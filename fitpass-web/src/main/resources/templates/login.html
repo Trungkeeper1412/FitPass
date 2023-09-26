@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/fitpass/app.css}"/>
+</head>
+
+<body class="body">
+<div class="container">
+  <div class="forms-container">
+    <div class="sign-in">
+      <form class="sign-in-form" th:action="@{/login}" method='POST'>
+        <h2 class="title">ĐĂNG NHẬP</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Tài khoản" name="account"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Mật khẩu" name="password"/>
+        </div>
+        <button type="submit" class="btn">Đăng nhập</button>
+        <div class="text-field">
+          <div>
+            <div class="switch-theme">
+              <input type="checkbox" name="remember-me"/>
+              <label>Ghi nhớ tài khoản</label>
+            </div>
+          </div>
+          <div style="text-align: right">
+            <div class="switch-theme">
+              <input type="checkbox" id="switch-sign-in">
+              <label>Chế độ tối</label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div th:if="${param.logout}" id="toast-info">Đăng xuất thành công.</div>
+<div th:if="${param.error}" id="toast-error">Email hoặc mật khẩu không chính xác.</div>
+
+<!-- Javascript -->
+<script th:src="@{/js/fitpass/app.js}"></script>
+
+<script th:if="${param.logout}">
+    const toastInfo = document.getElementById("toast-info");
+    toastInfo.className = "show success";
+    setTimeout(function () {
+        toastInfo.className = toastInfo.className.replace("show", "");
+    }, 2800);
+</script>
+
+<script th:if="${param.error}">
+    const toastError = document.getElementById("toast-error");
+    toastError.className = "show danger";
+    setTimeout(function () {
+        toastError.className = toastError.className.replace("show", "");
+    }, 2800);
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+.datatable {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  color: #212529;
+}
+
+.table>thead>tr>th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #555;
+  color: var(--primary-text) !important;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.table>thead:first-child>tr:first-child>th {
+  border-top: 0;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>th {
+  padding: 10px;
+  line-height: 1.45;
+  vertical-align: top;
+  border-top: 1px solid var(--secondary-border-color);
+  color: var(--secondary-text);
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.table>thead>tr>th:hover {
+  cursor: pointer;
+  color: #ffc107 !important;
+}
+
+.table>thead>tr>th:focus {
+  outline: none;
+}
+
+.table>thead>tr>th>i {
+  /* float: right; */
+  margin-left: 8px;
+}
+
+.table>thead>tr>th>i.fa-size {
+  font-size: 13px;
+  padding-top: 5px;
+}
+
+
+/* Tables - Border */
+
+.table-bordered {
+  border: 1px solid var(--secondary-border-color);
+}
+
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+  border: 1px solid var(--secondary-border-color);
+}
+
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+  border-bottom-width: 2px;
+}
+
+
+/* Customer - Datables */
+
+.dataTables_length {
+  float: left;
+}
+
+#member-table_filter,
+#order-history-table_filter {
+  float: right;
+}
+
+.datatable label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 12px;
+  font-weight: 400;
+  color: var(--secondary-text);
+}
+
+.dataTables_info {
+  color: var(--secondary-text);
+  float: left;
+}
+
+
+/* Customer - Select */
+
+.datatable label select {
+  margin: 0 5px;
+  border: 1px solid var(--secondary-border-color);
+  color: var(--secondary-text);
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.datatable label select:focus {
+  outline-color: #555;
+}
+
+.datatable label select option {
+  background-color: #fff;
+}
+
+
+/* Customer - Search */
+
+.datatable label input {
+  margin-left: 10px;
+  border: 1px solid var(--secondary-border-color);
+  color: var(--secondary-text);
+  background-color: transparent;
+  padding: 5px 10px;
+  font-weight: normal;
+  width: 200px;
+  border-radius: 8px;
+}
+
+.datatable label input:focus {
+  outline: none;
+}
+
+
+/* Customer - Pagination */
+
+.dataTables_paginate {
+  float: right;
+}
+
+.paging_simple_numbers>a {
+  color: var(--secondary-text);
+  width: 80px;
+  padding: 5px;
+  border: 1px solid var(--secondary-border-color);
+  display: inline-block;
+  text-align: center;
+  border-radius: 0 7px 7px 0;
+  height: 38px;
+}
+
+.paging_simple_numbers>a:first-child {
+  border-right: none;
+  border-radius: 7px 0 0 7px;
+}
+
+.paging_simple_numbers>span>a {
+  color: var(--secondary-text);
+  border: 1px solid var(--secondary-border-color);
+  width: 38px;
+  height: 38px;
+  padding: 5px;
+  display: inline-block;
+  text-align: center;
+  border-right: none;
+}
+
+.paging_simple_numbers a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #3a3b3c;
+}
+
+.ellipsis {
+  color: var(--secondary-text);
+  width: 38px;
+  height: 38px;
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid var(--secondary-border-color);
+  text-align: center;
+  border-right: none;
+}
+
+
+/* Customer - Responsivve */
+
+@media(max-width: 500px) {
+  #order-table_filter {
+    float: none;
+  }
+  label select {
+    margin: 0 5px 0 20px;
+  }
+  .dataTables_paginate {
+    float: left;
+    margin-top: 10px;
+  }
+  .paging_simple_numbers>a {
+    width: 65px;
+  }
+  .paging_simple_numbers>span>a {
+    width: 28px;
+  }
+}

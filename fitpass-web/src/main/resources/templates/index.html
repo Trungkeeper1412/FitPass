@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitPass</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/fitpass/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fitpass/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fitpass/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fitpass/color.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fitpass/index.css}"/>
+</head>
+
+<body>
+<div th:replace="common/navbar :: navbar"></div>
+
+<div class="container fix-mt-index">
+
+  <div class="row menu-feature">
+    <div class="col-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+      <a th:href="@{/}" class="card-feature m-mb-16">
+        <div class="card-feature-content">
+          <i class="fas fa-bowling-ball text-danger fa-fw"></i>
+          <div class="card-feature-title">
+            <h4>Menu 1</h4>
+            <p>Description menu 1</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+      <a th:href="@{/}" class="card-feature m-mb-16">
+        <div class="card-feature-content">
+          <i class="fas fa-cocktail text-pink fa-fw"></i>
+          <div class="card-feature-title">
+            <h4>Menu 2</h4>
+            <p>Description menu 2</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+      <a th:href="@{/}" class="card-feature m-mb-16">
+        <div class="card-feature-content">
+          <i class="fas fa-list-ul text-warning fa-fw"></i>
+          <div class="card-feature-title">
+            <h4>Menu 3</h4>
+            <p>Description menu 3</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
+
+</body>
+
+</html>

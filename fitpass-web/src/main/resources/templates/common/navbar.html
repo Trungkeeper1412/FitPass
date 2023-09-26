@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar" th:fragment="navbar">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand mr-auto" th:href="@{/}">FitPass</a>
+    <!-- Navbar -->
+    <div class="navbar-btn-group">
+      <ul class="m-0 p-0">
+        <li class="navbar-btn sub-item-menu">
+          <a th:href="@{/}">
+            <i class="fas fa-home text-success m-0 fa-fw"></i>
+          </a>
+          <span class="small-menu-label">Menu 1</span>
+        </li>
+        <li class="navbar-btn sub-item-menu">
+          <a th:href="@{/}">
+            <i class="fas fa-bowling-ball text-danger m-0 fa-fw"></i>
+          </a>
+          <span class="small-menu-label">Menu 2</span>
+        </li>
+        <li class="navbar-btn sub-item-menu">
+          <a th:href="@{/}">
+            <i class="fas fa-list-ul text-warning m-0 fa-fw"></i>
+          </a>
+          <span class="small-menu-label">Menu 3</span>
+        </li>
+        <li class="navbar-btn dropdown pointer-events-none user">
+          <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="far fa-user text-info m-0 fa-fw"></i>
+          </a>
+          <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
+            <a class="dropdown-item username" href="#"><i class="far fa-user fa-fw"></i>
+              <span sec:authentication="principal.username"></span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
+          </ul>
+        </li>
+        <li class="navbar-btn btn-sidebar-menu">
+          <button aria-controls="sidebar" aria-expanded="false" class="navbar-toggle collapsed"
+                  data-bs-target="#sidebar" data-bs-toggle="collapse" id="btn-open-sidebar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="small-menu-label">Menu</span>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <ul class="nav navbar-nav menu">
+        <li>
+          <div class="switch-theme">
+            <div>
+              <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
+            </div>
+            <div class="btn-switch-theme">
+              <input class="switch-button" id="switch" type="checkbox"/>
+              <label for="switch"></label>
+            </div>
+          </div>
+        </li>
+        <li><a th:href="@{/}"><i class="fas fa-bowling-ball text-danger fa-fw"></i>Menu 1</a></li>
+        <li><a th:href="@{/}"><i class="fas fa-list-ul text-warning fa-fw"></i>Menu 2</a></li>
+        <li><a th:href="@{/}"><i class="fas fa-list text-sea-green fa-fw"></i>Menu 3</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

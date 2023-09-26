@@ -1,0 +1,29 @@
+<div class="col-left" th:fragment="menu">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="title fix-pd fix-mb-title">Menu</h1>
+    </div>
+  </div>
+  <ul class="nav navbar-nav sub-menu">
+    <li>
+      <a th:href="@{/}" th:classappend="${(page == 1) ? 'active' : ''}">
+        <i class="fas fa-bowling-ball text-danger fa-fw"></i>Billiards
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/}" th:classappend="${(page == 2) ? 'active' : ''}">
+        <i class="fas fa-list-ul text-warning fa-fw"></i>Đơn hàng
+      </a>
+    </li>
+    <li>
+      <a th:href="@{//}" th:classappend="${(page == 3) ? 'active' : ''}">
+        <i class="fas fa-list text-sea-green fa-fw"></i>Lịch sử đơn hàng
+      </a>
+    </li>
+    <li>
+      <a href="javascript:back()">
+        <i class="fas fa-chevron-left text-tan fa-fw"></i>Quay lại
+      </a>
+    </li>
+  </ul>
+</div>

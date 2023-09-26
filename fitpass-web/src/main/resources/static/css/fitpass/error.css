@@ -1,0 +1,182 @@
+@charset "utf-8";
+
+/**/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/**/
+
+html {
+  height: 100%;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  /* headers and titles ------------------------------ */
+  --font-weight-4: 400;
+  --font-weight-5: 500;
+}
+
+html[data-theme='light'] {
+  /* background-color -------------------------------- */
+  --body-background: #F0F2F5;
+  --primary-background: #FFFFFF;
+  --secondary-background: #F0F2F5;
+  /* button-background-color ------------------------- */
+  --primary-button-background: #FFFFFF;
+  --secondary-button-background: #E4E6EB;
+  /* text-color -------------------------------------- */
+  --accent-text: #1BA80E;
+  --danger-text: #E25563;
+  --primary-text: #050505;
+  --secondary-text: #B0B3B8;
+  /* button-background-color ------------------------- */
+  --label-button-background: #DCDFE6;
+  /* shadow-color ------------------------------------ */
+  --shadow-button: rgb(228 230 235 / 55%);
+}
+
+html[data-theme='dark'] {
+  /* background-color -------------------------------- */
+  --body-background: #18191A;
+  --primary-background: #242526;
+  --secondary-background: #3A3B3C;
+  /* button-background-color ------------------------- */
+  --primary-button-background: #242526;
+  --secondary-button-background: #3A3B3C;
+  /* text-color -------------------------------------- */
+  --accent-text: #FFC107;
+  --danger-text: #B02F3B;
+  --primary-text: #E4E6EB;
+  --secondary-text: #B0B3B8;
+  /* button-background-color ------------------------- */
+  --label-button-background: #3A3B3C;
+  /* shadow-color ------------------------------------ */
+  --shadow-button: rgb(58 59 60 / 55%);
+}
+
+body {
+  font-size: 16px;
+  color: var(--primary-text);
+  line-height: 1.55;
+  height: 100vh;
+  background-color: var(--body-background);
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+
+/*
+ * ---------- Intro ----------
+ */
+
+#intro {
+  width: 100%;
+  height: 100%;
+  display: table;
+  position: absolute;
+}
+
+#intro .middle {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1000;
+}
+
+#intro .middle .error-panel {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 320px;
+  max-width: 600px;
+  width: calc(100% - 40px);
+  padding: 32px;
+  margin-bottom: 50px;
+  border-radius: 16px;
+  background-color: var(--primary-background);
+}
+
+.error .status-code {
+  font-size: 100px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 10px;
+}
+
+.error h4 {
+  margin-bottom: 30px;
+  font-weight: var(--font-weight-4);
+  font-size: 20px;
+}
+
+.error a {
+  color: #d0d0d0;
+  font-size: 1rem;
+}
+
+.error .btn-back {
+  font-size: 16px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  background-color: var(--secondary-button-background);
+  color: var(--primary-text);
+}
+
+.error .btn-back:hover {
+  box-shadow: 0 0 0 4px var(--shadow-button);
+  background-color: var(--secondary-button-background);
+  color: var(--primary-text);
+}
+
+.error .btn-back:focus {
+  background-color: var(--secondary-button-background);
+  color: var(--primary-text);
+  box-shadow: none;
+}
+
+
+/*
+ * ---------- Footer ----------
+ */
+
+#footer {
+  font-size: 14px;
+  bottom: 0;
+  background-color: var(--primary-background);
+  border-radius: 10px;
+  padding: 4px 12px;
+  width: calc(100% - 40px);
+  position: fixed;
+  margin: 20px;
+}
+
+#footer .f-bot {
+  padding: 6px 4px;
+}
+
+#footer .f-bot span {
+  padding: 2px 0;
+  display: inline-block;
+}
+
+#footer .f-bot .copyright {
+  text-align: right;
+}
+
+@media (max-width: 767.98px) {
+  #footer .f-bot .copyright {
+    text-align: left;
+  }
+  #footer .f-top {
+    padding: 3rem 0 2.5rem;
+  }
+  #footer .copyright {
+    display: none;
+  }
+}

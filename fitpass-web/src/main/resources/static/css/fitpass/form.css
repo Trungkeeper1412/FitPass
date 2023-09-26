@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+/**/
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+form fieldset {
+  border: 2px solid var(--secondary-border-color);
+  border-radius: var(--secondary-border-radius);
+  padding:  2px 12px 12px;
+  position: relative;
+}
+
+form fieldset legend {
+  border-radius: var(--third-border-radius);
+  font-weight: var(--font-weight-4);
+  color: var(--primary-text);
+  width: auto;
+  max-width: 100%;
+  font-size: 14px;
+  padding: 0 8px;
+  margin-bottom: 0;
+  float: none;
+}
+
+form fieldset .form-control {
+  color: var(--secondary-text);
+  border: 1px solid transparent;
+  background-color: transparent;
+  padding: 0 8px;
+}
+
+form .form-control:disabled,
+form .form-control[readonly] {
+  background-color: transparent;
+}
+
+form fieldset .form-control:focus {
+  color: var(--secondary-text);
+  box-shadow: none;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+label.custom-control-label {
+  font-weight: normal;
+}
+
+fieldset label.unit {
+  position: absolute;
+  right: 16px;
+  top: 2px;
+  font-size: 16px;
+  color: var(--secondary-text);
+}
+
+/* .custom-control-label::before {
+  background-color: #3a3b3c;
+  border: #555 solid 1px;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  color: #e4e6eb;
+  border-color: #555;
+  background-color: #555;
+} */
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input[data-autocompleted] {
+  background-color: transparent !important;
+}
+
+.form-control:focus {
+  color: var(--secondary-text);
+  background-color: transparent;
+  border-color: var(--secondary-border-color);
+  outline: 0;
+  box-shadow: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url(../../images/system/calendar.png) center/80% no-repeat;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: url(../../images/system/calendar.png) center/80% no-repeat;
+}
+
+input[type=file] {
+  background-color: transparent;
+  border: 2px solid var(--secondary-border-color);
+  border-radius: var(--secondary-border-radius);
+}
+
+input[type=file]:focus {
+  background-color: transparent;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type=file]::before {
+  content: '';
+  display: inline-block;
+  background: transparent;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--secondary-text);
+}
+
+input[type=file]:hover::before {
+  border-color: transparent;
+}
+
+input[type=file]:active::before {
+  background: transparent;
+}
+
+option {
+  color: #050505;
+}
+
+.custom-radio {
+  display: flex;
+  height: 26px;
+}
+
+.custom-radio .form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.custom-radio .form-check label {
+  height: 24px;
+  color: var(--secondary-text);
+}
+
+.custom-radio .form-check .form-check-input {
+  background-color: var(--secondary-background);
+  border: 1px solid var(--secondary-border-color);
+}
+
+.custom-radio .form-check .form-check-input:checked {
+  background-color: var(--accent-text);
+  border: 1px solid var(--accent-text);
+}
+
+.form-check {
+  margin-bottom: 6px;
+}

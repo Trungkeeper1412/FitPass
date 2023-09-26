@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/**/
+
+.text-main {
+  color: #e4e6eb;
+}
+
+.text-tan {
+  color: #c7af8b !important;
+}
+
+.text-violet {
+  color: #9360f7 !important;
+}
+
+.text-pink {
+  color: #e87093 !important;
+}
+
+.text-slate-blue {
+  color: #6a5acd !important;
+}
+
+.text-sea-green {
+  color: #3cb371 !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-tomato {
+  color: #ff6653 !important;
+}
+
+.text-gray {
+  color: #555 !important;
+}

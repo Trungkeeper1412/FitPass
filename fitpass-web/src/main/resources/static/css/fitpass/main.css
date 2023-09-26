@@ -1,0 +1,174 @@
+@charset "utf-8";
+
+/**/
+
+html {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  /* headers and titles ------------------------------ */
+  --font-weight-2: 200;
+  --font-weight-3: 300;
+  --font-weight-4: 400;
+  --font-weight-5: 500;
+}
+
+html[data-theme='light'] {
+  --switch-color: #DCDFE6;
+  /* background-color -------------------------------- */
+  --body-background: #F0F2F5;
+  --primary-background: #FFFFFF;
+  --secondary-background: #F0F2F5;
+  /* border-color ------------------------------------ */
+  --primary-border-color: transparent;
+  --secondary-border-color: #E4E6EB;
+  --third-border-color: #D5D6DB;
+  /* text-color -------------------------------------- */
+  --main-text: #198754;
+  --accent-text: #2271FF;
+  --danger-text: #E25563;
+  --warning-color: #FFC107;
+  --start-color: #DCDFE6;
+  --primary-text: #050505;
+  --secondary-text: #65676B;
+  /* button-background-color ------------------------- */
+  --navbar-button-background: #DCDFE6;
+  --primary-button-background: #FFFFFF;
+  --secondary-button-background: #E4E6EB;
+  --third-button-background: #D5D6DB;
+  --label-button-background: #DCDFE6;
+  /* sidebar-link-background-hover-color ------------- */
+  --link-primary-button-background: #F2F2F2;
+  --link-secondary-button-background: #F2F2F2;
+  --icon-button-background: #E4E6EB;
+  /* icon-color -------------------------------------- */
+  --primary-icon: #B0B3B8;
+  --secondary-icon: #E4E6EB;
+  /* shadow-color ------------------------------------ */
+  --shadow-1: rgb(0 0 0 / 10%);
+  --shadow-2: rgb(0 0 0 / 20%);
+  --shadow-inset: rgb(255 255 255 / 50%);
+  /* --shadow-button: rgb(27 168 14 / 35%); */
+  --shadow-button: rgb(228 230 235 / 55%);
+  /* border-radius ------------------------------------ */
+  --primary-border-radius: 12px;
+  --secondary-border-radius: 10px;
+  --third-border-radius: 8px;
+}
+
+html[data-theme='dark'] {
+  --switch-color: #2271FF;
+  /* background-color -------------------------------- */
+  --body-background: #18191A;
+  --primary-background: #242526;
+  --secondary-background: #3A3B3C;
+  /* border-color ------------------------------------ */
+  /* --primary-border-color: #3A3B3C; */
+  --primary-border-color: transparent;
+  --secondary-border-color: #3A3B3C;
+  --third-border-color: #4E4F50;
+  /* text-color -------------------------------------- */
+  --main-text: #198754;
+  --accent-text: #2271FF;
+  --danger-text: #B02F3B;
+  --warning-color: #FFC107;
+  --start-color: #B0B3B8;
+  --primary-text: #E4E6EB;
+  --secondary-text: #B0B3B8;
+  /* button-background-color ------------------------- */
+  --navbar-button-background: #3A3B3C;
+  --primary-button-background: #242526;
+  --secondary-button-background: #3A3B3C;
+  --third-button-background: #4E4F50;
+  --label-button-background: #3A3B3C;
+  /* sidebar-link-background-hover-color ------------- */
+  --link-primary-button-background: #242526;
+  --link-secondary-button-background: #3A3B3C;
+  --icon-button-background: #4E4F50;
+  /* icon-color -------------------------------------- */
+  --primary-icon: #B0B3B8;
+  --secondary-icon: #E4E6EB;
+  /* shadow-color ------------------------------------ */
+  --shadow-1: rgb(0 0 0 / 10%);
+  --shadow-2: rgb(0 0 0 / 20%);
+  --shadow-inset: rgb(255 255 255 / 5%);
+  /* --shadow-button: rgb(255 193 7 / 35%); */
+  --shadow-button: rgb(58 59 60 / 55%);
+  /* border-radius ------------------------------------ */
+  --primary-border-radius: 12px;
+  --secondary-border-radius: 10px;
+  --third-border-radius: 8px;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--body-background);
+  color: var(--primary-text);
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.5;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+i.far,
+i.fas,
+i.fab {
+  margin-right: 12px;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-size: 16px;
+  color: var(--secondary-text);
+  margin-bottom: 0;
+  font-family: var(--font);
+}
+
+.table {
+  color: var(--primary-text);
+  border-color: var(--secondary-border-color);
+}
+
+.table>:not(caption)>*>* {
+  background-color: transparent !important;
+}
+
+.table i.far,
+.table i.fas,
+.table i.fab {
+  margin-right: 0;
+}
+
+th {
+  font-weight: 400;
+}
+
+td {
+  color: var(--secondary-text);
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: var(--secondary-border-color) !important;
+}
+
+hr {
+  margin: 8px 0 8px 0;
+}
