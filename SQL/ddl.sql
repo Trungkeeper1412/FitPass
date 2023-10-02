@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS wallet;
 
-
 -- User Wallet table to store user wallet information
 CREATE TABLE IF NOT EXISTS wallet (
                                       wallet_id     INT AUTO_INCREMENT PRIMARY KEY,
