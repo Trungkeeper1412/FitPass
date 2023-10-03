@@ -16,21 +16,25 @@ DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS wallet;
 
--- User Wallet table to store user wallet information
-CREATE TABLE IF NOT EXISTS wallet (
-                                      wallet_id     INT AUTO_INCREMENT PRIMARY KEY,
-                                      balance       DECIMAL(10, 2) DEFAULT 0.0
-    );
+
+
 
 -- User table to store user information
 CREATE TABLE IF NOT EXISTS `user` (
                                       user_id          INT AUTO_INCREMENT PRIMARY KEY,
                                       user_account     VARCHAR(250) NOT NULL,
     user_password    VARCHAR(100) NOT NULL,
-    wallet_id        INT NOT NULL,
     user_create_time VARCHAR(20) NOT NULL,
-    user_deleted     TINYINT NOT NULL,
-    FOREIGN KEY (wallet_id) REFERENCES wallet(wallet_id)
+    user_deleted     TINYINT NOT NULL
+
+    );
+
+-- User Wallet table to store user wallet information
+CREATE TABLE IF NOT EXISTS wallet (
+                                      wallet_id     INT AUTO_INCREMENT PRIMARY KEY,
+                                      user_id       INT NOT NULL,
+                                      balance       DECIMAL(10, 2) DEFAULT 0.0,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
     );
 
 -- Role table to store user roles
@@ -70,7 +74,8 @@ CREATE TABLE IF NOT EXISTS gym_department (
     address           VARCHAR(255) NOT NULL,
     contact_number    VARCHAR(20) NOT NULL,
     logo_url          VARCHAR(255),
-    opening_hours     VARCHAR(255),
+    opening_hours     VARCHAR(20),
+    closing_hours     VARCHAR(20),
     image_url         VARCHAR(255),
     description       TEXT,
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
