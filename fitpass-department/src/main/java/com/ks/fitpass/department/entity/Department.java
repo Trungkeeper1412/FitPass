@@ -25,8 +25,6 @@ public class Department {
 
     private String departmentOpeningHours;
 
-    private String departmentClosingHours;
-
     private String departmentImageUrl;
 
     private String departmentDescription;
