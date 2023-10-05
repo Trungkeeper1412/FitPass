@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS mst_kbn (
 -- Gym Plan table to store gym plan information
 CREATE TABLE IF NOT EXISTS gym_plan (
                                         plan_id        INT AUTO_INCREMENT PRIMARY KEY,
-                                        gym_deparment_id         INT NOT NULL,
+                                        gym_department_id         INT NOT NULL,
                                         gym_plan_key   INT NOT NULL,
                                         gym_plan_status_key    INT NOT NULL,
                                         name           VARCHAR(255) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS gym_plan (
     plan_before_active_validity       INT NOT NULL,
     plan_after_active_validity        INT NOT NULL,
     image_url      VARCHAR(255),
-    FOREIGN KEY (gym_deparment_id) REFERENCES gym_department(gym_department_id)
+    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
     );
 
 -- Shift table to store shift information
