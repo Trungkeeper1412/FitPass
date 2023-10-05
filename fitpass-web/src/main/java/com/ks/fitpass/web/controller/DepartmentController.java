@@ -1,15 +1,14 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.enums.PageEnum;
-import main.java.com.ks.fitpass.department.entity.Department;
-import main.java.com.ks.fitpass.department.enums.DepartmentStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import main.java.com.ks.fitpass.department.service.DepartmentService;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 

@@ -3,8 +3,10 @@ package com.ks.fitpass.department.service;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface DepartmentService {
 
