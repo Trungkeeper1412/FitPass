@@ -10,23 +10,35 @@ DROP TABLE IF EXISTS shift;
 DROP TABLE IF EXISTS gym_plan;
 DROP TABLE IF EXISTS mst_kbn;
 DROP TABLE IF EXISTS gym_department;
-DROP TABLE IF EXISTS user_detail;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS wallet;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS user_detail;
 
 
+
+CREATE TABLE IF NOT EXISTS user_detail (
+                                           user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
+                                           first_name    VARCHAR(50) NOT NULL,
+    last_name     VARCHAR(50) NOT NULL,
+    email         VARCHAR(100) NOT NULL,
+    phone_number  VARCHAR(20) NOT NULL,
+    address       VARCHAR(255) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    gender        VARCHAR(10) NOT NULL
+
+    );
 -- User table to store user information
 CREATE TABLE IF NOT EXISTS `user` (
                                       user_id          INT AUTO_INCREMENT PRIMARY KEY,
                                       user_account     VARCHAR(250) NOT NULL,
     user_password    VARCHAR(100) NOT NULL,
+    user_detail_id        INT NOT NULL,
     user_create_time VARCHAR(20) NOT NULL,
-    user_deleted     TINYINT NOT NULL
-
+    user_deleted     TINYINT NOT NULL,
+    FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id)
     );
-
 -- User Wallet table to store user wallet information
 CREATE TABLE IF NOT EXISTS wallet (
                                       wallet_id     INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +46,6 @@ CREATE TABLE IF NOT EXISTS wallet (
                                       balance       DECIMAL(10, 2) DEFAULT 0.0,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
     );
-
 -- Role table to store user roles
 CREATE TABLE IF NOT EXISTS role (
                                     role_id   INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,18 +61,7 @@ CREATE TABLE IF NOT EXISTS user_role (
     FOREIGN KEY (role_id) REFERENCES role (role_id)
     );
 
-CREATE TABLE IF NOT EXISTS user_detail (
-                                           user_id       INT AUTO_INCREMENT PRIMARY KEY,
-                                           first_name    VARCHAR(50) NOT NULL,
-    last_name     VARCHAR(50) NOT NULL,
-    email         VARCHAR(100) NOT NULL,
-    phone_number  VARCHAR(20) NOT NULL,
-    address       VARCHAR(255) ,
-    gender        VARCHAR(10) ,
-    role_id       INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES `user`(user_id),
-    FOREIGN KEY (role_id) REFERENCES role(role_id)
-    );
+
 
 -- Gym Department table to store gym department information
 CREATE TABLE IF NOT EXISTS gym_department (
@@ -72,8 +72,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
     address           VARCHAR(255) NOT NULL,
     contact_number    VARCHAR(20) NOT NULL,
     logo_url          VARCHAR(255),
-    opening_hours     VARCHAR(20),
-    closing_hours     VARCHAR(20),
+    opening_hours     VARCHAR(255),
     image_url         VARCHAR(255),
     description       TEXT,
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
