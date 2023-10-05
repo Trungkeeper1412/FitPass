@@ -1,5 +1,6 @@
 package com.ks.fitpass.department.service.impl;
 
+import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.repository.DepartmentRepository;
@@ -9,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -26,13 +28,30 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public List<DepartmentDTO> getAllDepartmentForHome(int pageIndex, int pageSize) throws DataAccessException {
+        // to do : implement paging
+        List<Department> departments = departmentRepository.getAllByStatus(1);
+        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
+
+    }
+
+    DepartmentDTO departmentDTOMapper(Department department) {
+        return DepartmentDTO.builder()
+                .departmentId(department.getDepartmentId())
+                .departmentName(department.getDepartmentName())
+                .departmentAddress(department.getDepartmentAddress())
+                .departmentImageUrl(department.getDepartmentImageUrl())
+                .build();
+    }
+
+    @Override
     public List<Department> getAllByStatus(int status) throws DataAccessException {
         return departmentRepository.getAllByStatus(status);
     }
 
     @Override
     public Department getOne(int id) throws DataAccessException {
-        return  departmentRepository.getOne(id);
+        return departmentRepository.getOne(id);
     }
 
     @Override

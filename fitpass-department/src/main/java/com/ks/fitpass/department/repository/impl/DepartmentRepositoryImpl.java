@@ -43,7 +43,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
                 department.getDepartmentContactNumber(),
                 department.getDepartmentLogoUrl(),
                 department.getDepartmentOpeningHours(),
-                department.getDepartmentClosingHours(),
                 department.getDepartmentImageUrl(),
                 department.getDepartmentDescription(),
                 department.getDepartmentStatus().getDepartmentStatusCd(),
