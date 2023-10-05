@@ -17,8 +17,6 @@ DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS wallet;
 
 
-
-
 -- User table to store user information
 CREATE TABLE IF NOT EXISTS `user` (
                                       user_id          INT AUTO_INCREMENT PRIMARY KEY,
