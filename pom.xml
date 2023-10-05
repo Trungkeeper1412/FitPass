@@ -27,7 +27,6 @@
         <module>fitpass-core</module>
         <module>fitpass-web</module>
         <module>fitpass-department</module>
-
     </modules>
 
     <dependencies>
