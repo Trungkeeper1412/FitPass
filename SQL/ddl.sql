@@ -66,8 +66,9 @@ CREATE TABLE IF NOT EXISTS user_detail (
     last_name     VARCHAR(50) NOT NULL,
     email         VARCHAR(100) NOT NULL,
     phone_number  VARCHAR(20) NOT NULL,
-    address       VARCHAR(255) ,
-    gender        VARCHAR(10) ,
+    address       VARCHAR(255) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    gender        VARCHAR(10) NOT NULL,
     role_id       INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES `user`(user_id),
     FOREIGN KEY (role_id) REFERENCES role(role_id)
