@@ -8,9 +8,8 @@ import lombok.*;
 @Getter
 @Setter
 public class Kbn {
-
-    private int kbnId;
-    private String kbnName;
-    private int kbnKey;
-    private String kbnValue;
+            private int kbnId;
+            private String kbnName;
+            private int kbnKey;
+            private String kbnValue;
 }

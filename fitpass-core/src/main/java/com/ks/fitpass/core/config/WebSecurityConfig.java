@@ -22,8 +22,11 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                 .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
+                    .requestMatchers("/user-homepage-assets/**").permitAll()
                 .requestMatchers("/login", "/logout").permitAll()
-                .requestMatchers("/vip/**").permitAll()
+                .requestMatchers("/vip/**").permitAll().
+                    requestMatchers("/user/**").permitAll()
+//                    .requestMatchers("/gym-owner/**").hasRole("MANAGER")
                 .requestMatchers("/manage/**").hasRole("ADMIN")
                 .requestMatchers("/statistics/chart", "/statistics/drink").hasRole("ADMIN")
                 .anyRequest().authenticated()
@@ -33,7 +36,7 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("account")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/user/homepage")
                 .failureUrl("/login?error=true")
             )
             .logout(logout -> logout

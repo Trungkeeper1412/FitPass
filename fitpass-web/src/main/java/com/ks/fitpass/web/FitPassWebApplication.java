@@ -9,9 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com")
 @SpringBootApplication
 public class FitPassWebApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(FitPassWebApplication.class, args);
     }
-
 }
