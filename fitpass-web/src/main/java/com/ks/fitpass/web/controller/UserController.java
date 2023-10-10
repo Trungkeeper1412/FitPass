@@ -27,5 +27,10 @@ public class UserController {
         session.setAttribute("userInfo", user);
         return "list-of-gym";
     }
+    @GetMapping("/user/department-detail")
+    public String gymDepartmentDetail(Principal principal, HttpSession session, Model model) {
+
+        return "gym-department-details";
+    }
 
 }
