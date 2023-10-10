@@ -28,4 +28,10 @@ public class Department {
     private String departmentImageUrl;
 
     private String departmentDescription;
+
+    private Double latitude;
+
+    private Double longitude;
+
+    private Double rating;
 }

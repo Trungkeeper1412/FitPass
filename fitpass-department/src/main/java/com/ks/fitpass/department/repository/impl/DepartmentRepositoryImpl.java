@@ -30,6 +30,11 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_STATUS, new DepartmentMapper(), status);
     }
     @Override
+    public List<Department> getAllByTopRating(int status) throws DataAccessException {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_RATING, new DepartmentMapper(), status);
+    }
+
+    @Override
     public Department getOne(int id) throws DataAccessException {
     return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapper(), id);
     }

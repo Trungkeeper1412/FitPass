@@ -35,6 +35,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     }
 
+    @Override
+    public List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException {
+        // to do : implement paging
+        List<Department> departments = departmentRepository.getAllByTopRating(1);
+        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
+    }
+
     DepartmentDTO departmentDTOMapper(Department department) {
         return DepartmentDTO.builder()
                 .departmentId(department.getDepartmentId())

@@ -12,7 +12,12 @@ public interface IRepositoryQuery {
                      d.logo_url,
                      d.opening_hours,
                      d.image_url,
-                     d.description,                     
+                     d.description,
+                     d.latitude,
+                     d.longitude,
+                     d.rating,
+                     d.gym_department_status_key,
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name                     
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
@@ -21,39 +26,46 @@ public interface IRepositoryQuery {
                      AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
                      WHERE d.gym_department_status_key = ?
             """;
-//String GET_ALL_DEPARTMENT_BY_STATUS = """
-//    SELECT
-//        d.gym_department_id,
-//        d.user_id,
-//        d.name,
-//        d.address,
-//        d.contact_number,
-//        d.logo_url,
-//        d.opening_hours,
-//        d.image_url,
-//        d.description,
-//        d.gym_department_status_key,
-//        kbs.mst_kbn_value AS gym_department_status_name
-//    FROM gym_department d
-//    LEFT JOIN mst_kbn kbs
-//        ON d.gym_department_status_key = kbs.mst_kbn_key
-//        AND kbs.mst_kbn_name = 'DEPARTMENT_STATUS';
-//        WHERE d.gym_department_status_key = ?
-//""";
-
+    String GET_ALL_DEPARTMENT_BY_RATING = """
+                 SELECT
+                     d.gym_department_id,
+                     d.user_id,
+                     d.name,
+                     d.address,
+                     d.contact_number,
+                     d.logo_url,
+                     d.opening_hours,
+                     d.image_url,
+                     d.description,
+                     d.latitude,
+                     d.longitude,
+                     d.rating,
+                     d.gym_department_status_key,
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name                     
+                     d.gym_department_status_key,
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name
+                 FROM gym_department d
+                 LEFT JOIN mst_kbn kbn_department_status
+                     ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
+                 WHERE d.gym_department_status_key = ?
+                 ORDER BY d.rating DESC
+            """;
 
     String GET_DEPARTMENT_BY_ID = """
             SELECT INTO 
-                d.gym_department_id,
-                d.user_id,
-                d.name,
-                d.address,
-                d.contact_number,
-                d.logo_url,
-                d.opening_hours,
-                d.closing_hours,
-                d.image_url,
-                d.description,                     
+                     d.gym_department_id,
+                     d.user_id,
+                     d.name,
+                     d.address,
+                     d.contact_number,
+                     d.logo_url,
+                     d.opening_hours,
+                     d.image_url,
+                     d.description,
+                     d.latitude,
+                     d.longitude,
+                     d.rating,                     
                 d.gym_department_status_key,
                 kbn_department_status.mst_kbn_value AS gym_department_status_name
                 FROM gym_department d
@@ -62,6 +74,7 @@ public interface IRepositoryQuery {
                 AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
                 WHERE d.gym_department_id =?
                 """;
+
     String GET_DEPARTMENT_BY_USER = """
                  SELECT INTO 
                      d.gym_department_id,
@@ -71,9 +84,11 @@ public interface IRepositoryQuery {
                      d.contact_number,
                      d.logo_url,
                      d.opening_hours,
-                     d.closing_hours,
                      d.image_url,
-                     d.description,                     
+                     d.description,
+                     d.latitude,
+                     d.longitude,
+                     d.rating,                     
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d

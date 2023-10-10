@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping("/user/homepage")
     public String userHomepage(Principal principal, HttpSession session, Model model) {
         com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentForHome(1,5);
+        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1,5);
         model.addAttribute("departments",departmentDTOList);
         session.setAttribute("userInfo", user);
         return "list-of-gym";

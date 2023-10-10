@@ -12,4 +12,5 @@ public class DepartmentStatus {
     private int departmentStatusCd;
 
     private String departmentStatusName;
+
 }
