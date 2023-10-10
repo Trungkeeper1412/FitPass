@@ -37,12 +37,12 @@ INSERT INTO gym_department
 (gym_department_id, gym_department_status_key, user_id, name, address, contact_number,
  logo_url, opening_hours, image_url, description, latitude, longitude)
 VALUES
-    (1, 1, 2, 'Gym 1', '123 Main St', '555-123-1234',
-     'logo1.png', '8am-8pm', 'img1.jpg', 'Gym description', 41.1234567, -87.654321),
-    (2, 1, 2, 'Gym 2', '124 Main St', '555-123-1235',
-     'logo2.png', '9am-9pm', 'img2.jpg', 'Gym description', 41.234567, -87.65432),
-    (3, 1, 2, 'Gym 3', '125 Main St', '555-123-1236',
-     'logo3.png', '10am-10pm', 'img3.jpg', 'Gym description', 41.345678, -87.65433);
+    (1, 1, 2, 'Super Gym Hoa Lac', '123 Main St', '555-123-1234',
+     'logo1.png', '8am-8pm', 'img1.jpg', 'Gym description', 20.994853642138313, 105.52473891128982),
+    (2, 1, 2, 'Gym Hoa Lac', '124 Main St', '555-123-1235',
+     'logo2.png', '9am-9pm', 'img2.jpg', 'Gym description', 20.984756591708862, 105.5304037366675),
+    (3, 1, 2, 'FitWay Kickboxing', '125 Main St', '555-123-1236',
+     'logo3.png', '10am-10pm', 'img3.jpg', 'Gym description', 21.013202882232747, 105.5189882552246);
 
 /********** Department Feedback Creation ***********/
 -- 2 records with department_id = 2
