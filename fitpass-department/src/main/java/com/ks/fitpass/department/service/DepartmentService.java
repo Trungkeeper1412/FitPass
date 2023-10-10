@@ -25,4 +25,6 @@ public interface DepartmentService {
 
     boolean updateStatusDepartment(Department department, DepartmentStatus departmentStatus) throws DataAccessException;
 
+    List<DepartmentDTO> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
+                                                         double userLatitude, double userLongitude,double radiusInMeters);
 }

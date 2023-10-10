@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private DepartmentRepository departmentRepository;
+    private final DepartmentRepository departmentRepository;
 
     @Autowired
     public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
@@ -40,6 +40,42 @@ public class DepartmentServiceImpl implements DepartmentService {
         // to do : implement paging
         List<Department> departments = departmentRepository.getAllByTopRating(1);
         return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DepartmentDTO> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize, double userLatitude, double userLongitude, double radiusInMeters) {
+        // To do: Implement paging
+        List<Department> allDepartments = departmentRepository.getAllByStatus(1);
+        List<Department> nearbyDepartments = allDepartments.stream()
+                .filter(department -> calculateDistance(userLatitude, userLongitude,
+                        department.getLatitude(), department.getLongitude()) <= radiusInMeters)
+                .toList();
+
+        // Sorting and mapping to DTO
+        return nearbyDepartments.stream()
+                .map(this::departmentDTOMapper)
+                .collect(Collectors.toList());
+    }
+
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        // Convert latitude and longitude from degrees to radians
+        double radLat1 = Math.toRadians(lat1);
+        double radLon1 = Math.toRadians(lon1);
+        double radLat2 = Math.toRadians(lat2);
+        double radLon2 = Math.toRadians(lon2);
+
+        // Haversine formula
+        double dLat = radLat2 - radLat1;
+        double dLon = radLon2 - radLon1;
+
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(radLat1) * Math.cos(radLat2) *
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        // Calculate the distance in kilometers
+        return 6371 * c;
     }
 
     DepartmentDTO departmentDTOMapper(Department department) {
@@ -75,4 +111,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         );
         return departmentRepository.update(department);
     }
+
+
 }
