@@ -18,15 +18,13 @@ public interface IRepositoryQuery {
                      d.rating,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name                     
-                     d.gym_department_status_key,
-                     kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
                  LEFT JOIN mst_kbn kbn_department_status
                      ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
                      AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
                      WHERE d.gym_department_status_key = ?
             """;
-    String GET_ALL_DEPARTMENT_BY_RATING = """
+    String GET_ALL_DEPARTMENT_ORDER_BY_RATING = """
                  SELECT
                      d.gym_department_id,
                      d.user_id,
@@ -42,8 +40,6 @@ public interface IRepositoryQuery {
                      d.rating,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name                     
-                     d.gym_department_status_key,
-                     kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
                  LEFT JOIN mst_kbn kbn_department_status
                      ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
