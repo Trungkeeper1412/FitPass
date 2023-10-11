@@ -1,0 +1,41 @@
+<!-- gym-card-fragment.html -->
+<div th:fragment="gym-card-fragment">
+    <div class="card">
+        <div class="gym_image">
+            <img th:src="${department.getDepartmentImageUrl()}" style="height: 95%" alt="gym picture">
+        </div>
+        <div class="gym-description">
+            <div style="display: flex; width: fit-content;">
+                <div class="">
+                    <h4 style="font-weight: 600;" th:text="${department.getDepartmentName()}"></h4>
+                </div>
+                <div class="form-check rating-filter">
+                    <label class="form-check-label">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                    </label>
+                </div>
+            </div>
+            <div style="text-decoration: underline; color: rgb(143, 143, 143);" th:text="${department.getDepartmentAddress()}"></div>
+
+            <div style="display: flex; margin-top: -10px;">
+                <button style="width: 130px; height: 40px;" class="button button4">
+                    <img src="https://cdn-icons-png.flaticon.com/128/2923/2923404.png" style="width: 30px">
+                    <span style="margin-left: 10px;">1,5 km</span>
+                </button>
+                <button style="width: 150px; height: 40px; margin-left: 20px;" class="button button4">
+                    <img src="https://cdn-icons-png.flaticon.com/128/681/681494.png" style="width: 30px">
+                    <span style="margin-left: 10px;">100 người</span>
+                </button>
+            </div>
+
+            <div style="display: flex; margin-top: 15px; justify-content: center;">
+                <div style="color: rgb(171, 168, 168); font-weight: 600; font-size: larger; padding-top: 4px;">Chỉ từ</div>
+                <div style="font-weight: 600; font-size: x-large; color: rgb(255, 187, 0); margin-left: 10px;">500 Credits</div>
+            </div>
+        </div>
+    </div>
+</div>
