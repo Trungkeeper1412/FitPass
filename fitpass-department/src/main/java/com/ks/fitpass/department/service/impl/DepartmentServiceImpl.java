@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,13 +47,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<DepartmentDTO> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize, double userLatitude, double userLongitude, double radiusInMeters) {
         // To do: Implement paging
         List<Department> allDepartments = departmentRepository.getAllByStatus(1);
-        List<Department> nearbyDepartments = allDepartments.stream()
-                .filter(department -> calculateDistance(userLatitude, userLongitude,
-                        department.getLatitude(), department.getLongitude()) <= radiusInMeters)
-                .toList();
 
         // Sorting and mapping to DTO
-        return nearbyDepartments.stream()
+        return allDepartments.stream()
+                .sorted(Comparator.comparingDouble(department ->
+                        calculateDistance(userLatitude, userLongitude,
+                                department.getLatitude(), department.getLongitude())))
                 .map(this::departmentDTOMapper)
                 .collect(Collectors.toList());
     }
