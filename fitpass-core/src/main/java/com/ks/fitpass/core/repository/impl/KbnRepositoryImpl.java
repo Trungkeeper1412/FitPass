@@ -24,4 +24,10 @@ public class KbnRepositoryImpl implements KbnRepository, IRepositoryQuery {
     public List<Kbn> getKbnByName(String kbnName) {
         return jdbcTemplate.query(GET_KBN_BY_NAME, new KbnMapper(), kbnName);
     }
+
+    @Override
+    public String getGymPlanTypeByPlanKey(int planKey) {
+        return jdbcTemplate.queryForObject(GET_GYM_PLAN_TYPE_BY_PLAN_KEY, String.class, planKey);
+    }
+
 }

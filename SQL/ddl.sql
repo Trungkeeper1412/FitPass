@@ -9,14 +9,15 @@ DROP TABLE IF EXISTS gymer_booking;
 DROP TABLE IF EXISTS shift;
 DROP TABLE IF EXISTS gym_plan;
 DROP TABLE IF EXISTS mst_kbn;
+DROP TABLE IF EXISTS gym_department_services;
+DROP TABLE IF EXISTS gym_department_schedule;
+DROP TABLE IF EXISTS gym_department_albums;
 DROP TABLE IF EXISTS gym_department;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS wallet;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_detail;
-
-
 
 CREATE TABLE IF NOT EXISTS user_detail (
                                            user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,21 +62,54 @@ CREATE TABLE IF NOT EXISTS user_role (
                                          FOREIGN KEY (role_id) REFERENCES role (role_id)
 );
 
-
-
 -- Gym Department table to store gym department information
 CREATE TABLE IF NOT EXISTS gym_department (
-                                              gym_department_id INT AUTO_INCREMENT PRIMARY KEY,
-                                              gym_department_status_key INT NOT NULL,
-                                              user_id           INT NOT NULL,
-                                              name              VARCHAR(255) NOT NULL,
-                                              address           VARCHAR(255) NOT NULL,
-                                              contact_number    VARCHAR(20) NOT NULL,
-                                              logo_url          VARCHAR(255),
-                                              opening_hours     VARCHAR(255),
-                                              image_url         VARCHAR(255),
-                                              description       TEXT,
+                                              gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
+                                              gym_department_status_key   INT NOT NULL,
+                                              user_id                     INT NOT NULL,
+                                              name                        VARCHAR(255) NOT NULL,
+                                              address                     VARCHAR(255) NOT NULL,
+                                              contact_number              VARCHAR(20) NOT NULL,
+                                              logo_url                    VARCHAR(255) NOT NULL,
+                                              wallpaper_url               VARCHAR(255) NOT NULL,
+                                              description                 VARCHAR(255) NOT NULL,
+                                              latitude 		            DECIMAL(10,8) NOT NULL,
+                                              longitude 		            DECIMAL(11,8) NOT NULL,
+                                              rating                      DECIMAL(10, 2) DEFAULT 0,
+                                              capacity                    INT NOT NULL,
+                                              area                        DECIMAL(10, 2),
                                               FOREIGN KEY (user_id) REFERENCES `user`(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS gym_department_albums (
+                                                     id INT PRIMARY KEY AUTO_INCREMENT,
+                                                     gym_department_id INT NOT NULL,
+                                                     photo_url VARCHAR(255) NOT NULL,
+                                                     description VARCHAR(255),
+                                                     FOREIGN KEY(gym_department_id) REFERENCES gym_department(gym_department_id)
+);
+
+CREATE TABLE IF NOT EXISTS gym_department_schedule (
+                                                       id INT AUTO_INCREMENT PRIMARY KEY,
+                                                       gym_department_id INT NOT NULL,
+                                                       day VARCHAR(10) NOT NULL,
+                                                       open_time VARCHAR(255),
+                                                       close_time VARCHAR(255),
+                                                       FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
+);
+
+CREATE TABLE gym_department_services (
+                                         services_id INT PRIMARY KEY AUTO_INCREMENT,
+                                         gym_department_id INT,
+                                         massage TINYINT(1) DEFAULT 0,
+                                         sauna TINYINT(1) DEFAULT 0,
+                                         bathroom TINYINT(1) DEFAULT 0,
+                                         air_conditioner TINYINT(1) DEFAULT 0,
+                                         boxing TINYINT(1) DEFAULT 0,
+                                         body_composition_analyzer TINYINT(1) DEFAULT 0,
+                                         pool TINYINT(1) DEFAULT 0,
+                                         bar TINYINT(1) DEFAULT 0,
+                                         FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
 -- table name mst_kbn to store type,status of all tables
@@ -89,9 +123,11 @@ CREATE TABLE IF NOT EXISTS mst_kbn (
 -- Gym Plan table to store gym plan information
 CREATE TABLE IF NOT EXISTS gym_plan (
                                         plan_id        INT AUTO_INCREMENT PRIMARY KEY,
-                                        gym_deparment_id         INT NOT NULL,
+                                        gym_department_id         INT NOT NULL,
+                                        user_id        INT NOT NULL,
                                         gym_plan_key   INT NOT NULL,
                                         gym_plan_status_key    INT NOT NULL,
+                                        gym_plan_type_key  INT NOT NULL,
                                         name           VARCHAR(255) NOT NULL,
                                         description    VARCHAR(255) NOT NULL,
                                         price          DECIMAL(10, 2) ,
@@ -100,8 +136,8 @@ CREATE TABLE IF NOT EXISTS gym_plan (
                                         duration       INT ,
                                         plan_before_active_validity       INT NOT NULL,
                                         plan_after_active_validity        INT NOT NULL,
-                                        image_url      VARCHAR(255),
-                                        FOREIGN KEY (gym_deparment_id) REFERENCES gym_department(gym_department_id)
+                                        FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id),
+                                        foreign key (user_id)references user(user_id)
 );
 
 -- Shift table to store shift information
@@ -200,3 +236,25 @@ CREATE TABLE IF NOT EXISTS user_feedback (
                                              FOREIGN KEY (user_id) REFERENCES `user`(user_id),
                                              FOREIGN KEY (department_id) REFERENCES gym_department(gym_department_id)
 );
+
+DELIMITER $$
+CREATE TRIGGER update_gym_rating_avg
+    AFTER INSERT ON user_feedback
+    FOR EACH ROW
+BEGIN
+
+    DECLARE dept_id INT;
+    DECLARE total, count INT;
+
+    SET dept_id = NEW.department_id;
+
+    SELECT IFNULL(SUM(rating),0), COUNT(*) INTO total, count
+    FROM user_feedback
+    WHERE department_id = dept_id;
+
+    UPDATE gym_department
+    SET rating = total/count
+    WHERE gym_department_id = dept_id;
+
+END$$
+DELIMITER ;

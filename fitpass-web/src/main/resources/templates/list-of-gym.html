@@ -344,7 +344,7 @@
                 </div>
               </div>
               <div style="text-decoration: underline; color: rgb(143, 143, 143);" th:text="${department.getDepartmentAddress()}"></div>
-              
+              <a th:href="@{/department/department-detail/{department_id}(department_id=${department.getDepartmentId()})}">View Details</a>
               <div style="display: flex; margin-top: -10px;">
                 <button style="width: 130px; height: 40px;" class="button button4">
                   <img src="https://cdn-icons-png.flaticon.com/128/2923/2923404.png" style="width: 30px">

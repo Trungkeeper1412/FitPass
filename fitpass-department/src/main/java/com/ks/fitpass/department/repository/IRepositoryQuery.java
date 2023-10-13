@@ -43,7 +43,7 @@ public interface IRepositoryQuery {
 
 
     String GET_DEPARTMENT_BY_ID = """
-            SELECT INTO 
+            SELECT  
                 d.gym_department_id,
                 d.user_id,
                 d.name,
@@ -60,7 +60,7 @@ public interface IRepositoryQuery {
                 LEFT JOIN mst_kbn kbn_department_status
                 ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
                 AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
-                WHERE d.gym_department_id =?
+                WHERE d.gym_department_id =?  
                 """;
     String GET_DEPARTMENT_BY_USER = """
                  SELECT INTO 
@@ -100,4 +100,85 @@ public interface IRepositoryQuery {
                         gym_department_status_key = ?
                 WHERE gym_department_id = ?
             """;
+    // Query to get all plans of a gym department
+    String GET_ALL_GYM_PLANS_BY_DEPARTMENT_ID = """
+                SELECT gp.*, mkv.mst_kbn_value AS gym_plan_type
+                FROM gym_plan gp
+                JOIN mst_kbn mkv ON gp.gym_plan_type_key = mkv.mst_kbn_key
+                WHERE gp.gym_department_id = ?
+                AND mkv.mst_kbn_name = 'Gym Plan Type';
+            """;
+
+    // Query to get a gym plan by ID and department ID
+    String GET_GYM_PLAN_BY_ID = """
+    SELECT
+        gp.plan_id,
+        gp.gym_department_id,
+        gp.gym_plan_key,
+        gp.gym_plan_status_key,
+        gp.name,
+        gp.description,
+        gp.price,
+        gp.price_per_hours,
+        gp.plan_sold,
+        gp.duration,
+        gp.plan_before_active_validity,
+        gp.plan_after_active_validity,
+        gp.image_url,
+        kbn_plan_type.mst_kbn_value AS gym_plan_type,
+        kbn_plan_status.mst_kbn_value AS gym_plan_status
+    FROM gym_plan gp
+    LEFT JOIN mst_kbn kbn_plan_type
+        ON gp.gym_plan_type_key = kbn_plan_type.mst_kbn_key
+        AND kbn_plan_type.mst_kbn_name = 'PLAN_TYPE'
+    LEFT JOIN mst_kbn kbn_plan_status
+        ON gp.gym_plan_status_key = kbn_plan_status.mst_kbn_key
+        AND kbn_plan_status.mst_kbn_name = 'PLAN_STATUS'
+    WHERE gp.plan_id = ? AND gp.gym_department_id = ?
+""";
+
+    // Query to create a new gym plan
+    String CREATE_GYM_PLAN = """
+    INSERT INTO gym_plan (
+        gym_department_id,
+        gym_plan_key,
+        gym_plan_status_key,
+        gym_plan_type_key,
+        name,
+        description,
+        price,
+        price_per_hours,
+        plan_sold,
+        duration,
+        plan_before_active_validity,
+        plan_after_active_validity,
+        image_url
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+""";
+
+    // Query to update a gym plan
+    String UPDATE_GYM_PLAN = """
+    UPDATE gym_plan
+    SET
+        gym_department_id = ?,
+        gym_plan_key = ?,
+        gym_plan_status_key = ?,
+        gym_plan_type_key = ?,
+        name = ?,
+        description = ?,
+        price = ?,
+        price_per_hours = ?,
+        plan_sold = ?,
+        duration = ?,
+        plan_before_active_validity = ?,
+        plan_after_active_validity = ?,
+        image_url = ?
+    WHERE plan_id = ?
+""";
+
+    // Query to delete a gym plan
+    String DELETE_GYM_PLAN = """
+    DELETE FROM gym_plan
+    WHERE plan_id = ?
+""";
 }

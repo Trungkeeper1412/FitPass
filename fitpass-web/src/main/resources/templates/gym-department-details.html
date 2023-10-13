@@ -84,148 +84,69 @@
     </div>
 </header>
 
-<!--<div style="width: 100%; margin: auto; margin-top: 0px;">-->
-    <div class="gym-first-info">
-        <div class="gym-picture">
-            <img style="width: 150px; border-radius: 50%;" src="https://images-platform.99static.com//OKu0VMqKvuxDE1ZpNydMBJaZ74Q=/81x0:1091x1010/fit-in/500x500/99designs-contests-attachments/66/66218/attachment_66218425">
-            <div class="gym-name-cover">
-                <h3 style="margin: auto; color: rgb(255, 255, 255); font-weight: 600;">Phòng Gym Hòa Lạc</h3>
-                <h5 style="color: white;">2000 người đã tham gia</h5>
-            </div>
+<div class="gym-first-info">
+    <div class="gym-picture">
+        <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}" alt="gym picture">
+        <div class="gym-name-cover">
+            <h3 style="margin: auto; color: rgb(255, 255, 255); font-weight: 600;" th:text="${department.departmentName}"></h3>
+            <h5 style="color: white;">2000 người đã tham gia</h5>
         </div>
-        <!-- <div style="background-color: black;">
-        </div> -->
     </div>
-    <div class="gym-container">
-        <h3 style="color: aliceblue; font-weight: 600;">Về phòng gym của chúng tôi</h3>
-        <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-        <div class="about-our-gym">
-            <div class="gym-intro">Không chỉ là 1 phòng tập gym - thể hình đơn lẻ, Kickfit Sports là một trung tâm thể dụng thể thao với quy mô lớn và hiện đại hàng đầu Hà Nội. Các trang thiết bị luyện tập đều được nhập khẩu từ các thương hiệu lớn tại Châu Âu và Mỹ đem đến trải nghiệm tập luyện tốt nhất. Phòng tập được tích hợp đầy đủ bể bơi 4 mùa, phòng xông hơi, spa, sân tập ngoài trời và trên cao thoáng mát, tủ đồ, khu vực nghỉ ngơi... Ngoài tập gym bạn còn có thể trải nghiệm nhiều loại hình thể thao khác như: Boxing, Muay Thái, Kickboxing, Bơi, Yoga, Zumba, Kickfit,...</div>
-            <hr style="margin-top: 20px;">
-            <div class="gym-address">
-                <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png"></a>
-                <div style="margin-left: 10px;">Địa chỉ : Thôn 3 thạch hòa, Thạch Thất, Hà Nội</div>
-            </div>
-            <div class="gym-address">
-                <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png"></a>
-                <div style="margin-left: 10px;">Số điện thoại : 0123456789</div>
-            </div>
-            <div class="gym-address">
-                <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png"></a>
-                <div style="margin-left: 10px;">Giờ hoạt động : 6AM - 11PM</div>
-            </div>
-
+</div>
+<div class="gym-container">
+    <h3 style="color: aliceblue; font-weight: 600;">Về phòng gym của chúng tôi</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
+    <div class="about-our-gym">
+        <div class="gym-intro">
+            <p th:utext="${department.departmentDescription}"></p>
         </div>
-
-        <h3 style="color: aliceblue; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
-        <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-        <div style="color:white; margin-top: 25px;">Hiểu được nhu cầu tập luyện, khả năng sắp xếp thời gian và tính kỉ luật phụ thuộc vào đặc thù mỗi cá nhân, chúng tôi chia ra thành những gói tập khác nhau với các khung thời gian phù hợp với nhu cầu của mỗi khách hàng.</div>
-        <div class="list-plan-wrapper">
-            <button class="left" onclick="leftScroll()">
-                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
-            </button>
-            <div class="scroll-plans">
-                <div class="child">
-                    <div class="plan-description">
-                        <div class="gym-plan-name">GÓI 1 NGÀY</div>
-                        <div class="gym-plan-price">
-                            <div style="font-size: xxx-large; font-weight: 700;">20</div>
-                            <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
-                        </div>
-                        <div style="color: rgb(255, 255, 255);">Gói tập phù hợp với các bạn không cố định về mặt thời gian. Bạn sẽ trải nghiệm đầy đủ cơ sở vật chất, chất lượng dịch vụ, không khí tập luyện máu lửa ở Gym Hòa Lạc.</div>
-                        <hr>
-                        <div>Thời hạn trước khi active : 1 tuần</div>
-                        <div>Thời hạn sau khi active : 2 ngày</div>
+        <hr style="margin-top: 20px;">
+        <div class="gym-address">
+            <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png">
+            <div style="margin-left: 10px;" th:text="${department.departmentAddress}"></div>
+        </div>
+        <div class="gym-address">
+            <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png">
+            <div style="margin-left: 10px;" th:text="${department.departmentContactNumber}"></div>
+        </div>
+        <div class="gym-address">
+            <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png">
+            <div style="margin-left: 10px;" th:text="${department.departmentOpeningHours}"></div>
+        </div>
+    </div>
+</div>
+<h3 style="color: aliceblue; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
+<div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
+<div class="list-plan-wrapper">
+    <button class="left" onclick="leftScroll()">
+        <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
+    </button>
+    <div class="scroll-plans">
+        <div th:each="gymPlan : ${gymPlans}" class="child">
+            <div class="plan-description">
+                <div class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
+                <div class="gym-plan-price">
+                    <div style="font-size: xxx-large; font-weight: 700;" th:text="${gymPlan.getGymPlanDescription()}"></div>
+                    <div style="font-size: xxx-large; font-weight: 700;">
+                        <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
+                        <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}"></span>
                     </div>
-                    <button type="button">
-                        Đăng ký ngay
-                    </button>
+                    <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
                 </div>
-                <div class="child special-plan" id="higher">
-                    <div class="plan-description">
-                        <div class="gym-plan-name">GÓI 1 NGÀY</div>
-                        <div class="gym-plan-price">
-                            <div style="font-size: xxx-large; font-weight: 700;">20</div>
-                            <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
-                        </div>
-                        <div style="color: rgb(255, 255, 255);">Gói tập phù hợp với các bạn không cố định về mặt thời gian. Bạn sẽ trải nghiệm đầy đủ cơ sở vật chất, chất lượng dịch vụ, không khí tập luyện máu lửa ở Gym Hòa Lạc.</div>
-                        <hr>
-                        <div>Thời hạn trước khi active : 1 tuần</div>
-                        <div>Thời hạn sau khi active : 2 ngày</div>
-                    </div>
-                    <button type="button">
-                        Đăng ký ngay
-                    </button>
-                </div>
-                <div class="child">
-                    <div class="plan-description">
-                        <div class="gym-plan-name">GÓI 1 NGÀY</div>
-                        <div class="gym-plan-price">
-                            <div style="font-size: xxx-large; font-weight: 700;">20</div>
-                            <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
-                        </div>
-                        <div style="color: rgb(255, 255, 255);">Gói tập phù hợp với các bạn không cố định về mặt thời gian. Bạn sẽ trải nghiệm đầy đủ cơ sở vật chất, chất lượng dịch vụ, không khí tập luyện máu lửa ở Gym Hòa Lạc.</div>
-                        <hr>
-                        <div>Thời hạn trước khi active : 1 tuần</div>
-                        <div>Thời hạn sau khi active : 2 ngày</div>
-                    </div>
-                    <button type="button">
-                        Đăng ký ngay
-                    </button>
-                </div>
-                <div class="child">
-                    <div class="plan-description">
-                        <div class="gym-plan-name">GÓI 1 NGÀY</div>
-                        <div class="gym-plan-price">
-                            <div style="font-size: xxx-large; font-weight: 700;">20</div>
-                            <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
-                        </div>
-                        <div style="color: rgb(255, 255, 255);">Gói tập phù hợp với các bạn không cố định về mặt thời gian. Bạn sẽ trải nghiệm đầy đủ cơ sở vật chất, chất lượng dịch vụ, không khí tập luyện máu lửa ở Gym Hòa Lạc.</div>
-                        <hr>
-                        <div>Thời hạn trước khi active : 1 tuần</div>
-                        <div>Thời hạn sau khi active : 2 ngày</div>
-                    </div>
-                    <button type="button">
-                        Đăng ký ngay
-                    </button>
-                </div>
-                <div class="child">
-                    <div class="plan-description">
-                        <div class="gym-plan-name">GÓI 1 NGÀY</div>
-                        <div class="gym-plan-price">
-                            <div style="font-size: xxx-large; font-weight: 700;">20</div>
-                            <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
-                        </div>
-                        <div style="color: rgb(255, 255, 255);">Gói tập phù hợp với các bạn không cố định về mặt thời gian. Bạn sẽ trải nghiệm đầy đủ cơ sở vật chất, chất lượng dịch vụ, không khí tập luyện máu lửa ở Gym Hòa Lạc.</div>
-                        <hr>
-                        <div>Thời hạn trước khi active : 1 tuần</div>
-                        <div>Thời hạn sau khi active : 2 ngày</div>
-                    </div>
-                    <button type="button">
-                        Đăng ký ngay
-                    </button>
-                </div>
-                <div class="child">
-                    <div class="plan-description">
-                        <div class="gym-plan-name">GÓI 1 NGÀY</div>
-                        <div class="gym-plan-price">
-                            <div style="font-size: xxx-large; font-weight: 700;">20</div>
-                            <div style=" padding-left: 10px; padding-top: 22px;">credits</div>
-                        </div>
-                        <div style="color: rgb(255, 255, 255);">Gói tập phù hợp với các bạn không cố định về mặt thời gian. Bạn sẽ trải nghiệm đầy đủ cơ sở vật chất, chất lượng dịch vụ, không khí tập luyện máu lửa ở Gym Hòa Lạc.</div>
-                        <hr>
-                        <div>Thời hạn trước khi active : 1 tuần</div>
-                        <div>Thời hạn sau khi active : 2 ngày</div>
-                    </div>
-                    <button type="button">
-                        Đăng ký ngay
-                    </button>
-                </div>
+                <div style="color: rgb(255, 255, 255);" th:text="${gymPlan.getGymPlanDescription()}"></div>
+                <hr>
+                <div th:text="'Thời hạn trước khi active : ' + ${gymPlan.planBeforeActiveValidity}"></div>
+                <div th:text="'Thời hạn sau khi active : ' + ${gymPlan.planAfterActiveValidity}"></div>
             </div>
-            <button class="right" onclick="rightScroll()">
-                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
+            <button type="button">
+                Đăng ký ngay
             </button>
         </div>
+    </div>
+    <button class="right" onclick="rightScroll()">
+        <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
+    </button>
+</div>
 
         <div style="align-items: center;">
             <h3 style="color: rgb(255, 255, 255); margin-top: 50px; font-weight: 600">Album ảnh</h3>
