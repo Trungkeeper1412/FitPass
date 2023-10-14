@@ -12,8 +12,14 @@ public interface DepartmentRepository {
 
     List<Department> getAllByStatus(int status) throws DataAccessException;
 
+    List<Department> getAllByTopRating(int status) throws DataAccessException;
+
     Department getOne(int id) throws DataAccessException;
 
     boolean update(Department department) throws DataAccessException;
+
+    List<Department> findByRatingBetween(double from, double to);
+
+
 
 }

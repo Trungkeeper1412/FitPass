@@ -30,6 +30,11 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_STATUS, new DepartmentMapper(), status);
     }
     @Override
+    public List<Department> getAllByTopRating(int status) throws DataAccessException {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), status);
+    }
+
+    @Override
     public Department getOne(int id) throws DataAccessException {
     return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapper(), id);
     }
@@ -42,11 +47,15 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
                 department.getDepartmentAddress(),
                 department.getDepartmentContactNumber(),
                 department.getDepartmentLogoUrl(),
-                department.getDepartmentOpeningHours(),
-                department.getDepartmentImageUrl(),
+                department.getDepartmentWallpaperUrl(),
                 department.getDepartmentDescription(),
                 department.getDepartmentStatus().getDepartmentStatusCd(),
                 department.getDepartmentId()
         ) > 0;
+    }
+
+    @Override
+    public List<Department> findByRatingBetween(double from, double to) throws DataAccessException {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), from, to);
     }
 }

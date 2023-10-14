@@ -1,6 +1,5 @@
 package com.ks.fitpass.department.dto;
 
-import com.ks.fitpass.department.entity.DepartmentStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,13 @@ public class DepartmentDTO {
 
     private String departmentAddress;
 
-    private String departmentImageUrl;
+    private String departmentWallpaperUrl;
+
+    private Double rating;
+
+    private int capacity;
+
+    private Double area;
+
 
 }

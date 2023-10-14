@@ -25,12 +25,12 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/")
-    public String index(Principal principal, HttpSession session) {
-        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        session.setAttribute("userInfo", user);
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String index(Principal principal, HttpSession session) {
+//        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
+//        session.setAttribute("userInfo", user);
+//        return "index";
+//    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
