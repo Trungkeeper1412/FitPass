@@ -1,12 +1,12 @@
 package com.ks.fitpass.department.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Department {
 
     private int departmentId;
@@ -28,4 +28,10 @@ public class Department {
     private String departmentImageUrl;
 
     private String departmentDescription;
+
+    private Double latitude;
+
+    private Double longitude;
+
+    private Double rating;
 }

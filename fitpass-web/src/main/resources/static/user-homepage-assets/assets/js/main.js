@@ -373,3 +373,5 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " w3-black";
 }
+
+// list of plan in Gym department details page

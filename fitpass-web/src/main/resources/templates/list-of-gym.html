@@ -2,76 +2,52 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitPass Homepage</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <link rel="icon" th:href="@{/user-homepage-assets/user-homepage-assets/assets/img/icon.png}">
-  <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/user-homepage-assets/assets/img/apple-touch-icon.png}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitPass Homepage</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" th:href="@{/user-homepage-assets/user-homepage-assets/assets/img/icon.png}">
+    <link rel="apple-touch-icon"
+          th:href="@{/user-homepage-assets/user-homepage-assets/assets/img/apple-touch-icon.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body style="background-color: rgb(37, 37, 37);">
+<body class="list-of-gym-body">
   <header id="header" class="fixed-top">
     <div  class="container d-flex align-items-center justify-content-lg-between">
-      <h1 class="logo me-auto me-lg-0"><a href="index.html">Fitpass<span>.</span></a></h1>
-      <nav style="margin:auto" id="navbar" class="navbar order-last order-lg-0">
-        <ul>
+      <h1 style="margin-left: -60px;" class="logo me-auto me-lg-0"><a href="index.html">Fitpass<span>.</span></a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul >
           <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
           <li><a class="nav-link scrollto" href="#about">Đặt lịch tập</a></li>
           <li><a class="nav-link scrollto" href="#services">Liên hệ</a></li>
           <li>
             <form class="d-flex" style="margin-left: 50px;">
-              <input style="height: 30px;  margin-top: 5px;" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-              <button class="btn btn-outline-warning" type="submit">Search</button>
+              <input style="height: 30px;  margin-top: 5px; width: 300px;" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+              <img type="submit" style="margin-top: 6px; width: 25px; height: 25px;" src="https://cdn-icons-png.flaticon.com/128/4250/4250968.png">
             </form>
           </li>
-          <!-- <li class="dropdown">
-            <a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Danh mục 1</a></li>
-              <li class="dropdown">
-                <a href="#"><span>Danh mục con</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Danh mục con 1</a></li>
-                  <li><a href="#">Danh mục con 2</a></li>
-                  <li><a href="#">Danh mục con 3</a></li>
-                  <li><a href="#">Danh mục con 4</a></li>
-                  <li><a href="#">Danh mục con 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Danh mục 2</a></li>
-              <li><a href="#">Danh mục 3</a></li>
-              <li><a href="#">Danh mục 4</a></li>
-            </ul>
-          </li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-
-        <!-- <li class="dropdown">
-          <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
-          <ul>
-            <li><a href="#">Tài khoản người dùng</a></li>
-            <li><a href="#">Lịch sử</a></li>
-            <li><a href="#">Đăng xuất</a></li>
-          </ul>
-        </li> -->
-
       </nav>
-
-      <div class="dropdown">
+      <div style="display: flex; margin-right: 50px;">
+        <img type="submit" style="margin-top: 3px; width: 35px; height: 35px;" src="https://cdn-icons-png.flaticon.com/128/9405/9405895.png">
+        <div style="margin: auto; margin-left: 10PX; color: rgb(255, 170, 0); font-weight: 500;">500 Credits</div>
+      </div>
+      <div class="dropdown" style="position: absolute; right:10px;">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
         </button>
@@ -85,38 +61,20 @@
     </div> 
   </header>
   
-  <!-- <div style="height: 180px; background-color: rgb(0, 0, 240); display: flex;">
-  <div style="width: 50%; margin: auto; margin-bottom: 30px;">
-    <div class="search">
-      <input type="text" class="search-input" placeholder="Search..." name="">
-      <a href="#" class="search-icon">
-        <img src="https://cdn-icons-png.flaticon.com/128/4250/4250968.png" style="width:35px; margin-top: -3px;">
-      </a>
-    </div>
-  </div>
-  </div> -->
-
-  
-
     <!-- ======= Banner/slider ======= -->
-    
-    <div style="display: grid; grid-template-columns: 3fr 2fr; background-color: rgb(37, 37, 37); padding: 30px; margin-top: 90px ; height: 380px;">
-      <div style="background-color: rgb(37, 37, 37); margin-top: -30px; padding-top: 10px;">
+      <div>
         <div class="slideshow-container">
           <div class="mySlides fade">
             <img
-              src="https://www.spookynooksports.com/hs-fs/hubfs/01-What-Gym-Provides.png?width=680&name=01-What-Gym-Provides.png"
-              style="width:100%; height: 340px">
+              src="https://nowfit.vn/wp-content/uploads/2023/10/1-03-scaled.jpg">
           </div>
   
           <div class="mySlides fade">
-            <img src="https://www.fitness4less.co.uk/images/upload/images/blogGYM-GURU-F4L_13860119.jpg"
-              style="width:100%; height: 340px">
+            <img src="https://gymone.vn/wp-content/uploads/2023/04/304-15-banner-1920x1100-1.jpg">
           </div>
   
           <div class="mySlides fade">
-            <img src="https://www.fitness4less.co.uk/images/upload/images/blogtransform-programme_1392.jpg"
-              style="width:100%; height: 340px">
+            <img src="https://strongfit.vn/upload/partner/4699285652475-553456189623861-8407339603745830464-n.jpg">
           </div>
             
         </div>
@@ -125,77 +83,16 @@
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
-      
       </div>
-      <div style="background-color: rgb(37, 37, 37); display: grid; grid-template-rows: 1fr 1fr; height: 340px; ">
-        <div style="background-color: rgb(37, 37, 37);">
-          <img src="https://img.freepik.com/free-psd/gym-fitness-web-banner-template_106176-670.jpg"
-              style="height: 175px; width: 100%; padding: 10px 0 0 10px">
-        </div>
-        <div style="background-color: rgb(37, 37, 37);">
-          <img src="https://img.freepik.com/premium-psd/modern-black-diagonal-gym-fitness-banner-poster_179813-622.jpg"
-          style="height: 175px; width: 100%; padding: 10px 0 0 10px">
-        </div>
-      </div>
-      <!-- <div class="slideshow-container">
-        <div class="mySlides fade">
-          <img
-            src="https://www.spookynooksports.com/hs-fs/hubfs/01-What-Gym-Provides.png?width=680&name=01-What-Gym-Provides.png"
-            style="width:100%; height: 450px;">
-        </div>
-
-        <div class="mySlides fade">
-          <img src="https://www.fitness4less.co.uk/images/upload/images/blogGYM-GURU-F4L_13860119.jpg"
-            style="width:100%; height: 450px;">
-        </div>
-
-        <div class="mySlides fade">
-          <img src="https://www.fitness4less.co.uk/images/upload/images/blogtransform-programme_1392.jpg"
-            style="width:100%; height: 450px;">
-        </div>
-          
-      </div>
-      <div style="text-align:center; margin-top: 50px;">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div> -->
-    </div>
-
-
-    <!-- <div style="height: 475px; background-color: black;">
-      <div class="slideshow-container">
-        <div class="mySlides fade">
-          <img
-            src="https://www.spookynooksports.com/hs-fs/hubfs/01-What-Gym-Provides.png?width=680&name=01-What-Gym-Provides.png"
-            style="width:100%; height: 450px;">
-        </div>
-
-        <div class="mySlides fade">
-          <img src="https://www.fitness4less.co.uk/images/upload/images/blogGYM-GURU-F4L_13860119.jpg"
-            style="width:100%; height: 450px;">
-        </div>
-
-        <div class="mySlides fade">
-          <img src="https://www.fitness4less.co.uk/images/upload/images/blogtransform-programme_1392.jpg"
-            style="width:100%; height: 450px;">
-        </div>
-          
-      </div>
-      <div style="text-align:center; margin-top: 50px;">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div> -->
-
+    <h2 style="text-align: center; margin-top: 50px; font-weight: 800; color: white;">Danh sách các phòng gym</h2>
+    <div style="background-color: rgb(255, 187, 0); height: 4px; width: 280px; margin: auto;"></div>
 
     <!-- ======= List Gym Section ======= -->
-    <div style="display: flex; padding-top: 50px; min-height: 1000px; padding: 10px">
-      <div class="filter" style="width: 20%; background-color: rgb(37, 37, 37); margin-top: 40px; ">
+    <div style="display: flex; padding-top: 30px; min-height: 1000px; padding: 60px; justify-content: center; width: 100%;">
+      <div class="filter" style="width: 20%;  margin-top: 10px; ">
         <div class="range-price" style="border-radius: 10px 10px 0 0;">
           <header>
-            <h2>Lọc theo giá</h2>
+            <h4>Lọc theo giá</h4>
             <p>Áp dụng bộ lọc dựa trên giá</p>
           </header>
           <div style="margin-left: -5px;" class="price-input">
@@ -219,36 +116,36 @@
         </div>
         <div class="range-price" style="height:fit-content">
           <header>
-            <h2>Lọc theo khoảng cách</h2>
+            <h4>Lọc theo khoảng cách</h4>
             <p>Áp dụng bộ lọc dựa trên khoảng cách</p>
           </header>
           <div class="form-check rating-filter">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-            <label class="form-check-label" for="flexCheckDefault1">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               0-2 km
             </label>
           </div>
           <div class="form-check rating-filter">
-            <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault2">
-            <label class="form-check-label" for="flexCheckDefault2">
+            <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               2-5 km
             </label>
           </div>
           <div class="form-check rating-filter">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3" checked>
-            <label class="form-check-label " for="flexCheckChecked3">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label " for="flexCheckChecked">
               Trên 5km
             </label>
           </div>
         </div>
         <div class="range-price" style="height: fit-content;">
           <header>
-            <h2>Lọc theo đánh giá</h2>
+            <h4>Lọc theo đánh giá</h4>
             <p>Áp dụng bộ lọc dựa trên đánh giá</p>
           </header>
           <div class="form-check rating-filter">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-            <label class="form-check-label" for="flexCheckDefault4">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -257,8 +154,8 @@
             </label>
           </div>
           <div class="form-check rating-filter">
-            <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault5">
-            <label class="form-check-label" for="flexCheckDefault5">
+            <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -267,8 +164,8 @@
             </label>
           </div>
           <div class="form-check rating-filter">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6" checked>
-            <label class="form-check-label " for="flexCheckChecked6">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label " for="flexCheckChecked">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -277,8 +174,8 @@
             </label>
           </div>
           <div class="form-check rating-filter ">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
-            <label class="form-check-label" for="flexCheckDefault6">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
@@ -287,8 +184,8 @@
             </label>
           </div>
           <div class="form-check rating-filter">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7">
-            <label class="form-check-label" for="flexCheckDefault7">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
@@ -300,7 +197,7 @@
 
         <div class="range-price" style="height: fit-content; border-radius: 0 0 10px 10px ; ">
           <header>
-            <h2>Sắp xếp</h2>
+            <h4>Sắp xếp</h4>
           </header>
           <div class="form-check" style="margin-top: 20px;">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -317,90 +214,34 @@
         </div>
       </div>
 
-      
       <!-- Lis of gym -->
-      <div class="gradient" style="min-height: 1200px; margin-top: 40px; ">
-        <div style="grid-column-start: 1; grid-column-end:4; "><h2 style="color: rgb(255, 183, 0); font-weight: 600;">Danh sách các phòng gym</h2></div>
-
-        <div th:each="department: ${departments}" class="card">
-          <!-- <a href="#"> -->
-            <!-- <div class="price">60<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>  / day</div> -->
-            <div class="gym_image">
-              <img th:src="${department.getDepartmentImageUrl()}" style="height: 95%" alt="gym picture">
-            </div>
-            <div class="gym-description">
-              <div style="display: flex; width: fit-content;">
-                <div class="">
-                  <h4 style="font-weight: 600;" th:text="${department.getDepartmentName()}"></h4>
-                </div>
-                <div class="form-check rating-filter">
-                  <label class="form-check-label">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                  </label>
-                </div>
-              </div>
-              <div style="text-decoration: underline; color: rgb(143, 143, 143);" th:text="${department.getDepartmentAddress()}"></div>
-              
-              <div style="display: flex; margin-top: -10px;">
-                <button style="width: 130px; height: 40px;" class="button button4">
-                  <img src="https://cdn-icons-png.flaticon.com/128/2923/2923404.png" style="width: 30px">
-                  <span style="margin-left: 10px;">1,5 km</span>
-                </button>
-                <button style="width: 150px; height: 40px; margin-left: 20px;" class="button button4">
-                  <img src="https://cdn-icons-png.flaticon.com/128/681/681494.png" style="width: 30px">
-                  <span style="margin-left: 10px;">100 người</span>
-                </button>
-              </div>
-
-              <div style="display: flex; margin-top: 15px; justify-content: center;">
-                <div style="color: rgb(171, 168, 168); font-weight: 600; font-size: larger; padding-top: 4px;">Chỉ từ</div>
-                <div style="font-weight: 600; font-size: x-large; color: rgb(255, 187, 0); margin-left: 10px;">500 Credits</div>
-              </div>
-            </div>
-          <!-- </a> -->
-        </div>
-
+      <div class="listContainer" th:insert="fragments/gym-card-fragment.html :: gym-card-fragment"></div>
       </div>
     </div>
 
-    <!-- End List Gym Section -->
-          <!-- Pagination -->
-          <div style="position: absolute ;right: 50px; margin-bottom: 60px; margin-top: 80px;"> 
-            <nav style="" aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                <li class="page-item"><a class="page-link" href="#">7</a></li>
-                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div> 
+  <div class="pagination-wrapper" style="margin-top: -50px;">
+            <div class="pagination">
+              <a class="prev page-numbers" href="javascript:;">prev</a>
+              <span aria-current="page" class="page-numbers current">1</span>
+              <a class="page-numbers" href="javascript:;">2</a>
+              <a class="page-numbers" href="javascript:;">3</a>
+              <a class="page-numbers" href="javascript:;">4</a>
+              <a class="page-numbers" href="javascript:;">5</a>
+              <a class="page-numbers" href="javascript:;">6</a>
+              <a class="page-numbers" href="javascript:;">7</a>
+              <a class="page-numbers" href="javascript:;">8</a>
+              <a class="page-numbers" href="javascript:;">9</a>
+              <a class="page-numbers" href="javascript:;">10</a>
+              <a class="next page-numbers" href="javascript:;">next</a>
+            </div>
+          </div>
   <!-- </main> -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-    <div class="footer-top" style="margin-top: 150px;">
+    <div class="footer-top" style="margin-top: 80px;">
       <div class="container">
         <div class="row">
-
           <div class="col-lg-3 col-md-6">
             <div class="footer-info">
               <h3>Gp<span>.</span></h3>
@@ -450,41 +291,73 @@
             </form>
 
           </div>
-
+          <div class="container">
+            <div class="copyright">
+              &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+            </div>
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+          </div>
         </div>
-      </div>
     </div>
+  </footer>
+  <!-- End Footer -->
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i>
+</a>
+<script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendLocationToServer);
+    }
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+    function sendLocationToServer(position) {
+        //real value from the web
+        // const latitude = position.coords.latitude;
+        // const longitude = position.coords.longitude;
+        // console.log(latitude, longitude);
 
-  <!-- Vendor JS Files -->
-  <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+        //fixed value (position at hoa lac)
+        const userLatitude = 21.00418734116798;
+        const userLongitude = 105.52004332513577;
+        console.log("Before AJAX request");
+        $.ajax({
+            type: "POST",
+            url: "/user/homepage",
+            data: {latitude: userLatitude, longitude: userLongitude},
+            success: function (response) {
+                console.log("Inside success callback");
+                console.log(response.length);
+                if (response.length === 0) {
+                    $('.listContainer').empty();
+                    $('.listContainer').html('<p>No gyms found nearby.</p>');
+                } else {
+                    $('.listContainer').empty();
+                    $('.listContainer').html(response)
+                    // updateCardContainer(response);
+                }
+            },
+            error: function (error) {
+                console.log("Inside error callback");
+                console.error("Error sending location data:", error);
+            }
+        });
+        console.log("After AJAX request");
+    }
 
-  <!-- Template Main JS File -->
-  <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+    //
 
+</script>
+<!-- Vendor JS Files -->
+<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+<!-- Template Main JS File -->
+<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 </body>
-
 </html>
