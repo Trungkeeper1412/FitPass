@@ -1686,11 +1686,18 @@ textarea.form-control {
   height: auto;
 }
 
-/*css for List of gym */
+/*CSS for List of gym */
+.list-of-gym-body{
+  /* background-image: url("https://i.pinimg.com/236x/a4/8e/72/a48e727b363f66fedb9fe30b8026a850.jpg");
+  background-size: cover; */
+
+}
+
 .filter {
   min-height: 800px;
-  padding-top: 50px;
-
+  height: 100%;
+  /* position: fixed; */
+  /* padding-top: 50px; */
 }
 
 /*price range*/
@@ -1710,12 +1717,16 @@ textarea.form-control {
 }
 
 .range-price {
-  width: 100%;
+  width: 80%;
   height: 270px;
-  background-color: rgb(56, 52, 52);
+  background-color: rgb(0, 0, 0);
   color: white;
   padding: 20px 25px 40px;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.279);
+}
+
+.range-price h4{
+  font-weight: 600;
 }
 
 .price-input {
@@ -1809,34 +1820,45 @@ input[type="range"]::-moz-range-thumb {
 
 /* card */
 .gradient {
-  background-color: rgb(37, 37, 37);
-  width: 70%;
+  /* background-color: white; */
+  margin-top: 40px;
+  width: 60%;
   display: grid;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 40px;
   grid-row-gap: 40px;
-  padding: 10px 0 10px 20px;
+  padding: 10px 0 20px 20px;
   height: fit-content;
 }
 
 
 .gradient .card {
-  /* padding: 30px; */
-  background-color: rgb(56, 52, 52);
-  border-radius: 20px;
-  box-shadow: 0px 1px 5px #999;
-  /* overflow: hidden; */
-  /* box-sizing: 50px; */
-  /* z-index: 10; */
-  /* display: grid;
-  height: fit-content;
-  grid-template-rows: 1fr 1fr; */
+  border-radius: 10px;
+  border: 1px solid rgb(255, 183, 0);
+  box-shadow: 0px 5px 5px 5px #ffffff94;
+  /* background-image: linear-gradient(rgb(139, 69, 0), rgb(174, 135, 6), rgb(227, 198, 104)); */
+  /* background-image: url("https://i.pinimg.com/236x/8a/3c/a1/8a3ca1089e86d2c55e24790632291867.jpg");
+  background-size: cover; */
+  /* background-image: url("https://i.pinimg.com/236x/a4/8e/72/a48e727b363f66fedb9fe30b8026a850.jpg");
+  background-size: cover; */
   padding: 10px;
-  width: 360px;
-  height: 450px;
-  margin-top: 20px;
+  width: 340px;
+  height: fit-content;
+  background-size: cover;
 
+}
+
+.gradient .card h4{
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.gradient .card button{
+  background-color: none;
+  width: fit-content;
+  height: 40px;
+  padding: 10px
 }
 
 .gym_image {
@@ -1856,6 +1878,10 @@ input[type="range"]::-moz-range-thumb {
   height: 100%;
 }
 
+/* .gym_image:hover {
+  transform: rotate(-3deg) scale(1.1);
+  -webkit-transform: rotate(-3deg) scale(1.1);
+} */ */
 
 .price {
   position: absolute;
@@ -1956,10 +1982,12 @@ input[type="range"]::-moz-range-thumb {
   margin: auto;
   height: 250px;
   width: 97%;
-  color: #eee;
+  color: #000000;
   padding: 20px;
-  background-color: rgb(56, 52, 52);
+  /* background-color: rgb(56, 52, 52); */
   border-radius: 10px;
+  /* background-image: url("https://i.pinimg.com/236x/04/e9/8b/04e98bc8bfb8a89092cec3795660672d.jpg");
+  background-size: cover; */
 }
 
 .gym-description ul {
@@ -1981,26 +2009,31 @@ input[type="range"]::-moz-range-thumb {
 .gym-description .glyphicon {
   font-size: 20px;
   text-align: center;
-}
+} */
 
 .gym-description .button{
   background-color: #4CAF50; /* Green */
   color: white;
   width: 120px;
-  padding: 15px 25px;
+  padding: 20px;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  height: 45px;
 }
 
 .gym-description  .button4 {
   margin-top: 30px;
-  background-color: rgb(64, 64, 64);
+  /* background-color: rgb(64, 64, 64);  */
   color: rgb(255, 255, 255);
   border-radius: 20px;
   border: 1px solid ;
+  background-image: url("https://i.pinimg.com/236x/04/e9/8b/04e98bc8bfb8a89092cec3795660672d.jpg");
+  background-size: cover;
+  padding: 10px;
+  height: 45px;
 } /* Gray */
 
 /* Pagination */
@@ -2100,14 +2133,14 @@ input[type="range"]::-moz-range-thumb {
 
 /* Fading animation */
 .banner{
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .banner img{
-  height: 175px;
+  /* height: 175px;
   width: 85%;
-  /* padding: 10px 0 0 10px; */
+  padding: 10px 0 0 10px;
   border: 1px solid white;
-  border-radius: 15px;
+  border-radius: 15px; */
 }
 .fade {
   animation-name: fade;
@@ -2139,16 +2172,16 @@ img {
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
+  width: 100%;
   position: relative;
   margin: auto;
 }
 
 .slideshow-container img{
   width:100%;
-  height: 360px;
-  border: 1px solid white;
-  border-radius: 15px;
+  height: 660px;
+  /* border: 1px solid white; */
+  /* border-radius: 15px; */
 }
 
 /* Search */
@@ -2373,9 +2406,156 @@ a:link {
   background-image: url("https://i.pinimg.com/236x/a4/8e/72/a48e727b363f66fedb9fe30b8026a850.jpg");
   background-size: cover;
 }
-.about-our-gym{
-  color: white;
+.switch {
+  position: relative;
+  display: inline-block;
+  min-width: 50px;
+  height: 24px;
 }
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .toggle-slider {
+  background-color: rgb(255, 208, 0);
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toggle-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.toggle-slider.round {
+  border-radius: 34px;
+}
+
+.toggle-slider.round:before {
+  border-radius: 50%;
+}
+
+.about-our-gym{
+  /* background-color: #18d26e; */
+  color: white;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-column-gap: 80px
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 40%;
+  color: #000;
+  height: fit-content;
+}
+
+.schedule-modal-header h3 {
+  font-weight: 700;
+  color: #000;
+  margin: auto;
+}
+
+.schedule-modal-header{
+  display: grid;
+  grid-template-columns: 14fr 1fr;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  height: 60px;
+}
+
+.week{
+  width: 70%;
+  margin: 30px auto 30px;
+}
+.day-line{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10px;
+}
+.day{
+  text-align: left;
+  font-weight: 600;
+}
+.time{
+  text-align: right;
+  /* display: flex; */
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  margin-top: 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.about-our-gym-1 .modal{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.about-our-gym-1{
+  /* background-color: #18d26e; */
+  width: 100%;
+}
+
 .gym-name-cover{
   margin: auto;
   margin-left: 20px;
@@ -2383,11 +2563,9 @@ a:link {
   padding: 10px;
 }
 .gym-name-cover h5{
-  margin-top: 10px;
   border:1px solid rgb(255, 162, 0);
   padding: 10px;
   border-radius: 50px;
-  width: fit-content;
 }
 .gym-picture{
   position: relative;
@@ -2401,14 +2579,42 @@ a:link {
 }
 
 .gym-first-info{
+  top: 50px;
   position: relative;
   background-color: rgb(0, 0, 0);
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  height: 30%;
   margin: auto;
   border-radius: 10px;
-  padding: 70px;
+  padding: 30px;
+}
+.w3-modal{
+  /* width: 50%; */
+}
+
+.service-info{
+  align-items: right;
+  background-color: #000;
+}
+.gym-service{
+  margin: auto;
+  border: 1px solid rgba(255, 158, 2, 0.905);
+  border-radius: 10px;
+  padding: 25px 25px 0px 25px;
+  width: 100%;
+  height: 60%;
+  display: grid;
+  margin-top: 40px;
+  grid-template-columns: auto auto;
+  grid-column-gap: 70px;
+}
+
+.sub-service{
+  display: flex;
+  width: fit-content;
+  height: fit-content;
 }
 
 .gym-first-info::before{
@@ -2428,7 +2634,7 @@ a:link {
   width: 100%;
   margin: auto;
   margin-top: 60px;
-  padding: 20px 150px 150px 150px;
+  padding: 30px 150px 150px 150px;
 }
 
 .gym-name{
@@ -2438,6 +2644,8 @@ a:link {
 }
 .gym-intro{
   margin-top: 30px;
+  padding: 10px;
+  width:100%;
 }
 .gym-address{
   display: flex;
@@ -2535,21 +2743,35 @@ section {
   /* box-shadow: 5px 10px rgba(216, 216, 216, 0.268); */
 }
 
+.plan-intro{
+  color: white
+}
+
 .special-plan{
-  background-image: url("https://i.pinimg.com/236x/ba/86/19/ba8619865d7d7eb592d11c03a7f9fe0b.jpg");
+  background-image: url("https://i.pinimg.com/236x/1e/85/2c/1e852cb84f256d39406a0afd4aa7d8ed.jpg");
   background-size: cover;
   /* padding-top:50px */
 }
 
-#higher{
+#special-plan{
   height: 520px;
+  color: #000000;
 }
 
-#higher button{
+#special-plan .plan-description div{
+  color: #000000;
+}
+
+#special-plan .gym-plan-name{
+  color:#000000;
+  background-color: rgba(255, 166, 0, 0.396);
+}
+
+#special-plan button{
   /* color: white;
   background-image: url("https://i.pinimg.com/236x/8a/3c/a1/8a3ca1089e86d2c55e24790632291867.jpg");
   background-size: cover; */
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .scroll-plans .child:hover {
@@ -2589,6 +2811,15 @@ section {
   background-color: rgba(255, 213, 0, 0.24);
   border-radius: 20px;
   width: fit-content;
+}
+
+.gym-duration{
+  /* text-decoration: underline; */
+}
+
+.day-duration{
+  /* font-size: 22px;
+  font-weight: bold */
 }
 
 
@@ -2674,7 +2905,6 @@ section {
   width:340px;
   height:1200px;
   /* margin:0; */
-  /* background:rgb(255, 255, 255); */
   overflow-y:auto;
   overflow-x:hidden;
   transform:rotate(-90deg) translateY(-80px);
@@ -2717,3 +2947,12 @@ section {
   margin-top: -30px;
 }
 /*  */
+
+
+/* TEST */
+.gym-filter{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: fit-content;
+  margin: auto;
+}
