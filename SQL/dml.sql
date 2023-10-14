@@ -37,17 +37,15 @@ VALUES (1, 1, 'Gym A', '123 Main St', '555-123-4567', 'https://example.com/logo.
        (1, 2, 'Gym B', '456 Elm St', '555-987-6543', 'https://example.com/logo.png', 'https://example.com/wallpaper.png', 'This is Gym B', 37.98765432, -122.98765432, 0, 150, 300.75);
 
 INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES(1, 'https://example.com/photo1.png', 'Album 1'),
-      (2, 'https://example.com/photo2.png', 'Album 2');
+VALUES(1, 'https://i.pinimg.com/236x/6c/c4/49/6cc4498dfac9d232b9c49f46d1948f8b.jpg', 'Album 1'),
+      (1, 'https://i.pinimg.com/236x/62/ce/d1/62ced13c5fd204f575f47d4b026243dd.jpg', 'Album 2');
 
 
 INSERT INTO gym_department_schedule (gym_department_id, day, open_time, close_time)
 VALUES (1, 'Monday', '8:00 AM', '10:00 PM'),
        (2, 'Tuesday', '9:00 AM', '11:00 PM');
 
-INSERT INTO gym_department_services (gym_department_id, massage, sauna, bathroom, air_conditioner, boxing, body_composition_analyzer, pool, bar)
-VALUES (1, 1, 1, 1, 1, 0, 0, 1, 0),
-       (2, 0, 1, 1, 0, 1, 0, 1, 0);
+
 
 INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value)
 VALUES ('Gym Plan Type', 1, 'Gói theo giờ'),
@@ -60,3 +58,37 @@ VALUES ('Gym Plan Type', 1, 'Gói theo giờ'),
 INSERT INTO gym_plan (gym_department_id, user_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES (1, 1, 1, 1, 1, 'Gói 1', 'Gói theo giờ 1', 100.00, 10.00, 20, 3, 7, 14),
        (1, 1, 2, 2, 2, 'Gói 2', 'Gói khong theo giờ ', 150.00, 15.00, 30, 5, 10, 20);
+
+-- Inserting a sample feedback record
+INSERT INTO user_feedback (user_id, department_id, rating, comments, feedback_time, feedback_status)
+VALUES (1, 1, 5, 'Great service!', '2021-10-15 09:30:00', 1);
+
+-- Inserting another feedback record
+INSERT INTO user_feedback (user_id, department_id, rating, comments, feedback_time, feedback_status)
+VALUES (2, 1, 3, 'Could be better.', '2021-10-16 14:45:00', 1);
+
+-- insert data to features
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon1.png', 'Bể bơi', 1);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon2.png', 'Massage', 0);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon3.png', 'Xông hơi', 1);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon4.png', 'Phòng tắm', 1);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon5.png', 'Máy lạnh', 0);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon6.png', 'Boxing', 0);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon7.png', 'Quầy bar', 1);
+
+INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+VALUES (1, 'icon8.png', 'Máy đo chỉ số cơ thể', 1);
+

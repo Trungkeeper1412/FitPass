@@ -111,67 +111,38 @@
         </div>
         <div class="gym-address">
             <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png">
-            <div style="margin-left: 10px;"  > cho nay de gio hoat dong</div>
+            <div style="margin-left: 10px;">Cho nay de gio hoat dong</div>
+            <div class="modal-content">
+                <div class="schedule-modal-header">
+                    <div style="display: flex;">
+                        <h3>Giờ hoạt động</h3>
+                    </div>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="week">
+                    <!-- Iterate over the departmentSchedules list to display each schedule -->
+                    <div th:each="schedule : ${departmentSchedules}" class="day-line">
+                        <div class="day" th:text="${schedule.departmentScheduleDay}"></div>
+                        <div class="time">
+                            <span th:text="${schedule.departmentScheduleOpenTime}"></span>
+                            <span>-</span>
+                            <span th:text="${schedule.departmentScheduleCloseTime}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
-    <div class="gym-service">
-        <div class="sub-service">
-            <label class="switch">
-                <input  type="checkbox" checked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px">Bể bơi</div>
-        </div>
-        <div class="sub-service">
-            <label class="switch">
-                <input  style="margin-left: 10px" type="checkbox" checked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Spa</div>
-        </div>
-        <div class="sub-service">
-            <label class="switch">
-                <input  style="margin-left: 10px" type="checkbox" unchecked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Xông hơi</div>
-        </div>
-        <div class="sub-service">
-            <label class="switch">
-                <input  style="margin-left: 10px" type="checkbox" checked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Phòng tắm</div>
-        </div>
-        <div class="sub-service">
-            <label class="switch">
-                <input  style="margin-left: 10px" type="checkbox" checked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Máy lạnh</div>
-        </div>
-        <div class="sub-service">
-            <label class="switch">
-                <input  style="margin-left: 10px" type="checkbox" checked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Boxing</div>
-        </div>
-        <div class="sub-service">
-            <label  class="switch">
-                <input  style="margin-left: 10px" type="checkbox" checked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Quầy bar</div>
-        </div>
-        <div class="sub-service">
-            <label class="switch">
-                <input  type="checkbox" unchecked disabled>
-                <span class="toggle-slider round"></span>
-            </label>
-            <div style="color: rgb(255, 255, 255); margin-left: 10px;">Máy đo chỉ số cơ thể </div>
-        </div>
+<div class="gym-service">
+    <div th:each="feature : ${departmentFeatures}" class="sub-service">
+        <label class="switch">
+            <input type="checkbox" th:checked="${feature.isSelected}" disabled>
+            <span class="toggle-slider round"></span>
+        </label>
+        <div style="color: rgb(255, 255, 255); margin-left: 10px" th:text="${feature.featureName}"></div>
     </div>
+</div>
 </div>
 <h3 style="color: aliceblue; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
 <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
@@ -206,100 +177,56 @@
     </button>
 </div>
 
-        <div style="align-items: center;">
-            <h3 style="color: rgb(255, 255, 255); margin-top: 50px; font-weight: 600">Album ảnh</h3>
-            <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
-            <div style="color: white; margin-top: 20px;">Chúng tôi hiểu rằng đánh giá một khoản đầu tư không thể dựa trên chi phí bỏ ra, mà phải đến từ hiệu quả mang lại – tỷ suất sinh lời. Với mục tiêu duy nhất là kết quả của khách hàng, thay vì đầu tư vào những tiện nghi hào nhoáng bên ngoài, chúng tôi tập trung vào những thiết bị có chất lượng cao, đến từ những thương hiệu hàng đầu thế giới, giúp tối ưu hóa quá trình tập luyện.</div>
-            <div class="image-scroll-wrapper squares">
-                <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAGIQk6TEpwkErCMYY37an2C8Bm7Vh-z5w1Q&usqp=CAU"></div>
-                <div><img src="https://i.pinimg.com/236x/6c/c4/49/6cc4498dfac9d232b9c49f46d1948f8b.jpg"></div>
-                <div><img src="https://i.pinimg.com/236x/62/ce/d1/62ced13c5fd204f575f47d4b026243dd.jpg"></div>
-                <div><img src="https://i.pinimg.com/236x/69/4b/bc/694bbc932ff9783d3ec5164096988be1.jpg"></div>
-                <div><img src="https://i.pinimg.com/236x/91/16/39/9116391be5c0f4e4a03cb179a416926f.jpg"></div>
-                <div><img src="https://i.pinimg.com/236x/57/26/a4/5726a443be2ce511399ae372e37fe28d.jpg"></div>
-                <div><img src="https://i.pinimg.com/236x/4c/e1/e3/4ce1e30cfab91bc7b6dbc8b53abc9db5.jpg"></div>
-            </div>
-        </div>
+<div style="align-items: center;">
+    <h3 style="color: rgb(255, 255, 255); margin-top: 50px; font-weight: 600">Album ảnh</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
 
+    <div class="image-scroll-wrapper squares">
+        <!-- Iterate over the departmentAlbums list to display each album -->
+        <div th:each="album : ${departmentAlbums}">
+            <img th:src="${album.photoUrl}" />
+        </div>
+    </div>
+</div>
         <h3 style="color: rgb(255, 255, 255); margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
         <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
         <div style="color: white; margin-top: 20px;">Chúng tôi đã giúp hàng trăm người như bạn, và tất nhiên nói có sách mách có chứng! Ẩn sau mỗi feedback dưới đây là những câu chuyện dài về sự nỗ lực để thay đổi bản thân, trở thành phiên bản tốt hơn, mạnh mẽ hơn, kỉ luật hơn của chính mình. Họ cũng đã từng gặp rất nhiều khó khăn khi tự giảm cân trong thời gian dài.
             Hãy liên hệ ngay để trở thành transform tiếp theo của chúng tôi!</div>
-        <div class="rating-feedback">
-            <div class="rating-option">
-                <div class="rating-point">4.8 trên 5</div>
-                <button type="button" class="btn btn-warning" style="margin-left: 70px;">
-                    Tất cả (100)
-                </button>
-                <button type="button" class="btn btn-warning">
-                    5 sao (80)
-                </button>
-                <button type="button" class="btn btn-warning">
-                    4 sao (10)
-                </button>
-                <button  type="button" class="btn btn-warning">
-                    3 sao (5)
-                </button>
-                <button type="button" class="btn btn-warning">
-                    2 sao (2)
-                </button>
-                <button  type="button" class="btn btn-warning">
-                    1 sao (3)
-                </button>
-            </div>
-            <div class="user-rating">
-                <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-                </div>
-                <div class="user-rating-description">
-                    <div>User0101838383</div>
-                    <i style="height: 20px;" data-star="3"></i>
-                    <div>2023-07-15 12:05</div>
-                    <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo hức</div>
-                </div>
-            </div>
-            <div class="user-rating">
-                <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-                </div>
-                <div class="user-rating-description">
-                    <div>User0101838383</div>
-                    <i style="height: 20px;" data-star="3"></i>
-                    <div>2023-07-15 12:05</div>
-                    <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo hức</div>
-                </div>
-            </div>
-            <div class="user-rating">
-                <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-                </div>
-                <div class="user-rating-description">
-                    <div>User0101838383</div>
-                    <i style="height: 20px;" data-star="3"></i>
-                    <div>2023-07-15 12:05</div>
-                    <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo hức</div>
-                </div>
-            </div>
-            <div class="user-rating">
-                <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-                </div>
-                <div class="user-rating-description">
-                    <div>User0101838383</div>
-                    <i style="height: 20px;" data-star="3"></i>
-                    <div>2023-07-15 12:05</div>
-                    <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo hức</div>
-                </div>
-            </div>
-            <div class="user-rating">
-                <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-                </div>
-                <div class="user-rating-description">
-                    <div>User0101838383</div>
-                    <i style="height: 20px;" data-star="3"></i>
-                    <div>2023-07-15 12:05</div>
-                    <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo hức</div>
+<div class="rating-feedback">
+    <div class="rating-option">
+        <div class="rating-point" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
+        <button type="button" class="btn btn-warning" style="margin-left: 70px;">
+            Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
+        </button>
+        <button type="button" class="btn btn-warning">
+            5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
+        </button>
+        <button type="button" class="btn btn-warning">
+            4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
+        </button>
+        <button type="button" class="btn btn-warning">
+            3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
+        </button>
+        <button type="button" class="btn btn-warning">
+            2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
+        </button>
+        <button type="button" class="btn btn-warning">
+            1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
+        </button>
+    </div>
+</div>
+            <div class="user-ratings">
+                <!-- Iterate over the userFeedbacks list and generate the HTML for each feedback -->
+                <div th:each="feedback : ${userFeedbacks}" class="user-rating">
+                    <div class="user-rating-avatar">
+                        <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
+                    </div>
+                    <div class="user-rating-description">
+                        <div th:text="${feedback.userName}"></div>
+                        <i style="height: 20px;" th:attr="data-star=${feedback.rating}"></i>
+                        <div th:text="${feedback.feedbackTime}"></div>
+                        <div th:text="${feedback.comments}"></div>
+                    </div>
                 </div>
             </div>
             <hr style="margin-top: 35px;">

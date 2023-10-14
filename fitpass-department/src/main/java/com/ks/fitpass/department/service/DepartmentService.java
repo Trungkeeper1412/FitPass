@@ -3,8 +3,8 @@ package com.ks.fitpass.department.service;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
+import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -31,4 +31,8 @@ public interface DepartmentService {
     List<Department> findByRatingBetween(double from, double to);
 
 
+    List<UserFeedback> getDepartmentFeedback(int departmentId);
+
+
+    DepartmentDTO filterDepartmentFeedbacks(int departmentId);
 }

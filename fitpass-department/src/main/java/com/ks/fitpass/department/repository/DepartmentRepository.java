@@ -2,6 +2,7 @@ package com.ks.fitpass.department.repository;
 
 
 import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public interface DepartmentRepository {
     boolean update(Department department) throws DataAccessException;
 
     List<Department> findByRatingBetween(double from, double to);
+
+
+    List<UserFeedback> getDepartmentFeedback(int departmentId);
 
 
 

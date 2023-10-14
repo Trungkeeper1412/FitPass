@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS gymer_booking;
 DROP TABLE IF EXISTS shift;
 DROP TABLE IF EXISTS gym_plan;
 DROP TABLE IF EXISTS mst_kbn;
+DROP TABLE IF EXISTS gym_department_features;
 DROP TABLE IF EXISTS gym_department_services;
 DROP TABLE IF EXISTS gym_department_schedule;
 DROP TABLE IF EXISTS gym_department_albums;
@@ -98,18 +99,14 @@ CREATE TABLE IF NOT EXISTS gym_department_schedule (
                                                        FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
-CREATE TABLE gym_department_services (
-                                         services_id INT PRIMARY KEY AUTO_INCREMENT,
-                                         gym_department_id INT,
-                                         massage TINYINT(1) DEFAULT 0,
-                                         sauna TINYINT(1) DEFAULT 0,
-                                         bathroom TINYINT(1) DEFAULT 0,
-                                         air_conditioner TINYINT(1) DEFAULT 0,
-                                         boxing TINYINT(1) DEFAULT 0,
-                                         body_composition_analyzer TINYINT(1) DEFAULT 0,
-                                         pool TINYINT(1) DEFAULT 0,
-                                         bar TINYINT(1) DEFAULT 0,
-                                         FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
+
+CREATE TABLE IF NOT EXISTS gym_department_features (
+                                                       feature_id INT AUTO_INCREMENT PRIMARY KEY,
+                                                       gym_department_id INT NOT NULL,
+                                                       feature_icon varchar(150),
+                                                       feature_name VARCHAR(50),
+                                                       isSelected bit,
+                                                       FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
 -- table name mst_kbn to store type,status of all tables

@@ -1,9 +1,9 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.GymPlanDto;
-import com.ks.fitpass.department.entity.Department;
-import com.ks.fitpass.department.service.DepartmentService;
-import com.ks.fitpass.department.service.GymPlanService;
+import com.ks.fitpass.department.entity.*;
+import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.web.enums.PageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,10 +22,19 @@ public class DepartmentController {
     private final DepartmentService departmentService;
     private final GymPlanService gymPlanService;
 
+    private final DepartmentScheduleService departmentScheduleService;
+
+    private final DepartmentAlbumsService departmentAlbumsService;
+
+    private  final DepartmentFeatureService departmentFeatureService;
+
     @Autowired
-    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService) {
+    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService) {
         this.departmentService = departmentService;
         this.gymPlanService = gymPlanService;
+        this.departmentScheduleService = departmentScheduleService;
+        this.departmentAlbumsService = departmentAlbumsService;
+        this.departmentFeatureService = departmentFeatureService;
     }
 
     @GetMapping("/department-detail/{department_id}")
@@ -39,9 +48,30 @@ public class DepartmentController {
             List<GymPlanDto> gymPlans = gymPlanService.getGymPlanDetailsByDepartmentId(departmentId);
             model.addAttribute("gymPlans", gymPlans);
 
+            // Get department schedule
+            List<DepartmentSchedule> departmentSchedules = departmentScheduleService.getAllByDepartmentID(departmentId);
+            model.addAttribute("departmentSchedules", departmentSchedules);
+
+            // Get Department Album
+            List<DepartmentAlbums> departmentAlbums = departmentAlbumsService.getAllByDepartmentID(departmentId);
+            model.addAttribute("departmentAlbums", departmentAlbums);
+
+            // Get list of user feedback for the department
+            List<UserFeedback> userFeedbacks = departmentService.getDepartmentFeedback(departmentId);
+            model.addAttribute("userFeedbacks", userFeedbacks);
+
+            // Calculate the rating statistics
+            DepartmentDTO departmentDTO = departmentService.filterDepartmentFeedbacks(departmentId);
+            model.addAttribute("departmentFeedbacks", departmentDTO);
+
+            // Get department features
+            List<DepartmentFeature> departmentFeatures = departmentFeatureService.getDepartmentFeatures(departmentId);
+            model.addAttribute("departmentFeatures", departmentFeatures);
+
             return "gym-department-details";
         } catch (EmptyResultDataAccessException e) {
             return "error/no-data";
         }
     }
+
 }

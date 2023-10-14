@@ -215,4 +215,39 @@ public interface IRepositoryQuery {
     DELETE FROM gym_plan
     WHERE plan_id = ?
 """;
+
+
+    String GET_DEPARTMENT_FEEDBACK = """
+    SELECT
+        uf.feedback_id,
+        uf.user_id,
+        ud.first_name,
+        ud.last_name,
+        uf.department_id,
+        uf.rating,
+        uf.comments,
+        uf.feedback_time,
+        uf.feedback_status
+    FROM
+        user_feedback uf
+        INNER JOIN `user` u ON uf.user_id = u.user_id
+        INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+    WHERE
+        uf.department_id = ?
+""";
+
+    String GET_DEPARTMENT_FEATURES = """
+    SELECT
+        feature_id,
+        gym_department_id,
+        feature_icon,
+        feature_name,
+        isSelected
+    FROM
+        gym_department_features
+    WHERE
+        gym_department_id = ?
+""";
+
+
 }
