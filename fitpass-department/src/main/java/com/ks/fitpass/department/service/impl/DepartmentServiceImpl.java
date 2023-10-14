@@ -84,6 +84,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .departmentName(department.getDepartmentName())
                 .departmentAddress(department.getDepartmentAddress())
                 .departmentImageUrl(department.getDepartmentImageUrl())
+                .rating(department.getRating())
                 .build();
     }
 

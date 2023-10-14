@@ -18,4 +18,6 @@ public class DepartmentDTO {
 
     private String departmentImageUrl;
 
+    private double rating;
+
 }

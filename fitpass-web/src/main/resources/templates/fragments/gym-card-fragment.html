@@ -1,0 +1,36 @@
+<!-- gym-card-fragment.html -->
+<div th:fragment="gym-card-fragment">
+<div class="gradient" style="margin-top: 0;">
+    <div th:each="department: ${departments}" class="card">
+        <div class="gym_image">
+            <img th:src="${department.getDepartmentImageUrl()}" alt="this is gym image" style="height: 95%">
+        </div>
+        <div class="gym-description">
+            <div style="display: flex; width: fit-content;">
+                <div class="">
+                    <h4 style="font-weight: 600; color: white" th:text="${department.getDepartmentName()}"></h4>
+                </div>
+                <i style="height: 40px; margin-left: 20px;" th:attr="data-star=${department.getRating()}"></i>
+
+            </div>
+            <div style="text-decoration: underline; color: rgb(110, 110, 110);"
+                 th:text="${department.getDepartmentAddress()}"></div>
+            <div style="display: flex; margin-top: -10px;">
+                <button  class="button button4">
+                    <i class="bi bi-geo-alt"></i>
+                    <span style="margin-left: 10px;">1,5 km</span>
+                </button>
+                <button style=" margin-left: 20px;" class="button button4">
+                    <i class="bi bi-people-fill" style="width: 40px;"></i>
+                    <span style="margin-left: 10px;">100 người</span>
+                </button>
+            </div>
+
+            <div style="display: flex; margin-top: 15px; justify-content: center;">
+                <div style="color: rgb(171, 168, 168); font-weight: 600; font-size: larger; padding-top: 4px;">Chỉ từ</div>
+                <div style="font-weight: 600; font-size: x-large; color: rgb(255, 187, 0); margin-left: 10px;">500 Credits</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

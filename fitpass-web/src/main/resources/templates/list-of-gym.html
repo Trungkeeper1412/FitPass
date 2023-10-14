@@ -25,350 +25,283 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body style="background-color: rgb(37, 37, 37);">
-<header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-        <h1 class="logo me-auto me-lg-0"><a href="index.html">Fitpass<span>.</span></a></h1>
-        <nav style="margin:auto" id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
-                <li><a class="nav-link scrollto" href="#about">Đặt lịch tập</a></li>
-                <li><a class="nav-link scrollto" href="#services">Liên hệ</a></li>
-                <li>
-                    <form class="d-flex" style="margin-left: 50px;">
-                        <input style="height: 30px;  margin-top: 5px;" class="form-control me-2" type="search"
-                               placeholder="Tìm kiếm" aria-label="Search">
-                        <button class="btn btn-outline-warning" type="submit">Search</button>
-                    </form>
-                </li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Tài khoản người dùng</a></li>
-                <li><a class="dropdown-item" href="#">Lịch sử</a></li>
-                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
-<!-- ======= Banner/slider ======= -->
-
-<div style="display: grid; grid-template-columns: 3fr 2fr; background-color: rgb(37, 37, 37); padding: 30px; margin-top: 90px ; height: 380px;">
-    <div style="background-color: rgb(37, 37, 37); margin-top: -30px; padding-top: 10px;">
+<body class="list-of-gym-body">
+  <header id="header" class="fixed-top">
+    <div  class="container d-flex align-items-center justify-content-lg-between">
+      <h1 style="margin-left: -60px;" class="logo me-auto me-lg-0"><a href="index.html">Fitpass<span>.</span></a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul >
+          <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+          <li><a class="nav-link scrollto" href="#about">Đặt lịch tập</a></li>
+          <li><a class="nav-link scrollto" href="#services">Liên hệ</a></li>
+          <li>
+            <form class="d-flex" style="margin-left: 50px;">
+              <input style="height: 30px;  margin-top: 5px; width: 300px;" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+              <img type="submit" style="margin-top: 6px; width: 25px; height: 25px;" src="https://cdn-icons-png.flaticon.com/128/4250/4250968.png">
+            </form>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <div style="display: flex; margin-right: 50px;">
+        <img type="submit" style="margin-top: 3px; width: 35px; height: 35px;" src="https://cdn-icons-png.flaticon.com/128/9405/9405895.png">
+        <div style="margin: auto; margin-left: 10PX; color: rgb(255, 170, 0); font-weight: 500;">500 Credits</div>
+      </div>
+      <div class="dropdown" style="position: absolute; right:10px;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Tài khoản người dùng</a></li>
+          <li><a class="dropdown-item" href="#">Lịch sử</a></li>
+          <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+        </ul>
+      </div>
+      
+    </div> 
+  </header>
+  
+    <!-- ======= Banner/slider ======= -->
+      <div>
         <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img
-                        src="https://www.spookynooksports.com/hs-fs/hubfs/01-What-Gym-Provides.png?width=680&name=01-What-Gym-Provides.png"
-                        style="width:100%; height: 340px">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="https://www.fitness4less.co.uk/images/upload/images/blogGYM-GURU-F4L_13860119.jpg"
-                     style="width:100%; height: 340px">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="https://www.fitness4less.co.uk/images/upload/images/blogtransform-programme_1392.jpg"
-                     style="width:100%; height: 340px">
-            </div>
-
+          <div class="mySlides fade">
+            <img
+              src="https://nowfit.vn/wp-content/uploads/2023/10/1-03-scaled.jpg">
+          </div>
+  
+          <div class="mySlides fade">
+            <img src="https://gymone.vn/wp-content/uploads/2023/04/304-15-banner-1920x1100-1.jpg">
+          </div>
+  
+          <div class="mySlides fade">
+            <img src="https://strongfit.vn/upload/partner/4699285652475-553456189623861-8407339603745830464-n.jpg">
+          </div>
+            
         </div>
         <div class="dot-slider" style="text-align:center; margin-top: 20px;">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
         </div>
+      </div>
+    <h2 style="text-align: center; margin-top: 50px; font-weight: 800; color: white;">Danh sách các phòng gym</h2>
+    <div style="background-color: rgb(255, 187, 0); height: 4px; width: 280px; margin: auto;"></div>
 
-    </div>
-    <div style="background-color: rgb(37, 37, 37); display: grid; grid-template-rows: 1fr 1fr; height: 340px; ">
-        <div style="background-color: rgb(37, 37, 37);">
-            <img src="https://img.freepik.com/free-psd/gym-fitness-web-banner-template_106176-670.jpg"
-                 style="height: 175px; width: 100%; padding: 10px 0 0 10px">
-        </div>
-        <div style="background-color: rgb(37, 37, 37);">
-            <img src="https://img.freepik.com/premium-psd/modern-black-diagonal-gym-fitness-banner-poster_179813-622.jpg"
-                 style="height: 175px; width: 100%; padding: 10px 0 0 10px">
-        </div>
-    </div>
-</div>
-<!-- ======= List Gym Section ======= -->
-<div style="display: flex; ; padding: 50px 10px 10px; min-height: 1000px">
-    <div class="filter" style="width: 20%; background-color: rgb(37, 37, 37); margin-top: 40px; ">
+    <!-- ======= List Gym Section ======= -->
+    <div style="display: flex; padding-top: 30px; min-height: 1000px; padding: 60px; justify-content: center; width: 100%;">
+      <div class="filter" style="width: 20%;  margin-top: 10px; ">
         <div class="range-price" style="border-radius: 10px 10px 0 0;">
-            <header>
-                <h2>Lọc theo giá</h2>
-                <p>Áp dụng bộ lọc dựa trên giá</p>
-            </header>
-            <div style="margin-left: -5px;" class="price-input">
-                <div class="field">
-                    <!-- <span style="font-size: 14px;">Min</span> -->
-                    <input style="color: white;" type="number" class="input-min" value="2500" disabled>
-                </div>
-                <div class="separator">-</div>
-                <div style="margin-left: -10px;" class="field">
-                    <!-- <span style="font-size: 14px;">Max</span> -->
-                    <input style="color: white;" type="number" class="input-max" value="7500" disabled>
-                </div>
+          <header>
+            <h4>Lọc theo giá</h4>
+            <p>Áp dụng bộ lọc dựa trên giá</p>
+          </header>
+          <div style="margin-left: -5px;" class="price-input">
+            <div class="field">
+              <!-- <span style="font-size: 14px;">Min</span> -->
+              <input style="color: white;" type="number" class="input-min" value="2500" disabled>
             </div>
-            <div class="slider">
-                <div class="progress"></div>
+            <div class="separator">-</div>
+            <div style="margin-left: -10px;" class="field">
+              <!-- <span style="font-size: 14px;">Max</span> -->
+              <input style="color: white;" type="number" class="input-max" value="7500" disabled>
             </div>
-            <div class="range-input">
-                <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
-            </div>
+          </div>
+          <div class="slider">
+            <div class="progress"></div>
+          </div>
+          <div class="range-input">
+            <input  type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+            <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+          </div>
         </div>
         <div class="range-price" style="height:fit-content">
-            <header>
-                <h2>Lọc theo khoảng cách</h2>
-                <p>Áp dụng bộ lọc dựa trên khoảng cách</p>
-            </header>
-            <div class="form-check rating-filter">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                <label class="form-check-label" for="flexCheckDefault1">
-                    0-2 km
-                </label>
-            </div>
-            <div class="form-check rating-filter">
-                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault2">
-                <label class="form-check-label" for="flexCheckDefault2">
-                    2-5 km
-                </label>
-            </div>
-            <div class="form-check rating-filter">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3" checked>
-                <label class="form-check-label " for="flexCheckChecked3">
-                    Trên 5km
-                </label>
-            </div>
+          <header>
+            <h4>Lọc theo khoảng cách</h4>
+            <p>Áp dụng bộ lọc dựa trên khoảng cách</p>
+          </header>
+          <div class="form-check rating-filter">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              0-2 km
+            </label>
+          </div>
+          <div class="form-check rating-filter">
+            <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              2-5 km
+            </label>
+          </div>
+          <div class="form-check rating-filter">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label " for="flexCheckChecked">
+              Trên 5km
+            </label>
+          </div>
         </div>
         <div class="range-price" style="height: fit-content;">
-            <header>
-                <h2>Lọc theo đánh giá</h2>
-                <p>Áp dụng bộ lọc dựa trên đánh giá</p>
-            </header>
-            <div class="form-check rating-filter">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                <label class="form-check-label" for="flexCheckDefault4">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                </label>
-            </div>
-            <div class="form-check rating-filter">
-                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault5">
-                <label class="form-check-label" for="flexCheckDefault5">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </label>
-            </div>
-            <div class="form-check rating-filter">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6" checked>
-                <label class="form-check-label " for="flexCheckChecked6">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star "></span>
-                    <span class="fa fa-star "></span>
-                </label>
-            </div>
-            <div class="form-check rating-filter ">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
-                <label class="form-check-label" for="flexCheckDefault6">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </label>
-            </div>
-            <div class="form-check rating-filter">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7">
-                <label class="form-check-label" for="flexCheckDefault7">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </label>
-            </div>
+          <header>
+            <h4>Lọc theo đánh giá</h4>
+            <p>Áp dụng bộ lọc dựa trên đánh giá</p>
+          </header>
+          <div class="form-check rating-filter">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+            </label>
+          </div>
+          <div class="form-check rating-filter">
+            <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+            </label>
+          </div>
+          <div class="form-check rating-filter">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label " for="flexCheckChecked">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star "></span>
+              <span class="fa fa-star "></span>
+            </label>
+          </div>
+          <div class="form-check rating-filter ">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </label>
+          </div>
+          <div class="form-check rating-filter">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </label>
+          </div>
         </div>
 
         <div class="range-price" style="height: fit-content; border-radius: 0 0 10px 10px ; ">
-            <header>
-                <h2>Sắp xếp</h2>
-            </header>
-            <div class="form-check" style="margin-top: 20px;">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                    Sắp xếp theo số người tham gia
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                    Sắp xếp theo đánh giá
-                </label>
-            </div>
+          <header>
+            <h4>Sắp xếp</h4>
+          </header>
+          <div class="form-check" style="margin-top: 20px;">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Sắp xếp theo số người tham gia
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              Sắp xếp theo đánh giá
+            </label>
+          </div>
         </div>
-    </div>
-    <!-- Lis of gym -->
-    <div class="gradient" style=" margin-top: 40px; ">
-        <div style="grid-column-start: 1; grid-column-end:4; ">
-            <h2 style="color: rgb(255, 183, 0); font-weight: 600;">Danh sách các phòng gym</h2>
-        </div>
-        <div class="gymCardContainer d-flex" id="gymCardContainer">
-            <div th:each="department: ${departments}" class="card">
-                <div class="gym_image">
-                    <img th:src="${department.getDepartmentImageUrl()}" style="height: 95%" alt="gym picture">
-                </div>
-                <div class="gym-description">
-                    <div style="display: flex; width: fit-content;">
-                        <div class="">
-                            <h4 style="font-weight: 600;" th:text="${department.getDepartmentName()}"></h4>
-                        </div>
-                        <div class="form-check rating-filter">
-                            <label class="form-check-label">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div style="text-decoration: underline; color: rgb(143, 143, 143);"
-                         th:text="${department.getDepartmentAddress()}"></div>
+      </div>
 
-                    <div style="display: flex; margin-top: -10px;">
-                        <button style="width: 130px; height: 40px;" class="button button4">
-                            <img src="https://cdn-icons-png.flaticon.com/128/2923/2923404.png" style="width: 30px">
-                            <span style="margin-left: 10px;">1,5 km</span>
-                        </button>
-                        <button style="width: 150px; height: 40px; margin-left: 20px;" class="button button4">
-                            <img src="https://cdn-icons-png.flaticon.com/128/681/681494.png" style="width: 30px">
-                            <span style="margin-left: 10px;">100 người</span>
-                        </button>
-                    </div>
-
-                    <div style="display: flex; margin-top: 15px; justify-content: center;">
-                        <div style="color: rgb(171, 168, 168); font-weight: 600; font-size: larger; padding-top: 4px;">
-                            Chỉ từ
-                        </div>
-                        <div style="font-weight: 600; font-size: x-large; color: rgb(255, 187, 0); margin-left: 10px;">
-                            500 Credits
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End List Gym Section -->
-<!-- Pagination -->
-<div style="position: absolute ;right: 50px; margin-bottom: 60px; margin-top: 80px;">
-    <nav style="" aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#">6</a></li>
-            <li class="page-item"><a class="page-link" href="#">7</a></li>
-            <li class="page-item"><a class="page-link" href="#">8</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<!-- </main> -->
-
-<!-- ======= Footer ======= -->
-<footer id="footer">
-    <div class="footer-top" style="margin-top: 150px;">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-info">
-                        <h3>Gp<span>.</span></h3>
-                        <p>
-                            A108 Adam Street <br>
-                            NY 535022, USA<br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-                        <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
+      <!-- Lis of gym -->
+      <div class="listContainer" th:insert="fragments/gym-card-fragment.html :: gym-card-fragment"></div>
+      </div>
     </div>
 
-    <div class="container">
-        <div class="copyright">
-            &copy; Copyright <strong><span>My</span></strong>. All Rights Reserved
+  <div class="pagination-wrapper" style="margin-top: -50px;">
+            <div class="pagination">
+              <a class="prev page-numbers" href="javascript:;">prev</a>
+              <span aria-current="page" class="page-numbers current">1</span>
+              <a class="page-numbers" href="javascript:;">2</a>
+              <a class="page-numbers" href="javascript:;">3</a>
+              <a class="page-numbers" href="javascript:;">4</a>
+              <a class="page-numbers" href="javascript:;">5</a>
+              <a class="page-numbers" href="javascript:;">6</a>
+              <a class="page-numbers" href="javascript:;">7</a>
+              <a class="page-numbers" href="javascript:;">8</a>
+              <a class="page-numbers" href="javascript:;">9</a>
+              <a class="page-numbers" href="javascript:;">10</a>
+              <a class="next page-numbers" href="javascript:;">next</a>
+            </div>
+          </div>
+  <!-- </main> -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top" style="margin-top: 80px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Gp<span>.</span></h3>
+              <p>
+                A108 Adam Street <br>
+                NY 535022, USA<br><br>
+                <strong>Phone:</strong> +1 5589 55488 55<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+          <div class="container">
+            <div class="copyright">
+              &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+            </div>
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+          </div>
         </div>
     </div>
-</footer>
+  </footer>
+  <!-- End Footer -->
 
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -397,10 +330,11 @@
                 console.log("Inside success callback");
                 console.log(response.length);
                 if (response.length === 0) {
-                    $('#gymCardContainer').empty();
-                    $('#gymCardContainer').html('<p>No gyms found nearby.</p>');
+                    $('.listContainer').empty();
+                    $('.listContainer').html('<p>No gyms found nearby.</p>');
                 } else {
-                    $('#gymCardContainer').replaceWith(response);
+                    $('.listContainer').empty();
+                    $('.listContainer').html(response)
                     // updateCardContainer(response);
                 }
             },
@@ -412,53 +346,8 @@
         console.log("After AJAX request");
     }
 
-    function updateCardContainer(response) {
-        $("#gymCardContainer").empty();
-        // Loop through the gym data and create cards
-        response.forEach(function (department) {
-            const cardHtml = `
-  <div th:each="department: ${departments} class="card">
-    <div class="gym_image">
-      <img src="${department.getDepartmentImageUrl()}" style="height: 95%" alt="gym picture">
-    </div>
-    <div class="gym-description">
-      <div style="display: flex; width: fit-content;">
-        <div>
-          <h4 style="font-weight: 600;" th:text="${department.getDepartmentName()}"></h4>
-        </div>
-        <div class="form-check rating-filter">
-          <label class="form-check-label">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-          </label>
-        </div>
-      </div>
-      <div style="text-decoration: underline; color: rgb(143, 143, 143);" th:text="${department.getDepartmentAddress()}"></div>
+    //
 
-      <div style="display: flex; margin-top: -10px;">
-        <button style="width: 130px; height: 40px;" class="button button4">
-          <img src="https://cdn-icons-png.flaticon.com/128/2923/2923404.png" style="width: 30px">
-          <span style="margin-left: 10px;">1,5 km</span>
-        </button>
-        <button style="width: 150px; height: 40px; margin-left: 20px;" class="button button4">
-          <img src="https://cdn-icons-png.flaticon.com/128/681/681494.png" style="width: 30px">
-          <span style="margin-left: 10px;">100 người</span>
-        </button>
-      </div>
-
-      <div style="display: flex; margin-top: 15px; justify-content: center;">
-        <div style="color: rgb(171, 168, 168); font-weight: 600; font-size: larger; padding-top: 4px;">Chỉ từ</div>
-        <div style="font-weight: 600; font-size: x-large; color: rgb(255, 187, 0); margin-left: 10px;">500 Credits</div>
-      </div>
-    </div>
-  </div>
-`;
-            $("#gymCardContainer").append(cardHtml);
-        });
-    }
 </script>
 <!-- Vendor JS Files -->
 <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
