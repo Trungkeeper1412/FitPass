@@ -76,10 +76,10 @@
 <div class="gym-container">
     <div class="about-our-gym">
         <div class="about-our-gym-1">
-            <h3 style="color: aliceblue;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
+            <h3 style="color: black;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
             <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-            <div class="gym-intro"  th:utext="${department.departmentDescription}"></div>
-            <hr style="margin-top: 20px;">
+            <div class="gym-intro"  th:text="${department.departmentDescription}"></div>
+            <hr style="margin-top: 20px; color: black">
             <div class="gym-address">
                 <i class="bi bi-geo-alt-fill"></i>
                 <div style="margin-left: 10px;"  th:text="${department.departmentAddress}"></div>
@@ -123,12 +123,12 @@
                     <input type="checkbox" th:checked="${feature.isSelected}" disabled>
                     <span class="toggle-slider round"></span>
                 </label>
-                <div style="color: rgb(255, 255, 255); margin-left: 10px" th:text="${feature.featureName}"></div>
+                <div style="color: black; margin-left: 10px" th:text="${feature.featureName}"></div>
             </div>
         </div>
     </div>
 
-    <h3 style="color: aliceblue; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
+    <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <!-- <div style="color:white; margin-top: 25px;">Hiểu được nhu cầu tập luyện, khả năng sắp xếp thời gian và tính kỉ luật phụ thuộc vào đặc thù mỗi cá nhân, chúng tôi chia ra thành những gói tập khác nhau với các khung thời gian phù hợp với nhu cầu của mỗi khách hàng.</div> -->
     <div class="list-plan-wrapper">
@@ -138,23 +138,24 @@
         <div class="scroll-plans">
             <div th:each="gymPlan : ${gymPlans}" class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
-                    <div style="color: rgb(255, 255, 255);" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
-                    <div style="color: rgb(255, 255, 255);" class="gym-plan-price">
-                        <div style="font-size: xxx-large; font-weight: 700; color: rgb(255, 255, 255)">
+                    <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
+                    <div style="" class="gym-plan-price">
+                        <div style="font-size: xxx-large; font-weight: 700">
                             <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
                             <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}"></span>
                         </div>
-                        <div style="padding-left: 10px; padding-top: 22px; color: rgb(255, 255, 255)">credits</div>
+                        <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
-                    <div style="color: rgb(255, 255, 255);" th:text="${gymPlan.getGymPlanDescription()}"></div>
-                    <hr>
-                    <div style="color: rgb(255, 255, 255);" class="gym-duration">
+                    <div style="" th:text="${gymPlan.getGymPlanDescription()}"></div>
+                    <hr class="line">
+                    <div style="background-color: black; height: 2px; width: fit-content"></div>
+                    <div style="" class="gym-duration">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
-                    <div style="color: rgb(255, 255, 255);" th:text="'Thời hạn trước khi active : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div style="color: rgb(255, 255, 255);" th:text="'Thời hạn sau khi active : ' + ${gymPlan.planAfterActiveValidity} + 'ngày'"></div>
+                    <div style="" th:text="'Thời hạn trước khi active : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                    <div style="" th:text="'Thời hạn sau khi active : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
                 <button type="button">
                     Đăng ký ngay
@@ -168,7 +169,7 @@
     </div>
 
     <div style="margin: auto;">
-        <h3 style="color: rgb(255, 255, 255); margin-top: 50px; font-weight: 600">Album ảnh</h3>
+        <h3 style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
         <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
         <!-- <div style="color: white; margin-top: 20px;">Chúng tôi hiểu rằng đánh giá một khoản đầu tư không thể dựa trên chi phí bỏ ra, mà phải đến từ hiệu quả mang lại – tỷ suất sinh lời. Với mục tiêu duy nhất là kết quả của khách hàng, thay vì đầu tư vào những tiện nghi hào nhoáng bên ngoài, chúng tôi tập trung vào những thiết bị có chất lượng cao, đến từ những thương hiệu hàng đầu thế giới, giúp tối ưu hóa quá trình tập luyện.</div> -->
         <div class="image-scroll-wrapper squares">
@@ -186,7 +187,7 @@
         </div>
     </div>
 
-    <h3 style="color: rgb(255, 255, 255); margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
+    <h3 style="color: black; margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <!-- <div style="color: white; margin-top: 20px;">Chúng tôi đã giúp hàng trăm người như bạn, và tất nhiên nói có sách mách có chứng! Ẩn sau mỗi feedback dưới đây là những câu chuyện dài về sự nỗ lực để thay đổi bản thân, trở thành phiên bản tốt hơn, mạnh mẽ hơn, kỉ luật hơn của chính mình. Họ cũng đã từng gặp rất nhiều khó khăn khi tự giảm cân trong thời gian dài.
       Hãy liên hệ ngay để trở thành transform tiếp theo của chúng tôi!</div> -->
@@ -223,8 +224,7 @@
                 <div  th:text="${feedback.comments}"></div>
             </div>
         </div>
-        <hr style="margin-top: 35px;">
-        <div class="pagination-wrapper" th:if="${departmentFeedbacks.total}>6">
+        <div class="pagination-wrapper" th:if="${departmentFeedbacks.total == 7}">
             <div class="pagination">
                 <a class="prev page-numbers" href="javascript:;">prev</a>
                 <span aria-current="page" class="page-numbers current">1</span>
