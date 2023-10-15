@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym department details</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" th:href="@{/assets/img/icon.png}">
+    <link rel="apple-touch-icon" th:href="@{assets/img/apple-touch-icon.png}">
+    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+
+<body class="body-gym-details">
+<header id="header" >
+    <div  class="container d-flex align-items-center justify-content-lg-between">
+        <h1 style="margin-left: -60px;" class="logo me-auto me-lg-0"><a href="index.html">Fitpass<span>.</span></a></h1>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul >
+                <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+                <li><a class="nav-link scrollto" href="#about">Đặt lịch tập</a></li>
+                <li><a class="nav-link scrollto" href="#services">Liên hệ</a></li>
+                <li>
+                    <form class="d-flex" style="margin-left: 50px;">
+                        <input style="height: 30px;  margin-top: 5px; width: 300px;" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                        <img type="submit" style="margin-top: 6px; width: 25px; height: 25px;" src="https://cdn-icons-png.flaticon.com/128/4250/4250968.png">
+                    </form>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <div style="display: flex; margin-right: 50px;">
+            <img type="submit" style="margin-top: 3px; width: 35px; height: 35px;" src="https://cdn-icons-png.flaticon.com/128/9405/9405895.png">
+            <div style="margin: auto; margin-left: 10PX; color: rgb(255, 170, 0); font-weight: 500;">500 Credits</div>
+        </div>
+        <div class="dropdown" style="position: absolute; right:10px;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Tài khoản người dùng</a></li>
+                <li><a class="dropdown-item" href="#">Lịch sử</a></li>
+                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+            </ul>
+        </div>
+
+    </div>
+</header>
+
+<!-- <div style="width: 100%; margin: auto; margin-top: 0px;"> -->
+<div class="gym-first-info">
+    <div class="gym-picture">
+        <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
+        <div class="gym-name-cover">
+            <h3 style="margin: auto; color: rgb(255, 255, 255); font-weight: 600;" th:text="${department.departmentName}"></h3>
+            <h5 style="color: white;">2000 người đã tham gia</h5>
+        </div>
+    </div>
+    <!-- <div style="background-color: black;">
+    </div> -->
+</div>
+<div class="gym-container">
+    <div class="about-our-gym">
+        <div class="about-our-gym-1">
+            <h3 style="color: black;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
+            <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
+            <div class="gym-intro"  th:text="${department.departmentDescription}"></div>
+            <hr style="margin-top: 20px; color: black">
+            <div class="gym-address">
+                <i class="bi bi-geo-alt-fill"></i>
+                <div style="margin-left: 10px;"  th:text="${department.departmentAddress}"></div>
+            </div>
+            <div class="gym-address">
+                <i class="bi bi-telephone-outbound-fill"></i>
+                <!-- <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png"></a> -->
+                <div style="margin-left: 10px;" th:text="${department.departmentContactNumber}"></div>
+            </div>
+            <div class="gym-address">
+                <i class="bi bi-alarm-fill"></i>
+                <!-- <img style="width: 22px;" src="https://cdn-icons-png.flaticon.com/128/463/463575.png"></a> -->
+                <div id="myBtn" style="margin-left: 10px;">Giờ hoạt động</div>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <div class="schedule-modal-header">
+                            <div style="display: flex;">
+                                <h3>Giờ hoạt động</h3>
+                            </div>
+                            <span class="close">&times;</span>
+                        </div>
+                        <div class="week">
+                            <div th:each="schedule : ${departmentSchedules}" class="day-line">
+                                <div class="day" th:text="${schedule.departmentScheduleDay}"></div>
+                                <div class="time">
+                                    <span th:text="${schedule.departmentScheduleOpenTime}"></span>
+                                    <span>-</span>
+                                    <span th:text="${schedule.departmentScheduleCloseTime}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gym-service">
+            <div th:each="feature : ${departmentFeatures}" class="sub-service">
+                <label class="switch">
+                    <input type="checkbox" th:checked="${feature.isSelected}" disabled>
+                    <span class="toggle-slider round"></span>
+                </label>
+                <div style="color: black; margin-left: 10px" th:text="${feature.featureName}"></div>
+            </div>
+        </div>
+    </div>
+
+    <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
+    <!-- <div style="color:white; margin-top: 25px;">Hiểu được nhu cầu tập luyện, khả năng sắp xếp thời gian và tính kỉ luật phụ thuộc vào đặc thù mỗi cá nhân, chúng tôi chia ra thành những gói tập khác nhau với các khung thời gian phù hợp với nhu cầu của mỗi khách hàng.</div> -->
+    <div class="list-plan-wrapper">
+        <button class="left" onclick="leftScroll()" th:if="${gymPlans.size()}>3">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
+        </button>
+        <div class="scroll-plans">
+            <div th:each="gymPlan : ${gymPlans}" class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
+                <div class="plan-description">
+                    <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
+                    <div style="" class="gym-plan-price">
+                        <div style="font-size: xxx-large; font-weight: 700">
+                            <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
+                            <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}"></span>
+                        </div>
+                        <div style="padding-left: 10px; padding-top: 22px;">credits</div>
+                    </div>
+                    <div style="" th:text="${gymPlan.getGymPlanDescription()}"></div>
+                    <hr class="line">
+                    <div style="background-color: black; height: 2px; width: fit-content"></div>
+                    <div style="" class="gym-duration">
+                        <span>Thời lượng gói tập :</span>
+                        <span class="day-duration" th:text="${gymPlan.duration}"></span>
+                        <span class="day-duration">ngày</span>
+                    </div>
+                    <div style="" th:text="'Thời hạn trước khi active : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                    <div style="" th:text="'Thời hạn sau khi active : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                </div>
+                <button type="button">
+                    Đăng ký ngay
+                </button>
+            </div>
+
+        </div>
+        <button class="right" onclick="rightScroll()" th:if="${gymPlans.size()}>3">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
+        </button>
+    </div>
+
+    <div style="margin: auto;">
+        <h3 style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
+        <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
+        <!-- <div style="color: white; margin-top: 20px;">Chúng tôi hiểu rằng đánh giá một khoản đầu tư không thể dựa trên chi phí bỏ ra, mà phải đến từ hiệu quả mang lại – tỷ suất sinh lời. Với mục tiêu duy nhất là kết quả của khách hàng, thay vì đầu tư vào những tiện nghi hào nhoáng bên ngoài, chúng tôi tập trung vào những thiết bị có chất lượng cao, đến từ những thương hiệu hàng đầu thế giới, giúp tối ưu hóa quá trình tập luyện.</div> -->
+        <div class="image-scroll-wrapper squares">
+            <div th:each="album : ${departmentAlbums}">
+                <img onclick="onClickImage(this)" class="w3-hover-opacity" th:src="${album.photoUrl}" />
+            </div>
+        </div>
+        <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+            <div style="text-align: center;">
+                <span class="w3-button w3-hover-red ">&times;</span>
+                <div class="w3-animate-zoom" style="width: 70%; margin: auto;">
+                    <img id="img01" style="width:50%; margin: auto;" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 style="color: black; margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
+    <!-- <div style="color: white; margin-top: 20px;">Chúng tôi đã giúp hàng trăm người như bạn, và tất nhiên nói có sách mách có chứng! Ẩn sau mỗi feedback dưới đây là những câu chuyện dài về sự nỗ lực để thay đổi bản thân, trở thành phiên bản tốt hơn, mạnh mẽ hơn, kỉ luật hơn của chính mình. Họ cũng đã từng gặp rất nhiều khó khăn khi tự giảm cân trong thời gian dài.
+      Hãy liên hệ ngay để trở thành transform tiếp theo của chúng tôi!</div> -->
+    <div class="rating-feedback">
+        <div class="rating-option">
+            <div class="rating-point" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
+            <button type="button" class="btn btn-warning" style="margin-left: 70px;">
+                Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
+            </button>
+            <button type="button" class="btn btn-warning">
+                5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
+            </button>
+            <button type="button" class="btn btn-warning">
+                4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
+            </button>
+            <button type="button" class="btn btn-warning">
+                3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
+            </button>
+            <button type="button" class="btn btn-warning">
+                2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
+            </button>
+            <button type="button" class="btn btn-warning">
+                1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
+            </button>
+        </div>
+        <div th:each="feedback : ${userFeedbacks}" class="user-rating">
+            <div class="user-rating-avatar">
+                <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
+            </div>
+            <div class="user-rating-description">
+                <div th:text="${feedback.userName}"></div>
+                <i style="height: 20px;" th:attr="data-star=${feedback.rating}"></i>
+                <div th:text="${feedback.feedbackTime}"></div>
+                <div  th:text="${feedback.comments}"></div>
+            </div>
+        </div>
+        <div class="pagination-wrapper" th:if="${departmentFeedbacks.total == 7}">
+            <div class="pagination">
+                <a class="prev page-numbers" href="javascript:;">prev</a>
+                <span aria-current="page" class="page-numbers current">1</span>
+                <a class="page-numbers" href="javascript:;">2</a>
+                <a class="page-numbers" href="javascript:;">3</a>
+                <a class="page-numbers" href="javascript:;">4</a>
+                <a class="page-numbers" href="javascript:;">5</a>
+                <a class="page-numbers" href="javascript:;">6</a>
+                <a class="page-numbers" href="javascript:;">7</a>
+                <a class="page-numbers" href="javascript:;">8</a>
+                <a class="page-numbers" href="javascript:;">9</a>
+                <a class="page-numbers" href="javascript:;">10</a>
+                <a class="next page-numbers" href="javascript:;">next</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-info">
+                        <h3>Gp<span>.</span></h3>
+                        <p>
+                            A108 Adam Street <br>
+                            NY 535022, USA<br><br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <h4>Our Newsletter</h4>
+                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<script>
+    function onClickImage(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollImages = document.querySelector(".scroll-plans");
+        const scrollLength = scrollImages.scrollWidth - scrollImages.clientWidth;
+        const leftButton = document.querySelector(".left");
+        const rightButton = document.querySelector(".right");
+
+        function checkScroll() {
+            const currentScroll = scrollImages.scrollLeft;
+            if (currentScroll === 0) {
+                leftButton.setAttribute("disabled", "true");
+                rightButton.removeAttribute("disabled");
+            } else if (currentScroll === scrollLength) {
+                rightButton.setAttribute("disabled", "true");
+                leftButton.removeAttribute("disabled");
+            } else {
+                leftButton.removeAttribute("disabled");
+                rightButton.removeAttribute("disabled");
+            }
+        }
+
+        scrollImages.addEventListener("scroll", checkScroll);
+        window.addEventListener("resize", checkScroll);
+        checkScroll();
+
+        function leftScroll() {
+            scrollImages.scrollBy({
+                left: -500,
+                behavior: "smooth"
+            });
+        }
+
+        function rightScroll() {
+            scrollImages.scrollBy({
+                left: 500,
+                behavior: "smooth"
+            });
+        }
+
+        leftButton.addEventListener("click", leftScroll);
+        rightButton.addEventListener("click", rightScroll);
+    });
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+
+</html>

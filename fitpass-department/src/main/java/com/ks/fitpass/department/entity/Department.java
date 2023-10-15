@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class Department {
 
+
     private int departmentId;
 
     private DepartmentStatus departmentStatus;
@@ -23,9 +24,7 @@ public class Department {
 
     private String departmentLogoUrl;
 
-    private String departmentOpeningHours;
-
-    private String departmentImageUrl;
+    private String departmentWallpaperUrl;
 
     private String departmentDescription;
 
@@ -34,4 +33,10 @@ public class Department {
     private Double longitude;
 
     private Double rating;
+
+
+    private int capacity;
+
+    private Double area;
+
 }

@@ -17,12 +17,15 @@ public class DepartmentMapper implements RowMapper<Department> {
                 .departmentAddress(resultSet.getString("address"))
                 .departmentContactNumber(resultSet.getString("contact_number"))
                 .departmentLogoUrl(resultSet.getString("logo_url"))
-                .departmentOpeningHours(resultSet.getString("opening_hours"))
-                .departmentImageUrl(resultSet.getString("image_url"))
+                .departmentWallpaperUrl(resultSet.getString("wallpaper_url"))
                 .departmentDescription(resultSet.getString("description"))
                 .latitude(resultSet.getDouble("latitude"))
                 .longitude(resultSet.getDouble("longitude"))
                 .rating(resultSet.getDouble("rating"))
+
+                .capacity(resultSet.getInt("capacity"))
+                .area(resultSet.getDouble("area"))
+
                 .departmentStatus(DepartmentStatus.builder()
                         .departmentStatusCd(resultSet.getInt("gym_department_status_key"))
                         .departmentStatusName(resultSet.getString("gym_department_status_name"))

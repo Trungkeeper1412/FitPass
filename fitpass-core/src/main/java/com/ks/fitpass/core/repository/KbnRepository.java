@@ -8,4 +8,6 @@ import java.util.List;
 public interface KbnRepository {
 
     List<Kbn> getKbnByName(String kbnName);
+
+    String getGymPlanTypeByPlanKey(int gymPlanKey);
 }

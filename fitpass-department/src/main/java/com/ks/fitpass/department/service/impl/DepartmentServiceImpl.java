@@ -1,8 +1,10 @@
 package com.ks.fitpass.department.service.impl;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.UserFeedbackDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
+import com.ks.fitpass.department.entity.UserFeedback;
 import com.ks.fitpass.department.repository.DepartmentRepository;
 import com.ks.fitpass.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,8 +85,12 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
                 .departmentAddress(department.getDepartmentAddress())
-                .departmentImageUrl(department.getDepartmentImageUrl())
+
+                .departmentWallpaperUrl(department.getDepartmentWallpaperUrl())
                 .rating(department.getRating())
+                .capacity(department.getCapacity())
+                .area(department.getArea())
+
                 .build();
     }
 
@@ -95,7 +101,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getOne(int id) throws DataAccessException {
-        return departmentRepository.getOne(id);
+        Department department =  departmentRepository.getOne(id);
+        // tinh 5 bien
+        int total =0;
+
+
+        //setter vao department
+//        department.setTotal(total);
+
+        return department;
+
     }
 
     @Override
@@ -114,4 +129,65 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
 
+    @Override
+    public List<Department> findByRatingBetween(double from, double to) {
+        return departmentRepository.findByRatingBetween(from, to);
+    }
+
+    @Override
+    public List<UserFeedback> getDepartmentFeedback(int departmentId) {
+        return departmentRepository.getDepartmentFeedback(departmentId);
+    }
+
+    @Override
+    public DepartmentDTO filterDepartmentFeedbacks(int departmentId) {
+        List<UserFeedback> feedbacks = departmentRepository.getDepartmentFeedback(departmentId);
+
+        DepartmentDTO departmentDTO = new DepartmentDTO();
+        departmentDTO.setTotal(feedbacks.size());
+
+        int total5 = 0;
+        int total4 = 0;
+        int total3 = 0;
+        int total2 = 0;
+        int total1 = 0;
+        int total = 0;
+
+        for (UserFeedback fb : feedbacks) {
+            int rating = fb.getRating();
+            total += rating;
+
+            switch (rating) {
+                case 5:
+                    total5++;
+                    break;
+                case 4:
+                    total4++;
+                    break;
+                case 3:
+                    total3++;
+                    break;
+                case 2:
+                    total2++;
+                    break;
+                case 1:
+                    total1++;
+                    break;
+            }
+        }
+
+        departmentDTO.setTotal5(total5);
+        departmentDTO.setTotal4(total4);
+        departmentDTO.setTotal3(total3);
+        departmentDTO.setTotal2(total2);
+        departmentDTO.setTotal1(total1);
+
+        double avgRating = feedbacks.isEmpty() ? 0 : (double) total / feedbacks.size();
+        departmentDTO.setAvgRating(avgRating);
+
+        return departmentDTO;
+    }
+
 }
+
+

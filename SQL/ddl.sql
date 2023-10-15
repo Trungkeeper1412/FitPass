@@ -73,7 +73,9 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               contact_number              VARCHAR(20) NOT NULL,
                                               logo_url                    VARCHAR(255) NOT NULL,
                                               wallpaper_url               VARCHAR(255) NOT NULL,
+
                                               description                 text,
+
                                               latitude 		            DECIMAL(10,8) NOT NULL,
                                               longitude 		            DECIMAL(11,8) NOT NULL,
                                               rating                      DECIMAL(10, 2) DEFAULT 0,

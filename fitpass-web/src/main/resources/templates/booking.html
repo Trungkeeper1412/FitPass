@@ -115,13 +115,15 @@
       <!-- Slides -->
       <div class="carousel-inner">
         <div class="carousel-item active bg-black">
-          <img src=".\assets\img\banner\banner_2.gif" class="d-block w-100" alt="Banner 1">
+
+          <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100" alt="Banner 1">
         </div>
         <div class="carousel-item bg-black">
-          <img src=".\assets\img\banner\banner_2.gif" class="d-block w-100" alt="Banner 2">
+          <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100" alt="Banner 2">
         </div>
         <div class="carousel-item bg-black">
-          <img src=".\assets\img\banner\banner_2.gif" class="d-block w-100" alt="Banner 3">
+          <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100" alt="Banner 3">
+
         </div>
       </div>
 
@@ -747,6 +749,24 @@
             </div> -->
           </div>
         </div>
+
+        <div class="container">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#page1" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#page1">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#page2">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </div>
+
       </section>
     </div>
 

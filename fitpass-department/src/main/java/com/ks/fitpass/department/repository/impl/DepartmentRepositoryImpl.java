@@ -1,7 +1,9 @@
 package com.ks.fitpass.department.repository.impl;
 
 import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.department.entity.UserFeedback;
 import com.ks.fitpass.department.mapper.DepartmentMapper;
+import com.ks.fitpass.department.mapper.UserFeedbackMapper;
 import com.ks.fitpass.department.repository.DepartmentRepository;
 import com.ks.fitpass.department.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +49,22 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
                 department.getDepartmentAddress(),
                 department.getDepartmentContactNumber(),
                 department.getDepartmentLogoUrl(),
-                department.getDepartmentOpeningHours(),
-                department.getDepartmentImageUrl(),
+                department.getDepartmentWallpaperUrl(),
                 department.getDepartmentDescription(),
                 department.getDepartmentStatus().getDepartmentStatusCd(),
                 department.getDepartmentId()
         ) > 0;
     }
+
+    @Override
+    public List<Department> findByRatingBetween(double from, double to) throws DataAccessException {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), from, to);
+    }
+
+    @Override
+    public List<UserFeedback> getDepartmentFeedback(int departmentId) {
+        return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK, new UserFeedbackMapper(), departmentId);
+    }
+
+
 }
