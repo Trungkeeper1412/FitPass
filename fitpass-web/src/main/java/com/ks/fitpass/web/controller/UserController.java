@@ -23,23 +23,25 @@ public class UserController {
     @GetMapping("/user/homepage")
     public String userHomepage(Principal principal, HttpSession session, Model model) {
         com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1,5);
-        model.addAttribute("departments",departmentDTOList);
+        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
+        model.addAttribute("departments", departmentDTOList);
         session.setAttribute("userInfo", user);
 
         return "booking";
-
-
-    @PostMapping("/user/homepage")
-    public String getNearbyGyms(@RequestParam("latitude") double latitude,
-                                @RequestParam("longitude") double longitude,
-                                Principal principal, HttpSession session, Model model) {
-        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentByNearbyLocation(1, 5, latitude, longitude, 5000);
-        model.addAttribute("departments", departmentDTOList);
-        session.setAttribute("userInfo", user);
-        return "fragments/gym-card-fragment";
     }
 
 
-}
+        @PostMapping("/user/homepage")
+        public String getNearbyGyms ( @RequestParam("latitude") double latitude,
+        @RequestParam("longitude") double longitude,
+        Principal principal, HttpSession session, Model model){
+            com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
+            List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentByNearbyLocation(1, 5, latitude, longitude, 5000);
+            model.addAttribute("departments", departmentDTOList);
+            session.setAttribute("userInfo", user);
+            return "fragments/gym-card-fragment";
+        }
+
+
+    }
+
