@@ -26,7 +26,7 @@ public class UserController {
         List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1,5);
         model.addAttribute("departments",departmentDTOList);
         session.setAttribute("userInfo", user);
-        return "list-of-gym";
+        return "booking";
     }
 
     @PostMapping("/user/homepage")
