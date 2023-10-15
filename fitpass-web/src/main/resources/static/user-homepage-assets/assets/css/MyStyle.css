@@ -2730,7 +2730,7 @@ section {
   border-radius: 10px;
   /* justify-content: center; */
   /* align-items: center; */
-  min-width: 365px;
+  width: 365px;
   height: 480px;
   /* padding: 0px 15px; */
   margin: 1px 10px;
@@ -2782,6 +2782,7 @@ section {
   width:100%;
   color: rgb(0, 0, 0);
   margin: auto;
+  margin-top: 40px;
   font-weight: 500;
   font-size: medium;
   padding: 10px;

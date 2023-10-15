@@ -41,6 +41,7 @@ VALUES(1, 'https://i.pinimg.com/236x/6c/c4/49/6cc4498dfac9d232b9c49f46d1948f8b.j
       (1, 'https://i.pinimg.com/236x/62/ce/d1/62ced13c5fd204f575f47d4b026243dd.jpg', 'Album 2');
 
 
+
 INSERT INTO gym_department_schedule (gym_department_id, day, open_time, close_time)
 VALUES (1, 'Monday', '8:00 AM', '10:00 PM'),
        (2, 'Tuesday', '9:00 AM', '11:00 PM');

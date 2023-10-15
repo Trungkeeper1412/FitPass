@@ -33,6 +33,7 @@ public class GymPlanServiceImpl implements GymPlanService {
             dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
             dto.setPlanBeforeActiveValidity(gymPlan.getPlanBeforeActiveValidity());
             dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
+            dto.setDuration(gymPlan.getDuration());
 
             String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanKey(gymPlan.getGymPlanKey());
             dto.setGymPlanType(gymPlanType);

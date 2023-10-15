@@ -13,6 +13,7 @@ public class GymPlanDto {
     private String gymPlanType;
     private String gymPlanName;
     private String gymPlanDescription;
+    private int duration;
     private double price;
     private double pricePerHours;
     private int planBeforeActiveValidity;
