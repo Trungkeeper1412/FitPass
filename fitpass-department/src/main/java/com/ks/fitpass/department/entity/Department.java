@@ -34,7 +34,9 @@ public class Department {
 
     private Double rating;
 
+
     private int capacity;
 
     private Double area;
+
 }

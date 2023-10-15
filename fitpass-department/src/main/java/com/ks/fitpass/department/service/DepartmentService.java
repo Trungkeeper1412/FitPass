@@ -28,6 +28,7 @@ public interface DepartmentService {
     List<DepartmentDTO> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
                                                          double userLatitude, double userLongitude,double radiusInMeters);
 
+
     List<Department> findByRatingBetween(double from, double to);
 
 
@@ -35,4 +36,5 @@ public interface DepartmentService {
 
 
     DepartmentDTO filterDepartmentFeedbacks(int departmentId);
+
 }

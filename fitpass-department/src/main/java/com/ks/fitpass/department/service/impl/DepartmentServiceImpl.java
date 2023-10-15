@@ -85,10 +85,12 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
                 .departmentAddress(department.getDepartmentAddress())
+
                 .departmentWallpaperUrl(department.getDepartmentWallpaperUrl())
                 .rating(department.getRating())
                 .capacity(department.getCapacity())
                 .area(department.getArea())
+
                 .build();
     }
 
@@ -125,6 +127,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         );
         return departmentRepository.update(department);
     }
+
 
     @Override
     public List<Department> findByRatingBetween(double from, double to) {
@@ -184,6 +187,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentDTO;
     }
+
 }
 
 

@@ -22,8 +22,10 @@ public class DepartmentMapper implements RowMapper<Department> {
                 .latitude(resultSet.getDouble("latitude"))
                 .longitude(resultSet.getDouble("longitude"))
                 .rating(resultSet.getDouble("rating"))
+
                 .capacity(resultSet.getInt("capacity"))
                 .area(resultSet.getDouble("area"))
+
                 .departmentStatus(DepartmentStatus.builder()
                         .departmentStatusCd(resultSet.getInt("gym_department_status_key"))
                         .departmentStatusName(resultSet.getString("gym_department_status_name"))

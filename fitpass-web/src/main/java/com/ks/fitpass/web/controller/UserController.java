@@ -26,8 +26,9 @@ public class UserController {
         List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1,5);
         model.addAttribute("departments",departmentDTOList);
         session.setAttribute("userInfo", user);
+
         return "booking";
-    }
+
 
     @PostMapping("/user/homepage")
     public String getNearbyGyms(@RequestParam("latitude") double latitude,

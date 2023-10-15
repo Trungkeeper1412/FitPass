@@ -19,6 +19,7 @@ public interface DepartmentRepository {
 
     boolean update(Department department) throws DataAccessException;
 
+
     List<Department> findByRatingBetween(double from, double to);
 
 

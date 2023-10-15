@@ -9,13 +9,17 @@ public interface IRepositoryQuery {
                      d.address,
                      d.contact_number,
                      d.logo_url,
+
                      d.wallpaper_url,
+
                      d.description,
                      d.latitude,
                      d.longitude,
                      d.rating,
+
                      d.capacity,
                      d.area,
+
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name                     
                  FROM gym_department d
@@ -32,13 +36,17 @@ public interface IRepositoryQuery {
                      d.address,
                      d.contact_number,
                      d.logo_url,
+
                      d.wallpaper_url,
+
                      d.description,
                      d.latitude,
                      d.longitude,
                      d.rating,
+
                      d.capacity,
                      d.area,
+
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name                     
                  FROM gym_department d
@@ -50,13 +58,16 @@ public interface IRepositoryQuery {
             """;
 
     String GET_DEPARTMENT_BY_ID = """
+
             SELECT  
+
                      d.gym_department_id,
                      d.user_id,
                      d.name,
                      d.address,
                      d.contact_number,
                      d.logo_url,
+
                      d.wallpaper_url,
                      d.description,
                      d.latitude,
@@ -64,6 +75,7 @@ public interface IRepositoryQuery {
                      d.rating,   
                      d.capacity,
                      d.area,                  
+
                 d.gym_department_status_key,
                 kbn_department_status.mst_kbn_value AS gym_department_status_name
                 FROM gym_department d
@@ -81,6 +93,7 @@ public interface IRepositoryQuery {
                      d.address,
                      d.contact_number,
                      d.logo_url,
+
                      d.wallpaper_url,
                      d.description,
                      d.latitude,
@@ -88,6 +101,7 @@ public interface IRepositoryQuery {
                      d.rating,
                      d.capacity,
                      d.area,                     
+
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d

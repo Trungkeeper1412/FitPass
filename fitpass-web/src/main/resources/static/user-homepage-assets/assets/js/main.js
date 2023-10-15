@@ -292,84 +292,88 @@
 
 })()
 
-/**
-   * Price range
-   */
-const rangeInput = document.querySelectorAll(".range-input input"),
-priceInput = document.querySelectorAll(".price-input input"),
-range = document.querySelector(".slider .progress");
-let priceGap = 1000;
-priceInput.forEach(input =>{
-    input.addEventListener("input", e =>{
-        let minPrice = parseInt(priceInput[0].value),
-        maxPrice = parseInt(priceInput[1].value);
-        
-        if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
-            if(e.target.className === "input-min"){
-                rangeInput[0].value = minPrice;
-                range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
-            }else{
-                rangeInput[1].value = maxPrice;
-                range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-            }
-        }
-    });
-});
+/* Check box */
+// window.onload = (event) => {
+//   initMultiselect();
+// };
 
-rangeInput.forEach(input =>{
-  input.addEventListener("input", e =>{
-      let minVal = parseInt(rangeInput[0].value),
-      maxVal = parseInt(rangeInput[1].value);
-      if((maxVal - minVal) < priceGap){
-          if(e.target.className === "range-min"){
-              rangeInput[0].value = maxVal - priceGap
-          }else{
-              rangeInput[1].value = minVal + priceGap;
-          }
-      }else{
-          priceInput[0].value = minVal;
-          priceInput[1].value = maxVal;
-          range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
-          range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-      }
+// function initMultiselect() {
+//   checkboxStatusChange();
+
+//   document.addEventListener("click", function(evt) {
+//     var flyoutElement = document.getElementById('myMultiselect'),
+//       targetElement = evt.target; // clicked element
+
+//     do {
+//       if (targetElement == flyoutElement) {
+//         // This is a click inside. Do nothing, just return.
+//         //console.log('click inside');
+//         return;
+//       }
+
+//       // Go up the DOM
+//       targetElement = targetElement.parentNode;
+//     } while (targetElement);
+
+//     // This is a click outside.
+//     toggleCheckboxArea(true);
+//     //console.log('click outside');
+//   });
+// }
+
+// function checkboxStatusChange() {
+//   var multiselect = document.getElementById("mySelectLabel");
+//   var multiselectOption = multiselect.getElementsByTagName('option')[0];
+
+//   var values = [];
+//   var checkboxes = document.getElementById("mySelectOptions");
+//   var checkedCheckboxes = checkboxes.querySelectorAll('input[type=checkbox]:checked');
+
+//   for (const item of checkedCheckboxes) {
+//     var checkboxValue = item.getAttribute('value');
+//     values.push(checkboxValue);
+//   }
+
+//   var dropdownValue = "Nothing is selected";
+//   if (values.length > 0) {
+//     dropdownValue = values.join(', ');
+//   }
+
+//   multiselectOption.innerText = dropdownValue;
+// }
+
+// function toggleCheckboxArea(onlyHide = false) {
+//   var checkboxes = document.getElementById("mySelectOptions");
+//   var displayValue = checkboxes.style.display;
+
+//   if (displayValue != "block") {
+//     if (onlyHide == false) {
+//       checkboxes.style.display = "block";
+//     }
+//   } else {
+//     checkboxes.style.display = "none";
+//   }
+// }
+
+(function() {
+  "use strict";
+
+  $(document).ready(function () {
+    // L?y d?i tu?ng th? card
+    var card = $(".card");
+    // L?y các tru?ng nh?p li?u
+    var inputFields = $("input[type='text'], textarea");
+    // Tính toán và c?p nh?t chi?u cao c?a th? card d?a trên n?i dung dã nh?p
+    function updateCardHeight() {
+      var newHeight = card.find(".card-body").outerHeight();
+      card.css("height", newHeight + "px");
+    }
+    // S? ki?n khi tru?ng nh?p li?u thay d?i
+    inputFields.on("input", updateCardHeight);
+    // G?i hàm d? cài d?t chi?u cao ban d?u c?a th? card
+    updateCardHeight();
   });
-});
 
-
-// Slider/banner
-let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
-
-
-
-// tabs in user profile page
-function openCity(evt, cityName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("city");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-black", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " w3-black";
-}
+})();
+ 
+// Phân trang

@@ -415,10 +415,12 @@ h6 {
 
 .card {
   border-radius: 20px;
+
   background-color: white;
   padding: 20px 20px 0px 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: black;
+
   left: 0;
   top: 50%;
   transform: translate(0, -50%);
@@ -620,8 +622,10 @@ h6 {
   --------------------------------------------------------------*/
   .filter-container {
     overflow: hidden;
+
     background: whitesmoke;
     color: black;
+
 }
 
 .section-title {
@@ -1522,7 +1526,10 @@ h6 {
 }
 
 #footer .footer-top {
+
   background: black;
+
+
   border-bottom: 1px solid #222222;
   padding: 60px 0 30px 0;
 }
@@ -2183,7 +2190,9 @@ select {
 
 .distance, .area, .capacity {
   border-radius: 15px;
+
   background-color: #fba95c;
+
   padding: 7px;
   margin: 10px 10px 10px 0px;
 }
@@ -2291,6 +2300,7 @@ select {
 .text-money {
   color: #02aa0a;
   font-size: 18px;
+
   font-weight: bold;
 }
 
@@ -2302,3 +2312,4 @@ select {
 .pagination .page-item.active .page-link {
   background-color: #fba95c;
 }
+
