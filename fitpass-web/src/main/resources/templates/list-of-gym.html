@@ -153,8 +153,8 @@
           <form id="filter-form">
             <div class="row">
               <div class="col-2">
-                <label for="location">Vị trí:</label>
-                <select id="location">
+                <label for="city">Vị trí:</label>
+                <select id="city">
                   <option value="all">Tất cả</option>
                   <option value="hn">Hà Nội</option>
                   <option value="hcm">TP. Hồ Chí Mnh</option>
@@ -162,22 +162,22 @@
                 </select>
               </div>
               <div class="col-2">
-                <label for="price">Giá linh hoạt:</label>
+                <label for="price-hourly">Giá linh hoạt:</label>
                 <select id="price-hourly">
                   <option value="lowToHigh">Thấp đến cao</option>
                   <option value="highToLow">Cao đến thấp</option>
                 </select>
               </div>
               <div class="col-2">
-                <label for="price">Giá cố định:</label>
+                <label for="price-annually">Giá cố định:</label>
                 <select id="price-annually">
                   <option value="lowToHigh">Thấp đến cao</option>
                   <option value="highToLow">Cao đến thấp</option>
                 </select>
               </div>
               <div class="col-2">
-                <label for="capacity">Cơ sở vật chất:</label>
-                <select id="capacity">
+                <label for="capacityAndArea">Cơ sở vật chất:</label>
+                <select id="capacityAndArea">
                   <option value="all">None</option>
                   <option value="area">Diện tích &#8595;</option>
                   <option value="capacity">Sức chứa &#8595;</option>
@@ -210,7 +210,7 @@
       </section>
 
       <section class="gym-list">
-        <div class="container" id="gymListContainer" th:insert="fragments/booking-gym-list-fragment.html :: booking-gym-list-fragment">
+        <div class="container" id="gymListContainer" th:insert="fragments/gym-list-fragment.html :: gym-list-fragment">
         </div>
 
         <div class="container">
