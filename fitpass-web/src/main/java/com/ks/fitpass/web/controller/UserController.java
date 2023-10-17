@@ -42,5 +42,16 @@ public class UserController {
         }
 
 
+    @GetMapping("/user/shopping-cart")
+    public String userShoppingCart(Principal principal, HttpSession session, Model model) {
+        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
+//        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
+//        model.addAttribute("departments", departmentDTOList);
+//        session.setAttribute("userInfo", user);
+        return "shopping-cart";
     }
+
+
+
+}
 
