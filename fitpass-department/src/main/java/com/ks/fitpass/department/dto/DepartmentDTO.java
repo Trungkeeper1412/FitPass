@@ -5,7 +5,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor // Add this annotation
+@NoArgsConstructor
 @AllArgsConstructor
 public class DepartmentDTO {
 

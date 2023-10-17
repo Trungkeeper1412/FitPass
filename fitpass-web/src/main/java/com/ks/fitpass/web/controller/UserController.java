@@ -26,8 +26,7 @@ public class UserController {
         List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
         model.addAttribute("departments", departmentDTOList);
         session.setAttribute("userInfo", user);
-
-        return "booking";
+        return "list-of-gym";
     }
 
 
@@ -39,7 +38,7 @@ public class UserController {
             List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentByNearbyLocation(1, 5, latitude, longitude, 5000);
             model.addAttribute("departments", departmentDTOList);
             session.setAttribute("userInfo", user);
-            return "fragments/gym-card-fragment";
+            return "fragments/gym-list-fragment";
         }
 
 
