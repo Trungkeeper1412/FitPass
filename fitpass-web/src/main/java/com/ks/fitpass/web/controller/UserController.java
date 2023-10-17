@@ -41,13 +41,9 @@ public class UserController {
             return "fragments/gym-list-fragment";
         }
 
-
+ //method test front end
     @GetMapping("/user/shopping-cart")
-    public String userShoppingCart(Principal principal, HttpSession session, Model model) {
-        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-//        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
-//        model.addAttribute("departments", departmentDTOList);
-//        session.setAttribute("userInfo", user);
+    public String userShoppingCart() {
         return "shopping-cart";
     }
 
