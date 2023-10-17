@@ -1,0 +1,55 @@
+<div th:fragment="booking-gym-list-fragment">
+    <div class="row">
+        <div th:each="department:${departments}" class="col-md-4 mb-4">
+            <div class="card">
+                <img th:src="${department.getDepartmentWallpaperUrl()}" class="card-img-top"
+                     alt="Phòng tập 1">
+                <div class="card-body">
+                    <h3 class="card-title" th:text="${department.getDepartmentName()}"></h3>
+                    <p class="card-text">
+                        <i class="bi bi-geo-alt"></i> Address: <span th:text="${department.getDepartmentAddress()}"></span>
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <div class="extras">
+                            <div class="distance">
+                                <i class="bi bi-geo"></i> Khoảng cách: 2,5 km
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="extras">
+                            <div class="area">
+                                <i class="bi bi-textarea-resize"></i> Diện tích: <span th:text="${department.getArea()}"></span> m²
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="extras">
+                            <div class="capacity">
+                                <i class="bi bi-people"></i> Sức chứa: <span th:text="${department.getCapacity()}"></span> người
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-section">
+                        Đánh giá:
+                        <div class="rating" th:attr="data-star=${department.getRating()}"></div>
+                    </div>
+                    <div class="justify-content-between">
+                        <div class="row price justify-content-center">
+                            <div class="col">
+                                <br>
+                                <span class="price-segment flexible-price">Giá thẻ linh hoạt:</span>
+                                <h5 class="text-money">10 <span class="credit">Credit/Giờ</span></h5>
+                            </div>
+                            <div class="col">
+                                <br>
+                                <span class="price-segment fixed-price">Giá thẻ cố định:</span>
+                                <h5 class="text-money">100-500 <span class="credit">Credit</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
