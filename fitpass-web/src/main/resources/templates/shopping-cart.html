@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym department details</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" th:href="@{/assets/img/icon.png}">
+    <link rel="apple-touch-icon" th:href="@{assets/img/apple-touch-icon.png}">
+    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+
+<body class="body-my-card">
+<header id="header">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+        <h1 style="margin-left: -60px;" class="logo me-auto me-lg-0">
+            <a href="index.html">Fitpass<span>.</span></a>
+        </h1>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+                <li><a class="nav-link scrollto" href="#about">Đặt lịch tập</a></li>
+                <li><a class="nav-link scrollto" href="#services">Liên hệ</a></li>
+                <li>
+                    <form class="d-flex" style="margin-left: 50px;">
+                        <input style="height: 30px; margin-top: 5px; width: 300px;" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
+                        <img type="submit" style="margin-top: 6px; width: 25px; height: 25px;" src="https://cdn-icons-png.flaticon.com/128/4250/4250968.png" />
+                    </form>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <div style="display: flex; margin-right: 50px;">
+            <img type="submit" style="margin-top: 3px; width: 35px; height: 35px;" src="https://cdn-icons-png.flaticon.com/128/9405/9405895.png" />
+            <div style="margin: auto; margin-left: 10px; color: rgb(255, 170, 0); font-weight: 500;">500 Credits</div>
+        </div>
+        <div class="dropdown" style="position: absolute; right: 10px;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png" /></a>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Tài khoản người dùng</a></li>
+                <li><a class="dropdown-item" href="#">Lịch sử</a></li>
+                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- Content -->
+<div id="my-card" class="my-card-container">
+    <h2>Giỏ hàng của bạn</h2>
+    <div class="line"></div>
+    <div class="my-card-title">
+        <div class="form-check">
+            <input onclick= 'checkUncheck(this)' class="" type="checkbox" value="" />
+            <label class="" for="flexCheckChecked"> </label>
+        </div>
+        <div class="my-plan-title">Gói tập</div>
+        <div class="price-title">Đơn giá (credits)</div>
+        <div class="num-of-plan-title">Số lượng</div>
+        <div class="action-title">Thao tác</div>
+    </div>
+    <!-- Để foreach ở đây -->
+    <div th:each="cartItem : ${cartItems}">
+        <div class="plan-in-my-card">
+            <div class="all-plan-of-gym">
+                <div class="form-check">
+                    <input  onclick='checkUncheckGymDept(this)' name="gym" class="" type="checkbox" value="" id="flexCheckChecked" />
+                    <label class="" for="flexCheckChecked"> </label>
+                </div>
+                <div class="gym-name-mc" th:text="${cartItem.getGymPlan().getGymDepartmentName()}">Phòng gym hòa lạc</div>
+            </div>
+            <!-- Từng gym plan -->
+            <div style="height: 15px; background-color: white;"></div>
+            <div class="gym-department-plan">
+                <div class="form-check">
+                    <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" />
+                    <label class="" for="flexCheckChecked"> </label>
+                </div>
+                <div class="plan-card-mc">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                    <div class="plan-info-mc">
+                        <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
+                        <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
+                    </div>
+                    <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                        Kích hoạt trong vòng 10 ngày
+                    </div>
+                </div>
+                <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                    200
+                </div>
+                <div class="num-of-plan-mc" >
+                    <button class="decrease-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">-</button>
+                    <div class="product-quantity" th:text="${cartItem.getQuantity()}" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">1</div>
+                    <button class="increase-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">+</button>
+                </div>
+
+                <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path
+                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="total-container-mc">
+        <h3 class="total-plan-mc">
+            <span id="count-all-plan-mc"></span>
+            <span>sản phẩm</span>
+        </h3>
+        <div class="total-credits-mc">
+            <span class="total-title">Tổng thanh toán : </span>
+            <span id="total-price-mc" class="total">0</span>
+        </div>
+        <div class="buy-button-mc">
+            <button class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
+        </div>
+    </div>
+    <p id="demo"></p>
+</div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script>
+    const element = document.getElementById("my-card");
+    const nodes = element.getElementsByClassName("gym-department-plan");
+    // count num of plan in shopping card
+    document.getElementById("count-all-plan-mc").innerHTML = nodes.length;
+    function checkUncheck(checkBox) {
+        get = document.getElementsByTagName("input");
+        for(var i=0; i<get.length; i++) {
+            get[i].checked = checkBox.checked;}
+    }
+
+    get1 = document.getElementsByClassName("plan-in-my-card");
+    //   list_price = document.getElementsByClassName("plan-price-mc");
+    //   console.log(list_price);
+    function checkUncheckGymDept(checkBox) {
+        get2 = checkBox.parentElement.parentElement.parentElement.getElementsByTagName("input");
+        // console.log(get2);
+        for(var i=0; i<get2.length; i++) {
+            get2[i].checked = checkBox.checked;
+        }
+
+        // list_gym_dept_price = checkBox.parentElement.parentElement.parentElement.getElementsByClassName("plan-price-mc");
+        // let total = document.getElementById("total-price-mc").innerHTML;
+        // total_int = parseInt(total);
+        // let total_gym_dept = 0;
+        // for(var j=0; j<list_gym_dept_price.length;j++){
+        //     total_gym_dept = total_gym_dept + parseInt(list_gym_dept_price[j].innerHTML);
+        // }
+        // total_int = total_int + total_gym_dept;
+        // document.getElementById("total-price-mc").innerHTML = total_int;
+        // console.log(total_int);
+
+        // if(checkBox.checked == false){
+        //     total_int = parseInt(document.getElementById("total-price-mc").innerHTML) - total_gym_dept;
+        //     console.log(total_gym_dept);
+        //     console.log(total_int);
+        // }
+
+    }
+
+
+
+    function updateCartTotal(checkBox){
+        let total = document.getElementById("total-price-mc").innerHTML;
+        total_int = parseInt(total);
+        get2 = checkBox.parentElement.parentElement.getElementsByClassName("plan-price-mc");
+        price_int = parseInt(get2[0].innerHTML);
+        let quantity = checkBox.parentElement.parentElement.querySelector(".product-quantity");
+        if(checkBox.checked){
+            total_int = total_int + price_int * quantity.innerHTML;
+            document.getElementById("total-price-mc").innerHTML = total_int;
+            console.log(total_int);
+            document.getElementById("total-price-mc").innerHTML = price;
+        }
+        else{
+            total_int = total_int - price_int * quantity.innerHTML;
+            document.getElementById("total-price-mc").innerHTML = total_int;
+            console.log(total_int);
+            // document.getElementById("total-price-mc").innerHTML = total;
+        }
+    }
+
+    function removeFromCart(gymPlanId) {
+        var confirmation = confirm("Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?");
+        if(confirmation) {
+            window.location.href = '/cart/remove?gymPlanId=' + gymPlanId;
+        }
+    }
+
+    var increaseButtons = document.querySelectorAll(".increase-button");
+    var decreaseButtons = document.querySelectorAll(".decrease-button");
+
+    increaseButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var productId = button.getAttribute("data-product-id");
+            increaseQuantity(productId);
+        });
+    });
+
+    decreaseButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var productId = button.getAttribute("data-product-id");
+            decreaseQuantity(productId);
+        });
+    });
+
+    function increaseQuantity(productId) {
+        // Sử dụng productId để xác định sản phẩm cần tăng
+        var newQuantity = parseInt(document.querySelector(".product-quantity[data-product-id='" + productId + "']").textContent) + 1;
+        updateQuantity(productId, newQuantity);
+    }
+
+    function decreaseQuantity(productId) {
+        // Sử dụng productId để xác định sản phẩm cần giảm
+        var currentQuantity = parseInt(document.querySelector(".product-quantity[data-product-id='" + productId + "']").textContent);
+        if (currentQuantity > 1) {
+            var newQuantity = currentQuantity - 1;
+            updateQuantity(productId, newQuantity);
+        }
+    }
+
+    function updateQuantity(productId, newQuantity) {
+        console.log(JSON.stringify({
+            gymPlanId: +productId,
+            quantity: newQuantity,
+        }))
+        fetch("/cart/update", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                gymPlanId: +productId,
+                quantity: newQuantity,
+            }),
+        })
+            .then((response) => console.log(response))
+            .then((data) => {
+                // Xử lý phản hồi từ máy chủ (nếu cần)
+                // Cập nhật số lượng sản phẩm trong giao diện người dùng
+                document.querySelector(".product-quantity[data-product-id='" + productId + "']").textContent = newQuantity;
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
+</script>
+</body>
+</html>

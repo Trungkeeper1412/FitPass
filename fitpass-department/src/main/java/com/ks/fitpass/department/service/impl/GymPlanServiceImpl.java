@@ -1,6 +1,7 @@
 package com.ks.fitpass.department.service.impl;
 
 import com.ks.fitpass.core.repository.KbnRepository;
+import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.dto.GymPlanDto;
 import com.ks.fitpass.department.entity.GymPlan;
 import com.ks.fitpass.department.repository.GymPlanRepository;
@@ -29,6 +30,7 @@ public class GymPlanServiceImpl implements GymPlanService {
 
         for (GymPlan gymPlan : gymPlans) {
             GymPlanDto dto = new GymPlanDto();
+            dto.setGymPlanId(gymPlan.getPlanId());
             dto.setGymPlanName(gymPlan.getGymPlanName());
             dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
             dto.setPlanBeforeActiveValidity(gymPlan.getPlanBeforeActiveValidity());
@@ -48,5 +50,21 @@ public class GymPlanServiceImpl implements GymPlanService {
         }
 
         return gymPlanDtos;
+    }
+
+
+    @Override
+    public GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId) {
+        GymPlan gymPlan = gymPlanRepository.getGymPlanByGymPlanId(gymPlanId);
+        GymPlanDepartmentNameDto dto = new GymPlanDepartmentNameDto();
+        dto.setGymPlanId(gymPlan.getPlanId());
+        dto.setGymPlanName(gymPlan.getGymPlanName());
+        dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
+        dto.setPrice(gymPlan.getPrice());
+        dto.setPlanBeforeActiveValidity(gymPlan.getPlanBeforeActiveValidity());
+        dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
+        dto.setDuration(gymPlan.getDuration());
+        dto.setGymDepartmentName(gymPlan.getGymDepartmentName());
+        return dto;
     }
 }

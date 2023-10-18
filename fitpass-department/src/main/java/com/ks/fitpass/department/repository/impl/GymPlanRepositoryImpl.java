@@ -2,6 +2,7 @@ package com.ks.fitpass.department.repository.impl;
 
 import com.ks.fitpass.department.entity.GymPlan;
 import com.ks.fitpass.department.mapper.GymPlanMapper;
+import com.ks.fitpass.department.mapper.GymPlanWithDepartmentNameMapper;
 import com.ks.fitpass.department.repository.GymPlanRepository;
 import com.ks.fitpass.department.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,8 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
         return jdbcTemplate.query(IRepositoryQuery.GET_ALL_GYM_PLANS_BY_DEPARTMENT_ID, new GymPlanMapper(), departmentId);
     }
 
-
+    @Override
+    public GymPlan getGymPlanByGymPlanId(int gymPlanId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_GYM_PLAN_BY_GYM_PLAN_ID, new Object[]{gymPlanId}, new GymPlanWithDepartmentNameMapper());
+    }
 }

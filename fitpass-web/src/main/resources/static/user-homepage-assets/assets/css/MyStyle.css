@@ -2954,10 +2954,224 @@ section {
 /*  */
 
 
-/* TEST */
-.gym-filter{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  height: fit-content;
+/* CSS FOR MY CARD PAGE*/
+.my-card-container{
+  position: relative;
+  width: 80%;
+  bottom: 90px;
   margin: auto;
+  /* background-color: white; */
+  margin-top: 150px;
+}
+.my-card-container h2{
+  font-weight: 900;
+  color: black;
+}
+.my-card-container .line{
+  background-color: rgb(253, 197, 0);
+  border-radius: 10px;
+  height: 8px;
+  width: 120px;
+}
+.my-card-container .my-card-title{
+  margin-top: 50px;
+  height: 60px;
+  display: grid;
+  background-color: white;
+  grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
+}
+.my-card-title input{
+  border: 1px solid orange;
+  width: 20px;
+  height: 20px;
+}
+.my-card-container .form-check{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-card-container  input[type=checkbox] {
+  position: relative;
+  border: 2px solid  orange;
+  border-radius: 2px;
+  background: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  margin-left: -20px;
+  -webkit-appearance: none;
+  opacity: .5;
+}
+
+.my-plan-title{
+  display: flex;
+  align-items: center;
+  color:rgb(0, 0, 0)
+}
+.price-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:rgb(0, 0, 0)
+}
+.num-of-plan-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:rgb(0, 0, 0)
+}
+.action-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:rgb(0, 0, 0)
+}
+
+.my-card-container  input[type=checkbox]:hover {
+  opacity: 1;
+}
+
+.my-card-container input[type=checkbox]:checked {
+  background-color:  rgb(255, 179, 0);
+  opacity: 1;
+}
+
+.my-card-container  input[type=checkbox]:before {
+  content: '';
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  width: 4px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-50%, -50%);
+  z-index:2;
+}
+
+/* .my-card-container  input[type=checkbox]:after {
+  content: '';
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  width: 4px;
+  height: 10px;
+  border: solid #000000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-50%, -50%);
+  z-index:2;
+} */
+
+.all-plan-of-gym{
+  height: 60px;
+  margin-top: 20px;
+  display: grid;
+  background-color: white;
+  grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
+  border-bottom: 1px solid rgb(203, 203, 203);
+}
+.all-plan-of-gym .gym-name-mc{
+  display: flex;
+  align-items: center;
+  color:rgb(0, 0, 0);
+}
+.gym-department-plan{
+  display: grid;
+  background-color: white;
+  grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
+  height: 170px;
+  /* background-color: #000; */
+}
+
+.plan-card-mc{
+  background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+  background-size: cover;
+  height: 75%;
+  width: 90%;
+  display:grid;
+  grid-template-columns: 1fr 2fr 1.5fr;
+  margin: auto 0;
+  border-radius: 10px;
+}
+.plan-card-mc img{
+  border-radius: 50%;
+  width : 80px;
+  height: 80px;
+  margin: auto;
+}
+.gym-department-plan button{
+  width: 50px;
+  height: 40px;
+  border-radius: 15px;
+  margin: auto;
+}
+.plan-info-mc{
+  margin: auto 0;
+  color: white;
+}
+.plan-info-mc h4{
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: black;
+  padding: 10px;
+  width: fit-content;
+}
+.active-time-mc{
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  color: white;
+  padding: 10px;
+  font-weight: 500;
+}
+.plan-price-mc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+}
+.num-of-plan-mc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+}
+.body-my-card{
+  background-color: rgb(238, 238, 238);
+  height: fit-content;
+}
+
+.total-container-mc {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  position: fixed;
+  margin: auto 0;
+  bottom: 0;
+  width: 80%;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  text-align: center;
+  height: 90px;
+}
+.total-plan-mc{
+  font-weight: 700;
+  margin: auto;
+}
+.total-credits-mc{
+  display: flex;
+  margin: auto;
+  font-size: 16px;
+}
+.total-credits-mc .total{
+  font-size: 22px;
+  font-weight: 600;
+  color: rgb(255, 191, 0);
+}
+.total-credits-mc .total-title{
+  margin: auto 0;
+}
+.buy-button-mc{
+  margin: auto 0;
+  font-weight: 700;
 }

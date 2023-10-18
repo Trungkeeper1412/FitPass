@@ -1,28 +1,23 @@
-package com.ks.fitpass.department.entity;
+package com.ks.fitpass.department.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
+@Data
 @Builder
-@Getter
-@Setter
-public class GymPlan implements Serializable {
-    private int planId;
+@NoArgsConstructor
+@AllArgsConstructor
+public class GymPlanDepartmentNameDto implements Serializable {
+    private int gymPlanId;
     private int gymDepartmentId;
     private int gymPlanKey;
-    private int gymPlanStatusKey;
-    private int gymPlanTypeKey;
     private String gymPlanName;
     private String gymPlanDescription;
     private double price;
     private double pricePerHours;
-    private int planSold;
     private int duration;
     private int planBeforeActiveValidity;
     private int planAfterActiveValidity;
     private String gymDepartmentName;
-
 }

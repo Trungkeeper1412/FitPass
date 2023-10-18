@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GymPlanDto {
+    private int gymPlanId;
     private String gymPlanType;
     private String gymPlanName;
     private String gymPlanDescription;

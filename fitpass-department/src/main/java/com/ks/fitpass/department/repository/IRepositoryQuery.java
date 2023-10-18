@@ -264,4 +264,36 @@ public interface IRepositoryQuery {
 """;
 
 
+String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
+                SELECT
+                    gp.plan_id,
+                    gp.gym_department_id,
+                    gp.gym_plan_key,
+                    gp.gym_plan_status_key,
+                    gp.gym_plan_type_key,
+                    gp.name,
+                    gp.description,
+                    gp.price,
+                    gp.price_per_hours,
+                    gp.plan_sold,
+                    gp.duration,
+                    gp.plan_before_active_validity,
+                    gp.plan_after_active_validity,
+                    (SELECT name from fitpass.gym_department gd
+                                where gp.gym_department_id = gd.gym_department_id) as name_department
+                FROM gym_plan gp
+                WHERE
+                    gp.plan_id = ?
+            """;
+
+    String INSERT_ITEM_INVENTORY = """
+                INSERT INTO item_inventory 
+                    ( 
+                    user_id, 
+                    plan_id, 
+                    plan_active_time, 
+                    item_status_key, 
+                    plan_expired_time)  
+                    VALUES (?, ?, ?, ?, ?)
+            """;
 }
