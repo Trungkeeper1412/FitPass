@@ -26,9 +26,11 @@ public class WebSecurityConfig {
                 .requestMatchers("/login", "/logout").permitAll()
                 .requestMatchers("/vip/**").permitAll().
                     requestMatchers("/user/**").permitAll()
+                    .requestMatchers("/cart/**").permitAll()
 //                    .requestMatchers("/gym-owner/**").hasRole("MANAGER")
                 .requestMatchers("/manage/**").hasRole("ADMIN")
                 .requestMatchers("/statistics/chart", "/statistics/drink").hasRole("ADMIN")
+                
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin
