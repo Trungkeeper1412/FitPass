@@ -1,14 +1,10 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.cart.Cart;
-import com.ks.fitpass.cart.CartItem;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
-import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.ItemInventory;
 import com.ks.fitpass.department.service.ItemInventoryService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,5 +43,10 @@ public class ItemInventoryController {
         }
 
         return "redirect:/cart/view";
+    }
+
+    @GetMapping("/view")
+    public String showInventory(){
+        return "inventory";
     }
 }

@@ -97,4 +97,10 @@ public class CartController {
         }
         return ResponseEntity.badRequest().body("Cart not found");
     }
+
+    //Test method
+    @GetMapping("/checkout")
+    public String showCheckout() {
+        return "check-out";
+    }
 }
