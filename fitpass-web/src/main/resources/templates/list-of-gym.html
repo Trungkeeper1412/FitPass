@@ -2,250 +2,248 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>User Homepage</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>User Homepage</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link th:href="@{/user-homepage-assets/assets/img/icon.png}" rel="icon">
-  <link th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link th:href="@{/user-homepage-assets/assets/img/icon.png}" rel="icon">
+    <link th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
 
-  <!-- Jquery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header th:replace="common/navbar :: navbar"></header>
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
 
-  <main id="main">
+<main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs bg-black">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="sidebar-brand-icon ">
-            <img th:src="@{/user-homepage-assets/assets/img/logo.png}" alt="Logo Fitpass">
-          </div>
-          <div class="search-bar">
-            <input type="text" placeholder="Tìm kiếm...">
-            <button class="search-button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-          <ol>
-            <li><a href="index.html">Fitpass</a></li>
-            <li>Trang chủ</li>
-          </ol>
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <ol>
+                    <li><a href="index.html">Fitpass</a></li>
+                    <li>Trang chủ</li>
+                </ol>
+            </div>
         </div>
-      </div>
     </section><!-- End Breadcrumbs -->
 
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
-        <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
-        <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
-      </ol>
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+        </ol>
 
-      <!-- Slides -->
-      <div class="carousel-inner">
-        <div class="carousel-item active bg-black">
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div class="carousel-item active bg-black">
 
-          <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100" alt="Banner 1">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 1">
+            </div>
+            <div class="carousel-item bg-black">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 2">
+            </div>
+            <div class="carousel-item bg-black">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 3">
+
+            </div>
         </div>
-        <div class="carousel-item bg-black">
-          <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100" alt="Banner 2">
-        </div>
-        <div class="carousel-item bg-black">
-          <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100" alt="Banner 3">
 
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </a>
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
     </div>
 
     <div class="filter-container">
-      <section class="filter">
-        <div class="row md-3">
-          <div class="col">
-            <div class="text-center fs-1 fw-bold">Danh Sách Phòng Gym</div>
-          </div>
-        </div>
-        <hr class="my-4"><br>
-        <div class="container">
-          <form id="filter-form">
-            <div class="row">
-              <div class="col-2">
-                <label for="city">Vị trí:</label>
-                <select id="city">
-                  <option value="all">Tất cả</option>
-                  <option value="hn">Hà Nội</option>
-                  <option value="hcm">TP. Hồ Chí Mnh</option>
-                  <option value="dn">Đà Nẵng</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <label for="price-hourly">Giá linh hoạt:</label>
-                <select id="price-hourly">
-                  <option value="lowToHigh">Thấp đến cao</option>
-                  <option value="highToLow">Cao đến thấp</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <label for="price-annually">Giá cố định:</label>
-                <select id="price-annually">
-                  <option value="lowToHigh">Thấp đến cao</option>
-                  <option value="highToLow">Cao đến thấp</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <label for="capacityAndArea">Cơ sở vật chất:</label>
-                <select id="capacityAndArea">
-                  <option value="all">None</option>
-                  <option value="area">Diện tích &#8595;</option>
-                  <option value="capacity">Sức chứa &#8595;</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <label for="rating">Rating:</label>
-                <select id="rating">
-                  <option value="5">5 sao &#8595;</option>
-                  <option value="4">4 sao &#8595;</option>
-                  <option value="3">3 sao &#8595;</option>
-                  <option value="2">2 sao &#8595;</option>
-                  <option value="1">1 sao &#8595;</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <label for="distance">Khoảng cách:</label>
-                <select id="distance">
-                  <option value="1-5">Dưới 2 km</option>
-                  <option value="5-20">2-5 km</option>
-                  <option value="5-20">Trên 5 km</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <!-- You can add more filter options here -->
-              </div>
+        <section class="filter">
+            <div class="row md-3">
+                <div class="col">
+                    <div class="text-center fs-1 fw-bold">Danh Sách Phòng Gym</div>
+                </div>
             </div>
-          </form>
-        </div>
-      </section>
+            <hr class="my-4">
+            <br>
+            <div class="container">
+                <form id="filter-form">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="city">Vị trí:</label>
+                            <select id="city">
+                                <option value="all">Tất cả</option>
+                                <option value="hn">Hà Nội</option>
+                                <option value="hcm">TP. Hồ Chí Mnh</option>
+                                <option value="dn">Đà Nẵng</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label for="price-hourly">Giá linh hoạt:</label>
+                            <select id="price-hourly">
+                                <option value="lowToHigh">Thấp đến cao</option>
+                                <option value="highToLow">Cao đến thấp</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label for="price-annually">Giá cố định:</label>
+                            <select id="price-annually">
+                                <option value="lowToHigh">Thấp đến cao</option>
+                                <option value="highToLow">Cao đến thấp</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label for="capacityAndArea">Cơ sở vật chất:</label>
+                            <select id="capacityAndArea">
+                                <option value="all">None</option>
+                                <option value="area">Diện tích &#8595;</option>
+                                <option value="capacity">Sức chứa &#8595;</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label for="rating">Rating:</label>
+                            <select id="rating">
+                                <option value="5">5 sao &#8595;</option>
+                                <option value="4">4 sao &#8595;</option>
+                                <option value="3">3 sao &#8595;</option>
+                                <option value="2">2 sao &#8595;</option>
+                                <option value="1">1 sao &#8595;</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label for="distance">Khoảng cách:</label>
+                            <select id="distance">
+                                <option value="1-5">Dưới 2 km</option>
+                                <option value="5-20">2-5 km</option>
+                                <option value="5-20">Trên 5 km</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <!-- You can add more filter options here -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
 
-      <section class="gym-list">
-        <div class="container" id="gymListContainer" th:insert="fragments/gym-list-fragment.html :: gym-list-fragment">
-        </div>
+        <section class="gym-list">
+            <div class="container" id="gymListContainer"
+                 th:insert="fragments/gym-list-fragment.html :: gym-list-fragment">
+            </div>
 
-        <div class="container">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#page1" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item active" aria-current="page">
-              <a class="page-link" href="#page1">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#page2">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </div>
-      </section>
+            <div class="container">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#page1" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#page1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#page2">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </div>
 
-  </main><!-- End #main -->
+</main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer th:replace="common/footer :: footer">
-    <!-- End Footer -->
+<!-- ======= Footer ======= -->
+<footer th:replace="common/footer :: footer"></footer>
+<!-- End Footer -->
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-  <script>
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<script>
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(sendLocationToServer);
+        navigator.geolocation.getCurrentPosition(sendLocationToServer);
     }
 
     function sendLocationToServer(position) {
-      //real value from the web
-      // const latitude = position.coords.latitude;
-      // const longitude = position.coords.longitude;
-      // console.log(latitude, longitude);
+        //real value from the web
+        // const latitude = position.coords.latitude;
+        // const longitude = position.coords.longitude;
+        // console.log(latitude, longitude);
 
-      //fixed value (position at hoa lac)
-      const userLatitude = 21.00418734116798;
-      const userLongitude = 105.52004332513577;
-      console.log("Before AJAX request");
-      $.ajax({
-        type: "POST",
-        url: "/user/homepage",
-        data: {latitude: userLatitude, longitude: userLongitude},
-        success: function (response) {
-          console.log("Inside success callback");
-          console.log(response.length);
-          if (response.length === 0) {
-            $('#gymListContainer').empty();
-            $('#gymListContainer').html('<p>No gyms found nearby.</p>');
-          } else {
-            $('#gymListContainer').empty();
-            $('#gymListContainer').html(response)
-          }
-        },
-        error: function (error) {
-          console.log("Inside error callback");
-          console.error("Error sending location data:", error);
-        }
-      });
-      console.log("After AJAX request");
+        //fixed value (position at hoa lac)
+        const userLatitude = 21.00418734116798;
+        const userLongitude = 105.52004332513577;
+        console.log("Before AJAX request");
+        $.ajax({
+            type: "POST",
+            url: "/user/homepage",
+            data: {latitude: userLatitude, longitude: userLongitude},
+            success: function (response) {
+                console.log("Inside success callback");
+                console.log(response.length);
+                if (response.length === 0) {
+                    $('#gymListContainer').empty();
+                    $('#gymListContainer').html('<p>No gyms found nearby.</p>');
+                } else {
+                    $('#gymListContainer').empty();
+                    $('#gymListContainer').html(response)
+                }
+            },
+            error: function (error) {
+                console.log("Inside error callback");
+                console.error("Error sending location data:", error);
+            }
+        });
+        console.log("After AJAX request");
     }
-  </script>
-  <!-- Vendor JS Files -->
-  <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-  <script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+</script>
+<!-- Vendor JS Files -->
+<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
 
-  <!-- Template Main JS File -->
-  <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<!-- Template Main JS File -->
+<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 
 </body>
+
 </html>

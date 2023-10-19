@@ -1976,7 +1976,7 @@ textarea.form-control {
   text-align: center;
 }
 
-*/ .gym-description .button {
+* .gym-description .button {
   background-color: #4CAF50;
   /* Green */
   color: white;
@@ -2204,7 +2204,7 @@ select {
 .icon {
   width: 60px;
   height: 40px;
-  background-color: gray;
+  background-color: #808080;
   border-radius: 15px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -2219,7 +2219,7 @@ select {
   content: attr(data-title);
   width: 10vh;
   position: absolute;
-  background-color: gray;
+  background-color: #808080;
   color: #fff;
   padding: 5px 10px;
   border-radius: 5px;
