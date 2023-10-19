@@ -223,7 +223,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -290,90 +290,333 @@
    */
   new PureCounter();
 
-})()
+  /* Phân trang */
+  document.addEventListener("DOMContentLoaded", function () {
+    const pageLinks = document.querySelectorAll(".page-link");
+    const tabPanes = document.querySelectorAll(".tab-pane");
 
-/* Check box */
-// window.onload = (event) => {
-//   initMultiselect();
-// };
+    pageLinks.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
 
-// function initMultiselect() {
-//   checkboxStatusChange();
+        // Loại bỏ lớp "active" từ tất cả các tab pane
+        tabPanes.forEach(function (pane) {
+          pane.classList.remove("active");
+        });
 
-//   document.addEventListener("click", function(evt) {
-//     var flyoutElement = document.getElementById('myMultiselect'),
-//       targetElement = evt.target; // clicked element
+        // Lấy id của tab pane được chọn
+        const targetId = this.getAttribute("href").substring(1);
 
-//     do {
-//       if (targetElement == flyoutElement) {
-//         // This is a click inside. Do nothing, just return.
-//         //console.log('click inside');
-//         return;
-//       }
-
-//       // Go up the DOM
-//       targetElement = targetElement.parentNode;
-//     } while (targetElement);
-
-//     // This is a click outside.
-//     toggleCheckboxArea(true);
-//     //console.log('click outside');
-//   });
-// }
-
-// function checkboxStatusChange() {
-//   var multiselect = document.getElementById("mySelectLabel");
-//   var multiselectOption = multiselect.getElementsByTagName('option')[0];
-
-//   var values = [];
-//   var checkboxes = document.getElementById("mySelectOptions");
-//   var checkedCheckboxes = checkboxes.querySelectorAll('input[type=checkbox]:checked');
-
-//   for (const item of checkedCheckboxes) {
-//     var checkboxValue = item.getAttribute('value');
-//     values.push(checkboxValue);
-//   }
-
-//   var dropdownValue = "Nothing is selected";
-//   if (values.length > 0) {
-//     dropdownValue = values.join(', ');
-//   }
-
-//   multiselectOption.innerText = dropdownValue;
-// }
-
-// function toggleCheckboxArea(onlyHide = false) {
-//   var checkboxes = document.getElementById("mySelectOptions");
-//   var displayValue = checkboxes.style.display;
-
-//   if (displayValue != "block") {
-//     if (onlyHide == false) {
-//       checkboxes.style.display = "block";
-//     }
-//   } else {
-//     checkboxes.style.display = "none";
-//   }
-// }
-
-(function() {
-  "use strict";
-
-  $(document).ready(function () {
-    // L?y d?i tu?ng th? card
-    var card = $(".card");
-    // L?y c�c tru?ng nh?p li?u
-    var inputFields = $("input[type='text'], textarea");
-    // T�nh to�n v� c?p nh?t chi?u cao c?a th? card d?a tr�n n?i dung d� nh?p
-    function updateCardHeight() {
-      var newHeight = card.find(".card-body").outerHeight();
-      card.css("height", newHeight + "px");
-    }
-    // S? ki?n khi tru?ng nh?p li?u thay d?i
-    inputFields.on("input", updateCardHeight);
-    // G?i h�m d? c�i d?t chi?u cao ban d?u c?a th? card
-    updateCardHeight();
+        // Hiển thị tab pane tương ứng
+        document.getElementById(targetId).classList.add("active");
+      });
+    });
   });
 
-})();
- 
-// Ph�n trang
+  /* Inventory */
+  document.addEventListener("DOMContentLoaded", function () {
+    // Gán sự kiện click cho các phần tử HTML
+    var itemCards = document.querySelectorAll(".item-card, .item-card-2");
+    for (var i = 0; i < itemCards.length; i++) {
+      itemCards[i].addEventListener("click", function () {
+        showItemDetail(this);
+      });
+    }
+
+    function showItemDetail(element) {
+      // Ẩn thông báo "Chưa chọn vật phẩm"
+      document.getElementById("noItemSelected").style.display = "none";
+
+      // Hiển thị chi tiết vật phẩm
+      document.getElementById("item-detail-card").style.display = "block";
+
+      // Cập nhật thông tin chi tiết vật phẩm từ dữ liệu mẫu
+      document.getElementById("gymName").textContent = element.getAttribute("data-gym-name");
+      document.getElementById("itemType").textContent = "Loại thẻ: " + element.getAttribute("data-item-type");
+      document.getElementById("itemDescription").textContent = "Mô tả: " + element.getAttribute("data-item-description");
+      document.getElementById("itemPrice").textContent = "Giá thẻ: " + element.getAttribute("data-item-price");
+      document.getElementById("itemStatus").textContent = "Trạng thái: " + element.getAttribute("data-item-status");
+
+      var activationDate = new Date(element.getAttribute("data-activation-date"));
+      var activationPeriod = parseInt(element.getAttribute("data-activation-period"), 10);
+
+      // Tính ngày hết hạn bằng cộng thời hạn kích hoạt vào ngày mua
+      var expirationDate = new Date(activationDate);
+      expirationDate.setDate(expirationDate.getDate() + activationPeriod);
+
+      // Hiển thị ngày mua, thời hạn kích hoạt và ngày hết hạn
+      document.querySelector(".purchase-date span").textContent = activationDate.toLocaleDateString();
+      document.querySelector(".activation-period span").textContent = activationPeriod + " ngày";
+      document.querySelector(".expiration-date span").textContent = expirationDate.toLocaleDateString();
+    }
+  });
+
+  $(document).ready(function () {
+    // Bắt sự kiện khi một tab được nhấn
+    $('#myTabs a').on('click', function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+  });
+
+  // Calender
+  document.addEventListener('DOMContentLoaded', function () {
+    const calendarEl = document.getElementById('calendar');
+    const myModal = new bootstrap.Modal(document.getElementById('form'));
+    const dangerAlert = document.getElementById('danger-alert');
+    const close = document.querySelector('.btn-close');
+    
+  
+  
+    
+  const myEvents = JSON.parse(localStorage.getItem('events')) || [
+      {
+        id: uuidv4(),
+        title: `Edit Me`, 
+        start: '2023-04-11',
+        backgroundColor: 'red',
+        allDay: false, 
+        editable: false,
+      },
+      {
+        id: uuidv4(),
+        title: `Delete me`,
+        start: '2023-04-17',
+        end: '2023-04-21',
+  
+        allDay: false, 
+        editable: false,
+      },
+    ];
+  
+  
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      customButtons: {
+        customButton: {
+          text: 'Thêm lịch tập',
+          click: function () {
+            myModal.show();
+            const modalTitle = document.getElementById('modal-title');
+            const submitButton = document.getElementById('submit-button');
+            modalTitle.innerHTML = 'Add Event'
+            submitButton.innerHTML = 'Add Event'
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-success');
+            close.addEventListener('click', () => {
+              myModal.hide()
+            })
+          }
+        }
+      },
+      header: {
+        center: 'customButton', // add your custom button here
+        right: 'today, prev,next '
+      },
+      plugins: ['dayGrid', 'interaction'],
+      allDay: false,
+      editable: true,
+      selectable: true,
+      unselectAuto: false,
+      displayEventTime: false,
+      events: myEvents,
+      eventRender: function(info) {
+        info.el.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          let existingMenu = document.querySelector('.context-menu');
+          existingMenu && existingMenu.remove();
+          let menu = document.createElement('div');
+          menu.className = 'context-menu';
+          menu.innerHTML = `<ul>
+          <li><i class="fas fa-edit"></i>Edit</li>
+          <li><i class="fas fa-trash-alt"></i>Delete</li>
+          </ul>`;
+  
+          const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
+          
+          
+          document.body.appendChild(menu);
+          menu.style.top = e.pageY + 'px';
+          menu.style.left = e.pageX + 'px';
+  
+          // Edit context menu
+  
+          menu.querySelector('li:first-child').addEventListener('click', function() {
+            menu.remove();
+  
+            const editModal = new bootstrap.Modal(document.getElementById('form'));
+            const modalTitle = document.getElementById('modal-title');
+            const titleInput = document.getElementById('event-title');
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+            const colorInput = document.getElementById('event-color');
+            const submitButton = document.getElementById('submit-button');
+            const cancelButton = document.getElementById('cancel-button');
+            modalTitle.innerHTML = 'Edit Event';
+            titleInput.value = info.event.title;
+            startDateInput.value = moment(info.event.start).format('YYYY-MM-DD');
+            endDateInput.value = moment(info.event.end, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
+            colorInput.value = info.event.backgroundColor;
+            submitButton.innerHTML = 'Save Changes';
+
+            editModal.show();  
+            submitButton.classList.remove('btn-success')
+            submitButton.classList.add('btn-primary')
+  
+            // Edit button
+  
+            submitButton.addEventListener('click', function() {
+              const updatedEvents = {
+                id: info.event.id,
+                title: titleInput.value,
+                start: startDateInput.value,
+                end: moment(endDateInput.value, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD'),
+                backgroundColor: colorInput.value
+              }
+  
+              if ( updatedEvents.end <= updatedEvents.start) { // add if statement to check end date
+                dangerAlert.style.display = 'block';
+                return;
+              }
+            
+              const eventIndex = myEvents.findIndex(event => event.id === updatedEvents.id);
+              myEvents.splice(eventIndex, 1, updatedEvents);
+            
+              localStorage.setItem('events', JSON.stringify(myEvents));
+            
+              // Update the event in the calendar
+              const calendarEvent = calendar.getEventById(info.event.id);
+              calendarEvent.setProp('title', updatedEvents.title);
+              calendarEvent.setStart(updatedEvents.start);
+              calendarEvent.setEnd(updatedEvents.end);
+              calendarEvent.setProp('backgroundColor', updatedEvents.backgroundColor);
+  
+  
+            
+              editModal.hide();
+  
+            })
+  
+            
+          
+          });
+  
+          // Delete menu
+          menu.querySelector('li:last-child').addEventListener('click', function() {
+            const deleteModal = new bootstrap.Modal(document.getElementById('delete-modal'));
+            const modalBody = document.getElementById('delete-modal-body');
+            const cancelModal = document.getElementById('cancel-button');
+            modalBody.innerHTML = `Are you sure you want to delete <b>"${info.event.title}"</b>`
+            deleteModal.show();
+  
+            const deleteButton = document.getElementById('delete-button');
+            deleteButton.addEventListener('click', function () {
+              myEvents.splice(eventIndex, 1);
+              localStorage.setItem('events', JSON.stringify(myEvents));
+              calendar.getEventById(info.event.id).remove();
+              deleteModal.hide();
+              menu.remove();
+  
+            });
+  
+            cancelModal.addEventListener('click', function () { 
+              deleteModal.hide();
+            })
+  
+            
+          
+          
+          });
+          document.addEventListener('click', function() {
+            menu.remove();
+          });
+        });
+      },
+  
+      eventDrop: function(info) { 
+        let myEvents = JSON.parse(localStorage.getItem('events')) || [];
+        const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
+        const updatedEvent = {
+          ...myEvents[eventIndex],
+          id: info.event.id, 
+          title: info.event.title,
+          start: moment(info.event.start).format('YYYY-MM-DD'),
+          end: moment(info.event.end).format('YYYY-MM-DD'),
+          backgroundColor: info.event.backgroundColor
+        };
+        myEvents.splice(eventIndex, 1, updatedEvent); // Replace old event data with updated event data
+        localStorage.setItem('events', JSON.stringify(myEvents));
+        console.log(updatedEvent);
+      }
+  
+    });
+  
+    calendar.on('select', function(info) {
+  
+      const startDateInput = document.getElementById('start-date');
+      const endDateInput = document.getElementById('end-date');
+      startDateInput.value = info.startStr;
+      const endDate = moment(info.endStr, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
+      endDateInput.value = endDate;
+      if(startDateInput.value === endDate) {
+        endDateInput.value = '';
+      }
+    });
+  
+  
+    calendar.render();
+  
+    const form = document.querySelector('form');
+  
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent default form submission
+  
+      // retrieve the form input values
+      const title = document.querySelector('#event-title').value;
+      const startDate = document.querySelector('#start-date').value;
+      const endDate = document.querySelector('#end-date').value;
+      const color = document.querySelector('#event-color').value;
+      const endDateFormatted = moment(endDate, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD');
+      const eventId = uuidv4();
+  
+      console.log(eventId);
+  
+      if (endDateFormatted <= startDate) { // add if statement to check end date
+        dangerAlert.style.display = 'block';
+        return;
+      }
+  
+      const newEvent = {
+        id: eventId,
+        title: title,
+        start: startDate,
+        end: endDateFormatted,
+        allDay: false,
+        backgroundColor: color
+      };
+  
+      // add the new event to the myEvents array
+      myEvents.push(newEvent);
+  
+      // render the new event on the calendar
+      calendar.addEvent(newEvent);
+  
+      // save events to local storage
+      localStorage.setItem('events', JSON.stringify(myEvents));
+  
+      myModal.hide();
+      form.reset();
+    });
+  
+    myModal._element.addEventListener('hide.bs.modal', function () {
+      dangerAlert.style.display = 'none';
+      form.reset(); 
+    });
+  
+  });
+
+})()
+
+$(function() {
+  $("#include-navbar").load("navbar.html");
+  $("#include-footer").load("footer.html");
+});
