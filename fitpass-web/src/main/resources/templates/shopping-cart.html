@@ -88,7 +88,7 @@
             <div style="height: 15px; background-color: white;"></div>
             <div class="gym-department-plan">
                 <div class="form-check">
-                    <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" />
+                    <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}" />
                     <label class="" for="flexCheckChecked"> </label>
                 </div>
                 <div class="plan-card-mc">
@@ -105,9 +105,9 @@
                     200
                 </div>
                 <div class="num-of-plan-mc" >
-                    <button class="decrease-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">-</button>
+<!--                    <button class="decrease-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">-</button>-->
                     <div class="product-quantity" th:text="${cartItem.getQuantity()}" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">1</div>
-                    <button class="increase-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">+</button>
+<!--                    <button class="increase-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">+</button>-->
                 </div>
 
                 <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
@@ -134,9 +134,10 @@
             <span id="total-price-mc" class="total">0</span>
         </div>
         <div class="buy-button-mc">
-            <button class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
+            <button type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
         </div>
     </div>
+
     <p id="demo"></p>
 </div>
 
@@ -191,7 +192,7 @@
 
     }
 
-
+    const selectedItems = [];
 
     function updateCartTotal(checkBox){
         let total = document.getElementById("total-price-mc").innerHTML;
@@ -203,13 +204,32 @@
             total_int = total_int + price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
-            document.getElementById("total-price-mc").innerHTML = price;
+            // document.getElementById("total-price-mc").innerHTML = price;
         }
         else{
             total_int = total_int - price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             // document.getElementById("total-price-mc").innerHTML = total;
+        }
+
+        // Check out with select
+
+        const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]:checked');
+        checkboxes.forEach(function(checkbox) {
+            addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
+        });
+        console.log(JSON.stringify(selectedItems));
+    }
+
+    function checkout() {
+        const url = `/checkout/view?idList=${selectedItems.join(',')}`;
+        window.location.href = url;
+    }
+
+    function addToUniqueArray(arr, element) {
+        if (arr.indexOf(element) === -1) {
+            arr.push(element);
         }
     }
 
