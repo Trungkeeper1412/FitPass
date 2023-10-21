@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -15,13 +15,12 @@
 
     <!-- Google Fonts -->
     <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
@@ -31,15 +30,12 @@
     <!-- Template Main CSS File -->
     <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
 
-    <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 
 <body>
 
-<!-- ======= Header ======= -->
-<header th:replace="common/navbar :: navbar"></header>
+    <!-- ======= Header ======= -->
+    <header th:replace="common/navbar :: navbar"></header>
 
     <main id="main">
 
@@ -79,64 +75,34 @@
 
                     <!-- Tab Content -->
                     <div class="tab-content mt-4">
-                        
+
                         <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                             <div class="row">
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8">
-                                    <div class="item-grid" id="grid-container">
-                                        <div class="text-light item-card-2 mb-2"
-                                            data-gym-name="California Fitness & Yoga" data-item-type="Gói cố định"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="250 Credit" data-item-status="Chưa kích hoạt"
-                                            data-activation-date="01/10/2023" data-activation-period="30 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">California Fitness & Yoga
-                                            </h4>
-                                            <p>Gói cố định</p>
-                                            <p>Trạng thái: Chưa kích hoạt</p>
-                                            <p>Hạn sử dụng: 30 ngày</p>
-                                            <h5 class="text-money">250 <span class="credit">Credit</span></h5>
-                                        </div>
-                                        <div class="text-light item-card mb-2"
-                                            data-gym-name="Golden Wellness Fitness & Spa" data-item-type="Gói linh hoạt"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="5 Credit/Giờ" data-item-status="Chưa kích hoạt"
-                                            data-activation-date="05/10/2023" data-activation-period="10 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">Golden Wellness Fitness &
-                                                Spa</h4>
-                                            <p>Gói linh hoạt</p>
-                                            <p>Trạng thái: Chưa kích hoạt</p>
-                                            <p>Hạn sử dụng: 10 ngày</p>
-                                            <h5 class="text-money">50 <span class="credit">Credit/Giờ</span></h5>
-                                        </div>
-                                        <div class="text-light item-card mb-2" data-gym-name="California Fitness & Yoga"
-                                            data-item-type="Gói linh hoạt"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="10 Credit/Giờ" data-item-status="Hết hạn"
-                                            data-activation-date="01/10/2023" data-activation-period="0 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">California Fitness & Yoga
-                                            </h4>
-                                            <p>Gói cố định</p>
-                                            <p>Trạng thái: Hết hạn</p>
-                                            <p class="text-black">...</p>                                           
-                                            <h5 class="text-money">10 <span class="credit">Credit</span></h5>
-                                        </div>
-                                        <div class="text-light item-card-2 mb-2"
-                                            data-gym-name="Golden Wellness Fitness & Spa" data-item-type="Gói cố định"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="50 Credit" data-item-status="Đã kích hoạt"
-                                            data-activation-date="05/10/2023" data-activation-period="10 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">Golden Wellness Fitness &
-                                                Spa</h4>
-                                            <p>Gói cố định</p>
-                                            <p>Trạng thái: Đã kích hoạt</p>
-                                            <p>Ngày tập còn: 10 ngày</p>
-                                            <h5 class="text-money">50 <span class="credit">Credit</span></h5>
-                                        </div>
+                                    <div class="item-grid" id="grid-container" >
+                                        <th:block th:each="item : ${itemList}">
+
+
+                                            <div class="text-light item-card-2 mb-2"
+                                                 th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
+                                                 data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
+                                                 data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
+                                                 data-activation-period=${item.getDuration()} + ' ngày',
+                                                 data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()}"
+                                                onclick="showItemDetail(this)">
+                                                <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
+                                                </h4>
+                                                <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
+                                            </div>
+                                        </th:block>
                                     </div>
                                 </div>
 
@@ -159,8 +125,12 @@
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
-                                                    <a href="#" class="btn btn-primary text-black"
-                                                        onclick="activateItem(this)">Kích hoạt</a>
+                                                    <form method="post" action="/inventory/activeItem">
+                                                        <input id="orderDetailId" type="hidden" name="orderDetailId" value="" />
+                                                        <input id="duration" type="hidden" name="duration" value="" />
+                                                        <button type="submit" class="btn btn-primary text-black">Kích hoạt</button>
+                                                    </form>
+
                                                 </div>
                                             </div>
                                             <div class="no-item-selected" id="noItemSelected">
@@ -177,32 +147,25 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8">
                                     <div class="item-grid" id="grid-container">
-                                        <div class="text-light item-card-2 mb-2"
-                                            data-gym-name="California Fitness & Yoga" data-item-type="Gói cố định"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="10 Credit/Giờ" data-item-status="Chưa kích hoạt"
-                                            data-activation-date="01/10/2023" data-activation-period="30 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">California Fitness & Yoga
-                                            </h4>
-                                            <p>Gói cố định</p>
-                                            <p>Trạng thái: Chưa kích hoạt</p>
-                                            <p>Hạn sử dụng: 30 ngày</p>
-                                            <h5 class="text-money">10 <span class="credit">Credit/Giờ</span></h5>
-                                        </div>
-                                        <div class="text-light item-card mb-2"
-                                            data-gym-name="Golden Wellness Fitness & Spa" data-item-type="Gói linh hoạt"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="5 Credit/Giờ" data-item-status="Chưa kích hoạt"
-                                            data-activation-date="05/10/2023" data-activation-period="10 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">Golden Wellness Fitness &
-                                                Spa</h4>
-                                            <p>Gói linh hoạt</p>
-                                            <p>Trạng thái: Chưa kích hoạt</p>
-                                            <p>Hạn sử dụng: 10 ngày</p>
-                                            <h5 class="text-money">5 <span class="credit">Credit/Giờ</span></h5>
-                                        </div>
+                                        <th:block th:each="item : ${itemListNotActive}">
+                                            <div class="text-light item-card-2 mb-2"
+                                                 th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
+                                                 data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
+                                                 data-activation-date=${item.getPlanActiveTime() == null ? '' : item.getPlanActiveTime()},
+                                                 data-activation-period=${item.getDuration()} + ' ngày',
+                                                 data-item-description='Mô tả ' + ${item.getDescription()} "
+                                                 onclick="showItemDetail(this)">
+                                                <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
+                                                </h4>
+                                                <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
+                                            </div>
+                                        </th:block>
                                     </div>
                                 </div>
 
@@ -243,19 +206,25 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8">
                                     <div class="item-grid" id="grid-container">
-                                        <div class="text-light item-card-2 mb-2"
-                                            data-gym-name="Golden Wellness Fitness & Spa" data-item-type="Gói cố định"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="5 Credit/Giờ" data-item-status="Đã kích hoạt"
-                                            data-activation-date="05/10/2023" data-activation-period="10 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">Golden Wellness Fitness &
-                                                Spa</h4>
-                                            <p>Gói cố định</p>
-                                            <p>Trạng thái: Đã kích hoạt</p>
-                                            <p>Ngày tập còn: 10 ngày</p>
-                                            <h5 class="text-money">5 <span class="credit">Credit/Giờ</span></h5>
-                                        </div>
+                                        <th:block th:each="item : ${itemListActive}">
+                                            <div class="text-light item-card-2 mb-2"
+                                                 th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
+                                                 data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
+                                                 data-activation-date=${item.getPlanActiveTime() == null ? '' : item.getPlanActiveTime()},
+                                                 data-activation-period=${item.getDuration()} + ' ngày',
+                                                 data-item-description='Mô tả ' + ${item.getDescription()} "
+                                                 onclick="showItemDetail(this)">
+                                                <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
+                                                </h4>
+                                                <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
+                                            </div>
+                                        </th:block>
                                     </div>
                                 </div>
 
@@ -296,19 +265,27 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8">
                                     <div class="item-grid" id="grid-container">
-                                        <div class="text-light item-card mb-2" data-gym-name="California Fitness & Yoga"
-                                            data-item-type="Gói linh hoạt"
-                                            data-item-description="Mô tả: Thẻ tập gym cho phép tự do thời gian và tính hạn mức theo giờ."
-                                            data-item-price="10 Credit/Giờ" data-item-status="Hết hạn"
-                                            data-activation-date="01/10/2023" data-activation-period="10 ngày"
-                                            onclick="showItemDetail(this)">
-                                            <h4 class="show-title fw-bold text-uppercase">California Fitness & Yoga
-                                            </h4>
-                                            <p>Gói cố định</p>
-                                            <p>Trạng thái: Hết hạn</p>
-                                            <p class="text-black">...</p>
-                                            <h5 class="text-money">10 <span class="credit">Credit/Giờ</span></h5>
-                                        </div>
+                                        <th:block th:each="item : ${itemListExpired}">
+
+
+                                            <div class="text-light item-card-2 mb-2"
+                                                 th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
+                                                 data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
+                                                 data-activation-date=${item.getPlanActiveTime() == null ? '' : item.getPlanActiveTime()},
+                                                 data-activation-period=${item.getDuration()} + ' ngày',
+                                                 data-item-description='Mô tả ' + ${item.getDescription()} "
+                                                 onclick="showItemDetail(this)">
+                                                <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
+                                                </h4>
+                                                <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
+                                            </div>
+                                        </th:block>
                                     </div>
                                 </div>
 
@@ -360,6 +337,7 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
     <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
     <script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
