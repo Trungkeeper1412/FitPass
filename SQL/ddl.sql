@@ -190,7 +190,6 @@ CREATE TABLE IF NOT EXISTS `order` (
                                        gym_department_id INT NOT NULL,
                                        order_create_time      DATETIME NOT NULL,
                                        order_status_key    INT NOT NULL,
-                                       order_money     DECIMAL(10, 2) NOT NULL,
                                        discount              INT NOT NULL,
                                        order_total_money     DECIMAL(10, 2) NOT NULL,
                                        order_note                 VARCHAR(500),
@@ -208,7 +207,13 @@ CREATE TABLE IF NOT EXISTS order_plan_detail (
                                                  duration       INT NOT NULL,
                                                  plan_before_active_validity       INT NOT NULL,
                                                  plan_after_active_validity        INT NOT NULL,
-                                                 FOREIGN KEY (order_id) REFERENCES `order`(order_id)
+                                                 gym_department_id                 INT NOT NULL,
+                                                `plan_active_time`  DATETIME DEFAULT NULL,
+                                                `item_status_key`   INT NOT NULL,
+                                                `plan_expired_time` DATETIME DEFAULT NULL,
+                                                `description`       TEXT,
+                                                 FOREIGN KEY (order_id) REFERENCES `order`(order_id),
+                                                 FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
 -- User Inventory table to store user inventory information

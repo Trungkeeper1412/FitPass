@@ -102,7 +102,7 @@ VALUES ('Gym Plan Type', 1, 'Gói theo giờ'),
 
 -- Create Gym plan infos
 INSERT INTO gym_plan (gym_department_id, user_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
-VALUES (1, 1, 1, 1, 1, 'Gói 1', 'Gói theo giờ 1', 100.00, 10.00, 20, 3, 7, 14),
+VALUES (2, 1, 1, 1, 1, 'Gói 1', 'Gói theo giờ 1', 100.00, 10.00, 20, 3, 7, 14),
        (1, 1, 2, 2, 2, 'Gói 2', 'Gói không theo giờ ', 150.00, 15.00, 30, 5, 10, 20),
        (1, 1, 1, 1, 1, 'Gói giờ', 'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp. ', 100.00, 10.00, 20, 3, 7, 14),
        (1, 1, 2, 2, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính tại Gym Hòa Lạc. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 15.00, 30, 5, 10, 20);
