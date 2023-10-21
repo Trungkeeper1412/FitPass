@@ -99,10 +99,10 @@ VALUES
 INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value)
 VALUES ('Gym Plan Type', 1, 'Gói theo giờ'),
        ('Gym Plan Type', 2, 'Gói không theo giờ'),
-       ('Gym Plan Status', 1, 'Chưa kích hoạt'),
-       ('Gym Plan Status', 2, 'Đang sử dụng'),
-       ('Gym Plan Status', 3, 'Đã sử dụng'),
-       ('Gym Plan Status', 4, 'Quá hạn');
+       ('ITEM_STATUS', 0, 'Chưa kích hoạt'),
+       ('ITEM_STATUS', 1, 'Đang sử dụng'),
+       ('ITEM_STATUS', 2, 'Đã sử dụng'),
+       ('ITEM_STATUS', 3, 'Quá hạn');
 
 -- Create Gym plan infos
 INSERT INTO gym_plan (gym_department_id, user_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
