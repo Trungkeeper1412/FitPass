@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym department details</title>
+    <title>Giỏ Hàng</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="icon" th:href="@{/assets/img/icon.png}">
@@ -25,41 +25,9 @@
 </head>
 
 <body class="body-my-card">
-<header id="header">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-        <h1 style="margin-left: -60px;" class="logo me-auto me-lg-0">
-            <a href="index.html">Fitpass<span>.</span></a>
-        </h1>
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
-                <li><a class="nav-link scrollto" href="#about">Đặt lịch tập</a></li>
-                <li><a class="nav-link scrollto" href="#services">Liên hệ</a></li>
-                <li>
-                    <form class="d-flex" style="margin-left: 50px;">
-                        <input style="height: 30px; margin-top: 5px; width: 300px;" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
-                        <img type="submit" style="margin-top: 6px; width: 25px; height: 25px;" src="https://cdn-icons-png.flaticon.com/128/4250/4250968.png" />
-                    </form>
-                </li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <div style="display: flex; margin-right: 50px;">
-            <img type="submit" style="margin-top: 3px; width: 35px; height: 35px;" src="https://cdn-icons-png.flaticon.com/128/9405/9405895.png" />
-            <div style="margin: auto; margin-left: 10px; color: rgb(255, 170, 0); font-weight: 500;">500 Credits</div>
-        </div>
-        <div class="dropdown" style="position: absolute; right: 10px;">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png" /></a>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Tài khoản người dùng</a></li>
-                <li><a class="dropdown-item" href="#">Lịch sử</a></li>
-                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+
 <!-- Content -->
 <div id="my-card" class="my-card-container">
     <h2>Giỏ hàng của bạn</h2>

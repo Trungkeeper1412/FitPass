@@ -1,8 +1,10 @@
 <div th:fragment="gym-list-fragment">
     <div class="row">
         <div th:each="department:${departments}" class="col-md-4 mb-4">
+            <a th:href="@{/department/department-detail/{department_id}(department_id=${department.getDepartmentId()})}">
             <div class="card">
-                <img th:src="${department.getDepartmentWallpaperUrl()}" class="card-img-top"
+                <img th:src="${department.getDepartmentWallpaperUrl()}"
+                     class="card-img-top"
                      alt="Phòng tập 1">
                 <div class="card-body">
                     <h3 class="card-title" th:text="${department.getDepartmentName()}"></h3>
@@ -50,6 +52,7 @@
                     </div>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 </div>

@@ -44,9 +44,4 @@ public class ItemInventoryController {
 
         return "redirect:/cart/view";
     }
-
-    @GetMapping("/view")
-    public String showInventory(){
-        return "inventory";
-    }
 }
