@@ -30,7 +30,7 @@ public class WebSecurityConfig {
 //                    .requestMatchers("/gym-owner/**").hasRole("MANAGER")
                 .requestMatchers("/manage/**").hasRole("ADMIN")
                 .requestMatchers("/statistics/chart", "/statistics/drink").hasRole("ADMIN")
-                
+
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin
@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("account")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/user/homepage")
+                .defaultSuccessUrl("/user/homepage", true)
                 .failureUrl("/login?error=true")
             )
             .logout(logout -> logout
