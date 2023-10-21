@@ -29,7 +29,7 @@ public class CartController {
     }
 
     @GetMapping("/add")
-    public String addToCart(@RequestParam int gymPlanId, @RequestParam int quantity, HttpSession session) {
+    public String addToCart(@RequestParam int gymPlanId, @RequestParam int quantity, @RequestParam int departmentId,HttpSession session) {
         GymPlanDepartmentNameDto product = gymPlanService.getGymPlanByGymPlanId(gymPlanId);
         if (product != null && quantity > 0) {
             Cart cart = (Cart) session.getAttribute("cart");
@@ -42,7 +42,7 @@ public class CartController {
             boolean productExistsInCart = false;
             for (CartItem item : cart.getItems()) {
                 if (item.getGymPlan().getGymPlanId() == gymPlanId) {
-                    item.setQuantity(item.getQuantity() + quantity);
+/*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;
                 }
@@ -57,7 +57,7 @@ public class CartController {
             session.setAttribute("cart", cart);
         }
 
-        return "redirect:/cart/view";
+        return "redirect:/department/department-detail/"+departmentId;
     }
 
     @GetMapping("/view")

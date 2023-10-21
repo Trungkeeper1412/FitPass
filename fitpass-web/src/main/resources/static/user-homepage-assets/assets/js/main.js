@@ -35,7 +35,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -232,7 +232,7 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
@@ -286,7 +286,7 @@
   });
 
   /**
-   * Initiate Pure Counter 
+   * Initiate Pure Counter
    */
   new PureCounter();
 
@@ -337,19 +337,44 @@
       document.getElementById("itemPrice").textContent = "Giá thẻ: " + element.getAttribute("data-item-price");
       document.getElementById("itemStatus").textContent = "Trạng thái: " + element.getAttribute("data-item-status");
 
-      var activationDate = new Date(element.getAttribute("data-activation-date"));
+      var activationDate = element.getAttribute("data-activation-date") == "null" ? "null" : new Date(element.getAttribute("data-activation-date"));
       var activationPeriod = parseInt(element.getAttribute("data-activation-period"), 10);
+      var purchaseDate = new Date(element.getAttribute("data-item-buyDate"));
 
-      // Tính ngày hết hạn bằng cộng thời hạn kích hoạt vào ngày mua
-      var expirationDate = new Date(activationDate);
-      expirationDate.setDate(expirationDate.getDate() + activationPeriod);
+      if(activationDate != "null") {
+        // Tính ngày hết hạn bằng cộng thời hạn kích hoạt vào ngày mua
+        var expirationDate = new Date(activationDate);
+        expirationDate.setDate(expirationDate.getDate() + activationPeriod);
+        console.log(formatDate(purchaseDate));
+      }
+
+
 
       // Hiển thị ngày mua, thời hạn kích hoạt và ngày hết hạn
-      document.querySelector(".purchase-date span").textContent = activationDate.toLocaleDateString();
+      document.querySelector(".purchase-date span").textContent = activationDate == "null" ? formatDate(purchaseDate) : formatDate(activationDate);
       document.querySelector(".activation-period span").textContent = activationPeriod + " ngày";
-      document.querySelector(".expiration-date span").textContent = expirationDate.toLocaleDateString();
+      document.querySelector(".expiration-date span").textContent = activationDate == "null" ? "" : formatDate(expirationDate);
+
+      document.querySelector("#orderDetailId").value = element.getAttribute("data-item-id");
+      document.querySelector("#duration").value = element.getAttribute("data-item-duration");
     }
   });
+
+  function formatDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1; // Lưu ý rằng tháng bắt đầu từ 0
+    var year = date.getFullYear();
+
+    // Đảm bảo rằng ngày và tháng có hai chữ số
+    if (day < 10) {
+      day = '0' + day;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return day + '/' + month + '/' + year;
+  }
 
   $(document).ready(function () {
     // Bắt sự kiện khi một tab được nhấn
@@ -365,17 +390,17 @@
     const myModal = new bootstrap.Modal(document.getElementById('form'));
     const dangerAlert = document.getElementById('danger-alert');
     const close = document.querySelector('.btn-close');
-    
-  
-  
-    
+
+
+
+
   const myEvents = JSON.parse(localStorage.getItem('events')) || [
       {
         id: uuidv4(),
-        title: `Edit Me`, 
+        title: `Edit Me`,
         start: '2023-04-11',
         backgroundColor: 'red',
-        allDay: false, 
+        allDay: false,
         editable: false,
       },
       {
@@ -383,13 +408,13 @@
         title: `Delete me`,
         start: '2023-04-17',
         end: '2023-04-21',
-  
-        allDay: false, 
+
+        allDay: false,
         editable: false,
       },
     ];
-  
-  
+
+
     const calendar = new FullCalendar.Calendar(calendarEl, {
       customButtons: {
         customButton: {
@@ -430,19 +455,19 @@
           <li><i class="fas fa-edit"></i>Edit</li>
           <li><i class="fas fa-trash-alt"></i>Delete</li>
           </ul>`;
-  
+
           const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
-          
-          
+
+
           document.body.appendChild(menu);
           menu.style.top = e.pageY + 'px';
           menu.style.left = e.pageX + 'px';
-  
+
           // Edit context menu
-  
+
           menu.querySelector('li:first-child').addEventListener('click', function() {
             menu.remove();
-  
+
             const editModal = new bootstrap.Modal(document.getElementById('form'));
             const modalTitle = document.getElementById('modal-title');
             const titleInput = document.getElementById('event-title');
@@ -458,12 +483,12 @@
             colorInput.value = info.event.backgroundColor;
             submitButton.innerHTML = 'Save Changes';
 
-            editModal.show();  
+            editModal.show();
             submitButton.classList.remove('btn-success')
             submitButton.classList.add('btn-primary')
-  
+
             // Edit button
-  
+
             submitButton.addEventListener('click', function() {
               const updatedEvents = {
                 id: info.event.id,
@@ -472,34 +497,34 @@
                 end: moment(endDateInput.value, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD'),
                 backgroundColor: colorInput.value
               }
-  
+
               if ( updatedEvents.end <= updatedEvents.start) { // add if statement to check end date
                 dangerAlert.style.display = 'block';
                 return;
               }
-            
+
               const eventIndex = myEvents.findIndex(event => event.id === updatedEvents.id);
               myEvents.splice(eventIndex, 1, updatedEvents);
-            
+
               localStorage.setItem('events', JSON.stringify(myEvents));
-            
+
               // Update the event in the calendar
               const calendarEvent = calendar.getEventById(info.event.id);
               calendarEvent.setProp('title', updatedEvents.title);
               calendarEvent.setStart(updatedEvents.start);
               calendarEvent.setEnd(updatedEvents.end);
               calendarEvent.setProp('backgroundColor', updatedEvents.backgroundColor);
-  
-  
-            
+
+
+
               editModal.hide();
-  
+
             })
-  
-            
-          
+
+
+
           });
-  
+
           // Delete menu
           menu.querySelector('li:last-child').addEventListener('click', function() {
             const deleteModal = new bootstrap.Modal(document.getElementById('delete-modal'));
@@ -507,7 +532,7 @@
             const cancelModal = document.getElementById('cancel-button');
             modalBody.innerHTML = `Are you sure you want to delete <b>"${info.event.title}"</b>`
             deleteModal.show();
-  
+
             const deleteButton = document.getElementById('delete-button');
             deleteButton.addEventListener('click', function () {
               myEvents.splice(eventIndex, 1);
@@ -515,29 +540,29 @@
               calendar.getEventById(info.event.id).remove();
               deleteModal.hide();
               menu.remove();
-  
+
             });
-  
-            cancelModal.addEventListener('click', function () { 
+
+            cancelModal.addEventListener('click', function () {
               deleteModal.hide();
             })
-  
-            
-          
-          
+
+
+
+
           });
           document.addEventListener('click', function() {
             menu.remove();
           });
         });
       },
-  
-      eventDrop: function(info) { 
+
+      eventDrop: function(info) {
         let myEvents = JSON.parse(localStorage.getItem('events')) || [];
         const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
         const updatedEvent = {
           ...myEvents[eventIndex],
-          id: info.event.id, 
+          id: info.event.id,
           title: info.event.title,
           start: moment(info.event.start).format('YYYY-MM-DD'),
           end: moment(info.event.end).format('YYYY-MM-DD'),
@@ -547,11 +572,11 @@
         localStorage.setItem('events', JSON.stringify(myEvents));
         console.log(updatedEvent);
       }
-  
+
     });
-  
+
     calendar.on('select', function(info) {
-  
+
       const startDateInput = document.getElementById('start-date');
       const endDateInput = document.getElementById('end-date');
       startDateInput.value = info.startStr;
@@ -561,15 +586,15 @@
         endDateInput.value = '';
       }
     });
-  
-  
+
+
     calendar.render();
-  
+
     const form = document.querySelector('form');
-  
+
     form.addEventListener('submit', function(event) {
       event.preventDefault(); // prevent default form submission
-  
+
       // retrieve the form input values
       const title = document.querySelector('#event-title').value;
       const startDate = document.querySelector('#start-date').value;
@@ -577,14 +602,14 @@
       const color = document.querySelector('#event-color').value;
       const endDateFormatted = moment(endDate, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD');
       const eventId = uuidv4();
-  
+
       console.log(eventId);
-  
+
       if (endDateFormatted <= startDate) { // add if statement to check end date
         dangerAlert.style.display = 'block';
         return;
       }
-  
+
       const newEvent = {
         id: eventId,
         title: title,
@@ -593,25 +618,25 @@
         allDay: false,
         backgroundColor: color
       };
-  
+
       // add the new event to the myEvents array
       myEvents.push(newEvent);
-  
+
       // render the new event on the calendar
       calendar.addEvent(newEvent);
-  
+
       // save events to local storage
       localStorage.setItem('events', JSON.stringify(myEvents));
-  
+
       myModal.hide();
       form.reset();
     });
-  
+
     myModal._element.addEventListener('hide.bs.modal', function () {
       dangerAlert.style.display = 'none';
-      form.reset(); 
+      form.reset();
     });
-  
+
   });
 
 })()

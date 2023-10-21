@@ -138,16 +138,16 @@
         <div class="scroll-plans">
             <div th:each="gymPlan : ${gymPlans}" class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
-                    <th:block th:if="${gymPlan.getGymPlanType().equalsIgnoreCase('Gói không theo giờ')}">
-                        <a  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1)}" class="btn btn-primary">
+
+                        <a  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}" class="btn btn-primary">
                             Add to cart
                         </a>
-                    </th:block>
-                    <th:block th:if="${gymPlan.getGymPlanType().equalsIgnoreCase('Gói theo giờ')}">
+
+<!--                    <th:block th:if="${gymPlan.getGymPlanType().equalsIgnoreCase('Gói theo giờ')}">
                         <a  th:href="@{/item/add(gymPlanId=${gymPlan.getGymPlanId()})}" class="btn btn-primary">
                             Add to inventory
                         </a>
-                    </th:block>
+                    </th:block>-->
                     <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
                     <div style="" class="gym-plan-price">
                         <div style="font-size: xxx-large; font-weight: 700">
