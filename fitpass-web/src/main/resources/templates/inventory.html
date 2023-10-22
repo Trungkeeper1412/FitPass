@@ -42,10 +42,10 @@
         <!-- ======= Breadcrumbs ======= -->
         <section class="breadcrumbs bg-whitesmoke">
             <div class="container">
-                <div class="text-start fs-2 fw-bold text-uppercase">Túi đồ</div>
+                <div class="text-start fs-2 fw-bold ">Túi Đồ</div>
                 <ol>
                     <a href="index.html">Fitpass &nbsp;</a>
-                    <li class="text-black">/ Túi đồ</li>
+                    <li class="text-black">/ Túi Đồ</li>
                 </ol>
                 <hr>
             </div>
@@ -65,7 +65,7 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="active-tab" data-toggle="tab" href="#active" role="tab"
-                                aria-controls="active" aria-selected="false">Thẻ đang kích hoạt</a>
+                                aria-controls="active" aria-selected="false">Thẻ đang sử dụng</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="activated-tab" data-toggle="tab" href="#activated" role="tab"
@@ -99,7 +99,8 @@
                                                 <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
-                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
+                                                <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
                                                 <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
                                             </div>
                                         </th:block>
@@ -121,7 +122,7 @@
                                                     <p class="item-status" id="itemStatus">Trạng thái:</p>
                                                     <p class="purchase-date">Ngày mua thẻ: <span
                                                             class="purchase-date"></span></p>
-                                                    <p class="activation-period">Thời hạn kích hoạt: <span
+                                                    <p class="activation-period">Số lượng ngày tập còn lại: <span
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
@@ -161,7 +162,7 @@
                                                 <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
-                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '">Hạn sử dụng: 30 ngày</p>
                                                 <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
                                             </div>
                                         </th:block>
@@ -183,7 +184,7 @@
                                                     <p class="item-status" id="itemStatus">Trạng thái:</p>
                                                     <p class="purchase-date">Ngày mua thẻ: <span
                                                             class="purchase-date"></span></p>
-                                                    <p class="activation-period">Thời hạn kích hoạt: <span
+                                                    <p class="activation-period">Số lượng ngày tập còn lại: <span
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
@@ -220,7 +221,7 @@
                                                 <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
-                                                <p th:text="'Hạn sử dụng: ' + ${item.getDuration()} + ' ngày'">Hạn sử dụng: 30 ngày</p>
+                                                <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
                                                 <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
                                             </div>
                                         </th:block>
@@ -242,7 +243,7 @@
                                                     <p class="item-status" id="itemStatus">Trạng thái:</p>
                                                     <p class="purchase-date">Ngày mua thẻ: <span
                                                             class="purchase-date"></span></p>
-                                                    <p class="activation-period">Thời hạn kích hoạt: <span
+                                                    <p class="activation-period">Số lượng ngày tập còn lại: <span
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
