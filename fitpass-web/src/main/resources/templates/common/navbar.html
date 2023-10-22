@@ -33,7 +33,12 @@
                         <li><a href="#">Danh mục 4</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" th:href="@{/cart/view}"><i class="bi bi-cart3 fs-4"></i></a></li>
+                <li>
+                    <a class="nav-link scrollto" th:href="@{/cart/view}">
+                        <span class="cart-badge">13</span>
+                        <i class="bi bi-cart3 fs-4"></i>
+                    </a>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

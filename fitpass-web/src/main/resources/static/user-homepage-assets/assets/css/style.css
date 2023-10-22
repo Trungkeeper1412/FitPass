@@ -1976,7 +1976,7 @@ textarea.form-control {
   text-align: center;
 }
 
-*/ .gym-description .button {
+* .gym-description .button {
   background-color: #4CAF50;
   /* Green */
   color: white;
@@ -2278,6 +2278,74 @@ select {
   background-size: cover;
 }
 
+.item-card-all {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px 20px 0px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 220px;
+  overflow: hidden;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-size: cover;
+}
+
+.item-card-unactivated {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px 20px 0px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 220px;
+  overflow: hidden;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-size: cover;
+}
+
+.item-card-active {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px 20px 0px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 220px;
+  overflow: hidden;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-size: cover;
+}
+
+.item-card-activated {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px 20px 0px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 220px;
+  overflow: hidden;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-size: cover;
+}
+
 .item-card-2 {
   border-radius: 20px;
   background-color: white;
@@ -2458,4 +2526,19 @@ body {
 .fas {
   font-size: 13px;
   margin-right: 4px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  background-color: orangered;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }

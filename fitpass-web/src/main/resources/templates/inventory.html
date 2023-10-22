@@ -84,7 +84,7 @@
                                         <th:block th:each="item : ${itemList}">
 
 
-                                            <div class="text-light item-card-2 mb-2"
+                                            <div class="text-light item-card-all mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
@@ -112,7 +112,7 @@
                                         <div class="item-details">
                                             <h4>Chi tiết vật phẩm</h4>
                                             <hr>
-                                            <div class="detail-card" id="item-detail-card" style="display: none;">
+                                            <div class="detail-card" id="item-detail-card-all" style="display: none;">
                                                 <div class="card-body">
                                                     <h4 class="fw-bold text-uppercase" id="gymName">Tên phòng gym:</h4>
                                                     <p class="item-type" id="itemType">Loại thẻ:</p>
@@ -128,9 +128,8 @@
                                                     <form method="post" action="/inventory/activeItem">
                                                         <input id="orderDetailId" type="hidden" name="orderDetailId" value="" />
                                                         <input id="duration" type="hidden" name="duration" value="" />
-                                                        <button type="submit" class="btn btn-primary text-black">Kích hoạt</button>
+                                                        <button type="submit" class="btn btn-primary text-black w-100">Kích hoạt</button>
                                                     </form>
-
                                                 </div>
                                             </div>
                                             <div class="no-item-selected" id="noItemSelected">
@@ -148,7 +147,7 @@
                                 <div class="col-md-8">
                                     <div class="item-grid" id="grid-container">
                                         <th:block th:each="item : ${itemListNotActive}">
-                                            <div class="text-light item-card-2 mb-2"
+                                            <div class="text-light item-card-unactivated mb-2"
                                                  th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
@@ -175,7 +174,7 @@
                                         <div class="item-details">
                                             <h4>Chi tiết vật phẩm</h4>
                                             <hr>
-                                            <div class="detail-card" id="item-detail-card" style="display: none;">
+                                            <div class="detail-card" id="item-detail-card-unactivated" style="display: none;">
                                                 <div class="card-body">
                                                     <h4 class="fw-bold text-uppercase" id="gymName">Tên phòng gym:</h4>
                                                     <p class="item-type" id="itemType">Loại thẻ:</p>
@@ -188,7 +187,7 @@
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
-                                                    <a href="#" class="btn btn-primary text-black"
+                                                    <a href="#" class="btn btn-primary text-black w-100"
                                                         onclick="activateItem(this)">Kích hoạt</a>
                                                 </div>
                                             </div>
@@ -207,7 +206,7 @@
                                 <div class="col-md-8">
                                     <div class="item-grid" id="grid-container">
                                         <th:block th:each="item : ${itemListActive}">
-                                            <div class="text-light item-card-2 mb-2"
+                                            <div class="text-light item-card-active mb-2"
                                                  th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
@@ -234,7 +233,7 @@
                                         <div class="item-details">
                                             <h4>Chi tiết vật phẩm</h4>
                                             <hr>
-                                            <div class="detail-card" id="item-detail-card" style="display: none;">
+                                            <div class="detail-card" id="item-detail-card-active" style="display: none;">
                                                 <div class="card-body">
                                                     <h4 class="fw-bold text-uppercase" id="gymName">Tên phòng gym:</h4>
                                                     <p class="item-type" id="itemType">Loại thẻ:</p>
@@ -247,7 +246,7 @@
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
-                                                    <a href="#" class="btn btn-primary text-black"
+                                                    <a href="#" class="btn btn-primary text-black w-100"
                                                         onclick="activateItem(this)">Kích hoạt</a>
                                                 </div>
                                             </div>
@@ -268,7 +267,7 @@
                                         <th:block th:each="item : ${itemListExpired}">
 
 
-                                            <div class="text-light item-card-2 mb-2"
+                                            <div class="text-light item-card-activated mb-2"
                                                  th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
@@ -295,7 +294,7 @@
                                         <div class="item-details">
                                             <h4>Chi tiết vật phẩm</h4>
                                             <hr>
-                                            <div class="detail-card" id="item-detail-card" style="display: none;">
+                                            <div class="detail-card" id="item-detail-card-activated" style="display: none;">
                                                 <div class="card-body">
                                                     <h4 class="fw-bold text-uppercase" id="gymName">Tên phòng gym:</h4>
                                                     <p class="item-type" id="itemType">Loại thẻ:</p>
@@ -308,7 +307,7 @@
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
-                                                    <a href="#" class="btn btn-primary text-black"
+                                                    <a href="#" class="btn btn-primary text-black w-100"
                                                         onclick="activateItem(this)">Kích hoạt</a>
                                                 </div>
                                             </div>
