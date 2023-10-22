@@ -187,7 +187,6 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 CREATE TABLE IF NOT EXISTS `order` (
                                        order_id        INT AUTO_INCREMENT PRIMARY KEY,
                                        user_id         INT NOT NULL,
-                                       gym_department_id INT NOT NULL,
                                        order_create_time      DATETIME NOT NULL,
                                        order_status_key    INT NOT NULL,
                                        discount              INT NOT NULL,

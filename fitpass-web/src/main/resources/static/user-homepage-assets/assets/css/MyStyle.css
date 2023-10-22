@@ -2765,7 +2765,7 @@ section {
   border-radius: 10px;
   /* justify-content: center; */
   /* align-items: center; */
-  width: 365px;
+  min-width: 365px;
   height: 480px;
   /* padding: 0px 15px; */
   margin: 1px 10px;
@@ -2808,7 +2808,7 @@ section {
   /* color: white;
   background-image: url("https://i.pinimg.com/236x/8a/3c/a1/8a3ca1089e86d2c55e24790632291867.jpg");
   background-size: cover; */
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 .scroll-plans .child:hover {
@@ -2818,8 +2818,9 @@ section {
 .scroll-plans button{
   width:100%;
   color: rgb(0, 0, 0);
-  margin: auto;
-  margin-top: 40px;
+  /*margin: auto;*/
+  margin-top: 10px;
+  /*bottom: 5px;*/
   font-weight: 500;
   font-size: medium;
   padding: 10px;
@@ -2835,7 +2836,9 @@ section {
   color: #000000;
   margin-top: 10px;
 }
-
+.gym-plan-description{
+  height: 90px;
+}
 .plan-description{
   padding: 30px;
 }
@@ -2853,6 +2856,7 @@ section {
 
 .gym-duration{
   /* text-decoration: underline; */
+  margin-top: 52px;
 }
 
 .day-duration{
@@ -3173,6 +3177,9 @@ section {
 .body-my-card{
   background-color: rgb(238, 238, 238);
   height: fit-content;
+}
+.body-my-card header{
+  position: relative;
 }
 
 .total-container-mc {
