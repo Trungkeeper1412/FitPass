@@ -139,7 +139,7 @@
 <!--                <button type="button" >-->
 <!--                    Đăng ký ngay-->
 <!--                </button>-->
-                <button type="button" onclick="addToCart()" >
+                <button type="button"  >
                     <a style="color: black"  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}">
                         Add to cart
                     </a>
@@ -392,10 +392,6 @@
         }
     }
 
-    // Messeage when add to cart
-    function addToCart() {
-        alert("Bạn đã thêm gói tập thành công!");
-    }
 </script>
 
 </body>
