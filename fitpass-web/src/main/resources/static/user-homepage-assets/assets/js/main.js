@@ -315,20 +315,42 @@
 
   /* Inventory */
   document.addEventListener("DOMContentLoaded", function () {
-    // Gán sự kiện click cho các phần tử HTML
-    var itemCards = document.querySelectorAll(".item-card, .item-card-2");
-    for (var i = 0; i < itemCards.length; i++) {
-      itemCards[i].addEventListener("click", function () {
-        showItemDetail(this);
-      });
+    // Lấy tất cả các thẻ item trong mỗi tab
+    var allItemCards = document.querySelectorAll(".item-card-all, .item-card-2-all");
+    var unactivatedItemCards = document.querySelectorAll(".item-card-unactivated, .item-card-2-unactivated");
+    var activeItemCards = document.querySelectorAll(".item-card-active, .item-card-2-active");
+    var activatedItemCards = document.querySelectorAll(".item-card-activated, .item-card-2-activated");
+
+    // Add click event listeners for item cards in each tab
+    addClickListeners(allItemCards, "all");
+    addClickListeners(unactivatedItemCards, "unactivated");
+    addClickListeners(activeItemCards, "active");
+    addClickListeners(activatedItemCards, "activated");
+
+    function addClickListeners(itemCards, tabName) {
+      for (var i = 0; i < itemCards.length; i++) {
+        itemCards[i].addEventListener("click", function () {
+          showItemDetail(this, tabName);
+        });
+      }
     }
 
-    function showItemDetail(element) {
+    function showItemDetail(element, tabName) {
+
+      // Tìm các class có chứa "tab-pane"
+      var tabContent = element.closest(".tab-pane");
+
+      // Tạo ID thẻ chi tiết dựa trên tab
+      var detailCardId = "item-detail-card-" + tabName;
+
+      // Tìm thẻ chi tiết trong nội dung tab hiện tại
+      var detailCard = tabContent.querySelector("#" + detailCardId);
+
       // Ẩn thông báo "Chưa chọn vật phẩm"
       document.getElementById("noItemSelected").style.display = "none";
 
       // Hiển thị chi tiết vật phẩm
-      document.getElementById("item-detail-card").style.display = "block";
+      document.getElementById(detailCardId).style.display = "block";
 
       // Cập nhật thông tin chi tiết vật phẩm từ dữ liệu mẫu
       document.getElementById("gymName").textContent = element.getAttribute("data-gym-name");
@@ -341,14 +363,12 @@
       var activationPeriod = parseInt(element.getAttribute("data-activation-period"), 10);
       var purchaseDate = new Date(element.getAttribute("data-item-buyDate"));
 
-      if(activationDate != "null") {
+      if (activationDate != "null") {
         // Tính ngày hết hạn bằng cộng thời hạn kích hoạt vào ngày mua
         var expirationDate = new Date(activationDate);
         expirationDate.setDate(expirationDate.getDate() + activationPeriod);
         console.log(formatDate(purchaseDate));
       }
-
-
 
       // Hiển thị ngày mua, thời hạn kích hoạt và ngày hết hạn
       document.querySelector(".purchase-date span").textContent = activationDate == "null" ? formatDate(purchaseDate) : formatDate(activationDate);
