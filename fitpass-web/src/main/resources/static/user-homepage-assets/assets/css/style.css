@@ -1976,8 +1976,9 @@ textarea.form-control {
   text-align: center;
 }
 
-* .gym-description .button {
+*/ .gym-description .button {
   background-color: #4CAF50;
+  /* Green */
   color: white;
   width: 120px;
   padding: 15px 25px;
@@ -2277,58 +2278,7 @@ select {
   background-size: cover;
 }
 
-.item-card-2-all {
-  border-radius: 20px;
-  background-color: white;
-  padding: 20px 20px 0px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  height: 220px;
-  overflow: hidden;
-  border: 1px solid black;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background-image: url('https://i.ibb.co/ZdTCj65/card-1.jpg');
-  background-size: cover;
-}
-
-.item-card-2-unactivated {
-  border-radius: 20px;
-  background-color: white;
-  padding: 20px 20px 0px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  height: 220px;
-  overflow: hidden;
-  border: 1px solid black;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background-image: url('https://i.ibb.co/ZdTCj65/card-1.jpg');
-  background-size: cover;
-}
-
-.item-card-2-active {
-  border-radius: 20px;
-  background-color: white;
-  padding: 20px 20px 0px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  height: 220px;
-  overflow: hidden;
-  border: 1px solid black;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background-image: url('https://i.ibb.co/ZdTCj65/card-1.jpg');
-  background-size: cover;
-}
-
-.item-card-2-activated {
+.item-card-2 {
   border-radius: 20px;
   background-color: white;
   padding: 20px 20px 0px 20px;
