@@ -28,7 +28,8 @@ INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (1, 1, 1);
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (2, 2, 2);
 
 -- User Wallet insert
-INSERT INTO `wallet` VALUES (1,1,20000.00);
+INSERT INTO wallet (user_id, balance) VALUES (1,20000);
+INSERT INTO wallet (user_id, balance) VALUES (2,20000);
 
 
 /********** Gym Department Creation ***********/
