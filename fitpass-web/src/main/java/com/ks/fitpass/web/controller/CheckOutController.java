@@ -108,8 +108,13 @@ public class CheckOutController {
                     orderDetails.setDescription(gymPlanDepartmentNameDto.getGymPlanDescription());
 
                     orderDetailService.insertOrderDetail(orderDetails);
-                    cart.removeItem(gymPlanDepartmentNameDto.getGymPlanId());
+
                 }
+            }
+            // Remove khỏi cart
+            for (Integer i:
+                    planIdList) {
+                cart.removeItem(i);
             }
             session.setAttribute("cart", cart);
             // Lấy user balance
