@@ -133,15 +133,15 @@
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
-                    <div style="" th:text="'Thời hạn trước khi active : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div style="" th:text="'Thời hạn sau khi active : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                    <div style="" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                    <div style="" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
 <!--                <button type="button" >-->
 <!--                    Đăng ký ngay-->
 <!--                </button>-->
                 <button type="button"  >
                     <a style="color: black"  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}">
-                        Add to cart
+                        Thêm vào giỏ hàng
                     </a>
                 </button>
             </div>
