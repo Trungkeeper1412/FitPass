@@ -108,9 +108,9 @@
             <div th:each="gymPlan : ${gymPlans}" class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
 
-                        <a  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}" class="btn btn-primary">
-                            Add to cart
-                        </a>
+<!--                        <a  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}" class="btn btn-primary">-->
+<!--                            Add to cart-->
+<!--                        </a>-->
 
 <!--                    <th:block th:if="${gymPlan.getGymPlanType().equalsIgnoreCase('Gói theo giờ')}">
                         <a  th:href="@{/item/add(gymPlanId=${gymPlan.getGymPlanId()})}" class="btn btn-primary">
@@ -125,9 +125,9 @@
                         </div>
                         <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
-                    <div style="" th:text="${gymPlan.getGymPlanDescription()}"></div>
-                    <hr class="line">
-                    <div style="background-color: black; height: 2px; width: fit-content"></div>
+                    <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
+<!--                    <hr class="line">-->
+<!--                    <div style="background-color: black; height: 2px; width: fit-content"></div>-->
                     <div style="" class="gym-duration">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
@@ -136,8 +136,13 @@
                     <div style="" th:text="'Thời hạn trước khi active : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
                     <div style="" th:text="'Thời hạn sau khi active : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
-                <button type="button">
-                    Đăng ký ngay
+<!--                <button type="button" >-->
+<!--                    Đăng ký ngay-->
+<!--                </button>-->
+                <button type="button" onclick="addToCart()" >
+                    <a style="color: black"  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}">
+                        Add to cart
+                    </a>
                 </button>
             </div>
 
@@ -385,6 +390,11 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+
+    // Messeage when add to cart
+    function addToCart() {
+        alert("Bạn đã thêm gói tập thành công!");
     }
 </script>
 
