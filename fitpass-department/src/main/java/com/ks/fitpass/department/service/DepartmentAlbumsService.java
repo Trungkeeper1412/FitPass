@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface DepartmentAlbumsService {
     List<DepartmentAlbums> getAllByDepartmentID(int departmentID) throws DataAccessException;
-
 }

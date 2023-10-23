@@ -264,6 +264,20 @@ public interface IRepositoryQuery {
 """;
 
 
+    String GET_DEPARTMENT_AMENITIES_DEPARTMENT_ID = """
+    SELECT
+        amenitie_id,
+        gym_department_id,
+        photo_url,
+        amenitie_name,
+        description
+    FROM
+        gym_department_amenities
+    WHERE
+        gym_department_id = ?
+""";
+
+
 String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 SELECT
                     gp.plan_id,

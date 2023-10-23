@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 public class Department {
 
-
     private int departmentId;
 
     private DepartmentStatus departmentStatus;
