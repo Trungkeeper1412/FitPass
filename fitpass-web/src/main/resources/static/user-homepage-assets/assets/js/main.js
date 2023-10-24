@@ -384,22 +384,39 @@ function updateQuantityCart() {
             detailCard.querySelector("#itemStatus").textContent = "Trạng thái: " + element.getAttribute("data-item-status");
 
             var activationDate = element.getAttribute("data-activation-date") == "null" ? "null" : new Date(element.getAttribute("data-activation-date"));
+            // Duration
             var activationPeriod = parseInt(element.getAttribute("data-activation-period"), 10);
+            // Plan after active valid
+            var planAfterActiveValid = parseInt(element.getAttribute("data-item-plan-after-active"), 10);
             var purchaseDate = new Date(element.getAttribute("data-item-buyDate"));
 
             if (activationDate != "null") {
                 // Tính ngày hết hạn bằng cộng thời hạn kích hoạt vào ngày mua
                 var expirationDate = new Date(activationDate);
-                expirationDate.setDate(expirationDate.getDate() + activationPeriod);
+                expirationDate.setDate(expirationDate.getDate() + planAfterActiveValid);
             }
 
             // Hiển thị ngày mua, thời hạn kích hoạt và ngày hết hạn
             detailCard.querySelector(".purchase-date span").textContent = activationDate == "null" ? formatDate(purchaseDate) : formatDate(activationDate);
             detailCard.querySelector(".activation-period span").textContent = activationPeriod + " ngày";
-            detailCard.querySelector(".expiration-date span").textContent = activationDate == "null" ? "" : formatDate(expirationDate);
+
+            if(element.getAttribute("data-item-status") == "Chưa kích hoạt") {
+                detailCard.querySelector(".expiration-date").style.display = "none"
+                detailCard.querySelector(".activate-time").style.display = "block"
+                detailCard.querySelector(".activate-time span").textContent = element.getAttribute("data-item-duration")
+            } else {
+                detailCard.querySelector(".expiration-date").style.display = "block"
+                detailCard.querySelector(".activate-time").style.display = "none"
+                detailCard.querySelector(".expiration-date span").textContent = activationDate == "null" ? "" : formatDate(expirationDate);
+            }
+
 
             detailCard.querySelector("#orderDetailId").value = element.getAttribute("data-item-id");
             detailCard.querySelector("#duration").value = element.getAttribute("data-item-duration");
+
+            // Check xem trạng thái của gói là chưa kích hoạt thì hiện nút kích hoạt
+            const displayValue = element.getAttribute("data-item-status") == "Chưa kích hoạt"  ? "block" : "none";
+            document.querySelector("#formActive").style.display = displayValue;
         }
     });
 
@@ -682,3 +699,7 @@ $(function () {
     $("#include-navbar").load("navbar.html");
     $("#include-footer").load("footer.html");
 });
+
+
+
+
