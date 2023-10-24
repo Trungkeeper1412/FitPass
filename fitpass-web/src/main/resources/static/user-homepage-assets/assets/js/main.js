@@ -5,6 +5,35 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
+document.addEventListener('DOMContentLoaded', function() {
+    // Đây là nơi bạn có thể gọi hàm của bạn
+    updateQuantityCart();
+});
+
+function updateQuantityCart() {
+    let cartNum = document.querySelector(".cart-badge");
+    fetch("/cart/quantityInCart", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then((data) => {
+            let number = parseInt(data);
+            console.log(number);
+            cartNum.textContent = number;
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+}
+
 (function () {
     "use strict";
 

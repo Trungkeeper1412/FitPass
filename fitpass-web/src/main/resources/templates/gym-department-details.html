@@ -139,10 +139,10 @@
 <!--                <button type="button" >-->
 <!--                    Đăng ký ngay-->
 <!--                </button>-->
-                <button type="button"  >
-                    <a style="color: black"  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}">
+                <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
+
                         Thêm vào giỏ hàng
-                    </a>
+
                 </button>
             </div>
 
@@ -309,7 +309,8 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
@@ -391,6 +392,79 @@
             modal.style.display = "none";
         }
     }
+
+    function addToCart() {
+        var button = event.target;
+        // Lấy giá trị từ data-attribute
+        var gymPlanId = button.getAttribute('data-gym-plan-id');
+        var quantity = button.getAttribute('data-quantity');
+        var departmentId = button.getAttribute('data-department-id');
+
+        fetch("/cart/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                gymPlanId: gymPlanId,
+                quantity: quantity,
+                departmentId: departmentId
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.text().then((errorMessage) => {
+                        console.error(errorMessage);
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'error',
+                            title: 'General Title',
+                            animation: false,
+                            position: 'top-right',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: errorMessage
+                        });
+                    });
+                } else {
+
+                        var toastMixin = Swal.mixin({
+                            toast: true,
+                            icon: 'success',
+                            title: 'General Title',
+                            animation: false,
+                            position: 'top-right',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                        toastMixin.fire({
+                            animation: true,
+                            title: 'Thêm vào giỏ hàng thành công'
+                        });
+                        updateQuantityCart();
+
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi kết nối:', error);
+                // Xử lý lỗi kết nối nếu cần
+            });
+    }
+
+
 
 </script>
 

@@ -77,6 +77,7 @@ public class CheckOutController {
 
         if (cart != null) {
             List<CartItem> cartItemList = cart.getItems();
+            boolean statusInsertOrderDetailBoolean = true;
             Order order = new Order();
             order.setUserId(user.getUserId());
             order.setOrderCreateTime(new Timestamp(System.currentTimeMillis()));
@@ -84,7 +85,7 @@ public class CheckOutController {
             // Set tổng tiền của hóa đơn
             order.setOrderTotalMoney(totalPrice);
             order.setDiscount(0);
-            orderService.insertOrder(order);
+            int insertOrderStatus = orderService.insertOrder(order);
             int orderId = orderService.getLastOrderInsertId();
             for (CartItem cartItem : cartItemList) {
                 if (planIdList.contains(cartItem.getGymPlan().getGymPlanId())) {
@@ -107,13 +108,21 @@ public class CheckOutController {
                     orderDetails.setItemStatusKey(0);
                     orderDetails.setDescription(gymPlanDepartmentNameDto.getGymPlanDescription());
 
-                    orderDetailService.insertOrderDetail(orderDetails);
-
+                    int insertOrderDetailStatus = orderDetailService.insertOrderDetail(orderDetails);
+                    if(insertOrderDetailStatus <= 0) {
+                        statusInsertOrderDetailBoolean = false;
+                    }
                 }
             }
+            int insertOrderDetailStatus = statusInsertOrderDetailBoolean == false ? 0 : 1;
+
+            // Gửi thông báo về client
+            String messageInsert = insertOrderStatus > 0 ? "Mua thành công" : "Mua không thành công";
+            model.addAttribute("messageInsertOrder", messageInsert);
+
             // Remove khỏi cart
             for (Integer i:
-                    planIdList) {
+                 planIdList) {
                 cart.removeItem(i);
             }
             session.setAttribute("cart", cart);
@@ -125,6 +134,6 @@ public class CheckOutController {
 
 
 
-        return "redirect:/user/homepage";
+        return "check-out";
     }
 }

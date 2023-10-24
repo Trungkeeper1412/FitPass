@@ -2,8 +2,9 @@ package com.ks.fitpass.web.controller;
 
 
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
-import com.ks.fitpass.department.entity.GymPlan;
+import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.GymPlanService;
+import com.ks.fitpass.order.dto.AddToCartRequestDTO;
 import com.ks.fitpass.order.dto.CartUpdateRequestDto;
 import com.ks.fitpass.order.entity.cart.Cart;
 import com.ks.fitpass.order.entity.cart.CartItem;
@@ -28,8 +29,12 @@ public class CartController {
         this.gymPlanService = gymPlanService;
     }
 
-    @GetMapping("/add")
-    public String addToCart(@RequestParam int gymPlanId, @RequestParam int quantity, @RequestParam int departmentId,HttpSession session) {
+    @PostMapping("/add")
+    @ResponseBody
+    public ResponseEntity<String> addToCart(@RequestBody AddToCartRequestDTO addToCartRequestDTO ,HttpSession session) {
+        int gymPlanId = addToCartRequestDTO.getGymPlanId();
+        int quantity = addToCartRequestDTO.getQuantity();
+        int departmentId = addToCartRequestDTO.getDepartmentId();
         GymPlanDepartmentNameDto product = gymPlanService.getGymPlanByGymPlanId(gymPlanId);
         if (product != null && quantity > 0) {
             Cart cart = (Cart) session.getAttribute("cart");
@@ -45,7 +50,12 @@ public class CartController {
 /*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;
+
                 }
+            }
+
+            if(productExistsInCart) {
+                return ResponseEntity.badRequest().body("Sản phẩm này đã add vào giỏ hàng");
             }
 
             // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm nó vào
@@ -57,7 +67,19 @@ public class CartController {
             session.setAttribute("cart", cart);
         }
 
-        return "redirect:/department/department-detail/"+departmentId;
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/quantityInCart")
+    @ResponseBody
+    public ResponseEntity<Integer> getQuantityInCart(HttpSession session) {
+
+            Cart cart = (Cart) session.getAttribute("cart");
+            int quantity = 0;
+            if(cart != null) {
+                quantity = cart.getItems().size();
+            }
+        return ResponseEntity.ok(quantity);
     }
 
     @GetMapping("/view")
@@ -69,6 +91,22 @@ public class CartController {
         }
         List<CartItem> cartItems;
         cartItems = cart.getItems();
+
+        List<Department> departmentList = new ArrayList<>();
+
+        for (CartItem item:
+             cartItems) {
+            GymPlanDepartmentNameDto gymPlanDepartmentNameDto = item.getGymPlan();
+
+            if(departmentList.stream().noneMatch(e ->  e.getDepartmentId() == gymPlanDepartmentNameDto.getGymDepartmentId())) {
+                Department department = new Department();
+                department.setDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
+                department.setDepartmentName(gymPlanDepartmentNameDto.getGymDepartmentName());
+                departmentList.add(department);
+            }
+        }
+
+        model.addAttribute("departmentList", departmentList);
         model.addAttribute("cartItems", cartItems);
         return "shopping-cart";
     }

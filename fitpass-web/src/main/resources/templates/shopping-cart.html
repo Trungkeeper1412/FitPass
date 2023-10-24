@@ -43,49 +43,55 @@
         <div class="action-title">Thao tác</div>
     </div>
     <!-- Để foreach ở đây -->
-    <div th:each="cartItem : ${cartItems}">
+    <div th:each="department : ${departmentList}">
         <div class="plan-in-my-card">
             <div class="all-plan-of-gym">
                 <div class="form-check">
                     <input  onclick='checkUncheckGymDept(this)' name="gym" class="" type="checkbox" value="" id="flexCheckChecked" />
                     <label class="" for="flexCheckChecked"> </label>
                 </div>
-                <div class="gym-name-mc" th:text="${cartItem.getGymPlan().getGymDepartmentName()}">Phòng gym hòa lạc</div>
+                <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
             </div>
-            <!-- Từng gym plan -->
-            <div style="height: 15px; background-color: white;"></div>
-            <div class="gym-department-plan">
-                <div class="form-check">
-                    <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}" />
-                    <label class="" for="flexCheckChecked"> </label>
-                </div>
-                <div class="plan-card-mc">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
-                    <div class="plan-info-mc">
-                        <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
-                        <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
-                    </div>
-                    <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
-                        Kích hoạt trong vòng 10 ngày
-                    </div>
-                </div>
-                <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
-                    200
-                </div>
-                <div class="num-of-plan-mc" >
-<!--                    <button class="decrease-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">-</button>-->
-                    <div class="product-quantity" th:text="${cartItem.getQuantity()}" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">1</div>
-<!--                    <button class="increase-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">+</button>-->
-                </div>
+            <th:block th:each="cartItem: ${cartItems}">
+                <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
+                    <!-- Từng gym plan -->
+                    <div style="height: 15px; background-color: white;"></div>
+                    <div class="gym-department-plan">
+                        <div class="form-check">
+                            <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}" />
+                            <label class="" for="flexCheckChecked"> </label>
+                        </div>
+                        <div class="plan-card-mc">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                            <div class="plan-info-mc">
+                                <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
+                                <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
+                            </div>
+                            <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                                Kích hoạt trong vòng 10 ngày
+                            </div>
+                        </div>
+                        <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                            200
+                        </div>
+                        <div class="num-of-plan-mc" >
+                            <!--                    <button class="decrease-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">-</button>-->
+                            <div class="product-quantity" th:text="${cartItem.getQuantity()}" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">1</div>
+                            <!--                    <button class="increase-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">+</button>-->
+                        </div>
 
-                <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                        <path
-                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                        />
-                    </svg>
-                </button>
-            </div>
+                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </th:block>
+            </th:block>
+
+
 
 
         </div>
@@ -102,13 +108,13 @@
             <span id="total-price-mc" class="total">0</span>
         </div>
         <div class="buy-button-mc">
-            <button type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
+            <button disabled type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
         </div>
     </div>
 
     <p id="demo"></p>
 </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Vendor JS Files -->
 <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
@@ -121,6 +127,7 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
+
     const element = document.getElementById("my-card");
     const nodes = element.getElementsByClassName("gym-department-plan");
     // count num of plan in shopping card
@@ -160,7 +167,7 @@
 
     }
 
-    const selectedItems = [];
+    let selectedItems = [];
 
     function updateCartTotal(checkBox){
         let total = document.getElementById("total-price-mc").innerHTML;
@@ -173,20 +180,32 @@
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             // document.getElementById("total-price-mc").innerHTML = price;
+            addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
         }
         else{
             total_int = total_int - price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             // document.getElementById("total-price-mc").innerHTML = total;
+            selectedItems = selectedItems.filter(item => item !== checkBox.getAttribute("data-product-id"));
         }
+
 
         // Check out with select
 
-        const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]:checked');
+/*        const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]:checked');
         checkboxes.forEach(function(checkbox) {
             addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
-        });
+        });*/
+
+
+        //Check xem người dùng có chọn item trước khi check out không
+        if(selectedItems.length > 0) {
+            document.querySelector('.buy-button-mc button').disabled = false;
+        } else {
+            document.querySelector('.buy-button-mc button').disabled = true;
+        }
+
         console.log(JSON.stringify(selectedItems));
     }
 
