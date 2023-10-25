@@ -263,7 +263,15 @@
                                                 <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
                                                 <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
-                                                <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
+                                                <th:block th:if="${item.getPrice() > 0}">
+                                                    <h5 class="text-money">
+                                                        <span th:text="${item.getPrice()}">250 </span>  <span class="credit">Credit</span>
+                                                    </h5>
+                                                </th:block>
+                                                <th:block th:if="${item.getPricePerHours() > 0}">
+                                                    <h5 class="text-money">
+                                                        <span th:text="${item.getPricePerHours()}">250 </span>  <span class="credit">Credit/Giờ</span>
+                                                    </h5>
                                             </div>
                                         </th:block>
                                     </div>

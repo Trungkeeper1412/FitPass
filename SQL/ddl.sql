@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS gym_department_features;
 DROP TABLE IF EXISTS gym_department_services;
 DROP TABLE IF EXISTS gym_department_schedule;
 DROP TABLE IF EXISTS gym_department_albums;
+DROP TABLE IF EXISTS gym_department_amenities;
 DROP TABLE IF EXISTS gym_department;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS role;
