@@ -4,6 +4,7 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.KbnRepository;
 import com.ks.fitpass.core.service.KbnService;
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
+import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.order.entity.Order;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.entity.cart.Cart;
@@ -55,6 +56,23 @@ public class CheckOutController {
                 }
             }
         }
+
+        // Lấy ra tất cả department list trong check out cart
+        List<Department> departmentList = new ArrayList<>();
+
+        for (CartItem item:
+                checkoutCartList) {
+            GymPlanDepartmentNameDto gymPlanDepartmentNameDto = item.getGymPlan();
+
+            if(departmentList.stream().noneMatch(e ->  e.getDepartmentId() == gymPlanDepartmentNameDto.getGymDepartmentId())) {
+                Department department = new Department();
+                department.setDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
+                department.setDepartmentName(gymPlanDepartmentNameDto.getGymDepartmentName());
+                departmentList.add(department);
+            }
+        }
+
+        model.addAttribute("departmentList", departmentList);
 
         double totalPrice = checkoutCartList.stream().mapToDouble(item -> item.getGymPlan().getPrice() * item.getQuantity()).sum();
 

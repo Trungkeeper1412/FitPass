@@ -39,28 +39,33 @@
             <div class="price-title">Đơn giá (credits)</div>
             <div class="num-of-plan-title">Số lượng</div>
         </div>
-        <th:block th:each="cartItem :${checkoutCartList}">
+        <th:block th:each="department :${departmentList}">
             <div class="plan-in-a-gymdept">
-                <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()}"/>
-                <div class="gym-name-mc" th:text="${cartItem.getGymPlan().getGymDepartmentName()}">Phòng gym Hòa Lạc</div>
-                <div class="plan-checkout">
-                    <div class="plan-card-mc">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
-                        <div class="plan-info-mc">
-                            <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim cương</h4>
-                            <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
+
+                <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
+                <th:block th:each="cartItem: ${checkoutCartList}">
+
+                    <div class="plan-checkout">
+                        <div class="plan-card-mc">
+                            <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()}"/>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                            <div class="plan-info-mc">
+                                <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim cương</h4>
+                                <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
+                            </div>
+                            <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                                Kích hoạt trong vòng 10 ngày
+                            </div>
                         </div>
-                        <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
-                            Kích hoạt trong vòng 10 ngày
+                        <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                            200
+                        </div>
+                        <div class="num-of-plan-mc" th:text="${cartItem.getQuantity()}">
+                            1
                         </div>
                     </div>
-                    <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
-                        200
-                    </div>
-                    <div class="num-of-plan-mc" th:text="${cartItem.getQuantity()}">
-                        1
-                    </div>
-                </div>
+
+                </th:block>
             </div>
         </th:block>
 
@@ -112,7 +117,9 @@
             </button><br>
         </th:block>
 
-        <button type="submit" class="btn btn-dark" style="margin-bottom: 30px;">Thanh toán</button>
+        <th:block th:if="${userBalanceAfterBuying >= 0}">
+            <button type="submit" class="btn btn-dark" style="margin-bottom: 30px;">Thanh toán</button>
+        </th:block>
     </div>
 
 </div>

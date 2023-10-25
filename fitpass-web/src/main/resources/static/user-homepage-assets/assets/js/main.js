@@ -350,16 +350,6 @@ function updateQuantityCart() {
         addClickListeners("active");
         addClickListeners("activated");
 
-        function addClickListeners(tabName) {
-            var itemCards = document.querySelectorAll(".item-card-" + tabName);
-
-            for (var i = 0; i < itemCards.length; i++) {
-                itemCards[i].addEventListener("click", function () {
-                    showItemDetail(this, tabName);
-                });
-            }
-        }
-
         function showItemDetail(element, tabName) {
             // Tìm các class có chứa "tab-pane" của tab đang được chọn
             var tabContent = document.querySelector(".tab-pane.active");
@@ -411,13 +401,30 @@ function updateQuantityCart() {
             }
 
 
-            detailCard.querySelector("#orderDetailId").value = element.getAttribute("data-item-id");
-            detailCard.querySelector("#duration").value = element.getAttribute("data-item-duration");
+            detailCard.querySelector(".orderDetailId").value = element.getAttribute("data-item-id");
+            detailCard.querySelector(".duration").value = element.getAttribute("data-item-duration");
+
+            console.log(detailCard.querySelector(".orderDetailId").value)
+            console.log(detailCard.querySelector(".duration").value)
+            console.log(element.getAttribute("data-item-id"));
+            console.log(element.getAttribute("data-item-duration"));
 
             // Check xem trạng thái của gói là chưa kích hoạt thì hiện nút kích hoạt
             const displayValue = element.getAttribute("data-item-status") == "Chưa kích hoạt"  ? "block" : "none";
-            document.querySelector("#formActive").style.display = displayValue;
+            detailCard.querySelector(".formActive").style.display = displayValue;
         }
+
+        function addClickListeners(tabName) {
+            var itemCards = document.querySelectorAll(".item-card-" + tabName);
+
+            for (var i = 0; i < itemCards.length; i++) {
+                itemCards[i].addEventListener("click", function () {
+                    showItemDetail(this, tabName);
+                });
+            }
+        }
+
+
     });
 
     function formatDate(date) {

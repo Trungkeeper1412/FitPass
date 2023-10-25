@@ -8,5 +8,4 @@ import java.util.List;
 public interface DepartmentAlbumsRepository {
     List<DepartmentAlbums> getAllByDepartmentID(int departmentID) throws DataAccessException;
 
-
 }

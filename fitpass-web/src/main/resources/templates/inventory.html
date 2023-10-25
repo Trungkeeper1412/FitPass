@@ -144,9 +144,9 @@
                                                             class="expiration-date"></span></p>
                                                     <p class="activate-time">Bạn còn: <span
                                                             class="activate-time"></span> ngày để kích hoạt</p>
-                                                    <form method="post" action="/inventory/activeItem" id="formActive">
-                                                        <input id="orderDetailId" type="hidden" name="orderDetailId" value="" />
-                                                        <input id="duration" type="hidden" name="duration" value="" />
+                                                    <form method="post" action="/inventory/activeItem" class="formActive">
+                                                        <input class="orderDetailId" type="hidden" name="orderDetailId" value="" />
+                                                        <input class="duration" type="hidden" name="duration" value="" />
                                                         <button type="submit" class="btn btn-primary text-black w-100">Kích hoạt</button>
                                                     </form>
                                                 </div>
@@ -167,12 +167,14 @@
                                     <div class="item-grid" id="grid-container">
                                         <th:block th:each="item : ${itemListNotActive}">
                                             <div class="text-light item-card-unactivated mb-2"
-                                                 th:attr="data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
-                                                 data-activation-date=${item.getPlanActiveTime() == null ? '' : item.getPlanActiveTime()},
+                                                 data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getDuration()} + ' ngày',
-                                                 data-item-description='Mô tả ' + ${item.getDescription()} "
+                                                 data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
+                                                 data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
                                                  onclick="showItemDetail(this)">
                                                 <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                 </h4>
@@ -180,8 +182,24 @@
                                                 <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
                                                 <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
-                                                <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '">Hạn sử dụng: 30 ngày</p>
-                                                <h5 class="text-money" th:text="${item.getPrice() == 0 ? item.getPricePerHours() : item.getPrice()}">250 <span class="credit">Credit</span></h5>
+
+                                                <th:block th:if="${item.getItemStatusKey() == 0}">
+                                                    <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
+                                                </th:block>
+                                                <th:block th:if="${item.getItemStatusKey() == 1}">
+                                                    <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
+                                                </th:block>
+                                                <th:block th:if="${item.getPrice() > 0}">
+                                                    <h5 class="text-money">
+                                                        <span th:text="${item.getPrice()}">250 </span>  <span class="credit">Credit</span>
+                                                    </h5>
+                                                </th:block>
+                                                <th:block th:if="${item.getPricePerHours() > 0}">
+                                                    <h5 class="text-money">
+                                                        <span th:text="${item.getPricePerHours()}">250 </span>  <span class="credit">Credit/Giờ</span>
+                                                    </h5>
+                                                </th:block>
+
                                             </div>
                                         </th:block>
                                     </div>
@@ -206,6 +224,13 @@
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
+                                                    <p class="activate-time">Bạn còn: <span
+                                                            class="activate-time"></span> ngày để kích hoạt</p>
+                                                    <form method="post" action="/inventory/activeItem" class="formActive">
+                                                        <input class="orderDetailId" type="hidden" name="orderDetailId" value="" />
+                                                        <input class="duration" type="hidden" name="duration" value="" />
+                                                        <button type="submit" class="btn btn-primary text-black w-100">Kích hoạt</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="no-item-selected" id="noItemSelected">
@@ -263,8 +288,6 @@
                                                             class="activation-period"></span></p>
                                                     <p class="expiration-date">Ngày hết hạn: <span
                                                             class="expiration-date"></span></p>
-                                                    <a href="#" class="btn btn-primary text-black w-100"
-                                                        onclick="activateItem(this)">Kích hoạt</a>
                                                 </div>
                                             </div>
                                             <div class="no-item-selected" id="noItemSelected">

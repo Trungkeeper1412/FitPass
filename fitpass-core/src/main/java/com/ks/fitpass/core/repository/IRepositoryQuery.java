@@ -35,4 +35,12 @@ public interface IRepositoryQuery {
                   WHERE gp.gym_plan_key = ?
                   AND mkv.mst_kbn_name = 'Gym Plan Type'
             """;
+
+    String GET_STATUS_BY_ITEM_STATUS_KEY = """
+                SELECT DISTINCT mkv.mst_kbn_value AS item_status
+                  FROM order_plan_detail opd
+                  JOIN mst_kbn mkv ON opd.item_status_key = mkv.mst_kbn_key
+                  WHERE opd.item_status_key = ?
+                  AND mkv.mst_kbn_name = 'Gym Plan Status'
+            """;
 }
