@@ -1,0 +1,58 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+    <div class="sidebar-brand-icon">
+      <img th:src="@{/employee-assets/img/icon.png}" alt="Logo Fitpass">
+    </div>
+    <div class="sidebar-brand-text mx-3">Nhân viên</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Check-in
+  </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/employee/check-in/flexible}">
+      <i class="bi bi-shuffle"></i>
+      <span>Gói linh hoạt</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/employee/check-in/fixed}">
+      <i class="bi bi-flag-fill"></i>
+      <span>Gói cố định</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Lịch sử
+  </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/employee/history}">
+      <i class="bi bi-clock-history"></i>
+      <span>Lịch sử hoạt động</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>
