@@ -402,7 +402,7 @@ function updateQuantityCart() {
 
 
             detailCard.querySelector(".orderDetailId").value = element.getAttribute("data-item-id");
-            detailCard.querySelector(".duration").value = element.getAttribute("data-item-duration");
+            detailCard.querySelector(".duration").value = element.getAttribute("data-item-plan-after-active");
 
             console.log(detailCard.querySelector(".orderDetailId").value)
             console.log(detailCard.querySelector(".duration").value)
