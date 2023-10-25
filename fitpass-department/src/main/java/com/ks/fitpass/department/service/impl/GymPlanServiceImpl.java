@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class GymPlanServiceImpl implements GymPlanService {
 
-    private GymPlanRepository gymPlanRepository;
-    private KbnRepository mstKbnRepository;
+    private final GymPlanRepository gymPlanRepository;
+    private final KbnRepository mstKbnRepository;
 
     public GymPlanServiceImpl(GymPlanRepository gymPlanRepository, KbnRepository mstKbnRepository) {
         this.gymPlanRepository = gymPlanRepository;
@@ -45,10 +45,8 @@ public class GymPlanServiceImpl implements GymPlanService {
             } else if (gymPlanType.equalsIgnoreCase("Gói theo giờ")) {
                 dto.setPricePerHours(gymPlan.getPricePerHours());
             }
-
             gymPlanDtos.add(dto);
         }
-
         return gymPlanDtos;
     }
 
