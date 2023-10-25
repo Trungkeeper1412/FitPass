@@ -427,6 +427,7 @@
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                toast.style.top = '70px';
                             }
                         });
                         toastMixin.fire({
@@ -448,6 +449,7 @@
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                toast.style.top = '70px';
                             }
                         });
                         toastMixin.fire({

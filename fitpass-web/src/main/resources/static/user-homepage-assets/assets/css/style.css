@@ -2424,11 +2424,13 @@ select {
 }
 
 .detail-inventory {
-  border: 3px ridge orange;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
+  border: 3px double #808080;
+  box-shadow: 0 0 10px rgb(128, 128, 128);
+  border-radius: 10px;
   margin-bottom: 30px;
   margin-left: -10px;
+  padding: 10px;
+  background-color: #f1f1f1;
 }
 
 /* Calender */
@@ -2533,6 +2535,21 @@ body {
   top: 0px;
   right: -20px;
   background-color: orangered;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  background-color: orange;
   color: white;
   border-radius: 10px;
   width: 30px;
