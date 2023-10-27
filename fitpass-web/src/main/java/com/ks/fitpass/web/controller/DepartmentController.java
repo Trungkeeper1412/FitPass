@@ -28,13 +28,17 @@ public class DepartmentController {
 
     private  final DepartmentFeatureService departmentFeatureService;
 
+    private  final DepartmentAmenitieService departmentAmenitieService;
+
+
     @Autowired
-    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService) {
+    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService, DepartmentAmenitieService departmentAmenitieService) {
         this.departmentService = departmentService;
         this.gymPlanService = gymPlanService;
         this.departmentScheduleService = departmentScheduleService;
         this.departmentAlbumsService = departmentAlbumsService;
         this.departmentFeatureService = departmentFeatureService;
+        this.departmentAmenitieService = departmentAmenitieService;
     }
 
     @GetMapping("/department-detail/{department_id}")
@@ -67,6 +71,10 @@ public class DepartmentController {
             // Get department features
             List<DepartmentFeature> departmentFeatures = departmentFeatureService.getDepartmentFeatures(departmentId);
             model.addAttribute("departmentFeatures", departmentFeatures);
+
+            // Get department Amenities
+            List<DepartmentAmenitie> departmentAmenities = departmentAmenitieService.getAllByDepartmentID(departmentId);
+            model.addAttribute("departmentAmenities", departmentAmenities);
 
             return "gym-department-details";
         } catch (EmptyResultDataAccessException e) {

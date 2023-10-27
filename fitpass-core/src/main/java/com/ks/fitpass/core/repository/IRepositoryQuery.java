@@ -29,10 +29,18 @@ public interface IRepositoryQuery {
             SELECT * FROM mst_kbn WHERE mst_kbn_name = ?
         """;
     String GET_GYM_PLAN_TYPE_BY_PLAN_KEY = """
-              SELECT mkv.mst_kbn_value AS gym_plan_type
+              SELECT DISTINCT mkv.mst_kbn_value AS gym_plan_type
                   FROM gym_plan gp
                   JOIN mst_kbn mkv ON gp.gym_plan_type_key = mkv.mst_kbn_key
                   WHERE gp.gym_plan_key = ?
                   AND mkv.mst_kbn_name = 'Gym Plan Type'
+            """;
+
+    String GET_STATUS_BY_ITEM_STATUS_KEY = """
+                SELECT DISTINCT mkv.mst_kbn_value AS item_status
+                  FROM order_plan_detail opd
+                  JOIN mst_kbn mkv ON opd.item_status_key = mkv.mst_kbn_key
+                  WHERE opd.item_status_key = ?
+                  AND mkv.mst_kbn_name = 'Gym Plan Status'
             """;
 }

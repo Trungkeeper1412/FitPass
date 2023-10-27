@@ -9,6 +9,39 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+/*NAVBAR*/
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  justify-content: space-between;
+}
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.search-button {
+  background-color: orange;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.search-button i {
+  color: white;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -2732,7 +2765,7 @@ section {
   border-radius: 10px;
   /* justify-content: center; */
   /* align-items: center; */
-  width: 365px;
+  min-width: 365px;
   height: 480px;
   /* padding: 0px 15px; */
   margin: 1px 10px;
@@ -2775,7 +2808,7 @@ section {
   /* color: white;
   background-image: url("https://i.pinimg.com/236x/8a/3c/a1/8a3ca1089e86d2c55e24790632291867.jpg");
   background-size: cover; */
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 .scroll-plans .child:hover {
@@ -2785,8 +2818,9 @@ section {
 .scroll-plans button{
   width:100%;
   color: rgb(0, 0, 0);
-  margin: auto;
-  margin-top: 40px;
+  /*margin: auto;*/
+  margin-top: 10px;
+  /*bottom: 5px;*/
   font-weight: 500;
   font-size: medium;
   padding: 10px;
@@ -2802,7 +2836,9 @@ section {
   color: #000000;
   margin-top: 10px;
 }
-
+.gym-plan-description{
+  height: 90px;
+}
 .plan-description{
   padding: 30px;
 }
@@ -2820,6 +2856,7 @@ section {
 
 .gym-duration{
   /* text-decoration: underline; */
+  margin-top: 52px;
 }
 
 .day-duration{
@@ -3141,6 +3178,12 @@ section {
   background-color: rgb(238, 238, 238);
   height: fit-content;
 }
+<<<<<<< HEAD
+=======
+.body-my-card header{
+  position: relative;
+}
+>>>>>>> 55588548587a63a9245c20bb6cd3f9a83e81d397
 
 .total-container-mc {
   display: grid;
@@ -3174,4 +3217,156 @@ section {
 .buy-button-mc{
   margin: auto 0;
   font-weight: 700;
+<<<<<<< HEAD
 }
+=======
+}
+
+/* CSS for check out page */
+.body-checkout header{
+  position: relative;
+}
+.body-checkout{
+  background-color: white;
+  text-align: center;
+}
+.checkout-container{
+  position: relative;
+  width: 90%;
+  bottom: 90px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  /* background-color: white; */
+  margin-top: 150px;
+}
+.body-checkout h2{
+  /* text-align: center; */
+  text-align: start;
+  margin-top: 60px;
+  margin-left: 80px;
+  font-weight: 900;
+  width: 90%;
+  color: black;
+}
+.body-checkout .line{
+  background-color: rgb(253, 197, 0);
+  border-radius: 10px;
+  height: 8px;
+  width: 120px;
+  margin-left: 80px;
+
+}
+.checkout-content{
+  /* display: grid; */
+  /* background-color: rgb(248, 248, 248); */
+  /* grid-template-columns: 2fr 1fr; */
+  /* margin-top: 50px; */
+}
+.checkout-title{
+  background-color: rgb(248, 248, 248);
+  display: grid;
+  height: 50px;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+.bill-info{
+  background-color: rgb(248, 248, 248) ;
+  height: fit-content;
+}
+.checkout-title .my-plan-title{
+  padding-left: 15px;
+}
+.plan-checkout{
+  background-color: rgb(248, 248, 248);
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+.plan-checkout .plan-card-mc{
+  margin-left: 15px;
+  height: 120px;
+  background-color: white;
+}
+.checkout-container .gym-name-mc{
+  margin-top: 10px;
+  height: 50px;
+  padding-left: 15px;
+  padding-top: 20px;
+  border-bottom: 3px solid rgb(236, 236, 236);
+  text-align: start;
+
+}
+.plan-checkout{
+  margin-top: 30px;
+  background-color: white;
+}
+.total-checkout{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  float: left;
+  margin-top: 40px;
+  border-top: 3px solid rgb(236, 236, 236);
+  width: 100%;
+  height: 50px;
+
+}
+.total-checkout .back-to-cart{
+  display: flex;
+  left: 0;
+  position: absolute;
+  margin: auto ;
+  margin-top: 60px;
+}
+.back-to-cart h3{
+  font-weight: 700;
+  margin:  auto;
+  margin-left: 10px;
+}
+.total-credits{
+  margin-top: 40px;
+  position: absolute;
+  left: 600px;
+}
+.total-credits h3{
+  font-weight: 700;
+}
+.bill-info{
+  margin-left: 30px;
+}
+.bill-info button{
+  font-weight: 600;
+  margin-top: 30px;
+  width: 200px;
+}
+.bill-title{
+  font-weight: 600;
+  color: white;
+  background-color: black;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bill-descript{
+  width: 80%;
+  height: fit-content;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 15px;
+  margin-top: 30px;
+  padding: 20px;
+}
+.wallet-title{
+  text-align: start;
+}
+.wallet-value{
+  text-align: end;
+}
+.wallet-line{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  height: 3px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);;
+}
+>>>>>>> 55588548587a63a9245c20bb6cd3f9a83e81d397

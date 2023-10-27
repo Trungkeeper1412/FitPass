@@ -4,6 +4,7 @@ import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.repository.DepartmentRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,10 +13,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+@DisplayName("Test For DepartmentService Class")
 public class DepartmentServiceImplTest {
 
     private DepartmentServiceImpl departmentService;
     private DepartmentRepository departmentRepository;
+
 
     @BeforeEach
     void setUp() {

@@ -8,6 +8,8 @@ public interface GymPlanRepository {
 
     List<GymPlan> getAllByDepartmentId(int departmentId);
 
+    GymPlan getGymPlanByGymPlanId(int gymPlanId);
+
 
 
 }

@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS gym_department_features;
 DROP TABLE IF EXISTS gym_department_services;
 DROP TABLE IF EXISTS gym_department_schedule;
 DROP TABLE IF EXISTS gym_department_albums;
+DROP TABLE IF EXISTS gym_department_amenities;
 DROP TABLE IF EXISTS gym_department;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS role;
@@ -111,6 +112,15 @@ CREATE TABLE IF NOT EXISTS gym_department_features (
                                                        FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
+CREATE TABLE IF NOT EXISTS gym_department_amenities  (
+                                                        amenitie_id INT AUTO_INCREMENT PRIMARY KEY,
+                                                        gym_department_id INT NOT NULL,
+                                                        photo_url VARCHAR(255) NOT NULL,
+                                                        amenitie_name VARCHAR(50),
+                                                        description   text,
+    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
+);
+
 -- table name mst_kbn to store type,status of all tables
 CREATE TABLE IF NOT EXISTS mst_kbn (
                                        mst_kbn_id    INT AUTO_INCREMENT PRIMARY KEY,
@@ -187,10 +197,8 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 CREATE TABLE IF NOT EXISTS `order` (
                                        order_id        INT AUTO_INCREMENT PRIMARY KEY,
                                        user_id         INT NOT NULL,
-                                       gym_department_id INT NOT NULL,
                                        order_create_time      DATETIME NOT NULL,
                                        order_status_key    INT NOT NULL,
-                                       order_money     DECIMAL(10, 2) NOT NULL,
                                        discount              INT NOT NULL,
                                        order_total_money     DECIMAL(10, 2) NOT NULL,
                                        order_note                 VARCHAR(500),
@@ -208,7 +216,13 @@ CREATE TABLE IF NOT EXISTS order_plan_detail (
                                                  duration       INT NOT NULL,
                                                  plan_before_active_validity       INT NOT NULL,
                                                  plan_after_active_validity        INT NOT NULL,
-                                                 FOREIGN KEY (order_id) REFERENCES `order`(order_id)
+                                                 gym_department_id                 INT NOT NULL,
+                                                `plan_active_time`  DATETIME DEFAULT NULL,
+                                                `item_status_key`   INT NOT NULL,
+                                                `plan_expired_time` DATETIME DEFAULT NULL,
+                                                `description`       TEXT,
+                                                 FOREIGN KEY (order_id) REFERENCES `order`(order_id),
+                                                 FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
 -- User Inventory table to store user inventory information

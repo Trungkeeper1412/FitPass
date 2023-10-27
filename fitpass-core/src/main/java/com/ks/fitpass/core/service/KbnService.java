@@ -7,4 +7,7 @@ import java.util.List;
 public interface KbnService {
 
     List<Kbn> getKbnByName(String kbnName);
+
+    String getGymPlanTypeByPlanKey(int gymPlanKey);
+
 }

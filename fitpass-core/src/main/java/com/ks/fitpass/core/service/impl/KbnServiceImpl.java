@@ -22,4 +22,9 @@ public class KbnServiceImpl implements KbnService {
     public List<Kbn> getKbnByName(String kbnName) {
         return kbnRepository.getKbnByName(kbnName);
     }
+
+    @Override
+    public String getGymPlanTypeByPlanKey(int gymPlanKey) {
+        return kbnRepository.getGymPlanTypeByPlanKey(gymPlanKey);
+    }
 }

@@ -1,69 +1,65 @@
-<nav class="navbar navbar-expand-lg fixed-top" id="navbar" th:fragment="navbar">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand mr-auto" th:href="@{/}">FitPass</a>
-    <!-- Navbar -->
-    <div class="navbar-btn-group">
-      <ul class="m-0 p-0">
-        <li class="navbar-btn sub-item-menu">
-          <a th:href="@{/}">
-            <i class="fas fa-home text-success m-0 fa-fw"></i>
-          </a>
-          <span class="small-menu-label">Menu 1</span>
-        </li>
-        <li class="navbar-btn sub-item-menu">
-          <a th:href="@{/}">
-            <i class="fas fa-bowling-ball text-danger m-0 fa-fw"></i>
-          </a>
-          <span class="small-menu-label">Menu 2</span>
-        </li>
-        <li class="navbar-btn sub-item-menu">
-          <a th:href="@{/}">
-            <i class="fas fa-list-ul text-warning m-0 fa-fw"></i>
-          </a>
-          <span class="small-menu-label">Menu 3</span>
-        </li>
-        <li class="navbar-btn dropdown pointer-events-none user">
-          <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="far fa-user text-info m-0 fa-fw"></i>
-          </a>
-          <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
-            <a class="dropdown-item username" href="#"><i class="far fa-user fa-fw"></i>
-              <span sec:authentication="principal.username"></span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
-          </ul>
-        </li>
-        <li class="navbar-btn btn-sidebar-menu">
-          <button aria-controls="sidebar" aria-expanded="false" class="navbar-toggle collapsed"
-                  data-bs-target="#sidebar" data-bs-toggle="collapse" id="btn-open-sidebar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <span class="small-menu-label">Menu</span>
-        </li>
-      </ul>
+<header id="header" class="fixed-top" th:fragment="navbar">
+
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+        <h1 class="logo me-auto me-lg-0"><a th:href="@{/user/homepage}">Fitpass<span>.</span></a></h1>
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm...">
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <li><a class="nav-link scrollto active" th:href="@{/user/homepage}">Trang chủ</a></li>
+                <li><a class="nav-link scrollto" href="#about">Giới thiệu</a></li>
+                <li><a class="nav-link scrollto" href="#services">Dịch vụ</a></li>
+                <li><a class="nav-link scrollto" href="#portfolio">Bộ sưu tập</a></li>
+                <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#">Danh mục 1</a></li>
+                        <li class="dropdown"><a href="#"><span>Danh mục con</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">Danh mục con 1</a></li>
+                                <li><a href="#">Danh mục con 2</a></li>
+                                <li><a href="#">Danh mục con 3</a></li>
+                                <li><a href="#">Danh mục con 4</a></li>
+                                <li><a href="#">Danh mục con 5</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Danh mục 2</a></li>
+                        <li><a href="#">Danh mục 3</a></li>
+                        <li><a href="#">Danh mục 4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="nav-link scrollto" th:href="@{/cart/view}">
+                        <span class="cart-badge">0</span>
+                        <i class="bi bi-cart3 fs-4"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#notification" id="notification-btn">
+                        <span class="notification-badge" id="notification-badge">0</span>
+                        <i class="bi bi-bell fs-4"></i>
+                    </a>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item small" href="#"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
+                <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a></li>
+                <li><a class="dropdown-item small" href="#"><i class="fas fa-history"></i> Lịch sử</a></li>
+                <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+            </ul>
+        </div>
     </div>
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <ul class="nav navbar-nav menu">
-        <li>
-          <div class="switch-theme">
-            <div>
-              <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
-            </div>
-            <div class="btn-switch-theme">
-              <input class="switch-button" id="switch" type="checkbox"/>
-              <label for="switch"></label>
-            </div>
-          </div>
-        </li>
-        <li><a th:href="@{/}"><i class="fas fa-bowling-ball text-danger fa-fw"></i>Menu 1</a></li>
-        <li><a th:href="@{/}"><i class="fas fa-list-ul text-warning fa-fw"></i>Menu 2</a></li>
-        <li><a th:href="@{/}"><i class="fas fa-list text-sea-green fa-fw"></i>Menu 3</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
+</header>

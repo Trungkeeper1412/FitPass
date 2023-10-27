@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym department details</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
+    <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
+    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+
+<body class="body-checkout">
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+<form method="post" action="/checkout/perform">
+<!-- Content -->
+<h2>Thanh toán</h2>
+<div class="line"></div>
+<div id="my-card" class="checkout-container">
+    <div class="checkout-content">
+        <div class="checkout-title">
+            <div class="my-plan-title">Gói tập</div>
+            <div class="price-title">Đơn giá (credits)</div>
+            <div class="num-of-plan-title">Số lượng</div>
+        </div>
+        <th:block th:each="department :${departmentList}">
+            <div class="plan-in-a-gymdept">
+
+                <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
+                <th:block th:each="cartItem: ${checkoutCartList}">
+
+                    <div class="plan-checkout">
+                        <div class="plan-card-mc">
+                            <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()}"/>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                            <div class="plan-info-mc">
+                                <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim cương</h4>
+                                <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
+                            </div>
+                            <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                                Kích hoạt trong vòng 10 ngày
+                            </div>
+                        </div>
+                        <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                            200
+                        </div>
+                        <div class="num-of-plan-mc" th:text="${cartItem.getQuantity()}">
+                            1
+                        </div>
+                    </div>
+
+                </th:block>
+            </div>
+        </th:block>
+
+
+        <div class="total-checkout">
+            <div class="back-to-cart">
+                <a href="/cart/view">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
+                </a>
+                <h3>Giỏ hàng</h3>
+            </div>
+            <div class="total-credits">
+                <div th:text="'Tạm tính: ' + ${totalPrice} + ' Credits'">Tạm tính: 800 Credits</div>
+                <h3 th:text="'Tổng thanh toán: ' + ${totalPrice} + ' Credits'">Tổng thanh toán: 800 Credits</h3>
+            </div>
+        </div>
+    </div>
+    <div class="bill-info">
+        <div class="bill-title">Thông tin thanh toán</div>
+        <div class="bill-descript">
+            <div class="wallet-title">
+                <div>Số dư trong ví</div>
+                <div style="margin-top: 10px;">Tổng đơn hàng</div>
+                <div style="margin-top: 10px;">GIảm giá</div>
+            </div>
+            <div class="wallet-value">
+                <div th:text="${userBalance}">1000</div>
+                <input type="hidden" name="totalPrice" th:value="${totalPrice}">
+                <div style="margin-top: 10px;" th:text="${totalPrice}">800</div>
+                <div style="margin-top: 10px;" >0</div>
+            </div>
+            <div class="wallet-line"></div>
+            <div class="wallet-title">
+                <div>Số dư còn lại</div>
+            </div>
+            <div class="wallet-value">
+                <div th:text="${userBalanceAfterBuying}">200</div>
+            </div>
+        </div>
+        <th:block th:if="${userBalanceAfterBuying < 0}">
+            <button type="button" class="btn btn-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                Nạp thêm credits
+            </button><br>
+        </th:block>
+
+        <th:block th:if="${userBalanceAfterBuying >= 0}">
+            <button type="submit" class="btn btn-dark" style="margin-bottom: 30px;">Thanh toán</button>
+        </th:block>
+    </div>
+
+</div>
+</form>
+
+    <th:block th:if="${messageInsertOrder}">
+        <input type="hidden" id="messageInsertOrder" value="${messageInsertOrder}" />
+    </th:block>
+<!-- Vendor JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+    <script>
+        if(document.querySelector("#messageInsertOrder") != null) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Mua hàng thành công!',
+                text: 'Bạn đã mua hàng thành công.',
+                showConfirmButton: true,
+                timer: 1500
+            }).then(function () {
+                window.location.href = '/inventory/view';
+            });
+        }
+    </script>
+</body>
+</html>

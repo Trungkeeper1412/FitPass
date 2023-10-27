@@ -1,13 +1,15 @@
 package com.ks.fitpass.department.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Builder
 @Getter
 @Setter
-public class GymPlan {
+@NoArgsConstructor
+@AllArgsConstructor
+public class GymPlan implements Serializable {
     private int planId;
     private int gymDepartmentId;
     private int gymPlanKey;
@@ -21,5 +23,6 @@ public class GymPlan {
     private int duration;
     private int planBeforeActiveValidity;
     private int planAfterActiveValidity;
+    private String gymDepartmentName;
 
 }
