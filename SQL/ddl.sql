@@ -15,6 +15,9 @@ DROP TABLE IF EXISTS gym_department_schedule;
 DROP TABLE IF EXISTS gym_department_albums;
 DROP TABLE IF EXISTS gym_department_amenities;
 DROP TABLE IF EXISTS gym_department;
+DROP TABLE IF EXISTS brand_albums;
+DROP TABLE IF EXISTS brand_amenities;
+DROP TABLE IF EXISTS brand;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS wallet;
@@ -22,8 +25,8 @@ DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_detail;
 
 CREATE TABLE IF NOT EXISTS user_detail (
-    user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
-    first_name    VARCHAR(50) NOT NULL,
+                                           user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
+                                           first_name    VARCHAR(50) NOT NULL,
     last_name     VARCHAR(50) NOT NULL,
     email         VARCHAR(100) NOT NULL,
     phone_number  VARCHAR(20) NOT NULL,
@@ -318,4 +321,3 @@ DELIMITER $$
 
         END$$
         DELIMITER ;
-

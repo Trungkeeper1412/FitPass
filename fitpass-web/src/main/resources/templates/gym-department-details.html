@@ -31,7 +31,7 @@
 <header th:replace="common/navbar :: navbar"></header>
 
 <!-- <div style="width: 100%; margin: auto; margin-top: 0px;"> -->
-<div class="gym-first-info">
+<div class="gym-first-info container">
     <div class="gym-picture">
         <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
         <div class="gym-name-cover">
@@ -42,8 +42,8 @@
     <!-- <div style="background-color: black;">
     </div> -->
 </div>
-<div class="gym-container">
-    <div class="about-our-gym">
+<div class="gym-container container">
+    <div class="about-our-gym row justify-content-center">
         <div class="about-our-gym-1">
             <h3 style="color: black;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
             <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
@@ -65,7 +65,7 @@
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
                     <!-- Modal content -->
-                    <div class="modal-content">
+                    <div class="modal-content row-sm-6">
                         <div class="schedule-modal-header">
                             <div style="display: flex;">
                                 <h3>Giờ hoạt động</h3>
@@ -86,13 +86,63 @@
                 </div>
             </div>
         </div>
-        <div class="gym-service">
-            <div th:each="feature : ${departmentFeatures}" class="sub-service">
-                <label class="switch">
-                    <input type="checkbox" th:checked="${feature.isSelected}" disabled>
-                    <span class="toggle-slider round"></span>
-                </label>
-                <div style="color: black; margin-left: 10px" th:text="${feature.featureName}"></div>
+<!--        <div class="gym-service">-->
+<!--            <div th:each="feature : ${departmentFeatures}" class="sub-service">-->
+<!--                <label class="switch">-->
+<!--                    <input type="checkbox" th:checked="${feature.isSelected}" disabled>-->
+<!--                    <span class="toggle-slider round"></span>-->
+<!--                </label>-->
+<!--                <div style="color: black; margin-left: 10px" th:text="${feature.featureName}"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+
+    <h3 style="color: black; margin-top: 80px; font-weight: 600">Tiện ích hàng đầu</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 110px;"></div>
+    <!-- Gym service -->
+    <div class="container">
+        <div class="row justify-content-center gym-service">
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fas fa-parking"></i>
+                </div>
+                <div class="service-name">Khu để xe</div>
+            </div>
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fa-solid fa-wifi"></i>
+                </div>
+                <div class="service-name">Wifi</div>
+            </div>
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fa-solid fa-shower"></i>
+                </div>
+                <div class="service-name">Nước nóng lạnh</div>
+            </div>
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fas fa-scroll"></i>
+                </div>
+                <div class="service-name">Khăn tắm free</div>
+            </div>
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fa-solid fa-martini-glass-citrus"></i>
+                </div>
+                <div class="service-name">Quầy giải khát</div>
+            </div>
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fa-solid fa-couch"></i>
+                </div>
+                <div class="service-name">Khu nghỉ ngơi</div>
+            </div>
+            <div class="col-lg-1 col-md-1 service-type">
+                <div class="gym-service-logo">
+                    <i class="fa-solid fa-suitcase-medical"></i>
+                </div>
+                <div class="service-name">Phòng y tế</div>
             </div>
         </div>
     </div>
@@ -100,12 +150,12 @@
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <!-- <div style="color:white; margin-top: 25px;">Hiểu được nhu cầu tập luyện, khả năng sắp xếp thời gian và tính kỉ luật phụ thuộc vào đặc thù mỗi cá nhân, chúng tôi chia ra thành những gói tập khác nhau với các khung thời gian phù hợp với nhu cầu của mỗi khách hàng.</div> -->
-    <div class="list-plan-wrapper">
+    <div class="list-plan-wrapper container">
         <button class="left" onclick="leftScroll()" th:if="${gymPlans.size()}>3">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
         <div class="scroll-plans">
-            <div th:each="gymPlan : ${gymPlans}" class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
+            <div th:each="gymPlan : ${gymPlans}" class="child col-lg-3 col-md-3" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
 
 <!--                        <a  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}" class="btn btn-primary">-->
@@ -175,25 +225,25 @@
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <!-- <div style="color: white; margin-top: 20px;">Chúng tôi đã giúp hàng trăm người như bạn, và tất nhiên nói có sách mách có chứng! Ẩn sau mỗi feedback dưới đây là những câu chuyện dài về sự nỗ lực để thay đổi bản thân, trở thành phiên bản tốt hơn, mạnh mẽ hơn, kỉ luật hơn của chính mình. Họ cũng đã từng gặp rất nhiều khó khăn khi tự giảm cân trong thời gian dài.
       Hãy liên hệ ngay để trở thành transform tiếp theo của chúng tôi!</div> -->
-    <div class="rating-feedback">
-        <div class="rating-option">
-            <div class="rating-point" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
-            <button type="button" class="btn btn-warning" style="margin-left: 70px;">
+    <div class="rating-feedback container mx-auto">
+        <div class="rating-option row row-cols-6">
+            <div class="rating-point col-lg-0.5 col-md-1" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2" style="margin-left: 70px;">
                 Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
             </button>
         </div>
@@ -208,8 +258,8 @@
                 <div  th:text="${feedback.comments}"></div>
             </div>
         </div>
-        <div class="pagination-wrapper" th:if="${departmentFeedbacks.total == 7}">
-            <div class="pagination">
+        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.total == 7}">
+            <div class="pagination col justify-content-center">
                 <a class="prev page-numbers" href="javascript:;">prev</a>
                 <span aria-current="page" class="page-numbers current">1</span>
                 <a class="page-numbers" href="javascript:;">2</a>

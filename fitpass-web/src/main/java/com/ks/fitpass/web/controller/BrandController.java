@@ -45,4 +45,9 @@ public class BrandController {
             return "error/no-data";
         }
     }
+
+    @GetMapping("/brand-detail")
+    public String test() {
+        return "gym-brand-details";
+    }
 }
