@@ -14,7 +14,7 @@ public class Department {
 
     private DepartmentStatus departmentStatus;
 
-    private int userId;
+    private int brandId;
 
     private String departmentName;
 
@@ -33,7 +33,6 @@ public class Department {
     private Double longitude;
 
     private Double rating;
-
 
     private int capacity;
 
