@@ -40,13 +40,13 @@ public class BrandController {
             List<BrandAlbums> brandAlbums = brandAlbumsService.getAllByBrandID(brandId);
             model.addAttribute("brandAlbums", brandAlbums);
 
-            return "brand-detail";
+            return "gym-brand-details";
         } catch (EmptyResultDataAccessException e) {
             return "error/no-data";
         }
     }
 
-    @GetMapping("/brand-detail")
+    @GetMapping("/brand-detail/test")
     public String test() {
         return "gym-brand-details";
     }
