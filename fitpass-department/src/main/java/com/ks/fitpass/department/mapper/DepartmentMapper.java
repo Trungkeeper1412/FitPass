@@ -12,7 +12,7 @@ public class DepartmentMapper implements RowMapper<Department> {
     public Department mapRow(ResultSet resultSet, int i) throws SQLException {
         return Department.builder()
                 .departmentId(resultSet.getInt("gym_department_id"))
-                .userId(resultSet.getInt("user_id"))
+                .brandId(resultSet.getInt("brand_id"))
                 .departmentName(resultSet.getString("name"))
                 .departmentAddress(resultSet.getString("address"))
                 .departmentContactNumber(resultSet.getString("contact_number"))

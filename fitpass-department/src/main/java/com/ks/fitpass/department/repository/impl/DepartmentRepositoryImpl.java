@@ -44,7 +44,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     public boolean update(Department department) throws DataAccessException {
         return jdbcTemplate.update(
                 UPDATE_DEPARTMENT,
-                department.getUserId(),
+                department.getBrandId(),
                 department.getDepartmentName(),
                 department.getDepartmentAddress(),
                 department.getDepartmentContactNumber(),

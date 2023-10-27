@@ -4,7 +4,7 @@ public interface IRepositoryQuery {
     String GET_ALL_DEPARTMENT_BY_STATUS = """
                  SELECT
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
@@ -31,7 +31,7 @@ public interface IRepositoryQuery {
     String GET_ALL_DEPARTMENT_ORDER_BY_RATING = """
                  SELECT
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
@@ -58,11 +58,9 @@ public interface IRepositoryQuery {
             """;
 
     String GET_DEPARTMENT_BY_ID = """
-
             SELECT  
-
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
@@ -88,7 +86,7 @@ public interface IRepositoryQuery {
     String GET_DEPARTMENT_BY_USER = """
                  SELECT 
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
@@ -162,6 +160,7 @@ public interface IRepositoryQuery {
     SELECT
         gp.plan_id,
         gp.gym_department_id,
+        gp.brand_id,
         gp.gym_plan_key,
         gp.gym_plan_status_key,
         gp.name,
@@ -188,6 +187,7 @@ public interface IRepositoryQuery {
     // Query to create a new gym plan
     String CREATE_GYM_PLAN = """
     INSERT INTO gym_plan (
+        brand_id,
         gym_department_id,
         gym_plan_key,
         gym_plan_status_key,
@@ -201,13 +201,14 @@ public interface IRepositoryQuery {
         plan_before_active_validity,
         plan_after_active_validity,
         image_url
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
 """;
 
     // Query to update a gym plan
     String UPDATE_GYM_PLAN = """
     UPDATE gym_plan
     SET
+        brand_id = ?,
         gym_department_id = ?,
         gym_plan_key = ?,
         gym_plan_status_key = ?,

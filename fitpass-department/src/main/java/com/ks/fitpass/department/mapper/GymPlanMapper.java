@@ -11,6 +11,7 @@ public class GymPlanMapper implements RowMapper<GymPlan> {
     public GymPlan mapRow(ResultSet resultSet, int i) throws SQLException {
         return GymPlan.builder()
                 .planId(resultSet.getInt("plan_id"))
+                .brandId(resultSet.getInt("brand_id"))
                 .gymDepartmentId(resultSet.getInt("gym_department_id"))
                 .gymPlanKey(resultSet.getInt("gym_plan_key"))
                 .gymPlanStatusKey(resultSet.getInt("gym_plan_status_key"))
