@@ -26,6 +26,7 @@
     <modules>
         <module>fitpass-core</module>
         <module>fitpass-web</module>
+        <module>fitpass-brand</module>
         <module>fitpass-department</module>
         <module>fitpass-order</module>
         <module>fitpass-employee</module>
