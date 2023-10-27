@@ -3178,12 +3178,9 @@ section {
   background-color: rgb(238, 238, 238);
   height: fit-content;
 }
-<<<<<<< HEAD
-=======
 .body-my-card header{
   position: relative;
 }
->>>>>>> 55588548587a63a9245c20bb6cd3f9a83e81d397
 
 .total-container-mc {
   display: grid;
