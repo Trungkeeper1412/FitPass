@@ -1,6 +1,8 @@
 package com.ks.fitpass.employee.repository.impl;
 
 import com.ks.fitpass.employee.dto.CheckInFixedDTO;
+import com.ks.fitpass.employee.dto.CheckInFlexibleDTO;
+import com.ks.fitpass.employee.dto.CheckOutFlexibleDTO;
 import com.ks.fitpass.employee.dto.CheckedInFixedDTO;
 import com.ks.fitpass.employee.repository.EmployeeRepository;
 import com.ks.fitpass.employee.repository.IRepositoryQuery;
@@ -22,6 +24,65 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
+    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+            dto.setOrderDetailId(rs.getInt("order_detail_id"));
+            dto.setUsername(rs.getString("user_name"));
+            dto.setProductName(rs.getString("product_name"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setPricePerHours(rs.getDouble("price_per_hours"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setImageUrl(rs.getString("image_url"));
+            return dto;
+        }, departmentId);
+    }
+
+    @Override
+    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+            CheckOutFlexibleDTO dto = new CheckOutFlexibleDTO();
+            dto.setOrderDetailId(rs.getInt("order_detail_id"));
+            dto.setUsername(rs.getString("user_name"));
+            dto.setProductName(rs.getString("product_name"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setPricePerHours(rs.getDouble("price_per_hours"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setImageUrl(rs.getString("image_url"));
+            return dto;
+        }, departmentId);
+    }
+
+    @Override
+    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_IN_BY_USERNAME, (rs, rowNum) -> {
+            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+            dto.setOrderDetailId(rs.getInt("order_detail_id"));
+            dto.setUsername(rs.getString("user_name"));
+            dto.setProductName(rs.getString("product_name"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setPricePerHours(rs.getDouble("price_per_hours"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setImageUrl(rs.getString("image_url"));
+            return dto;
+        }, departmentId, "%" + username + "%");
+    }
+
+    @Override
+    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_IN_BY_PHONE, (rs, rowNum) -> {
+            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+            dto.setOrderDetailId(rs.getInt("order_detail_id"));
+            dto.setUsername(rs.getString("user_name"));
+            dto.setProductName(rs.getString("product_name"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setPricePerHours(rs.getDouble("price_per_hours"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setImageUrl(rs.getString("image_url"));
+            return dto;
+        }, departmentId, "%" + phoneNumber + "%");
+    }
 
     @Override
     public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
@@ -37,6 +98,37 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             return userReceiveMessageDTO;
         }, orderDetailId);
     }
+
+    @Override
+    public List<CheckInFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_OUT_BY_USERNAME, (rs, rowNum) -> {
+            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+            dto.setOrderDetailId(rs.getInt("order_detail_id"));
+            dto.setUsername(rs.getString("user_name"));
+            dto.setProductName(rs.getString("product_name"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setPricePerHours(rs.getDouble("price_per_hours"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setImageUrl(rs.getString("image_url"));
+            return dto;
+        }, departmentId, "%" + username + "%");
+    }
+
+    @Override
+    public List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_OUT_BY_PHONE, (rs, rowNum) -> {
+            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+            dto.setOrderDetailId(rs.getInt("order_detail_id"));
+            dto.setUsername(rs.getString("user_name"));
+            dto.setProductName(rs.getString("product_name"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setPricePerHours(rs.getDouble("price_per_hours"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setImageUrl(rs.getString("image_url"));
+            return dto;
+        }, departmentId, "%" + phoneNumber + "%");
+    }
+
     @Override
     public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId) {
         return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
