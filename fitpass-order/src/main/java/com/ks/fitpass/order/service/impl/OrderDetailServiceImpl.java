@@ -1,5 +1,6 @@
 package com.ks.fitpass.order.service.impl;
 
+import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.repository.OrderDetailRepository;
 import com.ks.fitpass.order.service.OrderDetailService;
@@ -37,5 +38,30 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public int updateOrderDetailItemStatus(Timestamp planActiveTime, int status, Timestamp planExpiredTime, int orderDetailId) {
         return orderDetailRepository.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
+    }
+
+    @Override
+    public int updateOrderDetailsUseStatus(int orderDetailId, String statusUse) {
+        return orderDetailRepository.updateOrderDetailsUseStatus(orderDetailId, statusUse);
+    }
+
+    @Override
+    public Double getPricePerHoursByOrderDetailId(int orderDetailId) {
+        return orderDetailRepository.getPricePerHoursByOrderDetailId(orderDetailId);
+    }
+
+    @Override
+    public String getGymDepartmentNameByOrderDetailId(int orderDetailId) {
+        return orderDetailRepository.getGymDepartmentNameByOrderDetailId(orderDetailId);
+    }
+
+    @Override
+    public OrderDetailConfirmCheckOut getByOrderDetailId(int orderDetailId) {
+        return orderDetailRepository.getByOrderDetailId(orderDetailId);
+    }
+
+    @Override
+    public String getUserNameByOrderDetailId(int orderDetailId) {
+        return orderDetailRepository.getUserNameByOrderDetailId(orderDetailId);
     }
 }
