@@ -274,12 +274,12 @@ CREATE TABLE IF NOT EXISTS notification (
                                       time_send DATETIME NOT NULL,
                                       department_id INT NOT NULL,
                                       message_type VARCHAR(100) NOT NULL,
-                                      status INT NOT NULL
+                                      status INT NOT NULL,
                                       CONSTRAINT Notification_pk PRIMARY KEY (notification_id),
                                       CONSTRAINT Notification_FK FOREIGN KEY (department_id) REFERENCES fitpass.gym_department(gym_department_id),
                                       CONSTRAINT Notification_FK_1 FOREIGN KEY (user_id_send) REFERENCES fitpass.`user`(user_id),
                                       CONSTRAINT Notification_FK_2 FOREIGN KEY (user_id_receive) REFERENCES fitpass.`user`(user_id)
-)
+);
 
 
 CREATE TABLE IF NOT EXISTS check_in_history (
@@ -289,11 +289,11 @@ CREATE TABLE IF NOT EXISTS check_in_history (
                                           `check_in _time` DATETIME NOT NULL,
                                           check_out_time DATETIME NULL,
                                           total_credit DECIMAL(10,2) NULL,
-                                          emp_checkin_id INT NOT NULL;
+                                          emp_checkin_id INT NOT NULL,
                                           CONSTRAINT check_in_history_pk PRIMARY KEY (check_in_history_id),
-                                          CONSTRAINT check_in_history_FK FOREIGN KEY (order_detail_id) REFERENCES fitpass.order_plan_detail(order_detail_id)
-                                          CONSTRAINT check_in_history_FK_1 FOREIGN KEY (emp_checkin_id) REFERENCES fitpass.`user`(user_id);
-)
+                                          CONSTRAINT check_in_history_FK FOREIGN KEY (order_detail_id) REFERENCES fitpass.order_plan_detail(order_detail_id),
+                                          CONSTRAINT check_in_history_FK_1 FOREIGN KEY (emp_checkin_id) REFERENCES fitpass.`user`(user_id)
+);
 
 
 DELIMITER $$
