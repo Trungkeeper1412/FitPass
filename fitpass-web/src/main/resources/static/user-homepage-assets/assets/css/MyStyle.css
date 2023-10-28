@@ -9,6 +9,68 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+/*NAVBAR*/
+.cart-badge {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  background-color: orangered;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  background-color: orange;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  justify-content: space-between;
+}
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.search-button {
+  background-color: orange;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.search-button i {
+  color: white;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -55,6 +117,7 @@ h6 {
   color: #151515;
   line-height: 0;
 }
+
 
 .back-to-top:hover {
   background: #151515;
@@ -2044,9 +2107,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .pagination {
-  /* display: inline-block; */
-  height: fit-content;
-  margin-top: 60px;
+  display: inline-block;
+  height: 40px;
+  margin-top: 50px;
   padding: 0 25px;
   border-radius: 35px;
   /* background-color: rgb(0, 0, 0); */
@@ -2264,7 +2327,7 @@ a:link {
   /* Tùy chỉnh màu sắc */
 }
 
-/* .dropdown-menu {
+.dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -2272,8 +2335,9 @@ a:link {
   border: 1px solid #ccc;
   display: none;
   min-width: 150px;
+  /* Tùy chỉnh kích thước của dropdown menu */
   z-index: 1;
-} */
+}
 
 .dropdown-menu a {
   color: #333;
@@ -2572,12 +2636,19 @@ input:checked + .toggle-slider:before {
   margin-left: 20px;
   border-radius: 10px;
   padding: 10px;
-  color: white;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
 .gym-name-cover h5{
   border:1px solid rgb(255, 162, 0);
   padding: 10px;
   border-radius: 50px;
+  color: white;
+}
+.gym-name-cover h3{
+  margin: auto;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
 }
 .gym-picture{
   position: relative;
@@ -2625,6 +2696,9 @@ input:checked + .toggle-slider:before {
   border-radius: 10px;
   margin: auto;
   width: fit-content;
+}
+.gym-service-logo i{
+  font-size:30px;
 }
 .service-name{
   height: 50px;
@@ -2802,7 +2876,7 @@ section {
   color: #000000;
 }
 
-#special-plan .gym-plan-name{
+.special-plan .gym-plan-name{
   color:#000000;
   background-color: rgba(255, 166, 0, 0.396);
 }
@@ -2852,9 +2926,8 @@ section {
   border-radius: 20px;
   width: fit-content;
 }
-
-.gym-plan-description{
-  height: 80px;
+.scroll-plans .gym-plan-description{
+  height: 130px;
 }
 .gym-duration{
   /* text-decoration: underline; */
@@ -2900,12 +2973,13 @@ section {
 
 .rating-option button{
   width:fit-content;
-  color: rgb(0, 0, 0);
-  /* margin: auto; */
+  background-color: white;
+  background-image: none;
+  border:  none;
+  box-shadow: 3px 4px rgb(224, 224, 224);
   margin-top: 10px;
   margin-left: 25px;
   font-weight: 600;
-  background-image: url("https://i.pinimg.com/236x/55/07/53/5507538396c7a86c7791bed6b1eab0e7.jpg");
   background-size: cover;
   height: 35px;
 }
@@ -2967,16 +3041,6 @@ section {
   /* transform-origin: right top; */
 }
 
-.squares{
-  /* padding:60px 0 0 0; */
-}
-
-.squares > div{
-  width:300px;
-  height:300px;
-  margin: 20px;
-}
-
 .image-scroll-wrapper::-webkit-scrollbar{width:2px;height:2px;}
 .image-scroll-wrapper::-webkit-scrollbar-button{width:2px;height:2px;}
 
@@ -2998,7 +3062,6 @@ section {
 .rating-feedback{
   margin-bottom: 30px;
 }
-
 
 /* CSS FOR MY CARD PAGE*/
 .body-my-card header{
@@ -3101,18 +3164,6 @@ section {
   z-index:2;
 }
 
-/* .my-card-container  input[type=checkbox]:after {
-  content: '';
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  width: 4px;
-  height: 10px;
-  border: solid #000000;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg) translate(-50%, -50%);
-  z-index:2;
-} */
 .plan-in-my-card{
   margin-top: 20px;
   width: 100%;
@@ -3232,13 +3283,6 @@ section {
   padding: 10px;
   width: fit-content;
 }
-/* .active-time-mc{
-  display: flex;
-  align-items: center;
-  color: white;
-  padding: 10px;
-  font-weight: 500;
-} */
 .plan-price-mc{
   display: flex;
   align-items: center;
@@ -3294,6 +3338,7 @@ section {
   padding-right: 40px;
 }
 
+
 /* CSS for check out page */
 .body-checkout header{
   position: relative;
@@ -3302,9 +3347,14 @@ section {
   background-color: white;
   text-align: center;
 }
-@media only screen and (min-width: 500px) and (max-width: 991px)  {
-  .body-checkout{
+@media only screen and (max-width: 370px)  {
+  .body-checkout .bill-descript{
+    font-size: 12px;
+    width: 100%;
   }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 991px)  {
   .checkout-container{
     position: relative;
     width: 100%;
@@ -3377,23 +3427,10 @@ section {
     margin-top: 50px;
   }
 }
-/* .checkout-container{
-  position: relative;
-  width: 100%;
-  margin: auto;
-  height: fit-content;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  background-color: white;
-  margin-top: 50px;
-} */
+
 .body-checkout h2{
-  /* text-align: center; */
-  /* text-align: start; */
   margin-top: 60px;
-  /* margin-left: 80px;  */
   font-weight: 900;
-  /* width: 90%; */
   color: black;
 }
 .body-checkout .line{
@@ -3401,15 +3438,8 @@ section {
   border-radius: 10px;
   height: 5px;
   width: 180px;
-  /* margin-left: 80px;  */
+}
 
-}
-.checkout-content{
-  /* display: grid; */
-  /* background-color: rgb(248, 248, 248); */
-  /* grid-template-columns: 2fr 1fr; */
-  /* margin-top: 50px; */
-}
 .checkout-title{
   background-color: rgb(248, 248, 248);
   display: grid;
@@ -3429,11 +3459,6 @@ section {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
 }
-/* .plan-checkout .plan-card-mc{
-  margin-left: 15px;
-  height: 120px;
-  background-color: white;
-} */
 .checkout-container .gym-name-mc{
   margin-top: 10px;
   height: 50px;
@@ -3469,8 +3494,6 @@ section {
 }
 .total-credits{
   margin-top: 40px;
-  /* position: relative; */
-  /* left: 600px; */
 }
 .total-credits h3{
   font-weight: 700;
@@ -3480,8 +3503,9 @@ section {
 }
 .bill-info button{
   font-weight: 600;
-  margin-top: 30px;
+  margin-top: 20px;
   width: 200px;
+  margin-bottom: 30px;
 }
 .bill-title{
   font-weight: 600;
@@ -3515,6 +3539,7 @@ section {
   width: 100%;
   background-color: rgb(255, 255, 255);;
 }
+
 
 /* ============== CSS FOR GYM BRAND DETAILS PAGE ============== */
 .body-gym-brand-details{
@@ -3760,21 +3785,22 @@ section {
   box-shadow: 3px 4px rgb(224, 224, 224);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
   .gym-brand-content .slideshow-container {
     margin: auto;
     margin-top: 30px;
     position: relative;
-    width: 100%;
+    height: 60%;
   }
-  .gym-brand-content .mySlides1 img {
+  .body-gym-brand-details .mySlides1 img {
     height: 60%;
   }
   .gym-brand-content .pagination-wrapper .page-numbers{
     font-size: 14px;
   }
   .gym-brand-content .pagination{
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
@@ -3850,6 +3876,36 @@ section {
   .body-gym-brand-details .brand-first-info{
     font-size: smaller;
   }
+  .gym-brand-content .pagination-wrapper .page-numbers{
+    font-size: 12px;
+  }
+  .gym-brand-content .pagination{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .body-gym-brand-details .pagination-wrapper .page-numbers {
+    font-size: 12px;
+    line-height: 35px;
+
+    &:hover,
+    &.current {
+      background-color: rgb(255, 196, 0);
+      color: white;
+    }
+
+    &.prev:hover,
+    &.next:hover {
+      background-color: transparent;
+      color: rgb(255, 196, 0);
+    }
+  }
+  .pagination {
+    display: inline-block;
+    height: fit-content;
+    margin-top: 50px;
+    padding: 0 15px;
+    border-radius: 15px;
+  }
 }
 
 .body-gym-brand-details .num-of-rating{
@@ -3862,9 +3918,36 @@ section {
     display: block
   }
   .body-gym-brand-details .user-rating-avatar{
-    padding: none;
+    padding: 0;
+  }
+  .gym-brand-content .pagination-wrapper .page-numbers{
+    font-size: 12px;
+  }
+  .gym-brand-content .pagination{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .body-gym-brand-details .pagination-wrapper .page-numbers {
+    font-size: 12px;
+    line-height: 35px;
+
+    &:hover,
+    &.current {
+      background-color: rgb(255, 196, 0);
+      color: white;
+    }
+
+    &.prev:hover,
+    &.next:hover {
+      background-color: transparent;
+      color: rgb(255, 196, 0);
+    }
+  }
+  .pagination {
+    display: inline-block;
+    height: fit-content;
+    margin-top: 50px;
+    padding: 0 15px;
+    border-radius: 15px;
   }
 }
-
-
-

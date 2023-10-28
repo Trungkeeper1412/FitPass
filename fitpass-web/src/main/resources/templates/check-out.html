@@ -30,17 +30,20 @@
 <header th:replace="common/navbar :: navbar"></header>
 <form method="post" action="/checkout/perform">
 <!-- Content -->
-<h2>Thanh toán</h2>
-<div class="line"></div>
-<div id="my-card" class="checkout-container">
+    <div class="container">
+        <h2 class="row">Thanh toán</h2>
+        <div class="line row"></div>
+    </div>
+
+<div id="my-card" class="checkout-container container">
     <div class="checkout-content">
-        <div class="checkout-title">
-            <div class="my-plan-title">Gói tập</div>
-            <div class="price-title">Đơn giá (credits)</div>
-            <div class="num-of-plan-title">Số lượng</div>
+        <div class="checkout-title row">
+            <div class="my-plan-title col-md-7">Gói tập</div>
+            <div class="price-title col-md-3">Đơn giá (credits)</div>
+            <div class="num-of-plan-title col-md-2">Số lượng</div>
         </div>
         <th:block th:each="department :${departmentList}">
-            <div class="plan-in-a-gymdept">
+            <div class="plan-in-a-gymdept row">
 
                 <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
                 <th:block th:each="cartItem: ${checkoutCartList}">
