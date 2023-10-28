@@ -25,6 +25,7 @@ public class UserController {
         com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
         List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
         model.addAttribute("departments", departmentDTOList);
+
         session.setAttribute("userInfo", user);
         return "list-of-gym";
     }
@@ -40,6 +41,7 @@ public class UserController {
             session.setAttribute("userInfo", user);
             return "fragments/gym-list-fragment";
         }
+
 
     }
 
