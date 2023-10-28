@@ -8,6 +8,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Đây là nơi bạn có thể gọi hàm của bạn
     updateQuantityCart();
+    checkConfirmCheckIn();
+    // Gọi hàm check thông báo confirm
+    checkConfirmCheckOut();
+    checkNotificationEmployee();
 });
 
 function updateQuantityCart() {
@@ -32,6 +36,196 @@ function updateQuantityCart() {
         .catch((error) => {
             console.error("Error:", error);
         });
+}
+
+function checkNotificationEmployee() {
+    $.ajax({
+        type: "GET",
+        url: `/notification/notificationCheckInEmployee` ,
+        success: function (data) {
+
+            console.log('Thông báo trả về từ người dùng check in đến employee', data);
+
+            // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+            $.ajax({
+                type: "GET",
+                url: `/notification/seen?id=${data.notificationId}` ,
+                success: function (data) {
+                    console.log("Trạng thái update status seen notification: ",data)
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình update status seen notification");
+                }
+            });
+
+            // Nếu có thông báo thì hiện
+            if(data.notificationId > 0) {
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    title: `${data.message}`,
+                    animation: true,
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
+        }
+    });
+}
+
+function checkConfirmCheckIn() {
+    $.ajax({
+        type: "GET",
+        url: `/notification/confirmCheckIn` ,
+        success: function (data) {
+
+            console.log('Thông báo xác nhận check in', data);
+
+            // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+            $.ajax({
+                type: "GET",
+                url: `/notification/seen?id=${data.notificationId}` ,
+                success: function (data) {
+                    console.log("Trạng thái update status seen notification: ",data)
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình update status seen notification");
+                }
+            });
+
+            // Nếu có thông báo thì hiện
+            if(data.notificationId > 0) {
+                Swal.fire({
+                    title: `Xác nhận check in`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    reverseButtons: true,
+                }).then((result) => {
+                    // Nếu người dùng nhấn xác nhận thì gửi yêu cầu lên sever
+                    // Khi người dùng nhấn xác nhận thì mình sẽ insert vào history các trường
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "GET",
+                            url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}` ,
+                            success: function (data) {
+                                console.log("Gửi vào db check in history thành công")
+                            },
+                            error: function () {
+                                alert("Đã xảy ra lỗi trong quá trình check in");
+                            }
+                        });
+                    }
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
+        }
+    });
+}
+
+function checkConfirmCheckOut() {
+    $.ajax({
+        type: "GET",
+        url: `/notification/confirmCheckOut` ,
+        success: function (data) {
+
+            console.log('Thông báo xác nhận check out', data);
+
+            // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+            $.ajax({
+                type: "GET",
+                url: `/notification/seen?id=${data.notificationId}` ,
+                success: function (data) {
+                    console.log("Trạng thái update status seen notification: ",data)
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình update status seen notification");
+                }
+            });
+
+            // Nếu có thông báo thì hiện
+            if(data.durationHavePractice > 0) {
+                if(data.creditAfterPay < 0) {
+                    Swal.fire({
+                        title: `Bạn không đủ số dư credit để thanh toán`,
+                        icon: 'error',
+                        html: `
+<p class="fw-bold">Phòng tập: <span class="fw-normal">${data.departmentName}</span></p>
+<p  class="fw-bold">Gói tập: <span class="fw-normal">${data.gymPlanName}</span></p>
+<p  class="fw-bold">Giá gói: <span class="fw-normal">${data.pricePerHours} credit/giờ</span></p>
+<p  class="fw-bold">Đã tập: <span class="fw-normal">${data.durationHavePractice} phút</span></p>
+<p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${data.creditInWallet} credit</span></p>
+<p  class="fw-bold">Số credit cần trả: <span class="fw-normal">${data.creditNeedToPay} credit</span></p>
+<p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${data.creditAfterPay} credit</span></p>
+                `,
+                        showCancelButton: true,
+                        confirmButtonText: 'Nạp thêm credit',
+                        cancelButtonText: 'No',
+                        reverseButtons: true,
+                    })
+                } else {
+                    Swal.fire({
+                        title: `Xác nhận thanh toán`,
+                        icon: 'question',
+                        html: `
+<p class="fw-bold">Phòng tập: <span class="fw-normal">${data.departmentName}</span></p>
+<p  class="fw-bold">Gói tập: <span class="fw-normal">${data.gymPlanName}</span></p>
+<p  class="fw-bold">Giá gói: <span class="fw-normal">${data.pricePerHours} credit/giờ</span></p>
+<p  class="fw-bold">Đã tập: <span class="fw-normal">${data.durationHavePractice} phút</span></p>
+<p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${data.creditInWallet} credit</span></p>
+<p  class="fw-bold">Số credit cần trả: <span class="fw-normal">${data.creditNeedToPay} credit</span></p>
+<p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${data.creditAfterPay} credit</span></p>
+                `,
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No',
+                        reverseButtons: true,
+                    }).then((result) => {
+                        const dataToSend = {
+                            orderDetailId: data.orderDetailId,
+                            checkInHistoryId: data.historyCheckInId,
+                            checkOutTime: data.checkOutTime,
+                            totalCredit: data.creditNeedToPay,
+                            creditAfterPay: data.creditAfterPay
+                        };
+                        console.log(dataToSend);
+                        // Nếu người dùng nhấn xác nhận thì gửi yêu cầu lên sever
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: "POST",
+                                url: `/employee/flexible/checkout` ,
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                data: JSON.stringify(dataToSend),
+                                success: function (data) {
+                                    console.log("Update check out time vào db check in history thành công", data)
+                                },
+                                error: function () {
+                                    alert("Đã xảy ra lỗi trong quá trình check in");
+                                }
+                            });
+                        }
+                    })
+                }
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
+        }
+    });
 }
 
 (function () {
