@@ -11312,7 +11312,7 @@ a:focus {
 
 .topbar {
     height: 4.375rem;
-    background-color: black;
+    background-color: #fff;
 }
 
 .topbar #sidebarToggleTop {
@@ -11439,6 +11439,10 @@ a:focus {
 
     .topbar .dropdown-list .dropdown-item .text-truncate {
         max-width: 13.375rem
+    }
+
+    .mr-3 {
+        margin-right: 0 !important;
     }
 }
 
@@ -12782,10 +12786,6 @@ label {
     max-height: 20vh;
 }
 
-.col-md-6 {
-    padding-bottom: 25px;
-}
-
 /* Employee-check-in*/
 
 .user-card {
@@ -12797,16 +12797,10 @@ label {
     margin-bottom: 20px;
 }
 
-.row .col-6,
 .row .col-4,
 .row .col-3,
 .row .col-2 {
     align-self: center;
-}
-
-.row .col-4 {
-    border-right: 1px solid #000;
-    padding-right: 15px;
 }
 
 .row .col-2 {
@@ -12815,19 +12809,17 @@ label {
     justify-content: center;
 }
 
-.user-card img {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+.img-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.status-box {
-    text-align: center;
-    background-color: #f6c23e;
-    border-radius: 5px;
-    padding: 7px;
+.user-card img {
+    border-radius: 50%;
     width: 120px;
+    height: 120px;
+    object-fit: cover;
 }
 
 .check-in-button:hover {
@@ -12907,13 +12899,13 @@ a {
     margin: 0;
     padding: 0;
     line-height: 1;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
 .navbar .logo a {
-    color: #fff;
+    color: #000000;
 }
 
 .navbar .logo a span {
@@ -12932,7 +12924,7 @@ a {
     background-color: orange;
 }
 
-.col-3 p {
+.col-2 p {
     font-weight: bold;
 }
 
@@ -12968,4 +12960,26 @@ a {
 
 #check-in-duration {
     background-color: #ffc451;
+}
+
+/* CSS for check-in list */
+@media (min-width: 576px) {
+    .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-lg-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
