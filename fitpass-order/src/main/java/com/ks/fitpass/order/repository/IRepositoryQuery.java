@@ -20,6 +20,24 @@ public interface IRepositoryQuery {
             SELECT LAST_INSERT_ID()
                 """;
 
+    String UPDATE_ORDER_DETAIL_ITEM_STATUS_USE = """
+            UPDATE order_plan_detail
+            SET use_status = ?
+            WHERE order_detail_id = ?;
+                """;
+
+    String SELECT_INFO_CHECK_IN_BY_ID = """
+            SELECT o.user_id, concat(ud.first_name, ' ',ud.last_name), gym_department_id
+                       FROM order_plan_detail od
+                       JOIN
+                           `order` o ON od.order_id = o.order_id
+                       JOIN
+                           `user` u ON o.user_id = u.user_id
+                       JOIN
+                       	user_detail ud ON u.user_detail_id = ud.user_detail_id
+                       WHERE order_detail_id = ?;
+                """;
+
     String INSERT_ORDER_PLAN_DETAIL= """
                 INSERT INTO order_plan_detail (order_id, name, gym_department_id, quantity, price_per_hours, price, duration,
                                                plan_before_active_validity, plan_after_active_validity, item_status_key, description)
@@ -85,4 +103,39 @@ public interface IRepositoryQuery {
                     od.item_status_key = ?;
             """;
 
+    String GET_PRICE_PER_HOURS_BY_ORDER_DETAIL_ID = """
+                SELECT price_per_hours
+                FROM order_plan_detail
+                WHERE order_detail_id = ?;
+            """;
+
+    String GET_DEPARTMENT_NAME_BY_ORDER_DETAIL_ID = """
+                SELECT gd.name AS gym_department_name
+                FROM gym_department gd
+                JOIN order_plan_detail opd ON gd.gym_department_id = opd.gym_department_id
+                WHERE opd.order_detail_id = ?;
+            """;
+
+    String GET_ORDER_DETAIL_CONFIRM_CHECKOUT_BY_DETAIL_ID = """
+                SELECT gd.name AS gym_department_name, opd.name, opd.price_per_hours
+                FROM order_plan_detail opd
+                JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                WHERE opd.order_detail_id = ?;
+            """;
+
+    String GET_USER_NAME_BY_ORDER_DETAIL_ID = """
+                SELECT CONCAT(ud.first_name, ' ', ud.last_name) AS user_name
+                FROM order_plan_detail opd
+                JOIN `order` o ON opd.order_id = o.order_id
+                JOIN `user` u ON o.user_id = u.user_id
+                JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+                WHERE opd.order_detail_id = ?;
+            """;
+
+    String UPDATE_ALL_FIXED_TO_CHECK_IN = """
+                UPDATE order_plan_detail
+                SET use_status = 'Chưa tập'
+                WHERE plan_expired_time > NOW()
+                AND price > 0;
+            """;
 }

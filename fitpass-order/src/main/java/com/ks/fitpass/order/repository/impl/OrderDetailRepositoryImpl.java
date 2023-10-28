@@ -1,5 +1,6 @@
 package com.ks.fitpass.order.repository.impl;
 
+import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.dto.OrderDetailDTO;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.mapper.OrderDetailMapper;
@@ -44,5 +45,41 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
     @Override
     public int updateOrderDetailItemStatus(Timestamp planActiveTime, int status, Timestamp planExpiredTime, int orderDetailId) {
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS, planActiveTime, status, planExpiredTime, orderDetailId);
+    }
+
+    @Override
+    public int updateOrderDetailsUseStatus(int orderDetailId, String statusUse) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS_USE, statusUse, orderDetailId);
+    }
+
+    @Override
+    public Double getPricePerHoursByOrderDetailId(int orderDetailId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_PRICE_PER_HOURS_BY_ORDER_DETAIL_ID, Double.class, orderDetailId);
+    }
+
+    @Override
+    public String getGymDepartmentNameByOrderDetailId(int orderDetailId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_DEPARTMENT_NAME_BY_ORDER_DETAIL_ID, String.class, orderDetailId);
+    }
+
+    @Override
+    public OrderDetailConfirmCheckOut getByOrderDetailId(int orderDetailId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_ORDER_DETAIL_CONFIRM_CHECKOUT_BY_DETAIL_ID, (rs, rowNum) -> {
+            OrderDetailConfirmCheckOut orderDetailConfirmCheckOut = new OrderDetailConfirmCheckOut();
+            orderDetailConfirmCheckOut.setDepartmentName(rs.getString("gym_department_name"));
+            orderDetailConfirmCheckOut.setGymPlanName(rs.getString("name"));
+            orderDetailConfirmCheckOut.setPricePerHours(rs.getDouble("price_per_hours"));
+            return  orderDetailConfirmCheckOut;
+        }, orderDetailId);
+    }
+
+    @Override
+    public String getUserNameByOrderDetailId(int orderDetailId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_USER_NAME_BY_ORDER_DETAIL_ID, String.class, orderDetailId);
+    }
+
+    @Override
+    public int updateAllFixedToCheckIn() {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_ALL_FIXED_TO_CHECK_IN);
     }
 }
