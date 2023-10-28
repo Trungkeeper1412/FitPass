@@ -154,9 +154,9 @@ CREATE TABLE IF NOT EXISTS gym_department_features (
 CREATE TABLE IF NOT EXISTS mst_kbn (
                                        mst_kbn_id    INT AUTO_INCREMENT PRIMARY KEY,
                                        mst_kbn_name  VARCHAR(50) NOT NULL,
-    mst_kbn_key   INT NOT NULL,
-    mst_kbn_value VARCHAR(50) NOT NULL
-    );
+                                       mst_kbn_key   INT NOT NULL,
+                                       mst_kbn_value VARCHAR(50) NOT NULL
+);
 
 -- Gym Plan table to store gym plan information
 CREATE TABLE IF NOT EXISTS gym_plan (

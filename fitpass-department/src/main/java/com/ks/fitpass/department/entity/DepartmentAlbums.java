@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartmentAlbums {
-
     private int albumId;
 
     private int departmentId;
