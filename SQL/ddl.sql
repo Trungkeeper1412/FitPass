@@ -70,18 +70,19 @@ CREATE TABLE IF NOT EXISTS user_role (
 
 
 CREATE TABLE IF NOT EXISTS brand (
-                                     brand_id INT AUTO_INCREMENT PRIMARY KEY,
-                                     user_id                     INT NOT NULL,
-                                     name                        VARCHAR(50) NOT NULL,
+    brand_id                    INT AUTO_INCREMENT PRIMARY KEY,
+    user_id                     INT NOT NULL,
+    name                        VARCHAR(50) NOT NULL,
     logo_url                    VARCHAR(255) NOT NULL,
     wallpaper_url               VARCHAR(255) NOT NULL,
     description                 text,
     rating                      DECIMAL(10, 2) DEFAULT 0,
     contact_number              VARCHAR(20) NOT NULL,
     contact_email				VARCHAR(50) NOT NULL,
-    brand_status_key   		INT NOT NULL,
+    brand_status_key   		    INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
-    );
+
+);
 
 
 CREATE TABLE IF NOT EXISTS brand_amenities  (
@@ -104,17 +105,17 @@ CREATE TABLE IF NOT EXISTS brand_albums (
 
 -- Gym Department table to store gym department information
 CREATE TABLE IF NOT EXISTS gym_department (
-                                              gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
-                                              gym_department_status_key   INT NOT NULL,
-                                              brand_id                    INT NOT NULL,
-                                              name                        VARCHAR(255) NOT NULL,
+    gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
+    gym_department_status_key   INT NOT NULL,
+    brand_id                    INT NOT NULL,
+    name                        VARCHAR(255) NOT NULL,
     address                     VARCHAR(255) NOT NULL,
     contact_number              VARCHAR(20) NOT NULL,
     logo_url                    VARCHAR(255) NOT NULL,
     wallpaper_url               VARCHAR(255) NOT NULL,
     description                 text,
-    latitude 		              DECIMAL(10,8) NOT NULL,
-    longitude 		          DECIMAL(11,8) NOT NULL,
+    latitude 		            DECIMAL(10,8) NOT NULL,
+    longitude 		            DECIMAL(11,8) NOT NULL,
     rating                      DECIMAL(10, 2) DEFAULT 0,
     capacity                    INT NOT NULL,
     area                        DECIMAL(10, 2),
@@ -138,9 +139,8 @@ CREATE TABLE IF NOT EXISTS gym_department_schedule (
     FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
     );
 
-
 CREATE TABLE IF NOT EXISTS gym_department_features (
-                                                       feature_id INT AUTO_INCREMENT PRIMARY KEY,
+    feature_id INT AUTO_INCREMENT PRIMARY KEY,
                                                        gym_department_id INT NOT NULL,
                                                        feature_icon varchar(150),
     feature_name VARCHAR(50),
@@ -161,7 +161,6 @@ CREATE TABLE IF NOT EXISTS mst_kbn (
 -- Gym Plan table to store gym plan information
 CREATE TABLE IF NOT EXISTS gym_plan (
                                         plan_id                         INT AUTO_INCREMENT PRIMARY KEY,
-                                        brand_id                        INT NOT NULL,
                                         gym_department_id               INT NOT NULL,
                                         user_id                         INT NOT NULL,
                                         gym_plan_key                    INT NOT NULL,
