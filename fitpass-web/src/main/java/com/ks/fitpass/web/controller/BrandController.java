@@ -2,6 +2,8 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.entity.*;
 import com.ks.fitpass.brand.service.*;
+import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.enums.PageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,11 +22,14 @@ public class BrandController {
     private final BrandAmenitieService brandAmenitieService;
     private  final BrandAlbumsService brandAlbumsService;
 
+    private final DepartmentService departmentService;
+
     @Autowired
-    public BrandController(BrandService brandService, BrandAmenitieService brandAmenitieService, BrandAlbumsService brandAlbumsService) {
+    public BrandController(BrandService brandService, BrandAmenitieService brandAmenitieService, BrandAlbumsService brandAlbumsService,DepartmentService departmentService) {
         this.brandService = brandService;
         this.brandAmenitieService = brandAmenitieService;
         this.brandAlbumsService = brandAlbumsService;
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/brand-detail/{brand_id}")
@@ -39,6 +44,9 @@ public class BrandController {
 
             List<BrandAlbums> brandAlbums = brandAlbumsService.getAllByBrandID(brandId);
             model.addAttribute("brandAlbums", brandAlbums);
+
+            List<DepartmentDTO> departmentDTOList = departmentService.getDepartmentByBrandID(brandId);
+            model.addAttribute("departments", departmentDTOList);
 
             return "gym-brand-details";
         } catch (EmptyResultDataAccessException e) {

@@ -23,4 +23,6 @@ public interface DepartmentRepository {
 
     List<UserFeedback> getDepartmentFeedback(int departmentId);
 
+    List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException;
+
 }

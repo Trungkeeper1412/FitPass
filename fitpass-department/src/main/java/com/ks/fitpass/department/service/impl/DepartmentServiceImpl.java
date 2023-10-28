@@ -188,6 +188,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDTO;
     }
 
+    @Override
+    public List<DepartmentDTO> getDepartmentByBrandID(int brandID) throws DataAccessException {
+        List<Department> departments = departmentRepository.getDepartmentByBrandID(1, brandID);
+        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
+    }
+
 }
 
 

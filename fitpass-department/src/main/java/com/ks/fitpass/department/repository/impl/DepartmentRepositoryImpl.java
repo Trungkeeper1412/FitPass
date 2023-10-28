@@ -66,5 +66,10 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK, new UserFeedbackMapper(), departmentId);
     }
 
+    @Override
+    public List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException {
+        return jdbcTemplate.query(GET_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), status,brandID);
+    }
+
 
 }

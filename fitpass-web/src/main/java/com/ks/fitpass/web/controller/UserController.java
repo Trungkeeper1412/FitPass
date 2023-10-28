@@ -41,6 +41,5 @@ public class UserController {
             return "fragments/gym-list-fragment";
         }
 
-
     }
 

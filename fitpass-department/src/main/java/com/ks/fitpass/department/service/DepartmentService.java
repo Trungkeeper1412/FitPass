@@ -35,4 +35,7 @@ public interface DepartmentService {
 
     DepartmentDTO filterDepartmentFeedbacks(int departmentId);
 
+    List<DepartmentDTO> getDepartmentByBrandID(int brandID) throws DataAccessException;
+
+
 }
