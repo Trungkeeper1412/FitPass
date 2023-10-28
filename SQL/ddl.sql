@@ -174,7 +174,6 @@ CREATE TABLE IF NOT EXISTS gym_plan (
     duration                        INT ,
     plan_before_active_validity     INT NOT NULL,
     plan_after_active_validity      INT NOT NULL,
-    FOREIGN KEY (brand_id) REFERENCES brand(brand_id),
     FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id),
     foreign key (user_id)references user(user_id)
     );
