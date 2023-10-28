@@ -35,7 +35,7 @@ public interface IRepositoryQuery {
                      d.name,
                      d.address,
                      d.contact_number,
-                     d.logo_url
+                     d.logo_url,
                      d.wallpaper_url,
                      d.description,
                      d.latitude,
