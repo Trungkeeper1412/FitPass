@@ -60,6 +60,8 @@ public class InventoryController {
         long durationInMilliseconds = duration * millisecondsInDay;
         long planExpiredTimeMilliseconds = planActiveTime.getTime() + durationInMilliseconds;
         Timestamp planExpiredTime = new Timestamp(planExpiredTimeMilliseconds);
+        // Chuyển trạng thái thành chưa tập để lấy ra bên check in
+        orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Chưa tập");
         int status = orderDetailService.updateOrderDetailItemStatus(planActiveTime, 1, planExpiredTime, orderDetailId);
         String message = status > 0 ? "Kích hoạt thành công" : "Kích hoạt không thành công";
         session.setAttribute("activeItemMSG", message);
