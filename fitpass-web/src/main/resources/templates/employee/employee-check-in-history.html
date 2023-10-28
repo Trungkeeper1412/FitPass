@@ -91,7 +91,7 @@
                                                 <th>Tên khách hàng</th>
                                                 <th>Số điện thoại</th>
                                                 <th>Tên nhân viên</th>
-                                                <th>Ngày</th>
+<!--                                                <th>Ngày</th>-->
                                                 <th>Thời gian Check-in</th>
                                                 <th>Thời gian Check-out</th>
                                                 <th>Thời gian tập</th>
@@ -100,59 +100,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-                                                <td>Nguyễn Văn Bảo Linh</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>12-04-2023</td>
-                                                <td>05:20 PM</td>
-                                                <td>07:12 PM</td>
-                                                <td>01h 58p</td>
-                                                <td>
-                                                    <h5 class="text-money">5 <span class="credit">Credit/Giờ</span></h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money">14 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/kb0sd7">Xem ảnh</button></td>
-                                                <td>Lê Đình Tuấn</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>24-10-2023</td>
-                                                <td>04:20 PM</td>
-                                                <td>07:12 PM</td>
-                                                <td>02h 58p</td>
-                                                <td>
-                                                    <h5 class="text-money">10 <span class="credit">Credit/Giờ</span>
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money">18 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/LGLMv6">Xem ảnh</button></td>
-                                                <td>Nguyễn Văn Trung</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>24-10-2023</td>
-                                                <td>06:40 PM</td>
-                                                <td>07:52 PM</td>
-                                                <td>01h 12p</td>
-                                                <td>
-                                                    <h5 class="text-money">10 <span class="credit">Credit/Giờ</span>
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money">22 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
+                                            <th:block th:each="item:${listFlexible}">
+
+                                                <tr>
+                                                    <td><button class="view-image-btn view-detail"
+                                                                data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+                                                    <td th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</td>
+                                                    <td th:text="${item.getPhoneNumber()}">0987654321</td>
+                                                    <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
+                                                    <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                    <td th:text="${item.getCheckOutTime() == null ? 'Chưa check out' : #temporals.format(item.getCheckOutTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                    <td th:text="${item.getCheckOutTime() == null ? 'Chưa check out' : item.getCheckOutTime().getTime() - item.getCheckInTime().getTime()}"></td>
+                                                    <td>
+                                                        <h5 class="text-money"><span th:text="${item.getPricePerHours()}">5</span> <span class="credit">Credit/Giờ</span></h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="text-money"><span th:text="${item.getTotalCredit() == null ? '0' : item.getTotalCredit()}">5</span> <span class="credit">Credit</span></h5>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+
+
                                         </tbody>
                                     </table>
                                 </div>
