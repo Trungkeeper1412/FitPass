@@ -2705,7 +2705,8 @@ input:checked + .toggle-slider:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 12px;
   color: rgb(0, 0, 0);
 }
 .service-row{
@@ -3727,7 +3728,7 @@ section {
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-behavior: smooth;
-  height: 600px;
+  max-height: 600px;
   -webkit-overflow-scrolling: touch;
 }
 .gym-brand-content .list-gym-department::-webkit-scrollbar-track
@@ -3830,7 +3831,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   color: rgb(0, 0, 0);
 }
@@ -3910,7 +3911,6 @@ section {
 
 .body-gym-brand-details .num-of-rating{
   font-size: 14px;
-  color: orange;
 }
 
 @media screen and (max-width: 600px) {

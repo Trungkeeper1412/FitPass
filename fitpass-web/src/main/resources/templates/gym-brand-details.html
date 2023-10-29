@@ -70,7 +70,7 @@
    <!-- DỊCH VỤ -->
 <h4 class="row fw-bold mt-5">Dịch vụ</h4>
 <div class="list-service-wrapper">
-    <div class="scroll-services row">
+    <div class="scroll-services justify-content-center">
         <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
             <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover;'"></div>
             <div class="service-name" th:text="${amenitie.amenitieName}"></div>
@@ -92,198 +92,25 @@
     <!--CƠ SỞ-->
     <h4 class="row fw-bold mt-5" id="club">CÁC CƠ SỞ</h4>
     <div class="list-gym-department container">
-        <div class="department">
+        <div class="department" th:each="dept : ${departments}">
             <div class="dept-img"
-                 style="background-image: url('https://gymlink.vn/wp-content/uploads/2021/10/Top-phong-gym-quan-Binh-thanh.jpg'); background-size: cover;">
+                 th:style="'background-image: url(\'' + ${dept.getDepartmentWallpaperUrl()} + '\'); background-size: cover;'">
             </div>
             <div class="dept-info">
-                <h4 class="fw-bold">City Gym</h4>
-                <div class="dept-address">2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Ho Chi Minh City, Vietnam</div>
+                <h4 class="fw-bold" th:text="${dept.getDepartmentName()}">City Gym</h4>
+                <div class="dept-address" th:text="${dept.getDepartmentAddress()}">2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Ho Chi Minh City, Vietnam</div>
                 <div class="dept-rating">
-                    <span>4.5</span>
+                    <span th:text="${dept.getRating()}"></span>
                     <span>
-              <div class="rating" data-star="4.5"></div>
-            </span>
+                        <div class="rating" th:attr="data-star=${dept.getRating()}"></div>
+                    </span>
                 </div>
-                <div class="fw-bold num-of-rating">700 lượt đánh giá</div>
+                <i class="num-of-rating">700 lượt đánh giá</i>
             </div>
             <div class="dept-description">
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-parking"></i>
-                    </div>
-                    <div class="service-name">Khu để xe</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-wifi"></i>
-                    </div>
-                    <div class="service-name">Wifi</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-shower"></i>
-                    </div>
-                    <div class="service-name">Nóng lạnh</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-scroll"></i>
-                    </div>
-                    <div class="service-name">Khăn tắm</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-martini-glass-citrus"></i>
-                    </div>
-                    <div class="service-name">Giải khát</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="department">
-            <div class="dept-img"
-                 style="background-image: url('https://cali.vn/storage/app/media/gym-quan-2-thumb.jpg'); background-size: cover;">
-            </div>
-            <div class="dept-info">
-                <h4 class="fw-bold">City Gym</h4>
-                <div class="dept-address">2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Ho Chi Minh City, Vietnam</div>
-                <div class="dept-rating">
-                    <span>4.5</span>
-                    <span>
-              <div class="rating" data-star="4.5"></div>
-            </span>
-                </div>
-                <div class="fw-bold num-of-rating">700 lượt đánh giá</div>
-            </div>
-            <div class="dept-description">
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-parking"></i>
-                    </div>
-                    <div class="service-name">Khu để xe</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-wifi"></i>
-                    </div>
-                    <div class="service-name">Wifi</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-shower"></i>
-                    </div>
-                    <div class="service-name">Nóng lạnh</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-scroll"></i>
-                    </div>
-                    <div class="service-name">Khăn tắm</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-martini-glass-citrus"></i>
-                    </div>
-                    <div class="service-name">Giải khát</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="department">
-            <div class="dept-img"
-                 style="background-image: url('https://thethaodonga.com/wp-content/uploads/2021/12/phong-tap-gym-tai-ha-noi-6.jpg'); background-size: cover;">
-            </div>
-            <div class="dept-info">
-                <h4 class="fw-bold">City Gym</h4>
-                <div class="dept-address">2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Ho Chi Minh City, Vietnam</div>
-                <div class="dept-rating">
-                    <span>4.5</span>
-                    <span>
-              <div class="rating" data-star="4.5"></div>
-            </span>
-                </div>
-                <div class="fw-bold num-of-rating">700 lượt đánh giá</div>
-            </div>
-            <div class="dept-description">
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-parking"></i>
-                    </div>
-                    <div class="service-name">Khu để xe</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-wifi"></i>
-                    </div>
-                    <div class="service-name">Wifi</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-shower"></i>
-                    </div>
-                    <div class="service-name">Nóng lạnh</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-scroll"></i>
-                    </div>
-                    <div class="service-name">Khăn tắm</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-martini-glass-citrus"></i>
-                    </div>
-                    <div class="service-name">Giải khát</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="department">
-            <div class="dept-img"
-                 style="background-image: url('https://levelfyc.com/wp-content/uploads/2022/08/tang-12-ftm-1024x576.png'); background-size: cover;">
-            </div>
-            <div class="dept-info">
-                <h4 class="fw-bold">City Gym</h4>
-                <div class="dept-address">2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Ho Chi Minh City, Vietnam</div>
-                <div class="dept-rating">
-                    <span>4.5</span>
-                    <span>
-              <div class="rating" data-star="4.5"></div>
-            </span>
-                </div>
-                <div class="fw-bold num-of-rating">700 lượt đánh giá</div>
-            </div>
-            <div class="dept-description">
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-parking"></i>
-                    </div>
-                    <div class="service-name">Khu để xe</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-wifi"></i>
-                    </div>
-                    <div class="service-name">Wifi</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-shower"></i>
-                    </div>
-                    <div class="service-name">Nóng lạnh</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fas fa-scroll"></i>
-                    </div>
-                    <div class="service-name">Khăn tắm</div>
-                </div>
-                <div class="service-type">
-                    <div class="gym-service-logo">
-                        <i class="fa-solid fa-martini-glass-citrus"></i>
-                    </div>
-                    <div class="service-name">Giải khát</div>
+                <div class="service-type" th:each="feature: ${departmentFeatures}" th:if="${feature.getGymDepartmentId() == dept.getDepartmentId() and feature.isSelected() == true}">
+                    <div class="gym-service-logo" th:utext="${feature.getFeatureIcon()}"></div>
+                    <div class="service-name" th:text="${feature.getFeatureName()}">Khu để xe</div>
                 </div>
             </div>
         </div>
@@ -295,9 +122,9 @@
     <div class="rating-feedback container mx-auto">
         <div class="rating-option row row-cols-6">
             <div class="rating-point col-lg-0.5 col-md-1">
-                <span>4/5</span>
+                <span th:text="${brand.getRating()}">4/5</span>
                 <span>
-            <div class="rating" data-star="4.5"></div>
+            <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
           </span>
             </div>
             <button style="margin-left: 40px;" type="button" class="btn btn-warning col-lg-1 col-md-2">
