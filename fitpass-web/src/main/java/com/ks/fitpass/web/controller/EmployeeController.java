@@ -289,6 +289,7 @@ public class EmployeeController {
     public String getCheckInHistory(@RequestParam("id")int departmentId, Model model){
         List<CheckInHistoryFlexible> listFlexible = checkInHistoryService.getListCheckInHistoryFlexibleByDepartmentId(departmentId);
         model.addAttribute("listFlexible", listFlexible);
+        model.addAttribute("departmentId", departmentId);
         return "employee/employee-check-in-history";
     }
 

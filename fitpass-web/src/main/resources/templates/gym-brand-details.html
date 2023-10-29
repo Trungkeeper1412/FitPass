@@ -38,11 +38,11 @@
 <!-- Content -->
 <div class="container gym-brand-content">
     <div class="row justify-content-center md-3 gym-brand-name">
-        <h2 class="text-center fw-bold">Thương hiệu Gym City</h2>
+        <h2 class="text-center fw-bold" th:text="${brand.brandName}"></h2>
     </div>
     <div class="row brand-info justify-content-center">
         <div class="col-md-7 col-lg-7 col-sm-6 brand-first-info">
-            <div class="brand-descript">
+            <div class="brand-descript" th:text="${brand.brandDescription}">
                 Hệ thống phòng tập gym và yoga của CITIGYM có mặt khắp các quận TPHCM.Lựa chọn phòng tập gần bạn nhất để có
                 thể tập luyện dễ dàng và tiết kiệm thời gian.
             </div>
@@ -50,11 +50,11 @@
                 <h6 class="fw-bold">LIÊN HỆ</h6>
                 <div class="phone mt-3">
                     <span><img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/128/455/455705.png"></span>
-                    <span>1900 12345</span>
+                    <span th:text="${brand.brandContactNumber}"></span>
                 </div>
                 <div class="email mt-2">
                     <span><img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/128/6244/6244710.png"></span>
-                    <span>citygymne@gmail.com</span>
+                    <span th:text="${brand.brandEmail}"></span>
                 </div>
             </div>
         </div>
@@ -67,78 +67,28 @@
         </div>
     </div>
 
-    <!--DỊCH VỤ -->
-    <h4 class="row fw-bold mt-5">Dịch vụ</h4>
-    <div class="list-service-wrapper">
-        <div class="scroll-services row">
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5">
-                <div class="brand-service-img"
-                     style="background-image: url('https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg'); background-size: cover;">
-                </div>
-                <div class="service-name">PHÒNG TẬP ĐA NĂNG</div>
-                <div class="service-descript">Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền
-                    hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.</div>
-            </div>
-
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5">
-                <div class="brand-service-img"
-                     style="background-image: url('https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg'); background-size: cover;">
-                </div>
-                <div class="service-name">HỆ THỐNG TỦ VÀ KHÓA</div>
-                <div class="service-descript">Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam.
-                    Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động.</div>
-            </div>
-
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5">
-                <div class="brand-service-img"
-                     style="background-image: url('https://citigym.com.vn/storage/uploads/atn9629-1.jpg'); background-size: cover;">
-                </div>
-                <div class="service-name">MÁY TẬP NHẬP KHẨU</div>
-                <div class="service-descript">Hệ thống máy tập nhập khẩu từ các thương hiệu nổi tiếng nước ngoài Technogym,
-                    LifeFitness, Escape, Reebok, Octane, Les Mills.</div>
-            </div>
-
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5">
-                <div class="brand-service-img"
-                     style="background-image: url('https://citigym.com.vn/storage/uploads/rin-8058citigym-1.jpg'); background-size: cover;">
-                </div>
-                <div class="service-name">HLV CHUYÊN NGHIỆP</div>
-                <div class="service-descript">Đội ngũ huấn luyện viên chuyên nghiệp, lắng nghe khách hàng, đồng hành cùng hội
-                    viên vượt qua những thử thách về hình thể và sức khỏe.</div>
-            </div>
-
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5">
-                <div class="brand-service-img"
-                     style="background-image: url('https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg'); background-size: cover;">
-                </div>
-                <div class="service-name">TIỆN NGHI PHÒNG TẬP</div>
-                <div class="service-descript">Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông hơi, khu vực
-                    trang điểm, phòng tắm), CITIGYM là nơi mang đến giây phút thư giãn cho bạn</div>
-            </div>
+   <!-- DỊCH VỤ -->
+<h4 class="row fw-bold mt-5">Dịch vụ</h4>
+<div class="list-service-wrapper">
+    <div class="scroll-services row">
+        <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
+            <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover;'"></div>
+            <div class="service-name" th:text="${amenitie.amenitieName}"></div>
+            <div class="service-descript" th:text="${amenitie.description}"></div>
         </div>
     </div>
+</div>
 
-    <!--ALBUM ẢNH -->
+    <!-- ALBUM ẢNH -->
     <h4 class="row fw-bold mt-5">Album ảnh</h4>
     <div class="slideshow-container">
-        <div class="mySlides1">
-            <img src="https://novaworld.info/wp-content/uploads/2022/10/citigym.jpg" style="width:100%; height: 60%">
-        </div>
-
-        <div class="mySlides1">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipP5JaqOZHMlW3qOowSqR-EZdccNKC-Wq38SwQPX=w1080-h608-p-no-v0"
-                 style="width:100%; height: 60%">
-        </div>
-
-        <div class="mySlides1">
-            <img src="https://wefit.vn/uploads/wp-content/uploads/2020/11/review-chi-tiet-ve-phong-tap-citi-gym.jpg"
-                 style="width:100%; height: 60%">
+        <div class="mySlides1" th:each="album : ${brandAlbums}">
+            <img th:src="${album.photoUrl}" style="width:100%; height: 60%">
         </div>
 
         <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
         <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
     </div>
-
     <!--CƠ SỞ-->
     <h4 class="row fw-bold mt-5" id="club">CÁC CƠ SỞ</h4>
     <div class="list-gym-department container">

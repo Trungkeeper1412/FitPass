@@ -56,31 +56,31 @@ public interface IRepositoryQuery {
             """;
 
     String GET_DEPARTMENT_BY_BRAND_ID = """
-                         SELECT
-                             d.gym_department_id,
-                             d.brand_id,
-                             d.name,
-                             d.address,
-                             d.contact_number,
-                             d.logo_url
-                             d.wallpaper_url,
-                             d.description,
-                             d.latitude,
-                             d.longitude,
-                             d.rating,
-
-                             d.capacity,
-                             d.area,
-
-                             d.gym_department_status_key,
-                             kbn_department_status.mst_kbn_value AS gym_department_status_name                     
-                         FROM gym_department d
-                         LEFT JOIN mst_kbn kbn_department_status
-                             ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
-                             AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
-                         WHERE d.gym_department_status_key = ? AND d.brand_id = ?
-                         ORDER BY d.rating DESC
-                    """;
+                 SELECT
+                                                            d.gym_department_id,
+                                                            d.brand_id,
+                                                            d.name,
+                                                            d.address,
+                                                            d.contact_number,
+                                                            d.logo_url,
+                                                            d.wallpaper_url,
+                                                            d.description,
+                                                            d.latitude,
+                                                            d.longitude,
+                                                            d.rating,
+                               
+                                                            d.capacity,
+                                                            d.area,
+                               
+                                                            d.gym_department_status_key,
+                                                            kbn_department_status.mst_kbn_value AS gym_department_status_name                    \s
+                                                        FROM gym_department d
+                                                        LEFT JOIN mst_kbn kbn_department_status
+                                                            ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                                                            AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS' \s
+                                                        WHERE d.gym_department_status_key = ? AND d.brand_id = ?
+                                                        ORDER BY d.rating DESC
+            """;
 
             String GET_DEPARTMENT_BY_ID = """
             SELECT  

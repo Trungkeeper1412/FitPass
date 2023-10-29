@@ -18,19 +18,17 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link" th:href="@{/employee/check-in/flexible}">
+    <a class="nav-link" th:href="@{/employee/check-in/flexible(departmentId=${departmentId})}">
       <i class="bi bi-shuffle"></i>
       <span>Gói linh hoạt</span>
     </a>
   </li>
-
   <li class="nav-item">
-    <a class="nav-link" th:href="@{/employee/check-in/fixed}">
+    <a class="nav-link" th:href="@{/employee/check-in/fixed(departmentId=${departmentId})}">
       <i class="bi bi-flag-fill"></i>
       <span>Gói cố định</span>
     </a>
   </li>
-
   <!-- Divider -->
   <hr class="sidebar-divider">
 
@@ -41,7 +39,7 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a class="nav-link" th:href="@{/employee/history}">
+    <a class="nav-link" th:href="@{/employee/history(id=${departmentId})}">
       <i class="bi bi-clock-history"></i>
       <span>Lịch sử hoạt động</span>
     </a>

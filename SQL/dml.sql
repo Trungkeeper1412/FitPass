@@ -6,10 +6,9 @@ INSERT INTO role (role_id, role_name) VALUES (4, 'ROLE_MEMBER');
 
 /********** User Creation ***********/
 -- Admin creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
-                         date_of_birth,
-                         gender)
-VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St, City, Country', '1990-01-01', 'Male');
+-- Admin creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St, City, Country', '1990-01-01', 'Male', "https://scontent.fhan5-8.fna.fbcdn.net/v/t39.30808-6/273480862_1000827017478075_7012157909548098358_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG8tV8pqQZOgWEiuJnPuj-ZHwi1_EC0JMgfCLX8QLQkyI6wlACYN_GuZzgDV24N8b02Ue6_RYorhudx-FO3zTuz&_nc_ohc=gUPqXSJXdfcAX92abUo&_nc_ht=scontent.fhan5-8.fna&oh=00_AfBxU5dVVJEnD5TrHJAzT4dSFm8MUjUIl_arsshXy1p3vg&oe=6542E990");
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
@@ -130,32 +129,30 @@ Muay Thái', 21.013202882232747, 105.5189882552246,100, 240.25);
 
 -- Create Gym Department Features
 INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
-VALUES (1, 'icon1.png', 'Bể bơi', 1),
-       (1, 'icon2.png', 'Massage', 0),
-       (1, 'icon3.png', 'Xông hơi', 1),
-       (1, 'icon4.png', 'Phòng tắm', 1),
-       (1, 'icon8.png', 'Máy đo chỉ số cơ thể', 1),
-       (1, 'icon7.png', 'Quầy bar', 1),
-       (1, 'icon6.png', 'Boxing', 0),
-       (1, 'icon5.png', 'Máy lạnh', 0),
+VALUES
+    (1, '<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
+    (1, '<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 0),
+    (1, '<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
+    (1, '<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
+    (1, '<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
+    (1, '<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
+    (1, '<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 0),
 
-       (2, 'icon1.png', 'Bể bơi', 1),
-       (2, 'icon2.png', 'Massage', 0),
-       (2, 'icon3.png', 'Xông hơi', 1),
-       (2, 'icon4.png', 'Phòng tắm', 1),
-       (2, 'icon8.png', 'Máy đo chỉ số cơ thể', 1),
-       (2, 'icon7.png', 'Quầy bar', 1),
-       (2, 'icon6.png', 'Boxing', 0),
-       (2, 'icon5.png', 'Máy lạnh', 0),
+    (2, '<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
+    (2, '<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 1),
+    (2, '<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
+    (2, '<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
+    (2, '<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
+    (2, '<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
+    (2, '<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 1),
 
-       (3, 'icon1.png', 'Bể bơi', 1),
-       (3, 'icon2.png', 'Massage', 0),
-       (3, 'icon3.png', 'Xông hơi', 1),
-       (3, 'icon4.png', 'Phòng tắm', 1),
-       (3, 'icon8.png', 'Máy đo chỉ số cơ thể', 1),
-       (3, 'icon7.png', 'Quầy bar', 1),
-       (3, 'icon6.png', 'Boxing', 0),
-       (3, 'icon5.png', 'Máy lạnh', 0);
+    (3, '<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
+    (3, '<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 0),
+    (3, '<i class="fa-solid fa-wifi"></i>', 'WIFI', 0),
+    (3, '<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 0),
+    (3, '<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 0),
+    (3, '<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 0),
+    (3, '<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 0);
 
 -- Create Gym Department Gallery
 INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
