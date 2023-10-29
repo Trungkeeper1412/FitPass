@@ -9,9 +9,8 @@
     <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
     <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
     <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
             rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -91,7 +90,7 @@
             </div>
         </div>
         <!-- List departments -->
-        <div class="tab-2">
+        <div class="tab-2" id="tab-department">
             <label for="tab2-2">
                 <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
                 <span class="tab-title">Cơ sở gần bạn</span>
@@ -146,7 +145,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="row justify-content-center mt-5"
+                <div class="row justify-content-center mt-5" id="department-list-container"
                      th:insert="homepage/fragments/list-gym-fr.html :: list-gym-fr">
                 </div>
                 <!-- pagination -->
@@ -168,6 +167,7 @@
 <div th:replace="common/footer :: footer"></div>
 
 <!-- Vendor JS Files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
@@ -180,15 +180,59 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
+    //Tab display code
     document.getElementById("list-gym").style.display = "none";
     function openGym() {
         document.getElementById("list-brand").style.display = "none";
         document.getElementById("list-gym").style.display = "block";
+        getNearbyGyms();
     }
     function openBrand() {
         document.getElementById("list-gym").style.display = "none";
         document.getElementById("list-brand").style.display = "block";
     }
+
+    function getNearbyGyms() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(sendLocationToServer);
+        }
+        function sendLocationToServer(position) {
+            //real value from the web
+            // const latitude = position.coords.latitude;
+            // const longitude = position.coords.longitude;
+            // console.log(latitude, longitude);
+
+            //fixed value (position at hoa lac)
+            const userLatitude = 21.00418734116798;
+            const userLongitude = 105.52004332513577;
+            console.log("Before AJAX request");
+            $.ajax({
+                type: "POST",
+                url: "/user/homepage",
+                data: {userLatitude: userLatitude, userLongitude: userLongitude},
+                success: function (response) {
+                    console.log("Inside success callback");
+                    console.log(response.length);
+                    if (response.length === 0) {
+                        $('#department-list-container').empty();
+                        $('#department-list-container').html('<p>No gyms found nearby.</p>');
+                    } else {
+                        $('#department-list-container').empty();
+                        $('#department-list-container').html(response)
+                    }
+                },
+                error: function (error) {
+                    console.log("Inside error callback");
+                    console.error("Error sending location data:", error);
+                }
+            });
+            console.log("After AJAX request");
+        }
+    }
+</script>
+<script>
+
+
 </script>
 </body>
 </html>

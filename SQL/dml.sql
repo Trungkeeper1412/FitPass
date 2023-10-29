@@ -8,7 +8,7 @@ INSERT INTO role (role_id, role_name) VALUES (4, 'ROLE_MEMBER');
 -- Admin creation
 -- Admin creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
-VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St, City, Country', '1990-01-01', 'Male', "https://scontent.fhan5-8.fna.fbcdn.net/v/t39.30808-6/273480862_1000827017478075_7012157909548098358_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG8tV8pqQZOgWEiuJnPuj-ZHwi1_EC0JMgfCLX8QLQkyI6wlACYN_GuZzgDV24N8b02Ue6_RYorhudx-FO3zTuz&_nc_ohc=gUPqXSJXdfcAX92abUo&_nc_ht=scontent.fhan5-8.fna&oh=00_AfBxU5dVVJEnD5TrHJAzT4dSFm8MUjUIl_arsshXy1p3vg&oe=6542E990");
+VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St, City, Country', '1990-01-01', 'Male','/static/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
