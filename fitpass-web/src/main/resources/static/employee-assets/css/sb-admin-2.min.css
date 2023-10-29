@@ -12929,7 +12929,7 @@ a {
 }
 
 /* CSS cho modal */
-.modal {
+.modal-img-popup{
     display: none;
     position: fixed;
     z-index: 1;
@@ -12939,7 +12939,7 @@ a {
     height: 100%;
 }
 
-.modal-content {
+.modal-content-img-popup{
     position: absolute;
     width: 400px;
     height: 400px;
@@ -12953,33 +12953,11 @@ a {
 }
 
 .modal-image {
-    max-width: 400px;
-    max-height: 400px;
+    width: 360px;
+    height: 360px;
     object-fit: cover;
 }
 
 #check-in-duration {
     background-color: #ffc451;
-}
-
-/* CSS for check-in list */
-@media (min-width: 576px) {
-    .col-sm-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 768px) {
-    .col-md-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 992px) {
-    .col-lg-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
 }
