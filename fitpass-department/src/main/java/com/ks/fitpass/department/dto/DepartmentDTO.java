@@ -17,6 +17,8 @@ public class DepartmentDTO {
 
     private String departmentWallpaperUrl;
 
+    private String departmentPhone;
+
     private Double rating;
 
     private int capacity;

@@ -78,8 +78,8 @@ public interface IRepositoryQuery {
                  LEFT JOIN mst_kbn kbn_department_status
                      ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
                      AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
-                 WHERE d.gym_department_status_key = ?
-                 AND d.brand_id = ?
+                 WHERE d.brand_id = ?
+                 AND d.gym_department_status_key = ?
                  ORDER BY d.rating DESC
             """;
 
