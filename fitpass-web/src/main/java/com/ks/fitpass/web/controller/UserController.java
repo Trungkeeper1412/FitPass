@@ -42,6 +42,9 @@ public class UserController {
             return "fragments/gym-list-fragment";
         }
 
-
+    @GetMapping("/user/homepage/test")
+    public String Test(Principal principal, HttpSession session, Model model) {
+        return "homepage-user";
+    }
     }
 

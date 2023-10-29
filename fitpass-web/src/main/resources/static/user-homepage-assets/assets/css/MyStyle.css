@@ -3951,3 +3951,310 @@ section {
     border-radius: 15px;
   }
 }
+
+/*================ CSS FOR LIST BRAND PAGE ================  */
+.body-list-brand{
+  background-color: rgb(238, 238, 238);;
+}
+.tabs {
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.tabs [class^="tab"] label,
+.tabs [class*=" tab"] label {
+  color: #000000;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  font-size: 1.1em;
+  line-height: 1em;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.tabs [class^="tab"] [type="radio"],
+.tabs [class*=" tab"] [type="radio"] {
+  border-bottom: 4px solid rgba(239, 237, 239, 0.5);
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  margin: auto;
+  width: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.tabs [class^="tab"] [type="radio"]:hover,
+.tabs [class^="tab"] [type="radio"]:focus,
+.tabs [class*=" tab"] [type="radio"]:hover,
+.tabs [class*=" tab"] [type="radio"]:focus {
+  border-bottom: 4px solid #cdcdcd;
+}
+
+.tabs [class^="tab"] [type="radio"]:checked,
+.tabs [class*=" tab"] [type="radio"]:checked {
+  border-bottom: 4px solid #000000;
+}
+
+.tabs [class^="tab"] [type="radio"]:checked+div,
+.tabs [class*=" tab"] [type="radio"]:checked+div {
+  opacity: 1;
+}
+
+.tabs [class^="tab"] [type="radio"]+div,
+.tabs [class*=" tab"] [type="radio"]+div {
+  display: block;
+  opacity: 0;
+  padding: 2rem 0;
+  width: 90%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.tabs .tab-2 {
+  width: 50%;
+}
+
+.tabs .tab-2 [type="radio"]+div {
+  height: 100%;
+  width: 200%;
+  margin-left: 200%;
+}
+
+.tabs .tab-2 [type="radio"]:checked+div {
+  margin-left: 0;
+}
+
+.tabs .tab-2:last-child [type="radio"]+div {
+  margin-left: 100%;
+}
+
+.tabs .tab-2:last-child [type="radio"]:checked+div {
+  margin-left: -100%;
+}
+
+.tabs img {
+  width: 35px;
+}
+
+.list-brand-title{
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Css for each brand */
+.list-of-brand .brand{
+  display: flex;
+  /* width: 48%; */
+  /* height: fit-content; */
+  min-height: 290px;
+  border-radius: 15px;
+  background-color: white;
+}
+.list-of-brand .brand-image{
+  width: 50%;
+  min-height: 250px;
+  /* height: 42%; */
+  padding: 20px 20px 20px 20px;
+}
+.list-of-brand .brand-info{
+  padding: 12px 20px 0 0;
+}
+
+.list-of-brand .brand .description{
+  margin-top: 5px;
+  color: black;
+  font-size: 14px;
+  height: 42%;
+}
+.list-of-brand .basic-info{
+  color: black;
+  font-size: 12px;
+  padding: 4px 10px 4px 10px;
+  background-color: #ececec;
+  border-radius: 20px;
+  margin-top: 7px;
+}
+.list-of-brand .basic-info img{
+  width: 20px;
+}
+@media screen and (min-width: 501px) and (max-width: 768px){
+  .list-of-brand .brand .description{
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .list-of-brand .brand{
+    display: block;
+  }
+  .list-of-brand .brand-image{
+    width: 100%;
+    height: 300px;
+  }
+  .list-of-brand .brand-info{
+    padding: 0px 20px 20px 20px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-of-brand .brand{
+    display: block;
+  }
+  .list-of-brand .brand-image{
+    width: 100%;
+    height: 50%;
+  }
+  .list-of-brand .brand-info{
+    padding: 0px 20px 20px 20px;
+  }
+  .list-of-brand .brand-info h5{
+    font-size: 15px;
+  }
+  .tab-img img{
+    width: 20px;
+  }
+  .tab-title{
+    font-size: 14px;
+  }
+  .list-brand-content .pagination a {
+    font-size: 12px;
+    padding: 1px;
+    text-decoration: none;
+    width: fit-content;
+  }
+}
+
+.list-brand-content .pagination {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  width: fit-content;
+  background-color: white;
+  margin: auto;
+}
+
+.list-brand-content .pagination a {
+  color: black;
+  float: left;
+  margin-left: 5px;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.list-brand-content .pagination a.active {
+  background-color: #000000;
+  color: white;
+  border-radius: 5px;
+}
+
+.list-brand-content .pagination a:hover:not(.active) {
+  background-color: #d8d8d8;
+  border-radius: 5px;
+}
+
+/* Css for each gym department */
+.list-of-gym{
+  height: fit-content;
+}
+.list-of-gym .gym-dept{
+  padding-bottom: 20px;
+  min-height: 260px;
+  border-radius: 20px;
+  background-color: white;
+}
+.list-of-gym .gym-image{
+  width: 100%;
+  height: 250px;
+  padding: 20px 20px 20px 20px;
+}
+.list-of-gym .gym-dept-info{
+  width: 100%;
+  height: 250px;
+  padding: 0px 20px 20px 20px;
+}
+.gym-dept-info img{
+  width: 20px;
+}
+.gym-dept .distance{
+  border-radius: 20px 20px 0 0;
+  background-color: rgb(214, 214, 214);
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  font-weight: 600;
+}
+.gym-dept .distance img{
+  width: 22px;
+}
+.gym-dept .price{
+  font-size: 22px;
+  font-weight: 700;
+  color: orange;
+}
+
+.list-of-gym .gym-dropdown{
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+}
+.gym-dropdown-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-of-gym .card {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px 20px 0px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: black;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  /* height: 650px; */
+  overflow: hidden;
+}
+.list-of-gym .card img{
+  width: 100%;
+  height: 30%;
+}
+.list-of-gym .card-body label {
+  font-weight: bold;
+}
+.list-of-gym .card-title {
+  padding-bottom: 10px;
+  min-height: 80px;
+}
+.list-of-gym .card-text {
+  min-height: 70px;
+}
+.review-section {
+  padding-top: 10px;
+  margin-bottom: -10px;
+}
+.credit {
+  color: orange;
+  font-size: 15px;
+  /* Đặt màu cam cho chữ "Credit" */
+}
+.text-money {
+  color: #02aa0a;
+  font-size: 18px;
+  font-weight: bold;
+}
