@@ -46,6 +46,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public List<DepartmentDTO> getAllDepartmentByBrandId(int brandID, int pageIndex, int pageSize) throws DataAccessException {
+        List<Department> departments = departmentRepository.getAllByBrandId(brandID,1);
+        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
+    }
+
+    @Override
     public List<DepartmentDTO> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize, double userLatitude, double userLongitude, double radiusInMeters) {
         // To do: Implement paging
         List<Department> allDepartments = departmentRepository.getAllByStatus(1);

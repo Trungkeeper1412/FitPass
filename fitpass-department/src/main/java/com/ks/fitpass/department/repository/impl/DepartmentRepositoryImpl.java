@@ -37,6 +37,11 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
+    public List<Department> getAllByBrandId(int brandId, int status) throws DataAccessException {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), brandId, status);
+    }
+
+    @Override
     public Department getOne(int id) throws DataAccessException {
     return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapper(), id);
     }

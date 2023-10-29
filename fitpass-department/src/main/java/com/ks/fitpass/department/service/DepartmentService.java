@@ -17,6 +17,8 @@ public interface DepartmentService {
 
     List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException;
 
+    List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
+
     List<Department> getAllByStatus(int status) throws DataAccessException;
 
     Department getOne(int id) throws DataAccessException;
