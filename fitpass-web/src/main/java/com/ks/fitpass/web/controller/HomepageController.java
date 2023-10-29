@@ -54,7 +54,7 @@ public class HomepageController {
     public String getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
                                           @RequestParam("userLongitude") double userLongitude, Model model) {
         Map<DepartmentDTO, Double> departmentDistanceMap = departmentService.getAllDepartmentByNearbyLocation(
-                1, 5, userLatitude, userLongitude, 5000);
+                1, 5, userLatitude, userLongitude, 5);
         model.addAttribute("departmentDistanceMap",departmentDistanceMap);
         return "homepage/fragments/list-gym-fr";
     }

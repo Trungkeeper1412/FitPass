@@ -29,7 +29,8 @@ public interface DepartmentService {
     boolean updateStatusDepartment(Department department, DepartmentStatus departmentStatus) throws DataAccessException;
 
     Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
-                                                                double userLatitude, double userLongitude, double radiusInMeters);
+                                                                double userLatitude, double userLongitude,
+                                                                double radiusInKm);
     List<Department> findByRatingBetween(double from, double to);
 
 

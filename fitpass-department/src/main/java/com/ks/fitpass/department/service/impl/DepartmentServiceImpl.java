@@ -68,7 +68,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize, double userLatitude, double userLongitude, double radiusInMeters) {
+    public Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
+                                                                       double userLatitude, double userLongitude,
+                                                                       double radiusInKm) {
         // To do: Implement paging
         List<Department> allDepartments = departmentRepository.getAllByStatus(1);
 
@@ -78,8 +80,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         // Calculate and add distance for each department
         for (Department department : allDepartments) {
             double distance = calculateDistance(userLatitude, userLongitude, department.getLatitude(), department.getLongitude());
-            DepartmentDTO departmentDTO = departmentDTOMapper(department);
-            departmentDistanceMap.put(departmentDTO, distance);
+            if (distance <= radiusInKm) {
+                DepartmentDTO departmentDTO = departmentDTOMapper(department);
+                departmentDistanceMap.put(departmentDTO, distance);
+            }
         }
 
         // Sort the map by distance
