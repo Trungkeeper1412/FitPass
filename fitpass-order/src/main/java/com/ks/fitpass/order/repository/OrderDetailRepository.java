@@ -27,4 +27,8 @@ public interface OrderDetailRepository {
     String getUserNameByOrderDetailId(int orderDetailId);
 
     int updateAllFixedToCheckIn();
+
+    Boolean isFixedGymPlan(int orderDetailId);
+
+    int decreaseDuration(int orderDetailId);
 }

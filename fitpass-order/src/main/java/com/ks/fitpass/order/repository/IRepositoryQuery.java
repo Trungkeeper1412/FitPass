@@ -138,4 +138,14 @@ public interface IRepositoryQuery {
                 WHERE plan_expired_time > NOW()
                 AND price > 0;
             """;
+
+    String IS_FIXED_GYM_PLAN = """
+                SELECT CASE WHEN price > 0 THEN TRUE ELSE FALSE END AS result
+                FROM order_plan_detail
+                WHERE order_detail_id = ?;
+            """;
+
+    String DECREASE_DURATION = """
+                UPDATE order_plan_detail SET duration = duration - 1 WHERE order_detail_id = ?
+            """;
 }

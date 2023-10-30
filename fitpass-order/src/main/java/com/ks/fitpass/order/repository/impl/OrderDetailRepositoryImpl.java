@@ -82,4 +82,14 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
     public int updateAllFixedToCheckIn() {
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_ALL_FIXED_TO_CHECK_IN);
     }
+
+    @Override
+    public Boolean isFixedGymPlan(int orderDetailId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.IS_FIXED_GYM_PLAN, Boolean.class, orderDetailId);
+    }
+
+    @Override
+    public int decreaseDuration(int orderDetailId) {
+        return jdbcTemplate.update(IRepositoryQuery.INSERT_ORDER_PLAN_DETAIL, orderDetailId);
+    }
 }

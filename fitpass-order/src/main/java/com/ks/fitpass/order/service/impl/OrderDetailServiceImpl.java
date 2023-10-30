@@ -64,4 +64,16 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public String getUserNameByOrderDetailId(int orderDetailId) {
         return orderDetailRepository.getUserNameByOrderDetailId(orderDetailId);
     }
+
+    @Override
+    public Boolean isFixedGymPlan(int orderDetailId) {
+        return orderDetailRepository.isFixedGymPlan(orderDetailId);
+    }
+
+    @Override
+    public int decreaseDuration(int orderDetailId) {
+        return orderDetailRepository.decreaseDuration(orderDetailId);
+    }
+
+
 }

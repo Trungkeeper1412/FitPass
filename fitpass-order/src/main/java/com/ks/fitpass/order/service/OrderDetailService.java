@@ -24,4 +24,8 @@ public interface OrderDetailService {
     OrderDetailConfirmCheckOut getByOrderDetailId(int orderDetailId);
 
     String getUserNameByOrderDetailId(int orderDetailId);
+
+    Boolean isFixedGymPlan(int orderDetailId);
+
+    int decreaseDuration(int orderDetailId);
 }
