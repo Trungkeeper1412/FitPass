@@ -1,5 +1,6 @@
 package com.ks.fitpass.employee.dto;
 
+import com.ks.fitpass.notification.entity.Notification;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,6 @@ public class UpdateCheckInHistory {
     private Timestamp checkOutTime;
     private double totalCredit;
     private double creditAfterPay;
+    private Notification notification;
+    private String cancel;
 }

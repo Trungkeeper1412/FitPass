@@ -5,6 +5,8 @@ import com.ks.fitpass.notification.repository.NotificationRepository;
 import com.ks.fitpass.notification.service.NotificationService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
@@ -34,12 +36,22 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public Notification getConfirmCheckInByEmpIdReceive(int empIdReceive) {
-        return notificationRepository.getConfirmCheckInByEmpIdReceive(empIdReceive);
+    public List<Notification> getAllConfirmCheckOutSuccessByEmpIdReceive(int empIdReceive) {
+        return notificationRepository.getAllConfirmCheckOutSuccessByEmpIdReceive(empIdReceive);
     }
 
     @Override
-    public Notification getConfirmCheckOutByEmpIdReceive(int empIdReceive) {
-        return notificationRepository.getConfirmCheckOutByEmpIdReceive(empIdReceive);
+    public List<Notification> getAllConfirmCheckInSuccessByEmpIdReceive(int empIdReceive) {
+        return notificationRepository.getAllConfirmCheckInSuccessByEmpIdReceive(empIdReceive);
+    }
+
+    @Override
+    public List<Notification> getAllConfirmCheckInCancelByEmpIdReceive(int empIdReceive) {
+        return notificationRepository.getAllConfirmCheckInCancelByEmpIdReceive(empIdReceive);
+    }
+
+    @Override
+    public List<Notification> getAllConfirmCheckOutCancelByEmpIdReceive(int empIdReceive) {
+        return notificationRepository.getAllConfirmCheckOutCancelByEmpIdReceive(empIdReceive);
     }
 }

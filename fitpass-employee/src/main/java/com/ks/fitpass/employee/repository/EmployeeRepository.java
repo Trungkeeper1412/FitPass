@@ -5,6 +5,7 @@ import com.ks.fitpass.employee.dto.CheckInFlexibleDTO;
 import com.ks.fitpass.employee.dto.CheckOutFlexibleDTO;
 import com.ks.fitpass.employee.dto.CheckedInFixedDTO;
 import com.ks.fitpass.notification.dto.UserReceiveMessageDTO;
+import com.ks.fitpass.order.entity.OrderDetails;
 
 import java.sql.Timestamp;
 import java.util.List;

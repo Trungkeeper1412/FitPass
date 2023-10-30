@@ -8,6 +8,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class NotificationRepositoryImpl implements NotificationRepository {
     private JdbcTemplate jdbcTemplate;
@@ -29,6 +31,7 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
+                notification.setUserIdReceive(rs.getInt("user_id_receive"));
                 notification.setMessage(rs.getString("message"));
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
@@ -52,6 +55,7 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
+                notification.setUserIdReceive(rs.getInt("user_id_receive"));
                 notification.setMessage(rs.getString("message"));
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
@@ -64,36 +68,76 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     }
 
     @Override
-    public Notification getConfirmCheckInByEmpIdReceive(int empIdReceive) {
+    public List<Notification> getAllConfirmCheckOutSuccessByEmpIdReceive(int empIdReceive) {
         try {
-            return jdbcTemplate.queryForObject(IRepositoryQuery.GET_CONFIRM_CHECK_IN_BY_EMP_RECEIVE_ID, (rs, rowNum) -> {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_OUT_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
+                notification.setUserIdReceive(rs.getInt("user_id_receive"));
                 notification.setMessage(rs.getString("message"));
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
                 notification.setMessageType(rs.getString("message_type"));
                 return notification;
-            }, empIdReceive, empIdReceive);
+            }, empIdReceive, "Thông báo checkout thành công tới employee");
         } catch (EmptyResultDataAccessException e) {
             return null; // Trả về null khi không có kết quả
         }
     }
 
     @Override
-    public Notification getConfirmCheckOutByEmpIdReceive(int empIdReceive) {
+    public List<Notification> getAllConfirmCheckInSuccessByEmpIdReceive(int empIdReceive) {
         try {
-            return jdbcTemplate.queryForObject(IRepositoryQuery.GET_CONFIRM_CHECK_OUT_BY_EMP_RECEIVE_ID, (rs, rowNum) -> {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_IN_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
+                notification.setUserIdReceive(rs.getInt("user_id_receive"));
                 notification.setMessage(rs.getString("message"));
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
                 notification.setMessageType(rs.getString("message_type"));
                 return notification;
-            }, empIdReceive, empIdReceive);
+            }, empIdReceive, "Thông báo checkin thành công tới employee");
+        } catch (EmptyResultDataAccessException e) {
+            return null; // Trả về null khi không có kết quả
+        }
+    }
+
+    @Override
+    public List<Notification> getAllConfirmCheckInCancelByEmpIdReceive(int empIdReceive) {
+        try {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_IN_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
+                Notification notification = new Notification();
+                notification.setNotificationId(rs.getInt("notification_id"));
+                notification.setUserIdSend(rs.getInt("user_id_send"));
+                notification.setUserIdReceive(rs.getInt("user_id_receive"));
+                notification.setMessage(rs.getString("message"));
+                notification.setTimeSend(rs.getTimestamp("time_send"));
+                notification.setDepartmentId(rs.getInt("department_id"));
+                notification.setMessageType(rs.getString("message_type"));
+                return notification;
+            }, empIdReceive, "Thông báo hủy checkin tới employee");
+        } catch (EmptyResultDataAccessException e) {
+            return null; // Trả về null khi không có kết quả
+        }
+    }
+
+    @Override
+    public List<Notification> getAllConfirmCheckOutCancelByEmpIdReceive(int empIdReceive) {
+        try {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_OUT_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
+                Notification notification = new Notification();
+                notification.setNotificationId(rs.getInt("notification_id"));
+                notification.setUserIdSend(rs.getInt("user_id_send"));
+                notification.setUserIdReceive(rs.getInt("user_id_receive"));
+                notification.setMessage(rs.getString("message"));
+                notification.setTimeSend(rs.getTimestamp("time_send"));
+                notification.setDepartmentId(rs.getInt("department_id"));
+                notification.setMessageType(rs.getString("message_type"));
+                return notification;
+            }, empIdReceive, "Thông báo hủy checkout tới employee");
         } catch (EmptyResultDataAccessException e) {
             return null; // Trả về null khi không có kết quả
         }
