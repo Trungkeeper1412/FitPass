@@ -41,31 +41,42 @@ INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_ST
 -- Create brand infos
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,description,rating,contact_number,contact_email,brand_status_key)
 VALUES
-    ( 1,1, 'Kickfit Sports', 'https://kickfit-sports.com/wp-content/uploads/2021/03/Do-Den.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-3-1.png', 'Desc1', 4.5, '9991234567', 'brand1@email.com', 1),
-    ( 2,1, 'Elite Fitness', 'https://bimgroup.com/uploads/catalog/2022/6/4ff9ee27-1562-4d32-be81-8f7f52fe3eab.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-6.png', 'Desc2', 3.5, '9981234567', 'brand2@email.com', 1),
-    ( 3,1, 'Citi Gym', 'https://citigym.com.vn/storage/uploads/logocitigym.png', 'https://novaworld.info/wp-content/uploads/2022/10/citigym.jpg', 'Desc3', 4, '9971234567', 'brand3@email.com', 1),
-    ( 4,1, 'California Fitness', 'https://cali.vn/storage/app/media/2022/System/Cali-Link-Thumbnail.png', 'https://cali.vn/storage/app/media/gia-tap-california-thumb.jpg', 'Desc4', 4.5, '9961234567', 'brand4@email.com', 1),
-    ( 5,1, 'Getfit Gym', 'https://getfit-gym.vn/wp-content/uploads/newlogogetfit2021-04.png', 'https://images.foody.vn/res/g12/111029/prof/s640x400/foody-mobile-hmb-et-fit-jpg-439-635555465733080414.jpg', 'Desc5', 3, '9951234567', 'brand5@email.com', 1);
+    ( 1,1, 'Kickfit Sports', 'https://kickfit-sports.com/wp-content/uploads/2021/03/Do-Den.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-3-1.png', 'Công ty cổ phần thể thao Kickfit Sports sở hữu tổ hợp đầy đủ các bộ môn từ võ thuật, thể hình, rèn luyện Thân - Tâm - Trí. Định hướng chính của Kickfit Sports là đưa các bộ môn Kickfit và Fitness trở thành thói quen sinh hoạt tích cực hàng ngày cho tất cả mọi người.Kickfit Sports đã đang và sẽ phát triển theo hướng: “Chuyên nghiệp – Chất Lượng – Luôn đổi mới và hoàn thiện” đồng thời mong muốn mang lại sức khỏe và thịnh vượng cho hàng triệu người Việt Nam.Với hơn 10 năm xây dựng và phát triển, hiện tại Kickfit Sports đang sở hữu 14 cơ sở phòng tập trải rộng khắp Hà Nội. Trung tâm luôn chú trọng đầu tư, cải tiến các sản phẩm, dịch vụ để mang đến môi trường tập luyện 5 sao, uy tín và chất lượng.', 4.5, '9991234567', 'brand1@email.com', 1),
+    ( 2,1, 'Elite Fitness', 'https://bimgroup.com/uploads/catalog/2022/6/4ff9ee27-1562-4d32-be81-8f7f52fe3eab.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-6.png', 'HỆ THỐNG CÂU LẠC BỘ THỂ THAO CAO CẤP ELITE FITNESS
+Ra đời từ năm 2010, Elite Fitness đã từng bước khẳng định vị thế và danh tiếng của mình là hệ thống câu lạc bộ thể dục thể thao cao cấp, hàng đầu tại Việt Nam.
+
+Tại Elite Fitness, những mục tiêu tập luyện của hội viên được hiện thực hóa bởi các chuyên gia hàng đầu trong ngành thể dục thẩm mỹ như: Giảm cân; Tạo hình cơ thể; Tăng cường cơ bắp, sức mạnh, sức bền; Tăng cường sự linh hoạt, dẻo dai; Tăng cường vẻ đẹp hình thể; Cải thiện và khắc phục các chấn thương thể thao; Cải thiện và khắc phục những vấn đề về sức khỏe; Phục vụ các nhu cầu tập luyện riêng biệt khác…', 3.5, '9981234567', 'brand2@email.com', 1),
+    ( 3,1, 'Citi Gym', 'https://citigym.com.vn/storage/uploads/logocitigym.png', 'https://novaworld.info/wp-content/uploads/2022/10/citigym.jpg', 'CITIGYM - Thương hiệu dẫn đầu phong cách sống, được thành lập từ năm 2018, đến nay CITIGYM đã có 7 chi nhánh tại TP.HCM và phục vụ hơn 100.000 khách hàng. Cơ sở vật chất, trang thiết bị tối tân từ các thương hiệu hàng đầu thế giới. Đội ngũ HLV chuyên nghiệp, giàu kinh nghiệm, mang đến những trải nghiệm tập luyện thú vị, đáp ứng mong muốn về vóc dáng và sức khoẻ cho người Việt. Đặc biệt, Citigym là thương hiệu fitness đầu tiên mang không gian xanh vào phòng tập, cho bạn cảm nhận sự trong lành, nhẹ nhàng thư thái.', 4, '9971234567', 'brand3@email.com', 1),
+    ( 4,1, 'California Fitness', 'https://cali.vn/storage/app/media/2022/System/Cali-Link-Thumbnail.png', 'https://cali.vn/storage/app/media/gia-tap-california-thumb.jpg', 'Là thương hiệu về sức khỏe lớn nhất Việt Nam, California Fitness & Yoga được xây dựng để mang lại hạnh phúc và tạo ra những khoảnh khắc viên mãn cho bạn trong cuộc sống bằng việc cung cấp các dịch vụ phát triển sức khỏe thể chất, dinh dưỡng và tinh thần toàn diện.', 4.5, '9961234567', 'brand4@email.com', 1),
+    ( 5,1, 'Getfit Gym', 'https://getfit-gym.vn/wp-content/uploads/newlogogetfit2021-04.png', 'https://images.foody.vn/res/g12/111029/prof/s640x400/foody-mobile-hmb-et-fit-jpg-439-635555465733080414.jpg', 'Thành lập năm 2010, Getfit nhanh chóng trở thành một trong những thương hiệu Fitness lớn nhất Việt Nam. Với cơ sở vật chất đẳng cấp, thiết bị luyện tập thể thao hiện đại, đội ngũ Huấn luyện viên có chuyên môn, Getfit tạo dấu ấn đặc biệt trong giới thể hình Việt.', 3, '9951234567', 'brand5@email.com', 1);
 
 INSERT INTO brand_amenities (brand_id, photo_url, amenitie_name, description)
 VALUES
-    (1, 'https://johnsonfitness.com.vn/wp-content/uploads/2023/04/z4302803743176_ddc1709663091cae6578d949562e2255-scaled.jpg', 'Amenity1', 'Desc1'),
-    (1, 'https://top1danhgia.com/uploads/2022/phong-gym-quan-tay-ho-Kickfit-Sports.jpg', 'Amenity1', 'Desc1'),
-    (1, 'https://kickfit-sports.com/wp-content/uploads/2022/07/hinh-anh-cua-khu-vuc-tap-kickfit-boxing-kickboxing-muay-thai.jpg.webp', 'Amenity1', 'Desc1'),
-    (2, 'https://cdn-ecommerce.estore.net.vn/img/s768x0/20230323_uu-dai-soc-giam-25--tai-elite-fitness-13_14032023103300.jpg?sign=C7n8QMtG29R0j1O4oEAA5w', 'Amenity2', 'Desc2'),
-    (2, 'https://cms.elitefitness.com.vn/Upload2/20230216/a44a1cbd-7735-449b-b704-5f893b09e03d.jpg?w=865&h=487&mode=max', 'Amenity2', 'Desc2'),
-    (2, 'https://cms.elitefitness.com.vn/Upload2/20230107/8b4ea796-2f02-434f-b2e6-d12bca7b3b5a.jpg?w=865&h=487&mode=max', 'Amenity2', 'Desc2'),
-    (3, 'https://channel.mediacdn.vn/428462621602512896/2023/4/8/photo-4-16809197242851942299068.png', 'Amenity3', 'Desc3'),
-    (3, 'https://images2.thanhnien.vn/uploaded/linhnt.qc/2021_01_07/citigym/citigym_3_DJUK.jpg?width=500', 'Amenity3', 'Desc3'),
-    (3, 'https://images.foody.vn/res/g80/796426/prof/s/sheis-094cf491-cedb-4173-baeb-35dcf77b5daf-20181108093222761.jpg', 'Amenity3', 'Desc3'),
-    (4, 'https://aeonmall-binhtan.com.vn/wp-content/uploads/2018/12/yoga-750x468.jpg', 'Amenity4', 'Desc4'),
-    (4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vHAcDALnte2CfERwNXR_ZfgU2zeqaw0I3w&usqp=CAU', 'Amenity4', 'Desc4'),
-    (4, 'https://cali.vn/storage/app/media/Editors/627a06aaabda5gia-tap-california-10.png', 'Amenity4', 'Desc4'),
+    (1, 'https://citigym.com.vn/storage/uploads/atn9629-1.jpg', 'MÁY TẬP NHẬP KHẨU', 'Hệ thống máy tập nhập khẩu từ các thương hiệu nổi tiếng nước ngoài Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills.'),
+    (1, 'https://citigym.com.vn/storage/uploads/rin-8058citigym-1.jpg', 'HLV CHUYÊN NGHIỆP', 'Đội ngũ huấn luyện viên chuyên nghiệp, lắng nghe khách hàng, đồng hành cùng hội viên vượt qua những thử thách về hình thể và sức khỏe.'),
+    (1, 'https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg', 'HỆ THỐNG TỦ VÀ KHÓA', 'Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động'),
+    (1, 'https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg', 'PHÒNG TẬP ĐA NĂNG', 'Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.'),
+    (1, 'https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg', 'TIỆN NGHI PHÒNG TẬP', 'Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông hơi, khu vực trang điểm, phòng tắm), là nơi mang đến giây phút thư giãn cho bạn.'),
+    (1, 'https://citigym.com.vn/storage/uploads/chi-2000-ty-dau-tu-cho-cau-lac-bo-gym-cao-cap-voi-quy-mo-hon-6000m2-tai-tphcm-cau-lac-bo-1-1561539908-613-width600height400.jpg', 'VƯỜN YOGA THƯ THÁI', 'Lớp học yoga buổi sáng được tổ chức ngoài trời để hội viên được hít thở không khí trong lành và tươi mát của cây xanh, mang lại tinh thần thư thái cho hội viên.'),
 
-    (5, 'https://clbdoanhnhansaigon.vn/dtool/data/computer/web670/viber-image-2020-10-06-09-49-11.jpg', 'Amenity5', 'Desc5'),
-    (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg', 'Amenity5', 'Desc5'),
-    (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg', 'Amenity5', 'Desc5');
 
+    (2, 'https://citigym.com.vn/storage/uploads/atn9629-1.jpg', 'MÁY TẬP NHẬP KHẨU', 'Hệ thống máy tập nhập khẩu từ các thương hiệu nổi tiếng nước ngoài Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills.'),
+    (2, 'https://citigym.com.vn/storage/uploads/rin-8058citigym-1.jpg', 'HLV CHUYÊN NGHIỆP', 'Đội ngũ huấn luyện viên chuyên nghiệp, lắng nghe khách hàng, đồng hành cùng hội viên vượt qua những thử thách về hình thể và sức khỏe.'),
+    (2, 'https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg', 'HỆ THỐNG TỦ VÀ KHÓA', 'Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động'),
+    (2, 'https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg', 'PHÒNG TẬP ĐA NĂNG', 'Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.'),
+
+    (3, 'https://citigym.com.vn/storage/uploads/atn9629-1.jpg', 'MÁY TẬP NHẬP KHẨU', 'Hệ thống máy tập nhập khẩu từ các thương hiệu nổi tiếng nước ngoài Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills.'),
+    (3, 'https://citigym.com.vn/storage/uploads/rin-8058citigym-1.jpg', 'HLV CHUYÊN NGHIỆP', 'Đội ngũ huấn luyện viên chuyên nghiệp, lắng nghe khách hàng, đồng hành cùng hội viên vượt qua những thử thách về hình thể và sức khỏe.'),
+    (3, 'https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg', 'HỆ THỐNG TỦ VÀ KHÓA', 'Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động'),
+    (3, 'https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg', 'PHÒNG TẬP ĐA NĂNG', 'Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.'),
+    (3, 'https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg', 'TIỆN NGHI PHÒNG TẬP', 'Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông hơi, khu vực trang điểm, phòng tắm), là nơi mang đến giây phút thư giãn cho bạn.'),
+
+    (4, 'https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg', 'PHÒNG TẬP ĐA NĂNG', 'Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.'),
+    (4, 'https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg', 'TIỆN NGHI PHÒNG TẬP', 'Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông hơi, khu vực trang điểm, phòng tắm), là nơi mang đến giây phút thư giãn cho bạn.'),
+    (4, 'https://citigym.com.vn/storage/uploads/chi-2000-ty-dau-tu-cho-cau-lac-bo-gym-cao-cap-voi-quy-mo-hon-6000m2-tai-tphcm-cau-lac-bo-1-1561539908-613-width600height400.jpg', 'VƯỜN YOGA THƯ THÁI', 'Lớp học yoga buổi sáng được tổ chức ngoài trời để hội viên được hít thở không khí trong lành và tươi mát của cây xanh, mang lại tinh thần thư thái cho hội viên.'),
+
+    (5, 'https://citigym.com.vn/storage/uploads/rin-8058citigym-1.jpg', 'HLV CHUYÊN NGHIỆP', 'Đội ngũ huấn luyện viên chuyên nghiệp, lắng nghe khách hàng, đồng hành cùng hội viên vượt qua những thử thách về hình thể và sức khỏe.'),
+    (5, 'https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg', 'HỆ THỐNG TỦ VÀ KHÓA', 'Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động');
 
 
 INSERT INTO brand_albums (brand_id, photo_url, description)
@@ -217,5 +228,3 @@ VALUES ( 1,1, 2, 2, 2, 'Gói 2', 'Gói không theo giờ ', 150.00, 15.00, 30, 5
        ( 5,1, 2, 2, 2, 'Gói 2', 'Gói không theo giờ ', 150.00, 15.00, 30, 5, 10, 20),
        ( 5,1, 1, 1, 1, 'Gói giờ', 'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp. ', 100.00, 10.00, 20, 3, 7, 14),
        (5,1, 2, 2, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính tại Gym Hòa Lạc. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 15.00, 30, 5, 10, 20);
-
-
