@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ks.fitpass.checkInHistory.repository.CheckInHistoryRepository;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.employee.dto.ConfirmCheckOutDTO;
 import com.ks.fitpass.employee.dto.DataSendCheckOutFlexibleDTO;
 import com.ks.fitpass.notification.dto.UserReceiveMessageDTO;
 import com.ks.fitpass.notification.entity.Notification;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/notification")
@@ -53,33 +56,78 @@ public class NotificationController {
         return ResponseEntity.ok(notification);
     }
 
-    @GetMapping("/notificationCheckInEmployee")
-    public ResponseEntity<Notification> getEmployeeCheckInNotification(HttpSession session){
+    @GetMapping("/notificationCheckInSuccessEmployee")
+    public ResponseEntity<List<Notification>> getEmployeeCheckInNotification(HttpSession session){
         // Lấy ra thông tin người dùng hiện tại
         User user = (User) session.getAttribute("userInfo");
 
-        // Lấy ra thông báo confirm check in mới nhất với id của người dùng hiện tại
-        Notification notification = notificationService.getConfirmCheckInByEmpIdReceive(user.getUserId());
-        if(notification == null) {
-            Notification n = new Notification();
-            n.setNotificationId(-1);
-            return ResponseEntity.ok(n);
+        // Lấy ra tất cả thông báo người dùng check in thành công gửi đến employee
+        List<Notification> notificationList = notificationService.getAllConfirmCheckInSuccessByEmpIdReceive(user.getUserId());
+        if(notificationList == null) {
+            List<Notification> empty = new ArrayList<>();
+            return ResponseEntity.ok(empty);
         }
-        notification.setUserIdReceive(user.getUserId());
-        return ResponseEntity.ok(notification);
+
+        return ResponseEntity.ok(notificationList);
+    }
+
+    @GetMapping("/notificationCheckInCancelEmployee")
+    public ResponseEntity<List<Notification>> getEmployeeCheckInCancelNotification(HttpSession session){
+        // Lấy ra thông tin người dùng hiện tại
+        User user = (User) session.getAttribute("userInfo");
+
+        // Lấy ra tất cả thông báo người dùng check in thành công gửi đến employee
+        List<Notification> notificationList = notificationService.getAllConfirmCheckInCancelByEmpIdReceive(user.getUserId());
+        if(notificationList == null) {
+            List<Notification> empty = new ArrayList<>();
+            return ResponseEntity.ok(empty);
+        }
+        return ResponseEntity.ok(notificationList);
+    }
+
+    @GetMapping("/notificationCheckOutSuccessEmployee")
+    public ResponseEntity<List<Notification>> getEmployeeCheckOutNotification(HttpSession session){
+        // Lấy ra thông tin người dùng hiện tại
+        User user = (User) session.getAttribute("userInfo");
+
+        // Lấy ra tất cả thông báo confirm check out thành công mới nhất với id của người dùng hiện tại
+        List<Notification> notificationList = notificationService.getAllConfirmCheckOutSuccessByEmpIdReceive(user.getUserId());
+        if(notificationList == null) {
+            List<Notification> empty = new ArrayList<>();
+            return ResponseEntity.ok(empty);
+        }
+
+        return ResponseEntity.ok(notificationList);
+    }
+
+    @GetMapping("/notificationCheckOutCancelEmployee")
+    public ResponseEntity<List<Notification>> getEmployeeCheckOutCancelNotification(HttpSession session){
+        // Lấy ra thông tin người dùng hiện tại
+        User user = (User) session.getAttribute("userInfo");
+
+        // Lấy ra tất cả thông báo confirm check out thành công mới nhất với id của người dùng hiện tại
+        List<Notification> notificationList = notificationService.getAllConfirmCheckOutCancelByEmpIdReceive(user.getUserId());
+        if(notificationList == null) {
+            List<Notification> empty = new ArrayList<>();
+            return ResponseEntity.ok(empty);
+        }
+
+        return ResponseEntity.ok(notificationList);
     }
 
     @GetMapping("/confirmCheckOut")
-    public ResponseEntity<OrderDetailConfirmCheckOut> getConfirmCheckOut(HttpSession session) throws JsonProcessingException {
+    public ResponseEntity<ConfirmCheckOutDTO> getConfirmCheckOut(HttpSession session) throws JsonProcessingException {
         // Lấy ra thông tin người dùng hiện tại
         User user = (User) session.getAttribute("userInfo");
 
         // Lấy ra thông báo confirm check in mới nhất với id của người dùng hiện tại
         Notification notification = notificationService.getConfirmCheckOutByUserIdReceive(user.getUserId());
         if(notification == null) {
+            ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();
             OrderDetailConfirmCheckOut n = new OrderDetailConfirmCheckOut();
             n.setDurationHavePractice(-1);
-            return ResponseEntity.ok(n);
+            confirmCheckOutDTO.setOrderDetailConfirmCheckOut(n);
+            return ResponseEntity.ok(confirmCheckOutDTO);
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -102,7 +150,11 @@ public class NotificationController {
         orderCheckOut.setHistoryCheckInId(checkInHistoryService.getCheckInHistoryIdByOrderDetailIdAndCheckInTime(orderDetailId, checkInTime));
         orderCheckOut.setCheckOutTime(new Timestamp(checkOutTimeLong));
         orderCheckOut.setOrderDetailId(orderDetailId);
-        return ResponseEntity.ok(orderCheckOut);
+
+        ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();
+        confirmCheckOutDTO.setOrderDetailConfirmCheckOut(orderCheckOut);
+        confirmCheckOutDTO.setNotification(notification);
+        return ResponseEntity.ok(confirmCheckOutDTO);
     }
 
     @GetMapping("/seen")

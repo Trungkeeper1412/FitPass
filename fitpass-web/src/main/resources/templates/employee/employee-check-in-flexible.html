@@ -395,8 +395,38 @@
                                 },
                                 data: JSON.stringify(dataToSend),
                                 success: function (data) {
-                                    console.log("Gửi yêu cầu check out thành công")
-                                    location.reload()
+                                    if(data > 0){
+                                        Swal.fire({
+                                            toast: true,
+                                            icon: 'success',
+                                            title: `Gửi yêu cầu check in thành công`,
+                                            animation: true,
+                                            position: 'top-right',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+                                    } else {
+                                        Swal.fire({
+                                            toast: true,
+                                            icon: 'error',
+                                            title: `Gửi yêu cầu check in không thành công`,
+                                            animation: true,
+                                            position: 'top-right',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+                                    }
+
                                 },
                                 error: function () {
                                     alert("Đã xảy ra lỗi trong quá trình gửi thông tin check out");
