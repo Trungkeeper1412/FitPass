@@ -5,21 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import java.sql.Timestamp;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-public class CheckInHistoryFlexible {
+@Setter
+public class CheckInHistoryFixed {
     private String username;
     private String phoneNumber;
     private String empName;
     private Timestamp checkInTime;
-    private Timestamp checkOutTime;
-    private double pricePerHours;
-    private double totalCredit;
-    private String duration;
+    private String gymPlanName;
+    private double credit;
 }
