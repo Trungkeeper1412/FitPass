@@ -1,5 +1,6 @@
 package com.ks.fitpass.checkInHistory.service;
 
+import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 
 import java.sql.Timestamp;
@@ -15,5 +16,11 @@ public interface CheckInHistoryService {
     List<Integer> getListCheckInHistoryIdNeedCheckOut();
 
     List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId);
+
+    List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId);
+
+    List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter);
+
+    List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter);
 
 }

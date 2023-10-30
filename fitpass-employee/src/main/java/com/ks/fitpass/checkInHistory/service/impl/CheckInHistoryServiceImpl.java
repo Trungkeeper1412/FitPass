@@ -1,5 +1,6 @@
 package com.ks.fitpass.checkInHistory.service.impl;
 
+import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.repository.CheckInHistoryRepository;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
@@ -39,5 +40,20 @@ public class CheckInHistoryServiceImpl implements CheckInHistoryService {
     @Override
     public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
         return checkInHistoryRepository.getListCheckInHistoryFlexibleByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId) {
+        return checkInHistoryRepository.getListCheckInHistoryFixedByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter) {
+        return checkInHistoryRepository.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
+    }
+
+    @Override
+    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
+        return checkInHistoryRepository.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
     }
 }
