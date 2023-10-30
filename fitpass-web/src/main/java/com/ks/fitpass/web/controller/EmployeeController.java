@@ -2,6 +2,7 @@ package com.ks.fitpass.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
@@ -109,47 +110,93 @@ public class EmployeeController {
     }
 
     @GetMapping("/flexible/checkin")
-    public ResponseEntity<Integer> performFlexibleCheckIn(@RequestParam("id") int orderDetailId,@RequestParam("uis") int userIdSend,@RequestParam("uir") int userIdReceive,@RequestParam("di") int departmentId){
-        int updateResult = employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()), null, 0, userIdSend);
-        // Thay đổi status thành đang tập để chuyển sang tab check in
-        int updateOrderDetailUseStatus = orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
-        // Gửi lại thông báo cho người gửi trước đấy là đã xác nhận check in
-        Notification notification = new Notification();
-        notification.setUserIdSend(userIdReceive);
-        notification.setUserIdReceive(userIdSend);
-        String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
-        notification.setMessageType("Thông báo xác nhận checkin tới employee");
-        notification.setMessage(username + " đã xác nhận check in thành công");
-        notification.setDepartmentId(departmentId);
-        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
-        int insertStatus = notificationService.insertNotification(notification);
+    public ResponseEntity<Integer> performFlexibleCheckIn(@RequestParam("id") int orderDetailId,
+                                                          @RequestParam("uis") int userIdSend,@RequestParam("uir") int userIdReceive,
+                                                          @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel){
+        // Nếu người dùng không nhấn cancel thì check in
+        if(cancel.equals("no")) {
+            int updateResult = employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()), null, 0, userIdSend);
+            // Thay đổi status thành đang tập để chuyển sang tab check in
+            int updateOrderDetailUseStatus = orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
+            // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
+            Notification notification = new Notification();
+            notification.setUserIdSend(userIdReceive);
+            notification.setUserIdReceive(userIdSend);
+            String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
+            notification.setMessageType("Thông báo checkin thành công tới employee");
+            notification.setMessage(username + " đã xác nhận check in thành công");
+            notification.setDepartmentId(departmentId);
+            notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+            int insertStatus = notificationService.insertNotification(notification);
+
+            // Kiểm tra xem nếu khi check in là gói cố định thì phải trừ cả duration đi nữa
+            if(orderDetailService.isFixedGymPlan(orderDetailId)) {
+                orderDetailService.decreaseDuration(orderDetailId);
+            }
+        } else {
+            // Gửi lại thông báo cho employee là người dùng đã hủy
+            Notification notification = new Notification();
+            notification.setUserIdSend(userIdReceive);
+            notification.setUserIdReceive(userIdSend);
+            String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
+            notification.setMessageType("Thông báo hủy checkin tới employee");
+            notification.setMessage(username + " đã hủy check in");
+            notification.setDepartmentId(departmentId);
+            notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+            int insertStatus = notificationService.insertNotification(notification);
+        }
         // Kiểm tra xem nếu người dùng đã check in trong ngày hôm nay thì không trừ duration
 
         // Ngược lại trừ duration trong order detail
-        return ResponseEntity.ok(updateResult);
+        return ResponseEntity.ok(1);
     }
 
     @PostMapping("/flexible/checkout")
-    public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session){
-        int updateResult = checkInHistoryService.updateCheckOutTimeAndCredit(updateCheckInHistory.getCheckInHistoryId(), updateCheckInHistory.getCheckOutTime(), updateCheckInHistory.getTotalCredit());
-        // Update status use của order detail id thành chưa tập
-        orderDetailService.updateOrderDetailsUseStatus(updateCheckInHistory.getOrderDetailId(), "Chưa tập");
-        User user = (User) session.getAttribute("userInfo");
+    public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) throws JsonProcessingException {
+        if(updateCheckInHistory.getCancel().equals("No")) {
+            int updateResult = checkInHistoryService.updateCheckOutTimeAndCredit(updateCheckInHistory.getCheckInHistoryId(), updateCheckInHistory.getCheckOutTime(), updateCheckInHistory.getTotalCredit());
+            // Update status use của order detail id thành chưa tập
+            orderDetailService.updateOrderDetailsUseStatus(updateCheckInHistory.getOrderDetailId(), "Chưa tập");
+            User user = (User) session.getAttribute("userInfo");
 
-        // Gửi lại thông báo cho người gửi trước đấy là đã thanh toán thành công
-//        Notification notification = new Notification();
-//        notification.setUserIdSend(userIdReceive);
-//        notification.setUserIdReceive(userIdSend);
-//        String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
-//        notification.setMessageType("Thông báo xác nhận checkout tới employee");
-//        notification.setMessage(username + " đã thanh toán thành công");
-//        notification.setDepartmentId(departmentId);
-//        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
-//        int insertStatus = notificationService.insertNotification(notification);
+            // Lấy ra notification từ employee gửi yêu cầu check out trước đấy
+            Notification notificationFromEmployee = updateCheckInHistory.getNotification();
+            ObjectMapper objectMapper = new ObjectMapper();
+            DataSendCheckOutFlexibleDTO dataSendCheckOutFlexibleDTO = objectMapper.readValue(notificationFromEmployee.getMessage(), DataSendCheckOutFlexibleDTO.class);
+            int orderDetailId = dataSendCheckOutFlexibleDTO.getOrderDetailId();
 
-        // Trừ credit của người dùng
 
-        return ResponseEntity.ok(updateResult);
+            // Gửi lại thông báo cho người gửi trước đấy là đã thanh toán thành công
+            Notification notification = new Notification();
+            notification.setUserIdSend(notificationFromEmployee.getUserIdReceive());
+            notification.setUserIdReceive(notificationFromEmployee.getUserIdSend());
+            String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
+            notification.setMessageType("Thông báo checkout thành công tới employee");
+            notification.setMessage(username + " đã thanh toán thành công");
+            notification.setDepartmentId(notificationFromEmployee.getDepartmentId());
+            notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+            int insertStatus = notificationService.insertNotification(notification);
+
+            // Trừ credit của người dùng
+            walletService.updateBalanceByUderId(user.getUserId(), updateCheckInHistory.getCreditAfterPay());
+        } else {
+            Notification notificationFromEmployee = updateCheckInHistory.getNotification();
+            ObjectMapper objectMapper = new ObjectMapper();
+            DataSendCheckOutFlexibleDTO dataSendCheckOutFlexibleDTO = objectMapper.readValue(notificationFromEmployee.getMessage(), DataSendCheckOutFlexibleDTO.class);
+            int orderDetailId = dataSendCheckOutFlexibleDTO.getOrderDetailId();
+            // Gửi lại thông báo cho người gửi trước đấy là đã thanh toán thành công
+            Notification notification = new Notification();
+            notification.setUserIdSend(notificationFromEmployee.getUserIdReceive());
+            notification.setUserIdReceive(notificationFromEmployee.getUserIdSend());
+            String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
+            notification.setMessageType("Thông báo hủy checkout tới employee");
+            notification.setMessage(username + " đã hủy checkout");
+            notification.setDepartmentId(notificationFromEmployee.getDepartmentId());
+            notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+            int insertStatus = notificationService.insertNotification(notification);
+        }
+
+        return ResponseEntity.ok(1);
     }
 
     @GetMapping("/flexible/sendCheckinRequest")
@@ -288,9 +335,31 @@ public class EmployeeController {
     @GetMapping("/history")
     public String getCheckInHistory(@RequestParam("id")int departmentId, Model model){
         List<CheckInHistoryFlexible> listFlexible = checkInHistoryService.getListCheckInHistoryFlexibleByDepartmentId(departmentId);
+        List<CheckInHistoryFixed> listFixed = checkInHistoryService.getListCheckInHistoryFixedByDepartmentId(departmentId);
         model.addAttribute("listFlexible", listFlexible);
+        model.addAttribute("listFixed", listFixed);
         model.addAttribute("departmentId", departmentId);
         return "employee/employee-check-in-history";
+    }
+
+    @GetMapping("/history/searchFlex")
+    public ResponseEntity<List<CheckInHistoryFlexible>> searchFlex(
+            @RequestParam("id") int departmentId,
+            @RequestParam(name = "username", required = false) String username,
+            @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(name = "dateFilter", required = false) String dateFilter) {
+        List<CheckInHistoryFlexible> listFlexible = checkInHistoryService.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
+        return ResponseEntity.ok(listFlexible);
+    }
+
+    @GetMapping("/history/searchFixed")
+    public ResponseEntity<List<CheckInHistoryFixed>> searchFixed(
+            @RequestParam("id") int departmentId,
+            @RequestParam(name = "username", required = false) String username,
+            @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(name = "dateFilter", required = false) String dateFilter) {
+        List<CheckInHistoryFixed> listFlexible = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
+        return ResponseEntity.ok(listFlexible);
     }
 
     public String calculateDuration(Timestamp checkInTime, Timestamp checkOutTime) {
