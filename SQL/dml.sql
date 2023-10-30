@@ -2,13 +2,15 @@
 INSERT INTO role (role_id, role_name) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO role (role_id, role_name) VALUES (2, 'ROLE_MANAGER');
 INSERT INTO role (role_id, role_name) VALUES (3, 'ROLE_EMPLOYEE');
-INSERT INTO role (role_id, role_name) VALUES (4, 'ROLE_MEMBER');
+INSERT INTO role (role_id, role_name) VALUES (4, 'ROLE_USER');
 
 /********** User Creation ***********/
 -- Admin creation
--- Admin creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
-VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St, City, Country', '1990-01-01', 'Male','/static/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St',
+        '1990-01-01', 'Male','/images.system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
@@ -16,28 +18,57 @@ VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c
 -- Gym Owner creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
-                         gender)
-VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '1234567890', '123 Main St, City, Country', '1990-01-01', 'Female');
+                         gender, image_url)
+VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '1234567890', '123 Main St',
+        '1990-01-01', 'Female','/images.system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (2, 'gymowner', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 2);
 
+-- Employee creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (3, 'Nguyen Van Bao', 'Linh', 'cuongbulu@gmail.com', '0987654321', '123 Main St',
+        '2001-01-01', 'Male','/images.system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
+VALUES (3, 'employee', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 3);
+
+-- User creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (4, 'Le Dinh', 'Tuan', 'tuana1@gmail.com', '0987654321', '123 Main St',
+        '2001-01-01', 'Male','/images.system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
+VALUES (4, 'tuanld', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 4);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (5, 'Dinh', 'Tuan Anh', 'tuananh@gmail.com', '0987654321', '123 Main St',
+        '1995-01-01', 'Male','/images.system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
+VALUES (5, 'anhdt', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 5);
+
 -- Assign role for users
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (1, 1, 1);
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (2, 2, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (3, 3, 3);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (4, 4, 4);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (5, 5, 4);
 
 -- User Wallet insert
 INSERT INTO wallet (user_id, balance) VALUES (1,20000);
 INSERT INTO wallet (user_id, balance) VALUES (2,20000);
+INSERT INTO wallet (user_id, balance) VALUES (3,0);
+INSERT INTO wallet (user_id, balance) VALUES (4,1000);
+INSERT INTO wallet (user_id, balance) VALUES (5,1000);
 
-
-/********** Gym Department Creation ***********/
--- Create Gym Department Status
-INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('DEPARTMENT_STATUS', 1, 'Hoạt Động');
-INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('DEPARTMENT_STATUS', 2, 'Không Hoạt Động');
-INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_STATUS', 1, 'Không Hoạt Động');
-INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_STATUS', 2, 'Không Hoạt Động');
-
+/********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,description,rating,contact_number,contact_email,brand_status_key)
 VALUES
@@ -97,6 +128,13 @@ VALUES
     (5, 'https://clbdoanhnhansaigon.vn/dtool/data/computer/web670/viber-image-2020-10-06-09-49-11.jpg','Desc5'),
     (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg','Desc5'),
     (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg', 'Desc5');
+
+/********** Gym Department Creation ***********/
+-- Create Gym Department Status
+INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('DEPARTMENT_STATUS', 1, 'Hoạt Động');
+INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('DEPARTMENT_STATUS', 2, 'Không Hoạt Động');
+INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_STATUS', 1, 'Không Hoạt Động');
+INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_STATUS', 2, 'Không Hoạt Động');
 
 
 -- Create Gym Department infos
