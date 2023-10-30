@@ -9,7 +9,7 @@
                     <h5 class="fw-bold" th:text="${brand.getBrandName()}"></h5>
                     <div style="height: 25px; margin-top: -3px;" th:attr="data-star=${brand.getRating()}"></div>
                     <div class="description" th:text="${brand.getBrandDescription()}"></div>
-                    <div style="display: flex;">
+                    <div style="display: flex; margin-top: 20px">
                         <div class="basic-info">
                             <span><img src="https://cdn-icons-png.flaticon.com/128/11569/11569967.png"></span>
                             <span th:text="${brandDepartmentsMap.get(brand.getBrandId())?.size()} + ' Cơ Sở'"></span>

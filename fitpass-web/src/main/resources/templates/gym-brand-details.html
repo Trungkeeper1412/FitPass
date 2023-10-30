@@ -35,9 +35,9 @@
 
 
 <!-- Content -->
-<div class="container gym-brand-content">
-    <div class="row justify-content-center md-3 gym-brand-name">
-        <h2 class="text-center fw-bold" th:text="${brand.brandName}"></h2>
+<div class="container gym-brand-content" style="margin-top: 50px">
+    <div class="row justify-content-center md-3 gym-brand-name mt-5">
+        <h2 class="text-center fw-bold" th:text="${brand.getBrandName()}"></h2>
     </div>
     <div class="row brand-info justify-content-center">
         <div class="col-md-7 col-lg-7 col-sm-6 brand-first-info">
@@ -68,28 +68,30 @@
 
    <!-- DỊCH VỤ -->
 <h4 class="row fw-bold mt-5">Dịch vụ</h4>
-<div class="list-service-wrapper">
-    <div class="scroll-services justify-content-center">
+<!--<div class="list-service-wrapper row">-->
+    <div class="scroll-services row">
         <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
             <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover;'"></div>
             <div class="service-name" th:text="${amenitie.amenitieName}"></div>
             <div class="service-descript" th:text="${amenitie.description}"></div>
         </div>
     </div>
-</div>
+<!--</div>-->
 
     <!-- ALBUM ẢNH -->
     <h4 class="row fw-bold mt-5">Album ảnh</h4>
     <div class="slideshow-container">
         <div class="mySlides1" th:each="album : ${brandAlbums}">
-            <img th:src="${album.photoUrl}" style="width:100%; height: 60%">
+            <img th:src="${album.photoUrl}" style="width:100%;">
         </div>
 
         <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
         <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
     </div>
+
+
     <!--CƠ SỞ-->
-    <h4 class="row fw-bold mt-5" id="club">CÁC CƠ SỞ</h4>
+    <h4 class="row fw-bold mt-5 brand-dept-title" id="club">CÁC CƠ SỞ</h4>
     <div class="list-gym-department container">
         <div class="department" th:each="dept : ${departments}">
             <div class="dept-img"

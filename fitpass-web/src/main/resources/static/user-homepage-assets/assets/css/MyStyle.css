@@ -2237,12 +2237,12 @@ img {
 .slideshow-container {
   width: 100%;
   position: relative;
-  margin: auto;
+  /*height: 30%;*/
 }
 
 .slideshow-container img{
   width:100%;
-  height: 660px;
+  /*height: 580px;*/
   /* border: 1px solid white; */
   /* border-radius: 15px; */
 }
@@ -2697,17 +2697,27 @@ input:checked + .toggle-slider:before {
   margin: auto;
   width: fit-content;
 }
+.gym-service-logo:hover + .service-name {
+  display: block;
+  position: absolute;
+  color: white;
+  width: fit-content;
+  padding: 3px;
+  border-radius: 5px;
+  background-color: black;
+}
 .gym-service-logo i{
   font-size:30px;
 }
 .service-name{
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 400;
-  font-size: 12px;
-  color: rgb(0, 0, 0);
+  display: none;
+  /*height: 50px;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*font-weight: 400;*/
+  /*font-size: 12px;*/
+  /*color: rgb(0, 0, 0);*/
 }
 .service-row{
   display: flex;
@@ -3552,13 +3562,13 @@ section {
   margin: auto;
 }
 .body-gym-brand-details .gym-brand-name{
-  margin-top: 30px;
+  margin-top: 80px;
   border-bottom: 1px solid black;
   padding-bottom: 10px;
 }
 .body-gym-brand-details .brand-bg-image img{
-  width: 1900px;
-  height: 480px;
+  width: 100%;
+  height: 350px;
   margin-top: 60px;
   object-fit: cover;
 }
@@ -3590,16 +3600,12 @@ section {
   font-weight: bold;
   margin-top: 160px;
 }
-/* .brand-descript{
-  padding:
-} */
 .brand-contact{
   margin-top: 20px;
 }
 .list-service-wrapper {
   position: relative;
-  /* padding-left: 30px;
-  padding-right: 30px; */
+  width: 100%;
   margin: auto;
 }
 
@@ -3607,11 +3613,7 @@ section {
   position: relative;
   width: 100%;
   padding: 30px 0px;
-  margin: auto;
   margin-bottom: 10px;
-  /* margin-left: -10px; */
-  /* align-items: center; */
-  background-color: none;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -3619,27 +3621,23 @@ section {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
-.scroll-services::-webkit-scrollbar-track
-{
+
+.scroll-services::-webkit-scrollbar-track {
   background-color: #ffffff;
 }
 
-.scroll-services::-webkit-scrollbar
-{
+.scroll-services::-webkit-scrollbar {
   width: 10px;
   height: 4px;
   background-color: #ffffff;
 }
 
-.scroll-services::-webkit-scrollbar-thumb
-{
+.scroll-services::-webkit-scrollbar-thumb {
   background-color: #c6c6c6;
-  border: 2px solid  #c6c6c6;
+  border: 2px solid #c6c6c6;
 }
 
-
 .scroll-services .child {
-  /* width: 263px; */
   height: 480px;
   margin: 10px;
   padding: 0;
@@ -3648,17 +3646,12 @@ section {
   overflow: hidden;
 }
 
-.list-service-wrapper .left {
-  /* position: absolute;
-  left: 0; */
+.scroll-services .left {
   transform: translateY(-50%);
   border: none;
 }
 
-.list-service-wrapper .right {
-  /* position: absolute;
-  right: 0;
-  top: 50%; */
+.scroll-services .right {
   transform: translateY(-50%);
   border: none
 }
@@ -3668,22 +3661,21 @@ section {
   width: 100%;
   margin-left: 0;
 }
-.list-service-wrapper .service-name{
+.scroll-services .service-name{
   font-weight: 600;
   color: orange;
 }
-.list-service-wrapper .service-descript{
+.scroll-services .service-descript{
   font-size: 13px;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 /* Album */
 .gym-brand-content .slideshow-container {
-  /* max-width: 1000px; */
+  width: 90%;
   margin: auto;
   margin-top: 30px;
   position: relative;
-  width: 60%;
 }
 
 .gym-brand-content .prev, .next {
@@ -3768,7 +3760,6 @@ section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
 }
 .gym-brand-content .pagination-wrapper .page-numbers{
   font-size: 16px;
@@ -3784,16 +3775,33 @@ section {
   box-shadow: 3px 4px rgb(224, 224, 224);
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (min-width: 1200px) {
   .gym-brand-content .slideshow-container {
-    margin: auto;
+    width: 100%;
+    height: 500px;
+    align-items: center;
+    /*height: 350px;*/
     margin-top: 30px;
-    position: relative;
-    height: 60%;
+    margin-bottom: 50px;
+    /*height: fit-content;*/
   }
   .body-gym-brand-details .mySlides1 img {
-    height: 60%;
+    width: 90%;
+    height: 500px;
+
   }
+
+}
+
+@media screen and (max-width: 1400px) {
+  /*.gym-brand-content .slideshow-container {*/
+  /*  width: 90%;*/
+  /*  margin-top: 30px;*/
+  /*}*/
+  /*.body-gym-brand-details .mySlides1 img {*/
+  /*  width: 90%;*/
+  /*  height: 50%;*/
+  /*}*/
   .gym-brand-content .pagination-wrapper .page-numbers{
     font-size: 14px;
   }
@@ -3802,13 +3810,6 @@ section {
     flex-wrap: wrap;
   }
 }
-
-/* .dept-description{
-  background-color: #2196F3;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-} */
 .dept-description .service-type{
   margin: auto;
   width: 70px;
@@ -3825,13 +3826,13 @@ section {
   font-size:20px;
 }
 .dept-description .service-name{
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  font-size: 12px;
-  color: rgb(0, 0, 0);
+  /*height: 35px;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*font-weight: 500;*/
+  /*font-size: 12px;*/
+  /*color: rgb(0, 0, 0);*/
 }
 
 @media screen and (max-width: 770px) {
@@ -3862,10 +3863,10 @@ section {
   .dept-description .gym-service-logo i{
     font-size:15px;
   }
-  .dept-description .service-name{
-    height: 30px;
-    font-size: 10px;
-  }
+  /*.dept-description .service-name{*/
+  /*  height: 30px;*/
+  /*  font-size: 10px;*/
+  /*}*/
   .body-gym-brand-details .dept-info h4{
     font-size: 17px;
   }
@@ -4060,7 +4061,7 @@ section {
 .list-of-brand .brand{
   display: flex;
   /* width: 48%; */
-  /* height: fit-content; */
+   height: fit-content;
   min-height: 290px;
   border-radius: 15px;
   background-color: white;
@@ -4079,7 +4080,13 @@ section {
   margin-top: 5px;
   color: black;
   font-size: 14px;
-  height: 42%;
+  /*height: 42%;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 25px;
+  -webkit-line-clamp: 5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .list-of-brand .basic-info{
   color: black;
@@ -4195,7 +4202,7 @@ section {
   text-align: center;
   font-size: 18px;
   color: rgb(0, 0, 0);
-  padding: 10px;
+  /*padding: 10px;*/
   font-weight: 600;
 }
 .gym-dept .distance img{
@@ -4216,10 +4223,17 @@ section {
   display: flex;
   flex-wrap: wrap;
 }
+.row-gym{
+  width: 90%;
+  margin: auto;
+}
 .list-of-gym .card {
+  width: 95%;
+  height: fit-content;
+  margin: auto;
   border-radius: 20px;
   background-color: white;
-  padding: 20px 20px 0px 20px;
+  padding: 0px 0px 0px 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: black;
   left: 0;
@@ -4230,6 +4244,7 @@ section {
 }
 .list-of-gym .card img{
   width: 100%;
+  padding-top: 5px;
   height: 30%;
 }
 .list-of-gym .card-body label {
