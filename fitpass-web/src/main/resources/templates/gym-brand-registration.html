@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>registration</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{/user-homepage-assets/assets/img/icon.png}" rel="icon">
+    <link th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header th:replace="common/navbar :: navbar"></header>
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs bg-black">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <ol>
+                    <li><a href="index.html">Fitpass</a></li>
+                    <li>Trang chủ</li>
+                </ol>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center justify-content-center">
+        <div class="row mt-3 mb-5" data-aos="fade-up" data-aos-delay="150">
+            <div class="col-xl-5 card-bg d-flex align-items-center justify-content-center">
+                <div class="card-2">
+                    <div class="card-body">
+                        <h3 class="fw-bold">Đăng kí phòng tập của bạn vào hệ thống của chúng tôi miễn phí</h3>
+                        <p class="">Tham gia cùng hơn 41,500 phòng tập, phòng gym, các địa điểm chăm sóc sức khỏe và làm
+                            đẹp để phát triển doanh nghiệp của mình với FitPass - bắt đầu một cách miễn phí ngay hôm
+                            nay.</p>
+                        <p class="fw-bold"><i class="bi bi-clock"></i> Đăng ký nhanh trong vòng 10 phút</p>
+                        <p class="fw-bold"><i class="bi bi-calendar-event"></i> Tạo các gói tập và dịch vụ miễn phí</p>
+                        <p class="fw-bold"><i class="bi bi-person-add"></i> Tận dụng người dùng có phạm vi toàn quốc của
+                            chúng
+                            tôi, bao gồm cả người đăng ký cá nhân và doanh nghiệp</p>
+                        <p class="fw-bold"><i class="bi bi-currency-dollar"></i> Tạo thêm thu nhập cho cơ sở của bạn</p>
+                        <p class="fst-italic">Đã là đối tác của FitPass, nhưng cần sự trợ giúp? Liên hệ với chúng tôi <a
+                                href="#">tại đây</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7">
+                <div class="container2 text-white" data-aos="zoom-in">
+                    <h3 class="fw-bold mb-5">Sẵn sàng để bắt đầu kiếm thêm thu nhập?</h3>
+                    <h4 class="mb-5">Đăng kí phòng tập của bạn trên FitPass, và kiếm thêm thu nhập.</h4>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="venueName" class="form-label">Tên phòng tập :</label>
+                                <input type="text" class="form-control" id="venueName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="location" class="form-label">Vị trí :</label>
+                                <input type="text" class="form-control" id="location" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">Tên :</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Họ :</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email :</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phoneNumber" class="form-label">Số điện thoại :</label>
+                                <input type="tel" class="form-control" id="phoneNumber" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="websiteURL" class="form-label">Địa chỉ trang web ( nếu có )*</label>
+                                <input type="url" class="form-control" id="websiteURL" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="businessType" class="form-label">Loại hình kinh doanh :</label>
+                                <select class="form-select" id="businessType" required>
+                                    <option value="" disabled selected>Chọn...</option>
+                                    <option value="Phòng tập thể dục">Phòng tập thể dục</option>
+                                    <option value="Phòng tập thể hình">Phòng tập thể hình</option>
+                                    <option value="Phòng tập yoga">Phòng tập yoga</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Bắt đầu ngay</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about pt-5 pb-5">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row">
+                    <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+                        <img src="assets/img/brand/about-brand.jpg" class="img-fluid rounded" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right"
+                        data-aos-delay="100">
+                        <h3>Trở thành đối tác?</h3>
+                        <p class="fw-bold">Đăng ký trực tuyến (trong vòng chưa đầy 10 phút).</p>
+                        <p>Với giao diện dễ dàng và thao tác nhanh chóng bạn có tham gia vào hệ thống của chúng tôi.</p>
+                        <p class="fw-bold">Tạo các gói tập và dịch vụ miễn phí.</p>
+                        <p>Cho phép bạn có thể tự do thêm các gói tập và dịch vụ của riêng bạn.</p>
+                        <p class="fw-bold">Tạo thêm thu nhập cho cơ sở của bạn.</p>
+                        <p>Với độ phủ sóng trải dài toàn Việt Nam hệ thống của chúng tôi cho phép bạn tiếp cận được mọi
+                            nguồn khách hàng.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Section -->
+
+        <section id="top-brand" class="top-brand pt-5">
+            <h3 class="text-center mt-4 fw-bold">Tham gia một mạng lưới các chuỗi phòng Gym hàng đầu</h3>
+            <p class="container text-center">Các chuỗi phòng Gym với đủ mọi đối tác với ClassPass. Cho dù bạn là một thương hiệu lớn hay mới bắt đầu, bạn sẽ có một môi trường công bằng như nhau.</p>
+            <div class="row p-3">
+                <div class="col text-center">
+                    <img src="assets/img/brand/icon/all-icon.jpg" alt="ClassPass Partner Logo" class="container center-image">
+                </div>
+            </div>
+        </section>        
+
+        <section id="service" class="about">
+            <h3 class="text-center mt-4 fw-bold">Bạn có các dịch vụ nổi bật? Hãy cho chúng tôi biết</h3>
+            <p class="container text-center">Với FitPass, bạn có thể tạo ra tất cả các trải nghiệm khác nhau mà không
+                tốn thêm chi phí nào. Người dùng sẽ có thể tìm và sử dụng các dịch vụ của bạn bằng cách tìm kiếm trực
+                tiếp studio của bạn, hoặc bằng cách tìm kiếm trên trang riêng của cơ sở của bạn đã cung cấp cho chúng
+                tôi.</p>
+            <div class="row p-3">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                    <div class="card-3 mb-4">
+                        <img src="assets/img/brand/service/boxing.jpg" class="card-img-top" alt="Dịch vụ 1">
+                        <div class="card-body">
+                            <label>Boxing</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                    <div class="card-3 mb-4">
+                        <img src="assets/img/brand/service/yoga.jpg" class="card-img-top" alt="Dịch vụ 2">
+                        <div class="card-body">
+                            <label>Yoga</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                    <div class="card-3 mb-4">
+                        <img src="assets/img/brand/service/outdoor.jpg" class="card-img-top" alt="Dịch vụ 3">
+                        <div class="card-body">
+                            <label>Tập ngoài trời</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                    <div class="card-3 mb-4">
+                        <img src="assets/img/brand/service/running.jpg" class="card-img-top" alt="Dịch vụ 4">
+                        <div class="card-body">
+                            <label>Chạy bộ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                    <div class="card-3 mb-4">
+                        <img src="assets/img/brand/service/spa.jpg" class="card-img-top" alt="Dịch vụ 5">
+                        <div class="card-body">
+                            <label>Spa</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                    <div class="card-3 mb-4">
+                        <img src="assets/img/brand/service/thien.jpg" class="card-img-top" alt="Dịch vụ 6">
+                        <div class="card-body">
+                            <label>Thiền</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info">
+                            <h3>Gp<span>.</span></h3>
+                            <p>
+                                A108 Adam Street <br>
+                                NY 535022, USA<br><br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+
+    <!-- Template Main JS File -->
+    <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+
+</body>
+
+</html>
