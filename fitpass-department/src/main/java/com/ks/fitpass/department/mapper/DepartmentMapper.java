@@ -19,6 +19,7 @@ public class DepartmentMapper implements RowMapper<Department> {
                 .departmentLogoUrl(resultSet.getString("logo_url"))
                 .departmentWallpaperUrl(resultSet.getString("wallpaper_url"))
                 .departmentDescription(resultSet.getString("description"))
+                .departmentThumbnailUrl(resultSet.getString("thumbnail_url"))
                 .latitude(resultSet.getDouble("latitude"))
                 .longitude(resultSet.getDouble("longitude"))
                 .rating(resultSet.getDouble("rating"))

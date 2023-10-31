@@ -9,9 +9,8 @@ public interface IRepositoryQuery {
                      d.address,
                      d.contact_number,
                      d.logo_url,
-
                      d.wallpaper_url,
-
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -37,6 +36,7 @@ public interface IRepositoryQuery {
                      d.contact_number,
                      d.logo_url,
                      d.wallpaper_url,
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -64,6 +64,7 @@ public interface IRepositoryQuery {
                      d.contact_number,
                      d.logo_url,
                      d.wallpaper_url,
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -92,6 +93,7 @@ public interface IRepositoryQuery {
                                                             d.contact_number,
                                                             d.logo_url,
                                                             d.wallpaper_url,
+                                                            d.thumbnail_url,
                                                             d.description,
                                                             d.latitude,
                                                             d.longitude,
@@ -120,6 +122,7 @@ public interface IRepositoryQuery {
                      d.logo_url,
 
                      d.wallpaper_url,
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -146,6 +149,7 @@ public interface IRepositoryQuery {
                      d.logo_url,
 
                      d.wallpaper_url,
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -302,16 +306,26 @@ public interface IRepositoryQuery {
 """;
 
     String GET_DEPARTMENT_FEATURES = """
-    SELECT
-        feature_id,
-        gym_department_id,
-        feature_icon,
-        feature_name,
-        isSelected
-    FROM
-        gym_department_features
-    WHERE
-        gym_department_id = ?
+            SELECT
+              df.gym_department_feature_id,
+              f.feature_id,
+              f.feature_icon,
+              f.feature_name,
+              df.gym_department_id,
+              df.feature_status
+            FROM gym_department_features df
+            INNER JOIN features f ON df.feature_id = f.feature_id
+            WHERE df.gym_department_id = ? AND f.feature_status = 1 AND df.feature_status = 1
+            """;
+
+    String GET_DEPARTMENT_FEATURES_BY_STATUS_AND_DEPARTMENT_ID = """
+    SELECT 
+    f.feature_icon, f.feature_name, gdf.feature_status
+    FROM 
+        gym_department_features gdf
+        JOIN features f ON f.feature_id = gdf.feature_id
+    WHERE 
+    gdf.gym_department_id = ? AND gdf.feature_status = ?
 """;
 
 

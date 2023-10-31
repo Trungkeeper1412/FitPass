@@ -16,6 +16,7 @@ public class BrandMapper implements RowMapper<Brand> {
                 .brandName(resultSet.getString("name"))
                 .brandLogoUrl(resultSet.getString("logo_url"))
                 .brandWallpaperUrl(resultSet.getString("wallpaper_url"))
+                .brandWallpaperUrl(resultSet.getString("thumbnail_url"))
                 .brandDescription(resultSet.getString("description"))
                 .rating(resultSet.getDouble("rating"))
                 .brandContactNumber(resultSet.getString("contact_number"))

@@ -70,16 +70,16 @@ INSERT INTO wallet (user_id, balance) VALUES (5,1000);
 
 /********** Brand Creation ***********/
 -- Create brand infos
-INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,description,rating,contact_number,contact_email,brand_status_key)
+INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)
 VALUES
-    ( 1,1, 'Kickfit Sports', 'https://kickfit-sports.com/wp-content/uploads/2021/03/Do-Den.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-3-1.png', 'Công ty cổ phần thể thao Kickfit Sports sở hữu tổ hợp đầy đủ các bộ môn từ võ thuật, thể hình, rèn luyện Thân - Tâm - Trí. Định hướng chính của Kickfit Sports là đưa các bộ môn Kickfit và Fitness trở thành thói quen sinh hoạt tích cực hàng ngày cho tất cả mọi người.Kickfit Sports đã đang và sẽ phát triển theo hướng: “Chuyên nghiệp – Chất Lượng – Luôn đổi mới và hoàn thiện” đồng thời mong muốn mang lại sức khỏe và thịnh vượng cho hàng triệu người Việt Nam.Với hơn 10 năm xây dựng và phát triển, hiện tại Kickfit Sports đang sở hữu 14 cơ sở phòng tập trải rộng khắp Hà Nội. Trung tâm luôn chú trọng đầu tư, cải tiến các sản phẩm, dịch vụ để mang đến môi trường tập luyện 5 sao, uy tín và chất lượng.', 4.5, '9991234567', 'brand1@email.com', 1),
-    ( 2,1, 'Elite Fitness', 'https://bimgroup.com/uploads/catalog/2022/6/4ff9ee27-1562-4d32-be81-8f7f52fe3eab.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-6.png', 'HỆ THỐNG CÂU LẠC BỘ THỂ THAO CAO CẤP ELITE FITNESS
+    ( 1,1, 'Kickfit Sports', 'https://kickfit-sports.com/wp-content/uploads/2021/03/Do-Den.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-3-1.png','https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-3-1.png', 'Công ty cổ phần thể thao Kickfit Sports sở hữu tổ hợp đầy đủ các bộ môn từ võ thuật, thể hình, rèn luyện Thân - Tâm - Trí. Định hướng chính của Kickfit Sports là đưa các bộ môn Kickfit và Fitness trở thành thói quen sinh hoạt tích cực hàng ngày cho tất cả mọi người.Kickfit Sports đã đang và sẽ phát triển theo hướng: “Chuyên nghiệp – Chất Lượng – Luôn đổi mới và hoàn thiện” đồng thời mong muốn mang lại sức khỏe và thịnh vượng cho hàng triệu người Việt Nam.Với hơn 10 năm xây dựng và phát triển, hiện tại Kickfit Sports đang sở hữu 14 cơ sở phòng tập trải rộng khắp Hà Nội. Trung tâm luôn chú trọng đầu tư, cải tiến các sản phẩm, dịch vụ để mang đến môi trường tập luyện 5 sao, uy tín và chất lượng.', 4.5, '9991234567', 'brand1@email.com', 1),
+    ( 2,1, 'Elite Fitness', 'https://bimgroup.com/uploads/catalog/2022/6/4ff9ee27-1562-4d32-be81-8f7f52fe3eab.png', 'https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-6.png','https://diadiemvietnam.vn/wp-content/uploads/2022/09/Thiet-ke-chua-co-ten-6.png', 'HỆ THỐNG CÂU LẠC BỘ THỂ THAO CAO CẤP ELITE FITNESS
 Ra đời từ năm 2010, Elite Fitness đã từng bước khẳng định vị thế và danh tiếng của mình là hệ thống câu lạc bộ thể dục thể thao cao cấp, hàng đầu tại Việt Nam.
 
 Tại Elite Fitness, những mục tiêu tập luyện của hội viên được hiện thực hóa bởi các chuyên gia hàng đầu trong ngành thể dục thẩm mỹ như: Giảm cân; Tạo hình cơ thể; Tăng cường cơ bắp, sức mạnh, sức bền; Tăng cường sự linh hoạt, dẻo dai; Tăng cường vẻ đẹp hình thể; Cải thiện và khắc phục các chấn thương thể thao; Cải thiện và khắc phục những vấn đề về sức khỏe; Phục vụ các nhu cầu tập luyện riêng biệt khác…', 3.5, '9981234567', 'brand2@email.com', 1),
-    ( 3,1, 'Citi Gym', 'https://citigym.com.vn/storage/uploads/logocitigym.png', 'https://novaworld.info/wp-content/uploads/2022/10/citigym.jpg', 'CITIGYM - Thương hiệu dẫn đầu phong cách sống, được thành lập từ năm 2018, đến nay CITIGYM đã có 7 chi nhánh tại TP.HCM và phục vụ hơn 100.000 khách hàng. Cơ sở vật chất, trang thiết bị tối tân từ các thương hiệu hàng đầu thế giới. Đội ngũ HLV chuyên nghiệp, giàu kinh nghiệm, mang đến những trải nghiệm tập luyện thú vị, đáp ứng mong muốn về vóc dáng và sức khoẻ cho người Việt. Đặc biệt, Citigym là thương hiệu fitness đầu tiên mang không gian xanh vào phòng tập, cho bạn cảm nhận sự trong lành, nhẹ nhàng thư thái.', 4, '9971234567', 'brand3@email.com', 1),
-    ( 4,1, 'California Fitness', 'https://cali.vn/storage/app/media/2022/System/Cali-Link-Thumbnail.png', 'https://cali.vn/storage/app/media/gia-tap-california-thumb.jpg', 'Là thương hiệu về sức khỏe lớn nhất Việt Nam, California Fitness & Yoga được xây dựng để mang lại hạnh phúc và tạo ra những khoảnh khắc viên mãn cho bạn trong cuộc sống bằng việc cung cấp các dịch vụ phát triển sức khỏe thể chất, dinh dưỡng và tinh thần toàn diện.', 4.5, '9961234567', 'brand4@email.com', 1),
-    ( 5,1, 'Getfit Gym', 'https://getfit-gym.vn/wp-content/uploads/newlogogetfit2021-04.png', 'https://images.foody.vn/res/g12/111029/prof/s640x400/foody-mobile-hmb-et-fit-jpg-439-635555465733080414.jpg', 'Thành lập năm 2010, Getfit nhanh chóng trở thành một trong những thương hiệu Fitness lớn nhất Việt Nam. Với cơ sở vật chất đẳng cấp, thiết bị luyện tập thể thao hiện đại, đội ngũ Huấn luyện viên có chuyên môn, Getfit tạo dấu ấn đặc biệt trong giới thể hình Việt.', 3, '9951234567', 'brand5@email.com', 1);
+    ( 3,1, 'Citi Gym', 'https://citigym.com.vn/storage/uploads/logocitigym.png', 'https://novaworld.info/wp-content/uploads/2022/10/citigym.jpg','https://novaworld.info/wp-content/uploads/2022/10/citigym.jpg', 'CITIGYM - Thương hiệu dẫn đầu phong cách sống, được thành lập từ năm 2018, đến nay CITIGYM đã có 7 chi nhánh tại TP.HCM và phục vụ hơn 100.000 khách hàng. Cơ sở vật chất, trang thiết bị tối tân từ các thương hiệu hàng đầu thế giới. Đội ngũ HLV chuyên nghiệp, giàu kinh nghiệm, mang đến những trải nghiệm tập luyện thú vị, đáp ứng mong muốn về vóc dáng và sức khoẻ cho người Việt. Đặc biệt, Citigym là thương hiệu fitness đầu tiên mang không gian xanh vào phòng tập, cho bạn cảm nhận sự trong lành, nhẹ nhàng thư thái.', 4, '9971234567', 'brand3@email.com', 1),
+    ( 4,1, 'California Fitness', 'https://cali.vn/storage/app/media/2022/System/Cali-Link-Thumbnail.png', 'https://cali.vn/storage/app/media/gia-tap-california-thumb.jpg', 'https://cali.vn/storage/app/media/gia-tap-california-thumb.jpg','Là thương hiệu về sức khỏe lớn nhất Việt Nam, California Fitness & Yoga được xây dựng để mang lại hạnh phúc và tạo ra những khoảnh khắc viên mãn cho bạn trong cuộc sống bằng việc cung cấp các dịch vụ phát triển sức khỏe thể chất, dinh dưỡng và tinh thần toàn diện.', 4.5, '9961234567', 'brand4@email.com', 1),
+    ( 5,1, 'Getfit Gym', 'https://getfit-gym.vn/wp-content/uploads/newlogogetfit2021-04.png', 'https://images.foody.vn/res/g12/111029/prof/s640x400/foody-mobile-hmb-et-fit-jpg-439-635555465733080414.jpg', 'https://images.foody.vn/res/g12/111029/prof/s640x400/foody-mobile-hmb-et-fit-jpg-439-635555465733080414.jpg','Thành lập năm 2010, Getfit nhanh chóng trở thành một trong những thương hiệu Fitness lớn nhất Việt Nam. Với cơ sở vật chất đẳng cấp, thiết bị luyện tập thể thao hiện đại, đội ngũ Huấn luyện viên có chuyên môn, Getfit tạo dấu ấn đặc biệt trong giới thể hình Việt.', 3, '9951234567', 'brand5@email.com', 1);
 
 INSERT INTO brand_amenities (brand_id, photo_url, amenitie_name, description)
 VALUES
@@ -110,24 +110,24 @@ VALUES
     (5, 'https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg', 'HỆ THỐNG TỦ VÀ KHÓA', 'Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động');
 
 
-INSERT INTO brand_albums (brand_id, photo_url, description)
-VALUES
-    (1, 'https://johnsonfitness.com.vn/wp-content/uploads/2023/04/z4302803743176_ddc1709663091cae6578d949562e2255-scaled.jpg', 'Desc1'),
-    (1, 'https://top1danhgia.com/uploads/2022/phong-gym-quan-tay-ho-Kickfit-Sports.jpg', 'Desc1'),
-    (1, 'https://kickfit-sports.com/wp-content/uploads/2022/07/hinh-anh-cua-khu-vuc-tap-kickfit-boxing-kickboxing-muay-thai.jpg.webp', 'Desc1'),
-    (2, 'https://cdn-ecommerce.estore.net.vn/img/s768x0/20230323_uu-dai-soc-giam-25--tai-elite-fitness-13_14032023103300.jpg?sign=C7n8QMtG29R0j1O4oEAA5w', 'Desc2'),
-    (2, 'https://cms.elitefitness.com.vn/Upload2/20230216/a44a1cbd-7735-449b-b704-5f893b09e03d.jpg?w=865&h=487&mode=max', 'Desc2'),
-    (2, 'https://cms.elitefitness.com.vn/Upload2/20230107/8b4ea796-2f02-434f-b2e6-d12bca7b3b5a.jpg?w=865&h=487&mode=max','Desc2'),
-    (3, 'https://channel.mediacdn.vn/428462621602512896/2023/4/8/photo-4-16809197242851942299068.png',  'Desc3'),
-    (3, 'https://images2.thanhnien.vn/uploaded/linhnt.qc/2021_01_07/citigym/citigym_3_DJUK.jpg?width=500','Desc3'),
-    (3, 'https://images.foody.vn/res/g80/796426/prof/s/sheis-094cf491-cedb-4173-baeb-35dcf77b5daf-20181108093222761.jpg','Desc3'),
-    (4, 'https://aeonmall-binhtan.com.vn/wp-content/uploads/2018/12/yoga-750x468.jpg','Desc4'),
-    (4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vHAcDALnte2CfERwNXR_ZfgU2zeqaw0I3w&usqp=CAU', 'Desc4'),
-    (4, 'https://cali.vn/storage/app/media/Editors/627a06aaabda5gia-tap-california-10.png', 'Desc4'),
+-- INSERT INTO brand_albums (brand_id, photo_url, description)
+-- VALUES
+--     (1, 'https://johnsonfitness.com.vn/wp-content/uploads/2023/04/z4302803743176_ddc1709663091cae6578d949562e2255-scaled.jpg', 'Desc1'),
+--     (1, 'https://top1danhgia.com/uploads/2022/phong-gym-quan-tay-ho-Kickfit-Sports.jpg', 'Desc1'),
+--     (1, 'https://kickfit-sports.com/wp-content/uploads/2022/07/hinh-anh-cua-khu-vuc-tap-kickfit-boxing-kickboxing-muay-thai.jpg.webp', 'Desc1'),
+--     (2, 'https://cdn-ecommerce.estore.net.vn/img/s768x0/20230323_uu-dai-soc-giam-25--tai-elite-fitness-13_14032023103300.jpg?sign=C7n8QMtG29R0j1O4oEAA5w', 'Desc2'),
+--     (2, 'https://cms.elitefitness.com.vn/Upload2/20230216/a44a1cbd-7735-449b-b704-5f893b09e03d.jpg?w=865&h=487&mode=max', 'Desc2'),
+--     (2, 'https://cms.elitefitness.com.vn/Upload2/20230107/8b4ea796-2f02-434f-b2e6-d12bca7b3b5a.jpg?w=865&h=487&mode=max','Desc2'),
+--     (3, 'https://channel.mediacdn.vn/428462621602512896/2023/4/8/photo-4-16809197242851942299068.png',  'Desc3'),
+--     (3, 'https://images2.thanhnien.vn/uploaded/linhnt.qc/2021_01_07/citigym/citigym_3_DJUK.jpg?width=500','Desc3'),
+--     (3, 'https://images.foody.vn/res/g80/796426/prof/s/sheis-094cf491-cedb-4173-baeb-35dcf77b5daf-20181108093222761.jpg','Desc3'),
+--     (4, 'https://aeonmall-binhtan.com.vn/wp-content/uploads/2018/12/yoga-750x468.jpg','Desc4'),
+--     (4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vHAcDALnte2CfERwNXR_ZfgU2zeqaw0I3w&usqp=CAU', 'Desc4'),
+--     (4, 'https://cali.vn/storage/app/media/Editors/627a06aaabda5gia-tap-california-10.png', 'Desc4'),
 
-    (5, 'https://clbdoanhnhansaigon.vn/dtool/data/computer/web670/viber-image-2020-10-06-09-49-11.jpg','Desc5'),
-    (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg','Desc5'),
-    (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg', 'Desc5');
+--     (5, 'https://clbdoanhnhansaigon.vn/dtool/data/computer/web670/viber-image-2020-10-06-09-49-11.jpg','Desc5'),
+--     (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg','Desc5'),
+--     (5, 'https://salt.tikicdn.com/ts/tmp/65/43/b7/461d7536feff1391eeec99b203a16d16.jpg', 'Desc5');
 
 /********** Gym Department Creation ***********/
 -- Create Gym Department Status
@@ -139,69 +139,75 @@ INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_ST
 
 -- Create Gym Department infos
 INSERT INTO gym_department (gym_department_id, brand_id,gym_department_status_key, name, address, contact_number,
-                            logo_url, wallpaper_url, description, latitude, longitude, capacity, area)
+                            logo_url, wallpaper_url, thumbnail_url,description, latitude, longitude, capacity, area)
 VALUES (1,1,1, 'Kickfit Sports', '123 Main St', '555-123-4567', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFg0vALj7wnJ-W6SbdUr7vhA278f3BPsMnQQ&usqp=CAU',
-        '/user-homepage-assets/assets/img/gym/gym_1_10.jpg', 'Không chỉ là 1 phòng tập gym -
+        '/user-homepage-assets/assets/img/gym/gym_1_10.jpg', '/user-homepage-assets/assets/img/gym/gym_1_10.jpg','Không chỉ là 1 phòng tập gym -
 thể hình đơn lẻ, Kickfit Sports là một trung tâm thể dụng thể thao với quy mô lớn
 và hiện đại hàng đầu Hà Nội. Các trang thiết bị luyện tập đều được nhập khẩu từ các thương hiệu
 lớn tại Châu Âu và Mỹ đem đến trải nghiệm tập luyện tốt nhất. Phòng tập được tích hợp đầy đủ bể bơi
 4 mùa, phòng xông hơi, spa, sân tập ngoài trời và trên cao thoáng mát, tủ đồ, khu vực nghỉ ngơi... Ngoài tập gym bạn còn có thể trải nghiệm nhiều loại hình thể thao khác như: Boxing,
 Muay Thái', 37.12345678, -122.12345678, 100, 200.50),
        (2,1,1, 'Elite Fitness', '456 Elm St', '555-987-6543',
-        'https://example.com/logo.png', '/user-homepage-assets/assets/img/gym/gym_1_5.jpg', 'Không chỉ là 1 phòng tập gym -
+        'https://example.com/logo.png', '/user-homepage-assets/assets/img/gym/gym_1_5.jpg', '/user-homepage-assets/assets/img/gym/gym_1_5.jpg','Không chỉ là 1 phòng tập gym -
 thể hình đơn lẻ, Elite Fitness là một trung tâm thể dụng thể thao với quy mô lớn
 và hiện đại hàng đầu Hà Nội. Các trang thiết bị luyện tập đều được nhập khẩu từ các thương hiệu
 lớn tại Châu Âu và Mỹ đem đến trải nghiệm tập luyện tốt nhất. Phòng tập được tích hợp đầy đủ bể bơi
 4 mùa, phòng xông hơi, spa, sân tập ngoài trời và trên cao thoáng mát, tủ đồ, khu vực nghỉ ngơi... Ngoài tập gym bạn còn có thể trải nghiệm nhiều loại hình thể thao khác như: Boxing,
 Muay Thái', 37.98765432, -122.98765432, 150, 300.75),
        (3,2, 1, 'Super Gym Hoa Lac', '123 Main St', '555-123-1234',
-        'https://example.com/logo.png','/user-homepage-assets/assets/img/gym/gym_1_2.jpg', 'Không chỉ là 1 phòng tập gym -
+        'https://example.com/logo.png','/user-homepage-assets/assets/img/gym/gym_1_2.jpg', '/user-homepage-assets/assets/img/gym/gym_1_2.jpg','Không chỉ là 1 phòng tập gym -
 thể hình đơn lẻ, Super Gym Hoa Lac là một trung tâm thể dụng thể thao với quy mô lớn
 và hiện đại hàng đầu Hà Nội. Các trang thiết bị luyện tập đều được nhập khẩu từ các thương hiệu
 lớn tại Châu Âu và Mỹ đem đến trải nghiệm tập luyện tốt nhất. Phòng tập được tích hợp đầy đủ bể bơi
 4 mùa, phòng xông hơi, spa, sân tập ngoài trời và trên cao thoáng mát, tủ đồ, khu vực nghỉ ngơi... Ngoài tập gym bạn còn có thể trải nghiệm nhiều loại hình thể thao khác như: Boxing,
 Muay Thái', 20.994853642138313, 105.52473891128982,250, 400),
        (4,3,1, 'Gym Hoa Lac', '124 Main St', '555-123-1235',
-        'https://example.com/logo.png','/user-homepage-assets/assets/img/gym/gym_1_3.jpg','Không chỉ là 1 phòng tập gym -
+        'https://example.com/logo.png','/user-homepage-assets/assets/img/gym/gym_1_3.jpg','/user-homepage-assets/assets/img/gym/gym_1_3.jpg', 'Không chỉ là 1 phòng tập gym -
 thể hình đơn lẻ, Gym Hoa Lac là một trung tâm thể dụng thể thao với quy mô lớn
 và hiện đại hàng đầu Hà Nội. Các trang thiết bị luyện tập đều được nhập khẩu từ các thương hiệu
 lớn tại Châu Âu và Mỹ đem đến trải nghiệm tập luyện tốt nhất. Phòng tập được tích hợp đầy đủ bể bơi
 4 mùa, phòng xông hơi, spa, sân tập ngoài trời và trên cao thoáng mát, tủ đồ, khu vực nghỉ ngơi... Ngoài tập gym bạn còn có thể trải nghiệm nhiều loại hình thể thao khác như: Boxing,
 Muay Thái', 20.984756591708862, 105.5304037366675, 200, 350.75),
        (5,3,1, 'FitWay Kickboxing', '125 Main St', '555-123-1236',
-        'https://example.com/logo.png','/user-homepage-assets/assets/img/gym/gym_1_4.jpg', 'Không chỉ là 1 phòng tập gym -
+        'https://example.com/logo.png','/user-homepage-assets/assets/img/gym/gym_1_4.jpg', '/user-homepage-assets/assets/img/gym/gym_1_4.jpg', 'Không chỉ là 1 phòng tập gym -
 thể hình đơn lẻ, FitWay Kickboxing là một trung tâm thể dụng thể thao với quy mô lớn
 và hiện đại hàng đầu Hà Nội. Các trang thiết bị luyện tập đều được nhập khẩu từ các thương hiệu
 lớn tại Châu Âu và Mỹ đem đến trải nghiệm tập luyện tốt nhất. Phòng tập được tích hợp đầy đủ bể bơi
 4 mùa, phòng xông hơi, spa, sân tập ngoài trời và trên cao thoáng mát, tủ đồ, khu vực nghỉ ngơi... Ngoài tập gym bạn còn có thể trải nghiệm nhiều loại hình thể thao khác như: Boxing,
 Muay Thái', 21.013202882232747, 105.5189882552246,100, 240.25);
 
--- Create Gym Department Features
-INSERT INTO gym_department_features (gym_department_id, feature_icon, feature_name, isSelected)
+
+
+INSERT INTO features (feature_icon, feature_name, feature_status)
 VALUES
-    (1, '<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
-    (1, '<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 0),
-    (1, '<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
-    (1, '<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
-    (1, '<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
-    (1, '<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
-    (1, '<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 0),
+    ('<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
+    ('<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 1),
+    ('<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
+    ('<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
+    ('<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
+    ('<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
+    ('<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 1);
 
-    (2, '<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
-    (2, '<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 1),
-    (2, '<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
-    (2, '<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
-    (2, '<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
-    (2, '<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
-    (2, '<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 1),
+-- Create Gym Department Features
+INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
+VALUES
+    (1, 1, 1),
+    (2, 1, 1),
+    (3, 1, 1),
+    (4, 1, 1),
+    (5, 1, 1),
 
-    (3, '<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
-    (3, '<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 0),
-    (3, '<i class="fa-solid fa-wifi"></i>', 'WIFI', 0),
-    (3, '<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 0),
-    (3, '<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 0),
-    (3, '<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 0),
-    (3, '<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 0);
+    (1, 2, 1),
+    (2, 2, 1),
+    (3, 2, 1),
+    (6, 2, 1),
+    (7, 2, 1),
+
+    (1, 3, 1),
+    (3, 3, 1),
+    (4, 3, 1),
+    (5, 3, 1),
+    (7, 3, 1);
 
 -- Create Gym Department Gallery
 INSERT INTO gym_department_albums (gym_department_id, photo_url, description)

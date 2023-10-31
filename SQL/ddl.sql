@@ -11,11 +11,12 @@ DROP TABLE IF EXISTS gymer_booking;
 DROP TABLE IF EXISTS shift;
 DROP TABLE IF EXISTS gym_plan;
 DROP TABLE IF EXISTS mst_kbn;
-DROP TABLE IF EXISTS gym_department_features;
 DROP TABLE IF EXISTS gym_department_services;
 DROP TABLE IF EXISTS gym_department_schedule;
 DROP TABLE IF EXISTS gym_department_albums;
 DROP TABLE IF EXISTS gym_department_amenities;
+DROP TABLE IF EXISTS gym_department_features;
+DROP TABLE IF EXISTS features;
 DROP TABLE IF EXISTS gym_department;
 DROP TABLE IF EXISTS brand_albums;
 DROP TABLE IF EXISTS brand_amenities;
@@ -77,6 +78,7 @@ CREATE TABLE IF NOT EXISTS brand (
                                      name                        VARCHAR(50) NOT NULL,
     logo_url                    VARCHAR(255) NOT NULL,
     wallpaper_url               VARCHAR(255) NOT NULL,
+    thumbnail_url               VARCHAR(255) NOT NULL,
     description                 text,
     rating                      DECIMAL(10, 2) DEFAULT 0,
     contact_number              VARCHAR(20) NOT NULL,
@@ -96,15 +98,6 @@ CREATE TABLE IF NOT EXISTS brand_amenities  (
     FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
     );
 
-CREATE TABLE IF NOT EXISTS brand_albums (
-                                            id INT PRIMARY KEY AUTO_INCREMENT,
-                                            brand_id INT NOT NULL,
-                                            photo_url VARCHAR(255) NOT NULL,
-    description VARCHAR(255),
-    FOREIGN KEY(brand_id) REFERENCES brand(brand_id)
-    );
-
-
 -- Gym Department table to store gym department information
 CREATE TABLE IF NOT EXISTS gym_department (
                                               gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,6 +108,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
     contact_number              VARCHAR(20) NOT NULL,
     logo_url                    VARCHAR(255) NOT NULL,
     wallpaper_url               VARCHAR(255) NOT NULL,
+    thumbnail_url               VARCHAR(255) NOT NULL,
     description                 text,
     latitude 		            DECIMAL(10,8) NOT NULL,
     longitude 		            DECIMAL(11,8) NOT NULL,
@@ -142,15 +136,21 @@ CREATE TABLE IF NOT EXISTS gym_department_schedule (
     );
 
 
-CREATE TABLE IF NOT EXISTS gym_department_features (
-                                                       feature_id INT AUTO_INCREMENT PRIMARY KEY,
-                                                       gym_department_id INT NOT NULL,
-                                                       feature_icon varchar(150),
+CREATE TABLE IF NOT EXISTS features (
+    feature_id INT AUTO_INCREMENT PRIMARY KEY,
+    feature_icon varchar(150),
     feature_name VARCHAR(50),
-    isSelected bit,
-    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
+    feature_status INT NOT NULL
     );
 
+CREATE TABLE IF NOT EXISTS gym_department_features (
+    gym_department_feature_id INT AUTO_INCREMENT PRIMARY KEY,
+    feature_id INT,
+    gym_department_id INT NOT NULL,
+    feature_status INT NOT NULL,
+    FOREIGN KEY (feature_id) REFERENCES features(feature_id),
+    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
+    );
 
 
 -- table name mst_kbn to store type,status of all tables

@@ -21,4 +21,9 @@ public class DepartmentFeatureRepositoryImpl implements DepartmentFeatureReposit
     public List<DepartmentFeature> getDepartmentFeatures(int departmentId) {
         return jdbcTemplate.query(GET_DEPARTMENT_FEATURES, new DepartmentFeatureMapper(), departmentId);
     }
+
+    @Override
+    public List<DepartmentFeature> getDepartmentFeaturesByStatusAndDepartmentID(int departmentId, int status) {
+        return jdbcTemplate.query(GET_DEPARTMENT_FEATURES_BY_STATUS_AND_DEPARTMENT_ID, new DepartmentFeatureMapper(), departmentId, status);
+    }
 }

@@ -21,6 +21,9 @@ public class Brand {
 
     private String brandWallpaperUrl;
 
+    private String brandThumbnailUrl;
+
+
     private String brandDescription;
 
     private Double rating;

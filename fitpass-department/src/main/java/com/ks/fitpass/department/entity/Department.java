@@ -26,6 +26,8 @@ public class Department {
 
     private String departmentWallpaperUrl;
 
+    private String departmentThumbnailUrl;
+
     private String departmentDescription;
 
     private Double latitude;

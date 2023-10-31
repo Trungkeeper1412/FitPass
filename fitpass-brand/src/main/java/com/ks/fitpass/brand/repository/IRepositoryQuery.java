@@ -8,6 +8,7 @@ public interface IRepositoryQuery {
                      b.name,
                      b.logo_url,
                      b.wallpaper_url,
+                     b.thumbnail_url,
                      b.description,
                      b.rating,
                      b.contact_number,
@@ -29,6 +30,7 @@ public interface IRepositoryQuery {
                      b.name,
                      b.logo_url,
                      b.wallpaper_url,
+                     b.thumbnail_url,
                      b.description,
                      b.rating,
                      b.contact_number,
@@ -49,6 +51,7 @@ public interface IRepositoryQuery {
                      b.name,
                      b.logo_url,
                      b.wallpaper_url,
+                     b.thumbnail_url,
                      b.description,
                      b.rating,
                      b.contact_number,
@@ -62,15 +65,6 @@ public interface IRepositoryQuery {
                      AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'  
                      WHERE b.brand_id = ?
             """;
-    String GET_BRAND_ALBUMS_BY_ID_BRAND = """
-            SELECT  
-                     da.id,
-                     da.brand_id,
-                     da.photo_url,
-                     da.description
-                FROM brand_albums da
-                    WHERE da.brand_id =?
-                """;
 
     String GET_BRAND_AMENITIES_BRAND_ID = """
     SELECT
@@ -84,5 +78,4 @@ public interface IRepositoryQuery {
     WHERE
         brand_id = ?
 """;
-
 }

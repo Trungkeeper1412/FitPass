@@ -23,16 +23,14 @@ import java.util.List;
 public class BrandController {
     private final BrandService brandService;
     private final BrandAmenitieService brandAmenitieService;
-    private  final BrandAlbumsService brandAlbumsService;
     private final DepartmentService departmentService;
     private final DepartmentFeatureService departmentFeatureService;
 
 
     @Autowired
-    public BrandController(BrandService brandService, BrandAmenitieService brandAmenitieService, BrandAlbumsService brandAlbumsService, DepartmentService departmentService, DepartmentFeatureService departmentFeatureService) {
+    public BrandController(BrandService brandService, BrandAmenitieService brandAmenitieService, DepartmentService departmentService, DepartmentFeatureService departmentFeatureService) {
         this.brandService = brandService;
         this.brandAmenitieService = brandAmenitieService;
-        this.brandAlbumsService = brandAlbumsService;
         this.departmentService = departmentService;
         this.departmentFeatureService = departmentFeatureService;
     }
@@ -46,9 +44,6 @@ public class BrandController {
 
             List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandID(brandId);
             model.addAttribute("brandAmenitie", brandAmenitie);
-
-            List<BrandAlbums> brandAlbums = brandAlbumsService.getAllByBrandID(brandId);
-            model.addAttribute("brandAlbums", brandAlbums);
 
             List<DepartmentDTO> departmentDTOList = departmentService.getDepartmentByBrandID(brandId);
             model.addAttribute("departments", departmentDTOList);

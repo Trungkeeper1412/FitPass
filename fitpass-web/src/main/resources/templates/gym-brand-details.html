@@ -78,18 +78,6 @@
     </div>
 <!--</div>-->
 
-    <!-- ALBUM ẢNH -->
-    <h4 class="row fw-bold mt-5">Album ảnh</h4>
-    <div class="slideshow-container">
-        <div class="mySlides1" th:each="album : ${brandAlbums}">
-            <img th:src="${album.photoUrl}" style="width:100%;">
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-    </div>
-
-
     <!--CƠ SỞ-->
     <h4 class="row fw-bold mt-5 brand-dept-title" id="club">CÁC CƠ SỞ</h4>
     <div class="list-gym-department container">
@@ -109,9 +97,9 @@
                 <i class="num-of-rating">700 lượt đánh giá</i>
             </div>
             <div class="dept-description">
-                <div class="service-type" th:each="feature: ${departmentFeatures}" th:if="${feature.getGymDepartmentId() == dept.getDepartmentId() and feature.isSelected() == true}">
-                    <div class="gym-service-logo" th:utext="${feature.getFeatureIcon()}"></div>
-                    <div class="service-name" th:text="${feature.getFeatureName()}">Khu để xe</div>
+                <div class="service-type" th:each="feature: ${departmentFeatures}" th:if="${feature.getGymDepartmentId() == dept.getDepartmentId()}">
+                    <div class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}"></div>
+                    <div class="service-name" th:text="${feature.feature.getFeatureName()}">Khu để xe</div>
                 </div>
             </div>
         </div>
