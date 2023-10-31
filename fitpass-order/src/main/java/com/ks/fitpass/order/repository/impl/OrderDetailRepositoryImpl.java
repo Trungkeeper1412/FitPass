@@ -90,6 +90,6 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
 
     @Override
     public int decreaseDuration(int orderDetailId) {
-        return jdbcTemplate.update(IRepositoryQuery.INSERT_ORDER_PLAN_DETAIL, orderDetailId);
+        return jdbcTemplate.update(IRepositoryQuery.DECREASE_DURATION, orderDetailId);
     }
 }
