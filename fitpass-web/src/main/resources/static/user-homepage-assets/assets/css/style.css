@@ -2655,3 +2655,21 @@ body {
   background-size: cover;
   z-index: 1;
 }
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+}
+
+.star-rating label::before {
+  content: "\2605";
+  font-size: 24px;
+  color: yellow;
+}
+
+.star-rating input[type="radio"]:checked + label ~ label::before {
+  color: #ccc;
+}

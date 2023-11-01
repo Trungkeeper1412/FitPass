@@ -58,4 +58,9 @@ public class HomepageController {
         model.addAttribute("departmentDistanceMap",departmentDistanceMap);
         return "homepage/fragments/list-gym-fr";
     }
+
+    @GetMapping("/profile/calendar")
+    public String getCalendar(){
+        return "calendar";
+    }
 }
