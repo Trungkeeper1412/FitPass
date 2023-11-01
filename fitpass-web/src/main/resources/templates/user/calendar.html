@@ -59,7 +59,6 @@
                     <div id='calendar'></div>
 
                     <!-- Add modal -->
-
                     <div class="modal fade edit-form" id="form" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -160,7 +159,12 @@
                                         <label for="membership-package">Gói tập</label>
                                         <input type="text" class="form-control" id="membership-package" readonly>
                                     </div>
-                                    <p>Bạn chưa đánh giá cơ sở này. <a href="" id="review-link">Đánh giá ngay</a></p>
+                                    <div class="border-rating">
+                                        <div class="centered-content">
+                                            <p>Bạn chưa đánh giá cơ sở này</p>
+                                            <a href="" id="review-link">Đánh giá ngay</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +202,13 @@
                                         <label for="membership-package">Gói tập</label>
                                         <input type="text" class="form-control" id="membership-package" readonly>
                                     </div>
-                                    <p>Bạn đã đánh giá cơ sở này. <a href="" id="reviewed-link">Xem đánh giá</a></p>
+                                    <div class="border-rating">
+                                        <div class="centered-content">
+                                            <p>Bạn đã đánh giá cơ sở này</p>
+                                            <p><div style="font-size: 28px;" data-star="4"></div></p>
+                                            <a href="" id="reviewed-link">Xem đánh giá</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

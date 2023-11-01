@@ -994,7 +994,7 @@ function loadCalendar(){
             document.getElementById('check-in-time').value = workoutData.checkInTime;
             document.getElementById('membership-package').value = workoutData.membershipPackage;
 
-            const detailModal = new bootstrap.Modal(document.getElementById('detail-modal'));
+            const detailModal = new bootstrap.Modal(document.getElementById('post-review-detail-modal'));
             detailModal.show();
         }
     });

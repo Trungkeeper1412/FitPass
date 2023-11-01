@@ -61,6 +61,6 @@ public class HomepageController {
 
     @GetMapping("/profile/calendar")
     public String getCalendar(){
-        return "calendar";
+        return "user/calendar";
     }
 }
