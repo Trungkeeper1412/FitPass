@@ -64,7 +64,7 @@ public class HomepageController {
         return "user/calendar";
     }
 
-    @GetMapping("/my-profile")
+    @GetMapping("profile/my-profile")
     public String showProfile() {
         return "user-profile2";
     }
