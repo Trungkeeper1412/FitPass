@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang cá nhân</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
+  <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
+  <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+  <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+  <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+
+  <script src="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+<body style="background-color: rgb(238, 238, 238);">
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+
+<!-- Content -->
+<div class="user-profile-content container">
+  <div class="row justify-content-center">
+    <div class="col-md-3 menu-option">
+      <div class="user-basic-info">
+        <div class="user-img">
+          <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfzmhjOE-yilOK41XrpuN4If42UNoLOCyn7Q&usqp=CAU">
+        </div>
+        <div class="user">
+          <div class="name">Nguyễn Văn A</div>
+          <div class="gmail">nguyenvana@gmail.com</div>
+        </div>
+      </div>
+
+      <ul class="account-info list-group">
+        <li class="list-group-item p-3 option-tab at" onclick="openUserProfileTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/8748/8748620.png">
+            </span>
+          <span>Hồ sơ của tôi</span>
+        </li>
+        <li class="list-group-item p-3 option-tab" onclick="openChangePwTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/807/807241.png">
+            </span>
+          <span>Đổi mật khẩu</span>
+        </li>
+        <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/1860/1860195.png">
+            </span>
+          <span>Lịch tập</span>
+        </li>
+        <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/11520/11520032.png">
+            </span>
+          <span>Đánh giá của tôi</span>
+        </li>
+      </ul>
+
+      <ul class="wallet-info list-group">
+        <li class="list-group-item p-3 option-tab" onclick="openAddMoneyTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/7887/7887095.png">
+            </span>
+          <span>Nạp tiền</span>
+        </li>
+        <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/9334/9334627.png">
+            </span>
+          <span>Thêm tài khoản ngân hàng</span>
+        </li>
+        <li class="list-group-item p-3 option-tab" onclick="openTransactionHistory()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/847/847566.png">
+            </span>
+          <span>Lịch sử giao dịch</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-9 content-by-option">
+      <!-- Common components in tab -->
+      <div class="add-money-tab">
+        <div class="row">
+          <div class="col-sm-6 col-md-6">
+            <div class="account-balance">
+              <div>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/10317/10317738.png"></span>
+                <span class="wallet-money">1200 Credits</span>
+              </div>
+              <div class="ab-title">Số dư trong ví</div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="account-balance">
+              <div>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/10318/10318269.png"></span>
+                <span class="wallet-money">2000 Credits</span>
+              </div>
+              <div class="ab-title">Tổng credits đã nạp</div>
+            </div>
+          </div>
+        </div>
+        <!-- User profile tab -->
+        <div class="mt-4 mb-5 user-profile" id="user-profile">
+          <div class="row user-change-ava justify-content-center">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-xs-6 mb-3">
+              <div class="user-img">
+                <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfzmhjOE-yilOK41XrpuN4If42UNoLOCyn7Q&usqp=CAU">
+              </div>
+            </div>
+            <div class="col-xl-10 col-lg-9 col-md-8 col-sm-8 col-xs-6 change-ava-btn mb-3">
+              <form>
+                <div class="form-group">
+                  <label for="exampleFormControlFile1"></label>
+                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+              </form>
+            </div>
+            <div class="col-12 mt-4 user-edit-profile">
+              <div class="row">
+                <div class="col-md-6 col-xs-12">
+                  <div class="input-title">Email</div>
+                  <input type="text" placeholder="nguyenvana@gmail.com" disabled value="nguyenvana@gmail.com">
+                </div>
+                <div class="col-md-3">
+                  <div class="input-title">Họ</div>
+                  <input type="text" value="Nguyễn">
+                </div>
+                <div class="col-md-3">
+                  <div class="input-title">Tên</div>
+                  <input type="text" value="Văn A">
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6 col-sm-12 mb-3">
+                  <div class="input-title">Ngày sinh</div>
+                  <input type="date" value="2014-12-29">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="input-title">Số điện thoại</div>
+                  <input type="number" value="0123456789">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="input-title">Giới tính</div>
+                  <div class="mt-2" style="display: flex;">
+                    <div style="display: flex;">
+                      <input type="radio" name="gender" value="male" checked>
+                      <span style="margin-left: 4px">nam</span>
+                    </div>
+                    <div style="display: flex; margin-left: 15px;">
+                      <input type="radio" name="gender" value="female">
+                      <span style="margin-left: 4px">nữ</span>
+                    </div>
+                    <div style="display: flex; margin-left: 15px;">
+                      <input type="radio" name="gender" value="other">
+                      <span style="margin-left: 4px">khác</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="input-title">Đia chỉ</div>
+                  <input type="text" value="526 Điện Biên Phủ, Phường 21, Quận Bình Thạnh, Thành phố Hồ Chí Minh">
+                </div>
+              </div>
+              <div class="row justify-content-center mt-3">
+                <div class="col-12 mx-auto">
+                  <button class="btn save-changes">Lưu thay đổi</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change pw tab -->
+        <div class="mt-4 mb-5 user-pw" id="change-pw">
+          <div class="row change-pw justify-content-center">
+            <div class="change-pw-icon col-12">
+              <img src="https://cdn-icons-png.flaticon.com/128/733/733527.png" alt="">
+            </div>
+          </div>
+        </div>
+
+        <!-- Add money tab -->
+        <div id="add-money-tab">
+          <div class="mt-4" style="font-weight: 500;">Chọn tài khoản ngân hàng thanh toán</div>
+          <div class="row banking-card-list mt-2">
+            <div class="col-md-4 col-lg-4 col-sm-4">
+              <label>
+                <input type="radio" name="product" class="card-input-element" checked />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                    <div>
+                      <span><img src="https://cdn-icons-png.flaticon.com/128/8759/8759618.png"></span>
+                      <span class="wallet-money">*1745</span>
+                    </div>
+                    <div class="ab-title">MB Bank</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4">
+              <label>
+                <input type="radio" name="product" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                    <div>
+                      <span><img src="https://cdn-icons-png.flaticon.com/128/8759/8759618.png" alt=""></span>
+                      <span class="wallet-money">*1745</span>
+                    </div>
+                    <div class="ab-title">Sacombank</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4">
+              <label>
+                <input type="radio" name="product" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                    <div>
+                      <span><img src="https://cdn-icons-png.flaticon.com/128/8759/8759618.png"></span>
+                      <span class="wallet-money">*1440</span>
+                    </div>
+                    <div class="ab-title">Vietcombank</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="mt-4" style="font-weight: 500;">Số tiền nạp</div>
+          <div class="row mt-2 justify-content-center add-money">
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                      <span>
+                        <h4 class="fw-bold">50.000</h4>
+                      </span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                  </div>
+                  <div class="credit-trans">50 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                        <h4 class="fw-bold">100.000</h4>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                  </div>
+                  <div class="credit-trans">100 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                        <h4 class="fw-bold">200.000</h4>
+                    <img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png" alt="">
+                  </div>
+                  <div class="credit-trans">200 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                        <h4 class="fw-bold">300.000</h4>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                  </div>
+                  <div class="credit-trans">300 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                      <span>
+                        <h4 class="fw-bold">500.000</h4>
+                      </span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                  </div>
+                  <div class="credit-trans">500 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                      <span>
+                        <h4 class="fw-bold">1.000.000</h4>
+                      </span>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png" alt=""></span>
+                  </div>
+                  <div class="credit-trans">1000 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                        <h4 class="fw-bold">2.000.000</h4>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                  </div>
+                  <div class="credit-trans">2000 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+              <label>
+                <input type="radio" name="money" class="card-input-element" />
+                <div class="panel panel-default card-input">
+                  <div class="panel-body">
+                        <h4 class="fw-bold">3.000.000</h4>
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                  </div>
+                  <div class="credit-trans">3000 credits tương ứng</div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-6 mb-4 input-money">
+              <input type="text" placeholder="Nhập số tiền cần nạp...">
+            </div>
+            <div class="col-6 mb-4" id="add-money">
+              <div class="add-money-btn trigger">Nạp tiền</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User schedule tab -->
+        <div class="mt-4 transaction-history" id="transaction-history"
+             style="background-color: white; padding: 20px; border-radius: 10px;">
+          <div class="row justify-content-center">
+            <!-- <table cellspacing="5" cellpadding="5">
+                <tbody>
+                  <tr>
+                    <td>Minimum date:</td>
+                    <td><input type="date" id="min" name="min"></td>
+                  </tr>
+                  <tr>
+                    <td>Maximum date:</td>
+                    <td><input type="date" id="max" name="max"></td>
+                  </tr>
+                </tbody>
+              </table> -->
+            <table class="table table-striped" id="transaction-history-tb" style="width:100%">
+              <thead>
+              <tr>
+                <th>Mã giao dịch</th>
+                <th>Nguồn tiền</th>
+                <th>Trạng thái</th>
+                <th>Thời gian</th>
+                <th>Số tiền</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>#2253489528</td>
+                <td>Vietcombank</td>
+                <td>Thành công</td>
+                <td>2011-04-25</td>
+                <td>320.800</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="add-money-modal">
+    <div class="modal-content">
+      <div>
+        <span class="close-button" style="float: right;"><i class="bi bi-x-circle-fill"></i></span>
+        <h3 class="fw-bold">Xác nhận nạp tiền</h3>
+      </div>
+      <div class="mt-4">
+        <span>Tổng tiền nạp</span>
+        <span>:</span>
+        <span class="money">500.000</span>
+      </div>
+      <div class="mt-2">
+        <span class="credit">500 Credits</span>
+        <span>sẽ được cộng vào ví của bạn!</span>
+      </div>
+      <div class="btn-option">
+        <button class="confirm">Xác nhận và thanh toán</button>
+        <button class="cancel">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= Footer ======= -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<script>
+  new DataTable('#transaction-history-tb');
+  var modal = document.querySelector(".add-money-modal");
+  var triggers = document.querySelectorAll(".trigger");
+  var closeButton = document.querySelector(".close-button");
+  var cancel = document.querySelector(".cancel");
+
+  function toggleModal() {
+    modal.classList.toggle("show-modal");
+  }
+
+  function windowOnClick(event) {
+    if (event.target === modal) {
+      toggleModal();
+    }
+  }
+
+  for (var i = 0, len = triggers.length; i < len; i++) {
+    triggers[i].addEventListener("click", toggleModal);
+  }
+  closeButton.addEventListener("click", toggleModal);
+  cancel.addEventListener("click", toggleModal);
+  window.addEventListener("click", windowOnClick);
+
+  document.getElementById("add-money-tab").style.display = "none";
+  document.getElementById("transaction-history").style.display = "none";
+  document.getElementById("change-pw").style.display = "none";
+
+  function openAddMoneyTab() {
+    document.getElementById("user-profile").style.display = "none";
+    document.getElementById("change-pw").style.display = "none";
+    document.getElementById("transaction-history").style.display = "none";
+    document.getElementById("add-money-tab").style.display = "block";
+  }
+  function openUserProfileTab() {
+    document.getElementById("add-money-tab").style.display = "none";
+    document.getElementById("transaction-history").style.display = "none";
+    document.getElementById("change-pw").style.display = "none";
+    document.getElementById("user-profile").style.display = "block";
+  }
+  function openTransactionHistory() {
+    document.getElementById("transaction-history").style.display = "block";
+    document.getElementById("user-profile").style.display = "none";
+    document.getElementById("change-pw").style.display = "none";
+    document.getElementById("add-money-tab").style.display = "none";
+  }
+  function openChangePwTab() {
+    document.getElementById("change-pw").style.display = "block";
+    document.getElementById("user-profile").style.display = "none";
+    document.getElementById("add-money-tab").style.display = "none";
+    document.getElementById("transaction-history").style.display = "none";
+  }
+
+  $(".option-tab").on("click", function () {
+    $(".option-tab").removeClass("at");
+    $(this).addClass("at");
+  });
+
+</script>
+
+</body>
+</html>
