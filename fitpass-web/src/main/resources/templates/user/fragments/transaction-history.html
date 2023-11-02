@@ -1,10 +1,324 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="mt-4 transaction-history" id="transaction-history"
+     style="background-color: white; padding: 20px; border-radius: 10px;" th:fragment="transaction-history">
+    <div class="row justify-content-center">
+        <!-- <table cellspacing="5" cellpadding="5">
+            <tbody>
+              <tr>
+                <td>Minimum date:</td>
+                <td><input type="date" id="min" name="min"></td>
+              </tr>
+              <tr>
+                <td>Maximum date:</td>
+                <td><input type="date" id="max" name="max"></td>
+              </tr>
+            </tbody>
+          </table> -->
+        <table class="table table-striped" id="transaction-history-tb" style="width:100%">
+            <thead>
+            <tr>
+                <th>Mã giao dịch</th>
+                <th>Nguồn tiền</th>
+                <th>Trạng thái</th>
+                <th>Thời gian</th>
+                <th>Số tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>#2253489528</td>
+                <td>Vietcombank</td>
+                <td>Thành công</td>
+                <td>2011-04-25</td>
+                <td>320.800</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            <tr>
+                <td>#2253489527</td>
+                <td>Sacombank</td>
+                <td>Thành công</td>
+                <td>2011-07-25</td>
+                <td>200.000</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
