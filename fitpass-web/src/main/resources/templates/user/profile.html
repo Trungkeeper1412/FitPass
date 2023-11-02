@@ -112,7 +112,18 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
-    new DataTable('#transaction-history-tb');
+    new DataTable('#transaction-history-tb', {
+        language: {
+            processing: "Đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Xem _MENU_ mục ",
+            info: "Bản ghi từ _START_ đến _END_ , tổng cộng _TOTAL_ bản ghi",
+            loadingRecords: "",
+            zeroRecords: "Không có dữ liệu",
+            emptyTable: "Không có dữ liệu",
+        }
+    });
+
     const modal = document.querySelector(".add-money-modal");
     const triggers = document.querySelectorAll(".trigger");
     const closeButton = document.querySelector(".close-button");
