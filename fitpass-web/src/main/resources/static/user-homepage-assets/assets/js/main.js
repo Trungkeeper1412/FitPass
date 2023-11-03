@@ -728,7 +728,7 @@ function checkConfirmCheckOut() {
 })()
 
 // CALENDAR
-document.addEventListener('DOMContentLoaded', function () {
+function loadCalendar(){
     var initialLocaleCode = 'vi';
     var calendarEl = document.getElementById('calendar');
     const myModal = new bootstrap.Modal(document.getElementById('form'));
@@ -989,9 +989,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const gymLocationInReviewModal = document.getElementById('gym-location-in-review-modal');
         gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
     });
-
-});
-
+}
 $(function () {
     $("#include-navbar").load("navbar.html");
     $("#include-footer").load("footer.html");
