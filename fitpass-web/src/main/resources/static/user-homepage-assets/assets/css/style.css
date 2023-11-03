@@ -2705,3 +2705,13 @@ body {
   text-align: center;
   flex: 1;
 }
+
+td div div a,
+th div a {
+  color: #000000;
+}
+
+td div div div a:hover {
+  color: #444444;
+  text-decoration: none;
+}

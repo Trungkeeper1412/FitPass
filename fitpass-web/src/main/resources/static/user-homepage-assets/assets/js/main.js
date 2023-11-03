@@ -728,38 +728,25 @@ function checkConfirmCheckOut() {
 })()
 
 // CALENDAR
-function loadCalendar(){
-    const calendarEl = document.getElementById('calendar');
-    const initialLocaleCode = 'vi';
+document.addEventListener('DOMContentLoaded', function () {
+    var initialLocaleCode = 'vi';
+    var calendarEl = document.getElementById('calendar');
     const myModal = new bootstrap.Modal(document.getElementById('form'));
     const dangerAlert = document.getElementById('danger-alert');
     const close = document.querySelector('.btn-close');
-
-
-
-
     const myEvents = JSON.parse(localStorage.getItem('events')) || [
         {
             id: uuidv4(),
-            title: `Edit Me`,
-            start: '2023-04-11',
+            title: `Tập chân`,
+            start: '2023-03-11',
             backgroundColor: 'red',
-            allDay: false,
-            editable: false,
-        },
-        {
-            id: uuidv4(),
-            title: `Delete me`,
-            start: '2023-04-17',
-            end: '2023-04-21',
-
-            allDay: false,
-            editable: false,
+            allDay: true,
+            editable: true,
         },
     ];
 
 
-    const calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         customButtons: {
             customButton: {
                 text: 'Đặt kế hoạch tập',
@@ -770,26 +757,27 @@ function loadCalendar(){
                     modalTitle.innerHTML = 'Kế hoạch tập'
                     submitButton.innerHTML = 'Lưu kế hoạch'
                     submitButton.classList.remove('btn-primary');
-                    submitButton.classList.add('btn-success');
+                    submitButton.classList.add('btn-primary');
                     close.addEventListener('click', () => {
                         myModal.hide()
                     })
                 }
             }
         },
-        locale: initialLocaleCode,
-        header: {
-            center: 'customButton', // add your custom button here
-            right: 'today, prev,next '
+        headerToolbar: {
+            right: 'customButton today prev,next',
+            center: 'title',
+            left: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
-        plugins: ['dayGrid', 'interaction'],
-        allDay: false,
+        locale: initialLocaleCode,
+        buttonIcons: true, // show the prev/next text
+        weekNumbers: true,
+        navLinks: true, // can click day/week names to navigate views
         editable: true,
-        selectable: true,
-        unselectAuto: false,
-        displayEventTime: false,
+
+        dayMaxEvents: true, // allow "more" link when too many events
         events: myEvents,
-        eventRender: function (info) {
+        eventDidMount: function (info) {
             info.el.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
                 let existingMenu = document.querySelector('.context-menu');
@@ -797,12 +785,11 @@ function loadCalendar(){
                 let menu = document.createElement('div');
                 menu.className = 'context-menu';
                 menu.innerHTML = `<ul>
-          <li><i class="fas fa-edit"></i>Chỉnh sửa</li>
-          <li><i class="fas fa-trash-alt"></i>Xóa</li>
+            <li><i class="fas fa-edit"></i>Chỉnh sửa</li>
+            <li><i class="fas fa-trash-alt"></i>Xóa</li>
           </ul>`;
 
                 const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
-
 
                 document.body.appendChild(menu);
                 menu.style.top = e.pageY + 'px';
@@ -829,8 +816,8 @@ function loadCalendar(){
                     submitButton.innerHTML = 'Save Changes';
 
                     editModal.show();
-                    submitButton.classList.remove('btn-success')
-                    submitButton.classList.add('btn-primary')
+                    submitButton.classList.remove('btn-success');
+                    submitButton.classList.add('btn-primary');
 
                     // Edit button
 
@@ -840,17 +827,17 @@ function loadCalendar(){
                             title: titleInput.value,
                             start: startDateInput.value,
                             end: moment(endDateInput.value, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD'),
-                            backgroundColor: colorInput.value
-                        }
+                            backgroundColor: colorInput.value,
+                        };
 
-                        if (updatedEvents.end <= updatedEvents.start) { // add if statement to check end date
+                        if (updatedEvents.end <= updatedEvents.start) {
+                            // Add an if statement to check end date
                             dangerAlert.style.display = 'block';
                             return;
                         }
 
                         const eventIndex = myEvents.findIndex(event => event.id === updatedEvents.id);
                         myEvents.splice(eventIndex, 1, updatedEvents);
-
                         localStorage.setItem('events', JSON.stringify(myEvents));
 
                         // Update the event in the calendar
@@ -860,14 +847,8 @@ function loadCalendar(){
                         calendarEvent.setEnd(updatedEvents.end);
                         calendarEvent.setProp('backgroundColor', updatedEvents.backgroundColor);
 
-
-
                         editModal.hide();
-
-                    })
-
-
-
+                    });
                 });
 
                 // Delete menu
@@ -875,7 +856,7 @@ function loadCalendar(){
                     const deleteModal = new bootstrap.Modal(document.getElementById('delete-modal'));
                     const modalBody = document.getElementById('delete-modal-body');
                     const cancelModal = document.getElementById('cancel-button');
-                    modalBody.innerHTML = `Bạn có chắc chắn xóa hoạt động <b>"${info.event.title}"</b>`
+                    modalBody.innerHTML = `Bạn có chắc chắn xóa hoạt động <b>"${info.event.title}"</b>`;
                     deleteModal.show();
 
                     const deleteButton = document.getElementById('delete-button');
@@ -885,38 +866,18 @@ function loadCalendar(){
                         calendar.getEventById(info.event.id).remove();
                         deleteModal.hide();
                         menu.remove();
-
                     });
 
                     cancelModal.addEventListener('click', function () {
                         deleteModal.hide();
-                    })
-
-
-
-
+                    });
                 });
+
                 document.addEventListener('click', function () {
                     menu.remove();
                 });
             });
         },
-
-        eventDrop: function (info) {
-            let myEvents = JSON.parse(localStorage.getItem('events')) || [];
-            const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
-            const updatedEvent = {
-                ...myEvents[eventIndex],
-                id: info.event.id,
-                title: info.event.title,
-                start: moment(info.event.start).format('YYYY-MM-DD'),
-                end: moment(info.event.end).format('YYYY-MM-DD'),
-                backgroundColor: info.event.backgroundColor
-            };
-            myEvents.splice(eventIndex, 1, updatedEvent); // Replace old event data with updated event data
-            localStorage.setItem('events', JSON.stringify(myEvents));
-            console.log(updatedEvent);
-        }
 
     });
 
@@ -931,7 +892,6 @@ function loadCalendar(){
             endDateInput.value = '';
         }
     });
-
 
     calendar.render();
 
@@ -994,7 +954,7 @@ function loadCalendar(){
             document.getElementById('check-in-time').value = workoutData.checkInTime;
             document.getElementById('membership-package').value = workoutData.membershipPackage;
 
-            const detailModal = new bootstrap.Modal(document.getElementById('post-review-detail-modal'));
+            const detailModal = new bootstrap.Modal(document.getElementById('detail-modal'));
             detailModal.show();
         }
     });
@@ -1029,7 +989,8 @@ function loadCalendar(){
         const gymLocationInReviewModal = document.getElementById('gym-location-in-review-modal');
         gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
     });
-}
+
+});
 
 $(function () {
     $("#include-navbar").load("navbar.html");
