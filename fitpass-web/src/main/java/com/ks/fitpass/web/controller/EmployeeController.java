@@ -249,7 +249,6 @@ public class EmployeeController {
         notification.setDepartmentId(userReceiveMessageDTO.getGymDepartmentId());
         notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
 
-
         // Gửi thông báo đến người dùng
         int insertStatus = notificationService.insertNotification(notification);
 

@@ -32,13 +32,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-        <!-- spring-websocket -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-websocket</artifactId>
-            <version>6.0.13</version>
-        </dependency>
-
         <!-- Import module-->
         <dependency>
             <groupId>com.ks</groupId>

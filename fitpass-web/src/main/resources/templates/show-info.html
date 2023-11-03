@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 
 <body>
@@ -11,11 +14,14 @@
 <a th:href="@{/}">Home</a><br/>
 <a th:href="@{/logout}">Logout</a>
 <p>Spring Security Thymeleaf tutorial</p>
-<div sec:authorize="hasRole('ADMIN')">Text visible to ADMIN.</div>
+<div sec:authorize="hasRole('USER')">Text visible to USER.</div>
+<div sec:authorize="hasRole('MANAGER')">Text visible to MANAGER.</div>
 <div sec:authorize="hasRole('EMPLOYEE')">Text visible to EMPLOYEE.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to ADMIN.</div>
+
 <br/>
 <div sec:authorize="isAuthenticated()">
-  Text visible only to authenticated users.
+    Text visible only to authenticated users.
 </div>
 <br/>
 <div sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">Text visible to ADMIN, EMPLOYEE.</div>
@@ -27,15 +33,84 @@ Authenticated user roles: <span sec:authentication="principal.authorities"></spa
 <br/>
 <br/>
 <table>
-  <tr>
-    <td>ID:</td>
-    <td><span th:text="${userInfo.userId}"></span></td>
-  </tr>
-  <tr>
-    <td>Role:</td>
-    <td th:each="role : ${userRole}"><span th:text="*{role}"></span></td>
-  </tr>
+    <tr>
+        <td>ID:</td>
+        <td><span th:text="${userInfo.userId}"></span></td>
+    </tr>
+    <tr>
+        <td>Role:</td>
+        <td th:each="role : ${userRole}"><span th:text="*{role}"></span></td>
+    </tr>
 </table>
+
+<div class="container">
+    <div class="col-md-12">
+        <button id="send" type="button">Click</button>
+        <label for="message"></label>
+        <input type="text" id="message" placeholder="Input here"/>
+    </div>
+    <div class="col-md-12">
+        <table id="message-history" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Messages
+                    <span id="notifications" style="
+                                    color: white;
+                                    background-color: red;
+                                    padding-left: 15px;
+                                    padding-right: 15px;">
+                </span>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="messages">
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 
+<script>
+    let stompClient = null;
+    $(document).ready(function (){
+        connect();
+
+        $("#send").click(function (){
+            sendMessage();
+        });
+    });
+
+    function connect(){
+        const socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log("Connected to " + frame);
+            stompClient.subscribe('/all/messages', function (message) {
+                showMessage(JSON.parse(message.body).content);
+            });
+        });
+    }
+
+    function sendMessage() {
+        console.log("Sending message")
+        const messageContent = $("#message").val();
+
+        $.ajax({
+            url: "/send-message",
+            type: "POST",
+            data: JSON.stringify({ "messageContent": messageContent }),
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Message sent successfully");
+            },
+            error: function(error) {
+                console.error("Error sending message:", error);
+            }
+        });
+    }
+
+    function showMessage(message) {
+        $("#messages").append("<tr><td>" + message + "</td></tr>");
+    }
+</script>
 </html>
