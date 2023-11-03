@@ -4217,7 +4217,10 @@ section {
 }
 
 .body-gym-brand-details .num-of-rating{
-  font-size: 14px;
+  font-size: 12px;
+  margin-left: 8px;
+  color: #555;
+  font-style: italic;
 }
 
 @media screen and (max-width: 600px) {

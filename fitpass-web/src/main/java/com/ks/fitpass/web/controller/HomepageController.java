@@ -38,6 +38,7 @@ public class HomepageController {
         for (Brand brand : brandList) {
             List<DepartmentDTO> departmentList = departmentService.getAllDepartmentByBrandId(brand.getBrandId(), 1, 5);
             brandDepartmentsMap.put(brand.getBrandId(), departmentList);
+
         }
 
         // Get list of departments, default sorted by rating
