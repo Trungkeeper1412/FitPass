@@ -6,6 +6,7 @@ import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.brand.service.*;
 import com.ks.fitpass.brand.entity.*;
 
+import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class HomepageController {
     private final UserRepository userRepository;
     private final DepartmentService departmentService;
     private final BrandService brandService;
+    private final WalletService walletService;
 
     @GetMapping("/homepage")
     public String getHomepage(Principal principal, HttpSession session, Model model) {
@@ -38,11 +40,13 @@ public class HomepageController {
         for (Brand brand : brandList) {
             List<DepartmentDTO> departmentList = departmentService.getAllDepartmentByBrandId(brand.getBrandId(), 1, 5);
             brandDepartmentsMap.put(brand.getBrandId(), departmentList);
-
         }
 
         // Get list of departments, default sorted by rating
         List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
+
+        double credit = walletService.getBalanceByUserId(user.getUserId());
+        session.setAttribute("userCredit", credit);
 
         model.addAttribute("brands", brandList);
         model.addAttribute("brandDepartmentsMap", brandDepartmentsMap);

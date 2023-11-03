@@ -146,8 +146,11 @@ public class CheckOutController {
             session.setAttribute("cart", cart);
             // Lấy user balance
             double userBalance = walletService.getBalanceByUserId(user.getUserId());
+            double creditAfter = userBalance - totalPrice;
+
+            session.setAttribute("userCredit",creditAfter);
             // Cập nhật lại user balance sau khi đã trừ
-            walletService.updateBalanceByUderId(user.getUserId(), userBalance);
+            walletService.updateBalanceByUderId(user.getUserId(), creditAfter);
         }
 
 
