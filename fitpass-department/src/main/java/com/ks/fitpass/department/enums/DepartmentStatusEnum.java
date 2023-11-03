@@ -5,8 +5,8 @@ public enum DepartmentStatusEnum {
     ACTIVE (1, "Hoạt Động"),
     INACTIVE(2, "Không Hoạt Động");
 
-    private int code;
-    private String label;
+    private final int code;
+    private final String label;
 
     DepartmentStatusEnum(int code, String label) {
         this.code = code;

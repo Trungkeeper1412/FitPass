@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public EmployeeRepositoryImpl(JdbcTemplate jdbcTemplate) {

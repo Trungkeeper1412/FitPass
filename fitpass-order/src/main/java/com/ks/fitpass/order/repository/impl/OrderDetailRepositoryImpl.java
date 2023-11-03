@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repository.OrderDetailRepository {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public OrderDetailRepositoryImpl(JdbcTemplate jdbcTemplate) {

@@ -72,7 +72,7 @@ public class CalendarController {
                                @RequestParam("rating") int rating,
                                @RequestParam("thoughts") String comments,
                                HttpSession session){
-        User u = (User) session.getAttribute("userInfo");
+        User user = (User) session.getAttribute("userInfo");
 
         UserFeedback userFeedback = new UserFeedback();
         userFeedback.setFeedbackId(feedbackId);
@@ -84,7 +84,7 @@ public class CalendarController {
     }
 
     @GetMapping("/getFeedback")
-    public ResponseEntity<CalendarFeedbackDTO> getFeedback(@RequestParam("id") int checkInHistoryId ,HttpSession session) {
+    public ResponseEntity<CalendarFeedbackDTO> getFeedback(@RequestParam("id") int checkInHistoryId) {
         CalendarFeedbackDTO calendarFeedbackDTO = calendarService.getFeedbackByCheckInHistoryId(checkInHistoryId);
         return ResponseEntity.ok(calendarFeedbackDTO);
     }

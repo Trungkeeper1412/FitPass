@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public class DepartmentAlbumsRepositoryImpl implements DepartmentAlbumsRepository, IRepositoryQuery {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public DepartmentAlbumsRepositoryImpl(JdbcTemplate jdbcTemplate) {

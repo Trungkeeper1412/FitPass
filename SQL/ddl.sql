@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS check_in_history (
                                                 check_out_time DATETIME NULL,
                                                 total_credit DECIMAL(10,2) NULL,
     emp_checkin_id INT NOT NULL,
-    feedback_id INT NULL;
+    feedback_id INT NULL,
     CONSTRAINT check_in_history_pk PRIMARY KEY (check_in_history_id),
     CONSTRAINT check_in_history_FK FOREIGN KEY (order_detail_id) REFERENCES fitpass.order_plan_detail(order_detail_id),
     CONSTRAINT check_in_history_FK_1 FOREIGN KEY (emp_checkin_id) REFERENCES fitpass.`user`(user_id),
