@@ -6,8 +6,18 @@
  * License: https://bootstrapmade.com/license/
  */
 document.addEventListener('DOMContentLoaded', function () {
+    $.ajax({
+        type: "GET",
+        url: `/calendar/getListCheckIn`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            loadCalendar(data);
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong getListCheckInCalendar");
+        }
+    });
     // Đây là nơi bạn có thể gọi hàm của bạn
-    loadCalendar();
     updateQuantityCart();
     checkConfirmCheckIn();
     // Gọi hàm check thông báo confirm
@@ -728,22 +738,33 @@ function checkConfirmCheckOut() {
 })()
 
 // CALENDAR
-function loadCalendar(){
+function loadCalendar(data){
     var initialLocaleCode = 'vi';
     var calendarEl = document.getElementById('calendar');
     const myModal = new bootstrap.Modal(document.getElementById('form'));
     const dangerAlert = document.getElementById('danger-alert');
     const close = document.querySelector('.btn-close');
-    const myEvents = JSON.parse(localStorage.getItem('events')) || [
-        {
-            id: uuidv4(),
-            title: `Tập chân`,
-            start: '2023-03-11',
-            backgroundColor: 'red',
-            allDay: true,
-            editable: true,
-        },
-    ];
+
+    var events = data.map(function(item) {
+        return {
+            id: item.checkInHistoryId,
+            title: item.gymDepartmentName,
+            start: item.checkInTime
+        };
+    });
+
+    console.log(events)
+
+    var userEvents = JSON.parse(localStorage.getItem('events')) || {
+
+    };
+
+    let userId = document.getElementById("userId").value;
+    const userEventById = userEvents[userId];
+
+    const allEvent = [...events, ...userEventById];
+
+    console.log(allEvent);
 
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -773,10 +794,10 @@ function loadCalendar(){
         buttonIcons: true, // show the prev/next text
         weekNumbers: true,
         navLinks: true, // can click day/week names to navigate views
-        editable: true,
+        editable: false,
 
         dayMaxEvents: true, // allow "more" link when too many events
-        events: myEvents,
+        events: allEvent,
         eventDidMount: function (info) {
             info.el.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
@@ -789,7 +810,7 @@ function loadCalendar(){
             <li><i class="fas fa-trash-alt"></i>Xóa</li>
           </ul>`;
 
-                const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
+                const eventIndex = userEventById.findIndex(event => event.id === info.event.id);
 
                 document.body.appendChild(menu);
                 menu.style.top = e.pageY + 'px';
@@ -836,9 +857,10 @@ function loadCalendar(){
                             return;
                         }
 
-                        const eventIndex = myEvents.findIndex(event => event.id === updatedEvents.id);
-                        myEvents.splice(eventIndex, 1, updatedEvents);
-                        localStorage.setItem('events', JSON.stringify(myEvents));
+                        const eventIndex = userEventById.findIndex(event => event.id === updatedEvents.id);
+                        userEventById.splice(eventIndex, 1, updatedEvents);
+                        userEvents[userId] = userEventById;
+                        localStorage.setItem('events', JSON.stringify(userEvents));
 
                         // Update the event in the calendar
                         const calendarEvent = calendar.getEventById(info.event.id);
@@ -861,8 +883,9 @@ function loadCalendar(){
 
                     const deleteButton = document.getElementById('delete-button');
                     deleteButton.addEventListener('click', function () {
-                        myEvents.splice(eventIndex, 1);
-                        localStorage.setItem('events', JSON.stringify(myEvents));
+                        userEventById.splice(eventIndex, 1);
+                        userEvents[userId] = userEventById;
+                        localStorage.setItem('events', JSON.stringify(userEvents));
                         calendar.getEventById(info.event.id).remove();
                         deleteModal.hide();
                         menu.remove();
@@ -881,22 +904,24 @@ function loadCalendar(){
 
     });
 
-    calendar.on('select', function (info) {
-
-        const startDateInput = document.getElementById('start-date');
-        const endDateInput = document.getElementById('end-date');
-        startDateInput.value = info.startStr;
-        const endDate = moment(info.endStr, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
-        endDateInput.value = endDate;
-        if (startDateInput.value === endDate) {
-            endDateInput.value = '';
-        }
-    });
+    // calendar.on('select', function (info) {
+    //
+    //     const startDateInput = document.getElementById('start-date');
+    //     const endDateInput = document.getElementById('end-date');
+    //     startDateInput.value = info.startStr;
+    //     const endDate = moment(info.endStr, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
+    //     endDateInput.value = endDate;
+    //     if (startDateInput.value === endDate) {
+    //         endDateInput.value = '';
+    //     }
+    //     console.log(1);
+    // });
 
     calendar.render();
 
     const form = document.querySelector('form');
 
+    // Tạo kế hoạch tập
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // prevent default form submission
 
@@ -915,23 +940,33 @@ function loadCalendar(){
             return;
         }
 
+        let userId = document.getElementById("userId").value;
+
+        // Kiểm tra xem userId đã tồn tại trong userEvents chưa
+        if (!userEvents[userId]) {
+            // Nếu userId chưa tồn tại, tạo một mảng rỗng để lưu trữ các sự kiện của người dùng đó
+            userEvents[userId] = [];
+        }
+
         const newEvent = {
             id: eventId,
             title: title,
             start: startDate,
             end: endDateFormatted,
-            allDay: false,
+            allDay: true,
             backgroundColor: color
         };
 
         // add the new event to the myEvents array
-        myEvents.push(newEvent);
+        // myEvents.push(newEvent);
+
+        userEvents[userId].push(newEvent)
 
         // render the new event on the calendar
         calendar.addEvent(newEvent);
 
         // save events to local storage
-        localStorage.setItem('events', JSON.stringify(myEvents));
+        localStorage.setItem('events', JSON.stringify(userEvents));
 
         myModal.hide();
         form.reset();
@@ -943,34 +978,98 @@ function loadCalendar(){
     });
 
     // Trong sự kiện click trên ngày trong lịch
-    calendar.on('dateClick', function (info) {
+    calendar.on('eventClick', function (info) {
         // Lấy thông tin buổi tập tương ứng với ngày này
-        const workoutData = getWorkoutDataForDate(info.dateStr);
+        //const workoutData = getWorkoutDataForDate(info.id);
 
-        if (workoutData) {
-            document.getElementById('gym-location').value = workoutData.gymLocation;
-            document.getElementById('gym-address').value = workoutData.gymAddress;
-            document.getElementById('workout-date').value = workoutData.date;
-            document.getElementById('check-in-time').value = workoutData.checkInTime;
-            document.getElementById('membership-package').value = workoutData.membershipPackage;
+        getWorkoutDataForDate(info.event.id, function (data) {
+            console.log(data);
+            if (data !== null) {
+                // Xử lý dữ liệu và trả về đối tượng chứa thông tin buổi tập
+                const workoutData = {
+                    gymLocation: data.gymDepartmentName,
+                    gymAddress: data.address,
+                    date: data.date,
+                    checkInTime: data.time,
+                    membershipPackage: data.gymPlanName
+                };
 
-            const detailModal = new bootstrap.Modal(document.getElementById('detail-modal'));
-            detailModal.show();
-        }
+                if(data.feedBackId == 0) {
+                    document.getElementById('gym-location').value = workoutData.gymLocation;
+                    document.getElementById('gym-address').value = workoutData.gymAddress;
+                    document.getElementById('workout-date').value = workoutData.date;
+                    document.getElementById('check-in-time').value = workoutData.checkInTime;
+                    document.getElementById('membership-package').value = workoutData.membershipPackage;
+
+                    document.getElementById("checkInHistoryIdReview").value = data.checkInHistoryId;
+                    document.getElementById("departmentIdReview").value = data.gymDepartmentId;
+
+                    const detailModal = new bootstrap.Modal(document.getElementById('detail-modal'));
+                    detailModal.show();
+                } else {
+                    $.ajax({
+                        type: "GET",
+                        url: `/calendar/getFeedback?id=${data.checkInHistoryId}`,
+                        success: function (feedback) {
+                            console.log("feedback", feedback)
+                            document.getElementById('gym-location-review').value = workoutData.gymLocation;
+                            document.getElementById('gym-address-review').value = workoutData.gymAddress;
+                            document.getElementById('workout-date-review').value = workoutData.date;
+                            document.getElementById('check-in-time-review').value = workoutData.checkInTime;
+                            document.getElementById('membership-package-review').value = workoutData.membershipPackage;
+
+                            document.getElementById("checkInHistoryIdReviewed").value = data.checkInHistoryId;
+
+                            document.getElementById("departmentIdReviewed").value = data.gymDepartmentId;
+                            document.getElementById("feedbackId").value = feedback.feedbackId;
+
+
+
+                            $('#star-rating-reviewed').attr('data-star', feedback.rating);
+                            const detailModal = new bootstrap.Modal(document.getElementById('post-review-detail-modal'));
+                            detailModal.show();
+                        },
+                        error: function () {
+                            alert("Đã xảy ra lỗi trong getFeedback");
+                        }
+                    });
+                }
+
+
+
+
+            } else {
+                // Xử lý lỗi nếu có.
+                console.error("Đã xảy ra lỗi trong getListCheckInCalendar");
+            }
+        });
+
     });
 
     // Hàm để lấy thông tin buổi tập dựa trên ngày (thay thế bằng dữ liệu thực tế của bạn)
-    function getWorkoutDataForDate(date) {
+    function getWorkoutDataForDate(id, callback) {
         // Thực hiện việc truy vấn dữ liệu hoặc xác định thông tin buổi tập dựa trên ngày
+        $.ajax({
+            type: "GET",
+            url: `/calendar/getDetail?id=${id}`,
+            success: function (data) {
+                console.log(data);
+                // Nếu có thông báo thì hiện
+                callback(data);
+            },
+            error: function () {
+                callback(null);
+            }
+        });
         // Trả về đối tượng chứa thông tin buổi tập
         // Ví dụ:
-        return {
-            gymLocation: "SKY CITY TOWER - QUẬN ĐỐNG ĐA",
-            gymAddress: "Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q.Đống Đa, Hà Nội",
-            date: date,
-            checkInTime: "12:36 AM",
-            membershipPackage: "Gói linh hoạt"
-        };
+        // return {
+        //     gymLocation: "SKY CITY TOWER - QUẬN ĐỐNG ĐA",
+        //     gymAddress: "Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q.Đống Đa, Hà Nội",
+        //     date: date,
+        //     checkInTime: "12:36 AM",
+        //     membershipPackage: "Gói linh hoạt"
+        // };
     }
 
     // Xử lý khi người dùng nhấp vào liên kết "Đánh giá ngay"
@@ -988,6 +1087,37 @@ function loadCalendar(){
         // Hiển thị gymLocation trong modal đánh giá
         const gymLocationInReviewModal = document.getElementById('gym-location-in-review-modal');
         gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
+    });
+
+    const reviewedLink = document.getElementById('reviewed-link');
+    reviewedLink.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Lấy thông tin gymLocation
+        const gymLocation = document.getElementById('gym-location').value;
+
+        // Hiển thị modal đánh giá
+        const reviewedModal = new bootstrap.Modal(document.getElementById('reviewed-modal'));
+        reviewedModal.show();
+
+        // Hiển thị gymLocation trong modal đánh giá
+        const gymLocationInReviewModal = document.getElementById('gym-location-in-reviewed-modal');
+        gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
+
+        let id = document.getElementById("checkInHistoryIdReviewed").value;
+
+        $.ajax({
+            type: "GET",
+            url: `/calendar/getFeedback?id=${id}`,
+            success: function (data) {
+                var radioId = 'star' + data.rating;
+                $('#your-rating ' + '#' + radioId).prop('checked', true);
+                $('#your-thoughts').val(data.comments);
+            },
+            error: function () {
+                alert("Đã xảy ra lỗi trong getListCheckInCalendar");
+            }
+        });
     });
 }
 $(function () {

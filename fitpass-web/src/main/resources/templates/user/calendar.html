@@ -50,7 +50,7 @@
             <hr>
         </div>
     </section><!-- End Breadcrumbs -->
-
+    <input type="hidden" th:value="${session.userInfo.userId}" id="userId" />
     <div class="filter-container">
         <div class="container">
             <section class="separator-box">
@@ -184,29 +184,29 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="gym-location">Cơ sở tập</label>
-                                    <input type="text" class="form-control" id="gym-location" readonly>
+                                    <input type="text" class="form-control" id="gym-location-review" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="gym-address">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="gym-address" readonly>
+                                    <input type="text" class="form-control" id="gym-address-review" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="workout-date">Ngày</label>
-                                    <input type="text" class="form-control" id="workout-date" readonly>
+                                    <input type="text" class="form-control" id="workout-date-review" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="check-in-time">Thời gian check-in</label>
-                                    <input type="text" class="form-control" id="check-in-time" readonly>
+                                    <input type="text" class="form-control" id="check-in-time-review" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="membership-package">Gói tập</label>
-                                    <input type="text" class="form-control" id="membership-package" readonly>
+                                    <input type="text" class="form-control" id="membership-package-review" readonly>
                                 </div>
                                 <div class="border-rating">
                                     <div class="centered-content">
                                         <p>Bạn đã đánh giá cơ sở này</p>
                                         <p>
-                                        <div style="font-size: 28px;" data-star="4"></div>
+                                        <div id="star-rating-reviewed" style="font-size: 28px;" data-star="4"></div>
                                         </p>
                                         <a href="" id="reviewed-link">Xem đánh giá</a>
                                     </div>
@@ -217,11 +217,14 @@
                 </div>
 
                 <!-- Modal đánh giá -->
+                <form method="post" action="/calendar/submitReview">
                 <div class="modal fade" id="review-modal" tabindex="-1" role="dialog"
                      aria-labelledby="review-modal-title" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header border-bottom-0">
+                                <input type="hidden" value="" name="checkInHistoryId" id="checkInHistoryIdReview">
+                                <input type="hidden" value="" name="departmentId" id="departmentIdReview">
                                 <h5 class="modal-title" id="review-modal-title">Đánh giá cơ sở tập</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
@@ -247,26 +250,31 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="thoughts">Suy nghĩ của bạn về phòng tập</label>
-                                    <textarea class="form-control" id="thoughts" rows="3"
+                                    <textarea class="form-control" name="thoughts" id="thoughts" rows="3"
                                               placeholder="Nhập suy nghĩ của bạn"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer border-top-0 d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="button" class="btn btn-primary" id="submit-review">Gửi đánh
+                                <button type="submit" class="btn btn-primary" id="submit-review">Gửi đánh
                                     giá
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                </form>
 
                 <!-- Modal đã đánh giá -->
+                <form method="post" action="/calendar/updateReview">
                 <div class="modal fade" id="reviewed-modal" tabindex="-1" role="dialog"
                      aria-labelledby="reviewed-modal-title" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header border-bottom-0">
+                                <input type="hidden" value=""  name="feedbackId" id="feedbackId">
+                                <input type="hidden" value="" name="checkInHistoryId" id="checkInHistoryIdReviewed">
+                                <input type="hidden" value="" name="departmentId" id="departmentIdReviewed">
                                 <h5 class="modal-title" id="reviewed-modal-title">Đã đánh giá cơ sở tập</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
@@ -292,12 +300,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="your-thoughts">Suy nghĩ của bạn về phòng tập</label>
-                                    <textarea class="form-control" id="your-thoughts" rows="3" readonly></textarea>
+                                    <textarea class="form-control" name="thoughts" id="your-thoughts" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer border-top-0 d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="button" class="btn btn-primary" id="edit-review">Lưu chỉnh
+                                <button type="submit" class="btn btn-primary" id="edit-review">Lưu chỉnh
                                     sửa
                                 </button>
                             </div>
@@ -305,6 +313,7 @@
                     </div>
                 </div>
 
+                </form>
 
             </section>
         </div>

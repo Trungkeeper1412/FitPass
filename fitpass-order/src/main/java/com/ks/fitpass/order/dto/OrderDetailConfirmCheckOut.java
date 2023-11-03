@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,18 +23,4 @@ public class OrderDetailConfirmCheckOut {
     private double creditNeedToPay;
     private double creditAfterPay;
     private Timestamp checkOutTime;
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        OrderDetailConfirmCheckOut other = (OrderDetailConfirmCheckOut) obj;
-        return Objects.equals(departmentName, other.departmentName)
-                && Objects.equals(gymPlanName, other.gymPlanName)
-                && Double.compare(pricePerHours, other.pricePerHours) == 0;
-    }
 }
