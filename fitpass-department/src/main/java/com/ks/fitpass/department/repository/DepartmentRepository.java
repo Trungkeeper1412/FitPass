@@ -15,16 +15,16 @@ public interface DepartmentRepository {
 
     List<Department> getAllByTopRating(int status) throws DataAccessException;
 
+    List<Department> getAllByBrandId(int brandId, int status) throws DataAccessException;
+
     Department getOne(int id) throws DataAccessException;
 
     boolean update(Department department) throws DataAccessException;
 
-
     List<Department> findByRatingBetween(double from, double to);
-
 
     List<UserFeedback> getDepartmentFeedback(int departmentId);
 
-
+    List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException;
 
 }

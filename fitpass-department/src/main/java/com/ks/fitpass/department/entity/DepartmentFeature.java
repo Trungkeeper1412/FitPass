@@ -8,13 +8,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartmentFeature {
-    private int featureId;
+    private int departmentFeatureId;
+
+    private Feature feature;
 
     private int gymDepartmentId;
 
-    private String featureIcon;
-
-    private String featureName;
-
-    private boolean isSelected;
+    private int departmentFeatureStatus;
 }

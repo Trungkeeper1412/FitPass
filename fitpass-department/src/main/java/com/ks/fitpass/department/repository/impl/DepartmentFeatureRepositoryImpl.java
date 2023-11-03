@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public class DepartmentFeatureRepositoryImpl implements DepartmentFeatureRepository, IRepositoryQuery {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public DepartmentFeatureRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -20,5 +20,10 @@ public class DepartmentFeatureRepositoryImpl implements DepartmentFeatureReposit
     @Override
     public List<DepartmentFeature> getDepartmentFeatures(int departmentId) {
         return jdbcTemplate.query(GET_DEPARTMENT_FEATURES, new DepartmentFeatureMapper(), departmentId);
+    }
+
+    @Override
+    public List<DepartmentFeature> getDepartmentFeaturesByStatusAndDepartmentID(int departmentId, int status) {
+        return jdbcTemplate.query(GET_DEPARTMENT_FEATURES_BY_STATUS_AND_DEPARTMENT_ID, new DepartmentFeatureMapper(), departmentId, status);
     }
 }

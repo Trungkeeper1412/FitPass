@@ -40,10 +40,11 @@
                             <form
                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-1 small"
+                                    <input type="hidden" id="departmentId" th:value="${departmentId}">
+                                    <input type="text" class="form-control bg-light border-1 small" id="searchInput"
                                         placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
+                                        <button class="btn btn-primary" type="button" id="searchButton">
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
@@ -51,14 +52,14 @@
                             </form>
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="alphabet-sort">
+                            <select id="search-by">
                                 <option value="" disabled selected>Tìm kiếm theo:</option>
-                                <option value="userName">Tên người dùng</option>
-                                <option value="phoneNumber">Số điện thoại</option>
+                                <option value="username">Tên người dùng</option>
+                                <option value="phonenumber">Số điện thoại</option>
                             </select>
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="check-in-duration">
+                            <select id="filter-date">
                                 <option value="" disabled selected>Sắp xếp theo:</option>
                                 <option value="inDay">Trong ngày</option>
                                 <option value="inWeek">Trong tuần</option>
@@ -91,7 +92,7 @@
                                                 <th>Tên khách hàng</th>
                                                 <th>Số điện thoại</th>
                                                 <th>Tên nhân viên</th>
-                                                <th>Ngày</th>
+<!--                                                <th>Ngày</th>-->
                                                 <th>Thời gian Check-in</th>
                                                 <th>Thời gian Check-out</th>
                                                 <th>Thời gian tập</th>
@@ -99,60 +100,28 @@
                                                 <th>Credit sử dụng</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-                                                <td>Nguyễn Văn Bảo Linh</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>12-04-2023</td>
-                                                <td>05:20 PM</td>
-                                                <td>07:12 PM</td>
-                                                <td>01h 58p</td>
-                                                <td>
-                                                    <h5 class="text-money">5 <span class="credit">Credit/Giờ</span></h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money">14 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/kb0sd7">Xem ảnh</button></td>
-                                                <td>Lê Đình Tuấn</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>24-10-2023</td>
-                                                <td>04:20 PM</td>
-                                                <td>07:12 PM</td>
-                                                <td>02h 58p</td>
-                                                <td>
-                                                    <h5 class="text-money">10 <span class="credit">Credit/Giờ</span>
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money">18 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/LGLMv6">Xem ảnh</button></td>
-                                                <td>Nguyễn Văn Trung</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>24-10-2023</td>
-                                                <td>06:40 PM</td>
-                                                <td>07:52 PM</td>
-                                                <td>01h 12p</td>
-                                                <td>
-                                                    <h5 class="text-money">10 <span class="credit">Credit/Giờ</span>
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money">22 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
+                                        <tbody id="listFlexible">
+                                            <th:block th:each="item:${listFlexible}">
+
+                                                <tr>
+                                                    <td><button class="view-image-btn view-detail"
+                                                                data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+                                                    <td th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</td>
+                                                    <td th:text="${item.getPhoneNumber()}">0987654321</td>
+                                                    <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
+                                                    <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                    <td th:text="${item.getCheckOutTime() == null ? 'Chưa check out' : #temporals.format(item.getCheckOutTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                    <td th:text="${item.getDuration()}"></td>
+                                                    <td>
+                                                        <h5 class="text-money"><span th:text="${item.getPricePerHours()}">5</span> <span class="credit">Credit/Giờ</span></h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="text-money"><span th:text="${item.getTotalCredit() == null ? '0' : item.getTotalCredit()}">5</span> <span class="credit">Credit</span></h5>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -167,52 +136,26 @@
                                                 <th>Tên khách hàng</th>
                                                 <th>Số điện thoại</th>
                                                 <th>Tên nhân viên</th>
-                                                <th>Ngày</th>
                                                 <th>Thời gian Check-in</th>
                                                 <th>Tên gói</th>
                                                 <th>Giá gói</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-                                                <td>Nguyễn Trà My</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>12-04-2023</td>
-                                                <td>05:20 PM</td>
-                                                <td>Gói 3 ngày</td>
-                                                <td>
-                                                    <h5 class="text-money">100 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/kb0sd7">Xem ảnh</button></td>
-                                                <td>Lê Trung Đức</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>24-10-2023</td>
-                                                <td>04:20 PM</td>
-                                                <td>Gói 7 ngày</td>
-                                                <td>
-                                                    <h5 class="text-money">150 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                        data-image-src="https://bom.so/LGLMv6">Xem ảnh</button></td>
-                                                <td>Mai Quang Trường</td>
-                                                <td>0987654321</td>
-                                                <td>Nguyễn Ngọc Ánh</td>
-                                                <td>24-10-2023</td>
-                                                <td>06:40 PM</td>
-                                                <td>Gói 1 tháng</td>
-                                                <td>
-                                                    <h5 class="text-money">220 <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>
+                                        <tbody id="listFixed">
+                                            <th:block th:each="item : ${listFixed}">
+                                                <tr>
+                                                    <td><button class="view-image-btn view-detail"
+                                                            data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+                                                    <td th:text="${item.getUsername()}">Nguyễn Trà My</td>
+                                                    <td th:text="${item.getPhoneNumber()}">0987654321</td>
+                                                    <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
+                                                    <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}">12-04-2023</td>
+                                                    <td th:text="${item.getGymPlanName()}">Gói 3 ngày</td>
+                                                    <td>
+                                                        <h5 class="text-money"><span th:text="${item.getCredit()}">100</span> <span class="credit">Credit</span></h5>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
                                         </tbody>
                                     </table>
                                 </div>
@@ -265,5 +208,151 @@
 
     <!-- Script -->
     <th:block th:replace="employee/common/script :: script"></th:block>
+    <script>
+        $("#searchButton").click(function () {
+            event.preventDefault();
+            console.log("click");
+            // Lấy giá trị từ ô nhập liệu
+            let searchText = $("#searchInput").val();
+            // Lấy giá trị từ dropdown chọn
+            let searchOption = $("#search-by").val();
+
+            let filterDate = $("#filter-date").val();
+
+            let departmentId = $("#departmentId").val();
+            // Gửi yêu cầu tìm kiếm bằng Ajax
+            if ($("#flexible").hasClass("show")) {
+                searchListFlex(searchText, searchOption, filterDate, departmentId)
+            } else if($("#fixed").hasClass("show")) {
+                console.log("hello");
+                searchListFixed(searchText, searchOption, filterDate, departmentId);
+            }
+        });
+
+        function searchListFlex(searchText, searchOption, filterDate, departmentId) {
+            let url;
+
+            if (searchOption === 'username') {
+                url = `/employee/history/searchFlex?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+            } else if (searchOption === 'phonenumber') {
+                url = `/employee/history/searchFlex?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+            }
+
+            if (url) {
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function (data) {
+                        console.log(data);
+                        displaySearchListFlex(data);
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+                    }
+                });
+            }
+        }
+
+        function displaySearchListFlex(results) {
+            // Xóa các kết quả hiện tại
+            $("#listFlexible").empty();
+
+            // Hiển thị kết quả tìm kiếm
+            if (results.length > 0) {
+                var resultHtml = "";
+                for (var i = 0; i < results.length; i++) {
+                    resultHtml += `<tr>
+                                                <td><button class="view-image-btn view-detail"
+                                                            data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+                                                <td>${results[i].username}</td>
+                                                <td>${results[i].phoneNumber}</td>
+                                                <td>${results[i].empName}</td>
+                                                <td>${formatDateTime(results[i].checkInTime)}</td>
+                                                <td>${results[i].checkOutTime ? formatDateTime(results[i].checkOutTime) : 'Chưa check out'}</td>
+                                                <td>${results[i].duration ? results[i].duration : ''}</td>
+                                                <td>
+                                                    <h5 class="text-money"><span>${results[i].pricePerHours}</span> <span class="credit">Credit/Giờ</span></h5>
+                                                </td>
+                                                <td>
+                                                    <h5 class="text-money"><span>${results[i].totalCredit}</span> <span class="credit">Credit</span></h5>
+                                                </td>
+                                            </tr>`;
+                }
+                $("#listFlexible").append(resultHtml);
+            } else {
+                $("#listFlexible").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+            }
+        }
+
+        function searchListFixed(searchText, searchOption, filterDate, departmentId) {
+            let url;
+
+            if (searchOption === 'username') {
+                url = `/employee/history/searchFixed?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+            } else if (searchOption === 'phonenumber') {
+                url = `/employee/history/searchFixed?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+            }
+
+            if (url) {
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function (data) {
+                        console.log(data);
+                        displaySearchListFixed(data);
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+                    }
+                });
+            }
+        }
+
+        function displaySearchListFixed(results) {
+            // Xóa các kết quả hiện tại
+            $("#listFixed").empty();
+
+            // Hiển thị kết quả tìm kiếm
+            if (results.length > 0) {
+                var resultHtml = "";
+                for (var i = 0; i < results.length; i++) {
+                    resultHtml +=   `<tr>
+                                                    <td><button class="view-image-btn view-detail"
+                                                            data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+                                                    <td>${results[i].username}</td>
+                                                    <td>${results[i].phoneNumber}</td>
+                                                    <td>${results[i].empName}</td>
+                                                    <td>${results[i].checkInTime}</td>
+                                                    <td>${results[i].gymPlanName}</td>
+                                                    <td>
+                                                        <h5 class="text-money"><span>${results[i].credit}</span> <span class="credit">Credit</span></h5>
+                                                    </td>
+                                                </tr>`;
+                }
+                $("#listFixed").append(resultHtml);
+            } else {
+                $("#listFixed").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+            }
+        }
+
+        function formatDateTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // Tháng bắt đầu từ 0
+            const year = date.getFullYear();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            const seconds = date.getSeconds();
+
+            // Đảm bảo rằng tháng và ngày có hai chữ số
+            const formattedMonth = month < 10 ? `0${month}` : month;
+            const formattedDay = day < 10 ? `0${day}` : day;
+            const formattedHours = hours < 10 ? `0${hours}` : hours;
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+            const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+            return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        }
+    </script>
 </body>
 </html>

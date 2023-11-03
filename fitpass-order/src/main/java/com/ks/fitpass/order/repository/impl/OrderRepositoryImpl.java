@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public OrderRepositoryImpl(JdbcTemplate jdbcTemplate) {

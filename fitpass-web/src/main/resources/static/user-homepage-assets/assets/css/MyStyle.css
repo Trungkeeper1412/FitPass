@@ -10,6 +10,35 @@
 # General
 --------------------------------------------------------------*/
 /*NAVBAR*/
+.cart-badge {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  background-color: orangered;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  background-color: orange;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
 .search-bar {
   display: flex;
   align-items: center;
@@ -57,14 +86,14 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Raleway", sans-serif;
-}
+/*h1,*/
+/*h2,*/
+/*h3,*/
+/*h4,*/
+/*h5,*/
+/*h6 {*/
+/*  font-family: "Raleway", sans-serif;*/
+/*}*/
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -1915,7 +1944,7 @@ input[type="range"]::-moz-range-thumb {
 /* .gym_image:hover {
   transform: rotate(-3deg) scale(1.1);
   -webkit-transform: rotate(-3deg) scale(1.1);
-} */ */
+} */
 
 .price {
   position: absolute;
@@ -2043,7 +2072,7 @@ input[type="range"]::-moz-range-thumb {
 .gym-description .glyphicon {
   font-size: 20px;
   text-align: center;
-} */
+}
 
 .gym-description .button{
   background-color: #4CAF50; /* Green */
@@ -2208,12 +2237,12 @@ img {
 .slideshow-container {
   width: 100%;
   position: relative;
-  margin: auto;
+  /*height: 30%;*/
 }
 
 .slideshow-container img{
   width:100%;
-  height: 660px;
+  /*height: 580px;*/
   /* border: 1px solid white; */
   /* border-radius: 15px; */
 }
@@ -2328,117 +2357,433 @@ a:link {
 }
 
 
-/* User profile */
-.user-profile{
-  /* width: 80%; */
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  padding: 50px 90px 50px 90px;
+/* ===================== User profile ===================== */
+.transaction-history{
+  background-color: white;
+  padding: 20px;
+}
+.user-profile-content {
+  margin-top: 130px;
+}
+.user-profile-content .pagination {
+  display: flex;
+  color: black;
+}
+.user-profile-content .paginate_button .page-item .active{
+  color: black;
 }
 
-
-.profile-info{
-  margin-left: 40px;
-  display: grid;
-  grid-template-rows: 2fr 5fr;
-  border: rgb(255, 255, 255) solid;
-  border-radius: 10px;
-  box-shadow: 10px 10px 5px rgb(225, 225, 225);
-  background-color: rgb(255, 255, 255) ;
-}
-
-.profile-option{
-  display: grid;
-  grid-template-rows: 3fr 4.3fr;
+.account-info {
+  margin-top: 15px;
   height: fit-content;
-  border: #fffbec 1px solid;
   border-radius: 10px;
-  box-shadow: 10px 10px 5px rgb(225, 225, 225);
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  /* font-weight: 500; */
 }
 
-/*  */
-.card-info .form-control-label {
-  font-size: .875rem;
+.menu-option .list-group-item img {
+  width: 18px;
+  margin-right: 5px;
+}
+
+.option-tab.at {
+  color: #000;
+  border: 1px solid rgb(230, 230, 230);
+  border-right: 5px solid rgb(255, 200, 0);
+  background-color: white;
+  font-weight: bold;
+}
+
+.account-balance {
+  padding: 20px;
+  height: fit-content;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+
+.account-balance img {
+  width: 40px;
+}
+
+.ab-title {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.wallet-money {
+  font-size: 20px;
   font-weight: 600;
-  color: #ffffff;
+  float: right;
 }
 
-.card-info input{
-  margin-top: 8px;
-  color: white;
+.wallet-info {
+  margin-top: 15px;
+
 }
 
-.card-info .form-control:focus:-ms-input-placeholder {
-  color: #c4c4c4;
+.user-basic-info .user {
+  margin-left: 10px;
+  font-size: 14px;
 }
 
-.card-info .form-control:focus::-ms-input-placeholder {
-  color: #ffffff;
+.user-basic-info .gmail {
+  font-size: 12px;
 }
 
-.card-info .form-control:focus::placeholder {
-  color: #ffffff;
+.user-basic-info {
+  height: fit-content;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
 }
 
-.card-info .button{
-  background-color: #4CAF50; /* Green */
-  color: white;
-  width: 120px;
-  padding: 15px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+.user-img {
+  border: 3px solid rgb(255, 217, 0);
+  border-radius: 50%;
+}
+
+.user-img img {
+  width: 60px;
+  border-radius: 50%;
+  height: 60px;
+  padding: 5px;
+}
+
+.content-by-option {}
+
+/* css for banking card */
+.banking-card-list label {
+  width: 100%;
+}
+
+.banking-card-list img {
+  width: 30px;
+}
+
+.banking-card-list .card-input-element {
+  display: none;
+}
+
+.banking-card-list .card-input {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.banking-card-list .card-input:hover {
   cursor: pointer;
 }
 
-.card-info  .button4 {
-  margin-top: 30px;
-  background-color: rgb(64, 64, 64);
-  color: rgb(255, 255, 255);
-  border-radius: 15px;
-  border: 1px solid ;
-} /* Gray */
-
-
-.change-avatar{
-  background-color: #fffbec;
-  display: flex;
-  flex-direction: column;
+.banking-card-list .card-input-element:checked+.card-input {
+  box-shadow: 0 0 1px 1px #000000;
+  border: none;
 }
 
+.add-money label {
+  width: 100%;
+}
 
+.add-money img {
+  width: 30px;
+}
 
+.add-money .card-input-element {
+  display: none;
+}
+
+.add-money .card-input {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.add-money .card-input:hover {
+  cursor: pointer;
+}
+
+.add-money .card-input-element:checked+.card-input {
+  box-shadow: 0 0 1px 1px #000000;
+  border: none;
+}
+
+.add-money .panel-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-money-btn {
+  background-color: #000;
+  padding: 11px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.radio-buttons {
+  width: 100%;
+  margin: 0 auto;
+  /* text-align: center; */
+}
+
+.input-money input[type=text] {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  /* margin:8px 0; */
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: .3s;
+}
+
+.input-money input[type=text]:focus {
+  border-color: rgba(255, 200, 0, 0.577);
+  box-shadow: 0 0 8px 0 rgba(255, 200, 0, 0.658);
+}
+
+.credit-trans {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5px;
+  font-size: 14px;
+}
+
+.add-money-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.add-money-modal .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem 2.5rem;
+  width: 30em;
+  border-radius: 0.5rem;
+}
+
+.add-money-modal .close-button {
+  float: right;
+  width: 1.5rem;
+  font-size: 1.2em;
+  line-height: 1;
+  padding: 0 .2em .15em;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: var(--clr-neutral);
+  color: var(--clr-dark);
+  transition: color 0.12s ease-in-out;
+}
+
+.add-money-modal .money {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.add-money-modal .credit {
+  font-size: 18px;
+  font-weight: 600;
+  color: orange;
+}
+
+.add-money-modal .close-button:hover {
+  color: var(--clr-main);
+}
+
+.add-money-modal .btn-option {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-money-modal .confirm {
+  border: none;
+  background-color: rgb(255, 204, 0);
+  border-radius: 5px;
+  font-weight: 500;
+  padding: 8px 15px;
+}
+
+.add-money-modal .cancel {
+  border: 2px solid rgb(255, 204, 0);
+  background-color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-left: 30px;
+  padding: 8px 30px;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+/* Css  for profile tab */
+.user-profile{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.user-edit-profile input{
+  width:100%;
+  border:2px solid #e1e1e1;
+  border-radius:8px;
+  margin:2px 0;
+  outline:none;
+  padding:8px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+.user-edit-profile .input-title{
+  font-weight: 600;
+  font-size: 14px;
+}
+.user-edit-profile input:focus{
+  border-color:rgb(223, 223, 223);
+  box-shadow:0 0 8px 0 rgb(193, 193, 193);
+}
+input[type="radio"]:checked{
+  accent-color: rgb(0, 0, 0);
+}
+.user-edit-profile input[type='radio']:focus{
+  border-color:none;
+  background-color: black;
+  box-shadow:none;
+}
+.user-change-ava{
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+}
+.change-ava-btn{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.user-change-ava .user-img{
+  border: 3px solid rgb(255, 217, 0);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+.user-change-ava .user-img img{
+  border-radius: 50%;
+  width: 115px;
+  height: 115px;
+  padding: 5px;
+}
+.user-edit-profile .save-changes{
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 12px;
+  width: fit-content;
+  color: white;
+  background-color: black;
+  border-radius: 15px;
+}
+.transaction-history .paginate_button .page-item.active{
+  background-color: #000;
+}
+.dataTables_length label{
+  display: flex;
+  column-gap: 3px;
+  align-items: center;
+}
+.dataTables_length .form-select{
+  width: fit-content;
+}
+.dataTables_filter label{
+  display: flex;
+  align-items: center;
+}
+.dataTables_filter label input{
+  margin-left: 5px;
+  width: 250px;
+}
+.dataTables_filter label input:focus{
+  border-color:rgb(223, 223, 223);
+  background-color: white;
+  box-shadow:0 0 8px 0 rgb(193, 193, 193);
+}
+.change-pw{
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+}
+.change-pw-icon img{
+  width: 120px;
+  height: 120px;
+  margin: auto;
+}
 /* Button option in User profile */
-.option .active{
+.option .active {
   background-color: #000000;
 }
 
-.list-group button{
+.list-group button {
   font-weight: 500;
 }
-
-.option{
+.list-group button {
+  font-weight: 500;
+}
+.option {
   margin-top: 20px;
   width: 100%;
 }
 
-.title{
-  background-color: rgb(255, 244, 221); /* For browsers that do not support gradients */
+.title {
+  background-color: rgb(255, 244, 221);
+  /* For browsers that do not support gradients */
   background-image: linear-gradient(rgb(255, 235, 161), rgb(255, 255, 255));
 }
 
-.hr{
+.hr {
   border: 2px solid rgb(255, 200, 0);
 }
 
 /* CSS FOR GYM DETAILS PAGE */
 .body-gym-details{
   background-color: rgb(238, 238, 238);
-  /* background-image: linear-gradient(rgb(0, 0, 0),rgb(255, 231, 192), orange, yellow); */
-  /*background-image: url("https://i.pinimg.com/236x/a4/8e/72/a48e727b363f66fedb9fe30b8026a850.jpg");*/
   background-size: cover;
+}
+.body-gym-details header{
+  position: relative;
+}
+
+.body-gym-details .pagination-wrapper .page-numbers{
+  font-size: 16px;
+  padding: 0 15px;
+  float: left;
+  margin-top: 15px;
+  letter-spacing: 0.1em;
 }
 .switch {
   position: relative;
@@ -2502,10 +2847,10 @@ input:checked + .toggle-slider:before {
 
 .about-our-gym{
   /* background-color: #18d26e; */
-  color: #000000;
-  display: grid;
+  color: rgb(0, 0, 0);
+  /* display: grid;
   grid-template-columns: 1.3fr 1fr;
-  grid-column-gap: 80px
+  grid-column-gap: 80px */
 }
 
 .modal {
@@ -2522,15 +2867,18 @@ input:checked + .toggle-slider:before {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
   margin: auto;
   border: 1px solid #888;
-  width: 40%;
+  width: 50%;
   color: #000;
   height: fit-content;
 }
+
+
 
 .schedule-modal-header h3 {
   font-weight: 700;
@@ -2595,11 +2943,19 @@ input:checked + .toggle-slider:before {
   margin-left: 20px;
   border-radius: 10px;
   padding: 10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
 .gym-name-cover h5{
   border:1px solid rgb(255, 162, 0);
   padding: 10px;
   border-radius: 50px;
+  color: white;
+}
+.gym-name-cover h3{
+  margin: auto;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
 }
 .gym-picture{
   position: relative;
@@ -2618,7 +2974,7 @@ input:checked + .toggle-slider:before {
   background-color: rgb(0, 0, 0);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 80%;
+  width: 100%;
   height: 30%;
   margin: auto;
   border-radius: 10px;
@@ -2634,22 +2990,64 @@ input:checked + .toggle-slider:before {
 }
 .gym-service{
   margin: auto;
-  padding: 25px 25px 0px 25px;
-  width: 100%;
-  height: 60%;
-  display: grid;
-  margin-top: 40px;
-  /*box-shadow: 5px 5px rgba(201, 201, 201, 0.33);*/
   background-color: white;
-  grid-template-columns: auto auto;
-  grid-column-gap: 70px;
-  color: black;
+  padding: 30px;
+  width: 100%;
+  height: fit-content;
+  margin-top: 50px;
+  color: #000;
+}
+.gym-service-logo{
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+  width: fit-content;
+}
+.gym-service-logo:hover + .service-name {
+  display: block;
+  position: absolute;
+  color: white;
+  width: fit-content;
+  padding: 3px;
+  border-radius: 5px;
+  background-color: black;
+}
+.gym-service-logo i{
+  font-size:30px;
+}
+.service-name{
+  display: none;
+  /*height: 50px;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*font-weight: 400;*/
+  /*font-size: 12px;*/
+  /*color: rgb(0, 0, 0);*/
+}
+.service-row{
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.service-type{
+  margin-top: 30px;
+  margin: auto;
+  width: 150px;
+  /* background-color: #15928A; */
+}
+.service-type .gym-service-logo img{
+  width: 30x;
+  height: 30px;
 }
 
 .sub-service{
   display: flex;
+  align-items: center;
   width: fit-content;
   height: fit-content;
+  margin-top: 15px;
 }
 
 .gym-first-info::before{
@@ -2669,7 +3067,7 @@ input:checked + .toggle-slider:before {
   width: 100%;
   margin: auto;
   margin-top: 60px;
-  padding: 30px 150px 150px 150px;
+  /* padding: 30px 150px 150px 150px; */
 }
 
 .gym-name{
@@ -2729,6 +3127,7 @@ section {
   padding-left: 30px;
   padding-right: 30px;
   margin-top: 20px;
+  width: 94%;
   /* background-color: black; */
 }
 
@@ -2750,8 +3149,8 @@ section {
   position: relative;
   width: 100%;
   padding: 40px 0px;
+  margin: auto;
   align-items: center;
-  /* height: fit-content; */
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
@@ -2771,22 +3170,18 @@ section {
   margin: 1px 10px;
   color: #000000;
   background-color: #ffffff;
+  /* background-color: #ffffff; */
   border: 1px solid #ffb7006e;
   overflow: hidden;
-  /* -webkit-box-shadow: 0px 0px 15px 2px rgb(0 0 0 / 10%); */
-  /* box-shadow: 0px 0px 15px 2px rgb(0 0 0 / 10%);; */
-  /* box-shadow: 5px 10px rgba(216, 216, 216, 0.268); */
 }
 
 .plan-intro{
-  color: #000000
+  color: rgb(0, 0, 0)
 }
 
 .special-plan{
   background-image: url("https://i.pinimg.com/236x/1e/85/2c/1e852cb84f256d39406a0afd4aa7d8ed.jpg");
   background-size: cover;
-  color: black;
-  height: 520px;
   /* padding-top:50px */
 }
 
@@ -2795,7 +3190,7 @@ section {
   color: #000000;
 }
 
-.special-plan .plan-description div{
+#special-plan .plan-description div{
   color: #000000;
 }
 
@@ -2808,19 +3203,17 @@ section {
   /* color: white;
   background-image: url("https://i.pinimg.com/236x/8a/3c/a1/8a3ca1089e86d2c55e24790632291867.jpg");
   background-size: cover; */
-  /*margin-top: 10px;*/
+  margin-top: 20px;
 }
 
 .scroll-plans .child:hover {
-  box-shadow: 0 14px 20px rgba(255, 166, 0, 0.53);
+  box-shadow: 0 14px 20px rgba(255, 255, 255, 0.504);
 }
 
 .scroll-plans button{
   width:100%;
   color: rgb(0, 0, 0);
-  /*margin: auto;*/
-  margin-top: 10px;
-  /*bottom: 5px;*/
+  margin: auto;
   font-weight: 500;
   font-size: medium;
   padding: 10px;
@@ -2833,18 +3226,16 @@ section {
   display: flex;
   margin: auto;
   /* padding-left: 18px; */
-  color: #000000;
+  color: rgb(0, 0, 0);
   margin-top: 10px;
 }
-.gym-plan-description{
-  height: 90px;
-}
+
 .plan-description{
   padding: 30px;
 }
 .gym-plan-name{
   margin-top: 10px;
-  color: #ff8800;
+  color: #ffbf00;
   font-weight: 600;
   align-items: center;
   font-size: 20px;
@@ -2853,10 +3244,11 @@ section {
   border-radius: 20px;
   width: fit-content;
 }
-
+.scroll-plans .gym-plan-description{
+  height: 130px;
+}
 .gym-duration{
   /* text-decoration: underline; */
-  margin-top: 52px;
 }
 
 .day-duration{
@@ -2884,7 +3276,7 @@ section {
 }
 
 .rating-option{
-  display: flex;
+  /* display: flex; */
   padding: 20px;
   /*border: 1px solid rgb(255, 162, 0);*/
   background-color: #fff9e7;
@@ -2894,14 +3286,18 @@ section {
 .rating-point{
   font-size: 24px;
   font-weight: 600;
+  margin-top: 5px;
 }
 
 .rating-option button{
   width:fit-content;
-  color: rgb(0, 0, 0);
-  margin: auto;
+  background-color: white;
+  background-image: none;
+  border:  none;
+  box-shadow: 3px 4px rgb(224, 224, 224);
+  margin-top: 10px;
+  margin-left: 25px;
   font-weight: 600;
-  background-image: url("https://i.pinimg.com/236x/55/07/53/5507538396c7a86c7791bed6b1eab0e7.jpg");
   background-size: cover;
   height: 35px;
 }
@@ -2913,7 +3309,7 @@ section {
   /* background-color: rgb(239, 252, 252); */
   border-bottom: 1px solid rgb(255, 162, 0);
   width: 100%;
-  height: 150px;
+  height: fit-content;
   /*border-radius: 10px;*/
   margin-top: 30px;
 
@@ -2926,6 +3322,7 @@ section {
 .user-rating-description{
   color: rgb(0, 0, 0);
   padding: 15px;
+  height: fit-content;
 }
 
 .rating-feedback{
@@ -2962,16 +3359,6 @@ section {
   /* transform-origin: right top; */
 }
 
-.squares{
-  /* padding:60px 0 0 0; */
-}
-
-.squares > div{
-  width:300px;
-  height:300px;
-  margin: 20px;
-}
-
 .image-scroll-wrapper::-webkit-scrollbar{width:2px;height:2px;}
 .image-scroll-wrapper::-webkit-scrollbar-button{width:2px;height:2px;}
 
@@ -2986,15 +3373,21 @@ section {
 }
 
 .rating-feedback .pagination-wrapper{
-  margin-top: 20px;
+  margin-top: -30px;
 }
 /*  */
 
+.rating-feedback{
+  margin-bottom: 30px;
+}
 
 /* CSS FOR MY CARD PAGE*/
+.body-my-card header{
+  position: relative;
+}
 .my-card-container{
   position: relative;
-  width: 80%;
+  /* width: 85%; */
   bottom: 90px;
   margin: auto;
   /* background-color: white; */
@@ -3007,8 +3400,8 @@ section {
 .my-card-container .line{
   background-color: rgb(253, 197, 0);
   border-radius: 10px;
-  height: 8px;
-  width: 120px;
+  height: 5px;
+  width: 260px;
 }
 .my-card-container .my-card-title{
   margin-top: 50px;
@@ -3017,6 +3410,7 @@ section {
   background-color: white;
   grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
 }
+
 .my-card-title input{
   border: 1px solid orange;
   width: 20px;
@@ -3044,6 +3438,7 @@ section {
 .my-plan-title{
   display: flex;
   align-items: center;
+  margin-left: -10px;
   color:rgb(0, 0, 0)
 }
 .price-title{
@@ -3087,25 +3482,16 @@ section {
   z-index:2;
 }
 
-/* .my-card-container  input[type=checkbox]:after {
-  content: '';
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  width: 4px;
-  height: 10px;
-  border: solid #000000;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg) translate(-50%, -50%);
-  z-index:2;
-} */
-
+.plan-in-my-card{
+  margin-top: 20px;
+  width: 100%;
+}
 .all-plan-of-gym{
   height: 60px;
-  margin-top: 20px;
+  margin-top: 0px;
   display: grid;
   background-color: white;
-  grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
+  grid-template-columns: 1fr 16fr;
   border-bottom: 1px solid rgb(203, 203, 203);
 }
 .all-plan-of-gym .gym-name-mc{
@@ -3117,20 +3503,81 @@ section {
   display: grid;
   background-color: white;
   grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
-  height: 170px;
+  height: fit-content;
+  min-height: 170px;
   /* background-color: #000; */
 }
 
-.plan-card-mc{
-  background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
-  background-size: cover;
-  height: 75%;
-  width: 90%;
-  display:grid;
-  grid-template-columns: 1fr 2fr 1.5fr;
-  margin: auto 0;
-  border-radius: 10px;
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 375px) {
+  .plan-card-mc{
+    background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+    background-size: cover;
+    height: 90%;
+    width: 90%;
+    padding: 10px;
+    display:grid;
+    /* grid-template-rows: 1fr 2fr 1.5fr;  */
+    margin: auto 0;
+    border-radius: 10px;
+  }
+  .plan-info-mc h4{
+    font-size: 16px;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .plan-duration-mc{
+    font-size: 14px;
+    text-align: center;
+    margin-top: 3px;
+  }
+  .active-time-mc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding-bottom: 25px;
+    font-weight: 500;
+    font-size: 14px;
+  }
 }
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+  .plan-card-mc {
+    background: blue;
+  }
+}  */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .plan-card-mc {
+    background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+    background-size: cover;
+    height: 75%;
+    width: 90%;
+    display:grid;
+    grid-template-columns: 1fr 2fr 1.5fr;
+    margin: auto 0;
+    border-radius: 10px;
+  }
+  .active-time-mc{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    color: white;
+    padding: 10px;
+    font-weight: 500;
+  }
+  .plan-info-mc h4{
+    font-size: 18px;
+    margin: auto;
+    margin-top: 10px;
+  }
+}
+
 .plan-card-mc img{
   border-radius: 50%;
   width : 80px;
@@ -3154,14 +3601,6 @@ section {
   padding: 10px;
   width: fit-content;
 }
-.active-time-mc{
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  color: white;
-  padding: 10px;
-  font-weight: 500;
-}
 .plan-price-mc{
   display: flex;
   align-items: center;
@@ -3178,25 +3617,23 @@ section {
   background-color: rgb(238, 238, 238);
   height: fit-content;
 }
-.body-my-card header{
-  position: relative;
-}
 
 .total-container-mc {
-  display: grid;
+  /* position: fixed;
+    width: 87%; */
+  /* display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  position: fixed;
-  margin: auto 0;
+  margin: auto;*/
   bottom: 0;
-  width: 80%;
   background-color: rgb(0, 0, 0);
   color: white;
-  text-align: center;
+  /* text-align: center; */
   height: 90px;
 }
 .total-plan-mc{
   font-weight: 700;
   margin: auto;
+  padding-left: 30px;
 }
 .total-credits-mc{
   display: flex;
@@ -3212,9 +3649,13 @@ section {
   margin: auto 0;
 }
 .buy-button-mc{
-  margin: auto 0;
+  margin: auto;
+  padding-right: 10px;
   font-weight: 700;
+  text-align: end;
+  padding-right: 40px;
 }
+
 
 /* CSS for check out page */
 .body-checkout header{
@@ -3224,44 +3665,105 @@ section {
   background-color: white;
   text-align: center;
 }
-.checkout-container{
-  position: relative;
-  width: 90%;
-  bottom: 90px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  /* background-color: white; */
-  margin-top: 150px;
+@media only screen and (max-width: 370px)  {
+  .body-checkout .bill-descript{
+    font-size: 12px;
+    width: 100%;
+  }
 }
+
+@media only screen and (min-width: 250px) and (max-width: 991px)  {
+  .checkout-container{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    height: fit-content;
+    display: grid;
+    /* grid-template-rows: 1fr 1fr;   */
+    background-color: white;
+    margin-top: 50px;
+  }
+  .body-checkout .bill-info{
+    margin-top: 30px;
+    margin-left: 0px;
+    width: 100%;
+    margin-bottom: 60px;
+  }
+  .checkout-content{
+    height: fit-content;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .body-checkout{
+  }
+  .checkout-container{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: white;
+    margin-top: 50px;
+  }
+  .body-checkout .plan-card-mc{
+    height: 100%;
+    width: 90%;
+    padding: 10px;
+    display:grid;
+    /* grid-template-rows: 1fr 2fr 1.5fr;  */
+    margin: auto 0;
+    border-radius: 10px;
+  }
+  .body-checkout .plan-card-mc h4{
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  .body-checkout .plan-card-mc .duration{
+    font-size: 13px;
+    padding: 3px 0;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .body-checkout{
+  }
+  .body-checkout .plan-card-mc .duration{
+    font-size: 14px;
+    padding: 4px;
+    float: left;
+    margin-left: 5px;
+  }
+  .checkout-container{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: white;
+    margin-top: 50px;
+  }
+}
+
 .body-checkout h2{
-  /* text-align: center; */
-  text-align: start;
   margin-top: 60px;
-  margin-left: 80px;
   font-weight: 900;
-  width: 90%;
   color: black;
 }
 .body-checkout .line{
   background-color: rgb(253, 197, 0);
   border-radius: 10px;
-  height: 8px;
-  width: 120px;
-  margin-left: 80px;
+  height: 5px;
+  width: 180px;
+}
 
-}
-.checkout-content{
-  /* display: grid; */
-  /* background-color: rgb(248, 248, 248); */
-  /* grid-template-columns: 2fr 1fr; */
-  /* margin-top: 50px; */
-}
 .checkout-title{
   background-color: rgb(248, 248, 248);
   display: grid;
-  height: 50px;
   grid-template-columns: 3fr 1fr 1fr;
+  height: 50px;
+  padding-left: 10px;
 }
 .bill-info{
   background-color: rgb(248, 248, 248) ;
@@ -3274,11 +3776,6 @@ section {
   background-color: rgb(248, 248, 248);
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
-}
-.plan-checkout .plan-card-mc{
-  margin-left: 15px;
-  height: 120px;
-  background-color: white;
 }
 .checkout-container .gym-name-mc{
   margin-top: 10px;
@@ -3300,15 +3797,13 @@ section {
   margin-top: 40px;
   border-top: 3px solid rgb(236, 236, 236);
   width: 100%;
-  height: 50px;
+  height: fit-content;
 
 }
 .total-checkout .back-to-cart{
   display: flex;
-  left: 0;
-  position: absolute;
-  margin: auto ;
-  margin-top: 60px;
+  margin: auto 0 ;
+  padding-top: 20px;
 }
 .back-to-cart h3{
   font-weight: 700;
@@ -3317,8 +3812,6 @@ section {
 }
 .total-credits{
   margin-top: 40px;
-  position: absolute;
-  left: 600px;
 }
 .total-credits h3{
   font-weight: 700;
@@ -3328,8 +3821,9 @@ section {
 }
 .bill-info button{
   font-weight: 600;
-  margin-top: 30px;
+  margin-top: 20px;
   width: 200px;
+  margin-bottom: 30px;
 }
 .bill-title{
   font-weight: 600;
@@ -3362,4 +3856,729 @@ section {
   height: 3px;
   width: 100%;
   background-color: rgb(255, 255, 255);;
+}
+
+
+/* ============== CSS FOR GYM BRAND DETAILS PAGE ============== */
+.body-gym-brand-details{
+  background-color: rgb(238, 238, 238);
+
+}
+.gym-brand-content{
+  width: 80%;
+  margin: auto;
+}
+.body-gym-brand-details .gym-brand-name{
+  margin-top: 80px;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+.body-gym-brand-details .brand-bg-image img{
+  width: 100%;
+  height: 350px;
+  margin-top: 60px;
+  object-fit: cover;
+}
+.body-gym-brand-details .brand-bg-image{
+  background-color: #000000;
+}
+.body-gym-brand-details .brand-info{
+  margin-top: 30px;
+}
+.brand-first-info{
+  background-color: rgb(255, 255, 255);
+  mix-height: 300px;
+  padding: 20px
+}
+.club-view{
+  min-height: 300px;
+  background-image: url("https://i.pinimg.com/originals/98/83/2b/98832bffcec22fcbdb2759eb1335182e.jpg");
+  background-size: cover;
+}
+.club-view-bg{
+  margin-left: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.club-view-bg button{
+  color:rgb(0, 0, 0);
+  font-weight: bold;
+  margin-top: 160px;
+}
+.brand-contact{
+  margin-top: 20px;
+}
+.list-service-wrapper {
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+.scroll-services {
+  position: relative;
+  width: 100%;
+  padding: 30px 0px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-services::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.scroll-services::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+  background-color: #ffffff;
+}
+
+.scroll-services::-webkit-scrollbar-thumb {
+  background-color: #c6c6c6;
+  border: 2px solid #c6c6c6;
+}
+
+.scroll-services .child {
+  height: 480px;
+  margin: 10px;
+  padding: 0;
+  color: #000000;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.scroll-services .left {
+  transform: translateY(-50%);
+  border: none;
+}
+
+.scroll-services .right {
+  transform: translateY(-50%);
+  border: none
+}
+
+.brand-service-img{
+  height: 300px;
+  width: 100%;
+  margin-left: 0;
+}
+.scroll-services .service-name{
+  font-weight: 600;
+  color: orange;
+}
+.scroll-services .service-descript{
+  font-size: 13px;
+  padding: 10px;
+}
+
+/* Album */
+.gym-brand-content .slideshow-container {
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+  position: relative;
+}
+
+.gym-brand-content .prev,
+.gym-brand-content .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: #0000008f;
+}
+
+/* Position the "next button" to the right */
+.gym-brand-content .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a grey background color */
+.gym-brand-content .prev:hover {
+  background-color: #f1f1f1;
+  color: black;
+}
+.gym-brand-content .next:hover {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.gym-brand-content .list-gym-department{
+  margin-top: 30px;
+  background-color: white;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 600px;
+  -webkit-overflow-scrolling: touch;
+}
+.gym-brand-content .list-gym-department::-webkit-scrollbar-track
+{
+  background-color: #ffffff;
+}
+
+.gym-brand-content .list-gym-department::-webkit-scrollbar
+{
+  width: 8px;
+  height: 4px;
+  background-color: #ffffff;
+}
+
+.gym-brand-content .list-gym-department::-webkit-scrollbar-thumb
+{
+  background-color: #c6c6c6;
+  border: 2px solid  #c6c6c6;
+}
+
+.gym-brand-content .department{
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 2fr;
+  column-gap: 15px;
+  height: fit-content;
+  min-height: 200px;
+  width: 100%;
+  /* background-color: white; */
+  padding: 20px 10px 20px 10px;
+}
+.gym-brand-content .department .dept-img {
+  border-radius: 10px;
+  /* width: 100%; */
+}
+
+.gym-brand-content .list-gym-department .dept-description{
+  padding-left: 20px;
+  border-left: 2px solid rgb(227, 227, 227);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.gym-brand-content .pagination-wrapper .page-numbers{
+  font-size: 16px;
+  padding: 0 15px;
+  float: left;
+  margin-top: 15px;
+  letter-spacing: 0.1em;
+}
+.gym-brand-content .rating-option button{
+  background-color: white;
+  background-image: none;
+  border:  none;
+  box-shadow: 3px 4px rgb(224, 224, 224);
+}
+
+@media screen and (min-width: 1200px) {
+  .gym-brand-content .slideshow-container {
+    width: 100%;
+    height: 500px;
+    align-items: center;
+    /*height: 350px;*/
+    margin-top: 30px;
+    margin-bottom: 50px;
+    /*height: fit-content;*/
+  }
+  .body-gym-brand-details .mySlides1 img {
+    width: 90%;
+    height: 500px;
+
+  }
+
+}
+
+@media screen and (max-width: 1400px) {
+  /*.gym-brand-content .slideshow-container {*/
+  /*  width: 90%;*/
+  /*  margin-top: 30px;*/
+  /*}*/
+  /*.body-gym-brand-details .mySlides1 img {*/
+  /*  width: 90%;*/
+  /*  height: 50%;*/
+  /*}*/
+  .gym-brand-content .pagination-wrapper .page-numbers{
+    font-size: 14px;
+  }
+  .gym-brand-content .pagination{
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.dept-description .service-type{
+  margin: auto;
+  width: 70px;
+  /* background-color: #15928A; */
+}
+.dept-description .gym-service-logo{
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+  width: fit-content;
+}
+.dept-description .gym-service-logo i{
+  font-size:20px;
+}
+.dept-description .service-name{
+  /*height: 35px;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*font-weight: 500;*/
+  /*font-size: 12px;*/
+  /*color: rgb(0, 0, 0);*/
+}
+
+@media screen and (max-width: 770px) {
+  .gym-brand-content .department{
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    min-height: 200px;
+    width: 100%;
+    /* background-color: white; */
+    /* padding: 20px 10px 20px 10px; */
+  }
+  .gym-brand-content .department .dept-img {
+    border-radius: 10px;
+    height: 150px;
+    width: 100%;
+  }
+  .dept-description{
+    border-left: none;
+    margin-top: 10px;
+  }
+  .dept-description .service-type{
+    width: 60px;
+  }
+  .dept-description .gym-service-logo{
+    padding: 10px;
+  }
+  .dept-description .gym-service-logo i{
+    font-size:15px;
+  }
+  /*.dept-description .service-name{*/
+  /*  height: 30px;*/
+  /*  font-size: 10px;*/
+  /*}*/
+  .body-gym-brand-details .dept-info h4{
+    font-size: 17px;
+  }
+  .body-gym-brand-details .dept-address{
+    font-size: 13px;
+  }
+  .body-gym-brand-details .brand-first-info{
+    font-size: smaller;
+  }
+  .gym-brand-content .pagination-wrapper .page-numbers{
+    font-size: 12px;
+  }
+  .gym-brand-content .pagination{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .body-gym-brand-details .pagination-wrapper .page-numbers {
+    font-size: 12px;
+    line-height: 35px;
+
+    &:hover,
+    &.current {
+      background-color: rgb(255, 196, 0);
+      color: white;
+    }
+
+    &.prev:hover,
+    &.next:hover {
+      background-color: transparent;
+      color: rgb(255, 196, 0);
+    }
+  }
+  .pagination {
+    display: inline-block;
+    height: fit-content;
+    margin-top: 50px;
+    padding: 0 15px;
+    border-radius: 15px;
+  }
+}
+
+.body-gym-brand-details .num-of-rating{
+  font-size: 12px;
+  margin-left: 8px;
+  color: #555;
+  font-style: italic;
+}
+
+@media screen and (max-width: 600px) {
+  .body-gym-brand-details .user-rating{
+    display: block
+  }
+  .body-gym-brand-details .user-rating-avatar{
+    padding: 0;
+  }
+  .gym-brand-content .pagination-wrapper .page-numbers{
+    font-size: 12px;
+  }
+  .gym-brand-content .pagination{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .body-gym-brand-details .pagination-wrapper .page-numbers {
+    font-size: 12px;
+    line-height: 35px;
+
+    &:hover,
+    &.current {
+      background-color: rgb(255, 196, 0);
+      color: white;
+    }
+
+    &.prev:hover,
+    &.next:hover {
+      background-color: transparent;
+      color: rgb(255, 196, 0);
+    }
+  }
+  .pagination {
+    display: inline-block;
+    height: fit-content;
+    margin-top: 50px;
+    padding: 0 15px;
+    border-radius: 15px;
+  }
+}
+
+/*================ CSS FOR LIST BRAND PAGE ================  */
+.body-list-brand{
+  background-color: rgb(238, 238, 238);;
+}
+.tabs {
+  cursor: pointer;
+  display: block;
+  display: -webkit-flex;
+  /*display: -moz-flex;*/
+  /*display: flex;*/
+  justify-content: center;
+  /*-webkit-flex-wrap: wrap;*/
+  /*-moz-flex-wrap: wrap;*/
+  /*flex-wrap: wrap;*/
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.tabs [class^="tab"] label,
+.tabs [class*=" tab"] label {
+  color: #000000;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  font-size: 1.1em;
+  line-height: 1em;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.tabs [class^="tab"] [type="radio"],
+.tabs [class*=" tab"] [type="radio"] {
+  border-bottom: 4px solid rgba(239, 237, 239, 0.5);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  margin: auto;
+  width: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.tabs [class^="tab"] [type="radio"]:hover,
+.tabs [class^="tab"] [type="radio"]:focus,
+.tabs [class*=" tab"] [type="radio"]:hover,
+.tabs [class*=" tab"] [type="radio"]:focus {
+  border-bottom: 4px solid #cdcdcd;
+}
+
+.tabs [class^="tab"] [type="radio"]:checked,
+.tabs [class*=" tab"] [type="radio"]:checked {
+  border-bottom: 4px solid #000000;
+}
+
+.tabs [class^="tab"] [type="radio"]:checked+div,
+.tabs [class*=" tab"] [type="radio"]:checked+div {
+  opacity: 1;
+}
+
+.tabs [class^="tab"] [type="radio"]+div,
+.tabs [class*=" tab"] [type="radio"]+div {
+  display: block;
+  opacity: 0;
+  padding: 2rem 0;
+  width: 90%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.tabs .tab-2 {
+  width: 50%;
+}
+
+.tabs .tab-2 [type="radio"]+div {
+  height: 100%;
+  width: 200%;
+  margin-left: 200%;
+}
+
+.tabs .tab-2 [type="radio"]:checked+div {
+  margin-left: 0;
+}
+
+.tabs .tab-2:last-child [type="radio"]+div {
+  margin-left: 100%;
+}
+
+.tabs .tab-2:last-child [type="radio"]:checked+div {
+  margin-left: -100%;
+}
+
+.tabs img {
+  width: 35px;
+}
+
+.list-brand-title{
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Css for each brand */
+.list-of-brand .brand{
+  display: flex;
+  /* width: 48%; */
+   height: fit-content;
+  min-height: 290px;
+  border-radius: 15px;
+  background-color: white;
+}
+.list-of-brand .brand-image{
+  width: 50%;
+  min-height: 250px;
+  /* height: 42%; */
+  padding: 20px 20px 20px 20px;
+}
+.list-of-brand .brand-info{
+  padding: 12px 20px 0 0;
+}
+
+.list-of-brand .brand .description{
+  margin-top: 5px;
+  color: black;
+  font-size: 14px;
+  /*height: 42%;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 25px;
+  -webkit-line-clamp: 5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.list-of-brand .basic-info{
+  color: black;
+  font-size: 12px;
+  padding: 4px 10px 4px 10px;
+  background-color: #ececec;
+  border-radius: 20px;
+  margin-top: 7px;
+}
+.list-of-brand .basic-info img{
+  width: 20px;
+}
+@media screen and (min-width: 501px) and (max-width: 768px){
+  .list-of-brand .brand .description{
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .list-of-brand .brand{
+    display: block;
+  }
+  .list-of-brand .brand-image{
+    width: 100%;
+    height: 300px;
+  }
+  .list-of-brand .brand-info{
+    padding: 0px 20px 20px 20px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-of-brand .brand{
+    display: block;
+  }
+  .list-of-brand .brand-image{
+    width: 100%;
+    height: 50%;
+  }
+  .list-of-brand .brand-info{
+    padding: 0px 20px 20px 20px;
+  }
+  .list-of-brand .brand-info h5{
+    font-size: 15px;
+  }
+  .tab-img img{
+    width: 20px;
+  }
+  .tab-title{
+    font-size: 14px;
+  }
+  .list-brand-content .pagination a {
+    font-size: 12px;
+    padding: 1px;
+    text-decoration: none;
+    width: fit-content;
+  }
+}
+
+.list-brand-content .pagination {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  width: fit-content;
+  background-color: white;
+  margin: auto;
+}
+
+.list-brand-content .pagination a {
+  color: black;
+  float: left;
+  margin-left: 5px;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.list-brand-content .pagination a.active {
+  background-color: #000000;
+  color: white;
+  border-radius: 5px;
+}
+
+.list-brand-content .pagination a:hover:not(.active) {
+  background-color: #d8d8d8;
+  border-radius: 5px;
+}
+
+/* Css for each gym department */
+.list-of-gym{
+  height: fit-content;
+}
+.list-of-gym .gym-dept{
+  padding-bottom: 20px;
+  min-height: 260px;
+  border-radius: 20px;
+  background-color: white;
+}
+.list-of-gym .gym-image{
+  width: 100%;
+  height: 250px;
+  padding: 20px 20px 20px 20px;
+}
+.list-of-gym .gym-dept-info{
+  width: 100%;
+  height: 250px;
+  padding: 0px 20px 20px 20px;
+}
+.gym-dept-info img{
+  width: 20px;
+}
+.gym-dept .distance{
+  border-radius: 20px 20px 0 0;
+  background-color: rgb(214, 214, 214);
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  /*padding: 10px;*/
+  font-weight: 600;
+}
+.gym-dept .distance img{
+  width: 22px;
+}
+.gym-dept .price{
+  font-size: 22px;
+  font-weight: 700;
+  color: orange;
+}
+
+.list-of-gym .gym-dropdown{
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+}
+.gym-dropdown-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.row-gym{
+  width: 90%;
+  margin: auto;
+}
+.list-of-gym .card {
+  width: 95%;
+  height: fit-content;
+  margin: auto;
+  border-radius: 20px;
+  background-color: white;
+  padding: 0px 0px 0px 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: black;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  /* height: 650px; */
+  overflow: hidden;
+}
+.list-of-gym .card img{
+  width: 100%;
+  padding-top: 5px;
+  height: 30%;
+}
+.list-of-gym .card-body label {
+  font-weight: bold;
+}
+.list-of-gym .card-title {
+  padding-bottom: 10px;
+  min-height: 80px;
+}
+.list-of-gym .card-text {
+  min-height: 70px;
+}
+.review-section {
+  padding-top: 10px;
+  margin-bottom: -10px;
+}
+.credit {
+  color: orange;
+  font-size: 15px;
+  /* Đặt màu cam cho chữ "Credit" */
+}
+.text-money {
+  color: #02aa0a;
+  font-size: 18px;
+  font-weight: bold;
 }

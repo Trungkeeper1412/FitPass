@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemInventoryServiceImpl implements ItemInventoryService {
 
-    private ItemInventoryRepository itemInventoryRepository;
+    private final ItemInventoryRepository itemInventoryRepository;
 
     public ItemInventoryServiceImpl(ItemInventoryRepository itemInventoryRepository) {
         this.itemInventoryRepository = itemInventoryRepository;

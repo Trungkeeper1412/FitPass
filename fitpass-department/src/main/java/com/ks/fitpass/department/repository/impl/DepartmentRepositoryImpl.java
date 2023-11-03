@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository, IRepositoryQuery {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public DepartmentRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -37,6 +37,11 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
+    public List<Department> getAllByBrandId(int brandId, int status) throws DataAccessException {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), brandId, status);
+    }
+
+    @Override
     public Department getOne(int id) throws DataAccessException {
     return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapper(), id);
     }
@@ -44,7 +49,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     public boolean update(Department department) throws DataAccessException {
         return jdbcTemplate.update(
                 UPDATE_DEPARTMENT,
-                department.getUserId(),
+                department.getBrandId(),
                 department.getDepartmentName(),
                 department.getDepartmentAddress(),
                 department.getDepartmentContactNumber(),
@@ -64,6 +69,11 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     @Override
     public List<UserFeedback> getDepartmentFeedback(int departmentId) {
         return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK, new UserFeedbackMapper(), departmentId);
+    }
+
+    @Override
+    public List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException {
+        return jdbcTemplate.query(GET_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), status,brandID);
     }
 
 

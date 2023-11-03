@@ -21,11 +21,11 @@ public class OrderRepositoryImplTest {
     @Mock
     private JdbcTemplate jdbcTemplate;
 
-    private OrderRepositoryImpl orderRepository;
+    private OrderRepositoryImpl orderRepositoryImpl;
 
     @BeforeEach
     public void setup() {
-        orderRepository = new OrderRepositoryImpl(jdbcTemplate);
+        orderRepositoryImpl = new OrderRepositoryImpl(jdbcTemplate);
     }
 
     @Test
@@ -52,8 +52,8 @@ public class OrderRepositoryImplTest {
                 .thenReturn(1);
 
         // Call the insertOrder() method and verify the result
-        int result = orderRepository.insertOrder(order);
-
+        int result = orderRepositoryImpl.insertOrder(order);
+        // Assert result
         assertEquals(1, result);
     }
 
@@ -69,7 +69,7 @@ public class OrderRepositoryImplTest {
                 .thenReturn(lastInsertId);
 
         // Call the getLastOrderInsertId() method and verify the result
-        int result = orderRepository.getLastOrderInsertId();
+        int result = orderRepositoryImpl.getLastOrderInsertId();
         //assert the result
         assertEquals(lastInsertId, result);
     }

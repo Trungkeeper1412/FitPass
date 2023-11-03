@@ -4,14 +4,13 @@ public interface IRepositoryQuery {
     String GET_ALL_DEPARTMENT_BY_STATUS = """
                  SELECT
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
                      d.logo_url,
-
                      d.wallpaper_url,
-
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -21,24 +20,23 @@ public interface IRepositoryQuery {
                      d.area,
 
                      d.gym_department_status_key,
-                     kbn_department_status.mst_kbn_value AS gym_department_status_name                     
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
                  LEFT JOIN mst_kbn kbn_department_status
                      ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
-                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
+                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
                      WHERE d.gym_department_status_key = ?
             """;
     String GET_ALL_DEPARTMENT_ORDER_BY_RATING = """
                  SELECT
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
                      d.logo_url,
-
                      d.wallpaper_url,
-
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
@@ -48,33 +46,89 @@ public interface IRepositoryQuery {
                      d.area,
 
                      d.gym_department_status_key,
-                     kbn_department_status.mst_kbn_value AS gym_department_status_name                     
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
                  LEFT JOIN mst_kbn kbn_department_status
                      ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
-                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'  
+                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
                  WHERE d.gym_department_status_key = ?
                  ORDER BY d.rating DESC
             """;
 
-    String GET_DEPARTMENT_BY_ID = """
-
-            SELECT  
-
+    String GET_ALL_DEPARTMENT_BY_BRAND_ID = """
+                 SELECT
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
+                     d.name,
+                     d.address,
+                     d.contact_number,
+                     d.logo_url,
+                     d.wallpaper_url,
+                     d.thumbnail_url,
+                     d.description,
+                     d.latitude,
+                     d.longitude,
+                     d.rating,
+
+                     d.capacity,
+                     d.area,
+
+                     d.gym_department_status_key,
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name
+                 FROM gym_department d
+                 LEFT JOIN mst_kbn kbn_department_status
+                     ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
+                 WHERE d.brand_id = ?
+                 AND d.gym_department_status_key = ?
+                 ORDER BY d.rating DESC
+            """;
+
+    String GET_DEPARTMENT_BY_BRAND_ID = """
+                 SELECT
+                                                            d.gym_department_id,
+                                                            d.brand_id,
+                                                            d.name,
+                                                            d.address,
+                                                            d.contact_number,
+                                                            d.logo_url,
+                                                            d.wallpaper_url,
+                                                            d.thumbnail_url,
+                                                            d.description,
+                                                            d.latitude,
+                                                            d.longitude,
+                                                            d.rating,
+                               
+                                                            d.capacity,
+                                                            d.area,
+                               
+                                                            d.gym_department_status_key,
+                                                            kbn_department_status.mst_kbn_value AS gym_department_status_name                    \s
+                                                        FROM gym_department d
+                                                        LEFT JOIN mst_kbn kbn_department_status
+                                                            ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                                                            AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS' \s
+                                                        WHERE d.gym_department_status_key = ? AND d.brand_id = ?
+                                                        ORDER BY d.rating DESC
+            """;
+
+            String GET_DEPARTMENT_BY_ID = """
+            SELECT
+                     d.gym_department_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
                      d.logo_url,
 
                      d.wallpaper_url,
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
-                     d.rating,   
+                     d.rating,
                      d.capacity,
-                     d.area,                  
+                     d.area,
 
                 d.gym_department_status_key,
                 kbn_department_status.mst_kbn_value AS gym_department_status_name
@@ -86,21 +140,22 @@ public interface IRepositoryQuery {
                 """;
 
     String GET_DEPARTMENT_BY_USER = """
-                 SELECT 
+                 SELECT
                      d.gym_department_id,
-                     d.user_id,
+                     d.brand_id,
                      d.name,
                      d.address,
                      d.contact_number,
                      d.logo_url,
 
                      d.wallpaper_url,
+                     d.thumbnail_url,
                      d.description,
                      d.latitude,
                      d.longitude,
                      d.rating,
                      d.capacity,
-                     d.area,                     
+                     d.area,
 
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
@@ -110,7 +165,7 @@ public interface IRepositoryQuery {
                      AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
                  INNER JOIN user u ON d.user_id = u.user_id
                  INNER JOIN user_role ur ON u.user_id = ur.user_id
-                     WHERE u.user_id = ?        
+                     WHERE u.user_id = ?
             """;
 
     String UPDATE_DEPARTMENT = """
@@ -128,7 +183,7 @@ public interface IRepositoryQuery {
             """;
 
     String GET_DEPARTMENT_SCHEDULE_BY_ID_DEPARTMENT = """
-            SELECT  
+            SELECT
                      dc.id,
                      dc.gym_department_id,
                      dc.day,
@@ -139,7 +194,7 @@ public interface IRepositoryQuery {
                 """;
 
     String GET_DEPARTMENT_ALBUMS_BY_ID_DEPARTMENT = """
-            SELECT  
+            SELECT
                      da.id,
                      da.gym_department_id,
                      da.photo_url,
@@ -251,16 +306,26 @@ public interface IRepositoryQuery {
 """;
 
     String GET_DEPARTMENT_FEATURES = """
+            SELECT
+              df.gym_department_feature_id,
+              f.feature_id,
+              f.feature_icon,
+              f.feature_name,
+              df.gym_department_id,
+              df.feature_status
+            FROM gym_department_features df
+            INNER JOIN features f ON df.feature_id = f.feature_id
+            WHERE df.gym_department_id = ? AND f.feature_status = 1 AND df.feature_status = 1
+            """;
+
+    String GET_DEPARTMENT_FEATURES_BY_STATUS_AND_DEPARTMENT_ID = """
     SELECT
-        feature_id,
-        gym_department_id,
-        feature_icon,
-        feature_name,
-        isSelected
+    f.feature_icon, f.feature_name, gdf.feature_status
     FROM
-        gym_department_features
+        gym_department_features gdf
+        JOIN features f ON f.feature_id = gdf.feature_id
     WHERE
-        gym_department_id = ?
+    gdf.gym_department_id = ? AND gdf.feature_status = ?
 """;
 
 
@@ -301,13 +366,13 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
             """;
 
     String INSERT_ITEM_INVENTORY = """
-                INSERT INTO item_inventory 
-                    ( 
-                    user_id, 
-                    plan_id, 
-                    plan_active_time, 
-                    item_status_key, 
-                    plan_expired_time)  
+                INSERT INTO item_inventory
+                    (
+                    user_id,
+                    plan_id,
+                    plan_active_time,
+                    item_status_key,
+                    plan_expired_time)
                     VALUES (?, ?, ?, ?, ?)
             """;
 }

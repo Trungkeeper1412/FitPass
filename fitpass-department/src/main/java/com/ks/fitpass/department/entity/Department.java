@@ -14,7 +14,7 @@ public class Department {
 
     private DepartmentStatus departmentStatus;
 
-    private int userId;
+    private int brandId;
 
     private String departmentName;
 
@@ -26,6 +26,8 @@ public class Department {
 
     private String departmentWallpaperUrl;
 
+    private String departmentThumbnailUrl;
+
     private String departmentDescription;
 
     private Double latitude;
@@ -33,7 +35,6 @@ public class Department {
     private Double longitude;
 
     private Double rating;
-
 
     private int capacity;
 

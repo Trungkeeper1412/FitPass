@@ -5,9 +5,24 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    $.ajax({
+        type: "GET",
+        url: `/calendar/getListCheckIn`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            loadCalendar(data);
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong getListCheckInCalendar");
+        }
+    });
     // Đây là nơi bạn có thể gọi hàm của bạn
     updateQuantityCart();
+    checkConfirmCheckIn();
+    // Gọi hàm check thông báo confirm
+    checkConfirmCheckOut();
+    checkNotificationEmployee();
 });
 
 function updateQuantityCart() {
@@ -32,6 +47,274 @@ function updateQuantityCart() {
         .catch((error) => {
             console.error("Error:", error);
         });
+}
+
+function checkNotificationEmployee() {
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    // Gửi yêu cầu lên sever lấy ra thông báo thành công
+    $.ajax({
+        type: "GET",
+        url: `/notification/notificationCheckInSuccessEmployee`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            if (data.length > 0) {
+                console.log('Các thông báo trả về từ người dùng check in thành công đến employee', data);
+                data.forEach(function (item) {
+                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+                    sendSeenNotification(item.notificationId);
+                    toastr["success"](`${item.message}`, "Xác nhận check in")
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: `/notification/notificationCheckOutSuccessEmployee`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            if (data.length > 0) {
+                console.log('Các thông báo trả về từ người dùng check in đến employee', data);
+                data.forEach(function (item) {
+                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+                    sendSeenNotification(item.notificationId);
+                    toastr["success"](`${item.message}`, "Xác nhận check out")
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: `/notification/notificationCheckInCancelEmployee`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            if (data.length > 0) {
+                console.log('Các thông báo trả về từ người dùng hủy check in đến employee', data);
+                data.forEach(function (item) {
+                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+                    sendSeenNotification(item.notificationId);
+                    toastr["error"](`${item.message}`, "Xác nhận check in")
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: `/notification/notificationCheckOutCancelEmployee`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            if (data.length > 0) {
+                console.log('Các thông báo trả về từ người dùng hủy check in đến employee', data);
+                data.forEach(function (item) {
+                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+                    sendSeenNotification(item.notificationId);
+                    toastr["error"](`${item.message}`, "Xác nhận check out")
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
+        }
+    });
+}
+
+function sendSeenNotification(id) {
+    $.ajax({
+        type: "GET",
+        url: `/notification/seen?id=${id}`,
+        success: function (data) {
+            console.log("Trạng thái update status seen notification: ", data)
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong quá trình update status seen notification");
+        }
+    });
+}
+
+function checkConfirmCheckIn() {
+    $.ajax({
+        type: "GET",
+        url: `/notification/confirmCheckIn`,
+        success: function (data) {
+            // Nếu có thông báo thì hiện
+            if (data.notificationId > 0) {
+                console.log('Thông báo xác nhận check in', data);
+                // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+                sendSeenNotification(data.notificationId);
+                Swal.fire({
+                    title: `Xác nhận check in`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    reverseButtons: true,
+                }).then((result) => {
+                    // Nếu người dùng nhấn xác nhận thì gửi yêu cầu lên sever
+                    // Khi người dùng nhấn xác nhận thì mình sẽ insert vào history các trường
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "GET",
+                            url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}&cancel=no`,
+                            success: function (data) {
+
+                            },
+                            error: function () {
+                                alert("Đã xảy ra lỗi gửi check in thành công");
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}&cancel="yes"`,
+                            success: function (data) {
+
+                            },
+                            error: function () {
+                                alert("Đã xảy ra lỗi gửi check in không thành công");
+                            }
+                        });
+                    }
+                })
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
+        }
+    });
+}
+
+function checkConfirmCheckOut() {
+    $.ajax({
+        type: "GET",
+        url: `/notification/confirmCheckOut`,
+        success: function (data) {
+
+            // Nếu có thông báo thì hiện
+            if (data.orderDetailConfirmCheckOut.durationHavePractice > 0) {
+                console.log('Thông báo xác nhận check out', data);
+                // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+                sendSeenNotification(data.notification.notificationId);
+                if (data.orderDetailConfirmCheckOut.creditAfterPay < 0) {
+                    Swal.fire({
+                        title: `Bạn không đủ số dư credit để thanh toán`,
+                        icon: 'error',
+                        html: `
+<p class="fw-bold">Phòng tập: <span class="fw-normal">${data.orderDetailConfirmCheckOut.departmentName}</span></p>
+<p  class="fw-bold">Gói tập: <span class="fw-normal">${data.orderDetailConfirmCheckOut.gymPlanName}</span></p>
+<p  class="fw-bold">Giá gói: <span class="fw-normal">${data.orderDetailConfirmCheckOut.pricePerHours} credit/giờ</span></p>
+<p  class="fw-bold">Đã tập: <span class="fw-normal">${data.orderDetailConfirmCheckOut.durationHavePractice} phút</span></p>
+<p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${data.orderDetailConfirmCheckOut.creditInWallet} credit</span></p>
+<p  class="fw-bold">Số credit cần trả: <span class="fw-normal">${data.orderDetailConfirmCheckOut.creditNeedToPay} credit</span></p>
+<p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${data.orderDetailConfirmCheckOut.creditAfterPay} credit</span></p>
+                `,
+                        showCancelButton: true,
+                        confirmButtonText: 'Nạp thêm credit',
+                        cancelButtonText: 'No',
+                        reverseButtons: true,
+                    })
+                } else {
+                    Swal.fire({
+                        title: `Xác nhận thanh toán`,
+                        icon: 'question',
+                        html: `
+<p class="fw-bold">Phòng tập: <span class="fw-normal">${data.orderDetailConfirmCheckOut.departmentName}</span></p>
+<p  class="fw-bold">Gói tập: <span class="fw-normal">${data.orderDetailConfirmCheckOut.gymPlanName}</span></p>
+<p  class="fw-bold">Giá gói: <span class="fw-normal">${data.orderDetailConfirmCheckOut.pricePerHours} credit/giờ</span></p>
+<p  class="fw-bold">Đã tập: <span class="fw-normal">${data.orderDetailConfirmCheckOut.durationHavePractice} phút</span></p>
+<p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${data.orderDetailConfirmCheckOut.creditInWallet} credit</span></p>
+<p  class="fw-bold">Số credit cần trả: <span class="fw-normal">${data.orderDetailConfirmCheckOut.creditNeedToPay} credit</span></p>
+<p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${data.orderDetailConfirmCheckOut.creditAfterPay} credit</span></p>
+                `,
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No',
+                        reverseButtons: true,
+                    }).then((result) => {
+                        // Nếu người dùng nhấn xác nhận thì gửi yêu cầu lên sever
+                        if (result.isConfirmed) {
+                            const dataToSend = {
+                                orderDetailId: data.orderDetailConfirmCheckOut.orderDetailId,
+                                checkInHistoryId: data.orderDetailConfirmCheckOut.historyCheckInId,
+                                checkOutTime: data.orderDetailConfirmCheckOut.checkOutTime,
+                                totalCredit: data.orderDetailConfirmCheckOut.creditNeedToPay,
+                                creditAfterPay: data.orderDetailConfirmCheckOut.creditAfterPay,
+                                notification: data.notification,
+                                cancel: "No"
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: `/employee/flexible/checkout`,
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                data: JSON.stringify(dataToSend),
+                                success: function (data) {
+                                    console.log("Update check out time vào db check in history thành công", data)
+                                },
+                                error: function () {
+                                    alert("Đã xảy ra lỗi trong quá trình check in");
+                                }
+                            });
+                        } else {
+                            const dataToSend = {
+                                orderDetailId: data.orderDetailConfirmCheckOut.orderDetailId,
+                                checkInHistoryId: data.orderDetailConfirmCheckOut.historyCheckInId,
+                                checkOutTime: data.orderDetailConfirmCheckOut.checkOutTime,
+                                totalCredit: data.orderDetailConfirmCheckOut.creditNeedToPay,
+                                creditAfterPay: data.orderDetailConfirmCheckOut.creditAfterPay,
+                                notification: data.notification,
+                                cancel: "Yes"
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: `/employee/flexible/checkout`,
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                data: JSON.stringify(dataToSend),
+                                success: function (data) {
+                                    console.log("Update check out time vào db check in history thành công", data)
+                                },
+                                error: function () {
+                                    alert("Đã xảy ra lỗi trong quá trình check in");
+                                }
+                            });
+                        }
+                    })
+                }
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
+        }
+    });
 }
 
 (function () {
@@ -390,7 +673,7 @@ function updateQuantityCart() {
             detailCard.querySelector(".purchase-date span").textContent = activationDate == "null" ? formatDate(purchaseDate) : formatDate(activationDate);
             detailCard.querySelector(".activation-period span").textContent = activationPeriod + " ngày";
 
-            if(element.getAttribute("data-item-status") == "Chưa kích hoạt") {
+            if (element.getAttribute("data-item-status") == "Chưa kích hoạt") {
                 detailCard.querySelector(".expiration-date").style.display = "none"
                 detailCard.querySelector(".activate-time").style.display = "block"
                 detailCard.querySelector(".activate-time span").textContent = element.getAttribute("data-item-duration")
@@ -410,7 +693,7 @@ function updateQuantityCart() {
             console.log(element.getAttribute("data-item-duration"));
 
             // Check xem trạng thái của gói là chưa kích hoạt thì hiện nút kích hoạt
-            const displayValue = element.getAttribute("data-item-status") == "Chưa kích hoạt"  ? "block" : "none";
+            const displayValue = element.getAttribute("data-item-status") == "Chưa kích hoạt" ? "block" : "none";
             detailCard.querySelector(".formActive").style.display = displayValue;
         }
 
@@ -451,257 +734,392 @@ function updateQuantityCart() {
         });
     });
 
-    // Calender
-    document.addEventListener('DOMContentLoaded', function () {
-        const calendarEl = document.getElementById('calendar');
-        const myModal = new bootstrap.Modal(document.getElementById('form'));
-        const dangerAlert = document.getElementById('danger-alert');
-        const close = document.querySelector('.btn-close');
+
+})()
+
+// CALENDAR
+function loadCalendar(data){
+    var initialLocaleCode = 'vi';
+    var calendarEl = document.getElementById('calendar');
+    const myModal = new bootstrap.Modal(document.getElementById('form'));
+    const dangerAlert = document.getElementById('danger-alert');
+    const close = document.querySelector('.btn-close');
+
+    var events = data.map(function(item) {
+        return {
+            id: item.checkInHistoryId,
+            title: item.gymDepartmentName,
+            start: item.checkInTime
+        };
+    });
+
+    console.log(events)
+
+    var userEvents = JSON.parse(localStorage.getItem('events')) || {
+
+    };
+
+    let userId = document.getElementById("userId").value;
+    const userEventById = userEvents[userId];
+
+    const allEvent = [...events, ...userEventById];
+
+    console.log(allEvent);
 
 
-        const myEvents = JSON.parse(localStorage.getItem('events')) || [
-            {
-                id: uuidv4(),
-                title: `Edit Me`,
-                start: '2023-04-11',
-                backgroundColor: 'red',
-                allDay: false,
-                editable: false,
-            },
-            {
-                id: uuidv4(),
-                title: `Delete me`,
-                start: '2023-04-17',
-                end: '2023-04-21',
-
-                allDay: false,
-                editable: false,
-            },
-        ];
-
-
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            customButtons: {
-                customButton: {
-                    text: 'Thêm lịch tập',
-                    click: function () {
-                        myModal.show();
-                        const modalTitle = document.getElementById('modal-title');
-                        const submitButton = document.getElementById('submit-button');
-                        modalTitle.innerHTML = 'Add Event'
-                        submitButton.innerHTML = 'Add Event'
-                        submitButton.classList.remove('btn-primary');
-                        submitButton.classList.add('btn-success');
-                        close.addEventListener('click', () => {
-                            myModal.hide()
-                        })
-                    }
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        customButtons: {
+            customButton: {
+                text: 'Đặt kế hoạch tập',
+                click: function () {
+                    myModal.show();
+                    const modalTitle = document.getElementById('modal-title');
+                    const submitButton = document.getElementById('submit-button');
+                    modalTitle.innerHTML = 'Kế hoạch tập'
+                    submitButton.innerHTML = 'Lưu kế hoạch'
+                    submitButton.classList.remove('btn-primary');
+                    submitButton.classList.add('btn-primary');
+                    close.addEventListener('click', () => {
+                        myModal.hide()
+                    })
                 }
-            },
-            header: {
-                center: 'customButton', // add your custom button here
-                right: 'today, prev,next '
-            },
-            plugins: ['dayGrid', 'interaction'],
-            allDay: false,
-            editable: true,
-            selectable: true,
-            unselectAuto: false,
-            displayEventTime: false,
-            events: myEvents,
-            eventRender: function (info) {
-                info.el.addEventListener('contextmenu', function (e) {
-                    e.preventDefault();
-                    let existingMenu = document.querySelector('.context-menu');
-                    existingMenu && existingMenu.remove();
-                    let menu = document.createElement('div');
-                    menu.className = 'context-menu';
-                    menu.innerHTML = `<ul>
-          <li><i class="fas fa-edit"></i>Edit</li>
-          <li><i class="fas fa-trash-alt"></i>Delete</li>
+            }
+        },
+        headerToolbar: {
+            right: 'customButton today prev,next',
+            center: 'title',
+            left: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        locale: initialLocaleCode,
+        buttonIcons: true, // show the prev/next text
+        weekNumbers: true,
+        navLinks: true, // can click day/week names to navigate views
+        editable: false,
+
+        dayMaxEvents: true, // allow "more" link when too many events
+        events: allEvent,
+        eventDidMount: function (info) {
+            info.el.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                let existingMenu = document.querySelector('.context-menu');
+                existingMenu && existingMenu.remove();
+                let menu = document.createElement('div');
+                menu.className = 'context-menu';
+                menu.innerHTML = `<ul>
+            <li><i class="fas fa-edit"></i>Chỉnh sửa</li>
+            <li><i class="fas fa-trash-alt"></i>Xóa</li>
           </ul>`;
 
-                    const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
+                const eventIndex = userEventById.findIndex(event => event.id === info.event.id);
 
+                document.body.appendChild(menu);
+                menu.style.top = e.pageY + 'px';
+                menu.style.left = e.pageX + 'px';
 
-                    document.body.appendChild(menu);
-                    menu.style.top = e.pageY + 'px';
-                    menu.style.left = e.pageX + 'px';
+                // Edit context menu
 
-                    // Edit context menu
+                menu.querySelector('li:first-child').addEventListener('click', function () {
+                    menu.remove();
 
-                    menu.querySelector('li:first-child').addEventListener('click', function () {
-                        menu.remove();
+                    const editModal = new bootstrap.Modal(document.getElementById('form'));
+                    const modalTitle = document.getElementById('modal-title');
+                    const titleInput = document.getElementById('event-title');
+                    const startDateInput = document.getElementById('start-date');
+                    const endDateInput = document.getElementById('end-date');
+                    const colorInput = document.getElementById('event-color');
+                    const submitButton = document.getElementById('submit-button');
+                    const cancelButton = document.getElementById('cancel-button');
+                    modalTitle.innerHTML = 'Edit Event';
+                    titleInput.value = info.event.title;
+                    startDateInput.value = moment(info.event.start).format('YYYY-MM-DD');
+                    endDateInput.value = moment(info.event.end, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
+                    colorInput.value = info.event.backgroundColor;
+                    submitButton.innerHTML = 'Save Changes';
 
-                        const editModal = new bootstrap.Modal(document.getElementById('form'));
-                        const modalTitle = document.getElementById('modal-title');
-                        const titleInput = document.getElementById('event-title');
-                        const startDateInput = document.getElementById('start-date');
-                        const endDateInput = document.getElementById('end-date');
-                        const colorInput = document.getElementById('event-color');
-                        const submitButton = document.getElementById('submit-button');
-                        const cancelButton = document.getElementById('cancel-button');
-                        modalTitle.innerHTML = 'Edit Event';
-                        titleInput.value = info.event.title;
-                        startDateInput.value = moment(info.event.start).format('YYYY-MM-DD');
-                        endDateInput.value = moment(info.event.end, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
-                        colorInput.value = info.event.backgroundColor;
-                        submitButton.innerHTML = 'Save Changes';
+                    editModal.show();
+                    submitButton.classList.remove('btn-success');
+                    submitButton.classList.add('btn-primary');
 
-                        editModal.show();
-                        submitButton.classList.remove('btn-success')
-                        submitButton.classList.add('btn-primary')
+                    // Edit button
 
-                        // Edit button
+                    submitButton.addEventListener('click', function () {
+                        const updatedEvents = {
+                            id: info.event.id,
+                            title: titleInput.value,
+                            start: startDateInput.value,
+                            end: moment(endDateInput.value, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD'),
+                            backgroundColor: colorInput.value,
+                        };
 
-                        submitButton.addEventListener('click', function () {
-                            const updatedEvents = {
-                                id: info.event.id,
-                                title: titleInput.value,
-                                start: startDateInput.value,
-                                end: moment(endDateInput.value, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD'),
-                                backgroundColor: colorInput.value
-                            }
+                        if (updatedEvents.end <= updatedEvents.start) {
+                            // Add an if statement to check end date
+                            dangerAlert.style.display = 'block';
+                            return;
+                        }
 
-                            if (updatedEvents.end <= updatedEvents.start) { // add if statement to check end date
-                                dangerAlert.style.display = 'block';
-                                return;
-                            }
+                        const eventIndex = userEventById.findIndex(event => event.id === updatedEvents.id);
+                        userEventById.splice(eventIndex, 1, updatedEvents);
+                        userEvents[userId] = userEventById;
+                        localStorage.setItem('events', JSON.stringify(userEvents));
 
-                            const eventIndex = myEvents.findIndex(event => event.id === updatedEvents.id);
-                            myEvents.splice(eventIndex, 1, updatedEvents);
+                        // Update the event in the calendar
+                        const calendarEvent = calendar.getEventById(info.event.id);
+                        calendarEvent.setProp('title', updatedEvents.title);
+                        calendarEvent.setStart(updatedEvents.start);
+                        calendarEvent.setEnd(updatedEvents.end);
+                        calendarEvent.setProp('backgroundColor', updatedEvents.backgroundColor);
 
-                            localStorage.setItem('events', JSON.stringify(myEvents));
-
-                            // Update the event in the calendar
-                            const calendarEvent = calendar.getEventById(info.event.id);
-                            calendarEvent.setProp('title', updatedEvents.title);
-                            calendarEvent.setStart(updatedEvents.start);
-                            calendarEvent.setEnd(updatedEvents.end);
-                            calendarEvent.setProp('backgroundColor', updatedEvents.backgroundColor);
-
-
-                            editModal.hide();
-
-                        })
-
-
-                    });
-
-                    // Delete menu
-                    menu.querySelector('li:last-child').addEventListener('click', function () {
-                        const deleteModal = new bootstrap.Modal(document.getElementById('delete-modal'));
-                        const modalBody = document.getElementById('delete-modal-body');
-                        const cancelModal = document.getElementById('cancel-button');
-                        modalBody.innerHTML = `Are you sure you want to delete <b>"${info.event.title}"</b>`
-                        deleteModal.show();
-
-                        const deleteButton = document.getElementById('delete-button');
-                        deleteButton.addEventListener('click', function () {
-                            myEvents.splice(eventIndex, 1);
-                            localStorage.setItem('events', JSON.stringify(myEvents));
-                            calendar.getEventById(info.event.id).remove();
-                            deleteModal.hide();
-                            menu.remove();
-
-                        });
-
-                        cancelModal.addEventListener('click', function () {
-                            deleteModal.hide();
-                        })
-
-
-                    });
-                    document.addEventListener('click', function () {
-                        menu.remove();
+                        editModal.hide();
                     });
                 });
-            },
 
-            eventDrop: function (info) {
-                let myEvents = JSON.parse(localStorage.getItem('events')) || [];
-                const eventIndex = myEvents.findIndex(event => event.id === info.event.id);
-                const updatedEvent = {
-                    ...myEvents[eventIndex],
-                    id: info.event.id,
-                    title: info.event.title,
-                    start: moment(info.event.start).format('YYYY-MM-DD'),
-                    end: moment(info.event.end).format('YYYY-MM-DD'),
-                    backgroundColor: info.event.backgroundColor
+                // Delete menu
+                menu.querySelector('li:last-child').addEventListener('click', function () {
+                    const deleteModal = new bootstrap.Modal(document.getElementById('delete-modal'));
+                    const modalBody = document.getElementById('delete-modal-body');
+                    const cancelModal = document.getElementById('cancel-button');
+                    modalBody.innerHTML = `Bạn có chắc chắn xóa hoạt động <b>"${info.event.title}"</b>`;
+                    deleteModal.show();
+
+                    const deleteButton = document.getElementById('delete-button');
+                    deleteButton.addEventListener('click', function () {
+                        userEventById.splice(eventIndex, 1);
+                        userEvents[userId] = userEventById;
+                        localStorage.setItem('events', JSON.stringify(userEvents));
+                        calendar.getEventById(info.event.id).remove();
+                        deleteModal.hide();
+                        menu.remove();
+                    });
+
+                    cancelModal.addEventListener('click', function () {
+                        deleteModal.hide();
+                    });
+                });
+
+                document.addEventListener('click', function () {
+                    menu.remove();
+                });
+            });
+        },
+
+    });
+
+    // calendar.on('select', function (info) {
+    //
+    //     const startDateInput = document.getElementById('start-date');
+    //     const endDateInput = document.getElementById('end-date');
+    //     startDateInput.value = info.startStr;
+    //     const endDate = moment(info.endStr, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
+    //     endDateInput.value = endDate;
+    //     if (startDateInput.value === endDate) {
+    //         endDateInput.value = '';
+    //     }
+    //     console.log(1);
+    // });
+
+    calendar.render();
+
+    const form = document.querySelector('form');
+
+    // Tạo kế hoạch tập
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // prevent default form submission
+
+        // retrieve the form input values
+        const title = document.querySelector('#event-title').value;
+        const startDate = document.querySelector('#start-date').value;
+        const endDate = document.querySelector('#end-date').value;
+        const color = document.querySelector('#event-color').value;
+        const endDateFormatted = moment(endDate, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD');
+        const eventId = uuidv4();
+
+        console.log(eventId);
+
+        if (endDateFormatted <= startDate) { // add if statement to check end date
+            dangerAlert.style.display = 'block';
+            return;
+        }
+
+        let userId = document.getElementById("userId").value;
+
+        // Kiểm tra xem userId đã tồn tại trong userEvents chưa
+        if (!userEvents[userId]) {
+            // Nếu userId chưa tồn tại, tạo một mảng rỗng để lưu trữ các sự kiện của người dùng đó
+            userEvents[userId] = [];
+        }
+
+        const newEvent = {
+            id: eventId,
+            title: title,
+            start: startDate,
+            end: endDateFormatted,
+            allDay: true,
+            backgroundColor: color
+        };
+
+        // add the new event to the myEvents array
+        // myEvents.push(newEvent);
+
+        userEvents[userId].push(newEvent)
+
+        // render the new event on the calendar
+        calendar.addEvent(newEvent);
+
+        // save events to local storage
+        localStorage.setItem('events', JSON.stringify(userEvents));
+
+        myModal.hide();
+        form.reset();
+    });
+
+    myModal._element.addEventListener('hide.bs.modal', function () {
+        dangerAlert.style.display = 'none';
+        form.reset();
+    });
+
+    // Trong sự kiện click trên ngày trong lịch
+    calendar.on('eventClick', function (info) {
+        // Lấy thông tin buổi tập tương ứng với ngày này
+        //const workoutData = getWorkoutDataForDate(info.id);
+
+        getWorkoutDataForDate(info.event.id, function (data) {
+            console.log(data);
+            if (data !== null) {
+                // Xử lý dữ liệu và trả về đối tượng chứa thông tin buổi tập
+                const workoutData = {
+                    gymLocation: data.gymDepartmentName,
+                    gymAddress: data.address,
+                    date: data.date,
+                    checkInTime: data.time,
+                    membershipPackage: data.gymPlanName
                 };
-                myEvents.splice(eventIndex, 1, updatedEvent); // Replace old event data with updated event data
-                localStorage.setItem('events', JSON.stringify(myEvents));
-                console.log(updatedEvent);
+
+                if(data.feedBackId == 0) {
+                    document.getElementById('gym-location').value = workoutData.gymLocation;
+                    document.getElementById('gym-address').value = workoutData.gymAddress;
+                    document.getElementById('workout-date').value = workoutData.date;
+                    document.getElementById('check-in-time').value = workoutData.checkInTime;
+                    document.getElementById('membership-package').value = workoutData.membershipPackage;
+
+                    document.getElementById("checkInHistoryIdReview").value = data.checkInHistoryId;
+                    document.getElementById("departmentIdReview").value = data.gymDepartmentId;
+
+                    const detailModal = new bootstrap.Modal(document.getElementById('detail-modal'));
+                    detailModal.show();
+                } else {
+                    $.ajax({
+                        type: "GET",
+                        url: `/calendar/getFeedback?id=${data.checkInHistoryId}`,
+                        success: function (feedback) {
+                            console.log("feedback", feedback)
+                            document.getElementById('gym-location-review').value = workoutData.gymLocation;
+                            document.getElementById('gym-address-review').value = workoutData.gymAddress;
+                            document.getElementById('workout-date-review').value = workoutData.date;
+                            document.getElementById('check-in-time-review').value = workoutData.checkInTime;
+                            document.getElementById('membership-package-review').value = workoutData.membershipPackage;
+
+                            document.getElementById("checkInHistoryIdReviewed").value = data.checkInHistoryId;
+
+                            document.getElementById("departmentIdReviewed").value = data.gymDepartmentId;
+                            document.getElementById("feedbackId").value = feedback.feedbackId;
+
+
+
+                            $('#star-rating-reviewed').attr('data-star', feedback.rating);
+                            const detailModal = new bootstrap.Modal(document.getElementById('post-review-detail-modal'));
+                            detailModal.show();
+                        },
+                        error: function () {
+                            alert("Đã xảy ra lỗi trong getFeedback");
+                        }
+                    });
+                }
+
+
+
+
+            } else {
+                // Xử lý lỗi nếu có.
+                console.error("Đã xảy ra lỗi trong getListCheckInCalendar");
             }
-
-        });
-
-        calendar.on('select', function (info) {
-
-            const startDateInput = document.getElementById('start-date');
-            const endDateInput = document.getElementById('end-date');
-            startDateInput.value = info.startStr;
-            const endDate = moment(info.endStr, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
-            endDateInput.value = endDate;
-            if (startDateInput.value === endDate) {
-                endDateInput.value = '';
-            }
-        });
-
-
-        calendar.render();
-
-        const form = document.querySelector('form');
-
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // prevent default form submission
-
-            // retrieve the form input values
-            const title = document.querySelector('#event-title').value;
-            const startDate = document.querySelector('#start-date').value;
-            const endDate = document.querySelector('#end-date').value;
-            const color = document.querySelector('#event-color').value;
-            const endDateFormatted = moment(endDate, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD');
-            const eventId = uuidv4();
-
-            console.log(eventId);
-
-            if (endDateFormatted <= startDate) { // add if statement to check end date
-                dangerAlert.style.display = 'block';
-                return;
-            }
-
-            const newEvent = {
-                id: eventId,
-                title: title,
-                start: startDate,
-                end: endDateFormatted,
-                allDay: false,
-                backgroundColor: color
-            };
-
-            // add the new event to the myEvents array
-            myEvents.push(newEvent);
-
-            // render the new event on the calendar
-            calendar.addEvent(newEvent);
-
-            // save events to local storage
-            localStorage.setItem('events', JSON.stringify(myEvents));
-
-            myModal.hide();
-            form.reset();
-        });
-
-        myModal._element.addEventListener('hide.bs.modal', function () {
-            dangerAlert.style.display = 'none';
-            form.reset();
         });
 
     });
 
-})()
+    // Hàm để lấy thông tin buổi tập dựa trên ngày (thay thế bằng dữ liệu thực tế của bạn)
+    function getWorkoutDataForDate(id, callback) {
+        // Thực hiện việc truy vấn dữ liệu hoặc xác định thông tin buổi tập dựa trên ngày
+        $.ajax({
+            type: "GET",
+            url: `/calendar/getDetail?id=${id}`,
+            success: function (data) {
+                console.log(data);
+                // Nếu có thông báo thì hiện
+                callback(data);
+            },
+            error: function () {
+                callback(null);
+            }
+        });
+        // Trả về đối tượng chứa thông tin buổi tập
+        // Ví dụ:
+        // return {
+        //     gymLocation: "SKY CITY TOWER - QUẬN ĐỐNG ĐA",
+        //     gymAddress: "Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q.Đống Đa, Hà Nội",
+        //     date: date,
+        //     checkInTime: "12:36 AM",
+        //     membershipPackage: "Gói linh hoạt"
+        // };
+    }
 
+    // Xử lý khi người dùng nhấp vào liên kết "Đánh giá ngay"
+    const reviewLink = document.getElementById('review-link');
+    reviewLink.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Lấy thông tin gymLocation
+        const gymLocation = document.getElementById('gym-location').value;
+
+        // Hiển thị modal đánh giá
+        const reviewModal = new bootstrap.Modal(document.getElementById('review-modal'));
+        reviewModal.show();
+
+        // Hiển thị gymLocation trong modal đánh giá
+        const gymLocationInReviewModal = document.getElementById('gym-location-in-review-modal');
+        gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
+    });
+
+    const reviewedLink = document.getElementById('reviewed-link');
+    reviewedLink.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Lấy thông tin gymLocation
+        const gymLocation = document.getElementById('gym-location').value;
+
+        // Hiển thị modal đánh giá
+        const reviewedModal = new bootstrap.Modal(document.getElementById('reviewed-modal'));
+        reviewedModal.show();
+
+        // Hiển thị gymLocation trong modal đánh giá
+        const gymLocationInReviewModal = document.getElementById('gym-location-in-reviewed-modal');
+        gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
+
+        let id = document.getElementById("checkInHistoryIdReviewed").value;
+
+        $.ajax({
+            type: "GET",
+            url: `/calendar/getFeedback?id=${id}`,
+            success: function (data) {
+                var radioId = 'star' + data.rating;
+                $('#your-rating ' + '#' + radioId).prop('checked', true);
+                $('#your-thoughts').val(data.comments);
+            },
+            error: function () {
+                alert("Đã xảy ra lỗi trong getListCheckInCalendar");
+            }
+        });
+    });
+}
 $(function () {
     $("#include-navbar").load("navbar.html");
     $("#include-footer").load("footer.html");

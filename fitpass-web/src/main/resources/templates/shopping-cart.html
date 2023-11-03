@@ -29,10 +29,10 @@
 <header th:replace="common/navbar :: navbar"></header>
 
 <!-- Content -->
-<div id="my-card" class="my-card-container">
-    <h2>Giỏ hàng của bạn</h2>
-    <div class="line"></div>
-    <div class="my-card-title">
+<div id="my-card" class="my-card-container container">
+    <h2 class="row">Giỏ hàng của bạn</h2>
+    <div class="line row"></div>
+    <div class="my-card-title row">
         <div class="form-check">
             <input onclick= 'checkUncheck(this)' class="" type="checkbox" value="" />
             <label class="" for="flexCheckChecked"> </label>
@@ -45,7 +45,7 @@
     <!-- Để foreach ở đây -->
     <div th:each="department : ${departmentList}">
         <div class="plan-in-my-card">
-            <div class="all-plan-of-gym">
+            <div class="all-plan-of-gym row">
                 <div class="form-check">
                     <input  onclick='checkUncheckGymDept(this)' name="gym" class="" type="checkbox" value="" id="flexCheckChecked" />
                     <label class="" for="flexCheckChecked"> </label>
@@ -55,8 +55,8 @@
             <th:block th:each="cartItem: ${cartItems}">
                 <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
                     <!-- Từng gym plan -->
-                    <div style="height: 15px; background-color: white;"></div>
-                    <div class="gym-department-plan">
+                    <div class="row" style="height: 15px; background-color: white;"></div>
+                    <div class="gym-department-plan row">
                         <div class="form-check">
                             <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}" />
                             <label class="" for="flexCheckChecked"> </label>
@@ -90,29 +90,23 @@
                     </div>
                 </th:block>
             </th:block>
-
-
-
-
         </div>
     </div>
 
-
-    <div class="total-container-mc">
-        <h3 class="total-plan-mc">
-            <span id="count-all-plan-mc"></span>
+    <div class="row" style="height: 15px; background-color: white;"></div>
+    <div class="total-container-mc row justify-content-center">
+        <h3 class="total-plan-mc col-md-4 col-sm-3 col-3">
+            <span id="count-all-plan-mc">0</span>
             <span>sản phẩm</span>
         </h3>
-        <div class="total-credits-mc">
+        <div class="total-credits-mc col-md-6 col-sm-5 col-6">
             <span class="total-title">Tổng thanh toán : </span>
             <span id="total-price-mc" class="total">0</span>
         </div>
-        <div class="buy-button-mc">
+        <div class="buy-button-mc col-md-2 col-sm-4 col-3">
             <button disabled type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
         </div>
     </div>
-
-    <p id="demo"></p>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Vendor JS Files -->

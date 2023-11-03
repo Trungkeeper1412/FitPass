@@ -46,20 +46,22 @@ public class InventoryController {
 
 
         if(session.getAttribute("activeItemMSG") != null) {
-            model.addAttribute("activeItemMSG",(String) session.getAttribute("activeItemMSG"));
+            model.addAttribute("activeItemMSG", session.getAttribute("activeItemMSG"));
             session.removeAttribute("activeItemMSG");
         }
         return "inventory";
     }
 
     @PostMapping("/activeItem")
-    public String activeItem(Model model, @RequestParam("orderDetailId") int orderDetailId, @RequestParam("duration") int duration, HttpSession session) {
+    public String activeItem(@RequestParam("orderDetailId") int orderDetailId, @RequestParam("duration") int duration, HttpSession session) {
         Timestamp planActiveTime = new Timestamp(System.currentTimeMillis());
         long millisecondsInDay = 24 * 60 * 60 * 1000; // Số miligiây trong một ngày
 
         long durationInMilliseconds = duration * millisecondsInDay;
         long planExpiredTimeMilliseconds = planActiveTime.getTime() + durationInMilliseconds;
         Timestamp planExpiredTime = new Timestamp(planExpiredTimeMilliseconds);
+        // Chuyển trạng thái thành chưa tập để lấy ra bên check in
+        orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Chưa tập");
         int status = orderDetailService.updateOrderDetailItemStatus(planActiveTime, 1, planExpiredTime, orderDetailId);
         String message = status > 0 ? "Kích hoạt thành công" : "Kích hoạt không thành công";
         session.setAttribute("activeItemMSG", message);

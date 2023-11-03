@@ -18,22 +18,19 @@ public class Calendars {
     public static String formatTime(long millisecond) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("HH:mm:ss");
         isoFormat.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
-        String time = isoFormat.format(millisecond * 1000);
-        return time;
+        return isoFormat.format(millisecond * 1000);
     }
 
     public static String formatShortTime(long millisecond) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("HH:mm");
         isoFormat.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
-        String time = isoFormat.format(millisecond * 1000);
-        return time;
+        return isoFormat.format(millisecond * 1000);
     }
 
     public static String formatDate(long millisecond) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("dd-MM-yyyy");
         isoFormat.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
-        String date = isoFormat.format(millisecond * 1000);
-        return date;
+        return isoFormat.format(millisecond * 1000);
     }
 
     /**
@@ -72,8 +69,7 @@ public class Calendars {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.YEAR, year);
-        int DAY_OF_MONTH = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        return DAY_OF_MONTH;
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
     /**

@@ -41,10 +41,11 @@
                             <form
                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-1 small"
+                                    <input type="hidden" id="departmentId" th:value="${departmentId}">
+                                    <input type="text" class="form-control bg-light border-1 small" id="searchInput"
                                         placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
+                                        <button class="btn btn-primary" type="button" id="searchButton">
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
@@ -52,14 +53,15 @@
                             </form>
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="search-filter">
+                            <select id="search-by">
                                 <option value="" disabled selected>Tìm kiếm theo:</option>
-                                <option value="userName">Tên</option>
-                                <option value="phoneNumber">Số điện thoại</option>
+                                <option value="username">Tên</option>
+                                <option value="phonenumber">Số điện thoại</option>
                             </select>
                         </div>
                     </div>
                 </div>
+
                 <div class="container-fluid">
                     <div class="container separator-box">
                         <ul class="nav nav-tabs" id="myTabs">
@@ -74,127 +76,84 @@
                         <!-- Tab Content -->
                         <div class="tab-content mt-4">
                             <div class="tab-pane fade show active" id="unactivated">
-                                <div class="row">
-                                    <div class="user-card">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img src="https://bom.so/fvEON4" alt="User 1 Profile Image">
-                                            </div>
-                                            <div class="col-4">
-                                                <h3 class="fw-bold">Nguyễn Văn Bảo Linh</h3>
-                                                <p class="text-uppercase fw-bold">Gói 3 ngày</p>
-                                                <p class="fw-bold">Thời lượng còn: 2 ngày</p>
-                                                <p>Số điện thoại: 0934412001</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <h5 class="text-money">100 <span class="credit">Credit</span></h5>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="status-box">
-                                                    <span class="user-status">Chưa check-in</span>
+                                <div class="row" id="CheckInList">
+                                    <th:block th:each="item:${checkInList}">
+                                        <div class="user-card">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
+                                                </div>
+                                                <div class="col-4">
+                                                    <h3 class="fw-bold" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</h3>
+                                                    <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói 3 ngày</p>
+                                                    <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
+                                                    <p>Số điện thoại: <span th:text="${item.getPhoneNumber()}">0934412001</span></p>
+                                                </div>
+                                                <div class="col-2">
+                                                    <h5 class="text-money"><span th:text="${item.getPrice()}">100</span> <span class="credit">Credit</span></h5>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="status-box">
+                                                        <span class="user-status">Chưa check-in</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'" class="btn btn-primary">Check-in</button>
                                                 </div>
                                             </div>
-                                            <div class="col-2">
-                                                <button class="btn btn-primary">Check-in</button>
-                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="user-card">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img src="https://bom.so/kb0sd7" alt="User 1 Profile Image">
-                                            </div>
-                                            <div class="col-4">
-                                                <h3 class="fw-bold">Lê Đình Tuấn</h3>
-                                                <p class="text-uppercase fw-bold">Gói 1 tháng</p>
-                                                <p class="fw-bold">Thời lượng còn: 21 ngày</p>
-                                                <p>Số điện thoại: 0987654321</p>
-                                            </div>
-                                            <div class="col-2">
-                                                <h5 class="text-money">250 <span class="credit">Credit</span></h5>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="status-box">
-                                                    <span class="user-status">Chưa check-in</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <button class="btn btn-primary">Check-in</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </th:block>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="active">
-                                <div class="row">
-                                    <div class="user-card">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img src="https://bom.so/0DeV8c" alt="User 1 Profile Image">
-                                            </div>
-                                            <div class="col-4">
-                                                <h3 class="fw-bold">Mai Quang Trường</h3>
-                                                <p class="text-uppercase fw-bold">Gói 1 năm</p>
-                                                <p class="fw-bold">Thời lượng còn: 356 ngày</p>
-                                                <p>Số điện thoại: 0987654321</p>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                                    <h5 class="text-money">1200&nbsp;<span class="credit">Credit</span></h5>
-                                                    <div class="status-box">
-                                                        <span class="user-status">Đã check-in</span>
+                                <div class="row" id="CheckOutList">
+                                    <th:block th:each="item:${checkedInList}">
+                                        <div class="user-card">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
+                                                </div>
+                                                <div class="col-4">
+                                                    <h3 class="fw-bold" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</h3>
+                                                    <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói 3 ngày</p>
+                                                    <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
+                                                    <p>Số điện thoại: <span th:text="${item.getPhoneNumber()}">0934412001</span></p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <h5 class="text-money"><span th:text="${item.getPrice()}">1200</span>&nbsp;<span class="credit">Credit</span></h5>
+                                                        <div class="status-box">
+                                                            <span class="user-status">Đã check-in</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <p>Thời gian: 12:12:32 PM<span id="usageTime"></span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="user-card">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img src="https://bom.so/F6HGF4" alt="User 1 Profile Image">
-                                            </div>
-                                            <div class="col-4">
-                                                <h3 class="fw-bold">Nguyễn Bùi Đại</h3>
-                                                <p class="text-uppercase fw-bold">Gói 6 tháng</p>
-                                                <p class="fw-bold">Thời lượng còn: 86 ngày</p>
-                                                <p>Số điện thoại: 0987654321</p>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                                    <h5 class="text-money">600&nbsp;<span class="credit">Credit</span></h5>
-                                                    <div class="status-box">
-                                                        <span class="user-status">Đã check-in</span>
-                                                    </div>
+                                                <div class="col-3">
+                                                    <p>Thời gian: <span th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'HH:mm:ss dd/MM/yyyy')}">12:12:32 PM</span><span id="usageTime"></span></p>
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <p>Thời gian: 12:12:32 PM<span id="usageTime"></span></p>
-                                            </div>
                                         </div>
-                                    </div>
+                                    </th:block>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="container">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="#page1">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#page2">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" tabindex="+1">Next</a>
-                                </li>
-                            </ul>
-                        </div>
+<!--                        <div class="container">-->
+<!--                            <ul class="pagination justify-content-center">-->
+<!--                                <li class="page-item disabled">-->
+<!--                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item active" aria-current="page">-->
+<!--                                    <a class="page-link" href="#page1">1</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <a class="page-link" href="#page2">2</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <a class="page-link" href="#" tabindex="+1">Next</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -219,6 +178,187 @@
     <!-- Script -->
     <th:block th:replace="employee/common/script :: script"></th:block>
 
+
+    <script>
+        function performCheckIn(orderDetailId) {
+            $.ajax({
+                type: "GET",
+                url: `/employee/fixed/sendCheckinRequest?id=${orderDetailId}` ,
+                success: function (data) {
+                    console.log(data)
+                    // Nếu send request thành công thì hiện  thông báo gửi thành công
+                    if(data > 0) {
+                        Swal.fire({
+                            toast: true,
+                            icon: 'success',
+                            title: `Gửi yêu cầu check in thành công`,
+                            animation: true,
+                            position: 'top-right',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                    }
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình check in.");
+                }
+            });
+        }
+
+        $("#searchButton").click(function () {
+            event.preventDefault();
+            // Lấy giá trị từ ô nhập liệu
+            let searchText = $("#searchInput").val();
+            // Lấy giá trị từ dropdown chọn
+            let searchOption = $("#search-by").val();
+
+            let departmentId = $("#departmentId").val();
+            // Gửi yêu cầu tìm kiếm bằng Ajax
+            if ($("#active").hasClass("show")) {
+                searchListCheckOut(searchText, searchOption, departmentId)
+            } else {
+                searchListCheckIn(searchText, searchOption, departmentId);
+            }
+        });
+
+        //Tìm kiếm theo list check in
+        function searchListCheckIn(searchText, searchOption, departmentId) {
+            // Gửi yêu cầu tìm kiếm đến server
+            $.ajax({
+                type: "GET",
+                url: `/employee/fixed/searchListCheckIn?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}` ,
+                success: function (data) {
+                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                    console.log(data);
+                    displaySearchResultsCheckIn(data);
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+                }
+            });
+        }
+
+        // Hiển thị danh sách trong list check in
+        function displaySearchResultsCheckIn(results) {
+            // Xóa các kết quả hiện tại
+            $("#CheckInList").empty();
+
+            console.log(results)
+            // Hiển thị kết quả tìm kiếm
+            if (results.length > 0) {
+                var resultHtml = "";
+                for (var i = 0; i < results.length; i++) {
+                    resultHtml += `<div class="user-card">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img src="${results[i].imageUrl}" alt="User 1 Profile Image">
+                                                </div>
+                                                <div class="col-4">
+                                                    <h3 class="fw-bold">${results[i].username}</h3>
+                                                    <p class="text-uppercase fw-bold">${results[i].productName}</p>
+                                                    <p class="fw-bold">Thời lượng còn: ${results[i].duration} ngày</p>
+                                                    <p>Số điện thoại: ${results[i].phoneNumber}</p>
+                                                </div>
+                                                <div class="col-2">
+                                                    <h5 class="text-money">${results[i].price} <span class="credit">Credit</span></h5>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="status-box">
+                                                        <span class="user-status">Chưa check-in</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button onclick="performCheckIn(${results[i].orderDetailId})" class="btn btn-primary">Check-in</button>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                }
+                console.log(resultHtml);
+                $("#CheckInList").append(resultHtml);
+            } else {
+                $("#CheckInList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+            }
+        }
+
+        // Tìm kiếm theo list đã check in
+        function searchListCheckOut(searchText, searchOption, departmentId) {
+            // Gửi yêu cầu tìm kiếm đến server
+            $.ajax({
+                type: "GET",
+                url: `/employee/fixed/searchListCheckOut?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}` ,
+                success: function (data) {
+                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                    console.log(data);
+                    displaySearchResultsCheckOut(data);
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+                }
+            });
+        }
+
+        function displaySearchResultsCheckOut(results) {
+            // Xóa các kết quả hiện tại
+            $("#CheckOutList").empty();
+
+            console.log(results)
+            // Hiển thị kết quả tìm kiếm
+            if (results.length > 0) {
+                var resultHtml = "";
+                for (var i = 0; i < results.length; i++) {
+                    resultHtml += `<div class="user-card">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img src="${results[i].imageUrl}" alt="User 1 Profile Image">
+                                                </div>
+                                                <div class="col-4">
+                                                    <h3 class="fw-bold">${results[i].username}</h3>
+                                                    <p class="text-uppercase fw-bold">${results[i].productName}</p>
+                                                    <p class="fw-bold">Thời lượng còn: ${results[i].duration} ngày</p>
+                                                    <p>Số điện thoại: ${results[i].phoneNumber}</p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <h5 class="text-money">${results[i].price} &nbsp;<span class="credit">Credit</span></h5>
+                                                        <div class="status-box">
+                                                            <span class="user-status">Đã check-in</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <p>Thời gian:${formatDateTime(results[i].checkInTime)}<span id="usageTime"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                }
+                console.log(resultHtml);
+                $("#CheckOutList").append(resultHtml);
+            } else {
+                $("#CheckOutList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+            }
+        }
+
+        function formatDateTime(inputDate) {
+            const dateObject = new Date(inputDate);
+
+            const year = dateObject.getFullYear();
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const day = dateObject.getDate().toString().padStart(2, '0');
+            const hours = dateObject.getHours().toString().padStart(2, '0');
+            const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+            const seconds = dateObject.getSeconds().toString().padStart(2, '0');
+
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+            const formattedDate = `${day}-${month}-${year}`;
+
+            return `${formattedTime} ${formattedDate}`;
+        }
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,72 @@
+<div class="mt-4 mb-5 user-profile" id="user-profile" th:fragment="user-profile">
+    <div class="row user-change-ava justify-content-center">
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-xs-6 mb-3">
+            <div class="user-img">
+                <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfzmhjOE-yilOK41XrpuN4If42UNoLOCyn7Q&usqp=CAU">
+            </div>
+        </div>
+        <div class="col-xl-10 col-lg-9 col-md-8 col-sm-8 col-xs-6 change-ava-btn mb-3">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1"></label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+            </form>
+        </div>
+        <div class="col-12 mt-4 user-edit-profile">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="input-title">Email</div>
+                    <input type="text" placeholder="nguyenvana@gmail.com" disabled value="nguyenvana@gmail.com">
+                </div>
+                <div class="col-md-3">
+                    <div class="input-title">Họ</div>
+                    <input type="text" value="Nguyễn" required>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-title">Tên</div>
+                    <input type="text" value="Văn A" required>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6 col-sm-12 mb-3">
+                    <div class="input-title">Ngày sinh</div>
+                    <input type="date" value="2014-12-29">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-title">Số điện thoại</div>
+                    <input type="number" value="0123456789" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="input-title">Giới tính</div>
+                    <div class="mt-2" style="display: flex;">
+                        <div style="display: flex;">
+                            <input type="radio" name="gender" value="male" checked>
+                            <span style="margin-left: 4px">nam</span>
+                        </div>
+                        <div style="display: flex; margin-left: 15px;">
+                            <input type="radio" name="gender" value="female">
+                            <span style="margin-left: 4px">nữ</span>
+                        </div>
+                        <div style="display: flex; margin-left: 15px;">
+                            <input type="radio" name="gender" value="other">
+                            <span style="margin-left: 4px">khác</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="input-title">Đia chỉ</div>
+                    <input type="text" value="526 Điện Biên Phủ, Phường 21, Quận Bình Thạnh, Thành phố Hồ Chí Minh" required>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-12 mx-auto">
+                    <button class="btn save-changes">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

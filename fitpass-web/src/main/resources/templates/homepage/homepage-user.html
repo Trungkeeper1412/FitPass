@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
+    <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
+    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet" >
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+<body class="body-list-brand">
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="margin-top: 77px;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+    </ol>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+        <div class="carousel-item active bg-black">
+            <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                 alt="Banner 1">
+        </div>
+        <div class="carousel-item bg-black">
+            <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                 alt="Banner 2">
+        </div>
+        <div class="carousel-item bg-black">
+            <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                 alt="Banner 3">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+<!-- Content -->
+<div class="list-brand-content container">
+    <div class="tabs">
+        <!-- List brands -->
+        <div class="tab-2">
+            <label for="tab2-1">
+                <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/5632/5632749.png"></span>
+                <span class="tab-title">Thương hiệu</span>
+            </label>
+            <input id="tab2-1" onclick="openBrand()" name="tabs-two" type="radio" checked="checked">
+            <div id="list-brand" class="list-of-brand">
+                <h3 class="fw-bold list-brand-title">Danh sách các Gym Brand của chúng tôi</h3>
+                <div class="row justify-content-center"
+                     th:insert="homepage/fragments/list-brand-fr.html :: list-brand-fr">
+                </div>
+                <!-- pagination -->
+                <div class="pagination mt-5">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a href="#" class="active">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </div>
+        <!-- List departments -->
+        <div class="tab-2" id="tab-department">
+            <label for="tab2-2">
+                <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
+                <span class="tab-title">Cơ sở gần bạn</span>
+            </label>
+            <input onclick="openGym()" id="tab2-2" name="tabs-two" type="radio">
+            <div id="list-gym" class="list-of-gym">
+                <h3 class="fw-bold list-brand-title">Danh sách các cơ sở Gym gần bạn</h3>
+                <div class="container ">
+                    <form id="filter-form">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="location">Vị trí:</label>
+                                <select class="gym-dropdown" id="location">
+                                    <option value="all">Tất cả</option>
+                                    <option value="hn">Hà Nội</option>
+                                    <option value="hcm">TP. Hồ Chí Mnh</option>
+                                    <option value="dn">Đà Nẵng</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="price">Giá linh hoạt:</label>
+                                <select class="gym-dropdown" id="price1">
+                                    <option value="lowToHigh">Thấp đến cao</option>
+                                    <option value="highToLow">Cao đến thấp</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="price">Giá cố định:</label>
+                                <select class="gym-dropdown" id="price">
+                                    <option value="lowToHigh">Thấp đến cao</option>
+                                    <option value="highToLow">Cao đến thấp</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="rating">Rating:</label>
+                                <select class="gym-dropdown" id="rating">
+                                    <option value="5">5 sao &#8595;</option>
+                                    <option value="4">4 sao &#8595;</option>
+                                    <option value="3">3 sao &#8595;</option>
+                                    <option value="2">2 sao &#8595;</option>
+                                    <option value="1">1 sao &#8595;</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="distance fw-bold">Cách bạn:</label>
+                                <select class="gym-dropdown" id="distance fw-bold">
+                                    <option value="1-5">Dưới 2 km</option>
+                                    <option value="5-20">2-5 km</option>
+                                    <option value="5-20">Trên 5 km</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row justify-content-center mt-5" id="department-list-container"
+                     th:insert="homepage/fragments/list-gym-fr.html :: list-gym-fr">
+                </div>
+                <!-- pagination -->
+                <div class="pagination mt-5">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a href="#" class="active">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Header ======= -->
+<div th:replace="common/footer :: footer"></div>
+
+<!-- Vendor JS Files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<script>
+    //Tab display code
+    document.getElementById("list-gym").style.display = "none";
+    function openGym() {
+        document.getElementById("list-brand").style.display = "none";
+        document.getElementById("list-gym").style.display = "block";
+        getNearbyGyms();
+    }
+    function openBrand() {
+        document.getElementById("list-gym").style.display = "none";
+        document.getElementById("list-brand").style.display = "block";
+    }
+
+    function getNearbyGyms() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(sendLocationToServer);
+        }
+        function sendLocationToServer(position) {
+            //real value from the web
+            // const latitude = position.coords.latitude;
+            // const longitude = position.coords.longitude;
+            // console.log(latitude, longitude);
+
+            //fixed value (position at hoa lac)
+            const userLatitude = 21.00418734116798;
+            const userLongitude = 105.52004332513577;
+            console.log("Before AJAX request");
+            $.ajax({
+                type: "POST",
+                url: "/user/homepage",
+                data: {userLatitude: userLatitude, userLongitude: userLongitude},
+                success: function (response) {
+                    console.log("Inside success callback");
+                    console.log(response.length);
+                    if (response.length === 0) {
+                        $('#department-list-container').empty();
+                        $('#department-list-container').html('<p>No gyms found nearby.</p>');
+                    } else {
+                        $('#department-list-container').empty();
+                        $('#department-list-container').html(response)
+                    }
+                },
+                error: function (error) {
+                    console.log("Inside error callback");
+                    console.error("Error sending location data:", error);
+                }
+            });
+            console.log("After AJAX request");
+        }
+    }
+</script>
+<script>
+
+
+</script>
+</body>
+</html>

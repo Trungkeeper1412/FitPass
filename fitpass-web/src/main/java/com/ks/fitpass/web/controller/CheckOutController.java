@@ -1,7 +1,6 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.core.entity.User;
-import com.ks.fitpass.core.repository.KbnRepository;
 import com.ks.fitpass.core.service.KbnService;
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.Department;
@@ -14,7 +13,6 @@ import com.ks.fitpass.order.service.OrderService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -146,8 +144,11 @@ public class CheckOutController {
             session.setAttribute("cart", cart);
             // Lấy user balance
             double userBalance = walletService.getBalanceByUserId(user.getUserId());
+            double creditAfter = userBalance - totalPrice;
+
+            session.setAttribute("userCredit",creditAfter);
             // Cập nhật lại user balance sau khi đã trừ
-            walletService.updateBalanceByUderId(user.getUserId(), userBalance);
+            walletService.updateBalanceByUderId(user.getUserId(), creditAfter);
         }
 
 
