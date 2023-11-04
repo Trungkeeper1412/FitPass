@@ -80,14 +80,15 @@
             <div class="mt-4">
                 <span>Tổng tiền nạp</span>
                 <span>:</span>
-                <span class="money">500.000</span>
+                <span class="money">số tiền nạp</span>
+                <span class="currency"> đồng</span>
             </div>
             <div class="mt-2">
-                <span class="credit">500 Credits</span>
+                <span class="creditConfirm">500 Credits</span>
                 <span>sẽ được cộng vào ví của bạn!</span>
             </div>
             <div class="btn-option">
-                <button class="confirm">Xác nhận và thanh toán</button>
+                <button id="paymentSubmit" class="confirm">Xác nhận và thanh toán</button>
                 <button class="cancel">Hủy</button>
             </div>
         </div>
@@ -179,6 +180,52 @@
         $(".option-tab").removeClass("at");
         $(this).addClass("at");
     });
+
+
+        $("#paymentSubmit").click(function() {
+            var selectedAmount = $("#moneyAmount").val();
+
+            // Gửi giá trị lên server thông qua một POST request
+            $.ajax({
+                type: "POST",
+                url: "/payment/create-session",
+                data: {
+                    amount: selectedAmount
+                },
+                success: function(response) {
+                    // Xử lý kết quả trả về từ server (nếu cần)
+                    window.location.href = response;
+                }
+            });
+        });
+
+    function updateInputValue(value) {
+        document.getElementById('moneyAmount').value = value;
+    }
+
+// Get the necessary elements by their IDs or classes
+const moneyInput = document.getElementById('moneyAmount');
+const moneyElement = document.querySelector('.money');
+const creditTransDiv = document.querySelector('.credit-trans');
+const creditSpan = document.querySelector('.creditConfirm');
+const addButton = document.querySelector('.add-money-btn');
+
+    // Add a click event listener to the button
+    addButton.addEventListener('click', function() {
+        // Get the value from the input element
+        const inputValue = moneyInput.value;
+
+  // Get the text content from the creditTransDiv
+  const creditValue = creditTransDiv.textContent.trim();
+
+  // Update the text content of the money element with the input value
+  moneyElement.textContent = inputValue;
+
+  // Update the text content of the creditSpan with the credit value
+  creditSpan.textContent = creditValue;
+});
+
+
 </script>
 </body>
 </html>

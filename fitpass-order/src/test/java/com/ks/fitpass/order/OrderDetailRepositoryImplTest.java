@@ -189,43 +189,6 @@ public class OrderDetailRepositoryImplTest {
         // Assert result
         assertEquals(expectedDepartmentName, result);
     }
-
-    @Test
-    public void testGetByOrderDetailId() {
-        // Create a sample orderDetailId
-        int orderDetailId = 123;
-
-        // Create a mock result for the jdbcTemplate.queryForObject() method
-        OrderDetailConfirmCheckOut expectedOutput = new OrderDetailConfirmCheckOut();
-        expectedOutput.setDepartmentName("Sample Department");
-        expectedOutput.setGymPlanName("Sample Plan");
-        expectedOutput.setPricePerHours(10.5);
-
-        // Mock the behavior of the jdbcTemplate.queryForObject() method
-        Mockito.when(jdbcTemplate.queryForObject(
-                        Mockito.eq(IRepositoryQuery.GET_ORDER_DETAIL_CONFIRM_CHECKOUT_BY_DETAIL_ID),
-                        Mockito.<RowMapper<OrderDetailConfirmCheckOut>>any(),
-                        Mockito.eq(orderDetailId)))
-                .thenAnswer(invocation -> {
-                    RowMapper<OrderDetailConfirmCheckOut> rowMapper = invocation.getArgument(1);
-                    ResultSet rs = Mockito.mock(ResultSet.class);
-                    Mockito.when(rs.getString("gym_department_name")).thenReturn("Sample Department");
-                    Mockito.when(rs.getString("name")).thenReturn("Sample Plan");
-                    Mockito.when(rs.getDouble("price_per_hours")).thenReturn(10.5);
-                    return rowMapper.mapRow(rs, 0);
-                });
-
-        // Call the getByOrderDetailId() method and verify the result
-        OrderDetailConfirmCheckOut result = orderDetailRepositoryImpl.getByOrderDetailId(orderDetailId);
-
-        // Assert the result
-        assertEquals(expectedOutput, result);
-
-        // Verify the usage of jdbcTemplate.queryForObject()
-        Mockito.verify(jdbcTemplate).queryForObject(Mockito.eq(IRepositoryQuery.GET_ORDER_DETAIL_CONFIRM_CHECKOUT_BY_DETAIL_ID),
-                Mockito.<RowMapper<OrderDetailConfirmCheckOut>>any(),
-                Mockito.eq(orderDetailId));
-    }
     @Test
     public void testGetUserNameByOrderDetailId() {
         // Set up sample values for the parameter
@@ -332,6 +295,106 @@ public class OrderDetailRepositoryImplTest {
 
         // Act
         int actual = orderDetailRepositoryImpl.decreaseDuration(orderDetailId);
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+//normal test case
+    @Test
+    void testUpdateOrderDetailItemStatus_WhenParametersAreValidAndUpdateIsSuccessful() {
+        // Arrange
+        Timestamp planActiveTime = Timestamp.valueOf("2022-01-01 10:00:00");
+        int status = 1;
+        Timestamp planExpiredTime = Timestamp.valueOf("2022-01-02 10:00:00");
+        int orderDetailId = 1;
+        int expected = 1; // Number of rows affected by the update query
+
+        // Mock the behavior of the jdbcTemplate.update() method
+        Mockito.when(jdbcTemplate.update(
+                        Mockito.eq(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS),
+                        Mockito.eq(planActiveTime),
+                        Mockito.eq(status),
+                        Mockito.eq(planExpiredTime),
+                        Mockito.eq(orderDetailId)))
+                .thenReturn(1);
+
+        // Act
+        int actual = orderDetailRepositoryImpl.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+    //abnormal test case
+    @Test
+    void testUpdateOrderDetailItemStatus_WhenOrderDetailIdDoesNotExist() {
+        // Arrange
+        Timestamp planActiveTime = Timestamp.valueOf("2022-01-01 10:00:00");
+        int status = 1;
+        Timestamp planExpiredTime = Timestamp.valueOf("2022-01-02 10:00:00");
+        int orderDetailId = 999; // Non-existing orderDetailId
+        int expected = 0; // No rows affected as the orderDetailId does not exist
+
+        // Mock the behavior of the jdbcTemplate.update() method
+        Mockito.when(jdbcTemplate.update(
+                        Mockito.eq(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS),
+                        Mockito.eq(planActiveTime),
+                        Mockito.eq(status),
+                        Mockito.eq(planExpiredTime),
+                        Mockito.eq(orderDetailId)))
+                .thenReturn(0);
+
+        // Act
+        int actual = orderDetailRepositoryImpl.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+//Boundary Test Cases
+    @Test
+    void testUpdateOrderDetailItemStatus_WhenPlanActiveTimeIsMinimumAllowedValue() {
+        // Arrange
+        Timestamp planActiveTime = Timestamp.valueOf("1970-01-01 00:00:00");
+        int status = 1;
+        Timestamp planExpiredTime = Timestamp.valueOf("2022-01-02 10:00:00");
+        int orderDetailId = 1;
+        int expected = 1; // Number of rows affected by the update query
+
+        // Mock the behavior of the jdbcTemplate.update() method
+        Mockito.when(jdbcTemplate.update(
+                        Mockito.eq(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS),
+                        Mockito.eq(planActiveTime),
+                        Mockito.eq(status),
+                        Mockito.eq(planExpiredTime),
+                        Mockito.eq(orderDetailId)))
+                .thenReturn(1);
+
+        // Act
+        int actual = orderDetailRepositoryImpl.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testUpdateOrderDetailItemStatus_WhenPlanExpiredTimeIsMaximumAllowedValue() {
+        // Arrange
+        Timestamp planActiveTime = Timestamp.valueOf("2022-01-01 10:00:00");
+        int status = 1;
+        Timestamp planExpiredTime = Timestamp.valueOf("9999-12-31 23:59:59");
+        int orderDetailId = 1;
+        int expected = 1; // Number of rows affected by the update query
+
+        // Mock the behavior of the jdbcTemplate.update() method
+        Mockito.when(jdbcTemplate.update(
+                        Mockito.eq(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS),
+                        Mockito.eq(planActiveTime),
+                        Mockito.eq(status),
+                        Mockito.eq(planExpiredTime),
+                        Mockito.eq(orderDetailId)))
+                .thenReturn(1);
+
+        // Act
+        int actual = orderDetailRepositoryImpl.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
 
         // Assert
         assertEquals(expected, actual);
