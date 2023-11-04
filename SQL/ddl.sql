@@ -85,9 +85,7 @@ CREATE TABLE IF NOT EXISTS brand (
     contact_email				VARCHAR(50) NOT NULL,
     brand_status_key   		    INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
-
     );
-
 
 CREATE TABLE IF NOT EXISTS brand_amenities  (
                                                 amenitie_id             INT AUTO_INCREMENT PRIMARY KEY,

@@ -752,14 +752,21 @@ function loadCalendar(data){
             start: item.checkInTime
         };
     });
-
     console.log(events)
 
+    // không đc phép để null -> để 1 obj trống để insert vào
     var userEvents = JSON.parse(localStorage.getItem('events')) || {
 
     };
-
+    // Lưu localStorage theo userID
     let userId = document.getElementById("userId").value;
+
+    // Kiểm tra xem userId đã tồn tại trong userEvents chưa
+    if (!userEvents[userId]) {
+        // Nếu userId chưa tồn tại, tạo một mảng rỗng để lưu trữ các sự kiện của người dùng đó
+        userEvents[userId] = [];
+    }
+
     const userEventById = userEvents[userId];
 
     const allEvent = [...events, ...userEventById];
