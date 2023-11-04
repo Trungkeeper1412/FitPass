@@ -50,7 +50,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('50000')" >
                     <div class="panel-body">
                       <span>
                         <h4 class="fw-bold">50.000</h4>
@@ -64,7 +64,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('100000')">
                     <div class="panel-body">
                         <h4 class="fw-bold">100.000</h4>
                         <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
@@ -76,7 +76,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('200000')">
                     <div class="panel-body">
                         <h4 class="fw-bold">200.000</h4>
                         <img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png" alt="">
@@ -88,7 +88,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('300000')">
                     <div class="panel-body">
                         <h4 class="fw-bold">300.000</h4>
                         <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
@@ -100,7 +100,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('500000')">
                     <div class="panel-body">
                       <span>
                         <h4 class="fw-bold">500.000</h4>
@@ -114,7 +114,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('1000000')">
                     <div class="panel-body">
                       <span>
                         <h4 class="fw-bold">1.000.000</h4>
@@ -128,7 +128,7 @@
         <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
             <label>
                 <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
+                <div class="panel panel-default card-input" onclick="updateInputValue('2000000')">
                     <div class="panel-body">
                         <h4 class="fw-bold">2.000.000</h4>
                         <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
@@ -137,25 +137,26 @@
                 </div>
             </label>
         </div>
-        <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-            <label>
-                <input type="radio" name="money" class="card-input-element" />
-                <div class="panel panel-default card-input">
-                    <div class="panel-body">
-                        <h4 class="fw-bold">3.000.000</h4>
-                        <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
-                    </div>
-                    <div class="credit-trans">3000 credits tương ứng</div>
-                </div>
-            </label>
+  <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+    <label>
+        <input type="radio" name="money" class="card-input-element" />
+        <div class="panel panel-default card-input" onclick="updateInputValue('3000000')">
+            <div class="panel-body">
+                <h4 class="fw-bold">3.000.000</h4>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+            </div>
+            <div class="credit-trans">3000 credits tương ứng</div>
         </div>
+    </label>
+</div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-6 mb-4 input-money">
-            <input type="text" placeholder="Nhập số tiền cần nạp...">
-        </div>
-        <div class="col-6 mb-4" id="add-money">
+     <div class="col-6 mb-4 input-money">
+    <input id="moneyAmount" type="text" placeholder="Nhập số tiền cần nạp..."  oninput="updateMoneyValue(this.value)">
+</div>
+        <div class="col-6 mb-4" >
             <div class="add-money-btn trigger">Nạp tiền</div>
         </div>
     </div>
 </div>
+
