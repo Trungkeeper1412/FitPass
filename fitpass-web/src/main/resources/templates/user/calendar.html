@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Inventory</title>
+    <title>Calendar</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -44,7 +44,7 @@
         <div class="container">
             <div class="text-start fs-2 fw-bold pt-2 pb-2 text-uppercase">Lịch tập</div>
             <ol>
-                <a href="index.html">Fitpass &nbsp;</a>
+                <a th:href="@{/user/homepage}">Fitpass &nbsp;</a>
                 <li class="text-black">/ Lịch tập</li>
             </ol>
             <hr>
@@ -54,7 +54,7 @@
     <div class="filter-container">
         <div class="container">
             <section class="separator-box">
-                <div id='calendar'></div>
+                <div id=calendar></div>
 
                 <!-- Add modal -->
                 <div class="modal fade edit-form" id="form" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -331,7 +331,6 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
@@ -344,12 +343,12 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js'></script>
+<script th:src="@{/user-homepage-assets/assets/js/calendar.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/js/packages/core/locales/vi.global.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/js/packages/daygrid/index.global.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/js/packages/interaction/index.global.js}"></script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js'></script>
 
 </body>
 

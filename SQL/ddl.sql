@@ -1,7 +1,7 @@
 -- Drop queries to remove existing tables (if they exist)
+DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS user_feedback;
 DROP TABLE IF EXISTS item_inventory;
-DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS notification;
 DROP TABLE IF EXISTS order_plan_detail;
 DROP TABLE IF EXISTS `order`;

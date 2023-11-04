@@ -2,13 +2,13 @@ package com.ks.fitpass.calendar.repository;
 
 public interface IQueryRepository {
     String getListCheckInCalendarByUserId = """
-                select cih.check_in_history_id, gd.name as 'gym_department_name', gd.address , cih.check_in_time , opd.name as 'gym_plan_name' \s
-                from check_in_history cih\s
-                join order_plan_detail opd  on cih.order_detail_id = opd.order_detail_id\s
-                join `order` o  on o.order_id = opd.order_id\s
-                join `user` u on u.user_id = o.user_id\s
-                join user_detail ud on u.user_detail_id = ud.user_detail_id\s
-                join gym_department gd on gd.gym_department_id = opd.gym_department_id\s
+                select cih.check_in_history_id, gd.name as 'gym_department_name', gd.address , cih.check_in_time , opd.name as 'gym_plan_name'
+                from check_in_history cih
+                join order_plan_detail opd  on cih.order_detail_id = opd.order_detail_id
+                join `order` o  on o.order_id = opd.order_id
+                join `user` u on u.user_id = o.user_id
+                join user_detail ud on u.user_detail_id = ud.user_detail_id
+                join gym_department gd on gd.gym_department_id = opd.gym_department_id
                 where u.user_id = ?
             """;
 

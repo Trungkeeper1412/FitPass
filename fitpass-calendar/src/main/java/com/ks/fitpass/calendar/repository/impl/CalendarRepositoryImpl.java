@@ -3,7 +3,6 @@ package com.ks.fitpass.calendar.repository.impl;
 import com.ks.fitpass.calendar.dto.CalendarFeedbackDTO;
 import com.ks.fitpass.calendar.dto.CheckInDataCalendarDTO;
 import com.ks.fitpass.calendar.dto.CheckInDataCalendarDetailDTO;
-import com.ks.fitpass.calendar.mapper.CheckInDataCalendarMapper;
 import com.ks.fitpass.calendar.repository.CalendarRepository;
 import com.ks.fitpass.calendar.repository.IQueryRepository;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -25,8 +24,15 @@ public class CalendarRepositoryImpl implements CalendarRepository,IQueryReposito
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public List<CheckInDataCalendarDTO> getListCheckInCalendarByUserId(int userId) {
-        return jdbcTemplate.query(getListCheckInCalendarByUserId, new CheckInDataCalendarMapper(), userId);
+        return jdbcTemplate.query(IQueryRepository.getListCheckInCalendarByUserId, (rs, rowNum) -> {
+            CheckInDataCalendarDTO checkInDataCalendarDTO = new CheckInDataCalendarDTO();
+            checkInDataCalendarDTO.setCheckInHistoryId(rs.getInt("check_in_history_id"));
+            checkInDataCalendarDTO.setGymDepartmentName(rs.getString("gym_department_name"));
+            checkInDataCalendarDTO.setCheckInTime(rs.getTimestamp("check_in_time"));
+            return checkInDataCalendarDTO;
+        }, userId);
     }
 
 
@@ -51,7 +57,7 @@ public class CalendarRepositoryImpl implements CalendarRepository,IQueryReposito
 
             checkInDataCalendarDetailDTO.setDate(date);
             checkInDataCalendarDetailDTO.setTime(time);
-            return  checkInDataCalendarDetailDTO;
+            return checkInDataCalendarDetailDTO;
         }, userId, checkInHistoryId);
     }
 

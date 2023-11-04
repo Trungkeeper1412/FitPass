@@ -104,8 +104,8 @@
                                             <th:block th:each="item:${listFlexible}">
 
                                                 <tr>
-                                                    <td><button class="view-image-btn view-detail"
-                                                                data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+                                                    <td><button class="view-image-btn view-detail" data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
+<!--                                                                th:attr="data-image-src=${item.image}"-->
                                                     <td th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</td>
                                                     <td th:text="${item.getPhoneNumber()}">0987654321</td>
                                                     <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
