@@ -82,6 +82,7 @@
     <h4 class="row fw-bold mt-5 brand-dept-title" id="club">CÁC CƠ SỞ</h4>
     <div class="list-gym-department container">
         <div class="department" th:each="dept : ${departments}">
+            <a th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
             <div class="dept-img"
                  th:style="'background-image: url(\'' + ${dept.getDepartmentWallpaperUrl()} + '\'); background-size: cover;'">
             </div>
@@ -104,6 +105,7 @@
 
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
