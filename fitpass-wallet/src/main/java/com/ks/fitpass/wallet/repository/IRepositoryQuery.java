@@ -13,4 +13,11 @@ public interface IRepositoryQuery {
             SET balance = ?
             WHERE user_id = ?;
                 """;
+
+    String GET_WALLET_ID_BY_USER_ID = """
+                SELECT w.wallet_id
+                FROM wallet w
+                JOIN user u ON w.user_id = u.user_id
+                WHERE u.user_id = ?;
+            """;
 }

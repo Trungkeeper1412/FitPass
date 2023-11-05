@@ -205,6 +205,7 @@ CREATE TABLE IF NOT EXISTS transfer (
 CREATE TABLE IF NOT EXISTS `transaction` (
                                              transaction_id   INT AUTO_INCREMENT PRIMARY KEY,
                                              wallet_id        INT NOT NULL,
+                                             status           VARCHAR(30) NOT NULL,
                                              amount           DECIMAL(10, 2) NOT NULL,
     transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (wallet_id) REFERENCES wallet(wallet_id)

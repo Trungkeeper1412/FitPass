@@ -1,11 +1,14 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.brand.service.*;
 import com.ks.fitpass.brand.entity.*;
 
+import com.ks.fitpass.transaction.dto.TransactionDTO;
+import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +32,7 @@ public class HomepageController {
     private final DepartmentService departmentService;
     private final BrandService brandService;
     private final WalletService walletService;
-
+    private final TransactionService transactionService;
     @GetMapping("/homepage")
     public String getHomepage(Principal principal, HttpSession session, Model model) {
         com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
@@ -69,8 +72,14 @@ public class HomepageController {
         return "user/calendar";
     }
 
-    @GetMapping("profile/my-profile")
-    public String showProfile() {
+
+    @GetMapping("/profile/my-profile")
+    public String showProfile(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("userInfo");
+        List<TransactionDTO> transactionDTOList = transactionService.getListTransactionByUserId(user.getUserId());
+        model.addAttribute("transactionList", transactionDTOList);
+
         return "user/profile";
     }
 }
