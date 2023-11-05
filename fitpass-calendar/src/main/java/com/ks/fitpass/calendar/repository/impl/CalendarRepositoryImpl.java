@@ -26,7 +26,7 @@ public class CalendarRepositoryImpl implements CalendarRepository,IQueryReposito
 
     @Override
     public List<CheckInDataCalendarDTO> getListCheckInCalendarByUserId(int userId) {
-        return jdbcTemplate.query(IQueryRepository.getListCheckInCalendarByUserId, (rs, rowNum) -> {
+        return jdbcTemplate.query(IQueryRepository.GET_ALL_CHECKIN_CALENDAR_BY_USER_ID, (rs, rowNum) -> {
             CheckInDataCalendarDTO checkInDataCalendarDTO = new CheckInDataCalendarDTO();
             checkInDataCalendarDTO.setCheckInHistoryId(rs.getInt("check_in_history_id"));
             checkInDataCalendarDTO.setGymDepartmentName(rs.getString("gym_department_name"));
@@ -38,7 +38,7 @@ public class CalendarRepositoryImpl implements CalendarRepository,IQueryReposito
 
     @Override
     public CheckInDataCalendarDetailDTO getDetailByUserIdAndHistoryId(int userId, int checkInHistoryId) {
-        return jdbcTemplate.queryForObject(IQueryRepository.getDetailByUserIdAndHistoryId, (rs, rowNum) -> {
+        return jdbcTemplate.queryForObject(IQueryRepository.GET_CHECKIN_HISTORY_DETAIL_BY_USER_ID_AND_HISTORY_ID, (rs, rowNum) -> {
             CheckInDataCalendarDetailDTO checkInDataCalendarDetailDTO = new CheckInDataCalendarDetailDTO();
             checkInDataCalendarDetailDTO.setCheckInHistoryId(rs.getInt("check_in_history_id"));
             checkInDataCalendarDetailDTO.setGymDepartmentId(rs.getInt("gym_department_id"));
@@ -63,7 +63,7 @@ public class CalendarRepositoryImpl implements CalendarRepository,IQueryReposito
 
     @Override
     public CalendarFeedbackDTO getFeedbackByCheckInHistoryId(int checkInHistoryId) {
-        return jdbcTemplate.queryForObject(IQueryRepository.getFeedbackByCheckInHistoryId, (rs, rowNum) -> {
+        return jdbcTemplate.queryForObject(IQueryRepository.GET_USER_FEEDBACK_BY_CHECKIN_HISTORY_ID, (rs, rowNum) -> {
             CalendarFeedbackDTO calendarFeedbackDTO = new CalendarFeedbackDTO();
             calendarFeedbackDTO.setFeedbackId(rs.getInt("feedback_id"));
             calendarFeedbackDTO.setUserId(rs.getInt("user_id"));
@@ -78,17 +78,17 @@ public class CalendarRepositoryImpl implements CalendarRepository,IQueryReposito
 
     @Override
     public int insertCalendarFeedback(UserFeedback userFeedback) {
-        return jdbcTemplate.update(IQueryRepository.insertFeedback, userFeedback.getUserId(), userFeedback.getDepartmentId(), userFeedback.getRating(), userFeedback.getComments(), userFeedback.getFeedbackTime());
+        return jdbcTemplate.update(IQueryRepository.INSERT_USER_FEEDBACK, userFeedback.getUserId(), userFeedback.getDepartmentId(), userFeedback.getRating(), userFeedback.getComments(), userFeedback.getFeedbackTime());
     }
 
     @Override
     public int updateCalendarFeedbackRating(int feedBackId, UserFeedback userFeedback) {
-        return jdbcTemplate.update(IQueryRepository.updateFeedBackRating, userFeedback.getRating(), userFeedback.getComments(), userFeedback.getFeedbackTime(), userFeedback.getFeedbackId());
+        return jdbcTemplate.update(IQueryRepository.UPDATE_USER_FEEDBACK_RATTING_BY_FEEDBACK_ID, userFeedback.getRating(), userFeedback.getComments(), userFeedback.getFeedbackTime(), userFeedback.getFeedbackId());
     }
 
     @Override
     public Integer getLastInsertFeedbackId() {
-        return jdbcTemplate.queryForObject(IQueryRepository.getLastInsertFeedbackId, Integer.class);
+        return jdbcTemplate.queryForObject(IQueryRepository.GET_LAST_INSERT_FEEDBACK_ID, Integer.class);
     }
 
     @Override

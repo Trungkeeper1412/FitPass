@@ -59,8 +59,10 @@ public class CalendarController {
         userFeedback.setFeedbackTime(LocalDateTime.now());
         calendarService.insertCalendarFeedback(userFeedback);
 
+        // lấy id thằng feedbackId Mà vừa insert vào bảng user user_feedback
         int feedbackId = calendarService.getLastInsertFeedbackId();
 
+        // nhét nó lại vào bảng check_in_history
         calendarService.insertCheckInHistoryFeedback(feedbackId, checkInHistoryId);
         return "redirect:/calendar/view";
     }
