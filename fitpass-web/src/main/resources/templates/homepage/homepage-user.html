@@ -73,6 +73,29 @@
             <input id="tab2-1" onclick="openBrand()" name="tabs-two" type="radio" checked="checked">
             <div id="list-brand" class="list-of-brand">
                 <h3 class="fw-bold list-brand-title">Danh sách các Gym Brand của chúng tôi</h3>
+                <div class="container mb-5">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="price">Lượt bán:</label>
+                                <select class="gym-dropdown">
+                                    <option value="lowToHigh">Thấp đến cao</option>
+                                    <option value="highToLow">Cao đến thấp</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                                <label class="pt-2 pb-2" for="rating">Rating:</label>
+                                <select class="gym-dropdown" id="">
+                                    <option value="5">5 sao &#8595;</option>
+                                    <option value="4">Trên 4 sao &#8595;</option>
+                                    <option value="3">Trên 3 sao &#8595;</option>
+                                    <option value="2">Trên 2 sao &#8595;</option>
+                                    <option value="1">Trên 1 sao &#8595;</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="row justify-content-center"
                      th:insert="homepage/fragments/list-brand-fr.html :: list-brand-fr">
                 </div>

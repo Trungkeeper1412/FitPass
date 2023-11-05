@@ -2939,13 +2939,13 @@ input:checked + .toggle-slider:before {
 
 .about-our-gym-1 .modal{
   height: 100%;
-  width: 100%;
+  /*width: 100%;*/
   text-align: center;
 }
 
 .about-our-gym-1{
   /* background-color: #18d26e; */
-  width: 100%;
+  /*width: 100%;*/
 }
 
 .gym-name-cover{
@@ -4347,7 +4347,7 @@ section {
 }
 
 .tabs .tab-2 {
-  width: 50%;
+  width: 100%;
 }
 
 .tabs .tab-2 [type="radio"]+div {
@@ -4390,7 +4390,7 @@ section {
 .list-of-brand .brand-image{
   width: 50%;
   min-height: 250px;
-  /* height: 42%; */
+  object-fit: cover;
   padding: 20px 20px 20px 20px;
 }
 .list-of-brand .brand-info{
@@ -4535,7 +4535,7 @@ section {
   color: orange;
 }
 
-.list-of-gym .gym-dropdown{
+.gym-dropdown{
   width: 100%;
   height: 40px;
   border-radius: 5px;
