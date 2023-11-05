@@ -199,32 +199,30 @@
             });
         });
 
-    function updateInputValue(value) {
+    function updateInputValue(value, creditTrans) {
         document.getElementById('moneyAmount').value = value;
+        document.querySelector('.money').textContent = value; // Update the money element with the input value
+        document.querySelector('.creditConfirm').textContent = creditTrans; // Update the creditConfirm element with the selected credit-trans text
     }
 
-// Get the necessary elements by their IDs or classes
-const moneyInput = document.getElementById('moneyAmount');
-const moneyElement = document.querySelector('.money');
-const creditTransDiv = document.querySelector('.credit-trans');
-const creditSpan = document.querySelector('.creditConfirm');
-const addButton = document.querySelector('.add-money-btn');
+    // Get the necessary elements by their IDs or classes
+    const moneyInput = document.getElementById('moneyAmount');
+    const addButton = document.querySelector('.add-money-btn');
 
     // Add a click event listener to the button
     addButton.addEventListener('click', function() {
         // Get the value from the input element
         const inputValue = moneyInput.value;
 
-  // Get the text content from the creditTransDiv
-  const creditValue = creditTransDiv.textContent.trim();
+        // Get the selected credit-trans text
+        const creditTrans = document.querySelector('input[name="money"]:checked + .card-input .credit-trans').textContent.trim();
 
-  // Update the text content of the money element with the input value
-  moneyElement.textContent = inputValue;
+        // Update the text content of the money element with the input value
+        document.querySelector('.money').textContent = inputValue;
 
-  // Update the text content of the creditSpan with the credit value
-  creditSpan.textContent = creditValue;
-});
-
+        // Update the text content of the creditConfirm element with the selected credit-trans text
+        document.querySelector('.creditConfirm').textContent = creditTrans;
+    });
 
 </script>
 </body>

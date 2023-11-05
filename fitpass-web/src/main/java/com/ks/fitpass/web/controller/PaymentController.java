@@ -1,4 +1,5 @@
 package com.ks.fitpass.web.controller;
+import org.springframework.ui.Model;
 
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.wallet.service.WalletService;
@@ -8,7 +9,6 @@ import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,12 +65,18 @@ public class PaymentController {
     }
 
     @GetMapping("/success")
-    public String processSuccessPayment(@RequestParam("amount") long amount, HttpSession session) {
+    public String processSuccessPayment(@RequestParam("amount") long amount, HttpSession session, Model model) {
         User user = (User) session.getAttribute("userInfo");
         double balance = walletService.getBalanceByUserId(user.getUserId());
         double creditAfterPayment = balance + amount/1000;
         walletService.updateBalanceByUderId(user.getUserId(), creditAfterPayment);
         session.setAttribute("userCredit", creditAfterPayment);
-        return "user/profile";
+        model.addAttribute("redirectCountdown", 5); // Set the redirect countdown value (e.g., 5 seconds)
+        return "user/paymentSuccess";
     }
+    @GetMapping("/cancel")
+    public String processCancelPayment() {
+        return "user/paymentCancel";
+    }
+
 }
