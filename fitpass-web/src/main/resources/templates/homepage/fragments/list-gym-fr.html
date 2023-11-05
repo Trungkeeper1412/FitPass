@@ -12,7 +12,7 @@
                     <p class="card-text"><i class="bi bi-geo-alt"></i>
                         <th:block th:text="${entry.key.departmentAddress}"></th:block>
                     </p>
-                    <p class="phone-number" style="margin-top: -50px"><i class="bi bi-telephone"></i>
+                    <p class="phone-number"><i class="bi bi-telephone"></i>
                         <th:block th:text="${entry.key.departmentPhone}"></th:block>
                     </p>
                     <div class="d-flex justify-content-between">
@@ -22,18 +22,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="review-section">
+                    <div class="review-section mb-3">
                         Đánh giá:
                         <div class="rating" th:attr="data-star=${entry.key.rating}"></div>
                     </div>
 <!--                    <div class="justify-content-between">-->
                         <div class="row gym-price justify-content-center">
                             <div class="col">
-                                <h6>Giá Gói linh hoạt:</h6>
-                                <h5 class="text-money">10 <span class="credit" style="font-size: 14px;">Credit/Giờ</span></h5>
-                            </div>
-                            <div class="col">
-                                <h6>Giá Gói cố định:</h6>
+                                <div class="mb-3" >Giá gói:</div>
                                 <h5 class="text-money">100-500 <span class="credit" style="font-size: 14px;">Credit</span></h5>
                             </div>
                         </div>

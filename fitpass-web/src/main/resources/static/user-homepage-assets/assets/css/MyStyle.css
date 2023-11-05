@@ -9,6 +9,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /*NAVBAR*/
 .cart-badge {
   position: absolute;
@@ -1771,7 +1781,7 @@ textarea.form-control {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 ::selection {
@@ -4566,11 +4576,11 @@ section {
   min-height: 80px;
 }
 .list-of-gym .card-text {
-  min-height: 70px;
+  /*min-height: 70px;*/
 }
 .review-section {
-  padding-top: 10px;
-  margin-bottom: -10px;
+  /*padding-top: 10px;*/
+  /*margin-bottom: -10px;*/
 }
 .credit {
   color: orange;
