@@ -1,4 +1,6 @@
 package com.ks.fitpass.web.controller;
+import com.ks.fitpass.transaction.dto.TransactionDTO;
+import com.ks.fitpass.transaction.service.TransactionService;
 import org.springframework.ui.Model;
 
 import com.ks.fitpass.core.entity.User;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
+
 
 @Controller
 @RequestMapping("/payment")
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PaymentController {
 
     private final WalletService walletService;
+    private final TransactionService transactionService;
 
     @PostMapping("/create-session")
     public ResponseEntity<String> createCheckoutSession(@RequestParam("amount") String selectedAmount) {
@@ -44,7 +49,7 @@ public class PaymentController {
                     SessionCreateParams.builder()
                             .setMode(SessionCreateParams.Mode.PAYMENT)
                             .setSuccessUrl(YOUR_DOMAIN + "/payment/success?amount="+amount)
-                            .setCancelUrl(YOUR_DOMAIN + "/payment/cancel")
+                            .setCancelUrl(YOUR_DOMAIN + "/payment/cancel?amount="+amount)
                             .addLineItem(
                                     SessionCreateParams.LineItem.builder()
                                             .setQuantity(1L)
@@ -70,12 +75,29 @@ public class PaymentController {
         double balance = walletService.getBalanceByUserId(user.getUserId());
         double creditAfterPayment = balance + amount/1000;
         walletService.updateBalanceByUderId(user.getUserId(), creditAfterPayment);
+
+        // Insert vao bang transaction
+        TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setAmount((int) amount);
+        transactionDTO.setTransactionDate(new Timestamp(System.currentTimeMillis()));
+        transactionDTO.setStatus("Thành công");
+        transactionDTO.setWalletId(walletService.getWalletIdByUserId(user.getUserId()));
+        transactionService.insertTransaction(transactionDTO);
+
         session.setAttribute("userCredit", creditAfterPayment);
         model.addAttribute("redirectCountdown", 5); // Set the redirect countdown value (e.g., 5 seconds)
         return "user/paymentSuccess";
     }
     @GetMapping("/cancel")
-    public String processCancelPayment() {
+    public String processCancelPayment(@RequestParam("amount") long amount, HttpSession session) {
+        User user = (User) session.getAttribute("userInfo");
+        // Insert vao bang transaction
+        TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setAmount((int) amount);
+        transactionDTO.setTransactionDate(new Timestamp(System.currentTimeMillis()));
+        transactionDTO.setStatus("Đã hủy");
+        transactionDTO.setWalletId(walletService.getWalletIdByUserId(user.getUserId()));
+        transactionService.insertTransaction(transactionDTO);
         return "user/paymentCancel";
     }
 

@@ -9,6 +9,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /*NAVBAR*/
 .cart-badge {
   position: absolute;
@@ -1771,7 +1781,7 @@ textarea.form-control {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 ::selection {
@@ -2929,13 +2939,13 @@ input:checked + .toggle-slider:before {
 
 .about-our-gym-1 .modal{
   height: 100%;
-  width: 100%;
+  /*width: 100%;*/
   text-align: center;
 }
 
 .about-our-gym-1{
   /* background-color: #18d26e; */
-  width: 100%;
+  /*width: 100%;*/
 }
 
 .gym-name-cover{
@@ -4337,7 +4347,7 @@ section {
 }
 
 .tabs .tab-2 {
-  width: 50%;
+  width: 100%;
 }
 
 .tabs .tab-2 [type="radio"]+div {
@@ -4380,7 +4390,7 @@ section {
 .list-of-brand .brand-image{
   width: 50%;
   min-height: 250px;
-  /* height: 42%; */
+  object-fit: cover;
   padding: 20px 20px 20px 20px;
 }
 .list-of-brand .brand-info{
@@ -4525,7 +4535,7 @@ section {
   color: orange;
 }
 
-.list-of-gym .gym-dropdown{
+.gym-dropdown{
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -4566,11 +4576,11 @@ section {
   min-height: 80px;
 }
 .list-of-gym .card-text {
-  min-height: 70px;
+  /*min-height: 70px;*/
 }
 .review-section {
-  padding-top: 10px;
-  margin-bottom: -10px;
+  /*padding-top: 10px;*/
+  /*margin-bottom: -10px;*/
 }
 .credit {
   color: orange;

@@ -26,4 +26,9 @@ public class WalletRepositoryImpl implements WalletRepository {
     public int updateBalanceByUderId(int userId, double balance) {
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_WALLET_BALANCE_BY_USER_ID, balance, userId);
     }
+
+    @Override
+    public int getWalletIdByUserId(int userId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_WALLET_ID_BY_USER_ID, Integer.class , userId);
+    }
 }
