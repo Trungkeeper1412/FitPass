@@ -7,7 +7,7 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="Tìm kiếm...">
+                    <input type="text" placeholder="Nhập tên thương hiệu...">
                     <button class="search-button">
                         <i class="fas fa-search"></i>
                     </button>
@@ -15,31 +15,14 @@
                 <li><a class="nav-link scrollto active" th:href="@{/user/homepage}">Trang chủ</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/}">Giới thiệu</a></li>
                 <li><a class="nav-link scrollto" href="#services">Dịch vụ</a></li>
-                <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="#">Danh mục 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Danh mục con</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Danh mục con 1</a></li>
-                                <li><a href="#">Danh mục con 2</a></li>
-                                <li><a href="#">Danh mục con 3</a></li>
-                                <li><a href="#">Danh mục con 4</a></li>
-                                <li><a href="#">Danh mục con 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Danh mục 2</a></li>
-                        <li><a href="#">Danh mục 3</a></li>
-                        <li><a href="#">Danh mục 4</a></li>
-                    </ul>
-                </li>
                 <li>
                     <a href="#credit">
-                        <span class="text-money">2500&nbsp;</span>  <span class="credit">Credit</span>
+                        <span class="text-money" th:text="${session.userCredit}"></span>&nbsp<span class="credit">Credit</span>
                     </a>
                 </li>
                 <li>
                     <a class="nav-link scrollto" th:href="@{/cart/view}">
-                        <span class="cart-badge">0</span>
+                        <span class="cart-badge" id="card-badge">0</span>
                         <i class="bi bi-cart3 fs-4"></i>
                     </a>
                 </li>
@@ -58,9 +41,8 @@
                 <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item small" href="#"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
+                <li><a class="dropdown-item small" th:href="@{/user/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
                 <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a></li>
-                <li><a class="dropdown-item small" href="#"><i class="fas fa-history"></i> Lịch sử</a></li>
                 <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
             </ul>
         </div>

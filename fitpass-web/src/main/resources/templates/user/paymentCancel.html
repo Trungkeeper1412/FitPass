@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Cancelled</title>
+</head>
+<body>
+<h1>Payment Cancelled</h1>
+<p>Your payment has been cancelled.</p>
+<p>Forgot to add something to your cart? Shop around then come back to pay!</p>
+<p>Redirecting to profile page in <span th:text="${redirectCountdown}">5</span> seconds...</p>
+
+<script th:inline="javascript">
+    var redirectCountdown = [[${redirectCountdown}]];
+    var redirectInterval = setInterval(function() {
+        redirectCountdown--;
+        if (redirectCountdown === 0) {
+            clearInterval(redirectInterval);
+            window.location.href = "/user/profile/my-profile";
+        }
+        document.querySelector('span').textContent = redirectCountdown;
+    }, 1000);
+</script>
+</body>
+</html>

@@ -12582,6 +12582,8 @@ body.sidebar-toggled footer.sticky-footer {
     background-color: white;
     padding: 25px 25px 0px 25px;
     border-radius: 10px;
+    overflow-x: scroll;
+    scrollbar-width: thin;
 }
 
 .form-edit {

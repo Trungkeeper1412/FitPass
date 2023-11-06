@@ -1,11 +1,14 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.brand.service.*;
 import com.ks.fitpass.brand.entity.*;
-
+import com.ks.fitpass.transaction.dto.TransactionDTO;
+import com.ks.fitpass.transaction.service.TransactionService;
+import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,7 +30,8 @@ public class HomepageController {
     private final UserRepository userRepository;
     private final DepartmentService departmentService;
     private final BrandService brandService;
-
+    private final WalletService walletService;
+    private final TransactionService transactionService;
     @GetMapping("/homepage")
     public String getHomepage(Principal principal, HttpSession session, Model model) {
         com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
@@ -43,6 +47,9 @@ public class HomepageController {
         // Get list of departments, default sorted by rating
         List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
 
+        double credit = walletService.getBalanceByUserId(user.getUserId());
+        session.setAttribute("userCredit", credit);
+
         model.addAttribute("brands", brandList);
         model.addAttribute("brandDepartmentsMap", brandDepartmentsMap);
         model.addAttribute("departments", departmentDTOList);
@@ -54,8 +61,24 @@ public class HomepageController {
     public String getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
                                           @RequestParam("userLongitude") double userLongitude, Model model) {
         Map<DepartmentDTO, Double> departmentDistanceMap = departmentService.getAllDepartmentByNearbyLocation(
-                1, 5, userLatitude, userLongitude, 5);
+                1, 5, userLatitude, userLongitude, 10);
         model.addAttribute("departmentDistanceMap",departmentDistanceMap);
         return "homepage/fragments/list-gym-fr";
+    }
+
+    @GetMapping("/profile/calendar")
+    public String getCalendar(){
+        return "user/calendar";
+    }
+
+
+    @GetMapping("/profile/my-profile")
+    public String showProfile(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("userInfo");
+        List<TransactionDTO> transactionDTOList = transactionService.getListTransactionByUserId(user.getUserId());
+        model.addAttribute("transactionList", transactionDTOList);
+
+        return "user/profile";
     }
 }

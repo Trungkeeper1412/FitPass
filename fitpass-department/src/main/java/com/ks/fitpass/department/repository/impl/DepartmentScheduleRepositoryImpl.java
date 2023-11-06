@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public class DepartmentScheduleRepositoryImpl implements DepartmentScheduleRepository, IRepositoryQuery {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public DepartmentScheduleRepositoryImpl(JdbcTemplate jdbcTemplate) {

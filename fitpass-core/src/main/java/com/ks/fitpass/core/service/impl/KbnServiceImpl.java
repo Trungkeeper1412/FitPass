@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class KbnServiceImpl implements KbnService {
 
-    private KbnRepository kbnRepository;
+    private final KbnRepository kbnRepository;
 
     @Autowired
     public KbnServiceImpl(KbnRepository kbnRepository) {

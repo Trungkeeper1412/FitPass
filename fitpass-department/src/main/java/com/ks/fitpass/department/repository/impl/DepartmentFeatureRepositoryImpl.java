@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public class DepartmentFeatureRepositoryImpl implements DepartmentFeatureRepository, IRepositoryQuery {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public DepartmentFeatureRepositoryImpl(JdbcTemplate jdbcTemplate) {

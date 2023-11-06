@@ -9,6 +9,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /*NAVBAR*/
 .cart-badge {
   position: absolute;
@@ -86,14 +96,14 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Raleway", sans-serif;
-}
+/*h1,*/
+/*h2,*/
+/*h3,*/
+/*h4,*/
+/*h5,*/
+/*h6 {*/
+/*  font-family: "Raleway", sans-serif;*/
+/*}*/
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -1771,7 +1781,7 @@ textarea.form-control {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 ::selection {
@@ -2357,108 +2367,415 @@ a:link {
 }
 
 
-/* User profile */
-.user-profile{
-  /* width: 80%; */
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  padding: 50px 90px 50px 90px;
+/* ===================== User profile ===================== */
+.transaction-history{
+  background-color: white;
+  padding: 20px;
+}
+.user-profile-content {
+  margin-top: 130px;
+}
+.user-profile-content .pagination {
+  display: flex;
+  color: black;
+}
+.user-profile-content .paginate_button .page-item .active{
+  color: black;
 }
 
-
-.profile-info{
-  margin-left: 40px;
-  display: grid;
-  grid-template-rows: 2fr 5fr;
-  border: rgb(255, 255, 255) solid;
-  border-radius: 10px;
-  box-shadow: 10px 10px 5px rgb(225, 225, 225);
-  background-color: rgb(255, 255, 255) ;
-}
-
-.profile-option{
-  display: grid;
-  grid-template-rows: 3fr 4.3fr;
+.account-info {
+  margin-top: 15px;
   height: fit-content;
-  border: #fffbec 1px solid;
   border-radius: 10px;
-  box-shadow: 10px 10px 5px rgb(225, 225, 225);
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  /* font-weight: 500; */
 }
 
-/*  */
-.card-info .form-control-label {
-  font-size: .875rem;
+.menu-option .list-group-item img {
+  width: 18px;
+  margin-right: 5px;
+}
+
+.option-tab.at {
+  color: #000;
+  border: 1px solid rgb(230, 230, 230);
+  border-right: 5px solid rgb(255, 200, 0);
+  background-color: white;
+  font-weight: bold;
+}
+
+.account-balance {
+  padding: 20px;
+  height: fit-content;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+
+.account-balance img {
+  width: 40px;
+}
+
+.ab-title {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.wallet-money {
+  font-size: 20px;
   font-weight: 600;
-  color: #ffffff;
+  float: right;
 }
 
-.card-info input{
-  margin-top: 8px;
-  color: white;
+.wallet-info {
+  margin-top: 15px;
+
 }
 
-.card-info .form-control:focus:-ms-input-placeholder {
-  color: #c4c4c4;
+.user-basic-info .user {
+  margin-left: 10px;
+  font-size: 14px;
 }
 
-.card-info .form-control:focus::-ms-input-placeholder {
-  color: #ffffff;
+.user-basic-info .gmail {
+  font-size: 12px;
 }
 
-.card-info .form-control:focus::placeholder {
-  color: #ffffff;
+.user-basic-info {
+  height: fit-content;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
 }
 
-.card-info .button{
-  background-color: #4CAF50; /* Green */
-  color: white;
-  width: 120px;
-  padding: 15px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+.user-img {
+  border: 3px solid rgb(255, 217, 0);
+  border-radius: 50%;
+}
+
+.user-img img {
+  width: 60px;
+  border-radius: 50%;
+  height: 60px;
+  padding: 5px;
+}
+
+.content-by-option {}
+
+/* css for banking card */
+.banking-card-list label {
+  width: 100%;
+}
+
+.banking-card-list img {
+  width: 30px;
+}
+
+.banking-card-list .card-input-element {
+  display: none;
+}
+
+.banking-card-list .card-input {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.banking-card-list .card-input:hover {
   cursor: pointer;
 }
 
-.card-info  .button4 {
-  margin-top: 30px;
-  background-color: rgb(64, 64, 64);
-  color: rgb(255, 255, 255);
-  border-radius: 15px;
-  border: 1px solid ;
-} /* Gray */
-
-
-.change-avatar{
-  background-color: #fffbec;
-  display: flex;
-  flex-direction: column;
+.banking-card-list .card-input-element:checked+.card-input {
+  box-shadow: 0 0 1px 1px #000000;
+  border: none;
 }
 
+.add-money label {
+  width: 100%;
+}
 
+.add-money img {
+  width: 30px;
+}
 
+.add-money .card-input-element {
+  display: none;
+}
+
+.add-money .card-input {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.add-money .card-input:hover {
+  cursor: pointer;
+}
+
+.add-money .card-input-element:checked+.card-input {
+  box-shadow: 0 0 1px 1px #000000;
+  border: none;
+}
+
+.add-money .panel-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-money-btn {
+  background-color: #000;
+  padding: 11px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.radio-buttons {
+  width: 100%;
+  margin: 0 auto;
+  /* text-align: center; */
+}
+
+.input-money input[type=text] {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  /* margin:8px 0; */
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: .3s;
+}
+
+.input-money input[type=text]:focus {
+  border-color: rgba(255, 200, 0, 0.577);
+  box-shadow: 0 0 8px 0 rgba(255, 200, 0, 0.658);
+}
+
+.credit-trans {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5px;
+  font-size: 14px;
+}
+
+.add-money-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.add-money-modal .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem 2.5rem;
+  width: 30em;
+  border-radius: 0.5rem;
+}
+
+.add-money-modal .close-button {
+  float: right;
+  width: 1.5rem;
+  font-size: 1.2em;
+  line-height: 1;
+  padding: 0 .2em .15em;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: var(--clr-neutral);
+  color: var(--clr-dark);
+  transition: color 0.12s ease-in-out;
+}
+
+.add-money-modal .money {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.add-money-modal .credit {
+  font-size: 18px;
+  font-weight: 600;
+  color: orange;
+}
+
+.add-money-modal .close-button:hover {
+  color: var(--clr-main);
+}
+
+.add-money-modal .btn-option {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-money-modal .confirm {
+  border: none;
+  background-color: rgb(255, 204, 0);
+  border-radius: 5px;
+  font-weight: 500;
+  padding: 8px 15px;
+}
+
+.add-money-modal .cancel {
+  border: 2px solid rgb(255, 204, 0);
+  background-color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-left: 30px;
+  padding: 8px 30px;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+/* Css  for profile tab */
+.user-profile{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.user-edit-profile input{
+  width:100%;
+  border:2px solid #e1e1e1;
+  border-radius:8px;
+  margin:2px 0;
+  outline:none;
+  padding:8px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+.user-edit-profile .input-title{
+  font-weight: 600;
+  font-size: 14px;
+}
+.user-edit-profile input:focus{
+  border-color:rgb(223, 223, 223);
+  box-shadow:0 0 8px 0 rgb(193, 193, 193);
+}
+input[type="radio"]:checked{
+  accent-color: rgb(0, 0, 0);
+}
+.user-edit-profile input[type='radio']:focus{
+  border-color:none;
+  background-color: black;
+  box-shadow:none;
+}
+.user-change-ava{
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+}
+.change-ava-btn{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.user-change-ava .user-img{
+  border: 3px solid rgb(255, 217, 0);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+.user-change-ava .user-img img{
+  border-radius: 50%;
+  width: 115px;
+  height: 115px;
+  padding: 5px;
+}
+.user-edit-profile .save-changes{
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 12px;
+  width: fit-content;
+  color: white;
+  background-color: black;
+  border-radius: 15px;
+}
+.transaction-history .paginate_button .page-item.active{
+  background-color: #000;
+}
+.dataTables_length label{
+  display: flex;
+  column-gap: 3px;
+  align-items: center;
+}
+.dataTables_length .form-select{
+  width: fit-content;
+}
+.dataTables_filter label{
+  display: flex;
+  align-items: center;
+}
+.dataTables_filter label input{
+  margin-left: 5px;
+  width: 250px;
+}
+.dataTables_filter label input:focus{
+  border-color:rgb(223, 223, 223);
+  background-color: white;
+  box-shadow:0 0 8px 0 rgb(193, 193, 193);
+}
+.change-pw{
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+}
+.change-pw-icon img{
+  width: 120px;
+  height: 120px;
+  margin: auto;
+}
 /* Button option in User profile */
-.option .active{
+.option .active {
   background-color: #000000;
 }
 
-.list-group button{
+.list-group button {
   font-weight: 500;
 }
-
-.option{
+.list-group button {
+  font-weight: 500;
+}
+.option {
   margin-top: 20px;
   width: 100%;
 }
 
-.title{
-  background-color: rgb(255, 244, 221); /* For browsers that do not support gradients */
+.title {
+  background-color: rgb(255, 244, 221);
+  /* For browsers that do not support gradients */
   background-image: linear-gradient(rgb(255, 235, 161), rgb(255, 255, 255));
 }
 
-.hr{
+.hr {
   border: 2px solid rgb(255, 200, 0);
 }
 
@@ -2622,13 +2939,13 @@ input:checked + .toggle-slider:before {
 
 .about-our-gym-1 .modal{
   height: 100%;
-  width: 100%;
+  /*width: 100%;*/
   text-align: center;
 }
 
 .about-our-gym-1{
   /* background-color: #18d26e; */
-  width: 100%;
+  /*width: 100%;*/
 }
 
 .gym-name-cover{
@@ -3678,7 +3995,8 @@ section {
   position: relative;
 }
 
-.gym-brand-content .prev, .next {
+.gym-brand-content .prev,
+.gym-brand-content .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -3909,7 +4227,10 @@ section {
 }
 
 .body-gym-brand-details .num-of-rating{
-  font-size: 14px;
+  font-size: 12px;
+  margin-left: 8px;
+  color: #555;
+  font-style: italic;
 }
 
 @media screen and (max-width: 600px) {
@@ -3956,14 +4277,15 @@ section {
   background-color: rgb(238, 238, 238);;
 }
 .tabs {
+  cursor: pointer;
   display: block;
   display: -webkit-flex;
-  display: -moz-flex;
-  display: flex;
+  /*display: -moz-flex;*/
+  /*display: flex;*/
   justify-content: center;
-  -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
-  flex-wrap: wrap;
+  /*-webkit-flex-wrap: wrap;*/
+  /*-moz-flex-wrap: wrap;*/
+  /*flex-wrap: wrap;*/
   margin-top: 30px;
   overflow: hidden;
 }
@@ -3983,7 +4305,6 @@ section {
 .tabs [class^="tab"] [type="radio"],
 .tabs [class*=" tab"] [type="radio"] {
   border-bottom: 4px solid rgba(239, 237, 239, 0.5);
-  cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -4026,7 +4347,7 @@ section {
 }
 
 .tabs .tab-2 {
-  width: 50%;
+  width: 100%;
 }
 
 .tabs .tab-2 [type="radio"]+div {
@@ -4069,7 +4390,7 @@ section {
 .list-of-brand .brand-image{
   width: 50%;
   min-height: 250px;
-  /* height: 42%; */
+  object-fit: cover;
   padding: 20px 20px 20px 20px;
 }
 .list-of-brand .brand-info{
@@ -4214,7 +4535,7 @@ section {
   color: orange;
 }
 
-.list-of-gym .gym-dropdown{
+.gym-dropdown{
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -4255,11 +4576,11 @@ section {
   min-height: 80px;
 }
 .list-of-gym .card-text {
-  min-height: 70px;
+  /*min-height: 70px;*/
 }
 .review-section {
-  padding-top: 10px;
-  margin-bottom: -10px;
+  /*padding-top: 10px;*/
+  /*margin-bottom: -10px;*/
 }
 .credit {
   color: orange;

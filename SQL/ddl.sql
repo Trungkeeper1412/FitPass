@@ -1,7 +1,7 @@
 -- Drop queries to remove existing tables (if they exist)
+DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS user_feedback;
 DROP TABLE IF EXISTS item_inventory;
-DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS notification;
 DROP TABLE IF EXISTS order_plan_detail;
 DROP TABLE IF EXISTS `order`;
@@ -85,9 +85,7 @@ CREATE TABLE IF NOT EXISTS brand (
     contact_email				VARCHAR(50) NOT NULL,
     brand_status_key   		    INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
-
     );
-
 
 CREATE TABLE IF NOT EXISTS brand_amenities  (
                                                 amenitie_id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -205,6 +203,7 @@ CREATE TABLE IF NOT EXISTS transfer (
 CREATE TABLE IF NOT EXISTS `transaction` (
                                              transaction_id   INT AUTO_INCREMENT PRIMARY KEY,
                                              wallet_id        INT NOT NULL,
+                                             status           VARCHAR(30) NOT NULL,
                                              amount           DECIMAL(10, 2) NOT NULL,
     transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (wallet_id) REFERENCES wallet(wallet_id)
@@ -293,9 +292,11 @@ CREATE TABLE IF NOT EXISTS check_in_history (
                                                 check_out_time DATETIME NULL,
                                                 total_credit DECIMAL(10,2) NULL,
     emp_checkin_id INT NOT NULL,
+    feedback_id INT NULL,
     CONSTRAINT check_in_history_pk PRIMARY KEY (check_in_history_id),
     CONSTRAINT check_in_history_FK FOREIGN KEY (order_detail_id) REFERENCES fitpass.order_plan_detail(order_detail_id),
-    CONSTRAINT check_in_history_FK_1 FOREIGN KEY (emp_checkin_id) REFERENCES fitpass.`user`(user_id)
+    CONSTRAINT check_in_history_FK_1 FOREIGN KEY (emp_checkin_id) REFERENCES fitpass.`user`(user_id),
+    CONSTRAINT check_in_history_FK_2 FOREIGN KEY (feedback_id) REFERENCES fitpass.user_feedback(feedback_id)
     );
 
 

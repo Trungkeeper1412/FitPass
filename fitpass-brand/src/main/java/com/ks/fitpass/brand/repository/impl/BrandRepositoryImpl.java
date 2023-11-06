@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public BrandRepositoryImpl(JdbcTemplate jdbcTemplate) {

@@ -44,7 +44,7 @@
 </div>
 <div class="gym-container container">
     <div class="about-our-gym row justify-content-center">
-        <div class="about-our-gym-1">
+        <div class="about-our-gym-1 col-md-6">
             <h3 style="color: black;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
             <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
             <div class="gym-intro"  th:text="${department.departmentDescription}"></div>
@@ -91,6 +91,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="blank col-md-6 mt-4" style="background-color: white; border-radius: 10px;">
+
         </div>
     </div>
 
@@ -154,16 +157,6 @@
         <div class="scroll-plans">
             <div th:each="gymPlan : ${gymPlans}" class="child col-lg-3 col-md-3" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
-
-<!--                        <a  th:href="@{/cart/add(gymPlanId=${gymPlan.getGymPlanId()}, quantity=1,departmentId=${department.getDepartmentId()})}" class="btn btn-primary">-->
-<!--                            Add to cart-->
-<!--                        </a>-->
-
-<!--                    <th:block th:if="${gymPlan.getGymPlanType().equalsIgnoreCase('Gói theo giờ')}">
-                        <a  th:href="@{/item/add(gymPlanId=${gymPlan.getGymPlanId()})}" class="btn btn-primary">
-                            Add to inventory
-                        </a>
-                    </th:block>-->
                     <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
                     <div style="" class="gym-plan-price">
                         <div style="font-size: xxx-large; font-weight: 700">
@@ -173,8 +166,6 @@
                         <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
-<!--                    <hr class="line">-->
-<!--                    <div style="background-color: black; height: 2px; width: fit-content"></div>-->
                     <div style="" class="gym-duration">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
@@ -183,9 +174,6 @@
                     <div style="" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
                     <div style="" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
-<!--                <button type="button" >-->
-<!--                    Đăng ký ngay-->
-<!--                </button>-->
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
 
                         Thêm vào giỏ hàng
@@ -220,8 +208,6 @@
 
     <h3 style="color: black; margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-    <!-- <div style="color: white; margin-top: 20px;">Chúng tôi đã giúp hàng trăm người như bạn, và tất nhiên nói có sách mách có chứng! Ẩn sau mỗi feedback dưới đây là những câu chuyện dài về sự nỗ lực để thay đổi bản thân, trở thành phiên bản tốt hơn, mạnh mẽ hơn, kỉ luật hơn của chính mình. Họ cũng đã từng gặp rất nhiều khó khăn khi tự giảm cân trong thời gian dài.
-      Hãy liên hệ ngay để trở thành transform tiếp theo của chúng tôi!</div> -->
     <div class="rating-feedback container mx-auto">
         <div class="rating-option row row-cols-6">
             <div class="rating-point col-lg-0.5 col-md-1" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>

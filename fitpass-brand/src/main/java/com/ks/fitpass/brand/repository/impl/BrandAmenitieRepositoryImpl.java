@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public class BrandAmenitieRepositoryImpl implements BrandAmenitieRepository, IRepositoryQuery {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public BrandAmenitieRepositoryImpl(JdbcTemplate jdbcTemplate) {

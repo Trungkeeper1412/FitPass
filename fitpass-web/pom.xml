@@ -12,7 +12,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>fitpass-web</name>
     <description>fitpass-web</description>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,6 +39,18 @@
         </dependency>
         <dependency>
             <groupId>com.ks</groupId>
+            <artifactId>fitpass-wallet</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ks</groupId>
+            <artifactId>fitpass-notification</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ks</groupId>
             <artifactId>fitpass-department</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
@@ -59,6 +70,12 @@
         <dependency>
             <groupId>com.ks</groupId>
             <artifactId>fitpass-brand</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ks</groupId>
+            <artifactId>fitpass-calendar</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -2,12 +2,10 @@ package com.ks.fitpass.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ks.fitpass.checkInHistory.repository.CheckInHistoryRepository;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.employee.dto.ConfirmCheckOutDTO;
 import com.ks.fitpass.employee.dto.DataSendCheckOutFlexibleDTO;
-import com.ks.fitpass.notification.dto.UserReceiveMessageDTO;
 import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.service.NotificationService;
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;

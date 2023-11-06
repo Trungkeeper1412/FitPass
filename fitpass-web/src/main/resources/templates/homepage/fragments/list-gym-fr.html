@@ -2,6 +2,7 @@
     <div class="row row-gym">
         <div class="col-md-6 col-lg-6 col-xl-4 mb-4" th:each="entry : ${departmentDistanceMap}">
             <div class="card">
+                <a th:href="@{/department/department-detail/{department_id}(department_id=${entry.key.departmentId})}">
                 <div class="distance" style="border-radius: 20px 20px 0 0;background-color: rgb(214, 214, 214);width: 100%;text-align: center;font-size: 18px;color: rgb(0, 0, 0);padding: 10px;font-weight: 600;">
                     <span><img src="https://cdn-icons-png.flaticon.com/128/5774/5774388.png" style="width: 22px;"></span>
                     <span>Cách bạn <th:block th:text="${#numbers.formatDecimal(entry.value,1,2,'COMMA')}"></th:block> km</span>
@@ -12,7 +13,7 @@
                     <p class="card-text"><i class="bi bi-geo-alt"></i>
                         <th:block th:text="${entry.key.departmentAddress}"></th:block>
                     </p>
-                    <p class="phone-number" style="margin-top: -50px"><i class="bi bi-telephone"></i>
+                    <p class="phone-number"><i class="bi bi-telephone"></i>
                         <th:block th:text="${entry.key.departmentPhone}"></th:block>
                     </p>
                     <div class="d-flex justify-content-between">
@@ -22,23 +23,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="review-section">
+                    <div class="review-section mb-3">
                         Đánh giá:
                         <div class="rating" th:attr="data-star=${entry.key.rating}"></div>
                     </div>
 <!--                    <div class="justify-content-between">-->
                         <div class="row gym-price justify-content-center">
                             <div class="col">
-                                <h6>Giá Gói linh hoạt:</h6>
-                                <h5 class="text-money">10 <span class="credit" style="font-size: 14px;">Credit/Giờ</span></h5>
-                            </div>
-                            <div class="col">
-                                <h6>Giá Gói cố định:</h6>
+                                <div class="mb-3" >Giá gói:</div>
                                 <h5 class="text-money">100-500 <span class="credit" style="font-size: 14px;">Credit</span></h5>
                             </div>
                         </div>
 <!--                    </div>-->
                 </div>
+                </a>
             </div>
         </div>
     </div>

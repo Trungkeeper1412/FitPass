@@ -27,7 +27,7 @@ public class ItemInventoryController {
     public String addToInventory(@RequestParam int gymPlanId, HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
         if(user == null) {
-
+            return "redirect:/error";
         }
         ItemInventory itemInventory = new ItemInventory();
         itemInventory.setUserId(user.getUserId());
@@ -35,8 +35,6 @@ public class ItemInventoryController {
         itemInventory.setPlanActiveTime(Timestamp.valueOf("2023-10-17 00:00:00"));
         itemInventory.setItem_status_key(1);
         itemInventory.setPlanExpiredTime(Timestamp.valueOf("2023-10-31 23:59:59"));
-
-        boolean check = itemInventoryService.checkDuplicateItemInventory(user.getUserId(), gymPlanId);
 
         if(!itemInventoryService.checkDuplicateItemInventory(user.getUserId(), gymPlanId)) {
             itemInventoryService.insert(itemInventory);

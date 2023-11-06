@@ -82,6 +82,7 @@
     <h4 class="row fw-bold mt-5 brand-dept-title" id="club">CÁC CƠ SỞ</h4>
     <div class="list-gym-department container">
         <div class="department" th:each="dept : ${departments}">
+            <a th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
             <div class="dept-img"
                  th:style="'background-image: url(\'' + ${dept.getDepartmentWallpaperUrl()} + '\'); background-size: cover;'">
             </div>
@@ -93,15 +94,18 @@
                     <span>
                         <div class="rating" th:attr="data-star=${dept.getRating()}"></div>
                     </span>
+                    <i class="num-of-rating ">700 đánh giá</i>
                 </div>
-                <i class="num-of-rating">700 lượt đánh giá</i>
             </div>
             <div class="dept-description">
                 <div class="service-type" th:each="feature: ${departmentFeatures}" th:if="${feature.getGymDepartmentId() == dept.getDepartmentId()}">
                     <div class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}"></div>
+
                     <div class="service-name" th:text="${feature.feature.getFeatureName()}">Khu để xe</div>
+
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
@@ -111,9 +115,10 @@
     <div class="rating-feedback container mx-auto">
         <div class="rating-option row row-cols-6">
             <div class="rating-point col-lg-0.5 col-md-1">
-                <span th:text="${brand.getRating()}">4/5</span>
+                <span th:text="${brand.getRating()}">4/5</span> <span>/5</span>
                 <span>
             <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
+
           </span>
             </div>
             <button style="margin-left: 40px;" type="button" class="btn btn-warning col-lg-1 col-md-2">

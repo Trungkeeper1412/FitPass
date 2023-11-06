@@ -6,7 +6,7 @@ public enum PageEnum {
     XXX_SECOND_PAGE(12),
     XXX_THIRD_PAGE(13);
 
-    private int code;
+    private final int code;
 
     PageEnum(int code) {
         this.code = code;

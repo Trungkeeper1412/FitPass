@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public CheckInHistoryRepositoryImpl(JdbcTemplate jdbcTemplate) {

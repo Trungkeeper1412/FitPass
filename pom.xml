@@ -26,9 +26,12 @@
     <modules>
         <module>fitpass-core</module>
         <module>fitpass-web</module>
+        <module>fitpass-wallet</module>
+        <module>fitpass-notification</module>
         <module>fitpass-brand</module>
         <module>fitpass-department</module>
         <module>fitpass-order</module>
+        <module>fitpass-calendar</module>
         <module>fitpass-employee</module>
     </modules>
 
@@ -85,6 +88,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>24.1.0</version>
         </dependency>
     </dependencies>
 </project>

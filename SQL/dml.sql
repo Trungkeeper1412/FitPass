@@ -10,7 +10,7 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
                          date_of_birth,
                          gender, image_url)
 VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St',
-        '1990-01-01', 'Male','/images.system/v.png');
+        '1990-01-01', 'Male','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
@@ -20,7 +20,7 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
                          date_of_birth,
                          gender, image_url)
 VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '1234567890', '123 Main St',
-        '1990-01-01', 'Female','/images.system/v.png');
+        '1990-01-01', 'Female','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (2, 'gymowner', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 2);
@@ -30,7 +30,7 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
                          date_of_birth,
                          gender, image_url)
 VALUES (3, 'Nguyen Van Bao', 'Linh', 'cuongbulu@gmail.com', '0987654321', '123 Main St',
-        '2001-01-01', 'Male','/images.system/v.png');
+        '2001-01-01', 'Male','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (3, 'employee', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 3);
@@ -40,7 +40,7 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
                          date_of_birth,
                          gender, image_url)
 VALUES (4, 'Le Dinh', 'Tuan', 'tuana1@gmail.com', '0987654321', '123 Main St',
-        '2001-01-01', 'Male','/images.system/v.png');
+        '2001-01-01', 'Male','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (4, 'tuanld', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 4);
@@ -49,7 +49,7 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
                          date_of_birth,
                          gender, image_url)
 VALUES (5, 'Dinh', 'Tuan Anh', 'tuananh@gmail.com', '0987654321', '123 Main St',
-        '1995-01-01', 'Male','/images.system/v.png');
+        '1995-01-01', 'Male','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (5, 'anhdt', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 5);
