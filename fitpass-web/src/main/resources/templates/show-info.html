@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/user-homepage-assets/assets/js/websocket.js}"></script>
 </head>
 
 <body>
@@ -44,10 +45,27 @@ Authenticated user roles: <span sec:authentication="principal.authorities"></spa
 </table>
 
 <div class="container">
-    <div class="col-md-12">
-        <button id="send" type="button">Click</button>
-        <label for="message"></label>
-        <input type="text" id="message" placeholder="Input here"/>
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <input type="text" id="message" class="form-control" placeholder="Enter your message here...">
+                </div>
+                <button id="send" class="btn btn-default" type="button">Send</button>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="private-message">Private Message</label>
+                    <input type="text" id="private-message" class="form-control" placeholder="Enter your message here...">
+                </div>
+                <button id="send-private" class="btn btn-default" type="button">Send Private Message</button>
+            </form>
+        </div>
     </div>
     <div class="col-md-12">
         <table id="message-history" class="table table-striped">
@@ -69,48 +87,4 @@ Authenticated user roles: <span sec:authentication="principal.authorities"></spa
     </div>
 </div>
 </body>
-
-<script>
-    let stompClient = null;
-    $(document).ready(function (){
-        connect();
-
-        $("#send").click(function (){
-            sendMessage();
-        });
-    });
-
-    function connect(){
-        const socket = new SockJS('/ws');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            console.log("Connected to " + frame);
-            stompClient.subscribe('/all/messages', function (message) {
-                showMessage(JSON.parse(message.body).content);
-            });
-        });
-    }
-
-    function sendMessage() {
-        console.log("Sending message")
-        const messageContent = $("#message").val();
-
-        $.ajax({
-            url: "/send-message",
-            type: "POST",
-            data: JSON.stringify({ "messageContent": messageContent }),
-            contentType: "application/json",
-            success: function(response) {
-                console.log("Message sent successfully");
-            },
-            error: function(error) {
-                console.error("Error sending message:", error);
-            }
-        });
-    }
-
-    function showMessage(message) {
-        $("#messages").append("<tr><td>" + message + "</td></tr>");
-    }
-</script>
 </html>

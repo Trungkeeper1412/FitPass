@@ -1,8 +1,10 @@
 package com.ks.fitpass.notification.service.impl;
 
+import com.ks.fitpass.notification.entity.ResponseMessage;
 import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.repository.NotificationRepository;
 import com.ks.fitpass.notification.service.NotificationService;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +12,25 @@ import java.util.List;
 @Service
 public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
-    public NotificationServiceImpl(NotificationRepository notificationRepository) {
+    public NotificationServiceImpl(NotificationRepository notificationRepository, SimpMessagingTemplate simpMessagingTemplate) {
         this.notificationRepository = notificationRepository;
+        this.simpMessagingTemplate = simpMessagingTemplate;
+    }
+
+    @Override
+    public void sendPrivateNotification(final String userId) {
+        ResponseMessage message = new ResponseMessage("Private Notification");
+
+        simpMessagingTemplate.convertAndSendToUser(userId,"/all/private-notifications", message);
+    }
+
+    @Override
+    public void sendGlobalNotification() {
+        ResponseMessage message = new ResponseMessage("Global Notification");
+
+        simpMessagingTemplate.convertAndSend("/all/global-notifications", message);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.ks.fitpass.core.entity;
+package com.ks.fitpass.notification.entity;
 
 import lombok.*;
 

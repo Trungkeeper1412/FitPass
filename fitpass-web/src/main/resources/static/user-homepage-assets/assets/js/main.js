@@ -8,8 +8,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Đây là nơi bạn có thể gọi hàm của bạn
     updateQuantityCart();
-    checkConfirmCheckIn();
     // Gọi hàm check thông báo confirm
+    checkConfirmCheckIn();
     checkConfirmCheckOut();
     checkNotificationEmployee();
 });

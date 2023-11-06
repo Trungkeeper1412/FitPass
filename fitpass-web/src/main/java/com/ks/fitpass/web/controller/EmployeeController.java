@@ -115,9 +115,11 @@ public class EmployeeController {
                                                           @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel){
         // Nếu người dùng không nhấn cancel thì check in
         if(cancel.equals("no")) {
-            int updateResult = employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()), null, 0, userIdSend);
+            int updateResult = employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
+                    null, 0, userIdSend);
             // Thay đổi status thành đang tập để chuyển sang tab check in
             int updateOrderDetailUseStatus = orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
+
             // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
             Notification notification = new Notification();
             notification.setUserIdSend(userIdReceive);
@@ -146,7 +148,6 @@ public class EmployeeController {
             int insertStatus = notificationService.insertNotification(notification);
         }
         // Kiểm tra xem nếu người dùng đã check in trong ngày hôm nay thì không trừ duration
-
         // Ngược lại trừ duration trong order detail
         return ResponseEntity.ok(1);
     }
