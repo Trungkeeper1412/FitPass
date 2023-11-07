@@ -3026,15 +3026,8 @@ input:checked + .toggle-slider:before {
 .gym-service-logo i{
   font-size:30px;
 }
-.service-name{
+.list-gym-department .service-name{
   display: none;
-  /*height: 50px;*/
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  /*font-weight: 400;*/
-  /*font-size: 12px;*/
-  /*color: rgb(0, 0, 0);*/
 }
 .service-row{
   display: flex;
@@ -3928,49 +3921,46 @@ section {
 
 .scroll-services {
   position: relative;
-  width: 100%;
-  padding: 30px 0px;
-  margin-bottom: 10px;
+  width: 94%;
+  padding:  20px 0px 0px 0px;
+  margin: auto;
+  margin-left: 30px;
+  /*margin-right: 30px;*/
+  align-items: center;
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap:nowrap;
+  overflow-x: hidden;
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 
-.scroll-services::-webkit-scrollbar-track {
-  background-color: #ffffff;
-}
-
-.scroll-services::-webkit-scrollbar {
-  width: 10px;
-  height: 4px;
-  background-color: #ffffff;
-}
-
-.scroll-services::-webkit-scrollbar-thumb {
-  background-color: #c6c6c6;
-  border: 2px solid #c6c6c6;
-}
 
 .scroll-services .child {
   height: 480px;
-  margin: 10px;
+  margin-right: 20px;
   padding: 0;
   color: #000000;
   background-color: #ffffff;
   overflow: hidden;
+  position: relative;
 }
 
-.scroll-services .left {
+.list-service-wrapper .left {
   transform: translateY(-50%);
+  position: absolute;
+  left: 0;
   border: none;
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
-.scroll-services .right {
+.list-service-wrapper .right {
+  margin-left: 10px;
   transform: translateY(-50%);
-  border: none
+  position: absolute;
+  right: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.27);
 }
 
 .brand-service-img{
@@ -3979,7 +3969,13 @@ section {
   margin-left: 0;
 }
 .scroll-services .service-name{
-  font-weight: 600;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  font-weight: 700;
   color: orange;
 }
 .scroll-services .service-descript{
