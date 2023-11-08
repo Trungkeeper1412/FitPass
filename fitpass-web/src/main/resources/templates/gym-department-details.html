@@ -93,7 +93,15 @@
             </div>
         </div>
         <div class="blank col-md-6 mt-4" style="background-color: white; border-radius: 10px;">
-
+            <iframe
+                    width="100%"
+                    height="100%"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDn-1MGDGwJBHRvtO_asu53bAF1IzdJ9Bs&q='+${department.getLatitude()}+','+${department.getLongitude()}}">
+            </iframe>
         </div>
     </div>
 
@@ -208,7 +216,7 @@
 
     <h3 style="color: black; margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-    <div class="rating-feedback container mx-auto">
+    <div class="rating-feedback container mx-auto" id="ratingfeedback">
         <div class="rating-option row row-cols-6">
             <div class="rating-point col-lg-0.5 col-md-1" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
             <button type="button" class="btn btn-warning col-lg-1 col-md-2" style="margin-left: 70px;">
@@ -241,20 +249,18 @@
                 <div  th:text="${feedback.comments}"></div>
             </div>
         </div>
-        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.total == 7}">
+        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.getTotal() > 7}">
             <div class="pagination col justify-content-center">
-                <a class="prev page-numbers" href="javascript:;">prev</a>
-                <span aria-current="page" class="page-numbers current">1</span>
-                <a class="page-numbers" href="javascript:;">2</a>
-                <a class="page-numbers" href="javascript:;">3</a>
-                <a class="page-numbers" href="javascript:;">4</a>
-                <a class="page-numbers" href="javascript:;">5</a>
-                <a class="page-numbers" href="javascript:;">6</a>
-                <a class="page-numbers" href="javascript:;">7</a>
-                <a class="page-numbers" href="javascript:;">8</a>
-                <a class="page-numbers" href="javascript:;">9</a>
-                <a class="page-numbers" href="javascript:;">10</a>
-                <a class="next page-numbers" href="javascript:;">next</a>
+                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"
+                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>
+<!--                <span aria-current="page" class="page-numbers current" th:text="${currentPage}"></span>-->
+                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"
+                       th:classappend="${pageNumber == currentPage}? 'current' : ''"
+                       th:text="${pageNumber}"></a>
+                </span>
+                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"
+                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>
             </div>
         </div>
     </div>

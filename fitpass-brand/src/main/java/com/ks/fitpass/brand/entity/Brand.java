@@ -34,4 +34,6 @@ public class Brand {
 
     private BrandStatus brandStatus;
 
+    private int numberOfOrderDetailSale;
+
 }

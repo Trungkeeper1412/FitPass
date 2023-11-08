@@ -35,7 +35,8 @@ public class DepartmentDTO {
     private int total1;
     private double avgRating;
 
-
+    private int minPrice;
+    private int maxPrice;
 }
 
 

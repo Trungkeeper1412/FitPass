@@ -2,6 +2,7 @@ package com.ks.fitpass.department.repository.impl;
 
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.UserFeedback;
+import com.ks.fitpass.department.mapper.DepartmentHomePageMapper;
 import com.ks.fitpass.department.mapper.DepartmentMapper;
 import com.ks.fitpass.department.mapper.UserFeedbackMapper;
 import com.ks.fitpass.department.repository.DepartmentRepository;
@@ -28,8 +29,31 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
-    public List<Department> getAllByStatus(int status) throws DataAccessException {
-        return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_STATUS, new DepartmentMapper(), status);
+    public List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating) throws DataAccessException {
+        int offset = (page - 1) * size;
+        String sql = GET_ALL_DEPARTMENT_BY_STATUS;
+
+        if(sortRating != null && !sortRating.isEmpty()) {
+            sql +=  " AND d.rating >  " + sortRating + " \n";
+        }
+
+        if(city != null && !city.isEmpty()) {
+            sql +=  " AND d.city =  '"+city+"'\n";
+        }
+
+        if(sortPrice != null && !sortPrice.isEmpty()) {
+            if(sortPrice.equals("lowToHigh")) {
+                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc \n" +
+                        " ORDER BY COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc \n";
+            } else {
+                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc \n" +
+                        " ORDER BY COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc \n";
+            }
+        }
+
+        sql += " LIMIT "+size+" OFFSET " + offset;
+
+        return jdbcTemplate.query(sql, new DepartmentHomePageMapper(), status);
     }
     @Override
     public List<Department> getAllByTopRating(int status) throws DataAccessException {
@@ -69,6 +93,12 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     @Override
     public List<UserFeedback> getDepartmentFeedback(int departmentId) {
         return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK, new UserFeedbackMapper(), departmentId);
+    }
+
+    @Override
+    public List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK_PAGNITION, new UserFeedbackMapper(), departmentId, size, offset);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface DepartmentRepository {
 
     Department getByUserId(int userId) throws DataAccessException;
 
-    List<Department> getAllByStatus(int status) throws DataAccessException;
+    List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating) throws DataAccessException;
 
     List<Department> getAllByTopRating(int status) throws DataAccessException;
 
@@ -27,4 +27,5 @@ public interface DepartmentRepository {
 
     List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException;
 
+    List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size);
 }

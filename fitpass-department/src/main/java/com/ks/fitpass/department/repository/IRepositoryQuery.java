@@ -15,17 +15,17 @@ public interface IRepositoryQuery {
                      d.latitude,
                      d.longitude,
                      d.rating,
-
                      d.capacity,
                      d.area,
-
                      d.gym_department_status_key,
-                     kbn_department_status.mst_kbn_value AS gym_department_status_name
+                     kbn_department_status.mst_kbn_value AS gym_department_status_name,
+                     COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) AS max_price,
+                     COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) AS min_price
                  FROM gym_department d
                  LEFT JOIN mst_kbn kbn_department_status
                      ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
                      AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
-                     WHERE d.gym_department_status_key = ?
+                 WHERE d.gym_department_status_key = ?
             """;
     String GET_ALL_DEPARTMENT_ORDER_BY_RATING = """
                  SELECT
@@ -303,6 +303,25 @@ public interface IRepositoryQuery {
         INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
     WHERE
         uf.department_id = ?
+""";
+    String GET_DEPARTMENT_FEEDBACK_PAGNITION = """
+    SELECT
+        uf.feedback_id,
+        uf.user_id,
+        ud.first_name,
+        ud.last_name,
+        uf.department_id,
+        uf.rating,
+        uf.comments,
+        uf.feedback_time,
+        uf.feedback_status
+    FROM
+        user_feedback uf
+        INNER JOIN `user` u ON uf.user_id = u.user_id
+        INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+    WHERE
+        uf.department_id = ?
+    LIMIT ? OFFSET ?
 """;
 
     String GET_DEPARTMENT_FEATURES = """

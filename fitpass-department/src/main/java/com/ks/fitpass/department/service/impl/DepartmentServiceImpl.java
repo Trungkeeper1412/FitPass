@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,14 +39,16 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .rating(department.getRating())
                 .capacity(department.getCapacity())
                 .area(department.getArea())
-
+                .maxPrice(department.getMaxPrice())
+                .minPrice(department.getMinPrice())
                 .build();
     }
 
     @Override
     public List<DepartmentDTO> getAllDepartmentForHome(int pageIndex, int pageSize) throws DataAccessException {
         // to do : implement paging
-        List<Department> departments = departmentRepository.getAllByStatus(1);
+        //List<Department> departments = departmentRepository.getAllByStatus(1);
+        List<Department> departments = Collections.emptyList();
         return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
 
     }
@@ -68,11 +67,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
+    public Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int page, int size,
                                                                        double userLatitude, double userLongitude,
-                                                                       double radiusInKm) {
+                                                                       double radiusInKm, String city, String sortPrice, String sortRating) {
         // To do: Implement paging
-        List<Department> allDepartments = departmentRepository.getAllByStatus(1);
+        List<Department> allDepartments = departmentRepository.getAllByStatus(1, page, size, city, sortPrice, sortRating);
 
         // Create a map to associate DepartmentDTO with its distance
         Map<DepartmentDTO, Double> departmentDistanceMap = new LinkedHashMap<>();
@@ -117,10 +116,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return 6371 * c;
     }
 
-    @Override
-    public List<Department> getAllByStatus(int status) throws DataAccessException {
-        return departmentRepository.getAllByStatus(status);
-    }
+//    @Override
+//    public List<Department> getAllByStatus(int status) throws DataAccessException {
+//        return departmentRepository.getAllByStatus(status);
+//    }
 
     @Override
     public Department getOne(int id) throws DataAccessException {
@@ -158,8 +157,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<UserFeedback> getDepartmentFeedback(int departmentId) {
-        return departmentRepository.getDepartmentFeedback(departmentId);
+    public List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size) {
+        return departmentRepository.getDepartmentFeedbackPagnition(departmentId, page, size);
     }
 
     @Override

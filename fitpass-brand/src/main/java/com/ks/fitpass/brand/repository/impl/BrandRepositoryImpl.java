@@ -1,6 +1,7 @@
 package com.ks.fitpass.brand.repository.impl;
 
 import com.ks.fitpass.brand.entity.Brand;
+import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;
 import com.ks.fitpass.brand.repository.IRepositoryQuery;
 import com.ks.fitpass.brand.repository.BrandRepository;
 import com.ks.fitpass.brand.mapper.BrandMapper;
@@ -24,8 +25,31 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
 
 
     @Override
-    public List<Brand> getAllByStatus(int status) throws DataAccessException {
-        return jdbcTemplate.query(GET_ALL_BRAND_BY_STATUS, new BrandMapper(), status);
+    public List<Brand> getAllByStatus(int status, int page, int size, String sortPrice, String sortRating) throws DataAccessException {
+        int offset = (page - 1) * size;
+        String sql = GET_ALL_BRAND_BY_STATUS;
+
+        if(sortRating != null && !sortRating.isEmpty()) {
+            sql +=  " AND b.rating >  " + sortRating + " \n";
+        }
+
+        if(sortPrice != null && !sortPrice.isEmpty()) {
+            if(sortPrice.equals("lowToHigh")) {
+                sql += " ORDER BY (SELECT COUNT(*)\n" +
+                        "                      FROM order_plan_detail opd\n" +
+                        "                      JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id\n" +
+                        "                      WHERE gd.brand_id = b.brand_id) asc \n";
+            } else {
+                sql += " ORDER BY (SELECT COUNT(*)\n" +
+                        "                      FROM order_plan_detail opd\n" +
+                        "                      JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id\n" +
+                        "                      WHERE gd.brand_id = b.brand_id) desc \n";
+            }
+        }
+
+        sql += "LIMIT "+size+" OFFSET " + offset;
+
+        return jdbcTemplate.query(sql, new BrandWithTotalOrderMapper(), status);
     }
 
     @Override
@@ -36,5 +60,16 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     @Override
     public Brand getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(GET_BRAND_BY_ID, new BrandMapper(), id);
+    }
+
+    @Override
+    public int countAllBrands(int status, String sortRating) {
+        String sql = COUNT_ALL_BRAND_BY_STATUS;
+
+        if(sortRating != null && !sortRating.isEmpty()) {
+            sql +=  " AND b.rating >  " + sortRating + " \n";
+        }
+
+        return jdbcTemplate.queryForObject(sql, Integer.class, status);
     }
 }

@@ -18,8 +18,8 @@ public class BrandServiceImpl implements BrandService{
     }
 
     @Override
-    public List<Brand> getAllByStatus(int status) throws DataAccessException {
-        return brandRepository.getAllByStatus(status);
+    public List<Brand> getAllByStatus(int status, int page, int size, String sortPrice, String sortRating) throws DataAccessException {
+        return brandRepository.getAllByStatus(status, page, size, sortPrice, sortRating);
     }
 
     @Override
@@ -32,5 +32,10 @@ public class BrandServiceImpl implements BrandService{
         Brand brand =  brandRepository.getOne(id);
         return brand;
 
+    }
+
+    @Override
+    public int countAllBrands(int status, String sortRating) {
+        return brandRepository.countAllBrands(status, sortRating);
     }
 }

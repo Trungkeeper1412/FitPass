@@ -105,7 +105,12 @@
                                                     <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
                                                 </th:block>
                                                 <th:block th:if="${item.getItemStatusKey() == 1}">
-                                                    <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
+                                                    <th:block th:if="${item.getPrice()} > 0">
+                                                        <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
+                                                    </th:block>
+                                                    <th:block th:if="${item.getPrice()} > 0">
+                                                        <p th:text="'Bạn còn: ' + ${item.planAfterActiveValidity()} + ' ngày tập'"></p>
+                                                    </th:block>
                                                 </th:block>
                                                 <th:block th:if="${item.getPrice() > 0}">
                                                     <h5 class="text-money">

@@ -40,4 +40,6 @@ public class Department {
 
     private Double area;
 
+    private int minPrice;
+    private int maxPrice;
 }

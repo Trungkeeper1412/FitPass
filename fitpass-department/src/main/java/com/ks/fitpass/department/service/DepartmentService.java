@@ -20,7 +20,7 @@ public interface DepartmentService {
 
     List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
 
-    List<Department> getAllByStatus(int status) throws DataAccessException;
+//    List<Department> getAllByStatus(int status) throws DataAccessException;
 
     Department getOne(int id) throws DataAccessException;
 
@@ -30,11 +30,11 @@ public interface DepartmentService {
 
     Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
                                                                 double userLatitude, double userLongitude,
-                                                                double radiusInKm);
+                                                                double radiusInKm, String city, String sortPrice, String sortRating);
     List<Department> findByRatingBetween(double from, double to);
 
 
-    List<UserFeedback> getDepartmentFeedback(int departmentId);
+    List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size);
 
 
     DepartmentDTO filterDepartmentFeedbacks(int departmentId);
