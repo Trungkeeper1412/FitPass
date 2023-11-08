@@ -349,6 +349,30 @@ public class OrderDetailRepositoryImplTest {
         // Assert
         assertEquals(expected, actual);
     }
+    @Test
+    void testUpdateOrderDetailItemStatus_WhenStatusIsInvalid() {
+        // Arrange
+        Timestamp planActiveTime = Timestamp.valueOf("2022-01-01 10:00:00");
+        int status = -1; // Invalid status value
+        Timestamp planExpiredTime = Timestamp.valueOf("2022-01-02 10:00:00");
+        int orderDetailId = 1;
+        int expected = 0; // No rows affected as status is invalid
+
+        // Mock the behavior of the jdbcTemplate.update() method
+        Mockito.when(jdbcTemplate.update(
+                        Mockito.eq(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS),
+                        Mockito.eq(planActiveTime),
+                        Mockito.eq(status),
+                        Mockito.eq(planExpiredTime),
+                        Mockito.eq(orderDetailId)))
+                .thenReturn(0);
+
+        // Act
+        int actual = orderDetailRepositoryImpl.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
+
+        // Assert
+        assertEquals(expected, actual);
+    }
 //Boundary Test Cases
     @Test
     void testUpdateOrderDetailItemStatus_WhenPlanActiveTimeIsMinimumAllowedValue() {
@@ -374,7 +398,7 @@ public class OrderDetailRepositoryImplTest {
         // Assert
         assertEquals(expected, actual);
     }
-
+    //Boundary Test Cases
     @Test
     void testUpdateOrderDetailItemStatus_WhenPlanExpiredTimeIsMaximumAllowedValue() {
         // Arrange
@@ -382,6 +406,30 @@ public class OrderDetailRepositoryImplTest {
         int status = 1;
         Timestamp planExpiredTime = Timestamp.valueOf("9999-12-31 23:59:59");
         int orderDetailId = 1;
+        int expected = 1; // Number of rows affected by the update query
+
+        // Mock the behavior of the jdbcTemplate.update() method
+        Mockito.when(jdbcTemplate.update(
+                        Mockito.eq(IRepositoryQuery.UPDATE_ORDER_DETAIL_ITEM_STATUS),
+                        Mockito.eq(planActiveTime),
+                        Mockito.eq(status),
+                        Mockito.eq(planExpiredTime),
+                        Mockito.eq(orderDetailId)))
+                .thenReturn(1);
+
+        // Act
+        int actual = orderDetailRepositoryImpl.updateOrderDetailItemStatus(planActiveTime, status, planExpiredTime, orderDetailId);
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+    @Test
+    void testUpdateOrderDetailItemStatus_WhenOrderDetailIdIsMaximumAllowedValue() {
+        // Arrange
+        Timestamp planActiveTime = Timestamp.valueOf("2022-01-01 10:00:00");
+        int status = 1;
+        Timestamp planExpiredTime = Timestamp.valueOf("2022-01-02 10:00:00");
+        int orderDetailId = Integer.MAX_VALUE; // Maximum allowed value for orderDetailId
         int expected = 1; // Number of rows affected by the update query
 
         // Mock the behavior of the jdbcTemplate.update() method
