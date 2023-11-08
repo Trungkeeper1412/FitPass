@@ -1,5 +1,5 @@
 <div th:fragment="list-brand-fr">
-    <div class="row">
+    <div class="row" id="brandList">
         <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4" th:each="brand:${brands}">
             <a th:href="@{/brand/brand-detail/{brand_id}(brand_id=${brand.getBrandId()})}">
             <div class="brand">
@@ -16,7 +16,7 @@
                         </div>
                         <div class="basic-info" style="margin-left: 15px;">
                             <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png"></span>
-                            <span>200 gói tập đã bán</span>
+                            <span><span th:text="${brand.getNumberOfOrderDetailSale()}"></span> gói tập đã bán</span>
                         </div>
                     </div>
                 </div>

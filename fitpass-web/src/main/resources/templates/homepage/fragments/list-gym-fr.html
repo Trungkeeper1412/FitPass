@@ -31,7 +31,7 @@
                         <div class="row gym-price justify-content-center">
                             <div class="col">
                                 <div class="mb-3" >Giá gói:</div>
-                                <h5 class="text-money">100-500 <span class="credit" style="font-size: 14px;">Credit</span></h5>
+                                <h5 class="text-money"><span th:text="${entry.key.getMinPrice()}"></span>-<span th:text="${entry.key.getMaxPrice()}"></span> <span class="credit" style="font-size: 14px;">Credit</span></h5>
                             </div>
                         </div>
 <!--                    </div>-->
