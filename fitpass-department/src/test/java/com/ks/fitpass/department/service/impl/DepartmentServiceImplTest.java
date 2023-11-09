@@ -52,15 +52,15 @@ public class DepartmentServiceImplTest {
                 .build();
         //Arrange: mock the behavior
         List<Department> testDepartments = Arrays.asList(superGymHoaLac, GymHoaLac, FitWayKickboxing);
-        when(departmentRepository.getAllByStatus(1)).thenReturn(testDepartments);
+        when(departmentRepository.getAllByStatus(1,1,2,null,"lowToHigh","5")).thenReturn(testDepartments);
 
         //Act
         Map<DepartmentDTO,Double> nearbyDepartments = departmentService
-                .getAllDepartmentByNearbyLocation(pageIndex, pageSize, userLatitude, userLongitude, radiusInMeters);
+                .getAllDepartmentByNearbyLocation(pageIndex, pageSize, userLatitude, userLongitude, radiusInMeters,null,"lowToHigh","5");
 
         // Assertions
         // Verify that the departmentRepository method was called with the correct arguments
-        verify(departmentRepository).getAllByStatus(1);
+        verify(departmentRepository).getAllByStatus(1,1,2,null,"lowToHigh","5");
         assertEquals(3, nearbyDepartments.size()); // Check that the list is empty in this example
     }
 }
