@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="brand-owner/common/head"></th:block>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <th:block th:replace="brand-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <th:block th:replace="brand-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="fw-bold text-primary">Cơ sở Đống Đa</h1>
+                        <div class="show-wallpaper-brand col-lg-12">
+                            <img class="show-logo-brand" src="https://bom.so/roYX3t" alt="Hình ảnh">
+                        </div>
+                        <style>
+                            .show-wallpaper-brand {
+                                position: relative;
+                                background-image: url(img/Cali-banner.jpg);
+                                width: 100%;
+                                height: 400px;
+                                margin-top: 10px;
+                                object-fit: cover;
+                                background-repeat: round;
+                            }
+                        </style>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <h4 class="fw-bold text-primary text-uppercase pb-3">Thông tin cơ bản</h4>
+                            <div class="row text-start">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="name-brand" class="form-label fw-bold">Tên cơ sở
+                                            :</label>
+                                        <input type="text" class="form-control" id="name-brand" name="name-brand"
+                                               value="Lê Đình Tuấn" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label fw-bold">Số điện thoại :</label>
+                                        <input type="text" class="form-control" id="phone" name="phone"
+                                               value="0987654321" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label fw-bold">Địa chỉ cơ sở
+                                            :</label>
+                                        <input type="text" class="form-control" id="address" name="address"
+                                               value="Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội."
+                                               readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label fw-bold">Email cở sở:</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               value="ldt2001@gmai.com" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="capacity" class="form-label fw-bold">Sức chứa
+                                            :</label>
+                                        <input type="text" class="form-control" id="capacity" name="capacity"
+                                               value="1000 người" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="area" class="form-label fw-bold">Diện tích :</label>
+                                        <input type="text" class="form-control" id="area" name="area" value="500 m²"
+                                               readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="owners" class="form-label fw-bold">Tên chủ
+                                            cơ sở :</label>
+                                        <input type="text" class="form-control" id="area" name="area"
+                                               value="Lê Đình Tuấn - ledinhtuana1@gmail.com" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="openHours">Giờ mở cửa:</label><br>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#viewOpenHoursModal">
+                                            Xem giờ hoạt động
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="description" class="form-label fw-bold">Mô tả :</label>
+                                    <textarea style="width: 100%; padding: 10px;" rows="4" cols="50" name="comment"
+                                              form="usrform" readonly>Nhờ đáp ứng được mọi nhu cầu luyện tập theo tiêu chuẩn 5 sao với thiết kế cực kỳ sang trọng trong từng chi tiết nhỏ, phòng tập gym California Centuryon Somerset West Point đã trở thành địa điểm check-in quen thuộc của giới thượng lưu Hà Nội.
+                                        </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Các gói tập</h4>
+                            <section>
+                                <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="flexible-tab" data-toggle="tab"
+                                           href="#flexible" role="tab" aria-controls="flexible"
+                                           aria-selected="true">Gói linh hoạt</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="fixed-tab" data-toggle="tab" href="#fixed"
+                                           role="tab" aria-controls="fixed" aria-selected="false">Gói cố định</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content mt-4">
+                                    <div class="tab-pane fade show active" id="flexible" role="tabpanel"
+                                         aria-labelledby="flexible-tab">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTableCheckedFlexible"
+                                                       cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Thứ tự</th>
+                                                        <th>Tên gói tập</th>
+                                                        <th>Số credits/giờ</th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                            Thời hạn trước khi kích hoạt
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                            Thời hạn sau khi kích hoạt
+                                                        </th>
+                                                        <th class="flexible-description">Mô tả</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Gói linh hoạt tiết kiệm</td>
+                                                        <td>5</td>
+                                                        <td>20 ngày</td>
+                                                        <td>50 ngày</td>
+                                                        <td>Đây là một trong các hạng thẻ siêu tiết kiệm tại
+                                                            phòng gym của chúng tôi. Nếu bạn là người không có
+                                                            nhu cầu di chuyển nhiều và mong muốn được tập luyện
+                                                            ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
+                                                            chọn thích hợp
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Gói linh hoạt tối ưu</td>
+                                                        <td>5</td>
+                                                        <td>14 ngày</td>
+                                                        <td>40 ngày</td>
+                                                        <td>Đây là một trong các hạng thẻ siêu tiết kiệm tại
+                                                            phòng gym của chúng tôi. Nếu bạn là người không có
+                                                            nhu cầu di chuyển nhiều và mong muốn được tập luyện
+                                                            ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
+                                                            chọn thích hợp
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Gói tiêu chuẩn</td>
+                                                        <td>5</td>
+                                                        <td>30 ngày</td>
+                                                        <td>60 ngày</td>
+                                                        <td>Đây là một trong các hạng thẻ siêu tiết kiệm tại
+                                                            phòng gym của chúng tôi. Nếu bạn là người không có
+                                                            nhu cầu di chuyển nhiều và mong muốn được tập luyện
+                                                            ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
+                                                            chọn thích hợp
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="fixed" role="tabpanel"
+                                         aria-labelledby="fixed-tab">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTableCheckedFixed"
+                                                       cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Thứ tự</th>
+                                                        <th>Tên gói tập</th>
+                                                        <th>Số credits</th>
+                                                        <th>Thời lượng tập</th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                            Thời hạn trước khi kích hoạt
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                            Thời hạn sau khi kích hoạt
+                                                        </th>
+                                                        <th class="fixed-description">Mô tả</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Gói 1</td>
+                                                        <td>5</td>
+                                                        <td>30 ngày</td>
+                                                        <td>30 ngày</td>
+                                                        <td>60 ngày</td>
+                                                        <td>Gói Cố Định Đầy Đủ Chức Năng của phòng tập gym
+                                                            California Gym and Fitness mang đến cho bạn trải
+                                                            nghiệm luyện tập hoàn hảo theo tiêu chuẩn 5 sao, với
+                                                            sự chăm sóc tận tâm và một loạt các tiện nghi cao
+                                                            cấp
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Gói 1</td>
+                                                        <td>5</td>
+                                                        <td>30 ngày</td>
+                                                        <td>30 ngày</td>
+                                                        <td>60 ngày</td>
+                                                        <td>Gói Cố Định Đầy Đủ Chức Năng của phòng tập gym
+                                                            California Gym and Fitness mang đến cho bạn trải
+                                                            nghiệm luyện tập hoàn hảo theo tiêu chuẩn 5 sao, với
+                                                            sự chăm sóc tận tâm và một loạt các tiện nghi cao
+                                                            cấp
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Gói 1</td>
+                                                        <td>5</td>
+                                                        <td>30 ngày</td>
+                                                        <td>30 ngày</td>
+                                                        <td>60 ngày</td>
+                                                        <td>Gói Cố Định Đầy Đủ Chức Năng của phòng tập gym
+                                                            California Gym and Fitness mang đến cho bạn trải
+                                                            nghiệm luyện tập hoàn hảo theo tiêu chuẩn 5 sao, với
+                                                            sự chăm sóc tận tâm và một loạt các tiện nghi cao
+                                                            cấp
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Các dịch vụ</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Thứ tự</th>
+                                        <th>Tên dịch vụ</th>
+                                        <th>Ảnh dịch vụ</th>
+                                        <th class="service-description">Mô tả</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Hệ thống tủ khóa</td>
+                                        <td><img src="https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg"
+                                                 alt=""></td>
+                                        <td>Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại
+                                            Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay
+                                            locker tự động
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Phòng tập đa năng</td>
+                                        <td><img src="https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg"
+                                                 alt=""></td>
+                                        <td>Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các
+                                            kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud
+                                            lưu trữ tiến trình tập luyện.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Tiện nghi phòng tập</td>
+                                        <td><img src="https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg"
+                                                 alt=""></td>
+                                        <td>Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông
+                                            hơi, khu vực trang điểm, phòng tắm), là nơi mang đến giây phút thư
+                                            giãn cho bạn.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Các tiện ích</h4>
+                            <div class="service-list row d-flex align-items-center justify-content-center">
+                                <div class="col-md-1 pr-3">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-parking"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-wifi"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-shower"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-scroll"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-martini-glass-citrus"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-couch"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-suitcase-medical"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 pr-3">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-parking"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-wifi"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="service-type">
+                                        <div
+                                                class="gym-service-logo d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-shower"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Album ảnh</h4>
+                            <div class="row">
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_1.jpg" alt="Image 1" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_2.jpg" alt="Image 2" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_3.jpg" alt="Image 3" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_4.jpg" alt="Image 4" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_5.jpg" alt="Image 5" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_6.jpg" alt="Image 6" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_7.jpg" alt="Image 7" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_8.jpg" alt="Image 8" class="img-fluid">
+                                </div>
+                                <div class="album-view col-12 col-md-4 col-lg-2">
+                                    <img src="img/GymImage/gym_1_8.jpg" alt="Image 9" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Vị trí cơ sở</h4>
+                            <div class="row text-start">
+                                <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7449.6024470801!2d105.5373683!3d21.0006037!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae201b3bf5%3A0xf193b32b643aeedc!2sTwitter%20Beans%20Coffee%20H%C3%B2a%20L%E1%BA%A1c!5e0!3m2!1svi!2s!4v1699267965805!5m2!1svi!2s"
+                                        width="100%" height="450" style="border:0;" allowfullscreen=""
+                                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <th:block th:replace="brand-owner/common/footer"></th:block>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+</div>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<th:block th:replace="brand-owner/common/script"></th:block>
+</body>
+</html>
