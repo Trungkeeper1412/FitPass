@@ -38,7 +38,7 @@ public class GymOwnerController {
     //Feedback Management
     @GetMapping("/feedback/list")
     public String getListOfFeedback() {
-        return "gym-owner/gym-department-employee-add";
+        return "gym-owner/gym-department-feedback";
     }
 
     //Department Management
