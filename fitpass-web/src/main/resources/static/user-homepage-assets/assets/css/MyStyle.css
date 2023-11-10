@@ -4272,99 +4272,24 @@ section {
 .body-list-brand{
   background-color: rgb(238, 238, 238);;
 }
-.tabs {
-  cursor: pointer;
-  display: block;
-  display: -webkit-flex;
-  /*display: -moz-flex;*/
-  /*display: flex;*/
+.body-list-brand footer{
+  margin-top: 20px;
+}
+.home-option{
+  margin-top: 40px;
+}
+.home-option div{
+  padding-bottom: 15px;
+  display: flex;
   justify-content: center;
-  /*-webkit-flex-wrap: wrap;*/
-  /*-moz-flex-wrap: wrap;*/
-  /*flex-wrap: wrap;*/
-  margin-top: 30px;
-  overflow: hidden;
+  align-items: center;
+  font-size: 18px;
+}
+.home-option .active-list{
+  border-bottom: 4px solid black;
 }
 
-.tabs [class^="tab"] label,
-.tabs [class*=" tab"] label {
-  color: #000000;
-  font-weight: 600;
-  cursor: pointer;
-  display: block;
-  font-size: 1.1em;
-  line-height: 1em;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.tabs [class^="tab"] [type="radio"],
-.tabs [class*=" tab"] [type="radio"] {
-  border-bottom: 4px solid rgba(239, 237, 239, 0.5);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: block;
-  margin: auto;
-  width: 100%;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.tabs [class^="tab"] [type="radio"]:hover,
-.tabs [class^="tab"] [type="radio"]:focus,
-.tabs [class*=" tab"] [type="radio"]:hover,
-.tabs [class*=" tab"] [type="radio"]:focus {
-  border-bottom: 4px solid #cdcdcd;
-}
-
-.tabs [class^="tab"] [type="radio"]:checked,
-.tabs [class*=" tab"] [type="radio"]:checked {
-  border-bottom: 4px solid #000000;
-}
-
-.tabs [class^="tab"] [type="radio"]:checked+div,
-.tabs [class*=" tab"] [type="radio"]:checked+div {
-  opacity: 1;
-}
-
-.tabs [class^="tab"] [type="radio"]+div,
-.tabs [class*=" tab"] [type="radio"]+div {
-  display: block;
-  opacity: 0;
-  padding: 2rem 0;
-  width: 90%;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.tabs .tab-2 {
-  width: 100%;
-}
-
-.tabs .tab-2 [type="radio"]+div {
-  height: 100%;
-  width: 200%;
-  margin-left: 200%;
-}
-
-.tabs .tab-2 [type="radio"]:checked+div {
-  margin-left: 0;
-}
-
-.tabs .tab-2:last-child [type="radio"]+div {
-  margin-left: 100%;
-}
-
-.tabs .tab-2:last-child [type="radio"]:checked+div {
-  margin-left: -100%;
-}
-
-.tabs img {
+.home-option img {
   width: 35px;
 }
 
