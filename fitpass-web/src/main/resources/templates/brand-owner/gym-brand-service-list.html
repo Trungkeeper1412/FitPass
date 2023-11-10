@@ -28,7 +28,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h2 class="m-0 font-weight-bold text-primary">Danh sách các cơ sở</h2>
-                            <a href="gym-brand-service-add.html" class="btn btn-primary" data-toggle="tooltip"
+                            <a th:href="@{/brand-owner/service/add}" class="btn btn-primary" data-toggle="tooltip"
                                 data-placement="left" title="Thêm dịch vụ">
                                 <i class="fas fa-plus"></i>
                             </a>
@@ -51,28 +51,27 @@
                                             <td>Hệ thống tủ khóa</td>
                                             <td><img src="https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg" alt=""></td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-brand-service-detail.html" class="btn btn-primary">Cập nhật</a></td>
+                                            <td><a th:href="@{/brand-owner/service/details}" class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Phòng tập đa năng</td>
                                             <td><img src="https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg" alt=""></td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-brand-service-detail.html" class="btn btn-primary">Cập nhật</a></td>
+                                            <td><a th:href="@{/brand-owner/service/details}" class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>TIện nghi phòng tập</td>
                                             <td><img src="https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg" alt=""></td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-brand-service-detail.html" class="btn btn-primary">Cập nhật</a></td>
+                                            <td><a th:href="@{/brand-owner/service/details}" class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

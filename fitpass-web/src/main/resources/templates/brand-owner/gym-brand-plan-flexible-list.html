@@ -27,7 +27,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h2 class="m-0 font-weight-bold text-primary">Danh sách các gói linh hoạt</h2>
-                            <a href="gym-brand-plan-flexible-add.html" class="btn btn-primary" data-toggle="tooltip"
+                            <a th:href="@{/brand-owner/gym-plans/flexible/add}" class="btn btn-primary" data-toggle="tooltip"
                                 data-placement="left" title="Thêm gói tập">
                                 <i class="fas fa-plus"></i>
                             </a>
@@ -60,7 +60,7 @@
                                                 <td>7 ngày</td>
                                                 <td>30 ngày</td>
                                                 <td>Hoạt động</td>
-                                                <td><a href="gym-brand-plan-flexible-detail.html"
+                                                <td><a th:href="@{/brand-owner/gym-plans/flexible/details}"
                                                         class="btn btn-primary">Cập nhật</a></td>
                                             </tr>
                                             <tr>
@@ -70,7 +70,7 @@
                                                 <td>7 ngày</td>
                                                 <td>40 ngày</td>
                                                 <td>Hoạt động</td>
-                                                <td><a href="gym-brand-plan-flexible-detail.html"
+                                                <td><a th:href="@{/brand-owner/gym-plans/flexible/details}"
                                                         class="btn btn-primary">Cập nhật</a></td>
                                             </tr>
                                         </tbody>

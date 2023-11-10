@@ -28,20 +28,4 @@ public class WebUtil {
         }
         return sb.toString();
     }
-
-    public static int getCoin(int coin) {
-        return switch (coin) {
-            case 1 -> 1;
-            case 2 -> 3;
-            case 3 -> 5;
-            case 4 -> 7;
-            case 5 -> 9;
-            case 6 -> 11;
-            case 7 -> 13;
-            case 8 -> 15;
-            case 9 -> 17;
-            case 10 -> 19;
-            default -> 0;
-        };
-    }
 }

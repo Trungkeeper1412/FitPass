@@ -27,7 +27,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h2 class="m-0 font-weight-bold text-primary">Danh sách các cơ sở</h2>
-                            <a href="gym-brand-department-add.html" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Thêm mới cơ sở">
+                            <a th:href="@{/brand-owner/department/add}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Thêm mới cơ sở">
                                 <i class="fas fa-plus"></i>
                             </a>
                         </div>                                                                                              
@@ -59,7 +59,7 @@
                                                 <option value="active">Hoạt động</option>
                                                 <option value="deactive">Không hoạt động</option>
                                             </select></td>
-                                            <td><a href="gym-brand-department-detail.html" class="btn btn-primary">Xem chi tiết</a></td>
+                                            <td><a th:href="@{/brand-owner/department/details}" class="btn btn-primary">Xem chi tiết</a></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -73,36 +73,9 @@
                                                 <option value="active">Hoạt động</option>
                                                 <option value="deactive">Không hoạt động</option>
                                             </select></td>
-                                            <td><a href="gym-brand-department-detail.html" class="btn btn-primary">Xem chi tiết</a></td>
+                                            <td><a th:href="@{/brand-owner/department/details}" class="btn btn-primary">Xem chi tiết</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Cơ sở Đống Đa</td>
-                                            <td>Nguyễn Văn Trung</td>
-                                            <td><img src="./img/undraw_profile_3.svg" alt="Thumbnail 1"></td>
-                                            <td>0987654321</td>
-                                            <td>nvt2001@gmail.com</td>
-                                            <td><select class="form-select" id="set-active"
-                                                name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select></td>
-                                            <td><a href="gym-brand-department-detail.html" class="btn btn-primary">Xem chi tiết</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Cơ sở Cầu Giấy</td>
-                                            <td>Nguyễn Trà My</td>
-                                            <td><img src="./img/undraw_profile.svg" alt="Thumbnail 2"></td>
-                                            <td>0912345678</td>
-                                            <td>ntmy2001@gmail.com</td>
-                                            <td><select class="form-select" id="set-active"
-                                                name="set-active">
-                                                <option value="deactive">Không hoạt động</option>
-                                                <option value="active">Hoạt động</option>
-                                            </select></td>
-                                            <td><a href="gym-brand-department-detail.html" class="btn btn-primary">Xem chi tiết</a></td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>

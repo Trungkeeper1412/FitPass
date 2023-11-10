@@ -42,7 +42,7 @@ public class GymOwnerController {
     }
 
     //Department Management
-    @GetMapping("/department/add-details")
+    @GetMapping("/department/update-details")
     public String addDepartmentDetails() {
         return "gym-owner/gym-department-add";
     }

@@ -26,7 +26,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h2 class="m-0 font-weight-bold text-primary">Danh sách các chủ cơ sở</h2>
-                            <a href="gym-brand-owner-add.html" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Thêm chủ cơ sở">
+                            <a th:href="@{/brand-owner/gym-owner/add}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Thêm chủ cơ sở">
                                 <i class="fas fa-plus"></i>
                             </a>
                         </div>
@@ -54,7 +54,7 @@
                                             <td>ldt2001@gmail.com</td>
                                             <td>Cơ sở Đống Đa</td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-brand-owner-detail.html" class="btn btn-primary">Cập nhật</a></td>
+                                            <td><a th:href="@{/brand-owner/gym-owner/details}" class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -64,17 +64,7 @@
                                             <td>ldt2001@gmail.com</td>
                                             <td>Cơ sở Đống Đa</td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-brand-owner-detail.html" class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><img src="./img/undraw_profile_1.svg" alt="Thumbnail 1"></td>
-                                            <td>Nguyễn Trà My</td>
-                                            <td>0987654321</td>
-                                            <td>ldt2001@gmail.com</td>
-                                            <td>Cơ sở Đống Đa</td>
-                                            <td>Hoạt động</td>
-                                            <td><a href="gym-brand-owner-detail.html" class="btn btn-primary">Cập nhật</a></td>
+                                            <td><a th:href="@{/brand-owner/gym-owner/details}" class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -27,7 +27,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h2 class="m-0 font-weight-bold text-primary">Danh sách các gói cố định</h2>
-                            <a href="gym-brand-plan-fixed-add.html" class="btn btn-primary" data-toggle="tooltip"
+                            <a th:href="@{/brand-owner/gym-plans/fixed/add}" class="btn btn-primary" data-toggle="tooltip"
                                 data-placement="left" title="Thêm gói tập">
                                 <i class="fas fa-plus"></i>
                             </a>
@@ -62,7 +62,7 @@
                                                 <td>10 ngày</td>
                                                 <td>30 ngày</td>
                                                 <td>Hoạt động</td>
-                                                <td><a href="gym-brand-plan-fixed-detail.html"
+                                                <td><a th:href="@{/brand-owner/gym-plans/fixed/details}"
                                                         class="btn btn-primary">Cập nhật</a></td>
                                             </tr>
                                             <tr>
@@ -73,7 +73,7 @@
                                                 <td>15 ngày</td>
                                                 <td>40 ngày</td>
                                                 <td>Hoạt động</td>
-                                                <td><a href="gym-brand-plan-fixed-detail.html"
+                                                <td><a th:href="@{/brand-owner/gym-plans/fixed/details}"
                                                         class="btn btn-primary">Cập nhật</a></td>
                                             </tr>
                                         </tbody>
@@ -82,7 +82,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

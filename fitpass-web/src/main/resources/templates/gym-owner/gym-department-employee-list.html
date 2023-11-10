@@ -27,7 +27,8 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h2 class="m-0 font-weight-bold text-primary">Danh sách các nhân viên</h2>
-                            <a href="gym-department-employee-add.html" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Thêm nhân viên">
+                            <a th:href="@{/gym-owner/employee/add}" class="btn btn-primary" data-toggle="tooltip"
+                               data-placement="left" title="Thêm nhân viên">
                                 <i class="fas fa-plus"></i>
                             </a>
                         </div>
@@ -53,8 +54,8 @@
                                             <td>0987654321</td>
                                             <td>ldt2001@gmail.com</td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-department-employee-detail.html" class="btn btn-primary">Cập
-                                                    nhật</a></td>
+                                            <td><a th:href="@{/gym-owner/employee/details}"
+                                                   class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -63,8 +64,8 @@
                                             <td>0987654321</td>
                                             <td>ldt2001@gmail.com</td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-department-employee-detail.html" class="btn btn-primary">Cập
-                                                    nhật</a></td>
+                                            <td><a th:href="@{/gym-owner/employee/details}"
+                                                   class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
@@ -73,8 +74,8 @@
                                             <td>0987654321</td>
                                             <td>ldt2001@gmail.com</td>
                                             <td>Hoạt động</td>
-                                            <td><a href="gym-department-employee-detail.html" class="btn btn-primary">Cập
-                                                    nhật</a></td>
+                                            <td><a th:href="@{/gym-owner/employee/details}"
+                                                   class="btn btn-primary">Cập nhật</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
