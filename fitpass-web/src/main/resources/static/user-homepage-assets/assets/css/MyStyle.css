@@ -4041,6 +4041,7 @@ section {
 }
 .gym-brand-content .list-gym-department .dept-info{
   color: black;
+  display: grid;
 }
 .gym-brand-content .list-gym-department::-webkit-scrollbar-track
 {
@@ -4072,7 +4073,7 @@ section {
 }
 .gym-brand-content .department .dept-img {
   border-radius: 10px;
-  /* width: 100%; */
+  height: 250px;
 }
 
 .gym-brand-content .list-gym-department .dept-description{

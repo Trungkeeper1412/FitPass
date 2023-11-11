@@ -113,7 +113,7 @@ h6 {
   --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
-    transition-delay: 0 !important;
+    transition-delay: 0s !important;
   }
 }
 
@@ -594,7 +594,7 @@ h6 {
 }
 
 #hero .icon-box h3 a {
-  color: ffc451;
+  color: #ffc451;
   transition: ease-in-out 0.3s;
 }
 
@@ -2317,7 +2317,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2334,7 +2334,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2351,7 +2351,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2368,7 +2368,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2385,7 +2385,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2402,7 +2402,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/ZdTCj65/card-1.jpg');
+  background-image: url('../img/card_1.jpg');
   background-size: cover;
 }
 
@@ -2621,7 +2621,7 @@ body {
   background-color: white;
   color: black;
   overflow: hidden;
-  border-radius: solid 5px;
+  border-radius: 5px;
   text-align: center;
 }
 
