@@ -247,7 +247,55 @@ VALUES
     (3, 3, 1),
     (4, 3, 1),
     (5, 3, 1),
-    (7, 3, 1);
+    (7, 3, 1),
+
+    (1, 4, 1),
+    (3, 4, 1),
+    (4, 4, 1),
+    (5, 4, 1),
+    (7, 4, 1),
+
+    (1, 5, 1),
+    (3, 5, 1),
+    (4, 5, 1),
+    (5, 5, 1),
+    (7, 5, 1),
+
+    (1, 6, 1),
+    (3, 6, 1),
+    (4, 6, 1),
+    (5, 6, 1),
+    (7, 6, 1),
+
+    (1, 7, 1),
+    (3, 7, 1),
+    (4, 7, 1),
+    (5, 7, 1),
+    (7, 7, 1),
+
+    (1, 8, 1),
+    (3, 8, 1),
+    (4, 8, 1),
+    (5, 8, 1),
+    (7, 8, 1),
+
+    (1, 9, 1),
+    (3, 9, 1),
+    (4, 9, 1),
+    (5, 9, 1),
+    (7, 9, 1),
+
+    (1, 11, 1),
+    (3, 11, 1),
+    (4, 11, 1),
+    (5, 11, 1),
+    (7, 11, 1),
+
+    (1, 11, 1),
+    (3, 11, 1),
+    (4, 11, 1),
+    (5, 11, 1),
+    (7, 11, 1);
 
 -- Create Gym Department Gallery
 INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
@@ -670,17 +718,6 @@ INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_k
 VALUES (52, 10, 1, 'Fit365 Fitness &Yoga Q.11', '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam', '090 929 08 80', 'https://s.net.vn/w1ho', 'https://s.net.vn/H3lr', 'https://s.net.vn/EYRN', 'Hãy đến ngay với 𝐅𝐈𝐓𝟑𝟔𝟓  hôm nay để tập luyện, tại đây bạn sẽ được tư vấn các bài tập phụ hợp với tình trạng sức khỏe của bản thân, nâng cấp body và trải nghiệm hệ thống máy tập an toàn cùng đội ngũ PT tận tâm nhất.Liên hệ ngay với 𝐅𝐈𝐓𝟑𝟔𝟓 để được tư vấn miễn phí, nhận ngay ưu đãi và đăng kí tập luyện sớm nhất có thể !!!', 10.767766928241029, 106.65824315116448, 200, 200);
 
 --
-INSERT INTO features (feature_icon, feature_name, feature_status)
-VALUES
-    ('<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
-    ('<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 1),
-    ('<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
-    ('<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
-    ('<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
-    ('<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
-    ('<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 1);
-
---
 INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
 VALUES
     (1, 57, 1),
@@ -1053,7 +1090,7 @@ VALUES
     (52,1, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
 
-
+-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)
 
 VALUES
@@ -1186,6 +1223,64 @@ VALUES
      'Bạn là người yêu thích các bộ môn thể dục và mong muốn có được sức khoẻ tốt cùng với vóc dáng thon gọn, săn chắc? Hoặc bạn đã bắt đầu kế hoạch tập luyện nhưng chưa thể vượt qua các trở ngại và nỗi lo lắng? Đến với phòng tập gym VShape Fitness & Yoga quận 2, bạn sẽ được các huấn luyện viên hỗ trợ, tư vấn và chia sẻ kinh nghiệm trong các bài tập thể thao để bạn tận hưởng cuộc sống thật trọn vẹn và tràn đầy năng lượng.',
      10.789020254962827, 106.76547901599146,
      180, 550);
+
+
+-- Create Gym Department Features
+INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
+VALUES
+    (1, 12, 1),
+    (2, 12, 1),
+    (3, 12, 1),
+    (4, 12, 1),
+    (5, 12, 1),
+
+    (1,13, 1),
+    (2, 13, 1),
+    (3, 13, 1),
+    (6, 13, 1),
+    (7, 13, 1),
+
+    (1, 14, 1),
+    (3, 14, 1),
+    (4, 14, 1),
+    (5, 14, 1),
+    (7, 14, 1),
+
+    (1, 15, 1),
+    (3, 15, 1),
+    (4, 15, 1),
+    (5, 15, 1),
+    (7, 15, 1),
+
+    (1, 16, 1),
+    (3, 16, 1),
+    (4, 16, 1),
+    (5, 16, 1),
+    (7, 16, 1),
+
+    (1, 17, 1),
+    (3, 17, 1),
+    (4, 17, 1),
+    (5, 17, 1),
+    (7, 17, 1),
+
+    (1, 18, 1),
+    (3, 18, 1),
+    (4, 18, 1),
+    (5, 18, 1),
+    (7, 18, 1),
+
+    (1, 19, 1),
+    (3, 19, 1),
+    (4, 19, 1),
+    (5, 19, 1),
+    (7, 19, 1),
+
+    (1, 20, 1),
+    (3, 20, 1),
+    (4, 20, 1),
+    (5, 20, 1),
+    (7, 20, 1);
 
 INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
 
@@ -2109,6 +2204,106 @@ VALUES
     (36,1, 2, 1, 2, 'Gói Full Dịch Vụ',
      'Quý khách sẽ được hưởng quyền lợi như Gói Siêu Quyền Lợi cộng thêm tự do tập toàn khung giờ từ 5:30 - 22:00.Dịch vụ tiện ích thư giãn cao cấp: xông hơi, bơi lội,...',
      4000.00, 0, 0, 365, 10, 365);
+
+-- Create Gym Department Features
+INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
+VALUES
+    (1, 21, 1),
+    (2, 21, 1),
+    (3, 21, 1),
+    (4, 21, 1),
+    (5, 21, 1),
+
+    (1,22, 1),
+    (2, 22, 1),
+    (3, 22, 1),
+    (6, 22, 1),
+    (7, 22, 1),
+
+    (1, 23, 1),
+    (3, 23, 1),
+    (4, 23, 1),
+    (5, 23, 1),
+    (7, 23, 1),
+
+    (1, 24, 1),
+    (3, 24, 1),
+    (4, 24, 1),
+    (5, 24, 1),
+    (7, 24, 1),
+
+    (1, 25, 1),
+    (3, 25, 1),
+    (4, 25, 1),
+    (5, 25, 1),
+    (7, 25, 1),
+
+    (1, 26, 1),
+    (3, 26, 1),
+    (4, 26, 1),
+    (5, 26, 1),
+    (7, 26, 1),
+
+    (1, 27, 1),
+    (3, 27, 1),
+    (4, 27, 1),
+    (5, 27, 1),
+    (7, 27, 1),
+
+    (1, 28, 1),
+    (3, 28, 1),
+    (4, 28, 1),
+    (5, 28, 1),
+    (7, 28, 1),
+
+    (1, 29, 1),
+    (3, 29, 1),
+    (4, 29, 1),
+    (5, 29, 1),
+    (7, 29, 1),
+
+    (1, 30, 1),
+    (3, 30, 1),
+    (4, 30, 1),
+    (5, 30, 1),
+    (7, 30, 1),
+
+    (1, 31, 1),
+    (3, 31, 1),
+    (4, 31, 1),
+    (5, 31, 1),
+    (7, 31, 1),
+
+    (1, 32, 1),
+    (3, 32, 1),
+    (4, 32, 1),
+    (5, 32, 1),
+    (7, 32, 1),
+
+    (1, 33, 1),
+    (3, 33, 1),
+    (4, 33, 1),
+    (5, 33, 1),
+    (7, 33, 1),
+
+    (1, 34, 1),
+    (3, 34, 1),
+    (4, 34, 1),
+    (5, 34, 1),
+    (7, 34, 1),
+
+    (1, 35, 1),
+    (3, 35, 1),
+    (4, 35, 1),
+    (5, 35, 1),
+    (7, 35, 1),
+
+
+    (1, 36, 1),
+    (3, 36, 1),
+    (4, 36, 1),
+    (5, 36, 1),
+    (7, 36, 1);
 
 INSERT INTO user_feedback
 (user_id, department_id, rating, comments, feedback_time, feedback_status)
