@@ -3176,6 +3176,7 @@ section {
   /* background-color: #ffffff; */
   border: 1px solid #ffb7006e;
   overflow: hidden;
+  position: relative;
 }
 
 .plan-intro{
@@ -3217,6 +3218,8 @@ section {
   width:100%;
   color: rgb(0, 0, 0);
   margin: auto;
+  position: absolute;
+  bottom: 0px;
   font-weight: 500;
   font-size: medium;
   padding: 10px;
@@ -3248,17 +3251,11 @@ section {
   width: fit-content;
 }
 .scroll-plans .gym-plan-description{
-  height: 130px;
+  height: 150px;
 }
 .gym-duration{
   /* text-decoration: underline; */
 }
-
-.day-duration{
-  /* font-size: 22px;
-  font-weight: bold */
-}
-
 
 .scroll-plans::-webkit-scrollbar {
   width: 5px;
