@@ -3368,11 +3368,16 @@ section {
 .squares div{
   box-sizing:border-box;
 }
-
+.squares>div {
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+}
 .squares div img{
   width: 100%;
   height: 100%;
   border-radius: 6px;
+  object-fit: cover;
 }
 
 .rating-feedback .pagination-wrapper{
