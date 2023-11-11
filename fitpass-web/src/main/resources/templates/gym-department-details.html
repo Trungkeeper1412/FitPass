@@ -138,7 +138,7 @@
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
 
-                    <div style="" class="gym-duration fw-bold  th:if="${gymPlan.duration > 0}">
+                    <div style="" class="gym-duration fw-bold " th:if="${gymPlan.duration > 0}">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>

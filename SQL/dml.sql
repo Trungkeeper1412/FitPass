@@ -1556,9 +1556,3 @@ VALUES
     (5, 18, 5, 'Nhân viên tư vấn rất nhiệt tình và giúp đỡ.', NOW(), 1),
     (5, 19, 3, 'Cần cải thiện về việc duy trì sự sạch sẽ của phòng tập.', NOW(), 1),
     (5, 20, 4, 'Được biết đến qua bạn bè và không hối hận khi đăng ký thành viên.', NOW(), 1);
-
-
-
-
-
-
