@@ -110,47 +110,10 @@
     <!-- Gym service -->
     <div class="container">
         <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fas fa-parking"></i>
+            <div class="col-lg-1 col-md-1 service-type" th:each="feature: ${departmentFeatures}">
+                <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
+                     class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
-                <div class="service-name">Khu để xe</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-wifi"></i>
-                </div>
-                <div class="service-name">Wifi</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-shower"></i>
-                </div>
-                <div class="service-name">Nước nóng lạnh</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fas fa-scroll"></i>
-                </div>
-                <div class="service-name">Khăn tắm free</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-martini-glass-citrus"></i>
-                </div>
-                <div class="service-name">Quầy giải khát</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-couch"></i>
-                </div>
-                <div class="service-name">Khu nghỉ ngơi</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-suitcase-medical"></i>
-                </div>
-                <div class="service-name">Phòng y tế</div>
             </div>
         </div>
     </div>
@@ -360,6 +323,11 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
     function onClickImage(element) {
         document.getElementById("img01").src = element.src;
         document.getElementById("modal01").style.display = "block";

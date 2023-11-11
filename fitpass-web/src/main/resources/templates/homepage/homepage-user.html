@@ -64,14 +64,16 @@
 
         <!-- Content -->
         <div class="list-brand-content container">
-            <div class="tabs">
-                <!-- List brands -->
-                <div class="tab-2">
-                    <label for="tab2-1">
-                        <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/5632/5632749.png"></span>
-                        <span class="tab-title">Thương hiệu</span>
-                    </label>
-                    <input id="tab2-1" onclick="openBrand()" name="tabs-two" type="radio" checked="checked">
+            <div class="row home-option">
+                <div id="brand-list" onclick="openBrand()" class="col-md-6 mx-auto active-list">
+                    <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/5632/5632749.png"></span>
+                    <span class="tab-title fw-bold">Thương hiệu</span>
+                </div>
+                <div id="gym-list" onclick="openGym()" class="col-md-6 mx-auto">
+                    <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
+                    <span class="tab-title fw-bold">Cơ sở gần bạn</span>
+                </div>
+            </div>
                     <div id="list-brand" class="list-of-brand">
                         <h3 class="fw-bold list-brand-title">Danh sách các Gym Brand của chúng tôi</h3>
                         <div class="container mb-5">
@@ -102,17 +104,10 @@
                         </div>
                         <!-- pagination -->
                         <div id="pagnitionBrand" class="pagination mt-5">
-
                         </div>
                     </div>
-                </div>
+
                 <!-- List departments -->
-                <div class="tab-2" id="tab-department">
-                    <label for="tab2-2">
-                        <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
-                        <span class="tab-title">Cơ sở gần bạn</span>
-                    </label>
-                    <input onclick="openGym()" id="tab2-2" name="tabs-two" type="radio">
                     <div id="list-gym" class="list-of-gym">
                         <h3 class="fw-bold list-brand-title">Danh sách các cơ sở Gym gần bạn</h3>
                         <div class="container ">
@@ -160,12 +155,9 @@
                         </div>
                         <!-- pagination -->
                         <div class="pagination mt-5">
-
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
         <!-- ======= Header ======= -->
         <div th:replace="common/footer :: footer"></div>
 
@@ -185,17 +177,23 @@
         <script>
             //Tab display code
             document.getElementById("list-gym").style.display = "none";
-
             function openGym() {
                 document.getElementById("list-brand").style.display = "none";
                 document.getElementById("list-gym").style.display = "block";
+                document.getElementById("gym-list").classList.add("active-list");
+                document.getElementById("brand-list").classList.remove("active-list");
                 getNearbyGyms();
             }
-
             function openBrand() {
                 document.getElementById("list-gym").style.display = "none";
                 document.getElementById("list-brand").style.display = "block";
+                document.getElementById("brand-list").classList.add("active-list");
+                document.getElementById("gym-list").classList.remove("active-list");
             }
+
+            var page_num = document.getElementById("pagnitionBrand").getElementsByTagName("a");
+            console.log(page_num);
+            // page_num[0].style.backgroundColor = "black";
 
             function getNearbyGyms() {
                 if (navigator.geolocation) {
