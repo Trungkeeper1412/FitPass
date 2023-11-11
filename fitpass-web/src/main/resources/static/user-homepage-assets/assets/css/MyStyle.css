@@ -3211,7 +3211,8 @@ section {
 }
 
 .scroll-plans .child:hover {
-  box-shadow: 0 14px 20px rgba(255, 255, 255, 0.504);
+  box-shadow: 2px 0px 8px 10px rgba(255, 229, 137, 0.54);
+  cursor: pointer;
 }
 
 .scroll-plans button{
@@ -3251,7 +3252,7 @@ section {
   width: fit-content;
 }
 .scroll-plans .gym-plan-description{
-  height: 150px;
+  height: 146px;
 }
 .gym-duration{
   /* text-decoration: underline; */
