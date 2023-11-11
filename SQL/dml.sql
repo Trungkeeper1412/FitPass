@@ -1344,19 +1344,19 @@ VALUES
      6000.00, 0, 0, 90, 10, 90),
 
     (12, 1, 3, 1, 2, 'Gói 20 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      10300.00, 0, 0, 30, 10, 30),
 
     (12,1, 2, 1, 2, 'Gói 30 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      13400.00, 0, 0, 30, 10, 30),
 
     (12,1, 2, 1, 2, 'Gói 50 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      2000.00, 0, 0, 30, 10, 30),
 
     (12,1, 2, 1, 2, 'Gói 100 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      35800.00, 0, 0, 30, 10, 30),
 
     (13,1, 1, 1, 1, 'Gói giờ',
@@ -1368,19 +1368,19 @@ VALUES
      6000.00, 0, 0, 90, 10, 90),
 
     (13,1, 2, 1, 2, 'Gói 20 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      10300.00, 0, 0, 30, 10, 30),
 
     (13,1, 2, 1, 2, 'Gói 30 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      13400.00, 0, 0, 30, 10, 30),
 
     (13,1, 2, 1, 2, 'Gói 50 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      2000.00, 0, 0, 30, 10, 30),
 
     (13,1, 2, 1, 2, 'Gói 100 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      35800.00, 0, 0, 30, 10, 30),
 
     (14,1, 1, 1, 1, 'Gói giờ',
@@ -1392,23 +1392,23 @@ VALUES
      6000.00, 0, 0, 90, 10, 90),
 
     (14,1, 2, 1, 2, 'Gói 20 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      10300.00, 0, 0, 30, 10, 30),
 
     (14,1, 2, 1, 2, 'Gói 30 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      13400.00, 0, 0, 30, 10, 30),
 
     (14,1, 2, 1, 2, 'Gói 50 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      2000.00, 0, 0, 30, 10, 30),
 
     (14,1, 2, 1, 2, 'Gói 100 buổi tập luyện với PT',
-     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba…. Miễn phí thức ăn bổ sung như chuối, trứng, khoai lang… Có bể tắm Sauna, Steam Jacizzi. Thời gian tập luyện thoải mái.',
+     'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      35800.00, 0, 0, 30, 10, 30),
 
     (15,1, 1, 1, 1, 'Gói giờ',
-     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe. Với gói này, bạn sẽ được tận hưởng một loạt các tiện ích và ưu đãi đặc biệt, giúp bạn tối ưu hóa thời gian tập luyện của mình.',
+     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe. ',
      0, 150.00, 0, 0, 7, 14),
 
     (15,1, 2, 1, 2, 'Gói 1 tháng',
@@ -1424,7 +1424,7 @@ VALUES
      9000.00, 0, 0, 30, 10, 30),
 
     (16,1, 1, 1, 1, 'Gói giờ',
-     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe. Với gói này, bạn sẽ được tận hưởng một loạt các tiện ích và ưu đãi đặc biệt, giúp bạn tối ưu hóa thời gian tập luyện của mình.',
+     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe.',
      0, 150.00, 0, 0, 7, 14),
 
     (16,1, 2, 1, 2, 'Gói 1 tháng',
@@ -1440,7 +1440,7 @@ VALUES
      9000.00, 0, 0, 30, 10, 30),
 
     (17,1, 1, 1, 1, 'Gói giờ',
-     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe. Với gói này, bạn sẽ được tận hưởng một loạt các tiện ích và ưu đãi đặc biệt, giúp bạn tối ưu hóa thời gian tập luyện của mình.',
+     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe.',
      0, 150.00, 0, 0, 7, 14),
 
     (17,1, 2, 1, 2, 'Gói 1 tháng',
@@ -1456,7 +1456,7 @@ VALUES
      9000.00, 0, 0, 30, 10, 30),
 
     (18,1, 1, 1, 1, 'Gói giờ',
-     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe. Với gói này, bạn sẽ được tận hưởng một loạt các tiện ích và ưu đãi đặc biệt, giúp bạn tối ưu hóa thời gian tập luyện của mình.',
+     'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe.',
      0, 150.00, 0, 0, 7, 14),
 
     (18,1, 2, 1, 2, 'Gói 1 tháng',
@@ -1472,7 +1472,7 @@ VALUES
      9000.00, 0, 0, 30, 10, 30),
 
     (19, 1, 1, 1, 1, 'Gói giờ',
-     'Gói linh hoạt tính theo giờ của phòng tập gym là sự lựa chọn hoàn hảo cho những người có lịch trình bận rộn hoặc muốn tận hưởng sự thoải mái và linh hoạt trong việc tập luyện. Với gói này, thành viên có thể tận dụng mọi tiện ích và dịch vụ tại phòng tập trong khoảng thời gian cụ thể mà họ chọn, tạo điều kiện thuận lợi cho một lịch trình tập luyện linh hoạt.',
+     'Gói linh hoạt tính theo giờ của phòng tập gym là sự lựa chọn hoàn hảo cho những người có lịch trình bận rộn hoặc muốn tận hưởng sự thoải mái và linh hoạt trong việc tập luyện.',
      0, 150.00, 0, 0, 7, 14),
 
     (19,1, 2, 1, 2, 'Gói 1 tháng',
@@ -1488,7 +1488,7 @@ VALUES
      9000.00, 0, 0, 30, 10, 30),
 
     (20,1, 1, 1, 1, 'Gói giờ',
-     'Gói linh hoạt tính theo giờ của phòng tập gym là sự lựa chọn hoàn hảo cho những người có lịch trình bận rộn hoặc muốn tận hưởng sự thoải mái và linh hoạt trong việc tập luyện. Với gói này, thành viên có thể tận dụng mọi tiện ích và dịch vụ tại phòng tập trong khoảng thời gian cụ thể mà họ chọn, tạo điều kiện thuận lợi cho một lịch trình tập luyện linh hoạt.',
+     'Gói linh hoạt tính theo giờ của phòng tập gym là sự lựa chọn hoàn hảo cho những người có lịch trình bận rộn hoặc muốn tận hưởng sự thoải mái và linh hoạt trong việc tập luyện.',
      0, 150.00, 0, 0, 7, 14),
 
     (20,1, 2, 1, 2, 'Gói 1 tháng',
