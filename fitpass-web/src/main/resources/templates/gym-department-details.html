@@ -158,11 +158,11 @@
         </button>
     </div>
 
-    <div style="margin: auto;">
+    <div style="margin: auto;" class="container">
         <h3 style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
         <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
         <!-- <div style="color: white; margin-top: 20px;">Chúng tôi hiểu rằng đánh giá một khoản đầu tư không thể dựa trên chi phí bỏ ra, mà phải đến từ hiệu quả mang lại – tỷ suất sinh lời. Với mục tiêu duy nhất là kết quả của khách hàng, thay vì đầu tư vào những tiện nghi hào nhoáng bên ngoài, chúng tôi tập trung vào những thiết bị có chất lượng cao, đến từ những thương hiệu hàng đầu thế giới, giúp tối ưu hóa quá trình tập luyện.</div> -->
-        <div class="image-scroll-wrapper squares">
+        <div class="image-scroll-wrapper squares row">
             <div th:each="album : ${departmentAlbums}">
                 <img onclick="onClickImage(this)" class="w3-hover-opacity" th:src="${album.photoUrl}" />
             </div>
@@ -171,7 +171,7 @@
             <div style="text-align: center;">
                 <span class="w3-button w3-hover-red ">&times;</span>
                 <div class="w3-animate-zoom" style="width: 70%; margin: auto;">
-                    <img id="img01" style="width:50%; margin: auto;" >
+                    <img id="img01" style="width:90%; margin: auto;" >
                 </div>
             </div>
         </div>

@@ -3973,6 +3973,7 @@ section {
   margin-left: 0;
 }
 .scroll-services .service-name{
+  text-transform: uppercase;
   height: 50px;
   display: flex;
   align-items: center;
@@ -4301,20 +4302,34 @@ section {
 }
 
 /* Css for each brand */
-.list-of-brand .brand{
-  display: flex;
-  /* width: 48%; */
-  height: fit-content;
-  min-height: 290px;
-  border-radius: 15px;
-  background-color: white;
-}
+/*.list-of-brand .brand{*/
+/*  display: flex;*/
+/*  height: fit-content;*/
+/*  min-height: 290px;*/
+/*  border-radius: 15px;*/
+/*  background-color: white;*/
+/*}*/
 .list-of-brand .brand-image{
-  width: 50%;
-  min-height: 250px;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 300px;
   object-fit: cover;
   padding: 20px 20px 20px 20px;
 }
+.list-of-brand .brand-image img{
+  height: fit-content;
+}
+.list-of-brand .brand{
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/*.list-of-brand .brand-image img{*/
+/*  width: 50%;*/
+/*  height: 100%;*/
+/*  object-fit: cover;*/
+/*}*/
 .list-of-brand .brand-info{
   padding: 12px 20px 0 0;
 }
@@ -4360,13 +4375,22 @@ section {
   }
 }
 @media screen and (max-width: 500px) {
-  .list-of-brand .brand{
-    display: block;
-  }
   .list-of-brand .brand-image{
     width: 100%;
-    height: 50%;
+    height: 100%;
+    /*min-height: 150px;*/
+    object-fit: cover;
+    padding: 20px 20px 20px 20px;
   }
+  .list-of-brand .brand-image img{
+    /*width: 100%;*/
+    height: fit-content;
+  }
+  .list-of-brand .brand{
+    display: flex;
+    flex-direction: column;
+  }
+
   .list-of-brand .brand-info{
     padding: 0px 20px 20px 20px;
   }
