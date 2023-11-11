@@ -4,7 +4,7 @@
             <a th:href="@{/brand/brand-detail/{brand_id}(brand_id=${brand.getBrandId()})}">
             <div class="row brand">
                 <div class="brand-image">
-                <img th:src="${brand.getBrandWallpaperUrl()}" alt="Ảnh bìa">
+                <img th:src="${brand.getBrandThumbnailUrl()}" alt="thumbnail">
                 </div>
                 <div class="brand-info">
                     <h5 class="fw-bold" th:text="${brand.getBrandName()}"></h5>

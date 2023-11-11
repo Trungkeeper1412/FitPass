@@ -23,7 +23,6 @@ public class Brand {
 
     private String brandThumbnailUrl;
 
-
     private String brandDescription;
 
     private Double rating;
