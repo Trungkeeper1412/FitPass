@@ -143,8 +143,8 @@
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
-                    <div class="fw-bold" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div class="fw-bold" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                    <div class="fw-bold mt-1" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                    <div class="fw-bold mt-1" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
                         Thêm vào giỏ hàng
