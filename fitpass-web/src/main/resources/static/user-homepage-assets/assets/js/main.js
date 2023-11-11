@@ -665,7 +665,7 @@ function checkConfirmCheckOut() {
             if (element.getAttribute("data-item-status") == "Chưa kích hoạt") {
                 detailCard.querySelector(".expiration-date").style.display = "none"
                 detailCard.querySelector(".activate-time").style.display = "block"
-                detailCard.querySelector(".activate-time span").textContent = element.getAttribute("data-item-duration")
+                detailCard.querySelector(".activate-time span").textContent = element.getAttribute("data-item-before-active")
             } else {
                 detailCard.querySelector(".expiration-date").style.display = "block"
                 detailCard.querySelector(".activate-time").style.display = "none"

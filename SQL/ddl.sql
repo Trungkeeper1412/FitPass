@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS brand_amenities  (
                                                 photo_url               VARCHAR(255) NOT NULL,
     amenitie_name           VARCHAR(50),
     description             text,
+    amenitie_status INT NOT NULL,
     FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
     );
 
@@ -135,18 +136,18 @@ CREATE TABLE IF NOT EXISTS gym_department_schedule (
 
 
 CREATE TABLE IF NOT EXISTS features (
-    feature_id INT AUTO_INCREMENT PRIMARY KEY,
-    feature_icon varchar(150),
+                                        feature_id INT AUTO_INCREMENT PRIMARY KEY,
+                                        feature_icon varchar(150),
     feature_name VARCHAR(50),
     feature_status INT NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS gym_department_features (
-    gym_department_feature_id INT AUTO_INCREMENT PRIMARY KEY,
-    feature_id INT,
-    gym_department_id INT NOT NULL,
-    feature_status INT NOT NULL,
-    FOREIGN KEY (feature_id) REFERENCES features(feature_id),
+                                                       gym_department_feature_id INT AUTO_INCREMENT PRIMARY KEY,
+                                                       feature_id INT,
+                                                       gym_department_id INT NOT NULL,
+                                                       feature_status INT NOT NULL,
+                                                       FOREIGN KEY (feature_id) REFERENCES features(feature_id),
     FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
     );
 
@@ -204,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
                                              transaction_id   INT AUTO_INCREMENT PRIMARY KEY,
                                              wallet_id        INT NOT NULL,
                                              status           VARCHAR(30) NOT NULL,
-                                             amount           DECIMAL(10, 2) NOT NULL,
+    amount           DECIMAL(10, 2) NOT NULL,
     transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (wallet_id) REFERENCES wallet(wallet_id)
     );

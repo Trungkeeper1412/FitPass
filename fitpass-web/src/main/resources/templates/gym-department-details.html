@@ -137,7 +137,7 @@
                         <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
-                    <div style="" class="gym-duration">
+                    <div style="" class="gym-duration"  th:if="${gymPlan.duration > 0}">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>

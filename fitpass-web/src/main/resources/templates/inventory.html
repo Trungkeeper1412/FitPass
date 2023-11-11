@@ -91,6 +91,7 @@
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getPrice() > 0 ? item.getDuration() : item.getPlanAfterActiveValidity()} + ' ngày',
                                                  data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-before-active=${item.getPlanBeforeActiveValidity()},
                                                  data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
                                                  data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
                                                 onclick="showItemDetail(this)">
