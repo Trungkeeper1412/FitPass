@@ -3972,10 +3972,11 @@ section {
 }
 .scroll-services .service-name{
   text-transform: uppercase;
-  height: 50px;
+  padding: 10px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  text-align: center;
+  vertical-align: middle;
   font-size: 18px;
   font-weight: 700;
   color: orange;
