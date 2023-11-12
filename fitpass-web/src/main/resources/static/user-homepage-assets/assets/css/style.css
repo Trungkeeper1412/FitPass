@@ -2569,11 +2569,13 @@ body {
   border-radius: 2px;
 }
 
-/*.fa,*/
-/*.fas {*/
-/*  font-size: 13px;*/
-/*  margin: 1px;*/
-/*}*/
+.dropdown-menu a {
+  color: #333;
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  font-size: 13.125px;
+}
 
 .card-brand .image-container {
   position: relative;
