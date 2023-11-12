@@ -8,7 +8,7 @@ public interface GymPlanRepository {
 
     List<GymPlan> getAllByDepartmentId(int departmentId);
 
-    GymPlan getGymPlanByGymPlanId(int gymPlanId);
+    GymPlan getGymPlanByGymPlanId(int gymPlanId, int departmentId);
 
 
 

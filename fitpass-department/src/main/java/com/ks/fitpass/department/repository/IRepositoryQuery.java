@@ -225,11 +225,12 @@ public interface IRepositoryQuery {
 
     // Query to get all plans of a gym department
     String GET_ALL_GYM_PLANS_BY_DEPARTMENT_ID = """
-                SELECT gp.*, mkv.mst_kbn_value AS gym_plan_type
-                FROM gym_plan gp
-                JOIN mst_kbn mkv ON gp.gym_plan_type_key = mkv.mst_kbn_key
-                WHERE gp.gym_department_id = ?
-                AND mkv.mst_kbn_name = 'Gym Plan Type';
+            SELECT gp.*,gdp.gym_department_id, mkv.mst_kbn_value AS gym_plan_type
+            FROM gym_plan gp
+            JOIN mst_kbn mkv ON gp.gym_plan_type_key = mkv.mst_kbn_key
+            JOIN gym_department_plans gdp ON gp.plan_id = gdp.plan_id
+            WHERE gdp.gym_department_id = ?
+            AND mkv.mst_kbn_name = 'Gym Plan Type';
             """;
 
     // Query to get a gym plan by ID and department ID
@@ -369,39 +370,40 @@ public interface IRepositoryQuery {
 
 
     String GET_DEPARTMENT_AMENITIES_DEPARTMENT_ID = """
-                SELECT
-                    amenitie_id,
-                    gym_department_id,
-                    photo_url,
-                    amenitie_name,
-                    description
-                FROM
-                    gym_department_amenities
-                WHERE
-                    gym_department_id = ?
-            """;
+    SELECT
+        amenitie_id,
+        gym_department_id,
+        photo_url,
+        amenitie_name,
+        description
+    FROM
+        gym_department_amenities
+    WHERE
+        gym_department_id = ?
+""";
 
 
-    String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
-                SELECT
-                    gp.plan_id,
-                    gp.gym_department_id,
-                    gp.gym_plan_key,
-                    gp.gym_plan_status_key,
-                    gp.gym_plan_type_key,
-                    gp.name,
-                    gp.description,
-                    gp.price,
-                    gp.price_per_hours,
-                    gp.plan_sold,
-                    gp.duration,
-                    gp.plan_before_active_validity,
-                    gp.plan_after_active_validity,
-                    (SELECT name from fitpass.gym_department gd
-                                where gp.gym_department_id = gd.gym_department_id) as name_department
-                FROM gym_plan gp
-                WHERE
-                    gp.plan_id = ?
+String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
+        SELECT\s
+            gp.plan_id,
+            gp.brand_id,
+            gp.gym_plan_key,
+            gp.gym_plan_status_key,
+            gp.gym_plan_type_key,
+            gp.name,
+            gp.description,
+            gp.price,
+            gp.price_per_hours,
+            gp.plan_sold,
+            gp.duration,
+            gp.plan_before_active_validity,
+            gp.plan_after_active_validity,
+            gd.name AS name_department,
+            gd.gym_department_id
+        FROM gym_plan gp
+        JOIN gym_department_plans gdp ON gp.plan_id = gdp.plan_id
+        JOIN gym_department gd ON gdp.gym_department_id = gd.gym_department_id
+        WHERE gp.plan_id = ? AND gdp.gym_department_id = ?;
             """;
 
     String INSERT_ITEM_INVENTORY = """

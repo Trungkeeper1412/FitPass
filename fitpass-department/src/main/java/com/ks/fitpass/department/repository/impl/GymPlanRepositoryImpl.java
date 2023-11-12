@@ -28,7 +28,7 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
     }
 
     @Override
-    public GymPlan getGymPlanByGymPlanId(int gymPlanId) {
-        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_GYM_PLAN_BY_GYM_PLAN_ID, new Object[]{gymPlanId}, new GymPlanWithDepartmentNameMapper());
+    public GymPlan getGymPlanByGymPlanId(int gymPlanId, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_GYM_PLAN_BY_GYM_PLAN_ID, new Object[]{gymPlanId,departmentId}, new GymPlanWithDepartmentNameMapper());
     }
 }

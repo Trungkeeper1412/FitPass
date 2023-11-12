@@ -17,7 +17,7 @@ public class Cart implements Serializable {
 
     public void addItem(GymPlanDepartmentNameDto product, int quantity) {
         for (CartItem item : items) {
-            if (item.getGymPlan().getGymPlanId() == product.getGymPlanId()) {
+            if (item.getGymPlan().getGymPlanId() == product.getGymPlanId()&&item.getGymPlan().getGymPlanId()==product.getGymDepartmentId()) {
                 item.setQuantity(item.getQuantity() + quantity);
                 return;
             }
