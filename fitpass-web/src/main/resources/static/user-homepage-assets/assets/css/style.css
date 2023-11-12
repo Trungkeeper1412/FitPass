@@ -2075,6 +2075,7 @@ textarea.form-control {
 
 * {
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .mySlides {
@@ -2198,6 +2199,7 @@ select {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   justify-content: space-between;
+  font-size: 15px;
 }
 
 .sidebar-brand-icon img {
@@ -2567,11 +2569,11 @@ body {
   border-radius: 2px;
 }
 
-.fa,
-.fas {
-  font-size: 13px;
-  margin-right: 4px;
-}
+/*.fa,*/
+/*.fas {*/
+/*  font-size: 13px;*/
+/*  margin: 1px;*/
+/*}*/
 
 .card-brand .image-container {
   position: relative;

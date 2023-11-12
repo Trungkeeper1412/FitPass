@@ -4483,7 +4483,7 @@ section {
 
 .gym-dropdown{
   width: 100%;
-  height: 40px;
+  padding: 10px;
   border-radius: 5px;
 }
 .gym-dropdown-list{
