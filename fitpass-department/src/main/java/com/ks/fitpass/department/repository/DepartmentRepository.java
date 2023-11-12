@@ -1,6 +1,7 @@
 package com.ks.fitpass.department.repository;
 
 
+import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
@@ -11,7 +12,7 @@ public interface DepartmentRepository {
 
     Department getByUserId(int userId) throws DataAccessException;
 
-    List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating) throws DataAccessException;
+    List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance) throws DataAccessException;
 
     List<Department> getAllByTopRating(int status) throws DataAccessException;
 
@@ -28,4 +29,12 @@ public interface DepartmentRepository {
     List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException;
 
     List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size);
+
+    List<DepartmentListByBrandDTO> getAllDepartmentListOfBrand(int brandId);
+
+    int updateDepartmentStatus(int status, int departmentId);
+
+    int createDepartmentWithBrandId(int brandId, String name);
+
+    int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance);
 }
