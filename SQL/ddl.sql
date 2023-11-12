@@ -111,8 +111,8 @@ CREATE TABLE IF NOT EXISTS gym_department (
     wallpaper_url               VARCHAR(255) NOT NULL,
     thumbnail_url               VARCHAR(255) NOT NULL,
     description                 text,
-    latitude 		            DECIMAL(10,8) NOT NULL,
-    longitude 		            DECIMAL(11,8) NOT NULL,
+    latitude 		            DECIMAL(10,10) NOT NULL,
+    longitude 		            DECIMAL(11,10) NOT NULL,
     rating                      DECIMAL(10, 2) DEFAULT 0,
     capacity                    INT NOT NULL,
     area                        DECIMAL(10, 2),
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS gym_plan (
 
 
 CREATE TABLE IF NOT EXISTS gym_department_plans (
-                                                    gym_department_id INT,
+                                                    gym_department_id INT NOT NULL,
                                                     plan_id INT NOT NULL,
                                                     FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id),
     FOREIGN KEY (plan_id) REFERENCES gym_plan(plan_id),
