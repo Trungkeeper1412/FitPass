@@ -35,19 +35,19 @@
                                             <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                                 :</label>
                                             <input type="text" class="form-control" id="name-brand"
-                                                name="name-brand" placeholder="Cơ sở Cầu Giấy" readonly>
+                                                   name="name-brand" placeholder="Cơ sở Cầu Giấy" readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="phone" class="form-label fw-bold">Số điện thoại
                                                 :</label>
                                             <input type="text" class="form-control" id="phone" name="phone"
-                                                placeholder="Nhập số điện thoại">
+                                                   placeholder="Nhập số điện thoại">
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label fw-bold">Địa chỉ
                                                 :</label>
                                             <input type="text" class="form-control" id="address"
-                                                name="address" placeholder="Địa chỉ">
+                                                   name="address" placeholder="Địa chỉ">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -55,17 +55,155 @@
                                             <label for="capacity" class="form-label fw-bold">Sức chứa
                                                 :</label>
                                             <input type="text" class="form-control" id="capacity"
-                                                name="capacity" placeholder="Sức Chứa">
+                                                   name="capacity" placeholder="Sức Chứa">
                                         </div>
                                         <div class="mb-3">
                                             <label for="area" class="form-label fw-bold">Diện tích :</label>
                                             <input type="text" class="form-control" id="area" name="area"
-                                                placeholder="Diện tích">
+                                                   placeholder="Diện tích">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="email" class="form-label fw-bold">Email :</label>
-                                            <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Email">
+                                            <label for="provinceDropdown" class="form-label fw-bold">Chọn tỉnh/thành phố:</label>
+                                            <select class="form-select" id="provinceDropdown" name="province">
+                                                <option value="" selected disabled>Chọn tỉnh/thành phố</option>
+                                                <option value="HN">Hà Nội</option>
+                                                <option value="HCM">Hồ Chí Minh</option>
+                                                <option value="AG">An Giang</option>
+                                                <option value="BR">Bà Rịa - Vũng Tàu</option>
+                                                <option value="BG">Bắc Giang</option>
+                                                <option value="BK">Bắc Kạn</option>
+                                                <option value="BL">Bạc Liêu</option>
+                                                <option value="BN">Bắc Ninh</option>
+                                                <option value="BT">Bến Tre</option>
+                                                <option value="BĐ">Bình Định</option>
+                                                <option value="BP">Bình Phước</option>
+                                                <option value="BTH">Bình Thuận</option>
+                                                <option value="CM">Cà Mau</option>
+                                                <option value="CB">Cao Bằng</option>
+                                                <option value="DN">Đà Nẵng</option>
+                                                <option value="ĐN">Đắk Nông</option>
+                                                <option value="ĐL">Đắk Lắk</option>
+                                                <option value="ĐT">Đồng Tháp</option>
+                                                <option value="GL">Gia Lai</option>
+                                                <option value="HG">Hà Giang</option>
+                                                <option value="HD">Hải Dương</option>
+                                                <option value="HP">Hải Phòng</option>
+                                                <option value="HU">Hậu Giang</option>
+                                                <option value="HY">Hòa Bình</option>
+                                                <option value="KH">Khánh Hòa</option>
+                                                <option value="KG">Kiên Giang</option>
+                                                <option value="KT">Kon Tum</option>
+                                                <option value="LC">Lai Châu</option>
+                                                <option value="LD">Lâm Đồng</option>
+                                                <option value="LS">Lạng Sơn</option>
+                                                <option value="LA">Lào Cai</option>
+                                                <option value="LC">Long An</option>
+                                                <option value="ND">Nam Định</option>
+                                                <option value="NB">Nghệ An</option>
+                                                <option value="NT">Ninh Bình</option>
+                                                <option value="NA">Ninh Thuận</option>
+                                                <option value="PT">Phú Thọ</option>
+                                                <option value="PYN">Phú Yên</option>
+                                                <option value="QB">Quảng Bình</option>
+                                                <option value="QG">Quảng Ngãi</option>
+                                                <option value="QN">Quảng Ninh</option>
+                                                <option value="QT">Quảng Trị</option>
+                                                <option value="ST">Sóc Trăng</option>
+                                                <option value="SL">Sơn La</option>
+                                                <option value="TN">Tây Ninh</option>
+                                                <option value="TB">Thái Bình</option>
+                                                <option value="TNH">Thái Nguyên</option>
+                                                <option value="TH">Thanh Hóa</option>
+                                                <option value="TG">Thừa Thiên Huế</option>
+                                                <option value="TI">Tiền Giang</option>
+                                                <option value="TR">Trà Vinh</option>
+                                                <option value="TQ">Tuyên Quang</option>
+                                                <option value="VL">Vĩnh Long</option>
+                                                <option value="VT">Vĩnh Phúc</option>
+                                                <option value="YN">Yên Bái</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="fw-bold" for="openHours">Giờ hoạt động:</label><br>
+                                        <div class="mb-3 d-flex align-items-center align-content-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#selectOpenHoursModal">
+                                                Chọn giờ
+                                            </button>
+                                            <div class="pl-3" id="selectedOpenHours">
+                                                <label style="margin: 0" id="resultText">&#9679; Chưa chọn giờ mở cửa</label>
+                                            </div>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="selectOpenHoursModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Chọn giờ hoạt động</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Ngày</th>
+                                                                <th>Bắt đầu</th>
+                                                                <th>Kết thúc</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Thứ 2</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thứ 3</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thứ 4</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thứ 5</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thứ 6</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thứ 7</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Chủ Nhật</td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                                <td><input type="time" class="form-control"></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Đóng</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                id="saveChangesButton">Lưu
+                                                            thay đổi</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

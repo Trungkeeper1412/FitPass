@@ -1957,7 +1957,7 @@ pre code {
 .table th {
     padding: .75rem;
     vertical-align: top;
-    border: 1px solid #000000;
+    /*border: 1px solid #000000;*/
 }
 
 .table thead th {
@@ -12900,10 +12900,10 @@ label {
     width: 100%;
 }
 
-.modal-content {
-    background-color: #383434;
-    color: #ffffff;
-}
+/*.modal-content {*/
+/*    background-color: #383434;*/
+/*    color: #ffffff;*/
+/*}*/
 
 .col-md-9 .form-group input[type="text"],
 .col-md-9 .form-group input[type="tel"],
@@ -12916,8 +12916,8 @@ label {
 }
 
 .modal-content input[type="time"] {
-    background-color: #444444;
-    color: #ffffff;
+    background-color: #FFFFFF;
+    color: #000000;
 }
 
 .close {
@@ -13139,28 +13139,28 @@ a {
 }
 
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
+/*.modal {*/
+/*    display: none;*/
+/*    position: fixed;*/
+/*    z-index: 1;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
 
-.modal-content {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+/*.modal-content {*/
+/*    position: absolute;*/
+/*    width: 400px;*/
+/*    height: 400px;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    background-color: #fff;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ddd;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
+/*}*/
 
 .modal-image {
     max-width: 400px;
@@ -13565,4 +13565,8 @@ tr td i {
     color: whitesmoke;
     cursor: pointer;
     font-size: 20px;
+}
+
+.form-select {
+    border-radius: 10px;
 }
