@@ -634,27 +634,27 @@ VALUES
      'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp.',
      0, 10.00, 0, 0, 7, 14),
 
-    (2, 6, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
+    (2, 5, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
      400, 0, 0, 90, 10, 90),
 
-    (3, 7, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
+    (3, 5, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
      150.00, 0, 0, 30, 10, 30),
 
-    (4, 5, 1, 1, 1, 'Gói giờ',
+    (4, 6, 1, 1, 1, 'Gói giờ',
      'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp.',
      0, 10.00, 0, 0, 7, 14),
 
     (5, 6, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
      400, 0, 0, 90, 10, 90),
 
-    (6, 7, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
+    (6, 6, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
      150.00, 0, 0, 30, 10, 30),
 
-    (7,5, 1, 1, 1, 'Gói giờ',
+    (7,7, 1, 1, 1, 'Gói giờ',
      'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp.',
      0, 10.00, 0, 0, 7, 14),
 
-    (8,6, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
+    (8,7, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
      400, 0, 0, 90, 10, 90),
 
     (9,7, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
@@ -1788,6 +1788,12 @@ VALUES
     (5, 19, 3, 'Cần cải thiện về việc duy trì sự sạch sẽ của phòng tập.', NOW(), 1),
     (5, 20, 4, 'Được biết đến qua bạn bè và không hối hận khi đăng ký thành viên.', NOW(), 1);
 
+
+
+
+
+/***********************************************************************************************/
+
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)
 VALUES
 
@@ -2591,3 +2597,102 @@ VALUES
     (24,'https://shorturl.at/cmrF4','Cơ sở vật chất'),
     (24,'https://shorturl.at/qFIW8','Cơ sở vật chất'),
     (24,'https://shorturl.at/apJ49','Kết quả của khách hàng');
+
+INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
+VALUES
+    (1, 21, 1),
+    (2, 21, 1),
+    (3, 21, 1),
+    (4, 21, 1),
+    (5, 21, 1),
+
+    (1,22, 1),
+    (2, 22, 1),
+    (3, 22, 1),
+    (6, 22, 1),
+    (7, 22, 1),
+
+    (1, 23, 1),
+    (3, 23, 1),
+    (4, 23, 1),
+    (5, 23, 1),
+    (7, 23, 1),
+
+    (1, 24, 1),
+    (3, 24, 1),
+    (4, 24, 1),
+    (5, 24, 1),
+    (7, 24, 1),
+
+    (1, 25, 1),
+    (3, 25, 1),
+    (4, 25, 1),
+    (5, 25, 1),
+    (7, 25, 1),
+
+    (1, 26, 1),
+    (3, 26, 1),
+    (4, 26, 1),
+    (5, 26, 1),
+    (7, 26, 1),
+
+    (1, 27, 1),
+    (3, 27, 1),
+    (4, 27, 1),
+    (5, 27, 1),
+    (7, 27, 1),
+
+    (1, 28, 1),
+    (3, 28, 1),
+    (4, 28, 1),
+    (5, 28, 1),
+    (7, 28, 1),
+
+    (1, 29, 1),
+    (3, 29, 1),
+    (4, 29, 1),
+    (5, 29, 1),
+    (7, 29, 1),
+
+    (1, 30, 1),
+    (3, 30, 1),
+    (4, 30, 1),
+    (5, 30, 1),
+    (7, 30, 1),
+
+    (1, 31, 1),
+    (3, 31, 1),
+    (4, 31, 1),
+    (5, 31, 1),
+    (7, 31, 1),
+
+    (1, 32, 1),
+    (3, 32, 1),
+    (4, 32, 1),
+    (5, 32, 1),
+    (7, 32, 1),
+
+    (1, 33, 1),
+    (3, 33, 1),
+    (4, 33, 1),
+    (5, 33, 1),
+    (7, 33, 1),
+
+    (1, 34, 1),
+    (3, 34, 1),
+    (4, 34, 1),
+    (5, 34, 1),
+    (7, 34, 1),
+
+    (1, 35, 1),
+    (3, 35, 1),
+    (4, 35, 1),
+    (5, 35, 1),
+    (7, 35, 1),
+
+
+    (1, 36, 1),
+    (3, 36, 1),
+    (4, 36, 1),
+    (5, 36, 1),
+    (7, 36, 1);
