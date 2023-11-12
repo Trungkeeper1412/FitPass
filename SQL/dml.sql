@@ -1138,96 +1138,68 @@ VALUES
 
 
 
--- Create Gym plan infos for Getfit Chi nhánh Oriental (Tân Phú)
+-- Create Gym plan infos for brand 8
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES
-    (57, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (58,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (59,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+    (51, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (52,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (53,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
--- Create Gym plan infos for Getfit CHI NHÁNH HOÀNG DIỆU
+-- Create Gym plan infos for brand 9
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES
-    (63, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (64,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (65,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+    (54,9, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (55,9, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (56,9, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
--- Create Gym plan infos for Getfit Chi nhánh Mia Center
+-- Create Gym plan infos for brand 10
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES
-    (83, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (85,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (86,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
-
--- Create Gym plan infos for Elite Fitness XUÂN DIỆU
-INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
-VALUES
-    (87,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (88,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (99,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
-
--- Create Gym plan infos for Elite Fitness Bà Triệu
-INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
-VALUES
-    (78,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (79,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (62,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
-
--- Create Gym plan infos for Elite Fitness Nguyễn Chí Thanh
-INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
-VALUES
-    (67,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (68,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (69,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
-
--- Create Gym plan infos Gallery for Fit365 Fitness &Yoga Q.11
-INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
-VALUES
-    (71,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (72,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (73,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+    (57,10, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (58,10, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (59,10, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
 -- For Getfit Chi nhánh Oriental Tân Phú (department ID 57)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (57, 57), -- Gói Linh Hoạt
-                                                                 (57, 58), -- Gói 1 tháng
-                                                                 (57, 59); -- Gói 3 tháng
+                                                                 (57, 51), -- Gói Linh Hoạt
+                                                                 (57, 52), -- Gói 1 tháng
+                                                                 (57, 53); -- Gói 3 tháng
 
 -- For Getfit Chi nhánh HOÀNG DIỆU (department ID 63)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (63, 63), -- Gói Linh Hoạt
-                                                                 (63, 64), -- Gói 1 tháng
-                                                                 (63, 65); -- Gói 3 tháng
+                                                                 (63, 51), -- Gói Linh Hoạt
+                                                                 (63, 52), -- Gói 1 tháng
+                                                                 (63, 53); -- Gói 3 tháng
 
 -- For Getfit Chi nhánh Mia Center (department ID 83)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (83, 83), -- Gói Linh Hoạt
-                                                                 (83, 85), -- Gói 1 tháng
-                                                                 (83, 86); -- Gói 3 tháng
+                                                                 (83, 51), -- Gói Linh Hoạt
+                                                                 (83, 52), -- Gói 1 tháng
+                                                                 (83, 53); -- Gói 3 tháng
 
 -- For Elite Fitness XUÂN DIỆU (department ID 87)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (87, 87), -- Gói Linh Hoạt
-                                                                 (87, 88), -- Gói 1 tháng
-                                                                 (87, 99); -- Gói 3 tháng
+                                                                 (87, 54), -- Gói Linh Hoạt
+                                                                 (87, 55), -- Gói 1 tháng
+                                                                 (87, 56); -- Gói 3 tháng
 
 -- For Elite Fitness Bà Triệu (department ID 78)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (78, 78), -- Gói Linh Hoạt
-                                                                 (78, 79), -- Gói 1 tháng
-                                                                 (78, 62); -- Gói 3 tháng
+                                                                 (78, 54), -- Gói Linh Hoạt
+                                                                 (78, 55), -- Gói 1 tháng
+                                                                 (78, 56); -- Gói 3 tháng
 
 -- For Elite Fitness Nguyễn Chí Thanh (department ID 91)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (91, 67), -- Gói Linh Hoạt
-                                                                 (91, 68), -- Gói 1 tháng
-                                                                 (91, 69); -- Gói 3 tháng
+                                                                 (91, 54), -- Gói Linh Hoạt
+                                                                 (91, 55), -- Gói 1 tháng
+                                                                 (91, 56); -- Gói 3 tháng
 
 -- For Fit365 Fitness & Yoga Q.11 (department ID 52)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (52, 71), -- Gói Linh Hoạt
-                                                                 (52, 72), -- Gói 1 tháng
-                                                                 (52, 73); -- Gói 3 tháng
+                                                                 (52, 57), -- Gói Linh Hoạt
+                                                                 (52, 58), -- Gói 1 tháng
+                                                                 (52, 59); -- Gói 3 tháng
 
 -- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)

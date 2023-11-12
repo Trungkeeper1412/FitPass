@@ -35,7 +35,7 @@ public class CartController {
         int gymPlanId = addToCartRequestDTO.getGymPlanId();
         int quantity = addToCartRequestDTO.getQuantity();
         int departmentId = addToCartRequestDTO.getDepartmentId();
-        GymPlanDepartmentNameDto product = gymPlanService.getGymPlanByGymPlanId(gymPlanId);
+        GymPlanDepartmentNameDto product = gymPlanService.getGymPlanByGymPlanId(gymPlanId,departmentId);
         if (product != null && quantity > 0) {
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
@@ -46,7 +46,7 @@ public class CartController {
             // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
             boolean productExistsInCart = false;
             for (CartItem item : cart.getItems()) {
-                if (item.getGymPlan().getGymPlanId() == gymPlanId) {
+                if (item.getGymPlan().getGymPlanId() == gymPlanId&&item.getGymPlan().getGymDepartmentId()==departmentId) {
 /*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;

@@ -8,5 +8,5 @@ import java.util.List;
 public interface GymPlanService {
     List<GymPlanDto> getGymPlanDetailsByDepartmentId(int departmentId);
 
-    GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId);
+    GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId, int departmentId);
 }

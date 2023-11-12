@@ -11,7 +11,7 @@ public class GymPlanMapper implements RowMapper<GymPlan> {
     public GymPlan mapRow(ResultSet resultSet, int i) throws SQLException {
         return GymPlan.builder()
                 .planId(resultSet.getInt("plan_id"))
-                .gymDepartmentId(resultSet.getInt("gym_department_id"))
+                .brandId(resultSet.getInt("brand_id"))
                 .gymPlanKey(resultSet.getInt("gym_plan_key"))
                 .gymPlanStatusKey(resultSet.getInt("gym_plan_status_key"))
                 .gymPlanTypeKey(resultSet.getInt("gym_plan_type_key"))
@@ -23,6 +23,7 @@ public class GymPlanMapper implements RowMapper<GymPlan> {
                 .duration(resultSet.getInt("duration"))
                 .planBeforeActiveValidity(resultSet.getInt("plan_before_active_validity"))
                 .planAfterActiveValidity(resultSet.getInt("plan_after_active_validity"))
+                .gymDepartmentId(resultSet.getInt("gym_department_id"))
                 .build();
     }
 }
