@@ -12,6 +12,8 @@ public class DepartmentHomePageMapper extends DepartmentMapper {
         Department department = super.mapRow(resultSet, i);
         department.setMinPrice(resultSet.getInt("min_price"));
         department.setMaxPrice(resultSet.getInt("max_price"));
+        department.setCity(resultSet.getString("city"));
+        department.setDistance(resultSet.getDouble("distance"));
         return department;
     }
 }

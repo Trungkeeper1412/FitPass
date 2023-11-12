@@ -1,6 +1,7 @@
 package com.ks.fitpass.department.service;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -28,9 +29,9 @@ public interface DepartmentService {
 
     boolean updateStatusDepartment(Department department, DepartmentStatus departmentStatus) throws DataAccessException;
 
-    Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
+    List<Department> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
                                                                 double userLatitude, double userLongitude,
-                                                                double radiusInKm, String city, String sortPrice, String sortRating);
+                                                                String city, String sortPrice, String sortRating, String belowDistance);
     List<Department> findByRatingBetween(double from, double to);
 
 
@@ -41,5 +42,11 @@ public interface DepartmentService {
 
     List<DepartmentDTO> getDepartmentByBrandID(int brandID) throws DataAccessException;
 
+    List<DepartmentListByBrandDTO> getAllDepartmentListOfBrand(int brandId);
 
+    int updateDepartmentStatus(int status, int departmentId);
+
+    int createDepartmentWithBrandId(int brandId, String name);
+
+    int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance);
 }

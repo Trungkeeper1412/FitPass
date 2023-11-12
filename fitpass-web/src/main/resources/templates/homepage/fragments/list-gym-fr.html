@@ -3,7 +3,7 @@
         <div class="col-md-6 col-lg-6 col-xl-4 mb-4" th:each="entry : ${departmentDistanceMap}">
             <div class="card">
                 <a th:href="@{/department/department-detail/{department_id}(department_id=${entry.key.departmentId})}">
-                <div class="distance" style="border-radius: 20px 20px 0 0;background-color: rgb(214, 214, 214);width: 100%;text-align: center;font-size: 18px;color: rgb(0, 0, 0);padding: 10px;font-weight: 600;">
+                <div class="card distance-flag" style="border-radius: 20px 20px 0 0;background-color: rgb(214, 214, 214);width: 100%;text-align: center;font-size: 18px;color: rgb(0, 0, 0);padding: 10px;font-weight: 600;">
                     <span><img src="https://cdn-icons-png.flaticon.com/128/5774/5774388.png" style="width: 22px;"></span>
                     <span>Cách bạn <th:block th:text="${#numbers.formatDecimal(entry.value,1,2,'COMMA')}"></th:block> km</span>
                 </div>

@@ -59,6 +59,7 @@ h6 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   justify-content: space-between;
+  font-size: 15px;
 }
 .search-bar input {
   border: none;
@@ -2345,16 +2346,15 @@ a:link {
   border: 1px solid #ccc;
   display: none;
   min-width: 150px;
-  /* Tùy chỉnh kích thước của dropdown menu */
   z-index: 1;
 }
 
 .dropdown-menu a {
   color: #333;
-  /* Tùy chỉnh màu sắc của các mục trong menu */
   padding: 10px 15px;
   display: block;
   text-decoration: none;
+  font-size: 13.125px;
 }
 
 .dropdown-menu a:hover {
@@ -4457,7 +4457,7 @@ section {
 .list-of-gym .gym-dept-info{
   width: 100%;
   height: 250px;
-  padding: 0px 20px 20px 20px;
+  padding: 0 20px 20px 20px;
 }
 .gym-dept-info img{
   width: 20px;
@@ -4483,7 +4483,7 @@ section {
 
 .gym-dropdown{
   width: 100%;
-  height: 40px;
+  padding: 10px;
   border-radius: 5px;
 }
 .gym-dropdown-list{
@@ -4509,11 +4509,29 @@ section {
   /* height: 650px; */
   overflow: hidden;
 }
-.list-of-gym .card img{
+.list-of-gym .card .distance-flag{
+  border-radius: 20px 20px 0 0;
+  background-color: rgb(214, 214, 214);
   width: 100%;
-  padding-top: 5px;
-  height: 30%;
+  text-align: center;
+  font-size: 18px;color: rgb(0, 0, 0);
+  padding: 10px;
+  font-weight: 600;
 }
+
+.list-of-gym .card .distance-flag img{
+  width: 22px;
+  padding-top: 0;
+  height: fit-content;
+}
+
+.list-of-gym .card-img-top{
+  /*padding-top: 5px;*/
+  width: 100%;
+  height: 250px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+
 .list-of-gym .card-body label {
   font-weight: bold;
 }
@@ -4522,11 +4540,11 @@ section {
   min-height: 80px;
 }
 .list-of-gym .card-text {
-  /*min-height: 70px;*/
+  min-height: 70px;
 }
 .review-section {
-  /*padding-top: 10px;*/
-  /*margin-bottom: -10px;*/
+  padding-top: 10px;
+  margin-bottom: -10px;
 }
 .credit {
   color: orange;

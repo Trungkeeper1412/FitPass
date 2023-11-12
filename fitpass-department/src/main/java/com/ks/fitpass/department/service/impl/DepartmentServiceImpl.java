@@ -1,6 +1,7 @@
 package com.ks.fitpass.department.service.impl;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -67,32 +69,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Map<DepartmentDTO, Double> getAllDepartmentByNearbyLocation(int page, int size,
+    public List<Department> getAllDepartmentByNearbyLocation(int page, int size,
                                                                        double userLatitude, double userLongitude,
-                                                                       double radiusInKm, String city, String sortPrice, String sortRating) {
-        // To do: Implement paging
-        List<Department> allDepartments = departmentRepository.getAllByStatus(1, page, size, city, sortPrice, sortRating);
+                                                                    String city, String sortPrice, String sortRating, String belowDistance) {
 
-        // Create a map to associate DepartmentDTO with its distance
-        Map<DepartmentDTO, Double> departmentDistanceMap = new LinkedHashMap<>();
-
-        // Calculate and add distance for each department
-        for (Department department : allDepartments) {
-            double distance = calculateDistance(userLatitude, userLongitude, department.getLatitude(), department.getLongitude());
-            if (distance <= radiusInKm) {
-                DepartmentDTO departmentDTO = departmentDTOMapper(department);
-                departmentDistanceMap.put(departmentDTO, distance);
-            }
-        }
-
-        // Sort the map by distance
-        departmentDistanceMap = departmentDistanceMap.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (e1, e2) -> e1, LinkedHashMap::new));
-
-        return departmentDistanceMap;
+        return departmentRepository.getAllByStatus(1, page, size, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
     }
 
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
@@ -216,6 +197,25 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
     }
 
+    @Override
+    public List<DepartmentListByBrandDTO> getAllDepartmentListOfBrand(int brandId) {
+        return departmentRepository.getAllDepartmentListOfBrand(brandId);
+    }
+
+    @Override
+    public int updateDepartmentStatus(int status, int departmentId) {
+        return departmentRepository.updateDepartmentStatus(status, departmentId);
+    }
+
+    @Override
+    public int createDepartmentWithBrandId(int brandId, String name) {
+        return departmentRepository.createDepartmentWithBrandId(brandId, name);
+    }
+
+    @Override
+    public int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance) {
+        return departmentRepository.countAllDepartment(status, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
+    }
 }
 
 

@@ -77,7 +77,6 @@ function loadCalendar(data){
         weekNumbers: true,
         navLinks: true, // can click day/week names to navigate views
         editable: false,
-
         dayMaxEvents: true, // allow "more" link when too many events
         events: allEvent,
         eventDidMount: function (info) {
@@ -99,7 +98,6 @@ function loadCalendar(data){
                 menu.style.left = e.pageX + 'px';
 
                 // Edit context menu
-
                 menu.querySelector('li:first-child').addEventListener('click', function () {
                     menu.remove();
 
@@ -183,21 +181,24 @@ function loadCalendar(data){
                 });
             });
         },
+        dateClick: function (info) {
+            myModal.show();
+            const modalTitle = document.getElementById('modal-title');
+            const submitButton = document.getElementById('submit-button');
+            modalTitle.innerHTML = 'Kế hoạch tập'
+            submitButton.innerHTML = 'Lưu kế hoạch'
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-primary');
 
+            // Set start date in the form
+            const startDateInput = document.getElementById('start-date');
+            startDateInput.value = moment(info.date).format('YYYY-MM-DD');
+
+            close.addEventListener('click', () => {
+                myModal.hide();
+            });
+        },
     });
-
-    // calendar.on('select', function (info) {
-    //
-    //     const startDateInput = document.getElementById('start-date');
-    //     const endDateInput = document.getElementById('end-date');
-    //     startDateInput.value = info.startStr;
-    //     const endDate = moment(info.endStr, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
-    //     endDateInput.value = endDate;
-    //     if (startDateInput.value === endDate) {
-    //         endDateInput.value = '';
-    //     }
-    //     console.log(1);
-    // });
 
     calendar.render();
 

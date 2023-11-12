@@ -4,12 +4,15 @@ import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
+import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.brand.service.*;
 import com.ks.fitpass.brand.entity.*;
 import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
+import com.stripe.param.tax.RegistrationCreateParams;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -23,9 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,21 +50,21 @@ public class HomepageController {
 //            brandDepartmentsMap.put(brand.getBrandId(), departmentList);
 //        }
 
-        // Get list of departments, default sorted by rating
-        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
+//        // Get list of departments, default sorted by rating
+//        List<DepartmentDTO> departmentDTOList = departmentService.getAllDepartmentTopRatingForHome(1, 5);
 
         double credit = walletService.getBalanceByUserId(user.getUserId());
         session.setAttribute("userCredit", credit);
 
 //        model.addAttribute("brands", brandList);
 //        model.addAttribute("brandDepartmentsMap", brandDepartmentsMap);
-        model.addAttribute("departments", departmentDTOList);
+//        model.addAttribute("departments", departmentDTOList);
         session.setAttribute("userInfo", user);
         return "homepage/homepage-user";
     }
 
     @GetMapping("/homepage/brand")
-    public ResponseEntity<BrandPagnition> getBrandWithPagnition(@RequestParam(defaultValue = "1") int page,
+    public ResponseEntity<BrandPagnition> getBrandWithPagination(@RequestParam(defaultValue = "1") int page,
                                                                 @RequestParam(defaultValue = "2") int size,
                                                                 @RequestParam(required = false) String sortPrice,
                                                                 @RequestParam(required = false) String sortRating) {
@@ -86,18 +87,27 @@ public class HomepageController {
     }
 
     @PostMapping("/homepage")
-    public String getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
-                                          @RequestParam("userLongitude") double userLongitude,
-                                          @RequestParam(defaultValue = "1") int page,
-                                          @RequestParam(defaultValue = "2") int size,
-                                          Model model,
-                                          @RequestParam(required = false) String city,
-                                          @RequestParam(required = false) String sortPrice,
-                                          @RequestParam(required = false) String sortRating) {
-        Map<DepartmentDTO, Double> departmentDistanceMap = departmentService.getAllDepartmentByNearbyLocation(
-                page, size, userLatitude, userLongitude, 10, city, sortPrice, sortRating);
-        model.addAttribute("departmentDistanceMap",departmentDistanceMap);
-        return "homepage/fragments/list-gym-fr";
+    public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
+                                                                               @RequestParam("userLongitude") double userLongitude,
+                                                                               @RequestParam(defaultValue = "1") int page,
+                                                                               @RequestParam(defaultValue = "2") int size,
+                                                                               @RequestParam(required = false, defaultValue = "") String city,
+                                                                               @RequestParam(required = false, defaultValue = "") String sortPrice,
+                                                                               @RequestParam(required = false, defaultValue = "0") String sortRating,
+                                                                               @RequestParam(required = false, defaultValue = "10") String belowDistance) {
+
+        List<Department> departmentList = departmentService.getAllDepartmentByNearbyLocation(
+                page, size, userLatitude, userLongitude,  city, sortPrice, sortRating, belowDistance);
+        int totalDepartment = departmentService.countAllDepartment(1, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
+        int totalPages = (int) Math.ceil((double) totalDepartment / size);
+        int currentPage = page;
+
+        DepartmentHomePagePagnition departmentHomePagePagnition = new DepartmentHomePagePagnition();
+        departmentHomePagePagnition.setDepartmentList(departmentList);
+        departmentHomePagePagnition.setTotalPage(totalPages);
+        departmentHomePagePagnition.setCurrentPage(currentPage);
+
+        return ResponseEntity.ok(departmentHomePagePagnition);
     }
 
     @GetMapping("/profile/calendar")
