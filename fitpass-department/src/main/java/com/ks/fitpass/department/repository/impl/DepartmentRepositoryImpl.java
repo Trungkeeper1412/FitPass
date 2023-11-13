@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,43 +83,60 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         int offset = (page - 1) * size;
         String sql = GET_ALL_DEPARTMENT_BY_STATUS;
 
-        if (userLatitude != 0 && userLongitude != 0) {
-            sql += " HAVING distance <= :belowDistance";
+
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(userLatitude);
+        parameters.add(userLongitude);
+        parameters.add(userLatitude);
+        parameters.add(status);
+
+        if(userLatitude != 0 && userLongitude != 0) {
+            sql += " HAVING distance <= ? \n";
+            parameters.add(belowDistance);
         }
 
-        if (sortRating != null && !sortRating.isEmpty()) {
-            sql += " ORDER BY d.rating >= :sortRating DESC";
-        } else if (sortPrice != null && !sortPrice.isEmpty()) {
-            sql += " ORDER BY " + getSortPriceQuery(sortPrice);
-        } else {
-            sql += " ORDER BY d.rating DESC";
+        if(sortRating != null && !sortRating.isEmpty()) {
+            sql +=  " AND d.rating >=  ? \n";
+            parameters.add(sortRating);
         }
 
-        if (userLatitude != 0 && userLongitude != 0) {
-            sql += ", distance ASC) AS department LIMIT :limitSize OFFSET :limitOffset";
-        } else {
-            sql += ") AS department LIMIT :limitSize OFFSET :limitOffset";
+        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
+            sql +=  " AND d.city =  ? \n";
+            parameters.add(city);
         }
 
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("userLatitude", userLatitude);
-        parameters.addValue("userLongitude", userLongitude);
-        parameters.addValue("belowDistance", belowDistance);
-        parameters.addValue("sortRating", sortRating);
-        parameters.addValue("limitSize", size);
-        parameters.addValue("limitOffset", offset);
-        parameters.addValue("status", status);
+        if(sortPrice != null && !sortPrice.isEmpty()) {
+            if(sortPrice.equals("lowToHigh")) {
+                sql += " ORDER BY max_price asc, \n" +
+                        " min_price asc \n";
+            } else {
+                sql += " ORDER BY max_price desc, \n" +
+                        " min_price desc \n";
+            }
+        }
 
-        return namedParameterJdbcTemplate.query(sql, parameters, new DepartmentHomePageMapper());
+        if(userLatitude == 0 && userLongitude == 0) {
+            if(sortPrice == null && sortPrice.isEmpty()) {
+                sql += "ORDER BY d.rating DESC";
+            } else {
+                sql += ", d.rating DESC";
+            }
+        }
+
+        sql += " LIMIT ? OFFSET ?";
+        parameters.add(size);
+        parameters.add(offset);
+
+        return jdbcTemplate.query(sql, parameters.toArray(), new DepartmentHomePageMapper());
     }
 
-    private String getSortPriceQuery(String sortPrice) {
-        if (sortPrice.equals("lowToHigh")) {
-            return "min_price ASC, max_price ASC";
-        } else {
-            return "max_price DESC, min_price DESC";
-        }
-    }
+//    private String getSortPriceQuery(String sortPrice) {
+//        if (sortPrice.equals("lowToHigh")) {
+//            return "min_price ASC, max_price ASC";
+//        } else {
+//            return "max_price DESC, min_price DESC";
+//        }
+//    }
     @Override
     public List<Department> getAllByTopRating(int status) throws DataAccessException {
         return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), status);
