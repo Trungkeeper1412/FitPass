@@ -6498,12 +6498,8 @@ a.close.disabled {
 
 .modal-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 1rem 1rem;
-    border-bottom: 1px solid #e3e6f0;
-    border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px)
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-header .close {
@@ -6526,11 +6522,7 @@ a.close.disabled {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-end;
-    padding: .75rem;
-    border-top: 1px solid #e3e6f0;
-    border-bottom-right-radius: calc(.3rem - 1px);
-    border-bottom-left-radius: calc(.3rem - 1px)
+    justify-content: space-between;
 }
 
 .modal-footer>* {
@@ -12900,11 +12892,6 @@ label {
     width: 100%;
 }
 
-/*.modal-content {*/
-/*    background-color: #383434;*/
-/*    color: #ffffff;*/
-/*}*/
-
 .col-md-9 .form-group input[type="text"],
 .col-md-9 .form-group input[type="tel"],
 .col-md-9 .form-group textarea,
@@ -13569,4 +13556,21 @@ tr td i {
 
 .form-select {
     border-radius: 10px;
+}
+
+.withdraw {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    display: flex;
+    justify-content: end;
+    align-content: center;
+}
+
+.withdraw span {
+    display: block;
+}
+
+.totalTransactions {
+    font-size: 18px;
 }
