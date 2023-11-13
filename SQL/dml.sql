@@ -1,8 +1,9 @@
 /********** Role Creation ***********/
 INSERT INTO role (role_id, role_name) VALUES (1, 'ROLE_ADMIN');
-INSERT INTO role (role_id, role_name) VALUES (2, 'ROLE_MANAGER');
+INSERT INTO role (role_id, role_name) VALUES (2, 'ROLE_GYM_OWNER');
 INSERT INTO role (role_id, role_name) VALUES (3, 'ROLE_EMPLOYEE');
 INSERT INTO role (role_id, role_name) VALUES (4, 'ROLE_USER');
+INSERT INTO role (role_id, role_name) VALUES (5, 'ROLE_BRAND_OWNER');
 
 /********** User Creation ***********/
 -- Admin creation
@@ -14,7 +15,22 @@ VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St',
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
-
+-- Brand Owner Creation
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted)
+VALUES
+    (6, 'brandOwner1', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (7, 'brandOwner2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (8, 'brandOwner3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (9, 'brandOwner4', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (10, 'brandOwner5', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (11, 'brandOwner6', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (12, 'brandOwner7', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (13, 'brandOwner8', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (14, 'brandOwner9', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (15, 'brandOwner10', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (16, 'brandOwner11', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (17, 'brandOwner12', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0),
+    (18, 'brandOwner13', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0);
 -- Gym Owner creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
@@ -24,6 +40,287 @@ VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '1234567890', '123 Main St',
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (2, 'gymowner', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 2);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (19, 'Nguyễn', 'Văn A', 'gymowner1@example.com', '1234567890', '123 Main St', '1990-01-01', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (19, 'gymowner1', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 19);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (20, 'Trần', 'Thị B', 'gymowner2@example.com', '2345678901', '456 Oak St', '1985-07-15', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (20, 'gymowner2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 20);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (21, 'Lê', 'Văn C', 'gymowner3@example.com', '3456789012', '789 Elm St', '1992-03-25', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (21, 'gymowner3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 21);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (22, 'Ngô', 'Thị D', 'gymowner4@example.com', '4567890123', '789 Elm St', '1995-09-12', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (22, 'gymowner4', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 22);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (23, 'Hoàng', 'Văn E', 'gymowner5@example.com', '5678901234', '567 Pine St', '1988-11-30', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (23, 'gymowner5', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 23);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (24, 'Đặng', 'Thị F', 'gymowner6@example.com', '6789012345', '890 Maple St', '1993-06-20', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (24, 'gymowner6', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 24);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (25, 'Phạm', 'Văn G', 'gymowner7@example.com', '7890123456', '123 Cherry St', '1991-04-18', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (25, 'gymowner7', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 25);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (26, 'Vũ', 'Thị H', 'gymowner8@example.com', '8901234567', '456 Walnut St', '1987-02-09', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (26, 'gymowner8', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 26);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (27, 'Nguyễn', 'Văn I', 'gymowner9@example.com', '9012345678', '789 Walnut St', '1994-12-05', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (27, 'gymowner9', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 27);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (28, 'Hồ', 'Thị J', 'gymowner10@example.com', '0123456789', '123 Oak St', '1996-08-22', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (28, 'gymowner10', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 28);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (29, 'Trương', 'Văn K', 'gymowner11@example.com', '1234567890', '456 Maple St', '1997-11-13', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (29, 'gymowner11', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 29);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (30, 'Lý', 'Thị L', 'gymowner12@example.com', '2345678901', '789 Pine St', '1998-05-26', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (30, 'gymowner12', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 30);
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (31, 'Trần', 'Văn M', 'gymowner13@example.com', '3456789012', '123 Elm St', '1999-02-28', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (31, 'gymowner13', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 31);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (32, 'Nguyễn', 'Thị N', 'gymowner14@example.com', '4567890123', '456 Cherry St', '2000-09-15', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (32, 'gymowner14', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 32);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (33, 'Đỗ', 'Văn P', 'gymowner15@example.com', '5678901234', '789 Oak St', '2001-04-10', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (33, 'gymowner15', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 33);
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (34, 'Lê', 'Thị Q', 'gymowner16@example.com', '6789012345', '123 Pine St', '2002-11-25', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (34, 'gymowner16', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 34);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (35, 'Hoàng', 'Văn R', 'gymowner17@example.com', '7890123456', '456 Elm St', '2003-08-15', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (35, 'gymowner17', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 35);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (36, 'Nguyễn', 'Thị S', 'gymowner18@example.com', '8901234567', '789 Cherry St', '2004-05-10', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (36, 'gymowner18', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 36);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (37, 'Trần', 'Văn T', 'gymowner19@example.com', '9012345678', '123 Walnut St', '2005-02-28', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (37, 'gymowner19', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 37);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (38, 'Phạm', 'Thị U', 'gymowner20@example.com', '0123456789', '456 Pine St', '2006-09-15', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (38, 'gymowner20', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 38);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (39, 'Nguyễn', 'Văn V', 'gymowner21@example.com', '1234567890', '789 Oak St', '2007-04-10', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (39, 'gymowner21', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 39);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (40, 'Ngô', 'Thị X', 'gymowner22@example.com', '2345678901', '123 Maple St', '2008-11-25', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (40, 'gymowner22', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 40);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (41, 'Vũ', 'Văn Y', 'gymowner23@example.com', '3456789012', '456 Walnut St', '2009-08-15', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (41, 'gymowner23', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 41);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (42, 'Hoàng', 'Thị Z', 'gymowner24@example.com', '4567890123', '789 Elm St', '2010-05-10', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (42, 'gymowner24', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 42);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (43, 'Trần', 'Thị A', 'gymowner25@example.com', '5678901234', '123 Oak St', '2011-02-28', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (43, 'gymowner25', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 43);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (44, 'Nguyễn', 'Văn B', 'gymowner26@example.com', '6789012345', '456 Cherry St', '2012-09-15', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (44, 'gymowner26', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 44);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (45, 'Phạm', 'Thị C', 'gymowner27@example.com', '7890123456', '789 Walnut St', '2013-04-10', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (45, 'gymowner27', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 45);
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (46, 'Lê', 'Văn F', 'gymowner30@example.com', '9012345678', '123 Maple St', '1995-08-20', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (46, 'gymowner28', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 46);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (47, 'Hoàng', 'Thị G', 'gymowner31@example.com', '0123456789', '456 Cherry St', '1998-04-15', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (47, 'gymowner29', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 47);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (48, 'Nguyễn', 'Văn H', 'gymowner32@example.com', '1234567890', '789 Elm St', '2000-01-10', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (48, 'gymowner30', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 48);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (49, 'Nguyen', 'Thị I', 'gymowner33@example.com', '2345678901', '789 Oak St', '1992-03-25', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (49, 'gymowner31', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 49);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (50, 'Tran', 'Văn J', 'gymowner34@example.com', '3456789012', '456 Walnut St', '1994-11-12', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (50, 'gymowner32', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 50);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (51, 'Pham', 'Thị K', 'gymowner35@example.com', '4567890123', '789 Maple St', '1997-07-05', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (51, 'gymowner33', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 51);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (52, 'Nguyen', 'Van L', 'gymowner36@example.com', '5678901234', '123 Oak St', '1988-09-18', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (52, 'gymowner34', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 52);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (53, 'Tran', 'Thi M', 'gymowner37@example.com', '6789012345', '456 Cherry St', '1991-05-31', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (53, 'gymowner35', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 53);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (54, 'Pham', 'Van N', 'gymowner38@example.com', '7890123456', '789 Walnut St', '1986-12-10', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (54, 'gymowner36', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 54);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (55, 'Trần', 'Thị O', 'gymowner39@example.com', '8901234567', '123 Elm St', '1993-06-28', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (55, 'gymowner37', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 55);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (56, 'Lê', 'Văn P', 'gymowner40@example.com', '9012345678', '456 Oak St', '1990-02-15', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (56, 'gymowner38', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 56);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (57, 'Nguyễn', 'Thị Q', 'gymowner41@example.com', '0123456789', '789 Cherry St', '1996-09-10', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (57, 'gymowner39', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 57);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (58, 'Nguyen', 'Van R', 'gymowner42@example.com', '2345678901', '123 Walnut St', '1994-07-22', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (58, 'gymowner40', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 58);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (59, 'Tran', 'Thi S', 'gymowner43@example.com', '3456789012', '456 Maple St', '1997-03-12', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (59, 'gymowner41', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 59);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (60, 'Pham', 'Van T', 'gymowner44@example.com', '4567890123', '789 Oak St', '1999-10-05', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (60, 'gymowner42', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 60);
+
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (61, 'Nguyen', 'Thị U', 'gymowner45@example.com', '5678901234', '123 Cherry St', '1992-08-15', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (61, 'gymowner43', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 61);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (62, 'Tran', 'Văn V', 'gymowner46@example.com', '6789012345', '456 Elm St', '1995-11-28', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (62, 'gymowner44', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 62);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (63, 'Pham', 'Thị X', 'gymowner47@example.com', '7890123456', '789 Walnut St', '1998-04-10', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (63, 'gymowner45', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 63);
 
 -- Employee creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
@@ -53,7 +350,6 @@ VALUES (5, 'Dinh', 'Tuan Anh', 'tuananh@gmail.com', '0987654321', '123 Main St',
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted,user_detail_id)
 VALUES (5, 'anhdt', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 5);
-
 -- Assign role for users
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (1, 1, 1);
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (2, 2, 2);
@@ -61,18 +357,93 @@ INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (3, 3, 3);
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (4, 4, 4);
 INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (5, 5, 4);
 
+-- Assign role for brand owner
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (6, 6, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (7, 7, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (8, 8, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (9, 9, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (10, 10, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (11, 11, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (12, 12, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (13, 13, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (14, 14, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (15, 15, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (16, 16, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (17, 17, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (18, 18, 5);
+
+-- Assign role for gym owner
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (19, 19, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (20, 20, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (21, 21, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (22, 22, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (23, 23, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (24, 24, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (25, 25, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (26, 26, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (27, 27, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (28, 28, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (29, 29, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (30, 30, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (31, 31, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (32, 32, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (33, 33, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (34, 34, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (35, 35, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (36, 36, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (37, 37, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (38, 38, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (39, 39, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (40, 40, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (41, 41, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (42, 42, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (43, 43, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (44, 44, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (45, 45, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (46, 46, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (47, 47, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (48, 48, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (49, 49, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (50, 50, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (51, 51, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (52, 52, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (53, 53, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (54, 54, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (55, 55, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (56, 56, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (57, 57, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (58, 58, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (59, 59, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (60, 60, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (61, 61, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (62, 62, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id) VALUES (63, 63, 2);
+
 -- User Wallet insert
 INSERT INTO wallet (user_id, balance) VALUES (1,20000);
 INSERT INTO wallet (user_id, balance) VALUES (2,20000);
 INSERT INTO wallet (user_id, balance) VALUES (3,0);
 INSERT INTO wallet (user_id, balance) VALUES (4,1000);
 INSERT INTO wallet (user_id, balance) VALUES (5,1000);
-
+-- Brand Owner Wallet insert
+INSERT INTO wallet (user_id, balance) VALUES (6, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (7, 2000);
+INSERT INTO wallet (user_id, balance) VALUES (8, 10000);
+INSERT INTO wallet (user_id, balance) VALUES (9, 1000);
+INSERT INTO wallet (user_id, balance) VALUES (10, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (11, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (12, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (13, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (14, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (15, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (16, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (17, 20000);
+INSERT INTO wallet (user_id, balance) VALUES (18, 20000);
 /********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)
 VALUES
-    ( 5,1, 'Citi Gym',
+    ( 5,6, 'Citi Gym',
       'https://bom.so/T5HfJy',
       'https://bom.so/tr8QwM',
       'https://bom.so/ph2Fq2',
@@ -83,7 +454,7 @@ VALUES
   Ngoài ra, nếu sở hữu thẻ tập hội viên, bạn được quyền đến bất kỳ phòng tập tại TPHCM của thương hiệu để luyện tập thể thao và chăm sóc sức khỏe.',
       4, '1900 633 638', 'marketing@citigym.com.vn', 1),
 
-    ( 6,1, 'California Fitness & Yoga',
+    ( 6,7, 'California Fitness & Yoga',
       'https://bom.so/6MN7vp',
       'https://bom.so/IuUyjS',
       'https://bom.so/bGRVgN',
@@ -93,7 +464,7 @@ VALUES
       4.5, '(028) 7308 2277', 'cali@gmail.com', 1),
 
 
-    ( 7,1, 'Fit 24 – Fitness & Yoga Center',
+    ( 7,8, 'Fit 24 – Fitness & Yoga Center',
       'https://bom.so/gaVGez',
       'https://bom.so/68NAw5',
       'https://bom.so/TpJFtS',
@@ -135,31 +506,31 @@ INSERT INTO mst_kbn (mst_kbn_name, mst_kbn_key, mst_kbn_value) VALUES ('BRAND_ST
 
 
 -- Create Gym Department infos
-INSERT INTO gym_department (gym_department_id, brand_id,gym_department_status_key, name, address, contact_number,
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number,
                             logo_url, wallpaper_url, thumbnail_url,description, latitude, longitude, capacity, area)
 VALUES
-    (1,5,1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '1900633638',
+    (1,5,19,1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '1900633638',
      'https://bom.so/T5HfJy',
      'https://bom.so/i2mp74',
      'https://bom.so/PrIhQF',
      'Phòng gym quận 10 Citigym Thành Thái là phòng tập đẳng cấp được khai trương đầu tiên của hệ thống Citigym tọa lạc tại trung tâm quận 10. Nơi đây có không gian luyện tập mang hơi thở thiên nhiên năng động, thoải mái, đem đến cho bạn cảm giác thật hào hứng, sảng khoái khi tập luyện. Phòng tập của Citigym Thành Thái được trang bị đầy đủ các thiết bị hiện đại, cao cấp từ những thương hiệu hàng đầu thế giới như Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills. Đây cũng là hệ thống phòng tập đầu tiên tại TP HCM sử dụng dụng cụ tạ đòn, bục nhảy SmartBar, SmartStep của LesMills.',
      10.770294326858476, 106.66638328225508, 200, 5500),
 
-    (2,5,1, 'CITIGYM PHỔ QUANG', '119 Phổ Quang, Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh', ' 1900633638',
+    (2,5,20,1, 'CITIGYM PHỔ QUANG', '119 Phổ Quang, Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh', ' 1900633638',
      'https://bom.so/T5HfJy',
      'https://bom.so/whpmm3',
      'https://bom.so/agm7XG',
      'Phòng tập gym quận Phú Nhuận CITIGYM Phổ Quang với thiết kế lấy cảm hứng thiên nhiên, đưa cây xanh vào phòng tập cho phép hội viên thoải mái tập luyện với diện tích 4000m2. Phòng tập hiện đại mang hơi thở của thiên nhiên giúp hội viên cảm nhận năng lượng nhiệt huyết đồng thời cảm giác thư thái sau ngày dài làm việc. Ngoài ra, khi đến CLB Phổ Quang hội viên còn có cơ hội trải nghiệm hệ thống máy tập và dụng cụ hiện đại bậc nhất, nhập khẩu từ các thương hiệu nước ngoài hàng đầu cũng như chất lượng dịch vụ đẳng cấp 5 sao.',
      10.809065977594821, 106.67174681287801, 200, 4000),
 
-    (3,5,1, 'CITIGYM BẾN VÂN ĐỒN', '34-35 Bến Vân Đồn, Phường 12, Quận 4, Thành phố Hồ Chí Minh', ' 1900633638',
+    (3,5,21,1, 'CITIGYM BẾN VÂN ĐỒN', '34-35 Bến Vân Đồn, Phường 12, Quận 4, Thành phố Hồ Chí Minh', ' 1900633638',
      'https://bom.so/T5HfJy',
      'https://bom.so/XDQUdd',
      'https://bom.so/jtjjOf',
      'Phòng gym quận 4 CITIGYM Bến Vân Đồn tọa lạc tại vị trí đắc địa tại mặt tiền Bến Vân Đồn, cách quận 1 chỉ vài phút đi bộ, hướng nhìn ra sông Sài Gòn. Đến ngay CLB Bến Vân Đồn để trải nghiệm không gian tập luyện sang trọng và rộng rãi có một không hai với tầm nhìn thành phố 2 mặt tiền, thỏa thích tập các bộ môn nhóm đông người. Không chỉ là cơ sở hạ tầng, CLB Bến Vân Đồn còn được biết đến với hệ thống máy tập và dụng cụ hiện đại bậc nhất, nhập khẩu từ các thương hiệu nổi tiếng nước ngoài.',
      10.767283248645954, 106.70370099574525, 200, 5000),
 
-    (4,5,1, 'CITIGYM VẠN HẠNH MALL', 'Lầu 7 TTTM Vạn Hạnh Mall, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '1900633638',
+    (4,5,22,1, 'CITIGYM VẠN HẠNH MALL', 'Lầu 7 TTTM Vạn Hạnh Mall, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '1900633638',
      'https://bom.so/T5HfJy',
      'https://bom.so/wEoPa9',
      'https://bom.so/Nmuqc0',
@@ -167,42 +538,42 @@ VALUES
      10.770899546871222, 106.66895996876498, 200, 2000),
 
 
-    (5,6,1, 'CALIFORNIA WEST POINT - QUẬN TÂY HỒ', 'Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội.', '(024) 7300 1777',
+    (5,6,23,1, 'CALIFORNIA WEST POINT - QUẬN TÂY HỒ', 'Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội.', '(024) 7300 1777',
      'https://bom.so/6MN7vp',
      'https://bom.so/bpbfDn',
      'https://bom.so/wEoPa9',
      'Sang trọng, đẳng cấp, tinh tế trong từng chi tiết đó chính là những trải nghiệm tuyệt vời chỉ có khi bạn bước chân vào CLB California Centuryon West Point quận Tây Hồ. Một nơi tập luyện đạt chuẩn quốc tế cùng với các tiện ích phục hồi năng lượng tích hợp, đặc biệt có hồ bơi thư giãn chắc chắn sẽ mang lại cho bạn những trải nghiệm chưa từng có. Khám phá ngay hôm nay!',
      21.066572880558276, 105.8262971113118, 100, 2000),
 
-    (6,6,1, 'CALIFORNIA VINCOM STAR CITY - QUẬN CẦU GIẤY', 'Tầng 3, Trung tâm thương mại Vincom Star City, 119 đường Trần Duy Hưng, P. Trung Hòa, Q. Cầu Giấy, Hà Nội', '(024) 7300 1277',
+    (6,6,24,1, 'CALIFORNIA VINCOM STAR CITY - QUẬN CẦU GIẤY', 'Tầng 3, Trung tâm thương mại Vincom Star City, 119 đường Trần Duy Hưng, P. Trung Hòa, Q. Cầu Giấy, Hà Nội', '(024) 7300 1277',
      'https://bom.so/6MN7vp',
      'https://bom.so/w8xQZa',
      'https://bom.so/YjALju',
      'Sang trọng, đẳng cấp, tinh tế trong từng chi tiết đó chính là những trải nghiệm tuyệt vời chỉ có khi bạn bước chân vào CLB California Centuryon West Point quận Tây Hồ. Một nơi tập luyện đạt chuẩn quốc tế cùng với các tiện ích phục hồi năng lượng tích hợp, đặc biệt có hồ bơi thư giãn chắc chắn sẽ mang lại cho bạn những trải nghiệm chưa từng có. Khám phá ngay hôm nay!',
      21.00592534375174, 105.79509157389299, 100, 2000),
 
-    (7,6,1, 'CALIFORNIA TIMES CITY - QUẬN HAI BÀ TRƯNG', 'Time City Megamall, Tòa nhà T18, 458 Minh Khai, P. Vĩnh Tuy, Q. Hai Bà Trưng, Hà Nội', '(024) 7107 9999',
+    (7,6,25,1, 'CALIFORNIA TIMES CITY - QUẬN HAI BÀ TRƯNG', 'Time City Megamall, Tòa nhà T18, 458 Minh Khai, P. Vĩnh Tuy, Q. Hai Bà Trưng, Hà Nội', '(024) 7107 9999',
      'https://bom.so/6MN7vp',
      'https://bom.so/w8xQZa',
      'https://bom.so/YjALju',
      'Vượt qua mọi trở ngại khiến bạn mất động lực khi tập luyện. Trải nghiệm ngay California Fitness & Yoga quận Hai Bà Trưng - cộng đồng yêu thích lối sống năng động và khoẻ mạnh lớn nhất tại Hà Nội. Với trang thiết bị đầy đủ cùng với chương trình tập luyện đa dạng và các tiện ích phục hồi năng lượng tiêu chuẩn 5 sao như hồ bơi trong nhà, bạn sẽ luôn được truyền cảm hứng để duy trì lối sống lành mạnh.',
      21.00592534375174, 105.79509157389299, 100, 2000),
 
-    (8,6,1, 'CALIFORNIA SKY CITY TOWER - QUẬN ĐỐNG ĐA', 'Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q. Đống Đa, Hà Nội', '(024) 7109 7899',
+    (8,6,26,1, 'CALIFORNIA SKY CITY TOWER - QUẬN ĐỐNG ĐA', 'Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q. Đống Đa, Hà Nội', '(024) 7109 7899',
      'https://bom.so/6MN7vp',
      'https://bom.so/Iv6YYL',
      'https://bom.so/HwuZpU',
      'Không chỉ có lịch học trải đều các khung giờ, Trung tâm California Fitness and Yoga Quận Đống Đa còn sở hữu khu vực Hydro – Therapy hệ thống phòng tắm hơi lớn nhất Việt Nam, cung cấp không gian thư giãn sau tập luyện độc đáo khó nơi nào sánh được.',
      21.012892257325145, 105.81135818247371, 100, 2000),
 
-    (9,7,1, 'FIT24 PHẠM VĂN HAI- Q. TÂN BÌNH', 'Central Plaza, 91 Phạm Văn Hai, Phường 3, Quận Tân Bình, TP. HCM', '028 7307 2424',
+    (9,7,27,1, 'FIT24 PHẠM VĂN HAI- Q. TÂN BÌNH', 'Central Plaza, 91 Phạm Văn Hai, Phường 3, Quận Tân Bình, TP. HCM', '028 7307 2424',
      'https://bom.so/gaVGez',
      'https://bom.so/SKbgQF',
      'https://bom.so/JOhWQU',
      'Tọa lạc tại tầng K Tòa nhà Central Plaza, trang thiết bị tập luyện cao cấp cùng đa dạng các môn học và đặc biệt, hồ bơi ngoài trời chính là những điểm cộng tuyệt vời của phòng tập Gym – Yoga cao cấp nhất Quận Tân Bình.',
      10.794118291505661, 106.66311798225539, 70, 1500),
 
-    (10,7,1, 'FIT24 HỒ XUÂN HƯƠNG- QUẬN 3', '02 Hồ Xuân Hương, Phường Võ Thị Sáu, Quận 3, Hồ Chí Minh', '028 7307 2424',
+    (10,7,28,1, 'FIT24 HỒ XUÂN HƯƠNG- QUẬN 3', '02 Hồ Xuân Hương, Phường Võ Thị Sáu, Quận 3, Hồ Chí Minh', '028 7307 2424',
      'https://bom.so/gaVGez',
      'https://bom.so/xzKhs8',
      'https://bom.so/lnVZCn',
@@ -210,7 +581,7 @@ VALUES
      10.77720992036007, 106.68773747611712, 70, 1500),
 
 
-    (11,7,1, 'FIT24 BA THÁNG HAI – QUẬN 10', 'Lầu 6-7-8 Số 3 Ba Tháng Hai, Phường 11, Quận 10, TP. HCM', '028 7307 2424',
+    (11,7,29,1, 'FIT24 BA THÁNG HAI – QUẬN 10', 'Lầu 6-7-8 Số 3 Ba Tháng Hai, Phường 11, Quận 10, TP. HCM', '028 7307 2424',
      'https://bom.so/gaVGez',
      'https://bom.so/YVDRpm',
      'https://bom.so/Y3aZNS',
@@ -718,9 +1089,9 @@ VALUES
 -- Create brand infos
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)
 VALUES
-    (8, 1, 'Getfit Gym & Yoga', 'https://s.net.vn/nmj5','https://s.net.vn/qpJJ' ,'https://s.net.vn/zEWu' , 'Getfit với kinh nghiệm hơn 10 năm huấn luyện thể hình, được đánh giá là thương hiệu có chuyên môn cao và huấn luyện học viên theo chương trình chuẩn quốc tế. Hiện nay, sau đại dịch, Getfit đã và đang cung cấp đến học viên gói phục hồi sức khỏe sau Covid. Huấn luyện viên đã chuẩn bị sẵn lịch trình và bài tập phù hợp dành cho những người đang có triệu chứng của hậu Covid như: khó thở, hụt hơi khi thở…', 5, '0345 535 454', 'info@getfit.vn', 1),
-    (9, 1, 'Elite Fitness', 'https://s.net.vn/GDPl', 'https://s.net.vn/zFjJ','https://s.net.vn/pXdC', 'Khám phá Elite Fitness để trải nghiệm và tận hưởng không gian phòng tập sang trọng, đẹp bậc nhất Đông Nam Á. Xâm lấn vào thị trường gym năm 2010, thương hiệu gym này đã phát triển từ câu lạc bộ đầu tiên tại Xuân Diệu, Hà Nội. Hướng đến hệ thống câu lạc bộ thể thao đẳng cấp 5 sao, tiêu chuẩn Quốc tế. Dưới sự quản lý của tập đoàn BIM Việt Nam, hiện nay hệ thống đã sở hữu 14 câu lạc bộ trải khắp toàn quốc. Elite Fitness cung cấp đa dạng dịch vụ, tùy theo nhu cầu của bạn. Đến đây, bạn không cần phải bâng khuâng về lịch tập, vì các huấn luyện viên sẽ là người lên lịch phù hợp để bạn đạt mục tiêu của mình nhanh nhất.', 3, '(028) 7307 9899', 'elitefitness@gmail.com', 1),
-    (10, 1, 'Fit365 Fitness & Yoga', 'https://s.net.vn/3rlq', 'https://s.net.vn/XJiB','https://s.net.vn/TGAf', 'Fit365 đầu tư trang thiết bị tập luyện tối tân cho học viên được trải nghiệm cùng huấn luyện viên chuyên nghiệp. Khác biệt với thương hiệu khác, Fit365 đầu tư hồ thủy lực. Massage giúp nâng cao quá trình loại bỏ chất thải, cải thiện giấc ngủ và cải thiện độ đàn hồi của cơ bắp. Học viên được thỏa sức thư giãn thả lỏng trong bồn massage và cảm nhận sự tái sinh của cơ thể sau 1 ngày mệt mỏi.', 4, '0909 290 880', 'fit365vn@gmail.com', 1);
+    (8, 9, 'Getfit Gym & Yoga', 'https://s.net.vn/nmj5','https://s.net.vn/qpJJ' ,'https://s.net.vn/zEWu' , 'Getfit với kinh nghiệm hơn 10 năm huấn luyện thể hình, được đánh giá là thương hiệu có chuyên môn cao và huấn luyện học viên theo chương trình chuẩn quốc tế. Hiện nay, sau đại dịch, Getfit đã và đang cung cấp đến học viên gói phục hồi sức khỏe sau Covid. Huấn luyện viên đã chuẩn bị sẵn lịch trình và bài tập phù hợp dành cho những người đang có triệu chứng của hậu Covid như: khó thở, hụt hơi khi thở…', 5, '0345 535 454', 'info@getfit.vn', 1),
+    (9, 10, 'Elite Fitness', 'https://s.net.vn/GDPl', 'https://s.net.vn/zFjJ','https://s.net.vn/pXdC', 'Khám phá Elite Fitness để trải nghiệm và tận hưởng không gian phòng tập sang trọng, đẹp bậc nhất Đông Nam Á. Xâm lấn vào thị trường gym năm 2010, thương hiệu gym này đã phát triển từ câu lạc bộ đầu tiên tại Xuân Diệu, Hà Nội. Hướng đến hệ thống câu lạc bộ thể thao đẳng cấp 5 sao, tiêu chuẩn Quốc tế. Dưới sự quản lý của tập đoàn BIM Việt Nam, hiện nay hệ thống đã sở hữu 14 câu lạc bộ trải khắp toàn quốc. Elite Fitness cung cấp đa dạng dịch vụ, tùy theo nhu cầu của bạn. Đến đây, bạn không cần phải bâng khuâng về lịch tập, vì các huấn luyện viên sẽ là người lên lịch phù hợp để bạn đạt mục tiêu của mình nhanh nhất.', 3, '(028) 7307 9899', 'elitefitness@gmail.com', 1),
+    (10, 11, 'Fit365 Fitness & Yoga', 'https://s.net.vn/3rlq', 'https://s.net.vn/XJiB','https://s.net.vn/TGAf', 'Fit365 đầu tư trang thiết bị tập luyện tối tân cho học viên được trải nghiệm cùng huấn luyện viên chuyên nghiệp. Khác biệt với thương hiệu khác, Fit365 đầu tư hồ thủy lực. Massage giúp nâng cao quá trình loại bỏ chất thải, cải thiện giấc ngủ và cải thiện độ đàn hồi của cơ bắp. Học viên được thỏa sức thư giãn thả lỏng trong bồn massage và cảm nhận sự tái sinh của cơ thể sau 1 ngày mệt mỏi.', 4, '0909 290 880', 'fit365vn@gmail.com', 1);
 --
 -- Create brand_amenities
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
@@ -748,26 +1119,26 @@ INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, de
 
 -- Create Gym Department infos
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (57, 8, 1, 'Getfit Chi nhánh Oriental Tân Phú', 'Lầu M (lầu 1) Oriental Plaza, 685 Âu Cơ, P.Tân Thành,Q.Tân Phú.', '(097) 769-9490', 'https://s.net.vn/nmj5', 'https://s.net.vn/F4yH', 'https://s.net.vn/F4yH', 'Với phương châm lấy sức khỏe khách hàng làm mục tiêu phát triển, Getfit không ngừng nâng cấp, đổi mới và sáng tạo để vận dụng những khoa học công nghệ hàng đầu thế giới vào việc xây dựng thể chất của người Việt. Cùng với sứ mệnh “Nâng tầm thể chất người Việt” của Getfit Gym & Yoga, hàng loạt các hệ sinh thái ra đời và không ngừng mở rộng nhằm đem đến những giá trị trọn vẹn nhất đến với khách hàng.', 10.789814194191278, 106.63987821995256, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (57, 8, 30,1, 'Getfit Chi nhánh Oriental Tân Phú', 'Lầu M (lầu 1) Oriental Plaza, 685 Âu Cơ, P.Tân Thành,Q.Tân Phú.', '(097) 769-9490', 'https://s.net.vn/nmj5', 'https://s.net.vn/F4yH', 'https://s.net.vn/F4yH', 'Với phương châm lấy sức khỏe khách hàng làm mục tiêu phát triển, Getfit không ngừng nâng cấp, đổi mới và sáng tạo để vận dụng những khoa học công nghệ hàng đầu thế giới vào việc xây dựng thể chất của người Việt. Cùng với sứ mệnh “Nâng tầm thể chất người Việt” của Getfit Gym & Yoga, hàng loạt các hệ sinh thái ra đời và không ngừng mở rộng nhằm đem đến những giá trị trọn vẹn nhất đến với khách hàng.', 10.789814194191278, 106.63987821995256, 200, 200);
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (83, 8, 1, 'Getfit Chi nhánh Mia Center', 'Lầu 4, Saigon Mia Center, 202 Đường số 9A, KDC Trung Sơn.', '(096) 611-1241', 'https://s.net.vn/nmj5', 'https://s.net.vn/l57q', 'https://s.net.vn/z1Ms', 'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao, đây đủ dụng cụ tập đáp ứng đa dạng nhu cầu của quý hội viên.', 10.733395069054875, 106.68892360080237, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (83, 8,31, 1, 'Getfit Chi nhánh Mia Center', 'Lầu 4, Saigon Mia Center, 202 Đường số 9A, KDC Trung Sơn.', '(096) 611-1241', 'https://s.net.vn/nmj5', 'https://s.net.vn/l57q', 'https://s.net.vn/z1Ms', 'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao, đây đủ dụng cụ tập đáp ứng đa dạng nhu cầu của quý hội viên.', 10.733395069054875, 106.68892360080237, 200, 200);
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (63, 8, 1, 'Getfit Chi Nhánh HOÀNG DIỆU', 'Lầu 3, Cao Ốc H3, 384 Hoàng Diệu, Phường 6, Quận 4, TP. HCM', '(098) 849-9745', 'https://s.net.vn/nmj5', 'https://s.net.vn/Jy7I', 'https://s.net.vn/ZI2D', 'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao. Tất cả Khách hàng sẽ được kiểm tra thể chất bằng in Body & được tư vấn dinh dưỡng cũng như cách tập luyện phù hợp.', 10.76051532090389, 106.69908029869617, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (63, 8,32,1, 'Getfit Chi Nhánh HOÀNG DIỆU', 'Lầu 3, Cao Ốc H3, 384 Hoàng Diệu, Phường 6, Quận 4, TP. HCM', '(098) 849-9745', 'https://s.net.vn/nmj5', 'https://s.net.vn/Jy7I', 'https://s.net.vn/ZI2D', 'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao. Tất cả Khách hàng sẽ được kiểm tra thể chất bằng in Body & được tư vấn dinh dưỡng cũng như cách tập luyện phù hợp.', 10.76051532090389, 106.69908029869617, 200, 200);
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (87, 9, 1, 'Elite Fitness XUÂN DIỆU', '51 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội', '024 7302 0888', 'https://s.net.vn/GDPl', 'https://s.net.vn/vjc7', 'https://s.net.vn/nmwf', 'CLB tiên phong của Elite Fitness, tọa lạc tại tòa tháp Syrena ngự trên mảnh đất trung tâm Hồ Tây đáng sống bậc nhất tại Hà Nội; Elite Fitness Xuân Diệu là sự lựa chọn hoàn hảo để tận hưởng trọn vẹn không gian tập luyện đẳng cấp, cộng đồng văn minh, một nhịp sống bình yên rất Hà Nội mà không kém phần sôi động.', 21.063912459638402, 105.82813606669859, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (87, 9,33, 1, 'Elite Fitness XUÂN DIỆU', '51 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội', '024 7302 0888', 'https://s.net.vn/GDPl', 'https://s.net.vn/vjc7', 'https://s.net.vn/nmwf', 'CLB tiên phong của Elite Fitness, tọa lạc tại tòa tháp Syrena ngự trên mảnh đất trung tâm Hồ Tây đáng sống bậc nhất tại Hà Nội; Elite Fitness Xuân Diệu là sự lựa chọn hoàn hảo để tận hưởng trọn vẹn không gian tập luyện đẳng cấp, cộng đồng văn minh, một nhịp sống bình yên rất Hà Nội mà không kém phần sôi động.', 21.063912459638402, 105.82813606669859, 200, 200);
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (78, 9, 1, 'Elite Fitness Bà Triệu', 'Tầng 6, Tháp C, Vincom Center, 191 Bà Triệu, Hà Nội', '024 39749191', 'https://s.net.vn/GDPl', 'https://s.net.vn/HQon', 'https://s.net.vn/jik4', 'Tự hào là một trong những Câu lạc bộ Elite Fitness Top 1 về sự sang trọng và đẳng cấp nhất của hệ thống Elite Fitness, Elite Fitness Vincom Bà Triệu luôn luôn nỗ lực không ngừng để tạo nên một định nghĩa khác về trải nghiệm tập luyện thể thao cao cấp trong suốt 8 năm qua. Chúng tôi với đội ngũ của nhiệt huyết và sự khát khao tạo nên những dịch vụ tuyệt vời trong một môi trường phòng tập hàng đầu. Mỗi Hội viên, mỗi khách hàng là một trọng tâm của chăm sóc và hỗ trợ một cách tận tâm để luôn đạt được mục tiêu sức khỏe trọn vẹn khi đến với chúng tôi. Hãy trở thành một thành viên trong hành trình kiến tạo giá trị sức khỏe cho cộng đồng của chúng tôi! Let’s be Elite!', 21.01108468531799, 105.84965020691072, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (78, 9,34, 1, 'Elite Fitness Bà Triệu', 'Tầng 6, Tháp C, Vincom Center, 191 Bà Triệu, Hà Nội', '024 39749191', 'https://s.net.vn/GDPl', 'https://s.net.vn/HQon', 'https://s.net.vn/jik4', 'Tự hào là một trong những Câu lạc bộ Elite Fitness Top 1 về sự sang trọng và đẳng cấp nhất của hệ thống Elite Fitness, Elite Fitness Vincom Bà Triệu luôn luôn nỗ lực không ngừng để tạo nên một định nghĩa khác về trải nghiệm tập luyện thể thao cao cấp trong suốt 8 năm qua. Chúng tôi với đội ngũ của nhiệt huyết và sự khát khao tạo nên những dịch vụ tuyệt vời trong một môi trường phòng tập hàng đầu. Mỗi Hội viên, mỗi khách hàng là một trọng tâm của chăm sóc và hỗ trợ một cách tận tâm để luôn đạt được mục tiêu sức khỏe trọn vẹn khi đến với chúng tôi. Hãy trở thành một thành viên trong hành trình kiến tạo giá trị sức khỏe cho cộng đồng của chúng tôi! Let’s be Elite!', 21.01108468531799, 105.84965020691072, 200, 200);
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (91, 9, 1, 'Elite Fitness Nguyễn Chí Than', 'Tầng 6, Vinhomes 54A Nguyễn Chí Thanh, Ngọc Khánh, Ba Đình, Hà Nội', '024 7307 8889', 'https://s.net.vn/GDPl', 'https://s.net.vn/d1Vb', 'https://s.net.vn/bu8z', 'Tọa lạc tại vị trí trung tâm, Elite Fitness Nguyễn Chí Thanh là một trong những Câu lạc bộ có không gian tập rộng và sang trọng bậc nhất trong hệ thống Elite Fitness. Chúng tôi mong muốn mang đến những giá trị tích cực nhất; xây dựng một cộng đồng khỏe mạnh không những từ thể chất mà còn từ tinh thần bên trong; nơi mà những kiến thức luôn được chia sẻ. Hãy cùng bắt đầu hành trình cho cuộc sống của bạn trở nên tốt đẹp hơn cùng với Chúng tôi từ hôm nay!', 21.025367760381087, 105.80951344612583, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (91, 9, 35,1, 'Elite Fitness Nguyễn Chí Than', 'Tầng 6, Vinhomes 54A Nguyễn Chí Thanh, Ngọc Khánh, Ba Đình, Hà Nội', '024 7307 8889', 'https://s.net.vn/GDPl', 'https://s.net.vn/d1Vb', 'https://s.net.vn/bu8z', 'Tọa lạc tại vị trí trung tâm, Elite Fitness Nguyễn Chí Thanh là một trong những Câu lạc bộ có không gian tập rộng và sang trọng bậc nhất trong hệ thống Elite Fitness. Chúng tôi mong muốn mang đến những giá trị tích cực nhất; xây dựng một cộng đồng khỏe mạnh không những từ thể chất mà còn từ tinh thần bên trong; nơi mà những kiến thức luôn được chia sẻ. Hãy cùng bắt đầu hành trình cho cuộc sống của bạn trở nên tốt đẹp hơn cùng với Chúng tôi từ hôm nay!', 21.025367760381087, 105.80951344612583, 200, 200);
 
-INSERT INTO gym_department (gym_department_id, brand_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
-VALUES (52, 10, 1, 'Fit365 Fitness &Yoga Q.11', '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam', '090 929 08 80', 'https://s.net.vn/w1ho', 'https://s.net.vn/H3lr', 'https://s.net.vn/EYRN', 'Hãy đến ngay với 𝐅𝐈𝐓𝟑𝟔𝟓  hôm nay để tập luyện, tại đây bạn sẽ được tư vấn các bài tập phụ hợp với tình trạng sức khỏe của bản thân, nâng cấp body và trải nghiệm hệ thống máy tập an toàn cùng đội ngũ PT tận tâm nhất.Liên hệ ngay với 𝐅𝐈𝐓𝟑𝟔𝟓 để được tư vấn miễn phí, nhận ngay ưu đãi và đăng kí tập luyện sớm nhất có thể !!!', 10.767766928241029, 106.65824315116448, 200, 200);
+INSERT INTO gym_department (gym_department_id, brand_id,user_id, gym_department_status_key, name, address, contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+VALUES (52, 10, 36,1, 'Fit365 Fitness &Yoga Q.11', '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam', '090 929 08 80', 'https://s.net.vn/w1ho', 'https://s.net.vn/H3lr', 'https://s.net.vn/EYRN', 'Hãy đến ngay với 𝐅𝐈𝐓𝟑𝟔𝟓  hôm nay để tập luyện, tại đây bạn sẽ được tư vấn các bài tập phụ hợp với tình trạng sức khỏe của bản thân, nâng cấp body và trải nghiệm hệ thống máy tập an toàn cùng đội ngũ PT tận tâm nhất.Liên hệ ngay với 𝐅𝐈𝐓𝟑𝟔𝟓 để được tư vấn miễn phí, nhận ngay ưu đãi và đăng kí tập luyện sớm nhất có thể !!!', 10.767766928241029, 106.65824315116448, 200, 200);
 -- create Brand Amentites
 -- Getfit Chi nhánh Oriental Tân Phú Amenities Associations
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
@@ -1138,74 +1509,102 @@ VALUES
 
 
 
--- Create Gym plan infos for brand 8
+-- Create Gym plan infos for Getfit Chi nhánh Oriental (Tân Phú)
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES
-    (51, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (52,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (53,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+    (57, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (58,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (59,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
--- Create Gym plan infos for brand 9
+-- Create Gym plan infos for Getfit CHI NHÁNH HOÀNG DIỆU
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES
-    (54,9, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (55,9, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (56,9, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+    (63, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (64,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (65,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
--- Create Gym plan infos for brand 10
+-- Create Gym plan infos for Getfit Chi nhánh Mia Center
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
 VALUES
-    (57,10, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
-    (58,10, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
-    (59,10, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+    (83, 8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (85,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (86,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+
+-- Create Gym plan infos for Elite Fitness XUÂN DIỆU
+INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
+VALUES
+    (87,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (88,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (99,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+
+-- Create Gym plan infos for Elite Fitness Bà Triệu
+INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
+VALUES
+    (78,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (79,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (62,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+
+-- Create Gym plan infos for Elite Fitness Nguyễn Chí Thanh
+INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
+VALUES
+    (67,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (68,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (69,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
+
+-- Create Gym plan infos Gallery for Fit365 Fitness &Yoga Q.11
+INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price, price_per_hours, plan_sold, duration, plan_before_active_validity, plan_after_active_validity)
+VALUES
+    (71,8, 1, 1, 1, 'Gói Linh Hoạt', 'Gói tập linh hoạt, phù hợp cho người muốn trải nghiệm các phòng tập. Đặc quyền tập luyện ở mọi cơ sở.', 0, 50.00, 0, 0, 10, 30),
+    (72,8, 2, 1, 2, 'Gói 1 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 150.00, 0, 0, 30, 10, 30),
+    (73,8, 2, 1, 2, 'Gói 3 tháng', 'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ', 450.00, 0, 0, 90, 10, 90);
 
 -- For Getfit Chi nhánh Oriental Tân Phú (department ID 57)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (57, 51), -- Gói Linh Hoạt
-                                                                 (57, 52), -- Gói 1 tháng
-                                                                 (57, 53); -- Gói 3 tháng
+                                                                 (57, 57), -- Gói Linh Hoạt
+                                                                 (57, 58), -- Gói 1 tháng
+                                                                 (57, 59); -- Gói 3 tháng
 
 -- For Getfit Chi nhánh HOÀNG DIỆU (department ID 63)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (63, 51), -- Gói Linh Hoạt
-                                                                 (63, 52), -- Gói 1 tháng
-                                                                 (63, 53); -- Gói 3 tháng
+                                                                 (63, 63), -- Gói Linh Hoạt
+                                                                 (63, 64), -- Gói 1 tháng
+                                                                 (63, 65); -- Gói 3 tháng
 
 -- For Getfit Chi nhánh Mia Center (department ID 83)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (83, 51), -- Gói Linh Hoạt
-                                                                 (83, 52), -- Gói 1 tháng
-                                                                 (83, 53); -- Gói 3 tháng
+                                                                 (83, 83), -- Gói Linh Hoạt
+                                                                 (83, 85), -- Gói 1 tháng
+                                                                 (83, 86); -- Gói 3 tháng
 
 -- For Elite Fitness XUÂN DIỆU (department ID 87)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (87, 54), -- Gói Linh Hoạt
-                                                                 (87, 55), -- Gói 1 tháng
-                                                                 (87, 56); -- Gói 3 tháng
+                                                                 (87, 87), -- Gói Linh Hoạt
+                                                                 (87, 88), -- Gói 1 tháng
+                                                                 (87, 99); -- Gói 3 tháng
 
 -- For Elite Fitness Bà Triệu (department ID 78)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (78, 54), -- Gói Linh Hoạt
-                                                                 (78, 55), -- Gói 1 tháng
-                                                                 (78, 56); -- Gói 3 tháng
+                                                                 (78, 78), -- Gói Linh Hoạt
+                                                                 (78, 79), -- Gói 1 tháng
+                                                                 (78, 62); -- Gói 3 tháng
 
 -- For Elite Fitness Nguyễn Chí Thanh (department ID 91)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (91, 54), -- Gói Linh Hoạt
-                                                                 (91, 55), -- Gói 1 tháng
-                                                                 (91, 56); -- Gói 3 tháng
+                                                                 (91, 67), -- Gói Linh Hoạt
+                                                                 (91, 68), -- Gói 1 tháng
+                                                                 (91, 69); -- Gói 3 tháng
 
 -- For Fit365 Fitness & Yoga Q.11 (department ID 52)
 INSERT INTO gym_department_plans(gym_department_id, plan_id) VALUES
-                                                                 (52, 57), -- Gói Linh Hoạt
-                                                                 (52, 58), -- Gói 1 tháng
-                                                                 (52, 59); -- Gói 3 tháng
+                                                                 (52, 71), -- Gói Linh Hoạt
+                                                                 (52, 72), -- Gói 1 tháng
+                                                                 (52, 73); -- Gói 3 tháng
 
 -- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,description,rating,contact_number,contact_email,brand_status_key)
 
 VALUES
-    ( 11,1, 'Advance Fitness & Gym',
+    ( 11,12, 'Advance Fitness & Gym',
       'https://bom.so/JjIOXa',
       'https://bom.so/z68t4s',
       'https://bom.so/VPBYrp',
@@ -1214,7 +1613,7 @@ VALUES
   Nếu trở thành học viên ở Advance, bạn sẽ được kiểm tra sức khỏe đều đặn. Thông qua đó, huấn luyện viên sẽ đánh giá thể trạng và đưa ra phương pháp tập luyện phù hợp cho từng người.',
       0, '1900 63 35 31', ' advancefitnessgym@gmail.com', 1),
 
-    ( 12,1, 'The New Gym',
+    ( 12,13, 'The New Gym',
       'https://bom.so/T0IpUX',
       'https://bom.so/tdJyS0',
       'https://bom.so/lLdgCq',
@@ -1225,7 +1624,7 @@ VALUES
   Giá tập tại đây chỉ với 300.000 VNĐ/ 1 tháng, huấn luyện viên tại The New Gym sẵn sàng tư vấn bài tập và chế độ ăn cho học viên mà không phát sinh bất kỳ chi phí nào',
       0, '1900 63 69 20', 'info@thenewgym.vn', 1),
 
-    ( 13,1, 'VShape Gym & Yoga',
+    ( 13,14, 'VShape Gym & Yoga',
       'https://bom.so/thNR4Y',
       'https://bom.so/uMhrfX',
       'https://bom.so/thNR4Y',
@@ -1257,11 +1656,11 @@ VALUES
 
 
 
-INSERT INTO gym_department (gym_department_id, brand_id,gym_department_status_key, name, address, contact_number,
+INSERT INTO gym_department (gym_department_id, brand_id, user_id,gym_department_status_key, name, address, contact_number,
                             logo_url, wallpaper_url, thumbnail_url,description, latitude, longitude, capacity, area)
 
 VALUES
-    (12,11,1,'Advance Fitness & Gym Tôn Dật Tiên','SE05, GARDEN COURT 1, Tôn Dật Tiên, Phú Mỹ Hưng, Q7, Tp.HCM','08 5416 0555',
+    (12,11,37,1,'Advance Fitness & Gym Tôn Dật Tiên','SE05, GARDEN COURT 1, Tôn Dật Tiên, Phú Mỹ Hưng, Q7, Tp.HCM','08 5416 0555',
      'https://bom.so/JjIOXa',
      'https://bom.so/ab77Ui',
      'https://bom.so/1KSXnM',
@@ -1271,7 +1670,7 @@ VALUES
      10.722874426578613, 106.71464114001405,
      200, 800),
 
-    (13,11,1,'Advance Fitness & Gym Nguyễn Lương Bằng','ST05 Block E, Riverside Residence, Nguyễn Lương Bằng, Phú Mỹ Hưng, Q7, Tp.HCM','08 5411 8777',
+    (13,11,38,1,'Advance Fitness & Gym Nguyễn Lương Bằng','ST05 Block E, Riverside Residence, Nguyễn Lương Bằng, Phú Mỹ Hưng, Q7, Tp.HCM','08 5411 8777',
      'https://bom.so/JjIOXa',
      'https://bom.so/iJjVqj',
      'https://bom.so/x75prK',
@@ -1281,7 +1680,7 @@ VALUES
      10.720789817865652, 106.72672455649781,
      300, 1100),
 
-    (14,11,1,'Advance Fitness & Gym Kỳ Đồng','05 Kỳ Đồng, Phường 6 Quận 3 TPHCM.','08 6298 2111',
+    (14,11,39,1,'Advance Fitness & Gym Kỳ Đồng','05 Kỳ Đồng, Phường 6 Quận 3 TPHCM.','08 6298 2111',
      'https://bom.so/JjIOXa',
      'https://bom.so/543E8a',
      'https://bom.so/KgyGXq',
@@ -1289,7 +1688,7 @@ VALUES
      10.78467544118492, 106.68288665202464,
      450, 1200),
 
-    (15,12,1,'The New Gym Nguyễn Chí Thanh','332 Nguyễn Chí Thanh, Phường 5, Quận 10, Thành phố Hồ Chí Minh','1900 63 69 20',
+    (15,12,40,1,'The New Gym Nguyễn Chí Thanh','332 Nguyễn Chí Thanh, Phường 5, Quận 10, Thành phố Hồ Chí Minh','1900 63 69 20',
      'https://bom.so/JjIOXa',
      'https://bom.so/Dgxb1I',
      'https://bom.so/CtBw9Z',
@@ -1297,7 +1696,7 @@ VALUES
      10.760832460144496, 106.66690168835657,
      600, 2000),
 
-    (16,12,1,'The New Gym Điện Biên Phủ','256 Điện Biên Phủ, Phường 7, Quận 3, Thành phố Hồ Chí Minh','1900 63 69 20',
+    (16,12,41,1,'The New Gym Điện Biên Phủ','256 Điện Biên Phủ, Phường 7, Quận 3, Thành phố Hồ Chí Minh','1900 63 69 20',
      'https://bom.so/JjIOXa',
      'https://bom.so/d9i9v8',
      'https://bom.so/M7W2Cz',
@@ -1305,7 +1704,7 @@ VALUES
      10.779821919040735, 106.68661522494476,
      400, 1800),
 
-    (17,12,1,'The New Gym Hoàng Văn Thụ','Lầu 5, 1/1 Hoàng Việt, Phường 4, Quận Tân Bình, Thành phố Hồ Chí Minh','1900 63 69 20',
+    (17,12,42,1,'The New Gym Hoàng Văn Thụ','Lầu 5, 1/1 Hoàng Việt, Phường 4, Quận Tân Bình, Thành phố Hồ Chí Minh','1900 63 69 20',
      'https://bom.so/JjIOXa',
      'https://bom.so/ZDph1b',
      'https://bom.so/GzOWcD',
@@ -1313,7 +1712,7 @@ VALUES
      10.797626444808325, 106.65933092494488,
      300, 1200),
 
-    (18,12,1,'The New Gym Ung Văn Khiêm','58D Ung Văn Khiêm, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh','1900 63 69 20',
+    (18,12,43,1,'The New Gym Ung Văn Khiêm','58D Ung Văn Khiêm, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh','1900 63 69 20',
      'https://bom.so/JjIOXa',
      'https://bom.so/FhQ0Nz',
      'https://bom.so/unAbjV',
@@ -1321,7 +1720,7 @@ VALUES
      10.808073113779995, 106.71534072494497,
      500, 1800),
 
-    (19,13,1,'VShape Fitness & Yoga Center, Trường Chinh','491/21-23 Đường Trường Chinh, Phường 14, Quận Tân Bình, Hồ Chí Minh','(08) 71080815',
+    (19,13,44,1,'VShape Fitness & Yoga Center, Trường Chinh','491/21-23 Đường Trường Chinh, Phường 14, Quận Tân Bình, Hồ Chí Minh','(08) 71080815',
      'https://bom.so/thNR4Y',
      'https://bom.so/6JicJC',
      'https://bom.so/AgiwNL',
@@ -1329,7 +1728,7 @@ VALUES
      10.793479126084165, 106.65255131145184,
      200, 650),
 
-    (20,13,1,'VShape Fitness & Yoga Center, Vincom Plus','Lầu 3 – 307 Nguyễn Duy Trinh, Quận 2, Hồ Chí Minh','(08) 71080815',
+    (20,13,45,1,'VShape Fitness & Yoga Center, Vincom Plus','Lầu 3 – 307 Nguyễn Duy Trinh, Quận 2, Hồ Chí Minh','(08) 71080815',
      'https://bom.so/thNR4Y',
      'https://bom.so/hoy8bD',
      'https://bom.so/ZKU6Rb',
@@ -1607,7 +2006,7 @@ VALUES
      'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      10300.00, 0, 0, 30, 10, 30),
 
-    (154,11, 1, 1, 1, 'Gói 30 buổi tập luyện với PT',
+    (154,11, 2, 1, 2, 'Gói 30 buổi tập luyện với PT',
      'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
      13400.00, 0, 0, 30, 10, 30),
 
@@ -1770,7 +2169,7 @@ INSERT INTO brand (brand_id,user_id,name,logo_url,wallpaper_url,thumbnail_url,de
 VALUES
 
     /***************************************** Kickfit Sport Brand ******************************************************/
-    (1,1,'Kickfit Sport',
+    (1,15,'Kickfit Sport',
      'https://bom.so/CHjTsR',
      'https://kickfit-sports.com/wp-content/uploads/2022/06/Co-so-vat-chat-tai-Kickfit-Sports-dat-chuan-chat-luong-cao.png.webp',
      'https://kickfitvietnam.com/wp-content/uploads/2023/02/trai-nghiem-phong-tap-7.jpg',
@@ -1778,7 +2177,7 @@ VALUES
      5,'093 63 999 88','hethong@kickfit-sports.com',1),
 
     /****************************************** 25 FIT Brand *****************************************************/
-    (2,1,'25 Fit',
+    (2,16,'25 Fit',
      'https://shorturl.at/nwTUX',
      'https://shorturl.at/xEFNR',
      'https://phongtap.25fit.net/hubfs/Image%20from%20iOS.jpg',
@@ -1788,7 +2187,7 @@ VALUES
      4.7,'18006176','welisten@25fit.net',1),
 
     /******************************************** S'Life Brand ***************************************************/
-    (3,1,'S’Life Gym & Yoga',
+    (3,17,'S’Life Gym & Yoga',
      'https://shorturl.at/jrP35',
      'https://shorturl.at/foNUZ',
      'https://shorturl.at/eyENT',
@@ -1797,7 +2196,7 @@ Bài tập luyện của học viện đều được huấn luyện viên của
      4.7,'0902 635 124',' slifegym@gmail.com',1),
 
     /********************************************* Diamond Fitness Brand **************************************************/
-    (4,1,'Diamond Fitness Center',
+    (4,18,'Diamond Fitness Center',
      'https://shorturl.at/iFO17',
      'https://bom.so/V0CxT4',
      'https://shorturl.at/blpK4',
@@ -1806,11 +2205,11 @@ Sự khác biệt của thương hiệu này, chính là chương trình đo kh�
 Dựa vào BMI, huấn luyện viên của Diamond Fitness sẽ vạch ra lịch tập cũng như bài tập phù hợp với nhu cầu hoàn thiện cơ thể của bạn."',
      4.5,'(086) 212-3247','diamondfitness@gmail.com',1);
 
-INSERT INTO gym_department (gym_department_id, brand_id,gym_department_status_key, name, address, contact_number,
+INSERT INTO gym_department (gym_department_id, brand_id, user_id,gym_department_status_key, name, address, contact_number,
                             logo_url, wallpaper_url, thumbnail_url,description, latitude, longitude, capacity, area)
 VALUES
     /************************************************ Kickfit Sport Departments ***********************************************/
-    (21,1,1,'Kickfit Sports Nguyễn Phong Sắc',
+    (21,1,2,1,'Kickfit Sports Nguyễn Phong Sắc',
      'Tầng 03 Tòa nhà Lâm Viễn, 107 Đ. Nguyễn Phong Sắc, Hà Nội','0903411257',
      'https://bom.so/CHjTsR',
      'https://bom.so/YJ7xgS',
@@ -1818,7 +2217,7 @@ VALUES
      'Kickfit Sports Nguyễn Phong Sắc được biết đến là phòng tập kickfit chất lượng tốt nhất tại quận Cầu Giấy, địa chỉ quen thuộc của giới yêu võ thuật trên địa bàn Hà Nội. Không gian tập luyện có diện tích gần 1000m2 được phân chia theo từng khu riêng biệt, hợp lý đảm bảo hội viên có không gian riêng khi tập luyện và thư giãn.',
      21.040954973167608, 105.79023379536018,200,1000
     ),
-    (22,1,1,'Kickfit Sports Trần Duy Hưng',
+    (22,1,46,1,'Kickfit Sports Trần Duy Hưng',
      'Ngõ 196 Đ. Trần Duy Hưng, Trung Hoà, Cầu Giấy, Hà Nội','0903411257',
      'https://bom.so/CHjTsR',
      'https://bit.ly/kickfit-tranduyhung',
@@ -1826,7 +2225,7 @@ VALUES
      'Kickfit Sports Trần Duy Hưng được ra đời vào năm 2012 và là cơ sở đầu tiên của chuỗi phòng tập Kickfit Sports. Dịch vụ phòng tập chủ yếu về các bộ môn võ đối kháng hỗ trợ giảm cân, tăng cơ, cải thiện vóc dáng cũng như trang bị các kỹ năng phòng vệ hiệu quả giúp xử lý các tình huống nguy hiểm trong cuộc sống. Với không gian rộng rãi, cơ sở vật chất hiện đại tối tân, Kickfit Sports Trần Duy Hưng mang tới cho hội viên sự thoải mái, thư giãn sau những giờ học tập và làm việc mệt mỏi.',
      21.009542311744028, 105.79714248159206,200,1000
     ),
-    (23,1,1,'Kickfit Sports Thiên Đường Bảo Sơn',
+    (23,1,47,1,'Kickfit Sports Thiên Đường Bảo Sơn',
      'Tầng 5, Tòa Gemek 1, Thiên Đường Bảo Sơn, Hoài Đức, Hà Nội','093 63 999 88',
      'https://bom.so/CHjTsR',
      'https://shorturl.at/finvz',
@@ -1834,7 +2233,7 @@ VALUES
      'Kickfit Sports Thiên Đường Bảo Sơn tọa lạc tại vị trí đắc địa thuộc toà Gemek 1 ngay cổng chào của Thiên Đường Bảo Sơn. Đây một trong những cơ sở phòng tập được đầu tư lớn với nhiều trang thiết bị hiện đại và tiện ích sang chảnh mang đến trải nghiệm tập luyện thể thao tuyệt vời nhất cho khách hàng. Kickfit Sports Thiên Đường Bảo Sơn tự hào khi nhận được vô số những đánh giá tốt từ khách hàng và số lượng người đăng ký tập luyện ngày càng đông đảo.',
      21.00855235502214, 105.7307156200674,400,1500
     ),
-    (24,1,1,'Kickfit Sports Metro Hà Đông',
+    (24,1,48,1,'Kickfit Sports Metro Hà Đông',
      'Tầng 2, Siêu thị Metro - Melinh Plaza, Hà Đông','093 63 999 88',
      'https://bom.so/CHjTsR',
      'https://shorturl.at/BCFI3',
@@ -1844,7 +2243,7 @@ VALUES
     ),
 
     /************************************************ 25 FIT Departments ***********************************************/
-    (25,2,1,'25 FIT Lý Thường Kiệt',
+    (25,2,49,1,'25 FIT Lý Thường Kiệt',
      '42Z P. Lý Thường Kiệt, Tràng Tiền, Hoàn Kiếm, Hà Nội','18006176',
      'https://shorturl.at/nwTUX',
      'https://g2.by/f1WS',
@@ -1852,7 +2251,7 @@ VALUES
      '25 FIT Lý Thường Kiệt là studio đầu tiên ở Hà Nội đánh dấu những bước tiến quan trọng của 25 FIT tại khu vực phía Bắc trong việc mang công nghệ EMS đến với người dùng thủ đô',
      21.023985014649746,105.85026204718575,5,60
     ),
-    (26,2,1,'25 FIT Duy Tân',
+    (26,2,50,1,'25 FIT Duy Tân',
      '22 Duy Tân, Cầu Giấy, Hà Nội Hà Nội','18006176',
      'https://shorturl.at/nwTUX',
      'https://shorturl.at/gjls2',
@@ -1860,7 +2259,7 @@ VALUES
      'Nằm tại cung đường sầm uất và nhộn nhịp, tiếp giáp khu dân cư, văn phòng, studio mới 25 FIT Duy Tân hứa hẹn sẽ đem đến cho khách hàng những trải nghiệm tập luyện giá trị tốt nhất về sức khỏe, dịch vụ với công nghệ EMS Training hiện đại, đảm bảo tiết kiệm thời gian.',
      21.030865188489173,105.78566187313876,5,60
     ),
-    (27,2,1,'25 FIT Times City',
+    (27,2,51,1,'25 FIT Times City',
      'T1, SO.02, Khu đô thị Times City, Hai Bà Trưng, Hà Nội','18006176',
      'https://shorturl.at/nwTUX',
      'https://shorturl.at/lwLT5',
@@ -1868,7 +2267,7 @@ VALUES
      'Đặt ở vị trí thuận tiện tại khu dân cư Times City, Quận Hai Bà Trưng. Chỉ 20 phút tập, 2 buổi/tuần cùng huấn luyện viên chuyên nghiệp, quý khách không cần mang bất cứ thứ gì kể cả quần áo hay giày tập để có thể đạt kết quả tăng cơ, giảm mỡ.',
      20.99661352642664,105.86945587284531,5,55
     ),
-    (28,2,1,'25 FIT Vinhomes Gardenia Hàm Nghi',
+    (28,2,52,1,'25 FIT Vinhomes Gardenia Hàm Nghi',
      'B17 05A Shophouse Vinhomes Gardenia, P. Hàm Nghi, Cầu Diễn, Nam Từ Liêm, Hà Nội.','18006176',
      'https://shorturl.at/nwTUX',
      'https://g2.by/RBe2',
@@ -1878,7 +2277,7 @@ VALUES
     ),
 
     /********************************************** S'Life Departments *************************************************/
-    (29,3,1,'Phòng tập Gym S''Life Quận 10',
+    (29,3,53,1,'Phòng tập Gym S''Life Quận 10',
      '575 Đ. Sư Vạn Hạnh, Phường 12, Quận 10, Thành phố Hồ Chí Minh','(093) 889-1436',
      'https://shorturl.at/jrP35',
      'https://t.ly/Y_iVF',
@@ -1886,7 +2285,7 @@ VALUES
      'Nổi bật khắp HCM với không gian xanh đẳng cấp rộng hơn 3.000m2 và đầy đủ bộ môn, S''Life Quận 10 sẽ mang đến cho bạn những trải nghiệm tuyệt vời và hiệu quả nhất.',
      10.776571562971277,106.6669378322132,400,3000
     ),
-    (30,3,1,'Phòng tập Gym S''Life Quận 6',
+    (30,3,54,1,'Phòng tập Gym S''Life Quận 6',
      '893 Đ. Hậu Giang, P.11, Quận 6, Thành phố Hồ Chí Minh','(090) 263-5124',
      'https://shorturl.at/jrP35',
      'https://t.ly/XG2SC',
@@ -1894,7 +2293,7 @@ VALUES
      'Bạn đang tìm kiếm phòng tập tại quận 6? S''Life GYM chính là sự lựa chọn dành cho bạn với chất lượng hàng đầu',
      10.746277023301626,106.62821508856594,300,2000
     ),
-    (31,3,1,'Phòng tập Gym S''Life Bình Chánh',
+    (31,3,55,1,'Phòng tập Gym S''Life Bình Chánh',
      '34 Đ. Phạm Hùng, Bình Hưng, Bình Chánh, Thành phố Hồ Chí Minh','(090) 263-5124',
      'https://shorturl.at/jrP35',
      'https://t.ly/i-rgw',
@@ -1902,7 +2301,7 @@ VALUES
      '"Với không gian đẳng cấp và sang trọng, S''Life GYM Bình Chánh chính là sự lựa chọn hoàn hảo dành cho bạn để cải thiện sức khỏe và vóc dáng hiệu quả.',
      10.73050975241317,106.67597421199494,260,1800
     ),
-    (32,3,1,'Phòng tập Gym S''Life Bình Thạch',
+    (32,3,56,1,'Phòng tập Gym S''Life Bình Thạch',
      '26 Nguyễn Huy Lượng, Phường 14, Bình Thạnh, Thành phố Hồ Chí Minh, Vietnam','(090) 263-5124',
      'https://shorturl.at/jrP35',
      'https://shorturl.at/nwKU7',
@@ -1912,7 +2311,7 @@ VALUES
     ),
 
     /******************************************** Diamond Fitness Departments ***************************************************/
-    (33,4,1,'Diamond Fitness Center Trần Quang Khải',
+    (33,4,57,1,'Diamond Fitness Center Trần Quang Khải',
      'Cao ốc Horizon, 214 Đ. Trần Quang Khải, P, Quận 1, Thành phố Hồ Chí Minh','02866569555',
      'https://shorturl.at/iFO17',
      'https://shorturl.at/pBCGP',
@@ -1921,7 +2320,7 @@ VALUES
 Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực nhất tại DIAMOND FITNESS CENTER ngay bạn nhé!',
      10.79154285000631,106.68804505835055,650,6600
     ),
-    (34,4,1,'Diamond Fitness Center Lê Văn Sỹ',
+    (34,4,58,1,'Diamond Fitness Center Lê Văn Sỹ',
      '338 Đ. Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh','02866825544',
      'https://shorturl.at/iFO17',
      'https://t.ly/jVwO9',
@@ -1930,7 +2329,7 @@ Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực 
 Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực nhất tại DIAMOND FITNESS CENTER ngay bạn nhé!',
      10.78743076402733,106.67907250244333,120,576
     ),
-    (35,4,1,'Diamond Fitness Paragon Lê Hồng Phong',
+    (35,4,59,1,'Diamond Fitness Paragon Lê Hồng Phong',
      'TTTM Maslight, lô 20 Đ. Lê Hồng Phong, Đông Khê, Ngô Quyền, Hải Phòng.','02256626686',
      'https://shorturl.at/iFO17',
      'https://t.ly/F92Dw',
@@ -1938,7 +2337,7 @@ Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực 
      'Viên kim cương khổng lồ Diamond Fitness Paragon tại TD Plaza, Lê Hồng Phong, TP Hải Phòng là dự án lớn nhất TP Hải Phòng với dòng thiết bị cao cấp nhất Hàn Quốc – DRAX cùng 2 phân khu đẳng cấp nhất.',
      20.846699998604187,106.70741856252596,400,3000
     ),
-    (36,4,1,'Diamond Fitness Paragon Bạch Đằng',
+    (36,4,60,1,'Diamond Fitness Paragon Bạch Đằng',
      '97 Bạch Đằng, Hạ Lý, Hồng Bàng, Hải Phòng','(089) 916-4562',
      'https://shorturl.at/iFO17',
      'https://t.ly/IkZum',
