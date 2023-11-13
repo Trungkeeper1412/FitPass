@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `user` (
                                       user_id          INT AUTO_INCREMENT PRIMARY KEY,
                                       user_account     VARCHAR(250) NOT NULL,
     user_password    VARCHAR(100) NOT NULL,
-    user_detail_id        INT NOT NULL,
+    user_detail_id        INT ,
     user_create_time VARCHAR(20) NOT NULL,
     user_deleted     TINYINT NOT NULL,
     FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id)
@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
                                               gym_department_status_key   INT NOT NULL,
                                               brand_id                    INT NOT NULL,
+                                              user_id                     INT NOT NULL,
                                               name                        VARCHAR(255) NOT NULL,
     address                     VARCHAR(255) NOT NULL,
     contact_number              VARCHAR(20) NOT NULL,
