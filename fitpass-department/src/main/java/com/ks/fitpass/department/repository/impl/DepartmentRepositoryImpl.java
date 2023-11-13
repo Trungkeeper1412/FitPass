@@ -105,23 +105,39 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
             parameters.add(city);
         }
 
-        if(sortPrice != null && !sortPrice.isEmpty()) {
-            if(sortPrice.equals("lowToHigh")) {
-                sql += " ORDER BY max_price asc, \n" +
-                        " min_price asc \n";
-            } else {
-                sql += " ORDER BY max_price desc, \n" +
-                        " min_price desc \n";
+        if(userLatitude != 0 && userLongitude != 0) {
+            sql += " ORDER BY distance ASC ";
+            if(sortPrice != null && !sortPrice.isEmpty()) {
+                if(sortPrice.equals("lowToHigh")) {
+                    sql += " , max_price asc, \n" +
+                            " min_price asc \n";
+                } else {
+                    sql += " , max_price desc, \n" +
+                            " min_price desc \n";
+                }
+            }
+        } else {
+            if(sortPrice != null && !sortPrice.isEmpty()) {
+                if(sortPrice.equals("lowToHigh")) {
+                    sql += " ORDER BY max_price asc, \n" +
+                            " min_price asc \n";
+                } else {
+                    sql += " ORDER BY max_price desc, \n" +
+                            " min_price desc \n";
+                }
             }
         }
 
+
         if(userLatitude == 0 && userLongitude == 0) {
-            if(sortPrice == null && sortPrice.isEmpty()) {
+            if(sortPrice == null || sortPrice.isEmpty()) {
                 sql += "ORDER BY d.rating DESC";
             } else {
                 sql += ", d.rating DESC";
             }
         }
+
+
 
         sql += " LIMIT ? OFFSET ?";
         parameters.add(size);
@@ -129,14 +145,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
         return jdbcTemplate.query(sql, parameters.toArray(), new DepartmentHomePageMapper());
     }
-
-//    private String getSortPriceQuery(String sortPrice) {
-//        if (sortPrice.equals("lowToHigh")) {
-//            return "min_price ASC, max_price ASC";
-//        } else {
-//            return "max_price DESC, min_price DESC";
-//        }
-//    }
     @Override
     public List<Department> getAllByTopRating(int status) throws DataAccessException {
         return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), status);

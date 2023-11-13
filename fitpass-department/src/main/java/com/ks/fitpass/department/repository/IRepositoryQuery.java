@@ -2,7 +2,8 @@ package com.ks.fitpass.department.repository;
 
 public interface IRepositoryQuery {
         String GET_ALL_DEPARTMENT_BY_STATUS = """
-            SELECT
+
+              SELECT
                 d.gym_department_id,
                 d.brand_id,
                 d.name,
@@ -20,8 +21,14 @@ public interface IRepositoryQuery {
                 d.city,
                 d.gym_department_status_key,
                 kbn_department_status.mst_kbn_value AS gym_department_status_name,
-                COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.brand_id = d.brand_id), 0) AS max_price,
-                COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.brand_id = d.brand_id), 0) AS min_price,
+                COALESCE((SELECT MAX(gym_plan.price) AS max_price
+                            FROM gym_plan
+                            JOIN gym_department_plans ON gym_plan.plan_id = gym_department_plans.plan_id
+                            WHERE gym_department_plans.gym_department_id = d.gym_department_id), 0) AS max_price,
+                COALESCE((SELECT MIN(gym_plan.price) AS max_price
+                        FROM gym_plan
+                        JOIN gym_department_plans ON gym_plan.plan_id = gym_department_plans.plan_id
+                        WHERE gym_department_plans.gym_department_id = d.gym_department_id), 0) AS min_price,
                 (
                     6371 * acos(
                         cos(radians(?)) * cos(radians(d.latitude)) *
@@ -34,7 +41,7 @@ public interface IRepositoryQuery {
                 ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
                 AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
             WHERE d.gym_department_status_key = ?
-            """;
+                        """;
 //    String GET_ALL_DEPARTMENT_BY_STATUS ="""
 //            SELECT * FROM (SELECT d.gym_department_id, d.brand_id, d.name, d.address, d.contact_number, d.logo_url, d.wallpaper_url, d.thumbnail_url, d.description, d.latitude, d.longitude, d.rating, d.capacity, d.area, d.city, d.gym_department_status_key, kbn_department_status.mst_kbn_value AS gym_department_status_name,
 //            COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.brand_id = d.brand_id), 0) AS max_price,

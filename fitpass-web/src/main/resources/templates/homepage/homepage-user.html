@@ -138,9 +138,9 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
-                        <label class="pt-2 pb-2 fw-bold" for="distance fw-bold">Cách bạn:</label>
-                        <select class="gym-dropdown" id="distance fw-bold">
-                            <option value="2">Dưới 2 km</option>
+                        <label class="pt-2 pb-2 fw-bold" for="distance">Cách bạn:</label>
+                        <select class="gym-dropdown" id="distance">
+                            <option value="2" selected>Dưới 2 km</option>
                             <option value="5">Dưới 5 km</option>
                             <option value="10">Dưới 10 km</option>
                         </select>
@@ -321,7 +321,7 @@
                 latitude = 0;
                 longtitue = 0;
                 // Người dùng từ chối cung cấp vị trí
-                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
+                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
                 break;
             case error.POSITION_UNAVAILABLE:
                 // Không thể xác định được vị trí
