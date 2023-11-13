@@ -360,6 +360,9 @@ function loadCalendar(data){
     reviewLink.addEventListener('click', function (event) {
         event.preventDefault();
 
+        const formModal = new bootstrap.Modal(document.getElementById('form'));
+        formModal.hide();
+
         // Lấy thông tin gymLocation
         const gymLocation = document.getElementById('gym-location').value;
 
