@@ -2782,8 +2782,26 @@ input[type="radio"]:checked{
 }
 
 /* CSS FOR GYM DETAILS PAGE */
+.w3-animate-zoom{
+  width: 70%;
+  /*height: 40%;*/
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.w3-animate-zoom img{
+  width:90%;
+  height: 500px;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
 .body-gym-details{
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(255, 250, 250);
+  /*background-color: white;*/
   background-size: cover;
 }
 .body-gym-details header{
@@ -2858,11 +2876,7 @@ input:checked + .toggle-slider:before {
 }
 
 .about-our-gym{
-  /* background-color: #18d26e; */
   color: rgb(0, 0, 0);
-  /* display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  grid-column-gap: 80px */
 }
 
 .modal {
@@ -2951,6 +2965,7 @@ input:checked + .toggle-slider:before {
 }
 
 .gym-name-cover{
+  text-transform: uppercase;
   margin: auto;
   margin-left: 20px;
   border-radius: 10px;
@@ -3279,27 +3294,47 @@ section {
 }
 
 .rating-option{
-  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  column-gap: 10px;
   padding: 20px;
-  /*border: 1px solid rgb(255, 162, 0);*/
-  background-color: #fff9e7;
+  border: 1px solid #f9ede5;
+  /*background-color: #fff9e7;*/
+  background-color: #fffbf8;
   color: #000000;
 }
 
 .rating-point{
   font-size: 24px;
   font-weight: 600;
-  margin-top: 5px;
+  /*margin-top: 5px;*/
 }
-
+.rating-max{
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rating-option .rating-avg [data-star] {
+  font-size: 25px;
+}
+.rating-option .button-list{
+  /*margin-left: 10px;*/
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+  /*flex-direction: row;*/
+  flex-wrap: wrap;
+}
 .rating-option button{
   width:fit-content;
   background-color: white;
   background-image: none;
-  border:  none;
-  box-shadow: 3px 4px rgb(224, 224, 224);
+  border:  1px solid orange;
+  border-radius: none;
+  /*box-shadow: 3px 4px rgb(224, 224, 224);*/
   margin-top: 10px;
-  margin-left: 25px;
+  margin-right: 10px;
   font-weight: 600;
   background-size: cover;
   height: 35px;
@@ -3307,13 +3342,11 @@ section {
 
 .user-rating{
   display: grid;
-  grid-template-columns: 1fr 12fr;
+  grid-template-columns: 1fr 10fr;
   column-gap: 15px;
-  /* background-color: rgb(239, 252, 252); */
   border-bottom: 1px solid rgb(255, 162, 0);
   width: 100%;
   height: fit-content;
-  /*border-radius: 10px;*/
   margin-top: 30px;
 
 }
@@ -3339,39 +3372,51 @@ section {
 }
 
 .image-scroll-wrapper{
-  margin-left: -250px;
+  /*margin-left: -250px;*/
+  /*margin-left: 10px;*/
   margin-top: 30px;
-  /* margin: auto; */
   position:relative;
-  display:block;
-  width:340px;
-  height:1200px;
-  /* margin:0; */
-  overflow-y:auto;
-  overflow-x:hidden;
-  transform:rotate(-90deg) translateY(-80px);
-  transform-origin:right top;
+  width:90%;
+  overflow-y:hidden;
+  overflow-x:auto;
+  display: flex;
+  flex-wrap:nowrap;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
-
-.image-scroll-wrapper > div{
-  display:block;
+.list-image{
+  display: flex;
+  width: 100%;
+}
+.leftImage{
+  padding-right: 10px;
+  margin-right: 0;
+  margin: auto;
+  border: none;
+}
+.rightImage{
+  margin-left: 10px;
+  padding-left: 10px;
+  margin: auto;
+  border: none;
+}
+.image-scroll-wrapper .div{
+  /*display:block;*/
   padding:5px;
   /* background:#cab; */
   border-radius: 5px;
-  transform:rotate(90deg);
-  /* transform-origin: right top; */
 }
-
+.image-scroll-wrapper .div:first-child {
+  padding-left: 0;
+  margin-left: -20px;
+}
 .image-scroll-wrapper::-webkit-scrollbar{width:2px;height:2px;}
 .image-scroll-wrapper::-webkit-scrollbar-button{width:2px;height:2px;}
 
-.squares div{
-  box-sizing:border-box;
-}
 .squares>div {
   width: 300px;
   height: 300px;
-  margin: 20px;
+  /*margin: 20px;*/
 }
 .squares div img{
   width: 100%;
@@ -3869,7 +3914,8 @@ section {
 
 /* ============== CSS FOR GYM BRAND DETAILS PAGE ============== */
 .body-gym-brand-details{
-  background-color: rgb(238, 238, 238);
+  /*background-color: rgb(238, 238, 238);*/
+  background-color: white;
 
 }
 .gym-brand-content{
@@ -3919,19 +3965,20 @@ section {
 }
 .list-service-wrapper {
   position: relative;
+  display: flex;
   width: 100%;
   margin: auto;
 }
 
 .scroll-services {
   position: relative;
-  width: 94%;
-  padding:  20px 0px 0px 0px;
+  width: 90%;
+  padding: 10px;
   margin: auto;
-  margin-left: 30px;
-  /*margin-right: 30px;*/
-  align-items: center;
+  /*margin-left: 30px;*/
   display: flex;
+  /*justify-content: center;*/
+  /*align-items: center;*/
   flex-wrap:nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -3942,20 +3989,22 @@ section {
 
 .scroll-services .child {
   height: 480px;
+  min-width: 280px;
   margin-right: 20px;
   padding: 0;
   color: #000000;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   overflow: hidden;
   position: relative;
 }
 
 .list-service-wrapper .left {
+  margin-left: 10px;
   transform: translateY(-50%);
   position: absolute;
   left: 0;
   border: none;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: snow;
 }
 
 .list-service-wrapper .right {
@@ -3964,7 +4013,7 @@ section {
   position: absolute;
   right: 0;
   border: none;
-  background-color: rgba(0, 0, 0, 0.27);
+  background-color: snow;
 }
 
 .brand-service-img{
@@ -3975,10 +4024,11 @@ section {
 .scroll-services .service-name{
   text-transform: uppercase;
   padding: 10px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  vertical-align: middle;
+  /*display: flex;*/
+  height: 70px;
+  /*justify-content: center;*/
+  /*text-align: center;*/
+  /*vertical-align: middle;*/
   font-size: 18px;
   font-weight: 700;
   color: orange;
