@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -26,7 +26,7 @@
                     <div class="card-header">
                         <h1 class="fw-bold text-primary">Cơ sở Đống Đa</h1>
                         <div class="show-wallpaper-brand col-lg-12">
-                            <img class="show-logo-brand" src="https://bom.so/roYX3t" alt="Hình ảnh">
+                            <img class="show-logo-brand" th:src="${department.getDepartmentLogoUrl()}" alt="Hình ảnh">
                         </div>
                         <style>
                             .show-wallpaper-brand {
@@ -48,129 +48,57 @@
                                     <div class="mb-3">
                                         <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                             :</label>
-                                        <input type="text" class="form-control" id="name-brand" name="name-brand"
-                                               value="Lê Đình Tuấn" readonly>
+                                        <input th:value="${department.getDepartmentName()}" type="text" class="form-control" id="name-brand" name="name-brand"
+                                               readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label fw-bold">Số điện thoại :</label>
                                         <input type="text" class="form-control" id="phone" name="phone"
-                                               value="0987654321" readonly>
+                                               th:value="${department.getDepartmentContactNumber()}" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="owners" class="form-label fw-bold">Tên chủ
-                                            cơ sở :</label>
-                                        <input type="text" class="form-control" id="area" name="area"
-                                               value="Lê Đình Tuấn - ledinhtuana1@gmail.com" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="city" class="form-label fw-bold">Tỉnh/Thành phố:</label>
-                                        <input type="text" class="form-control" id="city" name="area" value="Hà Nội"
+                                        <label for="address" class="form-label fw-bold">Địa chỉ cơ sở
+                                            :</label>
+                                        <input type="text" class="form-control" id="address" name="address"
+                                               th:value="${department.getDepartmentAddress()}"
                                                readonly>
                                     </div>
+<!--                                    <div class="mb-3">-->
+<!--                                        <label for="email" class="form-label fw-bold">Email cở sở:</label>-->
+<!--                                        <input type="email" class="form-control" id="email" name="email"-->
+<!--                                               value="ldt2001@gmai.com" readonly>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="capacity" class="form-label fw-bold">Sức chứa
                                             :</label>
                                         <input type="text" class="form-control" id="capacity" name="capacity"
-                                               value="1000 người" readonly>
+                                               th:value="${department.getCapacity() + ' người'}" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="area" class="form-label fw-bold">Diện tích :</label>
-                                        <input type="text" class="form-control" id="area" name="area" value="500 m²"
-                                               readonly>
+                                        <input type="text" class="form-control" id="area" name="area"
+                                               th:value="${department.getArea()} + 'm²'" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="address" class="form-label fw-bold">Địa chỉ cơ sở
-                                            :</label>
-                                        <input type="text" class="form-control" id="address" name="address"
-                                               value="Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội."
-                                               readonly>
+                                        <label for="owners" class="form-label fw-bold">Tên chủ
+                                            cơ sở :</label>
+                                        <input type="text" class="form-control" id="owners" name="area"
+                                               th:value="${department.getUserName()}" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="openHours" class="form-label fw-bold">Giờ hoạt động:</label><br>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewOpenHoursModal">
+                                        <label for="openHours">Giờ mở cửa:</label><br>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#viewOpenHoursModal">
                                             Xem giờ hoạt động
                                         </button>
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="viewOpenHoursModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header text-center">
-                                                    <h5 class="modal-title fw-bold fs-3" id="exampleModalLabel">Giờ hoạt động</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body text-align-last">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Monday">Thứ 2:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 3:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 4:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 5:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 6:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 7:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Chủ nhật:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="description" class="form-label fw-bold">Mô tả :</label>
                                     <textarea style="width: 100%; padding: 10px;" rows="4" cols="50" name="comment"
-                                              form="usrform" readonly>Nhờ đáp ứng được mọi nhu cầu luyện tập theo tiêu chuẩn 5 sao với thiết kế cực kỳ sang trọng trong từng chi tiết nhỏ, phòng tập gym California Centuryon Somerset West Point đã trở thành địa điểm check-in quen thuộc của giới thượng lưu Hà Nội.
+                                              form="usrform" readonly th:text="${department.getDepartmentDescription()}">Nhờ đáp ứng được mọi nhu cầu luyện tập theo tiêu chuẩn 5 sao với thiết kế cực kỳ sang trọng trong từng chi tiết nhỏ, phòng tập gym California Centuryon Somerset West Point đã trở thành địa điểm check-in quen thuộc của giới thượng lưu Hà Nội.
                                         </textarea>
                                 </div>
                             </div>
@@ -213,45 +141,23 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Gói linh hoạt tiết kiệm</td>
-                                                        <td>5</td>
-                                                        <td>20 ngày</td>
-                                                        <td>50 ngày</td>
-                                                        <td>Đây là một trong các hạng thẻ siêu tiết kiệm tại
-                                                            phòng gym của chúng tôi. Nếu bạn là người không có
-                                                            nhu cầu di chuyển nhiều và mong muốn được tập luyện
-                                                            ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
-                                                            chọn thích hợp
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Gói linh hoạt tối ưu</td>
-                                                        <td>5</td>
-                                                        <td>14 ngày</td>
-                                                        <td>40 ngày</td>
-                                                        <td>Đây là một trong các hạng thẻ siêu tiết kiệm tại
-                                                            phòng gym của chúng tôi. Nếu bạn là người không có
-                                                            nhu cầu di chuyển nhiều và mong muốn được tập luyện
-                                                            ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
-                                                            chọn thích hợp
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>Gói tiêu chuẩn</td>
-                                                        <td>5</td>
-                                                        <td>30 ngày</td>
-                                                        <td>60 ngày</td>
-                                                        <td>Đây là một trong các hạng thẻ siêu tiết kiệm tại
-                                                            phòng gym của chúng tôi. Nếu bạn là người không có
-                                                            nhu cầu di chuyển nhiều và mong muốn được tập luyện
-                                                            ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
-                                                            chọn thích hợp
-                                                        </td>
-                                                    </tr>
+                                                        <th:block th:each="gymPlan : ${gymPlans}">
+                                                            <th:block th:if="${gymPlan.getPricePerHours() > 0}">
+                                                                <tr>
+                                                                    <td th:text="${gymPlanStat.index + 1}">1</td>
+                                                                    <td th:text="${gymPlan.getGymPlanName()}">Gói linh hoạt tiết kiệm</td>
+                                                                    <td th:text="${gymPlan.getPricePerHours()}">5</td>
+                                                                    <td th:text="${gymPlan.getPlanBeforeActiveValidity()}">20 ngày</td>
+                                                                    <td th:text="${gymPlan.getPlanAfterActiveValidity()}">50 ngày</td>
+                                                                    <td th:text="${gymPlan.getGymPlanDescription()}">Đây là một trong các hạng thẻ siêu tiết kiệm tại
+                                                                        phòng gym của chúng tôi. Nếu bạn là người không có
+                                                                        nhu cầu di chuyển nhiều và mong muốn được tập luyện
+                                                                        ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
+                                                                        chọn thích hợp
+                                                                    </td>
+                                                                </tr>
+                                                            </th:block>
+                                                        </th:block>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -281,48 +187,19 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Gói 1</td>
-                                                        <td>5</td>
-                                                        <td>30 ngày</td>
-                                                        <td>30 ngày</td>
-                                                        <td>60 ngày</td>
-                                                        <td>Gói Cố Định Đầy Đủ Chức Năng của phòng tập gym
-                                                            California Gym and Fitness mang đến cho bạn trải
-                                                            nghiệm luyện tập hoàn hảo theo tiêu chuẩn 5 sao, với
-                                                            sự chăm sóc tận tâm và một loạt các tiện nghi cao
-                                                            cấp
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Gói 1</td>
-                                                        <td>5</td>
-                                                        <td>30 ngày</td>
-                                                        <td>30 ngày</td>
-                                                        <td>60 ngày</td>
-                                                        <td>Gói Cố Định Đầy Đủ Chức Năng của phòng tập gym
-                                                            California Gym and Fitness mang đến cho bạn trải
-                                                            nghiệm luyện tập hoàn hảo theo tiêu chuẩn 5 sao, với
-                                                            sự chăm sóc tận tâm và một loạt các tiện nghi cao
-                                                            cấp
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>Gói 1</td>
-                                                        <td>5</td>
-                                                        <td>30 ngày</td>
-                                                        <td>30 ngày</td>
-                                                        <td>60 ngày</td>
-                                                        <td>Gói Cố Định Đầy Đủ Chức Năng của phòng tập gym
-                                                            California Gym and Fitness mang đến cho bạn trải
-                                                            nghiệm luyện tập hoàn hảo theo tiêu chuẩn 5 sao, với
-                                                            sự chăm sóc tận tâm và một loạt các tiện nghi cao
-                                                            cấp
-                                                        </td>
-                                                    </tr>
+                                                        <th:block th:each="gymPlan : ${gymPlans}">
+                                                            <th:block th:if="${gymPlan.getPrice() > 0}">
+                                                                <tr>
+                                                                    <td th:text="${gymPlanStat.index + 1}">1</td>
+                                                                    <td th:text="${gymPlan.getGymPlanName()}">Gói linh hoạt tiết kiệm</td>
+                                                                    <td th:text="${gymPlan.getPrice()}">5</td>
+                                                                    <td th:text="${gymPlan.getDuration() + ' ngày'}">20 ngày</td>
+                                                                    <td th:text="${gymPlan.getPlanBeforeActiveValidity() + ' ngày'}">50 ngày</td>
+                                                                    <td th:text="${gymPlan.getPlanAfterActiveValidity() + ' ngày'}"></td>
+                                                                    <td th:text="${gymPlan.getGymPlanDescription()}"></td>
+                                                                </tr>
+                                                            </th:block>
+                                                        </th:block>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -344,6 +221,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     <tr>
                                         <td>1</td>
                                         <td>Hệ thống tủ khóa</td>
@@ -381,125 +259,33 @@
                         <div class="row">
                             <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Các tiện ích</h4>
                             <div class="service-list row d-flex align-items-center justify-content-center">
-                                <div class="col-md-1 pr-3">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-parking"></i>
+                                <th:block th:each="feature : ${departmentFeatures}">
+                                    <div class="col-md-1">
+                                        <div class="service-type">
+                                            <div th:utext="${feature.getFeature().getFeatureIcon()}"
+                                                    class="gym-service-logo d-flex align-items-center justify-content-center">
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-wifi"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-shower"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-scroll"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-martini-glass-citrus"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-couch"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-suitcase-medical"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1 pr-3">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-parking"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-wifi"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="service-type">
-                                        <div
-                                                class="gym-service-logo d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-shower"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                </th:block>
                             </div>
                         </div>
                         <div>
                             <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Album ảnh</h4>
                             <div class="row">
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_1.jpg" alt="Image 1" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_2.jpg" alt="Image 2" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_3.jpg" alt="Image 3" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_4.jpg" alt="Image 4" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_5.jpg" alt="Image 5" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_6.jpg" alt="Image 6" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_7.jpg" alt="Image 7" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_8.jpg" alt="Image 8" class="img-fluid">
-                                </div>
-                                <div class="album-view col-12 col-md-4 col-lg-2">
-                                    <img src="img/GymImage/gym_1_8.jpg" alt="Image 9" class="img-fluid">
-                                </div>
+                                <th:block th:each="album : ${departmentAlbums}">
+                                    <div class="album-view col-12 col-md-4 col-lg-2">
+                                        <img th:src="${album.photoUrl}" alt="Image" class="img-fluid">
+                                    </div>
+                                </th:block>
                             </div>
                         </div>
                         <div class="row">
                             <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Vị trí cơ sở</h4>
                             <div class="row text-start">
                                 <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7449.6024470801!2d105.5373683!3d21.0006037!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae201b3bf5%3A0xf193b32b643aeedc!2sTwitter%20Beans%20Coffee%20H%C3%B2a%20L%E1%BA%A1c!5e0!3m2!1svi!2s!4v1699267965805!5m2!1svi!2s"
+                                        th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDn-1MGDGwJBHRvtO_asu53bAF1IzdJ9Bs&q='+${department.getLatitude()}+','+${department.getLongitude()}}"
                                         width="100%" height="450" style="border:0;" allowfullscreen=""
                                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>

@@ -20,13 +20,13 @@ html {
     position: relative;
     unicode-bidi: bidi-override;
   }
-  
+
   [data-star]::before {
     display: block;
     content: '★★★★★';
     color: #eee;
   }
-  
+
   [data-star]::after {
     white-space: nowrap;
     position: absolute;

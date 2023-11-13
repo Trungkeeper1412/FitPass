@@ -1,6 +1,8 @@
 package com.ks.fitpass.brand.repository.impl;
 
+import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
+import com.ks.fitpass.brand.entity.BrandStatus;
 import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;
 import com.ks.fitpass.brand.repository.IRepositoryQuery;
 import com.ks.fitpass.brand.repository.BrandRepository;
@@ -71,5 +73,18 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
         }
 
         return jdbcTemplate.queryForObject(sql, Integer.class, status);
+    }
+
+    @Override
+    public Brand getBrandDetail(int userId) {
+        return jdbcTemplate.queryForObject(GET_BRAND_DETAIL_BY_USER_ID, new BrandMapper(), userId);
+    }
+
+    @Override
+    public int updateBrandDetail(BrandOwnerProfile brandOwnerProfile) {
+        return jdbcTemplate.update(UPDATE_BRAND_DETAIL_BY_BRAND_ID, brandOwnerProfile.getBrandName(), brandOwnerProfile.getBrandLogoUrl(),
+                brandOwnerProfile.getBrandWallpaperUrl(),brandOwnerProfile.getBrandThumbnailUrl(), brandOwnerProfile.getBrandDescription(),
+                brandOwnerProfile.getBrandContactNumber(), brandOwnerProfile.getBrandEmail(), brandOwnerProfile.getBrandStatus().getBrandStatusCd(),
+                brandOwnerProfile.getBrandId());
     }
 }

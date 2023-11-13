@@ -80,15 +80,53 @@ public interface IRepositoryQuery {
             """;
 
     String GET_BRAND_AMENITIES_BRAND_ID = """
-    SELECT
-        amenitie_id,
-        brand_id,
-        photo_url,
-        amenitie_name,
-        description
-    FROM
-        brand_amenities
-    WHERE
-        brand_id = ?
-""";
+                SELECT
+                    amenitie_id,
+                    brand_id,
+                    photo_url,
+                    amenitie_name,
+                    description
+                FROM
+                    brand_amenities
+                WHERE
+                    brand_id = ?
+            """;
+
+    String GET_BRAND_DETAIL_BY_USER_ID = """
+                SELECT
+                                  brand_id,
+                                  user_id,
+                                  name,
+                                  logo_url,
+                                  wallpaper_url,
+                                  thumbnail_url,
+                                  description,
+                                  rating,
+                                  contact_number,
+                                  contact_email,
+                                  brand_status_key,
+                                  kbn_brand_status.mst_kbn_value AS brand_status_name
+                                FROM
+                                  brand b
+                                  LEFT JOIN mst_kbn kbn_brand_status
+                                     ON b.brand_status_key = kbn_brand_status.mst_kbn_key
+                                     AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'
+                                WHERE
+                                  user_id = ?;
+            """;
+
+    String UPDATE_BRAND_DETAIL_BY_BRAND_ID = """
+                UPDATE brand
+                SET
+                  name = ?,
+                  logo_url = ?,
+                  wallpaper_url = ?,
+                  thumbnail_url = ?,
+                  description = ?,
+                  contact_number = ?,
+                  contact_email = ?,
+                  brand_status_key = ?
+                WHERE
+                  brand_id = ?;
+            """;
 }

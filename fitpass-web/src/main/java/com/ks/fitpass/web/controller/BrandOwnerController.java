@@ -1,12 +1,37 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.brand.entity.Brand;
+import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.GymPlanDto;
+import com.ks.fitpass.department.entity.*;
+import com.ks.fitpass.department.service.*;
+import com.ks.fitpass.web.enums.PageEnum;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/brand-owner")
+@RequiredArgsConstructor
 public class BrandOwnerController {
+    private final BrandService brandService;
+    private final DepartmentService departmentService;
+    private final GymPlanService gymPlanService;
+    private final DepartmentScheduleService departmentScheduleService;
+
+    private final DepartmentAlbumsService departmentAlbumsService;
+
+    private  final DepartmentFeatureService departmentFeatureService;
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
@@ -16,8 +41,20 @@ public class BrandOwnerController {
 
     //Brand Profile (Not a person)
     @GetMapping("/profile")
-    public String getBrandProfile() {
+    public String getBrandProfile(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        Brand brandDetails = brandService.getBrandDetail(user.getUserId());
+
+        model.addAttribute("time", System.currentTimeMillis());
+        model.addAttribute("brandDetails", brandDetails);
         return "brand-owner/gym-brand-update-profile";
+    }
+
+    @PostMapping("/updateProfile")
+    public ResponseEntity<Integer> updateBrandProfile(@RequestBody BrandOwnerProfile brandOwnerProfile,
+                                                      HttpSession session) {
+        int updateResult = brandService.updateBrandDetail(brandOwnerProfile);
+        return ResponseEntity.ok(updateResult);
     }
 
     //Change password (for brand owner account)
@@ -28,18 +65,60 @@ public class BrandOwnerController {
 
     //Department Management
     @GetMapping("/department/list")
-    public String getListOfDepartment() {
+    public String getListOfDepartment(@RequestParam("id") int brandId, Model model) {
+        List<DepartmentListByBrandDTO> departmentDTOList = departmentService.getAllDepartmentListOfBrand(brandId);
+
+        model.addAttribute("brandId", brandId);
+        model.addAttribute("departmentList", departmentDTOList);
         return "brand-owner/gym-brand-department-list";
     }
 
     @GetMapping("/department/details")
-    public String getDepartmentDetails() {
+    public String getDepartmentDetails(@RequestParam("id") int departmentId, Model model) {
+        Department department = departmentService.getOne(departmentId);
+        model.addAttribute("department", department);
+        model.addAttribute("page", PageEnum.XXX_FIRST_PAGE.getCode());
+
+        // Get list of gym plans for the department
+        List<GymPlanDto> gymPlans = gymPlanService.getGymPlanDetailsByDepartmentId(departmentId);
+        model.addAttribute("gymPlans", gymPlans);
+
+        // Get department schedule
+        List<DepartmentSchedule> departmentSchedules = departmentScheduleService.getAllByDepartmentID(departmentId);
+        model.addAttribute("departmentSchedules", departmentSchedules);
+
+        // Get Department Album
+        List<DepartmentAlbums> departmentAlbums = departmentAlbumsService.getAllByDepartmentID(departmentId);
+        model.addAttribute("departmentAlbums", departmentAlbums);
+
+        // Calculate the rating statistics
+        DepartmentDTO departmentDTO = departmentService.filterDepartmentFeedbacks(departmentId);
+        model.addAttribute("departmentFeedbacks", departmentDTO);
+
+        // Get department features
+        List<DepartmentFeature> departmentFeatures = departmentFeatureService.getDepartmentFeatures(departmentId);
+        model.addAttribute("departmentFeatures", departmentFeatures);
+
+        model.addAttribute("departmentId", departmentId);
         return "brand-owner/gym-brand-department-detail";
     }
 
     @GetMapping("/department/add")
-    public String addDepartment() {
+    public String addDepartment(@RequestParam("id") int brandId, Model model) {
+        model.addAttribute("brandId", brandId);
         return "brand-owner/gym-brand-department-add";
+    }
+
+    @PostMapping("/department/add")
+    public String createDepartment(@RequestParam int brandId, @RequestParam String brandName) {
+        departmentService.createDepartmentWithBrandId(brandId, brandName);
+        return "redirect:/brand-owner/department/list?id=" + brandId;
+    }
+
+    @PostMapping("/department/updateStatus")
+    public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status,@RequestParam int departmentId) {
+        int update = departmentService.updateDepartmentStatus(status, departmentId);
+        return ResponseEntity.ok(update);
     }
 
     //Feedback Management

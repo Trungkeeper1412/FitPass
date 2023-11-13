@@ -2346,11 +2346,13 @@ a:link {
   border: 1px solid #ccc;
   display: none;
   min-width: 150px;
+  /* Tùy chỉnh kích thước của dropdown menu */
   z-index: 1;
 }
 
 .dropdown-menu a {
   color: #333;
+  /* Tùy chỉnh màu sắc của các mục trong menu */
   padding: 10px 15px;
   display: block;
   text-decoration: none;

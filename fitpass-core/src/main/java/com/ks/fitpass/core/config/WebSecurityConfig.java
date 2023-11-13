@@ -27,6 +27,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/login", "/logout").permitAll()
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/cart/**").permitAll()
+                            .requestMatchers("/upload/**").permitAll()
+                            .requestMatchers("/user/**").permitAll()
 //                .requestMatchers("/gym-owner/**").hasRole("MANAGER")
 //                .requestMatchers("/admin/**").hasRole("ADMIN")
 //                .requestMatchers("/employee").hasRole("EMPLOYEE")

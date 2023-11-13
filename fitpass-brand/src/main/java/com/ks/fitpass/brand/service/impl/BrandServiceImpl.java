@@ -1,4 +1,5 @@
 package com.ks.fitpass.brand.service.impl;
+import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.brand.repository.BrandRepository;
@@ -31,11 +32,20 @@ public class BrandServiceImpl implements BrandService{
     public Brand getOne(int id) throws DataAccessException {
         Brand brand =  brandRepository.getOne(id);
         return brand;
-
     }
 
     @Override
     public int countAllBrands(int status, String sortRating) {
         return brandRepository.countAllBrands(status, sortRating);
+    }
+
+    @Override
+    public Brand getBrandDetail(int userId) {
+        return brandRepository.getBrandDetail(userId);
+    }
+
+    @Override
+    public int updateBrandDetail(BrandOwnerProfile brandOwnerProfile) {
+        return brandRepository.updateBrandDetail(brandOwnerProfile);
     }
 }

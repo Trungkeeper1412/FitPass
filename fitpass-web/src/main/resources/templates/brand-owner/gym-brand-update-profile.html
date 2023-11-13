@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 
 <body id="page-top">
@@ -42,43 +42,42 @@
                                             <div class="row text-start">
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
+                                                        <input type="hidden" id="brandId" th:value="${brandDetails.getBrandId()}"/>
                                                         <label for="name-brand" class="form-label fw-bold">Tên thương
                                                             hiệu</label>
                                                         <input type="text" class="form-control" id="name-brand"
-                                                            name="name-brand" placeholder="Nhập tên thương hiệu">
+                                                            name="name-brand" placeholder="Nhập tên thương hiệu" th:value="${brandDetails.getBrandName()}">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="phone" class="form-label fw-bold">Số điện
                                                             thoại:</label>
                                                         <input type="text" class="form-control" id="phone" name="phone"
-                                                            placeholder="Nhập số điện thoại">
+                                                            placeholder="Nhập số điện thoại" th:value="${brandDetails.getBrandContactNumber()}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label fw-bold">Email :</label>
                                                         <input type="email" class="form-control" id="email" name="email"
-                                                            placeholder="Nhập email">
+                                                            placeholder="Nhập email" th:value="${brandDetails.getBrandEmail()}">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="d-block fw-bold">Trạng thái :</label>
                                                         <div class="form-check form-check-inline">
-                                                            <input type="radio" name="actived" id="inlineradio1"
-                                                                value="true">
-                                                            <label class="active-check" for="inlineradio1">Đang hoạt
-                                                                động</label>
+                                                            <input type="radio" name="actived" id="inlineradio1" value="false"
+                                                                   th:checked="${brandDetails.getBrandStatus().getBrandStatusCd() == 1}">
+                                                            <label class="active-check" for="inlineradio1">Ngừng hoạt động</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input type="radio" name="actived" id="inlineradio2"
-                                                                value="false">
-                                                            <label class="active-check" for="inlineradio2">Ngừng hoạt
-                                                                động</label>
+                                                            <input type="radio" name="actived" id="inlineradio2" value="true"
+                                                                   th:checked="${brandDetails.getBrandStatus().getBrandStatusCd != 1}">
+                                                            <label class="active-check" for="inlineradio2">Đang hoạt động</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label for="description" class="form-label fw-bold">Mô tả :</label>
-                                                    <textarea rows="4" cols="50" name="comment" form="usrform"
+                                                    <textarea id="description" th:text="${brandDetails.getBrandDescription()}" rows="4" cols="50" name="comment" form="usrform"
                                                         placeholder="Mô tả về thương hiệu . . ."></textarea>
                                                 </div>
                                             </div>
@@ -90,12 +89,13 @@
                                                 <div class="col-md-4">
                                                     <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
                                                     <div class="image-container">
-                                                        <img src="img/icon.png" alt="Image">
+                                                        <img th:src="${brandDetails.getBrandLogoUrl()}" alt="Image">
                                                         <div class="image-actions">
                                                             <button class="img-edit-button" type="button"
-                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-toggle="tooltip" data-placement="top" data-image-type="logo"
                                                                 title="Chỉnh sửa hình ảnh"><i
                                                                     class="fas fa-edit"></i></button>
+                                                            <input type="hidden" id="imageLogo" th:value="${brandDetails.getBrandLogoUrl()}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -103,12 +103,14 @@
                                                     <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
                                                         :</label>
                                                     <div class="image-container">
-                                                        <img src="img/Cali-banner.jpg" alt="Image">
+                                                        <img th:src="${brandDetails.getBrandThumbnailUrl() + '?v=' + time}" alt="Image">
                                                         <div class="image-actions">
                                                             <button class="img-edit-button" type="button"
-                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-toggle="tooltip" data-placement="top" data-image-type="thumbnail"
                                                                 title="Chỉnh sửa hình ảnh"><i
                                                                     class="fas fa-edit"></i></button>
+                                                            <input type="hidden" id="imageThumbnail" th:value="${brandDetails.getBrandThumbnailUrl()}">
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,12 +118,14 @@
                                                     <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
                                                         :</label>
                                                     <div class="image-container">
-                                                        <img src="img/GymImage/gym_1_1.jpg" alt="Image">
+                                                        <img th:src="@{${brandDetails.getBrandWallpaperUrl()}}" alt="Image">
                                                         <div class="image-actions">
                                                             <button class="img-edit-button" type="button"
-                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-toggle="tooltip" data-placement="top" data-image-type="wallpaper"
                                                                 title="Chỉnh sửa hình ảnh"><i
-                                                                    class="fas fa-edit"></i></button>
+                                                                    class="fas fa-edit"></i></button>N
+                                                                <input type="hidden" id="imageWallpaper" th:value="${brandDetails.getBrandWallpaperUrl()}">
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,7 +136,7 @@
                                             <input type="button" name="previous" class="previous action-button-previous"
                                                 value="Previous" />
                                             <input type="submit" name="submit" class="submit action-button"
-                                                value="Submit" />
+                                                value="Submit" id="submitButton" />
                                         </fieldset>
                                     </form>
                                 </div>
@@ -164,3 +168,4 @@
 </body>
 
 </html>
+
