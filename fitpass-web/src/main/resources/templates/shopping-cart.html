@@ -215,10 +215,17 @@
     }
 
     function removeFromCart(gymPlanId) {
-        var confirmation = confirm("Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?");
-        if(confirmation) {
-            window.location.href = '/cart/remove?gymPlanId=' + gymPlanId;
-        }
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId;
+            }
+        });
     }
 
     var increaseButtons = document.querySelectorAll(".increase-button");

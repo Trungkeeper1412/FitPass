@@ -13,14 +13,27 @@ public interface IRepositoryQuery {
                      b.rating,
                      b.contact_number,
                      b.contact_email,
-
                      b.brand_status_key,
-                     kbn_brand_status.mst_kbn_value AS brand_status_name                     
+                     kbn_brand_status.mst_kbn_value AS brand_status_name,
+                     (SELECT COUNT(*)
+                      FROM order_plan_detail opd
+                      JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                      WHERE gd.brand_id = b.brand_id) AS total_order_details
                  FROM brand b
                  LEFT JOIN mst_kbn kbn_brand_status
                      ON b.brand_status_key = kbn_brand_status.mst_kbn_key
-                     AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'  
-                     WHERE b.brand_status_key = ?
+                     AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'
+                 WHERE b.brand_status_key = ?
+            """;
+
+    String COUNT_ALL_BRAND_BY_STATUS = """
+                SELECT
+                     COUNT(*)
+                 FROM brand b
+                 LEFT JOIN mst_kbn kbn_brand_status
+                     ON b.brand_status_key = kbn_brand_status.mst_kbn_key
+                     AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'
+                 WHERE b.brand_status_key = ?
             """;
 
     String GET_ALL_BRAND_ORDER_BY_RATING = """

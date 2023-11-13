@@ -11,6 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class GymPlan implements Serializable {
     private int planId;
+    private int brandId;
     private int gymDepartmentId;
     private int gymPlanKey;
     private int gymPlanStatusKey;

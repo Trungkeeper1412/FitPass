@@ -52,8 +52,8 @@ public class GymPlanServiceImpl implements GymPlanService {
 
 
     @Override
-    public GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId) {
-        GymPlan gymPlan = gymPlanRepository.getGymPlanByGymPlanId(gymPlanId);
+    public GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId, int departmentId) {
+        GymPlan gymPlan = gymPlanRepository.getGymPlanByGymPlanId(gymPlanId,departmentId);
         GymPlanDepartmentNameDto dto = new GymPlanDepartmentNameDto();
         dto.setGymPlanId(gymPlan.getPlanId());
         dto.setGymPlanName(gymPlan.getGymPlanName());

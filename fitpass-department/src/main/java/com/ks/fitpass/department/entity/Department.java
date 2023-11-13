@@ -12,6 +12,8 @@ public class Department {
 
     private int departmentId;
 
+    private String userName;
+
     private DepartmentStatus departmentStatus;
 
     private int brandId;
@@ -40,4 +42,10 @@ public class Department {
 
     private Double area;
 
+    private int minPrice;
+    private int maxPrice;
+
+    private String city;
+
+    private double distance;
 }

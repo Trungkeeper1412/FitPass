@@ -1,7 +1,10 @@
 package com.ks.fitpass.department.repository.impl;
 
+import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
 import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
+import com.ks.fitpass.department.mapper.DepartmentHomePageMapper;
 import com.ks.fitpass.department.mapper.DepartmentMapper;
 import com.ks.fitpass.department.mapper.UserFeedbackMapper;
 import com.ks.fitpass.department.repository.DepartmentRepository;
@@ -9,17 +12,23 @@ import com.ks.fitpass.department.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository, IRepositoryQuery {
     private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public DepartmentRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public DepartmentRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
@@ -28,8 +37,87 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
-    public List<Department> getAllByStatus(int status) throws DataAccessException {
-        return jdbcTemplate.query(GET_ALL_DEPARTMENT_BY_STATUS, new DepartmentMapper(), status);
+//    public List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating,
+//                                           double userLatitude, double userLongitude, String belowDistance) throws DataAccessException {
+//        int offset = (page - 1) * size;
+//        String sql = GET_ALL_DEPARTMENT_BY_STATUS;
+//
+//        if(userLatitude != 0 && userLongitude != 0) {
+//            sql += " HAVING distance <= " + belowDistance + "\n";
+//        }
+//
+//        if(sortRating != null && !sortRating.isEmpty()) {
+//            sql +=  " AND d.rating >=  " + sortRating + " \n";
+//        }
+//
+//        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
+//            sql +=  " AND d.city =  '"+city+"'\n";
+//        }
+//
+//        if(sortPrice != null && !sortPrice.isEmpty()) {
+//            if(sortPrice.equals("lowToHigh")) {
+//                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc, \n" +
+//                        " COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc \n";
+//            } else {
+//                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc, \n" +
+//                        " COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc \n";
+//            }
+//        }
+//
+//        if(userLatitude == 0 && userLongitude == 0) {
+//            if(sortPrice == null || sortPrice.isEmpty()) {
+//                sql += "ORDER BY d.rating DESC";
+//            } else {
+//                sql += ", d.rating DESC";
+//            }
+//        }
+//
+//        sql += " LIMIT " + size + " OFFSET " + offset;
+//
+//        return jdbcTemplate.query(sql, new DepartmentHomePageMapper(), userLatitude, userLongitude, userLatitude, status);
+//    }
+    public List<Department> getAllByStatus(int status, int page, int size, String city,
+                                           String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance)
+            throws DataAccessException {
+        int offset = (page - 1) * size;
+        String sql = GET_ALL_DEPARTMENT_BY_STATUS;
+
+        if (userLatitude != 0 && userLongitude != 0) {
+            sql += " HAVING distance <= :belowDistance";
+        }
+
+        if (sortRating != null && !sortRating.isEmpty()) {
+            sql += " ORDER BY d.rating >= :sortRating DESC";
+        } else if (sortPrice != null && !sortPrice.isEmpty()) {
+            sql += " ORDER BY " + getSortPriceQuery(sortPrice);
+        } else {
+            sql += " ORDER BY d.rating DESC";
+        }
+
+        if (userLatitude != 0 && userLongitude != 0) {
+            sql += ", distance ASC) AS department LIMIT :limitSize OFFSET :limitOffset";
+        } else {
+            sql += ") AS department LIMIT :limitSize OFFSET :limitOffset";
+        }
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("userLatitude", userLatitude);
+        parameters.addValue("userLongitude", userLongitude);
+        parameters.addValue("belowDistance", belowDistance);
+        parameters.addValue("sortRating", sortRating);
+        parameters.addValue("limitSize", size);
+        parameters.addValue("limitOffset", offset);
+        parameters.addValue("status", status);
+
+        return namedParameterJdbcTemplate.query(sql, parameters, new DepartmentHomePageMapper());
+    }
+
+    private String getSortPriceQuery(String sortPrice) {
+        if (sortPrice.equals("lowToHigh")) {
+            return "min_price ASC, max_price ASC";
+        } else {
+            return "max_price DESC, min_price DESC";
+        }
     }
     @Override
     public List<Department> getAllByTopRating(int status) throws DataAccessException {
@@ -72,9 +160,71 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
+    public List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK_PAGNITION, new UserFeedbackMapper(), departmentId, size, offset);
+    }
+
+    @Override
     public List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException {
         return jdbcTemplate.query(GET_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), status,brandID);
     }
 
+    @Override
+    public List<DepartmentListByBrandDTO> getAllDepartmentListOfBrand(int brandId) {
+        return jdbcTemplate.query(GET_ALL_DEPARTMENT_LIST_OF_BRAND, (rs, rowNum) -> {
+            DepartmentListByBrandDTO dto = new DepartmentListByBrandDTO();
+            dto.setDepartmentId(rs.getInt("gym_department_id"));
+            dto.setDepartmentName(rs.getString("name"));
+            dto.setUserName(rs.getString("user_name"));
+            dto.setDepartmentContactNumber(rs.getString("contact_number"));
+            dto.setDepartmentThumbnailUrl(rs.getString("thumbnail_url"));
+            dto.setDepartmentStatus(DepartmentStatus.builder().
+                    departmentStatusCd(rs.getInt("gym_department_status_key")).
+                    departmentStatusName(rs.getString("gym_department_status_name")).build());
+            return dto;
+        }, brandId);
+    }
 
+    @Override
+    public int updateDepartmentStatus(int status, int departmentId) {
+        return jdbcTemplate.update(UPDATE_DEPARTMENT_STATUS, status, departmentId);
+    }
+
+    @Override
+    public int createDepartmentWithBrandId(int brandId, String name) {
+        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2);
+    }
+
+    @Override
+    public int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance) {
+        String sql = "SELECT COUNT(*) -- Đếm số dòng\n" +
+                "        FROM gym_department subd\n" +
+                "        LEFT JOIN mst_kbn subkbn_department_status\n" +
+                "            ON subd.gym_department_status_key = subkbn_department_status.mst_kbn_key\n" +
+                "            AND subkbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'\n" +
+                "        WHERE subd.gym_department_status_key = ?\n";
+        if(userLatitude != 0 && userLongitude != 0) {
+            sql += "        AND (\n" +
+                    "            6371 * acos(\n" +
+                    "                cos(radians(?)) * cos(radians(subd.latitude)) *\n" +
+                    "                cos(radians(subd.longitude) - radians(?)) +\n" +
+                    "                sin(radians(?)) * sin(radians(subd.latitude))\n" +
+                    "            )\n" +
+                    "        ) <= "+belowDistance+" \n";
+        }
+
+        if(sortRating != null && !sortRating.isEmpty()) {
+            sql +=  " AND subd.rating >=  " + sortRating + " \n";
+        }
+
+        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
+            sql +=  " AND subd.city =  '"+city+"'\n";
+        }
+
+        if(userLatitude != 0 && userLongitude != 0) {
+            return jdbcTemplate.queryForObject(sql, Integer.class,  status, userLatitude, userLongitude, userLatitude);
+        }
+        return jdbcTemplate.queryForObject(sql, Integer.class,  status);
+    }
 }

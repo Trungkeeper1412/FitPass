@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS `transaction`;
 DROP TABLE IF EXISTS transfer;
 DROP TABLE IF EXISTS gymer_booking;
 DROP TABLE IF EXISTS shift;
+DROP TABLE IF EXISTS gym_department_plans;
+DROP TABLE IF EXISTS gym_department_amenities;
 DROP TABLE IF EXISTS gym_plan;
 DROP TABLE IF EXISTS mst_kbn;
 DROP TABLE IF EXISTS gym_department_services;
@@ -93,6 +95,7 @@ CREATE TABLE IF NOT EXISTS brand_amenities  (
                                                 photo_url               VARCHAR(255) NOT NULL,
     amenitie_name           VARCHAR(50),
     description             text,
+    amenitie_status INT NOT NULL,
     FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
     );
 
@@ -113,6 +116,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
     rating                      DECIMAL(10, 2) DEFAULT 0,
     capacity                    INT NOT NULL,
     area                        DECIMAL(10, 2),
+    city                        VARCHAR(255) DEFAULT 'Tất cả',
     FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
     );
 
@@ -135,21 +139,11 @@ CREATE TABLE IF NOT EXISTS gym_department_schedule (
 
 
 CREATE TABLE IF NOT EXISTS features (
-    feature_id INT AUTO_INCREMENT PRIMARY KEY,
-    feature_icon varchar(150),
+                                        feature_id INT AUTO_INCREMENT PRIMARY KEY,
+                                        feature_icon varchar(150),
     feature_name VARCHAR(50),
     feature_status INT NOT NULL
     );
-
-CREATE TABLE IF NOT EXISTS gym_department_features (
-    gym_department_feature_id INT AUTO_INCREMENT PRIMARY KEY,
-    feature_id INT,
-    gym_department_id INT NOT NULL,
-    feature_status INT NOT NULL,
-    FOREIGN KEY (feature_id) REFERENCES features(feature_id),
-    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
-    );
-
 
 -- table name mst_kbn to store type,status of all tables
 CREATE TABLE IF NOT EXISTS mst_kbn (
@@ -162,8 +156,7 @@ CREATE TABLE IF NOT EXISTS mst_kbn (
 -- Gym Plan table to store gym plan information
 CREATE TABLE IF NOT EXISTS gym_plan (
                                         plan_id        INT AUTO_INCREMENT PRIMARY KEY,
-                                        gym_department_id         INT NOT NULL,
-                                        user_id        INT NOT NULL,
+                                        brand_id         INT NOT NULL,
                                         gym_plan_key   INT NOT NULL,
                                         gym_plan_status_key    INT NOT NULL,
                                         gym_plan_type_key  INT NOT NULL,
@@ -175,8 +168,33 @@ CREATE TABLE IF NOT EXISTS gym_plan (
     duration       INT ,
     plan_before_active_validity       INT NOT NULL,
     plan_after_active_validity        INT NOT NULL,
-    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id),
-    foreign key (user_id)references user(user_id)
+    FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
+    );
+
+
+CREATE TABLE IF NOT EXISTS gym_department_plans (
+                                                    gym_department_id INT NOT NULL,
+                                                    plan_id INT NOT NULL,
+                                                    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id),
+    FOREIGN KEY (plan_id) REFERENCES gym_plan(plan_id),
+    PRIMARY KEY (gym_department_id, plan_id)
+    );
+
+CREATE TABLE IF NOT EXISTS gym_department_amenities (
+                                                        gym_department_id INT NOT NULL,
+                                                        amenitie_id INT NOT NULL,
+                                                        FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id),
+    FOREIGN KEY (amenitie_id) REFERENCES brand_amenities(amenitie_id),
+    PRIMARY KEY (gym_department_id, amenitie_id)
+    );
+
+CREATE TABLE IF NOT EXISTS gym_department_features (
+                                                       gym_department_feature_id INT AUTO_INCREMENT PRIMARY KEY,
+                                                       feature_id INT,
+                                                       gym_department_id INT NOT NULL,
+                                                       feature_status INT NOT NULL,
+                                                       FOREIGN KEY (feature_id) REFERENCES features(feature_id),
+    FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
     );
 
 -- Shift table to store shift information
@@ -204,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
                                              transaction_id   INT AUTO_INCREMENT PRIMARY KEY,
                                              wallet_id        INT NOT NULL,
                                              status           VARCHAR(30) NOT NULL,
-                                             amount           DECIMAL(10, 2) NOT NULL,
+    amount           DECIMAL(10, 2) NOT NULL,
     transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (wallet_id) REFERENCES wallet(wallet_id)
     );

@@ -47,7 +47,7 @@
 
                 <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
                 <th:block th:each="cartItem: ${checkoutCartList}">
-
+                    <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
                     <div class="plan-checkout">
                         <div class="plan-card-mc">
                             <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()}"/>
@@ -67,7 +67,7 @@
                             1
                         </div>
                     </div>
-
+                    </th:block>
                 </th:block>
             </div>
         </th:block>

@@ -14,7 +14,7 @@
                 </div>
                 <li><a class="nav-link scrollto active" th:href="@{/user/homepage}">Trang chủ</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/}">Giới thiệu</a></li>
-                <li><a class="nav-link scrollto" href="#services">Dịch vụ</a></li>
+                <li><a class="nav-link scrollto" th:href="@{/calendar/view}">Lịch tập</a></li>
                 <li>
                     <a href="#credit">
                         <span class="text-money" th:text="${session.userCredit}"></span>&nbsp<span class="credit">Credit</span>

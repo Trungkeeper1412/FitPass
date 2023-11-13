@@ -93,7 +93,15 @@
             </div>
         </div>
         <div class="blank col-md-6 mt-4" style="background-color: white; border-radius: 10px;">
-
+            <iframe
+                    width="100%"
+                    height="100%"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDn-1MGDGwJBHRvtO_asu53bAF1IzdJ9Bs&q='+${department.getLatitude()}+','+${department.getLongitude()}}">
+            </iframe>
         </div>
     </div>
 
@@ -102,47 +110,10 @@
     <!-- Gym service -->
     <div class="container">
         <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fas fa-parking"></i>
+            <div class="col-lg-1 col-md-1 service-type" th:each="feature: ${departmentFeatures}">
+                <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
+                     class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
-                <div class="service-name">Khu để xe</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-wifi"></i>
-                </div>
-                <div class="service-name">Wifi</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-shower"></i>
-                </div>
-                <div class="service-name">Nước nóng lạnh</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fas fa-scroll"></i>
-                </div>
-                <div class="service-name">Khăn tắm free</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-martini-glass-citrus"></i>
-                </div>
-                <div class="service-name">Quầy giải khát</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-couch"></i>
-                </div>
-                <div class="service-name">Khu nghỉ ngơi</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-suitcase-medical"></i>
-                </div>
-                <div class="service-name">Phòng y tế</div>
             </div>
         </div>
     </div>
@@ -166,18 +137,17 @@
                         <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
-                    <div style="" class="gym-duration">
+
+                    <div style="" class="gym-duration fw-bold " th:if="${gymPlan.duration > 0}">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
-                    <div style="" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div style="" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                    <div class="fw-bold mt-1" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                    <div class="fw-bold mt-1" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
-
                         Thêm vào giỏ hàng
-
                 </button>
             </div>
 
@@ -187,11 +157,11 @@
         </button>
     </div>
 
-    <div style="margin: auto;">
+    <div style="margin: auto;" class="container">
         <h3 style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
         <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
         <!-- <div style="color: white; margin-top: 20px;">Chúng tôi hiểu rằng đánh giá một khoản đầu tư không thể dựa trên chi phí bỏ ra, mà phải đến từ hiệu quả mang lại – tỷ suất sinh lời. Với mục tiêu duy nhất là kết quả của khách hàng, thay vì đầu tư vào những tiện nghi hào nhoáng bên ngoài, chúng tôi tập trung vào những thiết bị có chất lượng cao, đến từ những thương hiệu hàng đầu thế giới, giúp tối ưu hóa quá trình tập luyện.</div> -->
-        <div class="image-scroll-wrapper squares">
+        <div class="image-scroll-wrapper squares row">
             <div th:each="album : ${departmentAlbums}">
                 <img onclick="onClickImage(this)" class="w3-hover-opacity" th:src="${album.photoUrl}" />
             </div>
@@ -200,7 +170,7 @@
             <div style="text-align: center;">
                 <span class="w3-button w3-hover-red ">&times;</span>
                 <div class="w3-animate-zoom" style="width: 70%; margin: auto;">
-                    <img id="img01" style="width:50%; margin: auto;" >
+                    <img id="img01" style="width:90%; margin: auto;" >
                 </div>
             </div>
         </div>
@@ -208,7 +178,7 @@
 
     <h3 style="color: black; margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-    <div class="rating-feedback container mx-auto">
+    <div class="rating-feedback container mx-auto" id="ratingfeedback">
         <div class="rating-option row row-cols-6">
             <div class="rating-point col-lg-0.5 col-md-1" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
             <button type="button" class="btn btn-warning col-lg-1 col-md-2" style="margin-left: 70px;">
@@ -241,20 +211,18 @@
                 <div  th:text="${feedback.comments}"></div>
             </div>
         </div>
-        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.total == 7}">
+        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.getTotal() > 7}">
             <div class="pagination col justify-content-center">
-                <a class="prev page-numbers" href="javascript:;">prev</a>
-                <span aria-current="page" class="page-numbers current">1</span>
-                <a class="page-numbers" href="javascript:;">2</a>
-                <a class="page-numbers" href="javascript:;">3</a>
-                <a class="page-numbers" href="javascript:;">4</a>
-                <a class="page-numbers" href="javascript:;">5</a>
-                <a class="page-numbers" href="javascript:;">6</a>
-                <a class="page-numbers" href="javascript:;">7</a>
-                <a class="page-numbers" href="javascript:;">8</a>
-                <a class="page-numbers" href="javascript:;">9</a>
-                <a class="page-numbers" href="javascript:;">10</a>
-                <a class="next page-numbers" href="javascript:;">next</a>
+                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"
+                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>
+<!--                <span aria-current="page" class="page-numbers current" th:text="${currentPage}"></span>-->
+                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"
+                       th:classappend="${pageNumber == currentPage}? 'current' : ''"
+                       th:text="${pageNumber}"></a>
+                </span>
+                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"
+                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>
             </div>
         </div>
     </div>
@@ -354,6 +322,11 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
     function onClickImage(element) {
         document.getElementById("img01").src = element.src;
         document.getElementById("modal01").style.display = "block";

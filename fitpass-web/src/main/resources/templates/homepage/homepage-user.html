@@ -9,9 +9,10 @@
     <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
     <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
     <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
+          rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
@@ -19,7 +20,7 @@
     <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
-    <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet" >
+    <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet">
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
 </head>
 <body class="body-list-brand">
@@ -63,121 +64,96 @@
 
 <!-- Content -->
 <div class="list-brand-content container">
-    <div class="tabs">
-        <!-- List brands -->
-        <div class="tab-2">
-            <label for="tab2-1">
-                <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/5632/5632749.png"></span>
-                <span class="tab-title">Thương hiệu</span>
-            </label>
-            <input id="tab2-1" onclick="openBrand()" name="tabs-two" type="radio" checked="checked">
-            <div id="list-brand" class="list-of-brand">
-                <h3 class="fw-bold list-brand-title">Danh sách các Gym Brand của chúng tôi</h3>
-                <div class="container mb-5">
-                    <form>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <label class="pt-2 pb-2" for="price">Lượt bán:</label>
-                                <select class="gym-dropdown">
-                                    <option value="lowToHigh">Thấp đến cao</option>
-                                    <option value="highToLow">Cao đến thấp</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <label class="pt-2 pb-2" for="rating">Rating:</label>
-                                <select class="gym-dropdown" id="">
-                                    <option value="5">5 sao &#8595;</option>
-                                    <option value="4">Trên 4 sao &#8595;</option>
-                                    <option value="3">Trên 3 sao &#8595;</option>
-                                    <option value="2">Trên 2 sao &#8595;</option>
-                                    <option value="1">Trên 1 sao &#8595;</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row justify-content-center"
-                     th:insert="homepage/fragments/list-brand-fr.html :: list-brand-fr">
-                </div>
-                <!-- pagination -->
-                <div class="pagination mt-5">
-                    <a href="#">&laquo;</a>
-                    <a href="#">1</a>
-                    <a href="#" class="active">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">&raquo;</a>
-                </div>
-            </div>
+    <div class="row home-option">
+        <div id="brand-list" onclick="openBrand()" class="col-md-6 mx-auto active-list">
+            <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/5632/5632749.png"></span>
+            <span class="tab-title fw-bold">Thương hiệu</span>
         </div>
-        <!-- List departments -->
-        <div class="tab-2" id="tab-department">
-            <label for="tab2-2">
-                <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
-                <span class="tab-title">Cơ sở gần bạn</span>
-            </label>
-            <input onclick="openGym()" id="tab2-2" name="tabs-two" type="radio">
-            <div id="list-gym" class="list-of-gym">
-                <h3 class="fw-bold list-brand-title">Danh sách các cơ sở Gym gần bạn</h3>
-                <div class="container ">
-                    <form id="filter-form">
-                        <div class="row justify-content-center">
-                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <label class="pt-2 pb-2" for="location">Vị trí:</label>
-                                <select class="gym-dropdown" id="location">
-                                    <option value="all">Tất cả</option>
-                                    <option value="hn">Hà Nội</option>
-                                    <option value="hcm">TP. Hồ Chí Mnh</option>
-                                    <option value="dn">Đà Nẵng</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <label class="pt-2 pb-2" for="price">Giá gói:</label>
-                                <select class="gym-dropdown" id="price">
-                                    <option value="lowToHigh">Thấp đến cao</option>
-                                    <option value="highToLow">Cao đến thấp</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <label class="pt-2 pb-2" for="rating">Rating:</label>
-                                <select class="gym-dropdown" id="rating">
-                                    <option value="5">5 sao</option>
-                                    <option value="4">Trên 4 sao</option>
-                                    <option value="3">Trên 3 sao</option>
-                                    <option value="2">Trên 2 sao</option>
-                                    <option value="1">Trên 1 sao</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <label class="pt-2 pb-2" for="distance fw-bold">Cách bạn:</label>
-                                <select class="gym-dropdown" id="distance fw-bold">
-                                    <option value="1-5">Dưới 2 km</option>
-                                    <option value="5-20">Dưới 5 km</option>
-                                    <option value="5-20">Dưới 10 km</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row justify-content-center mt-5" id="department-list-container"
-                     th:insert="homepage/fragments/list-gym-fr.html :: list-gym-fr">
-                </div>
-                <!-- pagination -->
-                <div class="pagination mt-5">
-                    <a href="#">&laquo;</a>
-                    <a href="#">1</a>
-                    <a href="#" class="active">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">&raquo;</a>
-                </div>
-            </div>
+        <div id="gym-list" onclick="openGym()" class="col-md-6 mx-auto">
+            <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
+            <span class="tab-title fw-bold">Cơ sở gần bạn</span>
         </div>
     </div>
+    <div id="list-brand" class="list-of-brand">
+        <h3 class="fw-bold list-brand-title">Danh sách các Gym Brand của chúng tôi</h3>
+        <div class="container mb-5">
+            <form>
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                        <label class="pt-2 pb-2 fw-bold" for="price">Lượt bán:</label>
+                        <select class="gym-dropdown" id="sort-price">
+                            <option value="lowToHigh">Thấp đến cao</option>
+                            <option value="highToLow">Cao đến thấp</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                        <label class="pt-2 pb-2 fw-bold" for="rating">Rating:</label>
+                        <select class="gym-dropdown" id="sort-rating">
+                            <option value="5">5 sao</option>
+                            <option value="4">Trên 4 sao</option>
+                            <option value="3">Trên 3 sao</option>
+                            <option value="2">Trên 2 sao</option>
+                            <option value="1">Trên 1 sao</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row justify-content-center" id="brand-list-container"></div>
+        <!-- pagination -->
+        <div class="pagination mt-5" id="paginationBrand"></div>
+    </div>
+
+    <!-- List departments -->
+    <div id="list-gym" class="list-of-gym">
+        <h3 class="fw-bold list-brand-title">Danh sách các cơ sở Gym gần bạn</h3>
+        <div class="container ">
+            <form id="filter-form">
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                        <label class="pt-2 pb-2 fw-bold" for="location">Vị trí:</label>
+                        <select class="gym-dropdown" id="location">
+                            <option value="all">Tất cả</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Mnh</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                        <label class="pt-2 pb-2 fw-bold" for="price">Giá gói:</label>
+                        <select class="gym-dropdown" id="price">
+                            <option value="lowToHigh">Thấp đến cao</option>
+                            <option value="highToLow">Cao đến thấp</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                        <label class="pt-2 pb-2 fw-bold" for="rating">Rating:</label>
+                        <select class="gym-dropdown" id="rating">
+                            <option value="0" selected>Select Rating</option>
+                            <option value="5">5 sao</option>
+                            <option value="4">Trên 4 sao</option>
+                            <option value="3">Trên 3 sao</option>
+                            <option value="2">Trên 2 sao</option>
+                            <option value="1">Trên 1 sao</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                        <label class="pt-2 pb-2 fw-bold" for="distance fw-bold">Cách bạn:</label>
+                        <select class="gym-dropdown" id="distance fw-bold">
+                            <option value="2">Dưới 2 km</option>
+                            <option value="5">Dưới 5 km</option>
+                            <option value="10">Dưới 10 km</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row row-gym justify-content-center mt-5" id="department-list-container"></div>
+        <!-- pagination -->
+        <div class="pagination mt-5" id="pagnitionDepartment"></div>
+    </div>
+</div>
+</div>
 </div>
 <!-- ======= Header ======= -->
 <div th:replace="common/footer :: footer"></div>
@@ -196,59 +172,343 @@
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
+    var latitude = 0;
+    var longtitue = 0;
+    var selectedRating = "";
+    var selectedPrice = "";
+
+    $(document).ready(function () {
+        loadBrand(1); // Tải trang đầu tiên
+    });
+
     //Tab display code
     document.getElementById("list-gym").style.display = "none";
+
     function openGym() {
         document.getElementById("list-brand").style.display = "none";
         document.getElementById("list-gym").style.display = "block";
-        getNearbyGyms();
+        document.getElementById("gym-list").classList.add("active-list");
+        document.getElementById("brand-list").classList.remove("active-list");
+        loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), 1, 6);
+        getNearbyGyms(1);
     }
+
     function openBrand() {
         document.getElementById("list-gym").style.display = "none";
         document.getElementById("list-brand").style.display = "block";
+        document.getElementById("brand-list").classList.add("active-list");
+        document.getElementById("gym-list").classList.remove("active-list");
+        loadBrand(1);
     }
+    
+    // Sự kiện thay đổi giá trị trong dropdown "Rating"
+    $('#sort-rating').change(function () {
+        selectedRating = $(this).val();
+        loadBrand(1)
+    });
 
-    function getNearbyGyms() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(sendLocationToServer);
-        }
-        function sendLocationToServer(position) {
-            //real value from the web
-            // const latitude = position.coords.latitude;
-            // const longitude = position.coords.longitude;
-            // console.log(latitude, longitude);
+    // Sự kiện thay đổi giá trị trong dropdown "Price"
+    $('#sort-price').change(function () {
+        selectedPrice = $(this).val();
+        loadBrand(1)
+    });
 
-            //fixed value (position at hoa lac)
-            const userLatitude = 21.00418734116798;
-            const userLongitude = 105.52004332513577;
-            console.log("Before AJAX request");
-            $.ajax({
-                type: "POST",
-                url: "/user/homepage",
-                data: {userLatitude: userLatitude, userLongitude: userLongitude},
-                success: function (response) {
-                    console.log("Inside success callback");
-                    console.log(response.length);
-                    if (response.length === 0) {
-                        $('#department-list-container').empty();
-                        $('#department-list-container').html('<p>No gyms found nearby.</p>');
+    function loadBrand(page) {
+        $.ajax({
+            url: '/user/homepage/brand',
+            type: 'GET',
+            data: {
+                page: page,
+                size: 6,
+                sortPrice: selectedPrice,
+                sortRating: selectedRating
+            },
+            success: function (data) {
+                // Hiển thị danh sách người dùng
+                var brandListHtml = '';
+                $.each(data.listBrand, function (index, brand) {
+                    brandListHtml += `
+<div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
+<a href="/brand/brand-detail/${brand.brandId}">
+            <div class="brand">
+                <img class="brand-image"
+                     src="${brand.brandThumbnailUrl}" alt="Ảnh bìa">
+                <div class="brand-info">
+                    <h5 class="fw-bold">${brand.brandName}</h5>
+                    <div style="height: 25px; margin-top: -3px;" data-star="${brand.rating}"></div>
+                    <div class="description">${brand.brandDescription}</div>
+                    <div style="display: flex; margin-top: 20px">
+                        <div class="basic-info">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/11569/11569967.png"></span>
+                            <span>${data.brandDepartmentsMap[brand.brandId].length} Cơ Sở</span>
+                        </div>
+                        <div class="basic-info" style="margin-left: 15px;">
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png"></span>
+                            <span>${brand.numberOfOrderDetailSale} gói tập đã bán</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            </div>`;
+                });
+
+                $('#brand-list-container').html(brandListHtml);
+
+                // Tạo liên kết phân trang
+                var paginationHtml = '';
+                for (var i = 1; i <= data.totalPage; i++) {
+                    var currentPage = data.number + 1; // Trang hiện tại (0-based)
+                    if (i === currentPage) {
+                        paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
                     } else {
-                        $('#department-list-container').empty();
-                        $('#department-list-container').html(response)
+                        paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
                     }
-                },
-                error: function (error) {
-                    console.log("Inside error callback");
-                    console.error("Error sending location data:", error);
                 }
-            });
-            console.log("After AJAX request");
+                $('#paginationBrand').empty().html(paginationHtml);
+            }
+        });
+    }
+
+    function paginationBrand(page) {
+        event.preventDefault();
+        loadBrand(page);
+    }
+
+    $("#price").change(function () {
+        getNearbyGyms(1);
+    })
+
+    $("#rating").change(function () {
+        getNearbyGyms(1);
+    })
+
+    $("#distance").change(function () {
+        getNearbyGyms(1)
+    })
+
+    $("#location").change(function () {
+        getNearbyGyms(1);
+    })
+
+    function getNearbyGyms(page) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    sendLocationToServer(position, page);
+                },
+                function (error) {
+                    handleGeolocationError(error, page);
+                }
+            );
         }
     }
-</script>
-<script>
 
+    function sendLocationToServer(position, page) {
+        // latitude = position.coords.latitude;
+        // longtitue = position.coords.longitude;
+        //Hoan Kiem Geo
+        latitude = 21.0287875844513
+        longtitue = 105.85144018976352
+        console.log(latitude);
+        console.log(longtitue);
+        loadDepartmentData(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
+    }
 
+    function handleGeolocationError(error, page) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                latitude = 0;
+                longtitue = 0;
+                // Người dùng từ chối cung cấp vị trí
+                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
+                break;
+            case error.POSITION_UNAVAILABLE:
+                // Không thể xác định được vị trí
+                break;
+            case error.TIMEOUT:
+                // Quá thời gian để lấy vị trí
+                break;
+            case error.UNKNOWN_ERROR:
+                // Lỗi không xác định
+                break;
+        }
+    }
+
+    function loadDepartmentData(userLatitude, userLongitude, belowDistance, city, sortPrice, sortRating, page, size) {
+        $.ajax({
+            type: "POST",
+            url: "/user/homepage",
+            data: {
+                userLatitude: userLatitude,
+                userLongitude: userLongitude,
+                belowDistance: belowDistance,
+                city: city,
+                sortPrice: sortPrice,
+                sortRating: sortRating,
+                page: page,
+                size: size
+            },
+            success: function (response) {
+                handleDepartmentDataResponse(response);
+            },
+            error: function (error) {
+                console.error("Error sending location data:", error);
+            }
+        });
+    }
+
+    function loadDepartmentDataWithNoGeolocation(userLatitude, userLongitude, belowDistance, city, sortPrice, sortRating, page, size) {
+        $.ajax({
+            type: "POST",
+            url: "/user/homepage",
+            data: {
+                userLatitude: userLatitude,
+                userLongitude: userLongitude,
+                belowDistance: belowDistance,
+                city: city,
+                sortPrice: sortPrice,
+                sortRating: sortRating,
+                page: page,
+                size: size
+            },
+            success: function (response) {
+                handleDepartmentDataResponseWithNoGeolocation(response);
+            },
+            error: function (error) {
+                console.error("Error sending location data:", error);
+            }
+        });
+    }
+
+    function handleDepartmentDataResponse(response) {
+        console.log(response);
+        let departmentSize = response.departmentList.length
+
+        var departmentListContainer = $('#department-list-container');
+        departmentListContainer.empty();
+
+        if (departmentSize === 0) {
+            departmentListContainer.html('<p>No gyms found nearby.</p>');
+        } else {
+            var departmentListHtml = '';
+
+            $.each(response.departmentList, function (index, department) {
+                departmentListHtml += `
+                <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
+                    <a href="/department/department-detail/${department.departmentId}">
+                    <div class="card">
+                            <div class="distance-flag">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/5774/5774388.png"></span>
+                                <span>Cách bạn ${roundToTwoDecimalPlaces(+department.distance)} km</span>
+                            </div>
+                            <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            <div class="card-body">
+                                   <h3 class="card-title">${department.departmentName}</h3>
+                                    <p class="card-text">
+                                       <i class="bi bi-geo-alt"></i> ${department.departmentAddress}
+                                    </p>
+                                    <p class="phone-number">
+                                           <i class="bi bi-telephone"></i> ${department.departmentContactNumber}
+                                    </p>
+                <div class="review-section mb-3">
+                    Đánh giá:
+                    <div class="rating" data-star="${department.rating}"></div>
+                </div>
+                <div class="gym-price justify-content-center">
+                        <span class="mb-3 d-inline" >Giá gói:</span>
+                        <h5 class="text-money d-inline">
+                            ${department.minPrice}-${department.maxPrice} <span class="credit" style="font-size: 14px;">Credit</span>
+                        </h5>
+                </div>
+               </div>
+       </div>
+       </a>
+   </div>`;
+            });
+            departmentListContainer.html(departmentListHtml);
+
+            // Tạo liên kết phân trang
+            var paginationHtml = '';
+            for (var i = 1; i <= response.totalPage; i++) {
+                var currentPage = response.currentPage; // Trang hiện tại (0-based)
+                if (i === currentPage) {
+                    paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                } else {
+                    paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                }
+            }
+            $('#pagnitionDepartment').empty();
+            $('#pagnitionDepartment').html(paginationHtml);
+        }
+    }
+
+    function handleDepartmentDataResponseWithNoGeolocation(response) {
+        console.log(response);
+        let departmentSize = response.departmentList.length
+
+        var departmentListContainer = $('#department-list-container');
+        departmentListContainer.empty();
+
+        if (departmentSize === 0) {
+            departmentListContainer.html('<p>No gyms found</p>');
+        } else {
+            var departmentListHtml = '';
+
+            $.each(response.departmentList, function (index, department) {
+                departmentListHtml += `
+                <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
+                    <a href="/department/department-detail/${department.departmentId}">
+                    <div class="card">
+                            <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            <div class="card-body">
+                                   <h3 class="card-title">${department.departmentName}</h3>
+                                    <p class="card-text">
+                                       <i class="bi bi-geo-alt"></i> ${department.departmentAddress}
+                                    </p>
+                                    <p class="phone-number">
+                                           <i class="bi bi-telephone"></i> ${department.departmentContactNumber}
+                                    </p>
+                <div class="review-section mb-3">
+                    Đánh giá:
+                    <div class="rating" data-star="${department.rating}"></div>
+                </div>
+                <div class="gym-price justify-content-center">
+                        <span class="mb-3 d-inline" >Giá gói:</span>
+                        <h5 class="text-money d-inline">
+                            ${department.minPrice}-${department.maxPrice} <span class="credit" style="font-size: 14px;">Credit</span>
+                        </h5>
+                </div>
+               </div>
+       </div>
+       </a>
+   </div>`;
+            });
+            departmentListContainer.html(departmentListHtml);
+
+            // Tạo liên kết phân trang
+            var paginationHtml = '';
+            for (var i = 1; i <= response.totalPage; i++) {
+                var currentPage = response.currentPage; // Trang hiện tại (0-based)
+                if (i === currentPage) {
+                    paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                } else {
+                    paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                }
+            }
+            $('#pagnitionDepartment').empty();
+            $('#pagnitionDepartment').html(paginationHtml);
+        }
+    }
+
+    function pagnitionDepartment(page) {
+        event.preventDefault();
+        getNearbyGyms(page);
+    }
+
+    function roundToTwoDecimalPlaces(number) {
+        return Math.round((number + Number.EPSILON) * 100) / 100;
+    }
 </script>
 </body>
 </html>

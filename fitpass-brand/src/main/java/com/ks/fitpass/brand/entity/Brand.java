@@ -23,7 +23,6 @@ public class Brand {
 
     private String brandThumbnailUrl;
 
-
     private String brandDescription;
 
     private Double rating;
@@ -33,5 +32,7 @@ public class Brand {
     private String brandEmail;
 
     private BrandStatus brandStatus;
+
+    private int numberOfOrderDetailSale;
 
 }

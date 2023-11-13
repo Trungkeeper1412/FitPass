@@ -1,10 +1,11 @@
 <div th:fragment="list-brand-fr">
-    <div class="row">
+    <div class="row" id="brandList">
         <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4" th:each="brand:${brands}">
             <a th:href="@{/brand/brand-detail/{brand_id}(brand_id=${brand.getBrandId()})}">
-            <div class="brand">
-                <img class="brand-image"
-                     th:src="${brand.getBrandWallpaperUrl()}" alt="Ảnh bìa">
+            <div class="row brand">
+                <div class="brand-image">
+                <img th:src="${brand.getBrandThumbnailUrl()}" alt="thumbnail">
+                </div>
                 <div class="brand-info">
                     <h5 class="fw-bold" th:text="${brand.getBrandName()}"></h5>
                     <div style="height: 25px; margin-top: -3px;" th:attr="data-star=${brand.getRating()}"></div>
@@ -16,7 +17,7 @@
                         </div>
                         <div class="basic-info" style="margin-left: 15px;">
                             <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png"></span>
-                            <span>200 gói tập đã bán</span>
+                            <span><span th:text="${brand.getNumberOfOrderDetailSale()}"></span> gói tập đã bán</span>
                         </div>
                     </div>
                 </div>
