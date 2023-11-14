@@ -61,7 +61,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
                 user.getUserPassword(),
                 grantedAuthorities,
                 user.getUserId(),
-                user.getUserPassword(),
                 user.getUserCreateTime(),
                 user.isUserDeleted()
         );

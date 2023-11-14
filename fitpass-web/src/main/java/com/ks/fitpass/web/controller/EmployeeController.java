@@ -109,6 +109,61 @@ public class EmployeeController {
         return ResponseEntity.ok(searchResults);
     }
 
+    @GetMapping("/flexible/sendCheckinRequest")
+    public ResponseEntity<Integer> sendCheckInRequest(@RequestParam("id") int orderDetailId, HttpSession session){
+        // Lấy ra thông tin người dùng hiện tại
+        User user = (User) session.getAttribute("userInfo");
+
+        // Lấy ra thông tin người cần gửi đến (người dùng checkin)
+        UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(orderDetailId);
+
+        Notification notification = new Notification();
+        // Truyền id người gửi
+        notification.setUserIdSend(user.getUserId());
+        notification.setUserIdReceive(userReceiveMessageDTO.getUserId());
+        notification.setMessageType("Xác nhận check in");
+        notification.setMessage(""+orderDetailId);
+        notification.setDepartmentId(userReceiveMessageDTO.getGymDepartmentId());
+        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+
+        int insertStatus = notificationService.insertNotification(notification);
+
+        return ResponseEntity.ok(insertStatus);
+    }
+
+    @PostMapping("/flexible/sendCheckoutRequest")
+    public ResponseEntity<Integer> sendCheckoutRequest(@RequestBody DataSendCheckOutFlexibleDTO dataSendCheckOutFlexibleDTO, HttpSession session) throws JsonProcessingException {
+//         Lấy ra thông tin người dùng hiện tại
+        User user = (User) session.getAttribute("userInfo");
+
+        // Lấy ra thông tin người cần gửi đến (người dùng cần checkout)
+        UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(dataSendCheckOutFlexibleDTO.getOrderDetailId());
+
+        // Lấy ra thời điểm check out
+        Timestamp checkOutTime = new Timestamp(dataSendCheckOutFlexibleDTO.getCheckOutTime());
+        int duration = dataSendCheckOutFlexibleDTO.getDuration();
+        Timestamp checkInTime = dataSendCheckOutFlexibleDTO.getCheckInTime();
+        double totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
+        int orderDetailId = dataSendCheckOutFlexibleDTO.getOrderDetailId();
+
+        Notification notification = new Notification();
+        // Truyền id người gửi
+        notification.setUserIdSend(user.getUserId());
+        // Truyền id người nhận
+        notification.setUserIdReceive(userReceiveMessageDTO.getUserId());
+        notification.setMessageType("Xác nhận check out");
+        // Truyền thông báo dưới dạng json string để về sau hiện pop up cofirm check out xử lí
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = objectMapper.writeValueAsString(dataSendCheckOutFlexibleDTO);
+        notification.setMessage(jsonString);
+        notification.setDepartmentId(userReceiveMessageDTO.getGymDepartmentId());
+        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+
+        // Gửi thông báo đến người dùng
+        int insertStatus = notificationService.insertNotification(notification);
+
+        return ResponseEntity.ok(insertStatus);
+    }
     @GetMapping("/flexible/checkin")
     public ResponseEntity<Integer> performFlexibleCheckIn(@RequestParam("id") int orderDetailId,
                                                           @RequestParam("uis") int userIdSend,@RequestParam("uir") int userIdReceive,
@@ -198,62 +253,6 @@ public class EmployeeController {
         }
 
         return ResponseEntity.ok(1);
-    }
-
-    @GetMapping("/flexible/sendCheckinRequest")
-    public ResponseEntity<Integer> sendCheckInRequest(@RequestParam("id") int orderDetailId, HttpSession session){
-        // Lấy ra thông tin người dùng hiện tại
-        User user = (User) session.getAttribute("userInfo");
-
-        // Lấy ra thông tin người cần gửi đến (người dùng checkin)
-        UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(orderDetailId);
-
-        Notification notification = new Notification();
-        // Truyền id người gửi
-        notification.setUserIdSend(user.getUserId());
-        notification.setUserIdReceive(userReceiveMessageDTO.getUserId());
-        notification.setMessageType("Xác nhận check in");
-        notification.setMessage(""+orderDetailId);
-        notification.setDepartmentId(userReceiveMessageDTO.getGymDepartmentId());
-        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
-
-        int insertStatus = notificationService.insertNotification(notification);
-
-        return ResponseEntity.ok(insertStatus);
-    }
-
-    @PostMapping("/flexible/sendCheckoutRequest")
-    public ResponseEntity<Integer> sendCheckoutRequest(@RequestBody DataSendCheckOutFlexibleDTO dataSendCheckOutFlexibleDTO, HttpSession session) throws JsonProcessingException {
-//         Lấy ra thông tin người dùng hiện tại
-        User user = (User) session.getAttribute("userInfo");
-
-        // Lấy ra thông tin người cần gửi đến (người dùng cần checkout)
-        UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(dataSendCheckOutFlexibleDTO.getOrderDetailId());
-
-        // Lấy ra thời điểm check out
-        Timestamp checkOutTime = new Timestamp(dataSendCheckOutFlexibleDTO.getCheckOutTime());
-        int duration = dataSendCheckOutFlexibleDTO.getDuration();
-        Timestamp checkInTime = dataSendCheckOutFlexibleDTO.getCheckInTime();
-        double totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
-        int orderDetailId = dataSendCheckOutFlexibleDTO.getOrderDetailId();
-
-        Notification notification = new Notification();
-        // Truyền id người gửi
-        notification.setUserIdSend(user.getUserId());
-        // Truyền id người nhận
-        notification.setUserIdReceive(userReceiveMessageDTO.getUserId());
-        notification.setMessageType("Xác nhận check out");
-        // Truyền thông báo dưới dạng json string để về sau hiện pop up cofirm check out xử lí
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = objectMapper.writeValueAsString(dataSendCheckOutFlexibleDTO);
-        notification.setMessage(jsonString);
-        notification.setDepartmentId(userReceiveMessageDTO.getGymDepartmentId());
-        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
-
-        // Gửi thông báo đến người dùng
-        int insertStatus = notificationService.insertNotification(notification);
-
-        return ResponseEntity.ok(insertStatus);
     }
 
     @GetMapping("/flexible/getCheckInTime")

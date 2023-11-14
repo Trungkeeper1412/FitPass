@@ -14,16 +14,14 @@ import java.util.Collection;
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
 
     private int id;
-    private String customUserPassword;
     private long userCreateTime;
     private boolean userDeleted;
 
     public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                             int id, String customUserPassword,
+                             int id,
                              long userCreateTime, boolean userDeleted) {
         super(username, password, authorities);
         this.id = id;
-        this.customUserPassword=customUserPassword;
         this.userCreateTime = userCreateTime;
         this.userDeleted = userDeleted;
     }
