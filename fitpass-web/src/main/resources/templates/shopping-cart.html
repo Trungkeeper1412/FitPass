@@ -34,7 +34,7 @@
     <div class="line row"></div>
     <div class="my-card-title row">
         <div class="form-check">
-            <input onclick= 'checkUncheck(this)' class="" type="checkbox" value="" />
+            <input class="auto" onchange="checkAll(this)" id="check-all" type="checkbox" value="" />
             <label class="" for="flexCheckChecked"> </label>
         </div>
         <div class="my-plan-title">Gói tập</div>
@@ -47,7 +47,7 @@
         <div class="plan-in-my-card">
             <div class="all-plan-of-gym row">
                 <div class="form-check">
-                    <input  onclick='checkUncheckGymDept(this)' name="gym" class="" type="checkbox" value="" id="flexCheckChecked" />
+                    <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
                     <label class="" for="flexCheckChecked"> </label>
                 </div>
                 <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
@@ -58,7 +58,7 @@
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
                         <div class="form-check">
-                            <input onclick='updateCartTotal(this)' name="plan" class="" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}" />
+                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${department.getDepartmentId()}" />
                             <label class="" for="flexCheckChecked"> </label>
                         </div>
                         <div class="plan-card-mc">
@@ -75,9 +75,7 @@
                             200
                         </div>
                         <div class="num-of-plan-mc" >
-                            <!--                    <button class="decrease-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">-</button>-->
-                            <div class="product-quantity" th:text="${cartItem.getQuantity()}" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">1</div>
-                            <!--                    <button class="increase-button" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}">+</button>-->
+                            <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
                         </div>
 
                         <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
@@ -122,46 +120,96 @@
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
 <script>
 
-    const element = document.getElementById("my-card");
-    const nodes = element.getElementsByClassName("gym-department-plan");
-    // count num of plan in shopping card
-    document.getElementById("count-all-plan-mc").innerHTML = nodes.length;
-    function checkUncheck(checkBox) {
-        get = document.getElementsByTagName("input");
-        for(var i=0; i<get.length; i++) {
-            get[i].checked = checkBox.checked;}
-    }
-
-    get1 = document.getElementsByClassName("plan-in-my-card");
-    //   list_price = document.getElementsByClassName("plan-price-mc");
-    //   console.log(list_price);
-    function checkUncheckGymDept(checkBox) {
-        get2 = checkBox.parentElement.parentElement.parentElement.getElementsByTagName("input");
-        // console.log(get2);
-        for(var i=0; i<get2.length; i++) {
-            get2[i].checked = checkBox.checked;
-        }
-
-        // list_gym_dept_price = checkBox.parentElement.parentElement.parentElement.getElementsByClassName("plan-price-mc");
-        // let total = document.getElementById("total-price-mc").innerHTML;
-        // total_int = parseInt(total);
-        // let total_gym_dept = 0;
-        // for(var j=0; j<list_gym_dept_price.length;j++){
-        //     total_gym_dept = total_gym_dept + parseInt(list_gym_dept_price[j].innerHTML);
-        // }
-        // total_int = total_int + total_gym_dept;
-        // document.getElementById("total-price-mc").innerHTML = total_int;
-        // console.log(total_int);
-
-        // if(checkBox.checked == false){
-        //     total_int = parseInt(document.getElementById("total-price-mc").innerHTML) - total_gym_dept;
-        //     console.log(total_gym_dept);
-        //     console.log(total_int);
-        // }
-
-    }
-
+    var count = 0;
     let selectedItems = [];
+    // check all
+    let checkboxs = document.getElementById("my-card").querySelectorAll("input[type='checkbox']")
+    let dept_checkboxes = document.querySelectorAll('.dept-checkbox');
+    let cbActual = document.getElementById("my-card").querySelectorAll('input:not([class=auto])');
+    let numOfPlan = document.getElementById("my-card").getElementsByClassName("plan-checkbox");
+
+    cbActual.forEach(cb => {
+        cb.addEventListener('change', (event) =>{
+            if(!event.target.checked){
+                document.getElementById('check-all').checked = false;
+                count -= 1;
+            } else{
+                count += 1;
+                if(count == numOfPlan.length+1){
+                    document.getElementById('check-all').checked = true;
+                }
+                if([...cbActual].every(cb=>cb.checked == true))
+                    document.getElementById('check-all').checked = true;
+            }
+            // console.log(count);
+            if(selectedItems.length > 0) {
+                document.querySelector('.buy-button-mc button').disabled = false;
+            } else {
+                document.querySelector('.buy-button-mc button').disabled = true;
+            }
+        })
+    })
+    function checkAll(myCheckAll){
+        // count = 0;
+        if(myCheckAll.checked === true){
+            count = numOfPlan.length;
+            checkboxs.forEach(function(checkbox){
+                checkbox.checked = true;
+            });
+        } else {
+            count = 0;
+            checkboxs.forEach(function(checkbox){
+                checkbox.checked = false;
+            });
+        }
+    }
+
+    // check all in each gym department
+    for(var i=0; i<dept_checkboxes.length; i++){
+        let cbActual1 = dept_checkboxes[i].parentElement.parentElement.parentElement.querySelectorAll('input:not([class=dept-checkbox])');
+        console.log(cbActual1);
+        cbActual1.forEach(cb1 => {
+            cb1.addEventListener('change', (event) =>{
+                if(!event.target.checked){
+                    // count -= 1;
+                    let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
+                    cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
+                } else{
+                    if([...cbActual1].every(cb1=>cb1.checked == true)){
+                        cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
+                    }
+                }
+                console.log(count);
+                console.log(JSON.stringify(selectedItems));
+            })
+        })
+    }
+    function checkAllGym(myCheckAll){
+        let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
+        if(myCheckAll.checked === true){
+            document.querySelector('.buy-button-mc button').disabled = false;
+            own_checkboxs.forEach(function(checkbox){
+                checkbox.checked = true;
+                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id", "data-dept-id"));
+            });
+        } else {
+            let valuesToRemove = [];
+            own_checkboxs.forEach(function(checkbox){
+                checkbox.checked = false;
+                addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
+                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                console.log(JSON.stringify(selectedItems));
+            });
+            // if(selectedItems.length > 0) {
+            //     document.querySelector('.buy-button-mc button').disabled = false;
+            // } else {
+            //     document.querySelector('.buy-button-mc button').disabled = true;
+            // }
+        }
+        console.log(JSON.stringify(selectedItems));
+        console.log(selectedItems.length);
+    }
+
 
     function updateCartTotal(checkBox){
         let total = document.getElementById("total-price-mc").innerHTML;
@@ -173,34 +221,21 @@
             total_int = total_int + price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
-            // document.getElementById("total-price-mc").innerHTML = price;
             addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
         }
         else{
             total_int = total_int - price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
-            // document.getElementById("total-price-mc").innerHTML = total;
             selectedItems = selectedItems.filter(item => item !== checkBox.getAttribute("data-product-id"));
         }
 
 
-        // Check out with select
-
-/*        const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]:checked');
-        checkboxes.forEach(function(checkbox) {
-            addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
-        });*/
-
-
-        //Check xem người dùng có chọn item trước khi check out không
         if(selectedItems.length > 0) {
             document.querySelector('.buy-button-mc button').disabled = false;
         } else {
             document.querySelector('.buy-button-mc button').disabled = true;
         }
-
-        console.log(JSON.stringify(selectedItems));
     }
 
     function checkout() {
@@ -209,10 +244,11 @@
     }
 
     function addToUniqueArray(arr, element) {
-        if (arr.indexOf(element) === -1) {
+        if (arr.indexOf(element) === -1 && element!== null) {
             arr.push(element);
         }
     }
+
 
     function removeFromCart(gymPlanId) {
         Swal.fire({

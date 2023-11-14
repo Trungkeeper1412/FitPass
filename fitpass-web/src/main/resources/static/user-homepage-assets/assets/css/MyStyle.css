@@ -2655,6 +2655,48 @@ a:link {
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
+/* Css for notifications tab */
+.my-notifications{
+  width: 100%;
+  /* height: 500px; */
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.noti-card{
+  /* background-color: rgb(228, 251, 255); */
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  height: fit-content;
+  border-radius: 10px;
+  border: 1px solid rgb(237, 217, 0)
+  /* grid-template-columns: 1fr 4fr; */
+}
+.noti-content{
+  margin-left: 20px;
+}
+.my-notifications img{
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.noti-description{
+  font-size: 14px;
+  color: grey;
+}
+.noti-time{
+  font-size: 14px;
+  color: grey;
+}
+.my-notifications .pagination .active-page a{
+  background-color: black;
+  color: white;
+}
+
+
 /* Css  for profile tab */
 .user-profile{
   background-color: white;
