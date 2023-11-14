@@ -33,13 +33,12 @@ CREATE TABLE IF NOT EXISTS user_detail (
                                            user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
                                            first_name    VARCHAR(50) NOT NULL,
     last_name     VARCHAR(50) NOT NULL,
-    email         VARCHAR(100) NOT NULL,
+    email         VARCHAR(100) UNIQUE,
     phone_number  VARCHAR(20) NOT NULL,
     address       VARCHAR(255) NOT NULL,
     date_of_birth DATE NOT NULL,
     gender        VARCHAR(10) NOT NULL,
     image_url TEXT NULL
-
     );
 -- User table to store user information
 CREATE TABLE IF NOT EXISTS `user` (
@@ -49,8 +48,11 @@ CREATE TABLE IF NOT EXISTS `user` (
     user_detail_id        INT ,
     user_create_time VARCHAR(20) NOT NULL,
     user_deleted     TINYINT NOT NULL,
-    FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id)
+    created_by INT NULL,
+    FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id),
+    CONSTRAINT user_FK FOREIGN KEY (created_by) REFERENCES `user`(user_id)
     );
+
 -- User Wallet table to store user wallet information
 CREATE TABLE IF NOT EXISTS wallet (
                                       wallet_id     INT AUTO_INCREMENT PRIMARY KEY,
@@ -58,6 +60,7 @@ CREATE TABLE IF NOT EXISTS wallet (
                                       balance       DECIMAL(10, 2) DEFAULT 0.0,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
     );
+
 -- Role table to store user roles
 CREATE TABLE IF NOT EXISTS role (
                                     role_id   INT AUTO_INCREMENT PRIMARY KEY,
@@ -76,7 +79,7 @@ CREATE TABLE IF NOT EXISTS user_role (
 
 CREATE TABLE IF NOT EXISTS brand (
                                      brand_id                    INT AUTO_INCREMENT PRIMARY KEY,
-                                     user_id                     INT NOT NULL,
+                                     user_id                     INT,
                                      name                        VARCHAR(50) NOT NULL,
     logo_url                    VARCHAR(255) NOT NULL,
     wallpaper_url               VARCHAR(255) NOT NULL,
@@ -104,18 +107,18 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
                                               gym_department_status_key   INT NOT NULL,
                                               brand_id                    INT NOT NULL,
-                                              user_id                     INT NOT NULL,
+                                              user_id                     INT,
                                               name                        VARCHAR(255) NOT NULL,
-    address                     VARCHAR(255) NOT NULL,
-    contact_number              VARCHAR(20) NOT NULL,
-    logo_url                    VARCHAR(255) NOT NULL,
-    wallpaper_url               VARCHAR(255) NOT NULL,
-    thumbnail_url               VARCHAR(255) NOT NULL,
+    address                     VARCHAR(255),
+    contact_number              VARCHAR(20),
+    logo_url                    VARCHAR(255),
+    wallpaper_url               VARCHAR(255),
+    thumbnail_url               VARCHAR(255),
     description                 text,
-    latitude 		            DECIMAL(10,8) NOT NULL,
-    longitude 		            DECIMAL(11,8) NOT NULL,
+    latitude 		            DECIMAL(10,8),
+    longitude 		            DECIMAL(11,8),
     rating                      DECIMAL(10, 2) DEFAULT 0,
-    capacity                    INT NOT NULL,
+    capacity                    INT,
     area                        DECIMAL(10, 2),
     city                        VARCHAR(255) DEFAULT 'Tất cả',
     FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
@@ -236,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `order` (
                                        order_status_key    INT NOT NULL,
                                        discount              INT NOT NULL,
                                        order_total_money     DECIMAL(10, 2) NOT NULL,
-                                        order_note                 VARCHAR(500),
+    order_note                 VARCHAR(500),
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
     );
 
@@ -359,3 +362,4 @@ DELIMITER $$
 
         END$$
         DELIMITER ;
+
