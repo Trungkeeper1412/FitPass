@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("account")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/show-info", true)
+                .defaultSuccessUrl("/user/homepage", true)
                 .failureUrl("/login?error=true")
             )
             .logout(logout -> logout
