@@ -137,12 +137,12 @@
                             <option value="1">Trên 1 sao</option>
                         </select>
                     </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="distance-select" style="display: none;">
                         <label class="pt-2 pb-2 fw-bold" for="distance">Cách bạn:</label>
                         <select class="gym-dropdown" id="distance">
-                            <option value="2" selected>Dưới 2 km</option>
+                            <option value="2">Dưới 2 km</option>
                             <option value="5">Dưới 5 km</option>
-                            <option value="10">Dưới 10 km</option>
+                            <option value="10" selected>Dưới 10 km</option>
                         </select>
                     </div>
                 </div>
@@ -295,6 +295,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
+                    document.getElementById("distance-select").style.display = "block";
                     sendLocationToServer(position, page);
                 },
                 function (error) {
