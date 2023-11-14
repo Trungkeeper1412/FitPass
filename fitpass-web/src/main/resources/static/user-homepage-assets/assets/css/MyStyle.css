@@ -4640,6 +4640,7 @@ section {
   padding-top: 10px;
   margin-bottom: -10px;
 }
+
 .credit {
   color: orange;
   font-size: 15px;
@@ -4649,4 +4650,11 @@ section {
   color: #02aa0a;
   font-size: 18px;
   font-weight: bold;
+}
+
+.num-of-rating{
+  font-size: 12px;
+  margin-left: 8px;
+  color: #555;
+  font-style: italic;
 }
