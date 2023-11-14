@@ -13518,7 +13518,6 @@ tr td i {
 .service-type {
     aspect-ratio : 1 / 1;
     width: 100%;
-    padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
 }

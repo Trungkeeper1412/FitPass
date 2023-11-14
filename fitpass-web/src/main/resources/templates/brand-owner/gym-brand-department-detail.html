@@ -57,19 +57,25 @@
                                                th:value="${department.getDepartmentContactNumber()}" readonly>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="city" class="form-label fw-bold">Tỉnh/Thành phố:</label>
+                                        <input type="text" class="form-control" id="city" name="area" value="Hà Nội"
+                                               readonly>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="address" class="form-label fw-bold">Địa chỉ cơ sở
                                             :</label>
                                         <input type="text" class="form-control" id="address" name="address"
-                                               th:value="${department.getDepartmentAddress()}"
+                                               value="Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội."
                                                readonly>
                                     </div>
-<!--                                    <div class="mb-3">-->
-<!--                                        <label for="email" class="form-label fw-bold">Email cở sở:</label>-->
-<!--                                        <input type="email" class="form-control" id="email" name="email"-->
-<!--                                               value="ldt2001@gmai.com" readonly>-->
-<!--                                    </div>-->
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="owners" class="form-label fw-bold">Tên chủ
+                                            cơ sở :</label>
+                                        <input type="text" class="form-control" id="area" name="area"
+                                               value="Lê Đình Tuấn - ledinhtuana1@gmail.com" readonly>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="capacity" class="form-label fw-bold">Sức chứa
                                             :</label>
@@ -82,17 +88,83 @@
                                                th:value="${department.getArea()} + 'm²'" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="owners" class="form-label fw-bold">Tên chủ
-                                            cơ sở :</label>
-                                        <input type="text" class="form-control" id="owners" name="area"
-                                               th:value="${department.getUserName()}" readonly>
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="openHours">Giờ mở cửa:</label><br>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#viewOpenHoursModal">
                                             Xem giờ hoạt động
                                         </button>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="viewOpenHoursModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header text-center">
+                                                    <h5 class="modal-title fw-bold fs-3" id="exampleModalLabel">Giờ hoạt động</h5>
+                                                </div>
+                                                <div class="modal-body text-align-last">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Monday">Thứ 2:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Tuesday">Thứ 3:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Tuesday">Thứ 4:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Tuesday">Thứ 5:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Tuesday">Thứ 6:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Tuesday">Thứ 7:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <p class="fw-bold" data-day="Tuesday">Chủ nhật:</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-secondary text-center"
+                                                            data-dismiss="modal">Đóng</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -258,7 +330,7 @@
                         </div>
                         <div class="row">
                             <h4 class="fw-bold text-primary text-uppercase pt-3 pb-3">Các tiện ích</h4>
-                            <div class="service-list row d-flex align-items-center justify-content-center">
+                            <div class="service-list row d-flex align-items-center justify-content-evenly">
                                 <th:block th:each="feature : ${departmentFeatures}">
                                     <div class="col-md-1">
                                         <div class="service-type">
