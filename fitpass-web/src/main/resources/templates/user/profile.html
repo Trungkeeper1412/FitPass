@@ -70,6 +70,9 @@
                 <!-- User transaction tab -->
                 <th:block th:replace="user/fragments/transaction-history.html :: transaction-history"></th:block>
 
+                <!--User notifications tab-->
+                <th:block th:replace="user/fragments/notifications.html :: notifications"></th:block>
+
             </div>
         </div>
     </div>
@@ -153,27 +156,40 @@
     document.getElementById("add-money-tab").style.display = "none";
     document.getElementById("transaction-history").style.display = "none";
     document.getElementById("change-pw").style.display = "none";
+    document.getElementById("my-notifications").style.display = "none";
 
     function openAddMoneyTab() {
         document.getElementById("user-profile").style.display = "none";
         document.getElementById("change-pw").style.display = "none";
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("transaction-history").style.display = "none";
         document.getElementById("add-money-tab").style.display = "block";
     }
     function openUserProfileTab() {
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("add-money-tab").style.display = "none";
         document.getElementById("transaction-history").style.display = "none";
         document.getElementById("change-pw").style.display = "none";
         document.getElementById("user-profile").style.display = "block";
     }
     function openTransactionHistory() {
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("transaction-history").style.display = "block";
         document.getElementById("user-profile").style.display = "none";
         document.getElementById("change-pw").style.display = "none";
         document.getElementById("add-money-tab").style.display = "none";
     }
     function openChangePwTab() {
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("change-pw").style.display = "block";
+        document.getElementById("user-profile").style.display = "none";
+        document.getElementById("add-money-tab").style.display = "none";
+        document.getElementById("transaction-history").style.display = "none";
+    }
+
+    function openNotiTab() {
+        document.getElementById("my-notifications").style.display = "block";
+        document.getElementById("change-pw").style.display = "none";
         document.getElementById("user-profile").style.display = "none";
         document.getElementById("add-money-tab").style.display = "none";
         document.getElementById("transaction-history").style.display = "none";
