@@ -72,6 +72,7 @@ public class HomepageController {
 
         int totalBrands = brandService.countAllBrands(1, sortRating);
         int totalPages = (int) Math.ceil((double) totalBrands / size);
+        int currentPage = page;
 
         Map<Integer, List<DepartmentDTO>> brandDepartmentsMap = new HashMap<>();
         for (Brand brand : brandList) {
@@ -82,6 +83,7 @@ public class HomepageController {
         BrandPagnition brandPagnition = new BrandPagnition();
         brandPagnition.setListBrand(brandList);
         brandPagnition.setTotalPage(totalPages);
+        brandPagnition.setCurrentPage(currentPage);
         brandPagnition.setBrandDepartmentsMap(brandDepartmentsMap);
         return ResponseEntity.ok(brandPagnition);
     }

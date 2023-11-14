@@ -258,7 +258,7 @@
                 // Tạo liên kết phân trang
                 var paginationHtml = '';
                 for (var i = 1; i <= data.totalPage; i++) {
-                    var currentPage = data.number + 1; // Trang hiện tại (0-based)
+                    var currentPage = data.currentPage;
                     if (i === currentPage) {
                         paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
                     } else {
@@ -438,8 +438,7 @@
                     paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
                 }
             }
-            $('#pagnitionDepartment').empty();
-            $('#pagnitionDepartment').html(paginationHtml);
+            $('#pagnitionDepartment').empty().html(paginationHtml);
         }
     }
 
@@ -489,7 +488,7 @@
             // Tạo liên kết phân trang
             var paginationHtml = '';
             for (var i = 1; i <= response.totalPage; i++) {
-                var currentPage = response.currentPage; // Trang hiện tại (0-based)
+                var currentPage = response.currentPage;
                 if (i === currentPage) {
                     paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
                 } else {
