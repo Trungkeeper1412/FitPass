@@ -5,6 +5,8 @@ import com.ks.fitpass.notification.entity.Notification;
 import java.util.List;
 
 public interface NotificationService {
+    void sendPrivateNotification(final String userId);
+    void sendGlobalNotification();
     int insertNotification(Notification notification);
     Notification getConfirmCheckInByUserIdReceive(int userIdReceive);
     Notification getConfirmCheckOutByUserIdReceive(int userIdReceive);

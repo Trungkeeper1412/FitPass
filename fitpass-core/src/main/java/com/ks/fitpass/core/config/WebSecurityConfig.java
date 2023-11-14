@@ -1,7 +1,11 @@
 package com.ks.fitpass.core.config;
 
+import com.ks.fitpass.core.service.impl.CustomUserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,10 +19,15 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+    private final CustomUserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    public WebSecurityConfig(CustomUserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
-        //http.csrf().disable();
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                 .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
@@ -33,6 +42,7 @@ public class WebSecurityConfig {
 //                .requestMatchers("/admin/**").hasRole("ADMIN")
 //                .requestMatchers("/employee").hasRole("EMPLOYEE")
                 .requestMatchers("/employee").permitAll()
+                .requestMatchers("/send-message").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin
@@ -40,7 +50,7 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("account")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/user/homepage", true)
+                .defaultSuccessUrl("/show-info", true)
                 .failureUrl("/login?error=true")
             )
             .logout(logout -> logout
@@ -68,9 +78,15 @@ public class WebSecurityConfig {
 //        // Save remember me in memory (RAM)
 //        return new InMemoryTokenRepositoryImpl();
 //    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }

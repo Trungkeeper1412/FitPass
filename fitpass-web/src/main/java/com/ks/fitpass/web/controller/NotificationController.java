@@ -54,6 +54,55 @@ public class NotificationController {
         return ResponseEntity.ok(notification);
     }
 
+    @GetMapping("/confirmCheckOut")
+    public ResponseEntity<ConfirmCheckOutDTO> getConfirmCheckOut(HttpSession session) throws JsonProcessingException {
+        // Lấy ra thông tin người dùng hiện tại
+        User user = (User) session.getAttribute("userInfo");
+
+        // Lấy ra thông báo confirm check in mới nhất với id của người dùng hiện tại
+        Notification notification = notificationService.getConfirmCheckOutByUserIdReceive(user.getUserId());
+        if(notification == null) {
+            ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();
+            OrderDetailConfirmCheckOut n = new OrderDetailConfirmCheckOut();
+            n.setDurationHavePractice(-1);
+            confirmCheckOutDTO.setOrderDetailConfirmCheckOut(n);
+            return ResponseEntity.ok(confirmCheckOutDTO);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DataSendCheckOutFlexibleDTO dataSendCheckOutFlexibleDTO = objectMapper.readValue(notification.getMessage(), DataSendCheckOutFlexibleDTO.class);
+        // Lấy ra hết thông tin gửi từ check out
+        int orderDetailId = dataSendCheckOutFlexibleDTO.getOrderDetailId();
+        int duration = dataSendCheckOutFlexibleDTO.getDuration();
+        Timestamp checkInTime = dataSendCheckOutFlexibleDTO.getCheckInTime();
+        long checkOutTimeLong = dataSendCheckOutFlexibleDTO.getCheckOutTime();
+        double totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
+
+        // Set các thông tin cần gửi về front
+        OrderDetailConfirmCheckOut orderCheckOut = orderDetailService.getByOrderDetailId(orderDetailId);
+        double userBalance = walletService.getBalanceByUserId(user.getUserId());
+        orderCheckOut.setCreditInWallet(userBalance);
+        orderCheckOut.setCreditNeedToPay(totalCredit);
+        orderCheckOut.setCreditAfterPay(userBalance - totalCredit);
+        orderCheckOut.setDurationHavePractice(duration);
+        orderCheckOut.setNotificationId(notification.getNotificationId());
+        orderCheckOut.setHistoryCheckInId(checkInHistoryService.getCheckInHistoryIdByOrderDetailIdAndCheckInTime(orderDetailId, checkInTime));
+        orderCheckOut.setCheckOutTime(new Timestamp(checkOutTimeLong));
+        orderCheckOut.setOrderDetailId(orderDetailId);
+
+        ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();
+        confirmCheckOutDTO.setOrderDetailConfirmCheckOut(orderCheckOut);
+        confirmCheckOutDTO.setNotification(notification);
+        return ResponseEntity.ok(confirmCheckOutDTO);
+    }
+
+    @GetMapping("/seen")
+    public ResponseEntity<Integer> performSeenNotification(@RequestParam("id") int notificationId){
+        // Chuyển status thành 1 là đã đọc
+        int status = notificationService.updateStatusNotificationById(notificationId, 1);
+        return ResponseEntity.ok(status);
+    }
+
     @GetMapping("/notificationCheckInSuccessEmployee")
     public ResponseEntity<List<Notification>> getEmployeeCheckInNotification(HttpSession session){
         // Lấy ra thông tin người dùng hiện tại
@@ -111,54 +160,5 @@ public class NotificationController {
         }
 
         return ResponseEntity.ok(notificationList);
-    }
-
-    @GetMapping("/confirmCheckOut")
-    public ResponseEntity<ConfirmCheckOutDTO> getConfirmCheckOut(HttpSession session) throws JsonProcessingException {
-        // Lấy ra thông tin người dùng hiện tại
-        User user = (User) session.getAttribute("userInfo");
-
-        // Lấy ra thông báo confirm check in mới nhất với id của người dùng hiện tại
-        Notification notification = notificationService.getConfirmCheckOutByUserIdReceive(user.getUserId());
-        if(notification == null) {
-            ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();
-            OrderDetailConfirmCheckOut n = new OrderDetailConfirmCheckOut();
-            n.setDurationHavePractice(-1);
-            confirmCheckOutDTO.setOrderDetailConfirmCheckOut(n);
-            return ResponseEntity.ok(confirmCheckOutDTO);
-        }
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        DataSendCheckOutFlexibleDTO dataSendCheckOutFlexibleDTO = objectMapper.readValue(notification.getMessage(), DataSendCheckOutFlexibleDTO.class);
-        // Lấy ra hết thông tin gửi từ check out
-        int orderDetailId = dataSendCheckOutFlexibleDTO.getOrderDetailId();
-        int duration = dataSendCheckOutFlexibleDTO.getDuration();
-        Timestamp checkInTime = dataSendCheckOutFlexibleDTO.getCheckInTime();
-        long checkOutTimeLong = dataSendCheckOutFlexibleDTO.getCheckOutTime();
-        double totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
-
-        // Set các thông tin cần gửi về front
-        OrderDetailConfirmCheckOut orderCheckOut = orderDetailService.getByOrderDetailId(orderDetailId);
-        double userBalance = walletService.getBalanceByUserId(user.getUserId());
-        orderCheckOut.setCreditInWallet(userBalance);
-        orderCheckOut.setCreditNeedToPay(totalCredit);
-        orderCheckOut.setCreditAfterPay(userBalance - totalCredit);
-        orderCheckOut.setDurationHavePractice(duration);
-        orderCheckOut.setNotificationId(notification.getNotificationId());
-        orderCheckOut.setHistoryCheckInId(checkInHistoryService.getCheckInHistoryIdByOrderDetailIdAndCheckInTime(orderDetailId, checkInTime));
-        orderCheckOut.setCheckOutTime(new Timestamp(checkOutTimeLong));
-        orderCheckOut.setOrderDetailId(orderDetailId);
-
-        ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();
-        confirmCheckOutDTO.setOrderDetailConfirmCheckOut(orderCheckOut);
-        confirmCheckOutDTO.setNotification(notification);
-        return ResponseEntity.ok(confirmCheckOutDTO);
-    }
-
-    @GetMapping("/seen")
-    public ResponseEntity<Integer> performSeenNotification(@RequestParam("id") int notificationId){
-        // Chuyển status thành 1 là đã đọc
-        int status = notificationService.updateStatusNotificationById(notificationId, 1);
-        return ResponseEntity.ok(status);
     }
 }
