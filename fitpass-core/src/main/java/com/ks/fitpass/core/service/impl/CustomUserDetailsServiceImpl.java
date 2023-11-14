@@ -1,10 +1,12 @@
 package com.ks.fitpass.core.service.impl;
 
-import com.ks.fitpass.core.entity.CustomUser;
+import com.ks.fitpass.core.entity.CustomUserDetails;
 import com.ks.fitpass.core.entity.Role;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.RoleRepository;
 import com.ks.fitpass.core.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,29 +19,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsServiceImpl.class);
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public CustomUserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
-        User user = userRepository.findByAccount(account);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByAccount(username);
 
         if (user == null) {
-            System.out.println("User not found! " + account);
-            throw new UsernameNotFoundException("User " + account + " was not found in the database");
+            logger.error("User not found! {}", username);
+            throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
-        System.out.println("USER: " + user.getUserAccount());
+        logger.info("User: {}", user.getUserAccount());
 
         // Get roles of user
-        List<Role> roles = roleRepository.getRolesByUserAccount(account);
+        List<Role> roles = roleRepository.getRolesByUserAccount(username);
 
         // Create GrantedAuthority of Spring for role
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
@@ -49,10 +53,10 @@ public class UserServiceImpl implements UserDetailsService {
                 grantedAuthorities.add(authority);
             }
         }
-        System.out.println("Authorities: " + grantedAuthorities);
+        logger.info("Authorities: {}", user.getUserAccount());
 
         // return object UserDetails of Spring
-        return new CustomUser(
+        return new CustomUserDetails(
                 user.getUserAccount(),
                 user.getUserPassword(),
                 grantedAuthorities,

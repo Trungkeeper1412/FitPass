@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `order` (
                                        order_status_key    INT NOT NULL,
                                        discount              INT NOT NULL,
                                        order_total_money     DECIMAL(10, 2) NOT NULL,
-    order_note                 VARCHAR(500),
+                                        order_note                 VARCHAR(500),
     FOREIGN KEY (user_id) REFERENCES `user`(user_id)
     );
 

@@ -196,4 +196,9 @@ public class BrandOwnerController {
     public String addFixedGymPlan() {
         return "brand-owner/gym-brand-plan-fixed-add";
     }
+
+    @GetMapping("/withdrawal/list")
+    public String getListOfTransaction() {
+        return "brand-owner/gym-brand-withdrawal-list";
+    }
 }

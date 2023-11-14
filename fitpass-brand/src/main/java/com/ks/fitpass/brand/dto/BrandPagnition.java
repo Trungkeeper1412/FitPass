@@ -17,5 +17,6 @@ import java.util.Map;
 public class BrandPagnition {
     private List<Brand> listBrand;
     private int totalPage;
+    private int currentPage;
     private Map<Integer, List<DepartmentDTO>> brandDepartmentsMap;
 }

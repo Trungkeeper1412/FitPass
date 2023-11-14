@@ -137,12 +137,12 @@
                             <option value="1">Trên 1 sao</option>
                         </select>
                     </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
-                        <label class="pt-2 pb-2 fw-bold" for="distance fw-bold">Cách bạn:</label>
-                        <select class="gym-dropdown" id="distance fw-bold">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="distance-select" style="display: none;">
+                        <label class="pt-2 pb-2 fw-bold" for="distance">Cách bạn:</label>
+                        <select class="gym-dropdown" id="distance">
                             <option value="2">Dưới 2 km</option>
                             <option value="5">Dưới 5 km</option>
-                            <option value="10">Dưới 10 km</option>
+                            <option value="10" selected>Dưới 10 km</option>
                         </select>
                     </div>
                 </div>
@@ -258,7 +258,7 @@
                 // Tạo liên kết phân trang
                 var paginationHtml = '';
                 for (var i = 1; i <= data.totalPage; i++) {
-                    var currentPage = data.number + 1; // Trang hiện tại (0-based)
+                    var currentPage = data.currentPage;
                     if (i === currentPage) {
                         paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
                     } else {
@@ -295,6 +295,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
+                    document.getElementById("distance-select").style.display = "block";
                     sendLocationToServer(position, page);
                 },
                 function (error) {
@@ -321,7 +322,7 @@
                 latitude = 0;
                 longtitue = 0;
                 // Người dùng từ chối cung cấp vị trí
-                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
+                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
                 break;
             case error.POSITION_UNAVAILABLE:
                 // Không thể xác định được vị trí
@@ -438,8 +439,7 @@
                     paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
                 }
             }
-            $('#pagnitionDepartment').empty();
-            $('#pagnitionDepartment').html(paginationHtml);
+            $('#pagnitionDepartment').empty().html(paginationHtml);
         }
     }
 
@@ -489,7 +489,7 @@
             // Tạo liên kết phân trang
             var paginationHtml = '';
             for (var i = 1; i <= response.totalPage; i++) {
-                var currentPage = response.currentPage; // Trang hiện tại (0-based)
+                var currentPage = response.currentPage;
                 if (i === currentPage) {
                     paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
                 } else {
