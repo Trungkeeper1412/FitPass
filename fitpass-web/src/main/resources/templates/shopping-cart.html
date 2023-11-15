@@ -129,6 +129,20 @@
     let dept_checkboxes = document.querySelectorAll('.dept-checkbox');
     let cbActual = document.getElementById("my-card").querySelectorAll('input:not([class=auto])');
     let numOfPlan = document.getElementById("my-card").getElementsByClassName("plan-checkbox");
+    let cbPlanActual = document.querySelectorAll(".plan-checkbox");
+    console.log(cbPlanActual);
+
+    // check all is checked when all plan checkbox is checked
+    cbPlanActual.forEach(cb => {
+        cb.addEventListener('change', (event) =>{
+            if(!event.target.checked){
+                document.getElementById('check-all').checked = false;
+            } else{
+                if([...cbPlanActual].every(cb=>cb.checked === true))
+                    document.getElementById('check-all').checked = true;
+            }
+        })
+    })
 
     cbActual.forEach(cb => {
         cb.addEventListener('change', (event) =>{
@@ -152,16 +166,27 @@
         })
     })
     function checkAll(myCheckAll){
+        selectedItems = [];
+        selectedDept = [];
         // count = 0;
         if(myCheckAll.checked === true){
             count = numOfPlan.length;
+            document.querySelector('.buy-button-mc button').disabled = false;
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = true;
+                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
+                addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
             });
         } else {
             count = 0;
+            let valuesToRemove = [];
+            let deptIdRemove = [];
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
+                addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
+                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
+                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
             });
         }
     }
