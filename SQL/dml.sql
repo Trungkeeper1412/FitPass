@@ -303,6 +303,25 @@ VALUES (60, 'Pham', 'Van T', 'gymowner44@example.com', '4567890123', '789 Oak St
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id,created_by)
 VALUES (60, 'gymowner42', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 60,18);
 
+-- Gym Owner Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (61, 'Nguyen', 'Thị U', 'gymowner45@example.com', '5678901234', '123 Cherry St', '1992-08-15', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id,created_by)
+VALUES (61, 'gymowner43', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 61,18);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (62, 'Tran', 'Văn V', 'gymowner46@example.com', '6789012345', '456 Elm St', '1995-11-28', 'Male', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id,created_by)
+VALUES (62, 'gymowner44', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 62,18);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (63, 'Pham', 'Thị X', 'gymowner47@example.com', '7890123456', '789 Walnut St', '1998-04-10', 'Female', '/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id,created_by)
+VALUES (63, 'gymowner45', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 63,18);
+
 -- Employee creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
