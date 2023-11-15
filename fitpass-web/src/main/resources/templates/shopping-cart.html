@@ -34,7 +34,7 @@
     <div class="line row"></div>
     <div class="my-card-title row">
         <div class="form-check">
-            <input class="auto" onchange="checkAll(this)" id="check-all" type="checkbox" value="" />
+            <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
             <label class="" for="flexCheckChecked"> </label>
         </div>
         <div class="my-plan-title">Gói tập</div>
@@ -58,7 +58,7 @@
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
                         <div class="form-check">
-                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${department.getDepartmentId()}" />
+                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()}" />
                             <label class="" for="flexCheckChecked"> </label>
                         </div>
                         <div class="plan-card-mc">
@@ -122,6 +122,8 @@
 
     var count = 0;
     let selectedItems = [];
+    let selectedDept = [];
+
     // check all
     let checkboxs = document.getElementById("my-card").querySelectorAll("input[type='checkbox']")
     let dept_checkboxes = document.querySelectorAll('.dept-checkbox');
@@ -135,13 +137,13 @@
                 count -= 1;
             } else{
                 count += 1;
-                if(count == numOfPlan.length+1){
-                    document.getElementById('check-all').checked = true;
-                }
+                // if(count == numOfPlan.length+1){
+                //     document.getElementById('check-all').checked = true;
+                // }
                 if([...cbActual].every(cb=>cb.checked == true))
                     document.getElementById('check-all').checked = true;
             }
-            // console.log(count);
+            console.log(count);
             if(selectedItems.length > 0) {
                 document.querySelector('.buy-button-mc button').disabled = false;
             } else {
@@ -179,7 +181,6 @@
                         cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
-                console.log(count);
                 console.log(JSON.stringify(selectedItems));
             })
         })
@@ -190,15 +191,18 @@
             document.querySelector('.buy-button-mc button').disabled = false;
             own_checkboxs.forEach(function(checkbox){
                 checkbox.checked = true;
-                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id", "data-dept-id"));
+                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
+                addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
             });
         } else {
             let valuesToRemove = [];
+            let deptIdRemove = [];
             own_checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
                 addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
                 selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
-                console.log(JSON.stringify(selectedItems));
+                addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
+                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
             });
             // if(selectedItems.length > 0) {
             //     document.querySelector('.buy-button-mc button').disabled = false;
@@ -207,7 +211,9 @@
             // }
         }
         console.log(JSON.stringify(selectedItems));
+        console.log(JSON.stringify(selectedDept));
         console.log(selectedItems.length);
+        console.log(selectedDept.length);
     }
 
 
@@ -222,12 +228,18 @@
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
+            addToUniqueArray(selectedDept, checkBox.getAttribute("data-dept-id"));
         }
         else{
             total_int = total_int - price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
-            selectedItems = selectedItems.filter(item => item !== checkBox.getAttribute("data-product-id"));
+            let valuesToRemove = [];
+            let deptIdRemove = [];
+                addToUniqueArray(valuesToRemove, checkBox.getAttribute("data-product-id"));
+                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                addToUniqueArray(deptIdRemove, checkBox.getAttribute("data-dept-id"));
+                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
         }
 
 
@@ -239,12 +251,12 @@
     }
 
     function checkout() {
-        const url = `/checkout/view?idList=${selectedItems.join(',')}`;
+        const url = `/checkout/view?idList=${selectedItems.join(',')}&deptIdList=${selectedDept.join(',')}`;
         window.location.href = url;
     }
 
     function addToUniqueArray(arr, element) {
-        if (arr.indexOf(element) === -1 && element!== null) {
+        if (element!== null) {
             arr.push(element);
         }
     }

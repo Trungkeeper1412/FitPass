@@ -50,7 +50,7 @@
                     <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
                     <div class="plan-checkout">
                         <div class="plan-card-mc">
-                            <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()}"/>
+                            <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymDepartmentId()}"/>
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
                             <div class="plan-info-mc">
                                 <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim cương</h4>

@@ -43,13 +43,13 @@ public class CheckOutController {
     }
 
     @GetMapping("/view")
-    public String viewCheckout(Model model, @RequestParam List<Integer> idList, HttpSession session) {
+    public String viewCheckout(Model model, @RequestParam List<Integer> idList,@RequestParam List<Integer> deptIdList, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         List<CartItem> checkoutCartList = new ArrayList<>();
         if (cart != null) {
             List<CartItem> cartItemList = cart.getItems();
             for (CartItem cartItem : cartItemList) {
-                if (idList.contains(cartItem.getGymPlan().getGymPlanId())) {
+                if (idList.contains(cartItem.getGymPlan().getGymPlanId()) && deptIdList.contains(cartItem.getGymPlan().getGymDepartmentId())) {
                     checkoutCartList.add(cartItem);
                 }
             }
