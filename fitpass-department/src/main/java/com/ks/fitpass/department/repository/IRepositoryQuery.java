@@ -141,29 +141,31 @@ public interface IRepositoryQuery {
 
     String GET_DEPARTMENT_BY_ID = """
             SELECT
-                     d.gym_department_id,
-                     d.brand_id,
-                     d.name,
-                     d.address,
-                     d.contact_number,
-                     d.logo_url,
+                                 d.gym_department_id,
+                                 d.brand_id,
+                                 d.name,
+                                 d.address,
+                                 d.contact_number,
+                                 d.logo_url,
 
-                     d.wallpaper_url,
-                     d.thumbnail_url,
-                     d.description,
-                     d.latitude,
-                     d.longitude,
-                     d.rating,
-                     d.capacity,
-                     d.area,
-
-                d.gym_department_status_key,
-                kbn_department_status.mst_kbn_value AS gym_department_status_name
-                FROM gym_department d
-                LEFT JOIN mst_kbn kbn_department_status
-                ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
-                AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
-                WHERE d.gym_department_id =?
+                                 d.wallpaper_url,
+                                 d.thumbnail_url,
+                                 d.description,
+                                 d.latitude,
+                                 d.longitude,
+                                 d.rating,
+                                 d.capacity,
+                                 d.area,
+                            d.gym_department_status_key,
+                            kbn_department_status.mst_kbn_value AS gym_department_status_name,
+                            concat(ud.first_name, " ", ud.last_name) as user_name
+                            FROM gym_department d
+                            LEFT JOIN mst_kbn kbn_department_status
+                            ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                            AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
+                            INNER JOIN user u ON d.user_id = u.user_id
+                            inner join user_detail ud on ud.user_detail_id  = u.user_detail_id
+                            WHERE d.gym_department_id = ?
                 """;
 
     String GET_DEPARTMENT_BY_USER = """
@@ -332,6 +334,28 @@ public interface IRepositoryQuery {
                 WHERE
                     uf.department_id = ?
             """;
+
+    String GET_DEPARTMENT_FEEDBACK_OF_BRAND_OWNER = """
+            SELECT
+                                uf.feedback_id,
+                                uf.user_id,
+                                ud.first_name,
+                                ud.last_name,
+                                uf.department_id,
+                                uf.rating,
+                                uf.comments,
+                                uf.feedback_time,
+                                uf.feedback_status,
+                                ud.email,
+                                ud.phone_number
+                            FROM
+                                user_feedback uf
+                                INNER JOIN `user` u ON uf.user_id = u.user_id
+                                INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+                            WHERE
+                                uf.department_id = ?
+            """;
+
     String GET_DEPARTMENT_FEEDBACK_PAGNITION = """
                 SELECT
                     uf.feedback_id,
@@ -460,5 +484,11 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
     String CREATE_DEPARTMENT_WITH_BRAND_ID = """
                 INSERT INTO gym_department (name, brand_id, gym_department_status_key)
                 VALUES (?, ?, ?);
+            """;
+
+    String UPDATE_DEPARTMENT_GYM_OWNER = """
+                UPDATE gym_department
+                SET user_id=?
+                WHERE gym_department_id=?;
             """;
 }
