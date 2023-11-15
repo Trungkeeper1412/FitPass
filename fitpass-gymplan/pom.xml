@@ -7,10 +7,10 @@
 		<artifactId>FitPass</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>fitpass-notification</artifactId>
+	<artifactId>fitpass-gymplan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>fitpass-notification</name>
-	<description>fitpass-notification</description>
+	<name>fitpass-gymplan</name>
+	<description>fitpass-gymplan</description>
 	<dependencies>
 		<dependency>
 			<groupId>com.ks</groupId>

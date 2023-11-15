@@ -33,6 +33,7 @@
         <module>fitpass-order</module>
         <module>fitpass-calendar</module>
         <module>fitpass-employee</module>
+        <module>fitpass-gymplan</module>
     </modules>
 
     <dependencies>
