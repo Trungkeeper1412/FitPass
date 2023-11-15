@@ -92,6 +92,19 @@ public interface IRepositoryQuery {
                 WHERE
                     brand_id = ?
             """;
+    String GET_BRAND_AMENITIES_BRAND_ID_ACTIVATE = """
+                SELECT
+                    amenitie_id,
+                    brand_id,
+                    photo_url,
+                    amenitie_name,
+                    description,
+                    amenitie_status
+                FROM
+                    brand_amenities
+                WHERE
+                    brand_id = ? AND amenitie_status = 1
+            """;
 
     String GET_BRAND_DETAIL_BY_USER_ID = """
                 SELECT

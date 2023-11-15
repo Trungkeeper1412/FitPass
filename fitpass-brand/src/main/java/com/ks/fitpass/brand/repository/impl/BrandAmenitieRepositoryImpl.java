@@ -28,6 +28,12 @@ public class BrandAmenitieRepositoryImpl implements BrandAmenitieRepository, IRe
     }
 
     @Override
+    public List<BrandAmenitie> getAllByBrandIDActivate(int brandID) throws DataAccessException {
+        return jdbcTemplate.query(GET_BRAND_AMENITIES_BRAND_ID_ACTIVATE, new BrandAmenitieMapper(), brandID);
+
+    }
+
+    @Override
     public BrandAmenitie getAmenitieDetail(int amenitieId) {
         return jdbcTemplate.queryForObject(GET_BRAND_AMENITIES_DETAIL, (rs, rowNum) -> {
                 BrandAmenitie brandAmenitie = new BrandAmenitie();

@@ -23,6 +23,11 @@ public class BrandAmenitieServiceImpl implements BrandAmenitieService {
     }
 
     @Override
+    public List<BrandAmenitie> getAllByBrandIDActivate(int brandID) throws DataAccessException {
+        return brandAmenitieRepository.getAllByBrandIDActivate(brandID);
+    }
+
+    @Override
     public BrandAmenitie getAmenitieDetail(int amenitieId) {
         return brandAmenitieRepository.getAmenitieDetail(amenitieId);
     }
