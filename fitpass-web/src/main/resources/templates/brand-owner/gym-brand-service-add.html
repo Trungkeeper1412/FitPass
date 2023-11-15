@@ -31,29 +31,32 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                <div class="row">
-                                    <div class="col-md-1 mb-3">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
-                                        <img class="show-service-img" src="" alt="Chưa chọn hình ảnh">
-                                        <input type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="previewImage(this);">
-                                    </div>
-                                    <div class="col-md-7 mb-3">
-                                        <div class="mb-3">
-                                            <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
-                                            <input type="text" class="form-control" id="name-service"
-                                                placeholder="Hệ thống tủ khóa">
+                                <form action="/brand-owner/service/add" method="post">
+                                    <div class="row">
+                                        <div class="col-md-1 mb-3">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
-                                            <textarea class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
+                                            <img class="show-service-img" src="" alt="Chưa chọn hình ảnh">
+                                            <input type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
+                                            <input id="photoUrl" type="hidden" name="photoUrl">
+                                        </div>
+                                        <div class="col-md-7 mb-3">
+                                            <div class="mb-3">
+                                                <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
+                                                <input name="amenitieName" type="text" class="form-control" id="name-service"
+                                                    placeholder="Hệ thống tủ khóa">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
+                                                <textarea name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
                                         </div>
                                     </div>
-                                    <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -80,7 +83,39 @@
     </a>
 
     <th:block th:replace="brand-owner/common/script"></th:block>
+    <script>
+        function uploadImage(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
 
+                var formData = new FormData();
+                formData.append("file", file);
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/uploadImageBrandAmenities/0`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        $("#photoUrl").val(response);
+                    },
+                    error: function () {
+                        console.log("Failed to upload file");
+                    }
+                });
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var img = document.querySelector('.show-service-img');
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </body>
 
 </html>

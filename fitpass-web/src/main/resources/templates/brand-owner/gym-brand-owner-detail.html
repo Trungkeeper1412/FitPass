@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -30,79 +30,85 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                <div class="row">
-                                    <div class="col-md-2 mb-3">
-                                        <label for="avatar" class="form-label fw-bold">Ảnh :</label>
-                                        <img class="show-avatar-img" src="img/undraw_profile_2.svg" alt="Hình ảnh">
-                                    </div>
-                                    <div class="col-md-5 mb-3">
-                                        <div class="mb-3">
-                                            <label for="firt-name" class="form-label fw-bold">Họ :</label>
-                                            <input type="text" class="form-control" id="firt-name"
-                                                name="firt-name" placeholder="Nhập họ">
+                                <form action="/brand-owner/gym-owner/update" method="post">
+                                    <div class="row">
+                                        <div class="col-md-2 mb-3">
+                                            <label for="avatar" class="form-label fw-bold">Ảnh :</label>
+                                            <img class="show-avatar-img" th:src="${userDetail.getImageUrl()}" alt="Hình ảnh">
+                                            <input type="hidden" th:value="${userId}" name="userId">
+                                            <input type="hidden" th:value="${oldDepartmentId}" name="oldDepartmentId">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label fw-bold">Email :</label>
-                                            <input type="text" class="form-control" id="email"
-                                                placeholder="Nhập gmail">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="address" class="form-label fw-bold">Địa chỉ :</label>
-                                            <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh :</label>
-                                            <input type="date" class="form-control" id="date-of-birth" name="date-of-birth">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="d-block fw-bold">Trạng thái :</label>
-                                            <div class="form-check form-check-inline">
-                                                <input type="radio" name="actived" id="inlineradio1"
-                                                    value="true">&nbsp;Đang hoạt động
+                                        <div class="col-md-5 mb-3">
+                                            <div class="mb-3">
+                                                <label for="firt-name" class="form-label fw-bold">Họ :</label>
+                                                <input th:value="${userDetail.getFirstName()}" type="text" class="form-control" id="firt-name"
+                                                    name="firstName" placeholder="Nhập họ">
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="radio" name="actived" id="inlineradio2"
-                                                    value="false">&nbsp;Ngừng hoạt động
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label fw-bold">Email :</label>
+                                                <input th:value="${userDetail.getEmail()}" type="text" class="form-control" id="email"
+                                                    name="email" placeholder="Nhập gmail">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label fw-bold">Địa chỉ :</label>
+                                                <input th:value="${userDetail.getAddress()}" type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh :</label>
+                                                <input th:value="${userDetail.getDateOfBirth()}" type="date" class="form-control" id="date-of-birth" name="dateOfBirth">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="d-block fw-bold">Trạng thái :</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" name="active" id="inlineradio1" th:checked="${!userDetail.isUserDeleted()}"
+                                                        value="true">&nbsp;Đang hoạt động
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" name="active" id="inlineradio2" th:checked="${userDetail.isUserDeleted()}"
+                                                        value="false">&nbsp;Ngừng hoạt động
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-5 mb-3">
+                                            <div class="mb-3">
+                                                <label for="last-name" class="form-label fw-bold">Tên :</label>
+                                                <input th:value="${userDetail.getLastName()}" type="text" class="form-control" id="last-name"
+                                                    name="lastName" placeholder="Nhập tên">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
+                                                <input th:value="${userDetail.getPhoneNumber()}" type="text" class="form-control" id="phone" name="phone" value="0987654321">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
+                                                <input type="text" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gender" class="form-label fw-bold">Giới Tính :</label>
+                                                <select class="form-select" id="gender" name="gender">
+                                                    <option value="">Chọn giới tính</option>
+                                                    <option value="Male"  th:selected="${userDetail.getGender().equals('Male')}">Nam</option>
+                                                    <option value="Female" th:selected="${userDetail.getGender().equals('Female')}">Nữ</option>
+                                                    <option value="Khác">Khác</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="existing-department" class="form-label fw-bold">Chọn cơ sở
+                                                    :</label>
+                                                <select class="form-select" id="existing-department"
+                                                    name="department">
+                                                    <option value="-1">Không có cơ sở nào</option>
+                                                    <th:block th:each="d : ${filteredList}">
+                                                        <option th:value="${d.getDepartmentId()}" th:text="${d.getDepartmentName()}" th:selected="${d.getDepartmentId() ==  userDetail.getGymDepartmentId()}">Cơ sở Đống Đa</option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
+                                        </div>
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <div class="mb-3">
-                                            <label for="last-name" class="form-label fw-bold">Tên :</label>
-                                            <input type="text" class="form-control" id="last-name"
-                                                name="last-name" placeholder="Nhập tên">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="0987654321">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
-                                            <input type="text" class="form-control" id="id-card" name="id-card" placeholder="Nhập số căn cước">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label fw-bold">Giới Tính :</label>
-                                            <select class="form-select" id="gender" name="gender">
-                                                <option value="">Chọn giới tính</option>
-                                                <option value="Nam">Nam</option>
-                                                <option value="Nữ">Nữ</option>
-                                                <option value="Khác">Khác</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="existing-department" class="form-label fw-bold">Chọn cơ sở
-                                                :</label>
-                                            <select class="form-select" id="existing-department"
-                                                name="existing-department">
-                                                <option value="option1">Cơ sở Đống Đa</option>
-                                                <option value="option2">Cơ sở Cầu Giấy</option>
-                                                <option value="option2">Cơ sở Hai Bà Trưng</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
-                                    </div>
+                                </form>
                                 </div>
                             </div>
                         </div>

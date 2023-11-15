@@ -65,17 +65,11 @@
                                         <label for="address" class="form-label fw-bold">Địa chỉ cơ sở
                                             :</label>
                                         <input type="text" class="form-control" id="address" name="address"
-                                               value="Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội."
+                                               th:value="${department.getDepartmentAddress()}"
                                                readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="owners" class="form-label fw-bold">Tên chủ
-                                            cơ sở :</label>
-                                        <input type="text" class="form-control" id="area" name="area"
-                                               value="Lê Đình Tuấn - ledinhtuana1@gmail.com" readonly>
-                                    </div>
                                     <div class="mb-3">
                                         <label for="capacity" class="form-label fw-bold">Sức chứa
                                             :</label>
@@ -86,6 +80,12 @@
                                         <label for="area" class="form-label fw-bold">Diện tích :</label>
                                         <input type="text" class="form-control" id="area" name="area"
                                                th:value="${department.getArea()} + 'm²'" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="owners" class="form-label fw-bold">Tên chủ
+                                            cơ sở :</label>
+                                        <input type="text" class="form-control" id="owners" name="area"
+                                               th:value="${department.getUserName()}" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="openHours">Giờ mở cửa:</label><br>

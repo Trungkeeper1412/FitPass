@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 
 <body id="page-top">
@@ -46,27 +46,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Hệ thống tủ khóa</td>
-                                            <td><img src="https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg" alt=""></td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/brand-owner/service/details}" class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Phòng tập đa năng</td>
-                                            <td><img src="https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg" alt=""></td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/brand-owner/service/details}" class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>TIện nghi phòng tập</td>
-                                            <td><img src="https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg" alt=""></td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/brand-owner/service/details}" class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
+                                        <th:block th:each="s : ${brandAmenitieList}">
+                                            <tr>
+                                                <td th:text="${sStat.index + 1}">1</td>
+                                                <td th:text="${s.getAmenitieName()}">Hệ thống tủ khóa</td>
+                                                <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
+                                                <td th:text="${s.getStatus() == 1 ? 'Hoạt động' : 'Ngừng hoạt động'}">Hoạt động</td>
+                                                <td><a th:href="@{/brand-owner/service/details(id=${s.getAmenitieId()})}" class="btn btn-primary">Cập nhật</a></td>
+                                            </tr>
+                                        </th:block>
                                     </tbody>
                                 </table>
                             </div>

@@ -115,8 +115,7 @@ public class EmployeeController {
                                                           @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel){
         // Nếu người dùng không nhấn cancel thì check in
         if(cancel.equals("no")) {
-            int updateResult = employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
-                    null, 0, userIdSend);
+            int updateResult = employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()), null, 0, userIdSend);
             // Thay đổi status thành đang tập để chuyển sang tab check in
             int updateOrderDetailUseStatus = orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
 
