@@ -4,7 +4,7 @@
       <img th:src="@{/images/system/v2.png}">
     </div>
     <div class="user">
-      <div class="name">Nguyễn Văn A</div>
+      <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
       <div class="gmail">nguyenvana@gmail.com</div>
     </div>
   </div>

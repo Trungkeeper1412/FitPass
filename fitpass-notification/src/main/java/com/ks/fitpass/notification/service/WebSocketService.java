@@ -1,7 +1,15 @@
 package com.ks.fitpass.notification.service;
 
-public interface WebSocketService {
-    void notifyFrontend(String message);
+import com.ks.fitpass.notification.entity.CheckInCheckOutResponse;
+import com.ks.fitpass.notification.entity.Notification;
 
-    void notifyUser(final String id, final String message);
+public interface WebSocketService {
+    void notifyFrontend(Notification notification);
+
+    void notifyUser(int id, Notification notification);
+
+    void notifyEmployee(int id, Notification notification);
+
+    void sendPrivateNotification(final String userId);
+    void sendGlobalNotification();
 }

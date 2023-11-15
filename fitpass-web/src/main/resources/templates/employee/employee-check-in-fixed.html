@@ -183,7 +183,7 @@
         function performCheckIn(orderDetailId) {
             $.ajax({
                 type: "GET",
-                url: `/employee/fixed/sendCheckinRequest?id=${orderDetailId}` ,
+                url: `/employee/fixed/sendCheckinRequest?id=${orderDetailId}`,
                 success: function (data) {
                     console.log(data)
                     // Nếu send request thành công thì hiện  thông báo gửi thành công

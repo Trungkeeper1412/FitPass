@@ -1,7 +1,7 @@
 package com.ks.fitpass.notification.service.impl;
 
+import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.entity.ResponseMessage;
-import com.ks.fitpass.notification.service.NotificationService;
 import com.ks.fitpass.notification.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -10,29 +10,39 @@ import org.springframework.stereotype.Service;
 @Service
 public class WebSocketServiceImpl implements WebSocketService {
     private final SimpMessagingTemplate simpMessagingTemplate;
-    private final NotificationService notificationService;
 
     @Autowired
-    public WebSocketServiceImpl(SimpMessagingTemplate simpMessagingTemplate, NotificationService notificationService){
+    public WebSocketServiceImpl(SimpMessagingTemplate simpMessagingTemplate){
         this.simpMessagingTemplate = simpMessagingTemplate;
-        this.notificationService = notificationService;
     }
 
-    public void notifyFrontend(String message){
-        ResponseMessage responseMessage = ResponseMessage.builder()
-                .content(message)
-                .build();
-        notificationService.sendGlobalNotification();
-        simpMessagingTemplate.convertAndSend("/all/messages",responseMessage);
+    public void notifyFrontend(Notification notification){
+        sendGlobalNotification();
+        simpMessagingTemplate.convertAndSend("/all/messages",notification);
     }
 
     @Override
-    public void notifyUser(String id, String message) {
-        ResponseMessage responseMessage = ResponseMessage.builder()
-                .content(message)
-                .build();
-        notificationService.sendPrivateNotification(id);
-        simpMessagingTemplate.convertAndSendToUser(id, "/all/private-messages", responseMessage);
+    public void notifyUser(int id, Notification notification) {
+        sendPrivateNotification(String.valueOf(id));
+        simpMessagingTemplate.convertAndSendToUser(String.valueOf(id), "/specific/private-messages", notification);
+    }
+
+    @Override
+    public void notifyEmployee(int id, Notification notification) {
+        sendPrivateNotification(String.valueOf(id));
+        simpMessagingTemplate.convertAndSendToUser(String.valueOf(id), "/specific/private-response", notification);
+    }
+
+    @Override
+    public void sendPrivateNotification(final String userId) {
+        ResponseMessage message = new ResponseMessage("Private Notification");
+        simpMessagingTemplate.convertAndSendToUser(userId,"/specific/private-notifications", message);
+    }
+
+    @Override
+    public void sendGlobalNotification() {
+        ResponseMessage message = new ResponseMessage("Global Notification");
+        simpMessagingTemplate.convertAndSend("/all/global-notifications", message);
     }
 
 }

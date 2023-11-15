@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.notification.entity.Message;
+
+import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.service.WebSocketService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,13 +16,17 @@ public class WebSocketRController {
         this.webSocketService = webSocketService;
     }
     @PostMapping("/send-message")
-    public void sendMessage(@RequestBody Message message){
-        webSocketService.notifyFrontend(message.getMessageContent());
+    public void sendMessage(@RequestBody Notification notification){
+        webSocketService.notifyFrontend(notification);
     }
 
     @PostMapping("/send-private-message/{id}")
-    public void sendPrivateMessage(@PathVariable final String id,
-                                   @RequestBody final Message message) {
-        webSocketService.notifyUser(id, message.getMessageContent());
+    public void sendPrivateMessage(@PathVariable int id, @RequestBody Notification notification) {
+        webSocketService.notifyUser(id,notification);
+    }
+
+    @PostMapping ("/send-private-response/{id}")
+        public void sendPrivateResponse(@PathVariable int id, @RequestBody Notification notification){
+        webSocketService.notifyEmployee(id,notification);
     }
 }

@@ -59,7 +59,7 @@ public class NotificationController {
         // Lấy ra thông tin người dùng hiện tại
         User user = (User) session.getAttribute("userInfo");
 
-        // Lấy ra thông báo confirm check in mới nhất với id của người dùng hiện tại
+        // Lấy ra thông báo confirm check out mới nhất với id của người dùng hiện tại
         Notification notification = notificationService.getConfirmCheckOutByUserIdReceive(user.getUserId());
         if(notification == null) {
             ConfirmCheckOutDTO confirmCheckOutDTO = new ConfirmCheckOutDTO();

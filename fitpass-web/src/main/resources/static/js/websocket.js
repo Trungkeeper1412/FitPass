@@ -4,15 +4,44 @@ $(document).ready(function () {
     connect();
 
     $("#send").click(function () {
-        sendMessage();
+        console.log("Sending message")
+        const messageContent = $("#message").val();
+
+        $.ajax({
+            url: "/send-message",
+            type: "POST",
+            data: JSON.stringify({"messageContent": messageContent}),
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Message sent successfully");
+            },
+            error: function (error) {
+                console.error("Error sending message:", error);
+            }
+        });
     });
 
     $("#send-private").click(function () {
-        sendPrivateMessage();
+        console.log("sending private message");
+        const privateMessageContent = $("#private-message").val();
+
+        $.ajax({
+            url: "/send-private-message/4",
+            type: "POST",
+            data: JSON.stringify({"messageContent": privateMessageContent}),
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Message sent successfully");
+            },
+            error: function (error) {
+                console.error("Error sending message:", error);
+            }
+        });
     });
 
     $("#notifications").click(function () {
-        resetNotificationCount();
+        notificationCount = 0;
+        updateNotificationDisplay();
     });
 });
 
@@ -45,51 +74,10 @@ function showMessage(message) {
     $("#messages").append("<tr><td>" + message + "</td></tr>");
 }
 
-function sendMessage() {
-    console.log("Sending message")
-    const messageContent = $("#message").val();
-
-    $.ajax({
-        url: "/send-message",
-        type: "POST",
-        data: JSON.stringify({"messageContent": messageContent}),
-        contentType: "application/json",
-        success: function (response) {
-            console.log("Message sent successfully");
-        },
-        error: function (error) {
-            console.error("Error sending message:", error);
-        }
-    });
-}
-
-function sendPrivateMessage() {
-    console.log("sending private message");
-    const privateMessageContent = $("#private-message").val();
-
-    $.ajax({
-        url: "/send-private-message/4",
-        type: "POST",
-        data: JSON.stringify({"messageContent": privateMessageContent}),
-        contentType: "application/json",
-        success: function (response) {
-            console.log("Message sent successfully");
-        },
-        error: function (error) {
-            console.error("Error sending message:", error);
-        }
-    });
-}
-
 function updateNotificationDisplay() {
     if (notificationCount === 0) {
         $('#notifications').hide();
     } else {
         $('#notifications').show().text(notificationCount);
     }
-}
-
-function resetNotificationCount() {
-    notificationCount = 0;
-    updateNotificationDisplay();
 }

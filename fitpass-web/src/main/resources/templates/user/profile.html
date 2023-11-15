@@ -115,9 +115,16 @@
 <script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Template Main JS File -->
 <script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<script th:src="@{/user-homepage-assets/assets/js/websocket-user.js}"></script>
 <script>
     new DataTable('#transaction-history-tb', {
         language: {

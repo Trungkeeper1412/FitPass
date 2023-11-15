@@ -9,9 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Đây là nơi bạn có thể gọi hàm của bạn
     updateQuantityCart();
     // Gọi hàm check thông báo confirm
-    checkConfirmCheckIn();
+    // checkConfirmCheckIn();
     checkConfirmCheckOut();
-    checkNotificationEmployee();
 });
 
 function updateQuantityCart() {
@@ -38,102 +37,6 @@ function updateQuantityCart() {
         });
 }
 
-function checkNotificationEmployee() {
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-    // Gửi yêu cầu lên sever lấy ra thông báo thành công
-    $.ajax({
-        type: "GET",
-        url: `/notification/notificationCheckInSuccessEmployee`,
-        success: function (data) {
-            // Nếu có thông báo thì hiện
-            if (data.length > 0) {
-                console.log('Các thông báo trả về từ người dùng check in thành công đến employee', data);
-                data.forEach(function (item) {
-                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
-                    sendSeenNotification(item.notificationId);
-                    toastr["success"](`${item.message}`, "Xác nhận check in")
-                })
-            }
-        },
-        error: function () {
-            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
-        }
-    });
-
-    $.ajax({
-        type: "GET",
-        url: `/notification/notificationCheckOutSuccessEmployee`,
-        success: function (data) {
-            // Nếu có thông báo thì hiện
-            if (data.length > 0) {
-                console.log('Các thông báo trả về từ người dùng check in đến employee', data);
-                data.forEach(function (item) {
-                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
-                    sendSeenNotification(item.notificationId);
-                    toastr["success"](`${item.message}`, "Xác nhận check out")
-                })
-            }
-        },
-        error: function () {
-            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
-        }
-    });
-
-    $.ajax({
-        type: "GET",
-        url: `/notification/notificationCheckInCancelEmployee`,
-        success: function (data) {
-            // Nếu có thông báo thì hiện
-            if (data.length > 0) {
-                console.log('Các thông báo trả về từ người dùng hủy check in đến employee', data);
-                data.forEach(function (item) {
-                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
-                    sendSeenNotification(item.notificationId);
-                    toastr["error"](`${item.message}`, "Xác nhận check in")
-                })
-            }
-        },
-        error: function () {
-            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
-        }
-    });
-
-    $.ajax({
-        type: "GET",
-        url: `/notification/notificationCheckOutCancelEmployee`,
-        success: function (data) {
-            // Nếu có thông báo thì hiện
-            if (data.length > 0) {
-                console.log('Các thông báo trả về từ người dùng hủy check in đến employee', data);
-                data.forEach(function (item) {
-                    // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
-                    sendSeenNotification(item.notificationId);
-                    toastr["error"](`${item.message}`, "Xác nhận check out")
-                })
-            }
-        },
-        error: function () {
-            alert("Đã xảy ra lỗi trong checkNotificationEmployee");
-        }
-    });
-}
-
 function sendSeenNotification(id) {
     $.ajax({
         type: "GET",
@@ -147,57 +50,57 @@ function sendSeenNotification(id) {
     });
 }
 
-function checkConfirmCheckIn() {
-    $.ajax({
-        type: "GET",
-        url: `/notification/confirmCheckIn`,
-        success: function (data) {
-            // Nếu có thông báo thì hiện
-            if (data.notificationId > 0) {
-                console.log('Thông báo xác nhận check in', data);
-                // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
-                sendSeenNotification(data.notificationId);
-                Swal.fire({
-                    title: `Xác nhận check in`,
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'No',
-                    reverseButtons: true,
-                }).then((result) => {
-                    // Nếu người dùng nhấn xác nhận thì gửi yêu cầu lên sever
-                    // Khi người dùng nhấn xác nhận thì mình sẽ insert vào history các trường
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "GET",
-                            url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}&cancel=no`,
-                            success: function (data) {
-
-                            },
-                            error: function () {
-                                alert("Đã xảy ra lỗi gửi check in thành công");
-                            }
-                        });
-                    } else {
-                        $.ajax({
-                            type: "GET",
-                            url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}&cancel="yes"`,
-                            success: function (data) {
-
-                            },
-                            error: function () {
-                                alert("Đã xảy ra lỗi gửi check in không thành công");
-                            }
-                        });
-                    }
-                })
-            }
-        },
-        error: function () {
-            alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
-        }
-    });
-}
+// function checkConfirmCheckIn() {
+//     $.ajax({
+//         type: "GET",
+//         url: `/notification/confirmCheckIn`,
+//         success: function (data) {
+//             // Nếu có thông báo thì hiện
+//             if (data.notificationId > 0) {
+//                 console.log('Thông báo xác nhận check in', data);
+//                 // Gửi lại yêu cầu đã đọc lên sever (chuyển status của notification = 1 là đã đọc)
+//                 sendSeenNotification(data.notificationId);
+//                 Swal.fire({
+//                     title: `Xác nhận check in`,
+//                     icon: 'question',
+//                     showCancelButton: true,
+//                     confirmButtonText: 'Yes',
+//                     cancelButtonText: 'No',
+//                     reverseButtons: true,
+//                 }).then((result) => {
+//                     // Nếu người dùng nhấn xác nhận thì gửi yêu cầu lên sever
+//                     // Khi người dùng nhấn xác nhận thì mình sẽ insert vào history các trường
+//                     if (result.isConfirmed) {
+//                         $.ajax({
+//                             type: "GET",
+//                             url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}&cancel=no`,
+//                             success: function (data) {
+//
+//                             },
+//                             error: function () {
+//                                 alert("Đã xảy ra lỗi gửi check in thành công");
+//                             }
+//                         });
+//                     } else {
+//                         $.ajax({
+//                             type: "GET",
+//                             url: `/employee/flexible/checkin?id=${data.message}&uis=${data.userIdSend}&uir=${data.userIdReceive}&di=${data.departmentId}&cancel="yes"`,
+//                             success: function (data) {
+//
+//                             },
+//                             error: function () {
+//                                 alert("Đã xảy ra lỗi gửi check in không thành công");
+//                             }
+//                         });
+//                     }
+//                 })
+//             }
+//         },
+//         error: function () {
+//             alert("Đã xảy ra lỗi trong quá trình lấy thông báo xác nhận check in");
+//         }
+//     });
+// }
 
 function checkConfirmCheckOut() {
     $.ajax({
