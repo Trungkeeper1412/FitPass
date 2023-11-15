@@ -281,12 +281,14 @@ CREATE TABLE IF NOT EXISTS item_inventory (
 CREATE TABLE IF NOT EXISTS user_feedback (
                                              feedback_id    INT AUTO_INCREMENT PRIMARY KEY,
                                              user_id        INT NOT NULL,
+                                             gym_plan_id    INT NOT NULL,
                                              department_id  INT NOT NULL,
                                              rating         INT NOT NULL,
                                              comments       TEXT,
                                              feedback_time  DATETIME NOT NULL,
                                              feedback_status INT NOT NULL,
                                              FOREIGN KEY (user_id) REFERENCES `user`(user_id),
+                                             FOREIGN KEY (gym_plan_id) REFERENCES `gym_plan`(plan_id),
                                              FOREIGN KEY (department_id) REFERENCES gym_department(gym_department_id)
 );
 
