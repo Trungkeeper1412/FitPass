@@ -267,8 +267,11 @@ public class BrandOwnerController {
                                         @RequestParam String active, @RequestParam String lastName,
                                         @RequestParam String phone, @RequestParam String idCard,
                                         @RequestParam String gender, @RequestParam("department") int departmentId,
-                                        @RequestParam int userId, @RequestParam("oldDepartmentId") int oldDepartmentId) {
+                                        @RequestParam int userId, @RequestParam("oldDepartmentId") int oldDepartmentId,
+                                        @RequestParam int userDetailId,
+                                        @RequestParam String imageUrl) {
         UserDetail userDetail = new UserDetail();
+        userDetail.setUserDetailId(userDetailId);
         userDetail.setFirstName(firstName);
         userDetail.setLastName(lastName);
         userDetail.setEmail(email);
@@ -276,6 +279,7 @@ public class BrandOwnerController {
         userDetail.setAddress(address);
         userDetail.setPhoneNumber(phone);
         userDetail.setGender(gender);
+        userDetail.setImageUrl(imageUrl);
         // Update user detail
         userService.updateUserDetail(userDetail);
 

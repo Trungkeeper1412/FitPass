@@ -33,9 +33,16 @@
                                 <form action="/brand-owner/gym-owner/update" method="post">
                                     <div class="row">
                                         <div class="col-md-2 mb-3">
-                                            <label for="avatar" class="form-label fw-bold">Ảnh :</label>
-                                            <img class="show-avatar-img" th:src="${userDetail.getImageUrl()}" alt="Hình ảnh">
+                                                <label for="department-img" class="form-label fw-bold w-100">Ảnh
+                                                    :</label>
+                                                <img class="show-department-img" th:src="${userDetail.getImageUrl()}">
+                                                <input type="file" class="form-control mt-2" id="department-img"
+                                                       name="department-img" accept="image/*"
+                                                       onchange="uploadImage(this);">
+                                                <input type="hidden" id="avatarImg" th:value="${userDetail.getImageUrl()}" name="imageUrl">
+
                                             <input type="hidden" th:value="${userId}" name="userId">
+                                            <input type="hidden" th:value="${userDetail.getUserDetailId()}" name="userDetailId">
                                             <input type="hidden" th:value="${oldDepartmentId}" name="oldDepartmentId">
                                         </div>
                                         <div class="col-md-5 mb-3">
@@ -135,6 +142,42 @@
 
     <th:block th:replace="brand-owner/common/script"></th:block>
 
+    <script>
+        function uploadImage(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+
+                var formData = new FormData();
+                formData.append("file", file);
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/uploadAvatar`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        $("#avatarImg").val(response);
+                    },
+                    error: function () {
+                        console.log("Failed to upload file");
+                    }
+                });
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var img = document.querySelector('.show-department-img');
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
 </body>
+
 
 </html>

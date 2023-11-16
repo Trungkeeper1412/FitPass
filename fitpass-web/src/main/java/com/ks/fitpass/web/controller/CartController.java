@@ -46,7 +46,7 @@ public class CartController {
             // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
             boolean productExistsInCart = false;
             for (CartItem item : cart.getItems()) {
-                if (item.getGymPlan().getGymPlanId() == gymPlanId&&item.getGymPlan().getGymDepartmentId()==departmentId) {
+                if (item.getGymPlan().getGymPlanId() == gymPlanId && item.getGymPlan().getGymDepartmentId()==departmentId) {
 /*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;
@@ -112,10 +112,10 @@ public class CartController {
     }
 
     @GetMapping("/remove")
-    public String removeItem(@RequestParam int gymPlanId, HttpSession session) {
+    public String removeItem(@RequestParam int gymPlanId,@RequestParam int departmentId, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart != null) {
-            cart.removeItem(gymPlanId);
+            cart.removeItem(gymPlanId,departmentId);
         }
         session.setAttribute("cart", cart);
         return "redirect:/cart/view";

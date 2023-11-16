@@ -78,7 +78,7 @@
                             <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
                         </div>
 
-                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
+                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
@@ -176,7 +176,7 @@
                 checkbox.checked = true;
                 addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
                 addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
-            });
+            }   );
         } else {
             count = 0;
             document.querySelector('.buy-button-mc button').disabled = true;
@@ -288,7 +288,7 @@
     }
 
 
-    function removeFromCart(gymPlanId) {
+    function removeFromCart(gymPlanId,departmentId) {
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?',
             icon: 'warning',
@@ -297,7 +297,7 @@
             cancelButtonText: 'Hủy',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId;
+                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId + '&departmentId='+ departmentId;
             }
         });
     }

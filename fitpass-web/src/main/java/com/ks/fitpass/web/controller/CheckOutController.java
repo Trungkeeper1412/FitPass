@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/checkout")
@@ -86,13 +87,14 @@ public class CheckOutController {
     }
 
     @PostMapping("/perform")
-    public String payment(Model model,  @RequestParam("planId") List<Integer> planIdList, @RequestParam("totalPrice") double totalPrice, HttpSession session) {
+    public String payment(Model model,  @RequestParam("planId") List<String> planIdList, @RequestParam("totalPrice") double totalPrice, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
 
         User user = (User) session.getAttribute("userInfo");
 
         if (cart != null) {
             List<CartItem> cartItemList = cart.getItems();
+            List<CartItem> cartItemsRemoveList= new ArrayList<>();
             boolean statusInsertOrderDetailBoolean = true;
             Order order = new Order();
             order.setUserId(user.getUserId());
@@ -128,6 +130,7 @@ public class CheckOutController {
                     if(insertOrderDetailStatus <= 0) {
                         statusInsertOrderDetailBoolean = false;
                     }
+                    cartItemsRemoveList.add(cartItem);
                 }
             }
             int insertOrderDetailStatus = statusInsertOrderDetailBoolean == false ? 0 : 1;
@@ -137,9 +140,9 @@ public class CheckOutController {
             model.addAttribute("messageInsertOrder", messageInsert);
 
             // Remove khỏi cart
-            for (Integer i:
-                 planIdList) {
-                cart.removeItem(i);
+            for (CartItem i:
+                 cartItemsRemoveList) {
+             cart.removeItem(i.getGymPlan().getGymPlanId(),i.getGymPlan().getGymDepartmentId());
             }
             session.setAttribute("cart", cart);
             // Lấy user balance

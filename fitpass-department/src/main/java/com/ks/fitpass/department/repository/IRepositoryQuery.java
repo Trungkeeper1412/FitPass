@@ -141,31 +141,31 @@ public interface IRepositoryQuery {
 
     String GET_DEPARTMENT_BY_ID = """
             SELECT
-                                 d.gym_department_id,
-                                 d.brand_id,
-                                 d.name,
-                                 d.address,
-                                 d.contact_number,
-                                 d.logo_url,
-
-                                 d.wallpaper_url,
-                                 d.thumbnail_url,
-                                 d.description,
-                                 d.latitude,
-                                 d.longitude,
-                                 d.rating,
-                                 d.capacity,
-                                 d.area,
-                            d.gym_department_status_key,
-                            kbn_department_status.mst_kbn_value AS gym_department_status_name,
-                            concat(ud.first_name, " ", ud.last_name) as user_name
-                            FROM gym_department d
-                            LEFT JOIN mst_kbn kbn_department_status
-                            ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
-                            AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
-                            INNER JOIN user u ON d.user_id = u.user_id
-                            inner join user_detail ud on ud.user_detail_id  = u.user_detail_id
-                            WHERE d.gym_department_id = ?
+                                          d.gym_department_id,
+                                          d.brand_id,
+                                          d.name,
+                                          d.address,
+                                          d.contact_number,
+                                          d.logo_url,
+                     
+                                          d.wallpaper_url,
+                                          d.thumbnail_url,
+                                          d.description,
+                                          d.latitude,
+                                          d.longitude,
+                                          d.rating,
+                                          d.capacity,
+                                          d.area,
+                                     d.gym_department_status_key,
+                                     kbn_department_status.mst_kbn_value AS gym_department_status_name,
+                                     concat(ud.first_name, " ", ud.last_name) as user_name
+                                     FROM gym_department d
+                                     LEFT JOIN mst_kbn kbn_department_status
+                                     ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                                     AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
+                                     LEFT JOIN user u ON d.user_id = u.user_id
+                                     LEFT join user_detail ud on ud.user_detail_id  = u.user_detail_id
+                                     WHERE d.gym_department_id = ?
                 """;
 
     String GET_DEPARTMENT_BY_USER = """
