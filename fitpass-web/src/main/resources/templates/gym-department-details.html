@@ -120,7 +120,7 @@
 
 <!--    Dịch vụ-->
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Dịch vụ</h3>
-    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
     <div class="list-service-wrapper container mt-2">
         <button class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
@@ -238,8 +238,8 @@
                 <div class="rating" th:attr="data-star=${departmentFeedbacks.avgRating}"></div>
             </div>
             <div class="button-list">
-                <div class="row">
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4" style="margin-left: 70px;">
+            <div class="row">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
             </button>
             <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
@@ -275,7 +275,6 @@
             <div class="pagination col justify-content-center">
                 <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"
                    th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>
-<!--                <span aria-current="page" class="page-numbers current" th:text="${currentPage}"></span>-->
                 <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
                     <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"
                        th:classappend="${pageNumber == currentPage}? 'current' : ''"
