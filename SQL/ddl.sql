@@ -332,7 +332,8 @@ CREATE TRIGGER update_gym_rating_avg
 BEGIN
 
     DECLARE dept_id INT;
-    DECLARE total, count INT;
+    DECLARE total DECIMAL(10,2);
+    DECLARE count INT;
 
     SET dept_id = NEW.department_id;
 
@@ -347,13 +348,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+
 DELIMITER $$
 CREATE TRIGGER update_brand_rating
     AFTER UPDATE ON gym_department
     FOR EACH ROW
 BEGIN
 
-    DECLARE avg_rating DECIMAL(3,1);
+    DECLARE avg_rating DECIMAL(10,2);
 
     SELECT AVG(rating) INTO avg_rating
     FROM gym_department

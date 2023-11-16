@@ -946,7 +946,6 @@ VALUES (1, 1),
        (3, 2),
        (3, 3),
 
-
        (4, 1),
        (4, 2),
        (4, 3),
@@ -1044,11 +1043,11 @@ VALUES (1, 1, 1),
        (5, 9, 1),
        (7, 9, 1),
 
-       (1, 11, 1),
-       (3, 11, 1),
-       (4, 11, 1),
-       (5, 11, 1),
-       (7, 11, 1),
+       (1, 10, 1),
+       (3, 10, 1),
+       (4, 10, 1),
+       (5, 10, 1),
+       (7, 10, 1),
 
        (1, 11, 1),
        (3, 11, 1),
@@ -1257,7 +1256,53 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (1, 1, 1, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
        (4, 2, 2, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
        (5, 3, 3, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
-       (5, 1, 4, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1);
+       (5, 1, 4, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+
+
+       (1, 1, 5, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (4, 2, 6, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (5, 3, 7, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (5, 1, 8, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+
+       (1, 1, 5, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+       (4, 2, 6, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+       (5, 3, 7, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+       (5, 1, 8, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+
+       (1, 1, 5, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+       (4, 2, 6, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+       (5, 3, 7, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+       (5, 1, 8, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+
+       (1, 1, 5, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (4, 2, 6, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (5, 3, 7, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (5, 1, 8, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+
+       (1, 1, 5, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (4, 2, 6, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (5, 3, 7, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (5, 1, 8, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+
+       (1, 1, 9, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (4, 2, 10, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (5, 3, 11, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+
+       (1, 1, 9, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+       (4, 2, 10, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+       (5, 3, 11, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
+
+       (1, 1, 9, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+       (4, 2, 10, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+       (5, 3, 11, 5, 'Thích không khí ở phòng tập.', NOW(), 1),
+
+       (1, 1, 9, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (4, 2, 10, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (5, 3, 11, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+
+       (1, 1, 9, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (4, 2, 10, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+       (5, 3, 11, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1);
 
 /**************************************************************************************** Brand Creation - DUC **********************************************************************/
 -- Create brand infos
@@ -2357,8 +2402,8 @@ VALUES (12, 151),
 INSERT INTO user_feedback
 (user_id, gym_plan_id, department_id, rating, comments, feedback_time, feedback_status)
 VALUES
-    (1, 151, 12, 4, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
-    (2, 152, 12, 3, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
+    (1, 151, 12, 5, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
+    (2, 152, 12, 5, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
     (3, 153, 12, 4, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
     (4, 154, 12, 4, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
     (5, 155, 12, 5, 'Rất hài lòng với dịch vụ, nhân viên phục vụ nhiệt tình.', NOW(), 1),
@@ -2368,22 +2413,18 @@ VALUES
 INSERT INTO user_feedback
 (user_id, gym_plan_id, department_id, rating, comments, feedback_time, feedback_status)
 VALUES
-    (1, 151, 13, 4, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
+    (1, 151, 13, 5, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
     (2, 152, 13, 5, 'Rất hài lòng với dịch vụ, nhân viên phục vụ nhiệt tình.', NOW(), 1),
-    (3, 153, 13, 3, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
-    (4, 154, 13, 3, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
-    (5, 155, 13, 4, 'Thiết bị ở phòng tập rất chất lượng, giúp tôi có buổi tập hiệu quả.', NOW(), 1),
+    (3, 153, 13, 5, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
     (5, 156, 13, 4, 'Thiết bị ở phòng tập rất chất lượng, giúp tôi có buổi tập hiệu quả.', NOW(), 1);
 
 /****Department ID 14 Feedback****/
 INSERT INTO user_feedback
 (user_id, gym_plan_id, department_id, rating, comments, feedback_time, feedback_status)
 VALUES
-    (1, 151, 14, 4, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
-    (2, 152, 14, 4, 'Thiết bị ở phòng tập rất chất lượng, giúp tôi có buổi tập hiệu quả.', NOW(), 1),
-    (3, 153, 14, 5, 'Rất hài lòng với dịch vụ, nhân viên phục vụ nhiệt tình.', NOW(), 1),
+    (1, 151, 14, 5, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
+    (2, 152, 14, 5, 'Thiết bị ở phòng tập rất chất lượng, giúp tôi có buổi tập hiệu quả.', NOW(), 1),
     (4, 154, 14, 5, 'Rất hài lòng với dịch vụ, nhân viên phục vụ nhiệt tình.', NOW(), 1),
-    (5, 155, 14, 3, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
     (5, 156, 14, 3, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1);
 
 /****Department ID 15 Feedback****/
@@ -2391,9 +2432,9 @@ INSERT INTO user_feedback
 (user_id, gym_plan_id, department_id, rating, comments, feedback_time, feedback_status)
 VALUES
     (1, 157, 15, 4, 'Phòng tập cùng các thiết bị rất sạch sẽ và thoải mái.', NOW(), 1),
-    (2, 158, 15, 3, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
-    (3, 159, 15, 4, 'Thiết bị ở phòng tập rất chất lượng, giúp tôi có buổi tập hiệu quả.', NOW(), 1),
-    (5, 160, 15, 2, 'Gặp một số vấn đề với việc bảo dưỡng thiết bị, mong cải thiện.', NOW(), 1);
+    (2, 158, 15, 5, 'Phòng tập có không khí tốt nhưng thiếu một số thiết bị cần thiết.', NOW(), 1),
+    (3, 159, 15, 5, 'Thiết bị ở phòng tập rất chất lượng, giúp tôi có buổi tập hiệu quả.', NOW(), 1),
+    (5, 160, 15, 3, 'Gặp một số vấn đề với việc bảo dưỡng thiết bị, mong cải thiện.', NOW(), 1);
 
 /****Department ID 16 Feedback****/
 INSERT INTO user_feedback
@@ -2439,6 +2480,11 @@ VALUES
     (3, 162, 20, 3, 'Phòng tập cần được làm mới, không gian hơi chật hẹp.', NOW(), 1),
     (5, 163, 20, 4, 'Được biết đến qua bạn bè và không hối hận khi đăng ký thành viên.', NOW(), 1),
     (5, 164, 20, 4, 'Được biết đến qua bạn bè và không hối hận khi đăng ký thành viên.', NOW(), 1);
+
+
+
+
+
 
 
 /**************************************************************************************** Brand Creation - TRUNG **********************************************************************/
