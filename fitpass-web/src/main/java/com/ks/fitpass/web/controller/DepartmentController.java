@@ -29,13 +29,17 @@ public class DepartmentController {
 
     private  final DepartmentFeatureService departmentFeatureService;
 
+    private  final DepartmentAmenitiesService departmentAmenitiesService;
+
+
     @Autowired
-    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService) {
+    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService,DepartmentAmenitiesService departmentAmenitiesService) {
         this.departmentService = departmentService;
         this.gymPlanService = gymPlanService;
         this.departmentScheduleService = departmentScheduleService;
         this.departmentAlbumsService = departmentAlbumsService;
         this.departmentFeatureService = departmentFeatureService;
+        this.departmentAmenitiesService = departmentAmenitiesService;
     }
 
     @GetMapping("/department-detail/{department_id}")
@@ -69,6 +73,10 @@ public class DepartmentController {
             // Get department features
             List<DepartmentFeature> departmentFeatures = departmentFeatureService.getDepartmentFeatures(departmentId);
             model.addAttribute("departmentFeatures", departmentFeatures);
+
+            // Get Department Amenities
+            List<DepartmentAmenities> departmentAmenities = departmentAmenitiesService.getAllDepartmentAmenitiesActivate(departmentId);
+            model.addAttribute("departmentAmenities", departmentAmenities);
 
             int totalPages = (int) Math.ceil((double) departmentDTO.getTotal() / size);
             model.addAttribute("totalPages", totalPages);

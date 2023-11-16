@@ -401,17 +401,20 @@ public interface IRepositoryQuery {
 
 
     String GET_DEPARTMENT_AMENITIES_DEPARTMENT_ID = """
-    SELECT
-        amenitie_id,
-        gym_department_id,
-        photo_url,
-        amenitie_name,
-        description
-    FROM
-        gym_department_amenities
-    WHERE
-        gym_department_id = ?
-""";
+                                    SELECT\s
+                                        gda.gym_department_id,
+                        				ba.amenitie_id,
+                                        ba.brand_id,
+                                        ba.photo_url,
+                                        ba.amenitie_name,
+                                        ba.description,
+                                        ba.amenitie_status
+                        		FROM brand_amenities ba
+                        INNER JOIN gym_department_amenities gda ON ba.amenitie_id = gda.amenitie_id \s
+                        WHERE gda.gym_department_id = ? AND ba.amenitie_status = 1
+            """;
+
+
 
 
 String GET_GYM_PLAN_BY_GYM_PLAN_ID = """

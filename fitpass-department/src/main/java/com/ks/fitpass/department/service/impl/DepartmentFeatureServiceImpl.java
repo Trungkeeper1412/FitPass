@@ -23,9 +23,4 @@ public class DepartmentFeatureServiceImpl implements DepartmentFeatureService {
         return departmentFeatureRepository.getDepartmentFeatures(departmentId);
     }
 
-    @Override
-    public List<DepartmentFeature> getDepartmentFeaturesByStatusAndDepartmentID(int departmentId, int status) {
-        return departmentFeatureRepository.getDepartmentFeaturesByStatusAndDepartmentID(departmentId, status);
-    }
-
 }
