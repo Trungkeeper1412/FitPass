@@ -12967,12 +12967,12 @@ label {
 
 .user-card {
     display: grid;
-    grid-template-columns: 1.5fr 4fr 2fr;
+    grid-template-columns: 1fr 5fr;
     align-items: center;
     column-gap: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
@@ -13023,7 +13023,7 @@ select {
 
 .text-money {
     color: rgb(2, 170, 10);
-    font-size: 18px;
+    /*font-size: 18px;*/
     font-weight: bold;
 }
 
@@ -13168,10 +13168,12 @@ td img {
 .checkin-btn{
     width: 90px;
 }
-/* .plan-info{
-    display: flex;
-    flex-wrap: wrap;
-} */
+.plan-info{
+    /*margin: auto;*/
+}
+.plan-type{
+    margin-bottom: 0;
+}
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .uc{
         display: grid;

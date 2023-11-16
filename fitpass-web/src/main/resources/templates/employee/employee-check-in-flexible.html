@@ -74,30 +74,31 @@
                         <!-- Tab Content -->
                         <div class="tab-content mt-4">
                             <div class="tab-pane fade show active" id="unactivated">
-                                <div class="row" id="CheckInList">
+                                <div class="row justify-content-center" id="CheckInList">
                                     <th:block th:each="item : ${checkInList}">
+                                        <div class="col-md-11 col-lg-6">
                                         <div class="user-card">
-                                            <div class="row">
-                                                <div class="col-2">
+                                                <div class="img-col">
                                                     <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
                                                 </div>
-                                                <div class="col-4">
-                                                    <h3 class="fw-bold" th:text="${item.getUsername()}">Lê Đình Tuấn</h3>
-                                                    <p class="text-uppercase fw-bold" th:text="${item.getProductName()}" >Gói linh hoạt VIP</p>
-                                                    <p>Số điện thoại: <span th:text="${item.getPhoneNumber()}">0987654321</span></p>
-                                                </div>
-                                                <div class="col-2">
-                                                    <h5 class="text-money"><span th:text="${item.getPricePerHours()}">500</span>  <span class="credit">Credit/Giờ</span></h5>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="status-box">
-                                                        <span class="user-status">Chưa tập</span>
+                                                <div class="user-info">
+                                                    <div class="basic-info">
+                                                        <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
+                                                        <p class="phone" th:text="${item.getPhoneNumber()}">0987654321</p>
+                                                        <div class="status-box">
+                                                            <span class="user-status">Chưa tập</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="plan-info" style="margin-left: 10px">
+                                                        <p class="fw-bold plan-type"  th:text="${item.getProductName()}">Gói linh hoạt VIP</p>
+                                                        <p>
+                                                            <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
+                                                            <span class="credit fw-bold">Credit/Giờ</span>
+                                                        </p>
+                                                        <button class="btn btn-primary checkin-btn" th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'">Check-in</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-primary" th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'">Check-in</button>
-                                                </div>
-                                            </div>
+                                        </div>
                                         </div>
                                     </th:block>
 
@@ -105,30 +106,31 @@
                             </div>
 
                             <div class="tab-pane fade" id="active">
-                                <div class="row" id="CheckOutList">
+                                <div class="row justify-content-center" id="CheckOutList">
                                     <th:block th:each="item : ${checkOutList}">
+                                        <div class="col-md-11 col-lg-6">
                                         <div class="user-card">
-                                            <div class="row">
-                                                <div class="col-2">
+                                                <div class="img-col">
                                                     <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
                                                 </div>
-                                                <div class="col-4">
-                                                    <h3 class="fw-bold" th:text="${item.getUsername()}">Emma Watson</h3>
-                                                    <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói linh hoạt VIP</p>
-                                                    <p>Số điện thoại: <span th:text="${item.getPhoneNumber()}">0987654321</span></p>
-                                                </div>
-                                                <div class="col-2">
-                                                    <h5 class="text-money"><span th:text="${item.getPricePerHours()}">500</span> <span class="credit">Credit/Giờ</span></h5>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="status-box">
-                                                        <span class="user-status">Đang tập</span>
+                                                <div class="user-info">
+                                                    <div class="basic-info">
+                                                        <div class="fw-bold" th:text="${item.getUsername()}">Emma Watson</div>
+                                                        <span th:text="${item.getPhoneNumber()}">0987654321</span>
+                                                        <div class="status-box">
+                                                            <span class="user-status">Đang tập</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="plan-info">
+                                                        <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói 3 ngày</p>
+                                                        <p>
+                                                            <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
+                                                            <span class="credit fw-bold">Credit/Giờ</span>
+                                                        </p>
+                                                        <button class="btn btn-primary" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-primary" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
-                                                </div>
-                                            </div>
+                                        </div>
                                         </div>
                                     </th:block>
                                 </div>
