@@ -17,4 +17,5 @@ public class BrandAmenitie {
     private String amenitieName;
 
     private String description;
+    private int status;
 }

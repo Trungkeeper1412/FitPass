@@ -42,7 +42,7 @@ public class BrandController {
             model.addAttribute("brand", brand);
             model.addAttribute("page", PageEnum.XXX_FIRST_PAGE.getCode());
 
-            List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandID(brandId);
+            List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(brandId);
             model.addAttribute("brandAmenitie", brandAmenitie);
 
             List<DepartmentDTO> departmentDTOList = departmentService.getDepartmentByBrandID(brandId);

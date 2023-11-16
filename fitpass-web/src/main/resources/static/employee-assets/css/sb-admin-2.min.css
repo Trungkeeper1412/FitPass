@@ -254,9 +254,8 @@ section {
 
 body {
     margin: 0;
-    font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
-    font-weight: 400;
     line-height: 1.5;
     color: #000000;
     text-align: left;
@@ -682,6 +681,7 @@ mark {
 
 .img-fluid {
     max-width: 100%;
+    aspect-ratio: 1 / 0.6;
     height: auto
 }
 
@@ -5197,7 +5197,7 @@ input[type=submit].btn-block {
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem
+    padding: 1.25rem;
 }
 
 .card-title {
@@ -8713,7 +8713,7 @@ button.bg-dark:hover {
 
 .mb-4,
 .my-4 {
-    margin-bottom: 0rem !important
+    margin-bottom: 1.5rem !important
 }
 
 .ml-4,
@@ -13391,6 +13391,9 @@ td img {
 }
 
 /* Gym brand */
+.brand-title {
+    text-align: center;
+}
 
 .active-check {
     white-space: nowrap;
@@ -13518,7 +13521,6 @@ tr td i {
 .service-type {
     aspect-ratio : 1 / 1;
     width: 100%;
-    padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
 }

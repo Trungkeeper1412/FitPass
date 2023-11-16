@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -46,26 +46,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><img src="./img/undraw_profile_2.svg" alt="Thumbnail 1"></td>
-                                            <td>Lê Đình Tuấn</td>
-                                            <td>0987654321</td>
-                                            <td>ldt2001@gmail.com</td>
-                                            <td>Cơ sở Đống Đa</td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/brand-owner/gym-owner/details}" class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><img src="./img/undraw_profile_2.svg" alt="Thumbnail 1"></td>
-                                            <td>Mai Quang Trường</td>
-                                            <td>0987654321</td>
-                                            <td>ldt2001@gmail.com</td>
-                                            <td>Cơ sở Đống Đa</td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/brand-owner/gym-owner/details}" class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
+                                        <th:block th:each="gymOwner : ${gymOwnerList}">
+                                            <tr>
+                                                <td th:text="${gymOwnerStat.index + 1}"></td>
+                                                <td><img th:src="${gymOwner.getImageUrl()}" /></td>
+                                                <td th:text="${gymOwner.getFirstName() + ' ' + gymOwner.getLastName()}">Lê Đình Tuấn</td>
+                                                <td th:text="${gymOwner.getPhoneNumber()}">0987654321</td>
+                                                <td th:text="${gymOwner.getEmail()}">ldt2001@gmail.com</td>
+                                                <td th:text="${gymOwner.getGymDepartmentName()}">Cơ sở Đống Đa</td>
+                                                <td th:text="${gymOwner.isUserDeleted() ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
+                                                <td><a th:href="@{/brand-owner/gym-owner/details(id1=${gymOwner.getUserId()}, id2=${gymOwner.getUserDetailId()})}" class="btn btn-primary">Cập nhật</a></td>
+                                            </tr>
+                                        </th:block>
                                     </tbody>
                                 </table>
                             </div>

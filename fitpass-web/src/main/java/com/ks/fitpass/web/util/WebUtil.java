@@ -28,4 +28,25 @@ public class WebUtil {
         }
         return sb.toString();
     }
+
+    public static String generateRandomPassword() {
+        // Độ dài của mật khẩu ngẫu nhiên
+        int passwordLength = 10;
+
+        // Ký tự có thể xuất hiện trong mật khẩu
+        String allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        StringBuilder password = new StringBuilder();
+
+        for (int i = 0; i < passwordLength; i++) {
+            // Chọn ngẫu nhiên một ký tự từ chuỗi allowedChars
+            int randomIndex = (int) (Math.random() * allowedChars.length());
+            char randomChar = allowedChars.charAt(randomIndex);
+
+            // Thêm ký tự ngẫu nhiên vào mật khẩu
+            password.append(randomChar);
+        }
+
+        return password.toString();
+    }
 }

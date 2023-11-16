@@ -3,7 +3,7 @@
         <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4" th:each="brand:${brands}">
             <a th:href="@{/brand/brand-detail/{brand_id}(brand_id=${brand.getBrandId()})}">
             <div class="row brand">
-                <div class="brand-image">
+                <div style="border-radius: 20px" class="brand-image">
                 <img th:src="${brand.getBrandThumbnailUrl()}" alt="thumbnail">
                 </div>
                 <div class="brand-info">

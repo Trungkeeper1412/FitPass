@@ -101,6 +101,92 @@ public class FileUploadController {
         }
     }
 
+    @PostMapping("/uploadAvatar")
+    public ResponseEntity<String> uploadAvatar(
+            @RequestParam("file") MultipartFile file) {
+
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("Please select a file to upload");
+        }
+
+        try {
+            String originalFileName = file.getOriginalFilename();
+
+            // Kiểm tra định dạng của tệp
+            String fileExtension = getFileExtension(originalFileName);
+            if (!isValidFileExtension(fileExtension)) {
+                return ResponseEntity.badRequest().body("Invalid file format. Only PNG and JPEG files are allowed.");
+            }
+
+            // Tạo thư mục nếu nó chưa tồn tại
+            Path brandDirectoryPath = Paths.get(UPLOAD_DIRECTORY + "user/");
+            if (!Files.exists(brandDirectoryPath)) {
+                Files.createDirectories(brandDirectoryPath);
+            }
+
+            String fileName = "avatar";
+            long userId = System.currentTimeMillis();
+
+            // Xác định đường dẫn tới tệp đã tải lên
+            Path filePath = brandDirectoryPath.resolve(userId + "_" + fileName + "." + fileExtension);
+
+            // Sử dụng StandardCopyOption.REPLACE_EXISTING để ghi đè tệp nếu nó tồn tại
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Trả về đường dẫn tới tệp đã tải lên
+            String uploadedFilePath = "/img/user/" + userId + "_" + fileName + "." + fileExtension;
+
+            return ResponseEntity.ok(uploadedFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Failed to upload file");
+        }
+    }
+
+    @PostMapping("/uploadImageBrandAmenities/{amenitieId}")
+    public ResponseEntity<String> uploadBrandAmenities(
+            @PathVariable int amenitieId,
+            @RequestParam("file") MultipartFile file) {
+
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("Please select a file to upload");
+        }
+
+        try {
+            String originalFileName = file.getOriginalFilename();
+
+            // Kiểm tra định dạng của tệp
+            String fileExtension = getFileExtension(originalFileName);
+            if (!isValidFileExtension(fileExtension)) {
+                return ResponseEntity.badRequest().body("Invalid file format. Only PNG and JPEG files are allowed.");
+            }
+
+            // Tạo thư mục nếu nó chưa tồn tại
+            Path brandDirectoryPath = Paths.get(UPLOAD_DIRECTORY + "brandAmenities/");
+            if (!Files.exists(brandDirectoryPath)) {
+                Files.createDirectories(brandDirectoryPath);
+            }
+
+            String fileName = "brandAmenities";
+            long time = System.currentTimeMillis();
+
+            // Xác định đường dẫn tới tệp đã tải lên
+            Path filePath = brandDirectoryPath.resolve(time + "_" + fileName + "." + fileExtension);
+
+            // Sử dụng StandardCopyOption.REPLACE_EXISTING để ghi đè tệp nếu nó tồn tại
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Trả về đường dẫn tới tệp đã tải lên
+            String uploadedFilePath = "/img/brandAmenities/" + time + "_" + fileName + "." + fileExtension;
+
+            return ResponseEntity.ok(uploadedFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Failed to upload file");
+        }
+    }
+
+
     private String getFileExtension(String fileName) {
         int lastIndexOfDot = fileName.lastIndexOf(".");
         if (lastIndexOfDot >= 0) {

@@ -1,5 +1,5 @@
 package com.ks.fitpass.core.config;
-import com.ks.fitpass.core.entity.CustomUserDetails;
+import com.ks.fitpass.core.entity.CustomUser;
 import com.sun.security.auth.UserPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class UserHandshakeHandler extends DefaultHandshakeHandler {
     @Override
     protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails customUserDetails) {
+        if (authentication != null && authentication.getPrincipal() instanceof CustomUser customUserDetails) {
             String id = String.valueOf(customUserDetails.getId());
             // ... other attributes
             LOG.info("User with ID " + id + " opened the page");

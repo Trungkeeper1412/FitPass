@@ -85,11 +85,25 @@ public interface IRepositoryQuery {
                     brand_id,
                     photo_url,
                     amenitie_name,
-                    description
+                    description,
+                    amenitie_status
                 FROM
                     brand_amenities
                 WHERE
                     brand_id = ?
+            """;
+    String GET_BRAND_AMENITIES_BRAND_ID_ACTIVATE = """
+                SELECT
+                    amenitie_id,
+                    brand_id,
+                    photo_url,
+                    amenitie_name,
+                    description,
+                    amenitie_status
+                FROM
+                    brand_amenities
+                WHERE
+                    brand_id = ? AND amenitie_status = 1
             """;
 
     String GET_BRAND_DETAIL_BY_USER_ID = """
@@ -128,5 +142,29 @@ public interface IRepositoryQuery {
                   brand_status_key = ?
                 WHERE
                   brand_id = ?;
+            """;
+
+    String GET_BRAND_AMENITIES_DETAIL = """
+                SELECT amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status
+                FROM brand_amenities
+                WHERE amenitie_id = ?;
+            """;
+
+    String CREATE_BRAND_AMENITIES = """
+                INSERT INTO brand_amenities
+                (brand_id, photo_url, amenitie_name, description, amenitie_status)
+                VALUES(?,?, ?, ?, ?);
+            """;
+
+    String UPDATE_BRAND_AMENITIES = """
+                UPDATE brand_amenities
+                SET photo_url=?, amenitie_name=?, description=?, amenitie_status=?
+                WHERE amenitie_id=?;
+            """;
+
+    String UPDATE_BRAND_AMENITIES_STATUS = """
+                UPDATE brand_amenities
+                SET amenitie_status=?
+                WHERE amenitie_id=?;
             """;
 }

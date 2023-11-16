@@ -2,6 +2,7 @@ package com.ks.fitpass.department.service;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -49,4 +50,8 @@ public interface DepartmentService {
     int createDepartmentWithBrandId(int brandId, String name);
 
     int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance);
+
+    int updateDepartmentGymOwner(int departmentId, int userId);
+
+    List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
 }

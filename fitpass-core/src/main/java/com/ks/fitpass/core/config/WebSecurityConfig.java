@@ -1,6 +1,6 @@
 package com.ks.fitpass.core.config;
 
-import com.ks.fitpass.core.service.impl.CustomUserDetailsServiceImpl;
+import com.ks.fitpass.core.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +19,10 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private final CustomUserDetailsServiceImpl userDetailsService;
+    private final UserServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(CustomUserDetailsServiceImpl userDetailsService) {
+    public WebSecurityConfig(UserServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

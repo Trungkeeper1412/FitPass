@@ -1,11 +1,13 @@
 package com.ks.fitpass.department.repository.impl;
 
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
 import com.ks.fitpass.department.mapper.DepartmentHomePageMapper;
 import com.ks.fitpass.department.mapper.DepartmentMapper;
+import com.ks.fitpass.department.mapper.DepartmentMapperWithUserName;
 import com.ks.fitpass.department.mapper.UserFeedbackMapper;
 import com.ks.fitpass.department.repository.DepartmentRepository;
 import com.ks.fitpass.department.repository.IRepositoryQuery;
@@ -145,6 +147,14 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
         return jdbcTemplate.query(sql, parameters.toArray(), new DepartmentHomePageMapper());
     }
+
+    private String getSortPriceQuery(String sortPrice) {
+        if (sortPrice.equals("lowToHigh")) {
+            return "min_price ASC, max_price ASC";
+        } else {
+            return "max_price DESC, min_price DESC";
+        }
+    }
     @Override
     public List<Department> getAllByTopRating(int status) throws DataAccessException {
         return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), status);
@@ -157,7 +167,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public Department getOne(int id) throws DataAccessException {
-    return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapper(), id);
+    return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapperWithUserName(), id);
     }
     @Override
     public boolean update(Department department) throws DataAccessException {
@@ -253,4 +263,32 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         }
         return jdbcTemplate.queryForObject(sql, Integer.class,  status);
     }
+
+    @Override
+    public int updateDepartmentGymOwner(int departmentId, int userId) {
+        if(userId == 0) {
+            return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_GYM_OWNER, null, departmentId);
+        }
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_GYM_OWNER, userId, departmentId);
+    }
+
+    @Override
+    public List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_DEPARTMENT_FEEDBACK_OF_BRAND_OWNER, (rs, rowNum) -> {
+            UserFeedbackOfBrandOwner dto = new UserFeedbackOfBrandOwner();
+            dto.setFeedbackId(rs.getInt("feedback_id"));
+            dto.setUserId(rs.getInt("user_id"));
+            dto.setUserName(rs.getString("first_name") + " " + rs.getString("last_name"));
+            dto.setDepartmentId(rs.getInt("department_id"));
+            dto.setRating(rs.getInt("rating"));
+            dto.setComments(rs.getString("comments"));
+            dto.setFeedbackTime(rs.getTimestamp("feedback_time").toLocalDateTime());
+            dto.setFeedbackStatus(rs.getInt("feedback_status"));
+            dto.setEmail(rs.getString("email"));
+            dto.setPhoneNumber(rs.getString("phone_number"));
+            return dto;
+        },departmentId);
+    }
+
+
 }

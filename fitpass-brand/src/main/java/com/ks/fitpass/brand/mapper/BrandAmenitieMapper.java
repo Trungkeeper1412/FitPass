@@ -15,6 +15,7 @@ public class BrandAmenitieMapper implements RowMapper<BrandAmenitie> {
                 .amenitieName(resultSet.getString("amenitie_name"))
                 .photoUrl(resultSet.getString("photo_url"))
                 .description(resultSet.getString("description"))
+                .status(resultSet.getInt("amenitie_status"))
                 .build();
     }
 }

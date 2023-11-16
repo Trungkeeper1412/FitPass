@@ -59,6 +59,7 @@
         </div>
         <div class="col-md-5 col-lg-5 col-sm-6 club-view">
             <div class="club-view-bg">
+<!--                <img th:src="${brand.getBrandThumbnailUrl()}">-->
                 <a href="#club">
                     <button class="btn btn-warning">Xem các cơ sở</button>
                 </a>
@@ -68,7 +69,8 @@
 
     <!-- DỊCH VỤ -->
     <h4 class="row fw-bold mt-5">Dịch vụ</h4>
-    <div class="list-service-wrapper">
+    <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 50px;"></div>
+    <div class="list-service-wrapper mt-4">
         <button class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
         </button>
@@ -86,6 +88,7 @@
 
     <!--CƠ SỞ-->
     <h4 class="row fw-bold mt-5 brand-dept-title" id="club">CÁC CƠ SỞ</h4>
+    <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 70px;"></div>
     <div class="list-gym-department container">
         <div th:each="dept : ${departments}">
             <a class="department" th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
@@ -117,16 +120,19 @@
 
     <!--ĐÁNH GIÁ-->
     <h4 class="row fw-bold mt-5">ĐÁNH GIÁ TỪ NGƯỜI TẬP</h4>
+    <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 140px;"></div>
     <div class="rating-feedback container mx-auto">
-        <div class="rating-option row row-cols-6">
-            <div class="rating-point col-lg-0.5 col-md-1">
-                <span th:text="${brand.getRating()}">4/5</span> <span>/5</span>
-                <span>
-            <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
-
-          </span>
+        <div class="rating-option row">
+            <div class="rating-avg">
+                <div style="display: flex; position: relative">
+                    <div class="rating-point" th:text="${brand.getRating()}"></div>
+                    <div class="rating-max">trên 5</div>
+                </div>
+                <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
             </div>
-            <button style="margin-left: 40px;" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <div class="button-list">
+            <div class="row">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 Tất cả (<span>24</span>)
             </button>
             <button type="button" class="btn btn-warning col-lg-1 col-md-2">
@@ -144,6 +150,8 @@
             <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 1 sao (<span>1</span>)
             </button>
+            </div>
+            </div>
         </div>
         <div class="user-rating">
             <div class="user-rating-avatar">

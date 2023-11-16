@@ -34,7 +34,7 @@
     <div class="line row"></div>
     <div class="my-card-title row">
         <div class="form-check">
-            <input class="auto" onchange="checkAll(this)" id="check-all" type="checkbox" value="" />
+            <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
             <label class="" for="flexCheckChecked"> </label>
         </div>
         <div class="my-plan-title">Gói tập</div>
@@ -58,7 +58,7 @@
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
                         <div class="form-check">
-                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${department.getDepartmentId()}" />
+                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()}" />
                             <label class="" for="flexCheckChecked"> </label>
                         </div>
                         <div class="plan-card-mc">
@@ -78,7 +78,7 @@
                             <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
                         </div>
 
-                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ')'">
+                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
@@ -122,11 +122,27 @@
 
     var count = 0;
     let selectedItems = [];
+    let selectedDept = [];
+
     // check all
     let checkboxs = document.getElementById("my-card").querySelectorAll("input[type='checkbox']")
     let dept_checkboxes = document.querySelectorAll('.dept-checkbox');
     let cbActual = document.getElementById("my-card").querySelectorAll('input:not([class=auto])');
     let numOfPlan = document.getElementById("my-card").getElementsByClassName("plan-checkbox");
+    let cbPlanActual = document.querySelectorAll(".plan-checkbox");
+    console.log(cbPlanActual);
+
+    // check all is checked when all plan checkbox is checked
+    cbPlanActual.forEach(cb => {
+        cb.addEventListener('change', (event) =>{
+            if(!event.target.checked){
+                document.getElementById('check-all').checked = false;
+            } else{
+                if([...cbPlanActual].every(cb=>cb.checked === true))
+                    document.getElementById('check-all').checked = true;
+            }
+        })
+    })
 
     cbActual.forEach(cb => {
         cb.addEventListener('change', (event) =>{
@@ -135,13 +151,13 @@
                 count -= 1;
             } else{
                 count += 1;
-                if(count == numOfPlan.length+1){
-                    document.getElementById('check-all').checked = true;
-                }
+                // if(count == numOfPlan.length+1){
+                //     document.getElementById('check-all').checked = true;
+                // }
                 if([...cbActual].every(cb=>cb.checked == true))
                     document.getElementById('check-all').checked = true;
             }
-            // console.log(count);
+            console.log(count);
             if(selectedItems.length > 0) {
                 document.querySelector('.buy-button-mc button').disabled = false;
             } else {
@@ -150,16 +166,28 @@
         })
     })
     function checkAll(myCheckAll){
+        selectedItems = [];
+        selectedDept = [];
         // count = 0;
         if(myCheckAll.checked === true){
             count = numOfPlan.length;
+            document.querySelector('.buy-button-mc button').disabled = false;
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = true;
-            });
+                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
+                addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
+            }   );
         } else {
             count = 0;
+            document.querySelector('.buy-button-mc button').disabled = true;
+            let valuesToRemove = [];
+            let deptIdRemove = [];
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
+                addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
+                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
+                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
             });
         }
     }
@@ -179,7 +207,6 @@
                         cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
-                console.log(count);
                 console.log(JSON.stringify(selectedItems));
             })
         })
@@ -190,15 +217,18 @@
             document.querySelector('.buy-button-mc button').disabled = false;
             own_checkboxs.forEach(function(checkbox){
                 checkbox.checked = true;
-                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id", "data-dept-id"));
+                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
+                addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
             });
         } else {
             let valuesToRemove = [];
+            let deptIdRemove = [];
             own_checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
                 addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
                 selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
-                console.log(JSON.stringify(selectedItems));
+                addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
+                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
             });
             // if(selectedItems.length > 0) {
             //     document.querySelector('.buy-button-mc button').disabled = false;
@@ -207,7 +237,9 @@
             // }
         }
         console.log(JSON.stringify(selectedItems));
+        console.log(JSON.stringify(selectedDept));
         console.log(selectedItems.length);
+        console.log(selectedDept.length);
     }
 
 
@@ -222,12 +254,18 @@
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
+            addToUniqueArray(selectedDept, checkBox.getAttribute("data-dept-id"));
         }
         else{
             total_int = total_int - price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
-            selectedItems = selectedItems.filter(item => item !== checkBox.getAttribute("data-product-id"));
+            let valuesToRemove = [];
+            let deptIdRemove = [];
+                addToUniqueArray(valuesToRemove, checkBox.getAttribute("data-product-id"));
+                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                addToUniqueArray(deptIdRemove, checkBox.getAttribute("data-dept-id"));
+                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
         }
 
 
@@ -239,18 +277,18 @@
     }
 
     function checkout() {
-        const url = `/checkout/view?idList=${selectedItems.join(',')}`;
+        const url = `/checkout/view?idList=${selectedItems.join(',')}&deptIdList=${selectedDept.join(',')}`;
         window.location.href = url;
     }
 
     function addToUniqueArray(arr, element) {
-        if (arr.indexOf(element) === -1 && element!== null) {
+        if (element!== null) {
             arr.push(element);
         }
     }
 
 
-    function removeFromCart(gymPlanId) {
+    function removeFromCart(gymPlanId,departmentId) {
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?',
             icon: 'warning',
@@ -259,7 +297,7 @@
             cancelButtonText: 'Hủy',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId;
+                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId + '&departmentId='+ departmentId;
             }
         });
     }

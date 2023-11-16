@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 
 <body id="page-top">
@@ -28,7 +28,7 @@
                         <div class="card-header py-3">
                             <h2 class="m-0 font-weight-bold text-primary">Chi tiết đánh giá</h2>
                             <div class="feedback-img col-lg-12">
-                                <h2 class="title-feedback">Cơ sở Cầu Giấy</h2>
+                                <h2 class="title-feedback" th:text="${department.getDepartmentName()}">Cơ sở Cầu Giấy</h2>
                             </div>
                         </div>
                         <div class="card-body">
@@ -40,43 +40,25 @@
                                             <th>Tên người đánh giá</th>
                                             <th>Số điện thoại</th>
                                             <th>Email</th>
-                                            <th>Tên gói tập</th>
+<!--                                            <th>Tên gói tập</th>-->
                                             <th>Ngày đánh giá</th>
                                             <th>Số sao đánh giá</th>
                                             <th style="width: 350px;">Nội dung đánh giá</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Lê Đình Tuấn</td>
-                                            <td>0987654321</td>
-                                            <td>tuanld2001@gmail.com</td>
-                                            <td>Gói linh hoạt</td>
-                                            <td>2023-10-15</td>
-                                            <td><i data-star="4"></i></td>
-                                            <td>Hôm nay phòng tập hơi đông, điều hòa không đủ mát. Rất mong mọi người có thể khắc phục sự bất tiện này</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Nguyễn Văn Trung</td>
-                                            <td>0987654321</td>
-                                            <td>tuanld2001@gmail.com</td>
-                                            <td>Gói 3 ngày</td>
-                                            <td>2023-10-15</td>
-                                            <td><i data-star="1"></i></td>
-                                            <td>Quá tệ</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Lê Trung Đức</td>
-                                            <td>0987654321</td>
-                                            <td>tuanld2001@gmail.com</td>
-                                            <td>Gói 3 ngày</td>
-                                            <td>2023-10-15</td>
-                                            <td><i data-star="4"></i></td>
-                                            <td>Phòng tập máy chạy bộ bị hỏng</td>
-                                        </tr>
+                                        <th:block th:each="u : ${userFeedbackList}">
+                                            <tr>
+                                                <td th:text="${uStat.index + 1}">1</td>
+                                                <td th:text="${u.getUserName()}">Lê Đình Tuấn</td>
+                                                <td th:text="${u.getPhoneNumber()}">0987654321</td>
+                                                <td th:text="${u.getEmail()}">tuanld2001@gmail.com</td>
+<!--                                                <td>Gói linh hoạt</td>-->
+                                                <td th:text="${#temporals.format(u.getFeedbackTime(), 'dd-MM-yyyy HH:mm:ss')}">2023-10-15</td>
+                                                <td><i th:attr="data-star=${u.getRating()}"></i></td>
+                                                <td th:text="${u.getComments()}">Hôm nay phòng tập hơi đông, điều hòa không đủ mát. Rất mong mọi người có thể khắc phục sự bất tiện này</td>
+                                            </tr>
+                                        </th:block>
                                     </tbody>
                                 </table>
                             </div>
@@ -105,3 +87,4 @@
 </body>
 
 </html>
+

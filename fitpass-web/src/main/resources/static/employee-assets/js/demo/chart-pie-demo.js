@@ -7,11 +7,11 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["Gói linh hoạt", "Gói 7 ngày", "Gói 3 tháng", "Gói 6 tháng", "Gói 12 tháng"],
     datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      data: [55, 20, 15, 8, 2],
+      backgroundColor: ['#FFCE56', '#36A2EB', '#4BC0C0', '#FF6384', '#FF9F40'],
+      hoverBackgroundColor: ['#FFCE56', '#36A2EB', '#4BC0C0', '#FF6384', '#FF9F40'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },

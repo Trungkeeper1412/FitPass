@@ -2,6 +2,7 @@ package com.ks.fitpass.department.repository;
 
 
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
@@ -37,4 +38,8 @@ public interface DepartmentRepository {
     int createDepartmentWithBrandId(int brandId, String name);
 
     int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance);
+
+    int updateDepartmentGymOwner(int departmentId, int userId);
+
+    List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
 }
