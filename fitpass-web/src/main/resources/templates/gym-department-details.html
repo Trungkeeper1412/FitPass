@@ -106,7 +106,6 @@
             </div>
         </div>
     </div>
-
 <!--    Dịch vụ-->
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Dịch vụ</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
@@ -115,35 +114,10 @@
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
         </button>
         <div class="scroll-services mt-4">
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12">
-                <div class="brand-service-img" style="background-image:url('https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg') ; background-size: cover; object-fit: cover;"></div>
-                <div class="service-name"> PHÒNG TẬP ĐA NĂNG</div>
-                <div class="service-descript">Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền
-                    hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.</div>
-            </div>
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12">
-                <div class="brand-service-img" style="background-image:url('https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg') ;background-size: cover; object-fit: cover;"></div>
-                <div class="service-name"> PHÒNG TẬP ĐA NĂNG</div>
-                <div class="service-descript">Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền
-                    hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.</div>
-            </div>
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12">
-                <div class="brand-service-img" style="background-image:url('https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg') ;background-size: cover; object-fit: cover;"></div>
-                <div class="service-name"> PHÒNG TẬP ĐA NĂNG</div>
-                <div class="service-descript">Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền
-                    hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.</div>
-            </div>
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12">
-                <div class="brand-service-img" style="background-image:url('https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg') ;background-size: cover; object-fit: cover;"></div>
-                <div class="service-name"> PHÒNG TẬP ĐA NĂNG</div>
-                <div class="service-descript">Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền
-                    hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.</div>
-            </div>
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12">
-                <div class="brand-service-img" style="background-image:url('https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg') ;background-size: cover; object-fit: cover;"></div>
-                <div class="service-name"> PHÒNG TẬP ĐA NĂNG</div>
-                <div class="service-descript">Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền
-                    hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.</div>
+            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12"  th:each="amenitie: ${departmentAmenities}">
+                <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
+                <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
+                <div class="service-descript" th:text="${amenitie.brandAmenitieId.getDescription()}"></div>
             </div>
         </div>
         <button class="right" onclick="rightScroll()">

@@ -6,7 +6,4 @@ import java.util.List;
 
 public interface DepartmentFeatureRepository {
     List<DepartmentFeature> getDepartmentFeatures(int departmentId);
-
-    List<DepartmentFeature> getDepartmentFeaturesByStatusAndDepartmentID(int departmentId, int status);
-
 }

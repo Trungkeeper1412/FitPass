@@ -404,7 +404,6 @@ public class BrandOwnerController {
         // Add to db
         return "redirect:/gym-plans/flexible/list";
     }
-
     //Fixed Plans
     @GetMapping("/gym-plans/fixed/list")
     public String getListOfFixedGymPlans() {
