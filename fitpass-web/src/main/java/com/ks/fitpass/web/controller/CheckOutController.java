@@ -4,6 +4,7 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.service.KbnService;
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.order.dto.PlanData;
 import com.ks.fitpass.order.entity.Order;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.entity.cart.Cart;
@@ -91,7 +92,15 @@ public class CheckOutController {
         Cart cart = (Cart) session.getAttribute("cart");
 
         User user = (User) session.getAttribute("userInfo");
-
+        List<PlanData> planDataObjects = new ArrayList<>();
+        for (String planData:
+             planIdList) {
+            String[] parts = planData.split(";");
+            Integer gymPlanId = Integer.parseInt(parts[0]);
+            Integer departmentId = Integer.parseInt(parts[1]);
+            PlanData planDataObject = new PlanData(gymPlanId,departmentId);
+            planDataObjects.add(planDataObject);
+        }
         if (cart != null) {
             List<CartItem> cartItemList = cart.getItems();
             List<CartItem> cartItemsRemoveList= new ArrayList<>();
@@ -106,7 +115,7 @@ public class CheckOutController {
             int insertOrderStatus = orderService.insertOrder(order);
             int orderId = orderService.getLastOrderInsertId();
             for (CartItem cartItem : cartItemList) {
-                if (planIdList.contains(cartItem.getGymPlan().getGymPlanId())) {
+                if (planDataObjects.stream().anyMatch(b->b.getGymPlanId()==cartItem.getGymPlan().getGymPlanId()&&b.getDepartmentId()==cartItem.getGymPlan().getGymDepartmentId())) {
                     GymPlanDepartmentNameDto gymPlanDepartmentNameDto = cartItem.getGymPlan();
                     OrderDetails orderDetails = new OrderDetails();
                     orderDetails.setOrderId(orderId);
