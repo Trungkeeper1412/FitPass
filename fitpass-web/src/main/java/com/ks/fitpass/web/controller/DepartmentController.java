@@ -22,12 +22,9 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
     private final GymPlanService gymPlanService;
-
     private final DepartmentScheduleService departmentScheduleService;
-
     private final DepartmentAlbumsService departmentAlbumsService;
-
-    private  final DepartmentFeatureService departmentFeatureService;
+    private final DepartmentFeatureService departmentFeatureService;
 
     @Autowired
     public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService) {

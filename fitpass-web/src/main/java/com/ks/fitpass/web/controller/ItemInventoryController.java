@@ -16,11 +16,8 @@ import java.sql.Timestamp;
 @RequestMapping("/item")
 public class ItemInventoryController {
     private final ItemInventoryService itemInventoryService;
-    private final UserRepository userRepository;
-
-    public ItemInventoryController(ItemInventoryService itemInventoryService, UserRepository userRepository) {
+    public ItemInventoryController(ItemInventoryService itemInventoryService) {
         this.itemInventoryService = itemInventoryService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/add")

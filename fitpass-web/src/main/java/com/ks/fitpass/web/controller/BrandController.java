@@ -50,7 +50,6 @@ public class BrandController {
 
             List<DepartmentFeature> departmentFeatures = new ArrayList<>();
 
-            // Loop through departmentDTOList to get departmentId values and fetch department features
             for (DepartmentDTO departmentDTO : departmentDTOList) {
                 int departmentId = departmentDTO.getDepartmentId();
                 List<DepartmentFeature> features = departmentFeatureService.getDepartmentFeatures(departmentId);

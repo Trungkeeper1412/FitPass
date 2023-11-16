@@ -45,7 +45,7 @@ public class InventoryController {
         model.addAttribute("itemListExpired", itemListExpired);
 
 
-        if(session.getAttribute("activeItemMSG") != null) {
+        if (session.getAttribute("activeItemMSG") != null) {
             model.addAttribute("activeItemMSG", session.getAttribute("activeItemMSG"));
             session.removeAttribute("activeItemMSG");
         }

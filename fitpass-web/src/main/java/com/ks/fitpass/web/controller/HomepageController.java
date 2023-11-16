@@ -36,6 +36,7 @@ public class HomepageController {
     private final BrandService brandService;
     private final WalletService walletService;
     private final TransactionService transactionService;
+
     @GetMapping("/homepage")
     public String getHomepage(Principal principal, HttpSession session) {
         com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
@@ -47,9 +48,9 @@ public class HomepageController {
 
     @GetMapping("/homepage/brand")
     public ResponseEntity<BrandPagnition> getBrandWithPagination(@RequestParam(defaultValue = "1") int page,
-                                                                @RequestParam(defaultValue = "2") int size,
-                                                                @RequestParam(required = false) String sortPrice,
-                                                                @RequestParam(required = false) String sortRating) {
+                                                                 @RequestParam(defaultValue = "2") int size,
+                                                                 @RequestParam(required = false) String sortPrice,
+                                                                 @RequestParam(required = false) String sortRating) {
         List<Brand> brandList = brandService.getAllByStatus(1, page, size, sortPrice, sortRating);
 
         int totalBrands = brandService.countAllBrands(1, sortRating);
@@ -81,7 +82,7 @@ public class HomepageController {
                                                                                @RequestParam(required = false, defaultValue = "10") String belowDistance) {
 
         List<Department> departmentList = departmentService.getAllDepartmentByNearbyLocation(
-                page, size, userLatitude, userLongitude,  city, sortPrice, sortRating, belowDistance);
+                page, size, userLatitude, userLongitude, city, sortPrice, sortRating, belowDistance);
         int totalDepartment = departmentService.countAllDepartment(1, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
         int totalPages = (int) Math.ceil((double) totalDepartment / size);
         int currentPage = page;
@@ -95,7 +96,7 @@ public class HomepageController {
     }
 
     @GetMapping("/profile/calendar")
-    public String getCalendar(){
+    public String getCalendar() {
         return "user/calendar";
     }
 
