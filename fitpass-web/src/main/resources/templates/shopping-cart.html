@@ -4,22 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ Hàng</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="icon" th:href="@{/assets/img/icon.png}">
-    <link rel="apple-touch-icon" th:href="@{assets/img/apple-touch-icon.png}">
-    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <meta name="description" content="Cart Page">
+    <meta name="keywords" content="My">
+
+    <th:block th:include="common/vendor-head"></th:block>
+
     <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
 </head>
@@ -34,7 +23,7 @@
     <div class="line row"></div>
     <div class="my-card-title row">
         <div class="form-check">
-            <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
+            <input class="auto" onchange="checkAll(this)" id="check-all" type="checkbox" value=""/>
             <label class="" for="flexCheckChecked"> </label>
         </div>
         <div class="my-plan-title">Gói tập</div>
@@ -47,7 +36,8 @@
         <div class="plan-in-my-card">
             <div class="all-plan-of-gym row">
                 <div class="form-check">
-                    <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
+                    <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value=""
+                           id="flexCheckChecked"/>
                     <label class="" for="flexCheckChecked"> </label>
                 </div>
                 <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
@@ -58,28 +48,35 @@
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
                         <div class="form-check">
-                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()}" />
+                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox"
+                                   value=""
+                                   th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()}"/>
                             <label class="" for="flexCheckChecked"> </label>
                         </div>
                         <div class="plan-card-mc">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU"/>
                             <div class="plan-info-mc">
                                 <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
-                                <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
+                                <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời
+                                    lượng 365 ngày
+                                </div>
                             </div>
-                            <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                            <div class="active-time-mc"
+                                 th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
                                 Kích hoạt trong vòng 10 ngày
                             </div>
                         </div>
                         <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
                             200
                         </div>
-                        <div class="num-of-plan-mc" >
+                        <div class="num-of-plan-mc">
                             <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
                         </div>
 
-                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <button type="button" class="btn btn-warning"
+                                th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                 class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
                                 />
@@ -102,22 +99,15 @@
             <span id="total-price-mc" class="total">0</span>
         </div>
         <div class="buy-button-mc col-md-2 col-sm-4 col-3">
-            <button disabled type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
+            <button disabled type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua
+                hàng
+            </button>
         </div>
     </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- Vendor JS Files -->
-<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
 
-<!-- Template Main JS File -->
-<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+
+<th:block th:insert="common/vendor-script"></th:block>
 <script>
 
     var count = 0;
@@ -134,76 +124,77 @@
 
     // check all is checked when all plan checkbox is checked
     cbPlanActual.forEach(cb => {
-        cb.addEventListener('change', (event) =>{
-            if(!event.target.checked){
+        cb.addEventListener('change', (event) => {
+            if (!event.target.checked) {
                 document.getElementById('check-all').checked = false;
-            } else{
-                if([...cbPlanActual].every(cb=>cb.checked === true))
+            } else {
+                if ([...cbPlanActual].every(cb => cb.checked === true))
                     document.getElementById('check-all').checked = true;
             }
         })
     })
 
     cbActual.forEach(cb => {
-        cb.addEventListener('change', (event) =>{
-            if(!event.target.checked){
+        cb.addEventListener('change', (event) => {
+            if (!event.target.checked) {
                 document.getElementById('check-all').checked = false;
                 count -= 1;
-            } else{
+            } else {
                 count += 1;
                 // if(count == numOfPlan.length+1){
                 //     document.getElementById('check-all').checked = true;
                 // }
-                if([...cbActual].every(cb=>cb.checked == true))
+                if ([...cbActual].every(cb => cb.checked == true))
                     document.getElementById('check-all').checked = true;
             }
             console.log(count);
-            if(selectedItems.length > 0) {
+            if (selectedItems.length > 0) {
                 document.querySelector('.buy-button-mc button').disabled = false;
             } else {
                 document.querySelector('.buy-button-mc button').disabled = true;
             }
         })
     })
-    function checkAll(myCheckAll){
+
+    function checkAll(myCheckAll) {
         selectedItems = [];
         selectedDept = [];
         // count = 0;
-        if(myCheckAll.checked === true){
+        if (myCheckAll.checked === true) {
             count = numOfPlan.length;
             document.querySelector('.buy-button-mc button').disabled = false;
-            checkboxs.forEach(function(checkbox){
+            checkboxs.forEach(function (checkbox) {
                 checkbox.checked = true;
                 addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
                 addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
-            }   );
+            });
         } else {
             count = 0;
             document.querySelector('.buy-button-mc button').disabled = true;
             let valuesToRemove = [];
             let deptIdRemove = [];
-            checkboxs.forEach(function(checkbox){
+            checkboxs.forEach(function (checkbox) {
                 checkbox.checked = false;
                 addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
-                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                selectedItems = selectedItems.filter(item => !valuesToRemove.includes(item));
                 addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
-                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
+                selectedDept = selectedDept.filter(item => !deptIdRemove.includes(item));
             });
         }
     }
 
     // check all in each gym department
-    for(var i=0; i<dept_checkboxes.length; i++){
+    for (var i = 0; i < dept_checkboxes.length; i++) {
         let cbActual1 = dept_checkboxes[i].parentElement.parentElement.parentElement.querySelectorAll('input:not([class=dept-checkbox])');
         console.log(cbActual1);
         cbActual1.forEach(cb1 => {
-            cb1.addEventListener('change', (event) =>{
-                if(!event.target.checked){
+            cb1.addEventListener('change', (event) => {
+                if (!event.target.checked) {
                     // count -= 1;
                     let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
                     cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
-                } else{
-                    if([...cbActual1].every(cb1=>cb1.checked == true)){
+                } else {
+                    if ([...cbActual1].every(cb1 => cb1.checked == true)) {
                         cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
@@ -211,11 +202,12 @@
             })
         })
     }
-    function checkAllGym(myCheckAll){
+
+    function checkAllGym(myCheckAll) {
         let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
-        if(myCheckAll.checked === true){
+        if (myCheckAll.checked === true) {
             document.querySelector('.buy-button-mc button').disabled = false;
-            own_checkboxs.forEach(function(checkbox){
+            own_checkboxs.forEach(function (checkbox) {
                 checkbox.checked = true;
                 addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
                 addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
@@ -223,12 +215,12 @@
         } else {
             let valuesToRemove = [];
             let deptIdRemove = [];
-            own_checkboxs.forEach(function(checkbox){
+            own_checkboxs.forEach(function (checkbox) {
                 checkbox.checked = false;
                 addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
-                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+                selectedItems = selectedItems.filter(item => !valuesToRemove.includes(item));
                 addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
-                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
+                selectedDept = selectedDept.filter(item => !deptIdRemove.includes(item));
             });
             // if(selectedItems.length > 0) {
             //     document.querySelector('.buy-button-mc button').disabled = false;
@@ -243,33 +235,32 @@
     }
 
 
-    function updateCartTotal(checkBox){
+    function updateCartTotal(checkBox) {
         let total = document.getElementById("total-price-mc").innerHTML;
         total_int = parseInt(total);
         get2 = checkBox.parentElement.parentElement.getElementsByClassName("plan-price-mc");
         price_int = parseInt(get2[0].innerHTML);
         let quantity = checkBox.parentElement.parentElement.querySelector(".product-quantity");
-        if(checkBox.checked){
+        if (checkBox.checked) {
             total_int = total_int + price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
             addToUniqueArray(selectedDept, checkBox.getAttribute("data-dept-id"));
-        }
-        else{
+        } else {
             total_int = total_int - price_int * quantity.innerHTML;
             document.getElementById("total-price-mc").innerHTML = total_int;
             console.log(total_int);
             let valuesToRemove = [];
             let deptIdRemove = [];
-                addToUniqueArray(valuesToRemove, checkBox.getAttribute("data-product-id"));
-                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
-                addToUniqueArray(deptIdRemove, checkBox.getAttribute("data-dept-id"));
-                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
+            addToUniqueArray(valuesToRemove, checkBox.getAttribute("data-product-id"));
+            selectedItems = selectedItems.filter(item => !valuesToRemove.includes(item));
+            addToUniqueArray(deptIdRemove, checkBox.getAttribute("data-dept-id"));
+            selectedDept = selectedDept.filter(item => !deptIdRemove.includes(item));
         }
 
 
-        if(selectedItems.length > 0) {
+        if (selectedItems.length > 0) {
             document.querySelector('.buy-button-mc button').disabled = false;
         } else {
             document.querySelector('.buy-button-mc button').disabled = true;
@@ -282,13 +273,13 @@
     }
 
     function addToUniqueArray(arr, element) {
-        if (element!== null) {
+        if (element !== null) {
             arr.push(element);
         }
     }
 
 
-    function removeFromCart(gymPlanId,departmentId) {
+    function removeFromCart(gymPlanId, departmentId) {
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?',
             icon: 'warning',
@@ -297,7 +288,7 @@
             cancelButtonText: 'Hủy',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId + '&departmentId='+ departmentId;
+                window.location.href = '/cart/remove?gymPlanId=' + gymPlanId + '&departmentId=' + departmentId;
             }
         });
     }
@@ -305,15 +296,15 @@
     var increaseButtons = document.querySelectorAll(".increase-button");
     var decreaseButtons = document.querySelectorAll(".decrease-button");
 
-    increaseButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
+    increaseButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
             var productId = button.getAttribute("data-product-id");
             increaseQuantity(productId);
         });
     });
 
-    decreaseButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
+    decreaseButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
             var productId = button.getAttribute("data-product-id");
             decreaseQuantity(productId);
         });

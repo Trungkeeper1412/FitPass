@@ -49,7 +49,7 @@ public class InventoryController {
             model.addAttribute("activeItemMSG", session.getAttribute("activeItemMSG"));
             session.removeAttribute("activeItemMSG");
         }
-        return "inventory";
+        return "user/inventory";
     }
 
     @PostMapping("/activeItem")

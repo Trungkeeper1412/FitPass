@@ -129,8 +129,7 @@ h6 {
 
 #header.header-scrolled,
 #header.header-inner-pages {
-  background: black;
-  animation: gradientAnimation 5s linear infinite;
+  background: rgb(0, 0, 0);
 }
 
 #header .logo {
