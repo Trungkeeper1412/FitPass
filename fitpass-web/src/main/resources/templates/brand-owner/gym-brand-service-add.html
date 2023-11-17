@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
-                                            <img class="show-service-img" src="" alt="Chưa chọn hình ảnh">
+                                            <img class="show-service-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
                                             <input type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
                                             <input id="photoUrl" type="hidden" name="photoUrl">
                                         </div>
