@@ -3948,7 +3948,34 @@ section {
   background-color: rgb(255, 255, 255);;
 }
 
+.cart-empty{
+  width: 40%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: 50%;
+  background-color: white;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 60px;
+  text-align: center;
+}
 
+.cart-empty img{
+  width: 50%;
+  height: 50%;
+  margin: auto;
+}
+
+.buy-now-btn{
+  margin: auto;
+  background-color: rgb(255, 196, 0);
+  color: black;
+  border-radius: 20px;
+  padding: 8px 22px;
+  width: fit-content;
+  font-weight: 700;
+  border: none;
+}
 /* ============== CSS FOR GYM BRAND DETAILS PAGE ============== */
 .body-gym-brand-details{
   /*background-color: rgb(238, 238, 238);*/
