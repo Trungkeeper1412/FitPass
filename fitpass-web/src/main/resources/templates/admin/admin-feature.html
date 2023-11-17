@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="admin/common/head"></th:block>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <th:block th:replace="admin/common/sidebar"></th:block>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <th:block th:replace="admin/common/navbar"></th:block>
+      <!-- End of Topbar -->
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header py-3 d-flex justify-content-between">
+            <h2 class="m-0 font-weight-bold text-primary">Danh sách tiện ích</h2>
+            <div class="btn btn-primary" data-toggle="modal" data-target="#addModalFeature">
+              <i class="fas fa-plus"></i> <span class="ml-1">Thêm mới</span>
+            </div>
+          </div>
+          <!-- Modal Add Feature-->
+          <div class="modal fade" id="addModalFeature" tabindex="-1" role="dialog" aria-labelledby="addFeature" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addFeature">Thêm tiện ích mới</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form thêm mới tiện ích -->
+                  <form>
+                    <div class="form-group">
+                      <label for="name">Tên tiện ích:</label>
+                      <input type="text" class="form-control" id="name" placeholder="Nhập tên tiện ích">
+                    </div>
+                    <div class="form-group">
+                      <label for="icon">Nhập tên icon:</label>
+                      <input type="text" class="form-control" id="icon" placeholder="Ví dụ: <i class=&#34;bi bi-p-circle&#34;></i>">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                  <button type="button" class="btn btn-primary">Thêm mới</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Update Feature -->
+          <div class="modal fade" id="updateModalFeature" tabindex="-1" role="dialog" aria-labelledby="updateFeature" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="updateFeature">Cập nhật tiện ích</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form cập nhật tiện ích -->
+                  <form>
+                    <div class="form-group">
+                      <label for="updateName">Tên tiện ích:</label>
+                      <input type="text" class="form-control" id="updateName" value="Bãi đỗ xe">
+                    </div>
+                    <div class="form-group">
+                      <label for="updateIcon">Icon:</label>
+                      <input type="text" class="form-control" id="updateIcon" value="<i class=&#34;bi bi-p-circle&#34;></i>">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                  <button type="button" class="btn btn-primary">Cập nhật</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="text-start">
+                <table class="table table-bordered" id="dataTable" width="100%"
+                       cellspacing="0">
+                  <thead>
+                  <tr>
+                    <th>Thứ tự</th>
+                    <th>Tên tiện ích</th>
+                    <th>Icon</th>
+                    <th class="status-active">Trạng thái</th>
+                    <th class="table-action">Hành động</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Bãi đỗ xe</td>
+                    <td><i class="bi bi-p-circle"></i></td>
+                    <td><select class="form-select" id="set-active"
+                                name="set-active">
+                      <option value="active">Hoạt động</option>
+                      <option value="deactive">Không hoạt động</option>
+                    </select></td>
+                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#updateModalFeature">Cập nhật</div></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Quầy nước</td>
+                    <td><i class="fa-solid fa-martini-glass-citrus"></i></td>
+                    <td><select class="form-select" id="set-active"
+                                name="set-active">
+                      <option value="active">Hoạt động</option>
+                      <option value="deactive">Không hoạt động</option>
+                    </select></td>
+                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#updateModalFeature">Cập nhật</div></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Khăn miễn phí</td>
+                    <td><i class="fas fa-scroll"></i></td>
+                    <td><select class="form-select" id="set-active"
+                                name="set-active">
+                      <option value="active">Hoạt động</option>
+                      <option value="deactive">Không hoạt động</option>
+                    </select></td>
+                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#updateModalFeature">Cập nhật</div></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Phòng y tế</td>
+                    <td><i class="fa-solid fa-suitcase-medical"></i></td>
+                    <td><select class="form-select" id="set-active"
+                                name="set-active">
+                      <option value="active">Hoạt động</option>
+                      <option value="deactive">Không hoạt động</option>
+                    </select></td>
+                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#updateModalFeature">Cập nhật</div></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <th:block th:replace="admin/common/footer"></th:block>
+    <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+<th:block th:replace="admin/common/script"></th:block>
+</body>
+
+</html>

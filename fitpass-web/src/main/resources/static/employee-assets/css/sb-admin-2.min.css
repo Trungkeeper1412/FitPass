@@ -6508,6 +6508,8 @@ a.close.disabled {
 }
 
 .modal-title {
+    font-size: 26px;
+    font-weight: bold;
     margin-bottom: 0;
     line-height: 1.5
 }
@@ -10952,7 +10954,7 @@ a.text-info:hover {
 }
 
 .text-warning {
-    color: #f6c23e !important
+    color: #ffc10b !important
 }
 
 a.text-warning:focus,
@@ -13577,4 +13579,73 @@ tr td i {
 
 .totalTransactions {
     font-size: 18px;
+}
+
+.list-gym-brand {
+    max-height: 470px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.list-gym-department {
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.list-gym-employee {
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.brand-img {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.employee-img {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.employee-name {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 5px double orange;
+    object-fit: cover;
+}
+
+.btn-banner {
+    text-align: center;
+    width: 130px;
+    background: orange;
+    font-weight: bold;
+    color: white;
+    border-radius: 25px;
+    padding: 10px;
+}
+.btn-banner:hover {
+    background: darkorange;
+    color: white;
+}
+
+.table-action {
+    width: 100px;
+}
+
+.table-action-lock {
+    width: 120px;
+}
+
+.modal-title-container {
+    flex: 1; /* Take remaining space */
 }

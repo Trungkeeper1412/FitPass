@@ -9,9 +9,9 @@ var myPieChart = new Chart(ctx, {
   data: {
     labels: ["Gói linh hoạt", "Gói 7 ngày", "Gói 3 tháng", "Gói 6 tháng", "Gói 12 tháng"],
     datasets: [{
-      data: [55, 20, 15, 8, 2],
-      backgroundColor: ['#FFCE56', '#36A2EB', '#4BC0C0', '#FF6384', '#FF9F40'],
-      hoverBackgroundColor: ['#FFCE56', '#36A2EB', '#4BC0C0', '#FF6384', '#FF9F40'],
+      data: [45, 20, 15, 12, 8],
+      backgroundColor: ['#0AC429', '#36A2EB', '#4BC0C0', '#FF6384', '#FF9F40'],
+      hoverBackgroundColor: ['#FFCE56', '#FFCE56', '#FFCE56', '#FFCE56', '#FFCE56'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
