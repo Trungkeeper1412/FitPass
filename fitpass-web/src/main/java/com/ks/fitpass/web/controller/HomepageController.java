@@ -3,20 +3,17 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
-import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
-import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +40,7 @@ public class HomepageController {
         double credit = walletService.getBalanceByUserId(user.getUserId());
         session.setAttribute("userCredit", credit);
         session.setAttribute("userInfo", user);
-        return "homepage/homepage-user";
+        return "homepage-user";
     }
 
     @GetMapping("/homepage/brand")
@@ -95,18 +92,6 @@ public class HomepageController {
         return ResponseEntity.ok(departmentHomePagePagnition);
     }
 
-    @GetMapping("/profile/calendar")
-    public String getCalendar() {
-        return "user/calendar";
-    }
 
 
-    @GetMapping("/profile/my-profile")
-    public String showProfile(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("userInfo");
-        List<TransactionDTO> transactionDTOList = transactionService.getListTransactionByUserId(user.getUserId());
-        model.addAttribute("transactionList", transactionDTOList);
-
-        return "user/profile";
-    }
 }
