@@ -173,10 +173,10 @@ public interface IRepositoryQuery {
                      d.gym_department_id,
                      d.brand_id,
                      d.name,
+                     d.user_id,
                      d.address,
                      d.contact_number,
                      d.logo_url,
-
                      d.wallpaper_url,
                      d.thumbnail_url,
                      d.description,
@@ -185,7 +185,7 @@ public interface IRepositoryQuery {
                      d.rating,
                      d.capacity,
                      d.area,
-
+                     d.city,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
@@ -414,8 +414,19 @@ public interface IRepositoryQuery {
                         WHERE gda.gym_department_id = ? AND ba.amenitie_status = 1
             """;
 
-
-
+//    String GET_DEPARTMENT_AMENITIES_BRAND_ID = """
+//                                    SELECT\s
+//                                        gda.gym_department_id,
+//                        				ba.amenitie_id,
+//                                        ba.brand_id,
+//                                        ba.photo_url,
+//                                        ba.amenitie_name,
+//                                        ba.description,
+//                                        ba.amenitie_status
+//                        		FROM brand_amenities ba
+//                        INNER JOIN gym_department_amenities gda ON ba.amenitie_id = gda.amenitie_id \s
+//                        WHERE ba.brand_id = ? AND ba.amenitie_status = 1
+//            """;
 
 String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
         SELECT\s
