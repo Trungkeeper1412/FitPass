@@ -320,7 +320,7 @@
                 if(!event.target.checked){
                     let plan = {planId: cb1.getAttribute("data-product-id"),
                         deptId: cb1.getAttribute("data-dept-id"),
-                        price: checkbox.getAttribute("data-plan-price")};
+                        price: cb1.getAttribute("data-plan-price")};
                     planSet.forEach((item) => {
                         if(item.planId === plan.planId && plan.deptId === item.deptId){
                             planSet.delete(item);
@@ -337,7 +337,9 @@
                     let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
                     cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
                 } else{
-                    let plan = {planId: cb1.getAttribute("data-product-id"), deptId: cb1.getAttribute("data-dept-id")};
+                    let plan = {planId: cb1.getAttribute("data-product-id"),
+                        deptId: cb1.getAttribute("data-dept-id"),
+                        price: cb1.getAttribute("data-plan-price")};
                     if(plan.planId !== null && plan.deptId !== null){
                         planSet.add(plan);
                     }
@@ -354,6 +356,7 @@
                     }
                 }
 
+                total_price = 0;
                 for (var i in selectedPrice) {
                     total_price += parseFloat(selectedPrice[i]);
                 }
