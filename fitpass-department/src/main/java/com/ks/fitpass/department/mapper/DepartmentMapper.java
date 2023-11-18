@@ -26,7 +26,7 @@ public class DepartmentMapper implements RowMapper<Department> {
 
                 .capacity(resultSet.getInt("capacity"))
                 .area(resultSet.getDouble("area"))
-
+                .city(resultSet.getString("city"))
                 .departmentStatus(DepartmentStatus.builder()
                         .departmentStatusCd(resultSet.getInt("gym_department_status_key"))
                         .departmentStatusName(resultSet.getString("gym_department_status_name"))
