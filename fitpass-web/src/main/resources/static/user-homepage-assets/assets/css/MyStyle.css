@@ -20,6 +20,7 @@ h6 {
 }
 
 /*NAVBAR*/
+
 .cart-badge {
   position: absolute;
   top: 0px;
@@ -305,20 +306,35 @@ a:hover {
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  left: 14px;
-  top: calc(100% + 30px);
-  margin: 0;
-  padding: 10px 0;
-  z-index: 99;
+  /*left: 0px;*/
+  right: 0;
+  top: calc(100% + 50px);
+  margin-top: 10px;
+  /*padding: 10px 0;*/
   opacity: 0;
   visibility: hidden;
   background: #fff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
+.view-all-noti{
+  position: absolute;
+  bottom: 0;
+}
+.view-all-noti button{
+  padding: 9px;
+  height: 100%;
+  font-size: 12px;
+  border: hidden;
+  font-weight: 600;
+  width: 100%;
+  background-color: #e1e1e1;
+}
 
 .navbar .dropdown ul li {
-  min-width: 200px;
+  min-width: 320px;
+  border-radius: 5px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .navbar .dropdown ul a {
@@ -327,6 +343,21 @@ a:hover {
   text-transform: none;
   color: #151515;
   font-weight: 400;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.noti img{
+  width: 35px;
+}
+.noti .noti-time{
+  color: #9f9f9f;
+  font-weight: 600;
+  font-size: 12px;
+}
+.noti .noti-title{
+  font-size: 13px;
+  margin-top: 4px;
 }
 
 .navbar .dropdown ul a i {
@@ -336,7 +367,7 @@ a:hover {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  background-color: #ffc451;
+  background-color: aliceblue;
 }
 
 .navbar .dropdown:hover>ul {
@@ -3471,7 +3502,7 @@ section {
   margin-bottom: 30px;
 }
 
-/* CSS FOR MY CARD PAGE*/
+/* CSS FOR SHOPPING CART PAGE*/
 .body-my-card header{
   position: relative;
 }
@@ -3615,7 +3646,7 @@ section {
   }
   .plan-info-mc h4{
     font-size: 16px;
-    margin: auto;
+    /*margin: auto;*/
     margin-top: 10px;
   }
   .plan-duration-mc{
@@ -3647,7 +3678,7 @@ section {
     background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
     background-size: cover;
     height: 75%;
-    width: 90%;
+    width: 80%;
     display:grid;
     grid-template-columns: 1fr 2fr 1.5fr;
     margin: auto 0;
@@ -3663,7 +3694,7 @@ section {
   }
   .plan-info-mc h4{
     font-size: 18px;
-    margin: auto;
+    /*margin: auto;*/
     margin-top: 10px;
   }
 }
@@ -3681,7 +3712,10 @@ section {
   margin: auto;
 }
 .plan-info-mc{
-  margin: auto 0;
+  /*margin: auto 0;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: white;
 }
 .plan-info-mc h4{
@@ -3808,7 +3842,7 @@ section {
   }
   .body-checkout .plan-card-mc h4{
     font-size: 14px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
   }
   .body-checkout .plan-card-mc .duration{
     font-size: 13px;
