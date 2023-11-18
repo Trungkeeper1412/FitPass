@@ -68,7 +68,10 @@
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
                         <div class="form-check">
-                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value="" th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()}, data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()}" />
+                            <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value=""
+                                   th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()},
+                                   data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()},
+                                   data-plan-price=${cartItem.getGymPlan().getPrice()}"/>
                             <label class="" for="flexCheckChecked"> </label>
                         </div>
                         <div class="plan-card-mc">
@@ -208,6 +211,9 @@
     var count = 0;
     let selectedItems = [];
     let selectedDept = [];
+    let selectedPrice = [];
+    let total_price = 0;
+
     // function Plan(planId, deptId) {
     //     this.planId = planId;
     //     this.deptId = deptId;
@@ -262,6 +268,8 @@
     function checkAll(myCheckAll){
         selectedItems = [];
         selectedDept = [];
+        selectedPrice = [];
+        total_price = 0;
         planSet = new Set([]);
         // count = 0;
         if(myCheckAll.checked === true){
@@ -269,7 +277,7 @@
             document.querySelector('.buy-button-mc button').disabled = false;
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = true;
-                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id")};
+                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id"), price: checkbox.getAttribute("data-plan-price")};
                 if(plan.planId !== null && plan.deptId !== null){
                     planSet.add(plan);
                 }
@@ -278,19 +286,28 @@
             for(let p of planSet){
                 addToUniqueArray(selectedItems, p.planId);
                 addToUniqueArray(selectedDept, p.deptId);
+                addToUniqueArray(selectedPrice, p.price);
             }
-            document.getElementById("count-all-plan-mc").innerHTML = parseInt(planSet.size);
         } else {
             count = 0;
             document.querySelector('.buy-button-mc button').disabled = true;
             planSet = new Set([]);
             selectedItems = [];
             selectedDept = [];
+            selectedPrice = [];
+            total_price = 0;
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
             });
-            document.getElementById("count-all-plan-mc").innerHTML = parseInt(selectedDept.length);
         }
+
+        document.getElementById("count-all-plan-mc").innerHTML = parseInt(planSet.size);
+        console.log(JSON.stringify(selectedPrice));
+        for (var i in selectedPrice) {
+            total_price += parseFloat(selectedPrice[i]);
+        }
+        console.log(total_price);
+        document.getElementById("total-price-mc").innerHTML = total_price;
         console.log(JSON.stringify(selectedItems));
     }
 
@@ -301,7 +318,9 @@
         cbActual1.forEach(cb1 => {
             cb1.addEventListener('change', (event) =>{
                 if(!event.target.checked){
-                    let plan = {planId: cb1.getAttribute("data-product-id"), deptId: cb1.getAttribute("data-dept-id")};
+                    let plan = {planId: cb1.getAttribute("data-product-id"),
+                        deptId: cb1.getAttribute("data-dept-id"),
+                        price: checkbox.getAttribute("data-plan-price")};
                     planSet.forEach((item) => {
                         if(item.planId === plan.planId && plan.deptId === item.deptId){
                             planSet.delete(item);
@@ -309,9 +328,11 @@
                     });
                     selectedItems = [];
                     selectedDept = [];
+                    selectedPrice = [];
                     for(let p of planSet){
                         addToUniqueArray(selectedItems, p.planId);
                         addToUniqueArray(selectedDept, p.deptId);
+                        addToUniqueArray(selectedPrice, p.price);
                     }
                     let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
                     cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
@@ -322,15 +343,22 @@
                     }
                     selectedItems = [];
                     selectedDept = [];
+                    selectedPrice = [];
                     for(let p of planSet){
                         addToUniqueArray(selectedItems, p.planId);
                         addToUniqueArray(selectedDept, p.deptId);
+                        addToUniqueArray(selectedPrice, p.price);
                     }
                     if([...cbActual1].every(cb1=>cb1.checked == true)){
                         cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
 
+                for (var i in selectedPrice) {
+                    total_price += parseFloat(selectedPrice[i]);
+                }
+                console.log(total_price);
+                document.getElementById("total-price-mc").innerHTML = total_price;
                 console.log(planSet);
                 console.log(JSON.stringify(selectedItems));
                 console.log(JSON.stringify(selectedDept));
@@ -342,26 +370,37 @@
 
     function checkAllGym(myCheckAll){
         let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
+        total_price = 0;
         if(myCheckAll.checked === true){
             document.querySelector('.buy-button-mc button').disabled = false;
             own_checkboxs.forEach(function(checkbox) {
                 checkbox.checked = true;
-                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id")};
+                let plan = {planId: checkbox.getAttribute("data-product-id"),
+                    deptId: checkbox.getAttribute("data-dept-id"),
+                    price: checkbox.getAttribute("data-plan-price")};
                 if(plan.planId !== null && plan.deptId !== null){
                     for(let p of planSet){
                         if(plan.planId === p.planId && plan.deptId === p.deptId)
                             return;
                     }
                     planSet.add(plan);
-                    selectedItems.push(plan.planId);
-                    selectedDept.push(plan.deptId);
+                    selectedItems = [];
+                    selectedDept = [];
+                    selectedPrice = [];
+                    for(let p of planSet){
+                        addToUniqueArray(selectedItems, p.planId);
+                        addToUniqueArray(selectedDept, p.deptId);
+                        addToUniqueArray(selectedPrice, p.price);
+                    }
                 }
                 console.log(planSet);
             });
         } else {
             own_checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
-                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id")};
+                let plan = {planId: checkbox.getAttribute("data-product-id"),
+                    deptId: checkbox.getAttribute("data-dept-id"),
+                    price: checkbox.getAttribute("data-plan-price")};
                 planSet.forEach((item) => {
                     if(item.planId === plan.planId && plan.deptId === item.deptId){
                         planSet.delete(item);
@@ -369,17 +408,23 @@
                 });
                 selectedItems = [];
                 selectedDept = [];
+                selectedPrice = [];
                 for(let p of planSet){
                     addToUniqueArray(selectedItems, p.planId);
                     addToUniqueArray(selectedDept, p.deptId);
+                    addToUniqueArray(selectedPrice, p.price);
                 }
             });
         }
-
+        for (var i in selectedPrice) {
+            total_price += parseFloat(selectedPrice[i]);
+        }
+        console.log(total_price);
         console.log(JSON.stringify(selectedItems));
         console.log(JSON.stringify(selectedDept));
-        console.log(planSet.size);
+        console.log(JSON.stringify(selectedPrice));
         console.log(planSet);
+        document.getElementById("total-price-mc").innerHTML = total_price;
         document.getElementById("count-all-plan-mc").innerHTML = parseInt(planSet.size);
         document.querySelector('.buy-button-mc button').disabled = planSet.size <= 0;
 
