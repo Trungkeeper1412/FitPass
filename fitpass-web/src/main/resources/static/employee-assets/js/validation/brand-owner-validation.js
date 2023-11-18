@@ -34,6 +34,16 @@ $(document).ready(function () {
                 maxlength: 200,
                 pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
             },
+            packageDuration: {
+                required: true,
+                number: true,
+                min: 1,
+            },
+            pricePlan: {
+                required: true,
+                number: true,
+                min: 0.01,
+            },
         },
         messages: {
             brandName: {
@@ -68,6 +78,16 @@ $(document).ready(function () {
                 minlength: "Mô tả gói tập phải có ít nhất 2 kí tự",
                 maxlength: "Mô tả gói tập không được vượt quá 200 kí tự",
                 pattern: "Mô tả gói tập không được chứa kí tự đặc biệt",
+            },
+            packageDuration: {
+                required: "Vui lòng nhập nhập số ngày sử dụng gói tập",
+                number: "Vui lòng nhập số hợp lệ",
+                min: "Số ngày ít nhất phải bằng 1"
+            },
+            pricePlan: {
+                required: "Vui lòng nhập số credits",
+                number: "Vui lòng nhập số hợp lệ",
+                min: "Số credits phải lớn hơn 0",
             },
         },
     });
