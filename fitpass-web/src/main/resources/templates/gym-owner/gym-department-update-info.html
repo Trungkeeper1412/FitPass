@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="gym-owner/common/head"></th:block>
 
 <body id="page-top">
@@ -35,19 +35,19 @@
                                             <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                                 :</label>
                                             <input type="text" class="form-control" id="name-brand"
-                                                   name="name-brand" placeholder="Cơ sở Cầu Giấy" readonly>
+                                                   name="name-brand" th:value="${departmentDetails.getDepartmentName()}" readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="phone" class="form-label fw-bold">Số điện thoại
                                                 :</label>
                                             <input type="text" class="form-control" id="phone" name="phone"
-                                                   placeholder="Nhập số điện thoại">
+                                                   placeholder="Nhập số điện thoại"  th:value="${departmentDetails.getDepartmentContactNumber()}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label fw-bold">Địa chỉ
                                                 :</label>
                                             <input type="text" class="form-control" id="address"
-                                                   name="address" placeholder="Địa chỉ">
+                                                   name="address" placeholder="Địa chỉ" th:value="${departmentDetails.getDepartmentAddress()}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -55,16 +55,16 @@
                                             <label for="capacity" class="form-label fw-bold">Sức chứa
                                                 :</label>
                                             <input type="text" class="form-control" id="capacity"
-                                                   name="capacity" placeholder="Sức Chứa">
+                                                   name="capacity" placeholder="Sức Chứa" th:value="${departmentDetails.getCapacity()}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="area" class="form-label fw-bold">Diện tích :</label>
                                             <input type="text" class="form-control" id="area" name="area"
-                                                   placeholder="Diện tích">
+                                                   placeholder="Diện tích" th:value="${departmentDetails.getArea()}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="provinceDropdown" class="form-label fw-bold">Chọn tỉnh/thành phố:</label>
-                                            <select class="form-select" id="provinceDropdown" name="province">
+                                            <select class="form-select" id="provinceDropdown" name="province" th:value="${departmentDetails.getCity()}">
                                                 <option value="" selected disabled>Chọn tỉnh/thành phố</option>
                                                 <option value="HN">Hà Nội</option>
                                                 <option value="HCM">Hồ Chí Minh</option>
@@ -210,7 +210,7 @@
                                 <div class="col-md-12">
                                     <label for="description" class="form-label fw-bold">Mô tả :</label>
                                     <textarea style="width: 100%; padding: 10px;" rows="4" cols="50" name="comment"
-                                        form="usrform" readonly>Nhờ đáp ứng được mọi nhu cầu luyện tập theo tiêu chuẩn 5 sao với thiết kế cực kỳ sang trọng trong từng chi tiết nhỏ, phòng tập gym California Centuryon Somerset West Point đã trở thành địa điểm check-in quen thuộc của giới thượng lưu Hà Nội.
+                                        form="usrform"  th:text="${departmentDetails.getDepartmentDescription()}"> >Nhờ đáp ứng được mọi nhu cầu luyện tập theo tiêu chuẩn 5 sao với thiết kế cực kỳ sang trọng trong từng chi tiết nhỏ, phòng tập gym California Centuryon Somerset West Point đã trở thành địa điểm check-in quen thuộc của giới thượng lưu Hà Nội.
                                     </textarea>
                                 </div>
                             </div>
