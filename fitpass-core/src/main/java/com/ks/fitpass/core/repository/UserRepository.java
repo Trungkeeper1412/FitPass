@@ -31,4 +31,8 @@ public interface UserRepository {
     int updateUserStatusByUserId(int userId, int status);
 
     UserDetail getUserDetailByUserDetailId(int userId);
+
+    boolean checkEmailExist(String email);
+
+    boolean checkUsernameExist(String username);
 }
