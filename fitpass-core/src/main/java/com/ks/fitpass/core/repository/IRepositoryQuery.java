@@ -117,4 +117,12 @@ public interface IRepositoryQuery {
                 SET user_deleted = ?
                 WHERE user_id = ?;
             """;
+
+    String CHECK_EMAIL_EXIST = """
+                SELECT COUNT(*) FROM user_detail WHERE email = ?;
+            """;
+
+    String CHECK_USERNAME_EXIST = """
+                SELECT COUNT(*) FROM user WHERE user_account LIKE '%?%';
+            """;
 }
