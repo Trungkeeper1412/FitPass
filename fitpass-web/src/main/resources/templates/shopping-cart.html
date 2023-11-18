@@ -208,11 +208,22 @@
     var count = 0;
     let selectedItems = [];
     let selectedDept = [];
-    function Plan(planId, deptId) {
-        this.planId = planId;
-        this.deptId = deptId;
+    // function Plan(planId, deptId) {
+    //     this.planId = planId;
+    //     this.deptId = deptId;
+    // }
+    class Plan {
+        constructor(planId, deptId) {
+                this.planId = planId;
+                this.deptId = deptId;
+            }
+        get PlanId() {
+            return this.planId;
+        }
+        get DeptId() {
+            return this.deptId;
+        }
     }
-
     let planSet = new Set();
 
 
@@ -222,7 +233,6 @@
     let cbActual = document.getElementById("my-card").querySelectorAll('input:not([class=auto])');
     let numOfPlan = document.getElementById("my-card").getElementsByClassName("plan-checkbox");
     let cbPlanActual = document.querySelectorAll(".plan-checkbox");
-    console.log(cbPlanActual);
 
     // check all is checked when all plan checkbox is checked
     cbPlanActual.forEach(cb => {
@@ -243,18 +253,10 @@
                 count -= 1;
             } else{
                 count += 1;
-                // if(count == numOfPlan.length+1){
-                //     document.getElementById('check-all').checked = true;
-                // }
                 if([...cbActual].every(cb=>cb.checked == true))
                     document.getElementById('check-all').checked = true;
             }
-            console.log(count);
-            if(selectedItems.length > 0) {
-                document.querySelector('.buy-button-mc button').disabled = false;
-            } else {
-                document.querySelector('.buy-button-mc button').disabled = true;
-            }
+            // document.querySelector('.buy-button-mc button').disabled = selectedItems.length <= 0;
         })
     })
     function checkAll(myCheckAll){
@@ -267,31 +269,29 @@
             document.querySelector('.buy-button-mc button').disabled = false;
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = true;
-                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
-                addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
-                plan = new Plan(checkbox.getAttribute("data-product-id"), checkbox.getAttribute("data-dept-id"));
-                if(plan.planId !== null){
-                    console.log(plan);
+                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id")};
+                if(plan.planId !== null && plan.deptId !== null){
                     planSet.add(plan);
                 }
             });
-            console.log(planSet.entries());
+            console.log(planSet);
+            for(let p of planSet){
+                addToUniqueArray(selectedItems, p.planId);
+                addToUniqueArray(selectedDept, p.deptId);
+            }
             document.getElementById("count-all-plan-mc").innerHTML = parseInt(planSet.size);
         } else {
             count = 0;
             document.querySelector('.buy-button-mc button').disabled = true;
-            let valuesToRemove = [];
-            let deptIdRemove = [];
             planSet = new Set([]);
+            selectedItems = [];
+            selectedDept = [];
             checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
-                addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
-                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
-                addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
-                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
             });
             document.getElementById("count-all-plan-mc").innerHTML = parseInt(selectedDept.length);
         }
+        console.log(JSON.stringify(selectedItems));
     }
 
     // check all in each gym department
@@ -301,96 +301,123 @@
         cbActual1.forEach(cb1 => {
             cb1.addEventListener('change', (event) =>{
                 if(!event.target.checked){
-                    let plan = new Plan(cb1.getAttribute("data-product-id"), cb1.getAttribute("data-dept-id"));
-                    if(plan.planId != null){
-                        planSet.delete(JSON.stringify(plan));
+                    let plan = {planId: cb1.getAttribute("data-product-id"), deptId: cb1.getAttribute("data-dept-id")};
+                    planSet.forEach((item) => {
+                        if(item.planId === plan.planId && plan.deptId === item.deptId){
+                            planSet.delete(item);
+                        }
+                    });
+                    selectedItems = [];
+                    selectedDept = [];
+                    for(let p of planSet){
+                        addToUniqueArray(selectedItems, p.planId);
+                        addToUniqueArray(selectedDept, p.deptId);
                     }
                     let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
                     cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
                 } else{
-                    let plan = new Plan(cb1.getAttribute("data-product-id"), cb1.getAttribute("data-dept-id"));
-                    if(plan.planId != null){
-                        planSet.add(JSON.stringify(plan));
+                    let plan = {planId: cb1.getAttribute("data-product-id"), deptId: cb1.getAttribute("data-dept-id")};
+                    if(plan.planId !== null && plan.deptId !== null){
+                        planSet.add(plan);
+                    }
+                    selectedItems = [];
+                    selectedDept = [];
+                    for(let p of planSet){
+                        addToUniqueArray(selectedItems, p.planId);
+                        addToUniqueArray(selectedDept, p.deptId);
                     }
                     if([...cbActual1].every(cb1=>cb1.checked == true)){
                         cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
-                console.log(planSet.entries());
+
+                console.log(planSet);
+                console.log(JSON.stringify(selectedItems));
+                console.log(JSON.stringify(selectedDept));
+                document.querySelector('.buy-button-mc button').disabled = planSet.size <= 0;
                 document.getElementById("count-all-plan-mc").innerHTML = parseInt(planSet.size);
             })
         })
     }
+
     function checkAllGym(myCheckAll){
         let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
         if(myCheckAll.checked === true){
             document.querySelector('.buy-button-mc button').disabled = false;
-            own_checkboxs.forEach(function(checkbox){
+            own_checkboxs.forEach(function(checkbox) {
                 checkbox.checked = true;
-                addToUniqueArray(selectedItems, checkbox.getAttribute("data-product-id"));
-                addToUniqueArray(selectedDept, checkbox.getAttribute("data-dept-id"));
-                let plan = new Plan(checkbox.getAttribute("data-product-id"), checkbox.getAttribute("data-dept-id"));
-                if(plan.planId !== null){
-                    planSet.add(JSON.stringify(plan));
+                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id")};
+                if(plan.planId !== null && plan.deptId !== null){
+                    for(let p of planSet){
+                        if(plan.planId === p.planId && plan.deptId === p.deptId)
+                            return;
+                    }
+                    planSet.add(plan);
+                    selectedItems.push(plan.planId);
+                    selectedDept.push(plan.deptId);
                 }
+                console.log(planSet);
             });
         } else {
-            let valuesToRemove = [];
-            let deptIdRemove = [];
             own_checkboxs.forEach(function(checkbox){
                 checkbox.checked = false;
-                addToUniqueArray(valuesToRemove, checkbox.getAttribute("data-product-id"));
-                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
-                addToUniqueArray(deptIdRemove, checkbox.getAttribute("data-dept-id"));
-                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
-                let plan = new Plan(checkbox.getAttribute("data-product-id"), checkbox.getAttribute("data-dept-id"));
-                if(plan.planId !== null){
-                    planSet.forEach(item => { if (item.planId === plan.planId && item.deptId === plan.deptId) planSet.delete(item); });
-                    console.log(planSet.size);
+                let plan = {planId: checkbox.getAttribute("data-product-id"), deptId: checkbox.getAttribute("data-dept-id")};
+                planSet.forEach((item) => {
+                    if(item.planId === plan.planId && plan.deptId === item.deptId){
+                        planSet.delete(item);
+                    }
+                });
+                selectedItems = [];
+                selectedDept = [];
+                for(let p of planSet){
+                    addToUniqueArray(selectedItems, p.planId);
+                    addToUniqueArray(selectedDept, p.deptId);
                 }
             });
         }
-        // console.log(JSON.stringify(selectedItems));
-        // console.log(JSON.stringify(selectedDept));
-        // console.log(selectedItems.length);
-        // console.log(selectedDept.length);
+
+        console.log(JSON.stringify(selectedItems));
+        console.log(JSON.stringify(selectedDept));
         console.log(planSet.size);
+        console.log(planSet);
         document.getElementById("count-all-plan-mc").innerHTML = parseInt(planSet.size);
+        document.querySelector('.buy-button-mc button').disabled = planSet.size <= 0;
+
     }
 
 
-    function updateCartTotal(checkBox){
-        let total = document.getElementById("total-price-mc").innerHTML;
-        total_int = parseInt(total);
-        get2 = checkBox.parentElement.parentElement.getElementsByClassName("plan-price-mc");
-        price_int = parseInt(get2[0].innerHTML);
-        let quantity = checkBox.parentElement.parentElement.querySelector(".product-quantity");
-        if(checkBox.checked){
-            total_int = total_int + price_int * quantity.innerHTML;
-            document.getElementById("total-price-mc").innerHTML = total_int;
-            console.log(total_int);
-            addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
-            addToUniqueArray(selectedDept, checkBox.getAttribute("data-dept-id"));
-        }
-        else{
-            total_int = total_int - price_int * quantity.innerHTML;
-            document.getElementById("total-price-mc").innerHTML = total_int;
-            console.log(total_int);
-            let valuesToRemove = [];
-            let deptIdRemove = [];
-                addToUniqueArray(valuesToRemove, checkBox.getAttribute("data-product-id"));
-                selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
-                addToUniqueArray(deptIdRemove, checkBox.getAttribute("data-dept-id"));
-                selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
-        }
-
-
-        if(selectedItems.length > 0) {
-            document.querySelector('.buy-button-mc button').disabled = false;
-        } else {
-            document.querySelector('.buy-button-mc button').disabled = true;
-        }
-    }
+    // function updateCartTotal(checkBox){
+    //     let total = document.getElementById("total-price-mc").innerHTML;
+    //     total_int = parseInt(total);
+    //     get2 = checkBox.parentElement.parentElement.getElementsByClassName("plan-price-mc");
+    //     price_int = parseInt(get2[0].innerHTML);
+    //     let quantity = checkBox.parentElement.parentElement.querySelector(".product-quantity");
+    //     if(checkBox.checked){
+    //         total_int = total_int + price_int * quantity.innerHTML;
+    //         document.getElementById("total-price-mc").innerHTML = total_int;
+    //         console.log(total_int);
+    //         addToUniqueArray(selectedItems, checkBox.getAttribute("data-product-id"));
+    //         addToUniqueArray(selectedDept, checkBox.getAttribute("data-dept-id"));
+    //     }
+    //     else{
+    //         total_int = total_int - price_int * quantity.innerHTML;
+    //         document.getElementById("total-price-mc").innerHTML = total_int;
+    //         console.log(total_int);
+    //         let valuesToRemove = [];
+    //         let deptIdRemove = [];
+    //             addToUniqueArray(valuesToRemove, checkBox.getAttribute("data-product-id"));
+    //             selectedItems = selectedItems.filter(item =>  !valuesToRemove.includes(item));
+    //             addToUniqueArray(deptIdRemove, checkBox.getAttribute("data-dept-id"));
+    //             selectedDept = selectedDept.filter(item =>  !deptIdRemove.includes(item));
+    //     }
+    //
+    //
+    //     if(selectedItems.length > 0) {
+    //         document.querySelector('.buy-button-mc button').disabled = false;
+    //     } else {
+    //         document.querySelector('.buy-button-mc button').disabled = true;
+    //     }
+    // }
 
     function checkout() {
         const url = `/checkout/view?idList=${selectedItems.join(',')}&deptIdList=${selectedDept.join(',')}`;
