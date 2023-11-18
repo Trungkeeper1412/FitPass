@@ -12389,14 +12389,6 @@ form.user .btn-user {
     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .5)
 }
 
-.error {
-    color: #5a5c69;
-    font-size: 7rem;
-    position: relative;
-    line-height: 1;
-    width: 12.5rem
-}
-
 @-webkit-keyframes noise-anim {
     0% {
         clip: rect(49px, 9999px, 40px, 0)
@@ -13648,4 +13640,11 @@ tr td i {
 
 .modal-title-container {
     flex: 1; /* Take remaining space */
+}
+
+label.error {
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+    display: block;
 }
