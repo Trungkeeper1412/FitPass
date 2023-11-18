@@ -15,18 +15,24 @@ $(document).ready(function () {
             },
             pricePerHours: {
                 required: true,
-                number: true
+                number: true,
+                min: 0.01,
             },
             planBeforeActive: {
                 required: true,
-                number: true
+                number: true,
+                min: 0.01,
             },
             planAfterActive: {
                 required: true,
-                number: true
+                number: true,
+                min: 0.01,
             },
             description: {
-                required: true
+                required: true,
+                minlength: 2,
+                maxlength: 200,
+                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
             },
         },
         messages: {
@@ -43,19 +49,25 @@ $(document).ready(function () {
                 pattern: "Tên gói tập không được chứa kí tự đặc biệt",
             },
             pricePerHours: {
-                required: "Số credits/giờ là trường bắt buộc",
-                number: "Vui lòng nhập số hợp lệ"
+                required: "Vui lòng nhập số credits",
+                number: "Vui lòng nhập số hợp lệ",
+                min: "Số credits/giờ phải lớn hơn 0",
             },
             planBeforeActive: {
-                required: "Thời hạn trước khi kích hoạt là trường bắt buộc",
-                number: "Vui lòng nhập số hợp lệ"
+                required: "Vui lòng nhập nhập số ngày trước khi kích hoạt",
+                number: "Vui lòng nhập số hợp lệ",
+                min: "Số ngày phải lớn hơn 0"
             },
             planAfterActive: {
-                required: "Thời hạn sau khi kích hoạt là trường bắt buộc",
-                number: "Vui lòng nhập số hợp lệ"
+                required: "Vui lòng nhập nhập số ngày sau khi kích hoạt",
+                number: "Vui lòng nhập số hợp lệ",
+                min: "Số ngày phải lớn hơn 0"
             },
             description: {
-                required: "Mô tả gói tập là trường bắt buộc"
+                required: "Vui lòng nhập nhập mô tả gói tập",
+                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự",
+                maxlength: "Mô tả gói tập không được vượt quá 200 kí tự",
+                pattern: "Mô tả gói tập không được chứa kí tự đặc biệt",
             },
         },
     });
