@@ -37,7 +37,7 @@
                                             <th>Tên cơ sở</th>
                                             <th>Ảnh cơ sở</th>
                                             <th>Sao đánh giá</th>
-<!--                                            <th>Lượt đánh giá</th>-->
+                                            <th>Lượt đánh giá</th>
                                             <th>Chi tiết</th>
                                         </tr>
                                     </thead>
@@ -48,7 +48,7 @@
                                                 <td th:text="${d.getDepartmentName()}">Cơ sở Cầu Giấy</td>
                                                 <td><img th:src="${d.getDepartmentWallpaperUrl()}" alt=""></td>
                                                 <td><i data-star="3" th:attr="data-star=${d.getRating()}"></i></td>
-<!--                                                <td th:text="${d.getTotal()}">5643</td>-->
+                                                <td th:text="${d.getFeedbackCount()}">5643</td>
                                                 <td><a th:href="@{/brand-owner/feedback/details(id=${d.getDepartmentId()})}" class="btn btn-primary">Chi tiết đánh giá</a></td>
                                             </tr>
                                         </th:block>
