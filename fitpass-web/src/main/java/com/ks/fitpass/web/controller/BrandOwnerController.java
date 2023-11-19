@@ -372,7 +372,7 @@ public class BrandOwnerController {
         // Get number of account gym-owner by brand id
         int numberOfAccountCreated = userService.getNumberOfAccountCreatedByBrandId(brandId);
         // Create userName
-        String accountName = "fp_" + brandName + "_" + ++numberOfAccountCreated + "_" + gymOwnerCreateDTO.getUsername();
+        String accountName = "fp_" + brandName.replaceAll("\\s+", "") + "_" + ++numberOfAccountCreated + "_" + gymOwnerCreateDTO.getUsername();
         // Create password random
         String randomPassword = WebUtil.generateRandomPassword();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
