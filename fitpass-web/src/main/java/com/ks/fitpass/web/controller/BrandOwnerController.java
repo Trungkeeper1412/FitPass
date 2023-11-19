@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.brand.dto.GymOwnerUpdateDTO;
 import com.ks.fitpass.brand.dto.ServiceCreateDTO;
 import com.ks.fitpass.brand.dto.ServiceUpdateDTO;
 import com.ks.fitpass.brand.entity.Brand;
@@ -9,6 +10,7 @@ import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.dto.*;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/brand-owner")
@@ -249,6 +252,42 @@ public class BrandOwnerController {
         model.addAttribute("gymOwnerList", gymOwnerList);
 
         return "brand-owner/gym-brand-owner-list";
+    }
+
+    @GetMapping("/gym-owner/details")
+    public String getGymOwnerDetails(@RequestParam("id1") int userId, @RequestParam("id2") int userDetailId,
+                                     Model model, HttpSession session) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        List<DepartmentListByBrandDTO> departmentList = departmentService.getAllDepartmentListOfBrand(brandId);
+
+
+        UserDetail ud = userService.getUserDetailByUserDetailId(userDetailId);
+
+        List<DepartmentListByBrandDTO> filteredList = departmentList.stream()
+                .filter(dto -> dto.getUserName() == null || dto.getDepartmentId() == ud.getGymDepartmentId())
+                .collect(Collectors.toList());
+
+        GymOwnerUpdateDTO gymOwnerUpdateDTO = new GymOwnerUpdateDTO();
+        gymOwnerUpdateDTO.setUserDetailId(ud.getUserDetailId());
+        gymOwnerUpdateDTO.setFirstName(ud.getFirstName());
+        gymOwnerUpdateDTO.setLastName(ud.getLastName());
+        gymOwnerUpdateDTO.setEmail(ud.getEmail());
+        gymOwnerUpdateDTO.setPhone(ud.getPhoneNumber());
+        gymOwnerUpdateDTO.setAddress(ud.getAddress());
+        gymOwnerUpdateDTO.setDateOfBirth(ud.getDateOfBirth());
+        gymOwnerUpdateDTO.setGender(ud.getGender());
+        gymOwnerUpdateDTO.setImageUrl(ud.getImageUrl());
+        gymOwnerUpdateDTO.setUserDeleted(ud.isUserDeleted());
+        gymOwnerUpdateDTO.setDepartmentId(ud.getGymDepartmentId());
+        gymOwnerUpdateDTO.setOldDepartmentId(ud.getGymDepartmentId());
+        gymOwnerUpdateDTO.setUserId(userId);
+
+        model.addAttribute("gymOwner", gymOwnerUpdateDTO);
+        model.addAttribute("filteredList", filteredList);
+        return "brand-owner/gym-brand-owner-detail";
     }
 
 }
