@@ -214,6 +214,23 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-service-add";
     }
 
-   
+    @PostMapping("/service/add")
+    public String createService(@Valid @ModelAttribute("createService") ServiceCreateDTO serviceCreateDTO, BindingResult bindingResult, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-service-add"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
 
+        BrandAmenitie brandAmenitie = new BrandAmenitie();
+        brandAmenitie.setBrandId(brandId);
+        brandAmenitie.setAmenitieName(serviceCreateDTO.getAmenitieName());
+        brandAmenitie.setPhotoUrl(serviceCreateDTO.getPhotoUrl());
+        brandAmenitie.setDescription(serviceCreateDTO.getDescription());
+        brandAmenitie.setStatus(1);
+        brandAmenitieService.createBrandAmenitie(brandAmenitie);
+        return "redirect:/brand-owner/service/list";
+    }
 }
