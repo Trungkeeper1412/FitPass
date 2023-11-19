@@ -16,6 +16,10 @@ import com.ks.fitpass.department.entity.DepartmentAlbums;
 import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
 import com.ks.fitpass.department.service.*;
+import com.ks.fitpass.gymplan.dto.BrandGymPlanFixedDTO;
+import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
+import com.ks.fitpass.gymplan.dto.BrandUpdateGymPlanFixedDTO;
+import com.ks.fitpass.gymplan.dto.BrandUpdateGymPlanFlexDTO;
 import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.enums.PageEnum;
@@ -341,7 +345,7 @@ public class BrandOwnerController {
     public String addGymOwner(@ModelAttribute("gymOwner")GymOwnerCreateDTO gymOwnerCreateDTO) {
         return "brand-owner/gym-brand-owner-add";
     }
-    
+
     @PostMapping("/gym-owner/add")
     public String createGymOwner(@Valid @ModelAttribute("gymOwner") GymOwnerCreateDTO gymOwnerCreateDTO,
                                  BindingResult bindingResult, HttpSession session) {
@@ -405,5 +409,48 @@ public class BrandOwnerController {
         emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
                 userDetail.getEmail());
         return "redirect:/brand-owner/gym-owner/list";
+    }
+
+    //Gym Plans Management
+    //Flexible Plans
+    @GetMapping("/gym-plans/flexible/list")
+    public String getListOfFlexibleGymPlans(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        // Get List Of flexible gym plan by brand id
+        List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandId(brandId);
+        // Send to front
+        model.addAttribute("listFlexGymPlan", listFlexGymPlan);
+        return "brand-owner/gym-brand-plan-flexible-list";
+    }
+
+    @GetMapping("/gym-plans/flexible/details")
+    public String getFlexibleGymPlanDetails(@RequestParam("id") int gymPlanId, Model model) {
+        BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO = gymPlanService.getGymPlanFlexDetail(gymPlanId);
+        model.addAttribute("b", brandUpdateGymPlanFlexDTO);
+        return "brand-owner/gym-brand-plan-flexible-detail";
+    }
+
+    //Fixed Plans
+    @GetMapping("/gym-plans/fixed/list")
+    public String getListOfFixedGymPlans(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        // Get List Of flexible gym plan by brand id
+        List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandId(brandId);
+        // Send to front
+        model.addAttribute("listFixedGymPlan", listFixedGymPlan);
+        return "brand-owner/gym-brand-plan-fixed-list";
+    }
+
+    @GetMapping("/gym-plans/fixed/details")
+    public String getFixedGymPlanDetails(@RequestParam("id") int gymPlanId, Model model) {
+        BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO = gymPlanService.getGymPlanFixedDetail(gymPlanId);
+        model.addAttribute("b", brandUpdateGymPlanFixedDTO);
+        return "brand-owner/gym-brand-plan-fixed-detail";
     }
 }
