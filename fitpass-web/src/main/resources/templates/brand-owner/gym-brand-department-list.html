@@ -53,7 +53,7 @@
                                                 <td th:text="${d.getUserName()}">Lê Đình Tuấn</td>
                                                 <td><img th:src="${d.getDepartmentThumbnailUrl()}" alt="Thumbnail 1"></td>
                                                 <td th:text="${d.getDepartmentContactNumber()}">0987654321</td>
-                                                <td><select class="form-select set-active" th:onchange="'updateStatus(\'' + ${d.getDepartmentId()} + '\', this.value)'"
+                                                <td><select class="form-select set-active" th:onchange="'updateStatus(\'' + ${d.getDepartmentId()} + '\', this.value, this)'"
                                                             name="set-active">
                                                     <option value="active" th:selected="${d.getDepartmentStatus().getDepartmentStatusCd() == 1}">Hoạt động</option>
                                                     <option value="deactive" th:selected="${d.getDepartmentStatus().getDepartmentStatusCd() != 1}">Không hoạt động</option>
@@ -90,7 +90,7 @@
 
     <th:block th:replace="brand-owner/common/script"></th:block>
     <script>
-        function updateStatus(departmentId, status) {
+        function updateStatus(departmentId, status, select) {
             Swal.fire({
                 title: 'Bạn có muốn thay đổi trạng thái hoạt động cơ sở mới không?',
                 icon: 'question',
@@ -120,7 +120,12 @@
                     });
 
                 } else {
-
+                    if(status === "active") {
+                        console.log(select)
+                        select.value = "deactive";
+                    } else {
+                        select.value = "active";
+                    }
                 }
             });
         }
