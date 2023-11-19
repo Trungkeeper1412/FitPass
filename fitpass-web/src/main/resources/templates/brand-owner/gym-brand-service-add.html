@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -31,25 +31,28 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                <form action="/brand-owner/service/add" method="post">
+                                <form action="/brand-owner/service/add" method="post" th:object="${createService}">
                                     <div class="row">
                                         <div class="col-md-1 mb-3">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
-                                            <img class="show-service-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
+                                            <img class="show-service-img" src="" alt="Chưa chọn hình ảnh">
                                             <input type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
-                                            <input id="photoUrl" type="hidden" name="photoUrl">
+                                            <input th:field="*{photoUrl}" id="photoUrl" type="hidden" name="photoUrl">
+                                            <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
                                         </div>
                                         <div class="col-md-7 mb-3">
                                             <div class="mb-3">
                                                 <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
-                                                <input name="amenitieName" type="text" class="form-control" id="name-service"
+                                                <input th:field="*{amenitieName}" name="amenitieName" type="text" class="form-control" id="name-service"
                                                     placeholder="Hệ thống tủ khóa">
+                                                <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
-                                                <textarea name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
+                                                <textarea th:field="*{description}" name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
+                                                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">photoUrl Error</span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
