@@ -433,6 +433,17 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-plan-flexible-detail";
     }
 
+    @PostMapping("/gym-plans/flexible/update")
+    public String updateFlexibleGymPlanDetails(@Valid @ModelAttribute("b") BrandUpdateGymPlanFlexDTO brandDetails,
+                                               BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-flexible-detail";
+        }
+
+        gymPlanService.updateGymPlanFlex(brandDetails);
+        return "redirect:/brand-owner/gym-plans/flexible/list";
+    }
+
     //Fixed Plans
     @GetMapping("/gym-plans/fixed/list")
     public String getListOfFixedGymPlans(HttpSession session, Model model) {
