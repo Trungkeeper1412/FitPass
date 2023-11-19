@@ -2,6 +2,8 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
+import com.ks.fitpass.brand.entity.BrandAmenitie;
+import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
@@ -34,7 +36,9 @@ public class BrandOwnerController {
     private final DepartmentScheduleService departmentScheduleService;
     private final DepartmentAlbumsService departmentAlbumsService;
     private final DepartmentAmenitieService departmentAmenitieService;
-    private  final DepartmentFeatureService departmentFeatureService;
+    private final DepartmentFeatureService departmentFeatureService;
+    private final BrandAmenitieService brandAmenitieService;
+
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
@@ -160,5 +164,18 @@ public class BrandOwnerController {
         List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentId);
         model.addAttribute("userFeedbackList", userFeedbackList);
         return "brand-owner/gym-brand-feedback-list-detail";
+    }
+
+    //Service Management
+    @GetMapping("/service/list")
+    public String getListOfService(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        // Get all list service
+        List<BrandAmenitie> brandAmenitieList = brandAmenitieService.getAllByBrandID(brandId);
+        model.addAttribute("brandAmenitiesList", brandAmenitieList);
+        return "brand-owner/gym-brand-service-list";
     }
 }
