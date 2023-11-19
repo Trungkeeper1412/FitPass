@@ -7,8 +7,10 @@ import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
+import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentAlbums;
@@ -34,6 +36,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BrandOwnerController {
     private final UserRepository userRepository;
+    private final UserService userService;
     private final BrandService brandService;
     private final DepartmentService departmentService;
     private final GymPlanService gymPlanService;
@@ -233,4 +236,19 @@ public class BrandOwnerController {
         brandAmenitieService.createBrandAmenitie(brandAmenitie);
         return "redirect:/brand-owner/service/list";
     }
+
+    //Gym Owner Management
+    @GetMapping("/gym-owner/list")
+    public String getListOfGymOwner(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+
+        List<GymOwnerListDTO> gymOwnerList = userService.getAllAccountByBrandId(brandId);
+        model.addAttribute("gymOwnerList", gymOwnerList);
+
+        return "brand-owner/gym-brand-owner-list";
+    }
+
 }
