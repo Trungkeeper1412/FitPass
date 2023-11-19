@@ -290,4 +290,49 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-owner-detail";
     }
 
+    @PostMapping("/gym-owner/update")
+    public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner")GymOwnerUpdateDTO gymOwnerUpdateDTO,
+                                        BindingResult bindingResult) {
+        if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
+            bindingResult.rejectValue("email", "error.email", "Email already exist");
+        }
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-owner-detail";
+        }
+        UserDetail userDetail = new UserDetail();
+        userDetail.setUserDetailId(gymOwnerUpdateDTO.getUserDetailId());
+        userDetail.setFirstName(gymOwnerUpdateDTO.getFirstName());
+        userDetail.setLastName(gymOwnerUpdateDTO.getLastName());
+        userDetail.setEmail(gymOwnerUpdateDTO.getEmail());
+        userDetail.setDateOfBirth(gymOwnerUpdateDTO.getDateOfBirth());
+        userDetail.setAddress(gymOwnerUpdateDTO.getAddress());
+        userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
+        userDetail.setGender(gymOwnerUpdateDTO.getGender());
+        userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
+        // Update user detail
+        userService.updateUserDetail(userDetail);
+
+        userService.updateUserStatusByUserId(gymOwnerUpdateDTO.getUserId(), gymOwnerUpdateDTO.isUserDeleted() ? 1 : 0);
+        if(gymOwnerUpdateDTO.getDepartmentId() == -1 ) {
+            if(gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
+                departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
+            }
+            return "redirect:/brand-owner/gym-owner/list";
+        }
+        // Nếu trạng thái là 0 thì đá khỏi cơ sở
+        if(gymOwnerUpdateDTO.isUserDeleted() && gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
+            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
+        }
+
+        // Update user department
+        if(gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
+        }
+        if(gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
+        }
+        return "redirect:/brand-owner/gym-owner/list";
+    }
+
+    
 }
