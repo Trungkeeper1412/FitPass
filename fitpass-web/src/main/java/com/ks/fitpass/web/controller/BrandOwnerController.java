@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.brand.dto.ServiceUpdateDTO;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
@@ -16,10 +17,12 @@ import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.web.enums.PageEnum;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -184,5 +187,24 @@ public class BrandOwnerController {
         BrandAmenitie brandAmenitie = brandAmenitieService.getAmenitieDetail(id);
         model.addAttribute("brandAmenitie", brandAmenitie);
         return "brand-owner/gym-brand-service-detail";
+    }
+
+    @PostMapping("/service/update")
+    public String updateServiceDetails(@Valid @ModelAttribute("brandAmenitie") ServiceUpdateDTO serviceUpdateDTO,
+                                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-service-detail"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+
+        BrandAmenitie brandAmenitie = new BrandAmenitie();
+        brandAmenitie.setPhotoUrl(serviceUpdateDTO.getPhotoUrl());
+        brandAmenitie.setAmenitieName(serviceUpdateDTO.getAmenitieName());
+        brandAmenitie.setDescription(serviceUpdateDTO.getDescription());
+        brandAmenitie.setStatus(serviceUpdateDTO.getStatus() ? 1 : 0);
+        brandAmenitie.setAmenitieId(serviceUpdateDTO.getAmenitieId());
+
+        // Thực hiện cập nhật dịch vụ trong CSDL
+        brandAmenitieService.updateBrandAmenitie(brandAmenitie);
+        return "redirect:/brand-owner/service/list";
     }
 }
