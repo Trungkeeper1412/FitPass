@@ -464,4 +464,15 @@ public class BrandOwnerController {
         model.addAttribute("b", brandUpdateGymPlanFixedDTO);
         return "brand-owner/gym-brand-plan-fixed-detail";
     }
+
+    @PostMapping("/gym-plans/fixed/update")
+    public String updateFixedGymPlanDetails(@Valid @ModelAttribute("b") BrandUpdateGymPlanFixedDTO brandDetails,
+                                            BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-fixed-detail";
+        }
+
+        gymPlanService.updateGymPlanFixed(brandDetails);
+        return "redirect:/brand-owner/gym-plans/fixed/list";
+    }
 }
