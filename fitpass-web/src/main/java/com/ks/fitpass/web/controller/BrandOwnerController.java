@@ -117,4 +117,22 @@ public class BrandOwnerController {
         model.addAttribute("departmentId", departmentId);
         return "brand-owner/gym-brand-department-detail";
     }
+
+    @GetMapping("/department/add")
+    public String addDepartment(@RequestParam("id") int brandId, Model model) {
+        model.addAttribute("brandId", brandId);
+        return "brand-owner/gym-brand-department-add";
+    }
+    @PostMapping("/department/add")
+    public String createDepartment(@RequestParam int brandId,
+                                   @RequestParam String brandName,
+                                   Model model) {
+        if (brandName == null || brandName.isEmpty()) {
+            String errorMessage = "Brand Name can't be empty";
+            model.addAttribute("errorMessage", errorMessage);
+            return "brand-owner/gym-brand-department-add";
+        }
+        departmentService.createDepartmentWithBrandId(brandId, brandName);
+        return "redirect:/brand-owner/department/list?id=" + brandId;
+    }
 }
