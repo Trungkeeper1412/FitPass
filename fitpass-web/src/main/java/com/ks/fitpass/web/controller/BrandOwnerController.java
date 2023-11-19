@@ -1,9 +1,6 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.brand.dto.BrandOwnerProfile;
-import com.ks.fitpass.brand.dto.GymOwnerUpdateDTO;
-import com.ks.fitpass.brand.dto.ServiceCreateDTO;
-import com.ks.fitpass.brand.dto.ServiceUpdateDTO;
+import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
@@ -20,11 +17,15 @@ import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
 import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
+import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.enums.PageEnum;
+import com.ks.fitpass.web.util.Email;
+import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +41,8 @@ import java.util.stream.Collectors;
 public class BrandOwnerController {
     private final UserRepository userRepository;
     private final UserService userService;
+    private final WalletService walletService;
+    private final Email emailService;
     private final BrandService brandService;
     private final DepartmentService departmentService;
     private final GymPlanService gymPlanService;
@@ -334,5 +337,73 @@ public class BrandOwnerController {
         return "redirect:/brand-owner/gym-owner/list";
     }
 
+    @GetMapping("/gym-owner/add")
+    public String addGymOwner(@ModelAttribute("gymOwner")GymOwnerCreateDTO gymOwnerCreateDTO) {
+        return "brand-owner/gym-brand-owner-add";
+    }
     
+    @PostMapping("/gym-owner/add")
+    public String createGymOwner(@Valid @ModelAttribute("gymOwner") GymOwnerCreateDTO gymOwnerCreateDTO,
+                                 BindingResult bindingResult, HttpSession session) {
+        if(userService.checkEmailExist(gymOwnerCreateDTO.getEmail())) {
+            bindingResult.rejectValue("email", "error.email", "Email already exist");
+        }
+
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-owner-add";
+        }
+        User user = (User) session.getAttribute("userInfo");
+        UserDetail userDetail = new UserDetail();
+        userDetail.setFirstName(gymOwnerCreateDTO.getFirstName());
+        userDetail.setLastName(gymOwnerCreateDTO.getLastName());
+        userDetail.setEmail(gymOwnerCreateDTO.getEmail());
+        userDetail.setPhoneNumber(gymOwnerCreateDTO.getPhone());
+        userDetail.setAddress(gymOwnerCreateDTO.getAddress());
+        userDetail.setDateOfBirth(gymOwnerCreateDTO.getDateOfBirth());
+        userDetail.setImageUrl(gymOwnerCreateDTO.getImageUrl());
+        userDetail.setGender(gymOwnerCreateDTO.getGender());
+
+        // Insert into User Detail
+        userService.insertIntoUserDetail(userDetail);
+        // Get last insert user detail id
+        int userDetailId = userService.getLastInsertUserDetailId(userDetail);
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        // Get number of account gym-owner by brand id
+        int numberOfAccountCreated = userService.getNumberOfAccountCreatedByBrandId(brandId);
+        // Create userName
+        String accountName = "fp_" + brandId + "_" + ++numberOfAccountCreated + "_" + gymOwnerCreateDTO.getUsername();
+        // Create password random
+        String randomPassword = WebUtil.generateRandomPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(randomPassword);
+        // Create user create time
+        Long userCreateTimeLong = System.currentTimeMillis();
+        String createTime = userCreateTimeLong.toString();
+        // Create user_deleted = 0;
+        boolean userDelete = false;
+        // Create new User
+        User newUser = new User();
+        newUser.setUserAccount(accountName);
+        newUser.setUserCreateTime(userCreateTimeLong);
+        newUser.setUserPassword(hashedPassword);
+        newUser.setUserDeleted(userDelete);
+        newUser.setUserDetailId(userDetailId);
+        newUser.setCreatedBy(user.getUserId());
+        // Insert into User
+        userService.insertIntoUser(newUser);
+        // Get last user insert id
+        int userInsertId = userService.getLastUserInsertId(newUser);
+        // Insert into user_role
+        userService.insertIntoUserRole(userInsertId, 2);
+        // Insert into wallet
+        walletService.insertWallet(userInsertId, 0);
+
+        // Send email to user email
+        // Todo: trang tri trang html
+        emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
+                userDetail.getEmail());
+        return "redirect:/brand-owner/gym-owner/list";
+    }
 }
