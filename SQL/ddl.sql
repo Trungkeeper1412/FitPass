@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS user_detail (
                                            address       VARCHAR(255) NOT NULL,
                                            date_of_birth DATE NOT NULL,
                                            gender        VARCHAR(10) NOT NULL,
+                                           securityId   int null,
                                            image_url TEXT NULL
 
 );
