@@ -5,10 +5,7 @@ import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
-import com.ks.fitpass.department.dto.DepartmentAmenitie;
-import com.ks.fitpass.department.dto.DepartmentDTO;
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.GymPlanDto;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentAlbums;
 import com.ks.fitpass.department.entity.DepartmentFeature;
@@ -140,5 +137,18 @@ public class BrandOwnerController {
         }
         departmentService.createDepartmentWithBrandId(brandId, brandName);
         return "redirect:/brand-owner/department/list?id=" + brandId;
+    }
+
+    //Feedback Management
+    @GetMapping("/feedback/list")
+    public String getListOfDepartmentFeedback(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        List<ListBrandDepartmentFeedback> departments = departmentService.getDepartmentFeedbackOfBrandOwner(brandId);
+
+        model.addAttribute("listDepartment", departments);
+        return "brand-owner/gym-brand-feedback-list";
     }
 }
