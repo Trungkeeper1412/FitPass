@@ -3718,6 +3718,9 @@ section {
   justify-content: center;
   color: white;
 }
+.plan-info-mc div{
+  text-align: start;
+}
 .plan-info-mc h4{
   font-weight: 600;
   border-radius: 10px;
