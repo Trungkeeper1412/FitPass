@@ -178,4 +178,11 @@ public class BrandOwnerController {
         model.addAttribute("brandAmenitiesList", brandAmenitieList);
         return "brand-owner/gym-brand-service-list";
     }
+
+    @GetMapping("/service/details")
+    public String getServiceDetails(@RequestParam("id") int id, Model model) {
+        BrandAmenitie brandAmenitie = brandAmenitieService.getAmenitieDetail(id);
+        model.addAttribute("brandAmenitie", brandAmenitie);
+        return "brand-owner/gym-brand-service-detail";
+    }
 }
