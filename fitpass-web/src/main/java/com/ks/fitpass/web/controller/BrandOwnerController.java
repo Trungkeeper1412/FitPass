@@ -368,10 +368,11 @@ public class BrandOwnerController {
         // Get brandId by brandOwnerId
         Brand brand = brandService.getBrandDetail(user.getUserId());
         int brandId = brand.getBrandId();
+        String brandName = brand.getBrandName();
         // Get number of account gym-owner by brand id
         int numberOfAccountCreated = userService.getNumberOfAccountCreatedByBrandId(brandId);
         // Create userName
-        String accountName = "fp_" + brandId + "_" + ++numberOfAccountCreated + "_" + gymOwnerCreateDTO.getUsername();
+        String accountName = "fp_" + brandName + "_" + ++numberOfAccountCreated + "_" + gymOwnerCreateDTO.getUsername();
         // Create password random
         String randomPassword = WebUtil.generateRandomPassword();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -514,5 +515,10 @@ public class BrandOwnerController {
         brandCreateGymPlanFixedDTO.setStatus(1);
         gymPlanService.createGymPlanFixed(brandCreateGymPlanFixedDTO);
         return "redirect:/brand-owner/gym-plans/fixed/list";
+    }
+
+    @GetMapping("/withdrawal/list")
+    public String getWithdrawal(){
+        return "brand-owner/gym-brand-withdrawal-list";
     }
 }
