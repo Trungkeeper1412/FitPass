@@ -26,12 +26,62 @@
                         <i class="bi bi-cart3 fs-4"></i>
                     </a>
                 </li>
-                <li>
+                <li class="dropdown">
                     <a class="nav-link" href="#notification" id="notification-btn">
                         <span class="notification-badge" id="notification-badge">0</span>
-                        <i class="bi bi-bell fs-4"></i>
+                        <i class="bi bi-bell fs-4 dropbtn"></i>
                     </a>
+                    <ul>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="view-all-noti"><button>Xem tất cả</button></li>
+                    </ul>
                 </li>
+<!--                <li class="dropdown dropdown-noti">-->
+<!--                    <a class="nav-link" href="#notification" id="notification-btn">-->
+<!--                        <span class="notification-badge" id="notification-badge">0</span>-->
+<!--                        <i class="bi bi-bell fs-4 dropbtn" onclick="openNotifications()"></i>-->
+<!--                    </a>-->
+<!--                    <div id="myDropdown" class="dropdown-content">-->
+<!--                        <a href="#home">Home</a>-->
+<!--                        <a href="#about">About</a>-->
+<!--                        <a href="#contact">Contact</a>-->
+<!--                    </div>-->
+<!--                </li>-->
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -49,3 +99,24 @@
     </div>
 
 </header>
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function openNotifications() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

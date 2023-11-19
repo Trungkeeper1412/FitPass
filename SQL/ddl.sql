@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS user_detail (
                                            address       VARCHAR(255) NOT NULL,
                                            date_of_birth DATE NOT NULL,
                                            gender        VARCHAR(10) NOT NULL,
+                                           securityId   varchar(12) null,
                                            image_url TEXT NULL
 
 );
@@ -162,14 +163,14 @@ CREATE TABLE IF NOT EXISTS mst_kbn (
 CREATE TABLE IF NOT EXISTS gym_plan (
                                         plan_id        INT AUTO_INCREMENT PRIMARY KEY,
                                         brand_id         INT NOT NULL,
-                                        gym_plan_key   INT NOT NULL,
+                                        gym_plan_key   INT,
                                         gym_plan_status_key    INT NOT NULL,
                                         gym_plan_type_key  INT NOT NULL,
                                         name           VARCHAR(255) NOT NULL,
                                         description    text,
                                         price          DECIMAL(10, 2) ,
                                         price_per_hours         DECIMAL(10, 2) ,
-                                        plan_sold      INT NOT NULL,
+                                        plan_sold      INT,
                                         duration       INT ,
                                         plan_before_active_validity       INT NOT NULL,
                                         plan_after_active_validity        INT NOT NULL,

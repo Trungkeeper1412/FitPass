@@ -38,10 +38,12 @@
                                                     <input type="hidden" name="brandId" th:value="${brandId}"/>
                                                     <input type="text" class="form-control" id="name-brand"
                                                            name="brandName" placeholder="Tên cơ sở">
+                                                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                                                        <span th:text="${errorMessage}"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
-
                                         <div class="col-md-12 text-center">
                                             <input class="btn btn-submit" type="submit" value="Thêm mới"
                                                    id="createNewDepartment">

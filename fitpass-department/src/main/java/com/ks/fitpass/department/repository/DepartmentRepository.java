@@ -2,6 +2,7 @@ package com.ks.fitpass.department.repository;
 
 
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -42,4 +43,6 @@ public interface DepartmentRepository {
     int updateDepartmentGymOwner(int departmentId, int userId);
 
     List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
+
+    List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId);
 }

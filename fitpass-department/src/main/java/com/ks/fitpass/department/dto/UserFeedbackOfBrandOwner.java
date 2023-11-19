@@ -30,4 +30,5 @@ public class UserFeedbackOfBrandOwner {
 
     private String email;
     private String phoneNumber;
+    private String gymPlanName;
 }

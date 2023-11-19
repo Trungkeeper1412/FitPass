@@ -1,6 +1,7 @@
 package com.ks.fitpass.department.repository.impl;
 
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
@@ -286,9 +287,21 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
             dto.setFeedbackStatus(rs.getInt("feedback_status"));
             dto.setEmail(rs.getString("email"));
             dto.setPhoneNumber(rs.getString("phone_number"));
+            dto.setGymPlanName(rs.getString("name"));
             return dto;
         },departmentId);
     }
 
-
+    @Override
+    public List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_ALL_DEPARTMENT_FEEDBACK_OF_BRAND_OWNER, (rs, rowNum) -> {
+            ListBrandDepartmentFeedback listBrandDepartmentFeedback = new ListBrandDepartmentFeedback();
+            listBrandDepartmentFeedback.setDepartmentId(rs.getInt("gym_department_id"));
+            listBrandDepartmentFeedback.setDepartmentName(rs.getString("name"));
+            listBrandDepartmentFeedback.setDepartmentWallpaperUrl(rs.getString("wallpaper_url"));
+            listBrandDepartmentFeedback.setRating(rs.getDouble("rating"));
+            listBrandDepartmentFeedback.setFeedbackCount(rs.getInt("feedback_count"));
+            return listBrandDepartmentFeedback;
+        }, 1, brandId);
+    }
 }

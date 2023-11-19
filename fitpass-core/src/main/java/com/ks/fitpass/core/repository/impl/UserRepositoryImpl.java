@@ -132,4 +132,16 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
             return  userDetail;
         }, userId);
     }
+
+    @Override
+    public boolean checkEmailExist(String email) {
+        int count = jdbcTemplate.queryForObject(CHECK_EMAIL_EXIST, Integer.class, email);
+        return count > 0;
+    }
+
+    @Override
+    public boolean checkUsernameExist(String username) {
+        int count = jdbcTemplate.queryForObject(CHECK_USERNAME_EXIST, Integer.class, username);
+        return count > 0;
+    }
 }

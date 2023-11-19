@@ -2,6 +2,7 @@ package com.ks.fitpass.department.service.impl;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
@@ -226,6 +227,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId) {
         return departmentRepository.getAllDepartmentFeedbackOfBrandOwner(departmentId);
+    }
+
+    @Override
+    public List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId) {
+        return departmentRepository.getDepartmentFeedbackOfBrandOwner(brandId);
     }
 }
 

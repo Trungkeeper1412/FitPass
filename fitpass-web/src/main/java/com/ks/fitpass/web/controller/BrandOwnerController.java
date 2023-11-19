@@ -1,6 +1,6 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
@@ -10,29 +10,26 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
-import com.ks.fitpass.department.dto.DepartmentDTO;
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.GymPlanDto;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.*;
 import com.ks.fitpass.department.service.*;
+import com.ks.fitpass.gymplan.dto.*;
+import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.enums.PageEnum;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,22 +37,25 @@ import java.util.stream.Collectors;
 @RequestMapping("/brand-owner")
 @RequiredArgsConstructor
 public class BrandOwnerController {
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final WalletService walletService;
+    private final Email emailService;
     private final BrandService brandService;
     private final DepartmentService departmentService;
     private final GymPlanService gymPlanService;
     private final DepartmentScheduleService departmentScheduleService;
-
     private final DepartmentAlbumsService departmentAlbumsService;
-
-    private  final DepartmentFeatureService departmentFeatureService;
-    private final UserService userService;
-    private final WalletService walletService;
-    private final Email emailService;
+    private final DepartmentAmenitieService departmentAmenitieService;
+    private final DepartmentFeatureService departmentFeatureService;
     private final BrandAmenitieService brandAmenitieService;
+
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
-    public String getBOIndex() {
+    public String getBOIndex(Principal principal, HttpSession session) {
+        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
+        session.setAttribute("userInfo", user);
         return "brand-owner/index";
     }
 
@@ -119,6 +119,9 @@ public class BrandOwnerController {
         DepartmentDTO departmentDTO = departmentService.filterDepartmentFeedbacks(departmentId);
         model.addAttribute("departmentFeedbacks", departmentDTO);
 
+        List<DepartmentAmenitie> departmentAmenitieList = departmentAmenitieService.getAllAmenitieOfDepartment(departmentId);
+        model.addAttribute("departmentAmenitieList", departmentAmenitieList);
+
         // Get department features
         List<DepartmentFeature> departmentFeatures = departmentFeatureService.getDepartmentFeatures(departmentId);
         model.addAttribute("departmentFeatures", departmentFeatures);
@@ -127,21 +130,28 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-department-detail";
     }
 
+    @PostMapping("/department/updateStatus")
+    public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status,@RequestParam int departmentId) {
+        int update = departmentService.updateDepartmentStatus(status, departmentId);
+        return ResponseEntity.ok(update);
+    }
+
     @GetMapping("/department/add")
     public String addDepartment(@RequestParam("id") int brandId, Model model) {
         model.addAttribute("brandId", brandId);
         return "brand-owner/gym-brand-department-add";
     }
     @PostMapping("/department/add")
-    public String createDepartment(@RequestParam int brandId, @RequestParam String brandName) {
+    public String createDepartment(@RequestParam int brandId,
+                                   @RequestParam String brandName,
+                                   Model model) {
+        if (brandName == null || brandName.isEmpty()) {
+            String errorMessage = "Brand Name can't be empty";
+            model.addAttribute("errorMessage", errorMessage);
+            return "brand-owner/gym-brand-department-add";
+        }
         departmentService.createDepartmentWithBrandId(brandId, brandName);
         return "redirect:/brand-owner/department/list?id=" + brandId;
-    }
-
-    @PostMapping("/department/updateStatus")
-    public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status,@RequestParam int departmentId) {
-        int update = departmentService.updateDepartmentStatus(status, departmentId);
-        return ResponseEntity.ok(update);
     }
 
     //Feedback Management
@@ -151,7 +161,7 @@ public class BrandOwnerController {
         // Get brandId by brandOwnerId
         Brand brand = brandService.getBrandDetail(user.getUserId());
         int brandId = brand.getBrandId();
-        List<DepartmentDTO> departments = departmentService.getDepartmentByBrandID(brandId);
+        List<ListBrandDepartmentFeedback> departments = departmentService.getDepartmentFeedbackOfBrandOwner(brandId);
 
         model.addAttribute("listDepartment", departments);
         return "brand-owner/gym-brand-feedback-list";
@@ -176,7 +186,7 @@ public class BrandOwnerController {
         int brandId = brand.getBrandId();
         // Get all list service
         List<BrandAmenitie> brandAmenitieList = brandAmenitieService.getAllByBrandID(brandId);
-        model.addAttribute("brandAmenitieList", brandAmenitieList);
+        model.addAttribute("brandAmenitiesList", brandAmenitieList);
         return "brand-owner/gym-brand-service-list";
     }
 
@@ -188,27 +198,34 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/service/update")
-    public String updateServiceDetails(@RequestParam String photoUrl, @RequestParam String amenitieName,
-                                       @RequestParam String status, @RequestParam String description,
-                                       @RequestParam int amenitieId) {
+    public String updateServiceDetails(@Valid @ModelAttribute("brandAmenitie") ServiceUpdateDTO serviceUpdateDTO,
+                                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-service-detail"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+
         BrandAmenitie brandAmenitie = new BrandAmenitie();
-        brandAmenitie.setPhotoUrl(photoUrl);
-        brandAmenitie.setAmenitieName(amenitieName);
-        brandAmenitie.setDescription(description);
-        brandAmenitie.setStatus(status.equals("true") ? 1 : 0);
-        brandAmenitie.setAmenitieId(amenitieId);
+        brandAmenitie.setPhotoUrl(serviceUpdateDTO.getPhotoUrl());
+        brandAmenitie.setAmenitieName(serviceUpdateDTO.getAmenitieName());
+        brandAmenitie.setDescription(serviceUpdateDTO.getDescription());
+        brandAmenitie.setStatus(serviceUpdateDTO.getStatus() ? 1 : 0);
+        brandAmenitie.setAmenitieId(serviceUpdateDTO.getAmenitieId());
+
+        // Thực hiện cập nhật dịch vụ trong CSDL
         brandAmenitieService.updateBrandAmenitie(brandAmenitie);
         return "redirect:/brand-owner/service/list";
     }
 
     @GetMapping("/service/add")
-    public String addService() {
+    public String addService(@ModelAttribute("createService") ServiceCreateDTO serviceCreateDTO) {
         return "brand-owner/gym-brand-service-add";
     }
 
     @PostMapping("/service/add")
-    public String createService(@RequestParam String photoUrl, @RequestParam String amenitieName,
-                             @RequestParam String description, HttpSession session) {
+    public String createService(@Valid @ModelAttribute("createService") ServiceCreateDTO serviceCreateDTO, BindingResult bindingResult, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-service-add"; // Trả về trang form và hiển thị thông báo lỗi
+        }
         User user = (User) session.getAttribute("userInfo");
         // Get brandId by brandOwnerId
         Brand brand = brandService.getBrandDetail(user.getUserId());
@@ -216,9 +233,9 @@ public class BrandOwnerController {
 
         BrandAmenitie brandAmenitie = new BrandAmenitie();
         brandAmenitie.setBrandId(brandId);
-        brandAmenitie.setAmenitieName(amenitieName);
-        brandAmenitie.setPhotoUrl(photoUrl);
-        brandAmenitie.setDescription(description);
+        brandAmenitie.setAmenitieName(serviceCreateDTO.getAmenitieName());
+        brandAmenitie.setPhotoUrl(serviceCreateDTO.getPhotoUrl());
+        brandAmenitie.setDescription(serviceCreateDTO.getDescription());
         brandAmenitie.setStatus(1);
         brandAmenitieService.createBrandAmenitie(brandAmenitie);
         return "redirect:/brand-owner/service/list";
@@ -239,8 +256,8 @@ public class BrandOwnerController {
     }
 
     @GetMapping("/gym-owner/details")
-    public String getGymOwnerDetails(@RequestParam("id1") int userId, @RequestParam("id2") int userDetailId, Model model,
-                                     HttpSession session) {
+    public String getGymOwnerDetails(@RequestParam("id1") int userId, @RequestParam("id2") int userDetailId,
+                                     Model model, HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
         // Get brandId by brandOwnerId
         Brand brand = brandService.getBrandDetail(user.getUserId());
@@ -248,84 +265,101 @@ public class BrandOwnerController {
         List<DepartmentListByBrandDTO> departmentList = departmentService.getAllDepartmentListOfBrand(brandId);
 
 
-        UserDetail userDetail = userService.getUserDetailByUserDetailId(userDetailId);
+        UserDetail ud = userService.getUserDetailByUserDetailId(userDetailId);
 
         List<DepartmentListByBrandDTO> filteredList = departmentList.stream()
-                .filter(dto -> dto.getUserName() == null || dto.getDepartmentId() == userDetail.getGymDepartmentId())
+                .filter(dto -> dto.getUserName() == null || dto.getDepartmentId() == ud.getGymDepartmentId())
                 .collect(Collectors.toList());
 
-        model.addAttribute("oldDepartmentId", userDetail.getGymDepartmentId());
-        model.addAttribute("userDetail", userDetail);
-        model.addAttribute("userId", userId);
+        GymOwnerUpdateDTO gymOwnerUpdateDTO = new GymOwnerUpdateDTO();
+        gymOwnerUpdateDTO.setUserDetailId(ud.getUserDetailId());
+        gymOwnerUpdateDTO.setFirstName(ud.getFirstName());
+        gymOwnerUpdateDTO.setLastName(ud.getLastName());
+        gymOwnerUpdateDTO.setEmail(ud.getEmail());
+        gymOwnerUpdateDTO.setPhone(ud.getPhoneNumber());
+        gymOwnerUpdateDTO.setAddress(ud.getAddress());
+        gymOwnerUpdateDTO.setDateOfBirth(ud.getDateOfBirth());
+        gymOwnerUpdateDTO.setGender(ud.getGender());
+        gymOwnerUpdateDTO.setImageUrl(ud.getImageUrl());
+        gymOwnerUpdateDTO.setUserDeleted(ud.isUserDeleted());
+        gymOwnerUpdateDTO.setDepartmentId(ud.getGymDepartmentId());
+        gymOwnerUpdateDTO.setOldDepartmentId(ud.getGymDepartmentId());
+        gymOwnerUpdateDTO.setUserId(userId);
+
+        model.addAttribute("gymOwner", gymOwnerUpdateDTO);
         model.addAttribute("filteredList", filteredList);
         return "brand-owner/gym-brand-owner-detail";
     }
 
     @PostMapping("/gym-owner/update")
-    public String updateGymOwnerDetails(@RequestParam String firstName, @RequestParam String email,
-                                        @RequestParam String address, @RequestParam LocalDate dateOfBirth,
-                                        @RequestParam String active, @RequestParam String lastName,
-                                        @RequestParam String phone, @RequestParam String idCard,
-                                        @RequestParam String gender, @RequestParam("department") int departmentId,
-                                        @RequestParam int userId, @RequestParam("oldDepartmentId") int oldDepartmentId,
-                                        @RequestParam int userDetailId,
-                                        @RequestParam String imageUrl) {
+    public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner")GymOwnerUpdateDTO gymOwnerUpdateDTO,
+                                        BindingResult bindingResult) {
+        if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
+            bindingResult.rejectValue("email", "error.email", "Email already exist");
+        }
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-owner-detail";
+        }
         UserDetail userDetail = new UserDetail();
-        userDetail.setUserDetailId(userDetailId);
-        userDetail.setFirstName(firstName);
-        userDetail.setLastName(lastName);
-        userDetail.setEmail(email);
-        userDetail.setDateOfBirth(dateOfBirth);
-        userDetail.setAddress(address);
-        userDetail.setPhoneNumber(phone);
-        userDetail.setGender(gender);
-        userDetail.setImageUrl(imageUrl);
+        userDetail.setUserDetailId(gymOwnerUpdateDTO.getUserDetailId());
+        userDetail.setFirstName(gymOwnerUpdateDTO.getFirstName());
+        userDetail.setLastName(gymOwnerUpdateDTO.getLastName());
+        userDetail.setEmail(gymOwnerUpdateDTO.getEmail());
+        userDetail.setDateOfBirth(gymOwnerUpdateDTO.getDateOfBirth());
+        userDetail.setAddress(gymOwnerUpdateDTO.getAddress());
+        userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
+        userDetail.setGender(gymOwnerUpdateDTO.getGender());
+        userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
         // Update user detail
         userService.updateUserDetail(userDetail);
 
-        userService.updateUserStatusByUserId(userId, active.equals("true") ? 0 : 1);
-        if(departmentId == -1 ) {
-            if(oldDepartmentId != 0) {
-                departmentService.updateDepartmentGymOwner(oldDepartmentId, 0);
+        userService.updateUserStatusByUserId(gymOwnerUpdateDTO.getUserId(), gymOwnerUpdateDTO.isUserDeleted() ? 1 : 0);
+        if(gymOwnerUpdateDTO.getDepartmentId() == -1 ) {
+            if(gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
+                departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
             }
             return "redirect:/brand-owner/gym-owner/list";
         }
         // Nếu trạng thái là 0 thì đá khỏi cơ sở
-        if(active.equals("false") && oldDepartmentId != 0) {
-            departmentService.updateDepartmentGymOwner(oldDepartmentId, 0);
+        if(gymOwnerUpdateDTO.isUserDeleted() && gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
+            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
         }
 
-        // Update user deparment
-        if(oldDepartmentId != departmentId) {
-            departmentService.updateDepartmentGymOwner(departmentId, userId);
+        // Update user department
+        if(gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
         }
-        if(oldDepartmentId != 0 && oldDepartmentId != departmentId) {
-            departmentService.updateDepartmentGymOwner(oldDepartmentId, 0);
+        if(gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
         }
         return "redirect:/brand-owner/gym-owner/list";
     }
 
     @GetMapping("/gym-owner/add")
-    public String addGymOwner() {
+    public String addGymOwner(@ModelAttribute("gymOwner")GymOwnerCreateDTO gymOwnerCreateDTO) {
         return "brand-owner/gym-brand-owner-add";
     }
 
     @PostMapping("/gym-owner/add")
-    public String createGymOwner(@RequestParam String firstName, @RequestParam String lastName,
-                                 @RequestParam String username, @RequestParam String email,
-                                 @RequestParam String phone, @RequestParam String address,
-                                 @RequestParam LocalDate dateOfBirth, @RequestParam String idCard,
-                                 @RequestParam String gender, @RequestParam String imageUrl, HttpSession session) {
+    public String createGymOwner(@Valid @ModelAttribute("gymOwner") GymOwnerCreateDTO gymOwnerCreateDTO,
+                                 BindingResult bindingResult, HttpSession session) {
+        if(userService.checkEmailExist(gymOwnerCreateDTO.getEmail())) {
+            bindingResult.rejectValue("email", "error.email", "Email already exist");
+        }
+
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-owner-add";
+        }
         User user = (User) session.getAttribute("userInfo");
         UserDetail userDetail = new UserDetail();
-        userDetail.setFirstName(firstName);
-        userDetail.setLastName(lastName);
-        userDetail.setEmail(email);
-        userDetail.setPhoneNumber(phone);
-        userDetail.setAddress(address);
-        userDetail.setDateOfBirth(dateOfBirth);
-        userDetail.setImageUrl(imageUrl);
-        userDetail.setGender(gender);
+        userDetail.setFirstName(gymOwnerCreateDTO.getFirstName());
+        userDetail.setLastName(gymOwnerCreateDTO.getLastName());
+        userDetail.setEmail(gymOwnerCreateDTO.getEmail());
+        userDetail.setPhoneNumber(gymOwnerCreateDTO.getPhone());
+        userDetail.setAddress(gymOwnerCreateDTO.getAddress());
+        userDetail.setDateOfBirth(gymOwnerCreateDTO.getDateOfBirth());
+        userDetail.setImageUrl(gymOwnerCreateDTO.getImageUrl());
+        userDetail.setGender(gymOwnerCreateDTO.getGender());
 
         // Insert into User Detail
         userService.insertIntoUserDetail(userDetail);
@@ -334,10 +368,11 @@ public class BrandOwnerController {
         // Get brandId by brandOwnerId
         Brand brand = brandService.getBrandDetail(user.getUserId());
         int brandId = brand.getBrandId();
+        String brandName = brand.getBrandName();
         // Get number of account gym-owner by brand id
         int numberOfAccountCreated = userService.getNumberOfAccountCreatedByBrandId(brandId);
         // Create userName
-        String accountName = "fp_" + brandId + "_" + ++numberOfAccountCreated + "_" + username;
+        String accountName = "fp_" + brandName.replaceAll("\\s+", "") + "_" + ++numberOfAccountCreated + "_" + gymOwnerCreateDTO.getUsername();
         // Create password random
         String randomPassword = WebUtil.generateRandomPassword();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -365,58 +400,125 @@ public class BrandOwnerController {
         walletService.insertWallet(userInsertId, 0);
 
         // Send email to user email
-        emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword, userDetail.getEmail());
+        // Todo: trang tri trang html
+        emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
+                userDetail.getEmail());
         return "redirect:/brand-owner/gym-owner/list";
     }
 
     //Gym Plans Management
     //Flexible Plans
     @GetMapping("/gym-plans/flexible/list")
-    public String getListOfFlexibleGymPlans() {
+    public String getListOfFlexibleGymPlans(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
         // Get List Of flexible gym plan by brand id
-
+        List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandId(brandId);
         // Send to front
+        model.addAttribute("listFlexGymPlan", listFlexGymPlan);
         return "brand-owner/gym-brand-plan-flexible-list";
     }
 
     @GetMapping("/gym-plans/flexible/details")
-    public String getFlexibleGymPlanDetails() {
+    public String getFlexibleGymPlanDetails(@RequestParam("id") int gymPlanId, Model model) {
+        BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO = gymPlanService.getGymPlanFlexDetail(gymPlanId);
+        model.addAttribute("b", brandUpdateGymPlanFlexDTO);
         return "brand-owner/gym-brand-plan-flexible-detail";
     }
 
     @PostMapping("/gym-plans/flexible/update")
-    public String updateFlexibleGymPlanDetails() {
+    public String updateFlexibleGymPlanDetails(@Valid @ModelAttribute("b") BrandUpdateGymPlanFlexDTO brandDetails,
+                                               BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-flexible-detail";
+        }
 
-        return "brand-owner/gym-brand-plan-flexible-detail";
+        gymPlanService.updateGymPlanFlex(brandDetails);
+        return "redirect:/brand-owner/gym-plans/flexible/list";
     }
 
     @GetMapping("/gym-plans/flexible/add")
-    public String addFlexibleGymPlan() {
+    public String addFlexibleGymPlan(Model model) {
+        model.addAttribute("brandCreateGymPlanFlexDTO", new BrandCreateGymPlanFlexDTO());
         return "brand-owner/gym-brand-plan-flexible-add";
     }
 
     @PostMapping("/gym-plans/flexible/add")
-    public String createFlexibleGymPlan(@RequestParam String gymPlanName, @RequestParam int pricePerHours,
-                                        @RequestParam int planBeforeActive, @RequestParam int planAfterActive,
-                                        @RequestParam String description) {
-        // Create gym plan flexible
+    public String createFlexibleGymPlan(@Valid BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO,
+                                        BindingResult bindingResult, HttpSession session) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-flexible-add";
+        }
 
-        // Add to db
-        return "redirect:/gym-plans/flexible/list";
+        // Create gym plan flexible
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        brandCreateGymPlanFlexDTO.setBrandId(brandId);
+        brandCreateGymPlanFlexDTO.setStatus(1);
+        gymPlanService.createGymPlanFlex(brandCreateGymPlanFlexDTO);
+        return "redirect:/brand-owner/gym-plans/flexible/list";
     }
+
     //Fixed Plans
     @GetMapping("/gym-plans/fixed/list")
-    public String getListOfFixedGymPlans() {
+    public String getListOfFixedGymPlans(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        // Get List Of flexible gym plan by brand id
+        List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandId(brandId);
+        // Send to front
+        model.addAttribute("listFixedGymPlan", listFixedGymPlan);
         return "brand-owner/gym-brand-plan-fixed-list";
     }
 
     @GetMapping("/gym-plans/fixed/details")
-    public String getFixedGymPlanDetails() {
+    public String getFixedGymPlanDetails(@RequestParam("id") int gymPlanId, Model model) {
+        BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO = gymPlanService.getGymPlanFixedDetail(gymPlanId);
+        model.addAttribute("b", brandUpdateGymPlanFixedDTO);
         return "brand-owner/gym-brand-plan-fixed-detail";
     }
 
+    @PostMapping("/gym-plans/fixed/update")
+    public String updateFixedGymPlanDetails(@Valid @ModelAttribute("b") BrandUpdateGymPlanFixedDTO brandDetails,
+                                            BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-fixed-detail";
+        }
+
+        gymPlanService.updateGymPlanFixed(brandDetails);
+        return "redirect:/brand-owner/gym-plans/fixed/list";
+    }
+
     @GetMapping("/gym-plans/fixed/add")
-    public String addFixedGymPlan() {
+    public String addFixedGymPlan(Model model) {
+        model.addAttribute("brandCreateGymPlanFixedDTO", new BrandCreateGymPlanFixedDTO());
         return "brand-owner/gym-brand-plan-fixed-add";
+    }
+
+    @PostMapping("/gym-plans/fixed/add")
+    public String createFixedGymPlan(@Valid BrandCreateGymPlanFixedDTO brandCreateGymPlanFixedDTO,
+                                     BindingResult bindingResult, HttpSession session) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-fixed-add";
+        }
+
+        User user = (User) session.getAttribute("userInfo");
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        brandCreateGymPlanFixedDTO.setBrandId(brandId);
+        brandCreateGymPlanFixedDTO.setStatus(1);
+        gymPlanService.createGymPlanFixed(brandCreateGymPlanFixedDTO);
+        return "redirect:/brand-owner/gym-plans/fixed/list";
+    }
+
+    @GetMapping("/withdrawal/list")
+    public String getWithdrawal(){
+        return "brand-owner/gym-brand-withdrawal-list";
     }
 }

@@ -2,6 +2,7 @@ package com.ks.fitpass.department.service;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
@@ -54,4 +55,6 @@ public interface DepartmentService {
     int updateDepartmentGymOwner(int departmentId, int userId);
 
     List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
+
+    List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId);
 }

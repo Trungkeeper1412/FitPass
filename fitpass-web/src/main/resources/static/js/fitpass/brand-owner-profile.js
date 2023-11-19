@@ -293,6 +293,7 @@ $(document).ready(function () {
     function configureDataTable(tableId) {
         $(tableId).DataTable({
             "paging": true, "lengthMenu": [10, 25, 50, 100], "searching": true,
+            "bDestroy": true
         });
     }
 

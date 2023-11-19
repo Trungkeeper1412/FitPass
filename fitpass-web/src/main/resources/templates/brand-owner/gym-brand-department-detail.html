@@ -102,62 +102,20 @@
                                                     <h5 class="modal-title fw-bold fs-3" id="exampleModalLabel">Giờ hoạt động</h5>
                                                 </div>
                                                 <div class="modal-body text-align-last">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Monday">Thứ 2:</p>
+                                                    <th:block th:each="schedule : ${departmentSchedules}">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <p class="fw-bold" data-day="Monday" th:text="${schedule.getDepartmentScheduleDay() + ':'}">Thứ 2:</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <span data-hours="8:00 AM - 6:00 PM">
+                                                                    <span th:text="${schedule.departmentScheduleOpenTime}"></span>
+                                                                    <span>-</span>
+                                                                    <span th:text="${schedule.departmentScheduleCloseTime}"></span>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 3:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 4:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 5:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 6:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Thứ 7:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="fw-bold" data-day="Tuesday">Chủ nhật:</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <span data-hours="8:00 AM - 6:00 PM">8:00 AM - 6:00 PM</span>
-                                                        </div>
-                                                    </div>
+                                                    </th:block>
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-center">
                                                     <button type="button" class="btn btn-secondary text-center"
@@ -293,37 +251,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Hệ thống tủ khóa</td>
-                                        <td><img src="https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg"
-                                                 alt=""></td>
-                                        <td>Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại
-                                            Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay
-                                            locker tự động
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Phòng tập đa năng</td>
-                                        <td><img src="https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg"
-                                                 alt=""></td>
-                                        <td>Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các
-                                            kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud
-                                            lưu trữ tiến trình tập luyện.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Tiện nghi phòng tập</td>
-                                        <td><img src="https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg"
-                                                 alt=""></td>
-                                        <td>Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông
-                                            hơi, khu vực trang điểm, phòng tắm), là nơi mang đến giây phút thư
-                                            giãn cho bạn.
-                                        </td>
-                                    </tr>
+                                    <th:block th:each="d : ${departmentAmenitieList}">
+                                        <tr>
+                                            <td th:text="${dStat.index + 1}">1</td>
+                                            <td th:text="${d.amenitieName}">Hệ thống tủ khóa</td>
+                                            <td><img th:src="${d.photoUrl}"
+                                                     alt=""></td>
+                                            <td th:text="${d.description}">Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại
+                                                Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay
+                                                locker tự động
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>

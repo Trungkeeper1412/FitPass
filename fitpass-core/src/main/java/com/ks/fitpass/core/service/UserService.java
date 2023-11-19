@@ -24,4 +24,7 @@ public interface UserService {
     int updateUserDetail(UserDetail userDetail);
     int updateUserStatusByUserId(int userId, int status);
     UserDetail getUserDetailByUserDetailId(int userId);
+
+    boolean checkEmailExist(String email);
+    boolean checkUsernameExist(String username);
 }

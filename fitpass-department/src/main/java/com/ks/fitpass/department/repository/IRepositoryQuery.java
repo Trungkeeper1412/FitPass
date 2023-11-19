@@ -70,7 +70,7 @@ public interface IRepositoryQuery {
 
                      d.capacity,
                      d.area,
-
+                     d.city,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name,
                      COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) AS max_price,
@@ -99,7 +99,7 @@ public interface IRepositoryQuery {
 
                      d.capacity,
                      d.area,
-
+                     d.city,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
@@ -128,7 +128,7 @@ public interface IRepositoryQuery {
                                
                                                             d.capacity,
                                                             d.area,
-                               
+                                                            d.city,
                                                             d.gym_department_status_key,
                                                             kbn_department_status.mst_kbn_value AS gym_department_status_name                    \s
                                                         FROM gym_department d
@@ -156,6 +156,7 @@ public interface IRepositoryQuery {
                                           d.rating,
                                           d.capacity,
                                           d.area,
+                                          d.city,
                                      d.gym_department_status_key,
                                      kbn_department_status.mst_kbn_value AS gym_department_status_name,
                                      concat(ud.first_name, " ", ud.last_name) as user_name
@@ -173,10 +174,10 @@ public interface IRepositoryQuery {
                      d.gym_department_id,
                      d.brand_id,
                      d.name,
+                     d.user_id,
                      d.address,
                      d.contact_number,
                      d.logo_url,
-
                      d.wallpaper_url,
                      d.thumbnail_url,
                      d.description,
@@ -185,7 +186,7 @@ public interface IRepositoryQuery {
                      d.rating,
                      d.capacity,
                      d.area,
-
+                     d.city,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
@@ -347,11 +348,13 @@ public interface IRepositoryQuery {
                                 uf.feedback_time,
                                 uf.feedback_status,
                                 ud.email,
-                                ud.phone_number
+                                ud.phone_number,
+                                gp.name
                             FROM
                                 user_feedback uf
                                 INNER JOIN `user` u ON uf.user_id = u.user_id
                                 INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+                                INNER JOIN gym_plan gp ON gp.plan_id = uf.gym_plan_id
                             WHERE
                                 uf.department_id = ?
             """;
@@ -414,8 +417,19 @@ public interface IRepositoryQuery {
                         WHERE gda.gym_department_id = ? AND ba.amenitie_status = 1
             """;
 
-
-
+//    String GET_DEPARTMENT_AMENITIES_BRAND_ID = """
+//                                    SELECT\s
+//                                        gda.gym_department_id,
+//                        				ba.amenitie_id,
+//                                        ba.brand_id,
+//                                        ba.photo_url,
+//                                        ba.amenitie_name,
+//                                        ba.description,
+//                                        ba.amenitie_status
+//                        		FROM brand_amenities ba
+//                        INNER JOIN gym_department_amenities gda ON ba.amenitie_id = gda.amenitie_id \s
+//                        WHERE ba.brand_id = ? AND ba.amenitie_status = 1
+//            """;
 
 String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
         SELECT\s
@@ -465,6 +479,7 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                     d.rating,
                     d.capacity,
                     d.area,
+                    d.city,
                     d.gym_department_status_key,
                     kbn_department_status.mst_kbn_value AS gym_department_status_name,
                     CONCAT(ud.first_name, ' ', ud.last_name) as user_name
@@ -493,5 +508,32 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 UPDATE gym_department
                 SET user_id=?
                 WHERE gym_department_id=?;
+            """;
+
+    String GET_ALL_DEPARTMENT_FEEDBACK_OF_BRAND_OWNER = """
+                SELECT
+                    d.gym_department_id,
+                    d.brand_id,
+                    d.name,
+                    d.wallpaper_url,
+                    d.rating,
+                    (
+                        SELECT COUNT(uf.feedback_id)
+                        FROM user_feedback uf
+                        WHERE uf.department_id = d.gym_department_id
+                    ) AS feedback_count
+                FROM gym_department d
+                LEFT JOIN mst_kbn kbn_department_status
+                    ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
+                    AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
+                WHERE d.gym_department_status_key = ? AND d.brand_id = ?
+                ORDER BY d.rating DESC;
+            """;
+
+    String GET_ALL_AMENITIE_OF_DEPARTMENT = """
+                SELECT ba.amenitie_id, ba.brand_id, ba.photo_url, ba.amenitie_name, ba.description
+                FROM gym_department_amenities gda
+                INNER JOIN brand_amenities ba ON gda.amenitie_id = ba.amenitie_id
+                WHERE gda.gym_department_id = ?;
             """;
 }

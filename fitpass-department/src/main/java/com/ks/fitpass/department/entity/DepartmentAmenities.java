@@ -10,6 +10,4 @@ import lombok.*;
 public class DepartmentAmenities {
     private int gymDepartmentId;
     BrandAmenities brandAmenitieId;
-
-
 }

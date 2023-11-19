@@ -34,7 +34,7 @@ public class WebUtil {
         int passwordLength = 10;
 
         // Ký tự có thể xuất hiện trong mật khẩu
-        String allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        String allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,?';:_-!@#$%^&*()+{}[]|:<>?`~";
 
         StringBuilder password = new StringBuilder();
 

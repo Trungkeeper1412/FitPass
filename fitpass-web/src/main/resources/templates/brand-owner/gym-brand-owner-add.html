@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <div class="card-box">
                                     <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                    <form id="formSubmit" action="/brand-owner/gym-owner/add" method="post">
+                                    <form id="formSubmit" action="/brand-owner/gym-owner/add" method="post" th:object="${gymOwner}">
                                         <div class="row">
                                             <div class="col-md-2 mb-3">
                                                 <label for="department-img" class="form-label fw-bold w-100">Ảnh
@@ -40,63 +40,73 @@
                                                 <input type="file" class="form-control mt-2" id="department-img"
                                                        name="department-img" accept="image/*"
                                                        onchange="uploadImage(this);">
-                                                <input type="hidden" id="avatarImg" name="imageUrl">
+                                                <input th:field="*{imageUrl}" type="hidden" id="avatarImg" name="imageUrl">
+                                                <span th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}">photoUrl Error</span>
                                             </div>
                                             <div class="col-md-5 mb-3">
                                                 <div class="mb-3">
                                                     <label for="first-name" class="form-label fw-bold">Họ :</label>
-                                                    <input type="text" class="form-control" id="first-name"
+                                                    <input th:field="*{firstName}" type="text" class="form-control" id="first-name"
                                                            name="firstName" placeholder="Nhập họ">
+                                                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label fw-bold">Email :</label>
-                                                    <input type="text" class="form-control" id="email" name="email"
+                                                    <input th:field="*{email}" type="text" class="form-control" id="email" name="email"
                                                            placeholder="Nhập gmail">
+                                                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label fw-bold">Địa chỉ :</label>
-                                                    <input type="text" class="form-control" id="address" name="address"
+                                                    <input th:field="*{address}" type="text" class="form-control" id="address" name="address"
                                                            placeholder="Nhập địa chỉ">
+                                                    <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh
                                                         :</label>
-                                                    <input type="date" class="form-control" id="date-of-birth"
+                                                    <input th:field="*{dateOfBirth}" type="date" class="form-control" id="date-of-birth"
                                                            name="dateOfBirth">
+                                                    <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="gender" class="form-label fw-bold">Giới Tính :</label>
-                                                    <select class="form-select" id="gender" name="gender">
+                                                    <select th:field="*{gender}" class="form-select" id="gender" name="gender">
                                                         <option value="">Chọn giới tính</option>
-                                                        <option value="Nam">Nam</option>
-                                                        <option value="Nữ">Nữ</option>
+                                                        <option value="Male">Nam</option>
+                                                        <option value="Female">Nữ</option>
                                                         <option value="Khác">Khác</option>
                                                     </select>
+                                                    <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">photoUrl Error</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-5 mb-3">
                                                 <div class="mb-3">
                                                     <label for="last-name" class="form-label fw-bold">Tên :</label>
-                                                    <input type="text" class="form-control" id="last-name"
+                                                    <input th:field="*{lastName}" type="text" class="form-control" id="last-name"
                                                            name="lastName" placeholder="Nhập tên">
+                                                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label fw-bold">Tên đăng nhập
                                                         :</label>
-                                                    <input type="text" class="form-control" id="username" name="username"
+                                                    <input th:field="*{username}" type="text" class="form-control" id="username" name="username"
                                                            placeholder="Nhập tên người dùng">
+                                                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label fw-bold">Số Điện Thoại
                                                         :</label>
-                                                    <input type="text" class="form-control" id="phone" name="phone"
+                                                    <input th:field="*{phone}" type="text" class="form-control" id="phone" name="phone"
                                                            placeholder="Nhập số điện thoại">
+                                                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">photoUrl Error</span>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="id-card" class="form-label fw-bold">Số Căn Cước
+                                                    <label  for="id-card" class="form-label fw-bold">Số Căn Cước
                                                         :</label>
-                                                    <input type="text" class="form-control" id="id-card" name="idCard"
+                                                    <input th:field="*{idCard}" type="text" class="form-control" id="id-card" name="idCard"
                                                            placeholder="Nhập số căn cước">
+                                                    <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">photoUrl Error</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 text-center">

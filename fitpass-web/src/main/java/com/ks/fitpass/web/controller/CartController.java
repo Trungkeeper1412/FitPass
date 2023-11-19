@@ -3,7 +3,7 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.Department;
-import com.ks.fitpass.department.service.GymPlanService;
+import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.order.dto.AddToCartRequestDTO;
 import com.ks.fitpass.order.dto.CartUpdateRequestDto;
 import com.ks.fitpass.order.entity.cart.Cart;

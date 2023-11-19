@@ -244,6 +244,33 @@ h6 {
   transition: 0.3s;
 }
 
+.view-all-noti{
+  position: absolute;
+  bottom: 0;
+}
+.view-all-noti button{
+  padding: 9px;
+  height: 100%;
+  font-size: 12px;
+  border: hidden;
+  font-weight: 600;
+  width: 100%;
+  background-color: #e1e1e1;
+}
+
+.noti img{
+  width: 35px;
+}
+.noti .noti-time{
+  color: #9f9f9f;
+  font-weight: 600;
+  font-size: 12px;
+}
+.noti .noti-title{
+  font-size: 13px;
+  margin-top: 4px;
+}
+
 .navbar .dropdown ul li {
   min-width: 200px;
 }

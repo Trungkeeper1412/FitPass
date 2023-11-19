@@ -4,6 +4,7 @@ import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.GymPlanDto;
 import com.ks.fitpass.department.entity.*;
 import com.ks.fitpass.department.service.*;
+import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.web.enums.PageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,17 +27,21 @@ public class DepartmentController {
     private final DepartmentAlbumsService departmentAlbumsService;
     private final DepartmentFeatureService departmentFeatureService;
 
-    private  final DepartmentAmenitiesService departmentAmenitiesService;
+    private  final DepartmentAmenitieService departmentAmenitieService;
 
 
     @Autowired
-    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService, DepartmentScheduleService departmentScheduleService, DepartmentAlbumsService departmentAlbumsService, DepartmentFeatureService departmentFeatureService,DepartmentAmenitiesService departmentAmenitiesService) {
+    public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService,
+                                DepartmentScheduleService departmentScheduleService,
+                                DepartmentAlbumsService departmentAlbumsService,
+                                DepartmentFeatureService departmentFeatureService,
+                                DepartmentAmenitieService departmentAmenitieService) {
         this.departmentService = departmentService;
         this.gymPlanService = gymPlanService;
         this.departmentScheduleService = departmentScheduleService;
         this.departmentAlbumsService = departmentAlbumsService;
         this.departmentFeatureService = departmentFeatureService;
-        this.departmentAmenitiesService = departmentAmenitiesService;
+        this.departmentAmenitieService = departmentAmenitieService;
     }
 
     @GetMapping("/department-detail/{department_id}")
@@ -72,7 +77,7 @@ public class DepartmentController {
             model.addAttribute("departmentFeatures", departmentFeatures);
 
             // Get Department Amenities
-            List<DepartmentAmenities> departmentAmenities = departmentAmenitiesService.getAllDepartmentAmenitiesActivate(departmentId);
+            List<DepartmentAmenities> departmentAmenities = departmentAmenitieService.getAllDepartmentAmenitiesActivate(departmentId);
             model.addAttribute("departmentAmenities", departmentAmenities);
 
             int totalPages = (int) Math.ceil((double) departmentDTO.getTotal() / size);
