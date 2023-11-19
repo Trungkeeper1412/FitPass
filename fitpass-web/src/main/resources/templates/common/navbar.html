@@ -14,7 +14,7 @@
                 </div>
                 <li><a class="nav-link scrollto active" th:href="@{/user/homepage}">Trang chủ</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/}">Giới thiệu</a></li>
-                <li><a class="nav-link scrollto" href="#services">Dịch vụ</a></li>
+                <li><a class="nav-link scrollto" th:href="@{/calendar/view}">Lịch tập</a></li>
                 <li>
                     <a href="#credit">
                         <span class="text-money" th:text="${session.userCredit}"></span>&nbsp<span class="credit">Credit</span>
@@ -26,12 +26,53 @@
                         <i class="bi bi-cart3 fs-4"></i>
                     </a>
                 </li>
-                <li>
+                <li class="dropdown">
                     <a class="nav-link" href="#notification" id="notification-btn">
                         <span class="notification-badge" id="notification-badge">0</span>
-                        <i class="bi bi-bell fs-4"></i>
+                        <i class="bi bi-bell fs-4 dropbtn"></i>
                     </a>
+                    <ul>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="noti">
+                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <div>
+                                    <div class="noti-time">11/12/2023</div>
+                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="view-all-noti"><button>Xem tất cả</button></li>
+                    </ul>
                 </li>
+<!--                <li class="dropdown dropdown-noti">-->
+<!--                    <a class="nav-link" href="#notification" id="notification-btn">-->
+<!--                        <span class="notification-badge" id="notification-badge">0</span>-->
+<!--                        <i class="bi bi-bell fs-4 dropbtn" onclick="openNotifications()"></i>-->
+<!--                    </a>-->
+<!--                    <div id="myDropdown" class="dropdown-content">-->
+<!--                        <a href="#home">Home</a>-->
+<!--                        <a href="#about">About</a>-->
+<!--                        <a href="#contact">Contact</a>-->
+<!--                    </div>-->
+<!--                </li>-->
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -41,7 +82,7 @@
                 <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item small" th:href="@{/user/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
+                <li><a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
                 <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a></li>
                 <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
             </ul>
@@ -49,3 +90,24 @@
     </div>
 
 </header>
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function openNotifications() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

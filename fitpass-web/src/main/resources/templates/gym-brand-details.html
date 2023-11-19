@@ -1,25 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym department details</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
-    <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
-    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <title> Chi tiết chi nhánh </title>
+    <meta name="description" content="Gym Brand Details Page">
+    <meta name="keywords" content="My">
+
+    <th:block th:include="common/vendor-head"></th:block>
+
     <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet" >
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
 </head>
@@ -30,7 +19,7 @@
 
 <div id="include-navbar" class="container"></div>
 <div class="brand-bg-image">
-    <img th:src="${brand.brandWallpaperUrl}">
+    <img th:src="${brand.getBrandWallpaperUrl()}">
 </div>
 
 
@@ -59,30 +48,39 @@
         </div>
         <div class="col-md-5 col-lg-5 col-sm-6 club-view">
             <div class="club-view-bg">
+<!--                <img th:src="${brand.getBrandThumbnailUrl()}">-->
                 <a href="#club">
-                    <button class="btn btn-warning">Xem các Club</button>
+                    <button class="btn btn-warning">Xem các cơ sở</button>
                 </a>
             </div>
         </div>
     </div>
 
-   <!-- DỊCH VỤ -->
-<h4 class="row fw-bold mt-5">Dịch vụ</h4>
-<!--<div class="list-service-wrapper row">-->
-    <div class="scroll-services row">
-        <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
-            <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover;'"></div>
-            <div class="service-name" th:text="${amenitie.amenitieName}"></div>
-            <div class="service-descript" th:text="${amenitie.description}"></div>
+    <!-- DỊCH VỤ -->
+    <h4 class="row fw-bold mt-5">Dịch vụ</h4>
+    <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 50px;"></div>
+    <div class="list-service-wrapper mt-4">
+        <button class="left" onclick="leftScroll()">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+        </button>
+        <div class="scroll-services row">
+            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
+                <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover; object-fit: cover;'"></div>
+                <div class="service-name" th:text="${amenitie.amenitieName}"></div>
+                <div class="service-descript" th:text="${amenitie.description}"></div>
+            </div>
         </div>
+        <button class="right" onclick="rightScroll()">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+        </button>
     </div>
-<!--</div>-->
 
     <!--CƠ SỞ-->
     <h4 class="row fw-bold mt-5 brand-dept-title" id="club">CÁC CƠ SỞ</h4>
+    <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 70px;"></div>
     <div class="list-gym-department container">
-        <div class="department" th:each="dept : ${departments}">
-            <a th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
+        <div th:each="dept : ${departments}">
+            <a class="department" th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
             <div class="dept-img"
                  th:style="'background-image: url(\'' + ${dept.getDepartmentWallpaperUrl()} + '\'); background-size: cover;'">
             </div>
@@ -99,10 +97,9 @@
             </div>
             <div class="dept-description">
                 <div class="service-type" th:each="feature: ${departmentFeatures}" th:if="${feature.getGymDepartmentId() == dept.getDepartmentId()}">
-                    <div class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}"></div>
-
-                    <div class="service-name" th:text="${feature.feature.getFeatureName()}">Khu để xe</div>
-
+                    <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
+                         class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
+                    </div>
                 </div>
             </div>
             </a>
@@ -112,16 +109,19 @@
 
     <!--ĐÁNH GIÁ-->
     <h4 class="row fw-bold mt-5">ĐÁNH GIÁ TỪ NGƯỜI TẬP</h4>
+    <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 140px;"></div>
     <div class="rating-feedback container mx-auto">
-        <div class="rating-option row row-cols-6">
-            <div class="rating-point col-lg-0.5 col-md-1">
-                <span th:text="${brand.getRating()}">4/5</span> <span>/5</span>
-                <span>
-            <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
-
-          </span>
+        <div class="rating-option row">
+            <div class="rating-avg">
+                <div style="display: flex; position: relative">
+                    <div class="rating-point" th:text="${brand.getRating()}"></div>
+                    <div class="rating-max">trên 5</div>
+                </div>
+                <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
             </div>
-            <button style="margin-left: 40px;" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <div class="button-list">
+            <div class="row">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 Tất cả (<span>24</span>)
             </button>
             <button type="button" class="btn btn-warning col-lg-1 col-md-2">
@@ -139,6 +139,8 @@
             <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 1 sao (<span>1</span>)
             </button>
+            </div>
+            </div>
         </div>
         <div class="user-rating">
             <div class="user-rating-avatar">
@@ -212,66 +214,57 @@
 
 
 <div style="height: 50px;"></div>
-<!-- Vendor JS Files -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
+<div th:replace="common/footer :: footer"></div>
 
-<!-- Template Main JS File -->
-<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<th:block th:insert="common/vendor-script"></th:block>
 <script>
-    const slider = document.querySelector('.scroll-services');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.classList.add('active');
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        slider.classList.remove('active');
-    });
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.classList.remove('active');
-    });
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 3; //scroll-fast
-        slider.scrollLeft = scrollLeft - walk;
-        console.log(walk);
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollImages = document.querySelector(".scroll-services");
+        const scrollLength = scrollImages.scrollWidth - scrollImages.clientWidth;
+        const leftButton = document.querySelector(".left");
+        const rightButton = document.querySelector(".right");
 
-    let slideIndex = [1, 1];
-    let slideId = ["mySlides1", "mySlides2"]
-    showSlides(1, 0);
-    showSlides(1, 1);
-
-    function plusSlides(n, no) {
-        showSlides(slideIndex[no] += n, no);
-    }
-
-    function showSlides(n, no) {
-        let i;
-        let x = document.getElementsByClassName(slideId[no]);
-        if (n > x.length) { slideIndex[no] = 1 }
-        if (n < 1) { slideIndex[no] = x.length }
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
+        function checkScroll() {
+            const currentScroll = scrollImages.scrollLeft;
+            if (currentScroll === 0) {
+                leftButton.setAttribute("disabled", "true");
+                rightButton.removeAttribute("disabled");
+            } else if (currentScroll === scrollLength) {
+                rightButton.setAttribute("disabled", "true");
+                leftButton.removeAttribute("disabled");
+            } else {
+                leftButton.removeAttribute("disabled");
+                rightButton.removeAttribute("disabled");
+            }
         }
-        x[slideIndex[no] - 1].style.display = "block";
-    }
+
+        scrollImages.addEventListener("scroll", checkScroll);
+        window.addEventListener("resize", checkScroll);
+        checkScroll();
+
+        function leftScroll() {
+            scrollImages.scrollBy({
+                left: -450,
+                behavior: "smooth"
+            });
+        }
+
+        function rightScroll() {
+            scrollImages.scrollBy({
+                left: 500,
+                behavior: "smooth"
+            });
+        }
+
+        leftButton.addEventListener("click", leftScroll);
+        rightButton.addEventListener("click", rightScroll);
+    });
+
 </script>
 </body>
 </html>

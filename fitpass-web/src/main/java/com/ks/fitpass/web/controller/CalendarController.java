@@ -24,6 +24,7 @@ import java.util.List;
 public class CalendarController {
 
     private final CalendarService calendarService;
+
     @GetMapping("/view")
     public String viewCalendar() {
         return "user/calendar";
@@ -48,7 +49,7 @@ public class CalendarController {
                                @RequestParam("departmentId") int departmentId,
                                @RequestParam("rating") int rating,
                                @RequestParam("thoughts") String comments,
-                               HttpSession session){
+                               HttpSession session) {
         User u = (User) session.getAttribute("userInfo");
 
         UserFeedback userFeedback = new UserFeedback();
@@ -73,7 +74,7 @@ public class CalendarController {
                                @RequestParam("departmentId") int departmentId,
                                @RequestParam("rating") int rating,
                                @RequestParam("thoughts") String comments,
-                               HttpSession session){
+                               HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
 
         UserFeedback userFeedback = new UserFeedback();

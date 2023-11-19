@@ -4,23 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym department details</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
-    <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
-    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <title>Chi Tiết Cơ Sở</title>
+    <meta name="description" content="Gym Department Page">
+    <meta name="keywords" content="My">
+
+    <th:block th:include="common/vendor-head"></th:block>
+
     <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet" >
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
 </head>
@@ -30,17 +19,13 @@
 <!-- ======= Header ======= -->
 <header th:replace="common/navbar :: navbar"></header>
 
-<!-- <div style="width: 100%; margin: auto; margin-top: 0px;"> -->
 <div class="gym-first-info container">
     <div class="gym-picture">
         <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
         <div class="gym-name-cover">
             <h3 style="margin: auto; color: rgb(255, 255, 255); font-weight: 600;" th:text="${department.departmentName}"></h3>
-            <h5 style="color: white;">2000 người đã tham gia</h5>
         </div>
     </div>
-    <!-- <div style="background-color: black;">
-    </div> -->
 </div>
 <div class="gym-container container">
     <div class="about-our-gym row justify-content-center">
@@ -93,65 +78,54 @@
             </div>
         </div>
         <div class="blank col-md-6 mt-4" style="background-color: white; border-radius: 10px;">
-
+            <iframe
+                    width="100%"
+                    height="100%"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    th:src="@{'https://www.google.com/maps/embed/v1/place?key=AIzaSyDn-1MGDGwJBHRvtO_asu53bAF1IzdJ9Bs&q='+${department.getLatitude()}+','+${department.getLongitude()}}">
+            </iframe>
         </div>
     </div>
 
+<!--    Tiện ích-->
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Tiện ích hàng đầu</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 110px;"></div>
     <!-- Gym service -->
     <div class="container">
         <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fas fa-parking"></i>
+            <div class="col-lg-1 col-md-1 service-type" th:each="feature: ${departmentFeatures}">
+                <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
+                     class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
-                <div class="service-name">Khu để xe</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-wifi"></i>
-                </div>
-                <div class="service-name">Wifi</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-shower"></i>
-                </div>
-                <div class="service-name">Nước nóng lạnh</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fas fa-scroll"></i>
-                </div>
-                <div class="service-name">Khăn tắm free</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-martini-glass-citrus"></i>
-                </div>
-                <div class="service-name">Quầy giải khát</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-couch"></i>
-                </div>
-                <div class="service-name">Khu nghỉ ngơi</div>
-            </div>
-            <div class="col-lg-1 col-md-1 service-type">
-                <div class="gym-service-logo">
-                    <i class="fa-solid fa-suitcase-medical"></i>
-                </div>
-                <div class="service-name">Phòng y tế</div>
             </div>
         </div>
+    </div>
+<!--    Dịch vụ-->
+    <h3 style="color: black; margin-top: 80px; font-weight: 600">Dịch vụ</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
+    <div class="list-service-wrapper container mt-2">
+        <button class="left" onclick="leftScroll()">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
+        </button>
+        <div class="scroll-services mt-4">
+            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12"  th:each="amenitie: ${departmentAmenities}">
+                <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
+                <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
+                <div class="service-descript" th:text="${amenitie.brandAmenitieId.getDescription()}"></div>
+            </div>
+        </div>
+        <button class="right" onclick="rightScroll()">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/1549/1549454.png">
+        </button>
     </div>
 
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-    <!-- <div style="color:white; margin-top: 25px;">Hiểu được nhu cầu tập luyện, khả năng sắp xếp thời gian và tính kỉ luật phụ thuộc vào đặc thù mỗi cá nhân, chúng tôi chia ra thành những gói tập khác nhau với các khung thời gian phù hợp với nhu cầu của mỗi khách hàng.</div> -->
     <div class="list-plan-wrapper container">
-        <button class="left" onclick="leftScroll()" th:if="${gymPlans.size()}>3">
+        <button class="left l1" onclick="leftScroll()" th:if="${gymPlans.size()}>3">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
         <div class="scroll-plans">
@@ -166,69 +140,85 @@
                         <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
-                    <div style="" class="gym-duration">
+
+                    <div style="" class="gym-duration fw-bold " th:if="${gymPlan.duration > 0}">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
-                    <div style="" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div style="" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                    <div class="fw-bold mt-1" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                    <div class="fw-bold mt-1" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
-
                         Thêm vào giỏ hàng
-
                 </button>
             </div>
 
         </div>
-        <button class="right" onclick="rightScroll()" th:if="${gymPlans.size()}>3">
+        <button class="right r1" onclick="rightScroll()" th:if="${gymPlans.size()}>3">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
         </button>
     </div>
 
-    <div style="margin: auto;">
+    <div style="margin: auto;" class="container">
         <h3 style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
         <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
-        <!-- <div style="color: white; margin-top: 20px;">Chúng tôi hiểu rằng đánh giá một khoản đầu tư không thể dựa trên chi phí bỏ ra, mà phải đến từ hiệu quả mang lại – tỷ suất sinh lời. Với mục tiêu duy nhất là kết quả của khách hàng, thay vì đầu tư vào những tiện nghi hào nhoáng bên ngoài, chúng tôi tập trung vào những thiết bị có chất lượng cao, đến từ những thương hiệu hàng đầu thế giới, giúp tối ưu hóa quá trình tập luyện.</div> -->
-        <div class="image-scroll-wrapper squares">
+        <div class="list-image">
+            <button class="leftImage" onclick="leftScroll()">
+                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+            </button>
+            <div class="image-scroll-wrapper squares row">
             <div th:each="album : ${departmentAlbums}">
                 <img onclick="onClickImage(this)" class="w3-hover-opacity" th:src="${album.photoUrl}" />
             </div>
+            </div>
+            <button class="rightImage" onclick="rightScroll()">
+                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+            </button>
         </div>
         <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
             <div style="text-align: center;">
                 <span class="w3-button w3-hover-red ">&times;</span>
-                <div class="w3-animate-zoom" style="width: 70%; margin: auto;">
-                    <img id="img01" style="width:50%; margin: auto;" >
+                <div class="w3-animate-zoom" >
+                    <img id="img01" >
                 </div>
             </div>
         </div>
     </div>
 
-    <h3 style="color: black; margin-top: -790px; font-weight: 600">Đánh giá từ người tập</h3>
+    <h3 style="color: black; font-weight: 600; margin-top: 60px">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
-    <div class="rating-feedback container mx-auto">
-        <div class="rating-option row row-cols-6">
-            <div class="rating-point col-lg-0.5 col-md-1" th:text="${departmentFeedbacks.avgRating} + ' trên 5'"></div>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2" style="margin-left: 70px;">
+    <div class="rating-feedback container mx-auto" id="ratingfeedback">
+        <div class="rating-option row">
+            <div class="rating-avg">
+                <div style="display: flex; position: relative">
+                    <div class="rating-point" th:text="${departmentFeedbacks.avgRating}"></div>
+                    <div class="rating-max">trên 5</div>
+                </div>
+                <div class="rating" th:attr="data-star=${departmentFeedbacks.avgRating}"></div>
+            </div>
+            <div class="button-list">
+            <div class="row">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
             </button>
             <button type="button" class="btn btn-warning col-lg-1 col-md-2">
                 1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
             </button>
+                </div>
+            </div>
         </div>
         <div th:each="feedback : ${userFeedbacks}" class="user-rating">
             <div class="user-rating-avatar">
@@ -236,25 +226,22 @@
             </div>
             <div class="user-rating-description">
                 <div th:text="${feedback.userName}"></div>
-                <i style="height: 20px;" th:attr="data-star=${feedback.rating}"></i>
+                <i style="height: 25px;" th:attr="data-star=${feedback.rating}"></i>
                 <div th:text="${feedback.feedbackTime}"></div>
                 <div  th:text="${feedback.comments}"></div>
             </div>
         </div>
-        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.total == 7}">
+        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.getTotal() > 7}">
             <div class="pagination col justify-content-center">
-                <a class="prev page-numbers" href="javascript:;">prev</a>
-                <span aria-current="page" class="page-numbers current">1</span>
-                <a class="page-numbers" href="javascript:;">2</a>
-                <a class="page-numbers" href="javascript:;">3</a>
-                <a class="page-numbers" href="javascript:;">4</a>
-                <a class="page-numbers" href="javascript:;">5</a>
-                <a class="page-numbers" href="javascript:;">6</a>
-                <a class="page-numbers" href="javascript:;">7</a>
-                <a class="page-numbers" href="javascript:;">8</a>
-                <a class="page-numbers" href="javascript:;">9</a>
-                <a class="page-numbers" href="javascript:;">10</a>
-                <a class="next page-numbers" href="javascript:;">next</a>
+                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"
+                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>
+                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"
+                       th:classappend="${pageNumber == currentPage}? 'current' : ''"
+                       th:text="${pageNumber}"></a>
+                </span>
+                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"
+                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>
             </div>
         </div>
     </div>
@@ -264,96 +251,18 @@
 
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-info">
-                        <h3>Gp<span>.</span></h3>
-                        <p>
-                            A108 Adam Street <br>
-                            NY 535022, USA<br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-                        <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="copyright">
-            &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </div>
-</footer><!-- End Footer -->
-
+<th:block th:include="common/footer :: footer"></th:block>
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
-<!-- Vendor JS Files -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
-
-<!-- Template Main JS File -->
-<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<th:block th:include="common/vendor-script"></th:block>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
     function onClickImage(element) {
         document.getElementById("img01").src = element.src;
         document.getElementById("modal01").style.display = "block";
@@ -361,8 +270,94 @@
     document.addEventListener("DOMContentLoaded", function () {
         const scrollImages = document.querySelector(".scroll-plans");
         const scrollLength = scrollImages.scrollWidth - scrollImages.clientWidth;
+        const leftButton = document.querySelector(".left.l1");
+        const rightButton = document.querySelector(".right.r1");
+
+        function checkScroll() {
+            const currentScroll = scrollImages.scrollLeft;
+            if (currentScroll === 0) {
+                leftButton.setAttribute("disabled", "true");
+                rightButton.removeAttribute("disabled");
+            } else if (currentScroll === scrollLength) {
+                rightButton.setAttribute("disabled", "true");
+                leftButton.removeAttribute("disabled");
+            } else {
+                leftButton.removeAttribute("disabled");
+                rightButton.removeAttribute("disabled");
+            }
+        }
+
+        scrollImages.addEventListener("scroll", checkScroll);
+        window.addEventListener("resize", checkScroll);
+        checkScroll();
+
+        function leftScroll() {
+            scrollImages.scrollBy({
+                left: -500,
+                behavior: "smooth"
+            });
+        }
+
+        function rightScroll() {
+            scrollImages.scrollBy({
+                left: 500,
+                behavior: "smooth"
+            });
+        }
+
+        leftButton.addEventListener("click", leftScroll);
+        rightButton.addEventListener("click", rightScroll);
+    });
+
+
+    //JS dich vu
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollImages = document.querySelector(".scroll-services");
+        const scrollLength = scrollImages.scrollWidth - scrollImages.clientWidth;
         const leftButton = document.querySelector(".left");
         const rightButton = document.querySelector(".right");
+
+        function checkScroll() {
+            const currentScroll = scrollImages.scrollLeft;
+            if (currentScroll === 0) {
+                leftButton.setAttribute("disabled", "true");
+                rightButton.removeAttribute("disabled");
+            } else if (currentScroll === scrollLength) {
+                rightButton.setAttribute("disabled", "true");
+                leftButton.removeAttribute("disabled");
+            } else {
+                leftButton.removeAttribute("disabled");
+                rightButton.removeAttribute("disabled");
+            }
+        }
+
+        scrollImages.addEventListener("scroll", checkScroll);
+        window.addEventListener("resize", checkScroll);
+        checkScroll();
+
+        function leftScroll() {
+            scrollImages.scrollBy({
+                left: -450,
+                behavior: "smooth"
+            });
+        }
+
+        function rightScroll() {
+            scrollImages.scrollBy({
+                left: 500,
+                behavior: "smooth"
+            });
+        }
+
+        leftButton.addEventListener("click", leftScroll);
+        rightButton.addEventListener("click", rightScroll);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollImages = document.querySelector(".image-scroll-wrapper");
+        const scrollLength = scrollImages.scrollWidth - scrollImages.clientWidth;
+        const leftButton = document.querySelector(".leftImage");
+        const rightButton = document.querySelector(".rightImage");
 
         function checkScroll() {
             const currentScroll = scrollImages.scrollLeft;
@@ -498,8 +493,6 @@
                 // Xử lý lỗi kết nối nếu cần
             });
     }
-
-
 
 </script>
 

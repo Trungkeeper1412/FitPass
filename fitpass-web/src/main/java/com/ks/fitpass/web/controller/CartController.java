@@ -3,7 +3,7 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.Department;
-import com.ks.fitpass.department.service.GymPlanService;
+import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.order.dto.AddToCartRequestDTO;
 import com.ks.fitpass.order.dto.CartUpdateRequestDto;
 import com.ks.fitpass.order.entity.cart.Cart;
@@ -35,7 +35,7 @@ public class CartController {
         int gymPlanId = addToCartRequestDTO.getGymPlanId();
         int quantity = addToCartRequestDTO.getQuantity();
         int departmentId = addToCartRequestDTO.getDepartmentId();
-        GymPlanDepartmentNameDto product = gymPlanService.getGymPlanByGymPlanId(gymPlanId);
+        GymPlanDepartmentNameDto product = gymPlanService.getGymPlanByGymPlanId(gymPlanId,departmentId);
         if (product != null && quantity > 0) {
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
@@ -46,7 +46,7 @@ public class CartController {
             // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
             boolean productExistsInCart = false;
             for (CartItem item : cart.getItems()) {
-                if (item.getGymPlan().getGymPlanId() == gymPlanId) {
+                if (item.getGymPlan().getGymPlanId() == gymPlanId && item.getGymPlan().getGymDepartmentId()==departmentId) {
 /*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;
@@ -112,10 +112,10 @@ public class CartController {
     }
 
     @GetMapping("/remove")
-    public String removeItem(@RequestParam int gymPlanId, HttpSession session) {
+    public String removeItem(@RequestParam int gymPlanId,@RequestParam int departmentId, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart != null) {
-            cart.removeItem(gymPlanId);
+            cart.removeItem(gymPlanId,departmentId);
         }
         session.setAttribute("cart", cart);
         return "redirect:/cart/view";

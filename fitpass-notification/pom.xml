@@ -11,9 +11,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>fitpass-notification</name>
 	<description>fitpass-notification</description>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.ks</groupId>
@@ -21,5 +18,5 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
 </project>

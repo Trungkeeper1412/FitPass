@@ -29,4 +29,9 @@ public class WalletServiceImpl implements WalletService {
     public int getWalletIdByUserId(int userId) {
         return walletRepository.getWalletIdByUserId(userId);
     }
+
+    @Override
+    public int insertWallet(int userId, double balance) {
+        return walletRepository.insertWallet(userId, balance);
+    }
 }

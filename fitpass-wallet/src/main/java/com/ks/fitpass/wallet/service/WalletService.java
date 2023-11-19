@@ -5,5 +5,5 @@ public interface WalletService {
 
     int updateBalanceByUderId(int userId, double balance);
     int getWalletIdByUserId(int userId);
-
+    int insertWallet(int userId, double balance);
 }

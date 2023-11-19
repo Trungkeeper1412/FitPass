@@ -17,5 +17,6 @@ public class DataSendCheckOutFlexibleDTO {
     private Timestamp checkInTime;
     private long checkOutTime;
     private double totalCredit;
+    private String employeeMessage;
 }
 

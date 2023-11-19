@@ -4,6 +4,7 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.service.KbnService;
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.order.dto.PlanData;
 import com.ks.fitpass.order.entity.Order;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.entity.cart.Cart;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/checkout")
@@ -43,13 +45,13 @@ public class CheckOutController {
     }
 
     @GetMapping("/view")
-    public String viewCheckout(Model model, @RequestParam List<Integer> idList, HttpSession session) {
+    public String viewCheckout(Model model, @RequestParam List<Integer> idList,@RequestParam List<Integer> deptIdList, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         List<CartItem> checkoutCartList = new ArrayList<>();
         if (cart != null) {
             List<CartItem> cartItemList = cart.getItems();
             for (CartItem cartItem : cartItemList) {
-                if (idList.contains(cartItem.getGymPlan().getGymPlanId())) {
+                if (idList.contains(cartItem.getGymPlan().getGymPlanId()) && deptIdList.contains(cartItem.getGymPlan().getGymDepartmentId())) {
                     checkoutCartList.add(cartItem);
                 }
             }
@@ -86,13 +88,22 @@ public class CheckOutController {
     }
 
     @PostMapping("/perform")
-    public String payment(Model model,  @RequestParam("planId") List<Integer> planIdList, @RequestParam("totalPrice") double totalPrice, HttpSession session) {
+    public String payment(Model model,  @RequestParam("planId") List<String> planIdList, @RequestParam("totalPrice") double totalPrice, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
 
         User user = (User) session.getAttribute("userInfo");
-
+        List<PlanData> planDataObjects = new ArrayList<>();
+        for (String planData:
+             planIdList) {
+            String[] parts = planData.split(";");
+            Integer gymPlanId = Integer.parseInt(parts[0]);
+            Integer departmentId = Integer.parseInt(parts[1]);
+            PlanData planDataObject = new PlanData(gymPlanId,departmentId);
+            planDataObjects.add(planDataObject);
+        }
         if (cart != null) {
             List<CartItem> cartItemList = cart.getItems();
+            List<CartItem> cartItemsRemoveList= new ArrayList<>();
             boolean statusInsertOrderDetailBoolean = true;
             Order order = new Order();
             order.setUserId(user.getUserId());
@@ -104,7 +115,7 @@ public class CheckOutController {
             int insertOrderStatus = orderService.insertOrder(order);
             int orderId = orderService.getLastOrderInsertId();
             for (CartItem cartItem : cartItemList) {
-                if (planIdList.contains(cartItem.getGymPlan().getGymPlanId())) {
+                if (planDataObjects.stream().anyMatch(b->b.getGymPlanId()==cartItem.getGymPlan().getGymPlanId()&&b.getDepartmentId()==cartItem.getGymPlan().getGymDepartmentId())) {
                     GymPlanDepartmentNameDto gymPlanDepartmentNameDto = cartItem.getGymPlan();
                     OrderDetails orderDetails = new OrderDetails();
                     orderDetails.setOrderId(orderId);
@@ -128,6 +139,7 @@ public class CheckOutController {
                     if(insertOrderDetailStatus <= 0) {
                         statusInsertOrderDetailBoolean = false;
                     }
+                    cartItemsRemoveList.add(cartItem);
                 }
             }
             int insertOrderDetailStatus = statusInsertOrderDetailBoolean == false ? 0 : 1;
@@ -137,9 +149,9 @@ public class CheckOutController {
             model.addAttribute("messageInsertOrder", messageInsert);
 
             // Remove khỏi cart
-            for (Integer i:
-                 planIdList) {
-                cart.removeItem(i);
+            for (CartItem i:
+                 cartItemsRemoveList) {
+             cart.removeItem(i.getGymPlan().getGymPlanId(),i.getGymPlan().getGymDepartmentId());
             }
             session.setAttribute("cart", cart);
             // Lấy user balance

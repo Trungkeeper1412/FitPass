@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="brand-owner/common/head"></th:block>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <th:block th:replace="brand-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <th:block th:replace="brand-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex justify-content-between">
+                        <h2 class="m-0 font-weight-bold text-primary">Theo dõi yêu cầu rút tiền :</h2>
+                        <button type="button" class="btn btn-primary" onclick="openWithdrawModal()" title="Rút tiền">
+                            Gửi yêu cầu rút tiền<i class="fas fa-plus pl-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Modal Rút Tiền -->
+                    <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="withdrawModalLabel">Gửi yêu cầu rút tiền</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form Rút Tiền -->
+                                    <form id="withdrawForm">
+                                        <div class="row">
+                                            <div class="col-md-5 mb-3">
+                                                <label for="bankSelect" class="form-label">Chọn ngân hàng :</label>
+                                                <select class="form-select" id="bankSelect">
+                                                    <option value="acb">ACB</option>
+                                                    <option value="agribank">Agribank</option>
+                                                    <option value="bacabank">Bac A Bank</option>
+                                                    <option value="bidv">BIDV</option>
+                                                    <option value="hdbank">HDBank</option>
+                                                    <option value="mbbank">MB Bank</option>
+                                                    <option value="ncb">NCB</option>
+                                                    <option value="oceanbank">OceanBank</option>
+                                                    <option value="pgbank">PG Bank</option>
+                                                    <option value="saigonbank">Saigonbank</option>
+                                                    <option value="scb">SCB</option>
+                                                    <option value="shb">SHB</option>
+                                                    <option value="techcombank">Techcombank</option>
+                                                    <option value="tpbank">TPBank</option>
+                                                    <option value="vib">VIB</option>
+                                                    <option value="vietcombank">Vietcombank</option>
+                                                    <option value="vietinbank">Vietinbank</option>
+                                                    <option value="vpbank">VPBank</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-7 mb-3">
+                                                <label for="receiverAccount" class="form-label">Số tài khoản :</label>
+                                                <input type="text" class="form-control" id="receiverAccount" placeholder="Nhập tài khoản nhận tiền">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
+                                            <input type="text" class="form-control" id="cardHolderName" placeholder="Nhập tên chủ thẻ">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="currentBalance">Số dư hiện tại (Credit) :</label>
+                                            <input type="number" class="form-control" id="currentBalance" placeholder="Số dư hiện tại" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="amount">Số Credit muốn rút :</label>
+                                            <input type="number" class="form-control" id="amount" placeholder="Nhập số credit" required oninput="updateConversionRate()">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="conversionRate">Số tiền quy đổi (VND) :</label>
+                                            <input type="text" class="form-control" id="conversionRate" value="0" readonly>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <button type="button" class="btn btn-primary" onclick="submitWithdrawRequest()">Gửi Xác Nhận</button>
+                                        </div>
+                                    </form>
+                                    <script>
+                                        function updateConversionRate() {
+                                            var amount = document.getElementById('amount').value;
+                                            var conversionRate = amount * 1000;
+                                            document.getElementById('conversionRate').value = conversionRate;
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="withdraw text-center">
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Tổng số giao dịch:</label>
+                            <span class="totalTransactions fw-bold">3 <i class="bi bi-list-check"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Giao dịch thành công:</label>
+                            <span class="successTransactions fw-bold">1 <i class="bi bi-check-circle"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Giao dịch đang xử lý:</label>
+                            <span class="processingTransactions fw-bold">2 <i class="bi bi-clock"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Giao dịch từ chối:</label>
+                            <span class="rejectedTransactions fw-bold">0 <i class="bi bi-x-circle"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Tổng số credit đã rút:</label>
+                            <span class="totalCredits text-money">92000 Credit <i class="bi bi-cash"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Tổng số tiền đã nhận:</label>
+                            <span class="totalMoney text-money">9200000 <i class="fa-solid fa-dong-sign"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Mã giao dịch</th>
+                                    <th>Thời gian</th>
+                                    <th>Số credit</th>
+                                    <th>Số tiền quy đổi</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>10000 Creadit</td>
+                                    <td>10000000 vnđ</td>
+                                    <td class="text-success fw-bold">Thành công</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>172000 Creadit</td>
+                                    <td>172000000 vnđ</td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>20000 Creadit</td>
+                                    <td>20000000 vnđ</td>
+                                    <td class="text-danger fw-bold">Từ chối</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="brand-owner/common/footer"></th:block>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<th:block th:replace="brand-owner/common/script"></th:block>
+</body>
+
+</html>

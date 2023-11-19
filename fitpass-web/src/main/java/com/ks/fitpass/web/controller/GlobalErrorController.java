@@ -22,13 +22,13 @@ public class GlobalErrorController implements ErrorController {
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
 
-            if(statusCode == HttpStatus.FORBIDDEN.value()) {
+            if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "error/403";
             }
-            if(statusCode == HttpStatus.NOT_FOUND.value()) {
+            if (statusCode == HttpStatus.NOT_FOUND.value()) {
                 return "error/404";
             }
-            if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 return "error/500";
             }
         }

@@ -3,24 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang cá nhân</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>Trang Cá Nhân</title>
+    <meta name="description" content="Profile Page">
+    <meta name="keywords" content="My">
 
-    <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
-    <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
+    <th:block th:insert="common/vendor-head"></th:block>
 
-    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
     <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.css" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.js"></script>
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
 </head>
 <body style="background-color: rgb(238, 238, 238);">
@@ -70,6 +59,9 @@
                 <!-- User transaction tab -->
                 <th:block th:replace="user/fragments/transaction-history.html :: transaction-history"></th:block>
 
+                <!--User notifications tab-->
+                <th:block th:replace="user/fragments/notifications.html :: notifications"></th:block>
+
             </div>
         </div>
     </div>
@@ -104,17 +96,8 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
-<!-- Vendor JS Files -->
-<script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
-
-<!-- Template Main JS File -->
-<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
+<th:block th:include="common/vendor-script"></th:block>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.js"></script>
 <script>
     new DataTable('#transaction-history-tb', {
         language: {
@@ -153,27 +136,40 @@
     document.getElementById("add-money-tab").style.display = "none";
     document.getElementById("transaction-history").style.display = "none";
     document.getElementById("change-pw").style.display = "none";
+    document.getElementById("my-notifications").style.display = "none";
 
     function openAddMoneyTab() {
         document.getElementById("user-profile").style.display = "none";
         document.getElementById("change-pw").style.display = "none";
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("transaction-history").style.display = "none";
         document.getElementById("add-money-tab").style.display = "block";
     }
     function openUserProfileTab() {
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("add-money-tab").style.display = "none";
         document.getElementById("transaction-history").style.display = "none";
         document.getElementById("change-pw").style.display = "none";
         document.getElementById("user-profile").style.display = "block";
     }
     function openTransactionHistory() {
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("transaction-history").style.display = "block";
         document.getElementById("user-profile").style.display = "none";
         document.getElementById("change-pw").style.display = "none";
         document.getElementById("add-money-tab").style.display = "none";
     }
     function openChangePwTab() {
+        document.getElementById("my-notifications").style.display = "none";
         document.getElementById("change-pw").style.display = "block";
+        document.getElementById("user-profile").style.display = "none";
+        document.getElementById("add-money-tab").style.display = "none";
+        document.getElementById("transaction-history").style.display = "none";
+    }
+
+    function openNotiTab() {
+        document.getElementById("my-notifications").style.display = "block";
+        document.getElementById("change-pw").style.display = "none";
         document.getElementById("user-profile").style.display = "none";
         document.getElementById("add-money-tab").style.display = "none";
         document.getElementById("transaction-history").style.display = "none";

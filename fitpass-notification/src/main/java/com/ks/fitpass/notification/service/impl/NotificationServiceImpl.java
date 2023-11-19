@@ -3,6 +3,7 @@ package com.ks.fitpass.notification.service.impl;
 import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.repository.NotificationRepository;
 import com.ks.fitpass.notification.service.NotificationService;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
 
-    public NotificationServiceImpl(NotificationRepository notificationRepository) {
+    public NotificationServiceImpl(NotificationRepository notificationRepository, SimpMessagingTemplate simpMessagingTemplate) {
         this.notificationRepository = notificationRepository;
     }
 

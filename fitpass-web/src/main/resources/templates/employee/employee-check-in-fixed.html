@@ -78,28 +78,30 @@
                             <div class="tab-pane fade show active" id="unactivated">
                                 <div class="row" id="CheckInList">
                                     <th:block th:each="item:${checkInList}">
-                                        <div class="user-card">
-                                            <div class="row">
-                                                <div class="col-2">
+                                        <div class="col-md-11 col-lg-6">
+                                            <div class="user-card">
+                                                <div class="img-col">
                                                     <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
                                                 </div>
-                                                <div class="col-4">
-                                                    <h3 class="fw-bold" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</h3>
-                                                    <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói 3 ngày</p>
-                                                    <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
-                                                    <p>Số điện thoại: <span th:text="${item.getPhoneNumber()}">0934412001</span></p>
-                                                </div>
-                                                <div class="col-2">
-                                                    <h5 class="text-money"><span th:text="${item.getPrice()}">100</span> <span class="credit">Credit</span></h5>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="status-box">
-                                                        <span class="user-status">Chưa check-in</span>
+                                                <div class="user-info">
+                                                    <div class="basic-info">
+                                                        <div class="fw-bold" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
+                                                        <span th:text="${item.getPhoneNumber()}">0934412001</span>
+                                                        <div class="status-box mt-2">
+                                                            <span class="user-status">Chưa check-in</span>
+                                                        </div>
+                                                        <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
                                                     </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'" class="btn btn-primary">Check-in</button>
-                                                </div>
+
+                                                    <div class="plan-info" style="margin-left: 10px">
+                                                        <p class="text-uppercase fw-bold plan-type" th:text="${item.getProductName()}">Gói 3 ngày</p>
+                                                        <p>
+                                                            <span  class="text-money" th:text="${item.getPrice()}"></span>
+                                                            <span class="credit fw-bold">Credit</span>
+                                                        </p>
+                                                        <button th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'" class="btn btn-primary">Check-in</button>
+                                                    </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </th:block>
@@ -107,31 +109,31 @@
                             </div>
 
                             <div class="tab-pane fade" id="active">
-                                <div class="row" id="CheckOutList">
+                                <div class="row justify-content-center" id="CheckOutList">
                                     <th:block th:each="item:${checkedInList}">
-                                        <div class="user-card">
-                                            <div class="row">
-                                                <div class="col-2">
+                                        <div class="col-md-11 col-lg-6">
+                                            <div class="user-card">
+                                                <div class="img-col">
                                                     <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
                                                 </div>
-                                                <div class="col-4">
-                                                    <h3 class="fw-bold" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</h3>
-                                                    <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói 3 ngày</p>
-                                                    <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
-                                                    <p>Số điện thoại: <span th:text="${item.getPhoneNumber()}">0934412001</span></p>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <h5 class="text-money"><span th:text="${item.getPrice()}">1200</span>&nbsp;<span class="credit">Credit</span></h5>
+                                                <div class="user-info">
+                                                    <div class="basic-info">
+                                                    <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
+                                                    <span th:text="${item.getPhoneNumber()}">0934412001</span>
+
+                                                    <p class="mt-2 fw-bold plan-type" th:text="${item.getProductName()}">Gói 3 ngày</p>
+                                                    <h5 class="text-money"><span th:text="${item.getPrice()}">1200</span>&nbsp;<span class="credit">Credit</span></h5>
+                                                    </div>
+
+                                                    <div class="plan-info">
                                                         <div class="status-box">
                                                             <span class="user-status">Đã check-in</span>
                                                         </div>
+                                                        <p>Thời gian: <span th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'HH:mm:ss dd/MM/yyyy')}">12:12:32 PM</span><span id="usageTime"></span></p>
+                                                        <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
-                                                    <p>Thời gian: <span th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'HH:mm:ss dd/MM/yyyy')}">12:12:32 PM</span><span id="usageTime"></span></p>
-                                                </div>
-                                            </div>
+                                        </div>
                                         </div>
                                     </th:block>
 
@@ -183,7 +185,7 @@
         function performCheckIn(orderDetailId) {
             $.ajax({
                 type: "GET",
-                url: `/employee/fixed/sendCheckinRequest?id=${orderDetailId}` ,
+                url: `/employee/fixed/sendCheckinRequest?id=${orderDetailId}`,
                 success: function (data) {
                     console.log(data)
                     // Nếu send request thành công thì hiện  thông báo gửi thành công

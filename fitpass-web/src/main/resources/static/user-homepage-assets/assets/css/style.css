@@ -113,7 +113,7 @@ h6 {
   --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
-    transition-delay: 0 !important;
+    transition-delay: 0s !important;
   }
 }
 
@@ -129,8 +129,7 @@ h6 {
 
 #header.header-scrolled,
 #header.header-inner-pages {
-  background: black;
-  animation: gradientAnimation 5s linear infinite;
+  background: rgb(0, 0, 0);
 }
 
 #header .logo {
@@ -243,6 +242,33 @@ h6 {
   background: #fff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
+}
+
+.view-all-noti{
+  position: absolute;
+  bottom: 0;
+}
+.view-all-noti button{
+  padding: 9px;
+  height: 100%;
+  font-size: 12px;
+  border: hidden;
+  font-weight: 600;
+  width: 100%;
+  background-color: #e1e1e1;
+}
+
+.noti img{
+  width: 35px;
+}
+.noti .noti-time{
+  color: #9f9f9f;
+  font-weight: 600;
+  font-size: 12px;
+}
+.noti .noti-title{
+  font-size: 13px;
+  margin-top: 4px;
 }
 
 .navbar .dropdown ul li {
@@ -594,7 +620,7 @@ h6 {
 }
 
 #hero .icon-box h3 a {
-  color: ffc451;
+  color: #ffc451;
   transition: ease-in-out 0.3s;
 }
 
@@ -2075,6 +2101,7 @@ textarea.form-control {
 
 * {
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .mySlides {
@@ -2198,6 +2225,7 @@ select {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   justify-content: space-between;
+  font-size: 15px;
 }
 
 .sidebar-brand-icon img {
@@ -2317,7 +2345,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2334,7 +2362,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2351,7 +2379,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2368,7 +2396,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2385,7 +2413,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/5Ypszfv/card-2.jpg');
+  background-image: url('../img/card_2.jpg');
   background-size: cover;
 }
 
@@ -2402,7 +2430,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('https://i.ibb.co/ZdTCj65/card-1.jpg');
+  background-image: url('../img/card_1.jpg');
   background-size: cover;
 }
 
@@ -2567,10 +2595,12 @@ body {
   border-radius: 2px;
 }
 
-.fa,
-.fas {
-  font-size: 13px;
-  margin-right: 4px;
+.dropdown-menu a {
+  color: #333;
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  font-size: 13.125px;
 }
 
 .card-brand .image-container {
@@ -2621,7 +2651,7 @@ body {
   background-color: white;
   color: black;
   overflow: hidden;
-  border-radius: solid 5px;
+  border-radius: 5px;
   text-align: center;
 }
 

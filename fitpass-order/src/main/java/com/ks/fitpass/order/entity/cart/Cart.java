@@ -17,7 +17,7 @@ public class Cart implements Serializable {
 
     public void addItem(GymPlanDepartmentNameDto product, int quantity) {
         for (CartItem item : items) {
-            if (item.getGymPlan().getGymPlanId() == product.getGymPlanId()) {
+            if (item.getGymPlan().getGymPlanId() == product.getGymPlanId()&&item.getGymPlan().getGymDepartmentId()==product.getGymDepartmentId()) {
                 item.setQuantity(item.getQuantity() + quantity);
                 return;
             }
@@ -43,8 +43,8 @@ public class Cart implements Serializable {
 
 
 
-    public void removeItem(int gymPlanId) {
-        items.removeIf(item -> item.getGymPlan().getGymPlanId() == gymPlanId);
+    public void removeItem(int gymPlanId,int departmentId) {
+        items.removeIf(item -> item.getGymPlan().getGymPlanId() == gymPlanId && item.getGymPlan().getGymDepartmentId()==departmentId);
     }
 
     public double getTotalPrice() {

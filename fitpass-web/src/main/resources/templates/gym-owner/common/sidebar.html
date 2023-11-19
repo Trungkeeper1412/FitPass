@@ -1,0 +1,119 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/gym-owner/index}">
+    <div class="sidebar-brand-icon">
+      <img th:src="@{/employee-assets/img/icon.png}" alt="Logo Fitpass">
+    </div>
+    <div class="sidebar-brand-text mx-3">Quản lý cơ sở</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" th:href="@{/gym-owner/index}">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Thống kê</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Quản lý
+  </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/index}">
+      <i class="bi bi-server"></i>
+      <span>Cơ sở</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/employee/list}">
+      <i class="fas fa-users fa-fw"></i>
+      <span>Nhân viên</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Cập nhật thông tin
+  </div>
+
+  <!-- Nav Item - Đánh giá -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/department/info}">
+      <i class="fas fa-fw fa-info-circle"></i>
+      <span>Thông tin cơ sở</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/department/gym-plans}">
+      <i class="fas fa-fw fa-dumbbell"></i>
+      <span>Gói tập</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/department/image}">
+      <i class="fas fa-fw fa-image"></i>
+      <span>Quản lý hình ảnh</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/department/amenities}">
+      <i class="fas fa-fw fa-concierge-bell"></i>
+      <span>Dịch vụ</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/department/features}">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span>Tiện ích</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/department/location}">
+      <i class="fas fa-fw fa-map-marker"></i>
+      <span>Vị trí</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Dịch vụ
+  </div>
+
+  <!-- Nav Item - Đánh giá -->
+  <li class="nav-item">
+    <a class="nav-link" th:href="@{/gym-owner/feedback/list}">
+      <i class="fas fa-fw fa-star"></i>
+      <span>Đánh giá</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>

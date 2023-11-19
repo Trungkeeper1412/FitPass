@@ -3,26 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym department details</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="icon" th:href="@{/user-homepage-assets/assets/img/icon.png}">
-    <link rel="apple-touch-icon" th:href="@{/user-homepage-assets/assets/img/apple-touch-icon.png}">
-    <script src="https://kit.fontawesome.com/a59b9b09ab.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/aos/aos.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <title>Thanh Toán</title>
+    <meta name="description" content="Check Out Page">
+    <meta name="keywords" content="My">
+
+    <th:block th:include="common/vendor-head"></th:block>
+
     <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 </head>
 
 <body class="body-checkout">
@@ -38,19 +27,19 @@
 <div id="my-card" class="checkout-container container">
     <div class="checkout-content">
         <div class="checkout-title row">
-            <div class="my-plan-title col-md-7">Gói tập</div>
-            <div class="price-title col-md-3">Đơn giá (credits)</div>
-            <div class="num-of-plan-title col-md-2">Số lượng</div>
+            <div class="my-plan-title">Gói tập</div>
+            <div class="price-title mx-auto">Đơn giá (credits)</div>
+            <div class="num-of-plan-title mx-auto">Số lượng</div>
         </div>
         <th:block th:each="department :${departmentList}">
             <div class="plan-in-a-gymdept row">
 
                 <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
                 <th:block th:each="cartItem: ${checkoutCartList}">
-
+                    <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
                     <div class="plan-checkout">
                         <div class="plan-card-mc">
-                            <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()}"/>
+                            <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()+';'+cartItem.getGymPlan().getGymDepartmentId()}"/>
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
                             <div class="plan-info-mc">
                                 <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim cương</h4>
@@ -67,7 +56,7 @@
                             1
                         </div>
                     </div>
-
+                    </th:block>
                 </th:block>
             </div>
         </th:block>
@@ -127,23 +116,15 @@
 
 </div>
 </form>
+<!-- ======= Footer ======= -->
+<th:block th:include="common/footer :: footer"></th:block>
 
     <th:block th:if="${messageInsertOrder}">
         <input type="hidden" id="messageInsertOrder" value="${messageInsertOrder}" />
     </th:block>
 <!-- Vendor JS Files -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/user-homepage-assets/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/aos/aos.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/glightbox/js/glightbox.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-<script th:src="@{/user-homepage-assets/assets/vendor/php-email-form/validate.js}"></script>
-
-<!-- Template Main JS File -->
-<script th:src="@{/user-homepage-assets/assets/js/main.js}"></script>
-    <script>
+<th:block th:include="common/vendor-script"></th:block>
+<script>
         if(document.querySelector("#messageInsertOrder") != null) {
             Swal.fire({
                 icon: 'success',
@@ -155,6 +136,6 @@
                 window.location.href = '/inventory/view';
             });
         }
-    </script>
+</script>
 </body>
 </html>

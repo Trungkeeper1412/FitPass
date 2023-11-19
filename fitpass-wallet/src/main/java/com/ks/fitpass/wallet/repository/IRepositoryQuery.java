@@ -20,4 +20,10 @@ public interface IRepositoryQuery {
                 JOIN user u ON w.user_id = u.user_id
                 WHERE u.user_id = ?;
             """;
+
+    String INSERT_WALLET = """
+                INSERT INTO wallet
+                (user_id, balance)
+                VALUES(?, ?);
+            """;
 }

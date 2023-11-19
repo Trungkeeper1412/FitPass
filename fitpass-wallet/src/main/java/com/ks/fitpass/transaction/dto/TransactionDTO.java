@@ -17,4 +17,5 @@ public class TransactionDTO {
     private int amount;
     private Timestamp transactionDate;
     private String status;
+    
 }

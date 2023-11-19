@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="gym-owner/common/head"></th:block>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <th:block th:replace="gym-owner/common/sidebar"></th:block>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <th:block th:replace="gym-owner/common/navbar"></th:block>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="fw-bold text-primary">Cập nhật gói tập</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <section>
+                                    <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link active" id="flexible-tab" data-toggle="tab"
+                                                href="#flexible" role="tab" aria-controls="flexible"
+                                                aria-selected="true">Gói linh hoạt</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="fixed-tab" data-toggle="tab"
+                                                href="#fixed" role="tab" aria-controls="fixed"
+                                                aria-selected="false">Gói cố định</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content mt-4">
+                                        <div class="tab-pane fade show active" id="flexible" role="tabpanel"
+                                            aria-labelledby="flexible-tab">
+                                            <div class="row">
+                                                <div class="text-start">
+                                                    <table class="table table-bordered"
+                                                        id="dataTableCheckedFlexible" width="100%"
+                                                        cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Thứ tự</th>
+                                                                <th>Tên gói tập</th>
+                                                                <th>Số credits/giờ</th>
+                                                                <th data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                                    Thời hạn trước khi kích hoạt</th>
+                                                                <th data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                                    Thời hạn sau khi kích hoạt</th>
+                                                                <th style="width: 600px;" class="plan-description">Mô tả</th>
+                                                                <th><input type="checkbox" id="checkAll">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Gói linh hoạt tiết kiệm</td>
+                                                                <td>5</td>
+                                                                <td>30 ngày</td>
+                                                                <td>60 ngày</td>
+                                                                <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                    tập gym
+                                                                    California Gym and Fitness mang đến cho
+                                                                    bạn trải
+                                                                    nghiệm luyện tập hoàn hảo theo tiêu
+                                                                    chuẩn 5 sao, với
+                                                                    sự chăm sóc tận tâm và một loạt các tiện
+                                                                    nghi cao
+                                                                    cấp</td>
+                                                                <td><input type="checkbox"
+                                                                        class="rowCheckbox"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Gói linh hoạt tối ưu</td>
+                                                                <td>5</td>
+                                                                <td>30 ngày</td>
+                                                                <td>60 ngày</td>
+                                                                <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                    tập gym
+                                                                    California Gym and Fitness mang đến cho
+                                                                    bạn trải
+                                                                    nghiệm luyện tập hoàn hảo theo tiêu
+                                                                    chuẩn 5 sao, với
+                                                                    sự chăm sóc tận tâm và một loạt các tiện
+                                                                    nghi cao
+                                                                    cấp</td>
+                                                                <td><input type="checkbox"
+                                                                        class="rowCheckbox"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Gói linh hoạt tiêu chuẩn</td>
+                                                                <td>5</td>
+                                                                <td>30 ngày</td>
+                                                                <td>60 ngày</td>
+                                                                <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                    tập gym
+                                                                    California Gym and Fitness mang đến cho
+                                                                    bạn trải
+                                                                    nghiệm luyện tập hoàn hảo theo tiêu
+                                                                    chuẩn 5 sao, với
+                                                                    sự chăm sóc tận tâm và một loạt các tiện
+                                                                    nghi cao
+                                                                    cấp</td>
+                                                                <td><input type="checkbox"
+                                                                        class="rowCheckbox"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="fixed" role="tabpanel"
+                                            aria-labelledby="fixed-tab">
+                                            <div class="row">
+                                                <div class="text-start">
+                                                    <table class="table table-bordered"
+                                                        id="dataTableCheckedFixed" width="100%"
+                                                        cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Thứ tự</th>
+                                                                <th>Tên gói tập</th>
+                                                                <th>Số credits</th>
+                                                                <th>Thời lượng tập</th>
+                                                                <th data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                                    Thời hạn trước khi kích hoạt</th>
+                                                                <th data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                                    Thời hạn sau khi kích hoạt</th>
+                                                                <th class="fixed-description">Mô tả</th>
+                                                                <th><input type="checkbox" id="checkAll">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Gói 1</td>
+                                                                <td>5</td>
+                                                                <td>30 ngày</td>
+                                                                <td>10 ngày</td>
+                                                                <td>30 ngày</td>
+                                                                <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                    tập gym
+                                                                    California Gym and Fitness mang đến cho
+                                                                    bạn trải
+                                                                    nghiệm luyện tập hoàn hảo theo tiêu
+                                                                    chuẩn 5 sao, với
+                                                                    sự chăm sóc tận tâm và một loạt các tiện
+                                                                    nghi cao
+                                                                    cấp</td>
+                                                                <td><input type="checkbox"
+                                                                        class="rowCheckbox"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Gói 1</td>
+                                                                <td>5</td>
+                                                                <td>30 ngày</td>
+                                                                <td>10 ngày</td>
+                                                                <td>30 ngày</td>
+                                                                <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                    tập gym
+                                                                    California Gym and Fitness mang đến cho
+                                                                    bạn trải
+                                                                    nghiệm luyện tập hoàn hảo theo tiêu
+                                                                    chuẩn 5 sao, với
+                                                                    sự chăm sóc tận tâm và một loạt các tiện
+                                                                    nghi cao
+                                                                    cấp</td>
+                                                                <td><input type="checkbox"
+                                                                        class="rowCheckbox"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Gói 1</td>
+                                                                <td>5</td>
+                                                                <td>30 ngày</td>
+                                                                <td>10 ngày</td>
+                                                                <td>30 ngày</td>
+                                                                <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                    tập gym
+                                                                    California Gym and Fitness mang đến cho
+                                                                    bạn trải
+                                                                    nghiệm luyện tập hoàn hảo theo tiêu
+                                                                    chuẩn 5 sao, với
+                                                                    sự chăm sóc tận tâm và một loạt các tiện
+                                                                    nghi cao
+                                                                    cấp</td>
+                                                                <td><input type="checkbox"
+                                                                        class="rowCheckbox"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </section>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <th:block th:replace="gym-owner/common/footer"></th:block>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <th:block th:replace="gym-owner/common/script"></th:block>
+</body>
+</html>

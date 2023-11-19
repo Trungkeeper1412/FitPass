@@ -29,19 +29,24 @@ public class WebUtil {
         return sb.toString();
     }
 
-    public static int getCoin(int coin) {
-        return switch (coin) {
-            case 1 -> 1;
-            case 2 -> 3;
-            case 3 -> 5;
-            case 4 -> 7;
-            case 5 -> 9;
-            case 6 -> 11;
-            case 7 -> 13;
-            case 8 -> 15;
-            case 9 -> 17;
-            case 10 -> 19;
-            default -> 0;
-        };
+    public static String generateRandomPassword() {
+        // Độ dài của mật khẩu ngẫu nhiên
+        int passwordLength = 10;
+
+        // Ký tự có thể xuất hiện trong mật khẩu
+        String allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,?';:_-!@#$%^&*()+{}[]|:<>?`~";
+
+        StringBuilder password = new StringBuilder();
+
+        for (int i = 0; i < passwordLength; i++) {
+            // Chọn ngẫu nhiên một ký tự từ chuỗi allowedChars
+            int randomIndex = (int) (Math.random() * allowedChars.length());
+            char randomChar = allowedChars.charAt(randomIndex);
+
+            // Thêm ký tự ngẫu nhiên vào mật khẩu
+            password.append(randomChar);
+        }
+
+        return password.toString();
     }
 }

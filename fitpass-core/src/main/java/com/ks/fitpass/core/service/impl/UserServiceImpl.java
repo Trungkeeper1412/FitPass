@@ -1,10 +1,9 @@
 package com.ks.fitpass.core.service.impl;
 
-import com.ks.fitpass.core.entity.CustomUser;
-import com.ks.fitpass.core.entity.Role;
-import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.*;
 import com.ks.fitpass.core.repository.RoleRepository;
 import com.ks.fitpass.core.repository.UserRepository;
+import com.ks.fitpass.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -61,5 +60,65 @@ public class UserServiceImpl implements UserDetailsService {
                 user.getUserCreateTime(),
                 user.isUserDeleted()
         );
+    }
+
+    @Override
+    public int insertIntoUserDetail(UserDetail userDetail) {
+        return userRepository.insertIntoUserDetail(userDetail);
+    }
+
+    @Override
+    public int getLastInsertUserDetailId(UserDetail userDetail) {
+        return userRepository.getLastInsertUserDetailId(userDetail);
+    }
+
+    @Override
+    public int insertIntoUser(User user) {
+        return userRepository.insertIntoUser(user);
+    }
+
+    @Override
+    public int getLastUserInsertId(User user) {
+        return userRepository.getLastUserInsertId(user);
+    }
+
+    @Override
+    public int insertIntoUserRole(int userId, int roleId) {
+        return userRepository.insertIntoUserRole(userId, roleId);
+    }
+
+    @Override
+    public int getNumberOfAccountCreatedByBrandId(int brandId) {
+        return userRepository.getNumberOfAccountCreatedByBrandId(brandId);
+    }
+
+    @Override
+    public List<GymOwnerListDTO> getAllAccountByBrandId(int brandId) {
+        return userRepository.getAllAccountByBrandId(brandId);
+    }
+
+    @Override
+    public int updateUserDetail(UserDetail userDetail) {
+        return userRepository.updateUserDetail(userDetail);
+    }
+
+    @Override
+    public int updateUserStatusByUserId(int userId, int status) {
+        return userRepository.updateUserStatusByUserId(userId, status);
+    }
+
+    @Override
+    public UserDetail getUserDetailByUserDetailId(int userId) {
+        return userRepository.getUserDetailByUserDetailId(userId);
+    }
+
+    @Override
+    public boolean checkEmailExist(String email) {
+        return userRepository.checkEmailExist(email);
+    }
+
+    @Override
+    public boolean checkUsernameExist(String username) {
+        return userRepository.checkUsernameExist(username);
     }
 }

@@ -42,7 +42,7 @@ public class BrandController {
             model.addAttribute("brand", brand);
             model.addAttribute("page", PageEnum.XXX_FIRST_PAGE.getCode());
 
-            List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandID(brandId);
+            List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(brandId);
             model.addAttribute("brandAmenitie", brandAmenitie);
 
             List<DepartmentDTO> departmentDTOList = departmentService.getDepartmentByBrandID(brandId);
@@ -50,7 +50,6 @@ public class BrandController {
 
             List<DepartmentFeature> departmentFeatures = new ArrayList<>();
 
-            // Loop through departmentDTOList to get departmentId values and fetch department features
             for (DepartmentDTO departmentDTO : departmentDTOList) {
                 int departmentId = departmentDTO.getDepartmentId();
                 List<DepartmentFeature> features = departmentFeatureService.getDepartmentFeatures(departmentId);

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="admin/common/head"></th:block>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <th:block th:replace="admin/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <th:block th:replace="admin/common/navbar"></th:block>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Danh sách yêu cầu rút tiền :</h2>
+                    </div>
+
+                    <div class="withdraw text-center">
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Tổng số giao dịch:</label>
+                            <span class="totalTransactions fw-bold">3 <i class="bi bi-list-check"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Giao dịch thành công:</label>
+                            <span class="successTransactions fw-bold">1 <i class="bi bi-check-circle"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Giao dịch đang xử lý:</label>
+                            <span class="processingTransactions fw-bold">1 <i class="bi bi-clock"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Giao dịch từ chối:</label>
+                            <span class="rejectedTransactions fw-bold">1 <i class="bi bi-x-circle"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Tổng số credit đã rút:</label>
+                            <span class="totalCredits text-money">92000 Credit <i class="bi bi-cash"></i></span>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-2">
+                            <label class="form-label fw-bold">Tổng số tiền đã nhận:</label>
+                            <span class="totalMoney text-money">9200000 <i class="fa-solid fa-dong-sign"></i></span>
+                        </div>
+                    </div>
+                    <!-- Modal Xử lý -->
+                    <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="transactionModalLabel">Xử lý giao dịch</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form cập nhật tiện ích -->
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="brandName" class="form-label">Tên chủ thương hiệu :</label>
+                                            <input type="text" class="form-control" id="brandName" value="Lê Đình Tuấn" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="idCard" class="form-label">Chứng minh nhân dân :</label>
+                                            <input type="text" class="form-control" id="idCard" value="188310234" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label">Địa chỉ :</label>
+                                            <input type="text" class="form-control" id="address" value="Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội." readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phoneNumber" class="form-label">Số điện thoại :</label>
+                                            <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="credit" class="form-label">Số credit :</label>
+                                            <input type="text" class="form-control" id="credit" value="10000" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="amount" class="form-label">Số tiền quy đổi (VND) :</label>
+                                            <input type="text" class="form-control" id="amount" value="10000000" readonly>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5 mb-3">
+                                                <label for="bankSelect" class="form-label">Loại ngân hàng :</label>
+                                                <input type="text" class="form-control" id="bankSelect" value="BDIV" readonly>
+                                            </div>
+                                            <div class="col-md-7 mb-3">
+                                                <label for="receiverAccount" class="form-label">Số tài khoản :</label>
+                                                <input type="text" class="form-control" id="receiverAccount" value="0986547312" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
+                                            <input type="text" class="form-control" id="cardHolderName" value="Nguyễn Trà My" readonly>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Từ chối</button>
+                                    <button type="button" class="btn btn-success">Xác nhận</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Mã giao dịch</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Thời gian</th>
+                                    <th>Số credit</th>
+                                    <th>Số tiền quy đổi</th>
+                                    <th>Trạng thái</th>
+                                    <th class="table-action-lock">Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>California Fitness & Yoga</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>10000 Creadit</td>
+                                    <td>10000000 vnđ</td>
+                                    <td class="text-success fw-bold">Thành công</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Kickfit Sport</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>172000 Creadit</td>
+                                    <td>172000000 vnđ</td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>The New Gym</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>20000 Creadit</td>
+                                    <td>20000000 vnđ</td>
+                                    <td class="text-danger fw-bold">Từ chối</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="admin/common/footer"></th:block>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<th:block th:replace="admin/common/script"></th:block>
+</body>
+
+</html>
