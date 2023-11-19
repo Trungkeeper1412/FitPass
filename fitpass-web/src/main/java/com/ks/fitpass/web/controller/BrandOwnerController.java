@@ -46,4 +46,10 @@ public class BrandOwnerController {
         int updateResult = brandService.updateBrandDetail(brandOwnerProfile);
         return ResponseEntity.ok(updateResult);
     }
+
+    //Change password (for brand owner account)
+    @GetMapping("/password")
+    public String updateBrandPassword() {
+        return "brand-owner/gym-brand-update-password";
+    }
 }
