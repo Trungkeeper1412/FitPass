@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.brand.dto.ServiceCreateDTO;
 import com.ks.fitpass.brand.dto.ServiceUpdateDTO;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
@@ -207,4 +208,12 @@ public class BrandOwnerController {
         brandAmenitieService.updateBrandAmenitie(brandAmenitie);
         return "redirect:/brand-owner/service/list";
     }
+
+    @GetMapping("/service/add")
+    public String addService(@ModelAttribute("createService") ServiceCreateDTO serviceCreateDTO) {
+        return "brand-owner/gym-brand-service-add";
+    }
+
+   
+
 }
