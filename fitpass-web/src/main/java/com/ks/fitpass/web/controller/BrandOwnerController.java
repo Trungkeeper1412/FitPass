@@ -118,6 +118,12 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-department-detail";
     }
 
+    @PostMapping("/department/updateStatus")
+    public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status,@RequestParam int departmentId) {
+        int update = departmentService.updateDepartmentStatus(status, departmentId);
+        return ResponseEntity.ok(update);
+    }
+
     @GetMapping("/department/add")
     public String addDepartment(@RequestParam("id") int brandId, Model model) {
         model.addAttribute("brandId", brandId);
