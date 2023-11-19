@@ -16,10 +16,7 @@ import com.ks.fitpass.department.entity.DepartmentAlbums;
 import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
 import com.ks.fitpass.department.service.*;
-import com.ks.fitpass.gymplan.dto.BrandGymPlanFixedDTO;
-import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
-import com.ks.fitpass.gymplan.dto.BrandUpdateGymPlanFixedDTO;
-import com.ks.fitpass.gymplan.dto.BrandUpdateGymPlanFlexDTO;
+import com.ks.fitpass.gymplan.dto.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.enums.PageEnum;
@@ -442,6 +439,12 @@ public class BrandOwnerController {
 
         gymPlanService.updateGymPlanFlex(brandDetails);
         return "redirect:/brand-owner/gym-plans/flexible/list";
+    }
+
+    @GetMapping("/gym-plans/flexible/add")
+    public String addFlexibleGymPlan(Model model) {
+        model.addAttribute("brandCreateGymPlanFlexDTO", new BrandCreateGymPlanFlexDTO());
+        return "brand-owner/gym-brand-plan-flexible-add";
     }
 
     //Fixed Plans
