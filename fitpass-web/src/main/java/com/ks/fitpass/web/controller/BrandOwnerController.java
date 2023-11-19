@@ -447,6 +447,24 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-plan-flexible-add";
     }
 
+    @PostMapping("/gym-plans/flexible/add")
+    public String createFlexibleGymPlan(@Valid BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO,
+                                        BindingResult bindingResult, HttpSession session) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-flexible-add";
+        }
+
+        // Create gym plan flexible
+        User user = (User) session.getAttribute("userInfo");
+        // Get brandId by brandOwnerId
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        brandCreateGymPlanFlexDTO.setBrandId(brandId);
+        brandCreateGymPlanFlexDTO.setStatus(1);
+        gymPlanService.createGymPlanFlex(brandCreateGymPlanFlexDTO);
+        return "redirect:/brand-owner/gym-plans/flexible/list";
+    }
+
     //Fixed Plans
     @GetMapping("/gym-plans/fixed/list")
     public String getListOfFixedGymPlans(HttpSession session, Model model) {
@@ -476,6 +494,28 @@ public class BrandOwnerController {
         }
 
         gymPlanService.updateGymPlanFixed(brandDetails);
+        return "redirect:/brand-owner/gym-plans/fixed/list";
+    }
+
+    @GetMapping("/gym-plans/fixed/add")
+    public String addFixedGymPlan(Model model) {
+        model.addAttribute("brandCreateGymPlanFixedDTO", new BrandCreateGymPlanFixedDTO());
+        return "brand-owner/gym-brand-plan-fixed-add";
+    }
+
+    @PostMapping("/gym-plans/fixed/add")
+    public String createFixedGymPlan(@Valid BrandCreateGymPlanFixedDTO brandCreateGymPlanFixedDTO,
+                                     BindingResult bindingResult, HttpSession session) {
+        if(bindingResult.hasErrors()) {
+            return "brand-owner/gym-brand-plan-fixed-add";
+        }
+
+        User user = (User) session.getAttribute("userInfo");
+        Brand brand = brandService.getBrandDetail(user.getUserId());
+        int brandId = brand.getBrandId();
+        brandCreateGymPlanFixedDTO.setBrandId(brandId);
+        brandCreateGymPlanFixedDTO.setStatus(1);
+        gymPlanService.createGymPlanFixed(brandCreateGymPlanFixedDTO);
         return "redirect:/brand-owner/gym-plans/fixed/list";
     }
 }
