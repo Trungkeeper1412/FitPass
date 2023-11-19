@@ -151,4 +151,14 @@ public class BrandOwnerController {
         model.addAttribute("listDepartment", departments);
         return "brand-owner/gym-brand-feedback-list";
     }
+
+    @GetMapping("/feedback/details")
+    public String getDepartmentFeedbackDetails(@RequestParam("id") int departmentId, Model model) {
+        Department department = departmentService.getOne(departmentId);
+        model.addAttribute("department", department);
+
+        List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentId);
+        model.addAttribute("userFeedbackList", userFeedbackList);
+        return "brand-owner/gym-brand-feedback-list-detail";
+    }
 }
