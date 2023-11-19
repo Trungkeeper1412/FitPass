@@ -14,9 +14,9 @@ VALUES (5, 'ROLE_BRAND_OWNER');
 -- Admin creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
-                         gender, image_url)
+                         gender, image_url,securityId)
 VALUES (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St',
-        '1990-01-01', 'Male', '/images/system/v.png');
+        '1990-01-01', 'Male', '/images/system/v.png',123456789);
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (1, 'admin', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
@@ -38,33 +38,33 @@ VALUES (6, 'brandOwner1', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9J
 -- Gym Owner creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
-                         gender, image_url)
+                         gender, image_url,securityId)
 VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '1234567890', '123 Main St',
-        '1990-01-01', 'Female', '/images/system/v.png');
+        '1990-01-01', 'Female', '/images/system/v.png',123456789);
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (2, 'gymowner', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 2, 15);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
+                         image_url,securityId)
 VALUES (19, 'Nguyễn', 'Văn A', 'gymowner1@example.com', '1234567890', '123 Main St', '1990-01-01', 'Male',
-        '/images/system/v.png');
+        '/images/system/v.png',123456789);
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (19, 'gymowner1', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 19, 6);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
+                         image_url,securityId)
 VALUES (20, 'Trần', 'Thị B', 'gymowner2@example.com', '2345678901', '456 Oak St', '1985-07-15', 'Female',
-        '/images/system/v.png');
+        '/images/system/v.png',123456789);
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (20, 'gymowner2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 20, 6);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
+                         image_url,securityId)
 VALUES (21, 'Lê', 'Văn C', 'gymowner3@example.com', '3456789012', '789 Elm St', '1992-03-25', 'Male',
-        '/images/system/v.png');
+        '/images/system/v.png',123456789);
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (21, 'gymowner3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 21, 6);
