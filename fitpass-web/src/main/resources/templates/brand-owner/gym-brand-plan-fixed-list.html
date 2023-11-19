@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -54,28 +54,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Gói 3 ngày</td>
-                                                <td>100 Credit</td>
-                                                <td>3 ngày</td>
-                                                <td>10 ngày</td>
-                                                <td>30 ngày</td>
-                                                <td>Hoạt động</td>
-                                                <td><a th:href="@{/brand-owner/gym-plans/fixed/details}"
-                                                        class="btn btn-primary">Cập nhật</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Gói 1 tháng</td>
-                                                <td>200 Credit</td>
-                                                <td>30 ngày</td>
-                                                <td>15 ngày</td>
-                                                <td>40 ngày</td>
-                                                <td>Hoạt động</td>
-                                                <td><a th:href="@{/brand-owner/gym-plans/fixed/details}"
-                                                        class="btn btn-primary">Cập nhật</a></td>
-                                            </tr>
+                                            <th:block th:each="gymPlan : ${listFixedGymPlan}">
+                                                <tr>
+                                                    <td th:text="${gymPlanStat.index + 1}">1</td>
+                                                    <td th:text="${gymPlan.getGymPlanName()}">Gói 3 ngày</td>
+                                                    <td th:text="${gymPlan.getPrice() + ' Credit'}">100 Credit</td>
+                                                    <td th:text="${gymPlan.getPlanBeforeActive()  + ' ngày'}">3 ngày</td>
+                                                    <td th:text="${gymPlan.getPlanAfterActive() + ' ngày'}">10 ngày</td>
+                                                    <td th:text="${gymPlan.getDuration() + ' ngày'}">30 ngày</td>
+                                                    <td th:text="${gymPlan.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
+                                                    <td><a th:href="@{/brand-owner/gym-plans/fixed/details(id=${gymPlan.getGymPlanId()})}"
+                                                           class="btn btn-primary">Cập nhật</a></td>
+                                                </tr>
+                                            </th:block>
                                         </tbody>
                                     </table>
                                 </div>
