@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
-import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
@@ -72,6 +71,21 @@ public class HomepageControllerTest {
         assertNotNull(response.getBody());
         assertEquals(Collections.emptyList(), response.getBody().getListBrand());
     }
+
+    @Test
+    public void getBrandWithPagination_negativePageNumber_badRequest() {
+
+        // Arrange
+        Mockito.when(brandService.getAllByStatus(1, -1, 2, null, null))
+                .thenThrow(new IllegalArgumentException());
+
+        // Act
+        ResponseEntity<BrandPagnition> response = homepageController.getBrandWithPagination(-1, 2, null, null);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
 
 
 }
