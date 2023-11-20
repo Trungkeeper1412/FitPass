@@ -151,7 +151,7 @@ $(document).ready(function () {
             // Validate service
             amenitieName: {
                 required: true,
-                minlength: 1,
+                minlength: 2,
                 maxlength: 50,
             }
         },
@@ -252,9 +252,11 @@ $(document).ready(function () {
                 maxlength: "Số căn cước công dân không được vượt quá 12 chữ số !",
                 pattern: "Số căn cước công dân không hợp lệ !",
             },
+
+            // Validate service
             amenitieName: {
                 required: "Vui lòng nhập tên dịch vụ !",
-                minlength: "Tên dịch vụ phải có ít nhất 1 kí tự !",
+                minlength: "Tên dịch vụ phải có ít nhất 2 kí tự !",
                 maxlength: "Tên dịch vụ không được vượt quá 50 kí tự !",
             }
         },
