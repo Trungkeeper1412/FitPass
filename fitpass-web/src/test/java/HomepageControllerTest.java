@@ -4,6 +4,7 @@ import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.controller.HomepageController;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class HomepageControllerTest {
@@ -86,7 +88,35 @@ public class HomepageControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    @Test
+    public void getBrandWithPagination_zeroPageSize_badRequest() {
 
+        // Arrange
+        Mockito.when(brandService.getAllByStatus(1, 1, 0, null, null))
+                .thenThrow(new IllegalArgumentException());
+
+        // Act
+        ResponseEntity<BrandPagnition> response = homepageController.getBrandWithPagination(1, 0, null, null);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+
+    @Test
+    public void getBrandWithPagination_brandListEmpty_okResponseWithEmptyData() {
+
+        // Arrange
+        Mockito.when(brandService.getAllByStatus(1, 1, 2, null, null))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<BrandPagnition> response = homepageController.getBrandWithPagination(0, 0, null, null);
+
+        // Assert
+        Assertions.assertThat(response.getBody().getListBrand()).isEmpty();
+    }
 
 }
+
 
