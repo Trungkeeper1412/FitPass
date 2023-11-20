@@ -809,7 +809,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         'https://bom.so/YVDRpm',
         'https://bom.so/Y3aZNS',
         'Là phòng tập Gym và Yoga LỚN NHẤT – ĐẸP NHẤT với quy mô 3 tầng và diện tích trên 2,000m2, Fit24 Ba Tháng Hai được thiết kế sang trọng và ấn tượng theo phong cách Châu Âu hiện đại và là chi nhánh mới nhất của Hệ thống Fit24.',
-        10.777031921131604, 106.68105969760164, 70, 2000);
+        10.777031921131604, 106.68105969760164, 70, 2000,'Hồ Chí Minh');
 
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
 VALUES (1, 1),
