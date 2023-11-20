@@ -247,6 +247,22 @@ public class HomepageControllerTest {
     }
 
 
+
+    @Test
+    public void getNearByDepartmentList_outOfRangeLatitude_badRequest() {
+        // Arrange
+        // Assuming that your application restricts latitude values to a valid range
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+
 }
 
 
