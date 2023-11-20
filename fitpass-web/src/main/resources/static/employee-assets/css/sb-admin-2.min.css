@@ -12979,7 +12979,10 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 15px;
+}
+.checkin-time{
+    font-size: 13px;
+    text-align: center;
 }
 .user-info{
     /*display: grid;*/
@@ -13002,6 +13005,7 @@ label {
 }
 
 .img-col {
+    margin-right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13196,6 +13200,18 @@ td img {
 .not-check-in{
     background-color: rgba(255, 193, 193, 0.73);
     color: darkred;
+    text-align: center;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
+}
+.checked-in{
+    background-color: rgb(200, 236, 209);
+    color: darkgreen;
     text-align: center;
     width: 100px;
     margin-left: 10px;
