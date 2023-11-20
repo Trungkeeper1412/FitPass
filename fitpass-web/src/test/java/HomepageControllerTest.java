@@ -230,6 +230,21 @@ public class HomepageControllerTest {
         // Additional assertions based on your expectations
     }
 
+    //boundary
+
+    @Test
+    public void getNearByDepartmentList_outOfRangeLongitude_badRequest() {
+        // Arrange
+        // Assuming that your application restricts longitude values to a valid range
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
 
 
 }
