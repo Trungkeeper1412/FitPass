@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
@@ -16,11 +17,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-class HomepageControllerTest {
+public class HomepageControllerTest {
 
     @Mock
     private BrandService brandService;
@@ -39,10 +41,8 @@ class HomepageControllerTest {
     @Test
     void testGetBrandWithPagination() {
         // Mock data
-        List<Brand> mockBrandList = Arrays.asList(new Brand(/* populate with necessary values */));
+        List<Brand> mockBrandList = Arrays.asList(new Brand());
         Map<Integer, List<DepartmentDTO>> mockDepartmentMap = new HashMap<>();
-        // Populate mockDepartmentMap with necessary data
-
         // Mocking the behavior of the brandService and departmentService
         when(brandService.getAllByStatus(anyInt(), anyInt(), anyInt(), anyString(), anyString())).thenReturn(mockBrandList);
         when(brandService.countAllBrands(anyInt(), anyString())).thenReturn(mockBrandList.size());
@@ -58,5 +58,19 @@ class HomepageControllerTest {
         assertEquals(mockBrandList, brandPagnition.getListBrand());
 
     }
+    @Test
+    void testGetBrandWithPaginationHandlesException() {
+        // Arrange
+        when(brandService.getAllByStatus(anyInt(), anyInt(), anyInt(), anyString(), anyString()))
+                .thenThrow(new RuntimeException("Simulating an exception"));
+
+        // Act
+        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, null, null);
+
+        // Assert
+        assertEquals(500, responseEntity.getStatusCodeValue());
+    }
+
+
 }
 
