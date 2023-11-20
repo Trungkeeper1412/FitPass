@@ -136,7 +136,7 @@
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="list-plan-wrapper container">
-        <button class="left l1" onclick="leftScroll()" th:if="${gymPlans.size()}>3">
+        <button class="left l1" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
         <div class="scroll-plans">
@@ -166,7 +166,7 @@
             </div>
 
         </div>
-        <button class="right r1" onclick="rightScroll()" th:if="${gymPlans.size()}>3">
+        <button class="right r1" onclick="rightScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
         </button>
     </div>
