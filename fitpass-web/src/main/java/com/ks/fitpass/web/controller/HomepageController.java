@@ -103,18 +103,22 @@ public ResponseEntity<BrandPagnition> getBrandWithPagination(
     }
 }
 
-    @PostMapping("/homepage")
-    public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
-                                                                               @RequestParam("userLongitude") double userLongitude,
-                                                                               @RequestParam(defaultValue = "1") int page,
-                                                                               @RequestParam(defaultValue = "2") int size,
-                                                                               @RequestParam(required = false, defaultValue = "") String city,
-                                                                               @RequestParam(required = false, defaultValue = "") String sortPrice,
-                                                                               @RequestParam(required = false, defaultValue = "0") String sortRating,
-                                                                               @RequestParam(required = false, defaultValue = "10") String belowDistance) {
+@PostMapping("/homepage")
+public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(
+        @RequestParam("userLatitude") double userLatitude,
+        @RequestParam("userLongitude") double userLongitude,
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "2") int size,
+        @RequestParam(required = false, defaultValue = "") String city,
+        @RequestParam(required = false, defaultValue = "") String sortPrice,
+        @RequestParam(required = false, defaultValue = "0") String sortRating,
+        @RequestParam(required = false, defaultValue = "10") String belowDistance) {
+
+    try {
+        validateInputParameters(page, size); // New method for input validation
 
         List<Department> departmentList = departmentService.getAllDepartmentByNearbyLocation(
-                page, size, userLatitude, userLongitude,  city, sortPrice, sortRating, belowDistance);
+                page, size, userLatitude, userLongitude, city, sortPrice, sortRating, belowDistance);
         int totalDepartment = departmentService.countAllDepartment(1, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
         int totalPages = (int) Math.ceil((double) totalDepartment / size);
         int currentPage = page;
@@ -125,7 +129,22 @@ public ResponseEntity<BrandPagnition> getBrandWithPagination(
         departmentHomePagePagnition.setCurrentPage(currentPage);
 
         return ResponseEntity.ok(departmentHomePagePagnition);
+
+    } catch (IllegalArgumentException e) {
+        // Handle bad requests
+        return ResponseEntity.badRequest().build();
+
+    } catch (Exception e) {
+        // Handle internal server errors
+        return ResponseEntity.status(500).build();
     }
+}
+
+private void validateInputParameters(int page, int size) {
+    if (page <= 0 || size <= 0) {
+        throw new IllegalArgumentException("Page and size must be greater than zero.");
+    }
+}
 
     @GetMapping("/profile/calendar")
     public String getCalendar(){
