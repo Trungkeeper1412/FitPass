@@ -63,11 +63,13 @@ public class HomepageController {
         return "homepage/homepage-user";
     }
 
-    @GetMapping("/homepage/brand")
-    public ResponseEntity<BrandPagnition> getBrandWithPagination(@RequestParam(defaultValue = "1") int page,
-                                                                @RequestParam(defaultValue = "2") int size,
-                                                                @RequestParam(required = false) String sortPrice,
-                                                                @RequestParam(required = false) String sortRating) {
+   @GetMapping("/homepage/brand")
+public ResponseEntity<BrandPagnition> getBrandWithPagination(
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "2") int size,
+        @RequestParam(required = false) String sortPrice,
+        @RequestParam(required = false) String sortRating) {
+    try {
         List<Brand> brandList = brandService.getAllByStatus(1, page, size, sortPrice, sortRating);
 
         int totalBrands = brandService.countAllBrands(1, sortRating);
@@ -86,7 +88,13 @@ public class HomepageController {
         brandPagnition.setCurrentPage(currentPage);
         brandPagnition.setBrandDepartmentsMap(brandDepartmentsMap);
         return ResponseEntity.ok(brandPagnition);
+    } catch (Exception e) {
+        // Log the exception for debugging purposes
+        e.printStackTrace();
+        // Return an appropriate error response
+        return ResponseEntity.status(500).build();
     }
+}
 
     @PostMapping("/homepage")
     public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
