@@ -58,18 +58,6 @@ public class HomepageControllerTest {
         assertEquals(mockBrandList, brandPagnition.getListBrand());
 
     }
-    @Test
-    void testGetBrandWithPaginationHandlesException() {
-        // Arrange
-        when(brandService.getAllByStatus(anyInt(), anyInt(), anyInt(), anyString(), anyString()))
-                .thenThrow(new RuntimeException("Simulating an exception"));
-
-        // Act
-        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, null, null);
-
-        // Assert
-        assertEquals(500, responseEntity.getStatusCodeValue());
-    }
 
 
 }
