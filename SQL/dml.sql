@@ -750,7 +750,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         'https://bom.so/wEoPa9',
         'https://bom.so/Nmuqc0',
         'CITIGYM Vạn Hạnh Mall là phòng tập lớn nhất Việt Nam nằm trong trung tâm thương mại với diện tích 6000m2, tọa lạc tại trung tâm quận 10. Phòng tập gym quận 10 được thiết kế như thành phố New York sôi động, tại đây hội viên sẽ có trải nghiệm thú vị vừa tập luyện vừa ngắm nhìn thành phố từ trên cao. Ngoài ra, câu lạc bộ còn được trang bị hệ thống máy tập hiện đại nhất và tổ chức đa dạng các lớp gym, yoga, group x, dance...',
-        10.770899546871222, 106.66895996876498, 200, 2000),
+        10.770899546871222, 106.66895996876498, 200, 2000,'Hồ Chí Minh'),
 
 
        (5, 6, 23, 1, 'CALIFORNIA WEST POINT - QUẬN TÂY HỒ',
