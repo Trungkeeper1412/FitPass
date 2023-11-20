@@ -97,7 +97,7 @@
                                                 <div class="mb-4">
                                                     <label for="phone" class="form-label fw-bold">Số Điện Thoại
                                                         :</label>
-                                                    <input th:field="*{phone}" type="text" class="form-control" id="phone" name="phone"
+                                                    <input th:field="*{phone}" type="number" class="form-control" id="phone" name="phone"
                                                            placeholder="Nhập số điện thoại">
                                                     <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">photoUrl Error</span>
                                                 </div>

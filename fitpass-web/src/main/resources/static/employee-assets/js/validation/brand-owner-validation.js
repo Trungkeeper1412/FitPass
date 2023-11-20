@@ -82,7 +82,8 @@ $(document).ready(function () {
                 email: true
             },
             address: {
-                required: true
+                required: true,
+                maxlength: 150,
             },
             dateOfBirth: {
                 required: true,
@@ -106,7 +107,9 @@ $(document).ready(function () {
             },
             phone: {
                 required: true,
-                digits: true
+                minlength: 10,
+                maxlength: 11,
+                pattern: /^(0|84)(9|3|7|8|5)\d{8}$/
             },
             idCard: {
                 required: true,
@@ -175,7 +178,8 @@ $(document).ready(function () {
                 email: "Vui lòng nhập địa chỉ email hợp lệ"
             },
             address: {
-                required: "Vui lòng nhập địa chỉ"
+                required: "Vui lòng nhập địa chỉ",
+                maxlength: "Địa chỉ không được vượt quá 150 kí tự",
             },
             dateOfBirth: {
                 required: "Vui lòng nhập ngày sinh",
@@ -197,7 +201,9 @@ $(document).ready(function () {
             },
             phone: {
                 required: "Vui lòng nhập số điện thoại",
-                digits: "Vui lòng chỉ nhập số"
+                minlength: 'Số điện thoại phải có ít nhất 10 số!',
+                maxlength: 'Số điện thoại có tối đa 11 số!',
+                pattern: 'Số điện thoại không đúng định dạng!'
             },
             idCard: {
                 required: "Vui lòng nhập số căn cước",
