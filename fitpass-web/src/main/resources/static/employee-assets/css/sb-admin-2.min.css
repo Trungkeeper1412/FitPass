@@ -12968,8 +12968,8 @@ label {
     /*border: 1px solid #ccc;*/
     border-radius: 10px;
     padding: 15px;
-    background-color: whitesmoke;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #f4f9ff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
 }
 .basic-info{
@@ -13176,6 +13176,7 @@ td img {
     width: 90px;
     font-size: 14px;
     font-weight: 500;
+    color: white;
     justify-content: center;
 }
 .checkin-btn:hover{
@@ -13191,6 +13192,18 @@ td img {
 }
 .plan-type{
     /*margin-right: 10px;*/
+}
+.not-check-in{
+    background-color: rgba(255, 193, 193, 0.73);
+    color: darkred;
+    text-align: center;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
 }
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .uc{
@@ -13678,8 +13691,6 @@ label.error {
     text-align: center;
     width: 90px;
     margin-left: 15px;
-    /*position: absolute;*/
-    /*width: fit-content;*/
     background-color: #e5e5e5;
     color: grey;
     font-size: 12px;

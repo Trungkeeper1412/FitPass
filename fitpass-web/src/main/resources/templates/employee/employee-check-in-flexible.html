@@ -118,14 +118,14 @@
                                                 </div>
                                                 <span class="user-status working">Đang tập</span>
                                             </div>
-                                            <div class="plan-info mt-1">
+                                            <div class="plan-info">
                                                 <div class="fw-bold plan-type" th:text="${item.getProductName()}">Gói linh hoạt VIP </div>
                                                 <div>
                                                     <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
                                                     <span class="credit fw-bold">Credit/Giờ</span>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary checkin-btn mt-3 mx-auto" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
+                                            <button class="btn checkin-btn mt-3 mx-auto" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
                                         </div>
                                         </div>
                                     </th:block>
