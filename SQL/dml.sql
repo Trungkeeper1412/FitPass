@@ -800,7 +800,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         'https://bom.so/xzKhs8',
         'https://bom.so/lnVZCn',
         'Tọa lạc tại tầng K Tòa nhà Central Plaza, trang thiết bị tập luyện cao cấp cùng đa dạng các môn học và đặc biệt, hồ bơi ngoài trời chính là những điểm cộng tuyệt vời của phòng tập Gym – Yoga cao cấp nhất Quận Tân Bình.',
-        10.77720992036007, 106.68773747611712, 70, 1500),
+        10.77720992036007, 106.68773747611712, 70, 1500,'Hồ Chí Minh'),
 
 
        (11, 7, 29, 1, 'FIT24 BA THÁNG HAI – QUẬN 10', 'Lầu 6-7-8 Số 3 Ba Tháng Hai, Phường 11, Quận 10, TP. HCM',
