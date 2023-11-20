@@ -104,29 +104,66 @@ public ResponseEntity<BrandPagnition> getBrandWithPagination(
 }
 
     @PostMapping("/homepage")
-    public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(@RequestParam("userLatitude") double userLatitude,
-                                                                               @RequestParam("userLongitude") double userLongitude,
-                                                                               @RequestParam(defaultValue = "1") int page,
-                                                                               @RequestParam(defaultValue = "2") int size,
-                                                                               @RequestParam(required = false, defaultValue = "") String city,
-                                                                               @RequestParam(required = false, defaultValue = "") String sortPrice,
-                                                                               @RequestParam(required = false, defaultValue = "0") String sortRating,
-                                                                               @RequestParam(required = false, defaultValue = "10") String belowDistance) {
+    public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(
+            @RequestParam("userLatitude") double userLatitude,
+            @RequestParam("userLongitude") double userLongitude,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "2") int size,
+            @RequestParam(required = false, defaultValue = "") String city,
+            @RequestParam(required = false, defaultValue = "") String sortPrice,
+            @RequestParam(required = false, defaultValue = "0") String sortRating,
+            @RequestParam(required = false, defaultValue = "10") String belowDistance) {
 
-        List<Department> departmentList = departmentService.getAllDepartmentByNearbyLocation(
-                page, size, userLatitude, userLongitude,  city, sortPrice, sortRating, belowDistance);
-        int totalDepartment = departmentService.countAllDepartment(1, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
-        int totalPages = (int) Math.ceil((double) totalDepartment / size);
-        int currentPage = page;
+        try {
+            validateInputParameters(page, size, userLatitude, userLongitude, belowDistance); // Updated method for input validation
 
-        DepartmentHomePagePagnition departmentHomePagePagnition = new DepartmentHomePagePagnition();
-        departmentHomePagePagnition.setDepartmentList(departmentList);
-        departmentHomePagePagnition.setTotalPage(totalPages);
-        departmentHomePagePagnition.setCurrentPage(currentPage);
+            List<Department> departmentList = departmentService.getAllDepartmentByNearbyLocation(
+                    page, size, userLatitude, userLongitude, city, sortPrice, sortRating, belowDistance);
+            int totalDepartment = departmentService.countAllDepartment(1, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
+            int totalPages = (int) Math.ceil((double) totalDepartment / size);
+            int currentPage = page;
 
-        return ResponseEntity.ok(departmentHomePagePagnition);
+            DepartmentHomePagePagnition departmentHomePagePagnition = new DepartmentHomePagePagnition();
+            departmentHomePagePagnition.setDepartmentList(departmentList);
+            departmentHomePagePagnition.setTotalPage(totalPages);
+            departmentHomePagePagnition.setCurrentPage(currentPage);
+
+            return ResponseEntity.ok(departmentHomePagePagnition);
+
+        } catch (IllegalArgumentException e) {
+            // Handle bad requests
+            return ResponseEntity.badRequest().build();
+
+        } catch (Exception e) {
+            // Handle internal server errors
+            return ResponseEntity.status(500).build();
+        }
     }
 
+    private void validateInputParameters(int page, int size, double userLatitude, double userLongitude, String belowDistance) {
+        if (page <= 0 || size <= 0) {
+            throw new IllegalArgumentException("Page and size must be greater than zero.");
+        }
+
+        // Add additional validation for out-of-range values
+        if (userLatitude < -90 || userLatitude > 90) {
+            throw new IllegalArgumentException("Latitude must be between -90 and 90.");
+        }
+
+        if (userLongitude < -180 || userLongitude > 180) {
+            throw new IllegalArgumentException("Longitude must be between -180 and 180.");
+        }
+
+        try {
+            double distance = Double.parseDouble(belowDistance);
+            if (distance < 0) {
+                throw new IllegalArgumentException("Distance must be non-negative.");
+            }
+            // Add more specific range checks for distance if needed
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid distance format.");
+        }
+    }
     @GetMapping("/profile/calendar")
     public String getCalendar(){
         return "user/calendar";
