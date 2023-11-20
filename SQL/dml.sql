@@ -1371,11 +1371,11 @@ VALUES (83, 8, 31, 1, 'Getfit Chi nhánh Mia Center', 'Lầu 4, Saigon Mia Cente
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (63, 8, 32, 1, 'Getfit Chi Nhánh HOÀNG DIỆU', 'Lầu 3, Cao Ốc H3, 384 Hoàng Diệu, Phường 6, Quận 4, TP. HCM',
         '(098) 849-9745', 'https://s.net.vn/nmj5', 'https://s.net.vn/Jy7I', 'https://s.net.vn/ZI2D',
         'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao. Tất cả Khách hàng sẽ được kiểm tra thể chất bằng in Body & được tư vấn dinh dưỡng cũng như cách tập luyện phù hợp.',
-        10.76051532090389, 106.69908029869617, 200, 200);
+        10.76051532090389, 106.69908029869617, 200, 200,'Hồ Chí Minh');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
