@@ -88,7 +88,14 @@ public ResponseEntity<BrandPagnition> getBrandWithPagination(
         brandPagnition.setCurrentPage(currentPage);
         brandPagnition.setBrandDepartmentsMap(brandDepartmentsMap);
         return ResponseEntity.ok(brandPagnition);
-    } catch (Exception e) {
+    }
+    catch (IllegalArgumentException e) {
+        // Log the exception for debugging purposes
+        e.printStackTrace();
+        // Return a BAD_REQUEST response for negative page number
+        return ResponseEntity.badRequest().build();
+    }
+    catch (Exception e) {
         // Log the exception for debugging purposes
         e.printStackTrace();
         // Return an appropriate error response
