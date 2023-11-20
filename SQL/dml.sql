@@ -768,7 +768,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         'https://bom.so/w8xQZa',
         'https://bom.so/YjALju',
         'Sang trọng, đẳng cấp, tinh tế trong từng chi tiết đó chính là những trải nghiệm tuyệt vời chỉ có khi bạn bước chân vào CLB California Centuryon West Point quận Tây Hồ. Một nơi tập luyện đạt chuẩn quốc tế cùng với các tiện ích phục hồi năng lượng tích hợp, đặc biệt có hồ bơi thư giãn chắc chắn sẽ mang lại cho bạn những trải nghiệm chưa từng có. Khám phá ngay hôm nay!',
-        21.00592534375174, 105.79509157389299, 100, 2000),
+        21.00592534375174, 105.79509157389299, 100, 2000,'Hà Nội'),
 
        (7, 6, 25, 1, 'CALIFORNIA TIMES CITY - QUẬN HAI BÀ TRƯNG',
         'Time City Megamall, Tòa nhà T18, 458 Minh Khai, P. Vĩnh Tuy, Q. Hai Bà Trưng, Hà Nội', '(024) 7107 9999',
