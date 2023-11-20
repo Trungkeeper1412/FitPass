@@ -139,6 +139,36 @@ public class HomepageControllerTest {
         assertEquals(mockDepartmentList, departmentHomePagePagnition.getDepartmentList());
     }
 
+    @Test
+    public void getNearByDepartmentList_noDepartments_okResponseWithEmptyData() {
+
+        // Arrange
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(Collections.emptyList(), response.getBody().getDepartmentList());
+    }
+
+    @Test
+    public void getNearByDepartmentList_negativePageSize_badRequest() {
+
+        // Arrange
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new IllegalArgumentException());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, -1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
 }
 
 
