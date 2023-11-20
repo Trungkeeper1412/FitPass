@@ -198,6 +198,21 @@ public class HomepageControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    @Test
+    public void getNearByDepartmentList_invalidCoordinates_badRequest() {
+        // Arrange
+        // Assuming that your application restricts invalid coordinates (latitude and longitude) values
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new IllegalArgumentException("Invalid coordinates"));
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+
 
 }
 
