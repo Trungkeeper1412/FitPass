@@ -719,13 +719,14 @@ VALUES ('BRAND_STATUS', 2, 'Không Hoạt Động');
 -- Create Gym Department infos
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number,
-                            logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+                            logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
+                            capacity, area,city)
 VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '1900633638',
         'https://bom.so/T5HfJy',
         'https://bom.so/i2mp74',
         'https://bom.so/PrIhQF',
         'Phòng gym quận 10 Citigym Thành Thái là phòng tập đẳng cấp được khai trương đầu tiên của hệ thống Citigym tọa lạc tại trung tâm quận 10. Nơi đây có không gian luyện tập mang hơi thở thiên nhiên năng động, thoải mái, đem đến cho bạn cảm giác thật hào hứng, sảng khoái khi tập luyện. Phòng tập của Citigym Thành Thái được trang bị đầy đủ các thiết bị hiện đại, cao cấp từ những thương hiệu hàng đầu thế giới như Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills. Đây cũng là hệ thống phòng tập đầu tiên tại TP HCM sử dụng dụng cụ tạ đòn, bục nhảy SmartBar, SmartStep của LesMills.',
-        10.770294326858476, 106.66638328225508, 200, 5500),
+        10.770294326858476, 106.66638328225508, 200, 5500,'Hồ Chí Minh'),
 
        (2, 5, 20, 1, 'CITIGYM PHỔ QUANG', '119 Phổ Quang, Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh',
         ' 1900633638',
