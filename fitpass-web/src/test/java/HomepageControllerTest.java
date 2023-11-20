@@ -211,6 +211,24 @@ public class HomepageControllerTest {
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
+    @Test
+    public void getNearByDepartmentList_largePageSize_successfulResponseWithLimitedResults() {
+        // Arrange
+        List<Department> mockDepartmentList = Arrays.asList(new Department(), new Department(), new Department());
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(mockDepartmentList);
+        when(departmentService.countAllDepartment(anyInt(), anyString(), anyString(), anyString(), anyDouble(), anyDouble(), anyString()))
+                .thenReturn(mockDepartmentList.size());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 10_000, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(mockDepartmentList, response.getBody().getDepartmentList());
+        // Additional assertions based on your expectations
+    }
 
 
 
