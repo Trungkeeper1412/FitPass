@@ -3038,13 +3038,14 @@ input:checked + .toggle-slider:before {
 }
 
 .gym-name-cover{
+  width: 100%;
   text-transform: uppercase;
   margin: auto;
   margin-left: 20px;
   border-radius: 10px;
   padding: 10px;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  /*display: grid;*/
+  /*grid-template-rows: 1fr 1fr;*/
 }
 .gym-name-cover h5{
   border:1px solid rgb(255, 162, 0);
@@ -3065,6 +3066,7 @@ input:checked + .toggle-slider:before {
   /* background-image: url("https://img.freepik.com/premium-photo/comprehensive-set-gym-weights-presented-highdefinition_982950-3761.jpg"); */
   /* background-color: rgb(55, 55, 55); */
   display: flex;
+  flex-wrap: nowrap;
   width: 600px;
 }
 
@@ -3083,7 +3085,6 @@ input:checked + .toggle-slider:before {
 
 .gym-service{
   margin: auto;
-  background-color: white;
   padding: 30px;
   width: 100%;
   height: fit-content;

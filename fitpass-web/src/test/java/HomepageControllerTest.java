@@ -2,6 +2,8 @@ import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
+import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.controller.HomepageController;
 import org.assertj.core.api.Assertions;
@@ -116,6 +118,150 @@ public class HomepageControllerTest {
         // Assert
         Assertions.assertThat(response.getBody().getListBrand()).isEmpty();
     }
+
+    @Test
+    void testGetNearByDepartmentList() {
+        // Mock data
+        List<Department> mockDepartmentList = Collections.singletonList(new Department());
+        // Mocking the behavior of the departmentService
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(mockDepartmentList);
+        when(departmentService.countAllDepartment(anyInt(), anyString(), anyString(), anyString(), anyDouble(), anyDouble(), anyString()))
+                .thenReturn(mockDepartmentList.size());
+
+        // Calling the controller method
+        ResponseEntity<DepartmentHomePagePagnition> responseEntity = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assertions
+        assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 is the expected HTTP status code
+        DepartmentHomePagePagnition departmentHomePagePagnition = responseEntity.getBody();
+        // Perform assertions on departmentHomePagePagnition based on your expectations
+        assertEquals(mockDepartmentList, departmentHomePagePagnition.getDepartmentList());
+    }
+
+    @Test
+    public void getNearByDepartmentList_noDepartments_okResponseWithEmptyData() {
+
+        // Arrange
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(Collections.emptyList(), response.getBody().getDepartmentList());
+    }
+
+    @Test
+    public void getNearByDepartmentList_negativePageSize_badRequest() {
+
+        // Arrange
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new IllegalArgumentException());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, -1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+
+    @Test
+    public void getNearByDepartmentList_zeroPageSize_badRequest() {
+
+        // Arrange
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new IllegalArgumentException());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 0, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    public void getNearByDepartmentList_internalServerError() {
+
+        // Arrange
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new RuntimeException("Internal Server Error"));
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    @Test
+    public void getNearByDepartmentList_invalidCoordinates_badRequest() {
+        // Arrange
+        // Assuming that your application restricts invalid coordinates (latitude and longitude) values
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenThrow(new IllegalArgumentException("Invalid coordinates"));
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+    @Test
+    public void getNearByDepartmentList_largePageSize_successfulResponseWithLimitedResults() {
+        // Arrange
+        List<Department> mockDepartmentList = Arrays.asList(new Department(), new Department(), new Department());
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(mockDepartmentList);
+        when(departmentService.countAllDepartment(anyInt(), anyString(), anyString(), anyString(), anyDouble(), anyDouble(), anyString()))
+                .thenReturn(mockDepartmentList.size());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 10_000, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(mockDepartmentList, response.getBody().getDepartmentList());
+        // Additional assertions based on your expectations
+    }
+
+    //boundary
+
+    @Test
+    public void getNearByDepartmentList_outOfRangeLongitude_badRequest() {
+        // Arrange
+        // Assuming that your application restricts longitude values to a valid range
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+
+
+    @Test
+    public void getNearByDepartmentList_outOfRangeLatitude_badRequest() {
+        // Arrange
+        // Assuming that your application restricts latitude values to a valid range
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
 
 }
 
