@@ -759,7 +759,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         'https://bom.so/bpbfDn',
         'https://bom.so/wEoPa9',
         'Sang trọng, đẳng cấp, tinh tế trong từng chi tiết đó chính là những trải nghiệm tuyệt vời chỉ có khi bạn bước chân vào CLB California Centuryon West Point quận Tây Hồ. Một nơi tập luyện đạt chuẩn quốc tế cùng với các tiện ích phục hồi năng lượng tích hợp, đặc biệt có hồ bơi thư giãn chắc chắn sẽ mang lại cho bạn những trải nghiệm chưa từng có. Khám phá ngay hôm nay!',
-        21.066572880558276, 105.8262971113118, 100, 2000),
+        21.066572880558276, 105.8262971113118, 100, 2000,'Hà Nội'),
 
        (6, 6, 24, 1, 'CALIFORNIA VINCOM STAR CITY - QUẬN CẦU GIẤY',
         'Tầng 3, Trung tâm thương mại Vincom Star City, 119 đường Trần Duy Hưng, P. Trung Hòa, Q. Cầu Giấy, Hà Nội',
