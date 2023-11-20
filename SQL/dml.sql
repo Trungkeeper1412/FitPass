@@ -1354,12 +1354,12 @@ VALUES (62, 10, 'https://s.net.vn/zMIA', 'Yoga Cho Tâm Hồn',
 -- Create Gym Department infos
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (57, 8, 30, 1, 'Getfit Chi nhánh Oriental Tân Phú',
         'Lầu M (lầu 1) Oriental Plaza, 685 Âu Cơ, P.Tân Thành,Q.Tân Phú.', '(097) 769-9490', 'https://s.net.vn/nmj5',
         'https://s.net.vn/F4yH', 'https://s.net.vn/F4yH',
         'Với phương châm lấy sức khỏe khách hàng làm mục tiêu phát triển, Getfit không ngừng nâng cấp, đổi mới và sáng tạo để vận dụng những khoa học công nghệ hàng đầu thế giới vào việc xây dựng thể chất của người Việt. Cùng với sứ mệnh “Nâng tầm thể chất người Việt” của Getfit Gym & Yoga, hàng loạt các hệ sinh thái ra đời và không ngừng mở rộng nhằm đem đến những giá trị trọn vẹn nhất đến với khách hàng.',
-        10.789814194191278, 106.63987821995256, 200, 200);
+        10.789814194191278, 106.63987821995256, 200, 200,'Hồ Chí Minh');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
