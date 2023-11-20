@@ -12960,27 +12960,33 @@ label {
 /* Employee-check-in*/
 
 .user-card {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 5fr;*/
     align-items: center;
-    column-gap: 10px;
-    border: 1px solid #ccc;
+    column-gap: 18px;
+    min-height: 220px;
+    /*border: 1px solid #ccc;*/
     border-radius: 10px;
     padding: 15px;
-    background-color: #fff;
+    background-color: whitesmoke;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }
 .basic-info{
-    position: relative;
-    height: 100%;
-    margin: auto;
-    margin-top: 0;
+    /*position: relative;*/
+    height: 85px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px;
 }
 .user-info{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 7px;
+    /*display: grid;*/
+    /*grid-template-columns: auto auto;*/
+    /*column-gap: 7px;*/
+    display: flex;
+    position: relative;
 }
 
 .row .col-4,
@@ -13000,11 +13006,13 @@ label {
     align-items: center;
     justify-content: center;
 }
-
+.phone{
+    font-size: 13px;
+}
 .user-card img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
 }
 
@@ -13163,13 +13171,26 @@ td img {
     margin-right: 10px;
 }
 .checkin-btn{
+    background-color: black;
+    display: flex;
     width: 90px;
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: center;
+}
+.checkin-btn:hover{
+    background-color: orange;
+    color: white;
+    border: hidden;
 }
 .plan-info{
-    /*margin: auto;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .plan-type{
-    margin-bottom: 0;
+    /*margin-right: 10px;*/
 }
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .uc{
@@ -13185,6 +13206,8 @@ td img {
         height: 80px;
     }
     .user-info{
+        height: fit-content;
+        width: 100%;
         margin-top: 5px;
         font-size: 12px;
         display: flex;
@@ -13198,7 +13221,6 @@ td img {
     .plan-info{
         font-size: 12px;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -13653,12 +13675,21 @@ label.error {
     position: absolute;
 }
 .user-status{
-    position: absolute;
+    text-align: center;
     width: 90px;
-    background-color: rgba(255, 99, 71, 0.2);
-    color: black;
+    margin-left: 15px;
+    /*position: absolute;*/
+    /*width: fit-content;*/
+    background-color: #e5e5e5;
+    color: grey;
+    font-size: 12px;
+    font-weight: 450;
     padding: 6px 12px;
-    border: 1px solid orange;
-    border-radius: 5px;
-    bottom: 0;
+    border-radius: 20px;
+    margin:auto;
+    /*right: 0;*/
+}
+.working{
+    color: darkblue;
+    background-color: #cae8fd;
 }
