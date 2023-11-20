@@ -7,8 +7,14 @@ $.validator.addMethod("minAge", function (value, element) {
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
         age--;
     }
-    return age >= 18;
-}, "Bạn phải đủ 18 tuổi trở lên.");
+    return age >= 16;
+}, "Bạn phải đủ 16 tuổi trở lên.");
+
+$.validator.addMethod("notFutureDate", function (value, element) {
+    var selectedDate = new Date(value);
+    var today = new Date();
+    return selectedDate <= today;
+}, "Wow, bạn đang chọn ngày ở tương lai?");
 
 $(document).ready(function () {
     $("#formSubmit").validate({
@@ -81,6 +87,7 @@ $(document).ready(function () {
             dateOfBirth: {
                 required: true,
                 date: true,
+                notFutureDate: true,
                 minAge: true,
             },
             gender: {
@@ -173,7 +180,6 @@ $(document).ready(function () {
             dateOfBirth: {
                 required: "Vui lòng nhập ngày sinh",
                 date: "Vui lòng nhập ngày sinh hợp lệ",
-                minAge: "Bạn phải đủ 18 tuổi trở lên."
             },
             gender: {
                 required: "Vui lòng chọn giới tính"
