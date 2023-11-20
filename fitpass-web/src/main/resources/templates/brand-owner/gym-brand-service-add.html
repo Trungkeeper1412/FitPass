@@ -31,14 +31,14 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                <form action="/brand-owner/service/add" method="post" th:object="${createService}">
+                                <form id="formSubmit" action="/brand-owner/service/add" method="post" th:object="${createService}">
                                     <div class="row">
                                         <div class="col-md-1 mb-3">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
-                                            <img class="show-service-img" src="" alt="Chưa chọn hình ảnh">
-                                            <input type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
+                                            <img class="show-service-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
+                                            <input name="department-img" type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
                                             <input th:field="*{photoUrl}" id="photoUrl" type="hidden" name="photoUrl">
                                             <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
                                         </div>
