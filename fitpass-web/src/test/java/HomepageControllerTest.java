@@ -8,17 +8,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -57,6 +56,21 @@ public class HomepageControllerTest {
         // Perform assertions on brandPagnition based on your expectations
         assertEquals(mockBrandList, brandPagnition.getListBrand());
 
+    }
+    @Test
+    public void getBrandWithPagination_brandServiceReturnsEmpty_okResponseWithEmptyData() {
+
+        // Arrange
+        Mockito.when(brandService.getAllByStatus(1, 1, 2, null, null))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        ResponseEntity<BrandPagnition> response = homepageController.getBrandWithPagination(1, 2, null, null);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(Collections.emptyList(), response.getBody().getListBrand());
     }
 
 
