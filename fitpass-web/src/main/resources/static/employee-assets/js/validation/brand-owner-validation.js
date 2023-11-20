@@ -31,6 +31,13 @@ $.validator.addMethod("validateIdCard", function(value, element) {
 
     // Kiểm tra mã giới tính
     if (!/^[0-9]$/.test(validCenturyGenderCodes)) {
+        /*
+        "0": "nữ", "1": "nam", // Thế kỷ 20
+        "2": "nữ", "3": "nam", // Thế kỷ 21
+        "4": "nữ", "5": "nam", // Thế kỷ 22
+        "6": "nữ", "7": "nam", // Thế kỷ 23
+        "8": "nữ", "9": "nam" // Thế kỷ 24
+         */
         return false;
     }
 
@@ -140,6 +147,13 @@ $(document).ready(function () {
                 pattern: /^[0-9]{12}$/,
                 validateIdCard: true,
             },
+
+            // Validate service
+            amenitieName: {
+                required: true,
+                minlength: 1,
+                maxlength: 50,
+            }
         },
         messages: {
             // Validate Plan
@@ -226,16 +240,22 @@ $(document).ready(function () {
             },
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập số điện thoại !",
                 minlength: 'Số điện thoại phải có ít nhất 10 số !',
                 maxlength: 'Số điện thoại có tối đa 11 số !',
                 pattern: 'Số điện thoại không đúng định dạng !'
             },
             idCard: {
                 required: "Vui lòng nhập số căn cước công dân !",
-                number: "Nhập chữ ăn cứt à ?",
+                number: "Đã bảo nhập số rồi còn nhập cái gì đấy ?",
                 minlength: "Số căn cước công dân phải có ít nhất 12 chữ số !",
                 maxlength: "Số căn cước công dân không được vượt quá 12 chữ số !",
                 pattern: "Số căn cước công dân không hợp lệ !",
+            },
+            amenitieName: {
+                required: "Vui lòng nhập tên dịch vụ !",
+                minlength: "Tên dịch vụ phải có ít nhất 1 kí tự !",
+                maxlength: "Tên dịch vụ không được vượt quá 50 kí tự !",
             }
         },
         errorPlacement: function (error, element) {
