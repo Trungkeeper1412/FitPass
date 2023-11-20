@@ -2,6 +2,8 @@ import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
+import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.controller.HomepageController;
 import org.assertj.core.api.Assertions;
@@ -115,6 +117,26 @@ public class HomepageControllerTest {
 
         // Assert
         Assertions.assertThat(response.getBody().getListBrand()).isEmpty();
+    }
+
+    @Test
+    void testGetNearByDepartmentList() {
+        // Mock data
+        List<Department> mockDepartmentList = Collections.singletonList(new Department());
+        // Mocking the behavior of the departmentService
+        when(departmentService.getAllDepartmentByNearbyLocation(anyInt(), anyInt(), anyDouble(), anyDouble(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(mockDepartmentList);
+        when(departmentService.countAllDepartment(anyInt(), anyString(), anyString(), anyString(), anyDouble(), anyDouble(), anyString()))
+                .thenReturn(mockDepartmentList.size());
+
+        // Calling the controller method
+        ResponseEntity<DepartmentHomePagePagnition> responseEntity = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+
+        // Assertions
+        assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 is the expected HTTP status code
+        DepartmentHomePagePagnition departmentHomePagePagnition = responseEntity.getBody();
+        // Perform assertions on departmentHomePagePagnition based on your expectations
+        assertEquals(mockDepartmentList, departmentHomePagePagnition.getDepartmentList());
     }
 
 }
