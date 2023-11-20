@@ -1363,11 +1363,11 @@ VALUES (57, 8, 30, 1, 'Getfit Chi nhánh Oriental Tân Phú',
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (83, 8, 31, 1, 'Getfit Chi nhánh Mia Center', 'Lầu 4, Saigon Mia Center, 202 Đường số 9A, KDC Trung Sơn.',
         '(096) 611-1241', 'https://s.net.vn/nmj5', 'https://s.net.vn/l57q', 'https://s.net.vn/z1Ms',
         'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao, đây đủ dụng cụ tập đáp ứng đa dạng nhu cầu của quý hội viên.',
-        10.733395069054875, 106.68892360080237, 200, 200);
+        10.733395069054875, 106.68892360080237, 200, 200,'Hồ Chí Minh');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
