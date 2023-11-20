@@ -16,6 +16,27 @@ $.validator.addMethod("notFutureDate", function (value, element) {
     return selectedDate <= today;
 }, "Wow, bạn đang chọn ngày ở tương lai?");
 
+$.validator.addMethod("validateIdCard", function(value, element) {
+    // Lấy mã tỉnh từ số căn cước
+    var provinceCode = value.substring(0, 3);
+
+    // Lấy số tiếp theo sau mã tỉnh
+    var validCenturyGenderCodes = value.charAt(3);
+
+    // - Kiểm tra mã tỉnh
+    var validProvinceCodes = ["001", "002", "004", "006", "008", "010", "011", "012", "014", "015", "017", "019", "020", "022", "024", "025", "026", "027", "030", "031", "033", "034", "035", "036", "037", "038", "040", "042", "044", "045", "046", "048", "049", "051", "052", "054", "056", "058", "060", "062", "064", "066", "067", "068", "070", "072", "074", "075", "077", "079", "080", "082", "083", "084", "086", "087", "089", "091", "092", "093", "094", "095", "096"]; // Danh sách mã tỉnh hợp lệ
+    if (validProvinceCodes.indexOf(provinceCode) === -1) {
+        return false; // Mã tỉnh không hợp lệ
+    }
+
+    // Kiểm tra mã giới tính
+    if (!/^[0-9]$/.test(validCenturyGenderCodes)) {
+        return false;
+    }
+
+    return true; // Các mã tỉnh và số tiếp theo đều hợp lệ
+}, "Số căn cước công dân không đúng định dạng !");
+
 $(document).ready(function () {
     $("#formSubmit").validate({
         rules: {
@@ -113,102 +134,109 @@ $(document).ready(function () {
             },
             idCard: {
                 required: true,
-                digits: true
+                number: true,
+                minlength: 12,
+                maxlength: 12,
+                pattern: /^[0-9]{12}$/,
+                validateIdCard: true,
             },
         },
         messages: {
             // Validate Plan
             brandName: {
-                required: "Vui lòng nhập tên cơ sở",
-                minlength: "Tên cơ sở phải có ít nhất 3 kí tự",
-                maxlength: "Tên cơ sở không được vượt quá 32 kí tự",
-                pattern: "Tên cơ sở không được chứa kí tự đặc biệt",
+                required: "Vui lòng nhập tên cơ sở !",
+                minlength: "Tên cơ sở phải có ít nhất 3 kí tự !",
+                maxlength: "Tên cơ sở không được vượt quá 32 kí tự !",
+                pattern: "Tên cơ sở không được chứa kí tự đặc biệt !",
             },
             gymPlanName: {
-                required: "Vui lòng nhập tên gói tập",
-                minlength: "Tên gói tập phải có ít nhất 2 kí tự",
-                maxlength: "Tên gói tập không được vượt quá 32 kí tự",
-                pattern: "Tên gói tập không được chứa kí tự đặc biệt",
+                required: "Vui lòng nhập tên gói tập !",
+                minlength: "Tên gói tập phải có ít nhất 2 kí tự !",
+                maxlength: "Tên gói tập không được vượt quá 32 kí tự !",
+                pattern: "Tên gói tập không được chứa kí tự đặc biệt !",
             },
             pricePerHours: {
-                required: "Vui lòng nhập số credits",
-                number: "Vui lòng nhập số hợp lệ",
-                min: "Số credits/giờ phải lớn hơn 0",
+                required: "Vui lòng nhập số credits !",
+                number: "Vui lòng nhập số hợp lệ !",
+                min: "Số credits/giờ phải lớn hơn 0 !",
             },
             planBeforeActive: {
-                required: "Vui lòng nhập nhập số ngày trước khi kích hoạt",
-                number: "Vui lòng nhập số hợp lệ",
-                min: "Số ngày phải lớn hơn 0"
+                required: "Vui lòng nhập nhập số ngày trước khi kích hoạt !",
+                number: "Vui lòng nhập số hợp lệ !",
+                min: "Số ngày phải lớn hơn 0 !"
             },
             planAfterActive: {
-                required: "Vui lòng nhập nhập số ngày sau khi kích hoạt",
-                number: "Vui lòng nhập số hợp lệ",
-                min: "Số ngày phải lớn hơn 0"
+                required: "Vui lòng nhập nhập số ngày sau khi kích hoạt !",
+                number: "Vui lòng nhập số hợp lệ !",
+                min: "Số ngày phải lớn hơn 0 !"
             },
             description: {
-                required: "Vui lòng nhập nhập mô tả gói tập",
-                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự",
-                maxlength: "Mô tả gói tập không được vượt quá 250 kí tự",
+                required: "Vui lòng nhập nhập mô tả gói tập !",
+                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
+                maxlength: "Mô tả gói tập không được vượt quá 250 kí tự !",
             },
             duration: {
-                required: "Vui lòng nhập nhập số ngày sử dụng gói tập",
-                number: "Vui lòng nhập số hợp lệ",
-                min: "Số ngày ít nhất phải bằng 1"
+                required: "Vui lòng nhập nhập số ngày sử dụng gói tập !",
+                number: "Vui lòng nhập số hợp lệ !",
+                min: "Số ngày ít nhất phải bằng 1 !"
             },
             price: {
-                required: "Vui lòng nhập số credits",
-                number: "Vui lòng nhập số hợp lệ",
-                min: "Số credits phải lớn hơn 0",
+                required: "Vui lòng nhập số credits !",
+                number: "Vui lòng nhập số hợp lệ !",
+                min: "Số credits phải lớn hơn 0 !",
             },
             statusActive: {
-                required: "Vui lòng chọn trạng thái"
+                required: "Vui lòng chọn trạng thái !"
             },
 
             // Validate Owner
             'department-img': {
-                required: "Vui lòng chọn ảnh"
+                required: "Vui lòng chọn ảnh !"
             },
             firstName: {
-                required: "Vui lòng nhập họ của bạn",
-                maxlength: "Họ của bạn không được vượt quá 25 kí tự",
-                pattern: "Họ của bạn không được chứa kí tự đặc biệt",
+                required: "Vui lòng nhập họ của bạn !",
+                maxlength: "Họ của bạn không được vượt quá 25 kí tự !",
+                pattern: "Họ của bạn không được chứa kí tự đặc biệt !",
             },
             email: {
-                required: "Vui lòng nhập email",
-                email: "Vui lòng nhập địa chỉ email hợp lệ"
+                required: "Vui lòng nhập email !",
+                email: "Vui lòng nhập địa chỉ email hợp lệ !"
             },
             address: {
-                required: "Vui lòng nhập địa chỉ",
-                maxlength: "Địa chỉ không được vượt quá 150 kí tự",
+                required: "Vui lòng nhập địa chỉ !",
+                maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
             },
             dateOfBirth: {
-                required: "Vui lòng nhập ngày sinh",
-                date: "Vui lòng nhập ngày sinh hợp lệ",
+                required: "Vui lòng nhập ngày sinh !",
+                date: "Vui lòng nhập ngày sinh hợp lệ !",
             },
             gender: {
-                required: "Vui lòng chọn giới tính"
+                required: "Vui lòng chọn giới tính !"
             },
             lastName: {
-                required: "Vui lòng nhập tên của bạn",
-                maxlength: "Tên của bạn không được vượt quá 25 kí tự",
-                pattern: "Tên của bạn không được chứa kí tự đặc biệt",
+                required: "Vui lòng nhập tên của bạn !",
+                maxlength: "Tên của bạn không được vượt quá 25 kí tự !",
+                pattern: "Tên của bạn không được chứa kí tự đặc biệt !",
             },
             username: {
-                required: "Vui lòng nhập tên đăng nhập",
-                minlength: "Tên đăng nhập phải có ít nhất 6 kí tự",
-                maxlength: "Tên đăng nhập không được vượt quá 50 kí tự",
-                pattern: "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt",
+                required: "Vui lòng nhập tên đăng nhập !",
+                minlength: "Tên đăng nhập phải có ít nhất 6 kí tự !",
+                maxlength: "Tên đăng nhập không được vượt quá 50 kí tự !",
+                pattern: "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt !",
             },
             phone: {
-                required: "Vui lòng nhập số điện thoại",
-                minlength: 'Số điện thoại phải có ít nhất 10 số!',
-                maxlength: 'Số điện thoại có tối đa 11 số!',
-                pattern: 'Số điện thoại không đúng định dạng!'
+                required: "Vui lòng nhập số điện thoại !",
+                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                pattern: 'Số điện thoại không đúng định dạng !'
             },
             idCard: {
-                required: "Vui lòng nhập số căn cước",
-                digits: "Vui lòng chỉ nhập số"
-            },
+                required: "Vui lòng nhập số căn cước công dân !",
+                number: "Nhập chữ ăn cứt à ?",
+                minlength: "Số căn cước công dân phải có ít nhất 12 chữ số !",
+                maxlength: "Số căn cước công dân không được vượt quá 12 chữ số !",
+                pattern: "Số căn cước công dân không hợp lệ !",
+            }
         },
         errorPlacement: function (error, element) {
             if (element.attr("type") === "radio") {
