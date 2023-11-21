@@ -2571,7 +2571,7 @@ VALUES
      'https://g2.by/f1WS',
      'https://by.tn/oTZP',
      '25 FIT Lý Thường Kiệt là studio đầu tiên ở Hà Nội đánh dấu những bước tiến quan trọng của 25 FIT tại khu vực phía Bắc trong việc mang công nghệ EMS đến với người dùng thủ đô',
-     21.023985014649746, 105.85026204718575, 5, 60),
+     21.023985014649746, 105.85026204718575, 5, 60, 'Hà Nội'),
     (26, 2, 50, 1, '25 FIT Duy Tân',
      '22 Duy Tân, Cầu Giấy, Hà Nội Hà Nội', '18006176',
      'https://shorturl.at/nwTUX',
