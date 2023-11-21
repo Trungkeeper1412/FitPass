@@ -2532,7 +2532,7 @@ Dựa vào BMI, huấn luyện viên của Diamond Fitness sẽ vạch ra lịch
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number,
-                            logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area)
+                            logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area,city)
 VALUES
     /************************************************ Kickfit Sport Departments ***********************************************/
     (21, 1, 2, 1, 'Kickfit Sports Nguyễn Phong Sắc',
@@ -2541,7 +2541,7 @@ VALUES
      'https://bom.so/YJ7xgS',
      'https://bom.so/lNBYrM',
      'Kickfit Sports Nguyễn Phong Sắc được biết đến là phòng tập kickfit chất lượng tốt nhất tại quận Cầu Giấy, địa chỉ quen thuộc của giới yêu võ thuật trên địa bàn Hà Nội. Không gian tập luyện có diện tích gần 1000m2 được phân chia theo từng khu riêng biệt, hợp lý đảm bảo hội viên có không gian riêng khi tập luyện và thư giãn.',
-     21.040954973167608, 105.79023379536018, 200, 1000),
+     21.040954973167608, 105.79023379536018, 200, 1000,'Hà Nội'),
     (22, 1, 46, 1, 'Kickfit Sports Trần Duy Hưng',
      'Ngõ 196 Đ. Trần Duy Hưng, Trung Hoà, Cầu Giấy, Hà Nội', '0903411257',
      'https://bom.so/CHjTsR',
