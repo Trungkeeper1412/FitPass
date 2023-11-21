@@ -3159,7 +3159,6 @@ input:checked + .toggle-slider:before {
   width: 100%;
   margin: auto;
   margin-top: 60px;
-  /* padding: 30px 150px 150px 150px; */
 }
 
 .gym-name{
