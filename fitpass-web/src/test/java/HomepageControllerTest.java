@@ -51,7 +51,7 @@ public class HomepageControllerTest {
         when(departmentService.getAllDepartmentByBrandId(anyInt(), anyInt(), anyInt())).thenReturn(Arrays.asList(new DepartmentDTO(/* populate with necessary values */)));
 
         // Calling the controller method
-        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, "sortPrice", "sortRating");
+        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, "lowToHigh", "sortRating");
 
         // Assertions
         assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 is the expected HTTP status code
