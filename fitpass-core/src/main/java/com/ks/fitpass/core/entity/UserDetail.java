@@ -23,4 +23,5 @@ public class UserDetail {
     private String imageUrl;
     private boolean userDeleted;
     private int gymDepartmentId;
+    private String securityId;
 }
