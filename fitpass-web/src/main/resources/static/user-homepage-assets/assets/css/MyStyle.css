@@ -2504,7 +2504,7 @@ a:link {
 }
 
 .banking-card-list img {
-  width: 30px;
+  width: 50px;
 }
 
 .banking-card-list .card-input-element {
@@ -2515,6 +2515,10 @@ a:link {
   background-color: white;
   border-radius: 10px;
   padding: 15px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .banking-card-list .card-input:hover {
@@ -2539,6 +2543,8 @@ a:link {
 }
 
 .add-money .card-input {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 10px;
   padding: 15px;
@@ -2575,14 +2581,12 @@ a:link {
 .radio-buttons {
   width: 100%;
   margin: 0 auto;
-  /* text-align: center; */
 }
 
 .input-money input[type=text] {
   width: 100%;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
-  /* margin:8px 0; */
   outline: none;
   padding: 10px;
   box-sizing: border-box;
@@ -2684,6 +2688,12 @@ a:link {
   visibility: visible;
   transform: scale(1.0);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+.vnpay-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px;
 }
 
 /* Css for notifications tab */
