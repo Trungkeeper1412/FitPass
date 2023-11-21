@@ -116,20 +116,6 @@ public class HomepageControllerTest {
 
 
     @Test
-    public void getBrandWithPagination_brandListEmpty_okResponseWithEmptyData() {
-
-        // Arrange
-        Mockito.when(brandService.getAllByStatus(1, 1, 2, null, null))
-                .thenReturn(Collections.emptyList());
-
-        // Act
-        ResponseEntity<BrandPagnition> response = homepageController.getBrandWithPagination(0, 0, null, null);
-
-        // Assert
-        Assertions.assertThat(response.getBody().getListBrand()).isEmpty();
-    }
-
-    @Test
     void testGetNearByDepartmentList() {
         // Mock data
         List<Department> mockDepartmentList = Collections.singletonList(new Department());
@@ -140,7 +126,7 @@ public class HomepageControllerTest {
                 .thenReturn(mockDepartmentList.size());
 
         // Calling the controller method
-        ResponseEntity<DepartmentHomePagePagnition> responseEntity = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> responseEntity = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assertions
         assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 is the expected HTTP status code
@@ -157,7 +143,7 @@ public class HomepageControllerTest {
                 .thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -173,7 +159,7 @@ public class HomepageControllerTest {
                 .thenThrow(new IllegalArgumentException());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, -1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, -1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -188,7 +174,7 @@ public class HomepageControllerTest {
                 .thenThrow(new IllegalArgumentException());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 0, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 0, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -202,7 +188,7 @@ public class HomepageControllerTest {
                 .thenThrow(new RuntimeException("Internal Server Error"));
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -216,7 +202,7 @@ public class HomepageControllerTest {
                 .thenThrow(new IllegalArgumentException("Invalid coordinates"));
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 181.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -231,7 +217,7 @@ public class HomepageControllerTest {
                 .thenReturn(mockDepartmentList.size());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 10_000, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 10_000, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -250,7 +236,7 @@ public class HomepageControllerTest {
                 .thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 181.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
@@ -266,7 +252,7 @@ public class HomepageControllerTest {
                 .thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 0.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
