@@ -48,8 +48,15 @@ public class CartControllerTest {
     @Test
     public void addToCart_existingProductInCart_badRequest() {
         // Arrange
-        AddToCartRequestDTO requestDTO = new AddToCartRequestDTO(1, 2, 3); // Replace with actual values
-        GymPlanDepartmentNameDto mockProduct = new GymPlanDepartmentNameDto(); // Replace with actual product
+        int gymPlanId = 1;
+        int quantity = 2;
+        int departmentId = 3;
+
+        // Replace with actual values
+        AddToCartRequestDTO requestDTO = new AddToCartRequestDTO(gymPlanId, quantity, departmentId);
+        GymPlanDepartmentNameDto mockProduct = new GymPlanDepartmentNameDto();
+        mockProduct.setGymPlanId(1);
+        mockProduct.setGymDepartmentId(3);
         HttpSession mockSession = mock(HttpSession.class);
 
         when(gymPlanService.getGymPlanByGymPlanId(anyInt(), anyInt())).thenReturn(mockProduct);
@@ -65,8 +72,12 @@ public class CartControllerTest {
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Sản phẩm này đã add vào giỏ hàng", response.getBody());
+
+        // Verify that the cart was not modified
+        assertEquals(1, mockCart.getItems().size());
         // Additional assertions based on your expectations
     }
+
 
     @Test
     public void addToCart_invalidProductQuantity_badRequest() {
