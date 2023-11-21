@@ -2548,7 +2548,7 @@ VALUES
      'https://bit.ly/kickfit-tranduyhung',
      'https://shorturl.at/vyJ17',
      'Kickfit Sports Trần Duy Hưng được ra đời vào năm 2012 và là cơ sở đầu tiên của chuỗi phòng tập Kickfit Sports. Dịch vụ phòng tập chủ yếu về các bộ môn võ đối kháng hỗ trợ giảm cân, tăng cơ, cải thiện vóc dáng cũng như trang bị các kỹ năng phòng vệ hiệu quả giúp xử lý các tình huống nguy hiểm trong cuộc sống. Với không gian rộng rãi, cơ sở vật chất hiện đại tối tân, Kickfit Sports Trần Duy Hưng mang tới cho hội viên sự thoải mái, thư giãn sau những giờ học tập và làm việc mệt mỏi.',
-     21.009542311744028, 105.79714248159206, 200, 1000),
+     21.009542311744028, 105.79714248159206, 200, 1000,'Hà Nội'),
     (23, 1, 47, 1, 'Kickfit Sports Thiên Đường Bảo Sơn',
      'Tầng 5, Tòa Gemek 1, Thiên Đường Bảo Sơn, Hoài Đức, Hà Nội', '093 63 999 88',
      'https://bom.so/CHjTsR',
