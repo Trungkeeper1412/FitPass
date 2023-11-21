@@ -2601,7 +2601,7 @@ VALUES
      'https://t.ly/Y_iVF',
      'https://shorturl.at/cMUWX',
      'Nổi bật khắp HCM với không gian xanh đẳng cấp rộng hơn 3.000m2 và đầy đủ bộ môn, S''Life Quận 10 sẽ mang đến cho bạn những trải nghiệm tuyệt vời và hiệu quả nhất.',
-     10.776571562971277, 106.6669378322132, 400, 3000),
+     10.776571562971277, 106.6669378322132, 400, 3000,'Hồ Chí Minh'),
     (30, 3, 54, 1, 'Phòng tập Gym S''Life Quận 6',
      '893 Đ. Hậu Giang, P.11, Quận 6, Thành phố Hồ Chí Minh', '(090) 263-5124',
      'https://shorturl.at/jrP35',
