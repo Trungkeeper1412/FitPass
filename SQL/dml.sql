@@ -2006,7 +2006,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         'https://bom.so/GzOWcD',
         'The New Gym có diện tích không quá lớn nhưng lợi thế về vị trí thuận lợi view từ trên cao, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.797626444808325, 106.65933092494488,
-        300, 1200),
+        300, 1200, 'Hồ Chí Minh'),
 
        (18, 12, 43, 1, 'The New Gym Ung Văn Khiêm',
         '58D Ung Văn Khiêm, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh', '1900 63 69 20',
