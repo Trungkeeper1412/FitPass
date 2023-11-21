@@ -243,6 +243,33 @@
         document.querySelector('.creditConfirm').textContent = creditTrans;
     });
 
+    // JS add money
+    let choose_vnpay = document.getElementById("choose-vnpay");
+    let choose_visa = document.getElementById("choose-visa");
+    let choose_momo = document.getElementById("choose-momo");
+
+    let visa_payment = document.getElementById("visa-payment")
+    let vnpay_payment = document.getElementById("vnpay-payment");
+    let momo_payment = document.getElementById("momo-payment");
+
+    vnpay_payment.style.display = "none";
+    momo_payment.style.display = "none";
+
+    choose_vnpay.addEventListener("click", function () {
+        visa_payment.style.display = "none";
+        momo_payment.style.display = "none";
+        vnpay_payment.style.display = "block";
+    });
+    choose_visa.addEventListener("click", function () {
+        vnpay_payment.style.display = "none";
+        momo_payment.style.display = "none";
+        visa_payment.style.display = "block";
+    });
+    choose_momo.addEventListener("click", function () {
+        vnpay_payment.style.display = "none";
+        visa_payment.style.display = "none";
+        momo_payment.style.display = "block";
+    });
 </script>
 </body>
 </html>
