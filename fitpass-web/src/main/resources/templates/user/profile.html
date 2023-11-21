@@ -273,8 +273,9 @@
 
     document.getElementById("moneyAmount").oninput = function(){
         let money_value = document.getElementById("moneyAmount").value;
-
-
+        if (money_value === ""){
+            document.querySelector('input[name="money"]:checked').checked = false;
+        }
     };
 
 </script>
