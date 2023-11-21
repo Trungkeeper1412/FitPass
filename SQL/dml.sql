@@ -2024,7 +2024,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         'https://bom.so/AgiwNL',
         'Phòng tập gym VShape Fitness & Yoga Center tạo dựng hình tượng cho mình là 1 trung tâm thể dục thể hình – thẩm mỹ – yoga đáp ứng mọi nhu cầu về tập luyện thể hình và rèn luyện sức khỏe với mong muốn mang đến cho hội viên 1 không gian tập luyện chuyên nghiệp, thân thiện và luôn tạo niềm tin, niềm hứng thú tập luyện cho hội viên.',
         10.793479126084165, 106.65255131145184,
-        200, 650),
+        200, 650, 'Hồ Chí Minh'),
 
        (20, 13, 45, 1, 'VShape Fitness & Yoga Center, Vincom Plus', 'Lầu 3 – 307 Nguyễn Duy Trinh, Quận 2, Hồ Chí Minh',
         '(08) 71080815',
