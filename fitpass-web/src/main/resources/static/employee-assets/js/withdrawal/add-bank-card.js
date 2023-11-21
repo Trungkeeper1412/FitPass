@@ -20,7 +20,6 @@ function addBankCard() {
         selectedCardItem = cardItem;
         showCardInfo(cardHolder, bankType, accountNumber);
     };
-
     document.getElementById("cardList").appendChild(cardItem);
     document.getElementById("cardHolder").value = "";
     document.getElementById("bankType").value = "";
