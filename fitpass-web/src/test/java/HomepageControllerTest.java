@@ -44,14 +44,13 @@ public class HomepageControllerTest {
     void testGetBrandWithPagination() {
         // Mock data
         List<Brand> mockBrandList = Arrays.asList(new Brand());
-        Map<Integer, List<DepartmentDTO>> mockDepartmentMap = new HashMap<>();
         // Mocking the behavior of the brandService and departmentService
         when(brandService.getAllByStatus(anyInt(), anyInt(), anyInt(), anyString(), anyString())).thenReturn(mockBrandList);
         when(brandService.countAllBrands(anyInt(), anyString())).thenReturn(mockBrandList.size());
         when(departmentService.getAllDepartmentByBrandId(anyInt(), anyInt(), anyInt())).thenReturn(Arrays.asList(new DepartmentDTO(/* populate with necessary values */)));
 
         // Calling the controller method
-        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, "sortPrice", "sortRating");
+        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, "lowToHigh", "sortRating");
 
         // Assertions
         assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 is the expected HTTP status code
