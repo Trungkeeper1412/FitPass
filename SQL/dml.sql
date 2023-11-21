@@ -2592,7 +2592,7 @@ VALUES
      'https://g2.by/RBe2',
      'https://shorturl.at/fCUY9',
      'Chính thức từ ngày 23/07/2022 - studio 25 FIT Hàm Nghi đi vào hoạt động, sẵn sàng chào đón quý hội viên trải nghiệm công nghệ EMS Training mới tại B17.05A Shophouse Vinhomes Gardenia, Hàm Nghi, Phường Cầu Diễn, Quận Nam Từ Liêm, Hà Nội.',
-     21.035466912246545, 105.76214903467383, 6, 70),
+     21.035466912246545, 105.76214903467383, 6, 70,'Hà Nội'),
 
     /********************************************** S'Life Departments *************************************************/
     (29, 3, 53, 1, 'Phòng tập Gym S''Life Quận 10',
