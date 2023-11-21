@@ -2578,7 +2578,7 @@ VALUES
      'https://shorturl.at/gjls2',
      'https://g2.by/baBC',
      'Nằm tại cung đường sầm uất và nhộn nhịp, tiếp giáp khu dân cư, văn phòng, studio mới 25 FIT Duy Tân hứa hẹn sẽ đem đến cho khách hàng những trải nghiệm tập luyện giá trị tốt nhất về sức khỏe, dịch vụ với công nghệ EMS Training hiện đại, đảm bảo tiết kiệm thời gian.',
-     21.030865188489173, 105.78566187313876, 5, 60),
+     21.030865188489173, 105.78566187313876, 5, 60, 'Hà Nội'),
     (27, 2, 51, 1, '25 FIT Times City',
      'T1, SO.02, Khu đô thị Times City, Hai Bà Trưng, Hà Nội', '18006176',
      'https://shorturl.at/nwTUX',
