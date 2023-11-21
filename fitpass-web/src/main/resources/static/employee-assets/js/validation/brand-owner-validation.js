@@ -36,13 +36,6 @@ $.validator.addMethod("validateIdCard", function(value, element) {
 
     // Kiểm tra mã giới tính
     if (!/^[0-9]$/.test(validCenturyGenderCodes)) {
-        /*
-        "0": "nữ", "1": "nam", // Thế kỷ 20
-        "2": "nữ", "3": "nam", // Thế kỷ 21
-        "4": "nữ", "5": "nam", // Thế kỷ 22
-        "6": "nữ", "7": "nam", // Thế kỷ 23
-        "8": "nữ", "9": "nam" // Thế kỷ 24
-         */
         return false;
     }
 
