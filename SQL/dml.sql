@@ -2015,7 +2015,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         'https://bom.so/unAbjV',
         'The New Gym có lợi thế về vị trí đắc địa trên Quận Bình Thạnh, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.808073113779995, 106.71534072494497,
-        500, 1800),
+        500, 1800, 'Hồ Chí Minh'),
 
        (19, 13, 44, 1, 'VShape Fitness & Yoga Center, Trường Chinh',
         '491/21-23 Đường Trường Chinh, Phường 14, Quận Tân Bình, Hồ Chí Minh', '(08) 71080815',
