@@ -2647,7 +2647,7 @@ Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực 
      'https://t.ly/F92Dw',
      'https://t.ly/kyaTf',
      'Viên kim cương khổng lồ Diamond Fitness Paragon tại TD Plaza, Lê Hồng Phong, TP Hải Phòng là dự án lớn nhất TP Hải Phòng với dòng thiết bị cao cấp nhất Hàn Quốc – DRAX cùng 2 phân khu đẳng cấp nhất.',
-     20.846699998604187, 106.70741856252596, 400, 3000),
+     20.846699998604187, 106.70741856252596, 400, 3000,'Hồ Chí Minh'),
     (36, 4, 60, 1, 'Diamond Fitness Paragon Bạch Đằng',
      '97 Bạch Đằng, Hạ Lý, Hồng Bàng, Hải Phòng', '(089) 916-4562',
      'https://shorturl.at/iFO17',
