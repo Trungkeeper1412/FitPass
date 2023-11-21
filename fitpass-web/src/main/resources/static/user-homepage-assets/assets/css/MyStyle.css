@@ -3156,8 +3156,6 @@ input:checked + .toggle-slider:before {
 }
 
 .gym-container{
-  /* background-image: url("https://i.pinimg.com/236x/a4/8e/72/a48e727b363f66fedb9fe30b8026a850.jpg");
-  background-size: cover; */
   width: 100%;
   margin: auto;
   margin-top: 60px;
