@@ -2640,7 +2640,7 @@ Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực 
      'https://shorturl.at/wxCRT',
      'DIAMOND FITNESS CENTER mang trong mình sứ mệnh “Chăm sóc sức khỏe và vẻ đẹp toàn diện của Bạn”, hướng dẫn và mang đến cho bạn một chương trình luyện tập cho cả thể chất và tinh thần.
 Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực nhất tại DIAMOND FITNESS CENTER ngay bạn nhé!',
-     10.78743076402733, 106.67907250244333, 120, 576),
+     10.78743076402733, 106.67907250244333, 120, 576,'Hồ Chí Minh'),
     (35, 4, 59, 1, 'Diamond Fitness Paragon Lê Hồng Phong',
      'TTTM Maslight, lô 20 Đ. Lê Hồng Phong, Đông Khê, Ngô Quyền, Hải Phòng.', '02256626686',
      'https://shorturl.at/iFO17',
