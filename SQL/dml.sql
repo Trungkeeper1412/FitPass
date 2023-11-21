@@ -1971,7 +1971,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
 
  Đến với phòng tập bạn sẽ được kiểm tra thể chất bằng máy Check in Body (một trong những thiết bị hiện đại nhất tại Việt Nam hiện nay), sau đó được các chuyên gia dinh dưỡng tư vấn về cách ăn uống, phân tích thức ăn (ngay cả khi ở nhà)',
         10.720789817865652, 106.72672455649781,
-        300, 1100),
+        300, 1100,'Hồ Chí Minh'),
 
        (14, 11, 39, 1, 'Advance Fitness & Gym Kỳ Đồng', '05 Kỳ Đồng, Phường 6 Quận 3 TPHCM.', '08 6298 2111',
         'https://bom.so/JjIOXa',
