@@ -2615,7 +2615,7 @@ VALUES
      'https://t.ly/i-rgw',
      'https://shorturl.at/gzBQ1',
      '"Với không gian đẳng cấp và sang trọng, S''Life GYM Bình Chánh chính là sự lựa chọn hoàn hảo dành cho bạn để cải thiện sức khỏe và vóc dáng hiệu quả.',
-     10.73050975241317, 106.67597421199494, 260, 1800),
+     10.73050975241317, 106.67597421199494, 260, 1800, 'Hồ Chí Minh'),
     (32, 3, 56, 1, 'Phòng tập Gym S''Life Bình Thạch',
      '26 Nguyễn Huy Lượng, Phường 14, Bình Thạnh, Thành phố Hồ Chí Minh, Vietnam', '(090) 263-5124',
      'https://shorturl.at/jrP35',
