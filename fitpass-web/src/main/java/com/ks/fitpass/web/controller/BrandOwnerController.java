@@ -525,4 +525,9 @@ public class BrandOwnerController {
     public String getWithdrawal(){
         return "brand-owner/gym-brand-withdrawal-list";
     }
+
+    @GetMapping("/withdrawal/card/add")
+    public String getWithdrawalCard(){
+        return "brand-owner/gym-brand-withdrawal-card-add";
+    }
 }
