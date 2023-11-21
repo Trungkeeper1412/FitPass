@@ -2562,7 +2562,7 @@ VALUES
      'https://shorturl.at/BCFI3',
      'https://shorturl.at/boPZ1',
      'Kickfit Sports Metro Hà Đông có quy mô diện tích lớn, cung cấp đa dạng các loại hình tập luyện từ A-Z gồm cả võ thuật và thể hình. Lợi thế tọa lạc tại Mê Linh Plaza, Kickfit Sports được nhiều hội viên lựa chọn bởi đẳng cấp 5 sao cùng dịch vụ tuyệt vời, trang thiết bị hiện đại tạo cảm giác an tâm, thoải mái.',
-     20.964556785162678, 105.77230071391557, 280, 800),
+     20.964556785162678, 105.77230071391557, 280, 800,'Hà Nội'),
 
     /************************************************ 25 FIT Departments ***********************************************/
     (25, 2, 49, 1, '25 FIT Lý Thường Kiệt',
