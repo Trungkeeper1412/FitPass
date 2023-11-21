@@ -3063,8 +3063,6 @@ input:checked + .toggle-slider:before {
   /* width: 100%;
   height: 600px; */
   border-radius: 10px;
-  /* background-image: url("https://img.freepik.com/premium-photo/comprehensive-set-gym-weights-presented-highdefinition_982950-3761.jpg"); */
-  /* background-color: rgb(55, 55, 55); */
   display: flex;
   flex-wrap: nowrap;
   width: 600px;
