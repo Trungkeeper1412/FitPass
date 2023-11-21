@@ -43,38 +43,13 @@
                                 <div class="modal-body">
                                     <!-- Form Rút Tiền -->
                                     <form id="withdrawForm">
-                                        <div class="row">
-                                            <div class="col-md-5 mb-3">
-                                                <label for="bankSelect" class="form-label">Chọn ngân hàng :</label>
-                                                <select class="form-select" id="bankSelect">
-                                                    <option value="acb">ACB</option>
-                                                    <option value="agribank">Agribank</option>
-                                                    <option value="bacabank">Bac A Bank</option>
-                                                    <option value="bidv">BIDV</option>
-                                                    <option value="hdbank">HDBank</option>
-                                                    <option value="mbbank">MB Bank</option>
-                                                    <option value="ncb">NCB</option>
-                                                    <option value="oceanbank">OceanBank</option>
-                                                    <option value="pgbank">PG Bank</option>
-                                                    <option value="saigonbank">Saigonbank</option>
-                                                    <option value="scb">SCB</option>
-                                                    <option value="shb">SHB</option>
-                                                    <option value="techcombank">Techcombank</option>
-                                                    <option value="tpbank">TPBank</option>
-                                                    <option value="vib">VIB</option>
-                                                    <option value="vietcombank">Vietcombank</option>
-                                                    <option value="vietinbank">Vietinbank</option>
-                                                    <option value="vpbank">VPBank</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-7 mb-3">
-                                                <label for="receiverAccount" class="form-label">Số tài khoản :</label>
-                                                <input type="text" class="form-control" id="receiverAccount" placeholder="Nhập tài khoản nhận tiền">
-                                            </div>
-                                        </div>
                                         <div class="mb-3">
-                                            <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
-                                            <input type="text" class="form-control" id="cardHolderName" placeholder="Nhập tên chủ thẻ">
+                                            <label for="cardSelect" class="form-label">Chọn thẻ ngân hàng :</label>
+                                            <select class="form-select" id="cardSelect">
+                                                <option disabled selected readonly>Các thẻ có sẵn</option>
+                                                <option>ACB **** **** **** 1234</option>
+                                                <option>BIDV **** **** **** 5678</option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="currentBalance">Số dư hiện tại (Credit) :</label>
