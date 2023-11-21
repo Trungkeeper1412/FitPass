@@ -24,7 +24,12 @@ $.validator.addMethod("validateIdCard", function(value, element) {
     var validCenturyGenderCodes = value.charAt(3);
 
     // - Kiểm tra mã tỉnh
-    var validProvinceCodes = ["001", "002", "004", "006", "008", "010", "011", "012", "014", "015", "017", "019", "020", "022", "024", "025", "026", "027", "030", "031", "033", "034", "035", "036", "037", "038", "040", "042", "044", "045", "046", "048", "049", "051", "052", "054", "056", "058", "060", "062", "064", "066", "067", "068", "070", "072", "074", "075", "077", "079", "080", "082", "083", "084", "086", "087", "089", "091", "092", "093", "094", "095", "096"]; // Danh sách mã tỉnh hợp lệ
+    var validProvinceCodes = ["001", "002", "004", "006", "008", "010", "011", "012", "014",
+        "015", "017", "019", "020", "022", "024", "025", "026", "027", "030", "031", "033", "034",
+        "035", "036", "037", "038", "040", "042", "044", "045", "046", "048", "049", "051", "052",
+        "054", "056", "058", "060", "062", "064", "066", "067", "068", "070", "072", "074", "075",
+        "077", "079", "080", "082", "083", "084", "086", "087", "089", "091", "092", "093", "094",
+        "095", "096"]; // Danh sách mã tỉnh hợp lệ
     if (validProvinceCodes.indexOf(provinceCode) === -1) {
         return false; // Mã tỉnh không hợp lệ
     }
@@ -103,7 +108,7 @@ $(document).ready(function () {
             firstName: {
                 required: true,
                 maxlength: 25,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
             },
             email: {
                 required: true,
@@ -125,7 +130,7 @@ $(document).ready(function () {
             lastName: {
                 required: true,
                 maxlength: 25,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
             },
             username: {
                 required: true,
