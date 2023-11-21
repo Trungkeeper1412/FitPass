@@ -18,13 +18,11 @@ import java.time.LocalDate;
 
 @Data
 public class GymOwnerCreateDTO {
-
-
     // s allows for whitespace characters, including spaces.
     // u00C0-\\u1EF9 covers the Unicode range for Vietnamese characters.
 
-    @Size(min = 6, max = 50, message = "First Name must be between 6 and 50 characters")
-    @NotEmpty(message = "First Name cannot be empty")
+    @Size(min = 6, max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
+    @NotEmpty(message = "Vui lòng nhập họ của bạn !")
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
     private String firstName;
 
@@ -47,7 +45,6 @@ public class GymOwnerCreateDTO {
     @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Invalid phone number format")
     private String phone;
 
-
     @NotEmpty(message = "Address cannot be empty")
     @Size(max = 255, message = "Address must not exceed 255 characters")
     private String address;
@@ -66,7 +63,7 @@ public class GymOwnerCreateDTO {
     @NotEmpty(message = "Gender cannot be empty")
     private String gender;
 
-    @NotEmpty(message = "Image url cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
 
 
