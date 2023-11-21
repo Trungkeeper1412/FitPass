@@ -3097,7 +3097,6 @@ input:checked + .toggle-slider:before {
   align-items: center;
   width: 70px;
   height: 70px;
-  /*padding: 15px;*/
   border: 1px solid black;
   border-radius: 10px;
   /*width: fit-content;*/
@@ -3132,7 +3131,7 @@ input:checked + .toggle-slider:before {
   /* background-color: #15928A; */
 }
 .service-type .gym-service-logo img{
-  width: 30x;
+  width: 30px;
   height: 30px;
 }
 
