@@ -19,14 +19,18 @@ import java.time.LocalDate;
 @Data
 public class GymOwnerCreateDTO {
 
+
+    // s allows for whitespace characters, including spaces.
+    // u00C0-\\u1EF9 covers the Unicode range for Vietnamese characters.
+
     @Size(min = 6, max = 50, message = "First Name must be between 6 and 50 characters")
     @NotEmpty(message = "First Name cannot be empty")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9 ]*$", message = "Invalid First Name format")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
     private String firstName;
 
     @Size(min = 6, max = 50, message = "Last Name must be between 6 and 50 characters")
     @NotEmpty(message = "Last Name cannot be empty")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9 ]*$", message = "Invalid Last Name format")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
     private String lastName;
 
     @Size(min = 6, max = 50, message = "Username must be between 6 and 50 characters")
