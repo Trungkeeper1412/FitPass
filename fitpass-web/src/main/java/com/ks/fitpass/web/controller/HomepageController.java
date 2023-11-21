@@ -144,7 +144,7 @@ public ResponseEntity<BrandPagnition> getBrandWithPagination(
         if (page <= 0 || size <= 0) {
             throw new IllegalArgumentException("Page and size must be greater than zero.");
         }
-
+        
         // Add additional validation for out-of-range values
         if (userLatitude < -90 || userLatitude > 90) {
             throw new IllegalArgumentException("Latitude must be between -90 and 90.");
