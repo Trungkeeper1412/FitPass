@@ -2622,7 +2622,7 @@ VALUES
      'https://shorturl.at/nwKU7',
      'https://shorturl.at/FLNTY',
      '"Bạn đang tìm phòng tập để cải thiện sức khỏe và vóc dáng? S''Life GYM chính là sự lựa chọn dành cho bạn.',
-     10.805837559943653, 106.69624297299924, 350, 2400),
+     10.805837559943653, 106.69624297299924, 350, 2400,'Hồ Chí Minh'),
 
     /******************************************** Diamond Fitness Departments ***************************************************/
     (33, 4, 57, 1, 'Diamond Fitness Center Trần Quang Khải',
