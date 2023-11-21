@@ -1979,7 +1979,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         'https://bom.so/KgyGXq',
         'Phòng tập gym Advance Fitness & Gym được thành lập với mong muốn mang lại môi trường tập luyện chuyên nghiệp theo hình thức 1:1, đó là hình thức của một huấn luyện viên hướng dẫn cho một học viên đã được trung tâm cam kết áp dụng tuyệt đối. Đến với Trung tâm các học viên sẽ được kiểm tra thể chất bằng máy Check in Body sau đó được các chuyên gia dinh dưỡng tư vấn về cách ăn uống, phân tích thức ăn.',
         10.78467544118492, 106.68288665202464,
-        450, 1200),
+        450, 1200,'Hồ Chí Minh'),
 
        (15, 12, 40, 1, 'The New Gym Nguyễn Chí Thanh', '332 Nguyễn Chí Thanh, Phường 5, Quận 10, Thành phố Hồ Chí Minh',
         '1900 63 69 20',
