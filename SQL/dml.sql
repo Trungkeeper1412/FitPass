@@ -2632,7 +2632,7 @@ VALUES
      'https://shorturl.at/zCJ59',
      'DIAMOND FITNESS CENTER mang trong mình sứ mệnh “Chăm sóc sức khỏe và vẻ đẹp toàn diện của Bạn”, hướng dẫn và mang đến cho bạn một chương trình luyện tập cho cả thể chất và tinh thần.
 Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực nhất tại DIAMOND FITNESS CENTER ngay bạn nhé!',
-     10.79154285000631, 106.68804505835055, 650, 6600),
+     10.79154285000631, 106.68804505835055, 650, 6600,'Hồ Chí Minh'),
     (34, 4, 58, 1, 'Diamond Fitness Center Lê Văn Sỹ',
      '338 Đ. Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh', '02866825544',
      'https://shorturl.at/iFO17',
