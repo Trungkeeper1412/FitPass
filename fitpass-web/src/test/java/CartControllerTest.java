@@ -93,6 +93,37 @@ public class CartControllerTest {
         // Additional assertions based on your expectations
     }
 
-    // Add more test cases as needed to cover different scenarios and edge cases
+    @Test
+    public void addToCart_nullProduct_badRequest() {
+        // Arrange
+        AddToCartRequestDTO requestDTO = new AddToCartRequestDTO(1, 2, 3);
+        HttpSession mockSession = mock(HttpSession.class);
+
+        when(gymPlanService.getGymPlanByGymPlanId(anyInt(), anyInt())).thenReturn(null);
+
+        // Act
+        ResponseEntity<String> response = cartController.addToCart(requestDTO, mockSession);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        // Additional assertions based on your expectations
+    }
+
+
+    @Test
+    public void addToCart_negativeQuantity_badRequest() {
+        // Arrange
+        AddToCartRequestDTO requestDTO = new AddToCartRequestDTO(1, -1, 3);
+        HttpSession mockSession = mock(HttpSession.class);
+
+        // Act
+        ResponseEntity<String> response = cartController.addToCart(requestDTO, mockSession);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        // Additional assertions based on your expectations
+    }
+
+
 
 }
