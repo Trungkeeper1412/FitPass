@@ -143,7 +143,7 @@ public class HomepageControllerTest {
                 .thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
