@@ -19,4 +19,5 @@ public class GymOwnerListDTO {
     private String imageUrl;
     private String gymDepartmentName;
     private boolean userDeleted;
+    private String securityId;
 }
