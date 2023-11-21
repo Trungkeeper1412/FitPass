@@ -2608,7 +2608,7 @@ VALUES
      'https://t.ly/XG2SC',
      'https://shorturl.at/ivIPW',
      'Bạn đang tìm kiếm phòng tập tại quận 6? S''Life GYM chính là sự lựa chọn dành cho bạn với chất lượng hàng đầu',
-     10.746277023301626, 106.62821508856594, 300, 2000),
+     10.746277023301626, 106.62821508856594, 300, 2000,'Hồ Chí Minh'),
     (31, 3, 55, 1, 'Phòng tập Gym S''Life Bình Chánh',
      '34 Đ. Phạm Hùng, Bình Hưng, Bình Chánh, Thành phố Hồ Chí Minh', '(090) 263-5124',
      'https://shorturl.at/jrP35',
