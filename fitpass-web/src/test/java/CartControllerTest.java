@@ -109,4 +109,21 @@ public class CartControllerTest {
         // Additional assertions based on your expectations
     }
 
+
+    @Test
+    public void addToCart_negativeQuantity_badRequest() {
+        // Arrange
+        AddToCartRequestDTO requestDTO = new AddToCartRequestDTO(1, -1, 3);
+        HttpSession mockSession = mock(HttpSession.class);
+
+        // Act
+        ResponseEntity<String> response = cartController.addToCart(requestDTO, mockSession);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        // Additional assertions based on your expectations
+    }
+
+
+
 }
