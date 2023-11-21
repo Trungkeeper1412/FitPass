@@ -44,7 +44,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
                 userDetail.getFirstName(), userDetail.getLastName(),
                 userDetail.getEmail(), userDetail.getPhoneNumber(),
                 userDetail.getAddress(), userDetail.getDateOfBirth(),
-                userDetail.getGender(), userDetail.getImageUrl()
+                userDetail.getGender(), userDetail.getImageUrl(), userDetail.getSecurityId()
                 );
     }
 
@@ -54,7 +54,8 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
                 userDetail.getFirstName(), userDetail.getLastName(),
                 userDetail.getEmail(), userDetail.getPhoneNumber(),
                 userDetail.getAddress(), userDetail.getDateOfBirth(),
-                userDetail.getImageUrl());
+                userDetail.getImageUrl(), userDetail.getSecurityId()
+        );
     }
 
     @Override
@@ -95,6 +96,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
             gymOwnerListDTO.setEmail(rs.getString("email"));
             gymOwnerListDTO.setPhoneNumber(rs.getString("phone_number"));
             gymOwnerListDTO.setImageUrl(rs.getString("image_url"));
+            gymOwnerListDTO.setSecurityId(rs.getString("securityId"));
             gymOwnerListDTO.setGymDepartmentName(rs.getString("name"));
             gymOwnerListDTO.setUserDeleted(rs.getBoolean("user_deleted"));
             return gymOwnerListDTO;
@@ -106,7 +108,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         return jdbcTemplate.update(UPDATE_USER_DETAIL_BY_USER_DETAIL_ID, userDetail.getFirstName(),
                 userDetail.getLastName(), userDetail.getEmail(), userDetail.getPhoneNumber(),
                 userDetail.getAddress(), userDetail.getDateOfBirth(), userDetail.getGender(),
-                userDetail.getImageUrl(), userDetail.getUserDetailId());
+                userDetail.getImageUrl(),userDetail.getSecurityId(), userDetail.getUserDetailId());
     }
 
     @Override
@@ -127,6 +129,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
             userDetail.setDateOfBirth(rs.getObject("date_of_birth", LocalDate.class));
             userDetail.setGender(rs.getString("gender"));
             userDetail.setImageUrl(rs.getString("image_url"));
+            userDetail.setSecurityId(rs.getString("securityId"));
             userDetail.setUserDeleted(rs.getBoolean("user_deleted"));
             userDetail.setGymDepartmentId(rs.getInt("gym_department_id"));
             return  userDetail;

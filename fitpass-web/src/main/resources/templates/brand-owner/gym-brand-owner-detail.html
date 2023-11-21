@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="mb-4">
                                                 <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
-                                                <input th:field="*{idCard}" type="text" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
+                                                <input th:field="*{idCard}" th:value="${gymOwner.getIdCard()}" type="text" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
                                                 <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">idCard Error</span>
                                             </div>
                                             <div class="mb-4">

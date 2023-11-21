@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -40,17 +42,19 @@ public class HomepageControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(HomepageController.class);
     @Test
     void testGetBrandWithPagination() {
         // Mock data
         List<Brand> mockBrandList = Arrays.asList(new Brand());
+        Map<Integer, List<DepartmentDTO>> mockDepartmentMap = new HashMap<>();
         // Mocking the behavior of the brandService and departmentService
         when(brandService.getAllByStatus(anyInt(), anyInt(), anyInt(), anyString(), anyString())).thenReturn(mockBrandList);
         when(brandService.countAllBrands(anyInt(), anyString())).thenReturn(mockBrandList.size());
         when(departmentService.getAllDepartmentByBrandId(anyInt(), anyInt(), anyInt())).thenReturn(Arrays.asList(new DepartmentDTO(/* populate with necessary values */)));
 
         // Calling the controller method
-        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, "lowToHigh", "sortRating");
+        ResponseEntity<BrandPagnition> responseEntity = homepageController.getBrandWithPagination(1, 2, "sortPrice", "sortRating");
 
         // Assertions
         assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 is the expected HTTP status code
@@ -58,6 +62,13 @@ public class HomepageControllerTest {
         // Perform assertions on brandPagnition based on your expectations
         assertEquals(mockBrandList, brandPagnition.getListBrand());
 
+        // Logging for success
+        logger.info("testGetBrandWithPagination passed successfully. HTTP Status: {}", responseEntity.getStatusCodeValue());
+
+        // Logging for failure
+        if (!mockBrandList.equals(brandPagnition.getListBrand())) {
+            logger.error("testGetBrandWithPagination failed. Expected: {}, Actual: {}", mockBrandList, brandPagnition.getListBrand());
+        }
     }
     @Test
     public void getBrandWithPagination_brandServiceReturnsEmpty_okResponseWithEmptyData() {

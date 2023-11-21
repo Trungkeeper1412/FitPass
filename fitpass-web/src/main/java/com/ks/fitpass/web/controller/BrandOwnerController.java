@@ -281,6 +281,7 @@ public class BrandOwnerController {
         gymOwnerUpdateDTO.setDateOfBirth(ud.getDateOfBirth());
         gymOwnerUpdateDTO.setGender(ud.getGender());
         gymOwnerUpdateDTO.setImageUrl(ud.getImageUrl());
+        gymOwnerUpdateDTO.setIdCard(ud.getSecurityId());
         gymOwnerUpdateDTO.setUserDeleted(ud.isUserDeleted());
         gymOwnerUpdateDTO.setDepartmentId(ud.getGymDepartmentId());
         gymOwnerUpdateDTO.setOldDepartmentId(ud.getGymDepartmentId());
@@ -310,6 +311,8 @@ public class BrandOwnerController {
         userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
         userDetail.setGender(gymOwnerUpdateDTO.getGender());
         userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
+        userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard());
+
         // Update user detail
         userService.updateUserDetail(userDetail);
 
@@ -359,6 +362,7 @@ public class BrandOwnerController {
         userDetail.setAddress(gymOwnerCreateDTO.getAddress());
         userDetail.setDateOfBirth(gymOwnerCreateDTO.getDateOfBirth());
         userDetail.setImageUrl(gymOwnerCreateDTO.getImageUrl());
+        userDetail.setSecurityId(gymOwnerCreateDTO.getIdCard());
         userDetail.setGender(gymOwnerCreateDTO.getGender());
 
         // Insert into User Detail
