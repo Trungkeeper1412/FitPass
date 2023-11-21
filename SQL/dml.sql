@@ -1988,7 +1988,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         'https://bom.so/CtBw9Z',
         'The New Gym có diện tích 2.000m2, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.760832460144496, 106.66690168835657,
-        600, 2000),
+        600, 2000,'Hồ Chí Minh'),
 
        (16, 12, 41, 1, 'The New Gym Điện Biên Phủ', '256 Điện Biên Phủ, Phường 7, Quận 3, Thành phố Hồ Chí Minh',
         '1900 63 69 20',
