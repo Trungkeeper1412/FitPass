@@ -1379,37 +1379,37 @@ VALUES (63, 8, 32, 1, 'Getfit Chi Nhánh HOÀNG DIỆU', 'Lầu 3, Cao Ốc H3, 
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (87, 9, 33, 1, 'Elite Fitness XUÂN DIỆU', '51 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội', '024 7302 0888',
         'https://s.net.vn/GDPl', 'https://s.net.vn/vjc7', 'https://s.net.vn/nmwf',
         'CLB tiên phong của Elite Fitness, tọa lạc tại tòa tháp Syrena ngự trên mảnh đất trung tâm Hồ Tây đáng sống bậc nhất tại Hà Nội; Elite Fitness Xuân Diệu là sự lựa chọn hoàn hảo để tận hưởng trọn vẹn không gian tập luyện đẳng cấp, cộng đồng văn minh, một nhịp sống bình yên rất Hà Nội mà không kém phần sôi động.',
-        21.063912459638402, 105.82813606669859, 200, 200);
+        21.063912459638402, 105.82813606669859, 200, 200,'Hà Nội');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (78, 9, 34, 1, 'Elite Fitness Bà Triệu', 'Tầng 6, Tháp C, Vincom Center, 191 Bà Triệu, Hà Nội', '024 39749191',
         'https://s.net.vn/GDPl', 'https://s.net.vn/HQon', 'https://s.net.vn/jik4',
         'Tự hào là một trong những Câu lạc bộ Elite Fitness Top 1 về sự sang trọng và đẳng cấp nhất của hệ thống Elite Fitness, Elite Fitness Vincom Bà Triệu luôn luôn nỗ lực không ngừng để tạo nên một định nghĩa khác về trải nghiệm tập luyện thể thao cao cấp trong suốt 8 năm qua. Chúng tôi với đội ngũ của nhiệt huyết và sự khát khao tạo nên những dịch vụ tuyệt vời trong một môi trường phòng tập hàng đầu. Mỗi Hội viên, mỗi khách hàng là một trọng tâm của chăm sóc và hỗ trợ một cách tận tâm để luôn đạt được mục tiêu sức khỏe trọn vẹn khi đến với chúng tôi. Hãy trở thành một thành viên trong hành trình kiến tạo giá trị sức khỏe cho cộng đồng của chúng tôi! Let’s be Elite!',
-        21.01108468531799, 105.84965020691072, 200, 200);
+        21.01108468531799, 105.84965020691072, 200, 200,'Hà Nội');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (91, 9, 35, 1, 'Elite Fitness Nguyễn Chí Than',
         'Tầng 6, Vinhomes 54A Nguyễn Chí Thanh, Ngọc Khánh, Ba Đình, Hà Nội', '024 7307 8889', 'https://s.net.vn/GDPl',
         'https://s.net.vn/d1Vb', 'https://s.net.vn/bu8z',
         'Tọa lạc tại vị trí trung tâm, Elite Fitness Nguyễn Chí Thanh là một trong những Câu lạc bộ có không gian tập rộng và sang trọng bậc nhất trong hệ thống Elite Fitness. Chúng tôi mong muốn mang đến những giá trị tích cực nhất; xây dựng một cộng đồng khỏe mạnh không những từ thể chất mà còn từ tinh thần bên trong; nơi mà những kiến thức luôn được chia sẻ. Hãy cùng bắt đầu hành trình cho cuộc sống của bạn trở nên tốt đẹp hơn cùng với Chúng tôi từ hôm nay!',
-        21.025367760381087, 105.80951344612583, 200, 200);
+        21.025367760381087, 105.80951344612583, 200, 200,'Hà Nội');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
-                            capacity, area)
+                            capacity, area,city)
 VALUES (52, 10, 36, 1, 'Fit365 Fitness &Yoga Q.11',
         '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam', '090 929 08 80',
         'https://s.net.vn/w1ho', 'https://s.net.vn/H3lr', 'https://s.net.vn/EYRN',
         'Hãy đến ngay với 𝐅𝐈𝐓𝟑𝟔𝟓  hôm nay để tập luyện, tại đây bạn sẽ được tư vấn các bài tập phụ hợp với tình trạng sức khỏe của bản thân, nâng cấp body và trải nghiệm hệ thống máy tập an toàn cùng đội ngũ PT tận tâm nhất.Liên hệ ngay với 𝐅𝐈𝐓𝟑𝟔𝟓 để được tư vấn miễn phí, nhận ngay ưu đãi và đăng kí tập luyện sớm nhất có thể !!!',
-        10.767766928241029, 106.65824315116448, 200, 200);
+        10.767766928241029, 106.65824315116448, 200, 200,'Hồ Chí Minh');
 -- create Brand Amentites
 -- Getfit Chi nhánh Oriental Tân Phú Amenities Associations
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
