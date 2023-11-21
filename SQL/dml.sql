@@ -2585,7 +2585,7 @@ VALUES
      'https://shorturl.at/lwLT5',
      'https://shorturl.at/jCESV',
      'Đặt ở vị trí thuận tiện tại khu dân cư Times City, Quận Hai Bà Trưng. Chỉ 20 phút tập, 2 buổi/tuần cùng huấn luyện viên chuyên nghiệp, quý khách không cần mang bất cứ thứ gì kể cả quần áo hay giày tập để có thể đạt kết quả tăng cơ, giảm mỡ.',
-     20.99661352642664, 105.86945587284531, 5, 55),
+     20.99661352642664, 105.86945587284531, 5, 55, 'Hà Nội'),
     (28, 2, 52, 1, '25 FIT Vinhomes Gardenia Hàm Nghi',
      'B17 05A Shophouse Vinhomes Gardenia, P. Hàm Nghi, Cầu Diễn, Nam Từ Liêm, Hà Nội.', '18006176',
      'https://shorturl.at/nwTUX',
