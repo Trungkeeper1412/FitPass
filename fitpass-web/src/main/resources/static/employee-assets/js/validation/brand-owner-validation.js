@@ -30,7 +30,7 @@ $.validator.addMethod("validateIdCard", function(value, element) {
     }
 
     // Kiểm tra mã giới tính
-    if (!/^[0-9]$/.test(validCenturyGenderCodes)) {
+    if (!/^[0-3]$/.test(validCenturyGenderCodes)) {
         /*
         "0": "nữ", "1": "nam", // Thế kỷ 20
         "2": "nữ", "3": "nam", // Thế kỷ 21
