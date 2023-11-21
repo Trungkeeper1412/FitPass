@@ -2555,7 +2555,7 @@ VALUES
      'https://shorturl.at/finvz',
      'https://shorturl.at/DHVX2',
      'Kickfit Sports Thiên Đường Bảo Sơn tọa lạc tại vị trí đắc địa thuộc toà Gemek 1 ngay cổng chào của Thiên Đường Bảo Sơn. Đây một trong những cơ sở phòng tập được đầu tư lớn với nhiều trang thiết bị hiện đại và tiện ích sang chảnh mang đến trải nghiệm tập luyện thể thao tuyệt vời nhất cho khách hàng. Kickfit Sports Thiên Đường Bảo Sơn tự hào khi nhận được vô số những đánh giá tốt từ khách hàng và số lượng người đăng ký tập luyện ngày càng đông đảo.',
-     21.00855235502214, 105.7307156200674, 400, 1500),
+     21.00855235502214, 105.7307156200674, 400, 1500,'Hà Nội'),
     (24, 1, 48, 1, 'Kickfit Sports Metro Hà Đông',
      'Tầng 2, Siêu thị Metro - Melinh Plaza, Hà Đông', '093 63 999 88',
      'https://bom.so/CHjTsR',
