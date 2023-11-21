@@ -87,7 +87,7 @@
                 <span>Tổng tiền nạp</span>
                 <span>:</span>
                 <span class="money fw-bold">số tiền nạp</span>
-                <span class="currency"> đồng</span>
+<!--                <span class="currency"> đồng</span>-->
             </div>
             <div class="mt-2">
                 <span class="creditConfirm fw-bold">500</span>
@@ -232,7 +232,9 @@
     // Add a click event listener to the button
     addButton.addEventListener('click', function() {
         // Get the value from the input element
-        const inputValue = moneyInput.value;
+        let inputValue = moneyInput.value;
+        inputValue = parseInt(inputValue);
+        inputValue = inputValue.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
         // Get the selected credit-trans text
         // const creditTrans = document.querySelector('input[name="money"]:checked + .card-input .credit-trans').textContent.trim();
 
@@ -240,7 +242,7 @@
         document.querySelector('.money').textContent = inputValue;
 
         // Update the text content of the creditConfirm element with the selected credit-trans text
-        document.querySelector('.creditConfirm').textContent = inputValue/1000;
+        document.querySelector('.creditConfirm').textContent = moneyInput.value/1000;
     });
 
     // JS add money
@@ -273,6 +275,8 @@
 
     document.getElementById("moneyAmount").oninput = function(){
         let money_value = document.getElementById("moneyAmount").value;
+        document.getElementById("moneyAmount").value = money_value;
+        // console.log(money_value);
         if (money_value === ""){
             document.querySelector('input[name="money"]:checked').checked = false;
         }
