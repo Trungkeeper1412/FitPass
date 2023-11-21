@@ -217,7 +217,7 @@ public class HomepageControllerTest {
                 .thenReturn(mockDepartmentList.size());
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 10_000, "City", "lowToHigh", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(0.0, 0.0, 1, 10000, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
