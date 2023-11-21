@@ -44,7 +44,6 @@ public class HomepageControllerTest {
     void testGetBrandWithPagination() {
         // Mock data
         List<Brand> mockBrandList = Arrays.asList(new Brand());
-        Map<Integer, List<DepartmentDTO>> mockDepartmentMap = new HashMap<>();
         // Mocking the behavior of the brandService and departmentService
         when(brandService.getAllByStatus(anyInt(), anyInt(), anyInt(), anyString(), anyString())).thenReturn(mockBrandList);
         when(brandService.countAllBrands(anyInt(), anyString())).thenReturn(mockBrandList.size());
