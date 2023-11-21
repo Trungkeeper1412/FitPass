@@ -75,11 +75,12 @@
             <div class="mt-4">
                 <span>Tổng tiền nạp</span>
                 <span>:</span>
-                <span class="money">số tiền nạp</span>
-                <span class="currency"> đồng</span>
+                <span class="money fw-bold">số tiền nạp</span>
+<!--                <span class="currency"> đồng</span>-->
             </div>
             <div class="mt-2">
-                <span class="creditConfirm">500 Credits</span>
+                <span class="creditConfirm fw-bold">500</span>
+                <span>Credits</span>
                 <span>sẽ được cộng vào ví của bạn!</span>
             </div>
             <div class="btn-option">
@@ -211,17 +212,55 @@
     // Add a click event listener to the button
     addButton.addEventListener('click', function() {
         // Get the value from the input element
-        const inputValue = moneyInput.value;
-
+        let inputValue = moneyInput.value;
+        inputValue = parseInt(inputValue);
+        inputValue = inputValue.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
         // Get the selected credit-trans text
-        const creditTrans = document.querySelector('input[name="money"]:checked + .card-input .credit-trans').textContent.trim();
+        // const creditTrans = document.querySelector('input[name="money"]:checked + .card-input .credit-trans').textContent.trim();
 
         // Update the text content of the money element with the input value
         document.querySelector('.money').textContent = inputValue;
 
         // Update the text content of the creditConfirm element with the selected credit-trans text
-        document.querySelector('.creditConfirm').textContent = creditTrans;
+        document.querySelector('.creditConfirm').textContent = moneyInput.value/1000;
     });
+
+    // JS add money
+    let choose_vnpay = document.getElementById("choose-vnpay");
+    let choose_visa = document.getElementById("choose-visa");
+    let choose_momo = document.getElementById("choose-momo");
+
+    let visa_payment = document.getElementById("visa-payment")
+    let vnpay_payment = document.getElementById("vnpay-payment");
+    let momo_payment = document.getElementById("momo-payment");
+
+    vnpay_payment.style.display = "none";
+    momo_payment.style.display = "none";
+
+    choose_vnpay.addEventListener("click", function () {
+        visa_payment.style.display = "none";
+        momo_payment.style.display = "none";
+        vnpay_payment.style.display = "block";
+    });
+    choose_visa.addEventListener("click", function () {
+        vnpay_payment.style.display = "none";
+        momo_payment.style.display = "none";
+        visa_payment.style.display = "block";
+    });
+    choose_momo.addEventListener("click", function () {
+        vnpay_payment.style.display = "none";
+        visa_payment.style.display = "none";
+        momo_payment.style.display = "block";
+    });
+
+    document.getElementById("moneyAmount").oninput = function(){
+        let money_value = document.getElementById("moneyAmount").value;
+        document.getElementById("moneyAmount").value = money_value;
+        // console.log(money_value);
+        if (money_value === ""){
+            document.querySelector('input[name="money"]:checked').checked = false;
+        }
+    };
 
 </script>
 </body>

@@ -118,14 +118,13 @@
                                                     <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
                                                         :</label>
                                                     <div class="image-container">
-                                                        <img th:src="@{${brandDetails.getBrandWallpaperUrl()}}" alt="Image">
+                                                        <img  th:src="@{${brandDetails.getBrandWallpaperUrl()}}" alt="Image">
                                                         <div class="image-actions">
                                                             <button class="img-edit-button" type="button"
                                                                 data-toggle="tooltip" data-placement="top" data-image-type="wallpaper"
                                                                 title="Chỉnh sửa hình ảnh"><i
-                                                                    class="fas fa-edit"></i></button>N
+                                                                    class="fas fa-edit"></i></button>
                                                                 <input type="hidden" id="imageWallpaper" th:value="${brandDetails.getBrandWallpaperUrl()}">
-
                                                         </div>
                                                     </div>
                                                 </div>

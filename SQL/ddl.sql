@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               rating                      DECIMAL(10, 2) DEFAULT 0,
                                               capacity                    INT,
                                               area                        DECIMAL(10, 2),
-                                              city                        VARCHAR(255) DEFAULT 'Tất cả',
+                                              city                        VARCHAR(255),
                                               FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
 );
 

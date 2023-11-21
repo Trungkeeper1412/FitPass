@@ -12960,24 +12960,36 @@ label {
 /* Employee-check-in*/
 
 .user-card {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 5fr;*/
     align-items: center;
-    column-gap: 10px;
-    border: 1px solid #ccc;
+    column-gap: 18px;
+    min-height: 220px;
+    /*border: 1px solid #ccc;*/
     border-radius: 10px;
     padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #f4f9ff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
 }
 .basic-info{
-    margin: auto;
+    /*position: relative;*/
+    height: 85px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.checkin-time{
+    font-size: 13px;
+    text-align: center;
 }
 .user-info{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 7px;
+    /*display: grid;*/
+    /*grid-template-columns: auto auto;*/
+    /*column-gap: 7px;*/
+    display: flex;
+    position: relative;
 }
 
 .row .col-4,
@@ -12993,15 +13005,18 @@ label {
 }
 
 .img-col {
+    margin-right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+.phone{
+    font-size: 13px;
+}
 .user-card img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
 }
 
@@ -13160,13 +13175,51 @@ td img {
     margin-right: 10px;
 }
 .checkin-btn{
+    background-color: black;
+    display: flex;
     width: 90px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    justify-content: center;
+}
+.checkin-btn:hover{
+    background-color: orange;
+    color: white;
+    border: hidden;
 }
 .plan-info{
-    /*margin: auto;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .plan-type{
-    margin-bottom: 0;
+    /*margin-right: 10px;*/
+}
+.not-check-in{
+    background-color: rgba(255, 193, 193, 0.73);
+    color: darkred;
+    text-align: center;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
+}
+.checked-in{
+    background-color: rgb(200, 236, 209);
+    color: darkgreen;
+    text-align: center;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
 }
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .uc{
@@ -13182,6 +13235,8 @@ td img {
         height: 80px;
     }
     .user-info{
+        height: fit-content;
+        width: 100%;
         margin-top: 5px;
         font-size: 12px;
         display: flex;
@@ -13195,7 +13250,6 @@ td img {
     .plan-info{
         font-size: 12px;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -13456,12 +13510,20 @@ tr td i {
 
 #progressbar li.w-50::after {
     width: 96%;
-    left: -48%;
+    left: -47.7%;
+}
+
+.show-wallpaper-brand {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+    object-fit: cover;
+    background-repeat: round;
 }
 
 .feedback-img {
     position: relative;
-    background-image: url(https://citigym.com.vn/storage/uploads/untitled-5-9.jpg);
     width: 100%;
     height: 400px;
     margin-top: 10px;
@@ -13483,6 +13545,17 @@ tr td i {
 }
 
 /* Custome table */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 
 .status-active {
     width: 160px;
@@ -13550,10 +13623,6 @@ tr td i {
     color: whitesmoke;
     cursor: pointer;
     font-size: 20px;
-}
-
-.form-select {
-    border-radius: 10px;
 }
 
 .withdraw {
@@ -13644,7 +13713,44 @@ tr td i {
 
 label.error {
     color: red;
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 3px;
     display: block;
+    position: absolute;
+}
+.user-status{
+    text-align: center;
+    width: 90px;
+    margin-left: 15px;
+    background-color: #e5e5e5;
+    color: grey;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
+    /*right: 0;*/
+}
+.working{
+    color: darkblue;
+    background-color: #cae8fd;
+}
+
+.list-group-item {
+    background: linear-gradient(to right, #333, #666);
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px !important;
+    padding: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bank-card {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.list-group-item:hover {
+    background: linear-gradient(to right, #666, #333);
 }

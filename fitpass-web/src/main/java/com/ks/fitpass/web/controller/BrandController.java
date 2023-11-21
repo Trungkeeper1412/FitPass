@@ -3,6 +3,7 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.brand.entity.*;
 import com.ks.fitpass.brand.service.*;
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
 import com.ks.fitpass.department.service.DepartmentService;
@@ -47,6 +48,11 @@ public class BrandController {
 
             List<DepartmentDTO> departmentDTOList = departmentService.getDepartmentByBrandID(brandId);
             model.addAttribute("departments", departmentDTOList);
+
+
+            List<ListBrandDepartmentFeedback> departmentFeedback = departmentService.getDepartmentFeedbackOfBrandOwner(brandId);
+            model.addAttribute("departmentFeedback", departmentFeedback);
+
 
             List<DepartmentFeature> departmentFeatures = new ArrayList<>();
 

@@ -31,51 +31,53 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Gói cố định</h2>
-                                <form method="post" action="/brand-owner/gym-plans/fixed/update" th:object="${b}">
+                                <form id="formSubmit" method="post" action="/brand-owner/gym-plans/fixed/update" th:object="${b}">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <input type="hidden" th:field="${b.gymPlanId}" th:value="${b.gymPlanId}">
                                             <label for="packageName" class="form-label fw-bold">Tên gói tập :</label>
-                                            <input th:value="${b.gymPlanName}" th:field="${b.gymPlanName}" type="text" class="form-control" id="packageName" placeholder="Nhập tên gói tập">
+                                            <input name="gymPlanName" th:value="${b.gymPlanName}" th:field="${b.gymPlanName}" type="text" class="form-control" id="packageName" placeholder="Nhập tên gói tập">
                                             <span th:if="${#fields.hasErrors('gymPlanName')}" th:errors="*{gymPlanName}">Gym Plan Name Error</span>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="credits" class="form-label fw-bold">Số credits :</label>
-                                            <input th:value="${b.price}" th:field="${b.price}" type="text" class="form-control" id="credits" placeholder="Nhập số credits">
+                                            <input name="price" th:value="${b.price}" th:field="${b.price}" type="text" class="form-control" id="credits" placeholder="Nhập số credits">
                                             <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="activationBefore" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
                                             title="Đây là mô tả của thời gian trước khi kích hoạt">Thời hạn trước khi kích hoạt:</label>
-                                            <input th:value="${b.planBeforeActive}" th:field="${b.planBeforeActive}" type="text" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
+                                            <input name="planBeforeActive" th:value="${b.planBeforeActive}" th:field="${b.planBeforeActive}" type="text" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
                                             <span th:if="${#fields.hasErrors('planBeforeActive')}" th:errors="*{planBeforeActive}">PlanBeforeActive Error</span>
                                         </div>
 
                                         <div class="col-md-6 mb-3">
                                             <label for="activationAfter" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
                                             title="Đây là mô tả của thời gian sau khi kích hoạt">Thời hạn sau khi kích hoạt:</label>
-                                            <input th:value="${b.planAfterActive}" th:field="${b.planAfterActive}" type="text" class="form-control" id="activationAfter" placeholder="Nhập thời hạn sau khi kích hoạt">
+                                            <input name="planAfterActive" th:value="${b.planAfterActive}" th:field="${b.planAfterActive}" type="text" class="form-control" id="activationAfter" placeholder="Nhập thời hạn sau khi kích hoạt">
                                             <span th:if="${#fields.hasErrors('planAfterActive')}" th:errors="*{planAfterActive}">PlanAfterActive Error</span>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="packageDuration" class="form-label fw-bold">Thời lượng gói tập:</label>
-                                            <input th:value="${b.duration}" th:field="${b.duration}" type="text" class="form-control" id="packageDuration" placeholder="Nhập thời lượng gói tập">
+                                            <input name="duration" th:value="${b.duration}" th:field="${b.duration}" type="text" class="form-control" id="packageDuration" placeholder="Nhập thời lượng gói tập">
                                             <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration Error</span>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="d-block fw-bold">Trạng thái :</label>
-                                            <div class="form-check form-check-inline">
-                                                <input th:field="${b.status}" type="radio" name="actived" id="inlineradio1"
-                                                     value="1" th:checked="${b.status == 1}">&nbsp;Đang hoạt động
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input th:field="${b.status}" type="radio" name="actived" id="inlineradio2"
-                                                     value="2" th:checked="${b.status != 1}">&nbsp;Ngừng hoạt động
+                                            <div class="display-status">
+                                                <label class="d-block fw-bold">Trạng thái :</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input th:field="${b.status}" type="radio" name="actived" id="inlineradio1"
+                                                           value="1" th:checked="${b.status == 1}">&nbsp;Đang hoạt động
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input th:field="${b.status}" type="radio" name="actived" id="inlineradio2"
+                                                           value="2" th:checked="${b.status != 1}">&nbsp;Ngừng hoạt động
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label for="packageDescription" class="form-label fw-bold">Mô tả gói tập:</label>
-                                            <textarea th:text="${b.description}" th:field="${b.description}" class="form-control" id="packageDescription" rows="4" placeholder="Nhập mô tả gói tập"></textarea>
+                                            <textarea name="description" th:text="${b.description}" th:field="${b.description}" class="form-control" id="packageDescription" rows="4" placeholder="Nhập mô tả gói tập"></textarea>
                                             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
                                         </div>
                                         <div class="col-md-12 text-center">

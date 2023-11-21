@@ -63,9 +63,12 @@ public class CartController {
                 cart.addItem(product, quantity);
             }
 
-            // Cập nhật session
-            session.setAttribute("cart", cart);
-        }
+        // Update session
+        session.setAttribute("cart", cart);
+    } else {
+        // Handle invalid input
+        return ResponseEntity.badRequest().body("Invalid input for adding to cart");
+    }
 
         return ResponseEntity.ok().build();
     }
