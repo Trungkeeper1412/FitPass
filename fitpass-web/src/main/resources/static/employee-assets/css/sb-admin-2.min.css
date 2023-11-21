@@ -13625,10 +13625,6 @@ td, th {
     font-size: 20px;
 }
 
-.form-select {
-    border-radius: 10px;
-}
-
 .withdraw {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
@@ -13738,4 +13734,23 @@ label.error {
 .working{
     color: darkblue;
     background-color: #cae8fd;
+}
+
+.list-group-item {
+    background: linear-gradient(to right, #333, #666);
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px !important;
+    padding: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bank-card {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.list-group-item:hover {
+    background: linear-gradient(to right, #666, #333);
 }
