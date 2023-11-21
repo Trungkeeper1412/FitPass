@@ -202,7 +202,7 @@ public class HomepageControllerTest {
                 .thenThrow(new IllegalArgumentException("Invalid coordinates"));
 
         // Act
-        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 181.0, 1, 2, "City", "sortPrice", "sortRating", "10");
+        ResponseEntity<DepartmentHomePagePagnition> response = homepageController.getNearByDepartmentList(-91.0, 181.0, 1, 2, "City", "lowToHigh", "sortRating", "10");
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
