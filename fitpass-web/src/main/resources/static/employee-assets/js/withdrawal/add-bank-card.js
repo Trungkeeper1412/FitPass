@@ -77,10 +77,8 @@ function deleteCard() {
             cancelButtonText: 'Hủy bỏ'
         }).then((result) => {
             if (result.isConfirmed) {
-
                 selectedCardItem.remove();
                 selectedCardItem = null;
-
                 Swal.fire('Đã xóa!', 'Thẻ đã được xóa thành công.', 'success');
             }
         });
