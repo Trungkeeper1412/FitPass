@@ -48,8 +48,25 @@ public class CheckOutController {
     public String viewCheckout(Model model, @RequestParam List<Integer> idList,@RequestParam List<Integer> deptIdList, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         List<CartItem> checkoutCartList = new ArrayList<>();
+        if (cart == null) {
+            // Handle case where cart is null (if needed)
+            return "error/error"; // or another appropriate error view
+        }
+
+        List<CartItem> cartItemList = cart.getItems();
+
+        for (CartItem cartItem : cartItemList) {
+            if (cartItem.getGymPlan() == null || !idList.contains(cartItem.getGymPlan().getGymPlanId())
+                    || !deptIdList.contains(cartItem.getGymPlan().getGymDepartmentId())) {
+                // Invalid input, return 400 Bad Request view
+                return "error/400"; // or whatever the expected view name is for a bad request
+            }
+
+            checkoutCartList.add(cartItem);
+        }
+
         if (cart != null) {
-            List<CartItem> cartItemList = cart.getItems();
+            cartItemList = cart.getItems();
             for (CartItem cartItem : cartItemList) {
                 if (idList.contains(cartItem.getGymPlan().getGymPlanId()) && deptIdList.contains(cartItem.getGymPlan().getGymDepartmentId())) {
                     checkoutCartList.add(cartItem);
