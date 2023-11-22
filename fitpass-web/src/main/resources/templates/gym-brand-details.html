@@ -103,7 +103,10 @@
                     <span>
                         <div class="rating" th:attr="data-star=${dept.getRating()}"></div>
                     </span>
-                    <i class="num-of-rating ">700 đánh giá</i>
+                    <i class="num-of-rating ">
+                        <span th:text="${dept.getFeedbackCount()}"></span>
+                        đánh giá
+                    </i>
                 </div>
             </div>
             <div class="dept-description">
