@@ -69,7 +69,7 @@ public class GymOwnerCreateDTO {
     @Retention(RetentionPolicy.RUNTIME)
     @Constraint(validatedBy = ValidateIdCardValidator.class)
     public @interface ValidateIdCard {
-        String message() default "Invalid ID Card";
+        String message() default "Số căn cước công dân không hợp lệ !";
 
         Class<?>[] groups() default {};
 
