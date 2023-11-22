@@ -24,8 +24,8 @@ public class BrandCreateGymPlanFixedDTO {
     @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
     private Integer planAfterActive;
 
-    @NotNull(message = "Duration cannot be null")
-    @Min(value = 1, message = "Duration must be > 0 ")
+    @NotNull(message = "Vui lòng nhập nhập số ngày sử dụng gói tập !")
+    @Min(value = 1, message = "Số ngày ít nhất phải bằng 1 !")
     private Integer duration;
 
     @NotNull(message = "Vui lòng nhập nhập mô tả gói tập !")
