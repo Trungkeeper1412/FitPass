@@ -13,8 +13,8 @@ public class BrandUpdateGymPlanFixedDTO {
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên gói tập không được chứa kí tự đặc biệt !")
     private String gymPlanName;
 
-    @NotNull(message = "Price Per Hour cannot be null")
-    @Positive(message = "Price Per Hour must be a positive number")
+    @NotNull(message = "Vui lòng nhập số credits !")
+    @Positive(message = "Số credits phải lớn hơn 0 !")
     private Double price;
 
     @NotNull(message = "Plan Before Active cannot be null")
