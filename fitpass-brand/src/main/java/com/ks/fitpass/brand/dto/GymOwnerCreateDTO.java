@@ -37,8 +37,7 @@ public class GymOwnerCreateDTO {
     private String username;
 
     @NotEmpty(message = "Vui lòng nhập email !")
-    @Size(max = 100, message = "Email must not exceed 100 characters")
-    @Email (message = "Invalid email format")
+    @Email (message = "Vui lòng nhập địa chỉ email hợp lệ !")
     private String email;
 
     @NotEmpty(message = "Phone cannot be empty")
