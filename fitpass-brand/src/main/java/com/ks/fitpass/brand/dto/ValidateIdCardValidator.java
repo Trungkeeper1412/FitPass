@@ -3,10 +3,10 @@ package com.ks.fitpass.brand.dto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ValidateIdCardValidator implements ConstraintValidator<GymOwnerCreateDTO.ValidateIdCard, String> {
+public class ValidateIdCardValidator implements ConstraintValidator<GymOwnerUpdateDTO.ValidateIdCard, String>{
 
     @Override
-    public void initialize(GymOwnerCreateDTO.ValidateIdCard constraintAnnotation) {
+    public void initialize(GymOwnerUpdateDTO.ValidateIdCard constraintAnnotation) {
         // Initialization, if needed
     }
     @Override
