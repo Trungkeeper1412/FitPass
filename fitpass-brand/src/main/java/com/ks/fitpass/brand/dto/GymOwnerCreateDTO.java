@@ -52,8 +52,7 @@ public class GymOwnerCreateDTO {
     @Past(message = "Date of Birth must be in the past")
     private LocalDate dateOfBirth;
 
-    @NotEmpty(message = "ID Card cannot be empty")
-    @NotEmpty(message = "ID Card cannot be empty")
+    @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
     @Pattern(regexp = "^[0-9]{12}$", message = "Invalid ID Card format")
     @Size(min = 12, max = 12, message = "ID Card length must be 12 characters")
     @ValidateIdCard(message = "Invalid ID Card")
