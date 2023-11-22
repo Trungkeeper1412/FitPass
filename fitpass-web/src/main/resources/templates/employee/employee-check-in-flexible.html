@@ -64,8 +64,10 @@
                     <div class="container separator-box">
                         <ul class="nav nav-tabs" id="myTabs">
                             <li class="nav-item">
-                                <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">Chưa
-                                    tập</a>
+                                <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">
+                                    <span>Chưa tập</span>
+                                    <span id="num-of-checkin"></span>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">
@@ -168,10 +170,14 @@
 
     <!-- Search AJAX Jquery-->
     <script>
-        // number of active person
+        // number of checkout person
         let numOfActive = document.getElementById("CheckOutList").getElementsByClassName("user-card").length;
         document.getElementById("num-of-active").innerHTML = '('+numOfActive+')';
         console.log(numOfActive);
+
+        // number of checkin person
+        let numOfCheckin = document.getElementById("CheckInList").getElementsByClassName("user-card").length;
+        document.getElementById("num-of-checkin").innerHTML = '('+numOfCheckin+')';
 
 
         // Bắt sự kiện khi nút tìm kiếm được nhấn
