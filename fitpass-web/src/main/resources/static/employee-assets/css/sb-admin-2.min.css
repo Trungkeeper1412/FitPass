@@ -13630,7 +13630,7 @@ td, th {
     border: 1px solid #dee2e6;
     padding: 15px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-content: center;
 }
 
@@ -13638,8 +13638,22 @@ td, th {
     display: block;
 }
 
-.totalTransactions {
+.transactions {
     font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px 10px 10px 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.transactions-money {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
 }
 
 .list-gym-brand {
