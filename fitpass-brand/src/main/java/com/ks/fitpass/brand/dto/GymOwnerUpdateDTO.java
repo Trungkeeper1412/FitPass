@@ -1,9 +1,15 @@
 package com.ks.fitpass.brand.dto;
 
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.time.LocalDate;
 
 @Data
@@ -39,7 +45,7 @@ public class GymOwnerUpdateDTO {
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
     @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
-    @GymOwnerCreateDTO.ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
+    @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
     @NotEmpty(message = "Vui lòng chọn giới tính !")
@@ -55,4 +61,18 @@ public class GymOwnerUpdateDTO {
 
     private Integer departmentId;
     private Integer userId;
+
+
+
+    @Target({ ElementType.FIELD })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = ValidateIdCardValidator.class)
+    public @interface ValidateIdCard {
+        String message() default "Số căn cước công dân không hợp lệ !";
+
+        Class<?>[] groups() default {};
+
+        Class<? extends Payload>[] payload() default {};
+    }
+
 }
