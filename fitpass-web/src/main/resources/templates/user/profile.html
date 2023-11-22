@@ -232,7 +232,7 @@
     // Add a click event listener to the button
     addButton.addEventListener('click', function() {
         // Get the value from the input element
-        let inputValue = moneyInput.value;
+        let inputValue = moneyInput.value.replace(/\D/g,'');
         inputValue = parseInt(inputValue);
         inputValue = inputValue.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
         // Get the selected credit-trans text
@@ -275,8 +275,8 @@
 
     document.getElementById("moneyAmount").oninput = function(){
         let money_value = document.getElementById("moneyAmount").value;
-        document.getElementById("moneyAmount").value = money_value;
-        // console.log(money_value);
+        document.getElementById("moneyAmount").value = parseInt(money_value).toLocaleString("de-DE");
+        console.log(parseInt(money_value).toLocaleString("de-DE"));
         if (money_value === ""){
             document.querySelector('input[name="money"]:checked').checked = false;
         }
