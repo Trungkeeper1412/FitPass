@@ -18,11 +18,11 @@ public class BrandUpdateGymPlanFixedDTO {
     private Double price;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
-    @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
+    @Min(value = 1, message = "Số ngày phải lớn hơn 0 !")
     private Integer planBeforeActive;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
-    @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
+    @Min(value = 1, message = "Số ngày phải lớn hơn 0 !")
     private Integer planAfterActive;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sử dụng gói tập !")
