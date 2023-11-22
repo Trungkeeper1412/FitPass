@@ -62,11 +62,10 @@ public class GymOwnerCreateDTO {
 
     @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
-
-
+    
     @Target({ ElementType.FIELD })
     @Retention(RetentionPolicy.RUNTIME)
-    @Constraint(validatedBy = ValidateIdCardValidator.class)
+    @Constraint(validatedBy = ValidateIdCardValidatorForCreateDTO.class)
     public @interface ValidateIdCard {
         String message() default "Số căn cước công dân không hợp lệ !";
 
