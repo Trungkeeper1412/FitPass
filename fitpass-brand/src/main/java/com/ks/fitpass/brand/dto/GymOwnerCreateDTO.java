@@ -23,55 +23,51 @@ public class GymOwnerCreateDTO {
 
     @Size(min = 6, max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập họ của bạn !")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")
     private String firstName;
 
-    @Size(min = 6, max = 50, message = "Last Name must be between 6 and 50 characters")
-    @NotEmpty(message = "Last Name cannot be empty")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
+    @Size(min = 6, max = 50, message = "Tên của bạn không được vượt quá 25 kí tự !")
+    @NotEmpty(message = "Vui lòng nhập tên của bạn !")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên của bạn không được chứa kí tự đặc biệt !")
     private String lastName;
 
-    @Size(min = 6, max = 50, message = "Username must be between 6 and 50 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Invalid phone number format")
-    @NotEmpty(message = "Username cannot be empty")
+    @Size(min = 6, max = 50, message = "Tên đăng nhập phải nằm trong khoảng 6 đến 50 kí tự !")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt !")
+    @NotEmpty(message = "Vui lòng nhập tên đăng nhập !")
     private String username;
 
-    @NotEmpty(message = "Email cannot be empty")
-    @Size(max = 100, message = "Email must not exceed 100 characters")
-    @Email (message = "Invalid email format")
+    @NotEmpty(message = "Vui lòng nhập email !")
+    @Email (message = "Vui lòng nhập địa chỉ email hợp lệ !")
     private String email;
 
-    @NotEmpty(message = "Phone cannot be empty")
-    @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Invalid phone number format")
+    @NotEmpty(message = "Vui lòng nhập số điện thoại !")
+    @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
     private String phone;
 
-    @NotEmpty(message = "Address cannot be empty")
-    @Size(max = 255, message = "Address must not exceed 255 characters")
+    @NotEmpty(message = "Vui lòng nhập địa chỉ !")
+    @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
     private String address;
 
-    @NotNull(message = "Date of Birth cannot be null")
-    @Past(message = "Date of Birth must be in the past")
+    @NotNull(message = "Vui lòng nhập ngày sinh !")
+    @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
     private LocalDate dateOfBirth;
 
-    @NotEmpty(message = "ID Card cannot be empty")
-    @NotEmpty(message = "ID Card cannot be empty")
-    @Pattern(regexp = "^[0-9]{12}$", message = "Invalid ID Card format")
-    @Size(min = 12, max = 12, message = "ID Card length must be 12 characters")
-    @ValidateIdCard(message = "Invalid ID Card")
+    @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
+    @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
+    @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
-    @NotEmpty(message = "Gender cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn giới tính !")
     private String gender;
 
     @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
-
-
+    
     @Target({ ElementType.FIELD })
     @Retention(RetentionPolicy.RUNTIME)
-    @Constraint(validatedBy = ValidateIdCardValidator.class)
+    @Constraint(validatedBy = ValidateIdCardValidatorForCreateDTO.class)
     public @interface ValidateIdCard {
-        String message() default "Invalid ID Card";
+        String message() default "Số căn cước công dân không hợp lệ !";
 
         Class<?>[] groups() default {};
 
