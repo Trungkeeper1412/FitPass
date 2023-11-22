@@ -12982,7 +12982,7 @@ label {
 }
 .checkin-time{
     font-size: 13px;
-    text-align: center;
+    margin-top: 10px;
 }
 .user-info{
     /*display: grid;*/
