@@ -45,8 +45,8 @@ public interface IRepositoryQuery {
             """;
 
     String INSERT_INTO_USER_DETAIL = """
-                INSERT INTO user_detail (first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+                INSERT INTO user_detail (first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url,securityId)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);
             """;
 
     String GET_LAST_INSERT_USER_DETAIL_ID = """
@@ -59,7 +59,8 @@ public interface IRepositoryQuery {
                     phone_number = ? AND
                     address = ? AND
                     date_of_birth = ? AND
-                    image_url = ?;
+                    image_url = ? AND
+                    securityId =?;
             """;
 
     String INSERT_INTO_USER = """
@@ -90,7 +91,7 @@ public interface IRepositoryQuery {
             """;
 
     String GET_ALL_ACCOUNT_CREATED_BY_BRAND_ID = """
-                SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url, gd.name, u.user_deleted
+                SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url, ud.securityId ,gd.name, u.user_deleted
                             FROM user u
                             JOIN brand ON u.created_by = brand.user_id
                             JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id\s
@@ -99,7 +100,7 @@ public interface IRepositoryQuery {
             """;
 
     String GET_USER_DETAIL_BY_USER_DETAIL_ID = """
-            SELECT ud.user_detail_id, first_name, last_name, email, phone_number, ud.address, date_of_birth, gender, image_url, u.user_deleted, gd.name, gd.gym_department_id\s
+            SELECT ud.user_detail_id, first_name, last_name, email, phone_number, ud.address, date_of_birth, gender, image_url, ud.securityId, u.user_deleted, gd.name, gd.gym_department_id\s
             FROM user_detail ud
             JOIN `user` u  ON u.user_detail_id = ud.user_detail_id
             LEFT JOIN gym_department gd ON gd.user_id = u.user_id\s
@@ -108,7 +109,7 @@ public interface IRepositoryQuery {
 
     String UPDATE_USER_DETAIL_BY_USER_DETAIL_ID = """
                 UPDATE user_detail
-                SET first_name=?, last_name=?, email=?, phone_number=?, address=?, date_of_birth=?, gender=?, image_url=?
+                SET first_name=?, last_name=?, email=?, phone_number=?, address=?, date_of_birth=?, gender=?, image_url=?, securityId = ?
                 WHERE user_detail_id=?;
             """;
 

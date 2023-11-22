@@ -23,7 +23,7 @@
     <div class="gym-picture">
         <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
         <div class="gym-name-cover">
-            <h3 style="margin: auto; color: rgb(255, 255, 255); font-weight: 600;" th:text="${department.departmentName}"></h3>
+            <h3 th:text="${department.departmentName}"></h3>
         </div>
     </div>
 </div>
@@ -96,7 +96,7 @@
     <!-- Gym service -->
     <div class="container">
         <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type" th:each="feature: ${departmentFeatures}">
+            <div class="col-lg-1 col-md-1 service-type mb-3" th:each="feature: ${departmentFeatures}">
                 <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
                      class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
@@ -125,7 +125,7 @@
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="list-plan-wrapper container">
-        <button class="left l1" onclick="leftScroll()" th:if="${gymPlans.size()}>3">
+        <button class="left l1" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
         <div class="scroll-plans">
@@ -155,7 +155,7 @@
             </div>
 
         </div>
-        <button class="right r1" onclick="rightScroll()" th:if="${gymPlans.size()}>3">
+        <button class="right r1" onclick="rightScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
         </button>
     </div>

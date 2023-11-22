@@ -14,6 +14,58 @@ function updateNotificationDisplay() {
     notificationNum.textContent = notificationCount;
 }
 
+// ********************Load newest notification for navbar bell ************************ //
+function getNewestUnseenNotifications(userIdReceive) {
+    // Make an AJAX request to the backend endpoint
+    fetch(`/api/notifications/newest-unseen/${userIdReceive}`)
+        .then(response => response.json())
+        .then(notifications => {
+            // Handle the received notifications
+            updateNotificationDropdown(notifications);
+        })
+        .catch(error => {
+            console.error('Error fetching newest unseen notifications:', error);
+        });
+}
+
+function updateNotificationDropdown(notifications) {
+    // Assuming 'notification-badge' is the element displaying the notification count
+    const notificationBadge = document.getElementById('notification-badge');
+
+    // Assuming 'notification-btn' is the dropdown trigger
+    const notificationBtn = document.getElementById('notification-btn');
+
+    // Assuming 'notification-dropdown' is the container for notification items
+    const notificationDropdown = document.getElementById('notification-dropdown');
+
+    // Update the badge count
+    notificationBadge.innerText = notifications.length;
+
+    // Clear existing notification items
+    notificationDropdown.innerHTML = '';
+
+    // Iterate over notifications and append them to the dropdown
+    notifications.forEach(notification => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <a href="#" class="noti">
+                <img src="${notification.imageUrl}">
+                <div>
+                    <div class="noti-time">${notification.time}</div>
+                    <div class="noti-title">${notification.title}</div>
+                </div>
+            </a>
+        `;
+        notificationDropdown.appendChild(listItem);
+    });
+
+    // Add a "View All" button
+    const viewAllItem = document.createElement('li');
+    viewAllItem.className = 'view-all-noti';
+    viewAllItem.innerHTML = '<button>Xem tất cả</button>';
+    notificationDropdown.appendChild(viewAllItem);
+}
+
 function connect() {
     const socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -62,7 +114,7 @@ function showNotificationMessage(message) {
     }
 }
 
-// ********************Function to handle check in notification************************ //
+// ********************Function to handle check in notification ************************ //
 function insertCheckInNotificationDiv(notification) {
     // Create a new notification div
     const notiDiv = $("<div>").addClass("noti-card col-12 mb-4");
@@ -163,7 +215,7 @@ function handleCheckInCancellation(notification) {
     });
 }
 
-// ********************Function to handle check out notification************************ //
+// ********************Function to handle check out notification ************************ //
 function insertCheckOutNotificationDiv(notification) {
     // Parse the JSON strings from 2 object in message field
     let [orderDetailConfirmCheckOutJson, dataSendCheckOutFlexibleJson] = notification.message.split('|');

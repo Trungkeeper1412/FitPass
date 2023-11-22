@@ -48,4 +48,7 @@ public class Department {
     private String city;
 
     private double distance;
+
+    private int feedbackCount;
+
 }

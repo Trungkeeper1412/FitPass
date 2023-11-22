@@ -29,31 +29,94 @@
                     <div class="card-header py-3">
                         <h2 class="m-0 font-weight-bold text-primary">Danh sách yêu cầu rút tiền :</h2>
                     </div>
-
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table-withdrawal-waiting" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã giao dịch</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Thời gian</th>
+                                    <th>Số credit</th>
+                                    <th>Số tiền quy đổi</th>
+                                    <th>Trạng thái</th>
+                                    <th class="table-action-lock">Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>10001321</td>
+                                    <td>California Fitness & Yoga</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>10000 Creadit</td>
+                                    <td>10000000 VNĐ</td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>10001322</td>
+                                    <td>Kickfit Sport</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>172000 Creadit</td>
+                                    <td>172000000 VNĐ</td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>10001323</td>
+                                    <td>The New Gym</td>
+                                    <td>12:32:12 PM</td>
+                                    <td>20000 Creadit</td>
+                                    <td>20000000 VNĐ</td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pb-5 bg-gradient-withdrawal"></div>
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Lịch sử rút tiền :</h2>
+                    </div>
                     <div class="withdraw text-center">
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <label class="form-label fw-bold">Tổng số giao dịch:</label>
-                            <span class="totalTransactions fw-bold">3 <i class="bi bi-list-check"></i></span>
+                            <div class="transactions btn-transactions">
+                                <i class="bi bi-list-check fs-3"></i>
+                                <label >Tổng số giao dịch: 3</label>
+                            </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <label class="form-label fw-bold">Giao dịch thành công:</label>
-                            <span class="successTransactions fw-bold">1 <i class="bi bi-check-circle"></i></span>
+                            <div class="transactions btn-transactions">
+                                <i class="bi bi-check-circle fs-3"></i>
+                                <label >Giao dịch thành công: 3</label>
+                            </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <label class="form-label fw-bold">Giao dịch đang xử lý:</label>
-                            <span class="processingTransactions fw-bold">1 <i class="bi bi-clock"></i></span>
+                            <div class="transactions btn-transactions">
+                                <i class="bi bi-clock fs-3"></i>
+                                <label >Giao dịch đang xử lý: 2</label>
+                            </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <label class="form-label fw-bold">Giao dịch từ chối:</label>
-                            <span class="rejectedTransactions fw-bold">1 <i class="bi bi-x-circle"></i></span>
+                            <div class="transactions-money">
+                                <i class="bi bi-cash fs-3"></i>
+                                <label>Tổng số credit đã rút:
+                                    <span class="text-money">92000 Credit</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <label class="form-label fw-bold">Tổng số credit đã rút:</label>
-                            <span class="totalCredits text-money">92000 Credit <i class="bi bi-cash"></i></span>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-xl-2">
-                            <label class="form-label fw-bold">Tổng số tiền đã nhận:</label>
-                            <span class="totalMoney text-money">9200000 <i class="fa-solid fa-dong-sign"></i></span>
+                            <div class="transactions-money">
+                                <i class="bi bi-wallet2 fs-3"></i>
+                                <label>Tổng số tiền đã nhận:
+                                    <span class="text-money">9200000<i class="fa-solid fa-dong-sign pl-2"></i></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <!-- Modal Xử lý -->
@@ -76,8 +139,8 @@
                                             <input type="text" class="form-control" id="brandName" value="Lê Đình Tuấn" readonly>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="idCard" class="form-label">Chứng minh nhân dân :</label>
-                                            <input type="text" class="form-control" id="idCard" value="188310234" readonly>
+                                            <label for="idCard" class="form-label">Căn cước công dân :</label>
+                                            <input type="text" class="form-control" id="idCard" value="018301120234" readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label">Địa chỉ :</label>
@@ -112,7 +175,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Từ chối</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
                                     <button type="button" class="btn btn-success">Xác nhận</button>
                                 </div>
                             </div>
@@ -120,45 +183,45 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="table-withdrawal-success" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+                                    <th>STT</th>
                                     <th>Mã giao dịch</th>
                                     <th>Thương hiệu</th>
                                     <th>Thời gian</th>
                                     <th>Số credit</th>
                                     <th>Số tiền quy đổi</th>
                                     <th>Trạng thái</th>
-                                    <th class="table-action-lock">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>1</td>
+                                    <td>10001321</td>
                                     <td>California Fitness & Yoga</td>
                                     <td>12:32:12 PM</td>
                                     <td>10000 Creadit</td>
-                                    <td>10000000 vnđ</td>
+                                    <td>10000000 VNĐ</td>
                                     <td class="text-success fw-bold">Thành công</td>
-                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
+                                    <td>10001322</td>
                                     <td>Kickfit Sport</td>
                                     <td>12:32:12 PM</td>
                                     <td>172000 Creadit</td>
-                                    <td>172000000 vnđ</td>
-                                    <td class="text-warning fw-bold">Đang xử lý</td>
-                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                    <td>172000000 VNĐ</td>
+                                    <td class="text-success fw-bold">Thành công</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
+                                    <td>10001323</td>
                                     <td>The New Gym</td>
                                     <td>12:32:12 PM</td>
                                     <td>20000 Creadit</td>
-                                    <td>20000000 vnđ</td>
-                                    <td class="text-danger fw-bold">Từ chối</td>
-                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                    <td>20000000 VNĐ</td>
+                                    <td class="text-success fw-bold">Thành công</td>
                                 </tr>
                                 </tbody>
                             </table>

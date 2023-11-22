@@ -63,9 +63,12 @@ public class CartController {
                 cart.addItem(product, quantity);
             }
 
-            // Cập nhật session
-            session.setAttribute("cart", cart);
-        }
+        // Update session
+        session.setAttribute("cart", cart);
+    } else {
+        // Handle invalid input
+        return ResponseEntity.badRequest().body("Invalid input for adding to cart");
+    }
 
         return ResponseEntity.ok().build();
     }
@@ -111,15 +114,21 @@ public class CartController {
         return "shopping-cart";
     }
 
-    @GetMapping("/remove")
-    public String removeItem(@RequestParam int gymPlanId,@RequestParam int departmentId, HttpSession session) {
+@GetMapping("/remove")
+public String removeItem(@RequestParam int gymPlanId, @RequestParam int departmentId, HttpSession session) {
+    try {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart != null) {
             cart.removeItem(gymPlanId,departmentId);
         }
         session.setAttribute("cart", cart);
         return "redirect:/cart/view";
+    } catch (Exception e) {
+        // Log the exception or handle it appropriately
+        e.printStackTrace();
+        return "redirect:/error/error";
     }
+}
 
     @PostMapping("/update")
     @ResponseBody

@@ -19,6 +19,11 @@ public interface IRepositoryQuery {
                 d.capacity,
                 d.area,
                 d.city,
+                                     (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
                 d.gym_department_status_key,
                 kbn_department_status.mst_kbn_value AS gym_department_status_name,
                 COALESCE((SELECT MAX(gym_plan.price) AS max_price
@@ -71,6 +76,11 @@ public interface IRepositoryQuery {
                      d.capacity,
                      d.area,
                      d.city,
+                                          (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name,
                      COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) AS max_price,
@@ -101,6 +111,12 @@ public interface IRepositoryQuery {
                      d.area,
                      d.city,
                      d.gym_department_status_key,
+                     (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
+                                                            
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
                  LEFT JOIN mst_kbn kbn_department_status
@@ -130,6 +146,13 @@ public interface IRepositoryQuery {
                                                             d.area,
                                                             d.city,
                                                             d.gym_department_status_key,
+                                                            
+                                                            (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
+                                                            
                                                             kbn_department_status.mst_kbn_value AS gym_department_status_name                    \s
                                                         FROM gym_department d
                                                         LEFT JOIN mst_kbn kbn_department_status
@@ -157,6 +180,11 @@ public interface IRepositoryQuery {
                                           d.capacity,
                                           d.area,
                                           d.city,
+                                                               (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
                                      d.gym_department_status_key,
                                      kbn_department_status.mst_kbn_value AS gym_department_status_name,
                                      concat(ud.first_name, " ", ud.last_name) as user_name
@@ -187,6 +215,11 @@ public interface IRepositoryQuery {
                      d.capacity,
                      d.area,
                      d.city,
+                                          (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
                      d.gym_department_status_key,
                      kbn_department_status.mst_kbn_value AS gym_department_status_name
                  FROM gym_department d
@@ -480,6 +513,11 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                     d.capacity,
                     d.area,
                     d.city,
+                                         (
+                                                            SELECT COUNT(uf.feedback_id)
+                                                            FROM user_feedback uf
+                                                            WHERE uf.department_id = d.gym_department_id
+                                                            ) AS feedback_count,
                     d.gym_department_status_key,
                     kbn_department_status.mst_kbn_value AS gym_department_status_name,
                     CONCAT(ud.first_name, ' ', ud.last_name) as user_name

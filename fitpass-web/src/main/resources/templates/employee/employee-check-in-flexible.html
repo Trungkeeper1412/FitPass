@@ -64,11 +64,16 @@
                     <div class="container separator-box">
                         <ul class="nav nav-tabs" id="myTabs">
                             <li class="nav-item">
-                                <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">Chưa
-                                    tập</a>
+                                <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">
+                                    <span>Chưa tập</span>
+                                    <span id="num-of-checkin"></span>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">Đang tập</a>
+                                <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">
+                                    <span>Đang tập</span>
+                                    <span id="num-of-active">(0)</span>
+                                </a>
                             </li>
                         </ul>
                         <!-- Tab Content -->
@@ -76,28 +81,28 @@
                             <div class="tab-pane fade show active" id="unactivated">
                                 <div class="row justify-content-center" id="CheckInList">
                                     <th:block th:each="item : ${checkInList}">
-                                        <div class="col-md-11 col-lg-6">
+                                        <div class="col-md-6 col-lg-4 mb-4">
                                         <div class="user-card">
+                                            <div class="user-info">
                                                 <div class="img-col">
                                                     <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
                                                 </div>
-                                                <div class="user-info">
-                                                    <div class="basic-info">
-                                                        <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
-                                                        <p class="phone" th:text="${item.getPhoneNumber()}">0987654321</p>
-                                                        <div class="status-box">
-                                                            <span class="user-status">Chưa tập</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="plan-info" style="margin-left: 10px">
-                                                        <p class="fw-bold plan-type"  th:text="${item.getProductName()}">Gói linh hoạt VIP</p>
-                                                        <p>
-                                                            <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
-                                                            <span class="credit fw-bold">Credit/Giờ</span>
-                                                        </p>
-                                                        <button class="btn btn-primary checkin-btn" th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'">Check-in</button>
-                                                    </div>
+                                                <div class="basic-info">
+                                                    <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
+                                                    <div class="phone" th:text="${item.getPhoneNumber()}">0987654321</div>
                                                 </div>
+                                                <span class="user-status">Chưa tập</span>
+                                            </div>
+                                            <div class="plan-info">
+                                                <div class="plan-type" style="overflow-wrap: break-word" th:text="${item.getProductName()}">
+                                                    Gói linh hoạt Gói linh hoạt Gói linh hoạt
+                                                </div>
+                                                <div>
+                                                    <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
+                                                    <span class="credit fw-bold">Credit/Giờ</span>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary checkin-btn mt-3 mx-auto" th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'">Check-in</button>
                                         </div>
                                         </div>
                                     </th:block>
@@ -108,29 +113,31 @@
                             <div class="tab-pane fade" id="active">
                                 <div class="row justify-content-center" id="CheckOutList">
                                     <th:block th:each="item : ${checkOutList}">
-                                        <div class="col-md-11 col-lg-6">
+                                        <div class="col-md-6 col-lg-4 mb-4">
                                         <div class="user-card">
+                                            <div class="user-info">
                                                 <div class="img-col">
                                                     <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
                                                 </div>
-                                                <div class="user-info">
-                                                    <div class="basic-info">
-                                                        <div class="fw-bold" th:text="${item.getUsername()}">Emma Watson</div>
-                                                        <span th:text="${item.getPhoneNumber()}">0987654321</span>
-                                                        <div class="status-box">
-                                                            <span class="user-status">Đang tập</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="plan-info">
-                                                        <p class="text-uppercase fw-bold" th:text="${item.getProductName()}">Gói 3 ngày</p>
-                                                        <p>
-                                                            <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
-                                                            <span class="credit fw-bold">Credit/Giờ</span>
-                                                        </p>
-                                                        <button class="btn btn-primary" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
-                                                    </div>
+                                                <div class="basic-info">
+                                                    <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
+                                                    <div class="phone" th:text="${item.getPhoneNumber()}">0987654321</div>
                                                 </div>
-                                        </div>
+                                                <span class="user-status working">Đang tập</span>
+                                            </div>
+                                            <div style="display: flex" class="plan-wrapper">
+                                            <div class="plan-info">
+                                                <div class="plan-type" style="overflow-wrap: break-word" th:text="${item.getProductName()}">
+                                                    Gói linh hoạt Gói linh hoạt Gói linh hoạt
+                                                </div>
+                                                <div>
+                                                    <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
+                                                    <span class="credit fw-bold">Credit/Giờ</span>
+                                                </div>
+                                            </div>
+                                                <button class="btn checkin-btn mx-auto mt-2" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
+                                            </div>
+                                            </div>
                                         </div>
                                     </th:block>
                                 </div>
@@ -163,189 +170,18 @@
     <th:block th:replace="employee/common/script :: script"></th:block>
 
 
-
+    <!-- Search AJAX Jquery-->
     <script>
-        function performCheckIn(orderDetailId) {
-            $.ajax({
-                type: "GET",
-                url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}` ,
-                success: function (data) {
-                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                    console.log(data)
-                    if(data > 0) {
-                        Swal.fire({
-                            toast: true,
-                            icon: 'success',
-                            title: `Gửi yêu cầu check in thành công`,
-                            animation: true,
-                            position: 'top-right',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
-                    } else {
-                        Swal.fire({
-                            toast: true,
-                            icon: 'error',
-                            title: `Gửi yêu cầu check in không thành công`,
-                            animation: true,
-                            position: 'top-right',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
-                    }
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình check in.");
-                }
-            });
-        }
+        // number of checkout person
+        let numOfActive = document.getElementById("CheckOutList").getElementsByClassName("user-card").length;
+        document.getElementById("num-of-active").innerHTML = '('+numOfActive+')';
+        console.log(numOfActive);
 
-        function showDetail(orderDetailId) {
-            $.ajax({
-                type: "GET",
-                url: `/employee/flexible/getCheckInTime?id=${orderDetailId}` ,
-                success: function (data) {
-                    console.log(data)
-                    var dataCheckOut = data;
-                    // Xử lí thông tin check out
-                    var checkInTime = formatDateTime(data.checkInTime);
-                    var duration = calculateDuration(data.checkInTime);
-                    var credit = calculateTotalPrice(duration, data.pricePerHours);
-                    // Hiện thông tin check out bằng thông báo
-                    Swal.fire({
-                        title: 'Thông tin',
-                        html: `
-                            <p class="fw-bold">Thời gian check in: <span class="fw-normal">${checkInTime}</span></p>
-                            <p  class="fw-bold">Thời gian đã tập: <span class="fw-normal">${duration} phút</span></p>
-                            <p  class="fw-bold">Credit tạm tính: <span class="fw-normal">${credit} credit</span></p>
-                        `,
-                        showCancelButton: true,
-                        confirmButtonText: 'Check out',
-                        cancelButtonText: 'Quay lại',
-                        reverseButtons: true,
-                    }).then((result) => {
-                        // Nếu employee nhấn xác nhận check out thì gửi thông tin lên sever
-                        const dataToSend = {
-                            orderDetailId: orderDetailId,
-                            duration: duration,
-                            checkInTime: dataCheckOut.checkInTime,
-                            checkOutTime: Date.now(),
-                            totalCredit: credit
-                        };
-                        console.log(JSON.stringify(dataToSend));
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                type: "POST",
-                                url: `/employee/flexible/sendCheckoutRequest` ,
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                data: JSON.stringify(dataToSend),
-                                success: function (data) {
-                                    if(data > 0){
-                                        Swal.fire({
-                                            toast: true,
-                                            icon: 'success',
-                                            title: `Gửi yêu cầu check out thành công`,
-                                            animation: true,
-                                            position: 'top-right',
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        })
-                                    } else {
-                                        Swal.fire({
-                                            toast: true,
-                                            icon: 'error',
-                                            title: `Gửi yêu cầu check out không thành công`,
-                                            animation: true,
-                                            position: 'top-right',
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        })
-                                    }
+        // number of checkin person
+        let numOfCheckin = document.getElementById("CheckInList").getElementsByClassName("user-card").length;
+        document.getElementById("num-of-checkin").innerHTML = '('+numOfCheckin+')';
 
-                                },
-                                error: function () {
-                                    alert("Đã xảy ra lỗi trong quá trình gửi thông tin check out");
-                                }
-                            });
-                        }
-                    });
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình lấy check in time.");
-                }
-            });
-        }
 
-        function formatDateTime(inputDate) {
-            const dateObject = new Date(inputDate);
-
-            const year = dateObject.getFullYear();
-            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-            const day = dateObject.getDate().toString().padStart(2, '0');
-            const hours = dateObject.getHours().toString().padStart(2, '0');
-            const minutes = dateObject.getMinutes().toString().padStart(2, '0');
-            const seconds = dateObject.getSeconds().toString().padStart(2, '0');
-
-            const formattedTime = `${hours}:${minutes}:${seconds}`;
-            const formattedDate = `${day}-${month}-${year}`;
-
-            return `${formattedTime} ${formattedDate}`;
-        }
-
-        function calculateDuration(startTime) {
-            // Lấy thời gian hiện tại
-            const currentTime = new Date();
-
-            // Chuyển thời gian bắt đầu (startTime) thành đối tượng Date
-            const startDate = new Date(startTime);
-
-            // Tính toán thời gian cách nhau (đơn vị: mili giây)
-            const timeDifference = currentTime - startDate;
-
-            // Chuyển thời gian cách nhau thành phút (hoặc đơn vị khác tùy chọn)
-            const durationInMinutes = Math.floor(timeDifference / (1000 * 60)); // 1 phút = 60,000 mili giây
-
-            return durationInMinutes;
-        }
-
-        function calculateTotalPrice(durationInMinutes, pricePerHour) {
-            // Kiểm tra nếu durationInMinutes hoặc pricePerHour không hợp lệ
-            if (isNaN(durationInMinutes) || isNaN(pricePerHour) || durationInMinutes < 0 || pricePerHour < 0) {
-                return "Dữ liệu không hợp lệ";
-            }
-
-            // Chuyển đổi duration từ phút sang giờ (1 giờ = 60 phút)
-            const durationInHours = durationInMinutes / 60;
-
-            // Tính tổng giá dựa trên duration và giá cho mỗi giờ
-            const totalPrice = durationInHours * pricePerHour;
-
-            return totalPrice.toFixed(2); // Làm tròn tổng giá đến 2 chữ số thập phân
-        }
-
-        <!-- Search AJAX Jquery -->
         // Bắt sự kiện khi nút tìm kiếm được nhấn
         $("#searchButton").click(function () {
             event.preventDefault();
@@ -473,6 +309,186 @@
             } else {
                 $("#CheckOutList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
             }
+        }
+
+        function performCheckIn(orderDetailId) {
+            $.ajax({
+                type: "GET",
+                url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}` ,
+                success: function (data) {
+                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                    console.log(data)
+                    if(data > 0) {
+                        Swal.fire({
+                            toast: true,
+                            icon: 'success',
+                            title: `Gửi yêu cầu check in thành công`,
+                            animation: true,
+                            position: 'top-right',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            toast: true,
+                            icon: 'error',
+                            title: `Gửi yêu cầu check in không thành công`,
+                            animation: true,
+                            position: 'top-right',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                    }
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình check in.");
+                }
+            });
+        }
+
+        function showDetail(orderDetailId) {
+            $.ajax({
+                type: "GET",
+                url: `/employee/flexible/getCheckInTime?id=${orderDetailId}` ,
+                success: function (data) {
+                    console.log(data)
+                    var dataCheckOut = data;
+                    // Xử lí thông tin check out
+                    var checkInTime = formatDateTime(data.checkInTime);
+                    var duration = calculateDuration(data.checkInTime);
+                    var credit = calculateTotalPrice(duration, data.pricePerHours);
+                    // Hiện thông tin check out bằng thông báo
+                    Swal.fire({
+                        title: 'Thông tin',
+                        html: `
+                            <p class="fw-bold">Thời gian check in: <span class="fw-normal">${checkInTime}</span></p>
+                            <p  class="fw-bold">Thời gian đã tập: <span class="fw-normal">${duration} phút</span></p>
+                            <p  class="fw-bold">Credit tạm tính: <span class="fw-normal">${credit} credit</span></p>
+                        `,
+                        showCancelButton: true,
+                        confirmButtonText: 'Check out',
+                        cancelButtonText: 'Back',
+                        reverseButtons: true,
+                    }).then((result) => {
+                        // Nếu employee nhấn xác nhận check out thì gửi thông tin lên sever
+                        const dataToSend = {
+                            orderDetailId: orderDetailId,
+                            duration: duration,
+                            checkInTime: dataCheckOut.checkInTime,
+                            checkOutTime: Date.now(),
+                            totalCredit: credit
+                        };
+                        console.log(JSON.stringify(dataToSend));
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: "POST",
+                                url: `/employee/flexible/sendCheckoutRequest` ,
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                data: JSON.stringify(dataToSend),
+                                success: function (data) {
+                                    if(data > 0){
+                                        Swal.fire({
+                                            toast: true,
+                                            icon: 'success',
+                                            title: `Gửi yêu cầu check out thành công`,
+                                            animation: true,
+                                            position: 'top-right',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+                                    } else {
+                                        Swal.fire({
+                                            toast: true,
+                                            icon: 'error',
+                                            title: `Gửi yêu cầu check out không thành công`,
+                                            animation: true,
+                                            position: 'top-right',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+                                    }
+
+                                },
+                                error: function () {
+                                    alert("Đã xảy ra lỗi trong quá trình gửi thông tin check out");
+                                }
+                            });
+                        }
+                    });
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình lấy check in time.");
+                }
+            });
+        }
+
+        function formatDateTime(inputDate) {
+            const dateObject = new Date(inputDate);
+
+            const year = dateObject.getFullYear();
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const day = dateObject.getDate().toString().padStart(2, '0');
+            const hours = dateObject.getHours().toString().padStart(2, '0');
+            const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+            const seconds = dateObject.getSeconds().toString().padStart(2, '0');
+
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+            const formattedDate = `${day}-${month}-${year}`;
+
+            return `${formattedTime} ${formattedDate}`;
+        }
+
+        function calculateDuration(startTime) {
+            // Lấy thời gian hiện tại
+            const currentTime = new Date();
+
+            // Chuyển thời gian bắt đầu (startTime) thành đối tượng Date
+            const startDate = new Date(startTime);
+
+            // Tính toán thời gian cách nhau (đơn vị: mili giây)
+            const timeDifference = currentTime - startDate;
+
+            // Chuyển thời gian cách nhau thành phút (hoặc đơn vị khác tùy chọn)
+            const durationInMinutes = Math.floor(timeDifference / (1000 * 60)); // 1 phút = 60,000 mili giây
+
+            return durationInMinutes;
+        }
+
+        function calculateTotalPrice(durationInMinutes, pricePerHour) {
+            // Kiểm tra nếu durationInMinutes hoặc pricePerHour không hợp lệ
+            if (isNaN(durationInMinutes) || isNaN(pricePerHour) || durationInMinutes < 0 || pricePerHour < 0) {
+                return "Dữ liệu không hợp lệ";
+            }
+
+            // Chuyển đổi duration từ phút sang giờ (1 giờ = 60 phút)
+            const durationInHours = durationInMinutes / 60;
+
+            // Tính tổng giá dựa trên duration và giá cho mỗi giờ
+            const totalPrice = durationInHours * pricePerHour;
+
+            return totalPrice.toFixed(2); // Làm tròn tổng giá đến 2 chữ số thập phân
         }
     </script>
 </body>

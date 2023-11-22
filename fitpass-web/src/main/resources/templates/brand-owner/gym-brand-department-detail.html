@@ -25,20 +25,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h1 class="fw-bold text-primary">Thông tin chi tiết cơ sở</h1>
-                        <div class="show-wallpaper-brand col-lg-12">
+                        <div class="show-wallpaper-brand col-lg-12" th:style="'background-image: url(' + ${department.getDepartmentWallpaperUrl()} + ');'">
                             <img class="show-logo-brand" th:src="${department.getDepartmentLogoUrl()}" alt="Hình ảnh">
                         </div>
-                        <style>
-                            .show-wallpaper-brand {
-                                position: relative;
-                                background-image: url(img/Cali-banner.jpg);
-                                width: 100%;
-                                height: 400px;
-                                margin-top: 10px;
-                                object-fit: cover;
-                                background-repeat: round;
-                            }
-                        </style>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -58,7 +47,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="city" class="form-label fw-bold">Tỉnh/Thành phố:</label>
-                                        <input type="text" class="form-control" id="city" name="area" value="Hà Nội"
+                                        <input type="text" class="form-control" id="city" name="area" th:value="${department.getCity()}"
                                                readonly>
                                     </div>
                                     <div class="mb-3">
@@ -272,10 +261,9 @@
                             <div class="service-list row d-flex align-items-center justify-content-evenly">
                                 <th:block th:each="feature : ${departmentFeatures}">
                                     <div class="col-md-1">
-                                        <div class="service-type">
+                                        <div class="service-type mb-3">
                                             <div th:utext="${feature.getFeature().getFeatureIcon()}"
                                                     class="gym-service-logo d-flex align-items-center justify-content-center">
-
                                             </div>
                                         </div>
                                     </div>

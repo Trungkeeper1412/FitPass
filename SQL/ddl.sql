@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS user_detail (
                                            gender        VARCHAR(10) NOT NULL,
                                            securityId   varchar(12) null,
                                            image_url TEXT NULL
-
 );
 -- User table to store user information
 CREATE TABLE IF NOT EXISTS `user` (
@@ -122,7 +121,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               rating                      DECIMAL(10, 2) DEFAULT 0,
                                               capacity                    INT,
                                               area                        DECIMAL(10, 2),
-                                              city                        VARCHAR(255) DEFAULT 'Tất cả',
+                                              city                        VARCHAR(255),
                                               FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
 );
 
@@ -282,7 +281,7 @@ CREATE TABLE IF NOT EXISTS item_inventory (
 CREATE TABLE IF NOT EXISTS user_feedback (
                                              feedback_id    INT AUTO_INCREMENT PRIMARY KEY,
                                              user_id        INT NOT NULL,
-                                             gym_plan_id    INT NOT NULL,
+                                             gym_plan_id    INT,
                                              department_id  INT NOT NULL,
                                              rating         INT NOT NULL,
                                              comments       TEXT,

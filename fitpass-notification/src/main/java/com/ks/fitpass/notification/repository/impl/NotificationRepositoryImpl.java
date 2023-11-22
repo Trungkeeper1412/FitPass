@@ -25,33 +25,14 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     }
 
     @Override
-    public Notification getConfirmCheckInByUserIdReceive(int userIdReceive) {
-        try {
-            return jdbcTemplate.queryForObject(IRepositoryQuery.GET_CONFIRM_CHECK_IN_BY_USER_RECEIVE_ID, (rs, rowNum) -> {
-                Notification notification = new Notification();
-                notification.setNotificationId(rs.getInt("notification_id"));
-                notification.setUserIdSend(rs.getInt("user_id_send"));
-                notification.setUserIdReceive(rs.getInt("user_id_receive"));
-                notification.setMessage(rs.getString("message"));
-                notification.setTimeSend(rs.getTimestamp("time_send"));
-                notification.setDepartmentId(rs.getInt("department_id"));
-                notification.setMessageType(rs.getString("message_type"));
-                return notification;
-            }, userIdReceive, userIdReceive);
-        } catch (EmptyResultDataAccessException e) {
-            return null; // Trả về null khi không có kết quả
-        }
-    }
-
-    @Override
     public int updateStatusNotificationById(int notificationId, int status) {
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_STATUS_NOTIFICATION_BY_ID, status, notificationId);
     }
 
     @Override
-    public Notification getConfirmCheckOutByUserIdReceive(int userIdReceive) {
+    public List<Notification> getAllNotificationForUser(int userIdReceive) {
         try {
-            return jdbcTemplate.queryForObject(IRepositoryQuery.GET_CONFIRM_CHECK_OUT_BY_USER_RECEIVE_ID, (rs, rowNum) -> {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_NOTIFICATION_FOR_USER, (rs, rowNum) -> {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
@@ -60,17 +41,18 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
                 notification.setMessageType(rs.getString("message_type"));
+                notification.setStatus(rs.getInt("status"));
                 return notification;
-            }, userIdReceive, userIdReceive);
+            }, userIdReceive);
         } catch (EmptyResultDataAccessException e) {
-            return null; // Trả về null khi không có kết quả
+            return null;
         }
     }
 
     @Override
-    public List<Notification> getAllConfirmCheckOutSuccessByEmpIdReceive(int empIdReceive) {
+    public List<Notification> get3NewestUnseenNotificationForUser(int userIdReceive) {
         try {
-            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_OUT_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_3_NEWEST_UNSEEN_NOTIFICATION_FOR_USER, (rs, rowNum) -> {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
@@ -79,17 +61,18 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
                 notification.setMessageType(rs.getString("message_type"));
+                notification.setStatus(rs.getInt("status"));
                 return notification;
-            }, empIdReceive, "Thông báo checkout thành công tới employee");
+            }, userIdReceive);
         } catch (EmptyResultDataAccessException e) {
-            return null; // Trả về null khi không có kết quả
+            return null;
         }
     }
 
     @Override
-    public List<Notification> getAllConfirmCheckInSuccessByEmpIdReceive(int empIdReceive) {
+    public List<Notification> getAllNotificationForEmployee(int empIdReceive) {
         try {
-            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_IN_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
+            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_NOTIFICATION_FOR_EMPLOYEE, (rs, rowNum) -> {
                 Notification notification = new Notification();
                 notification.setNotificationId(rs.getInt("notification_id"));
                 notification.setUserIdSend(rs.getInt("user_id_send"));
@@ -98,48 +81,11 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
                 notification.setMessageType(rs.getString("message_type"));
+                notification.setStatus(rs.getInt("status"));
                 return notification;
-            }, empIdReceive, "Thông báo checkin thành công tới employee");
+            }, empIdReceive);
         } catch (EmptyResultDataAccessException e) {
-            return null; // Trả về null khi không có kết quả
-        }
-    }
-
-    @Override
-    public List<Notification> getAllConfirmCheckInCancelByEmpIdReceive(int empIdReceive) {
-        try {
-            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_IN_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
-                Notification notification = new Notification();
-                notification.setNotificationId(rs.getInt("notification_id"));
-                notification.setUserIdSend(rs.getInt("user_id_send"));
-                notification.setUserIdReceive(rs.getInt("user_id_receive"));
-                notification.setMessage(rs.getString("message"));
-                notification.setTimeSend(rs.getTimestamp("time_send"));
-                notification.setDepartmentId(rs.getInt("department_id"));
-                notification.setMessageType(rs.getString("message_type"));
-                return notification;
-            }, empIdReceive, "Thông báo hủy checkin tới employee");
-        } catch (EmptyResultDataAccessException e) {
-            return null; // Trả về null khi không có kết quả
-        }
-    }
-
-    @Override
-    public List<Notification> getAllConfirmCheckOutCancelByEmpIdReceive(int empIdReceive) {
-        try {
-            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_CONFIRM_CHECK_OUT_BY_EMP_RECEIVE_ID_AND_TYPE, (rs, rowNum) -> {
-                Notification notification = new Notification();
-                notification.setNotificationId(rs.getInt("notification_id"));
-                notification.setUserIdSend(rs.getInt("user_id_send"));
-                notification.setUserIdReceive(rs.getInt("user_id_receive"));
-                notification.setMessage(rs.getString("message"));
-                notification.setTimeSend(rs.getTimestamp("time_send"));
-                notification.setDepartmentId(rs.getInt("department_id"));
-                notification.setMessageType(rs.getString("message_type"));
-                return notification;
-            }, empIdReceive, "Thông báo hủy checkout tới employee");
-        } catch (EmptyResultDataAccessException e) {
-            return null; // Trả về null khi không có kết quả
+            return null;
         }
     }
 }

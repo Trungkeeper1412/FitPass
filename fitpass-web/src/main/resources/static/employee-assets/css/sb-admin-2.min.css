@@ -11261,6 +11261,12 @@ a:focus {
     animation-timing-function: opacity cubic-bezier(0, 1, .4, 1)
 }
 
+.bg-gradient-withdrawal {
+    background-color: #FFFFFF;
+    background-image: linear-gradient(180deg, #fff 10%, #e3e6f0 100%);
+    background-size: cover;
+}
+
 .bg-gradient-primary {
     background-color: #000;
     background-size: cover
@@ -12960,24 +12966,36 @@ label {
 /* Employee-check-in*/
 
 .user-card {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 5fr;*/
     align-items: center;
-    column-gap: 10px;
-    border: 1px solid #ccc;
+    column-gap: 18px;
+    min-height: 180px;
+    /*border: 1px solid #ccc;*/
     border-radius: 10px;
     padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #f4f9ff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
 }
 .basic-info{
-    margin: auto;
+    /*position: relative;*/
+    height: 85px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.checkin-time{
+    font-size: 13px;
+    margin-top: 10px;
 }
 .user-info{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 7px;
+    /*display: grid;*/
+    /*grid-template-columns: auto auto;*/
+    /*column-gap: 7px;*/
+    display: flex;
+    position: relative;
 }
 
 .row .col-4,
@@ -12993,15 +13011,18 @@ label {
 }
 
 .img-col {
+    margin-right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+.phone{
+    font-size: 13px;
+}
 .user-card img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
 }
 
@@ -13017,12 +13038,13 @@ select {
 
 .text-money {
     color: rgb(2, 170, 10);
-    /*font-size: 18px;*/
+    font-size: 13px;
     font-weight: bold;
 }
 
 .credit {
     color: orange;
+    font-size: 13px;
 }
 
 /* Breadcrumbs
@@ -13079,9 +13101,25 @@ a {
 @media (min-width: 992px) and (max-width: 1200px) {
     .user-info{
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
+        flex: 1 1 0;
+    }
+    .user-status{
+        text-align: center;
+        margin:auto;
+        width: 50px;
+        margin-left: 0px;
+        background-color: #e5e5e5;
+        color: grey;
+        font-size: 12px;
+        font-weight: 450;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
+    .plan-wrapper{
+        margin-top: 10px;
     }
 }
 
@@ -13160,13 +13198,56 @@ td img {
     margin-right: 10px;
 }
 .checkin-btn{
+    background-color: black;
     width: 90px;
+    height: fit-content;
+    /*position: absolute;*/
+    /*right: 0;*/
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+}
+.checkin-btn:hover{
+    background-color: orange;
+    color: white;
+    border: hidden;
 }
 .plan-info{
-    /*margin: auto;*/
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-wrap: break-word:
 }
 .plan-type{
-    margin-bottom: 0;
+    overflow-wrap: break-word:
+    width: 100px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.not-check-in{
+    background-color: rgba(255, 193, 193, 0.73);
+    color: darkred;
+    text-align: center;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
+}
+.checked-in{
+    background-color: rgb(200, 236, 209);
+    color: darkgreen;
+    text-align: center;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin:auto;
 }
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .uc{
@@ -13180,8 +13261,11 @@ td img {
     .user-card img{
         width: 80px;
         height: 80px;
+        margin: auto;
     }
     .user-info{
+        height: fit-content;
+        width: 100%;
         margin-top: 5px;
         font-size: 12px;
         display: flex;
@@ -13195,7 +13279,6 @@ td img {
     .plan-info{
         font-size: 12px;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -13456,12 +13539,20 @@ tr td i {
 
 #progressbar li.w-50::after {
     width: 96%;
-    left: -48%;
+    left: -47.7%;
+}
+
+.show-wallpaper-brand {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+    object-fit: cover;
+    background-repeat: round;
 }
 
 .feedback-img {
     position: relative;
-    background-image: url(https://citigym.com.vn/storage/uploads/untitled-5-9.jpg);
     width: 100%;
     height: 400px;
     margin-top: 10px;
@@ -13483,6 +13574,17 @@ tr td i {
 }
 
 /* Custome table */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 
 .status-active {
     width: 160px;
@@ -13552,16 +13654,12 @@ tr td i {
     font-size: 20px;
 }
 
-.form-select {
-    border-radius: 10px;
-}
-
 .withdraw {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     padding: 15px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-content: center;
 }
 
@@ -13569,8 +13667,33 @@ tr td i {
     display: block;
 }
 
-.totalTransactions {
+.transactions {
     font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px 10px 10px 20px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+}
+
+.btn-transactions {
+    background-color: #ededed;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0.2, 0.2);
+}
+
+.btn-transactions:hover {
+    background-color: #f5e193;
+    box-shadow: 0 2px 4px rgba(0, 0, 0.2, 0.2);
+}
+
+.transactions-money {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
 }
 
 .list-gym-brand {
@@ -13644,7 +13767,44 @@ tr td i {
 
 label.error {
     color: red;
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 3px;
     display: block;
+    position: absolute;
+}
+@media (max-width: 1600px) {
+.user-status{
+    text-align: center;
+    margin:auto;
+    width: 110px;
+    margin-left: 15px;
+    background-color: #e5e5e5;
+    color: grey;
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+.working{
+    color: darkblue;
+    background-color: #cae8fd;
+}
+
+.list-group-item {
+    background: linear-gradient(to right, #333, #666);
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px !important;
+    padding: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bank-card {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.list-group-item:hover {
+    background: linear-gradient(to right, #666, #333);
 }

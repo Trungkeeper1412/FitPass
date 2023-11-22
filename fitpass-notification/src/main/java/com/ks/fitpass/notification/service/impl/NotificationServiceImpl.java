@@ -12,7 +12,7 @@ import java.util.List;
 public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
 
-    public NotificationServiceImpl(NotificationRepository notificationRepository, SimpMessagingTemplate simpMessagingTemplate) {
+    public NotificationServiceImpl(NotificationRepository notificationRepository) {
         this.notificationRepository = notificationRepository;
     }
 
@@ -22,37 +22,22 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public Notification getConfirmCheckInByUserIdReceive(int userIdReceive) {
-        return notificationRepository.getConfirmCheckInByUserIdReceive(userIdReceive);
-    }
-
-    @Override
-    public Notification getConfirmCheckOutByUserIdReceive(int userIdReceive) {
-        return notificationRepository.getConfirmCheckOutByUserIdReceive(userIdReceive);
-    }
-
-    @Override
     public int updateStatusNotificationById(int notificationId, int status) {
         return notificationRepository.updateStatusNotificationById(notificationId, status);
     }
 
     @Override
-    public List<Notification> getAllConfirmCheckOutSuccessByEmpIdReceive(int empIdReceive) {
-        return notificationRepository.getAllConfirmCheckOutSuccessByEmpIdReceive(empIdReceive);
+    public List<Notification> getAllNotificationForUser(int userIdReceive) {
+        return notificationRepository.getAllNotificationForUser(userIdReceive);
     }
 
     @Override
-    public List<Notification> getAllConfirmCheckInSuccessByEmpIdReceive(int empIdReceive) {
-        return notificationRepository.getAllConfirmCheckInSuccessByEmpIdReceive(empIdReceive);
+    public List<Notification> get3NewestUnseenNotificationForUser(int userIdReceive) {
+        return notificationRepository.get3NewestUnseenNotificationForUser(userIdReceive);
     }
 
     @Override
-    public List<Notification> getAllConfirmCheckInCancelByEmpIdReceive(int empIdReceive) {
-        return notificationRepository.getAllConfirmCheckInCancelByEmpIdReceive(empIdReceive);
-    }
-
-    @Override
-    public List<Notification> getAllConfirmCheckOutCancelByEmpIdReceive(int empIdReceive) {
-        return notificationRepository.getAllConfirmCheckOutCancelByEmpIdReceive(empIdReceive);
+    public List<Notification> getAllNotificationForEmployee(int empIdReceive) {
+        return notificationRepository.getAllNotificationForEmployee(empIdReceive);
     }
 }

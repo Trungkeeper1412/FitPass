@@ -68,7 +68,6 @@
                                     <div class="item-grid" id="grid-container" >
                                         <th:block th:each="item : ${itemList}">
 
-
                                             <div class="text-light item-card-all mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},

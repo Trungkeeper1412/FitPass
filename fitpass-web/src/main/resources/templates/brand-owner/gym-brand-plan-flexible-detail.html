@@ -32,70 +32,72 @@
                             <div class="card-body">
                                 <div class="card-box">
                                     <h2 class="fs-title text-center">Gói linh hoạt</h2>
-                                    <form action="/brand-owner/gym-plans/flexible/update" method="post"
+                                    <form id="formSubmit" action="/brand-owner/gym-plans/flexible/update" method="post"
                                           th:object="${b}">
                                         <div class="row">
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-6 mb-4">
                                                 <input type="hidden" th:value="${b.getGymPlanId()}" th:field="*{gymPlanId}">
                                                 <label for="packageName" class="form-label fw-bold">Tên gói tập
                                                     :</label>
-                                                <input th:value="${b.getGymPlanName()}"
+                                                <input name="gymPlanName" th:value="${b.getGymPlanName()}"
                                                        th:field="*{gymPlanName}"
                                                        type="text" class="form-control" id="packageName"
                                                        placeholder="Nhập tên gói tập">
                                                 <span th:if="${#fields.hasErrors('gymPlanName')}" th:errors="*{gymPlanName}">Gym Plan Name Error</span>
 
                                             </div>
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-6 mb-4">
                                                 <label for="credits" class="form-label fw-bold">Số credits/giờ :</label>
-                                                <input th:value="${b.getPricePerHours()}"
+                                                <input name="pricePerHours" th:value="${b.getPricePerHours()}"
                                                        th:field="*{pricePerHours}"
-                                                       type="text"
+                                                       type="number"
                                                        class="form-control" id="credits"
                                                        placeholder="Nhập số credits/giờ">
                                                 <span th:if="${#fields.hasErrors('pricePerHours')}" th:errors="*{pricePerHours}">pricePerHours Error</span>
 
                                             </div>
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-6 mb-4">
                                                 <label for="activationBefore" class="form-label fw-bold"
                                                        data-toggle="tooltip" data-placement="top"
                                                        title="Đây là mô tả của thời gian trước khi kích hoạt">Thời hạn
                                                     trước khi kích hoạt:</label>
-                                                <input th:value="${b.getPlanBeforeActive()}"
+                                                <input name="planBeforeActive" th:value="${b.getPlanBeforeActive()}"
                                                        th:field="*{planBeforeActive}"
-                                                        type="text" class="form-control" id="activationBefore"
+                                                       type="number" class="form-control" id="activationBefore"
                                                        placeholder="Nhập thời hạn trước khi kích hoạt">
                                                 <span th:if="${#fields.hasErrors('planBeforeActive')}" th:errors="*{planBeforeActive}">planBeforeActive Error</span>
                                             </div>
 
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-6 mb-4">
                                                 <label for="activationAfter" class="form-label fw-bold"
                                                        data-toggle="tooltip" data-placement="top"
                                                        title="Đây là mô tả của thời gian sau khi kích hoạt">Thời hạn sau
                                                     khi kích hoạt:</label>
-                                                <input th:value="${b.getPlanAfterActive()}"
+                                                <input name="planAfterActive" th:value="${b.getPlanAfterActive()}"
                                                        th:field="*{planAfterActive}"
-                                                        type="text" class="form-control" id="activationAfter"
+                                                       type="number" class="form-control" id="activationAfter"
                                                        placeholder="Nhập thời hạn sau khi kích hoạt">
                                                 <span th:if="${#fields.hasErrors('planAfterActive')}" th:errors="*{planAfterActive}">planAfterActive Error</span>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="d-block fw-bold">Trạng thái :</label>
-                                                <div class="form-check form-check-inline">
-                                                    <input th:field="*{status}"
-                                                           type="radio" name="actived" id="inlineradio1"
-                                                           th:checked="${b.getStatus() == 1}"
-                                                           value="1">&nbsp;Đang hoạt động
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input th:field="*{status}" type="radio" name="actived" id="inlineradio2"
-                                                           value="2" th:checked="${b.getStatus() != 1}">&nbsp;Ngừng hoạt động
+                                            <div class="col-md-6">
+                                                <div class="display-status">
+                                                    <label class="d-block fw-bold">Trạng thái :</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input th:field="*{status}"
+                                                               type="radio" name="actived" id="inlineradio1"
+                                                               th:checked="${b.getStatus() == 1}"
+                                                               value="1">&nbsp;Đang hoạt động
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input th:field="*{status}" type="radio" name="actived" id="inlineradio2"
+                                                               value="2" th:checked="${b.getStatus() != 1}">&nbsp;Ngừng hoạt động
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-12 mt-3">
                                                 <label for="packageDescription" class="form-label fw-bold">Mô tả gói
                                                     tập:</label>
-                                                <textarea th:field="*{description}" class="form-control" id="packageDescription" rows="4"
+                                                <textarea name="description" th:field="*{description}" class="form-control" id="packageDescription" rows="4"
                                                           th:text="${b.getDescription()}"
                                                           placeholder="Nhập mô tả gói tập"></textarea>
                                                 <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description Error</span>

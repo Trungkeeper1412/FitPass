@@ -30,9 +30,9 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                <form action="/brand-owner/gym-owner/update" method="post" th:object="${gymOwner}">
+                                <form id="formSubmit" action="/brand-owner/gym-owner/update" method="post" th:object="${gymOwner}">
                                     <div class="row">
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-2 mb-4">
                                                 <label for="department-img" class="form-label fw-bold w-100">Ảnh
                                                     :</label>
                                                 <img class="show-department-img" th:src="${gymOwner.getImageUrl()}">
@@ -45,30 +45,30 @@
                                             <input th:field="*{userDetailId}" type="hidden" th:value="${gymOwner.getUserDetailId()}" name="userDetailId">
                                             <input th:field="*{oldDepartmentId}" type="hidden" th:value="${gymOwner.oldDepartmentId}" name="oldDepartmentId">
                                         </div>
-                                        <div class="col-md-5 mb-3">
-                                            <div class="mb-3">
+                                        <div class="col-md-5 mb-4">
+                                            <div class="mb-4">
                                                 <label for="firt-name" class="form-label fw-bold">Họ :</label>
                                                 <input th:field="*{firstName}" th:value="${gymOwner.getFirstName()}" type="text" class="form-control" id="firt-name"
                                                     name="firstName" placeholder="Nhập họ">
                                                 <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="email" class="form-label fw-bold">Email :</label>
                                                 <input th:field="*{email}" th:value="${gymOwner.getEmail()}" type="text" class="form-control" id="email"
                                                     name="email" placeholder="Nhập gmail">
                                                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="address" class="form-label fw-bold">Địa chỉ :</label>
                                                 <input th:field="*{address}" th:value="${gymOwner.getAddress()}" type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
                                                 <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh :</label>
                                                 <input th:field="*{dateOfBirth}" th:value="${gymOwner.getDateOfBirth()}" type="date" class="form-control" id="date-of-birth" name="dateOfBirth">
                                                 <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label class="d-block fw-bold">Trạng thái :</label>
                                                 <div class="form-check form-check-inline">
                                                     <input th:field="*{userDeleted}" type="radio" name="active" id="inlineradio1" th:checked="${!gymOwner.isUserDeleted()}"
@@ -80,24 +80,24 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5 mb-3">
-                                            <div class="mb-3">
+                                        <div class="col-md-5 mb-4">
+                                            <div class="mb-4">
                                                 <label for="last-name" class="form-label fw-bold">Tên :</label>
                                                 <input th:field="*{lastName}" th:value="${gymOwner.getLastName()}" type="text" class="form-control" id="last-name"
                                                     name="lastName" placeholder="Nhập tên">
                                                 <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
                                                 <input th:field="*{phone}" th:value="${gymOwner.getPhone()}" type="text" class="form-control" id="phone" name="phone" value="0987654321">
                                                 <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
-                                                <input th:field="*{idCard}" type="text" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
+                                                <input th:field="*{idCard}" th:value="${gymOwner.getIdCard()}" type="text" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
                                                 <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">idCard Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="gender" class="form-label fw-bold">Giới Tính :</label>
                                                 <select th:field="*{gender}" class="form-select" id="gender" name="gender">
                                                     <option value="">Chọn giới tính</option>
@@ -107,7 +107,7 @@
                                                 </select>
                                                 <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-4">
                                                 <label for="existing-department" class="form-label fw-bold">Chọn cơ sở
                                                     :</label>
                                                 <select th:field="*{departmentId}" class="form-select" id="existing-department"
