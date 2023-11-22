@@ -38,7 +38,6 @@ public class GymOwnerUpdateDTO {
     private LocalDate dateOfBirth;
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
-    @Pattern(regexp = "^[0-9]{12}$", message = "Số căn cước công dân không hợp lệ !")
     @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
     @GymOwnerCreateDTO.ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
@@ -48,7 +47,6 @@ public class GymOwnerUpdateDTO {
 
     @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
-
 
     private String active;
     private boolean userDeleted;
