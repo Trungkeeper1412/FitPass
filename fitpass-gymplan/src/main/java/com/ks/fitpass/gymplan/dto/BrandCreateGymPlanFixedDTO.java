@@ -13,7 +13,7 @@ public class BrandCreateGymPlanFixedDTO {
     private String gymPlanName;
 
     @NotNull(message = "Vui lòng nhập số credits !")
-    @Positive(message = "Số credits/giờ phải lớn hơn 0 !")
+    @Positive(message = "Số credits phải lớn hơn 0 !")
     private Double price;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
