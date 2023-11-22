@@ -23,8 +23,8 @@ public class BrandUpdateGymPlanFlexDTO {
     @Positive(message = "Số credits/giờ phải lớn hơn 0 !")
     private Double pricePerHours;
 
-    @NotNull(message = "Plan Before Active cannot be null")
-    @Min(value = 0, message = "Plan Before Active must be 0 or a positive number")
+    @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
+    @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
     private int planBeforeActive;
 
     @NotNull(message = "Plan After Active cannot be null")
