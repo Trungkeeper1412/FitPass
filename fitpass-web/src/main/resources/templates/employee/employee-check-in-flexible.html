@@ -68,7 +68,10 @@
                                     tập</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">Đang tập</a>
+                                <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">
+                                    <span>Đang tập</span>
+                                    <span id="num-of-active">(0)</span>
+                                </a>
                             </li>
                         </ul>
                         <!-- Tab Content -->
@@ -165,6 +168,12 @@
 
     <!-- Search AJAX Jquery-->
     <script>
+        // number of active person
+        let numOfActive = document.getElementById("CheckOutList").getElementsByClassName("user-card").length;
+        document.getElementById("num-of-active").innerHTML = '('+numOfActive+')';
+        console.log(numOfActive);
+
+
         // Bắt sự kiện khi nút tìm kiếm được nhấn
         $("#searchButton").click(function () {
             event.preventDefault();
