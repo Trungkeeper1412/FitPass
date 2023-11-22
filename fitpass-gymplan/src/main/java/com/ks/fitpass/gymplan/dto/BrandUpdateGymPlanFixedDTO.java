@@ -32,6 +32,7 @@ public class BrandUpdateGymPlanFixedDTO {
     @NotNull
     private Integer status;
 
-    @Size(max = 500, message = "Description must not exceed 500 characters")
+    @NotNull(message = "Vui lòng nhập nhập mô tả gói tập !")
+    @Size(min = 2, max = 250, message = "Mô tả gói tập phải nằm trong khoảng 2 đến 250 kí tự !")
     private String description;
 }
