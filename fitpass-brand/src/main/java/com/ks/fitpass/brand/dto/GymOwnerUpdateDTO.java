@@ -21,8 +21,8 @@ public class GymOwnerUpdateDTO {
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên của bạn không được chứa kí tự đặc biệt !")
     private String lastName;
 
-    @NotEmpty(message = "Email cannot be empty")
-    @Email(message = "Invalid email format")
+    @NotEmpty(message = "Vui lòng nhập email !")
+    @Email (message = "Vui lòng nhập địa chỉ email hợp lệ !")
     private String email;
 
     @NotEmpty(message = "Phone cannot be empty")
