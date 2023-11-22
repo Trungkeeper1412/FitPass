@@ -23,17 +23,17 @@ public class GymOwnerCreateDTO {
 
     @Size(min = 6, max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập họ của bạn !")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")
     private String firstName;
 
-    @Size(min = 6, max = 50, message = "Last Name must be between 6 and 50 characters")
-    @NotEmpty(message = "Last Name cannot be empty")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Invalid First Name format")
+    @Size(min = 6, max = 50, message = "Tên của bạn không được vượt quá 25 kí tự !")
+    @NotEmpty(message = "Vui lòng nhập tên của bạn !")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên của bạn không được chứa kí tự đặc biệt !")
     private String lastName;
 
-    @Size(min = 6, max = 50, message = "Username must be between 6 and 50 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Invalid phone number format")
-    @NotEmpty(message = "Username cannot be empty")
+    @Size(min = 6, max = 50, message = "Tên đăng nhập phải nằm trong khoảng 6 đến 50 kí tự !")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt !")
+    @NotEmpty(message = "Vui lòng nhập tên đăng nhập !")
     private String username;
 
     @NotEmpty(message = "Email cannot be empty")
