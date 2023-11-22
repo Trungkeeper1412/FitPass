@@ -60,6 +60,7 @@ public class CheckOutControllerTest {
         List<Integer> idList = List.of(1, 2);
         List<Integer> deptIdList = List.of(3, 4);
         when(mockSession.getAttribute("cart")).thenReturn(mockCart);
+        when(mockSession.getAttribute("userInfo")).thenReturn(mock(User.class)); // Mock the user
 
         // Act
         String viewName = checkOutController.viewCheckout(org.mockito.Mockito.mock(org.springframework.ui.Model.class), idList, deptIdList, mockSession);
@@ -68,7 +69,6 @@ public class CheckOutControllerTest {
         assertEquals("check-out", viewName); // or whatever the expected view name is for an empty cart
         // Additional assertions based on your expectations
     }
-
     @Test
     public void viewCheckout_userWithInsufficientBalance_insufficientBalanceView() {
         // Arrange
