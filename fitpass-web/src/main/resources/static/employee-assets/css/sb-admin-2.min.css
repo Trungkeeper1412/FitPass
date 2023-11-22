@@ -13095,9 +13095,25 @@ a {
 @media (min-width: 992px) and (max-width: 1200px) {
     .user-info{
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
+        flex: 1 1 0;
+    }
+    .user-status{
+        text-align: center;
+        margin:auto;
+        width: 50px;
+        margin-left: 0px;
+        background-color: #e5e5e5;
+        color: grey;
+        font-size: 12px;
+        font-weight: 450;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
+    .plan-wrapper{
+        margin-top: 10px;
     }
 }
 
@@ -13725,6 +13741,7 @@ label.error {
     display: block;
     position: absolute;
 }
+@media (max-width: 1600px) {
 .user-status{
     text-align: center;
     margin:auto;
