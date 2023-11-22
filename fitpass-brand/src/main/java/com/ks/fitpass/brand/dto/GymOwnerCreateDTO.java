@@ -54,7 +54,7 @@ public class GymOwnerCreateDTO {
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
     @Pattern(regexp = "^[0-9]{12}$", message = "Invalid ID Card format")
-    @Size(min = 12, max = 12, message = "ID Card length must be 12 characters")
+    @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
     @ValidateIdCard(message = "Invalid ID Card")
     private String idCard;
 
