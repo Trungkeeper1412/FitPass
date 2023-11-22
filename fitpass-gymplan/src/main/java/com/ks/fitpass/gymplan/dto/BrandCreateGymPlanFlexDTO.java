@@ -9,7 +9,7 @@ public class BrandCreateGymPlanFlexDTO {
 
     @NotEmpty(message = "Vui lòng nhập tên gói tập !")
     @Size(min = 2, max = 32, message = "Tên gói tập phải nằm trong khoảng 2 đến 32 kí tự !")
-    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên gói tập không được chứa kí tự đặc biệt !")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF90-9\\s]*$", message = "Tên gói tập không được chứa kí tự đặc biệt !")
     private String gymPlanName;
 
     @NotNull(message = "Vui lòng nhập số credits !")
