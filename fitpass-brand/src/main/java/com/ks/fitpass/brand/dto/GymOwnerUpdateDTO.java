@@ -37,9 +37,10 @@ public class GymOwnerUpdateDTO {
     @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
     private LocalDate dateOfBirth;
 
-    //    @NotEmpty(message = "ID Card cannot be empty")
-//    @Pattern(regexp = "^[0-9]*$", message = "Invalid ID Card format")
-//    @Size(min = 9, max = 12, message = "ID Card length must be between 9 and 12 characters")
+    @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
+    @Pattern(regexp = "^[0-9]{12}$", message = "Số căn cước công dân không hợp lệ !")
+    @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
+    @GymOwnerCreateDTO.ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
     @NotEmpty(message = "Gender cannot be empty")
