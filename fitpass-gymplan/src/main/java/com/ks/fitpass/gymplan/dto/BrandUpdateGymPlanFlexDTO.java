@@ -31,11 +31,11 @@ public class BrandUpdateGymPlanFlexDTO {
     @Min(value = 1, message = "Số ngày phải lớn hơn 0 !")
     private Integer planAfterActive;
 
-    @NotNull
-    private int status;
-
-    @NotNull(message = "Vui lòng nhập nhập mô tả gói tập !")
     @Size(min = 2, max = 250, message = "Mô tả gói tập phải nằm trong khoảng 2 đến 250 kí tự !")
+    @NotNull(message = "Vui lòng nhập nhập mô tả gói tập !")
     private String description;
 
+
+    @NotNull
+    private int status;
 }
