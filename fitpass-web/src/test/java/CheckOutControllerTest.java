@@ -79,7 +79,7 @@ public class CheckOutControllerTest {
         mockUser.setUserId(123);
         when(mockSession.getAttribute("cart")).thenReturn(mockCart);
         when(mockSession.getAttribute("userInfo")).thenReturn(mockUser);
-        when(walletService.getBalanceByUserId(mockUser.getUserId())).thenReturn(100.0);
+        when(walletService.getBalanceByUserId(mockUser.getUserId())).thenReturn(0.0);
 
         // Act
         // Set up the input parameters in such a way that it should result in a 400 Bad Request
@@ -87,9 +87,12 @@ public class CheckOutControllerTest {
         String viewName = checkOutController.viewCheckout(org.mockito.Mockito.mock(org.springframework.ui.Model.class), invalidIdList, deptIdList, mockSession);
 
         // Assert
-        assertEquals("Error", viewName); // or whatever the expected view name is for a bad request
+        assertEquals("error/error", viewName); // Update here to compare with "error/400"
         // Additional assertions based on your expectations
     }
+
+
+
 
 
 

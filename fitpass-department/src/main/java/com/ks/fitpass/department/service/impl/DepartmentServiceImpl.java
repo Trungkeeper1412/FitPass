@@ -45,6 +45,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .area(department.getArea())
                 .maxPrice(department.getMaxPrice())
                 .minPrice(department.getMinPrice())
+                .feedbackCount(department.getFeedbackCount())
                 .build();
     }
 

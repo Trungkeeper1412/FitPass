@@ -47,4 +47,9 @@ public class AdminController {
     public String getWithdrawalList() {
         return "admin/admin-withdrawal-list";
     }
+
+    @GetMapping("/withdrawal/history")
+    public String getWithdrawalHistory() {
+        return "admin/admin-withdrawal-history";
+    }
 }
