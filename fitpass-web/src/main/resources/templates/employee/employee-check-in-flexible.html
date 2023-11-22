@@ -114,19 +114,23 @@
                                                 </div>
                                                 <div class="basic-info">
                                                     <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
-                                                    <p class="phone" th:text="${item.getPhoneNumber()}">0987654321</p>
+                                                    <div class="phone" th:text="${item.getPhoneNumber()}">0987654321</div>
                                                 </div>
                                                 <span class="user-status working">Đang tập</span>
                                             </div>
+                                            <div style="display: flex">
                                             <div class="plan-info">
-                                                <div class="fw-bold plan-type" th:text="${item.getProductName()}">Gói linh hoạt VIP </div>
+                                                <div class="plan-type" style="overflow-wrap: break-word" th:text="${item.getProductName()}">
+                                                    Gói linh hoạt Gói linh hoạt Gói linh hoạt
+                                                </div>
                                                 <div>
                                                     <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
                                                     <span class="credit fw-bold">Credit/Giờ</span>
                                                 </div>
                                             </div>
-                                            <button class="btn checkin-btn mt-3 mx-auto" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
-                                        </div>
+                                                <button class="btn checkin-btn mx-auto mt-2" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
+                                            </div>
+                                            </div>
                                         </div>
                                     </th:block>
                                 </div>

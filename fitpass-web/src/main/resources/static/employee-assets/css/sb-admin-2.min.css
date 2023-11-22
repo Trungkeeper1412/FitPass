@@ -12964,7 +12964,7 @@ label {
     /*grid-template-columns: 1fr 5fr;*/
     align-items: center;
     column-gap: 18px;
-    min-height: 220px;
+    min-height: 180px;
     /*border: 1px solid #ccc;*/
     border-radius: 10px;
     padding: 15px;
@@ -12975,7 +12975,7 @@ label {
 .basic-info{
     /*position: relative;*/
     height: 85px;
-    width: fit-content;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13032,12 +13032,13 @@ select {
 
 .text-money {
     color: rgb(2, 170, 10);
-    /*font-size: 18px;*/
+    font-size: 13px;
     font-weight: bold;
 }
 
 .credit {
     color: orange;
+    font-size: 13px;
 }
 
 /* Breadcrumbs
@@ -13176,12 +13177,13 @@ td img {
 }
 .checkin-btn{
     background-color: black;
-    display: flex;
     width: 90px;
+    height: fit-content;
+    /*position: absolute;*/
+    /*right: 0;*/
     font-size: 14px;
     font-weight: 500;
     color: white;
-    justify-content: center;
 }
 .checkin-btn:hover{
     background-color: orange;
@@ -13189,13 +13191,17 @@ td img {
     border: hidden;
 }
 .plan-info{
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    overflow-wrap: break-word:
 }
 .plan-type{
-    /*margin-right: 10px;*/
+    overflow-wrap: break-word:
+    width: 100px;
+    margin-right: 10px;
+    font-size: 14px;
 }
 .not-check-in{
     background-color: rgba(255, 193, 193, 0.73);
@@ -13233,6 +13239,7 @@ td img {
     .user-card img{
         width: 80px;
         height: 80px;
+        margin: auto;
     }
     .user-info{
         height: fit-content;
@@ -13720,7 +13727,8 @@ label.error {
 }
 .user-status{
     text-align: center;
-    width: 90px;
+    margin:auto;
+    width: 110px;
     margin-left: 15px;
     background-color: #e5e5e5;
     color: grey;
@@ -13728,8 +13736,6 @@ label.error {
     font-weight: 450;
     padding: 6px 12px;
     border-radius: 20px;
-    margin:auto;
-    /*right: 0;*/
 }
 .working{
     color: darkblue;
