@@ -9,7 +9,7 @@ public class ServiceUpdateDTO {
     @NotNull(message = "AmenitieId cannot be empty")
     private Integer amenitieId;
 
-    @NotEmpty(message = "Photo URL cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String photoUrl;
 
     @NotEmpty(message = "Amenitie Name cannot be empty")
