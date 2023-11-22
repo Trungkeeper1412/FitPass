@@ -17,8 +17,8 @@ public class BrandUpdateGymPlanFixedDTO {
     @Positive(message = "Số credits phải lớn hơn 0 !")
     private Double price;
 
-    @NotNull(message = "Plan Before Active cannot be null")
-    @Min(value = 0, message = "Plan Before Active must be 0 or a positive number")
+    @NotNull(message = "ui lòng nhập nhập số ngày sau khi kích hoạt !")
+    @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
     private Integer planBeforeActive;
 
     @NotNull(message = "Plan After Active cannot be null")
