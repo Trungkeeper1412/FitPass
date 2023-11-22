@@ -43,10 +43,10 @@ public class GymOwnerUpdateDTO {
     @GymOwnerCreateDTO.ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
-    @NotEmpty(message = "Gender cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn giới tính !")
     private String gender;
 
-    @NotEmpty(message = "Image url cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
 
 
