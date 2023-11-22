@@ -16,12 +16,12 @@ public class BrandCreateGymPlanFixedDTO {
     @Positive(message = "Số credits/giờ phải lớn hơn 0 !")
     private Double price;
 
-    @NotNull(message = "ui lòng nhập nhập số ngày sau khi kích hoạt !")
+    @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
     @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
     private Integer planBeforeActive;
 
-    @NotNull(message = "Plan After Active cannot be null")
-    @Min(value = 0, message = "Plan After Active must be 0 or positive")
+    @NotNull(message = "Vui lòng nhập nhập số ngày trước khi kích hoạt !")
+    @Min(value = 0, message = "Số ngày phải lớn hơn 0 !")
     private Integer planAfterActive;
 
     @NotNull(message = "Duration cannot be null")
