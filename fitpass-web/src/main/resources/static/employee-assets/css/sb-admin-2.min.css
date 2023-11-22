@@ -11261,6 +11261,12 @@ a:focus {
     animation-timing-function: opacity cubic-bezier(0, 1, .4, 1)
 }
 
+.bg-gradient-withdrawal {
+    background-color: #FFFFFF;
+    background-image: linear-gradient(180deg, #fff 10%, #e3e6f0 100%);
+    background-size: cover;
+}
+
 .bg-gradient-primary {
     background-color: #000;
     background-size: cover
@@ -12964,7 +12970,7 @@ label {
     /*grid-template-columns: 1fr 5fr;*/
     align-items: center;
     column-gap: 18px;
-    min-height: 220px;
+    min-height: 180px;
     /*border: 1px solid #ccc;*/
     border-radius: 10px;
     padding: 15px;
@@ -12975,14 +12981,14 @@ label {
 .basic-info{
     /*position: relative;*/
     height: 85px;
-    width: fit-content;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .checkin-time{
     font-size: 13px;
-    text-align: center;
+    margin-top: 10px;
 }
 .user-info{
     /*display: grid;*/
@@ -13032,12 +13038,13 @@ select {
 
 .text-money {
     color: rgb(2, 170, 10);
-    /*font-size: 18px;*/
+    font-size: 13px;
     font-weight: bold;
 }
 
 .credit {
     color: orange;
+    font-size: 13px;
 }
 
 /* Breadcrumbs
@@ -13094,9 +13101,25 @@ a {
 @media (min-width: 992px) and (max-width: 1200px) {
     .user-info{
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
+        flex: 1 1 0;
+    }
+    .user-status{
+        text-align: center;
+        margin:auto;
+        width: 50px;
+        margin-left: 0px;
+        background-color: #e5e5e5;
+        color: grey;
+        font-size: 12px;
+        font-weight: 450;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
+    .plan-wrapper{
+        margin-top: 10px;
     }
 }
 
@@ -13176,12 +13199,13 @@ td img {
 }
 .checkin-btn{
     background-color: black;
-    display: flex;
     width: 90px;
+    height: fit-content;
+    /*position: absolute;*/
+    /*right: 0;*/
     font-size: 14px;
     font-weight: 500;
     color: white;
-    justify-content: center;
 }
 .checkin-btn:hover{
     background-color: orange;
@@ -13189,13 +13213,17 @@ td img {
     border: hidden;
 }
 .plan-info{
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    overflow-wrap: break-word:
 }
 .plan-type{
-    /*margin-right: 10px;*/
+    overflow-wrap: break-word:
+    width: 100px;
+    margin-right: 10px;
+    font-size: 14px;
 }
 .not-check-in{
     background-color: rgba(255, 193, 193, 0.73);
@@ -13233,6 +13261,7 @@ td img {
     .user-card img{
         width: 80px;
         height: 80px;
+        margin: auto;
     }
     .user-info{
         height: fit-content;
@@ -13630,7 +13659,7 @@ td, th {
     border: 1px solid #dee2e6;
     padding: 15px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-content: center;
 }
 
@@ -13638,8 +13667,33 @@ td, th {
     display: block;
 }
 
-.totalTransactions {
+.transactions {
     font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px 10px 10px 20px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+}
+
+.btn-transactions {
+    background-color: #ededed;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0.2, 0.2);
+}
+
+.btn-transactions:hover {
+    background-color: #f5e193;
+    box-shadow: 0 2px 4px rgba(0, 0, 0.2, 0.2);
+}
+
+.transactions-money {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
 }
 
 .list-gym-brand {
@@ -13718,9 +13772,11 @@ label.error {
     display: block;
     position: absolute;
 }
+@media (max-width: 1600px) {
 .user-status{
     text-align: center;
-    width: 90px;
+    margin:auto;
+    width: 110px;
     margin-left: 15px;
     background-color: #e5e5e5;
     color: grey;
@@ -13728,8 +13784,6 @@ label.error {
     font-weight: 450;
     padding: 6px 12px;
     border-radius: 20px;
-    margin:auto;
-    /*right: 0;*/
 }
 .working{
     color: darkblue;

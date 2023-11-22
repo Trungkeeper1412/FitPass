@@ -76,7 +76,7 @@
                 <span>Tổng tiền nạp</span>
                 <span>:</span>
                 <span class="money fw-bold">số tiền nạp</span>
-<!--                <span class="currency"> đồng</span>-->
+                <span class="currency"> đồng</span>
             </div>
             <div class="mt-2">
                 <span class="creditConfirm fw-bold">500</span>
@@ -214,7 +214,7 @@
         // Get the value from the input element
         let inputValue = moneyInput.value;
         inputValue = parseInt(inputValue);
-        inputValue = inputValue.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+        inputValue = inputValue.toLocaleString();
         // Get the selected credit-trans text
         // const creditTrans = document.querySelector('input[name="money"]:checked + .card-input .credit-trans').textContent.trim();
 
@@ -255,8 +255,8 @@
 
     document.getElementById("moneyAmount").oninput = function(){
         let money_value = document.getElementById("moneyAmount").value;
-        document.getElementById("moneyAmount").value = money_value;
-        // console.log(money_value);
+        // document.getElementById("moneyAmount").value = parseInt(money_value).toLocaleString("de-DE");
+        console.log(document.getElementById("moneyAmount").value.replace('.', ''));
         if (money_value === ""){
             document.querySelector('input[name="money"]:checked').checked = false;
         }

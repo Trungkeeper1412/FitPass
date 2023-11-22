@@ -124,6 +124,41 @@ public class CartControllerTest {
         // Additional assertions based on your expectations
     }
 
+    @Test
+    public void removeItem_validRequest_successfulRedirect() {
+        // Arrange
+        int gymPlanId = 1;
+        int departmentId = 3;
+        HttpSession mockSession = mock(HttpSession.class);
+
+        Cart mockCart = new Cart();
+        mockCart.addItem(new GymPlanDepartmentNameDto(), 1);
+        when(mockSession.getAttribute("cart")).thenReturn(mockCart);
+
+        // Act
+        String redirectResult = cartController.removeItem(gymPlanId, departmentId, mockSession);
+
+        // Assert
+        assertEquals("redirect:/cart/view", redirectResult);
+
+    }
+    @Test
+    public void removeItem_exceptionThrown_redirectToErrorPage() {
+        // Arrange
+        int gymPlanId = 1;
+        int departmentId = 3;
+        HttpSession mockSession = mock(HttpSession.class);
+
+        Cart mockCart = mock(Cart.class);
+        doThrow(new RuntimeException("Test exception")).when(mockCart).removeItem(anyInt(), anyInt());
+        when(mockSession.getAttribute("cart")).thenReturn(mockCart);
+
+        // Act
+        String redirectResult = cartController.removeItem(gymPlanId, departmentId, mockSession);
+
+        // Assert
+        assertEquals("redirect:/error/error", redirectResult);
+    }
 
 
 }

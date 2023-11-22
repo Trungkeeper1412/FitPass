@@ -3,17 +3,20 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
+import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,45 +44,43 @@ public class HomepageController {
         return "homepage-user";
     }
 
-   @GetMapping("/homepage/brand")
-public ResponseEntity<BrandPagnition> getBrandWithPagination(
-        @RequestParam(defaultValue = "1") int page,
-        @RequestParam(defaultValue = "2") int size,
-        @RequestParam(required = false) String sortPrice,
-        @RequestParam(required = false) String sortRating) {
-    try {
-        List<Brand> brandList = brandService.getAllByStatus(1, page, size, sortPrice, sortRating);
+    @GetMapping("/homepage/brand")
+    public ResponseEntity<BrandPagnition> getBrandWithPagination(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "2") int size,
+            @RequestParam(required = false) String sortPrice,
+            @RequestParam(required = false) String sortRating) {
+        try {
+            List<Brand> brandList = brandService.getAllByStatus(1, page, size, sortPrice, sortRating);
 
-        int totalBrands = brandService.countAllBrands(1, sortRating);
-        int totalPages = (int) Math.ceil((double) totalBrands / size);
-        int currentPage = page;
+            int totalBrands = brandService.countAllBrands(1, sortRating);
+            int totalPages = (int) Math.ceil((double) totalBrands / size);
+            int currentPage = page;
 
-        Map<Integer, List<DepartmentDTO>> brandDepartmentsMap = new HashMap<>();
-        for (Brand brand : brandList) {
-            List<DepartmentDTO> departmentList = departmentService.getAllDepartmentByBrandId(brand.getBrandId(), 1, 5);
-            brandDepartmentsMap.put(brand.getBrandId(), departmentList);
+            Map<Integer, List<DepartmentDTO>> brandDepartmentsMap = new HashMap<>();
+            for (Brand brand : brandList) {
+                List<DepartmentDTO> departmentList = departmentService.getAllDepartmentByBrandId(brand.getBrandId(), 1, 5);
+                brandDepartmentsMap.put(brand.getBrandId(), departmentList);
+            }
+
+            BrandPagnition brandPagnition = new BrandPagnition();
+            brandPagnition.setListBrand(brandList);
+            brandPagnition.setTotalPage(totalPages);
+            brandPagnition.setCurrentPage(currentPage);
+            brandPagnition.setBrandDepartmentsMap(brandDepartmentsMap);
+            return ResponseEntity.ok(brandPagnition);
+        } catch (IllegalArgumentException e) {
+            // Log the exception for debugging purposes
+            e.printStackTrace();
+            // Return a BAD_REQUEST response for negative page number
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            e.printStackTrace();
+            // Return an appropriate error response
+            return ResponseEntity.status(500).build();
         }
-
-        BrandPagnition brandPagnition = new BrandPagnition();
-        brandPagnition.setListBrand(brandList);
-        brandPagnition.setTotalPage(totalPages);
-        brandPagnition.setCurrentPage(currentPage);
-        brandPagnition.setBrandDepartmentsMap(brandDepartmentsMap);
-        return ResponseEntity.ok(brandPagnition);
     }
-    catch (IllegalArgumentException e) {
-        // Log the exception for debugging purposes
-        e.printStackTrace();
-        // Return a BAD_REQUEST response for negative page number
-        return ResponseEntity.badRequest().build();
-    }
-    catch (Exception e) {
-        // Log the exception for debugging purposes
-        e.printStackTrace();
-        // Return an appropriate error response
-        return ResponseEntity.status(500).build();
-    }
-}
 
     @PostMapping("/homepage")
     public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(
@@ -142,8 +143,9 @@ public ResponseEntity<BrandPagnition> getBrandWithPagination(
             throw new IllegalArgumentException("Invalid distance format.");
         }
     }
+
     @GetMapping("/profile/calendar")
-    public String getCalendar(){
+    public String getCalendar() {
         return "user/calendar";
     }
 

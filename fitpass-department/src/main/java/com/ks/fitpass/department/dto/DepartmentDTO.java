@@ -27,6 +27,8 @@ public class DepartmentDTO {
 
     private Double area;
 
+    private int feedbackCount;
+
     private int total;
     private int total5;
     private int total4;
