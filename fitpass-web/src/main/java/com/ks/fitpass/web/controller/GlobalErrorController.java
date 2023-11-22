@@ -22,10 +22,6 @@ public class GlobalErrorController implements ErrorController {
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
 
-            if(statusCode == HttpStatus.BAD_REQUEST.value()) {
-                return "error/400";
-            }
-
             if(statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "error/403";
             }

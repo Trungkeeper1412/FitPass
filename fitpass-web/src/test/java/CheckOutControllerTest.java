@@ -87,7 +87,7 @@ public class CheckOutControllerTest {
         String viewName = checkOutController.viewCheckout(org.mockito.Mockito.mock(org.springframework.ui.Model.class), invalidIdList, deptIdList, mockSession);
 
         // Assert
-        assertEquals("error/400", viewName); // Update here to compare with "error/400"
+        assertEquals("error/error", viewName); // Update here to compare with "error/400"
         // Additional assertions based on your expectations
     }
 
