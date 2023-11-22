@@ -53,7 +53,6 @@ public class GymOwnerCreateDTO {
     private LocalDate dateOfBirth;
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
-    @Pattern(regexp = "^[0-9]{12}$", message = "Số căn cước công dân không hợp lệ !")
     @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
     @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
