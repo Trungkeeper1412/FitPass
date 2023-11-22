@@ -35,7 +35,7 @@ public class ValidateIdCardValidator implements ConstraintValidator<GymOwnerCrea
         }
 
         // Kiểm tra mã giới tính
-        if (!String.valueOf(validCenturyGenderCodes).matches("^[0-9]$")) {
+        if (!String.valueOf(validCenturyGenderCodes).matches("^[0-3]$")) {
             return false;
         }
 
