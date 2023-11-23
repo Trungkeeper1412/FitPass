@@ -121,4 +121,24 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public boolean checkUsernameExist(String username) {
         return userRepository.checkUsernameExist(username);
     }
+
+    @Override
+    public boolean checkAccountFirstTimeLogin(int userId) {
+        return userRepository.checkAccountFirstTimeLogin(userId);
+    }
+
+    @Override
+    public int updateFirstTimeLoginStatus(int userId, int status) {
+        return userRepository.updateFirstTimeLoginStatus(userId, status);
+    }
+
+    @Override
+    public List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId) {
+        return userRepository.getAllAccountByDepartmentId(departmentId);
+    }
+
+    @Override
+    public int getNumberOfAccountCreatedByDepartmentId(int departmentId) {
+        return userRepository.getNumberOfAccountCreatedByDepartmentId(departmentId);
+    }
 }
