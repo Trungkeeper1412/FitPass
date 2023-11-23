@@ -126,4 +126,40 @@ public interface IRepositoryQuery {
     String CHECK_USERNAME_EXIST = """
                 SELECT COUNT(*) FROM user WHERE user_account LIKE '%?%';
             """;
+
+    String CHECK_ACCOUNT_FIRST_TIME_LOGIN = """
+                SELECT COUNT(*) FROM user WHERE user_id = ? AND first_time = 1;
+            """;
+
+    String UPDATE_FIRST_TIME_LOGIN_STATUS = """
+                UPDATE `user`
+                SET first_time = ?
+                WHERE user_id = ?;
+            """;
+
+    String GET_ALL_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID = """
+            SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url, u.user_deleted
+                            FROM user u
+                            JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
+                            JOIN user_role ur ON u.user_id = ur.user_id
+							WHERE ur.role_id = 3
+							AND u.created_by IN (
+							    SELECT user_id
+							    FROM gym_department
+							    WHERE gym_department_id = ?
+							);
+            """;
+
+    String GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID = """
+            SELECT COUNT(u.user_id) AS total_accounts
+                	    FROM user u
+                		JOIN user_role ur ON u.user_id = ur.user_id
+                		WHERE ur.role_id = 3
+                		AND u.user_id  IN (
+                			SELECT u2.user_id
+                			FROM gym_department gd
+                			JOIN user u2 ON gd.user_id = u2.user_id
+                			WHERE gd.gym_department_id = ?
+                		)
+            """;
 }
