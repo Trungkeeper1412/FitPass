@@ -304,4 +304,30 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
             return listBrandDepartmentFeedback;
         }, 1, brandId);
     }
+
+    @Override
+    public int updateGymOwnerDepartmentInfo(Department department) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_GYM_OWNER_DEPARTMENT_INFO,
+                department.getDepartmentAddress(),
+                department.getDepartmentContactNumber(),
+                department.getDepartmentDescription(),
+                department.getCapacity(),
+                department.getArea(),
+                department.getCity(),
+                department.getDepartmentId());
+    }
+
+    @Override
+    public int updateGymOwnerDepartmentInfoDetails(Department department) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_GYM_OWNER_DEPARTMENT_INFO_DETAIL,
+                department.getDepartmentAddress(),
+                department.getDepartmentContactNumber(),
+                department.getDepartmentDescription(),
+                department.getCapacity(),
+                department.getArea(),
+                department.getCity(),
+                department.getLatitude(),
+                department.getLongitude(),
+                department.getDepartmentId());
+    }
 }
