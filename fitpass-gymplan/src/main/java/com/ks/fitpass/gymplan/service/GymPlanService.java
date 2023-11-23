@@ -22,4 +22,10 @@ public interface GymPlanService {
     BrandUpdateGymPlanFixedDTO getGymPlanFixedDetail(int gymPlanId);
     int updateGymPlanFixed(BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO);
 
+    int[] insertGymPlanDepartment(int departmentId,List<Integer> gymPlanId);
+
+    List<GymPlanDepartmentNameDto> getGymPlanDepartmentFlexByDepartmentId(int departmentId);
+    List<GymPlanDepartmentNameDto> getGymPlanDepartmentFixedByDepartmentId(int departmentId);
+
+    int deleteAllGymPlanByDepartmentId(int departmentId);
 }
