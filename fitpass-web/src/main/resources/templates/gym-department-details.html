@@ -20,8 +20,11 @@
 <header th:replace="common/navbar :: navbar"></header>
 
 <div class="gym-first-info container">
+    <div class="gym-dept-img">
+        <img th:src="${department.getDepartmentWallpaperUrl()}">
+    </div>
     <div class="gym-picture">
-        <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
+        <img style="width: 150px; height: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
         <div class="gym-name-cover">
             <h3 th:text="${department.departmentName}"></h3>
         </div>
