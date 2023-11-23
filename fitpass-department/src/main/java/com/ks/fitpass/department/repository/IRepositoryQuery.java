@@ -574,4 +574,66 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 INNER JOIN brand_amenities ba ON gda.amenitie_id = ba.amenitie_id
                 WHERE gda.gym_department_id = ?;
             """;
+
+    String GET_ALL_FEATURES_ACTIVE = """
+                SELECT feature_id, feature_icon, feature_name, feature_status
+                FROM features WHERE feature_status = 1;
+            """;
+
+    String UPDATE_GYM_OWNER_DEPARTMENT_INFO = """
+                UPDATE gym_department
+                SET
+                    address = ?,
+                    contact_number = ?,           
+                    description = ?,
+                    capacity = ?,
+                    area = ?,
+                    city = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_GYM_OWNER_DEPARTMENT_INFO_DETAIL = """
+                UPDATE gym_department
+                SET
+                    address = ?,
+                    contact_number = ?,
+                    description = ?,
+                    capacity = ?,
+                    area = ?,
+                    city = ?,
+                    latitude = ?,
+                    longitude = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String ADD_DEPARTMENT_SCHEDULE = """
+                INSERT INTO gym_department_schedule (gym_department_id, `day`, open_time, close_time)
+                VALUES (?, ?, ?, ?);
+            """;
+
+    String INSERT_DEPARTMENT_AMENITIE = """
+                INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
+                VALUES (?, ?);
+            """;
+
+    String INSERT_DEPARTMENT_FEATURE = """
+                INSERT INTO gym_department_features
+                (feature_id, gym_department_id, feature_status)
+                VALUES(?, ?, 1);
+            """;
+
+    String DELETE_ALL_DEPARTMENT_AMENITIE = """
+                DELETE FROM gym_department_amenities
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_ALL_DEPARTMENT_FEATURES = """
+                DELETE FROM gym_department_features
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_ALL_DEPARTMENT_SCHEDULE = """
+                DELETE FROM gym_department_schedule
+                WHERE gym_department_id = ?;
+            """;
 }
