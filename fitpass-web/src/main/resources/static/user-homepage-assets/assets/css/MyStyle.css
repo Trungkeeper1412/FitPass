@@ -2446,6 +2446,9 @@ a:link {
   .credit-info-common{
     display: none;
   }
+  .user-profile-content{
+    width: 90%;
+  }
   .menu-option .credit-info{
     background-color: rgb(238, 238, 238);
     display: grid;
@@ -2500,9 +2503,12 @@ a:link {
   margin-left: 10px;
   font-size: 14px;
 }
-
+.user-basic-info .name{
+  overflow-wrap: break-word;
+}
 .user-basic-info .gmail {
   font-size: 12px;
+  overflow-wrap: break-word;
 }
 
 .user-basic-info {
