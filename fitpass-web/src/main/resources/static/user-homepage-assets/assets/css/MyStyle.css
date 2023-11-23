@@ -2424,11 +2424,42 @@ a:link {
   color: #000;
   /* font-weight: 500; */
 }
-
+.credit-info-common{
+  display: none;
+}
+@media only screen and (max-width: 460px) {
+  .menu-option .credit-info{
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .menu-option .credit-info {
+    display: none;
+  }
+  .credit-info-common{
+    display: flex;
+  }
+}
+@media only screen and (min-width: 461px) and (max-width: 767px) {
+  .credit-info-common{
+    display: none;
+  }
+  .menu-option .credit-info{
+    background-color: rgb(238, 238, 238);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .menu-option .list-group-item img {
   width: 18px;
   margin-right: 5px;
 }
+.menu-option .credit-info .account-balance .wallet-money{
+  font-size: 15px;
+}
+
 
 .option-tab.at {
   color: #000;
