@@ -2737,6 +2737,12 @@ a:link {
 
 
 /* Css  for profile tab */
+
+#exampleFormControlFile1{
+  margin-left: 10px;
+  width: 85px;
+  overflow: hidden;
+}
 .user-profile{
   background-color: white;
   padding: 20px;

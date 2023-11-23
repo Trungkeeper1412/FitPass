@@ -456,6 +456,13 @@ $(function () {
     $("#include-footer").load("footer.html");
 });
 
+//change avatar
+let user_img = document.getElementById('user-ava');
+let input_img = document.getElementById('exampleFormControlFile1');
+input_img.onchange = (e) =>{
+    if(input_img.files[0])
+        user_img.src = URL.createObjectURL(input_img.files[0]);
+};
 
 
 
