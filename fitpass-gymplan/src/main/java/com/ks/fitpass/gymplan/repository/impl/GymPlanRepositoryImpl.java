@@ -1,5 +1,6 @@
 package com.ks.fitpass.gymplan.repository.impl;
 
+import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.department.entity.GymPlan;
 import com.ks.fitpass.department.mapper.GymPlanMapper;
 import com.ks.fitpass.department.mapper.GymPlanWithDepartmentNameMapper;
@@ -8,9 +9,12 @@ import com.ks.fitpass.gymplan.repository.GymPlanRepository;
 import com.ks.fitpass.gymplan.repository.IRepositoryQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -39,6 +43,7 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
             brandGymPlanFlexDTO.setPlanBeforeActive(rs.getInt("plan_before_active_validity"));
             brandGymPlanFlexDTO.setPlanAfterActive(rs.getInt("plan_after_active_validity"));
             brandGymPlanFlexDTO.setStatus(rs.getInt("status"));
+            brandGymPlanFlexDTO.setDescription(rs.getString("description"));
             return brandGymPlanFlexDTO;
         }, brandId);
     }
@@ -85,6 +90,7 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
             brandGymPlanFixedDTO.setPlanBeforeActive(rs.getInt("plan_before_active_validity"));
             brandGymPlanFixedDTO.setPlanAfterActive(rs.getInt("plan_after_active_validity"));
             brandGymPlanFixedDTO.setStatus(rs.getInt("status"));
+            brandGymPlanFixedDTO.setDescription(rs.getString("description"));
             return brandGymPlanFixedDTO;
         }, brandId);
     }
@@ -121,5 +127,56 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
                 brandUpdateGymPlanFixedDTO.getPrice(), brandUpdateGymPlanFixedDTO.getPlanBeforeActive(),
                 brandUpdateGymPlanFixedDTO.getPlanAfterActive(), brandUpdateGymPlanFixedDTO.getDuration(), brandUpdateGymPlanFixedDTO.getGymPlanId()
                 );
+    }
+
+    @Override
+    public int[] insertGymPlanDepartment(int departmentId, List<Integer> gymPlanId) {
+        return jdbcTemplate.batchUpdate(IRepositoryQuery.INSERT_GYM_PLAN_DEPARTMENT, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                Integer planId = gymPlanId.get(i);
+                ps.setInt(1, departmentId);
+                ps.setInt(2, planId);
+            }
+
+            @Override
+            public int getBatchSize() {
+                return gymPlanId.size();
+            }
+        });
+    }
+
+    @Override
+    public List<GymPlanDepartmentNameDto> getGymPlanDepartmentFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_GYM_PLAN_DEPARTMENT_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+            GymPlanDepartmentNameDto gymPlanDepartmentNameDto = new GymPlanDepartmentNameDto();
+            gymPlanDepartmentNameDto.setGymPlanId(rs.getInt("plan_id"));
+            gymPlanDepartmentNameDto.setGymPlanName(rs.getString("name"));
+            gymPlanDepartmentNameDto.setPrice(rs.getDouble("price"));
+            gymPlanDepartmentNameDto.setDuration(rs.getInt("duration"));
+            gymPlanDepartmentNameDto.setPlanBeforeActiveValidity(rs.getInt("plan_before_active_validity"));
+            gymPlanDepartmentNameDto.setPlanAfterActiveValidity(rs.getInt("plan_after_active_validity"));
+            gymPlanDepartmentNameDto.setGymPlanDescription(rs.getString("description"));
+            return gymPlanDepartmentNameDto;
+        }, departmentId);
+    }
+
+    @Override
+    public List<GymPlanDepartmentNameDto> getGymPlanDepartmentFlexByDepartmentId(int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_GYM_PLAN_DEPARTMENT_FLEX_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+            GymPlanDepartmentNameDto gymPlanDepartmentNameDto = new GymPlanDepartmentNameDto();
+            gymPlanDepartmentNameDto.setGymPlanId(rs.getInt("plan_id"));
+            gymPlanDepartmentNameDto.setGymPlanName(rs.getString("name"));
+            gymPlanDepartmentNameDto.setPricePerHours(rs.getDouble("price_per_hours"));
+            gymPlanDepartmentNameDto.setPlanBeforeActiveValidity(rs.getInt("plan_before_active_validity"));
+            gymPlanDepartmentNameDto.setPlanAfterActiveValidity(rs.getInt("plan_after_active_validity"));
+            gymPlanDepartmentNameDto.setGymPlanDescription(rs.getString("description"));
+            return gymPlanDepartmentNameDto;
+        }, departmentId);
+    }
+
+    @Override
+    public int deleteAllGymPlanByDepartmentId(int departmentId) {
+        return jdbcTemplate.update(IRepositoryQuery.DELETE_ALL_GYM_PLAN_BY_DEPARTMENT_ID, departmentId);
     }
 }
