@@ -274,6 +274,12 @@ $(document).ready(function () {
         }
     });
 
+    $("#msform .next").click(function () {
+        if (!$("#formSubmit").valid()) {
+            return false;
+        }
+    });
+
     $("#createNewDepartment").click(function () {
         if (!$("#formSubmit").valid()) {
             return false;
