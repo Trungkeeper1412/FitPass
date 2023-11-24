@@ -2,10 +2,7 @@ package com.ks.fitpass.department.dto;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,7 +15,10 @@ import java.time.LocalDate;
 @Data
 public class EmployeUpdateDTO {
     private int userDetailId;
-    @NotEmpty(message = "First Name cannot be empty")
+
+    @Size(max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
+    @NotEmpty(message = "Vui lòng nhập họ của bạn !")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")
     private String firstName;
 
     @NotEmpty(message = "Last Name cannot be empty")
