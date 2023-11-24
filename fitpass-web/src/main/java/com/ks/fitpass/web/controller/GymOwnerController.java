@@ -55,7 +55,11 @@ public class GymOwnerController {
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
-    public String getGOIndex() {
+    public String getGOIndex(HttpSession session, Model model) {
+        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+        if(isFirstTime) {
+            return "redirect:/gym-owner/department/update-details";
+        }
         return "gym-owner/index";
     }
 
