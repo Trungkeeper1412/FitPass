@@ -234,6 +234,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId) {
         return departmentRepository.getDepartmentFeedbackOfBrandOwner(brandId);
     }
+
+    @Override
+    public int updateGymOwnerDepartmentInfo(Department department) {
+        return departmentRepository.updateGymOwnerDepartmentInfo(department);
+    }
+
+    @Override
+    public int updateGymOwnerDepartmentInfoDetails(Department department) {
+        return departmentRepository.updateGymOwnerDepartmentInfoDetails(department);
+    }
 }
 
 

@@ -27,4 +27,8 @@ public interface UserService {
 
     boolean checkEmailExist(String email);
     boolean checkUsernameExist(String username);
+    boolean checkAccountFirstTimeLogin(int userId);
+    int updateFirstTimeLoginStatus(int userId, int status);
+    List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId);
+    int getNumberOfAccountCreatedByDepartmentId(int departmentId);
 }

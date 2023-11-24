@@ -2407,6 +2407,7 @@ a:link {
 }
 .user-profile-content {
   margin-top: 130px;
+  width: 90%;
 }
 .user-profile-content .pagination {
   display: flex;
@@ -2424,11 +2425,45 @@ a:link {
   color: #000;
   /* font-weight: 500; */
 }
-
+.credit-info-common{
+  display: none;
+}
+@media only screen and (max-width: 460px) {
+  .menu-option .credit-info{
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .menu-option .credit-info {
+    display: none;
+  }
+  .credit-info-common{
+    display: flex;
+  }
+}
+@media only screen and (min-width: 461px) and (max-width: 767px) {
+  .credit-info-common{
+    display: none;
+  }
+  .user-profile-content{
+    width: 90%;
+  }
+  .menu-option .credit-info{
+    background-color: rgb(238, 238, 238);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .menu-option .list-group-item img {
   width: 18px;
   margin-right: 5px;
 }
+.menu-option .credit-info .account-balance .wallet-money{
+  font-size: 15px;
+}
+
 
 .option-tab.at {
   color: #000;
@@ -2469,9 +2504,12 @@ a:link {
   margin-left: 10px;
   font-size: 14px;
 }
-
+.user-basic-info .name{
+  overflow-wrap: break-word;
+}
 .user-basic-info .gmail {
   font-size: 12px;
+  overflow-wrap: break-word;
 }
 
 .user-basic-info {
@@ -3057,6 +3095,7 @@ input:checked + .toggle-slider:before {
   margin-left: 20px;
   border-radius: 10px;
   padding: 10px;
+  z-index: 1;
 }
 .gym-name-cover h5{
   border:1px solid rgb(255, 162, 0);
@@ -3065,31 +3104,53 @@ input:checked + .toggle-slider:before {
   color: white;
 }
 .gym-name-cover h3{
-  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: fit-content;
+  padding : 10px;
+  position: absolute;
+  top: 40px;
+  left: 210px;
   color: rgb(255, 255, 255);
   font-weight: 600;
+  overflow-wrap: break-word;
 }
 .gym-picture{
-  position: relative;
-  /* width: 100%;
-  height: 600px; */
-  border-radius: 10px;
+  position: absolute;
+  top: 20px;
+  left: 5%;
+  padding: 10px 10px 5px 10px;
+  z-index: 1;
   display: flex;
   flex-wrap: nowrap;
-  width: 600px;
+  width: 100%;
+}
+
+.gym-picture img{
+  position: absolute;
+  top: 15%;
 }
 
 .gym-first-info{
   top: 50px;
   position: relative;
-  background-color: rgb(0, 0, 0);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   width: 100%;
-  height: 30%;
+  height: 200px;
   margin: auto;
   border-radius: 10px;
-  padding: 30px;
+  object-fit: cover;
+
+}
+.gym-dept-img{
+
+}
+.gym-first-info img{
+  /*display: grid;*/
+  /*grid-template-columns: 1fr 1fr;*/
+  width: 100%;
+  height: 200px;
+  margin: auto;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 .gym-service{
@@ -3152,16 +3213,16 @@ input:checked + .toggle-slider:before {
   margin-top: 15px;
 }
 
-.gym-first-info::before{
-  content: ' ';
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  background: url("https://i.pinimg.com/564x/65/23/4b/65234baf62f7db63eada1ec1fa32627f.jpg") no-repeat center center;
-  background-size: cover;
-}
+/*.gym-first-info::before{*/
+/*  content: ' ';*/
+/*  position: absolute;*/
+/*  display: block;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  opacity: 0.5;*/
+/*  object-fit: cover;*/
+/*  background-size: cover;*/
+/*}*/
 
 .gym-container{
   width: 100%;

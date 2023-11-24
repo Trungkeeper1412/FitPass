@@ -109,4 +109,24 @@ public class GymPlanServiceImpl implements GymPlanService {
     public int updateGymPlanFixed(BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO) {
         return gymPlanRepository.updateGymPlanFixed(brandUpdateGymPlanFixedDTO);
     }
+
+    @Override
+    public int[] insertGymPlanDepartment(int departmentId, List<Integer> gymPlanId) {
+        return gymPlanRepository.insertGymPlanDepartment(departmentId, gymPlanId);
+    }
+
+    @Override
+    public List<GymPlanDepartmentNameDto> getGymPlanDepartmentFlexByDepartmentId(int departmentId) {
+        return gymPlanRepository.getGymPlanDepartmentFlexByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<GymPlanDepartmentNameDto> getGymPlanDepartmentFixedByDepartmentId(int departmentId) {
+        return gymPlanRepository.getGymPlanDepartmentFixedByDepartmentId(departmentId);
+    }
+
+    @Override
+    public int deleteAllGymPlanByDepartmentId(int departmentId) {
+        return gymPlanRepository.deleteAllGymPlanByDepartmentId(departmentId);
+    }
 }

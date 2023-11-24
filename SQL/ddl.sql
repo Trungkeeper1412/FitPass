@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `user` (
                                       user_create_time VARCHAR(20) NOT NULL,
                                       user_deleted     TINYINT NOT NULL,
                                       created_by INT NULL,
+                                      first_time boolean default 1,
                                       FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id),
                                       CONSTRAINT user_FK FOREIGN KEY (created_by) REFERENCES `user`(user_id)
 );

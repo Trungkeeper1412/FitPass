@@ -9,4 +9,8 @@ public interface DepartmentAmenitieService {
     List<DepartmentAmenitie> getAllAmenitieOfDepartment(int departmentId);
 
     List<DepartmentAmenities> getAllDepartmentAmenitiesActivate(int gymDepartmentId);
+
+    int[] insertDepartmentAmenitie(int gymDepartmentId, List<Integer> amenitieId);
+
+    int deleteAllDepartmentAmenitie(int gymDepartmentId);
 }

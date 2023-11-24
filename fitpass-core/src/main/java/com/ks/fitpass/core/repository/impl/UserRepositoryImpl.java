@@ -147,4 +147,36 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         int count = jdbcTemplate.queryForObject(CHECK_USERNAME_EXIST, Integer.class, username);
         return count > 0;
     }
+
+    @Override
+    public boolean checkAccountFirstTimeLogin(int userId) {
+        int count = jdbcTemplate.queryForObject(CHECK_ACCOUNT_FIRST_TIME_LOGIN, Integer.class, userId);
+        return count > 0;
+    }
+
+    @Override
+    public int updateFirstTimeLoginStatus(int userId, int status) {
+        return jdbcTemplate.update(UPDATE_FIRST_TIME_LOGIN_STATUS, status, userId);
+    }
+
+    @Override
+    public List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId) {
+        return jdbcTemplate.query(GET_ALL_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+            GymOwnerListDTO gymOwnerListDTO = new GymOwnerListDTO();
+            gymOwnerListDTO.setUserId(rs.getInt("user_id"));
+            gymOwnerListDTO.setUserDetailId(rs.getInt("user_detail_id"));
+            gymOwnerListDTO.setFirstName(rs.getString("first_name"));
+            gymOwnerListDTO.setLastName(rs.getString("last_name"));
+            gymOwnerListDTO.setEmail(rs.getString("email"));
+            gymOwnerListDTO.setPhoneNumber(rs.getString("phone_number"));
+            gymOwnerListDTO.setImageUrl(rs.getString("image_url"));
+            gymOwnerListDTO.setUserDeleted(rs.getBoolean("user_deleted"));
+            return gymOwnerListDTO;
+        }, departmentId);
+    }
+
+    @Override
+    public int getNumberOfAccountCreatedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
 }

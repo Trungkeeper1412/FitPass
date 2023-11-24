@@ -23,4 +23,14 @@ public class DepartmentAmenitieServiceImpl implements DepartmentAmenitieService 
     public List<DepartmentAmenities> getAllDepartmentAmenitiesActivate(int gymDepartmentId) {
         return departmentAmenitieRepository.getAllDepartmentAmenitiesActivate(gymDepartmentId);
     }
+
+    @Override
+    public int[] insertDepartmentAmenitie(int gymDepartmentId, List<Integer> amenitieId) {
+        return departmentAmenitieRepository.insertDepartmentAmenitie(gymDepartmentId, amenitieId);
+    }
+
+    @Override
+    public int deleteAllDepartmentAmenitie(int gymDepartmentId) {
+        return departmentAmenitieRepository.deleteAllDepartmentAmenitie(gymDepartmentId);
+    }
 }

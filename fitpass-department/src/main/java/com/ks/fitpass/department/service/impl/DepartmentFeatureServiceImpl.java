@@ -1,6 +1,7 @@
 package com.ks.fitpass.department.service.impl;
 
 import com.ks.fitpass.department.entity.DepartmentFeature;
+import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.department.repository.DepartmentFeatureRepository;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,18 @@ public class DepartmentFeatureServiceImpl implements DepartmentFeatureService {
         return departmentFeatureRepository.getDepartmentFeaturesByStatusAndDepartmentID(departmentId, status);
     }
 
+    @Override
+    public List<Feature> getAllFeatures() {
+        return departmentFeatureRepository.getAllFeatures();
+    }
+
+    @Override
+    public int[] insertDepartmentFeature(int gymDepartmentId, List<Integer> featureId) {
+        return departmentFeatureRepository.insertDepartmentFeature(gymDepartmentId, featureId);
+    }
+
+    @Override
+    public int deleteAllDepartmentFeatures(int gymDepartmentId) {
+        return departmentFeatureRepository.deleteAllDepartmentFeatures(gymDepartmentId);
+    }
 }

@@ -57,4 +57,8 @@ public interface DepartmentService {
     List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
 
     List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId);
+
+    int updateGymOwnerDepartmentInfo(Department department);
+
+    int updateGymOwnerDepartmentInfoDetails(Department department);
 }
