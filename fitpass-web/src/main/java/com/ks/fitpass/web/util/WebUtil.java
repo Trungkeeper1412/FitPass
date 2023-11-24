@@ -3,7 +3,9 @@ package com.ks.fitpass.web.util;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class WebUtil {
 
@@ -48,5 +50,24 @@ public class WebUtil {
         }
 
         return password.toString();
+    }
+
+    public static List<Integer> parseIntegerList(String inputStr) {
+        List<Integer> result = new ArrayList<>();
+
+        if (inputStr != null && !inputStr.isEmpty()) {
+            String[] elements = inputStr.split(",");
+            for (String element : elements) {
+                try {
+                    int number = Integer.parseInt(element.trim());
+                    result.add(number);
+                } catch (NumberFormatException e) {
+                    // Bỏ qua nếu không thể chuyển đổi thành số nguyên
+                    continue;
+                }
+            }
+        }
+
+        return result;
     }
 }
