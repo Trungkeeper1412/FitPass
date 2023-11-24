@@ -636,4 +636,27 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 DELETE FROM gym_department_schedule
                 WHERE gym_department_id = ?;
             """;
+
+    String UPDATE_DEPARTMENT_IMAGE = """
+                UPDATE gym_department
+                SET logo_url = ?, thumbnail_url = ?, wallpaper_url = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_DEPARTMENT_LONGITUDE_LATITUDE = """
+                UPDATE gym_department
+                SET longitude = ?, latitude = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_DEPARTMENT_ALBUMS_BY_ID_DEPARTMENT = """
+                DELETE FROM gym_department_albums
+                WHERE gym_department_id = ?;
+            """;
+
+    String INSERT_DEPARTMENT_ALBUM = """
+                INSERT INTO gym_department_albums
+                (gym_department_id, photo_url)
+                VALUES(?, ?);
+            """;
 }
