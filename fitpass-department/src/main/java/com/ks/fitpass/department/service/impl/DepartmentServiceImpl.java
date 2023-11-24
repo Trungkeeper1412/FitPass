@@ -244,6 +244,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int updateGymOwnerDepartmentInfoDetails(Department department) {
         return departmentRepository.updateGymOwnerDepartmentInfoDetails(department);
     }
+
+    @Override
+    public int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl) {
+        return departmentRepository.updateDepartmentImage(departmentId, imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
+    }
+
+    @Override
+    public int updateLongitudeLatitude(int departmentId, double longitude, double latitude) {
+        return departmentRepository.updateLongitudeLatitude(departmentId, longitude, latitude);
+    }
 }
 
 
