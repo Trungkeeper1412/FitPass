@@ -563,9 +563,19 @@ public class GymOwnerController {
         User user = (User) session.getAttribute("userInfo");
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
+        departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
+        departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
+        String[] listAlbum = listAlbumUrl.split(",");
+        List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
+        Arrays.stream(listAlbum).forEach(albumUrl -> {
+            DepartmentAlbums departmentAlbums = new DepartmentAlbums();
+            departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
+            departmentAlbums.setPhotoUrl(albumUrl);
+            departmentAlbumsList.add(departmentAlbums);
+        });
+        departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
 
-
-        return "gym-owner/gym-department-update-image";
+        return "redirect:/gym-owner/department/image";
     }
 
     @GetMapping("/department/location")
@@ -579,6 +589,21 @@ public class GymOwnerController {
 
         model.addAttribute("departmentDetails", departmentDetails);
         return "gym-owner/gym-department-update-location";
+    }
+
+    @PostMapping("/department/location")
+    public String updateDepartmentLocation(HttpSession session, Model model,
+                                           @RequestParam String latitude, @RequestParam String longitude) {
+        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+        if(isFirstTime) {
+            return "redirect:/gym-owner/department/update-details";
+        }
+        User user = (User) session.getAttribute("userInfo");
+        Department departmentDetails = departmentService.getByUserId(user.getUserId());
+
+        departmentService.updateLongitudeLatitude(departmentDetails.getDepartmentId(), Double.parseDouble(longitude), Double.parseDouble(latitude));
+
+        return "redirect:/gym-owner/department/location";
     }
 
     @GetMapping("/department/gym-plans")
