@@ -286,6 +286,7 @@ public class BrandOwnerController {
         gymOwnerUpdateDTO.setDepartmentId(ud.getGymDepartmentId());
         gymOwnerUpdateDTO.setOldDepartmentId(ud.getGymDepartmentId());
         gymOwnerUpdateDTO.setUserId(userId);
+        gymOwnerUpdateDTO.setOldEmail(ud.getEmail());
 
         model.addAttribute("gymOwner", gymOwnerUpdateDTO);
         model.addAttribute("filteredList", filteredList);
@@ -295,8 +296,10 @@ public class BrandOwnerController {
     @PostMapping("/gym-owner/update")
     public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner")GymOwnerUpdateDTO gymOwnerUpdateDTO,
                                         BindingResult bindingResult) {
-        if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email already exist");
+        if(!gymOwnerUpdateDTO.getEmail().equals(gymOwnerUpdateDTO.getOldEmail())) {
+            if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
+                bindingResult.rejectValue("email", "error.email", "Email already exist");
+            }
         }
         if(bindingResult.hasErrors()) {
             return "brand-owner/gym-brand-owner-detail";
