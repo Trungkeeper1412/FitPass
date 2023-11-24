@@ -3109,7 +3109,7 @@ input:checked + .toggle-slider:before {
   padding : 10px;
   position: absolute;
   top: 40px;
-  left: 210px;
+  left: 200px;
   color: rgb(255, 255, 255);
   font-weight: 600;
   overflow-wrap: break-word;
@@ -3117,19 +3117,32 @@ input:checked + .toggle-slider:before {
 .gym-picture{
   position: absolute;
   top: 20px;
-  left: 5%;
+  left: 20px;
   padding: 10px 10px 5px 10px;
   z-index: 1;
-  display: flex;
-  flex-wrap: nowrap;
   width: 100%;
 }
-
-.gym-picture img{
-  position: absolute;
-  top: 15%;
+@media only screen and (min-width: 799px) {
+  .gym-first-info .gym-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 15%;
+  }
+  .gym-name-cover h3{
+    font-size: 20px;
+    text-align: left;
+    width: fit-content;
+    position: absolute;
+    top: 35px;
+    left: 190px;
+    right: 20px;
+  }
 }
+@media only screen and (max-width: 1000px) {
 
+}
 .gym-first-info{
   top: 50px;
   position: relative;
@@ -3151,6 +3164,22 @@ input:checked + .toggle-slider:before {
   margin: auto;
   border-radius: 10px;
   object-fit: cover;
+}
+@media only screen and (min-width: 280px) and (max-width: 799px){
+  .gym-name-cover h3{
+    text-align: left;
+    font-size: 14px;
+    width: 70%;
+    padding : 5px;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+  }
+  .gym-picture img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
 }
 
 .gym-service{
