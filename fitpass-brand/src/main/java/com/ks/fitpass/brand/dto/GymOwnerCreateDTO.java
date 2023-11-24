@@ -26,7 +26,7 @@ public class GymOwnerCreateDTO {
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")
     private String firstName;
 
-    @Size(max = 50, message = "Tên của bạn không được vượt quá 25 kí tự !")
+    @Size(max = 25, message = "Tên của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập tên của bạn !")
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên của bạn không được chứa kí tự đặc biệt !")
     private String lastName;
