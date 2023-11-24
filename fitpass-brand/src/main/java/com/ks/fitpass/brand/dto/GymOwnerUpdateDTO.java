@@ -41,6 +41,7 @@ public class GymOwnerUpdateDTO {
 
     @NotNull(message = "Vui lòng nhập ngày sinh !")
     @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
