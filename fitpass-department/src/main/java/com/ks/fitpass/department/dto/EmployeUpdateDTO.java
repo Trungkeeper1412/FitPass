@@ -35,7 +35,8 @@ public class EmployeUpdateDTO {
     @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
     private String phone;
 
-    @NotEmpty(message = "Address cannot be empty")
+    @NotEmpty(message = "Vui lòng nhập địa chỉ !")
+    @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
     private String address;
 
     @NotNull(message = "Date of Birth cannot be null")
