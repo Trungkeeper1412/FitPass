@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Trở thành chủ thương hiệu</title>
+    <meta content="Gym Brand Registration" name="description">
+    <meta content="Linh" name="keywords">
+
+    <th:block th:include="common/vendor-head"></th:block>
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs bg-black">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <ol>
+                <li><a href="/static">Fitpass</a></li>
+                <li>Trở thành đối tác</li>
+            </ol>
+        </div>
+    </div>
+</section><!-- End Breadcrumbs -->
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="row mt-3 mb-5" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-5 card-bg d-flex align-items-center justify-content-center">
+            <div class="card-2">
+                <div class="card-body">
+                    <h3 class="fw-bold">Đăng kí phòng tập của bạn vào hệ thống của chúng tôi miễn phí</h3>
+                    <p class="">Tham gia cùng hơn 41,500 phòng tập, phòng gym, các địa điểm chăm sóc sức khỏe và làm
+                        đẹp để phát triển doanh nghiệp của mình với FitPass - bắt đầu một cách miễn phí ngay hôm
+                        nay.</p>
+                    <p class="fw-bold"><i class="bi bi-clock"></i> Đăng ký nhanh trong vòng 10 phút</p>
+                    <p class="fw-bold"><i class="bi bi-calendar-event"></i> Tạo các gói tập và dịch vụ miễn phí</p>
+                    <p class="fw-bold"><i class="bi bi-person-add"></i> Tận dụng người dùng có phạm vi toàn quốc của
+                        chúng
+                        tôi, bao gồm cả người đăng ký cá nhân và doanh nghiệp</p>
+                    <p class="fw-bold"><i class="bi bi-currency-dollar"></i> Tạo thêm thu nhập cho cơ sở của bạn</p>
+                    <p class="fst-italic">Đã là đối tác của FitPass, nhưng cần sự trợ giúp? Liên hệ với chúng tôi <a
+                            href="#">tại đây</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-7 d-flex align-items-center">
+            <div class="container2 text-white" data-aos="zoom-in">
+                <div class="fw-bold mb-5 fs-1 text-warning">Bạn đã đăng kí thành công !</div>
+                <div class="mb-5 fs-2">Chúng tôi sẽ liên hệ với bạn một cách sớm nhất.</div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<!-- ======= Footer ======= -->
+<footer th:replace="common/footer :: footer"></footer>
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<th:block th:insert="common/vendor-script"></th:block>
+
+</body>
+</html>
