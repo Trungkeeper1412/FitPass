@@ -614,6 +614,9 @@ INSERT INTO wallet (user_id, balance)
 VALUES (17, 20000);
 INSERT INTO wallet (user_id, balance)
 VALUES (18, 20000);
+
+INSERT INTO wallet (user_id, balance)
+VALUES (19, 20000);
 /********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,
