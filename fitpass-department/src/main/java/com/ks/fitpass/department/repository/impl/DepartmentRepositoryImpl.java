@@ -290,4 +290,14 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
                 department.getLongitude(),
                 department.getDepartmentId());
     }
+
+    @Override
+    public int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_IMAGE, imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl, departmentId);
+    }
+
+    @Override
+    public int updateLongitudeLatitude(int departmentId, double longitude, double latitude) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_LONGITUDE_LATITUDE, longitude, latitude, departmentId);
+    }
 }
