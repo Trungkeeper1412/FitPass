@@ -40,46 +40,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_USER, new DepartmentMapper(), userId);
     }
 
-    @Override
-//    public List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating,
-//                                           double userLatitude, double userLongitude, String belowDistance) throws DataAccessException {
-//        int offset = (page - 1) * size;
-//        String sql = GET_ALL_DEPARTMENT_BY_STATUS;
-//
-//        if(userLatitude != 0 && userLongitude != 0) {
-//            sql += " HAVING distance <= " + belowDistance + "\n";
-//        }
-//
-//        if(sortRating != null && !sortRating.isEmpty()) {
-//            sql +=  " AND d.rating >=  " + sortRating + " \n";
-//        }
-//
-//        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
-//            sql +=  " AND d.city =  '"+city+"'\n";
-//        }
-//
-//        if(sortPrice != null && !sortPrice.isEmpty()) {
-//            if(sortPrice.equals("lowToHigh")) {
-//                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc, \n" +
-//                        " COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc \n";
-//            } else {
-//                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc, \n" +
-//                        " COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc \n";
-//            }
-//        }
-//
-//        if(userLatitude == 0 && userLongitude == 0) {
-//            if(sortPrice == null || sortPrice.isEmpty()) {
-//                sql += "ORDER BY d.rating DESC";
-//            } else {
-//                sql += ", d.rating DESC";
-//            }
-//        }
-//
-//        sql += " LIMIT " + size + " OFFSET " + offset;
-//
-//        return jdbcTemplate.query(sql, new DepartmentHomePageMapper(), userLatitude, userLongitude, userLatitude, status);
-//    }
     public List<Department> getAllByStatus(int status, int page, int size, String city,
                                            String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance)
             throws DataAccessException {
