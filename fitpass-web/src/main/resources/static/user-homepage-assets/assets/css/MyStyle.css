@@ -3180,9 +3180,22 @@ input:checked + .toggle-slider:before {
     height: 80px;
     border-radius: 50%;
   }
+  .gym-service-logo{
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+  }
+  .gym-service{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+  }
+
 }
 
 .gym-service{
+  display: flex;
+  flex-wrap: wrap;
   margin: auto;
   padding: 30px;
   width: 100%;
@@ -3198,7 +3211,6 @@ input:checked + .toggle-slider:before {
   height: 70px;
   border: 1px solid black;
   border-radius: 10px;
-  /*width: fit-content;*/
 }
 .gym-service-logo:hover + .service-name {
   display: block;
@@ -3226,8 +3238,7 @@ input:checked + .toggle-slider:before {
 .service-type{
   margin-top: 30px;
   margin: auto;
-  width: 150px;
-  /* background-color: #15928A; */
+  /*width: 150px;*/
 }
 .service-type .gym-service-logo img{
   width: 30px;
@@ -4181,7 +4192,7 @@ section {
 
 .scroll-services .child {
   height: 480px;
-  min-width: 280px;
+  min-width: 220px;
   margin-right: 20px;
   padding: 0;
   color: #000000;

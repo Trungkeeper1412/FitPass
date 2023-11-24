@@ -98,9 +98,9 @@
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Tiện ích hàng đầu</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 110px;"></div>
     <!-- Gym service -->
-    <div class="container">
-        <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type mb-3" th:each="feature: ${departmentFeatures}">
+    <div class="container-fluid">
+        <div class="gym-service">
+            <div class="service-type mb-3" th:each="feature: ${departmentFeatures}">
                 <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
                      class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
@@ -114,8 +114,8 @@
         <button class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
         </button>
-        <div class="scroll-services mt-4">
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12"  th:each="amenitie: ${departmentAmenities}">
+        <div class="scroll-services row mt-4">
+            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-7"  th:each="amenitie: ${departmentAmenities}">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
                 <div class="service-descript" th:text="${amenitie.brandAmenitieId.getDescription()}"></div>
