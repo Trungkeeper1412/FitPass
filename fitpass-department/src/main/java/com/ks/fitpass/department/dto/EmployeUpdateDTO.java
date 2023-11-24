@@ -52,7 +52,7 @@ public class EmployeUpdateDTO {
     @NotEmpty(message = "Vui lòng chọn giới tính !")
     private String gender;
 
-    @NotEmpty(message = "Image url cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
 
     private boolean userDeleted;
