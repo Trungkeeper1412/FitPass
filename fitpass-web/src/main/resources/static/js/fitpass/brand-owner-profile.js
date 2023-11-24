@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function createImageContainer(imageSrc) {
         const newImageContainer = document.createElement("div");
         newImageContainer.classList.add("col-md-4");
+        let num = rowElement.querySelectorAll(".col-md-4").length + 1;
         if(type === "album") {
             newImageContainer.innerHTML = `
               <div class="image-container">
@@ -129,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="image-actions">
                   <button class="img-edit-button" type="button"
                     data-toggle="tooltip" data-placement="top" data-image-type="${type}"
+                    data-album-id="${num}"
                     title="Chỉnh sửa hình ảnh"><i
                     class="fas fa-edit"></i></button>
                   <button class="img-delete-button" type="button"
