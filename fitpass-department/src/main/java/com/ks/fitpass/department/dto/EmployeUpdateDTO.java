@@ -41,6 +41,7 @@ public class EmployeUpdateDTO {
 
     @NotNull(message = "Vui lòng nhập ngày sinh !")
     @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
 
