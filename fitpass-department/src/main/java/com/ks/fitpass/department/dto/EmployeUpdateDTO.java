@@ -43,9 +43,9 @@ public class EmployeUpdateDTO {
     @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
     private LocalDate dateOfBirth;
 
-    //    @NotEmpty(message = "ID Card cannot be empty")
-//    @Pattern(regexp = "^[0-9]*$", message = "Invalid ID Card format")
 
+    @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
+    @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
     @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
