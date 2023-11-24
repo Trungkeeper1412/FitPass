@@ -29,8 +29,8 @@ public class EmployeeCreateDTO {
     @NotEmpty(message = "Vui lòng nhập tên đăng nhập !")
     private String username;
 
-    @NotEmpty(message = "Email cannot be empty")
-    @Email(message = "Invalid email format")
+    @NotEmpty(message = "Vui lòng nhập email !")
+    @Email (message = "Vui lòng nhập địa chỉ email hợp lệ !")
     private String email;
 
     @NotEmpty(message = "Phone cannot be empty")
