@@ -31,8 +31,8 @@ public class EmployeUpdateDTO {
     @Email (message = "Vui lòng nhập địa chỉ email hợp lệ !")
     private String email;
 
-    @NotEmpty(message = "Phone cannot be empty")
-    @Pattern(regexp = "^[0-9]*$", message = "Invalid phone number format")
+    @NotEmpty(message = "Vui lòng nhập số điện thoại !")
+    @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
     private String phone;
 
     @NotEmpty(message = "Address cannot be empty")
