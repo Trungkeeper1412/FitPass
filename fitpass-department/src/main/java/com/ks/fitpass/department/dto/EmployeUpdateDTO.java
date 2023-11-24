@@ -39,8 +39,8 @@ public class EmployeUpdateDTO {
     @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
     private String address;
 
-    @NotNull(message = "Date of Birth cannot be null")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Vui lòng nhập ngày sinh !")
+    @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
     private LocalDate dateOfBirth;
 
     //    @NotEmpty(message = "ID Card cannot be empty")
