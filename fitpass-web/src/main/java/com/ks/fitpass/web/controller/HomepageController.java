@@ -140,19 +140,4 @@ public class HomepageController {
             throw new IllegalArgumentException("Invalid distance format.");
         }
     }
-
-    @GetMapping("/profile/calendar")
-    public String getCalendar() {
-        return "user/calendar";
-    }
-
-    @GetMapping("/gym-brand-registration")
-    public String getRegistration() {
-        return "user/gym-brand-registration";
-    }
-
-    @GetMapping("/gym-brand-registration/successful")
-    public String getRegistrationSuccessful() {
-        return "user/gym-brand-registration-successful";
-    }
 }
