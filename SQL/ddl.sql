@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS brand (
                                      contact_number              VARCHAR(20) NOT NULL,
                                      contact_email				VARCHAR(50) NOT NULL,
                                      brand_status_key   		    INT NOT NULL,
+                                     first_time boolean default 1,
                                      FOREIGN KEY (user_id) REFERENCES `user`(user_id)
 );
 
@@ -123,6 +124,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               capacity                    INT,
                                               area                        DECIMAL(10, 2),
                                               city                        VARCHAR(255),
+                                              first_time boolean default 1,
                                               FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
 );
 
