@@ -3118,9 +3118,9 @@ input:checked + .toggle-slider:before {
   position: absolute;
   top: 20px;
   left: 20px;
+  right: 20px;
   padding: 10px 10px 5px 10px;
   z-index: 1;
-  width: 100%;
 }
 @media only screen and (min-width: 799px) {
   .gym-first-info .gym-picture img {
