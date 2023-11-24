@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="gym-owner/common/head"></th:block>
 
 <body id="page-top">
@@ -32,71 +32,84 @@
                         <div class="card-body">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
+                                <form action="/gym-owner/employee/update" method="post" th:object="${employeeInfo}">
                                 <div class="row">
                                     <div class="col-md-2 mb-3">
                                         <label for="department-img" class="form-label fw-bold w-100">Ảnh :</label>
-                                        <img class="show-department-img" th:src="@{/images/system/no_image.png}">
-                                        <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" onchange="previewImage(this);">
+                                        <img class="show-department-img" th:src="${employeeInfo.getImageUrl()}">
+                                        <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" onchange="uploadImage(this);">
+                                        <input th:field="*{imageUrl}" type="hidden" id="avatarImg" th:value="${employeeInfo.getImageUrl()}" name="imageUrl">
+                                        <input th:field="*{userDetailId}" type="hidden" th:value="${employeeInfo.getUserDetailId()}" name="userDetailId">
                                     </div>
                                     <div class="col-md-5 mb-3">
                                         <div class="mb-3">
                                             <label for="firt-name" class="form-label fw-bold">Họ :</label>
                                             <input type="text" class="form-control" id="firt-name"
-                                                name="firt-name" value="Lê">
+                                                name="firt-name" th:value="${employeeInfo.firstName}"
+                                            th:field="*{firstName}">
+                                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label fw-bold">Email :</label>
-                                            <input type="text" class="form-control" id="email"
-                                                placeholder="Nhập gmail">
+                                            <input th:field="*{email}" type="text" class="form-control" id="email"
+                                                placeholder="Nhập gmail" th:value="${employeeInfo.email}">
+                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">firstName Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label fw-bold">Địa chỉ :</label>
-                                            <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
+                                            <input th:field="*{address}" th:value="${employeeInfo.address}" type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
+                                            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">firstName Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh :</label>
-                                            <input type="date" class="form-control" id="date-of-birth" name="date-of-birth">
+                                            <input th:field="*{dateOfBirth}" th:value="${employeeInfo.dateOfBirth}" type="date" class="form-control" id="date-of-birth" name="date-of-birth">
+                                            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">firstName Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label class="d-block fw-bold">Trạng thái :</label>
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" name="actived" id="inlineradio1"
-                                                    value="true">&nbsp;Đang hoạt động
+                                                <input th:field="*{userDeleted}" type="radio" name="actived" id="inlineradio1"
+                                                    value="0" th:checked="${!employeeInfo.isUserDeleted()}">Đang hoạt động
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" name="actived" id="inlineradio2"
-                                                    value="false">&nbsp;Ngừng hoạt động
+                                                <input th:field="*{userDeleted}" type="radio" name="actived" id="inlineradio2"
+                                                    value="1" th:checked="${employeeInfo.isUserDeleted()}">&nbsp;Ngừng hoạt động
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-3">
                                         <div class="mb-3">
                                             <label for="last-name" class="form-label fw-bold">Tên :</label>
-                                            <input type="text" class="form-control" id="last-name"
-                                                name="last-name" value="Đình Tuấn">
+                                            <input th:field="*{lastName}" th:value="${employeeInfo.lastName}" type="text" class="form-control" id="last-name"
+                                                name="last-name">
+                                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="0987654321">
+                                            <input th:field="*{phone}" th:value="${employeeInfo.phone}" type="text" class="form-control" id="phone" name="phone" value="0987654321">
+                                            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phoneNumber Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
                                             <input type="text" class="form-control" id="id-card" name="id-card" placeholder="Nhập số căn cước">
+<!--                                            <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{firstName}">firstName Error</span>-->
                                         </div>
                                         <div class="mb-3">
                                             <label for="gender" class="form-label fw-bold">Giới Tính :</label>
-                                            <select class="form-select" id="gender" name="gender">
+                                            <select th:field="*{gender}" th:value="${employeeInfo.gender}" class="form-select" id="gender" name="gender">
                                                 <option value="">Chọn giới tính</option>
                                                 <option value="Nam">Nam</option>
                                                 <option value="Nữ">Nữ</option>
                                                 <option value="Khác">Khác</option>
                                             </select>
-                                        </div>  
+                                            <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 text-center">
                                         <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
                                     </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -123,7 +136,40 @@
     </a>
 
     <th:block th:replace="gym-owner/common/script"></th:block>
+    <script>
+        function uploadImage(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
 
+                var formData = new FormData();
+                formData.append("file", file);
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/uploadAvatar`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        $("#avatarImg").val(response);
+                    },
+                    error: function () {
+                        console.log("Failed to upload file");
+                    }
+                });
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var img = document.querySelector('.show-department-img');
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
 </body>
 
 </html>
