@@ -108,6 +108,7 @@ public class GymOwnerController {
         employeUpdateDTO.setDateOfBirth(ud.getDateOfBirth());
         employeUpdateDTO.setGender(ud.getGender());
         employeUpdateDTO.setImageUrl(ud.getImageUrl());
+        employeUpdateDTO.setIdCard(ud.getSecurityId());
         employeUpdateDTO.setUserDeleted(ud.isUserDeleted());
         model.addAttribute("employeeInfo", employeUpdateDTO);
         return "gym-owner/gym-department-employee-detail";
@@ -155,10 +156,14 @@ public class GymOwnerController {
                                  BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
 
+        if(userService.checkEmailExist(employeeInfo.getEmail())) {
+            bindingResult.rejectValue("email", "error.email", "Email already exist");
+        }
+
         if(bindingResult.hasErrors()) {
             return "/gym-owner/gym-department-employee-add";
         }
-
+        User user = (User) session.getAttribute("userInfo");
         UserDetail userDetail = new UserDetail();
         userDetail.setFirstName(employeeInfo.getFirstName());
         userDetail.setLastName(employeeInfo.getLastName());
@@ -167,6 +172,7 @@ public class GymOwnerController {
         userDetail.setAddress(employeeInfo.getAddress());
         userDetail.setDateOfBirth(employeeInfo.getDateOfBirth());
         userDetail.setImageUrl(employeeInfo.getImageUrl());
+        userDetail.setSecurityId(employeeInfo.getIdCard());
         userDetail.setGender(employeeInfo.getGender());
 
         // Insert into User Detail
@@ -174,7 +180,6 @@ public class GymOwnerController {
         // Get last insert user detail id
         int userDetailId = userService.getLastInsertUserDetailId(userDetail);
         // Get deparmentId by userId
-        User user = (User) session.getAttribute("userInfo");
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
         String departmentName = departmentDetails.getDepartmentName();
         // Get number of account gym-owner by brand id
@@ -212,7 +217,7 @@ public class GymOwnerController {
         emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
                 userDetail.getEmail());
 
-        return "gym-owner/gym-department-employee-add";
+        return "redirect:/gym-owner/employee/list";
     }
 
     //Feedback Management
