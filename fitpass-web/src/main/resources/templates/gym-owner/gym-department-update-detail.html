@@ -1,673 +1,828 @@
 <!DOCTYPE html>
-<html lang="en">
-<th:block th:replace="gym-owner/common/head"></th:block>
-<body id="page-top">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <th:block th:replace="gym-owner/common/head"></th:block>
+    <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+            <!-- Sidebar -->
+            <th:block th:replace="gym-owner/common/sidebar"></th:block>
+            <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+                <!-- Main Content -->
+                <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+                    <!-- Topbar -->
+                    <th:block th:replace="gym-owner/common/navbar"></th:block>
+                    <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="fw-bold text-primary">Hoàn tất các bước để điền thông tin cơ sở</h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12 col-md-offset-3">
-                                    <form id="msform">
-                                        <!-- progressbar -->
-                                        <ul id="progressbar">
-                                            <li class="active">Thông tin cơ bản</li>
-                                            <li>Chọn gói tập</li>
-                                            <li>Quản lý hình ảnh</li>
-                                            <li>Chọn dịch vụ</li>
-                                            <li>Chọn tiện ích</li>
-                                            <li>Xác định vị trí</li>
-                                        </ul>
-                                        <!-- Thông tin cơ bản -->
-                                        <fieldset>
-                                            <h2 class="fs-title">Thông tin cơ bản</h2>
-                                            <div class="row text-start">
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="name-brand" class="form-label fw-bold">Tên cơ sở
-                                                            :</label>
-                                                        <input type="text" class="form-control" id="name-brand"
-                                                            name="name-brand" placeholder="Cơ sở Cầu Giấy" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="phone" class="form-label fw-bold">Số điện thoại
-                                                            :</label>
-                                                        <input type="text" class="form-control" id="phone" name="phone"
-                                                            placeholder="Nhập số điện thoại">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="address" class="form-label fw-bold">Địa chỉ
-                                                            :</label>
-                                                        <input type="text" class="form-control" id="address"
-                                                            name="address" placeholder="Địa chỉ">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="capacity" class="form-label fw-bold">Sức chứa
-                                                            :</label>
-                                                        <input type="text" class="form-control" id="capacity"
-                                                            name="capacity" placeholder="Sức Chứa">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="area" class="form-label fw-bold">Diện tích :</label>
-                                                        <input type="text" class="form-control" id="area" name="area"
-                                                            placeholder="Diện tích">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="provinceDropdown" class="form-label fw-bold">Chọn tỉnh/thành phố:</label>
-                                                        <select class="form-select" id="provinceDropdown" name="province">
-                                                            <option value="" selected disabled>Chọn tỉnh/thành phố</option>
-                                                            <option value="HN">Hà Nội</option>
-                                                            <option value="HCM">Hồ Chí Minh</option>
-                                                            <option value="AG">An Giang</option>
-                                                            <option value="BR">Bà Rịa - Vũng Tàu</option>
-                                                            <option value="BG">Bắc Giang</option>
-                                                            <option value="BK">Bắc Kạn</option>
-                                                            <option value="BL">Bạc Liêu</option>
-                                                            <option value="BN">Bắc Ninh</option>
-                                                            <option value="BT">Bến Tre</option>
-                                                            <option value="BĐ">Bình Định</option>
-                                                            <option value="BP">Bình Phước</option>
-                                                            <option value="BTH">Bình Thuận</option>
-                                                            <option value="CM">Cà Mau</option>
-                                                            <option value="CB">Cao Bằng</option>
-                                                            <option value="DN">Đà Nẵng</option>
-                                                            <option value="ĐN">Đắk Nông</option>
-                                                            <option value="ĐL">Đắk Lắk</option>
-                                                            <option value="ĐT">Đồng Tháp</option>
-                                                            <option value="GL">Gia Lai</option>
-                                                            <option value="HG">Hà Giang</option>
-                                                            <option value="HD">Hải Dương</option>
-                                                            <option value="HP">Hải Phòng</option>
-                                                            <option value="HU">Hậu Giang</option>
-                                                            <option value="HY">Hòa Bình</option>
-                                                            <option value="KH">Khánh Hòa</option>
-                                                            <option value="KG">Kiên Giang</option>
-                                                            <option value="KT">Kon Tum</option>
-                                                            <option value="LC">Lai Châu</option>
-                                                            <option value="LD">Lâm Đồng</option>
-                                                            <option value="LS">Lạng Sơn</option>
-                                                            <option value="LA">Lào Cai</option>
-                                                            <option value="LC">Long An</option>
-                                                            <option value="ND">Nam Định</option>
-                                                            <option value="NB">Nghệ An</option>
-                                                            <option value="NT">Ninh Bình</option>
-                                                            <option value="NA">Ninh Thuận</option>
-                                                            <option value="PT">Phú Thọ</option>
-                                                            <option value="PYN">Phú Yên</option>
-                                                            <option value="QB">Quảng Bình</option>
-                                                            <option value="QG">Quảng Ngãi</option>
-                                                            <option value="QN">Quảng Ninh</option>
-                                                            <option value="QT">Quảng Trị</option>
-                                                            <option value="ST">Sóc Trăng</option>
-                                                            <option value="SL">Sơn La</option>
-                                                            <option value="TN">Tây Ninh</option>
-                                                            <option value="TB">Thái Bình</option>
-                                                            <option value="TNH">Thái Nguyên</option>
-                                                            <option value="TH">Thanh Hóa</option>
-                                                            <option value="TG">Thừa Thiên Huế</option>
-                                                            <option value="TI">Tiền Giang</option>
-                                                            <option value="TR">Trà Vinh</option>
-                                                            <option value="TQ">Tuyên Quang</option>
-                                                            <option value="VL">Vĩnh Long</option>
-                                                            <option value="VT">Vĩnh Phúc</option>
-                                                            <option value="YN">Yên Bái</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <label class="fw-bold" for="openHours">Giờ hoạt động:</label><br>
-                                                    <div class="mb-3 d-flex align-items-center align-content-center">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                                data-target="#selectOpenHoursModal">
-                                                            Chọn giờ
-                                                        </button>
-                                                        <div class="pl-3" id="selectedOpenHours">
-                                                            <label style="margin: 0" id="resultText">&#9679; Chưa chọn giờ mở cửa</label>
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="fw-bold text-primary">Hoàn tất các bước để điền thông tin cơ sở</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-md-offset-3">
+                                        <form id="msform">
+                                            <!-- progressbar -->
+                                            <ul id="progressbar">
+                                                <li class="active">Thông tin cơ bản</li>
+                                                <li>Chọn gói tập</li>
+                                                <li>Quản lý hình ảnh</li>
+                                                <li>Chọn dịch vụ</li>
+                                                <li>Chọn tiện ích</li>
+                                                <li>Xác định vị trí</li>
+                                            </ul>
+                                            <!-- Thông tin cơ bản -->
+                                            <fieldset>
+                                                <h2 class="fs-title">Thông tin cơ bản</h2>
+                                                <div class="row text-start">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <input type="hidden" id="departmentId" th:value="${departmentId}" />
+                                                            <label for="name-brand" class="form-label fw-bold">Tên cơ sở
+                                                                :</label>
+                                                            <input th:value="${departmentName}"
+                                                                    type="text"
+                                                                   class="form-control" id="name-brand"
+                                                                   name="name-brand" placeholder="Cơ sở Cầu Giấy"
+                                                                   readonly>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="phone" class="form-label fw-bold">Số điện thoại
+                                                                :</label>
+                                                            <input type="text" class="form-control" id="phone"
+                                                                   name="phone"
+                                                                   placeholder="Nhập số điện thoại">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="address" class="form-label fw-bold">Địa chỉ
+                                                                :</label>
+                                                            <input  type="text" class="form-control" id="address"
+                                                                   name="address" placeholder="Địa chỉ">
                                                         </div>
                                                     </div>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="selectOpenHoursModal" tabindex="-1" role="dialog"
-                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Chọn giờ hoạt động</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal"
-                                                                            aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="capacity" class="form-label fw-bold">Sức chứa
+                                                                :</label>
+                                                            <input type="text" class="form-control" id="capacity"
+                                                                   name="capacity" placeholder="Sức Chứa">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="area" class="form-label fw-bold">Diện tích
+                                                                :</label>
+                                                            <input type="text" class="form-control" id="area"
+                                                                   name="area"
+                                                                   placeholder="Diện tích">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="provinceDropdown" class="form-label fw-bold">Chọn
+                                                                tỉnh/thành phố:</label>
+                                                            <select class="form-select" id="provinceDropdown"
+                                                                    name="province">
+                                                                <option value="" selected disabled>Chọn tỉnh/thành phố
+                                                                </option>
+                                                                <option value="Hà Nội">Hà Nội</option>
+                                                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                                <option value="An Giang">An Giang</option>
+                                                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                                                <option value="Bắc Giang">Bắc Giang</option>
+                                                                <option value="Bắc Kạn">Bắc Kạn</option>
+                                                                <option value="Bạc Liêu">Bạc Liêu</option>
+                                                                <option value="Bắc Ninh">Bắc Ninh</option>
+                                                                <option value="Bến Tre">Bến Tre</option>
+                                                                <option value="Bình Định">Bình Định</option>
+                                                                <option value="Bình Phước">Bình Phước</option>
+                                                                <option value="Bình Thuận">Bình Thuận</option>
+                                                                <option value="Cà Mau">Cà Mau</option>
+                                                                <option value="Cao Bằng">Cao Bằng</option>
+                                                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                                                <option value="Đắk Nông">Đắk Nông</option>
+                                                                <option value="Đắk Lắk">Đắk Lắk</option>
+                                                                <option value="Đồng Tháp">Đồng Tháp</option>
+                                                                <option value="Gia Lai">Gia Lai</option>
+                                                                <option value="Hà Giang">Hà Giang</option>
+                                                                <option value="Hải Dương">Hải Dương</option>
+                                                                <option value="Hải Phòng">Hải Phòng</option>
+                                                                <option value="Hậu Giang">Hậu Giang</option>
+                                                                <option value="Hòa Bình">Hòa Bình</option>
+                                                                <option value="Khánh Hòa">Khánh Hòa</option>
+                                                                <option value="Kiên Giang">Kiên Giang</option>
+                                                                <option value="Kon Tum">Kon Tum</option>
+                                                                <option value="Lai Châu">Lai Châu</option>
+                                                                <option value="Lâm Đồng">Lâm Đồng</option>
+                                                                <option value="Lạng Sơn">Lạng Sơn</option>
+                                                                <option value="Lào Cai">Lào Cai</option>
+                                                                <option value="Long An">Long An</option>
+                                                                <option value="Nam Định">Nam Định</option>
+                                                                <option value="Nghệ An">Nghệ An</option>
+                                                                <option value="Ninh Bình">Ninh Bình</option>
+                                                                <option value="Ninh Thuận">Ninh Thuận</option>
+                                                                <option value="Phú Thọ">Phú Thọ</option>
+                                                                <option value="Phú Yên">Phú Yên</option>
+                                                                <option value="Quảng Bình">Quảng Bình</option>
+                                                                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                                <option value="Quảng Ninh">Quảng Ninh</option>
+                                                                <option value="Quảng Trị">Quảng Trị</option>
+                                                                <option value="Sóc Trăng">Sóc Trăng</option>
+                                                                <option value="Sơn La">Sơn La</option>
+                                                                <option value="Tây Ninh">Tây Ninh</option>
+                                                                <option value="Thái Bình">Thái Bình</option>
+                                                                <option value="Thái Nguyên">Thái Nguyên</option>
+                                                                <option value="Thanh Hóa">Thanh Hóa</option>
+                                                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                                                <option value="Tiền Giang">Tiền Giang</option>
+                                                                <option value="Trà Vinh">Trà Vinh</option>
+                                                                <option value="Tuyên Quang">Tuyên Quang</option>
+                                                                <option value="Vĩnh Long">Vĩnh Long</option>
+                                                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                                <option value="Yên Bái">Yên Bái</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="fw-bold" for="openHours">Giờ hoạt
+                                                            động:</label><br>
+                                                        <div class="mb-3 d-flex align-items-center align-content-center">
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-toggle="modal"
+                                                                    data-target="#selectOpenHoursModal">
+                                                                Chọn giờ
+                                                            </button>
+                                                            <div class="pl-3" id="selectedOpenHours">
+                                                                <label style="margin: 0" id="resultText">&#9679; Chưa
+                                                                    chọn giờ mở cửa</label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="selectOpenHoursModal" tabindex="-1"
+                                                             role="dialog"
+                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Chọn giờ hoạt động</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Ngày</th>
+                                                                                    <th>Bắt đầu</th>
+                                                                                    <th>Kết thúc</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>Thứ 2</td>
+                                                                                    <td><input type="time" id="mondayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="mondayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Thứ 3</td>
+                                                                                    <td><input type="time" id="tuesdayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="tuesdayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Thứ 4</td>
+                                                                                    <td><input type="time" id="wednesdayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="wednesdayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Thứ 5</td>
+                                                                                    <td><input type="time" id="thursdayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="thursdayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Thứ 6</td>
+                                                                                    <td><input type="time" id="fridayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="fridayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Thứ 7</td>
+                                                                                    <td><input type="time" id="saturdayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="saturdayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Chủ Nhật</td>
+                                                                                    <td><input type="time" id="sundayOpenTime"
+                                                                                               class="form-control start-time-input">
+                                                                                    </td>
+                                                                                    <td><input type="time" id="sundayCloseTime"
+                                                                                               class="form-control end-time-input">
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                                data-dismiss="modal">Đóng
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary"
+                                                                                id="saveChangesButton">Lưu
+                                                                            thay đổi
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <table class="table">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label for="description" class="form-label fw-bold">Mô tả
+                                                            :</label>
+                                                        <textarea rows="4" cols="50" name="comment" id="description"
+                                                                  placeholder="Mô tả về cơ sở . . ."></textarea>
+                                                    </div>
+                                                </div>
+                                                <input type="button" name="next" class="next action-button"
+                                                       value="Next">
+                                            </fieldset>
+                                            <!-- Chọn gói tập -->
+                                            <fieldset>
+                                                <section>
+                                                    <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link active" id="flexible-tab"
+                                                               data-toggle="tab"
+                                                               href="#flexible" role="tab" aria-controls="flexible"
+                                                               aria-selected="true">Gói linh hoạt</a>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <a class="nav-link" id="fixed-tab" data-toggle="tab"
+                                                               href="#fixed" role="tab" aria-controls="fixed"
+                                                               aria-selected="false">Gói cố định</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content mt-4">
+                                                        <div class="tab-pane fade show active" id="flexible"
+                                                             role="tabpanel"
+                                                             aria-labelledby="flexible-tab">
+                                                            <div class="row">
+                                                                <input type="hidden" id="selectedFlexibleId">
+                                                                <div class="text-start">
+                                                                    <table class="table table-bordered"
+                                                                           id="dataTableCheckedFlexible" width="100%"
+                                                                           cellspacing="0">
                                                                         <thead>
-                                                                        <tr>
-                                                                            <th>Ngày</th>
-                                                                            <th>Bắt đầu</th>
-                                                                            <th>Kết thúc</th>
-                                                                        </tr>
+                                                                            <tr>
+                                                                                <th>Thứ tự</th>
+                                                                                <th>ID</th>
+                                                                                <th>Tên gói tập</th>
+                                                                                <th>Số credits/giờ</th>
+                                                                                <th data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                                                    Thời hạn trước khi kích hoạt
+                                                                                </th>
+                                                                                <th data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                                                    Thời hạn sau khi kích hoạt
+                                                                                </th>
+                                                                                <th class="plan-description">Mô tả</th>
+                                                                                <th><input type="checkbox"
+                                                                                           id="checkAllFlex">
+                                                                                </th>
+                                                                            </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        <tr>
-                                                                            <td>Thứ 2</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Thứ 3</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Thứ 4</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Thứ 5</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Thứ 6</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Thứ 7</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Chủ Nhật</td>
-                                                                            <td><input type="time" class="form-control start-time-input"></td>
-                                                                            <td><input type="time" class="form-control end-time-input"></td>
-                                                                        </tr>
+                                                                            <th:block th:each="g : ${listFlexGymPlan}">
+                                                                                <tr>
+                                                                                    <td th:text="${gStat.index + 1}">1
+                                                                                    </td>
+                                                                                    <td th:text="${g.gymPlanId}"></td>
+                                                                                    <td th:text="${g.gymPlanName}">Gói
+                                                                                        linh hoạt tiết kiệm
+                                                                                    </td>
+                                                                                    <td th:text="${g.pricePerHours}">5
+                                                                                    </td>
+                                                                                    <td th:text="${g.planBeforeActive + ' ngày'}">
+                                                                                        30 ngày
+                                                                                    </td>
+                                                                                    <td th:text="${g.planAfterActive + ' ngày'}">
+                                                                                        60 ngày
+                                                                                    </td>
+                                                                                    <td th:text="${g.description}">Gói
+                                                                                        Cố Định Đầy Đủ Chức Năng của
+                                                                                        phòng
+                                                                                        tập gym
+                                                                                        California Gym and Fitness mang
+                                                                                        đến cho
+                                                                                        bạn trải
+                                                                                        nghiệm luyện tập hoàn hảo theo
+                                                                                        tiêu
+                                                                                        chuẩn 5 sao, với
+                                                                                        sự chăm sóc tận tâm và một loạt
+                                                                                        các tiện
+                                                                                        nghi cao
+                                                                                        cấp
+                                                                                    </td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                            </th:block>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Đóng</button>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            id="saveChangesButton">Lưu
-                                                                        thay đổi</button>
+                                                                <style>
+                                                                    .dataTables_length {
+                                                                        float: left;
+                                                                    }
+
+                                                                    .dataTables_filter {
+                                                                        margin-right: 75px;
+                                                                        float: right;
+                                                                    }
+                                                                </style>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane fade" id="fixed" role="tabpanel"
+                                                             aria-labelledby="fixed-tab">
+                                                            <div class="row">
+                                                                <input type="hidden" id="selectedFixedId">
+                                                                <div class="text-start">
+                                                                    <table class="table table-bordered"
+                                                                           id="dataTableCheckedFixed" width="100%"
+                                                                           cellspacing="0">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Thứ tự</th>
+                                                                                <th>Id</th>
+                                                                                <th>Tên gói tập</th>
+                                                                                <th>Số credits</th>
+                                                                                <th>Thời lượng tập</th>
+                                                                                <th data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                                                    Thời hạn trước khi kích hoạt
+                                                                                </th>
+                                                                                <th data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                                                    Thời hạn sau khi kích hoạt
+                                                                                </th>
+                                                                                <th class="fixed-description">Mô tả</th>
+                                                                                <th><input type="checkbox"
+                                                                                           id="checkAllFixed">
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <th:block th:each="g : ${listFixedGymPlan}">
+                                                                                <tr>
+                                                                                    <td th:text="${gStat.index + 1}">1
+                                                                                    </td>
+                                                                                    <td th:text="${g.gymPlanId}"></td>
+                                                                                    <td th:text="${g.gymPlanName}">Gói
+                                                                                        1
+                                                                                    </td>
+                                                                                    <td th:text="${g.price}">5</td>
+                                                                                    <td th:text="${g.duration + ' ngày'}">
+                                                                                        30 ngày
+                                                                                    </td>
+                                                                                    <td th:text="${g.planBeforeActive + ' ngày'}">
+                                                                                        10 ngày
+                                                                                    </td>
+                                                                                    <td th:text="${g.planAfterActive + ' ngày'}">
+                                                                                        30 ngày
+                                                                                    </td>
+                                                                                    <td th:text="${g.description}">Gói
+                                                                                        Cố Định Đầy Đủ Chức Năng của
+                                                                                        phòng
+                                                                                        tập gym
+                                                                                        California Gym and Fitness mang
+                                                                                        đến cho
+                                                                                        bạn trải
+                                                                                        nghiệm luyện tập hoàn hảo theo
+                                                                                        tiêu
+                                                                                        chuẩn 5 sao, với
+                                                                                        sự chăm sóc tận tâm và một loạt
+                                                                                        các tiện
+                                                                                        nghi cao
+                                                                                        cấp
+                                                                                    </td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                            </th:block>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label for="description" class="form-label fw-bold">Mô tả :</label>
-                                                    <textarea rows="4" cols="50" name="comment" form="usrform"
-                                                        placeholder="Mô tả về cơ sở . . ."></textarea>
-                                                </div>
-                                            </div>
-                                            <input type="button" name="next" class="next action-button" value="Next">
-                                        </fieldset>
-                                        <!-- Chọn gói tập -->
-                                        <fieldset>
-                                            <section>
-                                                <ul class="nav nav-tabs" id="myTabs" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <a class="nav-link active" id="flexible-tab" data-toggle="tab"
-                                                            href="#flexible" role="tab" aria-controls="flexible"
-                                                            aria-selected="true">Gói linh hoạt</a>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <a class="nav-link" id="fixed-tab" data-toggle="tab"
-                                                            href="#fixed" role="tab" aria-controls="fixed"
-                                                            aria-selected="false">Gói cố định</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content mt-4">
-                                                    <div class="tab-pane fade show active" id="flexible" role="tabpanel"
-                                                        aria-labelledby="flexible-tab">
-                                                        <div class="row">
-                                                            <div class="text-start">
-                                                                <table class="table table-bordered"
-                                                                    id="dataTableCheckedFlexible" width="100%"
-                                                                    cellspacing="0">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Thứ tự</th>
-                                                                            <th>Tên gói tập</th>
-                                                                            <th>Số credits/giờ</th>
-                                                                            <th data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="Đây là mô tả của thời gian trước khi kích hoạt">
-                                                                                Thời hạn trước khi kích hoạt</th>
-                                                                            <th data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="Đây là mô tả của thời gian sau khi kích hoạt">
-                                                                                Thời hạn sau khi kích hoạt</th>
-                                                                            <th class="plan-description">Mô tả</th>
-                                                                            <th><input type="checkbox" id="checkAll">
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Gói linh hoạt tiết kiệm</td>
-                                                                            <td>5</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>60 ngày</td>
-                                                                            <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                                tập gym
-                                                                                California Gym and Fitness mang đến cho
-                                                                                bạn trải
-                                                                                nghiệm luyện tập hoàn hảo theo tiêu
-                                                                                chuẩn 5 sao, với
-                                                                                sự chăm sóc tận tâm và một loạt các tiện
-                                                                                nghi cao
-                                                                                cấp</td>
-                                                                            <td><input type="checkbox"
-                                                                                    class="rowCheckbox"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Gói linh hoạt tối ưu</td>
-                                                                            <td>5</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>60 ngày</td>
-                                                                            <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                                tập gym
-                                                                                California Gym and Fitness mang đến cho
-                                                                                bạn trải
-                                                                                nghiệm luyện tập hoàn hảo theo tiêu
-                                                                                chuẩn 5 sao, với
-                                                                                sự chăm sóc tận tâm và một loạt các tiện
-                                                                                nghi cao
-                                                                                cấp</td>
-                                                                            <td><input type="checkbox"
-                                                                                    class="rowCheckbox"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Gói linh hoạt tiêu chuẩn</td>
-                                                                            <td>5</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>60 ngày</td>
-                                                                            <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                                tập gym
-                                                                                California Gym and Fitness mang đến cho
-                                                                                bạn trải
-                                                                                nghiệm luyện tập hoàn hảo theo tiêu
-                                                                                chuẩn 5 sao, với
-                                                                                sự chăm sóc tận tâm và một loạt các tiện
-                                                                                nghi cao
-                                                                                cấp</td>
-                                                                            <td><input type="checkbox"
-                                                                                    class="rowCheckbox"></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <style>
-                                                                .dataTables_length {
-                                                                    float: left;
-                                                                }
-
-                                                                .dataTables_filter {
-                                                                    margin-right: 75px;
-                                                                    float: right;
-                                                                }
-                                                            </style>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="tab-pane fade" id="fixed" role="tabpanel"
-                                                        aria-labelledby="fixed-tab">
-                                                        <div class="row">
-                                                            <div class="text-start">
-                                                                <table class="table table-bordered"
-                                                                    id="dataTableCheckedFixed" width="100%"
-                                                                    cellspacing="0">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Thứ tự</th>
-                                                                            <th>Tên gói tập</th>
-                                                                            <th>Số credits</th>
-                                                                            <th>Thời lượng tập</th>
-                                                                            <th data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="Đây là mô tả của thời gian trước khi kích hoạt">
-                                                                                Thời hạn trước khi kích hoạt</th>
-                                                                            <th data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="Đây là mô tả của thời gian sau khi kích hoạt">
-                                                                                Thời hạn sau khi kích hoạt</th>
-                                                                            <th class="fixed-description">Mô tả</th>
-                                                                            <th><input type="checkbox" id="checkAll">
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Gói 1</td>
-                                                                            <td>5</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>10 ngày</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                                tập gym
-                                                                                California Gym and Fitness mang đến cho
-                                                                                bạn trải
-                                                                                nghiệm luyện tập hoàn hảo theo tiêu
-                                                                                chuẩn 5 sao, với
-                                                                                sự chăm sóc tận tâm và một loạt các tiện
-                                                                                nghi cao
-                                                                                cấp</td>
-                                                                            <td><input type="checkbox"
-                                                                                    class="rowCheckbox"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Gói 1</td>
-                                                                            <td>5</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>10 ngày</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                                tập gym
-                                                                                California Gym and Fitness mang đến cho
-                                                                                bạn trải
-                                                                                nghiệm luyện tập hoàn hảo theo tiêu
-                                                                                chuẩn 5 sao, với
-                                                                                sự chăm sóc tận tâm và một loạt các tiện
-                                                                                nghi cao
-                                                                                cấp</td>
-                                                                            <td><input type="checkbox"
-                                                                                    class="rowCheckbox"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Gói 1</td>
-                                                                            <td>5</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>10 ngày</td>
-                                                                            <td>30 ngày</td>
-                                                                            <td>Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                                tập gym
-                                                                                California Gym and Fitness mang đến cho
-                                                                                bạn trải
-                                                                                nghiệm luyện tập hoàn hảo theo tiêu
-                                                                                chuẩn 5 sao, với
-                                                                                sự chăm sóc tận tâm và một loạt các tiện
-                                                                                nghi cao
-                                                                                cấp</td>
-                                                                            <td><input type="checkbox"
-                                                                                    class="rowCheckbox"></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                </section>
+                                                <input type="button" name="previous"
+                                                       class="previous action-button-previous"
+                                                       value="Previous"/>
+                                                <input type="button" name="next" class="next action-button"
+                                                       value="Next"/>
+                                            </fieldset>
+                                            <!-- Quản lý hình ảnh -->
+                                            <fieldset>
+                                                <h2 class="fs-title">Quản lý hình ảnh</h2>
+                                                <div class="row text-start">
+                                                    <div class="col-md-4">
+                                                        <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
+                                                        <div class="image-container">
+                                                            <img th:src="@{/images/system/no_image.png}" alt="Image">
+                                                            <div class="image-actions">
+                                                                <button class="img-edit-button" type="button"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        data-image-type="logo"
+                                                                        title="Chỉnh sửa hình ảnh"><i
+                                                                        class="fas fa-edit"></i></button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                            </section>
-                                            <input type="button" name="previous" class="previous action-button-previous"
-                                                value="Previous" />
-                                            <input type="button" name="next" class="next action-button" value="Next" />
-                                        </fieldset>
-                                        <!-- Quản lý hình ảnh -->
-                                        <fieldset>
-                                            <h2 class="fs-title">Quản lý hình ảnh</h2>
-                                            <div class="row text-start">
-                                                <div class="col-md-4">
-                                                    <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
-                                                    <div class="image-container">
-                                                        <img th:src="@{/images/system/no_image.png}" alt="Image">
-                                                        <div class="image-actions">
-                                                            <button class="img-edit-button" type="button"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Chỉnh sửa hình ảnh"><i
-                                                                    class="fas fa-edit"></i></button>
+                                                    <div class="col-md-4">
+                                                        <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
+                                                            :</label>
+                                                        <div class="image-container">
+                                                            <img th:src="@{/images/system/no_image.png}" alt="Image">
+                                                            <div class="image-actions">
+                                                                <button class="img-edit-button" type="button"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        data-image-type="thumbnail"
+                                                                        title="Chỉnh sửa hình ảnh"><i
+                                                                        class="fas fa-edit"></i></button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
-                                                        :</label>
-                                                    <div class="image-container">
-                                                        <img th:src="@{/images/system/no_image.png}" alt="Image">
-                                                        <div class="image-actions">
-                                                            <button class="img-edit-button" type="button"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Chỉnh sửa hình ảnh"><i
-                                                                    class="fas fa-edit"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
-                                                        :</label>
-                                                    <div class="image-container">
-                                                        <img th:src="@{/images/system/no_image.png}" alt="Image">
-                                                        <div class="image-actions">
-                                                            <button class="img-edit-button" type="button"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Chỉnh sửa hình ảnh"><i
-                                                                    class="fas fa-edit"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="album-separator"></div>
-                                            <div class="row text-start">
-                                                <div class="col">
-                                                    <div class="d-flex justify-content-between pt-3">
-                                                        <label for="album" class="form-label fw-bold fs-4">Album
-                                                            ảnh:</label>
-                                                        <input type="file" id="imageInput" style="display: none;"
-                                                            accept="image/*">
-                                                        <a class="fw-bold fs-5 text-black" id="addImageButton">Thêm
-                                                            ảnh</a>
-                                                    </div>
-                                                    <div class="row-add">
-                                                        <div class="col-md-4">
-                                                            <div class="image-container">
-                                                                <img th:src="@{/images/system/list-empty.jpg}" alt="Image">
-                                                                <div class="image-actions">
-                                                                    <button class="img-edit-button" type="button"
+                                                    <div class="col-md-4">
+                                                        <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
+                                                            :</label>
+                                                        <div class="image-container">
+                                                            <img th:src="@{/images/system/no_image.png}" alt="Image">
+                                                            <div class="image-actions">
+                                                                <button class="img-edit-button" type="button"
+                                                                        data-image-type="wallpaper"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Chỉnh sửa hình ảnh"><i
-                                                                            class="fas fa-edit"></i></button>
-                                                                    <button class="img-delete-button" type="button"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        title="Xóa hình ảnh"><i
-                                                                            class="fas fa-trash"></i></button>
+                                                                        class="fas fa-edit"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="album-separator"></div>
+                                                <div class="row text-start">
+                                                    <div class="col">
+                                                        <div class="d-flex justify-content-between pt-3">
+                                                            <label for="album" class="form-label fw-bold fs-4">Album
+                                                                ảnh:</label>
+                                                            <input type="file" id="imageInput" style="display: none;"
+                                                                   accept="image/*">
+                                                            <a class="fw-bold fs-5 text-black" id="addImageButton">Thêm
+                                                                ảnh</a>
+                                                        </div>
+                                                        <div class="row-add">
+                                                            <div class="col-md-4">
+                                                                <div class="image-container">
+                                                                    <img th:src="@{/images/system/list-empty.jpg}"
+                                                                         alt="Image">
+                                                                    <div class="image-actions">
+                                                                        <button class="img-edit-button" type="button"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                data-image-type="albums"
+                                                                                title="Chỉnh sửa hình ảnh"><i
+                                                                                class="fas fa-edit"></i></button>
+                                                                        <button class="img-delete-button" type="button"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Xóa hình ảnh"><i
+                                                                                class="fas fa-trash"></i></button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <input type="button" name="previous" class="previous action-button-previous"
-                                                value="Previous" />
-                                            <input type="button" name="next" class="next action-button" value="Next" />
-                                        </fieldset>
-                                        <!-- Chọn dịch vụ -->
-                                        <fieldset>
-                                            <div class="text-start">
-                                                <table class="table table-bordered" id="dataTableAmenities" width="100%"
-                                                    cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Thứ tự</th>
-                                                            <th>Tên dịch vụ</th>
-                                                            <th>Ảnh dịch vụ</th>
-                                                            <th class="plan-description">Mô tả</th>
-                                                            <th><input type="checkbox" id="checkAll">
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Hệ thống tủ khóa</td>
-                                                            <td><img src="https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg"
-                                                                    alt=""></td>
-                                                            <td>Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock
-                                                                đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và
-                                                                khóa tủ bằng vòng tay locker tự động</td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Phòng tập đa năng</td>
-                                                            <td><img src="https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg"
-                                                                    alt=""></td>
-                                                            <td>Khu vực Functional đa dạng các loại máy tập Technogym,
-                                                                tích hợp các kênh truyền hình giải trí, kết nối Wifi và
-                                                                Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.
-                                                            </td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>TIện nghi phòng tập</td>
-                                                            <td><img src="https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg"
-                                                                    alt=""></td>
-                                                            <td>Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát,
-                                                                phòng xông hơi, khu vực trang điểm, phòng tắm), là nơi
-                                                                mang đến giây phút thư giãn cho bạn.</td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <input type="button" name="previous" class="previous action-button-previous"
-                                                value="Previous" />
-                                            <input type="button" name="next" class="next action-button" value="Next" />
-                                        </fieldset>
-                                        <!-- Chọn tiện ích -->
-                                        <fieldset>
-                                            <div class="text-start">
-                                                <table class="table table-bordered" id="dataTableFeatures" width="100%"
-                                                    cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Thứ tự</th>
-                                                            <th>Tên tiện ích</th>
-                                                            <th>Icon</th>
-                                                            <th><input type="checkbox" id="checkAll">
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Bãi đỗ xe</td>
-                                                            <td><i class="bi bi-p-circle"></i></td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Quầy nước</td>
-                                                            <td><i class="fa-solid fa-martini-glass-citrus"></i></td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Khăn miễn phí</td>
-                                                            <td><i class="fas fa-scroll"></i></td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Phòng y tế</td>
-                                                            <td><i class="fa-solid fa-suitcase-medical"></i></td>
-                                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <input type="button" name="previous" class="previous action-button-previous"
-                                                value="Previous" />
-                                            <input type="button" name="next" class="next action-button" value="Next" />
-                                        </fieldset>
-                                        <!-- Xác định kinh vĩ độ -->
-                                        <fieldset>
-                                            <h2 class="fs-title">Thông tin cơ bản</h2>
-                                            <div class="row text-start">
-                                                <div class="col-md-6 pb-4">
-                                                    <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
+                                                <input type="button" name="previous"
+                                                       class="previous action-button-previous"
+                                                       value="Previous"/>
+                                                <input type="button" name="next" class="next action-button"
+                                                       value="Next"/>
+                                            </fieldset>
+                                            <!-- Chọn dịch vụ -->
+                                            <fieldset>
+                                                <input type="hidden" id="selectedAmenitieId">
+                                                <div class="text-start">
+                                                    <table class="table table-bordered" id="dataTableAmenities"
+                                                           width="100%"
+                                                           cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Thứ tự</th>
+                                                                <th>ID</th>
+                                                                <th>Tên dịch vụ</th>
+                                                                <th>Ảnh dịch vụ</th>
+                                                                <th class="plan-description">Mô tả</th>
+                                                                <th><input type="checkbox" id="checkAll">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <th:block th:each="b : ${brandAmenitie}">
+                                                                <tr>
+                                                                    <td th:text="${bStat.index + 1}">1</td>
+                                                                    <td th:text="${b.getAmenitieId()}"></td>
+                                                                    <td th:text="${b.amenitieName}">Hệ thống tủ khóa
+                                                                    </td>
+                                                                    <td><img th:src="${b.photoUrl}"
+                                                                             alt=""></td>
+                                                                    <td th:text="${b.description}">Hệ thống khóa từ
+                                                                        thông minh bảo mật tối đa Esmart Lock
+                                                                        đầu tiên tại Việt Nam. Hội viên có thể yên tâm
+                                                                        gửi đồ và
+                                                                        khóa tủ bằng vòng tay locker tự động
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </th:block>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                                <div class="col-md-6 pb-4">
-                                                    <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
+                                                <input type="button" name="previous"
+                                                       class="previous action-button-previous"
+                                                       value="Previous"/>
+                                                <input type="button" name="next" class="next action-button"
+                                                       value="Next"/>
+                                            </fieldset>
+                                            <!-- Chọn tiện ích -->
+                                            <fieldset>
+                                                <div class="text-start">
+                                                    <input type="hidden" id="selectedFeatureId">
+                                                    <table class="table table-bordered" id="dataTableFeatures"
+                                                           width="100%"
+                                                           cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Thứ tự</th>
+                                                                <th>ID</th>
+                                                                <th>Tên tiện ích</th>
+                                                                <th>Icon</th>
+                                                                <th><input type="checkbox" id="checkAll">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <th:block th:each="f : ${features}">
+                                                                <tr>
+                                                                    <td th:text="${fStat.index + 1}">1</td>
+                                                                    <td th:text="${f.getFeatureID()}"></td>
+                                                                    <td th:text="${f.featureName}">Bãi đỗ xe</td>
+                                                                    <td th:utext="${f.getFeatureIcon()}"><i
+                                                                            class="bi bi-p-circle"></i></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </th:block>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="latitude" class="form-label fw-bold">Vĩ độ :</label>
-                                                        <input type="text" class="form-control" id="latitude"
-                                                            name="latitude" placeholder="Nhập vĩ độ">
+                                                <input type="button" name="previous"
+                                                       class="previous action-button-previous"
+                                                       value="Previous"/>
+                                                <input type="button" name="next" class="next action-button"
+                                                       value="Next"/>
+                                            </fieldset>
+                                            <!-- Xác định kinh vĩ độ -->
+                                            <fieldset>
+                                                <h2 class="fs-title">Thông tin cơ bản</h2>
+                                                <div class="row text-start">
+                                                    <div class="col-md-6 pb-4">
+                                                        <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
+                                                    </div>
+                                                    <div class="col-md-6 pb-4">
+                                                        <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="latitude" class="form-label fw-bold">Vĩ độ
+                                                                :</label>
+                                                            <input type="text" class="form-control" id="latitude"
+                                                                   name="latitude" placeholder="Nhập vĩ độ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="longitude" class="form-label fw-bold">Kinh độ
+                                                                :</label>
+                                                            <input type="text" class="form-control" id="longitude"
+                                                                   name="longitude" placeholder="Nhập kinh độ">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="longitude" class="form-label fw-bold">Kinh độ
-                                                            :</label>
-                                                        <input type="text" class="form-control" id="longitude"
-                                                            name="longitude" placeholder="Nhập kinh độ">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="button" name="previous" class="previous action-button-previous"
-                                                value="Previous" />
-                                            <input type="submit" name="submit" class="submit action-button"
-                                                value="Submit" />
-                                        </fieldset>
-                                    </form>
+                                                <input type="button" name="previous"
+                                                       class="previous action-button-previous"
+                                                       value="Previous"/>
+                                                <input id="submitForm" type="button" name="submit" class="submit action-button"
+                                                       value="Submit"/>
+                                            </fieldset>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <th:block th:replace="gym-owner/common/footer"></th:block>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="gym-owner/common/footer"></th:block>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <th:block th:replace="gym-owner/common/script"></th:block>
+        <script>
+            $(document).ready(function () {
+                // Khởi tạo đối tượng để lưu trữ các selectedIds cho từng bảng
+                var selectedIdsObject = {};
 
-    <th:block th:replace="gym-owner/common/script"></th:block>
-</body>
+                function configureDataTable(tableId, checkboxColumnIndex, idColumnIndex, selectedInputId) {
+                    var dataTable = $(tableId).DataTable({
+                        select: {
+                            style: 'multi',
+                            selector: 'td:last-child'
+                        },
+                        columnDefs: [
+                            {
+                                className: 'select-checkbox',
+                                targets: checkboxColumnIndex,
+                                orderDataType: 'dom-checkbox'
+                            },
+                            {
+                                targets: [idColumnIndex],
+                                visible: false,
+                                data: "ID"
+                            }
+                        ]
+                    });
+
+                    // Sự kiện khi hàng được chọn
+                    dataTable.on('select', function (e, dt, type, indexes) {
+                        var rowData = dataTable.rows(indexes).data().toArray();
+                        rowData.forEach(function (row) {
+                            console.log(row);
+                            // Lấy tên của bảng (tableId) để xác định mảng selectedIds tương ứng
+                            var tableName = $(tableId).attr('id');
+                            if (!selectedIdsObject[tableName]) {
+                                selectedIdsObject[tableName] = [];
+                            }
+                            selectedIdsObject[tableName].push(row.ID); // Thêm ID vào mảng
+
+                            // Cập nhật giá trị của input type = hidden
+                            updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
+                        });
+                        console.log("Selected IDs:", selectedIdsObject);
+                    });
+
+                    // Sự kiện khi hàng bị hủy chọn
+                    dataTable.on('deselect', function (e, dt, type, indexes) {
+                        var rowData = dataTable.rows(indexes).data().toArray();
+                        rowData.forEach(function (row) {
+                            var tableName = $(tableId).attr('id');
+                            var index = selectedIdsObject[tableName].indexOf(row.ID);
+
+                            if (index !== -1) {
+                                selectedIdsObject[tableName].splice(index, 1); // Xóa ID khỏi mảng
+                            }
+
+                            // Cập nhật giá trị của input type = hidden
+                            updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
+                        });
+                        console.log("Selected IDs:", selectedIdsObject);
+                    });
+                }
+
+                function updateHiddenInput(inputId, value) {
+                    var hiddenInput = $('#' + selectedFixedId);
+                    if (hiddenInput.length) {
+                        hiddenInput.val(value);
+                    }
+                }
+
+                configureDataTable('#dataTableCheckedFixed', 8, 1, 'selectedFixedId');
+                configureDataTable('#dataTableCheckedFlexible', 7, 1, 'selectedFlexibleId');
+                configureDataTable('#dataTableAmenities', 5, 1, 'selectedAmenitieId');
+                configureDataTable('#dataTableFeatures', 4, 1, 'selectedFeatureId');
+            });
+        </script>
+        <script>
+            $("#submitForm").click(function() {
+                var formData = {
+                    departmentId: $("#departmentId").val(),
+                    departmentAddress: $("#address").val(),
+                    departmentContactNumber: $("#phone").val(),
+                    departmentDescription: $("#description").val(),
+                    capacity: $("#capacity").val(),
+                    area: $("#area").val(),
+                    city: $("#provinceDropdown").val(),
+                    mondayOpenTime: $("#mondayOpenTime").val(),
+                    mondayCloseTime: $("#mondayCloseTime").val(),
+                    tuesdayOpenTime: $("#tuesdayOpenTime").val(),
+                    tuesdayCloseTime: $("#tuesdayCloseTime").val(),
+                    wednesdayOpenTime: $("#wednesdayOpenTime").val(),
+                    wednesdayCloseTime: $("#wednesdayCloseTime").val(),
+                    thursdayOpenTime: $("#thursdayOpenTime").val(),
+                    thursdayCloseTime: $("#thursdayCloseTime").val(),
+                    fridayOpenTime: $("#fridayOpenTime").val(),
+                    fridayCloseTime: $("#fridayCloseTime").val(),
+                    saturdayOpenTime: $("#saturdayOpenTime").val(),
+                    saturdayCloseTime: $("#saturdayCloseTime").val(),
+                    sundayOpenTime: $("#sundayOpenTime").val(),
+                    sundayCloseTime: $("#sundayCloseTime").val(),
+                    listSelectedFlexGymPlanId: $("#selectedFlexibleId").val(),
+                    listSelectedFixedGymPlanId: $("#selectedFixedId").val(),
+                    listSelectedAmenitiesId: $("#selectedAmenitieId").val(),
+                    listSelectedFeaturesId: $("#selectedFeatureId").val(),
+                    longitude: $("#longitude").val(),
+                    latitude: $("#latitude").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/gym-owner/department/update-details",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                    success: function(response) {
+                        console.log(response);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Cập nhật thành công',
+                            text: 'Dữ liệu đã được cập nhật thành công.',
+                            showConfirmButton: false,
+                            timer: 2000 // Hiển thị thông báo trong 2 giây
+                        }).then(() => {
+                            window.location.href = '/gym-owner/department/info';
+                        });
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Cập nhật không thành công',
+                            text: 'Có gì đó không ổn.',
+                            showConfirmButton: false,
+                            timer: 2000 // Hiển thị thông báo trong 2 giây
+                        })
+                        console.log(error);
+                    }
+                });
+            });
+
+        </script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+    </body>
 
 </html>
