@@ -24,7 +24,9 @@ public class EmployeeCreateDTO {
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên của bạn không được chứa kí tự đặc biệt !")
     private String lastName;
 
-    @NotEmpty(message = "Username cannot be empty")
+    @Size(min = 6, max = 50, message = "Tên đăng nhập phải nằm trong khoảng 6 đến 50 kí tự !")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt !")
+    @NotEmpty(message = "Vui lòng nhập tên đăng nhập !")
     private String username;
 
     @NotEmpty(message = "Email cannot be empty")
