@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById("addImageButton");
     const editImageInput = createEditImageInput();
     let editingImageContainer = null;
+    const currentUrl = window.location.pathname;
 
     // Gán sự kiện 'change' cho imageInput khi tài liệu được tải
     imageInput.addEventListener("change", handleImageChange);
@@ -55,26 +56,54 @@ document.addEventListener("DOMContentLoaded", function () {
         var formData = new FormData();
         formData.append("file", file);
 
-        $.ajax({
-            type: "POST",
-            url: `/upload/${type}/${$("#brandId").val()}`,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                console.log(response)
-                if (type == "logo") {
-                    $("#imageLogo").val(response);
-                } else if (type == "thumbnail") {
-                    $("#imageThumbnail").val(response)
-                } else if (type == "wallpaper") {
-                    $("imageWallpaper").val(response)
-                }
-            },
-            error: function () {
-                $("#message").text("Failed to upload file");
+        if (!currentUrl.includes("gym-owner/department/update-details")) {
+            if (currentUrl.includes("gym-owner/department/image")) {
+                let num = rowElement.querySelectorAll(".col-md-4").length + 1;
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/department/${type}/${$("#brandId").val()}`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        if (type == "logo") {
+                            $("#imageLogo").val(response);
+                        } else if (type == "thumbnail") {
+                            $("#imageThumbnail").val(response)
+                        } else if (type == "wallpaper") {
+                            $("imageWallpaper").val(response)
+                        } else if (type == "album") {
+                            $(`#album-${num}`).val(response);
+                        }
+                    },
+                    error: function () {
+                        $("#message").text("Failed to upload file");
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/${type}/${$("#brandId").val()}`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        if (type == "logo") {
+                            $("#imageLogo").val(response);
+                        } else if (type == "thumbnail") {
+                            $("#imageThumbnail").val(response)
+                        } else if (type == "wallpaper") {
+                            $("imageWallpaper").val(response)
+                        }
+                    },
+                    error: function () {
+                        $("#message").text("Failed to upload file");
+                    }
+                });
             }
-        });
+        }
 
         if (file) {
             const reader = new FileReader();
@@ -92,7 +121,25 @@ document.addEventListener("DOMContentLoaded", function () {
     function createImageContainer(imageSrc) {
         const newImageContainer = document.createElement("div");
         newImageContainer.classList.add("col-md-4");
-        newImageContainer.innerHTML = `
+        if(type === "album") {
+            newImageContainer.innerHTML = `
+              <div class="image-container">
+                <img src="${imageSrc}" alt="Image">
+                <div class="image-actions">
+                  <button class="img-edit-button" type="button"
+                    data-toggle="tooltip" data-placement="top" data-image-type="${type}"
+                    title="Chỉnh sửa hình ảnh"><i
+                    class="fas fa-edit"></i></button>
+                  <button class="img-delete-button" type="button"
+                    data-toggle="tooltip" data-placement="top"
+                    title="Xóa hình ảnh"><i
+                    class="fas fa-trash"></i></button>
+                </div>
+                <input type="hidden" class="hidden-img-album-src" id="album-${rowElement.querySelectorAll(".col-md-4").length + 1}">
+              </div>
+            `;
+        } else {
+            newImageContainer.innerHTML = `
       <div class="image-container">
         <img src="${imageSrc}" alt="Image">
         <div class="image-actions">
@@ -107,6 +154,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     `;
+        }
+
         // Kích hoạt tooltips
         $(newImageContainer).find('[data-toggle="tooltip"]').tooltip();
 
@@ -123,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Hàm thêm hình ảnh
     function addImage() {
+        type = "album";
         if (rowElement.querySelectorAll(".col-md-4").length >= MAX_IMAGES) {
             Swal.fire({
                 icon: 'warning', title: 'Chỉ có thể thêm 9 ảnh vào album',
@@ -143,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             return;
         }
-
+        console.log(imageContainer);
         Swal.fire({
             title: 'Xác nhận xóa',
             text: 'Bạn có chắc muốn xóa hình ảnh này?',
@@ -176,26 +226,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
             var formData = new FormData();
             formData.append("file", file);
-            $.ajax({
-                type: "POST",
-                url: `/upload/${type}/${$("#brandId").val()}`,
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log(response)
-                    if (type == "logo") {
-                        $("#imageLogo").val(response);
-                    } else if (type == "thumbnail") {
-                        $("#imageThumbnail").val(response)
-                    } else if (type == "wallpaper") {
-                        $("#imageWallpaper").val(response)
-                    }
-                },
-                error: function () {
-                    $("#message").text("Failed to upload file");
+
+            if (!currentUrl.includes("gym-owner/department/update-details")) {
+                if (currentUrl.includes("gym-owner/department/image")) {
+                    $.ajax({
+                        type: "POST",
+                        url: `/upload/department/${type}/${$("#brandId").val()}`,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            console.log(response)
+                            if (type == "logo") {
+                                $("#imageLogo").val(response);
+                            } else if (type == "thumbnail") {
+                                $("#imageThumbnail").val(response)
+                            } else if (type == "wallpaper") {
+                                $("imageWallpaper").val(response)
+                            } else if (type == "album") {
+                                let num = rowElement.querySelectorAll(".col-md-4").length;
+                                // Gửi yêu cầu delete ảnh cũ
+                                let oldImageSrc = $(`#album-${num}`).val();
+                                deleteImage(oldImageSrc);
+                                $(`#album-${num}`).val(response);
+                            }
+                        },
+                        error: function () {
+                            $("#message").text("Failed to upload file");
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: `/upload/${type}/${$("#brandId").val()}`,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            console.log(response)
+                            if (type == "logo") {
+                                $("#imageLogo").val(response);
+                            } else if (type == "thumbnail") {
+                                $("#imageThumbnail").val(response)
+                            } else if (type == "wallpaper") {
+                                $("imageWallpaper").val(response)
+                            }
+                        },
+                        error: function () {
+                            $("#message").text("Failed to upload file");
+                        }
+                    });
                 }
-            });
+            }
 
             if (file) {
                 const reader = new FileReader();
@@ -212,7 +294,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const tooltips = $(element).find('[data-toggle="tooltip"]');
         tooltips.tooltip('dispose');
     }
+
 });
+function deleteImage(imagePath) {
+    $.ajax({
+        type: "POST",
+        url: `/upload/deleteImage`,
+        contentType: "application/json",
+        data:JSON.stringify( {
+            "imagePath" : imagePath
+        }),
+        success: function (response) {
+            console.log(response)
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+
+
+}
 
 // jQuery time
 var current_fs, next_fs, previous_fs; // fieldsets
@@ -288,31 +389,6 @@ $(".previous").click(function () {
 $(".submit").click(function () {
     return false;
 })
-
-$(document).ready(function () {
-    function configureDataTable(tableId) {
-        $(tableId).DataTable({
-            "paging": true, "lengthMenu": [10, 25, 50, 100], "searching": true,
-            "bDestroy": true
-        });
-    }
-
-    // Bảng "Gói linh hoạt"
-    configureDataTable('#dataTableFlexible');
-
-    // Bảng "Gói cố định"
-    configureDataTable('#dataTableFixed');
-
-    // Bảng "Checked Gói linh hoạt"
-    configureDataTable('#dataTableCheckedFlexible');
-
-    // Bảng "Checked Gói cố định"
-    configureDataTable('#dataTableCheckedFixed');
-
-    configureDataTable('#dataTableAmenities');
-
-    configureDataTable('#dataTableFeatures');
-});
 
 function previewImage(input) {
     if (input.files && input.files[0]) {
