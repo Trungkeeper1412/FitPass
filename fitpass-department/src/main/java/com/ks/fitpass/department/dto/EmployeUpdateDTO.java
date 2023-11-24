@@ -41,7 +41,7 @@ public class EmployeUpdateDTO {
 
     //    @NotEmpty(message = "ID Card cannot be empty")
 //    @Pattern(regexp = "^[0-9]*$", message = "Invalid ID Card format")
-    
+
     @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
@@ -56,7 +56,7 @@ public class EmployeUpdateDTO {
 
     @Target({ ElementType.FIELD })
     @Retention(RetentionPolicy.RUNTIME)
-    @Constraint(validatedBy = ValidateIdCardValidatorForCreateDTO.class)
+    @Constraint(validatedBy = ValidateIdCardValidator.class)
     public @interface ValidateIdCard {
         String message() default "Số căn cước công dân không hợp lệ !";
 
