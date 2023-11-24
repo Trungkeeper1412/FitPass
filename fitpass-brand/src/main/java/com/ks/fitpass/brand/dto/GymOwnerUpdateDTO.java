@@ -61,7 +61,7 @@ public class GymOwnerUpdateDTO {
 
     private Integer departmentId;
     private Integer userId;
-
+    private String oldEmail;
 
 
     @Target({ ElementType.FIELD })
