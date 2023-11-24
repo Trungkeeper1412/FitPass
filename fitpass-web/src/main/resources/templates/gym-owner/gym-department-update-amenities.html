@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -25,6 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h2 class="fw-bold text-primary">Cập nhật dịch vụ</h2>
+                            <input type="hidden" th:value="${selectedId}" id="selectedIdDB">
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -34,6 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Thứ tự</th>
+                                                <th>ID</th>
                                                 <th>Tên dịch vụ</th>
                                                 <th>Ảnh dịch vụ</th>
                                                 <th class="plan-description">Mô tả</th>
@@ -42,20 +44,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <th:block th:each="s : ${brandAmenitie}">
-
-                                        <tr>
-                                            <td th:text="${sStat.index + 1}">1</td>
-                                            <td th:text="${s.getAmenitieName()}">Hệ thống tủ khóa</td>
-                                            <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
-                                            <td th:text="${s.getDescription()}">Mô tả</td>
-                                            <td><input type="checkbox" class="rowCheckbox"></td>
-                                            </tr>
+                                            <th:block th:each="s : ${brandAmenitie}">
+                                                <tr>
+                                                    <td th:text="${sStat.index + 1}">1</td>
+                                                    <td th:text="${s.getAmenitieId()}"></td>
+                                                    <td th:text="${s.getAmenitieName()}">Hệ thống tủ khóa</td>
+                                                    <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
+                                                    <td th:text="${s.getDescription()}">Mô tả</td>
+                                                    <td></td>
+                                                </tr>
+                                            </th:block>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                    <form method="post" action="/gym-owner/department/amenities">
+                                        <input type="hidden" id="selectedAmenitieId" name="selectedAmenitieId">
+                                        <input type="hidden" th:value="${departmentId}" name="departmentId">
+                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +90,105 @@
 
     <th:block th:replace="gym-owner/common/script"></th:block>
 
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+
+            var selectedIdDB = $("#selectedIdDB").val().split(',').map(function(item) {
+                return item.trim();
+            });
+
+            // Khởi tạo đối tượng để lưu trữ các selectedIds cho từng bảng
+            var selectedIdsObject = {
+
+            }
+
+            $.fn.dataTable.ext.order['dom-checkbox'] = function  ( settings, col )
+            {
+                return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+                    return $(td).closest('tr').hasClass('selected') ? '1' : '0';
+                } );
+            }
+
+            function configureDataTable(tableId, checkboxColumnIndex, idColumnIndex, selectedInputId) {
+                var dataTable = $(tableId).DataTable({
+                    select: {
+                        style: 'multi',
+                        selector: 'td:last-child'
+                    },
+                    columnDefs: [
+                        {
+                            className: 'select-checkbox',
+                            targets: checkboxColumnIndex,
+                            orderDataType: 'dom-checkbox'
+                        },
+                        {
+                            targets: [idColumnIndex],
+                            visible: false,
+                            data: "ID"
+                        }
+                    ]
+                });
+
+                // Sự kiện khi hàng được chọn
+                dataTable.on('select', function (e, dt, type, indexes) {
+                    var rowData = dataTable.rows(indexes).data().toArray();
+                    rowData.forEach(function (row) {
+                        console.log(row);
+                        // Lấy tên của bảng (tableId) để xác định mảng selectedIds tương ứng
+                        var tableName = $(tableId).attr('id');
+                        if (!selectedIdsObject[tableName]) {
+                            selectedIdsObject[tableName] = [];
+                        }
+                        selectedIdsObject[tableName].push(row.ID); // Thêm ID vào mảng
+
+                        // Cập nhật giá trị của input type = hidden
+                        updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
+                    });
+                    console.log("Selected IDs:", selectedIdsObject);
+                });
+
+                // Sự kiện khi hàng bị hủy chọn
+                dataTable.on('deselect', function (e, dt, type, indexes) {
+                    var rowData = dataTable.rows(indexes).data().toArray();
+                    rowData.forEach(function (row) {
+                        var tableName = $(tableId).attr('id');
+                        var index = selectedIdsObject[tableName].indexOf(row.ID);
+                        if (index !== -1) {
+                            selectedIdsObject[tableName].splice(index, 1); // Xóa ID khỏi mảng
+                        }
+
+                        // Cập nhật giá trị của input type = hidden
+                        updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
+                    });
+                    console.log("Selected IDs:", selectedIdsObject);
+                });
+
+                selectedIdDB.forEach(function(id) {
+                    dataTable.rows(function (idx, data, node) {
+                        return data.ID === id;
+                    }).select();
+                });
+
+                dataTable.order([
+                    [5, 'desc'] // Sắp xếp theo cột chọn (checkbox) theo thứ tự giảm dần
+                ]).draw();
+            }
+
+
+            function updateHiddenInput(inputId, value) {
+                var hiddenInput = $('#' + inputId);
+                if (hiddenInput.length) {
+                    hiddenInput.val(value);
+                }
+            }
+            configureDataTable('#dataTableAmenities', 5, 1, 'selectedAmenitieId');
+
+        });
+    </script>
 </body>
 
 </html>
