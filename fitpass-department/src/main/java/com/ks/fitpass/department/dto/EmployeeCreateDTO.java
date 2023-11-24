@@ -47,13 +47,13 @@ public class EmployeeCreateDTO {
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
     @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
-    @EmployeUpdateDTO.ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
+    @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
     private String idCard;
 
     @NotEmpty(message = "Vui lòng chọn giới tính !")
     private String gender;
 
-    @NotEmpty(message = "Image url cannot be empty")
+    @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
 
 
