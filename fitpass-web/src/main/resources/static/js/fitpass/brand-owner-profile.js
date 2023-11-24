@@ -5,6 +5,7 @@ $(function () {
 // --------------------------------------------------------------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
     var type = "";
+    var idImageAlbumEdit = "";
     const MAX_IMAGES = 9;
     const rowElement = document.querySelector(".row-add");
     const imageInput = document.getElementById("imageInput");
@@ -72,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         } else if (type == "thumbnail") {
                             $("#imageThumbnail").val(response)
                         } else if (type == "wallpaper") {
-                            $("imageWallpaper").val(response)
+                            $("#imageWallpaper").val(response)
                         } else if (type == "album") {
                             $(`#album-${num}`).val(response);
                         }
@@ -203,6 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
             cancelButtonText: 'Hủy',
         }).then((result) => {
             if (result.isConfirmed) {
+                let num = rowElement.querySelectorAll(".col-md-4").length;
+                // Gửi yêu cầu delete ảnh cũ
+                let oldImageSrc = $(`#album-${num}`).val();
+                deleteImage(oldImageSrc);
                 removeTooltip(imageContainer);
                 imageContainer.remove();
             }
@@ -214,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
         editingImageContainer = event.target.closest(".col-md-4");
         let button = editingImageContainer.querySelector(".img-edit-button");
         type = button.getAttribute("data-image-type");
+        idImageAlbumEdit = button.getAttribute("data-album-id");
         editImageInput.value = null;
         editImageInput.click();
     }
@@ -242,12 +248,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             } else if (type == "thumbnail") {
                                 $("#imageThumbnail").val(response)
                             } else if (type == "wallpaper") {
-                                $("imageWallpaper").val(response)
+                                $("#imageWallpaper").val(response)
                             } else if (type == "album") {
-                                let num = rowElement.querySelectorAll(".col-md-4").length;
+                                let num = idImageAlbumEdit;
                                 // Gửi yêu cầu delete ảnh cũ
                                 let oldImageSrc = $(`#album-${num}`).val();
-                                deleteImage(oldImageSrc);
+                                if(oldImageSrc != "") {
+                                    deleteImage(oldImageSrc);
+                                }
                                 $(`#album-${num}`).val(response);
                             }
                         },

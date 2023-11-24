@@ -23,10 +23,10 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card">
-                        <form id="updateImageForm" method="post" action="/upload/department/image">
+                        <form id="updateImageForm" method="post" action="/gym-owner/department/image">
                         <div class="card-header">
                             <h2 class="fw-bold text-primary">Quản lý hình ảnh</h2>
-                            <input type="hidden" id="brandId" th:value="${departmentDetails.getDepartmentId()}"/>
+                            <input type="hidden" id="brandId" th:value="${departmentDetails.getDepartmentId()}" name=""/>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -76,7 +76,7 @@
                                         <div class="d-flex justify-content-between pt-3">
                                             <label for="album" class="form-label fw-bold fs-4">Album
                                                 ảnh:</label>
-                                            <input type="file" id="imageInput" style="display: none;" accept="image/*" id="1,2">
+                                            <input type="file" id="imageInput" style="display: none;" accept="image/*">
                                             <input type="hidden" name="listAlbumUrl" id="listAlbumUrl">
                                             <a class="fw-bold fs-5 text-black" id="addImageButton">Thêm
                                                 ảnh</a>
@@ -89,12 +89,12 @@
                                                         <div class="image-actions">
                                                             <button class="img-edit-button" type="button"
                                                                     data-toggle="tooltip" data-placement="top" data-image-type="album"
-                                                                    title="Chỉnh sửa hình ảnh"><i
+                                                                    title="Chỉnh sửa hình ảnh" th:attr="data-album-id=${albumStat.index + 1}"><i
                                                                     class="fas fa-edit"></i></button>
                                                             <button class="img-delete-button" type="button"
                                                                     data-toggle="tooltip" data-placement="top"
                                                                     title="Xóa hình ảnh"><i class="fas fa-trash"></i></button>
-                                                            <input type="hidden" class="hidden-img-album-src" th:id="'album-'+${albumStat.index + 1}">
+                                                            <input type="hidden" class="hidden-img-album-src" th:id="'album-'+${albumStat.index + 1}" th:value="${album.getPhotoUrl()}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -148,7 +148,7 @@
     </a>
     <th:block th:replace="gym-owner/common/script"></th:block>
     <script>
-        $("saveChangeBtn").click(function () {
+        $("#saveChangeBtn").click(function () {
             var values = [];
             $(".hidden-img-album-src").each(function() {
                 values.push($(this).val());
