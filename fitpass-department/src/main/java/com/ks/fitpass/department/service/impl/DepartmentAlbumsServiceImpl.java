@@ -22,4 +22,14 @@ public class DepartmentAlbumsServiceImpl implements DepartmentAlbumsService {
     public List<DepartmentAlbums> getAllByDepartmentID(int departmentID) throws DataAccessException {
         return departmentAlbumsRepository.getAllByDepartmentID(departmentID);
     }
+
+    @Override
+    public int[] addDepartmentAlbums(List<DepartmentAlbums> departmentAlbums) throws DataAccessException {
+        return departmentAlbumsRepository.addDepartmentAlbums(departmentAlbums);
+    }
+
+    @Override
+    public int deleteAllAlbumsByDepartmentID(int departmentID) throws DataAccessException {
+        return departmentAlbumsRepository.deleteAllAlbumsByDepartmentID(departmentID);
+    }
 }
