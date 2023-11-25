@@ -34,11 +34,12 @@
                                     <div class="col-md-4">
                                         <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
                                         <div class="image-container">
-                                            <img th:src="${departmentDetails.getDepartmentLogoUrl()}" alt="Image">
+                                            <img th:if="${departmentDetails.getDepartmentLogoUrl() ne null}" th:src="${departmentDetails.getDepartmentLogoUrl()}" alt="Image">
+                                            <img th:unless="${departmentDetails.getDepartmentLogoUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
+
                                             <div class="image-actions">
                                                 <button class="img-edit-button" type="button" data-toggle="tooltip" data-image-type="logo"
-                                                    data-placement="top" title="Chỉnh sửa hình ảnh"><i
-                                                        class="fas fa-edit"></i></button>
+                                                        data-placement="top" title="Chỉnh sửa hình ảnh"><i class="fas fa-edit"></i></button>
                                                 <input name="imageLogoUrl" type="hidden" id="imageLogo" th:value="${departmentDetails.getDepartmentLogoUrl()}">
                                             </div>
                                         </div>
@@ -47,7 +48,9 @@
                                         <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
                                             :</label>
                                         <div class="image-container">
-                                            <img th:src="${departmentDetails.getDepartmentThumbnailUrl()}" alt="Image">
+                                            <img th:if="${departmentDetails.getDepartmentThumbnailUrl() ne null}" th:src="${departmentDetails.getDepartmentThumbnailUrl()}" alt="Image">
+                                            <img th:unless="${departmentDetails.getDepartmentThumbnailUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
+
                                             <div class="image-actions">
                                                 <button class="img-edit-button" type="button" data-toggle="tooltip" data-image-type="thumbnail"
                                                     data-placement="top" title="Chỉnh sửa hình ảnh"><i
@@ -60,7 +63,9 @@
                                         <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
                                             :</label>
                                         <div class="image-container">
-                                            <img th:src="${departmentDetails.getDepartmentWallpaperUrl()}" alt="Image">
+                                            <img th:if="${departmentDetails.getDepartmentWallpaperUrl() ne null}" th:src="${departmentDetails.getDepartmentWallpaperUrl()}" alt="Image">
+                                            <img th:unless="${departmentDetails.getDepartmentWallpaperUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
+
                                             <div class="image-actions">
                                                 <button class="img-edit-button" type="button" data-toggle="tooltip" data-image-type="wallpaper"
                                                     data-placement="top" title="Chỉnh sửa hình ảnh"><i
@@ -102,7 +107,7 @@
                                             <th:block th:if="${departmentAlbums.size() == 0}">
                                                 <div class="col-md-4">
                                                     <div class="image-container">
-                                                        <img src="" alt="Image">
+                                                        <img th:src="@{/images/system/list-empty.jpg}" alt="Image">
                                                         <div class="image-actions">
                                                             <button class="img-edit-button" type="button"
                                                                     data-toggle="tooltip" data-placement="top" data-image-type="album"
