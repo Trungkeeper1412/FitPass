@@ -254,6 +254,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int updateLongitudeLatitude(int departmentId, double longitude, double latitude) {
         return departmentRepository.updateLongitudeLatitude(departmentId, longitude, latitude);
     }
+
+    @Override
+    public boolean checkFirstTimeDepartmentCreated(int departmentId) {
+        return departmentRepository.checkFirstTimeDepartmentCreated(departmentId);
+    }
+
+    @Override
+    public int updateFirstTimeDepartmentCreated(int departmentId) {
+        return departmentRepository.updateFirstTimeDepartmentCreated(departmentId);
+    }
 }
 
 
