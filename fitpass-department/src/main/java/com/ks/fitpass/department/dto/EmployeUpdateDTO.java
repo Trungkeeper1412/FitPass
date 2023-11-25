@@ -57,6 +57,8 @@ public class EmployeUpdateDTO {
     private String imageUrl;
 
     private boolean userDeleted;
+    private int userId;
+    private String oldEmail;
 
 
     @Target({ ElementType.FIELD })
