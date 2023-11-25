@@ -44,26 +44,32 @@ public class UpdateGymOwnerDepartmentInfo {
     private String mondayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Hai")
     private String mondayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Ba")
     private String tuesdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Ba")
     private String tuesdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Tư")
     private String wednesdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Tư")
     private String wednesdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Năm")
     private String thursdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Năm")
     private String thursdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Sáu")
     private String fridayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Sáu")
     private String fridayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Bảy")
     private String saturdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Bảy")
     private String saturdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Chủ Nhật")
     private String sundayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Chủ Nhật")
