@@ -39,6 +39,109 @@
                                                 <li>Xác định vị trí</li>
                                             </ul>
                                             <!-- Thông tin cơ bản -->
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="selectOpenHoursModal" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Chọn giờ hoạt động</h5>
+                                                            <button type="button" class="close"
+                                                                    data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Ngày</th>
+                                                                    <th>Bắt đầu</th>
+                                                                    <th>Kết thúc</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>Thứ 2</td>
+                                                                    <td><input type="time" id="mondayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="mondayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Thứ 3</td>
+                                                                    <td><input type="time" id="tuesdayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="tuesdayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Thứ 4</td>
+                                                                    <td><input type="time" id="wednesdayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="wednesdayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Thứ 5</td>
+                                                                    <td><input type="time" id="thursdayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="thursdayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Thứ 6</td>
+                                                                    <td><input type="time" id="fridayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="fridayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Thứ 7</td>
+                                                                    <td><input type="time" id="saturdayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="saturdayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Chủ Nhật</td>
+                                                                    <td><input type="time" id="sundayOpenTime"
+                                                                               class="form-control start-time-input">
+                                                                    </td>
+                                                                    <td><input type="time" id="sundayCloseTime"
+                                                                               class="form-control end-time-input">
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Đóng
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                    id="saveChangesButton">Lưu
+                                                                thay đổi
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <fieldset>
                                                 <h2 class="fs-title">Thông tin cơ bản</h2>
                                                 <div class="row text-start">
@@ -158,109 +261,6 @@
                                                             <div class="pl-3" id="selectedOpenHours">
                                                                 <label style="margin: 0" id="resultText">&#9679; Chưa
                                                                     chọn giờ mở cửa</label>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="selectOpenHoursModal" tabindex="-1"
-                                                             role="dialog"
-                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Chọn giờ hoạt động</h5>
-                                                                        <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <table class="table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Ngày</th>
-                                                                                    <th>Bắt đầu</th>
-                                                                                    <th>Kết thúc</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td>Thứ 2</td>
-                                                                                    <td><input type="time" id="mondayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="mondayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Thứ 3</td>
-                                                                                    <td><input type="time" id="tuesdayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="tuesdayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Thứ 4</td>
-                                                                                    <td><input type="time" id="wednesdayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="wednesdayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Thứ 5</td>
-                                                                                    <td><input type="time" id="thursdayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="thursdayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Thứ 6</td>
-                                                                                    <td><input type="time" id="fridayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="fridayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Thứ 7</td>
-                                                                                    <td><input type="time" id="saturdayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="saturdayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Chủ Nhật</td>
-                                                                                    <td><input type="time" id="sundayOpenTime"
-                                                                                               class="form-control start-time-input">
-                                                                                    </td>
-                                                                                    <td><input type="time" id="sundayCloseTime"
-                                                                                               class="form-control end-time-input">
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                                data-dismiss="modal">Đóng
-                                                                        </button>
-                                                                        <button type="button" class="btn btn-primary"
-                                                                                id="saveChangesButton">Lưu
-                                                                            thay đổi
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -598,72 +598,6 @@
         <th:block th:replace="gym-owner/common/script"></th:block>
         <script>
             $(document).ready(function () {
-                // Khởi tạo đối tượng để lưu trữ các selectedIds cho từng bảng
-                var selectedIdsObject = {};
-
-                function configureDataTable(tableId, checkboxColumnIndex, idColumnIndex, selectedInputId) {
-                    var dataTable = $(tableId).DataTable({
-                        select: {
-                            style: 'multi',
-                            selector: 'td:last-child'
-                        },
-                        columnDefs: [
-                            {
-                                className: 'select-checkbox',
-                                targets: checkboxColumnIndex,
-                                orderDataType: 'dom-checkbox'
-                            },
-                            {
-                                targets: [idColumnIndex],
-                                visible: false,
-                                data: "ID"
-                            }
-                        ]
-                    });
-
-                    // Sự kiện khi hàng được chọn
-                    dataTable.on('select', function (e, dt, type, indexes) {
-                        var rowData = dataTable.rows(indexes).data().toArray();
-                        rowData.forEach(function (row) {
-                            console.log(row);
-                            // Lấy tên của bảng (tableId) để xác định mảng selectedIds tương ứng
-                            var tableName = $(tableId).attr('id');
-                            if (!selectedIdsObject[tableName]) {
-                                selectedIdsObject[tableName] = [];
-                            }
-                            selectedIdsObject[tableName].push(row.ID); // Thêm ID vào mảng
-
-                            // Cập nhật giá trị của input type = hidden
-                            updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
-                        });
-                        console.log("Selected IDs:", selectedIdsObject);
-                    });
-
-                    // Sự kiện khi hàng bị hủy chọn
-                    dataTable.on('deselect', function (e, dt, type, indexes) {
-                        var rowData = dataTable.rows(indexes).data().toArray();
-                        rowData.forEach(function (row) {
-                            var tableName = $(tableId).attr('id');
-                            var index = selectedIdsObject[tableName].indexOf(row.ID);
-
-                            if (index !== -1) {
-                                selectedIdsObject[tableName].splice(index, 1); // Xóa ID khỏi mảng
-                            }
-
-                            // Cập nhật giá trị của input type = hidden
-                            updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
-                        });
-                        console.log("Selected IDs:", selectedIdsObject);
-                    });
-                }
-
-                function updateHiddenInput(inputId, value) {
-                    var hiddenInput = $('#' + inputId);
-                    if (hiddenInput.length) {
-                        hiddenInput.val(value);
-                    }
-                }
-
                 configureDataTable('#dataTableCheckedFixed', 8, 1, 'selectedFixedId');
                 configureDataTable('#dataTableCheckedFlexible', 7, 1, 'selectedFlexibleId');
                 configureDataTable('#dataTableAmenities', 5, 1, 'selectedAmenitieId');
