@@ -605,21 +605,34 @@ public class GymOwnerController {
         User user = (User) session.getAttribute("userInfo");
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-        model.addAttribute("departmentDetails", departmentDetails);
+        UpdateGymOwnerDepartmentLocation updateGymOwnerDepartmentLocation = new UpdateGymOwnerDepartmentLocation();
+
+        updateGymOwnerDepartmentLocation.setLatitude(String.valueOf(departmentDetails.getLatitude()));
+        updateGymOwnerDepartmentLocation.setLongitude(String.valueOf(departmentDetails.getLongitude()));
+
+        model.addAttribute("updateGymOwnerDepartmentLocation", updateGymOwnerDepartmentLocation);
         return "gym-owner/gym-department-update-location";
     }
 
     @PostMapping("/department/location")
     public String updateDepartmentLocation(HttpSession session, Model model,
-                                           @RequestParam String latitude, @RequestParam String longitude) {
+                                           @Valid @ModelAttribute UpdateGymOwnerDepartmentLocation updateGymOwnerDepartmentLocation,
+                                           BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         if(isFirstTime) {
             return "redirect:/gym-owner/department/update-details";
         }
+
+        if (bindingResult.hasErrors()) {
+            // Nếu có lỗi validation, xử lý ở đây nếu cần
+            return "gym-owner/gym-department-update-location";
+        }
         User user = (User) session.getAttribute("userInfo");
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-        departmentService.updateLongitudeLatitude(departmentDetails.getDepartmentId(), Double.parseDouble(longitude), Double.parseDouble(latitude));
+        departmentService.updateLongitudeLatitude(departmentDetails.getDepartmentId(),
+                Double.parseDouble(updateGymOwnerDepartmentLocation.getLongitude()),
+                Double.parseDouble(updateGymOwnerDepartmentLocation.getLatitude()));
 
         return "redirect:/gym-owner/department/location";
     }
