@@ -300,4 +300,15 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     public int updateLongitudeLatitude(int departmentId, double longitude, double latitude) {
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_LONGITUDE_LATITUDE, longitude, latitude, departmentId);
     }
+
+    @Override
+    public boolean checkFirstTimeDepartmentCreated(int departmentId) {
+        int count = jdbcTemplate.queryForObject(IRepositoryQuery.CHECK_FIRST_TIME_DEPARTMENT_CREATED, Integer.class, departmentId);
+        return count > 0;
+    }
+
+    @Override
+    public int updateFirstTimeDepartmentCreated(int departmentId) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_FIRST_TIME_DEPARTMENT_CREATED, departmentId);
+    }
 }
