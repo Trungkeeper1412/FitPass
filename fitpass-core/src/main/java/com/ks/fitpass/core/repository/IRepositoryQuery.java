@@ -138,7 +138,7 @@ public interface IRepositoryQuery {
             """;
 
     String GET_ALL_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID = """
-            SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url, u.user_deleted
+            SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url,ud.securityId, u.user_deleted
                             FROM user u
                             JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
                             JOIN user_role ur ON u.user_id = ur.user_id
