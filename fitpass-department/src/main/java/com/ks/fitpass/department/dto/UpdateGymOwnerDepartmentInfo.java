@@ -69,7 +69,7 @@ public class UpdateGymOwnerDepartmentInfo {
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Chủ Nhật")
     private String sundayCloseTime;
 
-    @AssertTrue(message = "Open time must be before close time")
+    @AssertTrue(message = "Thời gian mở của phải trước thời gian đóng cửa ! ")
     public boolean isValidSchedule() {
         // Thực hiện kiểm tra cho từng ngày ở đây
         if (isInvalidDaySchedule(mondayOpenTime, mondayCloseTime)) {
