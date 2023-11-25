@@ -91,8 +91,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
-                                            <input type="text" class="form-control" id="id-card" name="id-card" placeholder="Nhập số căn cước">
-<!--                                            <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{firstName}">firstName Error</span>-->
+                                            <input th:field="*{idCard}" th:value="${employeeInfo.getIdCard()}" type="text" class="form-control" id="id-card" name="id-card" placeholder="Nhập số căn cước">
+                                            <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">idCard Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="gender" class="form-label fw-bold">Giới Tính :</label>
