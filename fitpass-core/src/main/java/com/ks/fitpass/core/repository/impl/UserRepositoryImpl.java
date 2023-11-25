@@ -136,6 +136,10 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         }, userId);
     }
 
+
+
+
+
     @Override
     public boolean checkEmailExist(String email) {
         int count = jdbcTemplate.queryForObject(CHECK_EMAIL_EXIST, Integer.class, email);
@@ -170,6 +174,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
             gymOwnerListDTO.setEmail(rs.getString("email"));
             gymOwnerListDTO.setPhoneNumber(rs.getString("phone_number"));
             gymOwnerListDTO.setImageUrl(rs.getString("image_url"));
+            gymOwnerListDTO.setSecurityId(rs.getString("securityId"));
             gymOwnerListDTO.setUserDeleted(rs.getBoolean("user_deleted"));
             return gymOwnerListDTO;
         }, departmentId);
