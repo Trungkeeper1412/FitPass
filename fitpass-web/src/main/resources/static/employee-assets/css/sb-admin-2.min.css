@@ -5939,6 +5939,25 @@ a.badge-dark:focus {
     border-radius: .35rem
 }
 
+.list-bank-card {
+    background: linear-gradient(to right, #333, #666);
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px !important;
+    padding: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bank-card {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.list-bank-card:hover {
+    background: linear-gradient(to right, #666, #333);
+}
+
 .list-group-item-action {
     width: 100%;
     color: #6e707e;
@@ -13788,23 +13807,4 @@ label.error {
 .working{
     color: darkblue;
     background-color: #cae8fd;
-}
-
-.list-group-item {
-    background: linear-gradient(to right, #333, #666);
-    color: white;
-    border: 2px solid #ccc;
-    border-radius: 10px !important;
-    padding: 10px;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.bank-card {
-    max-height: 400px;
-    overflow-x: auto;
-}
-
-.list-group-item:hover {
-    background: linear-gradient(to right, #666, #333);
 }
