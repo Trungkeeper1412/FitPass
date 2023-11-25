@@ -3,10 +3,11 @@ DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS user_feedback;
 DROP TABLE IF EXISTS item_inventory;
 DROP TABLE IF EXISTS notification;
+DROP TABLE IF EXISTS transfer_credit_history;
 DROP TABLE IF EXISTS order_plan_detail;
+DROP TABLE IF EXISTS transfer;
 DROP TABLE IF EXISTS `order`;
 DROP TABLE IF EXISTS `transaction`;
-DROP TABLE IF EXISTS transfer;
 DROP TABLE IF EXISTS gymer_booking;
 DROP TABLE IF EXISTS shift;
 DROP TABLE IF EXISTS gym_department_plans;
@@ -28,6 +29,7 @@ DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS wallet;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_detail;
+
 
 CREATE TABLE IF NOT EXISTS user_detail (
                                            user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -91,8 +93,12 @@ CREATE TABLE IF NOT EXISTS brand (
                                      contact_number              VARCHAR(20) NOT NULL,
                                      contact_email				VARCHAR(50) NOT NULL,
                                      brand_status_key   		    INT NOT NULL,
+                                     first_time boolean default 1,
                                      FOREIGN KEY (user_id) REFERENCES `user`(user_id)
 );
+
+
+
 
 CREATE TABLE IF NOT EXISTS brand_amenities  (
                                                 amenitie_id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -123,6 +129,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               capacity                    INT,
                                               area                        DECIMAL(10, 2),
                                               city                        VARCHAR(255),
+                                              first_time boolean default 0,
                                               FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
 );
 
@@ -212,16 +219,7 @@ CREATE TABLE IF NOT EXISTS shift (
                                      FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
--- Transfer table to do the function related to transferring credit
-CREATE TABLE IF NOT EXISTS transfer (
-                                        transfer_id    INT AUTO_INCREMENT PRIMARY KEY,
-                                        sender_id      INT NOT NULL,
-                                        receiver_id    INT NOT NULL,
-                                        amount         DECIMAL(10, 2) NOT NULL,
-                                        transfer_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-                                        FOREIGN KEY (sender_id) REFERENCES `user`(user_id),
-                                        FOREIGN KEY (receiver_id) REFERENCES `user`(user_id)
-);
+
 
 -- Transaction table to do the function with transactions between credit and real money
 CREATE TABLE IF NOT EXISTS `transaction` (
@@ -249,11 +247,11 @@ CREATE TABLE IF NOT EXISTS `order` (
 CREATE TABLE IF NOT EXISTS order_plan_detail (
                                                  order_detail_id INT AUTO_INCREMENT PRIMARY KEY,
                                                  order_id        INT NOT NULL,
-                                                 name              VARCHAR(255) NOT NULL,
+                                                 name            VARCHAR(255) NOT NULL,
                                                  quantity        INT NOT NULL,
                                                  price_per_hours         DECIMAL(10, 2) NOT NULL,
                                                  price           DECIMAL(10, 2) NOT NULL,
-                                                 duration       INT NOT NULL,
+                                                 duration        INT NOT NULL,
                                                  plan_before_active_validity       INT NOT NULL,
                                                  plan_after_active_validity        INT NOT NULL,
                                                  gym_department_id                 INT NOT NULL,
@@ -261,9 +259,22 @@ CREATE TABLE IF NOT EXISTS order_plan_detail (
                                                  `item_status_key`   INT NOT NULL,
                                                  `plan_expired_time` DATETIME DEFAULT NULL,
                                                  `description`       TEXT,
-                                                 use_status         VARCHAR(100),
+                                                 use_status          VARCHAR(100),
                                                  FOREIGN KEY (order_id) REFERENCES `order`(order_id),
                                                  FOREIGN KEY (gym_department_id) REFERENCES gym_department(gym_department_id)
+);
+
+-- Transfer table to do the function related to transferring credit history
+CREATE TABLE IF NOT EXISTS transfer_credit_history (
+                                                       transfer_id      INT AUTO_INCREMENT PRIMARY KEY,
+                                                       sender_id        INT NOT NULL,
+                                                       receiver_id      INT NOT NULL,
+                                                       amount           DECIMAL(10, 2) NOT NULL,
+                                                       order_detail_id  INT NOT NULL,
+                                                       transfer_date    DATETIME DEFAULT CURRENT_TIMESTAMP,
+                                                       FOREIGN KEY (order_detail_id) REFERENCES order_plan_detail (order_detail_id),
+                                                       FOREIGN KEY (sender_id) REFERENCES `user`(user_id),
+                                                       FOREIGN KEY (receiver_id) REFERENCES `user`(user_id)
 );
 
 -- User Inventory table to store user inventory information

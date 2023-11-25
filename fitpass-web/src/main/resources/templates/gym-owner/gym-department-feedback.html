@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="gym-owner/common/head"></th:block>
 
 <body id="page-top">
@@ -28,8 +28,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h2 class="m-0 font-weight-bold text-primary">Chi tiết đánh giá</h2>
+                            <div class="feedback-img col-lg-12" th:style="'background-image: url(' + ${departmentDetails.getDepartmentWallpaperUrl()} + ');'">
                             <div class="feedback-img col-lg-12">
-                                <h2 class="title-feedback">Cơ sở Cầu Giấy</h2>
+                                <h2 class="title-feedback" th:text="${departmentDetails.getDepartmentName()}">Cơ sở Cầu Giấy</h2>
                             </div>
                         </div>
                         <div class="card-body">
@@ -48,37 +49,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Lê Đình Tuấn</td>
-                                            <td>0987654321</td>
-                                            <td>tuanld2001@gmail.com</td>
-                                            <td>Gói linh hoạt</td>
-                                            <td>2023-10-15</td>
-                                            <td><i data-star="4"></i></td>
-                                            <td>Hôm nay phòng tập hơi đông, điều hòa không đủ mát. Rất mong mọi người có
-                                                thể khắc phục sự bất tiện này</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Nguyễn Văn Trung</td>
-                                            <td>0987654321</td>
-                                            <td>tuanld2001@gmail.com</td>
-                                            <td>Gói 3 ngày</td>
-                                            <td>2023-10-15</td>
-                                            <td><i data-star="1"></i></td>
-                                            <td>Quá tệ</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Lê Trung Đức</td>
-                                            <td>0987654321</td>
-                                            <td>tuanld2001@gmail.com</td>
-                                            <td>Gói 3 ngày</td>
-                                            <td>2023-10-15</td>
-                                            <td><i data-star="4"></i></td>
-                                            <td>Phòng tập máy chạy bộ bị hỏng</td>
-                                        </tr>
+                                        <th:block th:each="f : ${userFeedbackList}">
+                                            <tr>
+                                                <td th:text="${fStat.index + 1}">1</td>
+                                                <td th:text="${f.userName}">Lê Đình Tuấn</td>
+                                                <td th:text="${f.phoneNumber}">0987654321</td>
+                                                <td th:text="${f.email}">tuanld2001@gmail.com</td>
+                                                <td th:text="${f.gymPlanName}">Gói linh hoạt</td>
+                                                <td th:text="${#temporals.format(f.getFeedbackTime(), 'dd-MM-yyyy HH:mm:ss')}">2023-10-15</td>
+                                                <td><i data-star="4" th:attr="data-star=${f.getRating()}"></i></td>
+                                                <td th:text="${f.comments}">Hôm nay phòng tập hơi đông, điều hòa không đủ mát. Rất mong mọi người có
+                                                    thể khắc phục sự bất tiện này</td>
+                                            </tr>
+                                        </th:block>
                                     </tbody>
                                 </table>
                             </div>

@@ -22,7 +22,7 @@ public class GymOwnerUpdateDTO {
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")
     private String firstName;
 
-    @Size(max = 50, message = "Tên của bạn không được vượt quá 25 kí tự !")
+    @Size(max = 25, message = "Tên của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập tên của bạn !")
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Tên của bạn không được chứa kí tự đặc biệt !")
     private String lastName;
@@ -41,6 +41,7 @@ public class GymOwnerUpdateDTO {
 
     @NotNull(message = "Vui lòng nhập ngày sinh !")
     @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
@@ -61,7 +62,7 @@ public class GymOwnerUpdateDTO {
 
     private Integer departmentId;
     private Integer userId;
-
+    private String oldEmail;
 
 
     @Target({ ElementType.FIELD })

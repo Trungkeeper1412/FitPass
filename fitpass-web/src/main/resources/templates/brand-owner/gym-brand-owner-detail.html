@@ -46,6 +46,7 @@
                                             <input th:field="*{userDetailId}" type="hidden" th:value="${gymOwner.getUserDetailId()}" name="userDetailId">
                                             <input th:field="*{oldDepartmentId}" type="hidden" th:value="${gymOwner.oldDepartmentId}" name="oldDepartmentId">
                                         </div>
+
                                         <div class="col-md-5 mb-4">
                                             <div class="mb-4">
                                                 <label for="firt-name" class="form-label fw-bold">Họ :</label>
@@ -57,6 +58,7 @@
                                                 <label for="email" class="form-label fw-bold">Email :</label>
                                                 <input th:field="*{email}" th:value="${gymOwner.getEmail()}" type="text" class="form-control" id="email"
                                                     name="email" placeholder="Nhập gmail">
+                                                <input th:field="*{oldEmail}" th:value="${gymOwner.getEmail()}" type="hidden">
                                                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</span>
                                             </div>
                                             <div class="mb-4">

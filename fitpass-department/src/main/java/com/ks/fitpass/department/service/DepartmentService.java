@@ -61,4 +61,12 @@ public interface DepartmentService {
     int updateGymOwnerDepartmentInfo(Department department);
 
     int updateGymOwnerDepartmentInfoDetails(Department department);
+
+    int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl);
+
+    int updateLongitudeLatitude(int departmentId, double longitude, double latitude);
+
+    boolean checkFirstTimeDepartmentCreated(int departmentId);
+
+    int updateFirstTimeDepartmentCreated(int departmentId);
 }

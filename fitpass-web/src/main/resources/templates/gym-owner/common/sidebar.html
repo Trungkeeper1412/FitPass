@@ -8,6 +8,7 @@
     <div class="sidebar-brand-text mx-3">Quản lý cơ sở</div>
   </a>
 
+  <th:block th:if="${!isFirstTime}">
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
 
@@ -27,13 +28,6 @@
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link" th:href="@{/gym-owner/index}">
-      <i class="bi bi-server"></i>
-      <span>Cơ sở</span>
-    </a>
-  </li>
-
   <li class="nav-item">
     <a class="nav-link" th:href="@{/gym-owner/employee/list}">
       <i class="fas fa-users fa-fw"></i>
@@ -110,9 +104,9 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
-
+  </th:block>
   <!-- Sidebar Toggler (Sidebar) -->
-  <div class="text-center d-none d-md-inline">
+  <div class="text-center d-none d-md-inline mt-2">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
   </div>
 

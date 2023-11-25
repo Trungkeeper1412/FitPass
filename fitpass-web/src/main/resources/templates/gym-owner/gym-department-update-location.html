@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -23,6 +23,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card">
+                        <form action="/gym-owner/department/location" method="post" th:object="${updateGymOwnerDepartmentLocation}">
                         <div class="card-header">
                             <h2 class="fw-bold text-primary">Cập nhật vị trí</h2>
                         </div>
@@ -38,16 +39,18 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="latitude" class="form-label fw-bold">Vĩ độ :</label>
-                                            <input type="text" class="form-control" id="latitude" name="latitude"
-                                                placeholder="Nhập vĩ độ">
+                                            <input th:value="${updateGymOwnerDepartmentLocation.getLatitude()}" type="text" class="form-control" id="latitude" name="latitude"
+                                                   placeholder="Nhập kinh độ" th:field="*{latitude}" />
+                                            <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{latitude}" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="longitude" class="form-label fw-bold">Kinh độ
                                                 :</label>
-                                            <input type="text" class="form-control" id="longitude" name="longitude"
-                                                placeholder="Nhập kinh độ">
+                                            <input th:value="${updateGymOwnerDepartmentLocation.getLongitude()}" type="text" class="form-control" id="longitude" name="longitude"
+                                                   placeholder="Nhập kinh độ" th:field="*{longitude}" />
+                                            <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -56,6 +59,7 @@
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

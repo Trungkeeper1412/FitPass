@@ -40,46 +40,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_USER, new DepartmentMapper(), userId);
     }
 
-    @Override
-//    public List<Department> getAllByStatus(int status, int page, int size, String city, String sortPrice, String sortRating,
-//                                           double userLatitude, double userLongitude, String belowDistance) throws DataAccessException {
-//        int offset = (page - 1) * size;
-//        String sql = GET_ALL_DEPARTMENT_BY_STATUS;
-//
-//        if(userLatitude != 0 && userLongitude != 0) {
-//            sql += " HAVING distance <= " + belowDistance + "\n";
-//        }
-//
-//        if(sortRating != null && !sortRating.isEmpty()) {
-//            sql +=  " AND d.rating >=  " + sortRating + " \n";
-//        }
-//
-//        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
-//            sql +=  " AND d.city =  '"+city+"'\n";
-//        }
-//
-//        if(sortPrice != null && !sortPrice.isEmpty()) {
-//            if(sortPrice.equals("lowToHigh")) {
-//                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc, \n" +
-//                        " COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) asc \n";
-//            } else {
-//                sql += " ORDER BY COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc, \n" +
-//                        " COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.gym_department_id = d.gym_department_id), 0) desc \n";
-//            }
-//        }
-//
-//        if(userLatitude == 0 && userLongitude == 0) {
-//            if(sortPrice == null || sortPrice.isEmpty()) {
-//                sql += "ORDER BY d.rating DESC";
-//            } else {
-//                sql += ", d.rating DESC";
-//            }
-//        }
-//
-//        sql += " LIMIT " + size + " OFFSET " + offset;
-//
-//        return jdbcTemplate.query(sql, new DepartmentHomePageMapper(), userLatitude, userLongitude, userLatitude, status);
-//    }
     public List<Department> getAllByStatus(int status, int page, int size, String city,
                                            String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance)
             throws DataAccessException {
@@ -230,7 +190,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public int createDepartmentWithBrandId(int brandId, String name) {
-        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2);
+        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2,1);
     }
 
     @Override
@@ -329,5 +289,26 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
                 department.getLatitude(),
                 department.getLongitude(),
                 department.getDepartmentId());
+    }
+
+    @Override
+    public int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_IMAGE, imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl, departmentId);
+    }
+
+    @Override
+    public int updateLongitudeLatitude(int departmentId, double longitude, double latitude) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_LONGITUDE_LATITUDE, longitude, latitude, departmentId);
+    }
+
+    @Override
+    public boolean checkFirstTimeDepartmentCreated(int departmentId) {
+        int count = jdbcTemplate.queryForObject(IRepositoryQuery.CHECK_FIRST_TIME_DEPARTMENT_CREATED, Integer.class, departmentId);
+        return count > 0;
+    }
+
+    @Override
+    public int updateFirstTimeDepartmentCreated(int departmentId) {
+        return jdbcTemplate.update(IRepositoryQuery.UPDATE_FIRST_TIME_DEPARTMENT_CREATED, departmentId);
     }
 }

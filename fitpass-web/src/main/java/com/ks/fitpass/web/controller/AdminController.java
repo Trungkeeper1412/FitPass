@@ -52,4 +52,9 @@ public class AdminController {
     public String getWithdrawalHistory() {
         return "admin/admin-withdrawal-history";
     }
+
+    @GetMapping("/registration/list")
+    public String getRegistrationList() {
+        return "admin/admin-registration-list";
+    }
 }

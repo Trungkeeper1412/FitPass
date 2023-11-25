@@ -286,6 +286,7 @@ public class BrandOwnerController {
         gymOwnerUpdateDTO.setDepartmentId(ud.getGymDepartmentId());
         gymOwnerUpdateDTO.setOldDepartmentId(ud.getGymDepartmentId());
         gymOwnerUpdateDTO.setUserId(userId);
+        gymOwnerUpdateDTO.setOldEmail(ud.getEmail());
 
         model.addAttribute("gymOwner", gymOwnerUpdateDTO);
         model.addAttribute("filteredList", filteredList);
@@ -295,9 +296,13 @@ public class BrandOwnerController {
     @PostMapping("/gym-owner/update")
     public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner")GymOwnerUpdateDTO gymOwnerUpdateDTO,
                                         BindingResult bindingResult) {
-        if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email already exist");
+
+        if(!gymOwnerUpdateDTO.getEmail().equals(gymOwnerUpdateDTO.getOldEmail())) {
+            if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
+                bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+            }
         }
+
         if(bindingResult.hasErrors()) {
             return "brand-owner/gym-brand-owner-detail";
         }
@@ -311,12 +316,13 @@ public class BrandOwnerController {
         userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
         userDetail.setGender(gymOwnerUpdateDTO.getGender());
         userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
-        userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard());
+        userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard()) ;
 
         // Update user detail
         userService.updateUserDetail(userDetail);
 
         userService.updateUserStatusByUserId(gymOwnerUpdateDTO.getUserId(), gymOwnerUpdateDTO.isUserDeleted() ? 1 : 0);
+
         if(gymOwnerUpdateDTO.getDepartmentId() == -1 ) {
             if(gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
                 departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
@@ -332,6 +338,7 @@ public class BrandOwnerController {
         if(gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
             departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
         }
+
         if(gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
             departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
         }

@@ -30,7 +30,7 @@
             </div>
           </div>
           <!-- Modal Add Feature-->
-          <div class="modal fade" id="addModalFeature" tabindex="-1" role="dialog" aria-labelledby="addFeature" aria-hidden="true">
+          <div class="modal fade" id="addModalFeature" role="dialog" aria-labelledby="addFeature" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -48,7 +48,32 @@
                     </div>
                     <div class="form-group">
                       <label for="icon">Nhập tên icon:</label>
-                      <input type="text" class="form-control" id="icon" placeholder="Ví dụ: <i class=&#34;bi bi-p-circle&#34;></i>">
+                      <div class="row">
+                        <div class="select2-wrapper" id="icon">
+                          <select class="input icons_select2">
+                            <option value="bi-p-circle" data-icon="bi-p-circle">Bãi đỗ xe</option>
+                            <option value="fa-scroll" data-icon="fa-scroll">Khăn miễn phí</option>
+                            <option value="fa-medkit" data-icon="fa-medkit">Phòng y tế</option>
+                            <option value="fa-cocktail" data-icon="fa-cocktail">Quầy nước</option>
+                            <option value="bi-cloud-haze2" data-icon="bi-cloud-haze2">Phòng xông hơi</option>
+                            <option value="fa-shower" data-icon="fa-shower">Phòng tắm</option>
+                            <option value="fa fa-bed" data-icon="fa fa-bed">Phòng thay đồ</option>
+                            <option value="fa fa-coffee" data-icon="fa fa-coffee">Khu vực nghỉ ngơi</option>
+                            <option value="fa fa-utensils" data-icon="fa fa-utensils">Khu vực ăn uống</option>
+                            <option value="bi-bicycle" data-icon="bi-bicycle">Khu vực đạp xe</option>
+                            <option value="bi-calendar" data-icon="bi-calendar">Lịch hẹn</option>
+                            <option value="fa fa-wifi" data-icon="fa fa-wifi">Wi-Fi</option>
+                            <option value="fa fa-fire-extinguisher" data-icon="fa fa-fire-extinguisher">Hệ thống an toàn</option>
+                            <option value="fa fa-thermometer" data-icon="fa fa-thermometer">Đo nhiệt độ</option>
+                            <option value="fa fa-music" data-icon="fa fa-music">Âm nhạc</option>
+                            <option value="bi-person" data-icon="bi-person">Hướng dẫn viên</option>
+                            <option value="fa fa-spa" data-icon="fa fa-spa">Khu vực Spa</option>
+                            <option value="fa fa-smoking" data-icon="fa fa-smoking">Khu vực hút thuốc</option>
+                            <option value="fa fa-child" data-icon="fa fa-child">Khu vực trẻ em</option>
+                            <option value="fa fa-tree" data-icon="fa fa-tree">Khu vực tập luyện ngoại ô</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -60,7 +85,7 @@
             </div>
           </div>
           <!-- Modal Update Feature -->
-          <div class="modal fade" id="updateModalFeature" tabindex="-1" role="dialog" aria-labelledby="updateFeature" aria-hidden="true">
+          <div class="modal fade" id="updateModalFeature" role="dialog" aria-labelledby="updateFeature" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">

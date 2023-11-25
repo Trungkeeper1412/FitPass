@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -47,36 +47,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><img src="./img/undraw_profile_2.svg" alt="Thumbnail 1"></td>
-                                            <td>Lê Đình Tuấn</td>
-                                            <td>0987654321</td>
-                                            <td>ldt2001@gmail.com</td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/gym-owner/employee/details}"
-                                                   class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><img src="./img/undraw_profile_2.svg" alt="Thumbnail 1"></td>
-                                            <td>Mai Quang Trường</td>
-                                            <td>0987654321</td>
-                                            <td>ldt2001@gmail.com</td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/gym-owner/employee/details}"
-                                                   class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><img src="./img/undraw_profile_1.svg" alt="Thumbnail 1"></td>
-                                            <td>Nguyễn Trà My</td>
-                                            <td>0987654321</td>
-                                            <td>ldt2001@gmail.com</td>
-                                            <td>Hoạt động</td>
-                                            <td><a th:href="@{/gym-owner/employee/details}"
-                                                   class="btn btn-primary">Cập nhật</a></td>
-                                        </tr>
+                                        <th:block th:each="e : ${listOfEmployee}">
+                                            <tr>
+                                                <td th:text="${eStat.index + 1}">1</td>
+                                                <td><img th:src="${e.getImageUrl()}" alt="Thumbnail 1"></td>
+                                                <td th:text="${e.getFirstName() + ' ' + e.getLastName()}">Lê Đình Tuấn</td>
+                                                <td th:text="${e.getPhoneNumber()}">0987654321</td>
+                                                <td th:text="${e.getEmail()}">ldt2001@gmail.com</td>
+                                                <td th:text="${e.isUserDeleted() ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
+                                                <td><a th:href="@{/gym-owner/employee/details(id1=${e.getUserId()},id2=${e.getUserDetailId()})}"
+                                                       class="btn btn-primary">Cập nhật</a></td>
+                                            </tr>
+                                        </th:block>
                                     </tbody>
                                 </table>
                             </div>

@@ -538,8 +538,8 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
             """;
 
     String CREATE_DEPARTMENT_WITH_BRAND_ID = """
-                INSERT INTO gym_department (name, brand_id, gym_department_status_key)
-                VALUES (?, ?, ?);
+                INSERT INTO gym_department (name, brand_id, gym_department_status_key,first_time)
+                VALUES (?, ?, ?,?);
             """;
 
     String UPDATE_DEPARTMENT_GYM_OWNER = """
@@ -634,6 +634,42 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
 
     String DELETE_ALL_DEPARTMENT_SCHEDULE = """
                 DELETE FROM gym_department_schedule
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_DEPARTMENT_IMAGE = """
+                UPDATE gym_department
+                SET logo_url = ?, thumbnail_url = ?, wallpaper_url = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_DEPARTMENT_LONGITUDE_LATITUDE = """
+                UPDATE gym_department
+                SET longitude = ?, latitude = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_DEPARTMENT_ALBUMS_BY_ID_DEPARTMENT = """
+                DELETE FROM gym_department_albums
+                WHERE gym_department_id = ?;
+            """;
+
+    String INSERT_DEPARTMENT_ALBUM = """
+                INSERT INTO gym_department_albums
+                (gym_department_id, photo_url)
+                VALUES(?, ?);
+            """;
+
+    String CHECK_FIRST_TIME_DEPARTMENT_CREATED = """
+                SELECT COUNT(*)
+                FROM gym_department
+                WHERE gym_department_id = ?
+                AND first_time = 1;
+            """;
+
+    String UPDATE_FIRST_TIME_DEPARTMENT_CREATED = """
+                UPDATE gym_department
+                SET first_time = 0
                 WHERE gym_department_id = ?;
             """;
 }

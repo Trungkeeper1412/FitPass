@@ -140,12 +140,4 @@ public class HomepageController {
             throw new IllegalArgumentException("Invalid distance format.");
         }
     }
-
-    @GetMapping("/profile/calendar")
-    public String getCalendar() {
-        return "user/calendar";
-    }
-
-
-
 }

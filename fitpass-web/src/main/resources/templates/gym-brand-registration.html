@@ -26,7 +26,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <ol>
-                    <li><a href="/">Fitpass</a></li>
+                    <li><a href="/static">Fitpass</a></li>
                     <li>Trở thành đối tác</li>
                 </ol>
             </div>
@@ -60,28 +60,18 @@
                     <form>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="venueName" class="form-label">Tên phòng tập :</label>
+                                <label for="venueName" class="form-label">Tên thương hiệu :</label>
                                 <input type="text" class="form-control" id="venueName" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="location" class="form-label">Vị trí :</label>
+                                <label for="location" class="form-label">Địa chỉ :</label>
                                 <input type="text" class="form-control" id="location" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName" class="form-label">Tên :</label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName" class="form-label">Họ :</label>
-                                <input type="text" class="form-control" id="lastName" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email :</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <label for="fullName" class="form-label">Họ và Tên :</label>
+                                <input type="text" class="form-control" id="fullName" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="phoneNumber" class="form-label">Số điện thoại :</label>
@@ -94,16 +84,13 @@
                                 <input type="url" class="form-control" id="websiteURL" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="businessType" class="form-label">Loại hình kinh doanh :</label>
-                                <select class="form-select" id="businessType" required>
-                                    <option value="" disabled selected>Chọn...</option>
-                                    <option value="Phòng tập thể dục">Phòng tập thể dục</option>
-                                    <option value="Phòng tập thể hình">Phòng tập thể hình</option>
-                                    <option value="Phòng tập yoga">Phòng tập yoga</option>
-                                </select>
+                                <label for="email" class="form-label">Email liên hệ :</label>
+                                <input type="email" class="form-control" id="email" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Bắt đầu ngay</button>
+                        <div class="d-flex justify-content-center">
+                            <a th:href="@{/user/gym-brand-registration/successful}" type="submit" class="btn btn-primary mt-3">Đăng ký</a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -144,7 +131,7 @@
                     <img th:src="@{/user-homepage-assets/assets/img/brand/icon/all-icon.jpg}" alt="ClassPass Partner Logo" class="container center-image">
                 </div>
             </div>
-        </section>        
+        </section>
 
         <section id="service" class="about">
             <h3 class="text-center mt-4 fw-bold">Bạn có các dịch vụ nổi bật? Hãy cho chúng tôi biết</h3>
@@ -207,13 +194,14 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <th:block th:include="common/footer :: footer"></th:block>
+    <footer th:replace="common/footer :: footer"></footer>
 
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <th:block th:include="common/vendor-script"></th:block>
+    <!-- Vendor JS Files -->
+    <th:block th:insert="common/vendor-script"></th:block>
 
 </body>
 </html>
