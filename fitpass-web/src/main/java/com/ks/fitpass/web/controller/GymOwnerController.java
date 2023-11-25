@@ -366,7 +366,8 @@ public class GymOwnerController {
 
         // Update first time login status
         User user = (User) session.getAttribute("userInfo");
-        int rowfirstTimeLogin = userService.updateFirstTimeLoginStatus(user.getUserId(), 0);
+        Department departmentDetails = departmentService.getByUserId(user.getUserId());
+        int rowfirstTimeLogin = departmentService.updateFirstTimeDepartmentCreated(departmentDetails.getDepartmentId());
 
         // Check if any row is 0
         if(numRowInsertSchedule == 0 || numRowUpdateDepartment == 0 || rowFeature == 0 || rowfirstTimeLogin == 0
@@ -693,8 +694,10 @@ public class GymOwnerController {
         boolean isFirstTimeInSession = session.getAttribute("isFirstTime") != null
                 ? (boolean) session.getAttribute("isFirstTime")
                 : false;
+        Department departmentDetails = departmentService.getByUserId(user.getUserId());
+        int departmentId = departmentDetails.getDepartmentId();
 
-        boolean isFirstTimeInDB = userService.checkAccountFirstTimeLogin(user.getUserId());
+        boolean isFirstTimeInDB = departmentService.checkFirstTimeDepartmentCreated(departmentId);
 
         if (isFirstTimeInDB != isFirstTimeInSession) {
             // Giá trị isFirstTime trong DB khác với giá trị trong session
