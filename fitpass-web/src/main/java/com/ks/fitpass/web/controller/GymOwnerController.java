@@ -85,12 +85,13 @@ public class GymOwnerController {
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
         List<GymOwnerListDTO> listOfEmployee = userService.getAllAccountByDepartmentId(departmentDetails.getDepartmentId());
+
         model.addAttribute("listOfEmployee", listOfEmployee);
         return "gym-owner/gym-department-employee-list";
     }
 
     @GetMapping("/employee/details")
-    public String getEmployeeDetails(HttpSession session, Model model, @RequestParam("id") int userDetailId) {
+    public String getEmployeeDetails(HttpSession session, Model model,@RequestParam("id1") int userId, @RequestParam("id2") int userDetailId) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         if(isFirstTime) {
             return "redirect:/gym-owner/department/update-details";
@@ -109,7 +110,11 @@ public class GymOwnerController {
         employeUpdateDTO.setGender(ud.getGender());
         employeUpdateDTO.setImageUrl(ud.getImageUrl());
         employeUpdateDTO.setIdCard(ud.getSecurityId());
+        employeUpdateDTO.setUserId(userId);
+
         employeUpdateDTO.setUserDeleted(ud.isUserDeleted());
+
+
         model.addAttribute("employeeInfo", employeUpdateDTO);
         return "gym-owner/gym-department-employee-detail";
     }
@@ -119,6 +124,12 @@ public class GymOwnerController {
                                         @Valid @ModelAttribute("employeeInfo") EmployeUpdateDTO employeeInfo,
                                         BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+
+        if(!employeeInfo.getEmail().equals(employeeInfo.getOldEmail())) {
+            if(userService.checkEmailExist(employeeInfo.getEmail())) {
+                bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+            }
+        }
 
         if(bindingResult.hasErrors()) {
             return "/gym-owner/gym-department-employee-detail";
@@ -133,12 +144,14 @@ public class GymOwnerController {
         userDetail.setDateOfBirth(employeeInfo.getDateOfBirth());
         userDetail.setImageUrl(employeeInfo.getImageUrl());
         userDetail.setGender(employeeInfo.getGender());
-        userDetail.setUserDeleted(employeeInfo.isUserDeleted());
+        userDetail.setSecurityId(employeeInfo.getIdCard());
 
         userService.updateUserDetail(userDetail);
+
+        userService.updateUserStatusByUserId(employeeInfo.getUserId(), employeeInfo.isUserDeleted() ? 1 : 0);
+
         return "redirect:/gym-owner/employee/list";
     }
-
 
     @GetMapping("/employee/add")
     public String addEmployee(HttpSession session, Model model) {
@@ -157,7 +170,7 @@ public class GymOwnerController {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
 
         if(userService.checkEmailExist(employeeInfo.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email already exist");
+            bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
         }
 
         if(bindingResult.hasErrors()) {
