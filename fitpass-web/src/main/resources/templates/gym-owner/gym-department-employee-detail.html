@@ -39,6 +39,7 @@
                                         <img class="show-department-img" th:src="${employeeInfo.getImageUrl()}">
                                         <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" onchange="uploadImage(this);">
                                         <input th:field="*{imageUrl}" type="hidden" id="avatarImg" th:value="${employeeInfo.getImageUrl()}" name="imageUrl">
+                                        <input th:field="*{userId}" type="hidden" th:value="${userId}" name="userId">
                                         <input th:field="*{userDetailId}" type="hidden" th:value="${employeeInfo.getUserDetailId()}" name="userDetailId">
                                     </div>
                                     <div class="col-md-5 mb-3">
@@ -51,9 +52,10 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label fw-bold">Email :</label>
-                                            <input th:field="*{email}" type="text" class="form-control" id="email"
-                                                placeholder="Nhập gmail" th:value="${employeeInfo.email}">
-                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">firstName Error</span>
+                                            <input th:field="*{email}" th:value="${employeeInfo.getEmail()}" type="text" class="form-control" id="email"
+                                                   name="email" placeholder="Nhập gmail" >
+                                            <input th:field="*{oldEmail}" th:value="${employeeInfo.getEmail()}" type="hidden">
+                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label fw-bold">Địa chỉ :</label>
