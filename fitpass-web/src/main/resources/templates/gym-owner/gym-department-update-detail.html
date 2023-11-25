@@ -34,7 +34,6 @@
                                             <ul id="progressbar">
                                                 <li class="active">Thông tin cơ bản</li>
                                                 <li>Chọn gói tập</li>
-                                                <li>Quản lý hình ảnh</li>
                                                 <li>Chọn dịch vụ</li>
                                                 <li>Chọn tiện ích</li>
                                                 <li>Xác định vị trí</li>
@@ -449,92 +448,6 @@
                                                         </div>
                                                     </div>
                                                 </section>
-                                                <input type="button" name="previous"
-                                                       class="previous action-button-previous"
-                                                       value="Previous"/>
-                                                <input type="button" name="next" class="next action-button"
-                                                       value="Next"/>
-                                            </fieldset>
-                                            <!-- Quản lý hình ảnh -->
-                                            <fieldset>
-                                                <h2 class="fs-title">Quản lý hình ảnh</h2>
-                                                <div class="row text-start">
-                                                    <div class="col-md-4">
-                                                        <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
-                                                        <div class="image-container">
-                                                            <img th:src="@{/images/system/no_image.png}" alt="Image">
-                                                            <div class="image-actions">
-                                                                <button class="img-edit-button" type="button"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        data-image-type="logo"
-                                                                        title="Chỉnh sửa hình ảnh"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
-                                                            :</label>
-                                                        <div class="image-container">
-                                                            <img th:src="@{/images/system/no_image.png}" alt="Image">
-                                                            <div class="image-actions">
-                                                                <button class="img-edit-button" type="button"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        data-image-type="thumbnail"
-                                                                        title="Chỉnh sửa hình ảnh"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
-                                                            :</label>
-                                                        <div class="image-container">
-                                                            <img th:src="@{/images/system/no_image.png}" alt="Image">
-                                                            <div class="image-actions">
-                                                                <button class="img-edit-button" type="button"
-                                                                        data-image-type="wallpaper"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        title="Chỉnh sửa hình ảnh"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="album-separator"></div>
-                                                <div class="row text-start">
-                                                    <div class="col">
-                                                        <div class="d-flex justify-content-between pt-3">
-                                                            <label for="album" class="form-label fw-bold fs-4">Album
-                                                                ảnh:</label>
-                                                            <input type="file" id="imageInput" style="display: none;"
-                                                                   accept="image/*">
-                                                            <a class="fw-bold fs-5 text-black" id="addImageButton">Thêm
-                                                                ảnh</a>
-                                                        </div>
-                                                        <div class="row-add">
-                                                            <div class="col-md-4">
-                                                                <div class="image-container">
-                                                                    <img th:src="@{/images/system/list-empty.jpg}"
-                                                                         alt="Image">
-                                                                    <div class="image-actions">
-                                                                        <button class="img-edit-button" type="button"
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                data-image-type="albums"
-                                                                                title="Chỉnh sửa hình ảnh"><i
-                                                                                class="fas fa-edit"></i></button>
-                                                                        <button class="img-delete-button" type="button"
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="Xóa hình ảnh"><i
-                                                                                class="fas fa-trash"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <input type="button" name="previous"
                                                        class="previous action-button-previous"
                                                        value="Previous"/>
