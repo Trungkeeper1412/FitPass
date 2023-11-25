@@ -25,11 +25,12 @@ public class UpdateGymOwnerDepartmentInfo {
     @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
     private String departmentContactNumber;
 
-    @NotEmpty(message = "Vui lòng nhập nhập mô tả thông tin cơ sở !")
+    @NotEmpty(message = "Vui lòng nhập mô tả thông tin cơ sở !")
     @Size(min = 2, max = 250, message = "Mô tả thông tin cơ sở phải nằm trong khoảng 2 đến 250 kí tự !")
     private String departmentDescription;
 
-    @Min(value = 1, message = "Capacity should be greater than 0")
+    @NotEmpty(message = "Vui lòng nhập sức chứa của cơ sở !")
+    @Min(value = 1, message = "Sức chứa phải lơn hơn 0")
     private int capacity;
 
     @Min(value = 1, message = "Area should be greater than 0")
