@@ -111,9 +111,8 @@ public class GymOwnerController {
         employeUpdateDTO.setImageUrl(ud.getImageUrl());
         employeUpdateDTO.setIdCard(ud.getSecurityId());
         employeUpdateDTO.setUserId(userId);
-
         employeUpdateDTO.setUserDeleted(ud.isUserDeleted());
-
+        employeUpdateDTO.setOldEmail(ud.getEmail());
 
         model.addAttribute("employeeInfo", employeUpdateDTO);
         return "gym-owner/gym-department-employee-detail";
