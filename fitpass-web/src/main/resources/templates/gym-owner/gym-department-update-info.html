@@ -58,7 +58,7 @@
                                         <div class="mb-3">
                                             <label for="capacity" class="form-label fw-bold">Sức chứa
                                                 :</label>
-                                            <input th:field="*{capacity}" type="text" class="form-control" id="capacity"
+                                            <input th:field="*{capacity}" type="number" class="form-control" id="capacity"
                                                    name="capacity" th:value="${updateGymOwnerDepartmentInfo.getCapacity()}">
                                             <span th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}">Error</span>
                                         </div>
