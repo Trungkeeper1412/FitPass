@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class UpdateGymOwnerDepartmentLocation {
-    
+
     @NotEmpty(message = "Vui lòng nhập kinh độ !")
     @Pattern(regexp = "^-?([0-8]?[0-9]|90)(\\.\\d{1,8})?$", message = "Kinh độ của bạn đang sai!")
     private String latitude;
