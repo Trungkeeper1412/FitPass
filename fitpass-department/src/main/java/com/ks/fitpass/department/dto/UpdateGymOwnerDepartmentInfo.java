@@ -30,10 +30,11 @@ public class UpdateGymOwnerDepartmentInfo {
     private String departmentDescription;
 
     @NotEmpty(message = "Vui lòng nhập sức chứa của cơ sở !")
-    @Min(value = 1, message = "Sức chứa phải lơn hơn 0")
+    @Min(value = 1, message = "Sức chứa phải lớn hơn 0")
     private int capacity;
 
-    @Min(value = 1, message = "Area should be greater than 0")
+    @NotEmpty(message = "Vui lòng nhập diện tích của cơ sở !")
+    @Min(value = 1, message = "Diện tích phải lớn hơn 0")
     private Double area;
 
     @NotEmpty(message = "Vui lòng chọn thành phố !")
