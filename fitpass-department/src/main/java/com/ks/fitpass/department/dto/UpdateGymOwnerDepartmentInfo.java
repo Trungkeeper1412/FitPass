@@ -31,7 +31,7 @@ public class UpdateGymOwnerDepartmentInfo {
 
     @NotNull(message = "Vui lòng nhập sức chứa của cơ sở !")
     @Min(value = 1, message = "Sức chứa phải lớn hơn 0")
-    private int capacity;
+    private Integer capacity;
 
     @NotNull(message = "Vui lòng nhập diện tích của cơ sở !")
     @Min(value = 1, message = "Diện tích phải lớn hơn 0")
