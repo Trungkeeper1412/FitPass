@@ -28,8 +28,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h2 class="m-0 font-weight-bold text-primary">Chi tiết đánh giá</h2>
+                            <div class="feedback-img col-lg-12" th:style="'background-image: url(' + ${departmentDetails.getDepartmentWallpaperUrl()} + ');'">
                             <div class="feedback-img col-lg-12">
-                                <h2 class="title-feedback" th:text="${departmentName}">Cơ sở Cầu Giấy</h2>
+                                <h2 class="title-feedback" th:text="${departmentDetails.getDepartmentName()}">Cơ sở Cầu Giấy</h2>
                             </div>
                         </div>
                         <div class="card-body">
