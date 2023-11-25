@@ -28,6 +28,32 @@
                     <div class="card-header py-3 d-flex justify-content-between">
                         <h2 class="m-0 font-weight-bold text-primary">Danh sách các thương hiệu</h2>
                     </div>
+                    <!-- Modal Chỉnh sửa -->
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí giao dịch áp dụng</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="editPercentage">Phần trăm phí rút tiền:</label>
+                                    <input type="text" class="form-control" id="editPercentage" name="editPercentage" value="10%">
+                                    <small id="percentageNote" class="form-text text-danger">
+                                        Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí rút tiền được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
+                                    </small>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -39,7 +65,7 @@
                                     <th>Số liên hệ cơ sở</th>
                                     <th>Email cơ sở</th>
                                     <th class="status-active">Trạng thái</th>
-                                    <th class="table-action">Hành động</th>
+                                    <th class="table-action">Phí giao dịch</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,7 +80,14 @@
                                         <option value="active">Hoạt động</option>
                                         <option value="deactive">Không hoạt động</option>
                                     </select></td>
-                                    <td><a th:href="@{/brand/brand-detail/6}" class="btn btn-primary">Xem chi tiết</a></td>
+                                    <td>
+                                        <div class="d-flex justify-content-evenly align-items-center">
+                                            <span class="fw-bold">10%</span>
+                                            <div class="btn" data-toggle="modal" data-target="#editModal">
+                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -67,7 +100,14 @@
                                         <option value="active">Hoạt động</option>
                                         <option value="deactive">Không hoạt động</option>
                                     </select></td>
-                                    <td><a th:href="@{/brand/brand-detail/1}" class="btn btn-primary">Xem chi tiết</a></td>
+                                    <td>
+                                        <div class="d-flex justify-content-evenly align-items-center">
+                                            <span class="fw-bold">10%</span>
+                                            <div class="btn" data-toggle="modal" data-target="#editModal">
+                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
@@ -80,7 +120,14 @@
                                         <option value="active">Hoạt động</option>
                                         <option value="deactive">Không hoạt động</option>
                                     </select></td>
-                                    <td><a th:href="@{/brand/brand-detail/9}" class="btn btn-primary">Xem chi tiết</a></td>
+                                    <td>
+                                        <div class="d-flex justify-content-evenly align-items-center">
+                                            <span class="fw-bold">11%</span>
+                                            <div class="btn" data-toggle="modal" data-target="#editModal">
+                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
@@ -93,7 +140,14 @@
                                         <option value="active">Hoạt động</option>
                                         <option value="deactive">Không hoạt động</option>
                                     </select></td>
-                                    <td><a th:href="@{/brand/brand-detail/12}" class="btn btn-primary">Xem chi tiết</a></td>
+                                    <td>
+                                        <div class="d-flex justify-content-evenly align-items-center">
+                                            <span class="fw-bold">12%</span>
+                                            <div class="btn" data-toggle="modal" data-target="#editModal">
+                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
