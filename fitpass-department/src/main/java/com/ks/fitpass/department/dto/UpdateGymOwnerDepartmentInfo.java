@@ -29,11 +29,11 @@ public class UpdateGymOwnerDepartmentInfo {
     @Size(min = 2, max = 250, message = "Mô tả thông tin cơ sở phải nằm trong khoảng 2 đến 250 kí tự !")
     private String departmentDescription;
 
-    @NotEmpty(message = "Vui lòng nhập sức chứa của cơ sở !")
+    @NotNull(message = "Vui lòng nhập sức chứa của cơ sở !")
     @Min(value = 1, message = "Sức chứa phải lớn hơn 0")
-    private int capacity;
+    private Integer capacity;
 
-    @NotEmpty(message = "Vui lòng nhập diện tích của cơ sở !")
+    @NotNull(message = "Vui lòng nhập diện tích của cơ sở !")
     @Min(value = 1, message = "Diện tích phải lớn hơn 0")
     private Double area;
 
@@ -44,26 +44,32 @@ public class UpdateGymOwnerDepartmentInfo {
     private String mondayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Hai")
     private String mondayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Ba")
     private String tuesdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Ba")
     private String tuesdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Tư")
     private String wednesdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Tư")
     private String wednesdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Năm")
     private String thursdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Năm")
     private String thursdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Sáu")
     private String fridayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Sáu")
     private String fridayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Bảy")
     private String saturdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Bảy")
     private String saturdayCloseTime;
+
     @NotEmpty(message = "Vui lòng chọn giờ mở cửa Chủ Nhật")
     private String sundayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Chủ Nhật")

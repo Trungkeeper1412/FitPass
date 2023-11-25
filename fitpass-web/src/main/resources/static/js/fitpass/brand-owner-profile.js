@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             } else if (type == "thumbnail") {
                                 $("#imageThumbnail").val(response)
                             } else if (type == "wallpaper") {
-                                $("imageWallpaper").val(response)
+                                $("#imageWallpaper").val(response)
                             }
                         },
                         error: function () {
@@ -396,9 +396,9 @@ $(".previous").click(function () {
     });
 });
 
-$(".submit").click(function () {
-    return false;
-})
+// $(".submit").click(function () {
+//     return false;
+// })
 
 function previewImage(input) {
     if (input.files && input.files[0]) {
@@ -413,6 +413,7 @@ function previewImage(input) {
     }
 }
 
+//Code Js submit update Profile
 $("#submitButton").click(function () {
     var profileData = {
         brandId: $("#brandId").val(),

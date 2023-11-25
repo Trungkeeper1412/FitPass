@@ -21,6 +21,8 @@ import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +54,8 @@ public class GymOwnerController {
     private final DepartmentFeatureService departmentFeatureService;
     private final WalletService walletService;
     private final Email emailService;
+
+    private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
@@ -411,6 +415,10 @@ public class GymOwnerController {
                                        BindingResult bindingResult, HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         if(bindingResult.hasErrors()) {
+            logger.error("Binding errors found:");
+            bindingResult.getAllErrors().forEach(error -> logger.error(error.toString()));
+
+
             User user = (User) session.getAttribute("userInfo");
             Department departmentDetails = departmentService.getByUserId(user.getUserId());
             int departmentId = departmentDetails.getDepartmentId();
@@ -605,21 +613,34 @@ public class GymOwnerController {
         User user = (User) session.getAttribute("userInfo");
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-        model.addAttribute("departmentDetails", departmentDetails);
+        UpdateGymOwnerDepartmentLocation updateGymOwnerDepartmentLocation = new UpdateGymOwnerDepartmentLocation();
+
+        updateGymOwnerDepartmentLocation.setLatitude(String.valueOf(departmentDetails.getLatitude()));
+        updateGymOwnerDepartmentLocation.setLongitude(String.valueOf(departmentDetails.getLongitude()));
+
+        model.addAttribute("updateGymOwnerDepartmentLocation", updateGymOwnerDepartmentLocation);
         return "gym-owner/gym-department-update-location";
     }
 
     @PostMapping("/department/location")
     public String updateDepartmentLocation(HttpSession session, Model model,
-                                           @RequestParam String latitude, @RequestParam String longitude) {
+                                           @Valid @ModelAttribute UpdateGymOwnerDepartmentLocation updateGymOwnerDepartmentLocation,
+                                           BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         if(isFirstTime) {
             return "redirect:/gym-owner/department/update-details";
         }
+
+        if (bindingResult.hasErrors()) {
+            // Nếu có lỗi validation, xử lý ở đây nếu cần
+            return "gym-owner/gym-department-update-location";
+        }
         User user = (User) session.getAttribute("userInfo");
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-        departmentService.updateLongitudeLatitude(departmentDetails.getDepartmentId(), Double.parseDouble(longitude), Double.parseDouble(latitude));
+        departmentService.updateLongitudeLatitude(departmentDetails.getDepartmentId(),
+                Double.parseDouble(updateGymOwnerDepartmentLocation.getLongitude()),
+                Double.parseDouble(updateGymOwnerDepartmentLocation.getLatitude()));
 
         return "redirect:/gym-owner/department/location";
     }

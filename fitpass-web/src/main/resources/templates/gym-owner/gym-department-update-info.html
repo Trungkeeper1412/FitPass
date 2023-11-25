@@ -4,73 +4,92 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="gym-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="gym-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="fw-bold text-primary">Cập nhật thông tin</h2>
-                        </div>
-                        <div class="card-body">
-                            <form action="/gym-owner/department/info" method="post" th:object="${updateGymOwnerDepartmentInfo}">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="fw-bold text-primary">Cập nhật thông tin</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="/gym-owner/department/info" method="post"
+                              th:object="${updateGymOwnerDepartmentInfo}">
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <input type="hidden" th:field="*{departmentId}" th:value="${updateGymOwnerDepartmentInfo.departmentId}">
+                                            <input type="hidden" th:field="*{departmentId}"
+                                                   th:value="${updateGymOwnerDepartmentInfo.departmentId}">
                                             <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                                 :</label>
-                                            <input th:field="*{departmentName}" type="text" class="form-control" id="name-brand"
-                                                   name="name-brand" th:value="${updateGymOwnerDepartmentInfo.getDepartmentName()}" readonly>
-                                            <span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}">Error</span>
+                                            <input th:field="*{departmentName}" type="text" class="form-control"
+                                                   id="name-brand"
+                                                   name="name-brand"
+                                                   th:value="${updateGymOwnerDepartmentInfo.getDepartmentName()}"
+                                                   readonly>
+                                            <span th:if="${#fields.hasErrors('departmentName')}"
+                                                  th:errors="*{departmentName}">Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="phone" class="form-label fw-bold">Số điện thoại
                                                 :</label>
-                                            <input th:field="*{departmentContactNumber}" type="text" class="form-control" id="phone" name="phone"
-                                                   placeholder="Nhập số điện thoại"  th:value="${updateGymOwnerDepartmentInfo.getDepartmentContactNumber()}">
-                                            <span th:if="${#fields.hasErrors('departmentContactNumber')}" th:errors="*{departmentContactNumber}">Error</span>
+                                            <input th:field="*{departmentContactNumber}" type="text"
+                                                   class="form-control" id="phone" name="phone"
+                                                   placeholder="Nhập số điện thoại"
+                                                   th:value="${updateGymOwnerDepartmentInfo.getDepartmentContactNumber()}">
+                                            <span th:if="${#fields.hasErrors('departmentContactNumber')}"
+                                                  th:errors="*{departmentContactNumber}">Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label fw-bold">Địa chỉ
                                                 :</label>
-                                            <input th:field="*{departmentAddress}" type="text" class="form-control" placeholder="Địa chỉ" th:value="${updateGymOwnerDepartmentInfo.getDepartmentAddress()}">
-                                            <span th:if="${#fields.hasErrors('departmentAddress')}" th:errors="*{departmentAddress}">Error</span>
+                                            <input th:field="*{departmentAddress}" type="text" class="form-control"
+                                                   placeholder="Địa chỉ"
+                                                   th:value="${updateGymOwnerDepartmentInfo.getDepartmentAddress()}">
+                                            <span th:if="${#fields.hasErrors('departmentAddress')}"
+                                                  th:errors="*{departmentAddress}">Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="capacity" class="form-label fw-bold">Sức chứa
                                                 :</label>
-                                            <input th:field="*{capacity}" type="text" class="form-control" id="capacity"
-                                                   name="capacity" th:value="${updateGymOwnerDepartmentInfo.getCapacity()}">
-                                            <span th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}">Error</span>
+                                            <input th:field="*{capacity}" type="number" class="form-control"
+                                                   id="capacity"
+                                                   name="capacity"
+                                                   th:value="${updateGymOwnerDepartmentInfo.getCapacity()}">
+                                            <span th:if="${#fields.hasErrors('capacity')}"
+                                                  th:errors="*{capacity}">Error</span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="area" class="form-label fw-bold">Diện tích :</label>
-                                            <input th:field="*{area}" type="text" class="form-control" id="area" name="area"
+                                            <input th:field="*{area}" type="text" class="form-control" id="area"
+                                                   name="area"
                                                    th:value="${updateGymOwnerDepartmentInfo.getArea()}">
                                             <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Error</span>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="provinceDropdown" class="form-label fw-bold">Chọn tỉnh/thành phố:</label>
-                                            <select th:field="*{city}" class="form-select" id="provinceDropdown" name="province" th:value="${updateGymOwnerDepartmentInfo.getCity()}">
+                                            <label for="provinceDropdown" class="form-label fw-bold">Chọn tỉnh/thành
+                                                phố:</label>
+                                            <select th:field="*{city}" class="form-select" id="provinceDropdown"
+                                                    name="province"
+                                                    th:value="${updateGymOwnerDepartmentInfo.getCity()}">
                                                 <option value="" disabled>Chọn tỉnh/thành phố</option>
                                                 <option value="Hà Nội">Hà Nội</option>
                                                 <option value="Hồ Chí Minh">Hồ Chí Minh</option>
@@ -139,7 +158,7 @@
                                                 Chọn giờ
                                             </button>
                                             <div class="pl-3" id="selectedOpenHours">
-                                                    <label style="margin: 0" id="resultText"></label>
+                                                <label style="margin: 0" id="resultText"></label>
                                             </div>
                                         </div>
                                         <!-- Modal -->
@@ -148,7 +167,8 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Chọn giờ hoạt động</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Chọn giờ hoạt
+                                                            động</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -164,22 +184,32 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody id="timeInputsBody">
-                                                                <th:block th:each="s : ${departmentSchedules}">
-                                                                    <tr>
-                                                                        <td th:text="${s.getDepartmentScheduleDay()}">Thứ 2</td>
-                                                                        <td><input th:value="${@timeConversionUtil.convertTimeStringToTimeValue(s.getDepartmentScheduleOpenTime())}" type="time" class="form-control start-time-input"></td>
-                                                                        <td><input th:value="${@timeConversionUtil.convertTimeStringToTimeValue(s.getDepartmentScheduleCloseTime())}" type="time" class="form-control end-time-input"></td>
-                                                                    </tr>
-                                                                </th:block>
+                                                            <th:block th:each="s : ${departmentSchedules}">
+                                                                <tr>
+                                                                    <td th:text="${s.getDepartmentScheduleDay()}">Thứ
+                                                                        2
+                                                                    </td>
+                                                                    <td><input
+                                                                            th:value="${@timeConversionUtil.convertTimeStringToTimeValue(s.getDepartmentScheduleOpenTime())}"
+                                                                            type="time"
+                                                                            class="form-control start-time-input"></td>
+                                                                    <td><input
+                                                                            th:value="${@timeConversionUtil.convertTimeStringToTimeValue(s.getDepartmentScheduleCloseTime())}"
+                                                                            type="time"
+                                                                            class="form-control end-time-input"></td>
+                                                                </tr>
+                                                            </th:block>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Đóng</button>
+                                                                data-dismiss="modal">Đóng
+                                                        </button>
                                                         <button type="button" class="btn btn-primary"
                                                                 id="saveChangesButton">Lưu
-                                                            thay đổi</button>
+                                                            thay đổi
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,94 +218,114 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="description" class="form-label fw-bold">Mô tả :</label>
-                                    <textarea th:field="*{departmentDescription}" style="width: 100%; padding: 10px;" rows="4" cols="50" name="comment"
+                                    <textarea th:field="*{departmentDescription}" style="width: 100%; padding: 10px;"
+                                              rows="4" cols="50" name="comment"
                                               th:text="${updateGymOwnerDepartmentInfo.getDepartmentDescription()}">
                                     </textarea>
-                                    <span th:if="${#fields.hasErrors('departmentDescription')}" th:errors="*{departmentDescription}">Error</span>
+                                    <span th:if="${#fields.hasErrors('departmentDescription')}"
+                                          th:errors="*{departmentDescription}">Error</span>
                                 </div>
                             </div>
                             <div class="pt-3 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                             </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="gym-owner/common/footer"></th:block>
-            <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="gym-owner/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <th:block th:replace="gym-owner/common/script"></th:block>
-    <script>
-        function convertTimeStringToTimeValue(timeString) {
-            // Tạo đối tượng Date từ chuỗi thời gian
-            const timeValue = new Date("January 1, 2023 " + timeString);
+</div>
+<!-- End of Page Wrapper -->
 
-            // Lấy giờ và phút từ đối tượng Date
-            const hours = timeValue.getHours();
-            const minutes = timeValue.getMinutes();
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<th:block th:replace="gym-owner/common/script"></th:block>
+<script>
+    function convertTimeStringToTimeValue(timeString) {
+        // Tạo đối tượng Date từ chuỗi thời gian
+        const timeValue = new Date("January 1, 2023 " + timeString);
 
-            // Format giờ và phút thành chuỗi "HH:mm"
-            const formattedTime = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+        // Lấy giờ và phút từ đối tượng Date
+        const hours = timeValue.getHours();
+        const minutes = timeValue.getMinutes();
 
-            // Trả về chuỗi "HH:mm"
-            return formattedTime;
+        // Format giờ và phút thành chuỗi "HH:mm"
+        const formattedTime = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+
+        // Trả về chuỗi "HH:mm"
+        return formattedTime;
+    }
+
+    function convertDay(day) {
+        switch (day) {
+            case 'thứ hai.':
+                return 'Monday';
+            case 'thứ ba':
+                return 'Tuesday';
+            case 'thứ tư':
+                return 'Wednesday';
+            case 'thứ năm':
+                return 'Thursday';
+            case 'thứ sáu':
+                return 'Friday';
+            case 'thứ bảy':
+                return 'Saturday';
+            case 'chủ nhật':
+                return 'Sunday';
+            default:
+                return day;
         }
+    }
 
-        function convertDay(day) {
-            switch (day) {
-                case 'Thứ 2': return 'Monday';
-                case 'Thứ 3': return 'Tuesday';
-                case 'Thứ 4': return 'Wednesday';
-                case 'Thứ 5': return 'Thursday';
-                case 'Thứ 6': return 'Friday';
-                case 'Thứ 7': return 'Saturday';
-                case 'Chủ nhật': return 'Sunday';
-                default: return day;
+    function updateExistingTimeInputs() {
+        console.log('Updating time inputs...');  // Log a message when the function is called
+        var tableBody = document.getElementById('timeInputsBody');
+        var rows = tableBody.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var cells = row.getElementsByTagName('td');
+
+            if (cells.length === 3) {
+                var dayCell = cells[0];
+                var openTimeInput = cells[1].getElementsByTagName('input')[0];
+                var closeTimeInput = cells[2].getElementsByTagName('input')[0];
+
+                var dayText = dayCell.textContent.trim().toLowerCase();
+                var convertedDay = convertDay(dayText);
+
+                console.log(convertedDay)
+
+                openTimeInput.id = convertedDay.toLowerCase() + 'OpenTime';
+                openTimeInput.name = convertedDay.toLowerCase() + 'OpenTime';
+                closeTimeInput.id = convertedDay.toLowerCase() + 'CloseTime';
+                closeTimeInput.name = convertedDay.toLowerCase() + 'CloseTime';
+
+                console.log(openTimeInput.id)
+                console.log(openTimeInput.name)
+                console.log(closeTimeInput.id)
+                console.log(closeTimeInput.name)
             }
         }
+    }
 
-        function updateExistingTimeInputs() {
-            var tableBody = document.getElementById('timeInputsBody');
-            var rows = tableBody.getElementsByTagName('tr');
-
-            for (var i = 0; i < rows.length; i++) {
-                var row = rows[i];
-                var cells = row.getElementsByTagName('td');
-
-                if (cells.length === 3) {
-                    var dayCell = cells[0];
-                    var openTimeInput = cells[1].getElementsByTagName('input')[0];
-                    var closeTimeInput = cells[2].getElementsByTagName('input')[0];
-
-                    var dayText = dayCell.textContent.trim();
-                    var convertedDay = convertDay(dayText);
-
-                    openTimeInput.id = convertedDay.toLowerCase() + 'OpenTime';
-                    openTimeInput.name = convertedDay.toLowerCase() + 'OpenTime';
-                    closeTimeInput.id = convertedDay.toLowerCase() + 'CloseTime';
-                    closeTimeInput.name = convertedDay.toLowerCase() + 'CloseTime';
-                }
-            }
-        }
-
-        // Gọi hàm để cập nhật các input fields khi trang được tải
+    $("#saveChangesButton").click(function () {
+        // Call the updateExistingTimeInputs function when the button is clicked
         updateExistingTimeInputs();
-    </script>
+    });
+</script>
 </body>
 
 </html>
