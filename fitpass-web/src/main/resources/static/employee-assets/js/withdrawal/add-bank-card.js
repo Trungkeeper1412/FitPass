@@ -8,7 +8,7 @@ function addBankCard() {
     var maskedAccountNumber = "**** **** **** " + accountNumber.slice(-4);
 
     var cardItem = document.createElement("li");
-    cardItem.className = "list-group-item d-flex flex-column justify-content-between align-items-start mb-3";
+    cardItem.className = "list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-3";
     cardItem.innerHTML =
         `<div class="d-flex align-items-center">
             <i class="bi bi-credit-card-2-front fs-1 pr-3"></i>
