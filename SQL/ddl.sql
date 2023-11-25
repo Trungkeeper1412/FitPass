@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS user_feedback;
 DROP TABLE IF EXISTS item_inventory;
 DROP TABLE IF EXISTS notification;
+DROP TABLE IF EXISTS transfer_credit_history;
 DROP TABLE IF EXISTS order_plan_detail;
 DROP TABLE IF EXISTS transfer;
 DROP TABLE IF EXISTS `order`;
@@ -26,7 +27,6 @@ DROP TABLE IF EXISTS brand;
 DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS wallet;
-DROP TABLE IF EXISTS transfer_credit_history;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_detail;
 
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               capacity                    INT,
                                               area                        DECIMAL(10, 2),
                                               city                        VARCHAR(255),
-                                              first_time boolean default 1,
+                                              first_time boolean default 0,
                                               FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
 );
 
