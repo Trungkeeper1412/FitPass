@@ -21,6 +21,8 @@ import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +54,8 @@ public class GymOwnerController {
     private final DepartmentFeatureService departmentFeatureService;
     private final WalletService walletService;
     private final Email emailService;
+
+    private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
@@ -411,6 +415,10 @@ public class GymOwnerController {
                                        BindingResult bindingResult, HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         if(bindingResult.hasErrors()) {
+            logger.error("Binding errors found:");
+            bindingResult.getAllErrors().forEach(error -> logger.error(error.toString()));
+
+
             User user = (User) session.getAttribute("userInfo");
             Department departmentDetails = departmentService.getByUserId(user.getUserId());
             int departmentId = departmentDetails.getDepartmentId();
