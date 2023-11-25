@@ -298,9 +298,10 @@ public class BrandOwnerController {
                                         BindingResult bindingResult) {
         if(!gymOwnerUpdateDTO.getEmail().equals(gymOwnerUpdateDTO.getOldEmail())) {
             if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
-                bindingResult.rejectValue("email", "error.email", "Email already exist");
+                bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
             }
         }
+
         if(bindingResult.hasErrors()) {
             return "brand-owner/gym-brand-owner-detail";
         }
@@ -320,6 +321,7 @@ public class BrandOwnerController {
         userService.updateUserDetail(userDetail);
 
         userService.updateUserStatusByUserId(gymOwnerUpdateDTO.getUserId(), gymOwnerUpdateDTO.isUserDeleted() ? 1 : 0);
+
         if(gymOwnerUpdateDTO.getDepartmentId() == -1 ) {
             if(gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
                 departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
@@ -335,6 +337,7 @@ public class BrandOwnerController {
         if(gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
             departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
         }
+
         if(gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
             departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
         }
