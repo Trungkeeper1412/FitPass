@@ -244,7 +244,7 @@ public class GymOwnerController {
 
         List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentDetails.getDepartmentId());
         model.addAttribute("userFeedbackList", userFeedbackList);
-        model.addAttribute("departmentName", departmentDetails.getDepartmentName());
+        model.addAttribute("departmentDetails", departmentDetails);
         return "gym-owner/gym-department-feedback";
     }
 
