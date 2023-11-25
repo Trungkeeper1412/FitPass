@@ -3,9 +3,7 @@ package com.ks.fitpass.department.dto;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalTime;
@@ -14,19 +12,30 @@ import java.util.List;
 @Data
 public class UpdateGymOwnerDepartmentInfo {
     private int departmentId;
-    @NotEmpty(message = "Department Name is required")
+
+    @NotEmpty(message = "Vui lòng nhập tên cơ sở !")
+    @Size(max = 150, message = "Tên cơ sở không được vượt quá 150 kí tự !")
     private String departmentName;
-    @NotEmpty(message = "Department Address is required")
+
+    @NotEmpty(message = "Vui lòng nhập địa chỉ !")
+    @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
     private String departmentAddress;
-    @NotEmpty(message = "Department Contact Number is required")
+
+    @NotEmpty(message = "Vui lòng nhập số điện thoại !")
+    @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
     private String departmentContactNumber;
-    @NotEmpty(message = "Department Description is required")
+
+    @NotEmpty(message = "Vui lòng nhập nhập mô tả thông tin cơ sở !")
+    @Size(min = 2, max = 250, message = "Mô tả thông tin cơ sở phải nằm trong khoảng 2 đến 250 kí tự !")
     private String departmentDescription;
+
     @Min(value = 1, message = "Capacity should be greater than 0")
     private int capacity;
+
     @Min(value = 1, message = "Area should be greater than 0")
     private Double area;
-    @NotEmpty(message = "City is required")
+
+    @NotEmpty(message = "Vui lòng chọn thành phố !")
     private String city;
 
     @NotEmpty(message = "Monday open time is required")
