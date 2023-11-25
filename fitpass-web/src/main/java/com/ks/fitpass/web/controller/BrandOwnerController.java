@@ -296,6 +296,7 @@ public class BrandOwnerController {
     @PostMapping("/gym-owner/update")
     public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner")GymOwnerUpdateDTO gymOwnerUpdateDTO,
                                         BindingResult bindingResult) {
+
         if(!gymOwnerUpdateDTO.getEmail().equals(gymOwnerUpdateDTO.getOldEmail())) {
             if(userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
                 bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
@@ -315,7 +316,7 @@ public class BrandOwnerController {
         userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
         userDetail.setGender(gymOwnerUpdateDTO.getGender());
         userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
-        userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard());
+        userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard()) ;
 
         // Update user detail
         userService.updateUserDetail(userDetail);
