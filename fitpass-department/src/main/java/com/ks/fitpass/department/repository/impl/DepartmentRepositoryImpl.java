@@ -190,7 +190,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public int createDepartmentWithBrandId(int brandId, String name) {
-        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2);
+        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2,1);
     }
 
     @Override

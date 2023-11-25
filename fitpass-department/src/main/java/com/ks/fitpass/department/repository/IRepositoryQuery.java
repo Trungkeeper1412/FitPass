@@ -538,8 +538,8 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
             """;
 
     String CREATE_DEPARTMENT_WITH_BRAND_ID = """
-                INSERT INTO gym_department (name, brand_id, gym_department_status_key)
-                VALUES (?, ?, ?);
+                INSERT INTO gym_department (name, brand_id, gym_department_status_key,first_time)
+                VALUES (?, ?, ?,?);
             """;
 
     String UPDATE_DEPARTMENT_GYM_OWNER = """
