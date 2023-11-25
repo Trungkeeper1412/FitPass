@@ -16,6 +16,10 @@ import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,25 +52,55 @@ public class EmployeeController {
         this.webSocketService = webSocketService;
     }
 
-    @GetMapping("/check-in/fixed")
-    public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+  @GetMapping("/check-in/fixed")
+public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+    try {
         List<CheckInFixedDTO> checkInFixedDTOList = employeeService.getListNeedCheckInFixedByDepartmentId(departmentId);
         List<CheckedInFixedDTO> checkedInDTOList = employeeService.getListCheckedInFixedByDepartmentId(departmentId);
         model.addAttribute("checkInList", checkInFixedDTOList);
         model.addAttribute("checkedInList", checkedInDTOList);
         model.addAttribute("departmentId", departmentId);
         return "employee/employee-check-in-fixed";
+    } catch (DuplicateKeyException ex) {
+        // Handle duplicate key violation
+        return "error/duplicate-key-error";
+    } catch (EmptyResultDataAccessException ex) {
+        // Handle empty result set
+        return "error/no-data";
+    } catch (IncorrectResultSizeDataAccessException ex) {
+        // Handle incorrect result size
+        return "error/incorrect-result-size-error";
+    } catch (DataAccessException ex) {
+        // Handle other data access issues
+        return "error/data-access-error";
     }
+}
 
-    @GetMapping("/check-in/flexible")
-    public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+
+@GetMapping("/check-in/flexible")
+public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+    try {
         List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId);
         List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
         model.addAttribute("checkInList", checkInFlexibleDTOList);
         model.addAttribute("checkOutList", checkOutFlexibleDTOList);
         model.addAttribute("departmentId", departmentId);
         return "employee/employee-check-in-flexible";
+    } catch (DuplicateKeyException ex) {
+        // Handle duplicate key violation
+        return "error/duplicate-key-error";
+    } catch (EmptyResultDataAccessException ex) {
+        // Handle empty result set
+        return "error/no-data";
+    } catch (IncorrectResultSizeDataAccessException ex) {
+        // Handle incorrect result size
+        return "error/incorrect-result-size-error";
+    } catch (DataAccessException ex) {
+        // Handle other data access issues
+        return "error/data-access-error";
     }
+}
+
 
     @GetMapping("/searchListCheckIn")
     @ResponseBody

@@ -7,6 +7,7 @@ import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.web.enums.PageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,6 +89,8 @@ public class DepartmentController {
             return "gym-department-details";
         } catch (EmptyResultDataAccessException e) {
             return "error/no-data";
+        } catch (DataAccessException exception){
+            return "error/error";
         }
     }
 
