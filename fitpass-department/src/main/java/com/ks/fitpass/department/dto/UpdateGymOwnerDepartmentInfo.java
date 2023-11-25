@@ -56,9 +56,9 @@ public class UpdateGymOwnerDepartmentInfo {
     private String thursdayOpenTime;
     @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Năm")
     private String thursdayCloseTime;
-    @NotEmpty(message = "Friday open time is required")
+    @NotEmpty(message = "Vui lòng chọn giờ mở cửa Thứ Sáu")
     private String fridayOpenTime;
-    @NotEmpty(message = "Friday close time is required")
+    @NotEmpty(message = "Vui lòng chọn giờ đóng cửa Thứ Sáu")
     private String fridayCloseTime;
     @NotEmpty(message = "Saturday open time is required")
     private String saturdayOpenTime;
