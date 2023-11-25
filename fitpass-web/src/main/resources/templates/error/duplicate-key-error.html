@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitpass - Error</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" th:href="@{/css/all.css}"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/fitpass/error.css}"/>
+</head>
+
+<body>
+<div id="intro">
+    <div class="middle error">
+        <div class="error-panel">
+            <div class="text-center">
+                <div class="mb-4">
+                    <p class="status-code"></p>
+                </div>
+                <h4> Dữ liệu được nhập vào vi phạm đang phạm ràng buộc khóa chính hoặc chỉ mục unique .</h4>
+                <a th:href="@{/}" class="btn btn-back">
+                    <i class="fas fa-home fa-fw me-2"></i>Trang chủ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" class="mt-u">
+    <div class="container-fluid">
+        <div class="row f-bot">
+            <div class="col-12 col-sm-12 col-md-6">
+                Trợ giúp
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 copyright">
+                <span>Copyright © 2023 Fitpass</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
+</body>
+
+</html>
