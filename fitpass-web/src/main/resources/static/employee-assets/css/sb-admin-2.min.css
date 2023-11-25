@@ -13423,7 +13423,7 @@ td img {
     list-style-type: none;
     color: black;
     font-size: 20px;
-    width: calc(100% / 6);
+    width: 20%;
     float: left;
     position: relative;
     letter-spacing: 1px;
@@ -13445,11 +13445,11 @@ td img {
 /*progressbar connectors*/
 #progressbar li:after {
     content: '';
-    width: 89%;
+    width: 90%;
     height: 2px;
     background: #dddddd;
     position: absolute;
-    left: -44%;
+    left: -44.5%;
     top: 15px;
     z-index: 1; /*put it behind the numbers*/
 }
