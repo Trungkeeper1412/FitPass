@@ -659,4 +659,17 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 (gym_department_id, photo_url)
                 VALUES(?, ?);
             """;
+
+    String CHECK_FIRST_TIME_DEPARTMENT_CREATED = """
+                SELECT COUNT(*)
+                FROM gym_department
+                WHERE gym_department_id = ?
+                AND first_time = 1;
+            """;
+
+    String UPDATE_FIRST_TIME_DEPARTMENT_CREATED = """
+                UPDATE gym_department
+                SET first_time = 0
+                WHERE gym_department_id = ?;
+            """;
 }
