@@ -22,66 +22,383 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header py-3 d-flex justify-content-between">
-                        <h2 class="m-0 font-weight-bold text-primary">Danh sách yêu cầu trở thành thương hiệu</h2>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Đơn đang chờ xử lý</h2>
+                    </div>
+
+                    <!-- Modal chưa xử lý -->
+                    <div class="modal fade" id="pendingModal" tabindex="-1" role="dialog" aria-labelledby="pendingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="pendingModalLabel">Đơn đang chờ xử lý</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy đơn</button>
+                                    <button type="button" class="btn btn-warning">Xác nhận xử lý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal đang xử lý  -->
+                    <div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="processingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="processingModalLabel">Đơn đang xử lý</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeStart" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy đơn</button>
+                                    <button type="button" class="btn btn-success">Xác nhận thành công</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal thành công  -->
+                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="successModalLabel">Đơn xử lý thành công</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeSuccess" class="form-label">Thời gian xác nhận thành công:</label>
+                                                    <input type="text" class="form-control" id="requestTimeSuccess" value="15/11/2024 10:22 PM" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeStart" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal hủy  -->
+                    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="cancelModalLabel">Đơn xử lý đã hủy</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeCancel" class="form-label">Thời gian xác nhận hủy:</label>
+                                                    <input type="text" class="form-control" id="requestTimeCancel" value="15/11/2024 10:22 PM" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeStart" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="cancelReason" class="form-label">Lý do hủy:</label>
+                                                    <input type="text" class="form-control" id="cancelReason" value="Thương hiệu không đủ tiêu chuẩn" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table-registration-waiting" width="100%"
+                                   cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Thứ tự</th>
+                                    <th>Tên thương hiệu</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ trang web</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-info fw-bold">Chưa xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#pendingModal">Xem chi tiết</div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa     lạc</a> </td>
+                                    <td class="text-info fw-bold">Chưa xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#pendingModal">Xem chi tiết</div></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#processingModal">Xem chi tiết</div></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-warning fw-bold">Đang xử lý</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#processingModal">Xem chi tiết</div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pb-5 bg-gradient-withdrawal"></div>
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Lịch sử duyệt đơn</h2>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="text-start">
-                                <table class="table table-bordered" id="dataTable" width="100%"
-                                       cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Thứ tự</th>
-                                        <th>Tên thương hiệu</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Họ và Tên</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ trang web</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Gym hòa lạc</td>
-                                        <td>Số 19 ngõ 1 đường cây xăng 39, xã Thạch Hòa, huyện Thạch Thất, Hà Nội</td>
-                                        <td>Nguyễn Văn Bảo Linh</td>
-                                        <td>0917359115</td>
-                                        <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
-                                        <td><div class="btn btn-primary">Kích hoạt</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Gym hòa lạc</td>
-                                        <td>Số 19 ngõ 1 đường cây xăng 39, xã Thạch Hòa, huyện Thạch Thất, Hà Nội</td>
-                                        <td>Nguyễn Văn Bảo Linh</td>
-                                        <td>0917359115</td>
-                                        <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
-                                        <td><div class="btn btn-primary">Kích hoạt</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Gym hòa lạc</td>
-                                        <td>Số 19 ngõ 1 đường cây xăng 39, xã Thạch Hòa, huyện Thạch Thất, Hà Nội</td>
-                                        <td>Nguyễn Văn Bảo Linh</td>
-                                        <td>0917359115</td>
-                                        <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
-                                        <td><div class="btn btn-primary">Kích hoạt</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Gym hòa lạc</td>
-                                        <td>Số 19 ngõ 1 đường cây xăng 39, xã Thạch Hòa, huyện Thạch Thất, Hà Nội</td>
-                                        <td>Nguyễn Văn Bảo Linh</td>
-                                        <td>0917359115</td>
-                                        <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
-                                        <td><div class="btn btn-primary">Kích hoạt</div></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table-registration-successful" width="100%"
+                                   cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Thứ tự</th>
+                                    <th>Tên thương hiệu</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ trang web</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-success fw-bold">Thành công</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#successModal">Xem chi tiết</div></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-success fw-bold">Thành công</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#successModal">Xem chi tiết</div></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-danger fw-bold">Từ chối đơn</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">Xem chi tiết</div></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gym hòa lạc</td>
+                                    <td>Nguyễn Văn Bảo Linh</td>
+                                    <td>cc@gmail.com</td>
+                                    <td>0917359115</td>
+                                    <td> <a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a> </td>
+                                    <td class="text-danger fw-bold">Từ chối đơn</td>
+                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">Xem chi tiết</div></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
