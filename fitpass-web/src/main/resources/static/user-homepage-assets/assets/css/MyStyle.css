@@ -2777,8 +2777,9 @@ a:link {
 /* Css  for profile tab */
 
 #exampleFormControlFile1{
-  margin-left: 10px;
-  width: 85px;
+  /*margin-left: 10px;*/
+  /*width: 100px;*/
+  overflow-wrap: break-word;
   overflow: hidden;
 }
 .user-profile{
