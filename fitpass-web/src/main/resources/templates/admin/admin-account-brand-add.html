@@ -33,10 +33,13 @@
                                 <form id="formSubmit" action="/admin/department/add" method="post">
                                     <div class="d-flex justify-content-center pb-3">
                                         <div class="col-md-4">
-                                            <label for="name-brand" class="form-label fw-bold">Tên thương hiệu
+                                            <label for="name-brand" class="form-label fw-bold">Chọn thương hiệu trong danh sách chờ
                                                 :</label>
-                                            <input type="text" class="form-control" id="name-brand"
-                                                   name="brandName" placeholder="Nhập tên thương hiệu">
+                                            <select id="name-brand">
+                                                <option value="classpass">Classpass</option>
+                                                <option value="gym-hoa-lac">Gym Hòa Lạc</option>
+                                                <option value="v-shape">V-shape</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center pb-3">
@@ -44,7 +47,7 @@
                                             <label for="email-brand" class="form-label fw-bold">Email
                                                 :</label>
                                             <input type="text" class="form-control" id="email-brand"
-                                                   name="brandName" placeholder="Nhập email">
+                                                   name="brandName" value="Classpass@gmail.com" readonly>
                                         </div>
                                     </div>
                                 </form>

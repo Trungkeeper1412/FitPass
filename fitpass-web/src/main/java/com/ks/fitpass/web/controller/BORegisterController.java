@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/become-a-partner")
 public class BORegisterController {
-    @GetMapping("/")
+    @GetMapping("")
     public String getBrandOwnerRegister(){
         return "gym-brand-registration";
     }

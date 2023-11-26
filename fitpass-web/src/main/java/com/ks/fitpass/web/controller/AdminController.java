@@ -12,12 +12,6 @@ public class AdminController {
         return "admin/index";
     }
 
-    //Banner
-    @GetMapping("/banner")
-    public String getListBanner() {
-        return "admin/admin-banner";
-    }
-
     @GetMapping("/feature")
     public String getFeature() {
         return "admin/admin-feature";
