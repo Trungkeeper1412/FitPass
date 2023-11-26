@@ -14,6 +14,8 @@ public interface GymPlanRepository {
 
     List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandId(int brandId);
 
+    List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandIdActive(int brandId);
+
     int createGymPlanFlex(BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO);
 
     BrandUpdateGymPlanFlexDTO getGymPlanFlexDetail(int gymPlanId);
@@ -21,6 +23,8 @@ public interface GymPlanRepository {
     int updateGymPlanFlex(BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO);
 
     List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandId(int brandId);
+
+    List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandIdActive(int brandId);
 
     int createGymPlanFixed(BrandCreateGymPlanFixedDTO brandCreateGymPlanFixedDTO);
 

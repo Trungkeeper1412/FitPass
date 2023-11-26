@@ -67,13 +67,22 @@ public class GymPlanServiceImpl implements GymPlanService {
         dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
         dto.setDuration(gymPlan.getDuration());
         dto.setGymDepartmentName(gymPlan.getGymDepartmentName());
+        dto.setGymDepartmentLogoUrl(gymPlan.getGymDepartmentLogoUrl());
+
         return dto;
+    }
+
+    @Override
+    public List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandIdActive(int brandId) {
+        return gymPlanRepository.getAllGymPlanFlexByBrandIdActive(brandId);
     }
 
     @Override
     public List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandId(int brandId) {
         return gymPlanRepository.getAllGymPlanFlexByBrandId(brandId);
     }
+
+
 
     @Override
     public int createGymPlanFlex(BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO) {
@@ -88,6 +97,11 @@ public class GymPlanServiceImpl implements GymPlanService {
     @Override
     public int updateGymPlanFlex(BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO) {
         return gymPlanRepository.updateGymPlanFlex(brandUpdateGymPlanFlexDTO);
+    }
+
+    @Override
+    public List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandIdActive(int brandId) {
+        return gymPlanRepository.getAllGymPlanFixedByBrandIdActive(brandId);
     }
 
     @Override

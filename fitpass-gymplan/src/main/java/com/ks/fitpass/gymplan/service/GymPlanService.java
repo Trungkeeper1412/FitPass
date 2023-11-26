@@ -10,6 +10,9 @@ public interface GymPlanService {
     List<GymPlanDto> getGymPlanDetailsByDepartmentId(int departmentId);
     GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId, int departmentId);
 
+    List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandIdActive(int brandId);
+
+
     List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandId(int brandId);
     int createGymPlanFlex(BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO);
     BrandUpdateGymPlanFlexDTO getGymPlanFlexDetail(int gymPlanId);
@@ -17,6 +20,9 @@ public interface GymPlanService {
 
 
     // Fixed gym plan
+
+    List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandIdActive(int brandId);
+
     List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandId(int brandId);
     int createGymPlanFixed(BrandCreateGymPlanFixedDTO brandCreateGymPlanFixedDTO);
     BrandUpdateGymPlanFixedDTO getGymPlanFixedDetail(int gymPlanId);
