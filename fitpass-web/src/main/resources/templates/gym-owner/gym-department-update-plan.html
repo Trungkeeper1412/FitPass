@@ -53,7 +53,6 @@
                                                         cellspacing="0">
                                                         <thead>
                                                             <tr>
-                                                                <th>Thứ tự</th>
                                                                 <th>ID</th>
                                                                 <th>Tên gói tập</th>
                                                                 <th>Số credits/giờ</th>
@@ -66,14 +65,12 @@
                                                                     title="Đây là mô tả của thời gian sau khi kích hoạt">
                                                                     Thời hạn sau khi kích hoạt</th>
                                                                 <th style="width: 600px;" class="plan-description">Mô tả</th>
-                                                                <th><input type="checkbox" id="checkAll">
-                                                                </th>
+                                                                <th>Chọn gói tập</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <th:block th:each="gf : ${listFlexGymPlan}">
                                                                 <tr>
-                                                                    <td th:text="${gfStat.index + 1}">1</td>
                                                                     <td th:text="${gf.gymPlanId}"></td>
                                                                     <td th:text="${gf.gymPlanName}">Gói linh hoạt tiết kiệm</td>
                                                                     <td th:text="${gf.pricePerHours}">5</td>
@@ -106,7 +103,6 @@
                                                         cellspacing="0">
                                                         <thead>
                                                             <tr>
-                                                                <th>Thứ tự</th>
                                                                 <th>ID</th>
                                                                 <th>Tên gói tập</th>
                                                                 <th>Số credits</th>
@@ -120,14 +116,12 @@
                                                                     title="Đây là mô tả của thời gian sau khi kích hoạt">
                                                                     Thời hạn sau khi kích hoạt</th>
                                                                 <th class="fixed-description">Mô tả</th>
-                                                                <th><input type="checkbox" id="checkAll">
-                                                                </th>
+                                                                <th>Chọn gói tập</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <th:block th:each=" gf : ${listFixedGymPlan}">
                                                                 <tr>
-                                                                    <td th:text="${gfStat.index + 1}">1</td>
                                                                     <td th:text="${gf.gymPlanId}"></td>
                                                                     <td th:text="${gf.gymPlanName}">Gói 1</td>
                                                                     <td th:text="${gf.price}">5</td>
@@ -500,8 +494,8 @@
                 });
             }
 
-            configureDataTable('#dataTableCheckedFlexible', 7, 1, 'selectedFlexId');
-            configureDataTable('#dataTableCheckedFixed', 8, 1, 'selectedFixedId');
+            configureDataTable('#dataTableCheckedFlexible', 6, 0, 'selectedFlexId');
+            configureDataTable('#dataTableCheckedFixed', 7, 0, 'selectedFixedId');
 
             var dataTableFlex = $("#dataTableCheckedFlexible").DataTable();
             var dataTableFixed = $("#dataTableCheckedFixed").DataTable();

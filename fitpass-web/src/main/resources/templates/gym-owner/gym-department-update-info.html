@@ -68,8 +68,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="capacity" class="form-label fw-bold">Sức chứa
-                                                :</label>
+                                            <label for="capacity" class="form-label fw-bold">Sức chứa (Người):</label>
                                             <input th:field="*{capacity}" type="number" class="form-control"
                                                    id="capacity"
                                                    name="capacity"
@@ -78,7 +77,7 @@
                                                   th:errors="*{capacity}">Error</span>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="area" class="form-label fw-bold">Diện tích :</label>
+                                            <label for="area" class="form-label fw-bold">Diện tích (m2) :</label>
                                             <input th:field="*{area}" type="text" class="form-control" id="area"
                                                    name="area"
                                                    th:value="${updateGymOwnerDepartmentInfo.getArea()}">

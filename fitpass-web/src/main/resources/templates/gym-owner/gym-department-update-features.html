@@ -34,18 +34,15 @@
                                         cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Thứ tự</th>
                                                 <th>ID</th>
                                                 <th>Tên tiện ích</th>
                                                 <th>Icon</th>
-                                                <th><input type="checkbox" id="checkAll">
-                                                </th>
+                                                <th>Chọn tiện tích</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <th:block th:each="f : ${allFeatures}">
                                                 <tr>
-                                                    <td th:text="${fStat.index + 1}">1</td>
                                                     <td th:text="${f.getFeatureID()}">1</td>
                                                     <td th:text="${f.getFeatureName()}">Bãi đỗ xe</td>
                                                     <td th:utext="${f.getFeatureIcon()}"></td>
@@ -100,7 +97,7 @@
                 } );
             }
 
-            configureDataTable('#dataTableFeatures', 4, 1, 'selectedFeatureId');
+            configureDataTable('#dataTableFeatures', 3, 0, 'selectedFeatureId');
 
         });
     </script>
