@@ -38,4 +38,9 @@ public class ProfileController {
     public String showNotificationPage1(){
         return "user/notification";
     }
+
+    @GetMapping("/deposit")
+    public String showDepositPage(){
+        return "user/user-deposit";
+    }
 }
