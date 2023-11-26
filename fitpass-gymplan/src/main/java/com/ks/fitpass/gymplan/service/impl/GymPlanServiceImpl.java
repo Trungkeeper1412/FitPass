@@ -20,30 +20,9 @@ public class GymPlanServiceImpl implements GymPlanService {
     private final KbnRepository mstKbnRepository;
 
     @Override
-    public List<GymPlanDto> getGymPlanDetailsByDepartmentId(int departmentId) {
+    public List<GymPlan> getGymPlanDetailsByDepartmentId(int departmentId) {
         List<GymPlan> gymPlans = gymPlanRepository.getAllByDepartmentId(departmentId);
-        List<GymPlanDto> gymPlanDtos = new ArrayList<>();
-
-        for (GymPlan gymPlan : gymPlans) {
-            GymPlanDto dto = new GymPlanDto();
-            dto.setGymPlanId(gymPlan.getPlanId());
-            dto.setGymPlanName(gymPlan.getGymPlanName());
-            dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
-            dto.setPlanBeforeActiveValidity(gymPlan.getPlanBeforeActiveValidity());
-            dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
-            dto.setDuration(gymPlan.getDuration());
-
-            String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanKey(gymPlan.getGymPlanKey());
-            dto.setGymPlanType(gymPlanType);
-
-            if (gymPlanType.equalsIgnoreCase("Gói không theo giờ")) {
-                dto.setPrice(gymPlan.getPrice());
-            } else if (gymPlanType.equalsIgnoreCase("Gói theo giờ")) {
-                dto.setPricePerHours(gymPlan.getPricePerHours());
-            }
-            gymPlanDtos.add(dto);
-        }
-        return gymPlanDtos;
+        return gymPlans;
     }
 
 
