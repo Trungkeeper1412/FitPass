@@ -25,5 +25,6 @@ public class GymPlan implements Serializable {
     private int planBeforeActiveValidity;
     private int planAfterActiveValidity;
     private String gymDepartmentName;
+    private String gymDepartmentLogoUrl;
 
 }
