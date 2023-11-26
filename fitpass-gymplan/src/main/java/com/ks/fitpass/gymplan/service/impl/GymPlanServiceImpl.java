@@ -57,7 +57,7 @@ public class GymPlanServiceImpl implements GymPlanService {
         dto.setGymDepartmentId(gymPlan.getGymDepartmentId());
         dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
 
-        String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanTypeKey(gymPlan.getGymPlanKey());
+        String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanTypeKey(gymPlan.getGymPlanTypeKey());
         if (gymPlanType.equalsIgnoreCase("Gói không theo giờ")) {
             dto.setPrice(gymPlan.getPrice());
         } else if (gymPlanType.equalsIgnoreCase("Gói theo giờ")) {
