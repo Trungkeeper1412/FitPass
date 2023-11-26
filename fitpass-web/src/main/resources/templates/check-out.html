@@ -40,7 +40,7 @@
                     <div class="plan-checkout">
                         <div class="plan-card-mc">
                             <input name="planId" type="hidden" th:value="${cartItem.getGymPlan().getGymPlanId()+';'+cartItem.getGymPlan().getGymDepartmentId()}"/>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                            <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}" alt="Logo phòng tập"/>
                             <div class="plan-info-mc">
                                 <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim cương</h4>
                                 <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
