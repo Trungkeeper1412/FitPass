@@ -3,20 +3,16 @@ package com.ks.fitpass.gymplan;
 import com.ks.fitpass.core.repository.KbnRepository;
 import com.ks.fitpass.department.dto.GymPlanDto;
 import com.ks.fitpass.department.entity.GymPlan;
-import com.ks.fitpass.department.repository.DepartmentRepository;
 
 import com.ks.fitpass.gymplan.repository.GymPlanRepository;
 import com.ks.fitpass.gymplan.service.impl.GymPlanServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -53,11 +49,11 @@ class GymPlanServiceImplTest {
                 thenReturn(Collections.singletonList(testGymPlan));
 
         // Arrange: Set up mock behavior for kbnRepository
-        when(kbnRepository.getGymPlanTypeByPlanKey(testGymPlan.getGymPlanKey())).
+        when(kbnRepository.getGymPlanTypeByPlanTypeKey(testGymPlan.getGymPlanKey())).
                 thenReturn("Gói theo giờ");
 
         // Act: Call the method to test
-        List<GymPlan> result = gymPlanService.getGymPlanDetailsByDepartmentId(departmentId);
+        List<GymPlanDto> result = gymPlanService.getGymPlanDetailsByDepartmentId(departmentId);
 
         // Assert
 //        assertEquals(1, result.size(), ()-> "No Gym Plan Was Found by the department id = " +departmentId);

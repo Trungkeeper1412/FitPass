@@ -48,7 +48,7 @@ public class DepartmentController {
     @GetMapping("/department-detail/{department_id}")
     public String getDepartment(@PathVariable("department_id") int departmentId, Model model, @RequestParam(defaultValue = "1") int page,
                                 @RequestParam(defaultValue = "7") int size) {
-        try {
+//        try {
             Department department = departmentService.getOne(departmentId);
             model.addAttribute("department", department);
             model.addAttribute("page", PageEnum.XXX_FIRST_PAGE.getCode());
@@ -87,11 +87,11 @@ public class DepartmentController {
             model.addAttribute("departmentId", departmentId);
 
             return "gym-department-details";
-        } catch (EmptyResultDataAccessException e) {
-            return "error/no-data";
-        } catch (DataAccessException exception){
-            return "error/error";
-        }
+//        } catch (EmptyResultDataAccessException e) {
+//            return "error/no-data";
+//        } catch (DataAccessException exception){
+//            return "error/error";
+//        }
     }
 
 
