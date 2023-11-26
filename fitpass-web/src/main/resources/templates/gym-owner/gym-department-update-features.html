@@ -34,7 +34,6 @@
                                         cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Thứ tự</th>
                                                 <th>ID</th>
                                                 <th>Tên tiện ích</th>
                                                 <th>Icon</th>
@@ -45,7 +44,6 @@
                                         <tbody>
                                             <th:block th:each="f : ${allFeatures}">
                                                 <tr>
-                                                    <td th:text="${fStat.index + 1}">1</td>
                                                     <td th:text="${f.getFeatureID()}">1</td>
                                                     <td th:text="${f.getFeatureName()}">Bãi đỗ xe</td>
                                                     <td th:utext="${f.getFeatureIcon()}"></td>

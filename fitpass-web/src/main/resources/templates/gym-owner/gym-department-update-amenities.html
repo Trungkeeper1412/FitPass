@@ -34,7 +34,6 @@
                                         cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Thứ tự</th>
                                                 <th>ID</th>
                                                 <th>Tên dịch vụ</th>
                                                 <th>Ảnh dịch vụ</th>
@@ -46,7 +45,6 @@
                                         <tbody>
                                             <th:block th:each="s : ${brandAmenitie}">
                                                 <tr>
-                                                    <td th:text="${sStat.index + 1}">1</td>
                                                     <td th:text="${s.getAmenitieId()}"></td>
                                                     <td th:text="${s.getAmenitieName()}">Hệ thống tủ khóa</td>
                                                     <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
