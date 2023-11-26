@@ -33,4 +33,9 @@ public class ProfileController {
     public String showNotificationPage(){
         return "user/profile :: notifications";
     }
+
+    @GetMapping("/my-notifications")
+    public String showNotificationPage1(){
+        return "user/notification";
+    }
 }
