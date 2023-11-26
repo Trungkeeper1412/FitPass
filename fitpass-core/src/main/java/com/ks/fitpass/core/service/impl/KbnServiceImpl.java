@@ -25,6 +25,6 @@ public class KbnServiceImpl implements KbnService {
 
     @Override
     public String getGymPlanTypeByPlanKey(int gymPlanKey) {
-        return kbnRepository.getGymPlanTypeByPlanKey(gymPlanKey);
+        return kbnRepository.getGymPlanTypeByPlanTypeKey(gymPlanKey);
     }
 }

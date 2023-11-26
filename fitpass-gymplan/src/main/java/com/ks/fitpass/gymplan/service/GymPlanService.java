@@ -8,7 +8,7 @@ import com.ks.fitpass.gymplan.dto.*;
 import java.util.List;
 
 public interface GymPlanService {
-    List<GymPlan> getGymPlanDetailsByDepartmentId(int departmentId);
+    List<GymPlanDto> getGymPlanDetailsByDepartmentId(int departmentId);
     GymPlanDepartmentNameDto getGymPlanByGymPlanId(int gymPlanId, int departmentId);
 
     List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandIdActive(int brandId);
