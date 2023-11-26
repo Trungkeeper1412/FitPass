@@ -3,9 +3,8 @@ package com.ks.fitpass.gymplan.repository;
 public interface IRepositoryQuery {
     // Query to get all plans of a gym department
     String GET_ALL_GYM_PLANS_BY_DEPARTMENT_ID = """
-SELECT                          gp.plan_id ,
+       SELECT                   gp.plan_id ,
                                 gp.brand_id,
-                                gp.gym_plan_key,
                                 gp.gym_plan_status_key,
                                 gp.gym_plan_type_key,
 								gp.name,
@@ -14,7 +13,8 @@ SELECT                          gp.plan_id ,
 								gp.duration,
 								gp.plan_before_active_validity,
 								gp.plan_after_active_validity,
-								gp.description
+								gp.description,
+								gdp.gym_department_id
 								FROM gym_plan gp
 								JOIN gym_department_plans gdp ON gp.plan_id = gdp.plan_id
 								JOIN gym_department gd ON gdp.gym_department_id = gd.gym_department_id

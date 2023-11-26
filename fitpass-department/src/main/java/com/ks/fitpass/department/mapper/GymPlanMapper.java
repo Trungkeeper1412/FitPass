@@ -12,7 +12,6 @@ public class GymPlanMapper implements RowMapper<GymPlan> {
         return GymPlan.builder()
                 .planId(resultSet.getInt("plan_id"))
                 .brandId(resultSet.getInt("brand_id"))
-                .gymPlanKey(resultSet.getInt("gym_plan_key"))
                 .gymPlanStatusKey(resultSet.getInt("gym_plan_status_key"))
                 .gymPlanTypeKey(resultSet.getInt("gym_plan_type_key"))
                 .gymPlanName(resultSet.getString("name"))
@@ -22,6 +21,7 @@ public class GymPlanMapper implements RowMapper<GymPlan> {
                 .duration(resultSet.getInt("duration"))
                 .planBeforeActiveValidity(resultSet.getInt("plan_before_active_validity"))
                 .planAfterActiveValidity(resultSet.getInt("plan_after_active_validity"))
+                .gymDepartmentId(resultSet.getInt("gym_department_id"))
                 .build();
     }
 }
