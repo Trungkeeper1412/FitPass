@@ -53,7 +53,7 @@ public class GymPlanServiceImpl implements GymPlanService {
         GymPlanDepartmentNameDto dto = new GymPlanDepartmentNameDto();
         dto.setGymPlanId(gymPlan.getPlanId());
         dto.setGymPlanName(gymPlan.getGymPlanName());
-        dto.setGymPlanKey(gymPlan.getGymPlanKey());
+        dto.setGymPlanTypeKey(gymPlan.getGymPlanTypeKey());
         dto.setGymDepartmentId(gymPlan.getGymDepartmentId());
         dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
 

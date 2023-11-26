@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/checkout")
@@ -122,7 +121,7 @@ public class CheckOutController {
                     orderDetails.setName(gymPlanDepartmentNameDto.getGymPlanName());
                     orderDetails.setGymPlanDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
                     orderDetails.setQuantity(1);
-                    String gymPlanType = kbnService.getGymPlanTypeByPlanKey(gymPlanDepartmentNameDto.getGymPlanKey());
+                    String gymPlanType = kbnService.getGymPlanTypeByPlanKey(gymPlanDepartmentNameDto.getGymPlanTypeKey());
                     if (gymPlanType.equalsIgnoreCase("Gói không theo giờ")) {
                         orderDetails.setPrice(gymPlanDepartmentNameDto.getPrice());
                     } else if (gymPlanType.equalsIgnoreCase("Gói theo giờ")) {
