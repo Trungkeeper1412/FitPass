@@ -28,7 +28,7 @@
                     </div>
 
                     <!-- Modal chưa xử lý -->
-                    <div class="modal fade" id="pendingModal" tabindex="-1" role="dialog" aria-labelledby="pendingModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="pendingModal" role="dialog" aria-labelledby="pendingModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -78,8 +78,14 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy đơn</button>
-                                    <button type="button" class="btn btn-warning">Xác nhận xử lý</button>
+                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation()">
+                                        <i class="fas fa-times-circle mr-2"></i>
+                                        Hủy đơn
+                                    </button>
+                                    <button type="button" class="btn btn-warning ml-2" onclick="showProcessingConfirmation()">
+                                        Xác nhận xử lý
+                                        <i class="fas fa-check-circle ml-2"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -140,8 +146,14 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy đơn</button>
-                                    <button type="button" class="btn btn-success">Xác nhận thành công</button>
+                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation()">
+                                        <i class="fas fa-times-circle mr-2"></i>
+                                        Hủy đơn
+                                    </button>
+                                    <button type="button" class="btn btn-success ml-2" onclick="showProcessingConfirmation()">
+                                        Xác nhận thành công
+                                        <i class="fas fa-check-circle ml-2"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
