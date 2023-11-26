@@ -19,11 +19,9 @@ public class GymPlanMapper implements RowMapper<GymPlan> {
                 .gymPlanDescription(resultSet.getString("description"))
                 .price(resultSet.getDouble("price"))
                 .pricePerHours(resultSet.getDouble("price_per_hours"))
-                .planSold(resultSet.getInt("plan_sold"))
                 .duration(resultSet.getInt("duration"))
                 .planBeforeActiveValidity(resultSet.getInt("plan_before_active_validity"))
                 .planAfterActiveValidity(resultSet.getInt("plan_after_active_validity"))
-                .gymDepartmentId(resultSet.getInt("gym_department_id"))
                 .build();
     }
 }
