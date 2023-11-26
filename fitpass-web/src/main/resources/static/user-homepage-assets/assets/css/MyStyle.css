@@ -2906,6 +2906,65 @@ input[type="radio"]:checked{
   border: 2px solid rgb(255, 200, 0);
 }
 
+/* css for change password tab */
+.change-pw{
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+}
+.change-pw-icon{
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.change-pw-icon img{
+  width: 200px;
+}
+.change-pw input{
+  width:100%;
+  border:2px solid #e1e1e1;
+  border-radius:8px;
+  margin:2px 0;
+  outline:none;
+  padding:6px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+.change-pw .field-icon{
+  float: right;
+  margin-left: -25px;
+  margin-top: -32px;
+  margin-right: 8px;
+  position: relative;
+  z-index: 2;
+}
+.pw-format{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: fit-content;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow:0 0 25px 0 rgb(193, 193, 193);
+  font-size: 14px;
+}
+.pw-format img{
+  width: 18px;
+}
+.pw-details{
+  padding: 10px 15px;
+}
+.change-pw button{
+  border-radius: 14px;
+  padding: 6px 10px;
+  font-size: 15px;
+  background-color: #000;
+  color: white;
+  font-weight: 600;
+}
+
 /* CSS FOR GYM DETAILS PAGE */
 .w3-animate-zoom{
   width: 70%;
