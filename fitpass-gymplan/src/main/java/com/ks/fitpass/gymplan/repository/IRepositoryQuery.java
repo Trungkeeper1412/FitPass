@@ -27,8 +27,11 @@ public interface IRepositoryQuery {
             gp.duration,
             gp.plan_before_active_validity,
             gp.plan_after_active_validity,
+            
             gd.name AS name_department,
+            gd.logo_url AS logo_department,
             gd.gym_department_id
+            
         FROM gym_plan gp
         JOIN gym_department_plans gdp ON gp.plan_id = gdp.plan_id
         JOIN gym_department gd ON gdp.gym_department_id = gd.gym_department_id
@@ -120,19 +123,19 @@ public interface IRepositoryQuery {
             """;
 
     String GET_GYM_PLAN_DEPARTMENT_FIXED_BY_DEPARTMENT_ID = """
-                SELECT gp.plan_id ,
-                	   gp.name,
-                	   gp.price,
-                	   gp.duration,
-                	   gp.plan_before_active_validity,
-                	   gp.plan_after_active_validity,
-					   gp.description
-                FROM gym_plan gp
-                JOIN gym_department_plans gdp ON gp.plan_id = gdp.plan_id
-                JOIN gym_department gd ON gdp.gym_department_id = gd.gym_department_id
-                WHERE gdp.gym_department_id = ?
-                AND gp.gym_plan_type_key = 2;
-            """;
+																SELECT gp.plan_id ,
+																				gp.name,
+																				gp.price,
+																				gp.duration,
+																				gp.plan_before_active_validity,
+																				gp.plan_after_active_validity,
+								gp.description
+																FROM gym_plan gp
+																JOIN gym_department_plans gdp ON gp.plan_id = gdp.plan_id
+																JOIN gym_department gd ON gdp.gym_department_id = gd.gym_department_id
+																WHERE gdp.gym_department_id = ?
+																AND gp.gym_plan_type_key = 2;
+												""";
 
     String GET_GYM_PLAN_DEPARTMENT_FLEX_BY_DEPARTMENT_ID = """
                 SELECT gp.plan_id ,

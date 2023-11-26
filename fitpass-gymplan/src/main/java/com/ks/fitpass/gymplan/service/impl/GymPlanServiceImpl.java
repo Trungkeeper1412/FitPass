@@ -67,6 +67,8 @@ public class GymPlanServiceImpl implements GymPlanService {
         dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
         dto.setDuration(gymPlan.getDuration());
         dto.setGymDepartmentName(gymPlan.getGymDepartmentName());
+        dto.setGymDepartmentLogoUrl(gymPlan.getGymDepartmentLogoUrl());
+
         return dto;
     }
 

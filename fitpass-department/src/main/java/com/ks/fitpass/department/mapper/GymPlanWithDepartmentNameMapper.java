@@ -10,6 +10,7 @@ public class GymPlanWithDepartmentNameMapper extends GymPlanMapper{
     public GymPlan mapRow(ResultSet resultSet, int i) throws SQLException {
         GymPlan a = super.mapRow(resultSet, i);
         a.setGymDepartmentName(resultSet.getString("name_department"));
+        a.setGymDepartmentLogoUrl(resultSet.getString("logo_department"));
         return a;
     }
 }
