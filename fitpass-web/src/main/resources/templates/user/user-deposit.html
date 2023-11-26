@@ -47,21 +47,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- User profile tab -->
-                <th:block th:replace="user/fragments/user-profile.html :: user-profile"></th:block>
 
-                <!-- Change pw tab -->
-<!--                <th:block th:replace="user/fragments/change-password.html :: change-password"></th:block>-->
-
-                <!-- Add credit tab -->
-<!--                <th:block th:replace="user/fragments/deposit.html :: deposit"></th:block>-->
-
-                <!-- User transaction tab -->
-<!--                <th:block th:replace="user/fragments/transaction-history.html :: transaction-history"></th:block>-->
-
-                <!--User notifications tab-->
-<!--                <th:block th:replace="user/fragments/notifications.html :: notifications"></th:block>-->
-
+                <!-- User deposit tab -->
+                <th:block th:replace="user/fragments/deposit.html :: deposit"></th:block>
             </div>
         </div>
     </div>
@@ -134,47 +122,6 @@
     cancel.addEventListener("click", toggleModal);
     window.addEventListener("click", windowOnClick);
 
-    // document.getElementById("add-money-tab").style.display = "none";
-    // document.getElementById("transaction-history").style.display = "none";
-    // document.getElementById("change-pw").style.display = "none";
-    // document.getElementById("my-notifications").style.display = "none";
-    //
-    // function openAddMoneyTab() {
-    //     document.getElementById("user-profile").style.display = "none";
-    //     document.getElementById("change-pw").style.display = "none";
-    //     document.getElementById("my-notifications").style.display = "none";
-    //     document.getElementById("transaction-history").style.display = "none";
-    //     document.getElementById("add-money-tab").style.display = "block";
-    // }
-    // function openUserProfileTab() {
-    //     document.getElementById("my-notifications").style.display = "none";
-    //     document.getElementById("add-money-tab").style.display = "none";
-    //     document.getElementById("transaction-history").style.display = "none";
-    //     document.getElementById("change-pw").style.display = "none";
-    //     document.getElementById("user-profile").style.display = "block";
-    // }
-    // function openTransactionHistory() {
-    //     document.getElementById("my-notifications").style.display = "none";
-    //     document.getElementById("transaction-history").style.display = "block";
-    //     document.getElementById("user-profile").style.display = "none";
-    //     document.getElementById("change-pw").style.display = "none";
-    //     document.getElementById("add-money-tab").style.display = "none";
-    // }
-    // function openChangePwTab() {
-    //     document.getElementById("my-notifications").style.display = "none";
-    //     document.getElementById("change-pw").style.display = "block";
-    //     document.getElementById("user-profile").style.display = "none";
-    //     document.getElementById("add-money-tab").style.display = "none";
-    //     document.getElementById("transaction-history").style.display = "none";
-    // }
-    //
-    // function openNotiTab() {
-    //     document.getElementById("my-notifications").style.display = "block";
-    //     document.getElementById("change-pw").style.display = "none";
-    //     document.getElementById("user-profile").style.display = "none";
-    //     document.getElementById("add-money-tab").style.display = "none";
-    //     document.getElementById("transaction-history").style.display = "none";
-    // }
 
     $(".option-tab").on("click", function () {
         $(".option-tab").removeClass("at");
@@ -182,22 +129,22 @@
     });
 
 
-        $("#paymentSubmit").click(function() {
-            var selectedAmount = $("#moneyAmount").val();
+    $("#paymentSubmit").click(function() {
+        var selectedAmount = $("#moneyAmount").val();
 
-            // Gửi giá trị lên server thông qua một POST request
-            $.ajax({
-                type: "POST",
-                url: "/payment/create-session",
-                data: {
-                    amount: selectedAmount
-                },
-                success: function(response) {
-                    // Xử lý kết quả trả về từ server (nếu cần)
-                    window.location.href = response;
-                }
-            });
+        // Gửi giá trị lên server thông qua một POST request
+        $.ajax({
+            type: "POST",
+            url: "/payment/create-session",
+            data: {
+                amount: selectedAmount
+            },
+            success: function(response) {
+                // Xử lý kết quả trả về từ server (nếu cần)
+                window.location.href = response;
+            }
         });
+    });
 
     function updateInputValue(value, creditTrans) {
         document.getElementById('moneyAmount').value = value;

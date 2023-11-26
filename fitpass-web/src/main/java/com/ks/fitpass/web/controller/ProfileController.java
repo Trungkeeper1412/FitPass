@@ -33,4 +33,24 @@ public class ProfileController {
     public String showNotificationPage(){
         return "user/profile :: notifications";
     }
+
+    @GetMapping("/my-notifications")
+    public String showNotificationPage1(){
+        return "user/notification";
+    }
+
+    @GetMapping("/deposit")
+    public String showDepositPage(){
+        return "user/user-deposit";
+    }
+
+    @GetMapping("/transaction-history")
+    public String showTransactionHistoryPage(){
+        return "user/user-transaction-history";
+    }
+
+    @GetMapping("change-password")
+    public String showChangePwPage(){
+        return "user/user-change-password";
+    }
 }

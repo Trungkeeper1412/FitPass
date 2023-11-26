@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Cá Nhân</title>
+  <meta name="description" content="Profile Page">
+  <meta name="keywords" content="My">
+
+  <th:block th:insert="common/vendor-head"></th:block>
+
+  <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.css" rel="stylesheet">
+  <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+<body style="background-color: rgb(238, 238, 238);">
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+
+<!-- Content -->
+<div class="user-profile-content container-fluid">
+  <div class="row justify-content-center">
+    <th:block th:replace="user/fragments/sidebar.html :: sidebar"></th:block>
+
+    <div class="col-md-8 col-lg-8 col-xl-9 content-by-option">
+      <!-- Common components in tab -->
+      <div class="add-money-tab">
+        <div class="row justify-content-center credit-info-common">
+          <div class="col-sm-6 col-md-6">
+            <div class="account-balance">
+              <div>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/10317/10317738.png"></span>
+                <span class="wallet-money">
+                                    <span  th:text="${session.userCredit}"></span>
+                                    <span>Credits</span>
+                                </span>
+              </div>
+              <div class="ab-title">Số dư trong ví</div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="account-balance">
+              <div>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/10318/10318269.png"></span>
+                <span class="wallet-money">2000 Credits</span>
+              </div>
+              <div class="ab-title">Tổng credits đã nạp</div>
+            </div>
+          </div>
+        </div>
+        <!--User notifications tab-->
+        <th:block th:replace="user/fragments/notifications.html :: notifications"></th:block>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= Footer ======= -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:include="common/vendor-script"></th:block>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.js"></script>
+<script>
+
+  function toggleModal() {
+    modal.classList.toggle("show-modal");
+  }
+
+  function windowOnClick(event) {
+    if (event.target === modal) {
+      toggleModal();
+    }
+  }
+
+  for (var i = 0, len = triggers.length; i < len; i++) {
+    triggers[i].addEventListener("click", toggleModal);
+  }
+  closeButton.addEventListener("click", toggleModal);
+  cancel.addEventListener("click", toggleModal);
+  window.addEventListener("click", windowOnClick);
+
+
+  $(".option-tab").on("click", function () {
+    $(".option-tab").removeClass("at");
+    $(this).addClass("at");
+  });
+
+
+</script>
+</body>
+</html>

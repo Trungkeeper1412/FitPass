@@ -2906,6 +2906,65 @@ input[type="radio"]:checked{
   border: 2px solid rgb(255, 200, 0);
 }
 
+/* css for change password tab */
+.change-pw{
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+}
+.change-pw-icon{
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.change-pw-icon img{
+  width: 200px;
+}
+.change-pw input{
+  width:100%;
+  border:2px solid #e1e1e1;
+  border-radius:8px;
+  margin:2px 0;
+  outline:none;
+  padding:6px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+.change-pw .field-icon{
+  float: right;
+  margin-left: -25px;
+  margin-top: -32px;
+  margin-right: 8px;
+  position: relative;
+  z-index: 2;
+}
+.pw-format{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: fit-content;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow:0 0 25px 0 rgb(193, 193, 193);
+  font-size: 14px;
+}
+.pw-format img{
+  width: 18px;
+}
+.pw-details{
+  padding: 10px 15px;
+}
+.change-pw button{
+  border-radius: 14px;
+  padding: 6px 10px;
+  font-size: 15px;
+  background-color: #000;
+  color: white;
+  font-weight: 600;
+}
+
 /* CSS FOR GYM DETAILS PAGE */
 .w3-animate-zoom{
   width: 70%;
@@ -3109,7 +3168,7 @@ input:checked + .toggle-slider:before {
   padding : 10px;
   position: absolute;
   top: 40px;
-  left: 210px;
+  left: 200px;
   color: rgb(255, 255, 255);
   font-weight: 600;
   overflow-wrap: break-word;
@@ -3117,19 +3176,32 @@ input:checked + .toggle-slider:before {
 .gym-picture{
   position: absolute;
   top: 20px;
-  left: 5%;
+  left: 20px;
+  right: 20px;
   padding: 10px 10px 5px 10px;
   z-index: 1;
-  display: flex;
-  flex-wrap: nowrap;
-  width: 100%;
 }
-
-.gym-picture img{
-  position: absolute;
-  top: 15%;
+@media only screen and (min-width: 799px) {
+  .gym-first-info .gym-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 15%;
+  }
+  .gym-name-cover h3{
+    font-size: 20px;
+    text-align: left;
+    width: fit-content;
+    position: absolute;
+    top: 35px;
+    left: 190px;
+    right: 20px;
+  }
 }
+@media only screen and (max-width: 1000px) {
 
+}
 .gym-first-info{
   top: 50px;
   position: relative;
@@ -3152,8 +3224,37 @@ input:checked + .toggle-slider:before {
   border-radius: 10px;
   object-fit: cover;
 }
+@media only screen and (min-width: 280px) and (max-width: 799px){
+  .gym-name-cover h3{
+    text-align: left;
+    font-size: 14px;
+    width: 70%;
+    padding : 5px;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+  }
+  .gym-picture img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  .gym-service-logo{
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+  }
+  .gym-service{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+  }
+
+}
 
 .gym-service{
+  display: flex;
+  flex-wrap: wrap;
   margin: auto;
   padding: 30px;
   width: 100%;
@@ -3169,7 +3270,6 @@ input:checked + .toggle-slider:before {
   height: 70px;
   border: 1px solid black;
   border-radius: 10px;
-  /*width: fit-content;*/
 }
 .gym-service-logo:hover + .service-name {
   display: block;
@@ -3197,8 +3297,7 @@ input:checked + .toggle-slider:before {
 .service-type{
   margin-top: 30px;
   margin: auto;
-  width: 150px;
-  /* background-color: #15928A; */
+  /*width: 150px;*/
 }
 .service-type .gym-service-logo img{
   width: 30px;
@@ -4152,7 +4251,7 @@ section {
 
 .scroll-services .child {
   height: 480px;
-  min-width: 280px;
+  min-width: 220px;
   margin-right: 20px;
   padding: 0;
   color: #000000;

@@ -24,9 +24,10 @@
         <img th:src="${department.getDepartmentWallpaperUrl()}">
     </div>
     <div class="gym-picture">
-        <img style="width: 150px; height: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
-        <div class="gym-name-cover">
-            <h3 th:text="${department.departmentName}"></h3>
+        <img th:src="${department.departmentLogoUrl}">
+        <div class="gym-name-cover" >
+            <h3 class="gym-name" th:text="${department.departmentName}"></h3>
+        </div>
         </div>
     </div>
 </div>
@@ -97,9 +98,9 @@
     <h3 style="color: black; margin-top: 80px; font-weight: 600">Tiện ích hàng đầu</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 110px;"></div>
     <!-- Gym service -->
-    <div class="container">
-        <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type mb-3" th:each="feature: ${departmentFeatures}">
+    <div class="container-fluid">
+        <div class="gym-service">
+            <div class="service-type mb-3" th:each="feature: ${departmentFeatures}">
                 <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
                      class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
@@ -113,8 +114,8 @@
         <button class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
         </button>
-        <div class="scroll-services mt-4">
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12"  th:each="amenitie: ${departmentAmenities}">
+        <div class="scroll-services row mt-4">
+            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-7"  th:each="amenitie: ${departmentAmenities}">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
                 <div class="service-descript" th:text="${amenitie.brandAmenitieId.getDescription()}"></div>
@@ -254,10 +255,77 @@
 
 
 <!-- ======= Footer ======= -->
-<th:block th:include="common/footer :: footer"></th:block>
-<div id="preloader"></div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-info">
+                        <h3>Gp<span>.</span></h3>
+                        <p>
+                            A108 Adam Street <br>
+                            NY 535022, USA<br><br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <h4>Our Newsletter</h4>
+                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+<!--<div id="preloader"></div>-->
+<!--<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i-->
+<!--        class="bi bi-arrow-up-short"></i></a>-->
 
 <th:block th:include="common/vendor-script"></th:block>
 <script>
