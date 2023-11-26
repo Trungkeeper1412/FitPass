@@ -318,9 +318,6 @@ function loadCalendar(data){
                     });
                 }
 
-
-
-
             } else {
                 // Xử lý lỗi nếu có.
                 console.error("Đã xảy ra lỗi trong getListCheckInCalendar");
@@ -384,8 +381,8 @@ function loadCalendar(data){
         reviewedModal.show();
 
         // Hiển thị gymLocation trong modal đánh giá
-        const gymLocationInReviewModal = document.getElementById('gym-location-in-reviewed-modal');
-        gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
+        const gymLocationInReviewedModal = document.getElementById('gym-location-in-reviewed-modal');
+        gymLocationInReviewedModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
 
         let id = document.getElementById("checkInHistoryIdReviewed").value;
 
