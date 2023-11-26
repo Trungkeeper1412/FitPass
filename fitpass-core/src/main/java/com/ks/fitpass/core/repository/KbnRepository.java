@@ -9,5 +9,5 @@ public interface KbnRepository {
 
     List<Kbn> getKbnByName(String kbnName);
 
-    String getGymPlanTypeByPlanKey(int gymPlanKey);
+    String getGymPlanTypeByPlanTypeKey(int gymPlanKey);
 }

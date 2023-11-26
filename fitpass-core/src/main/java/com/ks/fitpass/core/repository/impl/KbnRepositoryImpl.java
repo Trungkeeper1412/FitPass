@@ -26,7 +26,7 @@ public class KbnRepositoryImpl implements KbnRepository, IRepositoryQuery {
     }
 
     @Override
-    public String getGymPlanTypeByPlanKey(int planKey) {
+    public String getGymPlanTypeByPlanTypeKey(int planKey) {
         return jdbcTemplate.queryForObject(GET_GYM_PLAN_TYPE_BY_PLAN_KEY, String.class, planKey);
     }
 
