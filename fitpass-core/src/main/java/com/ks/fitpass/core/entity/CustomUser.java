@@ -17,6 +17,7 @@ public class CustomUser extends org.springframework.security.core.userdetails.Us
     private long userCreateTime;
     private boolean userDeleted;
 
+
     public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, int id, String customUserPassword, long userCreateTime, boolean userDeleted) {
         super(username, password, authorities);
         this.id = id;
