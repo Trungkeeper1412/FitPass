@@ -43,4 +43,9 @@ public class ProfileController {
     public String showDepositPage(){
         return "user/user-deposit";
     }
+
+    @GetMapping("/transaction-history")
+    public String showTransactionHistoryPage(){
+        return "user/user-transaction-history";
+    }
 }
