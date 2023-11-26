@@ -51,6 +51,19 @@ public interface IRepositoryQuery {
                 and gym_plan_type_key = 1
             """;
 
+    String GET_ALL_GYM_PLAN_FLEX_BY_BRAND_ID_ACTIVE = """
+                SELECT plan_id,
+                	   name,
+                	   price_per_hours,
+                	   plan_before_active_validity,
+                	   plan_after_active_validity,
+                	   gym_plan_status_key as status,
+                	   description
+                FROM gym_plan
+                where brand_id = ?
+                and gym_plan_type_key = 1 AND gym_plan_status_key = 1
+            """;
+
     String CREATE_GYM_PLAN_FLEX = """
             INSERT INTO gym_plan
                 (brand_id, gym_plan_status_key, gym_plan_type_key, name, description, price_per_hours, plan_before_active_validity, plan_after_active_validity)
@@ -88,6 +101,19 @@ public interface IRepositoryQuery {
                 FROM gym_plan
                 where brand_id = ?
                 and gym_plan_type_key = 2
+            """;
+    String GET_ALL_GYM_PLAN_FIXED_BY_BRAND_ID_ACTIVE = """
+                SELECT plan_id,
+                	   name,
+                	   price,
+                	   duration,
+                	   plan_before_active_validity,
+                	   plan_after_active_validity,
+                	   gym_plan_status_key as status,
+                	   description
+                FROM gym_plan
+                where brand_id = ?
+                and gym_plan_type_key = 2 AND gym_plan_status_key = 1
             """;
 
     String CREATE_GYM_PLAN_FIXED = """
