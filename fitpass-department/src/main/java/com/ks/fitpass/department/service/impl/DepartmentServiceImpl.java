@@ -40,6 +40,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .departmentPhone(department.getDepartmentContactNumber())
 
                 .departmentWallpaperUrl(department.getDepartmentWallpaperUrl())
+                .departmentThumbnailUrl(department.getDepartmentThumbnailUrl())
                 .rating(department.getRating())
                 .capacity(department.getCapacity())
                 .area(department.getArea())

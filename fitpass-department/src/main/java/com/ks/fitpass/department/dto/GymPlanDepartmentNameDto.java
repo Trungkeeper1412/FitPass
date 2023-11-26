@@ -20,4 +20,5 @@ public class GymPlanDepartmentNameDto implements Serializable {
     private int planBeforeActiveValidity;
     private int planAfterActiveValidity;
     private String gymDepartmentName;
+    private String gymDepartmentLogoUrl;
 }

@@ -29,11 +29,6 @@ public class ProfileController {
         return "user/profile";
     }
 
-    @GetMapping("/notification-page")
-    public String showNotificationPage(){
-        return "user/profile :: notifications";
-    }
-
     @GetMapping("/my-notifications")
     public String showNotificationPage1(){
         return "user/notification";

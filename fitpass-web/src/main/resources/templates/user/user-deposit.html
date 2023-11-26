@@ -19,7 +19,104 @@
 <!-- Content -->
 <div class="user-profile-content container-fluid">
     <div class="row justify-content-center">
-        <th:block th:replace="user/fragments/sidebar.html :: sidebar"></th:block>
+        <div class="col-md-4 col-lg-4 col-xl-3 menu-option mb-4" th:fragment="sidebar">
+            <div class="user-basic-info">
+                <div class="user-img">
+                    <img th:src="@{/images/system/v2.png}">
+                </div>
+                <div class="user">
+                    <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
+                    <div class="gmail">nguyenvana@gmail.com</div>
+                </div>
+            </div>
+
+            <ul class="account-info list-group">
+                <div class="row justify-content-center credit-info">
+                    <div class="mb-3">
+                        <div class="account-balance">
+                            <div class="account-money">
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/10317/10317738.png"></span>
+                                <span class="wallet-money">
+                          <span  th:text="${session.userCredit}"></span>
+                          <span>Credits</span>
+                      </span>
+                            </div>
+                            <div class="ab-title">Số dư trong ví</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="account-balance">
+                            <div>
+                                <span><img src="https://cdn-icons-png.flaticon.com/128/10318/10318269.png"></span>
+                                <span class="wallet-money">2000 Credits</span>
+                            </div>
+                            <div class="ab-title">Tổng credits đã nạp</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a th:href="@{/profile/my-profile}">
+                    <li class="list-group-item p-3 option-tab" onclick="openUserProfileTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/8748/8748620.png">
+            </span>
+                        <span>Hồ sơ của tôi</span>
+                    </li>
+                </a>
+
+                <a th:href="@{/profile/change-password}">
+                    <li class="list-group-item p-3 option-tab" onclick="openChangePwTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/807/807241.png">
+            </span>
+                        <span>Đổi mật khẩu</span>
+                    </li>
+                </a>
+
+                <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/1860/1860195.png">
+            </span>
+                    <span>Lịch tập</span>
+                </li>
+
+                <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/11520/11520032.png">
+            </span>
+                    <span>Đánh giá của tôi</span>
+                </li>
+
+                <a th:href="@{/profile/my-notifications}">
+                    <li class="list-group-item p-3 option-tab" onclick="openNotiTab()">
+              <span>
+                <img src="https://cdn-icons-png.flaticon.com/128/891/891012.png">
+              </span>
+                        <span>Thông báo</span>
+                    </li>
+                </a>
+            </ul>
+
+            <ul class="wallet-info list-group">
+                <a th:href="@{/profile/deposit}">
+                    <li class="list-group-item p-3 option-tab at" onclick="openAddMoneyTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/7887/7887095.png">
+            </span>
+                        <span>Nạp tiền</span>
+                    </li>
+                </a>
+
+                <a th:href="@{/profile/transaction-history}">
+                    <li class="list-group-item p-3 option-tab" onclick="openTransactionHistory()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/847/847566.png">
+            </span>
+                        <span>Lịch sử giao dịch</span>
+                    </li>
+                </a>
+            </ul>
+        </div>
 
         <div class="col-md-8 col-lg-8 col-xl-9 content-by-option">
             <!-- Common components in tab -->
@@ -49,7 +146,431 @@
                 </div>
 
                 <!-- User deposit tab -->
-                <th:block th:replace="user/fragments/deposit.html :: deposit"></th:block>
+                <div id="add-money-tab">
+                    <div class="mt-4" style="font-weight: 500;">Chọn phương thức thanh toán</div>
+                    <div class="row banking-card-list mt-2 justify-content-center">
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                                <input id="choose-visa" type="radio" name="product" class="card-input-element" checked />
+                                <div class="panel panel-default card-input">
+                                    <div class="panel-body">
+                                        <span><img src="https://cdn-icons-png.flaticon.com/128/349/349221.png"></span>
+                                        <span class="ab-title">Thanh toán bằng VISA</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                                <input id="choose-vnpay" type="radio" name="product" class="card-input-element" />
+                                <div class="panel panel-default card-input">
+                                    <div class="panel-body">
+                                        <div>
+                                            <span><img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Icon-VNPAY-QR.png"></span>
+                                            <span class="ab-title">Thanh toán bằng VNPAY</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                                <input id="choose-momo" type="radio" name="product" class="card-input-element" />
+                                <div class="panel panel-default card-input">
+                                    <div class="panel-body">
+                                        <div>
+                        <span><img
+                                src="https://developers.momo.vn/v3/assets/images/square-logo-custom-fe8867afcb1aca43d3d5685f44c8c305.png"></span>
+                                            <span class="ab-title">Thanh toán bằng ví điện tử</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="visa-payment">
+                        <div class="mt-4" style="font-weight: 500;">Thanh toán bằng thẻ visa</div>
+                        <div class="row mt-2 justify-content-center add-money">
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('50000', '50 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">50.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">50 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('100000', '100 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">100.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">100 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('200000', '200 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">200.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">200 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('300000', '300 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">300.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">300 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('500000', '500 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">500.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">500 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('1000000', '1000 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">1.000.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">1000 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('2000000', '2000 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">2.000.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">2000 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('3000000', '3000 credits tương ứng')"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">3.000.000</h3>
+                        </span>
+                                            <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                        </div>
+                                        <div class="credit-trans">3000 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-6 mb-4 input-money">
+                                <input id="moneyAmount" type="text" placeholder="Nhập số tiền cần nạp...">
+                            </div>
+                            <div class="col-6 mb-4" id="add-money">
+                                <div class="add-money-btn trigger">Nạp tiền</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vnpay-payment" class="mb-4">
+                        <div class="mt-4" style="font-weight: 500;">Thanh toán bằng vnpay</div>
+                        <div class="row mt-2 justify-content-center add-money">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">50.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">50 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">100.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">100 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">200.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">200 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">300.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">300 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">500.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">500 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">1.000.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">1000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">2.000.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">2000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">3.000.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">3000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 vnpay-img">
+                                <img style="width: 95%; height: 95%"
+                                     src="https://kalite.vn/wp-content/uploads/2021/09/maqrkalite.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab thanh toán bằng ví momo -->
+                    <div id="momo-payment" class="mb-4">
+                        <div class="mt-4" style="font-weight: 500;">Thanh toán bằng momo</div>
+                        <div class="row mt-2 justify-content-center add-money">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">50.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">50 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">100.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">100 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">200.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">200 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">300.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">300 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">500.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">500 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">1.000.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">1000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">2.000.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">2000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input type="radio" name="money" class="card-input-element" />
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">3.000.000</h3>
+                            </span>
+                                                    <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
+                                                </div>
+                                                <div class="credit-trans">3000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 vnpay-img">
+                                <img style="width: 95%; height: 95%"
+                                     src="https://homepage.momocdn.net/blogscontents/momo-upload-api-220810110042-637957260425550228.webp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

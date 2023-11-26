@@ -2434,6 +2434,27 @@ a:link {
     display: flex;
     flex-direction: row;
   }
+  .user-profile{
+    font-size: 14px;
+    padding: 10px;
+  }
+  .custom-file-input{
+    font-size: 16px;
+  }
+  .user-change-ava{
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    margin: auto;
+  }
+}
+@media only screen and (min-width: 460px) {
+  .user-profile {
+    padding: 20px;
+  }
+  .user-change-ava{
+    padding: 20px;
+  }
 }
 @media only screen and (min-width: 768px) {
   .menu-option .credit-info {
@@ -2442,6 +2463,7 @@ a:link {
   .credit-info-common{
     display: flex;
   }
+
 }
 @media only screen and (min-width: 461px) and (max-width: 767px) {
   .credit-info-common{
@@ -2509,6 +2531,7 @@ a:link {
 }
 .user-basic-info .gmail {
   font-size: 12px;
+  width: fit-content;
   overflow-wrap: break-word;
 }
 
@@ -2776,7 +2799,7 @@ a:link {
 
 /* Css  for profile tab */
 
-#exampleFormControlFile1{
+.custom-file-input{
   margin-left: 10px;
   width: 85px;
   overflow: hidden;
@@ -2813,12 +2836,12 @@ input[type="radio"]:checked{
   background-color: black;
   box-shadow:none;
 }
-.user-change-ava{
-  border-radius: 10px;
-  background-color: white;
-  padding: 20px;
-  margin: auto;
-}
+/*.user-change-ava{*/
+/*  border-radius: 10px;*/
+/*  background-color: white;*/
+/*  padding: 20px;*/
+/*  margin: auto;*/
+/*}*/
 .change-ava-btn{
   display: flex;
   align-items: center;
