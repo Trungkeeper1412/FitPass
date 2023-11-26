@@ -265,9 +265,9 @@ public class GymOwnerController {
         Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
         // Get List Of fixed gym plan by brand id
-        List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandId(departmentDetails.getBrandId());
+        List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandIdActive(departmentDetails.getBrandId());
         // Get List Of flexible gym plan by brand id
-        List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandId(departmentDetails.getBrandId());
+        List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandIdActive(departmentDetails.getBrandId());
         // Get list brand amenitie
         List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(departmentDetails.getBrandId());
 
@@ -657,8 +657,8 @@ public class GymOwnerController {
         int departmentId = departmentDetails.getDepartmentId();
         int brandId = departmentDetails.getBrandId();
 
-        List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandId(brandId);
-        List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandId(brandId);
+        List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandIdActive(brandId);
+        List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandIdActive(brandId);
 
         List<GymPlanDepartmentNameDto> listFixedGymPlanSelected = gymPlanService.getGymPlanDepartmentFixedByDepartmentId(departmentId);
         List<GymPlanDepartmentNameDto> listFlexGymPlanSelected = gymPlanService.getGymPlanDepartmentFlexByDepartmentId(departmentId);
