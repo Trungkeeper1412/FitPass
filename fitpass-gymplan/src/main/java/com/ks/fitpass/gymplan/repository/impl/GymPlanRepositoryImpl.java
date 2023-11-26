@@ -49,6 +49,21 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
     }
 
     @Override
+    public List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandIdActive(int brandId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_ALL_GYM_PLAN_FLEX_BY_BRAND_ID_ACTIVE, (rs, rowNum) -> {
+            BrandGymPlanFlexDTO brandGymPlanFlexDTO = new BrandGymPlanFlexDTO();
+            brandGymPlanFlexDTO.setGymPlanId(rs.getInt("plan_id"));
+            brandGymPlanFlexDTO.setGymPlanName(rs.getString("name"));
+            brandGymPlanFlexDTO.setPricePerHours(rs.getDouble("price_per_hours"));
+            brandGymPlanFlexDTO.setPlanBeforeActive(rs.getInt("plan_before_active_validity"));
+            brandGymPlanFlexDTO.setPlanAfterActive(rs.getInt("plan_after_active_validity"));
+            brandGymPlanFlexDTO.setStatus(rs.getInt("status"));
+            brandGymPlanFlexDTO.setDescription(rs.getString("description"));
+            return brandGymPlanFlexDTO;
+        }, brandId);
+    }
+
+    @Override
     public int createGymPlanFlex(BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO) {
         return jdbcTemplate.update(IRepositoryQuery.CREATE_GYM_PLAN_FLEX,brandCreateGymPlanFlexDTO.getBrandId(),
                 brandCreateGymPlanFlexDTO.getStatus(), 1, brandCreateGymPlanFlexDTO.getGymPlanName(),
@@ -82,6 +97,22 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
     @Override
     public List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandId(int brandId) {
         return jdbcTemplate.query(IRepositoryQuery.GET_ALL_GYM_PLAN_FIXED_BY_BRAND_ID, (rs, rowNum) -> {
+            BrandGymPlanFixedDTO brandGymPlanFixedDTO = new BrandGymPlanFixedDTO();
+            brandGymPlanFixedDTO.setGymPlanId(rs.getInt("plan_id"));
+            brandGymPlanFixedDTO.setGymPlanName(rs.getString("name"));
+            brandGymPlanFixedDTO.setPrice(rs.getDouble("price"));
+            brandGymPlanFixedDTO.setDuration(rs.getInt("duration"));
+            brandGymPlanFixedDTO.setPlanBeforeActive(rs.getInt("plan_before_active_validity"));
+            brandGymPlanFixedDTO.setPlanAfterActive(rs.getInt("plan_after_active_validity"));
+            brandGymPlanFixedDTO.setStatus(rs.getInt("status"));
+            brandGymPlanFixedDTO.setDescription(rs.getString("description"));
+            return brandGymPlanFixedDTO;
+        }, brandId);
+    }
+
+    @Override
+    public List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandIdActive(int brandId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_ALL_GYM_PLAN_FIXED_BY_BRAND_ID_ACTIVE, (rs, rowNum) -> {
             BrandGymPlanFixedDTO brandGymPlanFixedDTO = new BrandGymPlanFixedDTO();
             brandGymPlanFixedDTO.setGymPlanId(rs.getInt("plan_id"));
             brandGymPlanFixedDTO.setGymPlanName(rs.getString("name"));
