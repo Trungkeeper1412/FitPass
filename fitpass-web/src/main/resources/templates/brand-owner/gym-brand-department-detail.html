@@ -60,13 +60,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="capacity" class="form-label fw-bold">Sức chứa
+                                        <label for="capacity" class="form-label fw-bold">Sức chứa (Người)
                                             :</label>
                                         <input type="text" class="form-control" id="capacity" name="capacity"
                                                th:value="${department.getCapacity() + ' người'}" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="area" class="form-label fw-bold">Diện tích :</label>
+                                        <label for="area" class="form-label fw-bold">Diện tích (m2) :</label>
                                         <input type="text" class="form-control" id="area" name="area"
                                                th:value="${department.getArea()} + 'm²'" readonly>
                                     </div>
