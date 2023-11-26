@@ -48,4 +48,9 @@ public class ProfileController {
     public String showTransactionHistoryPage(){
         return "user/user-transaction-history";
     }
+
+    @GetMapping("change-password")
+    public String showChangePwPage(){
+        return "user/user-change-password";
+    }
 }
