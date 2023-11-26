@@ -19,7 +19,104 @@
 <!-- Content -->
 <div class="user-profile-content container-fluid">
   <div class="row justify-content-center">
-    <th:block th:replace="user/fragments/sidebar.html :: sidebar"></th:block>
+    <div class="col-md-4 col-lg-4 col-xl-3 menu-option mb-4" th:fragment="sidebar">
+      <div class="user-basic-info">
+        <div class="user-img">
+          <img th:src="@{/images/system/v2.png}">
+        </div>
+        <div class="user">
+          <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
+          <div class="gmail">nguyenvana@gmail.com</div>
+        </div>
+      </div>
+
+      <ul class="account-info list-group">
+        <div class="row justify-content-center credit-info">
+          <div class="mb-3">
+            <div class="account-balance">
+              <div class="account-money">
+                <span><img src="https://cdn-icons-png.flaticon.com/128/10317/10317738.png"></span>
+                <span class="wallet-money">
+                          <span  th:text="${session.userCredit}"></span>
+                          <span>Credits</span>
+                      </span>
+              </div>
+              <div class="ab-title">Số dư trong ví</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="account-balance">
+              <div>
+                <span><img src="https://cdn-icons-png.flaticon.com/128/10318/10318269.png"></span>
+                <span class="wallet-money">2000 Credits</span>
+              </div>
+              <div class="ab-title">Tổng credits đã nạp</div>
+            </div>
+          </div>
+        </div>
+
+        <a th:href="@{/profile/my-profile}">
+          <li class="list-group-item p-3 option-tab" onclick="openUserProfileTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/8748/8748620.png">
+            </span>
+            <span>Hồ sơ của tôi</span>
+          </li>
+        </a>
+
+        <a th:href="@{/profile/change-password}">
+          <li class="list-group-item p-3 option-tab" onclick="openChangePwTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/807/807241.png">
+            </span>
+            <span>Đổi mật khẩu</span>
+          </li>
+        </a>
+
+        <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/1860/1860195.png">
+            </span>
+          <span>Lịch tập</span>
+        </li>
+
+        <li class="list-group-item p-3 option-tab">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/11520/11520032.png">
+            </span>
+          <span>Đánh giá của tôi</span>
+        </li>
+
+        <a th:href="@{/profile/my-notifications}">
+          <li class="list-group-item p-3 option-tab at" onclick="openNotiTab()">
+              <span>
+                <img src="https://cdn-icons-png.flaticon.com/128/891/891012.png">
+              </span>
+            <span>Thông báo</span>
+          </li>
+        </a>
+      </ul>
+
+      <ul class="wallet-info list-group">
+        <a th:href="@{/profile/deposit}">
+          <li class="list-group-item p-3 option-tab" onclick="openAddMoneyTab()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/7887/7887095.png">
+            </span>
+            <span>Nạp tiền</span>
+          </li>
+        </a>
+
+        <a th:href="@{/profile/transaction-history}">
+          <li class="list-group-item p-3 option-tab" onclick="openTransactionHistory()">
+            <span>
+              <img src="https://cdn-icons-png.flaticon.com/128/847/847566.png">
+            </span>
+            <span>Lịch sử giao dịch</span>
+          </li>
+        </a>
+      </ul>
+    </div>
 
     <div class="col-md-8 col-lg-8 col-xl-9 content-by-option">
       <!-- Common components in tab -->
@@ -47,8 +144,49 @@
             </div>
           </div>
         </div>
+
         <!--User notifications tab-->
-        <th:block th:replace="user/fragments/notifications.html :: notifications"></th:block>
+        <div class="mt-4 mb-4" id="my-notifications">
+          <div class="row my-notifications">
+            <div class="noti-card col-12 mb-4">
+              <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtk86cli80AalCTdP_MOrFRItgZ6JQKsaHTQ&usqp=CAU">
+              <div class="noti-content">
+                <div>
+                    <span><img style="width: 18px; height: 18px;"
+                               src="https://cdn-icons-png.flaticon.com/128/891/891012.png"></span>
+                  <span class="fw-bold">Hòa Lạc Fitness -</span>
+                  <span>Flash sale giá sốc, tức tốc vào ngay !</span>
+                </div>
+                <div class="noti-description">
+                  Sale mạnh đến 50% từ các gói tập linh hoạt đến cố định, vào quẹo lựa ngay.
+                </div>
+                <div class="noti-time">
+                  16:46 07-11-2023
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row pagination">
+            <div class="col-12">
+              <nav style="margin-top: -40px; float: right;">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active-page">
+                    <a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
