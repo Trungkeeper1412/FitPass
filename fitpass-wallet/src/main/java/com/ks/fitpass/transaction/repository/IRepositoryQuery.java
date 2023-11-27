@@ -28,4 +28,17 @@ public interface IRepositoryQuery {
                   ?
                 );
             """;
+
+    String GET_TOTAL_AMOUNT_TRANSACTION_BY_USER_ID = """
+            SELECT
+                SUM(t.amount) AS total_amount
+            FROM
+                wallet w
+                    JOIN
+                `transaction` t ON w.wallet_id = t.wallet_id
+            WHERE
+                    w.user_id = ?
+            GROUP BY
+                w.user_id, w.wallet_id;
+            """;
 }
