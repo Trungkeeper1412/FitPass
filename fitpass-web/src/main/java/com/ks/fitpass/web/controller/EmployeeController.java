@@ -2,6 +2,7 @@ package com.ks.fitpass.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
@@ -14,6 +15,8 @@ import com.ks.fitpass.notification.service.NotificationService;
 import com.ks.fitpass.notification.service.WebSocketService;
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.service.OrderDetailService;
+import com.ks.fitpass.transaction.dto.TransferCreditHistory;
+import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.dao.DataAccessException;
@@ -25,9 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -41,15 +42,20 @@ public class EmployeeController {
     private final WalletService walletService;
     private final WebSocketService webSocketService;
 
+    private final BrandService brandService;
+    private final TransactionService transactionService;
+
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
                               NotificationService notificationService, CheckInHistoryService checkInHistoryService,
-                              WalletService walletService, WebSocketService webSocketService) {
+                              WalletService walletService, WebSocketService webSocketService, BrandService brandService, TransactionService transactionService) {
         this.employeeService = employeeService;
         this.orderDetailService = orderDetailService;
         this.notificationService = notificationService;
         this.checkInHistoryService = checkInHistoryService;
         this.walletService = walletService;
         this.webSocketService = webSocketService;
+        this.brandService = brandService;
+        this.transactionService = transactionService;
     }
 
   @GetMapping("/check-in/fixed")
@@ -306,6 +312,23 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
             // Trừ credit của người dùng
             walletService.updateBalanceByUderId(user.getUserId(), updateCheckInHistory.getCreditAfterPay());
             double credit = walletService.getBalanceByUserId(user.getUserId());
+
+            // Cộng credit cho brand owner
+            int brandOwnerId = brandService.getBrandOwnerIdByDepartmentId(successNotification.getDepartmentId());
+            double brandOwnerBalance = walletService.getBalanceByUserId(brandOwnerId);
+            double brandOwnerCreditAfter = brandOwnerBalance + updateCheckInHistory.getTotalCredit();
+            walletService.updateBalanceByUderId(brandOwnerId, brandOwnerCreditAfter);
+
+            // Update bảng Transfer History
+            TransferCreditHistory transferCreditHistory = new TransferCreditHistory();
+            transferCreditHistory.setSenderUserId(user.getUserId());
+            transferCreditHistory.setReceiverUserId(brandOwnerId);
+            transferCreditHistory.setAmount(updateCheckInHistory.getTotalCredit());
+            transferCreditHistory.setOrderDetailId(successNotification.getOrderDetailId());
+            transferCreditHistory.setTransferDate(new Timestamp(System.currentTimeMillis()));
+
+            transactionService.insertTransferCreditHistory(transferCreditHistory);
+
             session.setAttribute("userCredit", credit);
             // Update status use của order detail id thành chưa tập
             orderDetailService.updateOrderDetailsUseStatus(updateCheckInHistory.getOrderDetailId(), "Chưa tập");
