@@ -44,7 +44,6 @@ public class EmployeUpdateDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-
     @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
     @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
     @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
