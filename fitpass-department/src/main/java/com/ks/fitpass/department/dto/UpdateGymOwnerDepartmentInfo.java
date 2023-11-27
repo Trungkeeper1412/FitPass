@@ -2,10 +2,16 @@ package com.ks.fitpass.department.dto;
 
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -22,7 +28,7 @@ public class UpdateGymOwnerDepartmentInfo {
     private String departmentAddress;
 
     @NotEmpty(message = "Vui lòng nhập số điện thoại !")
-    @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
+    @ValidatePhone(message = "Số điện thoại không đúng định dạng !")
     private String departmentContactNumber;
 
     @NotEmpty(message = "Vui lòng nhập mô tả thông tin cơ sở !")
@@ -114,5 +120,17 @@ public class UpdateGymOwnerDepartmentInfo {
 
         // Kiểm tra nếu openLocalTime lớn hơn hoặc bằng closeLocalTime
         return openLocalTime.isAfter(closeLocalTime);
+    }
+
+
+    @Target({ ElementType.FIELD })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = PhoneNumberValidator.class)
+    public @interface ValidatePhone {
+        String message() default "Số điện thoại không đúng định dạng !";
+
+        Class<?>[] groups() default {};
+
+        Class<? extends Payload>[] payload() default {};
     }
 }
