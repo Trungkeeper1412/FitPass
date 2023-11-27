@@ -3,7 +3,8 @@ import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.brand.repository.BrandRepository;
-import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.brand.dto.BrandDetailFeedback;
+import com.ks.fitpass.brand.dto.BrandDetailFeedbackStat;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,25 @@ public class BrandServiceImpl implements BrandService{
     @Override
     public int updateBrandDetail(BrandOwnerProfile brandOwnerProfile) {
         return brandRepository.updateBrandDetail(brandOwnerProfile);
+    }
+
+    @Override
+    public List<BrandDetailFeedback> getFeedbackOfBrandDetail(int brandId, int page, int size, String sortRating) {
+        return brandRepository.getFeedbackOfBrandDetail(brandId, page, size, sortRating);
+    }
+
+    @Override
+    public BrandDetailFeedbackStat getFeedbackOfBrandDetailStat(int brandId) {
+        return brandRepository.getFeedbackOfBrandDetailStat(brandId);
+    }
+
+    @Override
+    public int countTotalFeedback(int brandId, String sortRating) {
+        return brandRepository.countTotalFeedback(brandId, sortRating);
+    }
+
+    @Override
+    public int getBrandOwnerIdByDepartmentId(int departmentId) {
+        return brandRepository.getBrandOwnerIdByDepartmentId(departmentId);
     }
 }
