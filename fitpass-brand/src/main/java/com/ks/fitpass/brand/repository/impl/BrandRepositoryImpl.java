@@ -156,4 +156,5 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     public int getBrandOwnerIdByDepartmentId(int departmentId) {
         return jdbcTemplate.queryForObject(GET_BRAND_OWNER_ID_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
+
 }
