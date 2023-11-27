@@ -277,7 +277,7 @@ function loadCalendar(data){
                     membershipPackage: data.gymPlanName
                 };
 
-                if(data.feedBackId == 0) {
+                if(data.feedBackId === 0) {
                     document.getElementById('gym-location').value = workoutData.gymLocation;
                     document.getElementById('gym-address').value = workoutData.gymAddress;
                     document.getElementById('workout-date').value = workoutData.date;
@@ -294,7 +294,6 @@ function loadCalendar(data){
                         type: "GET",
                         url: `/calendar/getFeedback?id=${data.checkInHistoryId}`,
                         success: function (feedback) {
-                            console.log("feedback", feedback)
                             document.getElementById('gym-location-review').value = workoutData.gymLocation;
                             document.getElementById('gym-address-review').value = workoutData.gymAddress;
                             document.getElementById('workout-date-review').value = workoutData.date;
@@ -311,6 +310,35 @@ function loadCalendar(data){
                             $('#star-rating-reviewed').attr('data-star', feedback.rating);
                             const detailModal = new bootstrap.Modal(document.getElementById('post-review-detail-modal'));
                             detailModal.show();
+
+                            // document.getElementById('reviewed-link').addEventListener('click', event => {
+                            //     event.preventDefault();
+                            //     // Lấy thông tin gymLocation
+                            //     const gymLocation = document.getElementById('gym-location').value;
+                            //
+                            //     // Hiển thị modal đánh giá
+                            //     const reviewedModal = new bootstrap.Modal(document.getElementById('reviewed-modal'));
+                            //     reviewedModal.show();
+                            //
+                            //     // Hiển thị gymLocation trong modal đánh giá
+                            //     const gymLocationInReviewedModal = document.getElementById('gym-location-in-reviewed-modal');
+                            //     gymLocationInReviewedModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
+                            //
+                            //     let id = document.getElementById("checkInHistoryIdReviewed").value;
+                            //
+                            //     $.ajax({
+                            //         type: "GET",
+                            //         url: `/calendar/getFeedback?id=${id}`,
+                            //         success: function (data) {
+                            //             var radioId = 'star' + data.rating;
+                            //             $('#your-rating ' + '#' + radioId).prop('checked', true);
+                            //             $('#your-thoughts').val(data.comments);
+                            //         },
+                            //         error: function () {
+                            //             alert("Đã xảy ra lỗi trong getListCheckInCalendar");
+                            //         }
+                            //     });
+                            // });
                         },
                         error: function () {
                             alert("Đã xảy ra lỗi trong getFeedback");
@@ -369,8 +397,9 @@ function loadCalendar(data){
         gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
     });
 
+    // Xử lý khi người dùng nhấp vào liên kết "Chỉnh sửa đánh giá"
     const reviewedLink = document.getElementById('reviewed-link');
-    reviewedLink.addEventListener('click', function (event) {
+    reviewedLink.addEventListener('click', function (event)  {
         event.preventDefault();
 
         // Lấy thông tin gymLocation
@@ -390,9 +419,12 @@ function loadCalendar(data){
             type: "GET",
             url: `/calendar/getFeedback?id=${id}`,
             success: function (data) {
-                var radioId = 'star' + data.rating;
+                console.log("AJAX success!");
+                var radioId = 'star' + data.rating + 'Reviewed';
                 $('#your-rating ' + '#' + radioId).prop('checked', true);
                 $('#your-thoughts').val(data.comments);
+                console.log(data.comments)
+                console.log(data.rating)
             },
             error: function () {
                 alert("Đã xảy ra lỗi trong getListCheckInCalendar");
