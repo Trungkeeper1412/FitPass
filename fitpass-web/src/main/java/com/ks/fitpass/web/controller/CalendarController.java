@@ -33,6 +33,7 @@ public class CalendarController {
     @GetMapping("/getListCheckIn")
     public ResponseEntity<List<CheckInDataCalendarDTO>> getListCheckIn(HttpSession session) {
         User u = (User) session.getAttribute("userInfo");
+        // lấy ra danh sách check_in_history theo getUserId
         List<CheckInDataCalendarDTO> list = calendarService.getListCheckInCalendarByUserId(u.getUserId());
         return ResponseEntity.ok(list);
     }

@@ -442,16 +442,17 @@ $("#submitButton").click(function () {
 
             Swal.fire({
                 title: 'Đang cập nhật...', timer: 5000,
-                timerProgressBar: true, allowOutsideClick: false,
+                timerProgressBar: true,
+                allowOutsideClick: false,
                 onBeforeOpen: () => {
                     Swal.showLoading();
                 }
             });
 
-
             setTimeout(function () {
                 Swal.fire({
-                    icon: 'success', title: 'Cập nhật thành công', showConfirmButton: false,
+                    icon: 'success', title: 'Cập nhật thành công',
+                    showConfirmButton: false,
                     timer: 2000
                 }).then(() => {
                     window.location.href = "/brand-owner/department/list"
