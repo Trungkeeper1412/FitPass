@@ -162,4 +162,11 @@ public interface IRepositoryQuery {
                 			WHERE gd.gym_department_id = ?
                 		)
             """;
+
+    String GET_USER_EMAIL_BY_USER_ID = """
+            SELECT ud.email
+                FROM user_detail ud
+                JOIN user u ON u.user_detail_id = ud.user_detail_id
+            WHERE u.user_id = ?;
+            """;
 }
