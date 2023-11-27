@@ -5,10 +5,14 @@ import com.ks.fitpass.transaction.dto.TransferCreditHistory;
 import com.ks.fitpass.transaction.repository.IRepositoryQuery;
 import com.ks.fitpass.transaction.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Types;
 import java.util.List;
 
 @Repository
@@ -16,6 +20,8 @@ import java.util.List;
 public class TransactionRepositoryImpl implements TransactionRepository {
 
     private final JdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = LogManager.getLogger(TransactionRepositoryImpl.class);
 
     @Override
     public int insertTransaction(TransactionDTO transactionDTO) {
@@ -41,5 +47,22 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         return jdbcTemplate.update(IRepositoryQuery.INSERT_INTO_TRANSFER_CREDIT_HISTORY, transferCreditHistory.getSenderUserId(),
                 transferCreditHistory.getReceiverUserId(), transferCreditHistory.getAmount(), transferCreditHistory.getOrderDetailId(),
                 transferCreditHistory.getTransferDate());
+    }
+
+    @Override
+    public Double getTotalAmountOfTransactionByUserId(int userId) {
+        try {
+            return jdbcTemplate.queryForObject(
+                    IRepositoryQuery.GET_TOTAL_AMOUNT_TRANSACTION_BY_USER_ID,
+                    new Object[]{userId},
+                    new int[]{Types.INTEGER},
+                    Double.class
+            );
+
+        } catch (DataAccessException e) {
+            // Log the exception for further analysis
+            logger.error("Error retrieving total amount for user ID {}: {}", userId, e.getMessage(), e);
+            throw e; // Rethrow the exception if needed
+        }
     }
 }
