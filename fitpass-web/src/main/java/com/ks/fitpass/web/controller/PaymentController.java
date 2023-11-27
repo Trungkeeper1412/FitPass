@@ -4,6 +4,7 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
+import com.ks.fitpass.web.constant.Constants;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
@@ -31,9 +32,8 @@ public class PaymentController {
 
     @PostMapping("/create-session")
     public ResponseEntity<String> createCheckoutSession(@RequestParam("amount") String selectedAmount) {
-        Stripe.apiKey = "sk_test_51O8PFkCEyctaDSq7R5Pd9BhZcu45QPgcNGhA0gpgbJYFnBwNCGEXcNc7XyCF2DbwkVOaPs8YLknSQbVzcZJWNWgF00rHGcHPGL";
+        Stripe.apiKey = Constants.STRIPE_API_KEY;
         Long amount = Long.parseLong(selectedAmount);
-        String YOUR_DOMAIN = "http://localhost:8080";
         try {
             SessionCreateParams.LineItem.PriceData priceData = SessionCreateParams.LineItem.PriceData.builder()
                     .setCurrency("vnd")
@@ -41,15 +41,15 @@ public class PaymentController {
                     .setProductData(
                             SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                     .setName("FITPASS")
-                                    .setDescription("Nạp credit vào ví fitpass")
+                                    .setDescription("Nạp credit vào ví FitPass")
                                     .build()
                     )
                     .build();
             SessionCreateParams params =
                     SessionCreateParams.builder()
                             .setMode(SessionCreateParams.Mode.PAYMENT)
-                            .setSuccessUrl(YOUR_DOMAIN + "/payment/success?amount=" + amount)
-                            .setCancelUrl(YOUR_DOMAIN + "/payment/cancel?amount=" + amount)
+                            .setSuccessUrl(Constants.DOMAIN_NAME + "/payment/success?amount=" + amount)
+                            .setCancelUrl(Constants.DOMAIN_NAME + "/payment/cancel?amount=" + amount)
                             .addLineItem(
                                     SessionCreateParams.LineItem.builder()
                                             .setQuantity(1L)
@@ -73,7 +73,7 @@ public class PaymentController {
     public String processSuccessPayment(@RequestParam("amount") long amount, HttpSession session, Model model) {
         User user = (User) session.getAttribute("userInfo");
         double balance = walletService.getBalanceByUserId(user.getUserId());
-        double creditAfterPayment = balance + amount / 1000;
+        double creditAfterPayment = balance + (double) amount / 1000;
         walletService.updateBalanceByUderId(user.getUserId(), creditAfterPayment);
 
         // Insert vao bang transaction
