@@ -5,35 +5,13 @@
     </div>
     <div class="user">
       <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
-      <div class="gmail">nguyenvana@gmail.com</div>
+        <div class="gmail" th:if="${userEmail != null}">
+            <span th:text="${userEmail}"></span>
+        </div>
     </div>
   </div>
 
   <ul class="account-info list-group">
-      <div class="row justify-content-center credit-info">
-          <div class="mb-3">
-              <div class="account-balance">
-                  <div class="account-money">
-                      <span><img src="https://cdn-icons-png.flaticon.com/128/10317/10317738.png"></span>
-                      <span class="wallet-money">
-                          <span  th:text="${session.userCredit}"></span>
-                          <span>Credits</span>
-                      </span>
-                  </div>
-                  <div class="ab-title">Số dư trong ví</div>
-              </div>
-          </div>
-          <div class="mb-3">
-              <div class="account-balance">
-                  <div>
-                      <span><img src="https://cdn-icons-png.flaticon.com/128/10318/10318269.png"></span>
-                      <span class="wallet-money">2000 Credits</span>
-                  </div>
-                  <div class="ab-title">Tổng credits đã nạp</div>
-              </div>
-          </div>
-      </div>
-
       <a th:href="@{/profile/my-profile}">
     <li class="list-group-item p-3 option-tab" onclick="openUserProfileTab()">
             <span>
