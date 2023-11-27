@@ -75,5 +75,18 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailRepository.decreaseDuration(orderDetailId);
     }
 
+    @Override
+    public List<Integer> getListOrderDetailExpired() {
+        return orderDetailRepository.getListOrderDetailExpired();
+    }
 
+    @Override
+    public int[] updateOrderDetailExpiredStatus(List<Integer> listId) {
+        return orderDetailRepository.updateOrderDetailExpiredStatus(listId);
+    }
+
+    @Override
+    public int getLatestOrderDetailId() {
+        return orderDetailRepository.getLatestOrderDetailId();
+    }
 }

@@ -40,9 +40,9 @@ public interface IRepositoryQuery {
 
     String INSERT_ORDER_PLAN_DETAIL= """
                 INSERT INTO order_plan_detail (order_id, name, gym_department_id, quantity, price_per_hours, price, duration,
-                                               plan_before_active_validity, plan_after_active_validity, item_status_key, description)
+                                               plan_before_active_validity, plan_after_active_validity, item_status_key, description, plan_expired_time)
                 VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             """;
 
     String GET_ALL_ORDER_ITEM_BY_USER_ID = """
@@ -147,5 +147,24 @@ public interface IRepositoryQuery {
 
     String DECREASE_DURATION = """
                 UPDATE order_plan_detail SET duration = duration - 1 WHERE order_detail_id = ?
+            """;
+
+    String GET_LIST_ORDER_DETAIL_EXPIRED = """
+                SELECT order_detail_id
+                FROM order_plan_detail
+                WHERE plan_expired_time IS NOT NULL AND DATE(plan_expired_time) < CURDATE();
+            """;
+
+    String UPDATE_ORDER_DETAIL_EXPIRED_STATUS= """
+                UPDATE order_plan_detail
+                SET item_status_key = ?
+                WHERE order_detail_id = your_order_detail_id;
+            """;
+
+    String GET_LATEST_ORDER_DETAIL_ID = """
+                SELECT order_detail_id
+                FROM order_plan_detail
+                ORDER BY order_detail_id DESC
+                LIMIT 1;
             """;
 }
