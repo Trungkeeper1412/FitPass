@@ -142,7 +142,7 @@ public interface IRepositoryQuery {
                             FROM user u
                             JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
                             JOIN user_role ur ON u.user_id = ur.user_id
-							WHERE ur.role_id = 3
+                            WHERE ur.role_id = 3
 							AND u.created_by IN (
 							    SELECT user_id
 							    FROM gym_department
