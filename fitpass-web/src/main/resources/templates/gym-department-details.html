@@ -21,13 +21,13 @@
 
 <div class="gym-first-info container">
     <div class="gym-dept-img">
+        <input type="hidden" id="departmentId" th:value="${department.getDepartmentId()}">
         <img th:src="${department.getDepartmentWallpaperUrl()}">
     </div>
     <div class="gym-picture">
-        <img th:src="${department.departmentLogoUrl}">
-        <div class="gym-name-cover" >
-            <h3 class="gym-name" th:text="${department.departmentName}"></h3>
-        </div>
+        <img style="width: 150px; height: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
+        <div class="gym-name-cover">
+            <h3 th:text="${department.departmentName}"></h3>
         </div>
     </div>
 </div>
@@ -203,28 +203,31 @@
             </div>
             <div class="button-list">
             <div class="row">
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSortAllRating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort5Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort4Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort3Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort2Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
                 2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort1Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
                 1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
             </button>
                 </div>
             </div>
         </div>
-        <div th:each="feedback : ${userFeedbacks}" class="user-rating">
+        <div id="feedback-list">
+
+        </div>
+<!--        <div th:each="feedback : ${userFeedbacks}" class="user-rating">
             <div class="user-rating-avatar">
                 <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
             </div>
@@ -234,18 +237,18 @@
                 <div th:text="${feedback.feedbackTime}"></div>
                 <div  th:text="${feedback.comments}"></div>
             </div>
-        </div>
-        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.getTotal() > 7}">
-            <div class="pagination col justify-content-center">
-                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"
-                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>
-                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
-                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"
-                       th:classappend="${pageNumber == currentPage}? 'current' : ''"
-                       th:text="${pageNumber}"></a>
-                </span>
-                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"
-                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>
+        </div>-->
+        <div class="pagination-wrapper container">
+            <div class="pagination col justify-content-center" id="paginationFeedback">
+<!--                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"-->
+<!--                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>-->
+<!--                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">-->
+<!--                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"-->
+<!--                       th:classappend="${pageNumber == currentPage}? 'current' : ''"-->
+<!--                       th:text="${pageNumber}"></a>-->
+<!--                </span>-->
+<!--                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"-->
+<!--                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>-->
             </div>
         </div>
     </div>
@@ -566,7 +569,122 @@
     }
 
 </script>
+<script>
+    $(document).ready(function () {
+        loadDepartmentFeedback(1);
+    });
+    var sortRating = "";
 
+    $("#btnSortAllRating").click(function () {
+        sortRating = "";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort5Rating").click(function () {
+        sortRating = "5";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort4Rating").click(function () {
+        sortRating = "4";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort3Rating").click(function () {
+        sortRating = "3";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort2Rating").click(function () {
+        sortRating = "2";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort1Rating").click(function () {
+        sortRating = "1";
+        loadDepartmentFeedback(1);
+    });
+
+    function loadDepartmentFeedback(page) {
+        $.ajax({
+            url: '/department/department-feedback',
+            type: 'GET',
+            data: {
+                departmentId: $("#departmentId").val(),
+                page: page,
+                size: 2,
+                sortRating: sortRating
+            },
+            success: function (data) {
+                console.log(data);
+                // Hiển thị danh sách người dùng
+                var feedbackListHtml = '';
+                $.each(data.userFeedbacks, function (index, feedback) {
+                    feedbackListHtml += `
+                            <div class="user-rating">
+                <div class="user-rating-avatar">
+                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
+                </div>
+                <div class="user-rating-description">
+                    <div>${feedback.userName}</div>
+                    <i style="height: 25px;" data-star="${feedback.rating}"></i>
+                    <div>${formatDateTime(feedback.feedbackTime)}</div>
+                    <div>${feedback.comments}</div>
+                </div>
+            </div>
+`;
+                });
+
+                $('#feedback-list').html(feedbackListHtml);
+
+                    // Tạo liên kết phân trang
+                    var paginationHtml = '';
+
+
+                    var prevPage = data.currentPage - 1;
+                    paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">prev</a> ';
+
+
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        var currentPage = data.currentPage;
+                        if (i === currentPage) {
+                            paginationHtml += '<a class="page-numbers current" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
+                        } else {
+                            paginationHtml += '<a class="page-numbers" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
+                        }
+                    }
+
+
+                    var nextPage = data.currentPage + 1;
+                    paginationHtml += '<a class="next page-numbers' + (data.currentPage === data.totalPage ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + nextPage + ')">next</a> ';
+
+                    $('#paginationFeedback').empty().html(paginationHtml);
+                }
+
+        });
+    }
+
+    function paginationFeedback(page) {
+        event.preventDefault();
+        loadDepartmentFeedback(page);
+    }
+
+    function formatDateTime(inputDate) {
+        const dateObject = new Date(inputDate);
+
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObject.getDate().toString().padStart(2, '0');
+        const hours = dateObject.getHours().toString().padStart(2, '0');
+        const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+        const seconds = dateObject.getSeconds().toString().padStart(2, '0');
+
+        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        const formattedDate = `${day}-${month}-${year}`;
+
+        return `${formattedTime} ${formattedDate}`;
+    }
+</script>
 </body>
 
 </html>

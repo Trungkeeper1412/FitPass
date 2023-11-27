@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentDetailsFeedback;
 import com.ks.fitpass.department.dto.GymPlanDto;
 import com.ks.fitpass.department.entity.*;
 import com.ks.fitpass.department.service.*;
@@ -9,6 +10,7 @@ import com.ks.fitpass.web.enums.PageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +50,7 @@ public class DepartmentController {
     @GetMapping("/department-detail/{department_id}")
     public String getDepartment(@PathVariable("department_id") int departmentId, Model model, @RequestParam(defaultValue = "1") int page,
                                 @RequestParam(defaultValue = "7") int size) {
-//        try {
+        try {
             Department department = departmentService.getOne(departmentId);
             model.addAttribute("department", department);
             model.addAttribute("page", PageEnum.XXX_FIRST_PAGE.getCode());
@@ -66,8 +68,8 @@ public class DepartmentController {
             model.addAttribute("departmentAlbums", departmentAlbums);
 
             // Get list of user feedback for the department
-            List<UserFeedback> userFeedbacks = departmentService.getDepartmentFeedback(departmentId, page, size);
-            model.addAttribute("userFeedbacks", userFeedbacks);
+//            List<UserFeedback> userFeedbacks = departmentService.getDepartmentFeedback(departmentId, page, size);
+//            model.addAttribute("userFeedbacks", userFeedbacks);
 
             // Calculate the rating statistics
             DepartmentDTO departmentDTO = departmentService.filterDepartmentFeedbacks(departmentId);
@@ -87,13 +89,37 @@ public class DepartmentController {
             model.addAttribute("departmentId", departmentId);
 
             return "gym-department-details";
-//        } catch (EmptyResultDataAccessException e) {
-//            return "error/no-data";
-//        } catch (DataAccessException exception){
-//            return "error/error";
-//        }
+        } catch (EmptyResultDataAccessException e) {
+            return "error/no-data";
+        } catch (DataAccessException exception){
+            return "error/error";
+        }
     }
 
+    @GetMapping("/department-feedback")
+    public ResponseEntity<DepartmentDetailsFeedback> getDepartmentFeedback(@RequestParam int departmentId,
+                                                                           @RequestParam(defaultValue = "1") int page,
+                                                                           @RequestParam(defaultValue = "7") int size,
+                                                                           @RequestParam(required = false) String sortRating) {
+        try {
+            // Get list of user feedback for the department
+            List<UserFeedback> userFeedbacks = departmentService.getDepartmentFeedback(departmentId, page, size, sortRating);
+
+            // Get total number of query results
+            int total = departmentService.countAllFeedback(departmentId, sortRating);
+
+            int totalPages = (int) Math.ceil((double) total / size);
+
+            DepartmentDetailsFeedback departmentDetailsFeedback = new DepartmentDetailsFeedback();
+            departmentDetailsFeedback.setUserFeedbacks(userFeedbacks);
+            departmentDetailsFeedback.setTotalPage(totalPages);
+            departmentDetailsFeedback.setCurrentPage(page);
+
+            return ResponseEntity.ok(departmentDetailsFeedback);
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
 }
 
