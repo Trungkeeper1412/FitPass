@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         } else if (type == "thumbnail") {
                             $("#imageThumbnail").val(response)
                         } else if (type == "wallpaper") {
-                            $("imageWallpaper").val(response)
+                            $("#imageWallpaper").val(response)
                         }
                     },
                     error: function () {
