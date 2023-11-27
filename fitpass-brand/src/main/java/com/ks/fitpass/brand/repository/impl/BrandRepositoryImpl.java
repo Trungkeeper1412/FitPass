@@ -2,15 +2,17 @@ package com.ks.fitpass.brand.repository.impl;
 
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
-import com.ks.fitpass.brand.entity.BrandStatus;
 import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;
 import com.ks.fitpass.brand.repository.IRepositoryQuery;
 import com.ks.fitpass.brand.repository.BrandRepository;
 import com.ks.fitpass.brand.mapper.BrandMapper;
-import com.ks.fitpass.department.mapper.DepartmentMapper;
+import com.ks.fitpass.brand.dto.BrandDetailFeedback;
+import com.ks.fitpass.brand.dto.BrandDetailFeedbackStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,10 +21,12 @@ import java.util.List;
 public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
 
     private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public BrandRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public BrandRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
 
@@ -86,5 +90,70 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
                 brandOwnerProfile.getBrandWallpaperUrl(),brandOwnerProfile.getBrandThumbnailUrl(), brandOwnerProfile.getBrandDescription(),
                 brandOwnerProfile.getBrandContactNumber(), brandOwnerProfile.getBrandEmail(), brandOwnerProfile.getBrandStatus().getBrandStatusCd(),
                 brandOwnerProfile.getBrandId());
+    }
+
+    @Override
+    public BrandDetailFeedbackStat getFeedbackOfBrandDetailStat(int brandId) {
+        return jdbcTemplate.queryForObject(GET_FEEDBACK_OF_BRAND_STAT, (rs, rowNum) -> {
+            BrandDetailFeedbackStat dto = new BrandDetailFeedbackStat();
+            dto.setTotalFeedback(rs.getInt("totalFeedback"));
+            dto.setFiveStar(rs.getInt("fiveStarFeedback"));
+            dto.setFourStar(rs.getInt("fourStarFeedback"));
+            dto.setThreeStar(rs.getInt("threeStarFeedback"));
+            dto.setTwoStar(rs.getInt("twoStarFeedback"));
+            dto.setOneStar(rs.getInt("oneStarFeedback"));
+            return dto;
+        }, brandId);
+    }
+
+    @Override
+    public List<BrandDetailFeedback> getFeedbackOfBrandDetail(int brandId, int page, int size, String sortRating) {
+        String sql = GET_ALL_FEEDBACK_OF_BRAND;
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("brandId", brandId);
+
+        if (sortRating != null && !sortRating.isEmpty()) {
+            int sortRatingInt = Integer.parseInt(sortRating);
+            sql += " AND uf.rating >= :minRating AND uf.rating < :maxRating";
+            params.addValue("minRating", sortRatingInt);
+            params.addValue("maxRating", sortRatingInt + 1);
+        }
+
+        int offset = (page - 1) * size;
+        sql += " LIMIT :size OFFSET :offset";
+        params.addValue("size", size);
+        params.addValue("offset", offset);
+        return namedParameterJdbcTemplate.query(sql, params, (rs, rowNum) -> {
+            BrandDetailFeedback dto = new BrandDetailFeedback();
+            dto.setFeedbackId(rs.getInt("feedback_id"));
+            dto.setUserId(rs.getInt("user_id"));
+            dto.setFirstName(rs.getString("first_name"));
+            dto.setLastName(rs.getString("last_name"));
+            dto.setImageUrl(rs.getString("image_url"));
+            dto.setRating(rs.getInt("rating"));
+            dto.setComment(rs.getString("comments"));
+            dto.setFeedbackTime(rs.getTimestamp("feedback_time"));
+            return dto;
+        });
+    }
+
+    @Override
+    public int countTotalFeedback(int brandId, String sortRating) {
+        String sql = COUNT_TOTAL_FEEDBACK_OF_BRAND;
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("brandId", brandId);
+
+        if (sortRating != null && !sortRating.isEmpty()) {
+            int sortRatingInt = Integer.parseInt(sortRating);
+            sql += " AND uf.rating >= :minRating AND uf.rating < :maxRating";
+            params.addValue("minRating", sortRatingInt);
+            params.addValue("maxRating", sortRatingInt + 1);
+        }
+        return namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);
+    }
+
+    @Override
+    public int getBrandOwnerIdByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(GET_BRAND_OWNER_ID_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 }

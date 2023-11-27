@@ -167,4 +167,61 @@ public interface IRepositoryQuery {
                 SET amenitie_status=?
                 WHERE amenitie_id=?;
             """;
+
+    String GET_ALL_FEEDBACK_OF_BRAND = """
+                SELECT
+                    uf.feedback_id,
+                    uf.user_id,
+                    ud.first_name,
+                    ud.last_name,
+                    ud.image_url,
+                    uf.rating,
+                    uf.comments,
+                    uf.feedback_time
+                FROM
+                    user_feedback uf
+                JOIN
+                    user u ON uf.user_id = u.user_id
+                JOIN
+                    user_detail ud ON u.user_detail_id = ud.user_detail_id
+                JOIN
+                    gym_department gd ON uf.department_id = gd.gym_department_id
+                WHERE
+                    gd.brand_id = :brandId
+            """;
+
+    String GET_FEEDBACK_OF_BRAND_STAT = """
+                SELECT
+                    gd.brand_id,
+                    COUNT(uf.feedback_id) AS totalFeedback,
+                    COUNT(CASE WHEN uf.rating = 5 THEN 1 END) AS fiveStarFeedback,
+                    COUNT(CASE WHEN uf.rating >= 4 AND uf.rating < 5 THEN 1 END) AS fourStarFeedback,
+                    COUNT(CASE WHEN uf.rating >= 3 AND uf.rating < 4 THEN 1 END) AS threeStarFeedback,
+                    COUNT(CASE WHEN uf.rating >= 2 AND uf.rating < 3 THEN 1 END) AS twoStarFeedback,
+                    COUNT(CASE WHEN uf.rating >= 1 AND uf.rating < 2 THEN 1 END) AS oneStarFeedback
+                FROM
+                    user_feedback uf
+                JOIN
+                    gym_department gd ON uf.department_id = gd.gym_department_id
+                WHERE
+                    gd.brand_id  = ?;
+            """;
+
+    String COUNT_TOTAL_FEEDBACK_OF_BRAND = """
+                SELECT
+                    COUNT(uf.feedback_id) AS totalFeedback
+                FROM
+                    user_feedback uf
+                JOIN
+                    gym_department gd ON uf.department_id = gd.gym_department_id
+                WHERE
+                    gd.brand_id = :brandId
+            """;
+
+    String GET_BRAND_OWNER_ID_BY_DEPARTMENT_ID = """
+                SELECT bd.`user_id`
+                FROM `gym_department` gd
+                JOIN `brand` bd ON gd.`brand_id` = bd.`brand_id`
+                WHERE gd.`gym_department_id` = ?;
+            """;
 }
