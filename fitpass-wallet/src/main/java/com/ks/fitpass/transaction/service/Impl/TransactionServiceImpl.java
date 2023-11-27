@@ -29,4 +29,9 @@ public class TransactionServiceImpl implements TransactionService {
     public int insertTransferCreditHistory(TransferCreditHistory transferCreditHistory) {
         return transactionRepository.insertTransferCreditHistory(transferCreditHistory);
     }
+
+    @Override
+    public Double getTotalAmountOfTransactionByUserId(int userId) {
+        return transactionRepository.getTotalAmountOfTransactionByUserId(userId);
+    }
 }
