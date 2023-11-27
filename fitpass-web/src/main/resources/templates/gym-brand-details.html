@@ -294,7 +294,6 @@
                     var prevPage = data.currentPage - 1;
                     paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">prev</a> ';
 
-
                     for (var i = 1; i <= data.totalPage; i++) {
                         var currentPage = data.currentPage;
                         if (i === currentPage) {
