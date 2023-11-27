@@ -31,7 +31,7 @@
         </div>
     </th:block>
     <th:block th:if="${cartItems.size() > 0}">
-    <div class="my-card-title row">
+    <div class="my-card-title container-fluid">
         <div class="form-check">
             <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
             <label class="" for="flexCheckChecked"> </label>
@@ -42,6 +42,7 @@
         <div class="action-title">Thao tác</div>
     </div>
     <!-- Để foreach ở đây -->
+    <div class="plan-in-cart-wrapper container-fluid">
     <div th:each="department : ${departmentList}">
         <div class="plan-in-my-card">
             <div class="all-plan-of-gym row">
@@ -92,7 +93,9 @@
             </th:block>
         </div>
     </div>
+    </div>
 
+    <div class="container-fluid">
     <div class="row" style="height: 15px; background-color: white;"></div>
     <div class="total-container-mc row justify-content-center">
         <h3 class="total-plan-mc col-md-4 col-sm-3 col-3">
@@ -107,10 +110,11 @@
             <button disabled type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
         </div>
     </div>
+    </div>
     </th:block>
 </div>
 
-
+<div th:replace="common/footer :: footer"></div>
 <th:block th:insert="common/vendor-script"></th:block>
 <script>
 

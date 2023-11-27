@@ -3694,6 +3694,15 @@ section {
 .body-my-card header{
   position: relative;
 }
+.plan-in-cart-wrapper{
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 600px;
+  -webkit-overflow-scrolling: touch;
+}
 .my-card-container{
   position: relative;
   /* width: 85%; */
@@ -3979,6 +3988,15 @@ section {
 .body-checkout{
   background-color: white;
   text-align: center;
+}
+.check-out-scroll{
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 500px;
+  -webkit-overflow-scrolling: touch;
 }
 @media only screen and (max-width: 370px)  {
   .body-checkout .bill-descript{
@@ -4329,18 +4347,17 @@ section {
 .gym-brand-content .prev,
 .gym-brand-content .next {
   cursor: pointer;
-  position: absolute;
+  /*position: absolute;*/
   top: 50%;
   width: auto;
   padding: 16px;
   margin-top: -22px;
-  color: white;
-  font-weight: bold;
+  color: #ffc451;
+  /*font-weight: bold;*/
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
-  background-color: #0000008f;
 }
 
 /* Position the "next button" to the right */

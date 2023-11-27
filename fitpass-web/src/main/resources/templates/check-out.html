@@ -26,14 +26,14 @@
 
 <div id="my-card" class="checkout-container container">
     <div class="checkout-content">
-        <div class="checkout-title row">
+        <div class="checkout-title">
             <div class="my-plan-title">Gói tập</div>
             <div class="price-title mx-auto">Đơn giá (credits)</div>
             <div class="num-of-plan-title mx-auto">Số lượng</div>
         </div>
+        <div class="check-out-scroll">
         <th:block th:each="department :${departmentList}">
             <div class="plan-in-a-gymdept row">
-
                 <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
                 <th:block th:each="cartItem: ${checkoutCartList}">
                     <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
@@ -60,9 +60,9 @@
                 </th:block>
             </div>
         </th:block>
+        </div>
 
-
-        <div class="total-checkout">
+        <div class="total-checkout mb-4">
             <div class="back-to-cart">
                 <a href="/cart/view">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -122,6 +122,8 @@
     <th:block th:if="${messageInsertOrder}">
         <input type="hidden" id="messageInsertOrder" value="${messageInsertOrder}" />
     </th:block>
+
+<div style="margin-top: 40px" th:replace="common/footer :: footer"></div>
 <!-- Vendor JS Files -->
 <th:block th:include="common/vendor-script"></th:block>
 <script>
