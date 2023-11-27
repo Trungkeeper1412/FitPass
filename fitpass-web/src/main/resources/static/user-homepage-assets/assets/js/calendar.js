@@ -27,7 +27,6 @@ function loadCalendar(data){
             start: item.checkInTime
         };
     });
-    console.log(events)
 
     // không đc phép để null -> để 1 obj trống để insert vào
     var userEvents = JSON.parse(localStorage.getItem('events')) || {
@@ -266,7 +265,6 @@ function loadCalendar(data){
         //const workoutData = getWorkoutDataForDate(info.id);
 
         getWorkoutDataForDate(info.event.id, function (data) {
-            console.log(data);
             if (data !== null) {
                 // Xử lý dữ liệu và trả về đối tượng chứa thông tin buổi tập
                 const workoutData = {
@@ -289,6 +287,7 @@ function loadCalendar(data){
 
                     const detailModal = new bootstrap.Modal(document.getElementById('detail-modal'));
                     detailModal.show();
+                    reviewModalClick(workoutData);
                 } else {
                     $.ajax({
                         type: "GET",
@@ -310,35 +309,7 @@ function loadCalendar(data){
                             $('#star-rating-reviewed').attr('data-star', feedback.rating);
                             const detailModal = new bootstrap.Modal(document.getElementById('post-review-detail-modal'));
                             detailModal.show();
-
-                            // document.getElementById('reviewed-link').addEventListener('click', event => {
-                            //     event.preventDefault();
-                            //     // Lấy thông tin gymLocation
-                            //     const gymLocation = document.getElementById('gym-location').value;
-                            //
-                            //     // Hiển thị modal đánh giá
-                            //     const reviewedModal = new bootstrap.Modal(document.getElementById('reviewed-modal'));
-                            //     reviewedModal.show();
-                            //
-                            //     // Hiển thị gymLocation trong modal đánh giá
-                            //     const gymLocationInReviewedModal = document.getElementById('gym-location-in-reviewed-modal');
-                            //     gymLocationInReviewedModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
-                            //
-                            //     let id = document.getElementById("checkInHistoryIdReviewed").value;
-                            //
-                            //     $.ajax({
-                            //         type: "GET",
-                            //         url: `/calendar/getFeedback?id=${id}`,
-                            //         success: function (data) {
-                            //             var radioId = 'star' + data.rating;
-                            //             $('#your-rating ' + '#' + radioId).prop('checked', true);
-                            //             $('#your-thoughts').val(data.comments);
-                            //         },
-                            //         error: function () {
-                            //             alert("Đã xảy ra lỗi trong getListCheckInCalendar");
-                            //         }
-                            //     });
-                            // });
+                            reviewedModalClick(feedback, workoutData);
                         },
                         error: function () {
                             alert("Đã xảy ra lỗi trong getFeedback");
@@ -361,7 +332,6 @@ function loadCalendar(data){
             type: "GET",
             url: `/calendar/getDetail?id=${id}`,
             success: function (data) {
-                console.log(data);
                 // Nếu có thông báo thì hiện
                 callback(data);
             },
@@ -369,66 +339,43 @@ function loadCalendar(data){
                 callback(null);
             }
         });
-        // Trả về đối tượng chứa thông tin buổi tập
-        // Ví dụ:
-        // return {
-        //     gymLocation: "SKY CITY TOWER - QUẬN ĐỐNG ĐA",
-        //     gymAddress: "Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q.Đống Đa, Hà Nội",
-        //     date: date,
-        //     checkInTime: "12:36 AM",
-        //     membershipPackage: "Gói linh hoạt"
-        // };
     }
 
     // Xử lý khi người dùng nhấp vào liên kết "Đánh giá ngay"
-    const reviewLink = document.getElementById('review-link');
-    reviewLink.addEventListener('click', function (event) {
-        event.preventDefault();
+    function reviewModalClick(workoutData){
+        const reviewLink = document.getElementById('review-link');
+        reviewLink.addEventListener('click', function (event) {
 
-        // Lấy thông tin gymLocation
-        const gymLocation = document.getElementById('gym-location').value;
+            event.preventDefault();
 
-        // Hiển thị modal đánh giá
-        const reviewModal = new bootstrap.Modal(document.getElementById('review-modal'));
-        reviewModal.show();
+            // Hiển thị modal đánh giá
+            const reviewModal = new bootstrap.Modal(document.getElementById('review-modal'));
+            reviewModal.show();
 
-        // Hiển thị gymLocation trong modal đánh giá
-        const gymLocationInReviewModal = document.getElementById('gym-location-in-review-modal');
-        gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
-    });
+            // Hiển thị gymLocation trong modal đánh giá
+            const gymLocationInReviewModal = document.getElementById('gym-location-in-review-modal');
+            gymLocationInReviewModal.innerHTML = `<strong>Cơ sở tập: ${workoutData.gymLocation}</strong>`;
+        });
+    }
 
     // Xử lý khi người dùng nhấp vào liên kết "Chỉnh sửa đánh giá"
-    const reviewedLink = document.getElementById('reviewed-link');
-    reviewedLink.addEventListener('click', function (event)  {
-        event.preventDefault();
+    function reviewedModalClick(feedback, workoutData){
+        const reviewedLink = document.getElementById('reviewed-link');
+        reviewedLink.addEventListener('click', function (event)  {
+            event.preventDefault();
 
-        // Lấy thông tin gymLocation
-        const gymLocation = document.getElementById('gym-location').value;
+            // Hiển thị modal đánh giá
+            const reviewedModal = new bootstrap.Modal(document.getElementById('reviewed-modal'));
+            reviewedModal.show();
 
-        // Hiển thị modal đánh giá
-        const reviewedModal = new bootstrap.Modal(document.getElementById('reviewed-modal'));
-        reviewedModal.show();
+            // Hiển thị gymLocation trong modal đánh giá
+            const gymLocationInReviewedModal = document.getElementById('gym-location-in-reviewed-modal');
+            gymLocationInReviewedModal.innerHTML = `<strong>Cơ sở tập: ${workoutData.gymLocation} </strong>`;
 
-        // Hiển thị gymLocation trong modal đánh giá
-        const gymLocationInReviewedModal = document.getElementById('gym-location-in-reviewed-modal');
-        gymLocationInReviewedModal.innerHTML = `<strong>Cơ sở tập: ${gymLocation}</strong>`;
-
-        let id = document.getElementById("checkInHistoryIdReviewed").value;
-
-        $.ajax({
-            type: "GET",
-            url: `/calendar/getFeedback?id=${id}`,
-            success: function (data) {
-                console.log("AJAX success!");
-                var radioId = 'star' + data.rating + 'Reviewed';
-                $('#your-rating ' + '#' + radioId).prop('checked', true);
-                $('#your-thoughts').val(data.comments);
-                console.log(data.comments)
-                console.log(data.rating)
-            },
-            error: function () {
-                alert("Đã xảy ra lỗi trong getListCheckInCalendar");
-            }
+            //Hiển thị sao + comment của feedback
+            var radioId = 'star' + feedback.rating + 'Reviewed';
+            $('#your-rating ' + '#' + radioId).prop('checked', true);
+            $('#your-thoughts').val(feedback.comments);
         });
-    });
+    }
 }
