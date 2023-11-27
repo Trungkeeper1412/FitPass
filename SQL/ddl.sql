@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS brand (
                                      contact_number              VARCHAR(20) NOT NULL,
                                      contact_email				VARCHAR(50) NOT NULL,
                                      brand_status_key   		    INT NOT NULL,
+                                     money_percent   INT DEFAULT 0,
                                      first_time boolean default 1,
                                      FOREIGN KEY (user_id) REFERENCES `user`(user_id)
 );
