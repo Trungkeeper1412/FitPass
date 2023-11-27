@@ -11,6 +11,8 @@ public interface UserService {
 
     int getLastInsertUserDetailId(UserDetail userDetail);
 
+    String getUserEmailByUserId(int userId);
+
     int insertIntoUser(User user);
 
     int getLastUserInsertId(User user);
