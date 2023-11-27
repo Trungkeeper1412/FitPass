@@ -73,7 +73,12 @@ public class PaymentController {
     public String processSuccessPayment(@RequestParam("amount") long amount, HttpSession session, Model model) {
         User user = (User) session.getAttribute("userInfo");
         double balance = walletService.getBalanceByUserId(user.getUserId());
-        double creditAfterPayment = balance + (double) amount / 1000;
+        double userTotalDeposit = transactionService.getTotalAmountOfTransactionByUserId(user.getUserId());
+
+        double depositAmount = (double) amount / 1000;
+
+        double creditAfterPayment = balance + depositAmount;
+        double totalDepositAfterPayment = userTotalDeposit + depositAmount;
         walletService.updateBalanceByUderId(user.getUserId(), creditAfterPayment);
 
         // Insert vao bang transaction
@@ -85,6 +90,7 @@ public class PaymentController {
         transactionService.insertTransaction(transactionDTO);
 
         session.setAttribute("userCredit", creditAfterPayment);
+        session.setAttribute("userTotalDeposit",totalDepositAfterPayment);
         model.addAttribute("redirectCountdown", 5); // Set the redirect countdown value (e.g., 5 seconds)
         return "user/paymentSuccess";
     }
