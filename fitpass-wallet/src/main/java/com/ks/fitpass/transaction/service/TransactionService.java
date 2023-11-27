@@ -10,4 +10,6 @@ public interface TransactionService {
     List<TransactionDTO> getListTransactionByUserId(int userId);
 
     int insertTransferCreditHistory(TransferCreditHistory transferCreditHistory);
+
+    Double getTotalAmountOfTransactionByUserId(int userId);
 }
