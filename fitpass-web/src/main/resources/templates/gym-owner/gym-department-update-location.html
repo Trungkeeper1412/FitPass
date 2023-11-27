@@ -41,7 +41,7 @@
                                             <label for="latitude" class="form-label fw-bold">Vĩ độ :</label>
                                             <input th:value="${updateGymOwnerDepartmentLocation.getLatitude()}" type="text" class="form-control" id="latitude" name="latitude"
                                                    placeholder="Nhập kinh độ" th:field="*{latitude}" />
-                                            <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{latitude}" class="text-danger"></span>
+                                            <span th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
