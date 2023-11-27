@@ -1,5 +1,8 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.brand.dto.BrandDetailFeedback;
+import com.ks.fitpass.brand.dto.BrandDetailFeedbackPaginition;
+import com.ks.fitpass.brand.dto.BrandDetailFeedbackStat;
 import com.ks.fitpass.brand.entity.*;
 import com.ks.fitpass.brand.service.*;
 import com.ks.fitpass.department.dto.DepartmentDTO;
@@ -10,11 +13,13 @@ import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.enums.PageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +58,8 @@ public class BrandController {
             List<ListBrandDepartmentFeedback> departmentFeedback = departmentService.getDepartmentFeedbackOfBrandOwner(brandId);
             model.addAttribute("departmentFeedback", departmentFeedback);
 
+            BrandDetailFeedbackStat brandDetailFeedbackStat = brandService.getFeedbackOfBrandDetailStat(brandId);
+            model.addAttribute("feedbackStat", brandDetailFeedbackStat);
 
             List<DepartmentFeature> departmentFeatures = new ArrayList<>();
 
@@ -67,6 +74,30 @@ public class BrandController {
             return "gym-brand-details";
         } catch (EmptyResultDataAccessException e) {
             return "error/no-data";
+        }
+    }
+
+    @GetMapping("/feedback")
+    public ResponseEntity<BrandDetailFeedbackPaginition> getBrandFeedback(@RequestParam int brandId,
+                                                                          @RequestParam(defaultValue = "1") int page,
+                                                                          @RequestParam(defaultValue = "7") int size,
+                                                                          @RequestParam(required = false) String sortRating) {
+        try {
+            List<BrandDetailFeedback> brandDetailFeedbacks = brandService.getFeedbackOfBrandDetail(brandId,
+                    page, size, sortRating);
+
+            int total = brandService.countTotalFeedback(brandId, sortRating);
+
+            int totalPages = (int) Math.ceil((double) total / size);
+
+            BrandDetailFeedbackPaginition brandDetailFeedbackPaginition = new BrandDetailFeedbackPaginition();
+            brandDetailFeedbackPaginition.setFeedbackList(brandDetailFeedbacks);
+            brandDetailFeedbackPaginition.setTotalPage(totalPages);
+            brandDetailFeedbackPaginition.setCurrentPage(page);
+
+            return ResponseEntity.ok(brandDetailFeedbackPaginition);
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 }
