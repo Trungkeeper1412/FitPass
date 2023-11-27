@@ -12,4 +12,20 @@ public interface IRepositoryQuery {
                 JOIN wallet w ON t.wallet_id = w.wallet_id
                 WHERE w.user_id = ?;
             """;
+
+    String INSERT_INTO_TRANSFER_CREDIT_HISTORY = """
+                INSERT INTO `transfer_credit_history` (
+                  `sender_id`,
+                  `receiver_id`,
+                  `amount`,
+                  `order_detail_id`,
+                  `transfer_date`
+                ) VALUES (
+                  ?,
+                  ?,
+                  ?,
+                  ?,
+                  ?
+                );
+            """;
 }

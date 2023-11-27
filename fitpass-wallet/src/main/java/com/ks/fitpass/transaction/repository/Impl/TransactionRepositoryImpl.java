@@ -1,6 +1,7 @@
 package com.ks.fitpass.transaction.repository.Impl;
 
 import com.ks.fitpass.transaction.dto.TransactionDTO;
+import com.ks.fitpass.transaction.dto.TransferCreditHistory;
 import com.ks.fitpass.transaction.repository.IRepositoryQuery;
 import com.ks.fitpass.transaction.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,12 @@ public class TransactionRepositoryImpl implements TransactionRepository {
             transactionDTO.setStatus(rs.getString("status"));
             return transactionDTO;
         }, userId);
+    }
+
+    @Override
+    public int insertTransferCreditHistory(TransferCreditHistory transferCreditHistory) {
+        return jdbcTemplate.update(IRepositoryQuery.INSERT_INTO_TRANSFER_CREDIT_HISTORY, transferCreditHistory.getSenderUserId(),
+                transferCreditHistory.getReceiverUserId(), transferCreditHistory.getAmount(), transferCreditHistory.getOrderDetailId(),
+                transferCreditHistory.getTransferDate());
     }
 }
