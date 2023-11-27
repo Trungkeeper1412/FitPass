@@ -224,4 +224,6 @@ public interface IRepositoryQuery {
                 JOIN `brand` bd ON gd.`brand_id` = bd.`brand_id`
                 WHERE gd.`gym_department_id` = ?;
             """;
+
+
 }
