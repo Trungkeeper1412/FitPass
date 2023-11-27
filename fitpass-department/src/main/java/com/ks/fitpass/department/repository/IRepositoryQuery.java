@@ -408,8 +408,7 @@ public interface IRepositoryQuery {
                     INNER JOIN `user` u ON uf.user_id = u.user_id
                     INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
                 WHERE
-                    uf.department_id = ?
-                LIMIT ? OFFSET ?
+                    uf.department_id = :departmentId
             """;
 
     String GET_DEPARTMENT_FEATURES = """
@@ -671,5 +670,11 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 UPDATE gym_department
                 SET first_time = 0
                 WHERE gym_department_id = ?;
+            """;
+
+    String COUNT_ALL_FEEDBACK = """
+                SELECT COUNT(*)
+                FROM user_feedback
+                WHERE department_id = :departmentId
             """;
 }

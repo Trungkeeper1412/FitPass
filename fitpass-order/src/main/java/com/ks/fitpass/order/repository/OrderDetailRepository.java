@@ -31,4 +31,10 @@ public interface OrderDetailRepository {
     Boolean isFixedGymPlan(int orderDetailId);
 
     int decreaseDuration(int orderDetailId);
+
+    List<Integer> getListOrderDetailExpired();
+
+    int[] updateOrderDetailExpiredStatus(List<Integer> listId);
+
+    int getLatestOrderDetailId();
 }

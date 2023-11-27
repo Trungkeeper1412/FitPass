@@ -157,9 +157,25 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
-    public List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size) {
+    public List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size, String sortRating) {
+        String sql = GET_DEPARTMENT_FEEDBACK_PAGNITION;
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("departmentId", departmentId);
+
+        if (sortRating != null && !sortRating.isEmpty()) {
+            int sortRatingInt = Integer.parseInt(sortRating);
+            sql += " AND uf.rating >= :minRating AND uf.rating < :maxRating";
+            params.addValue("minRating", sortRatingInt);
+            params.addValue("maxRating", sortRatingInt + 1);
+        }
+
         int offset = (page - 1) * size;
-        return jdbcTemplate.query(GET_DEPARTMENT_FEEDBACK_PAGNITION, new UserFeedbackMapper(), departmentId, size, offset);
+        sql += " LIMIT :size OFFSET :offset";
+        params.addValue("size", size);
+        params.addValue("offset", offset);
+
+        return namedParameterJdbcTemplate.query(sql, params, new UserFeedbackMapper());
     }
 
     @Override
@@ -311,4 +327,22 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     public int updateFirstTimeDepartmentCreated(int departmentId) {
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_FIRST_TIME_DEPARTMENT_CREATED, departmentId);
     }
+
+    @Override
+    public int countAllFeedback(int departmentId, String sortRating) {
+        String sql = IRepositoryQuery.COUNT_ALL_FEEDBACK;
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("departmentId", departmentId);
+
+        if (sortRating != null && !sortRating.isEmpty()) {
+            int sortRatingInt = Integer.parseInt(sortRating);
+            sql += " AND user_feedback.rating >= :minRating AND user_feedback.rating < :maxRating";
+            params.addValue("minRating", sortRatingInt);
+            params.addValue("maxRating", sortRatingInt + 1);
+        }
+
+        return namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);
+    }
+
 }
