@@ -30,7 +30,7 @@ public interface DepartmentRepository {
 
     List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException;
 
-    List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size);
+    List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size, String sortRating);
 
     List<DepartmentListByBrandDTO> getAllDepartmentListOfBrand(int brandId);
 
@@ -57,4 +57,6 @@ public interface DepartmentRepository {
     boolean checkFirstTimeDepartmentCreated(int departmentId);
 
     int updateFirstTimeDepartmentCreated(int departmentId);
+
+    int countAllFeedback(int departmentId, String sortRating);
 }

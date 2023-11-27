@@ -1,9 +1,6 @@
 package com.ks.fitpass.department.service.impl;
 
-import com.ks.fitpass.department.dto.DepartmentDTO;
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -142,8 +139,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size) {
-        return departmentRepository.getDepartmentFeedbackPagnition(departmentId, page, size);
+    public List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size, String sortRating) {
+        return departmentRepository.getDepartmentFeedbackPagnition(departmentId, page, size, sortRating);
     }
 
     @Override
@@ -265,6 +262,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int updateFirstTimeDepartmentCreated(int departmentId) {
         return departmentRepository.updateFirstTimeDepartmentCreated(departmentId);
     }
+
+    @Override
+    public int countAllFeedback(int departmentId, String sortRating) {
+        return departmentRepository.countAllFeedback(departmentId, sortRating);
+    }
+
 }
 
 

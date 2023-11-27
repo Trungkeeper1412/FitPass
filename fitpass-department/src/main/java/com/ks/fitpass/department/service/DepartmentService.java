@@ -1,9 +1,6 @@
 package com.ks.fitpass.department.service;
 
-import com.ks.fitpass.department.dto.DepartmentDTO;
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -37,7 +34,7 @@ public interface DepartmentService {
     List<Department> findByRatingBetween(double from, double to);
 
 
-    List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size);
+    List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size, String sortRating);
 
 
     DepartmentDTO filterDepartmentFeedbacks(int departmentId);
@@ -69,4 +66,6 @@ public interface DepartmentService {
     boolean checkFirstTimeDepartmentCreated(int departmentId);
 
     int updateFirstTimeDepartmentCreated(int departmentId);
+
+    int countAllFeedback(int departmentId, String sortRating);
 }
