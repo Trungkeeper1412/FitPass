@@ -14,4 +14,6 @@ public interface NotificationRepository {
     List<Notification> get3NewestUnseenNotificationForUser(int userIdReceive);
 
     List<Notification> getAllNotificationForEmployee(int empIdReceive);
+
+    int getNumberOfUnseenNotification(int userIdReceive);
 }

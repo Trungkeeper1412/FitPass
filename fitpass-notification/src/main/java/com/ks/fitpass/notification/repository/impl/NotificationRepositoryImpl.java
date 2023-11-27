@@ -4,11 +4,18 @@ import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.repository.IRepositoryQuery;
 import com.ks.fitpass.notification.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class NotificationRepositoryImpl implements NotificationRepository {
@@ -19,9 +26,42 @@ public class NotificationRepositoryImpl implements NotificationRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+//    @Override
+//    public int insertNotification(Notification notification) {
+//        return jdbcTemplate.update(IRepositoryQuery.INSERT_NOTIFICATION, notification.getUserIdSend(), notification.getUserIdReceive(), notification.getMessage(), notification.getTimeSend(), notification.getDepartmentId(), notification.getMessageType(), 0);
+//    }
+
     @Override
     public int insertNotification(Notification notification) {
-        return jdbcTemplate.update(IRepositoryQuery.INSERT_NOTIFICATION, notification.getUserIdSend(), notification.getUserIdReceive(), notification.getMessage(), notification.getTimeSend(), notification.getDepartmentId(), notification.getMessageType(), 0);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        try {
+            jdbcTemplate.update(con -> {
+                PreparedStatement ps = con.prepareStatement(IRepositoryQuery.INSERT_NOTIFICATION, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, notification.getUserIdSend());
+                ps.setInt(2, notification.getUserIdReceive());
+                ps.setString(3, notification.getMessage());
+                ps.setTimestamp(4, Timestamp.valueOf(notification.getTimeSend().toLocalDateTime()));
+                ps.setInt(5, notification.getDepartmentId());
+                ps.setString(6, notification.getMessageType());
+                ps.setInt(7, 0);
+
+                return ps;
+            }, keyHolder);
+
+            // Retrieve the generated ID after insertion
+            Number generatedId = keyHolder.getKey();
+            if (generatedId != null) {
+                int notificationId = Objects.requireNonNull(generatedId).intValue();
+                notification.setNotificationId(notificationId);
+            }
+
+            return 1; // Assuming successful insertion, adjust as needed
+        } catch (DataAccessException e) {
+            // Handle insertion failure
+            // Log or throw an exception, depending on your application's error handling strategy
+            return 0; // Indicate failure
+        }
     }
 
     @Override
@@ -87,5 +127,10 @@ public class NotificationRepositoryImpl implements NotificationRepository {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    @Override
+    public int getNumberOfUnseenNotification(int userIdReceive) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_NUM_OF_UNSEEN_NOTIFICATION_BY_USER_RECEIVE_ID, Integer.class, userIdReceive);
     }
 }
