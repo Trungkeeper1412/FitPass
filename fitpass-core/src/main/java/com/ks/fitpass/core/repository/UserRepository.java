@@ -43,4 +43,6 @@ public interface UserRepository {
     List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId);
 
     int getNumberOfAccountCreatedByDepartmentId(int departmentId);
+
+    String getUserEmailByUserId(int userId);
 }
