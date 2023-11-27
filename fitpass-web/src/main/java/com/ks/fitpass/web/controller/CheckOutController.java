@@ -1,5 +1,6 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.service.KbnService;
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
@@ -11,6 +12,8 @@ import com.ks.fitpass.order.entity.cart.Cart;
 import com.ks.fitpass.order.entity.cart.CartItem;
 import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.order.service.OrderService;
+import com.ks.fitpass.transaction.dto.TransferCreditHistory;
+import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/checkout")
@@ -34,13 +38,18 @@ public class CheckOutController {
     private final OrderDetailService orderDetailService;
 
     private final KbnService kbnService;
+    private final BrandService brandService;
+    private final TransactionService transactionService;
 
     @Autowired
-    public CheckOutController(WalletService walletService, OrderService orderService, OrderDetailService orderDetailService, KbnService kbnService) {
+    public CheckOutController(WalletService walletService, OrderService orderService, OrderDetailService orderDetailService,
+                              KbnService kbnService, BrandService brandService, TransactionService transactionService) {
         this.walletService = walletService;
         this.orderService = orderService;
         this.orderDetailService = orderDetailService;
         this.kbnService = kbnService;
+        this.brandService = brandService;
+        this.transactionService = transactionService;
     }
 
     @GetMapping("/view")
@@ -134,11 +143,35 @@ public class CheckOutController {
                     orderDetails.setItemStatusKey(0);
                     orderDetails.setDescription(gymPlanDepartmentNameDto.getGymPlanDescription());
 
+                    // Set thời gian hết hạn của gói tập
+                    int planBeforeActiveValidity = gymPlanDepartmentNameDto.getPlanBeforeActiveValidity();
+                    Timestamp planExpiredTime = new Timestamp(System.currentTimeMillis());
+                    planExpiredTime.setTime(planExpiredTime.getTime() + planBeforeActiveValidity * 24 * 60 * 60 * 1000);
+                    orderDetails.setPlanExpiredTime(planExpiredTime);
+
                     int insertOrderDetailStatus = orderDetailService.insertOrderDetail(orderDetails);
+                    int lastOrderDetailId = 0;
                     if(insertOrderDetailStatus <= 0) {
                         statusInsertOrderDetailBoolean = false;
+                    } else {
+                        lastOrderDetailId = orderDetailService.getLatestOrderDetailId();
                     }
                     cartItemsRemoveList.add(cartItem);
+
+                    if(gymPlanDepartmentNameDto.getPrice() > 0 && lastOrderDetailId > 0) {
+                        int brandOwnerId = brandService.getBrandOwnerIdByDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
+                        double brandOwnerBalance = walletService.getBalanceByUserId(brandOwnerId);
+                        double brandOwnerCreditAfter = brandOwnerBalance + gymPlanDepartmentNameDto.getPrice();
+                        walletService.updateBalanceByUderId(brandOwnerId, brandOwnerCreditAfter);
+                        TransferCreditHistory transferCreditHistory = new TransferCreditHistory();
+                        transferCreditHistory.setSenderUserId(user.getUserId());
+                        transferCreditHistory.setReceiverUserId(brandOwnerId);
+                        transferCreditHistory.setAmount(gymPlanDepartmentNameDto.getPrice());
+                        transferCreditHistory.setOrderDetailId(lastOrderDetailId);
+                        transferCreditHistory.setTransferDate(new Timestamp(System.currentTimeMillis()));
+                        transactionService.insertTransferCreditHistory(transferCreditHistory);
+                    }
+
                 }
             }
             int insertOrderDetailStatus = statusInsertOrderDetailBoolean == false ? 0 : 1;
