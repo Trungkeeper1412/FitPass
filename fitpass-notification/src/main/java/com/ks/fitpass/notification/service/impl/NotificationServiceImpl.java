@@ -32,8 +32,14 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Notification> getAllNotificationForUser(int userIdReceive) {
-        return notificationRepository.getAllNotificationForUser(userIdReceive);
+    public int getTotalNotificationsForUser(int userId) {
+        return notificationRepository.getTotalNotificationsForUser(userId);
+    }
+
+    @Override
+    public List<Notification> getAllNotificationForUser(int userIdReceive, int page, int size) {
+        int offset = (page - 1) * size;
+        return notificationRepository.getAllNotificationForUser(userIdReceive, offset, size);
     }
 
     @Override
@@ -45,4 +51,6 @@ public class NotificationServiceImpl implements NotificationService {
     public List<Notification> getAllNotificationForEmployee(int empIdReceive) {
         return notificationRepository.getAllNotificationForEmployee(empIdReceive);
     }
+
+
 }
