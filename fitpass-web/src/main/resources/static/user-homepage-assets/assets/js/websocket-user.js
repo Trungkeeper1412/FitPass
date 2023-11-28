@@ -1,16 +1,22 @@
 let stompClient = null;
 let notificationCount = 0;
+let globalCurrentPage = 1;
+let defaultPageSize = 4;
 
-// ******************** Create WS client ************************ //
+// ******************** Create WS client & methods ************************ //
 $(document).ready(function () {
     connect();
+    (async () => {
+        try {
+            const totalPages = await getTotalPages();
+            console.log(totalPages)
+            renderPaginationLinks(globalCurrentPage, totalPages);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    })();
 });
 
-function updateNotificationDisplay() {
-    let notificationNum = document.querySelector(".notification-badge")
-    notificationNum.textContent = notificationCount;
-}
-// ******************** Create WS client ************************ //
 function connect() {
     const socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -35,39 +41,28 @@ function connect() {
     });
 }
 
-function insertWebSocketNotification(message) {
-    console.log("Received message:", message);
-
-    let notification;
-
+async function getTotalPages() {
     try {
-        // Check if the message is already a JavaScript object
-        if (typeof message === 'object') {
-            notification = message; // Assuming the message is already a JavaScript object
-        } else {
-            // Parse the message as JSON
-            notification = JSON.parse(message.body);
+        const response = await fetch(`/notification/user/get-total-page?size=${defaultPageSize}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        if (notification.messageType != null) {
-            switch (notification.messageType) {
-                // type prepend = insert to the top (for ws new notification)
-                case "Xác nhận check in":
-                    insertCheckInNotificationDiv(notification, "prepend");
-                    break;
-                case "Xác nhận check out":
-                    insertCheckOutNotificationDiv(notification, "prepend");
-                    break;
-                default:
-                    console.log("Unknown message type");
-                    break;
-            }
-        } else {
-            console.log("Null message type");
-        }
+        return await response.json();
     } catch (error) {
-        console.error("Error parsing JSON:", error);
+        console.error('Error fetching total pages:', error);
+        throw error; // Re-throw the error to be caught by the caller if needed
     }
+}
+
+function updateNotificationDisplay() {
+    let notificationNum = document.querySelector(".notification-badge")
+    notificationNum.textContent = notificationCount;
+}
+
+function updateCurrentPage(page) {
+    return globalCurrentPage = page;
 }
 
 function sendSeenNotification(id) {
@@ -84,6 +79,85 @@ function sendSeenNotification(id) {
         }
     });
 }
+
+// ******************** WebSocket Notification Handle ************************ //
+
+function insertWebSocketNotification(message) {
+    console.log("Inserting WS Notification")
+
+    let notification;
+
+    try {
+        notification = JSON.parse(message.body);
+        if (notification.messageType != null) {
+            switch (notification.messageType) {
+                // type prepend = insert to the top (for ws new notification)
+                case "Xác nhận check in":
+                    // Fetch total pages
+                    (async () => {
+                        try {
+                            const totalPages = await getTotalPages();
+
+                            // If the page number is 1, remove the oldest notification
+                            if (globalCurrentPage === 1) {
+                                removeOldestNotificationFromPage();
+                                insertCheckInNotificationDiv(notification, "prepend");
+                            }
+
+                            // Render pagination links
+                            renderPaginationLinks(globalCurrentPage, totalPages);
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    })();
+                    break;
+                case "Xác nhận check out":
+                    (async () => {
+                        try {
+                            const totalPages = await getTotalPages();
+
+                            // If the page number is 1, remove the oldest notification
+                            if (globalCurrentPage === 1) {
+                                insertCheckOutNotificationDiv(notification, "prepend");
+                                removeOldestNotificationFromPage();
+                            }
+
+                            // Render pagination links
+                            renderPaginationLinks(globalCurrentPage, totalPages);
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    })();
+
+                    break;
+                default:
+                    console.log("Unknown message type");
+                    break;
+            }
+        } else {
+            console.log("Null message type");
+        }
+    } catch (error) {
+        console.error("Error parsing JSON:", error);
+    }
+}
+
+function removeOldestNotificationFromPage() {
+    const notificationsContainer = document.querySelector('.my-notifications');
+
+    // Check if the page is 1
+    if (globalCurrentPage === 1) {
+        // Select all notification cards on the first page
+        const notificationCards = notificationsContainer.querySelectorAll('.noti-card');
+
+        // If there are more than 4 notifications, remove the oldest one
+        if (notificationCards.length > 4) {
+            // Remove the last notification (oldest) from the DOM
+            notificationsContainer.removeChild(notificationCards[notificationCards.length - 1]);
+        }
+    }
+}
+
 
 // ******************** Load newest notification for navbar bell ************************ //
 document.addEventListener('DOMContentLoaded', function () {
@@ -134,7 +208,7 @@ function updateNotificationDropdown(unseenNotifications) {
                 </div>
             </a>
         `;
-        notificationDropdown.appendChild(listItem);
+        notificationDropdown.prepend(listItem);
     });
 
     // Add a "View All" button
@@ -151,11 +225,11 @@ function updateNotificationDropdown(unseenNotifications) {
 
 // ******************** Load List of notifications for Notification Page ************************ //
 if (window.location.pathname === '/profile/my-notifications') {
-    fetch('/notification/user/all?page=1&size=4')
+    fetch(`/notification/user/all?page=${globalCurrentPage}&size=${defaultPageSize}`)
         .then(response => response.json())
         .then(data => {
-            renderPaginationLinks(data.totalPages); // Render pagination links
-            getAllNotification(1,4)
+            renderPaginationLinks(data.currentPage,data.totalPages); // Render pagination links
+            loadNotificationsFromDB(data.currentPage,defaultPageSize)
         })
         .catch(error => {
             console.error('Error fetching notifications:', error);
@@ -183,9 +257,10 @@ function renderPaginationLinks(currentPage, totalPages) {
 
 // Function to handle pagination clicks
 function paginationClick(page) {
-    getAllNotification(page, 4);
+    updateCurrentPage(page)
+    loadNotificationsFromDB(page, 4);
 }
-function getAllNotification(page, size) {
+function loadNotificationsFromDB(page, size) {
     fetch(`/notification/user/all?page=${page}&size=${size}`)
         .then(response => {
             if (!response.ok) {
@@ -244,7 +319,7 @@ function insertCheckInNotificationDiv(notification, order) {
         '<div>' +
         '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png" alt="Bell icon"></span>' +
         '<span class="fw-bold">' + notification.departmentId + ' -</span>' +
-        '<span>' + notification.messageType + '</span>' +
+        '<span class="noti-message-type">' + notification.messageType + '</span>' +
         '</div>'
     );
 
@@ -312,7 +387,8 @@ function handleCheckInNotificationClick(notification) {
             },
             success: function () {
                 console.log("Đã gửi thông báo check in thành công đến nhân viên");
-                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).removeClass("unseen-notification").addClass("seen-notification");
+                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).
+                removeClass("unseen-notification").addClass("seen-notification");
             },
             error: function () {
                 alert("Đã xảy ra lỗi gửi check in thành công");
