@@ -191,10 +191,6 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
 
             // Retrieve the generated ID after insertion
             if (insertStatus > 0) {
-                long generatedNotificationId = notification.getNotificationId(); // Assuming 'getId()' method returns the generated ID
-
-                logger.error("Generated Notification ID: {}", generatedNotificationId);
-
                 // Gửi thông báo đến người dùng
                 webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
                 return ResponseEntity.ok(insertStatus);
@@ -269,11 +265,6 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
 
             // Retrieve the generated ID after insertion
             if (insertStatus > 0) {
-                long generatedNotificationId = notification.getNotificationId(); // Assuming 'getId()' method returns the generated ID
-
-                logger.error("Generated Notification ID: {}", generatedNotificationId);
-
-                // Gửi thông báo đến người dùng
                 webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
                 return ResponseEntity.ok(insertStatus);
             } else {
@@ -300,11 +291,11 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                     .messageType("Thông báo checkin thành công tới employee")
                     .message(username + " đã xác nhận check in thành công")
                     .departmentId(departmentId)
+                    .orderDetailId(orderDetailId)
                     .timeSend(new Timestamp(System.currentTimeMillis()))
                     .build();
-
-            webSocketService.notifyEmployee(userIdReceive, successNotification);
             notificationService.insertNotification(successNotification);
+            webSocketService.notifyEmployee(userIdReceive, successNotification);
 
             // Update bảng check in history
             employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
@@ -324,10 +315,11 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                     .messageType("Thông báo hủy checkin tới employee")
                     .message(username + " đã hủy check in")
                     .departmentId(departmentId)
+                    .orderDetailId(orderDetailId)
                     .timeSend(new Timestamp(System.currentTimeMillis()))
                     .build();
-            webSocketService.notifyEmployee(userIdReceive, cancelNotification);
             notificationService.insertNotification(cancelNotification);
+            webSocketService.notifyEmployee(userIdReceive, cancelNotification);
         }
         // Ngược lại trừ duration trong order detail
         return ResponseEntity.ok(1);
@@ -346,8 +338,9 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
             successNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
 
             // Gửi lại thông báo cho employee là đã thanh toán thành công + insert vào db
-            webSocketService.notifyEmployee(successNotification.getUserIdReceive(), successNotification);
             notificationService.insertNotification(successNotification);
+            webSocketService.notifyEmployee(successNotification.getUserIdReceive(), successNotification);
+
 
 
             // Trừ credit của người dùng
@@ -385,8 +378,9 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
             cancelNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
 
             // Gửi lại thông báo cho employee là đã check in thất bại + insert vào db
-            webSocketService.notifyEmployee(cancelNotification.getUserIdReceive(), cancelNotification);
             notificationService.insertNotification(cancelNotification);
+            webSocketService.notifyEmployee(cancelNotification.getUserIdReceive(), cancelNotification);
+
         }
 
         return ResponseEntity.ok(1);
