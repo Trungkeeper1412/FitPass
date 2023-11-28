@@ -9,12 +9,14 @@ $(document).ready(function () {
     (async () => {
         try {
             const totalPages = await getTotalPages();
-            console.log(totalPages)
             renderPaginationLinks(globalCurrentPage, totalPages);
+
+            notificationCount = await getTotalUnseenNotificationNumber();
         } catch (error) {
             console.error('Error:', error);
         }
     })();
+    getNewestUnseenNotifications();
 });
 
 function connect() {
@@ -24,9 +26,11 @@ function connect() {
         console.log("Connected to " + frame);
         stompClient.subscribe('/all/messages', function (message) {
             insertWebSocketNotification(message);
+            insertWebSocketNavbarNotification(message);
         });
         stompClient.subscribe('/user/specific/private-messages', function (message) {
             insertWebSocketNotification(message);
+            insertWebSocketNavbarNotification(message);
         });
 
         stompClient.subscribe('/all/global-notifications', function () {
@@ -59,6 +63,29 @@ async function getTotalPages() {
 function updateNotificationDisplay() {
     let notificationNum = document.querySelector(".notification-badge")
     notificationNum.textContent = notificationCount;
+    if (notificationCount === 0) {
+        const noNotificationElement = document.createElement('li');
+        noNotificationElement.classList.add('no-notification');
+
+        const iconElement = document.createElement('img');
+        iconElement.classList.add('notification-icon');
+        iconElement.setAttribute('src', '/user-homepage-assets/assets/img/smile-bell.png');
+        iconElement.setAttribute('alt', 'Nothing');
+
+        const titleElement = document.createElement('p');
+        titleElement.classList.add('notification-title');
+        titleElement.textContent = 'Bạn không có thông báo mới nào';
+
+        const descriptionElement = document.createElement('p');
+        descriptionElement.classList.add('notification-description');
+        descriptionElement.textContent = 'Hãy quay lại sau nhé';
+
+        noNotificationElement.appendChild(iconElement);
+        noNotificationElement.appendChild(titleElement);
+        noNotificationElement.appendChild(descriptionElement);
+
+        $("#notification-dropdown").prepend(noNotificationElement);
+    }
 }
 
 function updateCurrentPage(page) {
@@ -83,8 +110,6 @@ function sendSeenNotification(id) {
 // ******************** WebSocket Notification Handle ************************ //
 
 function insertWebSocketNotification(message) {
-    console.log("Inserting WS Notification")
-
     let notification;
 
     try {
@@ -118,8 +143,8 @@ function insertWebSocketNotification(message) {
 
                             // If the page number is 1, remove the oldest notification
                             if (globalCurrentPage === 1) {
-                                insertCheckOutNotificationDiv(notification, "prepend");
                                 removeOldestNotificationFromPage();
+                                insertCheckOutNotificationDiv(notification, "prepend");
                             }
 
                             // Render pagination links
@@ -149,22 +174,62 @@ function removeOldestNotificationFromPage() {
     if (globalCurrentPage === 1) {
         // Select all notification cards on the first page
         const notificationCards = notificationsContainer.querySelectorAll('.noti-card');
-
         // If there are more than 4 notifications, remove the oldest one
-        if (notificationCards.length > 4) {
+        if (notificationCards.length >= 4) {
             // Remove the last notification (oldest) from the DOM
             notificationsContainer.removeChild(notificationCards[notificationCards.length - 1]);
         }
     }
 }
 
+function insertNotificationNavDiv(notification) {
+    const noNotificationElement = document.querySelector('#notification-dropdown .no-notification');
+    if (noNotificationElement) {
+        noNotificationElement.remove();
+    }
+    const notificationsContainer = document.querySelector('#notification-dropdown');
+    const notificationNavCards = notificationsContainer.querySelectorAll('.notification-card-nav');
+    // If there are more than 3 notifications, remove the oldest one
+    if (notificationNavCards.length >= 3) {
+        // Remove the last notification (oldest) from the DOM
+        notificationsContainer.removeChild(notificationNavCards[notificationNavCards.length - 1]);
+    }
+
+    const navItem = document.createElement('li');
+    navItem.className = 'notification-dropdown-card';
+    navItem.setAttribute('nav-notification-id', notification.notificationId);
+    navItem.innerHTML = `
+            <a href="/profile/my-notifications" class="notification-card-nav">
+                <img src="/user-homepage-assets/assets/img/new-message.png" alt="Alert">
+                <div>  
+                    <div class="notification-card-nav-time">${notification.timeSend}</div>
+                    <div class="notification-card-nav-title">${notification.messageType}</div>
+                </div>
+            </a>
+        `;
+    notificationsContainer.prepend(navItem);
+}
+
+function insertWebSocketNavbarNotification(message) {
+    let notification;
+
+    try {
+        notification = JSON.parse(message.body);
+        if (notification.messageType != null) {
+            try {
+                insertNotificationNavDiv(notification);
+            } catch (error) {
+                console.error('Error inserting notification nav div:', error);
+            }
+        } else {
+            console.log("Null message type");
+        }
+    } catch (error) {
+        console.error("Error parsing JSON:", error);
+    }
+}
 
 // ******************** Load newest notification for navbar bell ************************ //
-document.addEventListener('DOMContentLoaded', function () {
-    // Lấy ra các notification unseen id = 0
-    getNewestUnseenNotifications();
-});
-
 function getNewestUnseenNotifications() {
     // Make an AJAX request to the backend endpoint
     fetch('/notification/user/newest-unseen')
@@ -174,53 +239,77 @@ function getNewestUnseenNotifications() {
             }
             return response.json();
         })
-        .then(notifications => {
-            // Handle the received notifications
-            updateNotificationDropdown(notifications);
+        .then(data => {
+            const notifications = data.notifications;
+            const size = data.size;
+
+            if (size !== 0) {
+                // Handle the received notifications
+                const noNotificationElement = document.querySelector('#notification-dropdown .no-notification');
+                if (noNotificationElement) {
+                    noNotificationElement.remove();
+                }
+                loadNotificationDropdown(notifications);
+            } else {
+                const noNotificationElement = document.createElement('li');
+                noNotificationElement.classList.add('no-notification');
+
+                const iconElement = document.createElement('img');
+                iconElement.classList.add('notification-icon');
+                iconElement.setAttribute('src', '/user-homepage-assets/assets/img/smile-bell.png');
+                iconElement.setAttribute('alt', 'Nothing');
+
+                const titleElement = document.createElement('p');
+                titleElement.classList.add('notification-title');
+                titleElement.textContent = 'Bạn không có thông báo mới nào';
+
+                const descriptionElement = document.createElement('p');
+                descriptionElement.classList.add('notification-description');
+                descriptionElement.textContent = 'Hãy quay lại sau nhé';
+
+                noNotificationElement.appendChild(iconElement);
+                noNotificationElement.appendChild(titleElement);
+                noNotificationElement.appendChild(descriptionElement);
+
+                $("#notification-dropdown").prepend(noNotificationElement);
+
+            }
         })
         .catch(error => {
             console.error('Error fetching newest unseen notifications:', error);
         });
 }
 
-function updateNotificationDropdown(unseenNotifications) {
-    // Assuming 'notification-badge' is the element displaying the notification count
-    const notificationBadge = document.getElementById('notification-badge');
+function loadNotificationDropdown(unseenNotifications) {
+    //Empty notification dropdown
+    const notificationsContainer = document.querySelector('#notification-dropdown');
+    const notificationNavCards = notificationsContainer.querySelectorAll('.notification-card-nav');
 
-    // Assuming 'notification-dropdown' is the container for notification items
-    const notificationDropdown = document.getElementById('notification-dropdown');
-
-    // Update the badge count
-    notificationBadge.innerText = unseenNotifications.length;
-
-    // Clear existing notification items
-    notificationDropdown.innerHTML = '';
+    notificationNavCards.forEach((card) => {
+        card.remove();
+    });
 
     // Iterate over notifications and append them to the dropdown
     unseenNotifications.forEach(notification => {
         const listItem = document.createElement('li');
+        listItem.className = 'notification-dropdown-card';
+        listItem.setAttribute('nav-notification-id', notification.notificationId);
         listItem.innerHTML = `
-            <a href="/profile/my-notifications" class="noti">
+            <a href="/profile/my-notifications" class="notification-card-nav">
                 <img src="/user-homepage-assets/assets/img/new-message.png" alt="Alert">
                 <div>  
-                    <div class="noti-time">${notification.timeSend}</div>
-                    <div class="noti-title">${notification.messageType}</div>
+                    <div class="notification-card-nav-time">${new Date(notification.timeSend).toLocaleString()}</div>
+                    <div class="notification-card-nav-title">${notification.messageType}</div>
                 </div>
             </a>
         `;
-        notificationDropdown.prepend(listItem);
+        $("#notification-dropdown").prepend(listItem);
     });
+}
 
-    // Add a "View All" button
-    const viewAllItem = document.createElement('li');
-    viewAllItem.className = 'view-all-noti';
-    viewAllItem.innerHTML = '<button>Xem tất cả</button>';
-    notificationDropdown.appendChild(viewAllItem);
-
-    viewAllItem.addEventListener('click', function () {
-        // Navigate to the "/my-notifications" URL
-        window.location.href = '/profile/my-notifications';
-    });
+function deleteNavNotificationItem(notificationId) {
+    const notificationItem = $(`.notification-dropdown-card[nav-notification-id="${notificationId}"]`);
+    notificationItem.remove();
 }
 
 // ******************** Load List of notifications for Notification Page ************************ //
@@ -228,13 +317,14 @@ if (window.location.pathname === '/profile/my-notifications') {
     fetch(`/notification/user/all?page=${globalCurrentPage}&size=${defaultPageSize}`)
         .then(response => response.json())
         .then(data => {
-            renderPaginationLinks(data.currentPage,data.totalPages); // Render pagination links
-            loadNotificationsFromDB(data.currentPage,defaultPageSize)
+            renderPaginationLinks(data.currentPage, data.totalPages); // Render pagination links
+            loadNotificationsFromDB(data.currentPage, defaultPageSize)
         })
         .catch(error => {
             console.error('Error fetching notifications:', error);
         });
 }
+
 // Function to render pagination links
 function renderPaginationLinks(currentPage, totalPages) {
     const paginationContainer = document.getElementById('paginationNotification');
@@ -260,6 +350,7 @@ function paginationClick(page) {
     updateCurrentPage(page)
     loadNotificationsFromDB(page, 4);
 }
+
 function loadNotificationsFromDB(page, size) {
     fetch(`/notification/user/all?page=${page}&size=${size}`)
         .then(response => {
@@ -268,7 +359,7 @@ function loadNotificationsFromDB(page, size) {
             }
             return response.json();
         })
-        .then(data  => {
+        .then(data => {
             const notifications = data.notifications; // Assuming the notifications are in the 'notifications' field
             const totalPages = data.totalPages;
             renderPaginationLinks(page, totalPages); // Pass current page and total pages to the render function
@@ -278,25 +369,26 @@ function loadNotificationsFromDB(page, size) {
             console.error('Error fetching notifications:', error);
         });
 }
+
 function renderPage(notifications) {
     $(".my-notifications").html('');
     notifications.forEach(notification => {
-            if (notification.messageType != null) {
-                switch (notification.messageType) {
-                    // append = from top to bottom, for showing a list
-                    case "Xác nhận check in":
-                        insertCheckInNotificationDiv(notification, "append");
-                        break;
-                    case "Xác nhận check out":
-                        insertCheckOutNotificationDiv(notification, "append");
-                        break;
-                    default:
-                        console.log("Unknown message type");
-                        break;
-                }
-            } else {
-                console.log("Null message type");
+        if (notification.messageType != null) {
+            switch (notification.messageType) {
+                // append = from top to bottom, for showing a list
+                case "Xác nhận check in":
+                    insertCheckInNotificationDiv(notification, "append");
+                    break;
+                case "Xác nhận check out":
+                    insertCheckOutNotificationDiv(notification, "append");
+                    break;
+                default:
+                    console.log("Unknown message type");
+                    break;
             }
+        } else {
+            console.log("Null message type");
+        }
     })
 }
 
@@ -309,7 +401,7 @@ function insertCheckInNotificationDiv(notification, order) {
 
     // Add the image to the notification div
     notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"'
-    +'alt="Gym Logo">');
+        + ' alt="Gym Logo">');
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -387,8 +479,9 @@ function handleCheckInNotificationClick(notification) {
             },
             success: function () {
                 console.log("Đã gửi thông báo check in thành công đến nhân viên");
-                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).
-                removeClass("unseen-notification").addClass("seen-notification");
+                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
+                    .removeClass("unseen-notification").addClass("seen-notification");
+                deleteNavNotificationItem(notification.notificationId);
             },
             error: function () {
                 alert("Đã xảy ra lỗi gửi check in thành công");
@@ -411,7 +504,9 @@ function handleCheckInNotificationClick(notification) {
             },
             success: function () {
                 console.log("Đã gửi thông báo hủy xác nhận check in thành công")
-                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).removeClass("unseen-notification").addClass("seen-notification");
+                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
+                    .removeClass("unseen-notification").addClass("seen-notification");
+                deleteNavNotificationItem(notification.notificationId);
             },
             error: function () {
                 alert("Đã xảy ra lỗi khi gửi yêu cầu hủy check in");
@@ -434,7 +529,7 @@ function insertCheckOutNotificationDiv(notification, order) {
 
     // Add the image to the notification div
     notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"'
-    + 'alt="Gym Logo">');
+        + ' alt="Gym Logo">');
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -458,10 +553,8 @@ function insertCheckOutNotificationDiv(notification, order) {
 
     // Depending on the order parameter, append or prepend notiContentDiv
     if (order === "append") {
-        console.log("Append chose")
         $(".my-notifications").append(notiDiv);
     } else if (order === "prepend") {
-        console.log("Prepend chose")
         $(".my-notifications").prepend(notiDiv);
     } else {
         throw new Error("Invalid order parameter. Use 'append' or 'prepend'.");
@@ -566,6 +659,7 @@ function handleCheckOutNotificationClick(notification) {
                 console.log("Update check out time vào db check in history thành công", data)
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
                     .removeClass("unseen-notification").addClass("seen-notification");
+                deleteNavNotificationItem(notification.notificationId);
 
             },
             error: function () {
@@ -605,6 +699,7 @@ function handleCheckOutNotificationClick(notification) {
                 console.log("Update hủy check out thành công", data)
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
                     .removeClass("unseen-notification").addClass("seen-notification");
+                deleteNavNotificationItem(notification.notificationId);
             },
             error: function () {
                 alert("Đã xảy ra lỗi trong quá trình hủy check out");
