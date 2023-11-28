@@ -13,7 +13,6 @@ public class DepartmentAlbumsMapper implements RowMapper<DepartmentAlbums> {
                 .albumId(resultSet.getInt("id"))
                 .departmentId(resultSet.getInt("gym_department_id"))
                 .photoUrl(resultSet.getString("photo_url"))
-                .description(resultSet.getString("description"))
                 .build();
     }
 }

@@ -1,14 +1,14 @@
 /********** Role Creation ***********/
 INSERT INTO role (role_id, role_name)
-VALUES (1, 'ROLE_ADMIN');
+VALUES (1, 'ADMIN');
 INSERT INTO role (role_id, role_name)
-VALUES (2, 'ROLE_GYM_OWNER');
+VALUES (2, 'GYM_OWNER');
 INSERT INTO role (role_id, role_name)
-VALUES (3, 'ROLE_EMPLOYEE');
+VALUES (3, 'EMPLOYEE');
 INSERT INTO role (role_id, role_name)
-VALUES (4, 'ROLE_USER');
+VALUES (4, 'USER');
 INSERT INTO role (role_id, role_name)
-VALUES (5, 'ROLE_BRAND_OWNER');
+VALUES (5, 'BRAND_OWNER');
 
 /********** User Creation ***********/
 -- Admin creation
@@ -617,14 +617,61 @@ VALUES (18, 20000);
 
 INSERT INTO wallet (user_id, balance)
 VALUES (19, 20000);
+
+INSERT INTO wallet (user_id, balance)
+VALUES
+    (20, 0),
+    (21, 0),
+    (22, 0),
+    (23, 0),
+    (24, 0),
+    (25, 0),
+    (26, 0),
+    (27, 0),
+    (28, 0),
+    (29, 0),
+    (30, 0),
+    (31, 0),
+    (32, 0),
+    (33, 0),
+    (34, 0),
+    (35, 0),
+    (36, 0),
+    (37, 0),
+    (38, 0),
+    (39, 0),
+    (40, 0),
+    (41, 0),
+    (42, 0),
+    (43, 0),
+    (44, 0),
+    (45, 0),
+    (46, 0),
+    (47, 0),
+    (48, 0),
+    (49, 0),
+    (50, 0),
+    (51, 0),
+    (52, 0),
+    (53, 0),
+    (54, 0),
+    (55, 0),
+    (56, 0),
+    (57, 0),
+    (58, 0),
+    (59, 0),
+    (60, 0),
+    (61, 0),
+    (62, 0),
+    (63, 0);
 /********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,
                    contact_email, brand_status_key)
 VALUES (5, 6, 'Citi Gym',
-        'https://bom.so/MlG6sb',
-        'https://bom.so/tr8QwM',
-        'https://bom.so/ph2Fq2',
+        '/img/brands/logos/5_logo.jpg',
+        '/img/brands/wallpapers/5_wallpaper.jpg',
+        '/img/brands/thumbnails/5_thumbnail.jpg',
         'Thành lập từ 2018, Citigym đã phục vụ hơn 100.000 khách hàng. Với hệ thống phòng tập đầy đủ tiện nghi và nhiều chi nhánh, vận hành các khu phức hợp thể thao.
 
   Citigym mang đến cho học viên hơn 45 bộ môn tập luyện như Gym,Yoga, các lớp tập nhóm Lesmill bản quyền Quốc tế cùng huấn luyện viên hướng dẫn tận tình,…
@@ -633,9 +680,9 @@ VALUES (5, 6, 'Citi Gym',
         4, '1900 633 638', 'marketing@citigym.com.vn', 1),
 
        (6, 7, 'California Fitness & Yoga',
-        'https://bom.so/6MN7vp',
-        'https://bom.so/IuUyjS',
-        'https://bom.so/bGRVgN',
+        '/img/brands/logos/6_logo.jpg',
+        '/img/brands/wallpapers/6_wallpaper.jpg',
+        '/img/brands/thumbnails/6_thumbnail.jpg',
         'Là thương hiệu sức khỏe lớn nhất tại Việt Nam. Đã sở hữu hơn 35 câu lạc bộ khắp cả nước. Đến với California, bạn sẽ được tận hưởng môi trường luyện tập đẳng cấp với trang thiết bị tốt nhất.
 
   Ngoài gym, tại phòng tập California, bạn sẽ được thỏa sức “phiêu” Pop dance, Sexy dance, Pole dance,…hoặc thực hành chuẩn xác yoga dưới sự hướng dẫn của thầy yoga đến từ Ấn Độ.',
@@ -643,9 +690,9 @@ VALUES (5, 6, 'Citi Gym',
 
 
        (7, 8, 'Fit 24 – Fitness & Yoga Center',
-        'https://bom.so/gaVGez',
-        'https://bom.so/68NAw5',
-        'https://bom.so/TpJFtS',
+        '/img/brands/logos/7_logo.jpg',
+        '/img/brands/wallpapers/7_wallpaper.jpg',
+        '/img/brands/thumbnails/7_thumbnail.jpg',
         'Bạn sẽ được trải nghiệm đa dạng các lớp từ Dance cho đến Yoga, được hướng dẫn bài bản để học viên đạt được mục tiêu trong thời gian ngắn nhất.
 
   Trong đó, Yoga sẽ được hướng dẫn bởi master Ấn Độ và Việt Nam giàu kinh nghiệm, tận tâm, gym cùng các chuyên gia hàng đầu. FIT24 tổ chức cả lớp nhảy dành cho các bạn nhỏ.',
@@ -653,56 +700,68 @@ VALUES (5, 6, 'Citi Gym',
 
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
-VALUES (1, 5, 'https://citigym.com.vn/storage/uploads/atn9629-1.jpg', 'MÁY TẬP NHẬP KHẨU',
+VALUES (1, 5, '/img/brandAmenities/1701103600069_brandAmenities.jpg', 'MÁY TẬP NHẬP KHẨU',
         'Hệ thống máy tập nhập khẩu từ các thương hiệu nổi tiếng nước ngoài Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills.',
         1),
-       (2, 5, 'https://citigym.com.vn/storage/uploads/rin-8058citigym-1.jpg', 'HLV CHUYÊN NGHIỆP',
+       (2, 5, '/img/brandAmenities/1701103808800_brandAmenities.jpg', 'HLV CHUYÊN NGHIỆP',
         'Đội ngũ huấn luyện viên chuyên nghiệp, lắng nghe khách hàng, đồng hành cùng hội viên vượt qua những thử thách về hình thể và sức khỏe.',
         1),
-       (3, 5, 'https://citigym.com.vn/storage/uploads/he-thong-khoa-tu-2.jpg', 'HỆ THỐNG TỦ VÀ KHÓA',
+       (3, 5, '/img/brandAmenities/1701103823819_brandAmenities.jpg', 'HỆ THỐNG TỦ VÀ KHÓA',
         'Hệ thống khóa từ thông minh bảo mật tối đa Esmart Lock đầu tiên tại Việt Nam. Hội viên có thể yên tâm gửi đồ và khóa tủ bằng vòng tay locker tự động',
         1),
-       (4, 5, 'https://citigym.com.vn/storage/uploads/khu-vuc-functional-2.jpg', 'PHÒNG TẬP ĐA NĂNG',
+       (4, 5, '/img/brandAmenities/1701103988437_brandAmenities.jpg', 'PHÒNG TẬP ĐA NĂNG',
         'Khu vực Functional đa dạng các loại máy tập Technogym, tích hợp các kênh truyền hình giải trí, kết nối Wifi và Bluetooth, sở hữu Cloud lưu trữ tiến trình tập luyện.',
         1),
-       (5, 5, 'https://citigym.com.vn/storage/uploads/quay-giai-khat-2.jpg', 'TIỆN NGHI PHÒNG TẬP',
+       (5, 5, '/img/brandAmenities/1701103971478_brandAmenities.jpg', 'TIỆN NGHI PHÒNG TẬP',
         'Được trang bị đầy đủ tiện nghi 5 sao (quầy giải khát, phòng xông hơi, khu vực trang điểm, phòng tắm), là nơi mang đến giây phút thư giãn cho bạn.',
         1),
        (6, 5,
-        'https://citigym.com.vn/storage/uploads/chi-2000-ty-dau-tu-cho-cau-lac-bo-gym-cao-cap-voi-quy-mo-hon-6000m2-tai-tphcm-cau-lac-bo-1-1561539908-613-width600height400.jpg',
+        '/img/brandAmenities/1701103834502_brandAmenities.jpg',
         'VƯỜN YOGA THƯ THÁI',
         'Lớp học yoga buổi sáng được tổ chức ngoài trời để hội viên được hít thở không khí trong lành và tươi mát của cây xanh, mang lại tinh thần thư thái cho hội viên.',
         1),
 
-       (7, 6, 'https://bom.so/jvQH13', 'PHÒNG TẬP THỂ DỤC',
+
+
+
+
+
+
+       (7, 6, '/img/brandAmenities/1701104592515_brandAmenities.jpg', 'PHÒNG TẬP THỂ DỤC',
         'Cung cấp các thiết bị hiện đại để tập luyện cardio và tăng cường cơ bắp. Phòng tập chuyên biệt cho các hoạt động như tập TRX, tập luyện chịu lực, và các lớp tập luyện nhóm.',
         1),
-       (8, 6, 'https://bom.so/cwFZ2a', 'LỚP HỌP YOGA',
+       (8, 6, '/img/brandAmenities/1701104637094_brandAmenities.jpg', 'LỚP HỌP YOGA',
         'Cung cấp nhiều loại hình yoga như Hatha, Vinyasa, Ashtanga, và Yoga dành cho người mới bắt đầu. Lớp yoga đặc biệt như Hot Yoga (yoga trong phòng nhiệt độ cao) hoặc Aerial Yoga (yoga trên dây đu).',
         1),
-       (9, 6, 'https://bom.so/t0MwlU', 'LỚP HỌC NHÓM',
+       (9, 6, '/img/brandAmenities/1701104646969_brandAmenities.jpg', 'LỚP HỌC NHÓM',
         'Các buổi tập luyện nhóm như Zumba, Pilates, và các loại lớp tập khác.Các buổi hướng dẫn từ giáo viên chuyên nghiệp..',
         1),
-       (10, 6, 'https://bom.so/tGqbD2', 'HƯỚNG DẪN CÁ NHÂN',
+       (10, 6, '/img/brandAmenities/1701104662440_brandAmenities.jpg', 'HƯỚNG DẪN CÁ NHÂN',
         'Cung cấp dịch vụ hướng dẫn tập luyện cá nhân để cá nhân hóa chương trình tập luyện.', 1),
-       (11, 6, 'https://bom.so/g9lwgO', 'KHU VỰC XÔNG HƠI VÀ SPA',
+       (11, 6, '/img/brandAmenities/1701104669542_brandAmenities.jpg', 'KHU VỰC XÔNG HƠI VÀ SPA',
         'Các tiện nghi như phòng xông hơi, sauna, và các liệu pháp spa để thư giãn và tái tạo năng lượng.', 1),
-       (12, 6, 'https://bom.so/rNl08Q', 'TRUNG TÂM DINH DƯỠNG',
+       (12, 6, '/img/brandAmenities/1701104679085_brandAmenities.jpg', 'TRUNG TÂM DINH DƯỠNG',
         'Cung cấp tư vấn dinh dưỡng và chế độ ăn lành mạnh để hỗ trợ mục tiêu tập luyện của khách hàng.', 1),
 
-       (13, 7, 'https://bom.so/aOajxQ', 'GROUPX-DANCE',
+
+
+
+
+
+
+       (13, 7, '/img/brandAmenities/1701105355258_brandAmenities.jpg', 'GROUPX-DANCE',
         'Các bộ môn luyện tập theo nhóm như Zumba, BodyCombat, Body pump, B&T… trên nền nhạc sôi động sẽ mang cho bạn những sẽ mang đến cho bạn những buổi tập năng lượng và vui tươi.',
         1),
-       (14, 7, 'https://bom.so/7J8yoG', 'CÔNG NGHỆ EMS',
+       (14, 7, '/img/brandAmenities/1701105361944_brandAmenities.jpg', 'CÔNG NGHỆ EMS',
         'Máy EMS tại FIT24 là dòng máy tập luyện bằng công nghệ hiện đại đến từ Đức, đây là một phương pháp tập luyện an toàn, hiệu quả trong việc tăng cơ giảm mỡ, cải thiện vóc dáng và sức khỏe nhanh chóng cho người bận rộn.',
         1),
-       (15, 7, 'https://bom.so/3WBQnI', 'PERSONAL TRAINER',
+       (15, 7, '/img/brandAmenities/1701105371125_brandAmenities.jpg', 'PERSONAL TRAINER',
         'Tập luyện với Huấn luyện viên cá nhân theo hình thức 1 kèm 1, được thiết kế đặc biệt phù hợp với thể trạng và mục tiêu thể hình mà bạn mong muốn.',
         1),
-       (16, 7, 'https://bom.so/hMeMA9', 'LESMILLS',
+       (16, 7, '/img/brandAmenities/1701105377379_brandAmenities.jpg', 'LESMILLS',
         'Lesmill là các bộ môn tập luyện có bản quyền và vô cùng hiệu quả tại FIT24. Với mục đích cuối cùng: giúp người tập khỏe mạnh, vui vẻ, sảng khoái; giải phóng năng lượng, giảm mỡ & thân hình thon gọn, cân đối.',
         1),
-       (17, 7, 'https://bom.so/5tgS91', 'CĂNG CƠ – TRỊ LIỆU',
+       (17, 7, '/img/brandAmenities/1701105382902_brandAmenities.jpg', 'CĂNG CƠ – TRỊ LIỆU',
         'FIT24 với các Master chuyên môn cao không những giúp bạn phục hồi cơ thể sau những giờ tập luyện mà còn hỗ trợ trị liệu về các vấn đề xương khớp mà bạn mắc phải.',
         1);
 
@@ -725,92 +784,92 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
 VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '1900633638',
-        'https://bom.so/MlG6sb',
-        'https://bom.so/i2mp74',
-        'https://bom.so/PrIhQF',
+        '/img/departments/logos/1_logo.jpg',
+        '/img/departments/wallpapers/1_wallpaper.jpg',
+        '/img/departments/thumbnails/1_thumbnail.jpg',
         'Phòng gym quận 10 Citigym Thành Thái là phòng tập đẳng cấp được khai trương đầu tiên của hệ thống Citigym tọa lạc tại trung tâm quận 10. Nơi đây có không gian luyện tập mang hơi thở thiên nhiên năng động, thoải mái, đem đến cho bạn cảm giác thật hào hứng, sảng khoái khi tập luyện. Phòng tập của Citigym Thành Thái được trang bị đầy đủ các thiết bị hiện đại, cao cấp từ những thương hiệu hàng đầu thế giới như Technogym, LifeFitness, Escape, Reebok, Octane, Les Mills. Đây cũng là hệ thống phòng tập đầu tiên tại TP HCM sử dụng dụng cụ tạ đòn, bục nhảy SmartBar, SmartStep của LesMills.',
         10.770294326858476, 106.66638328225508, 200, 5500,'Hồ Chí Minh'),
 
        (2, 5, 20, 1, 'CITIGYM PHỔ QUANG', '119 Phổ Quang, Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh',
         ' 1900633638',
-        'https://bom.so/MlG6sb',
-        'https://bom.so/whpmm3',
-        'https://bom.so/agm7XG',
+        '/img/departments/logos/2_logo.jpg',
+        '/img/departments/wallpapers/2_wallpaper.jpg',
+        '/img/departments/thumbnails/2_thumbnail.jpg',
         'Phòng tập gym quận Phú Nhuận CITIGYM Phổ Quang với thiết kế lấy cảm hứng thiên nhiên, đưa cây xanh vào phòng tập cho phép hội viên thoải mái tập luyện với diện tích 4000m2. Phòng tập hiện đại mang hơi thở của thiên nhiên giúp hội viên cảm nhận năng lượng nhiệt huyết đồng thời cảm giác thư thái sau ngày dài làm việc. Ngoài ra, khi đến CLB Phổ Quang hội viên còn có cơ hội trải nghiệm hệ thống máy tập và dụng cụ hiện đại bậc nhất, nhập khẩu từ các thương hiệu nước ngoài hàng đầu cũng như chất lượng dịch vụ đẳng cấp 5 sao.',
         10.809065977594821, 106.67174681287801, 200, 4000,'Hồ Chí Minh'),
 
        (3, 5, 21, 1, 'CITIGYM BẾN VÂN ĐỒN', '34-35 Bến Vân Đồn, Phường 12, Quận 4, Thành phố Hồ Chí Minh',
         ' 1900633638',
-        'https://bom.so/MlG6sb',
-        'https://bom.so/XDQUdd',
-        'https://bom.so/jtjjOf',
+        '/img/departments/logos/3_logo.jpg',
+        '/img/departments/wallpapers/3_wallpaper.jpg',
+        '/img/departments/thumbnails/3_thumbnail.jpg',
         'Phòng gym quận 4 CITIGYM Bến Vân Đồn tọa lạc tại vị trí đắc địa tại mặt tiền Bến Vân Đồn, cách quận 1 chỉ vài phút đi bộ, hướng nhìn ra sông Sài Gòn. Đến ngay CLB Bến Vân Đồn để trải nghiệm không gian tập luyện sang trọng và rộng rãi có một không hai với tầm nhìn thành phố 2 mặt tiền, thỏa thích tập các bộ môn nhóm đông người. Không chỉ là cơ sở hạ tầng, CLB Bến Vân Đồn còn được biết đến với hệ thống máy tập và dụng cụ hiện đại bậc nhất, nhập khẩu từ các thương hiệu nổi tiếng nước ngoài.',
         10.767283248645954, 106.70370099574525, 200, 5000,'Hồ Chí Minh'),
 
        (4, 5, 22, 1, 'CITIGYM VẠN HẠNH MALL', 'Lầu 7 TTTM Vạn Hạnh Mall, Phường 12, Quận 10, Thành phố Hồ Chí Minh',
         '1900633638',
-        'https://bom.so/MlG6sb',
-        'https://bom.so/wEoPa9',
-        'https://bom.so/Nmuqc0',
+        '/img/departments/logos/4_logo.jpg',
+        '/img/departments/wallpapers/4_wallpaper.jpg',
+        '/img/departments/thumbnails/4_thumbnail.jpg',
         'CITIGYM Vạn Hạnh Mall là phòng tập lớn nhất Việt Nam nằm trong trung tâm thương mại với diện tích 6000m2, tọa lạc tại trung tâm quận 10. Phòng tập gym quận 10 được thiết kế như thành phố New York sôi động, tại đây hội viên sẽ có trải nghiệm thú vị vừa tập luyện vừa ngắm nhìn thành phố từ trên cao. Ngoài ra, câu lạc bộ còn được trang bị hệ thống máy tập hiện đại nhất và tổ chức đa dạng các lớp gym, yoga, group x, dance...',
         10.770899546871222, 106.66895996876498, 200, 2000,'Hồ Chí Minh'),
 
 
        (5, 6, 23, 1, 'CALIFORNIA WEST POINT - QUẬN TÂY HỒ',
         'Tầng 2 & 3 , Somerset West Point, Số 2 Tây Hồ, P. Quảng An, Q. Tây Hồ, Hà Nội.', '(024) 7300 1777',
-        'https://bom.so/6MN7vp',
-        'https://bom.so/bpbfDn',
-        'https://bom.so/wEoPa9',
+        '/img/departments/logos/5_logo.jpg',
+        '/img/departments/wallpapers/5_wallpaper.jpg',
+        '/img/departments/thumbnails/5_thumbnail.jpg',
         'Sang trọng, đẳng cấp, tinh tế trong từng chi tiết đó chính là những trải nghiệm tuyệt vời chỉ có khi bạn bước chân vào CLB California Centuryon West Point quận Tây Hồ. Một nơi tập luyện đạt chuẩn quốc tế cùng với các tiện ích phục hồi năng lượng tích hợp, đặc biệt có hồ bơi thư giãn chắc chắn sẽ mang lại cho bạn những trải nghiệm chưa từng có. Khám phá ngay hôm nay!',
         21.066572880558276, 105.8262971113118, 100, 2000,'Hà Nội'),
 
        (6, 6, 24, 1, 'CALIFORNIA VINCOM STAR CITY - QUẬN CẦU GIẤY',
         'Tầng 3, Trung tâm thương mại Vincom Star City, 119 đường Trần Duy Hưng, P. Trung Hòa, Q. Cầu Giấy, Hà Nội',
         '(024) 7300 1277',
-        'https://bom.so/6MN7vp',
-        'https://bom.so/w8xQZa',
-        'https://bom.so/YjALju',
+        '/img/departments/logos/6_logo.jpg',
+        '/img/departments/wallpapers/6_wallpaper.jpg',
+        '/img/departments/thumbnails/6_thumbnail.jpg',
         'Sang trọng, đẳng cấp, tinh tế trong từng chi tiết đó chính là những trải nghiệm tuyệt vời chỉ có khi bạn bước chân vào CLB California Centuryon West Point quận Tây Hồ. Một nơi tập luyện đạt chuẩn quốc tế cùng với các tiện ích phục hồi năng lượng tích hợp, đặc biệt có hồ bơi thư giãn chắc chắn sẽ mang lại cho bạn những trải nghiệm chưa từng có. Khám phá ngay hôm nay!',
         21.00592534375174, 105.79509157389299, 100, 2000,'Hà Nội'),
 
        (7, 6, 25, 1, 'CALIFORNIA TIMES CITY - QUẬN HAI BÀ TRƯNG',
         'Time City Megamall, Tòa nhà T18, 458 Minh Khai, P. Vĩnh Tuy, Q. Hai Bà Trưng, Hà Nội', '(024) 7107 9999',
-        'https://bom.so/6MN7vp',
-        'https://bom.so/w8xQZa',
-        'https://bom.so/YjALju',
+        '/img/departments/logos/7_logo.jpg',
+        '/img/departments/wallpapers/7_wallpaper.jpg',
+        '/img/departments/thumbnails/7_thumbnail.jpg',
         'Vượt qua mọi trở ngại khiến bạn mất động lực khi tập luyện. Trải nghiệm ngay California Fitness & Yoga quận Hai Bà Trưng - cộng đồng yêu thích lối sống năng động và khoẻ mạnh lớn nhất tại Hà Nội. Với trang thiết bị đầy đủ cùng với chương trình tập luyện đa dạng và các tiện ích phục hồi năng lượng tiêu chuẩn 5 sao như hồ bơi trong nhà, bạn sẽ luôn được truyền cảm hứng để duy trì lối sống lành mạnh.',
         21.00592534375174, 105.79509157389299, 100, 2000,'Hà Nội'),
 
        (8, 6, 26, 1, 'CALIFORNIA SKY CITY TOWER - QUẬN ĐỐNG ĐA',
         'Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q. Đống Đa, Hà Nội', '(024) 7109 7899',
-        'https://bom.so/6MN7vp',
-        'https://bom.so/Iv6YYL',
-        'https://bom.so/HwuZpU',
+        '/img/departments/logos/8_logo.jpg',
+        '/img/departments/wallpapers/8_wallpaper.jpg',
+        '/img/departments/thumbnails/8_thumbnail.jpg',
         'Không chỉ có lịch học trải đều các khung giờ, Trung tâm California Fitness and Yoga Quận Đống Đa còn sở hữu khu vực Hydro – Therapy hệ thống phòng tắm hơi lớn nhất Việt Nam, cung cấp không gian thư giãn sau tập luyện độc đáo khó nơi nào sánh được.',
         21.012892257325145, 105.81135818247371, 100, 2000,'Hà Nội'),
 
+
        (9, 7, 27, 1, 'FIT24 PHẠM VĂN HAI- Q. TÂN BÌNH',
         'Central Plaza, 91 Phạm Văn Hai, Phường 3, Quận Tân Bình, TP. HCM', '028 7307 2424',
-        'https://bom.so/gaVGez',
-        'https://bom.so/SKbgQF',
-        'https://bom.so/JOhWQU',
+        '/img/departments/logos/9_logo.jpg',
+        '/img/departments/wallpapers/9_wallpaper.jpg',
+        '/img/departments/thumbnails/9_thumbnail.jpg',
         'Tọa lạc tại tầng K Tòa nhà Central Plaza, trang thiết bị tập luyện cao cấp cùng đa dạng các môn học và đặc biệt, hồ bơi ngoài trời chính là những điểm cộng tuyệt vời của phòng tập Gym – Yoga cao cấp nhất Quận Tân Bình.',
         10.794118291505661, 106.66311798225539, 70, 1500,'Hồ Chí Minh'),
 
        (10, 7, 28, 1, 'FIT24 HỒ XUÂN HƯƠNG- QUẬN 3', '02 Hồ Xuân Hương, Phường Võ Thị Sáu, Quận 3, Hồ Chí Minh',
         '028 7307 2424',
-        'https://bom.so/gaVGez',
-        'https://bom.so/xzKhs8',
-        'https://bom.so/lnVZCn',
+        '/img/departments/logos/10_logo.jpg',
+        '/img/departments/wallpapers/10_wallpaper.jpg',
+        '/img/departments/thumbnails/10_thumbnail.jpg',
         'Tọa lạc tại tầng K Tòa nhà Central Plaza, trang thiết bị tập luyện cao cấp cùng đa dạng các môn học và đặc biệt, hồ bơi ngoài trời chính là những điểm cộng tuyệt vời của phòng tập Gym – Yoga cao cấp nhất Quận Tân Bình.',
         10.77720992036007, 106.68773747611712, 70, 1500,'Hồ Chí Minh'),
 
-
        (11, 7, 29, 1, 'FIT24 BA THÁNG HAI – QUẬN 10', 'Lầu 6-7-8 Số 3 Ba Tháng Hai, Phường 11, Quận 10, TP. HCM',
         '028 7307 2424',
-        'https://bom.so/gaVGez',
-        'https://bom.so/YVDRpm',
-        'https://bom.so/Y3aZNS',
+        '/img/departments/logos/11_logo.jpg',
+        '/img/departments/wallpapers/11_wallpaper.jpg',
+        '/img/departments/thumbnails/11_thumbnail.jpg',
         'Là phòng tập Gym và Yoga LỚN NHẤT – ĐẸP NHẤT với quy mô 3 tầng và diện tích trên 2,000m2, Fit24 Ba Tháng Hai được thiết kế sang trọng và ấn tượng theo phong cách Châu Âu hiện đại và là chi nhánh mới nhất của Hệ thống Fit24.',
         10.777031921131604, 106.68105969760164, 70, 2000,'Hồ Chí Minh');
 
@@ -1060,88 +1119,90 @@ VALUES (1, 1, 1),
        (7, 11, 1);
 
 -- Create Gym Department Gallery
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (1, 'https://bom.so/i2mp74', 'Album 1'),
-       (1, 'https://bom.so/i2mp74', 'Album 1'),
-       (1, 'https://bom.so/IkKUPw', 'Album 1'),
-       (1, 'https://bom.so/zU3jbE', 'Album 1'),
-       (1, 'https://bom.so/e3ZzB2', 'Album 1'),
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (1, '/img/departments/albums/1_albums_1701104437519.jpg'),
+       (1, '/img/departments/albums/1_albums_1701104573073.jpg'),
+       (1, '/img/departments/albums/1_albums_1701104577588.jpg'),
+       (1, '/img/departments/albums/1_albums_1701104604105.jpg'),
+       (1, '/img/departments/albums/1_albums_1701104610141.jpg'),
 
-       (2, 'https://bom.so/wiMnZY', 'Album 1'),
-       (2, 'https://bom.so/8nyE9i', 'Album 1'),
-       (2, 'https://bom.so/feNtwJ', 'Album 1'),
-       (2, 'https://bom.so/g5jRnI', 'Album 1'),
-       (2, 'https://bom.so/g5jRnI', 'Album 1'),
-       (2, 'https://bom.so/oR4B8d', 'Album 1'),
+       (2, '/img/departments/albums/2_albums_1701107454741.jpg'),
+       (2, '/img/departments/albums/2_albums_1701107459613.jpg'),
+       (2, '/img/departments/albums/2_albums_1701107370430.jpg'),
+       (2, '/img/departments/albums/2_albums_1701107386390.jpg'),
+       (2, '/img/departments/albums/2_albums_1701107397062.jpg'),
+       (2, '/img/departments/albums/2_albums_1701107408165.jpg'),
+       (2, '/img/departments/albums/2_albums_1701107415150.jpg'),
 
+       (3, '/img/departments/albums/3_albums_1701108321944.jpg'),
+       (3, '/img/departments/albums/3_albums_1701108325845.jpg'),
+       (3, '/img/departments/albums/3_albums_1701108330099.jpg'),
+       (3, '/img/departments/albums/3_albums_1701108360677.jpg'),
 
-       (3, 'https://bom.so/wiMnZY', 'Album 1'),
-       (3, 'https://bom.so/8nyE9i', 'Album 1'),
-       (3, 'https://bom.so/feNtwJ', 'Album 1'),
-       (3, 'https://bom.so/g5jRnI', 'Album 1'),
-       (3, 'https://bom.so/g5jRnI', 'Album 1'),
-       (3, 'https://bom.so/oR4B8d', 'Album 1'),
-
-       (4, 'https://bom.so/i2mp74', 'Album 1'),
-       (4, 'https://bom.so/i2mp74', 'Album 1'),
-       (4, 'https://bom.so/IkKUPw', 'Album 1'),
-       (4, 'https://bom.so/zU3jbE', 'Album 1'),
-       (4, 'https://bom.so/e3ZzB2', 'Album 1'),
-
-
-       (5, 'https://bom.so/70zX1i', 'Album 1'),
-       (5, 'https://bom.so/M4RSmu', 'Album 1'),
-       (5, 'https://bom.so/M4RSmu', 'Album 1'),
-       (5, 'https://bom.so/7RWMbJ', 'Album 1'),
-       (5, 'https://bom.so/QymJDd', 'Album 1'),
-       (5, 'https://bom.so/JEMnzf', 'Album 1'),
-       (5, 'https://bom.so/hrrAnR', 'Album 1'),
-
-       (6, 'https://bom.so/70zX1i', 'Album 1'),
-       (6, 'https://bom.so/M4RSmu', 'Album 1'),
-       (6, 'https://bom.so/M4RSmu', 'Album 1'),
-       (6, 'https://bom.so/7RWMbJ', 'Album 1'),
-       (6, 'https://bom.so/QymJDd', 'Album 1'),
-       (6, 'https://bom.so/JEMnzf', 'Album 1'),
-       (6, 'https://bom.so/hrrAnR', 'Album 1'),
-
-       (7, 'https://bom.so/70zX1i', 'Album 1'),
-       (7, 'https://bom.so/M4RSmu', 'Album 1'),
-       (7, 'https://bom.so/M4RSmu', 'Album 1'),
-       (7, 'https://bom.so/7RWMbJ', 'Album 1'),
-       (7, 'https://bom.so/QymJDd', 'Album 1'),
-       (7, 'https://bom.so/JEMnzf', 'Album 1'),
-       (7, 'https://bom.so/hrrAnR', 'Album 1'),
-
-       (8, 'https://bom.so/70zX1i', 'Album 1'),
-       (8, 'https://bom.so/M4RSmu', 'Album 1'),
-       (8, 'https://bom.so/M4RSmu', 'Album 1'),
-       (8, 'https://bom.so/7RWMbJ', 'Album 1'),
-       (8, 'https://bom.so/QymJDd', 'Album 1'),
-       (8, 'https://bom.so/JEMnzf', 'Album 1'),
-       (8, 'https://bom.so/hrrAnR', 'Album 1'),
-
-       (9, 'https://bom.so/DbDzIX', 'Album 1'),
-       (9, 'https://bom.so/3QnLs7', 'Album 1'),
-       (9, 'https://bom.so/lnVZCn', 'Album 1'),
-       (9, 'https://bom.so/rii7bT', 'Album 1'),
-       (9, 'https://bom.so/exmWmn', 'Album 1'),
-       (9, 'https://bom.so/PjgFM5', 'Album 1'),
+       (4, '/img/departments/albums/4_albums_1701109289985.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109283752.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109278412.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109270813.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109258500.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109250481.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109243505.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109238142.jpg'),
+       (4, '/img/departments/albums/4_albums_1701109234789.jpg'),
 
 
-       (10, 'https://bom.so/DbDzIX', 'Album 1'),
-       (10, 'https://bom.so/3QnLs7', 'Album 1'),
-       (10, 'https://bom.so/lnVZCn', 'Album 1'),
-       (10, 'https://bom.so/rii7bT', 'Album 1'),
-       (10, 'https://bom.so/exmWmn', 'Album 1'),
-       (10, 'https://bom.so/PjgFM5', 'Album 1'),
+       (5, '/img/departments/albums/5_albums_1701111013408.jpg'),
+       (5, '/img/departments/albums/5_albums_1701111017098.jpg'),
+       (5, '/img/departments/albums/5_albums_1701111025539.jpg'),
+       (5, '/img/departments/albums/5_albums_1701111029674.jpg'),
+       (5, '/img/departments/albums/5_albums_1701111034081.jpg'),
+       (5, '/img/departments/albums/5_albums_1701111038214.jpg'),
+       (5, '/img/departments/albums/5_albums_1701111041845.jpg'),
 
-       (11, 'https://bom.so/DbDzIX', 'Album 1'),
-       (11, 'https://bom.so/3QnLs7', 'Album 1'),
-       (11, 'https://bom.so/lnVZCn', 'Album 1'),
-       (11, 'https://bom.so/rii7bT', 'Album 1'),
-       (11, 'https://bom.so/exmWmn', 'Album 1'),
-       (11, 'https://bom.so/PjgFM5', 'Album 1');
+       (6, '/img/departments/albums/6_albums_1701142174578.jpg'),
+       (6, '/img/departments/albums/6_albums_1701142178608.jpg'),
+       (6, '/img/departments/albums/6_albums_1701142181497.jpg'),
+       (6, '/img/departments/albums/6_albums_1701142185421.jpg'),
+       (6, '/img/departments/albums/6_albums_1701142189410.jpg'),
+       (6, '/img/departments/albums/6_albums_1701142193981.jpg'),
+       (6, '/img/departments/albums/6_albums_1701142198305.jpg'),
+
+       (7, '/img/departments/albums/7_albums_1701143098188.jpg'),
+       (7, '/img/departments/albums/7_albums_1701143105629.jpg'),
+       (7, '/img/departments/albums/7_albums_1701143109872.jpg'),
+       (7, '/img/departments/albums/7_albums_1701143120671.jpg'),
+       (7, '/img/departments/albums/7_albums_1701143132113.jpg'),
+       (7, '/img/departments/albums/7_albums_1701143138069.jpg'),
+       (7, '/img/departments/albums/7_albums_1701143145141.jpg'),
+
+       (8, '/img/departments/albums/8_albums_1701143553816.jpg'),
+       (8, '/img/departments/albums/8_albums_1701143559552.jpg'),
+       (8, '/img/departments/albums/8_albums_1701143566241.jpg'),
+       (8, '/img/departments/albums/8_albums_1701143572260.jpg'),
+       (8, '/img/departments/albums/8_albums_1701143578119.jpg'),
+       (8, '/img/departments/albums/8_albums_1701143581000.jpg'),
+       (8, '/img/departments/albums/8_albums_1701143585399.jpg'),
+
+
+       (9, '/img/departments/albums/9_albums_1701144128162.jpg'),
+       (9, '/img/departments/albums/9_albums_1701144132976.jpg'),
+       (9, '/img/departments/albums/9_albums_1701144136663.jpg'),
+       (9, '/img/departments/albums/9_albums_1701144140433.jpg'),
+       (9, '/img/departments/albums/9_albums_1701144143669.jpg'),
+       (9, '/img/departments/albums/9_albums_1701144145922.jpg'),
+
+       (10, '/img/departments/albums/10_albums_1701144556457.jpg'),
+       (10, '/img/departments/albums/10_albums_1701144562320.jpg'),
+       (10, '/img/departments/albums/10_albums_1701144567954.jpg'),
+       (10, '/img/departments/albums/10_albums_1701144573122.jpg'),
+       (10, '/img/departments/albums/10_albums_1701144579887.jpg'),
+       (10, '/img/departments/albums/10_albums_1701144626383.jpg'),
+
+       (11, '/img/departments/albums/11_albums_1701144936622.jpg'),
+       (11, '/img/departments/albums/11_albums_1701144943120.jpg'),
+       (11, '/img/departments/albums/11_albums_1701144949475.jpg'),
+       (11, '/img/departments/albums/11_albums_1701144953905.jpg'),
+       (11, '/img/departments/albums/11_albums_1701144969646.jpg'),
+       (11, '/img/departments/albums/11_albums_1701144991980.jpg');
 
 
 -- Create Gym Department Schedule
@@ -1312,46 +1373,54 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,
                    contact_email, brand_status_key)
-VALUES (8, 9, 'Getfit Gym & Yoga', 'https://s.net.vn/nmj5', 'https://s.net.vn/qpJJ', 'https://s.net.vn/zEWu',
+VALUES (8, 9, 'Getfit Gym & Yoga', '/img/brands/logos/8_logo.jpg', '/img/brands/wallpapers/8_wallpaper.jpg', '/img/brands/thumbnails/8_thumbnail.jpg',
         'Getfit với kinh nghiệm hơn 10 năm huấn luyện thể hình, được đánh giá là thương hiệu có chuyên môn cao và huấn luyện học viên theo chương trình chuẩn quốc tế. Hiện nay, sau đại dịch, Getfit đã và đang cung cấp đến học viên gói phục hồi sức khỏe sau Covid. Huấn luyện viên đã chuẩn bị sẵn lịch trình và bài tập phù hợp dành cho những người đang có triệu chứng của hậu Covid như: khó thở, hụt hơi khi thở…',
         5, '0345 535 454', 'info@getfit.vn', 1),
-       (9, 10, 'Elite Fitness', 'https://s.net.vn/GDPl', 'https://s.net.vn/zFjJ', 'https://s.net.vn/pXdC',
+       (9, 10, 'Elite Fitness', '/img/brands/logos/9_logo.jpg', '/img/brands/wallpapers/9_wallpaper.jpg', '/img/brands/thumbnails/9_thumbnail.jpg',
         'Khám phá Elite Fitness để trải nghiệm và tận hưởng không gian phòng tập sang trọng, đẹp bậc nhất Đông Nam Á. Xâm lấn vào thị trường gym năm 2010, thương hiệu gym này đã phát triển từ câu lạc bộ đầu tiên tại Xuân Diệu, Hà Nội. Hướng đến hệ thống câu lạc bộ thể thao đẳng cấp 5 sao, tiêu chuẩn Quốc tế. Dưới sự quản lý của tập đoàn BIM Việt Nam, hiện nay hệ thống đã sở hữu 14 câu lạc bộ trải khắp toàn quốc. Elite Fitness cung cấp đa dạng dịch vụ, tùy theo nhu cầu của bạn. Đến đây, bạn không cần phải bâng khuâng về lịch tập, vì các huấn luyện viên sẽ là người lên lịch phù hợp để bạn đạt mục tiêu của mình nhanh nhất.',
         3, '(028) 7307 9899', 'elitefitness@gmail.com', 1),
-       (10, 11, 'Fit365 Fitness & Yoga', 'https://s.net.vn/3rlq', 'https://s.net.vn/XJiB', 'https://s.net.vn/TGAf',
+       (10, 11, 'Fit365 Fitness & Yoga', '/img/brands/logos/10_logo.jpg', '/img/brands/wallpapers/10_wallpaper.jpg', '/img/brands/thumbnails/10_thumbnail.jpg',
         'Fit365 đầu tư trang thiết bị tập luyện tối tân cho học viên được trải nghiệm cùng huấn luyện viên chuyên nghiệp. Khác biệt với thương hiệu khác, Fit365 đầu tư hồ thủy lực. Massage giúp nâng cao quá trình loại bỏ chất thải, cải thiện giấc ngủ và cải thiện độ đàn hồi của cơ bắp. Học viên được thỏa sức thư giãn thả lỏng trong bồn massage và cảm nhận sự tái sinh của cơ thể sau 1 ngày mệt mỏi.',
         4, '0909 290 880', 'fit365vn@gmail.com', 1);
 --
+
+
 -- Create brand_amenities
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
-VALUES (51, 8, 'https://s.net.vn/ZsDW', 'Yoga Master Class', 'Bừng sức sống mới cùng Yoga', 1),
-       (52, 8, 'https://s.net.vn/3F2r', 'Yoga 1:1', 'Trải nghiệm mới mẻ cùng Yoga', 1),
-       (53, 8, 'https://s.net.vn/dOQ0', 'Boxing cùng HLV', 'Boxing cùng những huấn luyện viên chuyên nghiệp', 1),
-       (54, 9, 'https://s.net.vn/v2mr', 'Yoga Thiền Cho Sức Khỏe Tinh Thần',
+VALUES (51, 8, '/img/brandAmenities/1701107286929_brandAmenities.jpg', 'Yoga Master Class', 'Bừng sức sống mới cùng Yoga', 1),
+       (52, 8, '/img/brandAmenities/1701107294515_brandAmenities.jpg', 'Yoga 1:1', 'Trải nghiệm mới mẻ cùng Yoga', 1),
+       (53, 8, '/img/brandAmenities/1701107307246_brandAmenities.jpg', 'Boxing cùng HLV', 'Boxing cùng những huấn luyện viên chuyên nghiệp', 1),
+
+       (54, 9, '/img/brandAmenities/1701107912519_brandAmenities.jpgr', 'Yoga Thiền Cho Sức Khỏe Tinh Thần',
         'Tham gia các buổi thiền yoga giúp giảm căng thẳng, tăng cường sức khỏe tinh thần một cách tự nhiên.', 1),
-       (55, 9, 'https://s.net.vn/mC0i', 'Lớp học độc quyền LESMILLS ',
+       (55, 9, '/img/brandAmenities/1701107919873_brandAmenities.jpg', 'Lớp học độc quyền LESMILLS ',
         'Chương trình bài tập LESMILLS sôi động, giúp đốt cháy calo và tăng cường sức bền.', 1),
-       (56, 9, 'https://s.net.vn/du49', 'Học Viện Boxing Chuyên Nghiệp',
+       (56, 9, '/img/brandAmenities/1701107925858_brandAmenities.jpg', 'Học Viện Boxing Chuyên Nghiệp',
         'Học viên sẽ được hướng dẫn kỹ thuật đấm bốc từ các huấn luyện viên chuyên nghiệp.', 1),
-       (57, 9, 'https://s.net.vn/B06r', 'Khóa Học Yoga Cấp Độ Cao',
+       (57, 9, '/img/brandAmenities/1701107936213_brandAmenities.jpg', 'Khóa Học Yoga Cấp Độ Cao',
         'Tham gia các khóa học yoga cấp độ cao, tập trung vào các động tác phức tạp và hiểu sâu về yoga.', 1);
 
 --
+
+
+
+
+
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
-VALUES (59, 10, 'https://s.net.vn/Kz6U', 'Hồ Massage Thủy Lực',
+VALUES (59, 10, '/img/brandAmenities/1701108717831_brandAmenities.jpg', 'Hồ Massage Thủy Lực',
         'Là một sản phẩm của sự kết hợp độc đáo giữa công nghệ hiện đại, tiên tiến nhất và cổ xưa nhất với các phương pháp trị liệu thư giãn của hương thơm tinh dầu, massage, thư giãn, chăm sóc da và giải trí mang lại cho bạn nhiều lợi ích về sức khỏe cũng như sắc đẹp.',
         1);
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
-VALUES (60, 10, 'https://s.net.vn/LZ0g', 'Lớp Zumba Sôi Động',
+VALUES (60, 10, '/img/brandAmenities/1701108770457_brandAmenities.jpg', 'Lớp Zumba Sôi Động',
         'Tham gia lớp Zumba sôi động với nhịp điệu âm nhạc, giúp tăng cường sức khỏe và vui vẻ trong quá trình tập luyện.',
         1);
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
-VALUES (61, 10, 'https://s.net.vn/BwvM', 'Lớp Boxing Chuyên Nghiệp',
+VALUES (61, 10, '/img/brandAmenities/1701108777548_brandAmenities.jpg', 'Lớp Boxing Chuyên Nghiệp',
         'Dành cho người muốn nâng cao kỹ thuật và tăng cường sức mạnh cùng với huấn luyện viên chuyên nghiệp.', 1);
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
-VALUES (62, 10, 'https://s.net.vn/zMIA', 'Yoga Cho Tâm Hồn',
+VALUES (62, 10, '/img/brandAmenities/1701108783673_brandAmenities.jpg', 'Yoga Cho Tâm Hồn',
         'Trải nghiệm các buổi yoga tập trung vào tinh thần, giúp cân bằng tâm hồn và cơ thể.', 1);
 
 -- Create Gym Department infos
@@ -1359,40 +1428,59 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
 VALUES (57, 8, 30, 1, 'Getfit Chi nhánh Oriental Tân Phú',
-        'Lầu M (lầu 1) Oriental Plaza, 685 Âu Cơ, P.Tân Thành,Q.Tân Phú.', '(097) 769-9490', 'https://s.net.vn/nmj5',
-        'https://s.net.vn/F4yH', 'https://s.net.vn/F4yH',
+        'Lầu M (lầu 1) Oriental Plaza, 685 Âu Cơ, P.Tân Thành,Q.Tân Phú.',
+        '(097) 769-9490',
+        '/img/departments/logos/57_logo.jpg',
+        '/img/departments/wallpapers/57_wallpaper.jpg',
+        '/img/departments/thumbnails/57_thumbnail.jpg',
         'Với phương châm lấy sức khỏe khách hàng làm mục tiêu phát triển, Getfit không ngừng nâng cấp, đổi mới và sáng tạo để vận dụng những khoa học công nghệ hàng đầu thế giới vào việc xây dựng thể chất của người Việt. Cùng với sứ mệnh “Nâng tầm thể chất người Việt” của Getfit Gym & Yoga, hàng loạt các hệ sinh thái ra đời và không ngừng mở rộng nhằm đem đến những giá trị trọn vẹn nhất đến với khách hàng.',
         10.789814194191278, 106.63987821995256, 200, 200,'Hồ Chí Minh');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
-VALUES (83, 8, 31, 1, 'Getfit Chi nhánh Mia Center', 'Lầu 4, Saigon Mia Center, 202 Đường số 9A, KDC Trung Sơn.',
-        '(096) 611-1241', 'https://s.net.vn/nmj5', 'https://s.net.vn/l57q', 'https://s.net.vn/z1Ms',
+VALUES (83, 8, 31, 1, 'Getfit Chi nhánh Mia Center',
+        'Lầu 4, Saigon Mia Center, 202 Đường số 9A, KDC Trung Sơn.',
+        '(096) 611-1241',
+        '/img/departments/logos/83_logo.jpg',
+        '/img/departments/wallpapers/83_wallpaper.jpg',
+        '/img/departments/thumbnails/83_thumbnail.jpg',
         'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao, đây đủ dụng cụ tập đáp ứng đa dạng nhu cầu của quý hội viên.',
         10.733395069054875, 106.68892360080237, 200, 200,'Hồ Chí Minh');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
-VALUES (63, 8, 32, 1, 'Getfit Chi Nhánh HOÀNG DIỆU', 'Lầu 3, Cao Ốc H3, 384 Hoàng Diệu, Phường 6, Quận 4, TP. HCM',
-        '(098) 849-9745', 'https://s.net.vn/nmj5', 'https://s.net.vn/Jy7I', 'https://s.net.vn/ZI2D',
+VALUES (63, 8, 32, 1, 'Getfit Chi Nhánh HOÀNG DIỆU',
+        'Lầu 3, Cao Ốc H3, 384 Hoàng Diệu, Phường 6, Quận 4, TP. HCM',
+        '(098) 849-9745',
+        '/img/departments/logos/63_logo.jpg',
+        '/img/departments/wallpapers/63_wallpaper.jpg',
+        '/img/departments/thumbnails/63_thumbnail.jpg',
         'Phòng tập được trang bị các thiết bị tập luyện hiện đại nhằm đem lại môi trường luyện tập đẳng cấp xứng tầm CLB 5 sao. Tất cả Khách hàng sẽ được kiểm tra thể chất bằng in Body & được tư vấn dinh dưỡng cũng như cách tập luyện phù hợp.',
         10.76051532090389, 106.69908029869617, 200, 200,'Hồ Chí Minh');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
-VALUES (87, 9, 33, 1, 'Elite Fitness XUÂN DIỆU', '51 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội', '024 7302 0888',
-        'https://s.net.vn/GDPl', 'https://s.net.vn/vjc7', 'https://s.net.vn/nmwf',
+VALUES (87, 9, 33, 1, 'Elite Fitness XUÂN DIỆU',
+        '51 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội',
+        '024 7302 0888',
+        '/img/departments/logos/87_logo.jpg',
+        '/img/departments/wallpapers/87_wallpaper.jpg',
+        '/img/departments/thumbnails/87_thumbnail.jpg',
         'CLB tiên phong của Elite Fitness, tọa lạc tại tòa tháp Syrena ngự trên mảnh đất trung tâm Hồ Tây đáng sống bậc nhất tại Hà Nội; Elite Fitness Xuân Diệu là sự lựa chọn hoàn hảo để tận hưởng trọn vẹn không gian tập luyện đẳng cấp, cộng đồng văn minh, một nhịp sống bình yên rất Hà Nội mà không kém phần sôi động.',
         21.063912459638402, 105.82813606669859, 200, 200,'Hà Nội');
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
-VALUES (78, 9, 34, 1, 'Elite Fitness Bà Triệu', 'Tầng 6, Tháp C, Vincom Center, 191 Bà Triệu, Hà Nội', '024 39749191',
-        'https://s.net.vn/GDPl', 'https://s.net.vn/HQon', 'https://s.net.vn/jik4',
+VALUES (78, 9, 34, 1, 'Elite Fitness Bà Triệu',
+        'Tầng 6, Tháp C, Vincom Center, 191 Bà Triệu, Hà Nội',
+        '024 39749191',
+        '/img/departments/logos78_logo.jpg',
+        '/img/departments/wallpapers/78_wallpaper.jpg',
+        '/img/departments/thumbnails/78_thumbnail.jpg',
         'Tự hào là một trong những Câu lạc bộ Elite Fitness Top 1 về sự sang trọng và đẳng cấp nhất của hệ thống Elite Fitness, Elite Fitness Vincom Bà Triệu luôn luôn nỗ lực không ngừng để tạo nên một định nghĩa khác về trải nghiệm tập luyện thể thao cao cấp trong suốt 8 năm qua. Chúng tôi với đội ngũ của nhiệt huyết và sự khát khao tạo nên những dịch vụ tuyệt vời trong một môi trường phòng tập hàng đầu. Mỗi Hội viên, mỗi khách hàng là một trọng tâm của chăm sóc và hỗ trợ một cách tận tâm để luôn đạt được mục tiêu sức khỏe trọn vẹn khi đến với chúng tôi. Hãy trở thành một thành viên trong hành trình kiến tạo giá trị sức khỏe cho cộng đồng của chúng tôi! Let’s be Elite!',
         21.01108468531799, 105.84965020691072, 200, 200,'Hà Nội');
 
@@ -1400,8 +1488,11 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
 VALUES (91, 9, 35, 1, 'Elite Fitness Nguyễn Chí Than',
-        'Tầng 6, Vinhomes 54A Nguyễn Chí Thanh, Ngọc Khánh, Ba Đình, Hà Nội', '024 7307 8889', 'https://s.net.vn/GDPl',
-        'https://s.net.vn/d1Vb', 'https://s.net.vn/bu8z',
+        'Tầng 6, Vinhomes 54A Nguyễn Chí Thanh, Ngọc Khánh, Ba Đình, Hà Nội',
+        '024 7307 8889',
+        '/img/departments/logos/91_logo.jpg',
+        '/img/departments/wallpapers/91_wallpaper.jpg',
+        '/img/departments/thumbnails/91_thumbnail.jpg',
         'Tọa lạc tại vị trí trung tâm, Elite Fitness Nguyễn Chí Thanh là một trong những Câu lạc bộ có không gian tập rộng và sang trọng bậc nhất trong hệ thống Elite Fitness. Chúng tôi mong muốn mang đến những giá trị tích cực nhất; xây dựng một cộng đồng khỏe mạnh không những từ thể chất mà còn từ tinh thần bên trong; nơi mà những kiến thức luôn được chia sẻ. Hãy cùng bắt đầu hành trình cho cuộc sống của bạn trở nên tốt đẹp hơn cùng với Chúng tôi từ hôm nay!',
         21.025367760381087, 105.80951344612583, 200, 200,'Hà Nội');
 
@@ -1409,10 +1500,14 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             contact_number, logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude,
                             capacity, area,city)
 VALUES (52, 10, 36, 1, 'Fit365 Fitness &Yoga Q.11',
-        '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam', '090 929 08 80',
-        'https://s.net.vn/w1ho', 'https://s.net.vn/H3lr', 'https://s.net.vn/EYRN',
+        '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam',
+        '090 929 08 80',
+        '/img/departments/logos/52_logo.jpg',
+        '/img/departments/wallpapers/52_wallpaper.jpg',
+        '/img/departments/thumbnails/52_thumbnail.jpg',
         'Hãy đến ngay với 𝐅𝐈𝐓𝟑𝟔𝟓  hôm nay để tập luyện, tại đây bạn sẽ được tư vấn các bài tập phụ hợp với tình trạng sức khỏe của bản thân, nâng cấp body và trải nghiệm hệ thống máy tập an toàn cùng đội ngũ PT tận tâm nhất.Liên hệ ngay với 𝐅𝐈𝐓𝟑𝟔𝟓 để được tư vấn miễn phí, nhận ngay ưu đãi và đăng kí tập luyện sớm nhất có thể !!!',
         10.767766928241029, 106.65824315116448, 200, 200,'Hồ Chí Minh');
+
 -- create Brand Amentites
 -- Getfit Chi nhánh Oriental Tân Phú Amenities Associations
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
@@ -1588,161 +1683,130 @@ VALUES (52, 57), -- Gói Linh Hoạt
 
 -- Create Gym Department Gallery
 
+-- Create Gym Department Gallery
+
 -- Gym Department Gallery for Getfit Chi nhánh Oriental (Tân Phú)
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (57, 'https://s.net.vn/F4yH', 'Getfit Tan phu - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (57, '/img/departments/albums/57_albums_1701165141821.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (57, 'https://s.net.vn/jWnd', 'Getfit Tan Phu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (57, '/img/departments/albums/57_albums_1701165146517.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (57, 'https://s.net.vn/vS0V', 'Getfit Tan Phu - Image 3 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (57, '/img/departments/albums/57_albums_1701165154409.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (57, 'https://s.net.vn/vNWz', 'Getfit Tan Phu - Image 4 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (57, '/img/departments/albums/57_albums_1701165205215.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (57, 'https://s.net.vn/ou8q', 'Getfit Tan Phu - Image 5 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (57, '/img/departments/albums/57_albums_1701165208307.jpg');
 
 -- Gym Department Gallery for Getfit Chi nhánh Mia Center
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (83, 'https://aicjsc.com/wp-content/uploads/2023/04/CHUC-NANG.png', 'Getfit Tan phu - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (83, '/img/departments/albums/83_albums_1701167708799.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (83, 'https://aicjsc.com/wp-content/uploads/2023/04/TAP-LUYEN-2.png', 'Getfit Tan Phu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (83, '/img/departments/albums/83_albums_1701167712479.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (83, 'https://aicjsc.com/wp-content/uploads/2023/04/TAP-LUYEN-3.png', 'Getfit Tan phu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (83, '/img/departments/albums/83_albums_1701167716572.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (83, 'https://aicjsc.com/wp-content/uploads/2023/04/TAP-LUYEN.png', 'Getfit Tan Phu - Image 3 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (83, '/img/departments/albums/83_albums_1701167726412.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (83, 'https://aicjsc.com/wp-content/uploads/2023/04/BOXING-2.png', 'Getfit Tan phu - Image 4 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (83, '/img/departments/albums/83_albums_1701167731963.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (83, 'https://aicjsc.com/wp-content/uploads/2023/04/BOXING.png', 'Getfit Tan Phu - Image 5 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (83, '/img/departments/albums/83_albums_1701167735604.jpg');
 
 -- Gym Department Gallery for Getfit CHI NHÁNH HOÀNG DIỆU
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (63, 'https://aicjsc.com/wp-content/uploads/2023/04/BAR-LOUNGE-2.png', 'Getfit Tan phu - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (63, '/img/departments/albums/63_albums_1701168326395.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (63, 'https://aicjsc.com/wp-content/uploads/2023/04/BAR-LOUNGE-3.png', 'Getfit Tan Phu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (63, '/img/departments/albums/63_albums_1701168329987.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (63, 'https://aicjsc.com/wp-content/uploads/2023/04/KHU-DAP-XE-2.png', 'Getfit Tan phu - Image 3 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (63, '/img/departments/albums/63_albums_1701168335998.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (63, 'https://aicjsc.com/wp-content/uploads/2023/04/KHU-DAP-XE-3.png', 'Getfit Tan Phu - Image 4 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (63, '/img/departments/albums/63_albums_1701168341023.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (63, 'https://aicjsc.com/wp-content/uploads/2023/04/YOGA.png', 'Getfit Tan phu - Image 5 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (63, '/img/departments/albums/63_albums_1701168345097.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (63, 'https://aicjsc.com/wp-content/uploads/2023/04/YOGA-2.png', 'Getfit Tan Phu - Image 6 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (63, '/img/departments/albums/63_albums_1701168359118.jpg');
 
 -- Gym Department Gallery for Elite Fitness XUÂN DIỆU
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (87,
-        'https://cms.elitefitness.com.vn/Upload2/20230821/82fd103a-d60c-4c48-9e0c-a7bb01f88980.JPG?w=865&h=487&mode=max',
-        'Elite Fitness XUÂN DIỆU - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (87,'/img/departments/albums/87_albums_1701176093401.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (87,
-        'https://cms.elitefitness.com.vn/Upload2/20230821/aff6ba33-7fac-46fa-997b-55c77eaf71ff.jpg?w=865&h=487&mode=max',
-        'Elite Fitness XUÂN DIỆU - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (87,'/img/departments/albums/87_albums_1701176096809.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (87,
-        'https://cms.elitefitness.com.vn/Upload2/20230821/c5a38c53-be2c-4868-87b1-e436e5def25b.jpg?w=865&h=487&mode=max',
-        'Elite Fitness XUÂN DIỆU - Image 3 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (87,'/img/departments/albums/87_albums_1701176101174.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (87,
-        'https://cms.elitefitness.com.vn/Upload2/20230821/c32d3e24-1791-49cb-a392-498ee29771e7.jpg?w=865&h=487&mode=max',
-        'Elite Fitness XUÂN DIỆU - Image 4 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (87,'/img/departments/albums/87_albums_1701176104813.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (87,
-        'https://cms.elitefitness.com.vn/Upload2/20231010/037c42be-61d2-450c-aa6c-d9dc974572d7.jpg?w=865&h=487&mode=max',
-        'Elite Fitness XUÂN DIỆU - Image 5 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (87,'/img/departments/albums/87_albums_1701176107670.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (87,
-        'https://cms.elitefitness.com.vn/Upload2/20230821/494b19ef-fbcf-45df-b75a-e7a7607588ae.jpg?w=865&h=487&mode=max',
-        'Elite Fitness XUÂN DIỆU - Image 6 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (87,'/img/departments/albums/87_albums_1701176110169.jpg');
 
 -- Gym Department Gallery for Elite Fitness Nguyễn Chí Thanh
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (91,
-        'https://cms.elitefitness.com.vn/Upload2/20230216/c0d0bfd0-1904-4485-b338-9b300986bc15.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Bà Triệu - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (91,'/img/departments/albums/91_albums_1701177622583.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (91,
-        'https://cms.elitefitness.com.vn/Upload2/20230216/d5b3a2cf-2aa2-4ecc-ab69-8bede36f7283.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Bà Triệu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (91,'/img/departments/albums/91_albums_1701177625728.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (91,
-        'https://cms.elitefitness.com.vn/Upload2/20230216/680b98f8-5c60-4d0a-8625-36eb7e75872a.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Bà Triệu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (91,'/img/departments/albums/91_albums_1701177629250.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (91,
-        'https://cms.elitefitness.com.vn/Upload2/20230216/d1ccb077-afde-4065-8bf2-ffd9fabc39b4.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Bà Triệu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (91,'/img/departments/albums/91_albums_1701177632612.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (91,
-        'https://cms.elitefitness.com.vn/Upload2/20230216/51b8d924-4f81-4692-a0dd-942bcc829ba1.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Bà Triệu - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (91,'/img/departments/albums/91_albums_1701177635440.jpg');
 
 -- Add more images as needed...
 -- Gym Department Gallery for Elite Fitness Bà Triệu
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (78,
-        'https://cms.elitefitness.com.vn/Upload2/20230109/ce3d98b6-92e4-4a3c-80ef-55c2f69e2bf7.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Nguyễn Chí Thanh - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (78,'/img/departments/albums/78_albums_1701176588906.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (78,
-        'https://cms.elitefitness.com.vn/Upload2/20230107/c9f9f0ee-0ad0-45c6-8bc9-df932c5986e6.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Nguyễn Chí Than - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (78,'/img/departments/albums/78_albums_1701176593448.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (78,
-        'https://cms.elitefitness.com.vn/Upload2/20230107/9478337f-d62c-43b0-9f10-fe39592b9ce1.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Nguyễn Chí Than - Image 3 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (78,'/img/departments/albums/78_albums_1701176597218.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (78,
-        'https://cms.elitefitness.com.vn/Upload2/20230107/9f33e6cf-bb46-490e-a81d-f52c1ade73f6.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Nguyễn Chí Than - Image 4 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (78,'/img/departments/albums/78_albums_1701176600865.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (78,
-        'https://cms.elitefitness.com.vn/Upload2/20230107/db32dd8d-cdf7-4991-99a0-7dc9129d846b.jpg?w=865&h=487&mode=max',
-        'Elite Fitness Nguyễn Chí Than - Image 5 Description');
-
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (78,'/img/departments/albums/78_albums_1701176604640.jpg');
 
 -- Add more images as needed...
 -- Gym Department Gallery for Fit365 Fitness &Yoga Q.11
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (52, 'https://s.net.vn/Zc2u', 'Fit365 Fitness &Yoga Q.11 - Image 1 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (52, '/img/departments/albums/52_albums_1701178346542.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (52, 'https://s.net.vn/zXG7', 'Fit365 Fitness &Yoga Q.11 - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (52, '/img/departments/albums/52_albums_1701178339564.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (52, 'https://s.net.vn/1Ihz', 'Fit365 Fitness &Yoga Q.11 - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (52, '/img/departments/albums/52_albums_1701178352469.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (52, 'https://s.net.vn/9zZB', 'Fit365 Fitness &Yoga Q.11 - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (52, '/img/departments/albums/52_albums_1701178356901.jpg');
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES (52, 'https://s.net.vn/L3Ku', 'Fit365 Fitness &Yoga Q.11 - Image 2 Description');
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES (52, '/img/departments/albums/52_albums_1701178361013.jpg');
 
 -- Add more images as needed...
 
@@ -1874,18 +1938,18 @@ INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_u
                    contact_email, brand_status_key)
 
 VALUES (11, 12, 'Advance Fitness & Gym',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/z68t4s',
-        'https://bom.so/VPBYrp',
+        '/img/brands/logos/11_logo.jpg',
+        '/img/brands/wallpapers/11_wallpaper.jpg',
+        '/img/brands/thumbnails/11_thumbnail.jpg',
         'Đến với Advance, học viên sẽ được kiểm tra thể chất bằng máy Check in Body – một trong những thiết bị hiện đại nhất Việt Nam hiện nay, được tư vấn dinh dưỡng như cách ăn uống và phân tích thức cả khi ở nhà.
 
   Nếu trở thành học viên ở Advance, bạn sẽ được kiểm tra sức khỏe đều đặn. Thông qua đó, huấn luyện viên sẽ đánh giá thể trạng và đưa ra phương pháp tập luyện phù hợp cho từng người.',
         0, '1900 63 35 31', ' advancefitnessgym@gmail.com', 1),
 
        (12, 13, 'The New Gym',
-        'https://bom.so/T0IpUX',
-        'https://bom.so/tdJyS0',
-        'https://bom.so/lLdgCq',
+        '/img/brands/logos/12_logo.jpg',
+        '/img/brands/wallpapers/12_wallpaper.jpg',
+        '/img/brands/thumbnails/12_thumbnail.jpg',
         'Hơn 200 máy tập từ cơ đến cardio và các loại tạ tự do. Điểm khác biệt của The New Gym chính là phòng tập gym 24/7, phòng tập Fitness and Yoga 24h, học viên ở đây có thể tập bất cứ khi nào rảnh.
 
   Nếu mong muốn hiện tại của bạn là tìm phòng tập gym Quận Tân Bình giá rẻ, phòng tập gym Bình Thạnh giá rẻ hay phòng tập gym quận 6 giá rẻ thì The New Gym là dành cho bạn.
@@ -1894,9 +1958,9 @@ VALUES (11, 12, 'Advance Fitness & Gym',
         0, '1900 63 69 20', 'info@thenewgym.vn', 1),
 
        (13, 14, 'VShape Gym & Yoga',
-        'https://bom.so/thNR4Y',
-        'https://bom.so/uMhrfX',
-        'https://bom.so/thNR4Y',
+        '/img/brands/logos/13_logo.jpg',
+        '/img/brands/wallpapers/13_wallpaper.jpg',
+        '/img/brands/thumbnails/13_thumbnail.jpg',
         'Vshape được đầu tư cơ sở vật chất hiện đại, không gian thoáng mát, rộng rãi và trang thiết bị nhập khẩu hoàn toàn.
 
   Với diện tích 650m2 , tuy nhỏ hơn so với những phòng tập trên. Nhưng phần đầu tư trang thiết bị, máy móc thì không hề thua kém. Tất cả đều đạt tiêu chuẩn quốc tế để phục vụ cho việc tập luyện.
@@ -1906,45 +1970,45 @@ VALUES (11, 12, 'Advance Fitness & Gym',
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
 
-VALUES (151, 11, 'https://bom.so/qBs9AN', 'Aerobic',
+VALUES (151, 11, '/img/brandAmenities/1701142144961_brandAmenities.jpg', 'Aerobic',
         'Chương trình tập luyện năng động với nhịp nhàng, kết hợp các bài tập cardio để cải thiện sức khỏe tim mạch và sự linh hoạt.',
         1),
-       (152, 11, 'https://bom.so/h2BBn6', 'Yoga',
+       (152, 11, '/img/brandAmenities/1701142151557_brandAmenities.jpg', 'Yoga',
         ' Mang lại sự cân bằng giữa tâm hồn và cơ thể thông qua các động tác linh hoạt, thở đều, và thiền. Dành cho những người muốn giảm căng thẳng và tăng cường sức khỏe tinh thần.',
         1),
-       (153, 11, 'https://bom.so/ugZMXk', 'Zumba',
+       (153, 11, '/img/brandAmenities/1701142157022_brandAmenities.jpg', 'Zumba',
         'Buổi tập năng động với những động tác nhảy và nhịp điệu âm nhạc sôi động. Phù hợp cho những người yêu thích không khí vui nhộn và muốn đốt cháy calo hiệu quả..',
         1),
-       (154, 11, 'https://bom.so/lAl2Ff', 'Combat Fit',
+       (154, 11, '/img/brandAmenities/1701142164233_brandAmenities.jpg', 'Combat Fit',
         'Kết hợp các phong cách võ thuật và bài tập cường độ cao để phát triển sức mạnh, sự linh hoạt và sự chịu đựng. Dành cho những người muốn nâng cao kỹ thuật tự vệ và cường độ tập luyện.',
         1),
-       (155, 11, 'https://bom.so/XE4XKx', 'Fight Fit',
+       (155, 11, '/img/brandAmenities/1701142168951_brandAmenities.jpg', 'Fight Fit',
         'Tập luyện dựa trên các phương pháp đối kháng và võ thuật, giúp cải thiện sức mạnh, tăng cường cardio và phản xạ. Là lựa chọn phù hợp cho những người muốn thách thức bản thân trong môi trường tập luyện độc đáo.',
         1),
 
-       (156, 12, 'https://bom.so/6vD5Ve', 'SEXY DANCE',
+       (156, 12, '/img/brandAmenities/1701143169446_brandAmenities.jpg', 'SEXY DANCE',
         'Sexy dance hay còn gọi là nhảy sexy là những điệu nhảy hiện đại đầy chất trẻ, quyến rũ, chủ yếu sử dụng sự mềm dẻo và linh động làm nổi bật nên đường nét quyến rũ của cơ thể. Sexy dance với đặc thù nhằm vào việc làm nổi bật những vùng ngực, eo, bụng dưới, đùi, mông khi nhảy, vì vậy các nhóm cơ trên toàn bộ cơ thể như cơ bụng, lưng, chân,… đều phải vận động',
         1),
-       (157, 12, 'https://bom.so/LJAxsj', 'BUM N TUM',
+       (157, 12, '/img/brandAmenities/1701143214325_brandAmenities.jpg', 'BUM N TUM',
         'Bum n Tum là chương trình 45 phút được thiết kế gồm 3 phần. Phần 1 là các bài tập phần mông. Phần 2 là các bài tập phần đùi. Phần 3 là các bài tập phần cơ bụng. Chỉ với 45 phút sẽ giúp bạn đôt cháy nhiều năng lượng và có 1 phần cơ bụng, mông, đùi săn chắc.',
         1),
-       (158, 12, 'https://bom.so/vXxtJb', 'NEW PUMP',
+       (158, 12, '/img/brandAmenities/1701143234612_brandAmenities.jpg', 'NEW PUMP',
         'New Pump là môn học được thiết kế với thanh bar, tạ và bục. Bộ môn này giúp bạn tập luyện toàn thân, hoàn toàn lý tưởng cho bất kỳ ai muốn có được thân hình mảnh mai, săn chắc . Học viên sẽ sử dụng mức tạ nhẹ đến trung bình. Các giảng viên sẽ hướng dẫn bạn từng bước di chuyển, kĩ thuật được thiết kế trên nền âm nhạc một cách khoa học giúp bạn đạt được kết quả cao.',
         1),
-       (159, 12, 'https://bom.so/r6xRvp', 'NEW COMBAT',
+       (159, 12, '/img/brandAmenities/1701143247303_brandAmenities.jpg', 'NEW COMBAT',
         'New Combat là môn học cường độ cao lấy cảm hứng từ võ thuật giúp bạn giải tỏa căng thẳng và tăng cường sức khỏe thể chất. Suốt 1 giờ đồng hồ được “đấm và đá” theo âm nhạc sôi động, bạn sẽ có cảm giác sung sức như một nhà vô địch',
         1),
-       (160, 12, 'https://bom.so/BWO4LI', 'DANCE FIT',
+       (160, 12, '/img/brandAmenities/1701143253322_brandAmenities.jpg', 'DANCE FIT',
         'Dance Fit là bộ môn dance fitness kết hợp những vũ đạo tự do, đơn giản trên nền nhạc sôi động trong thời gian dài, giúp đốt cháy mỡ thừa, giảm cân hiệu quả và thư giãn cùng âm nhạc. Khác với Zumba cùng những vũ điệu Latin, đến với New Dance bạn sẽ đắm chìm trong bữa tiệc âm nhạc nhiều màu sắc: Pop, Hip Hop ...',
         1),
 
-       (161, 13, 'https://bom.so/oojyMX', 'Aerobic',
+       (161, 13, '/img/brandAmenities/1701143641506_brandAmenities.jpg', 'Aerobic',
         'Cung cấp các buổi tập năng động với nhịp điệu âm nhạc, nhằm cải thiện sức khỏe tim mạch, tăng cường sức mạnh cơ bắp và đốt cháy calo. Đây là lựa chọn phổ biến cho những người muốn tăng cường thể lực và giảm cân.',
         1),
-       (162, 13, 'https://bom.so/JXvAlA', 'Gym',
+       (162, 13, '/img/brandAmenities/1701143646667_brandAmenities.jpg', 'Gym',
         'Trang bị phòng tập gym đầy đủ các máy móc và trang thiết bị để phục vụ mọi nhu cầu tập luyện cơ bản hoặc chuyên sâu. Hướng dẫn viên sẽ hỗ trợ hội viên trong việc lên kế hoạch và thực hiện các bài tập tùy thuộc vào mục tiêu cá nhân.',
         1),
-       (163, 13, 'https://bom.so/4OC25J', 'Yoga',
+       (163, 13, '/img/brandAmenities/1701143651396_brandAmenities.jpg', 'Yoga',
         'Tạo không gian yên tĩnh và tập trung, Yoga giúp cải thiện linh hoạt, giảm căng thẳng và kích thích sự ổn định tinh thần. Cung cấp các lớp hướng dẫn từ cơ bản đến nâng cao, phù hợp với mọi đối tượng và trình độ.',
         1);
 
@@ -1956,9 +2020,9 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
 
 VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         'SE05, GARDEN COURT 1, Tôn Dật Tiên, Phú Mỹ Hưng, Q7, Tp.HCM', '08 5416 0555',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/ab77Ui',
-        'https://bom.so/1KSXnM',
+        '/img/departments/logos/12_logo.jpg',
+        '/img/departments/wallpapers/12_wallpaper.jpg',
+        '/img/departments/thumbnails/12_thumbnail.jpg',
         'Phòng tập gym Advance Fitness & Gym không hoành tráng như phố Nguyễn Huệ, nhưng lợi thế phố đi bộ Tôn Dật Tiên kết hợp hài hòa cây xanh, mặt nước, lối dạo, cảnh quan tự nhiên những chỗ dừng chân.
 
  Đến với phòng tập bạn sẽ được kiểm tra thể chất bằng máy Check in Body (một trong những thiết bị hiện đại nhất tại Việt Nam hiện nay), sau đó được các chuyên gia dinh dưỡng tư vấn về cách ăn uống, phân tích thức ăn (ngay cả khi ở nhà)',
@@ -1967,9 +2031,9 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
 
        (13, 11, 38, 1, 'Advance Fitness & Gym Nguyễn Lương Bằng',
         'ST05 Block E, Riverside Residence, Nguyễn Lương Bằng, Phú Mỹ Hưng, Q7, Tp.HCM', '08 5411 8777',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/iJjVqj',
-        'https://bom.so/x75prK',
+        '/img/departments/logos/13_logo.jpg',
+        '/img/departments/wallpapers/13_wallpaper.jpg',
+        '/img/departments/thumbnails/13_thumbnail.jpg',
         'Phòng tập gym Advance Fitness & Gym với mong muốn mang lại môi trường tập luyện chuyên nghiệp theo hình thức 1:1, tức một huấn luyện viên hướng dẫn cho một học viên đã được trung tâm cam kết áp dụng tuyệt đối.
 
  Đến với phòng tập bạn sẽ được kiểm tra thể chất bằng máy Check in Body (một trong những thiết bị hiện đại nhất tại Việt Nam hiện nay), sau đó được các chuyên gia dinh dưỡng tư vấn về cách ăn uống, phân tích thức ăn (ngay cả khi ở nhà)',
@@ -1977,66 +2041,67 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         300, 1100,'Hồ Chí Minh'),
 
        (14, 11, 39, 1, 'Advance Fitness & Gym Kỳ Đồng', '05 Kỳ Đồng, Phường 6 Quận 3 TPHCM.', '08 6298 2111',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/543E8a',
-        'https://bom.so/KgyGXq',
+        '/img/departments/logos/14_logo.jpg',
+        '/img/departments/wallpapers/14_wallpaper.jpg',
+        '/img/departments/thumbnails/14_thumbnail.jpg',
         'Phòng tập gym Advance Fitness & Gym được thành lập với mong muốn mang lại môi trường tập luyện chuyên nghiệp theo hình thức 1:1, đó là hình thức của một huấn luyện viên hướng dẫn cho một học viên đã được trung tâm cam kết áp dụng tuyệt đối. Đến với Trung tâm các học viên sẽ được kiểm tra thể chất bằng máy Check in Body sau đó được các chuyên gia dinh dưỡng tư vấn về cách ăn uống, phân tích thức ăn.',
         10.78467544118492, 106.68288665202464,
         450, 1200,'Hồ Chí Minh'),
 
        (15, 12, 40, 1, 'The New Gym Nguyễn Chí Thanh', '332 Nguyễn Chí Thanh, Phường 5, Quận 10, Thành phố Hồ Chí Minh',
         '1900 63 69 20',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/Dgxb1I',
-        'https://bom.so/CtBw9Z',
+        '/img/departments/logos/15_logo.jpg',
+        '/img/departments/wallpapers/15_wallpaper.jpg',
+        '/img/departments/thumbnails/15_thumbnail.jpg',
         'The New Gym có diện tích 2.000m2, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.760832460144496, 106.66690168835657,
         600, 2000,'Hồ Chí Minh'),
 
        (16, 12, 41, 1, 'The New Gym Điện Biên Phủ', '256 Điện Biên Phủ, Phường 7, Quận 3, Thành phố Hồ Chí Minh',
         '1900 63 69 20',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/d9i9v8',
-        'https://bom.so/M7W2Cz',
+        '/img/departments/logos/16_logo.jpg',
+        '/img/departments/wallpapers/16_wallpaper.jpg',
+        '/img/departments/thumbnails/16_thumbnail.jpg',
         'The New Gym có diện tích 1.800m2 nằm ở vị trí đẹp trên đường Điện Biên Phủ, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.779821919040735, 106.68661522494476,
         400, 1800,'Hồ Chí Minh'),
 
        (17, 12, 42, 1, 'The New Gym Hoàng Văn Thụ',
         'Lầu 5, 1/1 Hoàng Việt, Phường 4, Quận Tân Bình, Thành phố Hồ Chí Minh', '1900 63 69 20',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/ZDph1b',
-        'https://bom.so/GzOWcD',
+        '/img/departments/logos/17_logo.jpg',
+        '/img/departments/wallpapers/17_wallpaper.jpg',
+        '/img/departments/thumbnails/17_thumbnail.jpg',
         'The New Gym có diện tích không quá lớn nhưng lợi thế về vị trí thuận lợi view từ trên cao, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.797626444808325, 106.65933092494488,
         300, 1200, 'Hồ Chí Minh'),
 
        (18, 12, 43, 1, 'The New Gym Ung Văn Khiêm',
         '58D Ung Văn Khiêm, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh', '1900 63 69 20',
-        'https://bom.so/JjIOXa',
-        'https://bom.so/FhQ0Nz',
-        'https://bom.so/unAbjV',
+        '/img/departments/logos/18_logo.jpg',
+        '/img/departments/wallpapers/18_wallpaper.jpg',
+        '/img/departments/thumbnails/18_thumbnail.jpg',
         'The New Gym có lợi thế về vị trí đắc địa trên Quận Bình Thạnh, gồm các khu vực tập luyện chính như Cardio, Strength, Free weights, Functional Training, Studio, Stretching, phù hợp với nhu cầu tập luyện cho mọi đối tượng.',
         10.808073113779995, 106.71534072494497,
         500, 1800, 'Hồ Chí Minh'),
 
        (19, 13, 44, 1, 'VShape Fitness & Yoga Center, Trường Chinh',
         '491/21-23 Đường Trường Chinh, Phường 14, Quận Tân Bình, Hồ Chí Minh', '(08) 71080815',
-        'https://bom.so/thNR4Y',
-        'https://bom.so/6JicJC',
-        'https://bom.so/AgiwNL',
+        '/img/departments/logos/19_logo.jpg',
+        '/img/departments/wallpapers/19_wallpaper.jpg',
+        '/img/departments/thumbnails/19_thumbnail.jpg',
         'Phòng tập gym VShape Fitness & Yoga Center tạo dựng hình tượng cho mình là 1 trung tâm thể dục thể hình – thẩm mỹ – yoga đáp ứng mọi nhu cầu về tập luyện thể hình và rèn luyện sức khỏe với mong muốn mang đến cho hội viên 1 không gian tập luyện chuyên nghiệp, thân thiện và luôn tạo niềm tin, niềm hứng thú tập luyện cho hội viên.',
         10.793479126084165, 106.65255131145184,
         200, 650, 'Hồ Chí Minh'),
 
        (20, 13, 45, 1, 'VShape Fitness & Yoga Center, Vincom Plus', 'Lầu 3 – 307 Nguyễn Duy Trinh, Quận 2, Hồ Chí Minh',
         '(08) 71080815',
-        'https://bom.so/thNR4Y',
-        'https://bom.so/hoy8bD',
-        'https://bom.so/ZKU6Rb',
+        '/img/departments/logos/20_logo.jpg',
+        '/img/departments/wallpapers/20_wallpaper.jpg',
+        '/img/departments/thumbnails/20_thumbnail.jpg',
         'Bạn là người yêu thích các bộ môn thể dục và mong muốn có được sức khoẻ tốt cùng với vóc dáng thon gọn, săn chắc? Hoặc bạn đã bắt đầu kế hoạch tập luyện nhưng chưa thể vượt qua các trở ngại và nỗi lo lắng? Đến với phòng tập gym VShape Fitness & Yoga quận 2, bạn sẽ được các huấn luyện viên hỗ trợ, tư vấn và chia sẻ kinh nghiệm trong các bài tập thể thao để bạn tận hưởng cuộc sống thật trọn vẹn và tràn đầy năng lượng.',
         10.789020254962827, 106.76547901599146,
         180, 550, 'Hồ Chí Minh');
+
 
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
 
@@ -2146,73 +2211,72 @@ VALUES (1, 12, 1),
        (5, 20, 1),
        (7, 20, 1);
 
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
 
-VALUES (12, 'https://bom.so/1KSXnM', 'Advance Fitness & Gym Tôn Dật Tiên'),
-       (12, 'https://bom.so/7pEK02', 'Advance Fitness & Gym Tôn Dật Tiên'),
-       (12, 'https://bom.so/7B2Mzt', 'Advance Fitness & Gym Tôn Dật Tiên'),
-       (12, 'https://bom.so/voh8ng', 'Advance Fitness & Gym Tôn Dật Tiên'),
-       (12, 'https://bom.so/UrVOOT', 'Advance Fitness & Gym Tôn Dật Tiên'),
+VALUES (12, '/img/departments/albums/12_albums_1701178952407.jpg'),
+       (12, '/img/departments/albums/12_albums_1701178958581.jpg'),
+       (12, '/img/departments/albums/12_albums_1701179042607.jpg'),
+       (12, '/img/departments/albums/12_albums_1701179045461.jpg'),
+       (12, '/img/departments/albums/12_albums_1701179048098.jpg'),
 
-       (13, 'https://bom.so/NOs6fZ', 'Advance Fitness & Gym Nguyễn Lương Bằng'),
-       (13, 'https://bom.so/b4n4Tr', 'Advance Fitness & Gym Nguyễn Lương Bằng'),
-       (13, 'https://bom.so/v8NMXD', 'Advance Fitness & Gym Nguyễn Lương Bằng'),
-       (13, 'https://bom.so/WAPkb3', 'Advance Fitness & Gym Nguyễn Lương Bằng'),
-       (13, 'https://bom.so/1KSXnM', 'Advance Fitness & Gym Nguyễn Lương Bằng'),
+       (13, '/img/departments/albums/13_albums_1701179805196.jpg'),
+       (13, '/img/departments/albums/13_albums_1701179808551.jpg'),
+       (13, '/img/departments/albums/13_albums_1701179811684.jpg'),
+       (13, '/img/departments/albums/13_albums_1701179814840.jpg'),
+       (13, '/img/departments/albums/13_albums_1701179818067.jpg'),
 
-       (14, 'https://bom.so/B3eGLt', 'Advance Fitness & Gym Kỳ Đồng'),
-       (14, 'https://bom.so/gBIrhB', 'Advance Fitness & Gym Kỳ Đồng'),
-       (14, 'https://bom.so/rhbXsp', 'Advance Fitness & Gym Kỳ Đồng'),
-       (14, 'https://bom.so/IpGdeE', 'Advance Fitness & Gym Kỳ Đồng'),
-       (14, 'https://bom.so/mMsGvS', 'Advance Fitness & Gym Kỳ Đồng'),
+       (14, '/img/departments/albums/14_albums_1701180043245.jpg'),
+       (14, '/img/departments/albums/14_albums_1701180053532.jpg'),
+       (14, '/img/departments/albums/14_albums_1701180056776.jpg'),
+       (14, '/img/departments/albums/14_albums_1701180059792.jpg'),
+       (14, '/img/departments/albums/14_albums_1701180063158.jpg'),
 
-       (15, 'https://bom.so/RXEacT', 'The New Gym Nguyễn Chí Thanh'),
-       (15, 'https://bom.so/OOqz5t', 'The New Gym Nguyễn Chí Thanh'),
-       (15, 'https://bom.so/aHSdjP', 'The New Gym Nguyễn Chí Thanh'),
-       (15, 'https://bom.so/fvtDuD', 'The New Gym Nguyễn Chí Thanh'),
-       (15, 'https://bom.so/NmhvHq', 'The New Gym Nguyễn Chí Thanh'),
+       (15, '/img/departments/albums/15_albums_1701180388930.jpg'),
+       (15, '/img/departments/albums/15_albums_1701180393344.jpg'),
+       (15, '/img/departments/albums/15_albums_1701180396587.jpg'),
+       (15, '/img/departments/albums/15_albums_1701180399586.jpg'),
+       (15, '/img/departments/albums/15_albums_1701180402529.jpg'),
 
-       (16, 'https://bom.so/jvqb2d', 'The New Gym Điện Biên Phủ'),
-       (16, 'https://bom.so/Fl0skO', 'The New Gym Điện Biên Phủ'),
-       (16, 'https://bom.so/FUul95', 'The New Gym Điện Biên Phủ'),
-       (16, 'https://bom.so/DALjJZ', 'The New Gym Điện Biên Phủ'),
-       (16, 'https://bom.so/pKSRYy', 'The New Gym Điện Biên Phủ'),
+       (16, '/img/departments/albums/16_albums_1701181350071.jpg'),
+       (16, '/img/departments/albums/16_albums_1701181367303.jpg'),
+       (16, '/img/departments/albums/16_albums_1701181357007.jpg'),
+       (16, '/img/departments/albums/16_albums_1701181360169.jpg'),
+       (16, '/img/departments/albums/16_albums_1701181376832.jpg'),
 
-       (17, 'https://bom.so/fxkFv8', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/YkwevS', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/SSL3g3', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/4TdGCJ', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/bHEgKJ', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/gEy8zl', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/6UNcfa', 'The New Gym Hoàng Văn Thụ'),
-       (17, 'https://bom.so/azrzVF', 'The New Gym Hoàng Văn Thụ'),
+       (17, '/img/departments/albums/17_albums_1701181709997.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181713341.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181718536.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181722026.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181724948.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181727556.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181730196.jpg'),
+       (17, '/img/departments/albums/17_albums_1701181732924.jpg'),
 
-       (18, 'https://bom.so/CHsVvw', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/6kSQgr', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/xUxfbR', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/j0sBh0', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/ZBgOWI', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/ET5kP6', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/PIvHmF', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/x9iNfH', 'The New Gym Ung Văn Khiêm'),
-       (18, 'https://bom.so/ObkOBa', 'The New Gym Ung Văn Khiêm'),
+       (18, '/img/departments/albums/18_albums_1701182354945.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182358962.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182362402.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182365515.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182369139.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182373083.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182381239.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182393799.jpg'),
+       (18, '/img/departments/albums/18_albums_1701182400942.jpg'),
 
-       (19, 'https://bom.so/R9xEBp', 'VShape Fitness & Yoga Center, Trường Chinh'),
-       (19, 'https://bom.so/v7aocI', 'VShape Fitness & Yoga Center, Trường Chinh'),
-       (19, 'https://bom.so/4Vokpr', 'VShape Fitness & Yoga Center, Trường Chinh'),
-       (19, 'https://bom.so/6fQg7m', 'VShape Fitness & Yoga Center, Trường Chinh'),
-       (19, 'https://bom.so/eYWdAf', 'VShape Fitness & Yoga Center, Trường Chinh'),
-       (19, 'https://bom.so/bCJ4rz', 'VShape Fitness & Yoga Center, Trường Chinh'),
-       (19, 'https://bom.so/eOwx2D', 'VShape Fitness & Yoga Center, Trường Chinh'),
+       (19, '/img/departments/albums/19_albums_1701182858235.jpg'),
+       (19, '/img/departments/albums/19_albums_1701182861385.jpg'),
+       (19, '/img/departments/albums/19_albums_1701182865479.jpg'),
+       (19, '/img/departments/albums/19_albums_1701182868827.jpg'),
+       (19, '/img/departments/albums/19_albums_1701182876208.jpg'),
+       (19, '/img/departments/albums/19_albums_1701182878870.jpg'),
+       (19, '/img/departments/albums/19_albums_1701182881736.jpg'),
 
-
-       (20, 'https://bom.so/VlE26M', 'VShape Fitness & Yoga Center, Vincom Plus'),
-       (20, 'https://bom.so/pVfS6U', 'VShape Fitness & Yoga Center, Vincom Plus'),
-       (20, 'https://bom.so/v7aocI', 'VShape Fitness & Yoga Center, Vincom Plus'),
-       (20, 'https://bom.so/c3IBz2', 'VShape Fitness & Yoga Center, Vincom Plus'),
-       (20, 'https://bom.so/dytfVw', 'VShape Fitness & Yoga Center, Vincom Plus'),
-       (20, 'https://bom.so/qPjY4f', 'VShape Fitness & Yoga Center, Vincom Plus'),
-       (20, 'https://bom.so/MxRM0d', 'VShape Fitness & Yoga Center, Vincom Plus');
+       (20, '/img/departments/albums/20_albums_1701183267924.jpg'),
+       (20, '/img/departments/albums/20_albums_1701183274601.jpg'),
+       (20, '/img/departments/albums/20_albums_1701183287500.jpg'),
+       (20, '/img/departments/albums/20_albums_1701183292841.jpg'),
+       (20, '/img/departments/albums/20_albums_1701183296017.jpg'),
+       (20, '/img/departments/albums/20_albums_1701183300939.jpg'),
+       (20, '/img/departments/albums/20_albums_1701183306210.jpg');
 
 INSERT INTO gym_department_schedule (gym_department_id, day, open_time, close_time)
 
@@ -2498,17 +2562,17 @@ VALUES
 
     /***************************************** Kickfit Sport Brand ******************************************************/
     (1, 15, 'Kickfit Sport',
-     'https://bom.so/CHjTsR',
-     'https://kickfit-sports.com/wp-content/uploads/2022/06/Co-so-vat-chat-tai-Kickfit-Sports-dat-chuan-chat-luong-cao.png.webp',
-     'https://kickfitvietnam.com/wp-content/uploads/2023/02/trai-nghiem-phong-tap-7.jpg',
+     '/img/brands/logos/1_logo.jpg',
+     '/img/brands/wallpapers/1_wallpaper.jpg',
+     '/img/brands/thumbnails/1_thumbnail.jpg',
      'Kickfit Sports đã đang và sẽ phát triển theo hướng: “Chuyên nghiệp – Chất Lượng – Luôn đổi mới và hoàn thiện” đồng thời mong muốn mang lại sức khỏe và thịnh vượng cho hàng triệu người Việt Nam.Với hơn 10 năm xây dựng và phát triển, hiện tại Kickfit Sports đang sở hữu 14 cơ sở phòng tập trải rộng khắp Hà Nội. Trung tâm luôn chú trọng đầu tư, cải tiến các sản phẩm, dịch vụ để mang đến môi trường tập luyện 5 sao, uy tín và chất lượng.',
      5, '093 63 999 88', 'hethong@kickfit-sports.com', 1),
 
     /****************************************** 25 FIT Brand *****************************************************/
     (2, 16, '25 Fit',
-     'https://shorturl.at/nwTUX',
-     'https://shorturl.at/xEFNR',
-     'https://phongtap.25fit.net/hubfs/Image%20from%20iOS.jpg',
+     '/img/brands/logos/2_logo.jpg',
+     '/img/brands/wallpapers/2_wallpaper.jpg',
+     '/img/brands/thumbnails/2_thumbnail.jpg',
      '25 Fit là viết tắt của cụm từ 25 minutes to get fit, là hệ thống phòng tập công nghệ EMS đầu tiên. EMS là phương pháp dùng xung điện để tác động, kích thích cơ bắp phát triển và đánh tan mỡ thừa.
      Với phương pháp này bạn không cần dùng tạ nên cũng không cần lo ngại về chấn thương, chỉ cần tập luyện 25 phút và 1 – 2 buổi/ tuần đã có thể đạt kết quả giảm mỡ nhanh hơn, tiết kiệm tối ưu thời gian.
      Trang thiết bị nhập khẩu từ Đức, đặc biệt là tại phòng tập 25 FIT, quần áo và thức uống pre-workout sẽ được chuẩn bị sẵn và miễn phí.',
@@ -2516,18 +2580,18 @@ VALUES
 
     /******************************************** S'Life Brand ***************************************************/
     (3, 17, 'S’Life Gym & Yoga',
-     'https://shorturl.at/jrP35',
-     'https://shorturl.at/foNUZ',
-     'https://shorturl.at/eyENT',
+     '/img/brands/logos/3_logo.jpg',
+     '/img/brands/wallpapers/3_wallpaper.jpg',
+     '/img/brands/thumbnails/3_thumbnail.jpg',
      '"S’Life là hệ thống phòng tập thể hình không gian xanh, môi trường lý tưởng để tập luyện với trang thiết bị hiện đại cùng huấn luyện viên chuyên nghiệp sẽ giúp hội viên đạt hiệu quả tập luyện cao nhất.
 Bài tập luyện của học viện đều được huấn luyện viên của S’Life cá nhân hóa để phù hợp với thể trạng của mỗi người."',
      4.7, '0902 635 124', ' slifegym@gmail.com', 1),
 
     /********************************************* Diamond Fitness Brand **************************************************/
     (4, 18, 'Diamond Fitness Center',
-     'https://shorturl.at/iFO17',
-     'https://bom.so/V0CxT4',
-     'https://shorturl.at/blpK4',
+     '/img/brands/logos/4_logo.jpg',
+     '/img/brands/wallpapers/4_wallpaper.jpg',
+     '/img/brands/thumbnails/4_thumbnail.jpg',
      '"Diamond Fitness Center tự hào đem lại trải nghiệm tốt nhất cho bạn với hệ thống gồm 14 câu lạc bộ đẳng cấp 5 sao. Được trang bị các thiết bị hiện đại, cùng hệ thống hồ bơi trong nhà, phòng tập Yoga, Kick Boxing, Thiền,…
 Sự khác biệt của thương hiệu này, chính là chương trình đo khám chỉ số BMI. Thông qua chỉ số này, bạn sẽ hiểu hơn về tình trạng cơ thể của mình và từ đó xác định nhu cầu của cơ thể là gì.
 Dựa vào BMI, huấn luyện viên của Diamond Fitness sẽ vạch ra lịch tập cũng như bài tập phù hợp với nhu cầu hoàn thiện cơ thể của bạn."',
@@ -2540,23 +2604,23 @@ VALUES
     /************************************************ Kickfit Sport Departments ***********************************************/
     (21, 1, 2, 1, 'Kickfit Sports Nguyễn Phong Sắc',
      'Tầng 03 Tòa nhà Lâm Viễn, 107 Đ. Nguyễn Phong Sắc, Hà Nội', '0903411257',
-     'https://bom.so/CHjTsR',
-     'https://bom.so/YJ7xgS',
-     'https://bom.so/lNBYrM',
+     '/img/departments/logos/21_logo.jpg',
+     '/img/departments/wallpapers/21_wallpaper.jpg',
+     '/img/departments/thumbnails/21_thumbnail.jpg',
      'Kickfit Sports Nguyễn Phong Sắc được biết đến là phòng tập kickfit chất lượng tốt nhất tại quận Cầu Giấy, địa chỉ quen thuộc của giới yêu võ thuật trên địa bàn Hà Nội. Không gian tập luyện có diện tích gần 1000m2 được phân chia theo từng khu riêng biệt, hợp lý đảm bảo hội viên có không gian riêng khi tập luyện và thư giãn.',
      21.040954973167608, 105.79023379536018, 200, 1000,'Hà Nội'),
     (22, 1, 46, 1, 'Kickfit Sports Trần Duy Hưng',
      'Ngõ 196 Đ. Trần Duy Hưng, Trung Hoà, Cầu Giấy, Hà Nội', '0903411257',
-     'https://bom.so/CHjTsR',
-     'https://bit.ly/kickfit-tranduyhung',
-     'https://shorturl.at/vyJ17',
+     '/img/departments/logos/22_logo.jpg',
+     '/img/departments/wallpapers/22_wallpaper.jpg',
+     '/img/departments/thumbnails/22_thumbnail.jpg',
      'Kickfit Sports Trần Duy Hưng được ra đời vào năm 2012 và là cơ sở đầu tiên của chuỗi phòng tập Kickfit Sports. Dịch vụ phòng tập chủ yếu về các bộ môn võ đối kháng hỗ trợ giảm cân, tăng cơ, cải thiện vóc dáng cũng như trang bị các kỹ năng phòng vệ hiệu quả giúp xử lý các tình huống nguy hiểm trong cuộc sống. Với không gian rộng rãi, cơ sở vật chất hiện đại tối tân, Kickfit Sports Trần Duy Hưng mang tới cho hội viên sự thoải mái, thư giãn sau những giờ học tập và làm việc mệt mỏi.',
      21.009542311744028, 105.79714248159206, 200, 1000,'Hà Nội'),
     (23, 1, 47, 1, 'Kickfit Sports Thiên Đường Bảo Sơn',
      'Tầng 5, Tòa Gemek 1, Thiên Đường Bảo Sơn, Hoài Đức, Hà Nội', '093 63 999 88',
-     'https://bom.so/CHjTsR',
-     'https://shorturl.at/finvz',
-     'https://shorturl.at/DHVX2',
+     '/img/departments/logos/23_logo.jpg',
+     '/img/departments/wallpapers/23_wallpaper.jpg',
+     '/img/departments/thumbnails/23_thumbnail.jpg',
      'Kickfit Sports Thiên Đường Bảo Sơn tọa lạc tại vị trí đắc địa thuộc toà Gemek 1 ngay cổng chào của Thiên Đường Bảo Sơn. Đây một trong những cơ sở phòng tập được đầu tư lớn với nhiều trang thiết bị hiện đại và tiện ích sang chảnh mang đến trải nghiệm tập luyện thể thao tuyệt vời nhất cho khách hàng. Kickfit Sports Thiên Đường Bảo Sơn tự hào khi nhận được vô số những đánh giá tốt từ khách hàng và số lượng người đăng ký tập luyện ngày càng đông đảo.',
      21.00855235502214, 105.7307156200674, 400, 1500,'Hà Nội'),
     (24, 1, 48, 1, 'Kickfit Sports Metro Hà Đông',
@@ -2570,150 +2634,280 @@ VALUES
     /************************************************ 25 FIT Departments ***********************************************/
     (25, 2, 49, 1, '25 FIT Lý Thường Kiệt',
      '42Z P. Lý Thường Kiệt, Tràng Tiền, Hoàn Kiếm, Hà Nội', '18006176',
-     'https://shorturl.at/nwTUX',
-     'https://g2.by/f1WS',
-     'https://by.tn/oTZP',
+     '/img/departments/logos/25_logo.jpg',
+     '/img/departments/wallpapers/25_wallpaper.jpg',
+     '/img/departments/thumbnails/25_thumbnail.jpg',
      '25 FIT Lý Thường Kiệt là studio đầu tiên ở Hà Nội đánh dấu những bước tiến quan trọng của 25 FIT tại khu vực phía Bắc trong việc mang công nghệ EMS đến với người dùng thủ đô',
      21.023985014649746, 105.85026204718575, 5, 60, 'Hà Nội'),
     (26, 2, 50, 1, '25 FIT Duy Tân',
      '22 Duy Tân, Cầu Giấy, Hà Nội Hà Nội', '18006176',
-     'https://shorturl.at/nwTUX',
-     'https://shorturl.at/gjls2',
-     'https://g2.by/baBC',
+     '/img/departments/logos/26_logo.jpg',
+     '/img/departments/wallpapers/26_wallpaper.jpg',
+     '/img/departments/thumbnails/26_thumbnail.jpg',
      'Nằm tại cung đường sầm uất và nhộn nhịp, tiếp giáp khu dân cư, văn phòng, studio mới 25 FIT Duy Tân hứa hẹn sẽ đem đến cho khách hàng những trải nghiệm tập luyện giá trị tốt nhất về sức khỏe, dịch vụ với công nghệ EMS Training hiện đại, đảm bảo tiết kiệm thời gian.',
      21.030865188489173, 105.78566187313876, 5, 60, 'Hà Nội'),
     (27, 2, 51, 1, '25 FIT Times City',
      'T1, SO.02, Khu đô thị Times City, Hai Bà Trưng, Hà Nội', '18006176',
-     'https://shorturl.at/nwTUX',
-     'https://shorturl.at/lwLT5',
-     'https://shorturl.at/jCESV',
+     '/img/departments/logos/27_logo.jpg',
+     '/img/departments/wallpapers/27_wallpaper.jpg',
+     '/img/departments/thumbnails/27_thumbnail.jpg',
      'Đặt ở vị trí thuận tiện tại khu dân cư Times City, Quận Hai Bà Trưng. Chỉ 20 phút tập, 2 buổi/tuần cùng huấn luyện viên chuyên nghiệp, quý khách không cần mang bất cứ thứ gì kể cả quần áo hay giày tập để có thể đạt kết quả tăng cơ, giảm mỡ.',
      20.99661352642664, 105.86945587284531, 5, 55, 'Hà Nội'),
     (28, 2, 52, 1, '25 FIT Vinhomes Gardenia Hàm Nghi',
      'B17 05A Shophouse Vinhomes Gardenia, P. Hàm Nghi, Cầu Diễn, Nam Từ Liêm, Hà Nội.', '18006176',
-     'https://shorturl.at/nwTUX',
-     'https://g2.by/RBe2',
-     'https://shorturl.at/fCUY9',
+     '/img/departments/logos/28_logo.jpg',
+     '/img/departments/wallpapers/28_wallpaper.jpg',
+     '/img/departments/thumbnails/28_thumbnail.jpg',
      'Chính thức từ ngày 23/07/2022 - studio 25 FIT Hàm Nghi đi vào hoạt động, sẵn sàng chào đón quý hội viên trải nghiệm công nghệ EMS Training mới tại B17.05A Shophouse Vinhomes Gardenia, Hàm Nghi, Phường Cầu Diễn, Quận Nam Từ Liêm, Hà Nội.',
      21.035466912246545, 105.76214903467383, 6, 70,'Hà Nội'),
 
     /********************************************** S'Life Departments *************************************************/
     (29, 3, 53, 1, 'Phòng tập Gym S''Life Quận 10',
      '575 Đ. Sư Vạn Hạnh, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '(093) 889-1436',
-     'https://shorturl.at/jrP35',
-     'https://t.ly/Y_iVF',
-     'https://shorturl.at/cMUWX',
+     '/img/departments/logos/29_logo.jpg',
+     '/img/departments/wallpapers/29_wallpaper.jpg',
+     '/img/departments/thumbnails/29_thumbnail.jpg',
      'Nổi bật khắp HCM với không gian xanh đẳng cấp rộng hơn 3.000m2 và đầy đủ bộ môn, S''Life Quận 10 sẽ mang đến cho bạn những trải nghiệm tuyệt vời và hiệu quả nhất.',
      10.776571562971277, 106.6669378322132, 400, 3000,'Hồ Chí Minh'),
     (30, 3, 54, 1, 'Phòng tập Gym S''Life Quận 6',
      '893 Đ. Hậu Giang, P.11, Quận 6, Thành phố Hồ Chí Minh', '(090) 263-5124',
-     'https://shorturl.at/jrP35',
-     'https://t.ly/XG2SC',
-     'https://shorturl.at/ivIPW',
+     '/img/departments/logos/30_logo.jpg',
+     '/img/departments/wallpapers/30_wallpaper.jpg',
+     '/img/departments/thumbnails/30_thumbnail.jpg',
      'Bạn đang tìm kiếm phòng tập tại quận 6? S''Life GYM chính là sự lựa chọn dành cho bạn với chất lượng hàng đầu',
      10.746277023301626, 106.62821508856594, 300, 2000,'Hồ Chí Minh'),
     (31, 3, 55, 1, 'Phòng tập Gym S''Life Bình Chánh',
      '34 Đ. Phạm Hùng, Bình Hưng, Bình Chánh, Thành phố Hồ Chí Minh', '(090) 263-5124',
-     'https://shorturl.at/jrP35',
-     'https://t.ly/i-rgw',
-     'https://shorturl.at/gzBQ1',
+     '/img/departments/logos/31_logo.jpg',
+     '/img/departments/wallpapers/31_wallpaper.jpg',
+     '/img/departments/thumbnails/31_thumbnail.jpg',
      '"Với không gian đẳng cấp và sang trọng, S''Life GYM Bình Chánh chính là sự lựa chọn hoàn hảo dành cho bạn để cải thiện sức khỏe và vóc dáng hiệu quả.',
      10.73050975241317, 106.67597421199494, 260, 1800, 'Hồ Chí Minh'),
     (32, 3, 56, 1, 'Phòng tập Gym S''Life Bình Thạch',
      '26 Nguyễn Huy Lượng, Phường 14, Bình Thạnh, Thành phố Hồ Chí Minh, Vietnam', '(090) 263-5124',
-     'https://shorturl.at/jrP35',
-     'https://shorturl.at/nwKU7',
-     'https://shorturl.at/FLNTY',
+     '/img/departments/logos/32_logo.jpg',
+     '/img/departments/wallpapers/32_wallpaper.jpg',
+     '/img/departments/thumbnails/32_thumbnail.jpg',
      '"Bạn đang tìm phòng tập để cải thiện sức khỏe và vóc dáng? S''Life GYM chính là sự lựa chọn dành cho bạn.',
      10.805837559943653, 106.69624297299924, 350, 2400,'Hồ Chí Minh'),
 
     /******************************************** Diamond Fitness Departments ***************************************************/
     (33, 4, 57, 1, 'Diamond Fitness Center Trần Quang Khải',
      'Cao ốc Horizon, 214 Đ. Trần Quang Khải, P, Quận 1, Thành phố Hồ Chí Minh', '02866569555',
-     'https://shorturl.at/iFO17',
-     'https://shorturl.at/pBCGP',
-     'https://shorturl.at/zCJ59',
+     '/img/departments/logos/33_logo.jpg',
+     '/img/departments/wallpapers/33_wallpaper.jpg',
+     '/img/departments/thumbnails/33_thumbnail.jpg',
      'DIAMOND FITNESS CENTER mang trong mình sứ mệnh “Chăm sóc sức khỏe và vẻ đẹp toàn diện của Bạn”, hướng dẫn và mang đến cho bạn một chương trình luyện tập cho cả thể chất và tinh thần.
 Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực nhất tại DIAMOND FITNESS CENTER ngay bạn nhé!',
      10.79154285000631, 106.68804505835055, 650, 6600,'Hồ Chí Minh'),
     (34, 4, 58, 1, 'Diamond Fitness Center Lê Văn Sỹ',
      '338 Đ. Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh', '02866825544',
-     'https://shorturl.at/iFO17',
-     'https://t.ly/jVwO9',
-     'https://shorturl.at/wxCRT',
+     '/img/departments/logos/34_logo.jpg',
+     '/img/departments/wallpapers/34_wallpaper.jpg',
+     '/img/departments/thumbnails/34_thumbnail.jpg',
      'DIAMOND FITNESS CENTER mang trong mình sứ mệnh “Chăm sóc sức khỏe và vẻ đẹp toàn diện của Bạn”, hướng dẫn và mang đến cho bạn một chương trình luyện tập cho cả thể chất và tinh thần.
 Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực nhất tại DIAMOND FITNESS CENTER ngay bạn nhé!',
      10.78743076402733, 106.67907250244333, 120, 576,'Hồ Chí Minh'),
     (35, 4, 59, 1, 'Diamond Fitness Paragon Lê Hồng Phong',
      'TTTM Maslight, lô 20 Đ. Lê Hồng Phong, Đông Khê, Ngô Quyền, Hải Phòng.', '02256626686',
-     'https://shorturl.at/iFO17',
-     'https://t.ly/F92Dw',
-     'https://t.ly/kyaTf',
+     '/img/departments/logos/35_logo.jpg',
+     '/img/departments/wallpapers/35_wallpaper.jpg',
+     '/img/departments/thumbnails/35_thumbnail.jpg',
      'Viên kim cương khổng lồ Diamond Fitness Paragon tại TD Plaza, Lê Hồng Phong, TP Hải Phòng là dự án lớn nhất TP Hải Phòng với dòng thiết bị cao cấp nhất Hàn Quốc – DRAX cùng 2 phân khu đẳng cấp nhất.',
      20.846699998604187, 106.70741856252596, 400, 3000,'Hồ Chí Minh'),
     (36, 4, 60, 1, 'Diamond Fitness Paragon Bạch Đằng',
      '97 Bạch Đằng, Hạ Lý, Hồng Bàng, Hải Phòng', '(089) 916-4562',
-     'https://shorturl.at/iFO17',
-     'https://t.ly/IkZum',
-     'https://t.ly/HPuva',
+     '/img/departments/logos/36_logo.jpg',
+     '/img/departments/wallpapers/36_wallpaper.jpg',
+     '/img/departments/thumbnails/36_thumbnail.jpg',
      'Diamond Fitness Paragon Bạch Đằng Hải Phòng tọa lạc ngay vị trí trung tâm của thành phố hoa phượng đỏ, được đầu tư lên đến 40 tỷ đồng với quy mô diện tích hơn 5.000m2, thiết kế hiện đại, sang trọng chuẩn "hoàng gia" cùng trang bị máy móc hiện đại. Với không gian tập luyện chuyên biệt vừa sang trọng vừa riêng tư đi kèm là những đặc quyền V.I.P độc nhất, Diamond Fitness Paragon Bạch Đằng không chỉ là nơi tập luyện, giải trí và chăm sóc sức khỏe vóc dáng đơn thuần mà còn mang đến những trải nghiệm tuyệt vời dành cho các Hội viên Diamond Fitness Paragon.',
      20.86149391226383, 106.67305678210231, 480, 5000,'Hồ Chí Minh');
+
+-- Create Gym Department Gallery
+INSERT INTO gym_department_albums (gym_department_id, photo_url)
+VALUES
+    /******************************************** Kickfit Sport Departments Plans ***************************************************/
+    (21, '/img/departments/albums/21_albums_1701167846382.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167849808.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167853533.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167860007.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167862975.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167865986.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167869633.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167872678.jpg'),
+    (21, '/img/departments/albums/21_albums_1701167875868.jpg'),
+
+    (22, '/img/departments/albums/22_albums_1701168464602.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168468601.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168471754.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168474895.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168477590.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168480855.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168483781.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168486666.jpg'),
+    (22, '/img/departments/albums/22_albums_1701168489604.jpg'),
+
+    (23, '/img/departments/albums/23_albums_1701169081567.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169084848.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169088608.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169092774.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169095399.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169098079.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169100987.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169104012.jpg'),
+    (23, '/img/departments/albums/23_albums_1701169106679.jpg'),
+
+    (24, '/img/departments/albums/24_albums_1701169494489.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169501010.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169504064.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169507099.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169510204.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169513170.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169516206.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169518945.jpg'),
+    (24, '/img/departments/albums/24_albums_1701169521971.jpg'),
+
+    (25, '/img/departments/albums/25_albums_1701170650279.jpg'),
+    (25, '/img/departments/albums/25_albums_1701170647617.jpg'),
+    (25, '/img/departments/albums/25_albums_1701170644674.jpg'),
+    (25, '/img/departments/albums/25_albums_1701170641167.jpg'),
+    (25, '/img/departments/albums/25_albums_1701170637603.jpg'),
+    (25, '/img/departments/albums/25_albums_1701170633699.jpg'),
+
+
+    (26, '/img/departments/albums/26_albums_1701171726804.jpg'),
+    (26, '/img/departments/albums/26_albums_1701171723498.jpg'),
+    (26, '/img/departments/albums/26_albums_1701171716017.jpg'),
+    (26, '/img/departments/albums/26_albums_1701171710653.jpg'),
+    (26, '/img/departments/albums/26_albums_1701171706756.jpg'),
+    (26, '/img/departments/albums/26_albums_1701171700502.jpg'),
+
+    (27, '/img/departments/albums/27_albums_1701172060315.jpg'),
+    (27, '/img/departments/albums/27_albums_1701172057568.jpg'),
+    (27, '/img/departments/albums/27_albums_1701172054880.jpg'),
+    (27, '/img/departments/albums/27_albums_1701172051735.jpg'),
+    (27, '/img/departments/albums/27_albums_1701172048731.jpg'),
+    (27, '/img/departments/albums/27_albums_1701172044712.jpg'),
+
+    (28, '/img/departments/albums/28_albums_1701172424191.jpg'),
+    (28, '/img/departments/albums/28_albums_1701172417839.jpg'),
+    (28, '/img/departments/albums/28_albums_1701172412682.jpg'),
+    (28, '/img/departments/albums/28_albums_1701172408573.jpg'),
+    (28, '/img/departments/albums/28_albums_1701172405674.jpg'),
+    (28, '/img/departments/albums/28_albums_1701172402608.jpg'),
+
+    (29, '/img/departments/albums/29_albums_1701174789330.jpg'),
+    (29, '/img/departments/albums/29_albums_1701174786626.jpg'),
+    (29, '/img/departments/albums/29_albums_1701174782090.jpg'),
+    (29, '/img/departments/albums/29_albums_1701174774025.jpg'),
+    (29, '/img/departments/albums/29_albums_1701174771092.jpg'),
+    (29, '/img/departments/albums/29_albums_1701174768468.jpg'),
+
+    (30, '/img/departments/albums/30_albums_1701175364484.jpg'),
+    (30, '/img/departments/albums/30_albums_1701175361528.jpg'),
+    (30, '/img/departments/albums/30_albums_1701175358712.jpg'),
+    (30, '/img/departments/albums/30_albums_1701175353372.jpg'),
+    (30, '/img/departments/albums/30_albums_1701175349816.jpg'),
+    (30, '/img/departments/albums/30_albums_1701175345989.jpg'),
+
+    (31, '/img/departments/albums/31_albums_1701175671931.jpg'),
+    (31, '/img/departments/albums/31_albums_1701175668379.jpg'),
+    (31, '/img/departments/albums/31_albums_1701175665263.jpg'),
+    (31, '/img/departments/albums/31_albums_1701175662389.jpg'),
+    (31, '/img/departments/albums/31_albums_1701175658965.jpg'),
+    (31, '/img/departments/albums/31_albums_1701175655143.jpg'),
+
+    (32, '/img/departments/albums/32_albums_1701176057568.jpg'),
+    (32, '/img/departments/albums/32_albums_1701176047898.jpg'),
+    (32, '/img/departments/albums/32_albums_1701176044884.jpg'),
+    (32, '/img/departments/albums/32_albums_1701176039147.jpg'),
+    (32, '/img/departments/albums/32_albums_1701176035493.jpg'),
+    (32, '/img/departments/albums/32_albums_1701176032130.jpg'),
+
+    (33, '/img/departments/albums/33_albums_1701176629133.jpg'),
+    (33, '/img/departments/albums/33_albums_1701176626172.jpg'),
+    (33, '/img/departments/albums/33_albums_1701176621489.jpg'),
+    (33, '/img/departments/albums/33_albums_1701176617834.jpg'),
+    (33, '/img/departments/albums/33_albums_1701176615418.jpg'),
+    (33, '/img/departments/albums/33_albums_1701176612718.jpg'),
+
+
+    (34, '/img/departments/albums/34_albums_1701176964185.jpg'),
+    (34, '/img/departments/albums/34_albums_1701176960198.jpg'),
+    (34, '/img/departments/albums/34_albums_1701176955994.jpg'),
+    (34, '/img/departments/albums/34_albums_1701176953172.jpg'),
+    (34, '/img/departments/albums/34_albums_1701176949398.jpg'),
+    (34, '/img/departments/albums/34_albums_1701176945483.jpg'),
+
+    (35, '/img/departments/albums/35_albums_1701177372839.jpg'),
+    (35, '/img/departments/albums/35_albums_1701177369109.jpg'),
+    (35, '/img/departments/albums/35_albums_1701177365973.jpg'),
+    (35, '/img/departments/albums/35_albums_1701177362976.jpg'),
+    (35, '/img/departments/albums/35_albums_1701177360184.jpg'),
+    (35, '/img/departments/albums/35_albums_1701177355412.jpg'),
+
+    (36, '/img/departments/albums/36_albums_1701177804778.jpg'),
+    (36, '/img/departments/albums/36_albums_1701177794458.jpg'),
+    (36, '/img/departments/albums/36_albums_1701177791945.jpg'),
+    (36, '/img/departments/albums/36_albums_1701177788876.jpg'),
+    (36, '/img/departments/albums/36_albums_1701177785604.jpg'),
+    (36, '/img/departments/albums/36_albums_1701177779930.jpg');
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
 VALUES
     /******************************************** Kickfit Sport Amenities ***************************************************/
-    (101, 1, 'https://bom.so/FZ3XO5', 'Hệ thống cơ sở rộng lớn',
+    (101, 1, '/img/brandAmenities/1701144638809_brandAmenities.jpg', 'Hệ thống cơ sở rộng lớn',
      'Hệ thống cơ sở của chúng tôi là một mạng lưới các trung tâm thể dục hiện đại và chuyên nghiệp, cung cấp dịch vụ tốt nhất để giúp bạn đạt được mục tiêu về sức khỏe và thể lực.',
      1),
-    (102, 1, 'https://bom.so/0fv3by', 'Chăm sóc khách hàng tận tâm',
+    (102, 1, '/img/brandAmenities/1701144643900_brandAmenities.jpg', 'Chăm sóc khách hàng tận tâm',
      'Với một cam kết không ngừng nỗ lực, Kickfit tạo ra một môi trường chuyên nghiệp, thân thiện và đồng điệu, nơi mỗi khách hàng được coi là cá nhân độc lập với nhu cầu và mong muốn riêng.',
      1),
-    (103, 1, 'https://bom.so/eXr75Q', 'Khóa học đa dạng',
+    (103, 1, '/img/brandAmenities/1701144650150_brandAmenities.jpg', 'Khóa học đa dạng',
      'Với các khóa học từ cấp độ beginner đến advanced, chúng tôi tự tin cung cấp cho bạn những trải nghiệm tập luyện độc đáo và hiệu quả.',
      1),
-    (104, 1, 'https://bom.so/NnIaoB', 'ĐỘI NGŨ HUẤN LUYỆN VIÊN',
+    (104, 1, '/img/brandAmenities/1701144654474_brandAmenities.jpg', 'ĐỘI NGŨ HUẤN LUYỆN VIÊN',
      'Đội ngũ huấn luyện viên của Kickfit Sports được sàng lọc kĩ càng, phải trải qua giai đoạn trainning ít nhất 3 tháng để có đủ kĩ năng giao tiếp và kiến thức chuyên môn hướng dẫn cho khách hàng',
      1),
 
     /********************************************** 25 FIT Amenities *************************************************/
-    (105, 2, 'https://bom.so/zUwK5C', 'Công nghê EMS Training',
+    (105, 2, '/img/brandAmenities/1701145220842_brandAmenities.jpg', 'Công nghê EMS Training',
      'EMS Training là phương pháp tập luyện sử dụng xung điện kích thích cơ bắp với hiệu quả cao, tiết kiệm thời gian và tăng cường sức mạnh cơ bắp.',
      1),
-    (106, 2, 'https://bom.so/zgjE5G', 'Cơ sở vật chất hiện đại',
+    (106, 2, '/img/brandAmenities/1701145226661_brandAmenities.jpg', 'Cơ sở vật chất hiện đại',
      'Chương trình tập luyện cá nhân được thiết kế dựa trên nhu cầu và mục tiêu riêng của từng khách hàng. Huấn luyện viên chuyên nghiệp sẽ làm việc một cách tận tâm với bạn, giúp bạn tập trung vào mục tiêu tập luyện và đạt được kết quả tốt nhất.',
      1),
-    (107, 2, 'https://bom.so/ndsemq', 'Hướng dẫn từ chuyên gia',
+    (107, 2, '/img/brandAmenities/1701145231830_brandAmenities.jpg', 'Hướng dẫn từ chuyên gia',
      'Phòng tập 25 Fit được thiết kế với sự chú trọng đến không gian sử dụng hiệu quả và tiện ích. Các khu vực tập luyện được bố trí hợp lý, tạo cảm giác rộng rãi và thoải mái cho các thành viên.',
      1),
-    (108, 2, 'https://bom.so/UaoDeA', 'Phương pháp cá nhân hóa',
+    (108, 2, '/img/brandAmenities/1701145238537_brandAmenities.jpg', 'Phương pháp cá nhân hóa',
      'Phòng tập 25 Fit cung cấp hướng dẫn và hỗ trợ từ chuyên gia để đảm bảo rằng thành viên nhận được sự chỉ dẫn chuyên nghiệp và hỗ trợ trong quá trình tập luyện.',
      1),
 
     /****************************************** S'Life Amenities *****************************************************/
-    (109, 3, 'https://bom.so/QlqoEO', 'Không gian xanh rộng 4.000m2',
+    (109, 3, '/img/brandAmenities/1701159952911_brandAmenities.jpg', 'Không gian xanh rộng 4.000m2',
      'Hệ thống lọc khí ion cùng trang thiết bị cao cấp nhập khẩu trực tiếp từ Mỹ, đem đến môi trường tập luyện tốt nhất',
      1),
-    (110, 3, 'https://bom.so/I9e2Am', 'Dịch Vụ Đẳng Cấp',
+    (110, 3, '/img/brandAmenities/1701159958271_brandAmenities.jpg', 'Dịch Vụ Đẳng Cấp',
      'Miễn phí xông hơi, phòng tắm, nước uống detox, khăn thêu tên cá nhân, phục vụ tốt nhất quá trình luyện tập của hội viên',
      1),
-    (111, 3, 'https://bom.so/RARYPt', 'Cam kết hiệu quả tập luyện',
+    (111, 3, '/img/brandAmenities/1701159962607_brandAmenities.jpg', 'Cam kết hiệu quả tập luyện',
      '100% hội viên đã đạt được kết quả tập luyện khi thực hiện đúng chương trình Cá Nhân Hóa của S''LIFE',
      1),
-    (112, 3, 'https://bom.so/9ofjlh', 'Huấn luyện viên chuẩn quốc tế',
+    (112, 3, '/img/brandAmenities/1701159967093_brandAmenities.jpg', 'Huấn luyện viên chuẩn quốc tế',
      'Chứng chỉ NASM Hoa Kỳ, 5 năm kinh nghiệm, động viên, theo sát quá trình luyện tập, đem lại vóc dáng cân đối cho hàng ngàn hội viên',
      1),
 
     /**************************************** Diamond Fitness Amenities *******************************************************/
-    (113, 4, 'https://bom.so/9vIWSg', 'Hệ thống CLB 5 sao',
+    (113, 4, '/img/brandAmenities/1701160439151_brandAmenities.jpg', 'Hệ thống CLB 5 sao',
      'Diamond Fitness là một phòng tập thể hình thuộc hệ thống CLB 5 sao cao cấp. Với môi trường sang trọng và tiện nghi, chúng tôi cam kết mang đến cho bạn trải nghiệm tập luyện đẳng cấp và đáng nhớ.',
      1),
-    (114, 4, 'https://bom.so/FFazQ1', 'Dịch vụ tập luyện đa dạng',
+    (114, 4, '/img/brandAmenities/1701160444909_brandAmenities.jpg', 'Dịch vụ tập luyện đa dạng',
      'Chúng tôi cung cấp một loạt dịch vụ tập luyện đa dạng nhằm đáp ứng nhu cầu và mục tiêu của khách hàng, mang lại nhiều trải nghiệm tập luyện khác nhau và mới lạ',
      1),
-    (115, 4, 'https://bom.so/yZ81es', 'Điểm đến của người nổi tiếng',
+    (115, 4, '/img/brandAmenities/1701160449773_brandAmenities.jpg', 'Điểm đến của người nổi tiếng',
      'Tự hào là cơ sở được hàng ngàn hội viên cũng như những nhân vật nổi tiếng như Angela Phương Trinh, Lương Thế Thành, .. tin dùng và lựa chọn',
      1),
-    (116, 4, 'https://bom.so/fDf1YR', 'Đội ngũ HLV giàu kinh nghiệm',
+    (116, 4, '/img/brandAmenities/1701160454425_brandAmenities.jpg', 'Đội ngũ HLV giàu kinh nghiệm',
      'Đội ngũ huấn luyện viên chuyên nghiệp và giàu kinh nghiệm của chúng tôi sẽ đồng hành cùng bạn trong hành trình tập luyện. Họ sẽ cung cấp hướng dẫn chuyên môn, tư vấn dinh dưỡng và lập kế hoạch tập luyện cá nhân hóa dựa trên mục tiêu và nhu cầu của bạn.',
      1);
 
@@ -3175,49 +3369,6 @@ VALUES
     (4, 111, 36, 4, 'Phòng tập thể dục rộng rãi và thoải mái, dịch vụ ổn', NOW(), 1),
     (5, 112, 36, 3, 'Phòng tập thể dục sạch sẽ và thoải mái, tuy nhiên dịch vụ chưa tương xứng', NOW(), 1),
     (1, 113, 36, 3, 'Phòng tập rộng rãi nhưng cần cải thiện về sự sạch sẽ và quản lý', NOW(), 1);
-
-INSERT INTO gym_department_albums (gym_department_id, photo_url, description)
-VALUES
-    /******************************************** Kickfit Sport Departments Plans ***************************************************/
-    (21, 'https://t.ly/f0WD0', 'Cơ sở vật chất'),
-    (21, 'https://t.ly/s3Ord', 'Cơ sở vật chất'),
-    (21, 'https://t.ly/PlwJn', 'Cơ sở vật chất'),
-    (21, 'https://t.ly/W13Hn', 'Kết quả của khách hàng'),
-    (21, 'https://t.ly/lCtuJ', 'Tập luyện yoga ở Kickfit'),
-    (21, 'https://shorturl.at/fruQ9', 'Cơ sở vật chất'),
-    (21, 'https://shorturl.at/cmrF4', 'Cơ sở vật chất'),
-    (21, 'https://shorturl.at/qFIW8', 'Cơ sở vật chất'),
-    (21, 'https://shorturl.at/apJ49', 'Kết quả của khách hàng'),
-
-    (22, 'https://t.ly/f0WD0', 'Cơ sở vật chất'),
-    (22, 'https://t.ly/s3Ord', 'Cơ sở vật chất'),
-    (22, 'https://t.ly/PlwJn', 'Cơ sở vật chất'),
-    (22, 'https://t.ly/W13Hn', 'Kết quả của khách hàng'),
-    (22, 'https://t.ly/lCtuJ', 'Tập luyện yoga ở Kickfit'),
-    (22, 'https://shorturl.at/fruQ9', 'Cơ sở vật chất'),
-    (22, 'https://shorturl.at/cmrF4', 'Cơ sở vật chất'),
-    (22, 'https://shorturl.at/qFIW8', 'Cơ sở vật chất'),
-    (22, 'https://shorturl.at/apJ49', 'Kết quả của khách hàng'),
-
-    (23, 'https://t.ly/f0WD0', 'Cơ sở vật chất'),
-    (23, 'https://t.ly/s3Ord', 'Cơ sở vật chất'),
-    (23, 'https://t.ly/PlwJn', 'Cơ sở vật chất'),
-    (23, 'https://t.ly/W13Hn', 'Kết quả của khách hàng'),
-    (23, 'https://t.ly/lCtuJ', 'Tập luyện yoga ở Kickfit'),
-    (23, 'https://shorturl.at/fruQ9', 'Cơ sở vật chất'),
-    (23, 'https://shorturl.at/cmrF4', 'Cơ sở vật chất'),
-    (23, 'https://shorturl.at/qFIW8', 'Cơ sở vật chất'),
-    (23, 'https://shorturl.at/apJ49', 'Kết quả của khách hàng'),
-
-    (24, 'https://t.ly/f0WD0', 'Cơ sở vật chất'),
-    (24, 'https://t.ly/s3Ord', 'Cơ sở vật chất'),
-    (24, 'https://t.ly/PlwJn', 'Cơ sở vật chất'),
-    (24, 'https://t.ly/W13Hn', 'Kết quả của khách hàng'),
-    (24, 'https://t.ly/lCtuJ', 'Tập luyện yoga ở Kickfit'),
-    (24, 'https://shorturl.at/fruQ9', 'Cơ sở vật chất'),
-    (24, 'https://shorturl.at/cmrF4', 'Cơ sở vật chất'),
-    (24, 'https://shorturl.at/qFIW8', 'Cơ sở vật chất'),
-    (24, 'https://shorturl.at/apJ49', 'Kết quả của khách hàng');
 
 INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
 VALUES (1, 21, 1),
