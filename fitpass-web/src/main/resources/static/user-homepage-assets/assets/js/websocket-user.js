@@ -26,12 +26,12 @@ function connect() {
             showNotificationMessage(message);
         });
 
-        stompClient.subscribe('/all/global-notifications', function (message) {
+        stompClient.subscribe('/all/global-notifications', function () {
             notificationCount = notificationCount + 1;
             updateNotificationDisplay();
         });
 
-        stompClient.subscribe('/user/specific/private-notifications', function (message) {
+        stompClient.subscribe('/user/specific/private-notifications', function () {
             notificationCount = notificationCount + 1;
             updateNotificationDisplay();
         });
@@ -104,9 +104,6 @@ function updateNotificationDropdown(unseenNotifications) {
     // Assuming 'notification-badge' is the element displaying the notification count
     const notificationBadge = document.getElementById('notification-badge');
 
-    // Assuming 'notification-btn' is the dropdown trigger
-    const notificationBtn = document.getElementById('notification-btn');
-
     // Assuming 'notification-dropdown' is the container for notification items
     const notificationDropdown = document.getElementById('notification-dropdown');
 
@@ -149,8 +146,7 @@ function insertCheckInNotificationDiv(notification) {
     const notiDiv = $("<div>").addClass("noti-card col-12 mb-4 unseen-notification").attr("data-notification-id", notification.notificationId);
 
     // Add the image to the notification div
-    notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"' +
-        'alt="Gym Logo">');
+    notiDiv.append('alt="Gym Logo">' + '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"');
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -158,7 +154,7 @@ function insertCheckInNotificationDiv(notification) {
     // Create and append the first part of the content (icon, location, message type)
     notiContentDiv.append(
         '<div>' +
-        '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png"></span>' +
+        '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png" alt="Bell icon"></span>' +
         '<span class="fw-bold">' + notification.departmentId + ' -</span>' +
         '<span>' + notification.messageType + '</span>' +
         '</div>'
@@ -221,7 +217,7 @@ function handleCheckInNotificationClick(notification) {
                 di: notification.departmentId,
                 cancel: "no"
             },
-            success: function (data) {
+            success: function () {
                 console.log("Đã gửi thông báo check in thành công đến nhân viên");
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).
                 removeClass("unseen-notification").addClass("seen-notification");
@@ -245,7 +241,7 @@ function handleCheckInNotificationClick(notification) {
                 di: notification.departmentId,
                 cancel: "yes"
             },
-            success: function (data) {
+            success: function () {
                 console.log("Đã gửi thông báo hủy xác nhận check in thành công")
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).
                 removeClass("unseen-notification").addClass("seen-notification");
@@ -271,8 +267,7 @@ function insertCheckOutNotificationDiv(notification) {
     const notiDiv = $("<div>").addClass("noti-card col-12 mb-4 unseen-notification").attr("data-notification-id", notification.notificationId);
 
     // Add the image to the notification div
-    notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"' +
-        'alt="Gym Logo">');
+    notiDiv.append('alt="Gym Logo">' + '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"');
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -280,7 +275,7 @@ function insertCheckOutNotificationDiv(notification) {
     // Create and append the first part of the content (icon, location, message type)
     notiContentDiv.append(
         '<div>' +
-        '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png"></span>' +
+        '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png" alt="Bell icon"></span>' +
         '<span class="fw-bold">' + notification.departmentId + ' -</span>' +
         '<span>' + notification.messageType + '</span>' +
         '</div>'
