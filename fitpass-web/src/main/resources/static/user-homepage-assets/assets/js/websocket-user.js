@@ -1,12 +1,9 @@
 let stompClient = null;
 let notificationCount = 0;
+
+// ******************** Create WS client ************************ //
 $(document).ready(function () {
     connect();
-
-    $(".notification-badge").click(function () {
-        notificationCount = 0;
-        updateNotificationDisplay();
-    });
 });
 
 function updateNotificationDisplay() {
@@ -20,10 +17,10 @@ function connect() {
     stompClient.connect({}, function (frame) {
         console.log("Connected to " + frame);
         stompClient.subscribe('/all/messages', function (message) {
-            showNotificationMessage(message);
+            insertWebSocketNotification(message);
         });
         stompClient.subscribe('/user/specific/private-messages', function (message) {
-            showNotificationMessage(message);
+            insertWebSocketNotification(message);
         });
 
         stompClient.subscribe('/all/global-notifications', function () {
@@ -38,24 +35,35 @@ function connect() {
     });
 }
 
-function showNotificationMessage(message) {
+function insertWebSocketNotification(message) {
     console.log("Received message:", message);
-    let notification = JSON.parse(message.body);
+
+    let notification;
+
     try {
+        // Check if the message is already a JavaScript object
+        if (typeof message === 'object') {
+            notification = message; // Assuming the message is already a JavaScript object
+        } else {
+            // Parse the message as JSON
+            notification = JSON.parse(message.body);
+        }
+
         if (notification.messageType != null) {
             switch (notification.messageType) {
+                // type prepend = insert to the top (for ws new notification)
                 case "Xác nhận check in":
-                    insertCheckInNotificationDiv(notification);
+                    insertCheckInNotificationDiv(notification, "prepend");
                     break;
                 case "Xác nhận check out":
-                    insertCheckOutNotificationDiv(notification);
+                    insertCheckOutNotificationDiv(notification, "prepend");
                     break;
                 default:
-                    console.log("Unknown message type")
+                    console.log("Unknown message type");
                     break;
             }
         } else {
-            console.log("Null message type")
+            console.log("Null message type");
         }
     } catch (error) {
         console.error("Error parsing JSON:", error);
@@ -77,11 +85,12 @@ function sendSeenNotification(id) {
     });
 }
 
-// ********************Load newest notification for navbar bell ************************ //
+// ******************** Load newest notification for navbar bell ************************ //
 document.addEventListener('DOMContentLoaded', function () {
     // Lấy ra các notification unseen id = 0
     getNewestUnseenNotifications();
 });
+
 function getNewestUnseenNotifications() {
     // Make an AJAX request to the backend endpoint
     fetch('/notification/user/newest-unseen')
@@ -140,13 +149,92 @@ function updateNotificationDropdown(unseenNotifications) {
     });
 }
 
-// ********************Function to handle check in notification ************************ //
-function insertCheckInNotificationDiv(notification) {
+// ******************** Load List of notifications for Notification Page ************************ //
+if (window.location.pathname === '/profile/my-notifications') {
+    fetch('/notification/user/all?page=1&size=4')
+        .then(response => response.json())
+        .then(data => {
+            renderPaginationLinks(data.totalPages); // Render pagination links
+            getAllNotification(1,4)
+        })
+        .catch(error => {
+            console.error('Error fetching notifications:', error);
+        });
+}
+// Function to render pagination links
+function renderPaginationLinks(currentPage, totalPages) {
+    const paginationContainer = document.getElementById('paginationNotification');
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageLink = document.createElement('a');
+        pageLink.href = '#';
+        pageLink.textContent = i;
+
+        // Add the 'active' class if the current page matches the loop variable
+        if (i === currentPage) {
+            pageLink.classList.add('active');
+        }
+
+        pageLink.addEventListener('click', () => paginationClick(i));
+        paginationContainer.appendChild(pageLink);
+    }
+}
+
+// Function to handle pagination clicks
+function paginationClick(page) {
+    getAllNotification(page, 4);
+}
+function getAllNotification(page, size) {
+    fetch(`/notification/user/all?page=${page}&size=${size}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data  => {
+            const notifications = data.notifications; // Assuming the notifications are in the 'notifications' field
+            const totalPages = data.totalPages;
+            renderPaginationLinks(page, totalPages); // Pass current page and total pages to the render function
+            renderPage(notifications);
+        })
+        .catch(error => {
+            console.error('Error fetching notifications:', error);
+        });
+}
+function renderPage(notifications) {
+    $(".my-notifications").html('');
+    notifications.forEach(notification => {
+            if (notification.messageType != null) {
+                switch (notification.messageType) {
+                    // append = from top to bottom, for showing a list
+                    case "Xác nhận check in":
+                        insertCheckInNotificationDiv(notification, "append");
+                        break;
+                    case "Xác nhận check out":
+                        insertCheckOutNotificationDiv(notification, "append");
+                        break;
+                    default:
+                        console.log("Unknown message type");
+                        break;
+                }
+            } else {
+                console.log("Null message type");
+            }
+    })
+}
+
+// ******************** Function to handle check in notification ************************ //
+function insertCheckInNotificationDiv(notification, order) {
     // Create a new notification div with data-notification-id attribute
-    const notiDiv = $("<div>").addClass("noti-card col-12 mb-4 unseen-notification").attr("data-notification-id", notification.notificationId);
+    const notiDiv = $("<div>")
+        .addClass(`noti-card col-12 mb-4 ${notification.status === 0 ? 'unseen-notification' : 'seen-notification'}`)
+        .attr("data-notification-id", notification.notificationId);
 
     // Add the image to the notification div
-    notiDiv.append('alt="Gym Logo">' + '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"');
+    notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"'
+    +'alt="Gym Logo">');
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -164,13 +252,18 @@ function insertCheckInNotificationDiv(notification) {
     notiContentDiv.append('<div class="noti-description">' + notification.message + '</div>');
 
     // Add the time to the noti-content div
-    notiContentDiv.append('<div class="noti-time">' + notification.timeSend + '</div>');
+    notiContentDiv.append('<div class="noti-time">' + new Date(notification.timeSend).toLocaleString() + '</div>');
 
-    // Append the noti-content div to the notification div
     notiDiv.append(notiContentDiv);
 
-    // Append the notification div to the messages container
-    $(".my-notifications").prepend(notiDiv);
+    // Depending on the order parameter, append or prepend notiContentDiv
+    if (order === "append") {
+        $(".my-notifications").append(notiDiv);
+    } else if (order === "prepend") {
+        $(".my-notifications").prepend(notiDiv);
+    } else {
+        throw new Error("Invalid order parameter. Use 'append' or 'prepend'.");
+    }
 
     // Add a click event listener to the notification div
     notiDiv.click(function () {
@@ -219,8 +312,7 @@ function handleCheckInNotificationClick(notification) {
             },
             success: function () {
                 console.log("Đã gửi thông báo check in thành công đến nhân viên");
-                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).
-                removeClass("unseen-notification").addClass("seen-notification");
+                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).removeClass("unseen-notification").addClass("seen-notification");
             },
             error: function () {
                 alert("Đã xảy ra lỗi gửi check in thành công");
@@ -243,8 +335,7 @@ function handleCheckInNotificationClick(notification) {
             },
             success: function () {
                 console.log("Đã gửi thông báo hủy xác nhận check in thành công")
-                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).
-                removeClass("unseen-notification").addClass("seen-notification");
+                $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).removeClass("unseen-notification").addClass("seen-notification");
             },
             error: function () {
                 alert("Đã xảy ra lỗi khi gửi yêu cầu hủy check in");
@@ -253,21 +344,21 @@ function handleCheckInNotificationClick(notification) {
     }
 }
 
-// ********************Function to handle check out notification ************************ //
-function insertCheckOutNotificationDiv(notification) {
+// ******************** Function to handle check out notification ************************ //
+function insertCheckOutNotificationDiv(notification, order) {
     // Parse the JSON strings from 2 object in message field
     let [orderDetailConfirmCheckOutJson, dataSendCheckOutFlexibleJson] = notification.message.split('|');
     let orderDetailConfirmCheckOut = JSON.parse(orderDetailConfirmCheckOutJson);
     let dataSendCheckOutFlexible = JSON.parse(dataSendCheckOutFlexibleJson);
 
-    console.log(orderDetailConfirmCheckOut);
-    console.log(dataSendCheckOutFlexible);
-
     // Create a new notification div with data-notification-id attribute
-    const notiDiv = $("<div>").addClass("noti-card col-12 mb-4 unseen-notification").attr("data-notification-id", notification.notificationId);
+    const notiDiv = $("<div>")
+        .addClass(`noti-card col-12 mb-4 ${notification.status === 0 ? 'unseen-notification' : 'seen-notification'}`)
+        .attr("data-notification-id", notification.notificationId);
 
     // Add the image to the notification div
-    notiDiv.append('alt="Gym Logo">' + '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"');
+    notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"'
+    + 'alt="Gym Logo">');
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -285,13 +376,20 @@ function insertCheckOutNotificationDiv(notification) {
     notiContentDiv.append('<div class="noti-description">' + dataSendCheckOutFlexible.employeeMessage + '</div>');
 
     // Add the time to the noti-content div
-    notiContentDiv.append('<div class="noti-time">' + notification.timeSend + '</div>');
+    notiContentDiv.append('<div class="noti-time">' + new Date(notification.timeSend).toLocaleString() + '</div>');
 
-    // Append the noti-content div to the notification div
     notiDiv.append(notiContentDiv);
 
-    // Append the notification div to the messages container
-    $(".my-notifications").prepend(notiDiv);
+    // Depending on the order parameter, append or prepend notiContentDiv
+    if (order === "append") {
+        console.log("Append chose")
+        $(".my-notifications").append(notiDiv);
+    } else if (order === "prepend") {
+        console.log("Prepend chose")
+        $(".my-notifications").prepend(notiDiv);
+    } else {
+        throw new Error("Invalid order parameter. Use 'append' or 'prepend'.");
+    }
 
     // Add a click event listener to the notification div
     notiDiv.click(function () {
@@ -303,11 +401,10 @@ function handleCheckOutNotificationClick(notification) {
     // Check if the notification is already seen
     const isSeen = $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).hasClass("seen-notification");
 
-    if(!isSeen){
+    if (!isSeen) {
         let [orderDetailConfirmCheckOutJson, dataSendCheckOutFlexibleJson] = notification.message.split('|');
         let orderDetailConfirmCheckOut = JSON.parse(orderDetailConfirmCheckOutJson);
-        let dataSendCheck
-        OutFlexible = JSON.parse(dataSendCheckOutFlexibleJson);
+        let dataSendCheckOutFlexible = JSON.parse(dataSendCheckOutFlexibleJson);
 
         if (orderDetailConfirmCheckOut.durationHavePractice > 0) {
             if (orderDetailConfirmCheckOut.creditAfterPay < 0) {
@@ -355,14 +452,14 @@ function handleCheckOutNotificationClick(notification) {
                 });
             }
         }
-    } else{
+    } else {
         // The notification is already seen, handle accordingly or do nothing
         console.log("Notification is already seen. No action taken.");
     }
 
 
     // Function to handle check-in confirmation when user clicks "Yes" in Swal dialog
-    function handleCheckOutConfirmation(notification){
+    function handleCheckOutConfirmation(notification) {
         sendSeenNotification(notification.notificationId);
         let [orderDetailConfirmCheckOutJson, dataSendCheckOutFlexibleJson] = notification.message.split('|');
         let orderDetailConfirmCheckOut = JSON.parse(orderDetailConfirmCheckOutJson);
@@ -374,7 +471,7 @@ function handleCheckOutNotificationClick(notification) {
             checkOutTime: orderDetailConfirmCheckOut.checkOutTime,
             totalCredit: orderDetailConfirmCheckOut.creditNeedToPay,
             creditAfterPay: orderDetailConfirmCheckOut.creditAfterPay,
-            notification : {
+            notification: {
                 orderDetailId: notification.orderDetailId,
                 userIdSend: notification.userIdReceive, //id của người dùng để xác nhận check in vào db
                 userIdReceive: notification.userIdSend, //id của người nhận (là nhân viên gửi vừa nãy)
@@ -413,7 +510,7 @@ function handleCheckOutNotificationClick(notification) {
             checkOutTime: orderDetailConfirmCheckOut.checkOutTime,
             totalCredit: orderDetailConfirmCheckOut.creditNeedToPay,
             creditAfterPay: orderDetailConfirmCheckOut.creditAfterPay,
-            notification : {
+            notification: {
                 orderDetailId: notification.orderDetailId,
                 userIdSend: notification.userIdReceive, //id của người dùng để xác nhận check in vào db
                 userIdReceive: notification.userIdSend, //id của người nhận (là nhân viên gửi vừa nãy)

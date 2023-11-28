@@ -2793,7 +2793,7 @@ a:link {
 
 .pagination-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 15px;
 }
 
@@ -2816,7 +2816,7 @@ a:link {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: auto;
-  width: 200px;
+  width: auto;
 }
 
 #notification-list .pagination a {
