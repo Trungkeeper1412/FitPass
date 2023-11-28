@@ -341,8 +341,6 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
             notificationService.insertNotification(successNotification);
             webSocketService.notifyEmployee(successNotification.getUserIdReceive(), successNotification);
 
-
-
             // Trừ credit của người dùng
             walletService.updateBalanceByUderId(user.getUserId(), updateCheckInHistory.getCreditAfterPay());
             double credit = walletService.getBalanceByUserId(user.getUserId());
