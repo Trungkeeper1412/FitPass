@@ -16,7 +16,7 @@
                 <li><a class="nav-link scrollto" th:href="@{/}">Giới thiệu</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/calendar/view}">Lịch tập</a></li>
                 <li>
-                    <a href="#credit">
+                    <a th:href="@{/profile/deposit}">
                         <span class="text-money" th:text="${session.userCredit}"></span>&nbsp<span class="credit">Credit</span>
                     </a>
                 </li>
@@ -27,32 +27,14 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="nav-link" href="#notification" id="notification-btn">
+                    <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
                         <span class="notification-badge" id="notification-badge">0</span>
                         <i class="bi bi-bell fs-4 dropbtn"></i>
                     </a>
-                    <ul>
+                    <ul id="notification-dropdown">
                         <li>
                             <a href="#" class="noti">
-                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
-                                <div>
-                                    <div class="noti-time">11/12/2023</div>
-                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="noti">
-                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
-                                <div>
-                                    <div class="noti-time">11/12/2023</div>
-                                    <div class="noti-title">Thông báo bảo trì hệ thống</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="noti">
-                                <img src="https://cdn-icons-png.flaticon.com/128/9109/9109810.png">
+                                <img th:src="@{/user-homepage-assets/assets/img/new-message.png}" alt="Alert">
                                 <div>
                                     <div class="noti-time">11/12/2023</div>
                                     <div class="noti-title">Thông báo bảo trì hệ thống</div>
