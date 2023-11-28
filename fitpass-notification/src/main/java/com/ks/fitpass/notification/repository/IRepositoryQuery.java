@@ -32,4 +32,10 @@ public interface IRepositoryQuery {
                 AND DATE(time_send) = CURDATE();
             ORDER BY time_send DESC
             """;
+    String GET_NUM_OF_UNSEEN_NOTIFICATION_BY_USER_RECEIVE_ID = """
+                SELECT COUNT(*) AS num_unseen_notifications
+                FROM notification
+                WHERE user_id_receive = ?
+                AND status = 0;
+            """;
 }
