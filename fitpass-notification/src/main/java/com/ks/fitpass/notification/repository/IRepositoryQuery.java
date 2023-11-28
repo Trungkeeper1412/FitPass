@@ -2,8 +2,8 @@ package com.ks.fitpass.notification.repository;
 
 public interface IRepositoryQuery {
     String INSERT_NOTIFICATION = """
-            INSERT INTO notification (user_id_send, user_id_receive, message, time_send, department_id, message_type, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO notification (user_id_send, user_id_receive, message, time_send, department_id, order_detail_id, message_type, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
                 """;
 
     String UPDATE_STATUS_NOTIFICATION_BY_ID = """
@@ -12,14 +12,14 @@ public interface IRepositoryQuery {
                 WHERE notification_id = ?;
             """;
     String GET_ALL_NOTIFICATION_FOR_USER = """
-            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, message_type, status
+            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, order_detail_id, message_type, status
             FROM notification
             WHERE user_id_receive = ?
             ORDER BY status, time_send DESC
             LIMIT ? OFFSET ?
             """;
     String GET_ALL_3_NEWEST_UNSEEN_NOTIFICATION_FOR_USER = """
-            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, message_type, status
+            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, order_detail_id, message_type, status
                 FROM notification
             WHERE user_id_receive = ?
                 AND status = 0
@@ -27,7 +27,7 @@ public interface IRepositoryQuery {
             LIMIT 3;
             """;
     String GET_ALL_NOTIFICATION_FOR_EMPLOYEE = """
-            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, message_type, status
+            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, order_detail_id, message_type, status
                 FROM notification
             WHERE user_id_receive = ?
                 AND DATE(time_send) = CURDATE()
