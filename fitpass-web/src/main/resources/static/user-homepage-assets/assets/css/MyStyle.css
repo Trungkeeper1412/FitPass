@@ -1960,7 +1960,6 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .gradient .card button{
-  background-color: none;
   width: fit-content;
   height: 40px;
   padding: 10px
@@ -3775,12 +3774,14 @@ section {
   margin-right: 0;
   margin: auto;
   border: none;
+  background-color: transparent;
 }
 .rightImage{
   margin-left: 10px;
   padding-left: 10px;
   margin: auto;
   border: none;
+  background-color: transparent;
 }
 .image-scroll-wrapper .div{
   /*display:block;*/
@@ -4409,10 +4410,10 @@ section {
   margin: auto;
   display: flex;
   flex-wrap:nowrap;
-  overflow-x: hidden;
+  overflow-x:auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 
@@ -4432,7 +4433,6 @@ section {
   position: absolute;
   left: 0;
   border: none;
-  background-color: snow;
 }
 
 .list-service-wrapper .right {
@@ -4441,7 +4441,6 @@ section {
   position: absolute;
   right: 0;
   border: none;
-  background-color: snow;
 }
 
 .brand-service-img{
