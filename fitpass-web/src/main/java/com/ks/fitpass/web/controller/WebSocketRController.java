@@ -17,6 +17,7 @@ public class WebSocketRController {
     }
     @PostMapping("/send-message")
     public void sendMessage(@RequestBody Notification notification){
+
         webSocketService.notifyFrontend(notification);
     }
 
