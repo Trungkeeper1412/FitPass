@@ -116,33 +116,33 @@
     <!--ĐÁNH GIÁ-->
     <h4 class="row fw-bold mt-5">ĐÁNH GIÁ TỪ NGƯỜI TẬP</h4>
     <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 140px;"></div>
-    <div class="rating-feedback container mx-auto">
+    <div class="rating-feedback mx-auto">
         <div class="rating-option row">
-            <div class="rating-avg">
+            <div class="rating-avg col-md-3">
                 <div style="display: flex; position: relative">
                     <div class="rating-point" th:text="${brand.getRating()}"></div>
                     <div class="rating-max">trên 5</div>
                 </div>
                 <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
             </div>
-            <div class="button-list">
+            <div class="button-list col-md-9">
             <div class="row">
-            <button id="btnSortAllRating" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSortAllRating" type="button" class="btn btn-warning">
                 Tất cả (<span th:text="${feedbackStat.getTotalFeedback()}">24</span>)
             </button>
-            <button id="btnSort5Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort5Rating" type="button" class="btn btn-warning">
                 5 sao (<span th:text="${feedbackStat.getFiveStar()}">5</span>)
             </button>
-            <button id="btnSort4Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort4Rating" type="button" class="btn btn-warning">
                 4 sao (<span th:text="${feedbackStat.getFourStar()}">5</span>)
             </button>
-            <button id="btnSort3Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort3Rating" type="button" class="btn btn-warning">
                 3 sao (<span th:text="${feedbackStat.getThreeStar()}">4</span>)
             </button>
-            <button id="btnSort2Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort2Rating" type="button" class="btn btn-warning">
                 2 sao (<span th:text="${feedbackStat.getTwoStar()}">10</span>)
             </button>
-            <button id="btnSort1Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort1Rating" type="button" class="btn btn-warning">
                 1 sao (<span th:text="${feedbackStat.getOneStar()}">1</span>)
             </button>
             </div>
