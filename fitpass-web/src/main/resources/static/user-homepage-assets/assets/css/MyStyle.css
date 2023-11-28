@@ -2890,8 +2890,29 @@ a:link {
 
 .unseen-notification {
   background-color: #ccf5ff; /* Light blue for more outstanding unseen notifications */
-  border: 1px solid #66b3ff; /* Border color for unseen notifications */
+  border: 1px solid #66b3ff; /* Sky blue border*/
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for emphasis */
+}
+
+.unseen-notification img {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for emphasis */
+}
+
+.unseen-notification .noti-content {
+  font-weight: bold;
+}
+
+.unseen-notification .noti-message-type {
+  font-weight: bold;
+}
+
+.unseen-notification .noti-description {
+  font-weight: bold;
+}
+
+.unseen-notification .noti-time {
+  color: #555; /* Darker color for the time text */
+  margin-top: 5px; /* Add margin to separate time from description */
 }
 
 .seen-notification {
