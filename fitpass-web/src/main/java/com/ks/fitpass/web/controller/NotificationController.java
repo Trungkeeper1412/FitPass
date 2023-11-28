@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.notification.dto.NotificationPage;
 import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.service.NotificationService;
 import jakarta.servlet.http.HttpSession;
@@ -36,10 +37,24 @@ public class NotificationController {
 
     // Endpoint to get all notifications for a user
     @GetMapping("/user/all")
-    public ResponseEntity<List<Notification>> getAllNotificationsForUser(HttpSession session) {
+    public ResponseEntity<NotificationPage> getAllNotificationsForUser(HttpSession session,
+                                                                       @RequestParam(defaultValue = "1") int page,
+                                                                       @RequestParam(defaultValue = "4") int size) {
+
         User user = (User) session.getAttribute("userInfo");
-        List<Notification> notifications = notificationService.getAllNotificationForUser(user.getUserId());
-        return ResponseEntity.ok(notifications);
+        List<Notification> notifications = notificationService.getAllNotificationForUser(user.getUserId(), page, size);
+
+        // Calculate the total number of notifications
+        int totalNotifications = notificationService.getTotalNotificationsForUser(user.getUserId());
+
+        // Calculate the total number of pages based on the total notifications and page size
+        int totalPages = (int) Math.ceil((double) totalNotifications / size);
+        int currentPage = page;
+
+        // Create a NotificationPage object to hold the notifications and pagination details
+        NotificationPage notificationPage = new NotificationPage(notifications, totalPages, currentPage);
+
+        return ResponseEntity.ok(notificationPage);
     }
 
     @GetMapping("/user/newest-unseen")
