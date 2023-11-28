@@ -38,8 +38,9 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 ps.setString(3, notification.getMessage());
                 ps.setTimestamp(4, Timestamp.valueOf(notification.getTimeSend().toLocalDateTime()));
                 ps.setInt(5, notification.getDepartmentId());
-                ps.setString(6, notification.getMessageType());
-                ps.setInt(7, 0);
+                ps.setInt(6, notification.getOrderDetailId());
+                ps.setString(7, notification.getMessageType());
+                ps.setInt(8, 0);
 
                 return ps;
             }, keyHolder);
@@ -77,6 +78,7 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                         notification.setMessage(rs.getString("message"));
                         notification.setTimeSend(rs.getTimestamp("time_send"));
                         notification.setDepartmentId(rs.getInt("department_id"));
+                        notification.setOrderDetailId(rs.getInt("order_detail_id"));
                         notification.setMessageType(rs.getString("message_type"));
                         notification.setStatus(rs.getInt("status"));
                         return notification;
@@ -98,6 +100,7 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 notification.setMessage(rs.getString("message"));
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
+                notification.setOrderDetailId(rs.getInt("order_detail_id"));
                 notification.setMessageType(rs.getString("message_type"));
                 notification.setStatus(rs.getInt("status"));
                 return notification;
@@ -118,6 +121,7 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                 notification.setMessage(rs.getString("message"));
                 notification.setTimeSend(rs.getTimestamp("time_send"));
                 notification.setDepartmentId(rs.getInt("department_id"));
+                notification.setOrderDetailId(rs.getInt("order_detail_id"));
                 notification.setMessageType(rs.getString("message_type"));
                 notification.setStatus(rs.getInt("status"));
                 return notification;
