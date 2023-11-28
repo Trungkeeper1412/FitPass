@@ -4575,6 +4575,10 @@ section {
   .scroll-services .service-name{
     font-size: 15px;
   }
+  .brand-service-img {
+    height: 220px;
+    width: 100%;
+  }
 
 }
 @media screen and (min-width: 1200px) {
