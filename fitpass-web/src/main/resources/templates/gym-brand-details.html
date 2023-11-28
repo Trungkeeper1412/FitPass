@@ -60,15 +60,17 @@
     <!-- DỊCH VỤ -->
     <h4 class="row fw-bold mt-5">Dịch vụ</h4>
     <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 50px;"></div>
-    <div class="list-service-wrapper mt-4">
+    <div class="list-service-wrapper  mt-4">
         <button class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
         </button>
-        <div class="scroll-services row">
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
+        <div class="scroll-services row mt-4">
+            <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3"  th:each="amenitie : ${brandAmenitie}">
+                <div class="child">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.amenitieName}"></div>
                 <div class="service-descript" th:text="${amenitie.description}"></div>
+                </div>
             </div>
         </div>
         <button class="right" onclick="rightScroll()">

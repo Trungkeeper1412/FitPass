@@ -3349,7 +3349,7 @@ input:checked + .toggle-slider:before {
 .gym-first-info{
   top: 50px;
   position: relative;
-  width: 100%;
+  width: 90%;
   height: 200px;
   margin: auto;
   border-radius: 10px;
@@ -4360,7 +4360,7 @@ section {
 
 }
 .gym-brand-content{
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
 .body-gym-brand-details .gym-brand-name{
@@ -4400,6 +4400,7 @@ section {
   color:rgb(0, 0, 0);
   font-weight: bold;
   margin-top: 160px;
+  margin-left: -10px;
 }
 .brand-contact{
   margin-top: 20px;
