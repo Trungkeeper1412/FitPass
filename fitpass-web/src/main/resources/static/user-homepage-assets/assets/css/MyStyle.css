@@ -3617,8 +3617,7 @@ section {
 .scroll-plans .child {
   /* display: flex; */
   border-radius: 10px;
-  height: max-content;
-  min-height: 480px;
+  height: 580px;
   color: #000000;
   background-color: #ffffff;
   /* background-color: #ffffff; */
@@ -3701,6 +3700,7 @@ section {
 }
 .scroll-plans .gym-plan-description{
   min-height: 146px;
+  margin-bottom: 20px;
 }
 .gym-duration{
   /* text-decoration: underline; */
@@ -3713,6 +3713,7 @@ section {
 
 .list-plan-wrapper button {
   background-color: transparent;
+  margin-top: 20px;
   border: none;
   outline: none;
   cursor: pointer;
@@ -4236,6 +4237,12 @@ section {
     background-color: white;
     margin-top: 50px;
   }
+  .scroll-plans  .child{
+    height: 480px;
+  }
+  .scroll-plans .gym-duration{
+    margin-top: -20px;
+  }
 }
 
 .body-checkout h2{
@@ -4600,6 +4607,10 @@ section {
   font-size: xxx-large;
   font-weight: 700;
 }
+/*.special-plan .plan-price{*/
+/*  font-size: xxx-large;*/
+/*  font-weight: 700;*/
+/*}*/
 @media screen and (min-width: 280px) and (max-width: 400px) {
   .list-service-wrapper .left {
     display: none;
@@ -4645,7 +4656,10 @@ section {
     font-size: 12px;
   }
   .scroll-plans  .child{
-    min-height: 400px;
+    height: 420px;
+  }
+  .scroll-plans .gym-plan-description{
+    margin-top: 15px;
   }
   .list-plan-wrapper button {
     font-size: 15px;
