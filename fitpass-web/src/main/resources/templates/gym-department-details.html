@@ -135,26 +135,26 @@
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
         <div class="scroll-plans row">
-            <div class="col-xl-4 col-lg-6 col-md-6" th:each="gymPlan : ${gymPlans}">
+            <div class="col-xl-4 col-lg-6 col-md-8" th:each="gymPlan : ${gymPlans}">
             <div class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
                     <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
                     <div style="" class="gym-plan-price">
-                        <div style="font-size: xxx-large; font-weight: 700">
-                            <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
+                        <div style="display: flex; align-items: center">
+                            <span class="plan-price" th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
                             <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}"></span>
+                            <span style="margin-left: 5px">credits</span>
                         </div>
-                        <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
 
-                    <div style="" class="gym-duration fw-bold " th:if="${gymPlan.duration > 0}">
+                    <div style="margin-top: 10px" class="gym-duration fw-bold" th:if="${gymPlan.duration > 0}">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
                     <div class="fw-bold mt-1" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div class="fw-bold mt-1" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                    <div style="padding-bottom: 15px"  class="fw-bold mt-1 mb-4" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
                         Thêm vào giỏ hàng

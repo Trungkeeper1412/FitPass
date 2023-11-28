@@ -3568,12 +3568,8 @@ section {
 .scroll-plans .child {
   /* display: flex; */
   border-radius: 10px;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /*min-width: 365px;*/
-  height: 480px;
-  /* padding: 0px 15px; */
-  /*margin: 1px 10px;*/
+  height: max-content;
+  min-height: 480px;
   color: #000000;
   background-color: #ffffff;
   /* background-color: #ffffff; */
@@ -3655,7 +3651,7 @@ section {
   width: fit-content;
 }
 .scroll-plans .gym-plan-description{
-  height: 146px;
+  min-height: 146px;
 }
 .gym-duration{
   /* text-decoration: underline; */
@@ -4558,7 +4554,10 @@ section {
 }
 .gym-brand-content .rating-option button{
 }
-
+.scroll-plans .plan-price{
+  font-size: xxx-large;
+  font-weight: 700;
+}
 @media screen and (min-width: 280px) and (max-width: 400px) {
   .list-service-wrapper .left {
     display: none;
@@ -4591,6 +4590,26 @@ section {
     padding-right: 0;
     margin-top: 20px;
     width: 100%;
+  }
+  .list-plan-wrapper .gym-plan-name{
+    font-size: 14px;
+  }
+  .scroll-plans  .plan-description .plan-price{
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .scroll-plans  .plan-description{
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .scroll-plans  .child{
+    min-height: 400px;
+  }
+  .list-plan-wrapper button {
+    font-size: 15px;
+  }
+  .scroll-plans .gym-plan-description{
+    min-height: 80px;
   }
 }
 @media screen and (min-width: 1200px) {
