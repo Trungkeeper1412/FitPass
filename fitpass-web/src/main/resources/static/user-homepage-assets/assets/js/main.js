@@ -6,8 +6,16 @@
  * License: https://bootstrapmade.com/license/
  */
 document.addEventListener('DOMContentLoaded', function () {
-    // Đây là nơi bạn có thể gọi hàm của bạn
-    updateQuantityCart();
+    (async () => {
+        try {
+            updateQuantityCart();
+            notificationCount = await getTotalUnseenNotificationNumber();
+            let notificationNum = document.querySelector(".notification-badge")
+            notificationNum.textContent = notificationCount;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    })();
 });
 
 function updateQuantityCart() {
@@ -31,6 +39,20 @@ function updateQuantityCart() {
         .catch((error) => {
             console.error("Error:", error);
         });
+}
+async function getTotalUnseenNotificationNumber() {
+    try {
+        const response = await fetch(`/notification/user/get-total-unseen`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching total notifications number:', error);
+        throw error;
+    }
 }
 
 (function () {
@@ -458,8 +480,8 @@ $(function () {
 //change avatar
 let user_img = document.getElementById('user-ava');
 let input_img = document.getElementById('exampleFormControlFile1');
-input_img.onchange = (e) =>{
-    if(input_img.files[0])
+input_img.onchange = (e) => {
+    if (input_img.files[0])
         user_img.src = URL.createObjectURL(input_img.files[0]);
 };
 
