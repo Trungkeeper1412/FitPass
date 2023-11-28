@@ -28,7 +28,7 @@
 
 
                 <!--User notifications tab-->
-                <div class="mt-4 mb-4" id="my-notifications">
+                <div class="mt-4 mb-4" id="notification-list">
                     <div class="row my-notifications">
                         <div class="noti-card col-12 mb-4 seen-notification">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtk86cli80AalCTdP_MOrFRItgZ6JQKsaHTQ&usqp=CAU"
@@ -36,7 +36,8 @@
                             <div class="noti-content">
                                 <div>
             <span>
-                <img style="width: 18px; height: 18px;" th:src="@{/user-homepage-assets/assets/img/small-bell.png}" alt="Bell icon">
+                <img style="width: 18px; height: 18px;" th:src="@{/user-homepage-assets/assets/img/small-bell.png}"
+                     alt="Bell icon">
             </span>
                                     <span class="fw-bold">Hòa Lạc Fitness -</span>
                                     <span>Flash sale giá sốc, tức tốc vào ngay !</span>
@@ -50,23 +51,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row pagination">
-                        <div class="col-12">
-                            <nav style="margin-top: -40px; float: right;">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active-page">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                    <div class="row pagination-container">
+                        <div class="pagination mt-3" id="paginationNotification">
+                            <a href="#" class="active">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <!-- Add more links as needed based on the total number of pages -->
                         </div>
                     </div>
                 </div>
