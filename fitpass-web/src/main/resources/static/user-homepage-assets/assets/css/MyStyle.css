@@ -2762,7 +2762,7 @@ a:link {
   /* height: 500px; */
   margin: auto;
   background-color: white;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   border-radius: 10px;
 }
 .noti-card{
@@ -2791,9 +2791,97 @@ a:link {
   font-size: 14px;
   color: #999999;
 }
-.my-notifications .pagination .active-page a{
+
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+#paginationNotification {
+  display: flex;
+  margin-top: 5px; /* Adjust as needed */
+}
+
+#paginationNotification a {
+  margin: 0 5px;
+  /* Your other styles here */
+}
+
+#notification-list .pagination {
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: center;
+  margin-top: -40px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: auto;
+  width: 200px;
+}
+
+#notification-list .pagination a {
+  margin: 0 5px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+#notification-list .pagination a.active {
   background-color: black;
   color: white;
+  border: 1px solid #000;
+}
+
+#notification-list .pagination a:hover {
+  background-color: #ddd;
+}
+
+#notification-list .pagination a:first-child {
+  margin-left: 0;
+}
+
+#notification-list .pagination a:last-child {
+  margin-right: 0;
+}
+
+#notification-list .pagination span {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 8px 16px;
+  color: #555;
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+#notification-list .pagination a.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+#notification-list .pagination a.disabled:hover {
+  background-color: white;
+}
+
+#notification-list .pagination a.active:hover {
+  background-color: #333;
+}
+
+#notification-list .pagination a.active:hover {
+  color: white;
+}
+
+#notification-list .pagination a.active:not(:hover) {
+  background-color: black;
+}
+
+#notification-list .pagination a:not(.active):hover {
+  transform: scale(1.05);
 }
 
 .unseen-notification {
