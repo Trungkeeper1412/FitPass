@@ -314,12 +314,15 @@ CREATE TABLE IF NOT EXISTS notification (
                                             message TEXT NOT NULL,
                                             time_send DATETIME NOT NULL,
                                             department_id INT NOT NULL,
+                                            order_detail_id INT NOT NULL,
                                             message_type VARCHAR(100) NOT NULL,
                                             status INT NOT NULL,
                                             CONSTRAINT Notification_pk PRIMARY KEY (notification_id),
                                             CONSTRAINT Notification_FK FOREIGN KEY (department_id) REFERENCES fitpass.gym_department(gym_department_id),
                                             CONSTRAINT Notification_FK_1 FOREIGN KEY (user_id_send) REFERENCES fitpass.`user`(user_id),
-                                            CONSTRAINT Notification_FK_2 FOREIGN KEY (user_id_receive) REFERENCES fitpass.`user`(user_id)
+                                            CONSTRAINT Notification_FK_2 FOREIGN KEY (user_id_receive) REFERENCES fitpass.`user`(user_id),
+                                            CONSTRAINT Notification_FK_3 FOREIGN KEY (order_detail_id) REFERENCES fitpass.order_plan_detail(order_detail_id)
+
 );
 
 
