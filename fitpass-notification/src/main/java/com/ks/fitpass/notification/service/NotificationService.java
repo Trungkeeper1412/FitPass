@@ -11,9 +11,11 @@ public interface NotificationService {
 
     int getNumberOfUnseenNotification(int userIdReceive);
 
-    List<Notification> getAllNotificationForUser(int userIdReceive);
+    List<Notification> getAllNotificationForUser(int userIdReceive, int page, int size);
 
     List<Notification> get3NewestUnseenNotificationForUser(int userIdReceive);
 
     List<Notification> getAllNotificationForEmployee(int empIdReceive);
+
+    int getTotalNotificationsForUser(int userId);
 }
