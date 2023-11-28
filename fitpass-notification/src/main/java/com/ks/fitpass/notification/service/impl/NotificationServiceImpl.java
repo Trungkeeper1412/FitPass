@@ -27,6 +27,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public int getNumberOfUnseenNotification(int userIdReceive) {
+        return notificationRepository.getNumberOfUnseenNotification(userIdReceive);
+    }
+
+    @Override
     public List<Notification> getAllNotificationForUser(int userIdReceive) {
         return notificationRepository.getAllNotificationForUser(userIdReceive);
     }
