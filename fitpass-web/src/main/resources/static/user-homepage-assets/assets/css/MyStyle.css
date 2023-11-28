@@ -2462,7 +2462,12 @@ a:link {
   .credit-info-common{
     display: flex;
   }
-
+  .rating-feedback{
+    padding: 40px;
+  }
+  .button-list{
+    padding-left: 10px;
+  }
 }
 @media only screen and (min-width: 461px) and (max-width: 767px) {
   .credit-info-common{
@@ -3706,7 +3711,7 @@ section {
 .rating-feedback{
   height: fit-content;
   margin-top: 30px;
-  padding: 40px;
+  /*padding: 40px;*/
   background-color: white;
   margin-bottom: 30px;
 }
@@ -3726,7 +3731,6 @@ section {
 }
 .rating-option .button-list{
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
