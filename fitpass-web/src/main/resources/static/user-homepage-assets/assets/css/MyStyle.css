@@ -3257,6 +3257,17 @@ input:checked + .toggle-slider:before {
   border-radius: 10px;
   object-fit: cover;
 }
+@media only screen and (min-width: 280px) and (max-width: 500px) {
+  .about-our-gym-1 div{
+    font-size: 12px;
+  }
+  .about-our-gym-1 .gym-intro{
+    margin-top: 10px;
+  }
+  .about-our-gym-1 hr{
+    display: none;
+  }
+}
 @media only screen and (min-width: 280px) and (max-width: 799px){
   .gym-name-cover h3{
     text-align: left;
@@ -3271,6 +3282,9 @@ input:checked + .toggle-slider:before {
     width: 80px;
     height: 80px;
     border-radius: 50%;
+  }
+  .info-title{
+    font-size: 18px;
   }
   .gym-service-logo{
     width: 20px;
