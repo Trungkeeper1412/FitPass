@@ -21,16 +21,16 @@ public interface IRepositoryQuery {
             SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, message_type, status
                 FROM notification
             WHERE user_id_receive = ?
-                AND status = 1;
+                AND status = 0
             ORDER BY time_send DESC
-                LIMIT 3
+            LIMIT 3;
             """;
     String GET_ALL_NOTIFICATION_FOR_EMPLOYEE = """
             SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, message_type, status
                 FROM notification
             WHERE user_id_receive = ?
-                AND DATE(time_send) = CURDATE();
-            ORDER BY time_send DESC
+                AND DATE(time_send) = CURDATE()
+            ORDER BY time_send DESC;
             """;
     String GET_NUM_OF_UNSEEN_NOTIFICATION_BY_USER_RECEIVE_ID = """
                 SELECT COUNT(*) AS num_unseen_notifications
