@@ -115,7 +115,7 @@
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
         </button>
         <div class="scroll-services row mt-4">
-            <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3 col-sm-6 col-xs-10"  th:each="amenitie: ${departmentAmenities}">
+            <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3"  th:each="amenitie: ${departmentAmenities}">
                 <div class="child">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
@@ -168,9 +168,10 @@
         </button>
     </div>
 
-    <div style="margin: auto;" class="container">
-        <h3 class="info-title" style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
-        <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
+    <h3 class="info-title" style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
+
+    <div style="margin: auto;">
         <div class="list-image">
             <button class="leftImage" onclick="leftScroll()">
                 <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
@@ -194,7 +195,7 @@
         </div>
     </div>
 
-    <h3 class="info-title" style="color: black; font-weight: 600; margin-top: 60px">Đánh giá từ người tập</h3>
+    <h3 class="info-title" style="color: black; font-weight: 600; margin-top: 50px">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="rating-feedback container mx-auto" id="ratingfeedback">
         <div class="rating-option row">
@@ -207,44 +208,32 @@
             </div>
             <div class="button-list col-md-9">
             <div class="row">
-                <div class="col-lg-1 col-md-2 col-xs-6">
-                    <button id="btnSortAllRating" type="button" class="btn btn-warning">
-                        Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
-                    </button>
-                </div>
-                <div class="col-lg-1 col-md-2 col-xs-6">
-                    <button id="btnSort5Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
-                        5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
-                    </button>
-                </div>
-                <div class="col-lg-1 col-md-2 col-xs-6">
-                    <button id="btnSort4Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
-                        4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
-                    </button>
-                </div>
-                <div class="col-lg-1 col-md-2 col-xs-6">
-                    <button id="btnSort3Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
-                        3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
-                    </button>
-                </div>
-                <div class="col-lg-1 col-md-2 col-xs-6">
-                    <button id="btnSort2Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
-                        2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
-                    </button>
-                </div>
-                <div class="col-lg-1 col-md-2 col-xs-6">
-                    <button id="btnSort1Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
-                        1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
-                    </button>
-                </div>
+            <button id="btnSortAllRating" type="button" class="btn btn-warning">
+                Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
+            </button>
+            <button id="btnSort5Rating" type="button" class="btn btn-warning">
+                5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
+            </button>
+            <button id="btnSort4Rating" type="button" class="btn btn-warning">
+                4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
+            </button>
+            <button id="btnSort3Rating" type="button" class="btn btn-warning">
+                3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
+            </button>
+            <button id="btnSort2Rating" type="button" class="btn btn-warning">
+                2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
+            </button>
+            <button id="btnSort1Rating" type="button" class="btn btn-warning">
+                1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
+            </button>
                 </div>
             </div>
         </div>
         <div id="feedback-list">
 
         </div>
-        <div class="pagination-wrapper container">
-            <div class="pagination col justify-content-center" id="paginationFeedback">
+        <div class="pagination-wrapper">
+            <div class="pagination justify-content-center" id="paginationFeedback">
 <!--                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"-->
 <!--                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>-->
 <!--                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">-->
@@ -634,7 +623,7 @@
                     <div>${feedback.userName}</div>
                     <i style="height: 25px;" data-star="${feedback.rating}"></i>
                     <div>${formatDateTime(feedback.feedbackTime)}</div>
-                    <div>${feedback.comments}</div>
+                    <div class="feedback-comment">${feedback.comments}</div>
                 </div>
             </div>
 `;
