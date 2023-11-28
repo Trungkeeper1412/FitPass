@@ -199,14 +199,14 @@
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="rating-feedback container mx-auto" id="ratingfeedback">
         <div class="rating-option row">
-            <div class="rating-avg col-md-3">
+            <div class="rating-avg col-md-3 col-lg-2">
                 <div style="display: flex; position: relative">
                     <div class="rating-point" th:text="${departmentFeedbacks.avgRating}"></div>
                     <div class="rating-max">trên 5</div>
                 </div>
                 <div class="rating" th:attr="data-star=${departmentFeedbacks.avgRating}"></div>
             </div>
-            <div class="button-list col-md-9">
+            <div class="button-list col-md-9 col-lg-10">
             <div class="row">
             <button id="btnSortAllRating" type="button" class="btn btn-warning">
                 Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
