@@ -2462,7 +2462,12 @@ a:link {
   .credit-info-common{
     display: flex;
   }
-
+  .rating-feedback{
+    padding: 40px;
+  }
+  .button-list{
+    padding-left: 10px;
+  }
 }
 @media only screen and (min-width: 461px) and (max-width: 767px) {
   .credit-info-common{
@@ -3349,7 +3354,7 @@ input:checked + .toggle-slider:before {
 .gym-first-info{
   top: 50px;
   position: relative;
-  width: 100%;
+  width: 90%;
   height: 200px;
   margin: auto;
   border-radius: 10px;
@@ -3368,6 +3373,10 @@ input:checked + .toggle-slider:before {
   border-radius: 10px;
   object-fit: cover;
 }
+@media only screen and (min-width: 501px) {
+
+}
+
 @media only screen and (min-width: 280px) and (max-width: 500px) {
   .about-our-gym-1 div{
     font-size: 12px;
@@ -3394,6 +3403,9 @@ input:checked + .toggle-slider:before {
   }
   .rating-option button{
     font-size: 12px;
+  }
+  .rating-feedback{
+    padding: 0;
   }
 }
 @media only screen and (min-width: 280px) and (max-width: 799px){
@@ -3696,7 +3708,13 @@ section {
   background-color: #fffbf8;
   color: #000000;
 }
-
+.rating-feedback{
+  height: fit-content;
+  margin-top: 30px;
+  /*padding: 40px;*/
+  background-color: white;
+  margin-bottom: 30px;
+}
 .rating-point{
   font-size: 24px;
   font-weight: 600;
@@ -3713,7 +3731,6 @@ section {
 }
 .rating-option .button-list{
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -3748,15 +3765,6 @@ section {
   height: fit-content;
 }
 
-.rating-feedback{
-  /*border-radius: 10px;*/
-  height: fit-content;
-  margin-top: 30px;
-  padding: 40px;
-  /*border: 1px solid rgba(255, 162, 0, 0.589);*/
-  /* background-image: url("https://i.pinimg.com/736x/b3/35/53/b335539b6c32baee8844a2adf98dc03d.jpg"); */
-  background-color: white;
-}
 
 .image-scroll-wrapper{
   /*margin-left: -250px;*/
@@ -3818,11 +3826,6 @@ section {
 
 .rating-feedback .pagination-wrapper{
   margin-top: -30px;
-}
-/*  */
-
-.rating-feedback{
-  margin-bottom: 30px;
 }
 
 /* CSS FOR SHOPPING CART PAGE*/
@@ -4360,7 +4363,7 @@ section {
 
 }
 .gym-brand-content{
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
 .body-gym-brand-details .gym-brand-name{
@@ -4400,6 +4403,7 @@ section {
   color:rgb(0, 0, 0);
   font-weight: bold;
   margin-top: 160px;
+  margin-left: -10px;
 }
 .brand-contact{
   margin-top: 20px;
@@ -4920,6 +4924,9 @@ section {
 @media screen and (min-width: 501px) and (max-width: 768px){
   .list-of-brand .brand .description{
     font-size: 12px;
+  }
+  .rating-feedback{
+    padding: 40px;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1200px) {
