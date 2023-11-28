@@ -2625,9 +2625,9 @@ VALUES
      21.00855235502214, 105.7307156200674, 400, 1500,'Hà Nội'),
     (24, 1, 48, 1, 'Kickfit Sports Metro Hà Đông',
      'Tầng 2, Siêu thị Metro - Melinh Plaza, Hà Đông', '093 63 999 88',
-     'https://bom.so/CHjTsR',
-     'https://shorturl.at/BCFI3',
-     'https://shorturl.at/boPZ1',
+     '/img/departments/logos/24_logo.jpg',
+     '/img/departments/wallpapers/24_wallpaper.jpg',
+     '/img/departments/thumbnails/24_thumbnail.jpg',
      'Kickfit Sports Metro Hà Đông có quy mô diện tích lớn, cung cấp đa dạng các loại hình tập luyện từ A-Z gồm cả võ thuật và thể hình. Lợi thế tọa lạc tại Mê Linh Plaza, Kickfit Sports được nhiều hội viên lựa chọn bởi đẳng cấp 5 sao cùng dịch vụ tuyệt vời, trang thiết bị hiện đại tạo cảm giác an tâm, thoải mái.',
      20.964556785162678, 105.77230071391557, 280, 800,'Hà Nội'),
 
