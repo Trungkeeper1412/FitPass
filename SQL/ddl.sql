@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS brand (
                                      contact_number              VARCHAR(20) NOT NULL,
                                      contact_email				VARCHAR(50) NOT NULL,
                                      brand_status_key   		    INT NOT NULL,
-                                     money_percent   INT DEFAULT 0,
+                                     money_percent               INT DEFAULT 0 ,
                                      first_time boolean default 1,
                                      FOREIGN KEY (user_id) REFERENCES `user`(user_id)
 );
@@ -140,7 +140,6 @@ CREATE TABLE IF NOT EXISTS gym_department_albums (
                                                      id INT PRIMARY KEY AUTO_INCREMENT,
                                                      gym_department_id INT NOT NULL,
                                                      photo_url VARCHAR(255) NOT NULL,
-                                                     description VARCHAR(255),
                                                      FOREIGN KEY(gym_department_id) REFERENCES gym_department(gym_department_id)
 );
 
@@ -360,8 +359,6 @@ CREATE TABLE IF NOT EXISTS request_withdrawal_history (
                                                           status           VARCHAR(30) NOT NULL,
                                                           FOREIGN KEY (credit_card_id) REFERENCES credit_card(credit_card_id)
 );
-
-
 
 DELIMITER $$
 CREATE TRIGGER update_gym_rating_avg

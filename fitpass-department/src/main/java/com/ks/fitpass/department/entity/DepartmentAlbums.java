@@ -13,6 +13,4 @@ public class DepartmentAlbums {
     private int departmentId;
 
     private String photoUrl;
-
-    private String description;
 }
