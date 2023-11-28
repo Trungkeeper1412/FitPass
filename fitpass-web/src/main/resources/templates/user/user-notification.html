@@ -25,48 +25,13 @@
             <!-- Common components in tab -->
             <div class="add-money-tab">
                 <th:block th:insert="~{user/fragments/money-tab :: money-tab}"></th:block>
-
-
                 <!--User notifications tab-->
-                <div class="mt-4 mb-4" id="my-notifications">
+                <div class="mt-4 mb-4" id="notification-list">
                     <div class="row my-notifications">
-                        <div class="noti-card col-12 mb-4 seen-notification">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtk86cli80AalCTdP_MOrFRItgZ6JQKsaHTQ&usqp=CAU"
-                                 alt="Gym Logo">
-                            <div class="noti-content">
-                                <div>
-            <span>
-                <img style="width: 18px; height: 18px;" th:src="@{/user-homepage-assets/assets/img/small-bell.png}" alt="Bell icon">
-            </span>
-                                    <span class="fw-bold">Hòa Lạc Fitness -</span>
-                                    <span>Flash sale giá sốc, tức tốc vào ngay !</span>
-                                </div>
-                                <div class="noti-description">
-                                    Sale mạnh đến 50% từ các gói tập linh hoạt đến cố định, vào quẹo lựa ngay.
-                                </div>
-                                <div class="noti-time">
-                                    16:46 07-11-2023
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="row pagination">
-                        <div class="col-12">
-                            <nav style="margin-top: -40px; float: right;">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active-page">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                    <div class="row pagination-container">
+                        <div class="pagination mt-3" id="paginationNotification">
+
                         </div>
                     </div>
                 </div>
@@ -84,7 +49,6 @@
 <th:block th:include="common/vendor-script"></th:block>
 <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.js"></script>
 <script>
-
     function toggleModal() {
         modal.classList.toggle("show-modal");
     }
@@ -107,8 +71,6 @@
         $(".option-tab").removeClass("at");
         $(this).addClass("at");
     });
-
-
 </script>
 </body>
 </html>
