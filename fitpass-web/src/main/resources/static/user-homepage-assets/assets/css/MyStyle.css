@@ -23,7 +23,7 @@ h6 {
 
 .cart-badge {
   position: absolute;
-  top: 0px;
+  top: 0;
   right: -20px;
   background-color: orangered;
   color: white;
@@ -317,11 +317,11 @@ a:hover {
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
-.view-all-noti{
+.view-all-notification-link{
   position: absolute;
   bottom: 0;
 }
-.view-all-noti button{
+.view-all-notification-link button{
   padding: 9px;
   height: 100%;
   font-size: 12px;
@@ -347,15 +347,39 @@ a:hover {
   grid-template-columns: 1fr 4fr;
 }
 
-.noti img{
+.no-notification {
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+.no-notification .notification-icon {
+  margin-bottom: 10px;
+}
+
+.no-notification .notification-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.no-notification .notification-description {
+  font-size: 14px;
+  color: #777;
+  font-style: italic;
+}
+
+.notification-card-nav img{
   width: 35px;
 }
-.noti .noti-time{
+.notification-card-nav .notification-card-nav-time{
   color: #9f9f9f;
   font-weight: 600;
   font-size: 12px;
 }
-.noti .noti-title{
+.notification-card-nav .notification-card-nav-title{
   font-size: 13px;
   margin-top: 4px;
 }
