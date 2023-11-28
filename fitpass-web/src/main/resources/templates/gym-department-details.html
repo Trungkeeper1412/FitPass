@@ -112,17 +112,19 @@
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
     <div class="list-service-wrapper container mt-2">
         <button class="left" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
         </button>
         <div class="scroll-services row mt-4">
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-7"  th:each="amenitie: ${departmentAmenities}">
+            <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3 col-sm-6 col-xs-7"  th:each="amenitie: ${departmentAmenities}">
+                <div class="child">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
                 <div class="service-descript" th:text="${amenitie.brandAmenitieId.getDescription()}"></div>
+                </div>
             </div>
         </div>
         <button class="right" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/1549/1549454.png">
+            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
         </button>
     </div>
 

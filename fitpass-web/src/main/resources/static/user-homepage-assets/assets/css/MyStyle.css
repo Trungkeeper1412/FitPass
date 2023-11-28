@@ -4399,7 +4399,7 @@ section {
 }
 
 .scroll-services {
-  position: relative;
+  /*position: relative;*/
   width: 90%;
   margin: auto;
   display: flex;
@@ -4416,23 +4416,25 @@ section {
 .scroll-services .child {
   position: relative;
   height: 480px;
-  min-width: 220px;
-  margin-right: 20px;
+  /*min-width: 220px;*/
+  /*margin-right: 20px;*/
   padding: 0;
   color: #000000;
   overflow: hidden;
 }
 
 .list-service-wrapper .left {
-  margin-right: 10px;
+  margin-left: 10px;
   transform: translateY(-50%);
   border: none;
+  background-color: transparent;
 }
 
 .list-service-wrapper .right {
   margin-left: 10px;
   transform: translateY(-50%);
   border: none;
+  background-color: transparent;
 }
 
 .brand-service-img{
@@ -4558,6 +4560,12 @@ section {
 }
 
 @media screen and (min-width: 1200px) {
+  .scroll-services {
+    width: 90%;
+  }
+  .list-service-wrapper {
+    width: 95%;
+  }
   .gym-brand-content .slideshow-container {
     width: 100%;
     height: 500px;
@@ -4568,7 +4576,6 @@ section {
   .body-gym-brand-details .mySlides1 img {
     width: 90%;
     height: 500px;
-
   }
 
 }
@@ -4682,6 +4689,9 @@ section {
 }
 
 @media screen and (max-width: 600px) {
+  .scroll-services {
+    width: 80%;
+  }
   .body-gym-brand-details .user-rating{
     display: block
   }
