@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/notification")
@@ -70,14 +72,24 @@ public class NotificationController {
         return ResponseEntity.ok(totalPages);
     }
 
+    @GetMapping("/user/get-total-unseen")
+    public ResponseEntity<Integer> getTotalUnseenNumberForUser(HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        int totalUnseenNotifications = notificationService.getNumberOfUnseenNotification(user.getUserId());
+        return ResponseEntity.ok(totalUnseenNotifications);
+    }
+
     @GetMapping("/user/newest-unseen")
-    public ResponseEntity<List<Notification>> get3NewestUnseenNotificationsForUser(HttpSession session) {
+    public ResponseEntity<Map<String, Object>> get3NewestUnseenNotificationsForUser(HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
         int userId = user.getUserId();
         List<Notification> notifications = notificationService.get3NewestUnseenNotificationForUser(userId);
 
+        Map<String, Object> response = new HashMap<>();
+        response.put("notifications", notifications);
+        response.put("size", notifications.size());
 
-        return ResponseEntity.ok(notifications);
+        return ResponseEntity.ok(response);
     }
 
     // Endpoint to get all notifications for an employee
