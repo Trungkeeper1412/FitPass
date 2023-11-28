@@ -3559,7 +3559,7 @@ section {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -3662,14 +3662,9 @@ section {
 }
 
 .scroll-plans::-webkit-scrollbar {
-  width: 5px;
-  height: 8px;
-  background-color: #aaa;
+  display: none;
 }
 
-.scroll-plans::-webkit-scrollbar-thumb {
-  background-color: black;
-}
 
 .list-plan-wrapper button {
   background-color: transparent;
@@ -4406,7 +4401,6 @@ section {
 .scroll-services {
   position: relative;
   width: 90%;
-  padding: 10px;
   margin: auto;
   display: flex;
   flex-wrap:nowrap;
@@ -4415,31 +4409,29 @@ section {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 }
-
+.scroll-services::-webkit-scrollbar {
+  display: none;
+}
 
 .scroll-services .child {
+  position: relative;
   height: 480px;
   min-width: 220px;
   margin-right: 20px;
   padding: 0;
   color: #000000;
   overflow: hidden;
-  position: relative;
 }
 
 .list-service-wrapper .left {
-  margin-left: 10px;
+  margin-right: 10px;
   transform: translateY(-50%);
-  position: absolute;
-  left: 0;
   border: none;
 }
 
 .list-service-wrapper .right {
   margin-left: 10px;
   transform: translateY(-50%);
-  position: absolute;
-  right: 0;
   border: none;
 }
 
