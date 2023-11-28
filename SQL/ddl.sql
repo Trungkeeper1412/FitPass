@@ -1,4 +1,6 @@
 -- Drop queries to remove existing tables (if they exist)
+DROP TABLE IF EXISTS request_withdrawal_history;
+DROP TABLE IF EXISTS credit_card;
 DROP TABLE IF EXISTS check_in_history;
 DROP TABLE IF EXISTS user_feedback;
 DROP TABLE IF EXISTS item_inventory;
@@ -336,6 +338,27 @@ CREATE TABLE IF NOT EXISTS check_in_history (
                                                 CONSTRAINT check_in_history_FK_2 FOREIGN KEY (feedback_id) REFERENCES fitpass.user_feedback(feedback_id)
 );
 
+-- bảng credit card
+CREATE TABLE IF NOT EXISTS credit_card (
+                                           credit_card_id   INT AUTO_INCREMENT PRIMARY KEY,
+                                           user_id  INT NOT NULL,
+                                           card_owner_name           VARCHAR(100) NOT NULL,
+                                           card_number       varchar(25) NOT NULL,
+                                           status           VARCHAR(30) NOT NULL,
+                                           FOREIGN KEY (user_id) REFERENCES user(user_id)
+);
+
+-- Bảng lịch sử rút tiền
+CREATE TABLE IF NOT EXISTS request_withdrawal_history (
+                                                          request_withdrawal_history_id   INT AUTO_INCREMENT PRIMARY KEY,
+                                                          credit_card_id INT not null,
+                                                          withdrawal_code        INT NOT NULL,
+                                                          withdrawal_time   timestamp,
+                                                          amount_credit    INT NOT NULL,
+                                                          actual_money     INT NOT NULL,
+                                                          status           VARCHAR(30) NOT NULL,
+                                                          FOREIGN KEY (credit_card_id) REFERENCES credit_card(credit_card_id)
+);
 
 DELIMITER $$
 CREATE TRIGGER update_gym_rating_avg
