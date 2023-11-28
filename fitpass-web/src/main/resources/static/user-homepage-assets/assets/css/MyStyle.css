@@ -3389,7 +3389,12 @@ input:checked + .toggle-slider:before {
   .gym-container .user-rating{
     display: block;
   }
-
+  .user-rating-description{
+    margin-top: 0;
+  }
+  .user-rating-description .button-list{
+    font-size: 12px;
+  }
 }
 @media only screen and (min-width: 280px) and (max-width: 799px){
   .gym-name-cover h3{
@@ -3682,9 +3687,9 @@ section {
 }
 
 .rating-option{
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  column-gap: 10px;
+  /*display: grid;*/
+  /*grid-template-columns: 1fr 7fr;*/
+  /*column-gap: 10px;*/
   padding: 20px;
   border: 1px solid #f9ede5;
   /*background-color: #fff9e7;*/

@@ -198,33 +198,45 @@
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="rating-feedback container mx-auto" id="ratingfeedback">
         <div class="rating-option row">
-            <div class="rating-avg">
+            <div class="rating-avg col-md-3">
                 <div style="display: flex; position: relative">
                     <div class="rating-point" th:text="${departmentFeedbacks.avgRating}"></div>
                     <div class="rating-max">trên 5</div>
                 </div>
                 <div class="rating" th:attr="data-star=${departmentFeedbacks.avgRating}"></div>
             </div>
-            <div class="button-list">
+            <div class="button-list col-md-9">
             <div class="row">
-            <button id="btnSortAllRating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
-                Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
-            </button>
-            <button id="btnSort5Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
-                5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
-            </button>
-            <button id="btnSort4Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
-                4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
-            </button>
-            <button id="btnSort3Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
-                3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
-            </button>
-            <button id="btnSort2Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
-                2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
-            </button>
-            <button id="btnSort1Rating" type="button" class="btn btn-warning col-lg-1 col-md-2">
-                1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
-            </button>
+                <div class="col-lg-1 col-md-2 col-xs-6">
+                    <button id="btnSortAllRating" type="button" class="btn btn-warning">
+                        Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
+                    </button>
+                </div>
+                <div class="col-lg-1 col-md-2 col-xs-6">
+                    <button id="btnSort5Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
+                        5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
+                    </button>
+                </div>
+                <div class="col-lg-1 col-md-2 col-xs-6">
+                    <button id="btnSort4Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
+                        4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
+                    </button>
+                </div>
+                <div class="col-lg-1 col-md-2 col-xs-6">
+                    <button id="btnSort3Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
+                        3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
+                    </button>
+                </div>
+                <div class="col-lg-1 col-md-2 col-xs-6">
+                    <button id="btnSort2Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
+                        2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
+                    </button>
+                </div>
+                <div class="col-lg-1 col-md-2 col-xs-6">
+                    <button id="btnSort1Rating" type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-6">
+                        1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
+                    </button>
+                </div>
                 </div>
             </div>
         </div>
