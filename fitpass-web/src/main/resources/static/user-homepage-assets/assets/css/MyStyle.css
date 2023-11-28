@@ -4559,6 +4559,24 @@ section {
 .gym-brand-content .rating-option button{
 }
 
+@media screen and (min-width: 280px) and (max-width: 400px) {
+  .list-service-wrapper .left {
+    display: none;
+  }
+  .list-service-wrapper .right {
+    display: none;
+  }
+  .scroll-services {
+    width: 100%;
+  }
+  .list-service-wrapper {
+    width: 100%;
+  }
+  .scroll-services .service-name{
+    font-size: 15px;
+  }
+
+}
 @media screen and (min-width: 1200px) {
   .scroll-services {
     width: 90%;
