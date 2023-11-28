@@ -2767,7 +2767,7 @@ a:link {
 }
 .noti-card{
   display: flex;
-  padding: 20px;
+  padding: 15px;
   align-items: center;
   height: fit-content;
   border-radius: 10px;
@@ -2775,7 +2775,7 @@ a:link {
   /* grid-template-columns: 1fr 4fr; */
 }
 .noti-content{
-  margin-left: 20px;
+  margin-left: 15px;
 }
 .my-notifications img{
   width: 80px;
@@ -2785,17 +2785,27 @@ a:link {
 }
 .noti-description{
   font-size: 14px;
-  color: grey;
+  color: #666666;
 }
 .noti-time{
   font-size: 14px;
-  color: grey;
+  color: #999999;
 }
 .my-notifications .pagination .active-page a{
   background-color: black;
   color: white;
 }
 
+.unseen-notification {
+  background-color: #ccf5ff; /* Light blue for more outstanding unseen notifications */
+  border: 1px solid #66b3ff; /* Border color for unseen notifications */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for emphasis */
+}
+
+.seen-notification {
+  background-color: #f0f0f0; /* Light gray for seen notifications */
+  border: 1px solid #d9d9d9; /* Border color for seen notifications */
+}
 
 /* Css  for profile tab */
 
