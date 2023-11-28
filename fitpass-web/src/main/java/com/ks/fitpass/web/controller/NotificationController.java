@@ -57,6 +57,19 @@ public class NotificationController {
         return ResponseEntity.ok(notificationPage);
     }
 
+    @GetMapping("/user/get-total-page")
+    public ResponseEntity<Integer> getTotalPagesForUser(HttpSession session,
+                                                        @RequestParam(defaultValue = "4") int pageSize) {
+
+        User user = (User) session.getAttribute("userInfo");
+        int totalNotifications = notificationService.getTotalNotificationsForUser(user.getUserId());
+
+        // Calculate the total number of pages based on the total notifications and page size
+        int totalPages = (int) Math.ceil((double) totalNotifications / pageSize);
+
+        return ResponseEntity.ok(totalPages);
+    }
+
     @GetMapping("/user/newest-unseen")
     public ResponseEntity<List<Notification>> get3NewestUnseenNotificationsForUser(HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
