@@ -3386,6 +3386,9 @@ input:checked + .toggle-slider:before {
     justify-content: center;
     align-items: center
   }
+  .gym-container .user-rating{
+    display: block;
+  }
 
 }
 @media only screen and (min-width: 280px) and (max-width: 799px){
@@ -3728,7 +3731,6 @@ section {
   width: 100%;
   height: fit-content;
   margin-top: 30px;
-
 }
 
 .user-rating-avatar{
