@@ -26,11 +26,6 @@ public class NotificationRepositoryImpl implements NotificationRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    @Override
-//    public int insertNotification(Notification notification) {
-//        return jdbcTemplate.update(IRepositoryQuery.INSERT_NOTIFICATION, notification.getUserIdSend(), notification.getUserIdReceive(), notification.getMessage(), notification.getTimeSend(), notification.getDepartmentId(), notification.getMessageType(), 0);
-//    }
-
     @Override
     public int insertNotification(Notification notification) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -70,20 +65,23 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     }
 
     @Override
-    public List<Notification> getAllNotificationForUser(int userIdReceive) {
+    public List<Notification> getAllNotificationForUser(int userIdReceive, int offset, int size) {
         try {
-            return jdbcTemplate.query(IRepositoryQuery.GET_ALL_NOTIFICATION_FOR_USER, (rs, rowNum) -> {
-                Notification notification = new Notification();
-                notification.setNotificationId(rs.getInt("notification_id"));
-                notification.setUserIdSend(rs.getInt("user_id_send"));
-                notification.setUserIdReceive(rs.getInt("user_id_receive"));
-                notification.setMessage(rs.getString("message"));
-                notification.setTimeSend(rs.getTimestamp("time_send"));
-                notification.setDepartmentId(rs.getInt("department_id"));
-                notification.setMessageType(rs.getString("message_type"));
-                notification.setStatus(rs.getInt("status"));
-                return notification;
-            }, userIdReceive);
+            return jdbcTemplate.query(
+                    IRepositoryQuery.GET_ALL_NOTIFICATION_FOR_USER,
+                    (rs, rowNum) -> {
+                        Notification notification = new Notification();
+                        notification.setNotificationId(rs.getInt("notification_id"));
+                        notification.setUserIdSend(rs.getInt("user_id_send"));
+                        notification.setUserIdReceive(rs.getInt("user_id_receive"));
+                        notification.setMessage(rs.getString("message"));
+                        notification.setTimeSend(rs.getTimestamp("time_send"));
+                        notification.setDepartmentId(rs.getInt("department_id"));
+                        notification.setMessageType(rs.getString("message_type"));
+                        notification.setStatus(rs.getInt("status"));
+                        return notification;
+                    },
+                    userIdReceive, size, offset);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -132,5 +130,10 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     @Override
     public int getNumberOfUnseenNotification(int userIdReceive) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_NUM_OF_UNSEEN_NOTIFICATION_BY_USER_RECEIVE_ID, Integer.class, userIdReceive);
+    }
+
+    @Override
+    public int getTotalNotificationsForUser(int userId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_NUM_OF_TOTAL_NOTIFICATION_BY_USER_RECEIVE_ID, Integer.class, userId);
     }
 }

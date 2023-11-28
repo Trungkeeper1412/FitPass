@@ -9,11 +9,13 @@ public interface NotificationRepository {
 
     int updateStatusNotificationById(int notificationId, int status);
 
-    List<Notification> getAllNotificationForUser(int userIdReceive);
+    List<Notification> getAllNotificationForUser(int userIdReceive, int offset, int size);
 
     List<Notification> get3NewestUnseenNotificationForUser(int userIdReceive);
 
     List<Notification> getAllNotificationForEmployee(int empIdReceive);
 
     int getNumberOfUnseenNotification(int userIdReceive);
+
+    int getTotalNotificationsForUser(int userId);
 }

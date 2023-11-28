@@ -26,7 +26,6 @@ function updateQuantityCart() {
         })
         .then((data) => {
             let number = parseInt(data);
-            console.log(number);
             cartNum.textContent = number;
         })
         .catch((error) => {

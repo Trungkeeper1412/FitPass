@@ -1960,7 +1960,6 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .gradient .card button{
-  background-color: none;
   width: fit-content;
   height: 40px;
   padding: 10px
@@ -2762,12 +2761,12 @@ a:link {
   /* height: 500px; */
   margin: auto;
   background-color: white;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   border-radius: 10px;
 }
 .noti-card{
   display: flex;
-  padding: 20px;
+  padding: 15px;
   align-items: center;
   height: fit-content;
   border-radius: 10px;
@@ -2775,7 +2774,7 @@ a:link {
   /* grid-template-columns: 1fr 4fr; */
 }
 .noti-content{
-  margin-left: 20px;
+  margin-left: 15px;
 }
 .my-notifications img{
   width: 80px;
@@ -2785,17 +2784,115 @@ a:link {
 }
 .noti-description{
   font-size: 14px;
-  color: grey;
+  color: #666666;
 }
 .noti-time{
   font-size: 14px;
-  color: grey;
+  color: #999999;
 }
-.my-notifications .pagination .active-page a{
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+#paginationNotification {
+  display: flex;
+  margin-top: 5px; /* Adjust as needed */
+}
+
+#paginationNotification a {
+  margin: 0 5px;
+  /* Your other styles here */
+}
+
+#notification-list .pagination {
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: center;
+  margin-top: -40px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: auto;
+  width: auto;
+}
+
+#notification-list .pagination a {
+  margin: 0 5px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+#notification-list .pagination a.active {
   background-color: black;
+  color: white;
+  border: 1px solid #000;
+}
+
+#notification-list .pagination a:hover {
+  background-color: #ddd;
+}
+
+#notification-list .pagination a:first-child {
+  margin-left: 0;
+}
+
+#notification-list .pagination a:last-child {
+  margin-right: 0;
+}
+
+#notification-list .pagination span {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 8px 16px;
+  color: #555;
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+#notification-list .pagination a.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+#notification-list .pagination a.disabled:hover {
+  background-color: white;
+}
+
+#notification-list .pagination a.active:hover {
+  background-color: #333;
+}
+
+#notification-list .pagination a.active:hover {
   color: white;
 }
 
+#notification-list .pagination a.active:not(:hover) {
+  background-color: black;
+}
+
+#notification-list .pagination a:not(.active):hover {
+  transform: scale(1.05);
+}
+
+.unseen-notification {
+  background-color: #ccf5ff; /* Light blue for more outstanding unseen notifications */
+  border: 1px solid #66b3ff; /* Border color for unseen notifications */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for emphasis */
+}
+
+.seen-notification {
+  background-color: #f0f0f0; /* Light gray for seen notifications */
+  border: 1px solid #d9d9d9; /* Border color for seen notifications */
+}
 
 /* Css  for profile tab */
 
@@ -3221,6 +3318,30 @@ input:checked + .toggle-slider:before {
     left: 190px;
     right: 20px;
   }
+
+  .gym-service-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+  .gym-service-logo i{
+    font-size:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .gym-service{
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+    margin-top: 50px;
+    color: #000;
+  }
+
 }
 @media only screen and (max-width: 1000px) {
 
@@ -3247,13 +3368,41 @@ input:checked + .toggle-slider:before {
   border-radius: 10px;
   object-fit: cover;
 }
+@media only screen and (min-width: 280px) and (max-width: 500px) {
+  .about-our-gym-1 div{
+    font-size: 12px;
+  }
+  .about-our-gym-1 .gym-intro{
+    margin-top: 10px;
+  }
+  .about-our-gym-1 hr{
+    display: none;
+  }
+  .w3-animate-zoom img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+  .gym-container .user-rating{
+    display: block;
+  }
+  .user-rating-description{
+    margin-top: 0;
+  }
+  .rating-option button{
+    font-size: 12px;
+  }
+}
 @media only screen and (min-width: 280px) and (max-width: 799px){
   .gym-name-cover h3{
     text-align: left;
     font-size: 14px;
     width: 70%;
     padding : 5px;
-    top: 80px;
+    top: 90px;
     left: 20px;
     right: 20px;
   }
@@ -3262,15 +3411,22 @@ input:checked + .toggle-slider:before {
     height: 80px;
     border-radius: 50%;
   }
+  .info-title{
+    font-size: 18px;
+  }
   .gym-service-logo{
-    width: 20px;
-    height: 20px;
-    padding: 8px;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+  }
+  .gym-service-logo i{
+    font-size:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .gym-service{
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
+    padding: 20px;
   }
 
 }
@@ -3279,18 +3435,15 @@ input:checked + .toggle-slider:before {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  padding: 30px;
   width: 100%;
+  margin-top: 30px;
   height: fit-content;
-  margin-top: 50px;
   color: #000;
 }
 .gym-service-logo{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70px;
-  height: 70px;
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -3304,7 +3457,6 @@ input:checked + .toggle-slider:before {
   background-color: black;
 }
 .gym-service-logo i{
-  font-size:30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -3334,17 +3486,6 @@ input:checked + .toggle-slider:before {
   height: fit-content;
   margin-top: 15px;
 }
-
-/*.gym-first-info::before{*/
-/*  content: ' ';*/
-/*  position: absolute;*/
-/*  display: block;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  opacity: 0.5;*/
-/*  object-fit: cover;*/
-/*  background-size: cover;*/
-/*}*/
 
 .gym-container{
   width: 100%;
@@ -3434,7 +3575,7 @@ section {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -3443,12 +3584,8 @@ section {
 .scroll-plans .child {
   /* display: flex; */
   border-radius: 10px;
-  /* justify-content: center; */
-  /* align-items: center; */
-  min-width: 365px;
-  height: 480px;
-  /* padding: 0px 15px; */
-  margin: 1px 10px;
+  height: max-content;
+  min-height: 480px;
   color: #000000;
   background-color: #ffffff;
   /* background-color: #ffffff; */
@@ -3530,21 +3667,16 @@ section {
   width: fit-content;
 }
 .scroll-plans .gym-plan-description{
-  height: 146px;
+  min-height: 146px;
 }
 .gym-duration{
   /* text-decoration: underline; */
 }
 
 .scroll-plans::-webkit-scrollbar {
-  width: 5px;
-  height: 8px;
-  background-color: #aaa;
+  display: none;
 }
 
-.scroll-plans::-webkit-scrollbar-thumb {
-  background-color: black;
-}
 
 .list-plan-wrapper button {
   background-color: transparent;
@@ -3555,9 +3687,9 @@ section {
 }
 
 .rating-option{
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  column-gap: 10px;
+  /*display: grid;*/
+  /*grid-template-columns: 1fr 7fr;*/
+  /*column-gap: 10px;*/
   padding: 20px;
   border: 1px solid #f9ede5;
   /*background-color: #fff9e7;*/
@@ -3581,16 +3713,16 @@ section {
 }
 .rating-option .button-list{
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
 .rating-option button{
   width:fit-content;
   background-color: white;
-  background-image: none;
   border:  1px solid orange;
   margin-top: 10px;
-  margin-right: 10px;
+  margin-right: 5px;
   font-weight: 600;
   background-size: cover;
   height: 35px;
@@ -3604,7 +3736,6 @@ section {
   width: 100%;
   height: fit-content;
   margin-top: 30px;
-
 }
 
 .user-rating-avatar{
@@ -3642,6 +3773,8 @@ section {
 }
 .list-image{
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 .leftImage{
@@ -3649,12 +3782,14 @@ section {
   margin-right: 0;
   margin: auto;
   border: none;
+  background-color: transparent;
 }
 .rightImage{
   margin-left: 10px;
   padding-left: 10px;
   margin: auto;
   border: none;
+  background-color: transparent;
 }
 .image-scroll-wrapper .div{
   /*display:block;*/
@@ -4277,45 +4412,42 @@ section {
 }
 
 .scroll-services {
-  position: relative;
+  /*position: relative;*/
   width: 90%;
-  padding: 10px;
   margin: auto;
   display: flex;
   flex-wrap:nowrap;
-  overflow-x: hidden;
+  overflow-x:auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+.scroll-services::-webkit-scrollbar {
+  display: none;
 }
 
-
 .scroll-services .child {
+  position: relative;
   height: 480px;
-  min-width: 220px;
-  margin-right: 20px;
+  width: 100%;
+  /*margin-right: 20px;*/
   padding: 0;
   color: #000000;
   overflow: hidden;
-  position: relative;
 }
 
 .list-service-wrapper .left {
   margin-left: 10px;
   transform: translateY(-50%);
-  position: absolute;
-  left: 0;
   border: none;
-  background-color: snow;
+  background-color: transparent;
 }
 
 .list-service-wrapper .right {
   margin-left: 10px;
   transform: translateY(-50%);
-  position: absolute;
-  right: 0;
   border: none;
-  background-color: snow;
+  background-color: transparent;
 }
 
 .brand-service-img{
@@ -4439,8 +4571,104 @@ section {
 }
 .gym-brand-content .rating-option button{
 }
-
+.scroll-plans .plan-price{
+  font-size: xxx-large;
+  font-weight: 700;
+}
+@media screen and (min-width: 280px) and (max-width: 400px) {
+  .list-service-wrapper .left {
+    display: none;
+  }
+  .list-service-wrapper .right {
+    display: none;
+  }
+  .scroll-services {
+    width: 100%;
+  }
+  .list-service-wrapper {
+    width: 100%;
+  }
+  .scroll-services .service-name{
+    font-size: 15px;
+  }
+  .brand-service-img {
+    height: 220px;
+    width: 100%;
+  }
+  .list-plan-wrapper .left{
+    display: none;
+  }
+  .list-plan-wrapper .right{
+    display: none;
+  }
+  .list-plan-wrapper {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .list-plan-wrapper .gym-plan-name{
+    font-size: 14px;
+  }
+  .scroll-plans  .plan-description .plan-price{
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .scroll-plans  .plan-description{
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .scroll-plans  .child{
+    min-height: 400px;
+  }
+  .list-plan-wrapper button {
+    font-size: 15px;
+  }
+  .scroll-plans .gym-plan-description{
+    min-height: 80px;
+  }
+  .plan-description{
+    padding: 20px;
+  }
+  .leftImage{
+    display: none;
+  }
+  .rightImage{
+    display: none;
+  }
+  .squares div{
+    width: 100%;
+    height: 100%;
+  }
+  .user-rating-avatar {
+    padding: 0px;
+  }
+  .user-rating-description{
+    margin-top: 5px;
+    padding: 0px;
+    padding-bottom: 10px;
+    font-size: 12px;
+  }
+  .body-gym-details .pagination-wrapper .page-numbers {
+    font-size: 12px;
+    height: fit-content;
+    padding: 0 5px;
+    float: left;
+    margin-top: 15px;
+    /*letter-spacing: 0.1em;*/
+  }
+  .page-numbers {
+    line-height: 20px;
+  }
+}
 @media screen and (min-width: 1200px) {
+  .scroll-services {
+    width: 90%;
+  }
+  .list-service-wrapper {
+    width: 95%;
+  }
   .gym-brand-content .slideshow-container {
     width: 100%;
     height: 500px;
@@ -4451,7 +4679,6 @@ section {
   .body-gym-brand-details .mySlides1 img {
     width: 90%;
     height: 500px;
-
   }
 
 }
@@ -4553,6 +4780,7 @@ section {
     height: fit-content;
     margin-top: 50px;
     padding: 0 15px;
+    font-size: 12px;
     border-radius: 15px;
   }
 }
@@ -4565,6 +4793,9 @@ section {
 }
 
 @media screen and (max-width: 600px) {
+  .scroll-services {
+    width: 80%;
+  }
   .body-gym-brand-details .user-rating{
     display: block
   }

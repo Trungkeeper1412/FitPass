@@ -19,6 +19,8 @@ import com.ks.fitpass.transaction.dto.TransferCreditHistory;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -35,13 +37,14 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     private final EmployeeService employeeService;
     private final OrderDetailService orderDetailService;
     private final NotificationService notificationService;
     private final CheckInHistoryService checkInHistoryService;
     private final WalletService walletService;
     private final WebSocketService webSocketService;
-
     private final BrandService brandService;
     private final TransactionService transactionService;
 
@@ -180,9 +183,28 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                 .timeSend(new Timestamp(System.currentTimeMillis()))
                 .build();
 
-        // Gửi thông báo đến người dùng + insert vào db
-        webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
-        int insertStatus = notificationService.insertNotification(notification);
+        int insertStatus = 0;
+
+        try {
+            //insert vào db
+            insertStatus = notificationService.insertNotification(notification);
+
+            // Retrieve the generated ID after insertion
+            if (insertStatus > 0) {
+                long generatedNotificationId = notification.getNotificationId(); // Assuming 'getId()' method returns the generated ID
+
+                logger.error("Generated Notification ID: {}", generatedNotificationId);
+
+                // Gửi thông báo đến người dùng
+                webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
+                return ResponseEntity.ok(insertStatus);
+            } else {
+                logger.error("Notification insertion failed for some reason.");
+            }
+        } catch (DataAccessException e) {
+            logger.error("Error during notification insertion", e);
+        }
+
         return ResponseEntity.ok(insertStatus);
     }
 
@@ -239,9 +261,28 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                 .timeSend(new Timestamp(System.currentTimeMillis()))
                 .build();
 
-        // Gửi thông báo đến người dùng + insert vào db
-        webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
-        int insertStatus = notificationService.insertNotification(notification);
+        int insertStatus = 0;
+
+        try {
+            //insert vào db
+            insertStatus = notificationService.insertNotification(notification);
+
+            // Retrieve the generated ID after insertion
+            if (insertStatus > 0) {
+                long generatedNotificationId = notification.getNotificationId(); // Assuming 'getId()' method returns the generated ID
+
+                logger.error("Generated Notification ID: {}", generatedNotificationId);
+
+                // Gửi thông báo đến người dùng
+                webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
+                return ResponseEntity.ok(insertStatus);
+            } else {
+                logger.error("Notification insertion failed for some reason.");
+            }
+        } catch (DataAccessException e) {
+            logger.error("Error during notification insertion", e);
+        }
+
         return ResponseEntity.ok(insertStatus);
     }
 
