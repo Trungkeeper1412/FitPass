@@ -3263,7 +3263,7 @@ input:checked + .toggle-slider:before {
     font-size: 14px;
     width: 70%;
     padding : 5px;
-    top: 80px;
+    top: 90px;
     left: 20px;
     right: 20px;
   }
