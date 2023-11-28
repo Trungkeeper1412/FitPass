@@ -260,8 +260,7 @@ public interface IRepositoryQuery {
             SELECT
                      da.id,
                      da.gym_department_id,
-                     da.photo_url,
-                     da.description
+                     da.photo_url
                 FROM gym_department_albums da
                     WHERE da.gym_department_id =?
                 """;
