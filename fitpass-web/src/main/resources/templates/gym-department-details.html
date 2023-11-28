@@ -134,8 +134,9 @@
         <button class="left l1" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
-        <div class="scroll-plans">
-            <div th:each="gymPlan : ${gymPlans}" class="child col-lg-3 col-md-3" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
+        <div class="scroll-plans row">
+            <div class="col-xl-4 col-lg-6 col-md-6" th:each="gymPlan : ${gymPlans}">
+            <div class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
                     <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
                     <div style="" class="gym-plan-price">
@@ -158,6 +159,7 @@
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
                         Thêm vào giỏ hàng
                 </button>
+            </div>
             </div>
 
         </div>

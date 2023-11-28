@@ -3570,10 +3570,10 @@ section {
   border-radius: 10px;
   /* justify-content: center; */
   /* align-items: center; */
-  min-width: 365px;
+  /*min-width: 365px;*/
   height: 480px;
   /* padding: 0px 15px; */
-  margin: 1px 10px;
+  /*margin: 1px 10px;*/
   color: #000000;
   background-color: #ffffff;
   /* background-color: #ffffff; */
@@ -4579,7 +4579,19 @@ section {
     height: 220px;
     width: 100%;
   }
-
+  .list-plan-wrapper .left{
+    display: none;
+  }
+  .list-plan-wrapper .right{
+    display: none;
+  }
+  .list-plan-wrapper {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
 }
 @media screen and (min-width: 1200px) {
   .scroll-services {
