@@ -344,7 +344,7 @@ public class GymOwnerController {
         dayToTimeMap.put("Thứ 5", thursdayOpenTime + "-" + thursdayCloseTime);
         dayToTimeMap.put("Thứ 6", fridayOpenTime + "-" + fridayCloseTime);
         dayToTimeMap.put("Thứ 7", saturdayOpenTime + "-" + saturdayCloseTime);
-        dayToTimeMap.put("Chủ nhật", sundayOpenTime + "-" + sundayCloseTime);
+        dayToTimeMap.put("Chủ Nhật", sundayOpenTime + "-" + sundayCloseTime);
 
         // Insert into department schedule
         int[] numRowInsertScheduleResult = departmentScheduleService.addDepartmentSchedule(dayToTimeMap, departmentInfo.getDepartmentId());
@@ -461,7 +461,7 @@ public class GymOwnerController {
         dayToTimeMap.put("Thứ 5", thursdayOpenTime + "-" + thursdayCloseTime);
         dayToTimeMap.put("Thứ 6", fridayOpenTime + "-" + fridayCloseTime);
         dayToTimeMap.put("Thứ 7", saturdayOpenTime + "-" + saturdayCloseTime);
-        dayToTimeMap.put("Chủ nhật", sundayOpenTime + "-" + sundayCloseTime);
+        dayToTimeMap.put("Chủ Nhật", sundayOpenTime + "-" + sundayCloseTime);
 
         // Delete all department schedule to update
         int numRowDeleteSchedule = departmentScheduleService.deleteAllDepartmentSchedule(updateGymOwnerDepartmentInfo.getDepartmentId());
