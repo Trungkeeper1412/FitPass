@@ -10,11 +10,16 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
+import com.ks.fitpass.credit_card.dto.CreditCard;
+import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.*;
 import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.dto.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
+import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.enums.PageEnum;
 import com.ks.fitpass.web.util.Email;
@@ -22,6 +27,8 @@ import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +37,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +57,8 @@ public class BrandOwnerController {
     private final DepartmentAmenitieService departmentAmenitieService;
     private final DepartmentFeatureService departmentFeatureService;
     private final BrandAmenitieService brandAmenitieService;
+    private final CreditCardService creditCardService;
+    private final RequestWithdrawHistoryService requestWithdrawHistoryService;
 
 
     //Index (Statistic Dashboard)
@@ -133,6 +143,9 @@ public class BrandOwnerController {
     @PostMapping("/department/updateStatus")
     public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status,@RequestParam int departmentId) {
         int update = departmentService.updateDepartmentStatus(status, departmentId);
+        if(status == 0) {
+            departmentService.updateDepartmentGymOwner(departmentId, 0);
+        }
         return ResponseEntity.ok(update);
     }
 
@@ -442,6 +455,10 @@ public class BrandOwnerController {
     @PostMapping("/gym-plans/flexible/update")
     public String updateFlexibleGymPlanDetails(@Valid @ModelAttribute("b") BrandUpdateGymPlanFlexDTO brandDetails,
                                                BindingResult bindingResult) {
+        if(gymPlanService.checkGymPlanInDepartmentUse(brandDetails.getGymPlanId()) > 0 && brandDetails.getStatus() == 2) {
+            bindingResult.rejectValue("status", "error.status", "Đang có cơ sở chọn gói tập này, không thể ngưng hoạt động gói tập");
+        }
+
         if(bindingResult.hasErrors()) {
             return "brand-owner/gym-brand-plan-flexible-detail";
         }
@@ -498,6 +515,10 @@ public class BrandOwnerController {
     @PostMapping("/gym-plans/fixed/update")
     public String updateFixedGymPlanDetails(@Valid @ModelAttribute("b") BrandUpdateGymPlanFixedDTO brandDetails,
                                             BindingResult bindingResult) {
+        if(gymPlanService.checkGymPlanInDepartmentUse(brandDetails.getGymPlanId()) > 0 && brandDetails.getStatus() == 2) {
+            bindingResult.rejectValue("status", "error.status", "Đang có cơ sở chọn gói tập này, không thể ngưng hoạt động gói tập");
+        }
+
         if(bindingResult.hasErrors()) {
             return "brand-owner/gym-brand-plan-fixed-detail";
         }
@@ -529,12 +550,105 @@ public class BrandOwnerController {
     }
 
     @GetMapping("/withdrawal/list")
-    public String getWithdrawal(){
+    public String getWithdrawal(Model model, HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        List<RequestWithdrawHistory> requestWithdrawHistoryListPending = requestWithdrawHistoryService.getAllByUserIdAndStatus(user.getUserId(), "Đang xử lý");
+        List<RequestWithdrawHistory> requestWithdrawHistoryListAll = requestWithdrawHistoryService.getAllByUserId(user.getUserId());
+        RequestHistoryStats requestHistoryStats = requestWithdrawHistoryService.getStatsByUserId(user.getUserId());
+        List<CreditCard> creditCardList = creditCardService.getAllByUserId(user.getUserId());
+        double userBalance = walletService.getBalanceByUserId(user.getUserId());
+
+        Brand b = brandService.getBrandDetail(user.getUserId());
+        int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
+
+
+        model.addAttribute("moneyPercent", moneyPercent);
+        model.addAttribute("userBalance", userBalance);
+        model.addAttribute("requestWithdrawHistoryListPending", requestWithdrawHistoryListPending);
+        model.addAttribute("requestWithdrawHistoryListAll", requestWithdrawHistoryListAll);
+        model.addAttribute("requestHistoryStats", requestHistoryStats);
+        model.addAttribute("creditCardList", creditCardList);
         return "brand-owner/gym-brand-withdrawal-list";
     }
 
+    @PostMapping("/withdrawal/add")
+    public String addWithdrawal(@RequestParam int cardId, @RequestParam int creditAmount, @RequestParam  int moneyAmount) {
+        RequestWithdrawHistory requestWithdrawHistory = new RequestWithdrawHistory();
+        requestWithdrawHistory.setCreditCardId(cardId);
+        requestWithdrawHistory.setAmountCredit((long) creditAmount);
+        requestWithdrawHistory.setActualMoney((long) moneyAmount);
+        requestWithdrawHistory.setWithdrawalTime(new Timestamp(System.currentTimeMillis()));
+        requestWithdrawHistory.setWithdrawalCode(WebUtil.generateUniqueTransactionCode());
+        requestWithdrawHistory.setStatus("Đang xử lý");
+        requestWithdrawHistoryService.create(requestWithdrawHistory);
+        return "redirect:/brand-owner/withdrawal/list";
+    }
+
     @GetMapping("/withdrawal/card/add")
-    public String getWithdrawalCard(){
+    public String getWithdrawalCard(Model model, HttpSession session){
+        try {
+            User user = (User) session.getAttribute("userInfo");
+            // Get all credit card by user id
+            List<CreditCard> creditCardList = creditCardService.getAllByUserId(user.getUserId());
+            model.addAttribute("creditCardList", creditCardList);
+        } catch (EmptyResultDataAccessException e) {
+
+        } catch (DataAccessException e) {
+
+        }
         return "brand-owner/gym-brand-withdrawal-card-add";
+    }
+
+    @PostMapping("/withdrawal/card/add-bank-card")
+    public ResponseEntity<Integer> addBankCard(@RequestBody CreditCard creditCard, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("userInfo");
+            creditCard.setUserId(user.getUserId());
+            creditCard.setStatus("Đang hoạt động");
+            if(creditCardService.checkCreditCardExist(creditCard, user.getUserId())) {
+                return ResponseEntity.ok(-1);
+            }
+
+            int rowAffect = creditCardService.createCreditCard(creditCard);
+            if(rowAffect > 0) {
+                int lastCreditCardId = creditCardService.getLastCreditCardId();
+                return ResponseEntity.ok(lastCreditCardId);
+            }
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/withdrawal/card/details")
+    public ResponseEntity<CreditCard> getBankCardDetails(@RequestParam("id") int creditCardId, Model model) {
+        try {
+            CreditCard creditCard = creditCardService.getOne(creditCardId);
+            return ResponseEntity.ok(creditCard);
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/withdrawal/card/update-bank-card")
+    public ResponseEntity<Integer> updateBankCard(@RequestBody CreditCard creditCard, HttpSession session) {
+        int rowAffect;
+        try {
+            rowAffect = creditCardService.updateCreditCard(creditCard);
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(rowAffect);
+    }
+
+    @PostMapping("/withdrawal/card/delete-bank-card")
+    public ResponseEntity<Integer> deleteBankCard(@RequestBody Integer creditCardId, HttpSession session) {
+        int rowAffect;
+        try {
+            rowAffect = creditCardService.deleteCreditCard(creditCardId);
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(rowAffect);
     }
 }

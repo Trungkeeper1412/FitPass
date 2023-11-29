@@ -18,7 +18,8 @@ public class WalletRepositoryImpl implements WalletRepository {
 
     @Override
     public double getBalanceByUserId(int userId) {
-        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_WALLET_BALANCE_BY_USER_ID, Double.class, userId);
+        double balance = jdbcTemplate.queryForObject(IRepositoryQuery.GET_WALLET_BALANCE_BY_USER_ID, Double.class, userId);
+        return balance;
     }
 
     @Override

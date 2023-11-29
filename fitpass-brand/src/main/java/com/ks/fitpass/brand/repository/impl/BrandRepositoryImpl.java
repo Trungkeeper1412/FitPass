@@ -1,7 +1,9 @@
 package com.ks.fitpass.brand.repository.impl;
 
+import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
+import com.ks.fitpass.brand.entity.BrandStatus;
 import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;
 import com.ks.fitpass.brand.repository.IRepositoryQuery;
 import com.ks.fitpass.brand.repository.BrandRepository;
@@ -93,6 +95,19 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     }
 
     @Override
+    public List<BrandAdminList> getAllBrand() {
+        return jdbcTemplate.query(GET_ALL_BRAND_ADMIN_LIST, (rs, rowNum) -> {
+            BrandAdminList brandAdminList = new BrandAdminList();
+            brandAdminList.setBrandId(rs.getInt("brand_id"));
+            brandAdminList.setBrandName(rs.getString("name"));
+            brandAdminList.setBrandContactNumber(rs.getString("contact_number"));
+            brandAdminList.setBrandEmail(rs.getString("contact_email"));
+            brandAdminList.setBrandStatus(rs.getInt("brand_status_key"));
+            brandAdminList.setMoneyPercent(rs.getInt("money_percent"));
+            return brandAdminList;
+  });
+    }
+    @Override
     public BrandDetailFeedbackStat getFeedbackOfBrandDetailStat(int brandId) {
         return jdbcTemplate.queryForObject(GET_FEEDBACK_OF_BRAND_STAT, (rs, rowNum) -> {
             BrandDetailFeedbackStat dto = new BrandDetailFeedbackStat();
@@ -136,6 +151,10 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
             return dto;
         });
     }
+       @Override
+    public int updateBrandMoneyPercent(int brandId, int moneyPercent) {
+        return jdbcTemplate.update(UPDATE_BRAND_MONEY_PERCENT, moneyPercent, brandId);
+          }
 
     @Override
     public int countTotalFeedback(int brandId, String sortRating) {
@@ -155,6 +174,10 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     @Override
     public int getBrandOwnerIdByDepartmentId(int departmentId) {
         return jdbcTemplate.queryForObject(GET_BRAND_OWNER_ID_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+       @Override
+    public int getBrandMoneyPercent(int brandId) {
+        return jdbcTemplate.queryForObject(GET_BRAND_MONEY_PERCENT, Integer.class, brandId);
     }
 
 }

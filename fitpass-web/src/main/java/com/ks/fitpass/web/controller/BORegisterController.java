@@ -15,4 +15,9 @@ public class BORegisterController {
     public String getRegistrationSuccessful() {
         return "gym-brand-registration-successful";
     }
+
+    @GetMapping("/famous-brands")
+    public String getFamousBrands() {
+        return "famous-brands";
+    }
 }

@@ -1,6 +1,5 @@
 package com.ks.fitpass.core.config;
 
-import com.ks.fitpass.core.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,49 +18,42 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private final UserServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(UserServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
-                .requestMatchers("/user-homepage-assets/**").permitAll()
-                .requestMatchers("/employee-assets/**").permitAll()
-                .requestMatchers("/login", "/logout").permitAll()
-                .requestMatchers("/user/**").permitAll()
-                .requestMatchers("/cart/**").permitAll()
-                            .requestMatchers("/upload/**").permitAll()
-                            .requestMatchers("/user/**").permitAll()
-//                .requestMatchers("/gym-owner/**").hasRole("MANAGER")
-//                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .requestMatchers("/employee").hasRole("EMPLOYEE")
-                .requestMatchers("/employee").permitAll()
-                .requestMatchers("/send-message").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(formLogin -> formLogin
-                //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
-                .loginPage("/login")
-                .usernameParameter("account")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/user/homepage", true)
-                .failureUrl("/login?error=true")
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")                               // default url
-                .logoutSuccessUrl("/login?logout")                  // default url
-                .invalidateHttpSession(true)                        // default: true
-                .deleteCookies("JSESSIONID")
-            )
-            .rememberMe((remember) -> remember
-                    .rememberMeServices(rememberMeServices)
-            );
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                                .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
+                                .requestMatchers("/user-homepage-assets/**").permitAll()
+                                .requestMatchers("/employee-assets/**").permitAll()
+                                .requestMatchers("/login", "/logout").permitAll()
+                                .requestMatchers("/user/**").permitAll()
+                                .requestMatchers("/cart/**").permitAll()
+                                .requestMatchers("/upload/**").permitAll()
+                                .requestMatchers("/user/**").permitAll()
+                                .requestMatchers("/become-a-partner/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                        //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
+                        .loginPage("/login")
+                        .usernameParameter("account")
+                        .passwordParameter("password")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .failureUrl("/login?error=true")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")                               // default url
+                        .logoutSuccessUrl("/login?logout")                  // default url
+                        .invalidateHttpSession(true)                        // default: true
+                        .deleteCookies("JSESSIONID")
+                )
+                .rememberMe((remember) -> remember
+                        .rememberMeServices(rememberMeServices)
+                );
         return http.build();
     }
 
@@ -73,13 +65,13 @@ public class WebSecurityConfig {
         return rememberMe;
     }
 
-//    @Bean
+    //    @Bean
 //    public PersistentTokenRepository persistentTokenRepository() {
 //        // Save remember me in memory (RAM)
 //        return new InMemoryTokenRepositoryImpl();
 //    }
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -87,6 +79,7 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
 }

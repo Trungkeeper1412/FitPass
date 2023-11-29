@@ -136,10 +136,6 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         }, userId);
     }
 
-
-
-
-
     @Override
     public boolean checkEmailExist(String email) {
         int count = jdbcTemplate.queryForObject(CHECK_EMAIL_EXIST, Integer.class, email);

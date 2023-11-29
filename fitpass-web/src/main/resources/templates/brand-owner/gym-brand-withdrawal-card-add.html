@@ -84,6 +84,19 @@
                                             <h5 class="card-title fw-bold">Danh Sách Thẻ Ngân Hàng</h5>
                                             <ul id="cardList" class="list-group">
                                                 <!-- Hiển thị danh sách thẻ ngân hàng ở đây -->
+                                                <th:block th:each="c : ${creditCardList}">
+                                                    <li th:attr="data-creditCardId=${c.getCreditCardId()}, data-cardHolder=${c.getCardOwnerName()},
+                                                    data-bankType=${c.getBankName()}, data-accountNumber=${c.getCardNumber()}"
+                                                        th:onclick="showCardInfo(this)"
+                                                        class="list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="bi bi-credit-card-2-front fs-1 pr-3"></i>
+                                                            <span class="fs-4 text-uppercase" th:text="${c.getBankName()}">agribank</span>
+                                                        </div>
+                                                        <span class="fs-5">**** **** **** <span th:text="${c.getCardNumber().substring(c.getCardNumber().length() - 4)}"></span></span>
+                                                    </li>
+                                                </th:block>
+
                                             </ul>
                                         </div>
                                     </div>
@@ -108,7 +121,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteCardBtn">Xóa thẻ</button>
-                                        <button type="button" class="btn btn-primary">Cập nhật thẻ</button>
+                                        <button type="button" class="btn btn-primary" onclick="updateCard()">Cập nhật thẻ</button>
                                     </div>
                                 </div>
                             </div>

@@ -15,4 +15,14 @@ public interface DepartmentFeatureRepository {
     int[] insertDepartmentFeature(int gymDepartmentId, List<Integer> featureId);
 
     int deleteAllDepartmentFeatures(int gymDepartmentId);
+
+    Feature getByFeatureId(int featureId);
+
+    int insertFeature(Feature feature);
+
+    int updateFeature(Feature feature);
+
+    int updateFeatureStatus(int featureId, int status);
+
+    List<Feature> getAllFeatureNoStatus();
 }

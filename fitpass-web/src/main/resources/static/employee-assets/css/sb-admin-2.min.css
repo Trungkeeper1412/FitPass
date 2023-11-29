@@ -2865,6 +2865,16 @@ fieldset:disabled a.btn {
     pointer-events: none
 }
 
+.btn-upload-img {
+    border: 1px solid #d1d3e2;
+    background-color: #e9ecef;
+}
+
+.btn-upload-img:hover {
+    border: 1px solid #d1d3e2;
+    background-color: #dde0e3;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #404040;

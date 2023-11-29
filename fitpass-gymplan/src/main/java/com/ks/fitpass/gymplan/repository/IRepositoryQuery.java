@@ -191,4 +191,9 @@ public interface IRepositoryQuery {
                 DELETE FROM gym_department_plans
                 WHERE gym_department_id = ?;
             """;
+
+	String CHECK_GYM_PLAN_IN_DEPARTMENT_USE = """
+				SELECT COUNT(*) FROM gym_department_plans
+				WHERE plan_id = ?;
+			""";
 }

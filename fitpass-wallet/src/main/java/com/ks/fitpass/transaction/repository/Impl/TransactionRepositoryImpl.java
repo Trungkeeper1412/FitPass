@@ -20,7 +20,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public int insertTransaction(TransactionDTO transactionDTO) {
-        return jdbcTemplate.update(IRepositoryQuery.INSERT_INTO_TRANSACTION, transactionDTO.getWalletId(), transactionDTO.getAmount(),
+        return jdbcTemplate.update(IRepositoryQuery.INSERT_INTO_TRANSACTION,  transactionDTO.getWalletId(), transactionDTO.getAmount(),
                 transactionDTO.getTransactionDate(), transactionDTO.getStatus());
     }
 
