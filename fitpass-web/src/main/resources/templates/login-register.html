@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gym Department Details</title>
+    <title>Login</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -24,12 +24,13 @@
 
         <!-- <div class="col-md-6 tab"> -->
         <div id="login-tab" class="col-md-6 login-tab">
+            <form th:action="@{/login}" method='POST'>
             <h1 class="fw-bold">ĐĂNG NHẬP</h1>
             <div class="line"></div>
             <div class="input-fields">
                 <div class="input-field">
-                    <div class="input-title">Email</div>
-                    <input type="number" name="email" placeholder="Nhập địa chỉ email của bạn" value="">
+                    <div class="input-title">Tên đăng nhập</div>
+                    <input type="text" name="account" placeholder="Nhập tên đăng nhập của bạn" value="">
                 </div>
                 <div class="input-field">
                     <div class="input-title">Mật khẩu</div>
@@ -46,7 +47,11 @@
                 </div>
             </div>
             <button class="login">Đăng nhập</button>
+            </form>
+            <div th:if="${param.logout}" id="toast-info">Đăng xuất thành công.</div>
+            <div th:if="${param.error}" id="toast-error">Email hoặc mật khẩu không chính xác.</div>
         </div>
+
 
         <div id="register-tab" class="col-md-6 register-tab">
             <h1 class="fw-bold">ĐĂNG KÝ</h1>
@@ -106,6 +111,21 @@
         </div>
     </div>
 </div>
+<script th:if="${param.logout}">
+    const toastInfo = document.getElementById("toast-info");
+    toastInfo.className = "show success";
+    setTimeout(function () {
+        toastInfo.className = toastInfo.className.replace("show", "");
+    }, 2800);
+</script>
+
+<script th:if="${param.error}">
+    const toastError = document.getElementById("toast-error");
+    toastError.className = "show danger";
+    setTimeout(function () {
+        toastError.className = toastError.className.replace("show", "");
+    }, 2800);
+</script>
 <script>
     const registerTab = document.getElementById("register-tab");
     // loginTab.style.display = "block";

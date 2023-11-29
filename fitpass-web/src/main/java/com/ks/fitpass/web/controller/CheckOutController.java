@@ -194,9 +194,6 @@ public class CheckOutController {
             // Cập nhật lại user balance sau khi đã trừ
             walletService.updateBalanceByUderId(user.getUserId(), creditAfter);
         }
-
-
-
         return "check-out";
     }
 }

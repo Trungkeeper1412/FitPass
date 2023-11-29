@@ -1,19 +1,15 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
-import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
-import com.ks.fitpass.credit_card.dto.CreditCard;
 import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
-import com.stripe.model.checkout.Session;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -128,8 +124,7 @@ public class AdminController {
     }
 
     @GetMapping("/withdrawal")
-    public String getWithdrawalList(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("userInfo");
+    public String getWithdrawalList(Model model) {
         List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListPending = requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý");
         List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListAll = requestWithdrawHistoryService.getAllWithBrandName();
         RequestHistoryStats requestHistoryStats = requestWithdrawHistoryService.getAllStats();
