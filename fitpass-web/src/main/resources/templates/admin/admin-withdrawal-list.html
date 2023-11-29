@@ -45,36 +45,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10001321</td>
-                                    <td>California Fitness & Yoga</td>
-                                    <td>12:32:12 PM</td>
-                                    <td>10000 Creadit</td>
-                                    <td>10000000 VNĐ</td>
-                                    <td class="text-warning fw-bold">Đang xử lý</td>
-                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10001322</td>
-                                    <td>Kickfit Sport</td>
-                                    <td>12:32:12 PM</td>
-                                    <td>172000 Creadit</td>
-                                    <td>172000000 VNĐ</td>
-                                    <td class="text-warning fw-bold">Đang xử lý</td>
-                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>10001323</td>
-                                    <td>The New Gym</td>
-                                    <td>12:32:12 PM</td>
-                                    <td>20000 Creadit</td>
-                                    <td>20000000 VNĐ</td>
-                                    <td class="text-warning fw-bold">Đang xử lý</td>
-                                    <td><div class="btn btn-primary" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
-                                </tr>
+                                    <th:block th:each="h : ${requestWithdrawHistoryListPending}">
+                                        <tr>
+                                            <td th:text="${hStat.index + 1}">1</td>
+                                            <td th:text="${h.getWithdrawalCode()}">10001321</td>
+                                            <td th:text="${h.getBrandName()}">California Fitness & Yoga</td>
+                                            <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
+                                            <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
+                                            <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                            <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
+                                            <td><div class="btn btn-primary" th:attr="onclick='getDetail(' + ${h.getRequestHistoryId()} + ')'" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div></td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -85,28 +67,28 @@
                     </div>
                     <div class="withdraw text-center">
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <div class="transactions btn-transactions">
+                            <div class="transactions btn-transactions" id="filterButtonAll">
                                 <i class="bi bi-list-check fs-3"></i>
-                                <label >Tổng số giao dịch: 3</label>
+                                <label >Tổng số giao dịch: <span th:text="${requestHistoryStats.getTotalRequest()}">3</span></label>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <div class="transactions btn-transactions">
+                            <div class="transactions btn-transactions" id="filterButtonSuccess">
                                 <i class="bi bi-check-circle fs-3"></i>
-                                <label >Giao dịch thành công: 3</label>
+                                <label >Giao dịch thành công: <span th:text="${requestHistoryStats.getTotalApproved()}">3</span></label>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
-                            <div class="transactions btn-transactions">
+                            <div class="transactions btn-transactions" id="filterButtonPending">
                                 <i class="bi bi-clock fs-3"></i>
-                                <label >Giao dịch đang xử lý: 2</label>
+                                <label >Giao dịch đang xử lý: <span th:text="${requestHistoryStats.getTotalPending()}">3</span></label>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
                             <div class="transactions-money">
                                 <i class="bi bi-cash fs-3"></i>
                                 <label>Tổng số credit đã rút:
-                                    <span class="text-money">92000 Credit</span>
+                                    <span class="text-money" th:text="${requestHistoryStats.getTotalCredit() + ' Credit'}">92000 Credit</span>
                                 </label>
                             </div>
                         </div>
@@ -114,7 +96,7 @@
                             <div class="transactions-money">
                                 <i class="bi bi-wallet2 fs-3"></i>
                                 <label>Tổng số tiền đã nhận:
-                                    <span class="text-money">9200000<i class="fa-solid fa-dong-sign pl-2"></i></span>
+                                    <span class="text-money"><span th:text="${requestHistoryStats.getTotalMoney()}">9200000</span><i class="fa-solid fa-dong-sign pl-2"></i></span>
                                 </label>
                             </div>
                         </div>
@@ -123,6 +105,8 @@
                     <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
+                                <form action="/admin/withdrawal/update-status" method="post">
+
                                 <div class="modal-header">
                                     <div class="text-center" style="width: 95%; margin-left: 20px">
                                         <h5 class="modal-title" id="transactionModalLabel">Xử lý giao dịch</h5>
@@ -132,9 +116,9 @@
                                     </div>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
                                         <div class="mb-3">
                                             <label for="brandName" class="form-label">Tên chủ thương hiệu :</label>
+                                            <input type="hidden" name="requestHistoryId" id="requestHistoryId">
                                             <input type="text" class="form-control" id="brandName" value="Lê Đình Tuấn" readonly>
                                         </div>
                                         <div class="mb-3">
@@ -162,12 +146,13 @@
                                             <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
                                             <input type="text" class="form-control" id="cardHolderName" value="Nguyễn Trà My" readonly>
                                         </div>
-                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
-                                    <button type="button" class="btn btn-success">Xác nhận</button>
+                                    <button type="submit" class="btn btn-success">Xác nhận</button>
                                 </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -186,33 +171,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10001321</td>
-                                    <td>California Fitness & Yoga</td>
-                                    <td>12:32:12 PM</td>
-                                    <td>10000 Creadit</td>
-                                    <td>10000000 VNĐ</td>
-                                    <td class="text-success fw-bold">Thành công</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10001322</td>
-                                    <td>Kickfit Sport</td>
-                                    <td>12:32:12 PM</td>
-                                    <td>172000 Creadit</td>
-                                    <td>172000000 VNĐ</td>
-                                    <td class="text-success fw-bold">Thành công</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>10001323</td>
-                                    <td>The New Gym</td>
-                                    <td>12:32:12 PM</td>
-                                    <td>20000 Creadit</td>
-                                    <td>20000000 VNĐ</td>
-                                    <td class="text-success fw-bold">Thành công</td>
-                                </tr>
+                                    <th:block th:each="h : ${requestWithdrawHistoryListAll}">
+                                        <tr>
+                                            <td th:text="${hStat.index + 1}">1</td>
+                                            <td th:text="${h.getWithdrawalCode()}">10001321</td>
+                                            <td th:text="${h.getBrandName()}">California Fitness & Yoga</td>
+                                            <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
+                                            <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
+                                            <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                            <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
+                                            <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
+                                            <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">Không thành công</td>
+                                        </tr>
+                                    </th:block>
+
                                 </tbody>
                             </table>
                         </div>
@@ -240,6 +212,61 @@
 </a>
 
 <th:block th:replace="admin/common/script"></th:block>
+    <script>
+        var table =$("#table-withdrawal-success").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+            }
+        });
+
+        $('#filterButtonPending').on('click', function () {
+            // Lọc theo trạng thái 'Active'
+            table.columns(6).search('Đang xử lý').draw();
+        });
+
+        $('#filterButtonAll').on('click', function () {
+            // Lọc theo trạng thái 'Active'
+            table.columns(6).search('').draw();
+        });
+
+        $('#filterButtonSuccess').on('click', function () {
+            // Lọc theo trạng thái 'Active'
+            table.columns(6).search('Thành công').draw();
+        });
+
+        function getDetail(requestId) {
+            $.ajax({
+                url: "/admin/withdrawal/detail/" + requestId,
+                type: "GET",
+                success: function (response) {
+                    console.log(response);
+                    $("#requestHistoryId").val(response.requestHistoryId);
+                    $("#brandName").val(response.brandName);
+                    $("#credit").val(response.amountCredit);
+                    $("#amount").val(response.actualMoney);
+                    $("#bankSelect").val(response.cardBank);
+                    $("#receiverAccount").val(response.cardNumber);
+                    $("#cardHolderName").val(response.cardHolder);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+
+            $.ajax({
+                url: "/admin/withdrawal/number-percentage/" + requestId,
+                type: "GET",
+                success: function (response) {
+                    console.log(response);
+                    $("#withdrawal-fee").text(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>

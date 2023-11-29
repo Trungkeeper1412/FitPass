@@ -32,6 +32,7 @@
                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
+                                <form action="/admin/brand/number-percentage" method="post">
                                 <div class="modal-header">
                                     <div class="text-center" style="width: 95%; margin-left: 20px">
                                         <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí giao dịch áp dụng</h5>
@@ -42,15 +43,18 @@
                                 </div>
                                 <div class="modal-body">
                                     <label for="editPercentage">Phần trăm phí rút tiền:</label>
-                                    <input type="text" class="form-control" id="editPercentage" name="editPercentage" value="10%">
+                                    <input type="hidden" id="brandId" name="brandId">
+                                    <input type="text" class="form-control" id="editPercentage" name="numberPercentage" value="10">
                                     <small id="percentageNote" class="form-text text-danger">
                                         Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí rút tiền được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
                                     </small>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                                 </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -61,7 +65,6 @@
                                 <tr>
                                     <th>Thứ tự</th>
                                     <th>Tên brand</th>
-                                    <th>Quản lý brand</th>
                                     <th>Số liên hệ cơ sở</th>
                                     <th>Email cơ sở</th>
                                     <th class="status-active">Trạng thái</th>
@@ -69,86 +72,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>California Fitness & Yoga</td>
-                                    <td>Lê Đình Tuấn</td>
-                                    <td>0987654321</td>
-                                    <td>ldt2001@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td>
-                                        <div class="d-flex justify-content-evenly align-items-center">
-                                            <span class="fw-bold">10%</span>
-                                            <div class="btn" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Kickfit Sport</td>
-                                    <td>Nguyễn Văn Trung</td>
-                                    <td>0912345678</td>
-                                    <td>mqt2001@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td>
-                                        <div class="d-flex justify-content-evenly align-items-center">
-                                            <span class="fw-bold">10%</span>
-                                            <div class="btn" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Elite Fitness</td>
-                                    <td>Lê Trung Đức</td>
-                                    <td>0987654321</td>
-                                    <td>nvt2001@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td>
-                                        <div class="d-flex justify-content-evenly align-items-center">
-                                            <span class="fw-bold">11%</span>
-                                            <div class="btn" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>The New Gym</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>0912345678</td>
-                                    <td>linhnvb@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td>
-                                        <div class="d-flex justify-content-evenly align-items-center">
-                                            <span class="fw-bold">12%</span>
-                                            <div class="btn" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Gym Hòa Lạc</td>
-                                    <td>Nguyễn Trà My</td>
-                                    <td>0912345678</td>
-                                    <td>mynt@gmail.com</td>
-                                    <td>Không hoạt động</td>
-                                    <td>
-                                        <div class="d-flex justify-content-evenly align-items-center">
-                                            <span class="fw-bold">12%</span>
-                                            <div class="btn" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <th:block th:each="b : ${brandList}">
+                                        <tr>
+                                            <td th:text="${bStat.index + 1}">1</td>
+                                            <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
+                                            <td th:text="${b.getBrandContactNumber()}">0987654321</td>
+                                            <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
+                                            <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
+                                            <td>
+                                                <div class="d-flex justify-content-evenly align-items-center">
+                                                    <span class="fw-bold" th:text="${b.getMoneyPercent() + '%'}">10%</span>
+                                                    <div class="btn" data-toggle="modal" data-target="#editModal"
+                                                         th:data-brandId="${b.getBrandId()}"
+                                                         th:data-numberPercentage="${b.getMoneyPercent()}"
+                                                         th:onclick="passValueToForm(this)">
+                                                        <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -177,6 +120,16 @@
 </a>
 
 <th:block th:replace="admin/common/script"></th:block>
+    <script>
+        function passValueToForm(btn) {
+            console.log(btn);
+            var brandId = btn.getAttribute("data-brandId");
+            var numberPercentage = btn.getAttribute("data-numberPercentage");
+            console.log(numberPercentage);
+            $("#brandId").val(brandId);
+            $("#editPercentage").val(numberPercentage);
+        }
+    </script>
 </body>
 
 </html>
