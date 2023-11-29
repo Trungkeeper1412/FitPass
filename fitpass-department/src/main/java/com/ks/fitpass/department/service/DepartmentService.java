@@ -7,7 +7,6 @@ import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
-import java.util.Map;
 
 
 public interface DepartmentService {
