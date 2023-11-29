@@ -2549,6 +2549,7 @@ a:link {
 }
 
 .user-basic-info .user {
+  position: relative;
   margin-left: 10px;
   font-size: 14px;
 }
