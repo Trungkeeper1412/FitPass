@@ -420,7 +420,7 @@ VALUES (63, 'gymowner45', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9J
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
                          gender, image_url)
-VALUES (3, 'Nguyễn Văn Bảo', 'Linh', 'cuongbulu@gmail.com', '0987654321', '123 Main St',
+VALUES (3, 'Nguyen Van Bao', 'Linh', 'cuongbulu@gmail.com', '0987654321', '123 Main St',
         '2001-01-01', 'Male', '/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
@@ -677,7 +677,7 @@ VALUES (5, 6, 'Citi Gym',
   Citigym mang đến cho học viên hơn 45 bộ môn tập luyện như Gym,Yoga, các lớp tập nhóm Lesmill bản quyền Quốc tế cùng huấn luyện viên hướng dẫn tận tình,…
 
   Ngoài ra, nếu sở hữu thẻ tập hội viên, bạn được quyền đến bất kỳ phòng tập tại TPHCM của thương hiệu để luyện tập thể thao và chăm sóc sức khỏe.',
-        4, '1900 633 638', 'marketing@citigym.com.vn', 1),
+        4, '1900633638', 'marketing@citigym.com.vn', 1),
 
        (6, 7, 'California Fitness & Yoga',
         '/img/brands/logos/6_logo.jpg',
@@ -686,7 +686,7 @@ VALUES (5, 6, 'Citi Gym',
         'Là thương hiệu sức khỏe lớn nhất tại Việt Nam. Đã sở hữu hơn 35 câu lạc bộ khắp cả nước. Đến với California, bạn sẽ được tận hưởng môi trường luyện tập đẳng cấp với trang thiết bị tốt nhất.
 
   Ngoài gym, tại phòng tập California, bạn sẽ được thỏa sức “phiêu” Pop dance, Sexy dance, Pole dance,…hoặc thực hành chuẩn xác yoga dưới sự hướng dẫn của thầy yoga đến từ Ấn Độ.',
-        4.5, '(028) 7308 2277', 'cali@gmail.com', 1),
+        4.5, '02873082277', 'cali@gmail.com', 1),
 
 
        (7, 8, 'Fit 24 – Fitness & Yoga Center',
@@ -696,7 +696,7 @@ VALUES (5, 6, 'Citi Gym',
         'Bạn sẽ được trải nghiệm đa dạng các lớp từ Dance cho đến Yoga, được hướng dẫn bài bản để học viên đạt được mục tiêu trong thời gian ngắn nhất.
 
   Trong đó, Yoga sẽ được hướng dẫn bởi master Ấn Độ và Việt Nam giàu kinh nghiệm, tận tâm, gym cùng các chuyên gia hàng đầu. FIT24 tổ chức cả lớp nhảy dành cho các bạn nhỏ.',
-        4.2, '1900 2624', 'fit24@gmail.com', 1);
+        4.2, '1900262442', 'fit24@gmail.com', 1);
 
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
@@ -791,7 +791,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         10.770294326858476, 106.66638328225508, 200, 5500,'Hồ Chí Minh'),
 
        (2, 5, 20, 1, 'CITIGYM PHỔ QUANG', '119 Phổ Quang, Phường 09, Quận Phú Nhuận, Thành phố Hồ Chí Minh',
-        ' 1900633638',
+        '1900633638',
         '/img/departments/logos/2_logo.jpg',
         '/img/departments/wallpapers/2_wallpaper.jpg',
         '/img/departments/thumbnails/2_thumbnail.jpg',
@@ -799,7 +799,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         10.809065977594821, 106.67174681287801, 200, 4000,'Hồ Chí Minh'),
 
        (3, 5, 21, 1, 'CITIGYM BẾN VÂN ĐỒN', '34-35 Bến Vân Đồn, Phường 12, Quận 4, Thành phố Hồ Chí Minh',
-        ' 1900633638',
+        '1900633638',
         '/img/departments/logos/3_logo.jpg',
         '/img/departments/wallpapers/3_wallpaper.jpg',
         '/img/departments/thumbnails/3_thumbnail.jpg',
@@ -825,7 +825,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
 
        (6, 6, 24, 1, 'CALIFORNIA VINCOM STAR CITY - QUẬN CẦU GIẤY',
         'Tầng 3, Trung tâm thương mại Vincom Star City, 119 đường Trần Duy Hưng, P. Trung Hòa, Q. Cầu Giấy, Hà Nội',
-        '(024) 7300 1277',
+        '02473001277',
         '/img/departments/logos/6_logo.jpg',
         '/img/departments/wallpapers/6_wallpaper.jpg',
         '/img/departments/thumbnails/6_thumbnail.jpg',
@@ -833,7 +833,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         21.00592534375174, 105.79509157389299, 100, 2000,'Hà Nội'),
 
        (7, 6, 25, 1, 'CALIFORNIA TIMES CITY - QUẬN HAI BÀ TRƯNG',
-        'Time City Megamall, Tòa nhà T18, 458 Minh Khai, P. Vĩnh Tuy, Q. Hai Bà Trưng, Hà Nội', '(024) 7107 9999',
+        'Time City Megamall, Tòa nhà T18, 458 Minh Khai, P. Vĩnh Tuy, Q. Hai Bà Trưng, Hà Nội', '02471079999',
         '/img/departments/logos/7_logo.jpg',
         '/img/departments/wallpapers/7_wallpaper.jpg',
         '/img/departments/thumbnails/7_thumbnail.jpg',
@@ -841,7 +841,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         21.00592534375174, 105.79509157389299, 100, 2000,'Hà Nội'),
 
        (8, 6, 26, 1, 'CALIFORNIA SKY CITY TOWER - QUẬN ĐỐNG ĐA',
-        'Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q. Đống Đa, Hà Nội', '(024) 7109 7899',
+        'Sky City, Tầng M, 88 Láng Hạ, P.Láng Hạ, Q. Đống Đa, Hà Nội', '02471097899',
         '/img/departments/logos/8_logo.jpg',
         '/img/departments/wallpapers/8_wallpaper.jpg',
         '/img/departments/thumbnails/8_thumbnail.jpg',
@@ -850,7 +850,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
 
 
        (9, 7, 27, 1, 'FIT24 PHẠM VĂN HAI- Q. TÂN BÌNH',
-        'Central Plaza, 91 Phạm Văn Hai, Phường 3, Quận Tân Bình, TP. HCM', '028 7307 2424',
+        'Central Plaza, 91 Phạm Văn Hai, Phường 3, Quận Tân Bình, TP. HCM', '02873072424',
         '/img/departments/logos/9_logo.jpg',
         '/img/departments/wallpapers/9_wallpaper.jpg',
         '/img/departments/thumbnails/9_thumbnail.jpg',
@@ -858,7 +858,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         10.794118291505661, 106.66311798225539, 70, 1500,'Hồ Chí Minh'),
 
        (10, 7, 28, 1, 'FIT24 HỒ XUÂN HƯƠNG- QUẬN 3', '02 Hồ Xuân Hương, Phường Võ Thị Sáu, Quận 3, Hồ Chí Minh',
-        '028 7307 2424',
+        '02873072424',
         '/img/departments/logos/10_logo.jpg',
         '/img/departments/wallpapers/10_wallpaper.jpg',
         '/img/departments/thumbnails/10_thumbnail.jpg',
@@ -866,7 +866,7 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         10.77720992036007, 106.68773747611712, 70, 1500,'Hồ Chí Minh'),
 
        (11, 7, 29, 1, 'FIT24 BA THÁNG HAI – QUẬN 10', 'Lầu 6-7-8 Số 3 Ba Tháng Hai, Phường 11, Quận 10, TP. HCM',
-        '028 7307 2424',
+        '02873072424',
         '/img/departments/logos/11_logo.jpg',
         '/img/departments/wallpapers/11_wallpaper.jpg',
         '/img/departments/thumbnails/11_thumbnail.jpg',
@@ -1429,7 +1429,7 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             capacity, area,city)
 VALUES (57, 8, 30, 1, 'Getfit Chi nhánh Oriental Tân Phú',
         'Lầu M (lầu 1) Oriental Plaza, 685 Âu Cơ, P.Tân Thành,Q.Tân Phú.',
-        '(097) 769-9490',
+        '0977699490',
         '/img/departments/logos/57_logo.jpg',
         '/img/departments/wallpapers/57_wallpaper.jpg',
         '/img/departments/thumbnails/57_thumbnail.jpg',
@@ -1441,7 +1441,7 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             capacity, area,city)
 VALUES (83, 8, 31, 1, 'Getfit Chi nhánh Mia Center',
         'Lầu 4, Saigon Mia Center, 202 Đường số 9A, KDC Trung Sơn.',
-        '(096) 611-1241',
+        '0966111241',
         '/img/departments/logos/83_logo.jpg',
         '/img/departments/wallpapers/83_wallpaper.jpg',
         '/img/departments/thumbnails/83_thumbnail.jpg',
@@ -1453,7 +1453,7 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             capacity, area,city)
 VALUES (63, 8, 32, 1, 'Getfit Chi Nhánh HOÀNG DIỆU',
         'Lầu 3, Cao Ốc H3, 384 Hoàng Diệu, Phường 6, Quận 4, TP. HCM',
-        '(098) 849-9745',
+        '0988499745',
         '/img/departments/logos/63_logo.jpg',
         '/img/departments/wallpapers/63_wallpaper.jpg',
         '/img/departments/thumbnails/63_thumbnail.jpg',
@@ -1465,7 +1465,7 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             capacity, area,city)
 VALUES (87, 9, 33, 1, 'Elite Fitness XUÂN DIỆU',
         '51 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội',
-        '024 7302 0888',
+        '02473020888',
         '/img/departments/logos/87_logo.jpg',
         '/img/departments/wallpapers/87_wallpaper.jpg',
         '/img/departments/thumbnails/87_thumbnail.jpg',
@@ -1501,7 +1501,7 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             capacity, area,city)
 VALUES (52, 10, 36, 1, 'Fit365 Fitness &Yoga Q.11',
         '219 Lý Thường Kiệt, Phường 15, Quận 11, Tp. Hồ Chí Minh , Ho Chi Minh City, Vietnam',
-        '090 929 08 80',
+        '0909290880',
         '/img/departments/logos/52_logo.jpg',
         '/img/departments/wallpapers/52_wallpaper.jpg',
         '/img/departments/thumbnails/52_thumbnail.jpg',
@@ -1944,7 +1944,7 @@ VALUES (11, 12, 'Advance Fitness & Gym',
         'Đến với Advance, học viên sẽ được kiểm tra thể chất bằng máy Check in Body – một trong những thiết bị hiện đại nhất Việt Nam hiện nay, được tư vấn dinh dưỡng như cách ăn uống và phân tích thức cả khi ở nhà.
 
   Nếu trở thành học viên ở Advance, bạn sẽ được kiểm tra sức khỏe đều đặn. Thông qua đó, huấn luyện viên sẽ đánh giá thể trạng và đưa ra phương pháp tập luyện phù hợp cho từng người.',
-        0, '1900 63 35 31', ' advancefitnessgym@gmail.com', 1),
+        0, '1900633531', ' advancefitnessgym@gmail.com', 1),
 
        (12, 13, 'The New Gym',
         '/img/brands/logos/12_logo.jpg',
@@ -1955,7 +1955,7 @@ VALUES (11, 12, 'Advance Fitness & Gym',
   Nếu mong muốn hiện tại của bạn là tìm phòng tập gym Quận Tân Bình giá rẻ, phòng tập gym Bình Thạnh giá rẻ hay phòng tập gym quận 6 giá rẻ thì The New Gym là dành cho bạn.
 
   Giá tập tại đây chỉ với 300.000 VNĐ/ 1 tháng, huấn luyện viên tại The New Gym sẵn sàng tư vấn bài tập và chế độ ăn cho học viên mà không phát sinh bất kỳ chi phí nào',
-        0, '1900 63 69 20', 'info@thenewgym.vn', 1),
+        0, '1900636920', 'info@thenewgym.vn', 1),
 
        (13, 14, 'VShape Gym & Yoga',
         '/img/brands/logos/13_logo.jpg',
@@ -1966,7 +1966,7 @@ VALUES (11, 12, 'Advance Fitness & Gym',
   Với diện tích 650m2 , tuy nhỏ hơn so với những phòng tập trên. Nhưng phần đầu tư trang thiết bị, máy móc thì không hề thua kém. Tất cả đều đạt tiêu chuẩn quốc tế để phục vụ cho việc tập luyện.
 
   Tại VShape hỗ trợ máy đánh giá sức khỏe, đo chỉ số cơ thể chi tiết và chuyên nghiệp của Inbody, công nghệ Mỹ.',
-        0, '(08) 7108 0815', 'vshapegym@gmail.com', 1);
+        0, '0871080815', 'vshapegym@gmail.com', 1);
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
 
@@ -2019,7 +2019,7 @@ INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department
                             logo_url, wallpaper_url, thumbnail_url, description, latitude, longitude, capacity, area,city)
 
 VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
-        'SE05, GARDEN COURT 1, Tôn Dật Tiên, Phú Mỹ Hưng, Q7, Tp.HCM', '08 5416 0555',
+        'SE05, GARDEN COURT 1, Tôn Dật Tiên, Phú Mỹ Hưng, Q7, Tp.HCM', '0854160555',
         '/img/departments/logos/12_logo.jpg',
         '/img/departments/wallpapers/12_wallpaper.jpg',
         '/img/departments/thumbnails/12_thumbnail.jpg',
@@ -2030,7 +2030,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         200, 800, 'Hồ Chí Minh'),
 
        (13, 11, 38, 1, 'Advance Fitness & Gym Nguyễn Lương Bằng',
-        'ST05 Block E, Riverside Residence, Nguyễn Lương Bằng, Phú Mỹ Hưng, Q7, Tp.HCM', '08 5411 8777',
+        'ST05 Block E, Riverside Residence, Nguyễn Lương Bằng, Phú Mỹ Hưng, Q7, Tp.HCM', '0854118777',
         '/img/departments/logos/13_logo.jpg',
         '/img/departments/wallpapers/13_wallpaper.jpg',
         '/img/departments/thumbnails/13_thumbnail.jpg',
@@ -2040,7 +2040,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         10.720789817865652, 106.72672455649781,
         300, 1100,'Hồ Chí Minh'),
 
-       (14, 11, 39, 1, 'Advance Fitness & Gym Kỳ Đồng', '05 Kỳ Đồng, Phường 6 Quận 3 TPHCM.', '08 6298 2111',
+       (14, 11, 39, 1, 'Advance Fitness & Gym Kỳ Đồng', '05 Kỳ Đồng, Phường 6 Quận 3 TPHCM.', '0862982111',
         '/img/departments/logos/14_logo.jpg',
         '/img/departments/wallpapers/14_wallpaper.jpg',
         '/img/departments/thumbnails/14_thumbnail.jpg',
@@ -2049,7 +2049,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         450, 1200,'Hồ Chí Minh'),
 
        (15, 12, 40, 1, 'The New Gym Nguyễn Chí Thanh', '332 Nguyễn Chí Thanh, Phường 5, Quận 10, Thành phố Hồ Chí Minh',
-        '1900 63 69 20',
+        '1900636920',
         '/img/departments/logos/15_logo.jpg',
         '/img/departments/wallpapers/15_wallpaper.jpg',
         '/img/departments/thumbnails/15_thumbnail.jpg',
@@ -2067,7 +2067,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         400, 1800,'Hồ Chí Minh'),
 
        (17, 12, 42, 1, 'The New Gym Hoàng Văn Thụ',
-        'Lầu 5, 1/1 Hoàng Việt, Phường 4, Quận Tân Bình, Thành phố Hồ Chí Minh', '1900 63 69 20',
+        'Lầu 5, 1/1 Hoàng Việt, Phường 4, Quận Tân Bình, Thành phố Hồ Chí Minh', '1900636920',
         '/img/departments/logos/17_logo.jpg',
         '/img/departments/wallpapers/17_wallpaper.jpg',
         '/img/departments/thumbnails/17_thumbnail.jpg',
@@ -2076,7 +2076,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         300, 1200, 'Hồ Chí Minh'),
 
        (18, 12, 43, 1, 'The New Gym Ung Văn Khiêm',
-        '58D Ung Văn Khiêm, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh', '1900 63 69 20',
+        '58D Ung Văn Khiêm, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh', '1900636920',
         '/img/departments/logos/18_logo.jpg',
         '/img/departments/wallpapers/18_wallpaper.jpg',
         '/img/departments/thumbnails/18_thumbnail.jpg',
@@ -2085,7 +2085,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         500, 1800, 'Hồ Chí Minh'),
 
        (19, 13, 44, 1, 'VShape Fitness & Yoga Center, Trường Chinh',
-        '491/21-23 Đường Trường Chinh, Phường 14, Quận Tân Bình, Hồ Chí Minh', '(08) 71080815',
+        '491/21-23 Đường Trường Chinh, Phường 14, Quận Tân Bình, Hồ Chí Minh', '0871080815',
         '/img/departments/logos/19_logo.jpg',
         '/img/departments/wallpapers/19_wallpaper.jpg',
         '/img/departments/thumbnails/19_thumbnail.jpg',
@@ -2094,7 +2094,7 @@ VALUES (12, 11, 37, 1, 'Advance Fitness & Gym Tôn Dật Tiên',
         200, 650, 'Hồ Chí Minh'),
 
        (20, 13, 45, 1, 'VShape Fitness & Yoga Center, Vincom Plus', 'Lầu 3 – 307 Nguyễn Duy Trinh, Quận 2, Hồ Chí Minh',
-        '(08) 71080815',
+        '0871080815',
         '/img/departments/logos/20_logo.jpg',
         '/img/departments/wallpapers/20_wallpaper.jpg',
         '/img/departments/thumbnails/20_thumbnail.jpg',
@@ -2566,7 +2566,7 @@ VALUES
      '/img/brands/wallpapers/1_wallpaper.jpg',
      '/img/brands/thumbnails/1_thumbnail.jpg',
      'Kickfit Sports đã đang và sẽ phát triển theo hướng: “Chuyên nghiệp – Chất Lượng – Luôn đổi mới và hoàn thiện” đồng thời mong muốn mang lại sức khỏe và thịnh vượng cho hàng triệu người Việt Nam.Với hơn 10 năm xây dựng và phát triển, hiện tại Kickfit Sports đang sở hữu 14 cơ sở phòng tập trải rộng khắp Hà Nội. Trung tâm luôn chú trọng đầu tư, cải tiến các sản phẩm, dịch vụ để mang đến môi trường tập luyện 5 sao, uy tín và chất lượng.',
-     5, '093 63 999 88', 'hethong@kickfit-sports.com', 1),
+     5, '0936399988', 'hethong@kickfit-sports.com', 1),
 
     /****************************************** 25 FIT Brand *****************************************************/
     (2, 16, '25 Fit',
@@ -2576,7 +2576,7 @@ VALUES
      '25 Fit là viết tắt của cụm từ 25 minutes to get fit, là hệ thống phòng tập công nghệ EMS đầu tiên. EMS là phương pháp dùng xung điện để tác động, kích thích cơ bắp phát triển và đánh tan mỡ thừa.
      Với phương pháp này bạn không cần dùng tạ nên cũng không cần lo ngại về chấn thương, chỉ cần tập luyện 25 phút và 1 – 2 buổi/ tuần đã có thể đạt kết quả giảm mỡ nhanh hơn, tiết kiệm tối ưu thời gian.
      Trang thiết bị nhập khẩu từ Đức, đặc biệt là tại phòng tập 25 FIT, quần áo và thức uống pre-workout sẽ được chuẩn bị sẵn và miễn phí.',
-     4.7, '18006176', 'welisten@25fit.net', 1),
+     4.7, '1800617654', 'welisten@25fit.net', 1),
 
     /******************************************** S'Life Brand ***************************************************/
     (3, 17, 'S’Life Gym & Yoga',
@@ -2585,7 +2585,7 @@ VALUES
      '/img/brands/thumbnails/3_thumbnail.jpg',
      '"S’Life là hệ thống phòng tập thể hình không gian xanh, môi trường lý tưởng để tập luyện với trang thiết bị hiện đại cùng huấn luyện viên chuyên nghiệp sẽ giúp hội viên đạt hiệu quả tập luyện cao nhất.
 Bài tập luyện của học viện đều được huấn luyện viên của S’Life cá nhân hóa để phù hợp với thể trạng của mỗi người."',
-     4.7, '0902 635 124', ' slifegym@gmail.com', 1),
+     4.7, '0902635124', ' slifegym@gmail.com', 1),
 
     /********************************************* Diamond Fitness Brand **************************************************/
     (4, 18, 'Diamond Fitness Center',
@@ -2595,7 +2595,7 @@ Bài tập luyện của học viện đều được huấn luyện viên của
      '"Diamond Fitness Center tự hào đem lại trải nghiệm tốt nhất cho bạn với hệ thống gồm 14 câu lạc bộ đẳng cấp 5 sao. Được trang bị các thiết bị hiện đại, cùng hệ thống hồ bơi trong nhà, phòng tập Yoga, Kick Boxing, Thiền,…
 Sự khác biệt của thương hiệu này, chính là chương trình đo khám chỉ số BMI. Thông qua chỉ số này, bạn sẽ hiểu hơn về tình trạng cơ thể của mình và từ đó xác định nhu cầu của cơ thể là gì.
 Dựa vào BMI, huấn luyện viên của Diamond Fitness sẽ vạch ra lịch tập cũng như bài tập phù hợp với nhu cầu hoàn thiện cơ thể của bạn."',
-     4.5, '(086) 212-3247', 'diamondfitness@gmail.com', 1);
+     4.5, '0862123247', 'diamondfitness@gmail.com', 1);
 
 INSERT INTO gym_department (gym_department_id, brand_id, user_id, gym_department_status_key, name, address,
                             contact_number,
@@ -2617,14 +2617,14 @@ VALUES
      'Kickfit Sports Trần Duy Hưng được ra đời vào năm 2012 và là cơ sở đầu tiên của chuỗi phòng tập Kickfit Sports. Dịch vụ phòng tập chủ yếu về các bộ môn võ đối kháng hỗ trợ giảm cân, tăng cơ, cải thiện vóc dáng cũng như trang bị các kỹ năng phòng vệ hiệu quả giúp xử lý các tình huống nguy hiểm trong cuộc sống. Với không gian rộng rãi, cơ sở vật chất hiện đại tối tân, Kickfit Sports Trần Duy Hưng mang tới cho hội viên sự thoải mái, thư giãn sau những giờ học tập và làm việc mệt mỏi.',
      21.009542311744028, 105.79714248159206, 200, 1000,'Hà Nội'),
     (23, 1, 47, 1, 'Kickfit Sports Thiên Đường Bảo Sơn',
-     'Tầng 5, Tòa Gemek 1, Thiên Đường Bảo Sơn, Hoài Đức, Hà Nội', '093 63 999 88',
+     'Tầng 5, Tòa Gemek 1, Thiên Đường Bảo Sơn, Hoài Đức, Hà Nội', '0936399988',
      '/img/departments/logos/23_logo.jpg',
      '/img/departments/wallpapers/23_wallpaper.jpg',
      '/img/departments/thumbnails/23_thumbnail.jpg',
      'Kickfit Sports Thiên Đường Bảo Sơn tọa lạc tại vị trí đắc địa thuộc toà Gemek 1 ngay cổng chào của Thiên Đường Bảo Sơn. Đây một trong những cơ sở phòng tập được đầu tư lớn với nhiều trang thiết bị hiện đại và tiện ích sang chảnh mang đến trải nghiệm tập luyện thể thao tuyệt vời nhất cho khách hàng. Kickfit Sports Thiên Đường Bảo Sơn tự hào khi nhận được vô số những đánh giá tốt từ khách hàng và số lượng người đăng ký tập luyện ngày càng đông đảo.',
      21.00855235502214, 105.7307156200674, 400, 1500,'Hà Nội'),
     (24, 1, 48, 1, 'Kickfit Sports Metro Hà Đông',
-     'Tầng 2, Siêu thị Metro - Melinh Plaza, Hà Đông', '093 63 999 88',
+     'Tầng 2, Siêu thị Metro - Melinh Plaza, Hà Đông', '0936399988',
      '/img/departments/logos/24_logo.jpg',
      '/img/departments/wallpapers/24_wallpaper.jpg',
      '/img/departments/thumbnails/24_thumbnail.jpg',
@@ -2633,28 +2633,28 @@ VALUES
 
     /************************************************ 25 FIT Departments ***********************************************/
     (25, 2, 49, 1, '25 FIT Lý Thường Kiệt',
-     '42Z P. Lý Thường Kiệt, Tràng Tiền, Hoàn Kiếm, Hà Nội', '18006176',
+     '42Z P. Lý Thường Kiệt, Tràng Tiền, Hoàn Kiếm, Hà Nội', '1800617612',
      '/img/departments/logos/25_logo.jpg',
      '/img/departments/wallpapers/25_wallpaper.jpg',
      '/img/departments/thumbnails/25_thumbnail.jpg',
      '25 FIT Lý Thường Kiệt là studio đầu tiên ở Hà Nội đánh dấu những bước tiến quan trọng của 25 FIT tại khu vực phía Bắc trong việc mang công nghệ EMS đến với người dùng thủ đô',
      21.023985014649746, 105.85026204718575, 5, 60, 'Hà Nội'),
     (26, 2, 50, 1, '25 FIT Duy Tân',
-     '22 Duy Tân, Cầu Giấy, Hà Nội Hà Nội', '18006176',
+     '22 Duy Tân, Cầu Giấy, Hà Nội Hà Nội', '1800617645',
      '/img/departments/logos/26_logo.jpg',
      '/img/departments/wallpapers/26_wallpaper.jpg',
      '/img/departments/thumbnails/26_thumbnail.jpg',
      'Nằm tại cung đường sầm uất và nhộn nhịp, tiếp giáp khu dân cư, văn phòng, studio mới 25 FIT Duy Tân hứa hẹn sẽ đem đến cho khách hàng những trải nghiệm tập luyện giá trị tốt nhất về sức khỏe, dịch vụ với công nghệ EMS Training hiện đại, đảm bảo tiết kiệm thời gian.',
      21.030865188489173, 105.78566187313876, 5, 60, 'Hà Nội'),
     (27, 2, 51, 1, '25 FIT Times City',
-     'T1, SO.02, Khu đô thị Times City, Hai Bà Trưng, Hà Nội', '18006176',
+     'T1, SO.02, Khu đô thị Times City, Hai Bà Trưng, Hà Nội', '1800617645',
      '/img/departments/logos/27_logo.jpg',
      '/img/departments/wallpapers/27_wallpaper.jpg',
      '/img/departments/thumbnails/27_thumbnail.jpg',
      'Đặt ở vị trí thuận tiện tại khu dân cư Times City, Quận Hai Bà Trưng. Chỉ 20 phút tập, 2 buổi/tuần cùng huấn luyện viên chuyên nghiệp, quý khách không cần mang bất cứ thứ gì kể cả quần áo hay giày tập để có thể đạt kết quả tăng cơ, giảm mỡ.',
      20.99661352642664, 105.86945587284531, 5, 55, 'Hà Nội'),
     (28, 2, 52, 1, '25 FIT Vinhomes Gardenia Hàm Nghi',
-     'B17 05A Shophouse Vinhomes Gardenia, P. Hàm Nghi, Cầu Diễn, Nam Từ Liêm, Hà Nội.', '18006176',
+     'B17 05A Shophouse Vinhomes Gardenia, P. Hàm Nghi, Cầu Diễn, Nam Từ Liêm, Hà Nội.', '1800617612',
      '/img/departments/logos/28_logo.jpg',
      '/img/departments/wallpapers/28_wallpaper.jpg',
      '/img/departments/thumbnails/28_thumbnail.jpg',
@@ -2663,28 +2663,28 @@ VALUES
 
     /********************************************** S'Life Departments *************************************************/
     (29, 3, 53, 1, 'Phòng tập Gym S''Life Quận 10',
-     '575 Đ. Sư Vạn Hạnh, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '(093) 889-1436',
+     '575 Đ. Sư Vạn Hạnh, Phường 12, Quận 10, Thành phố Hồ Chí Minh', '0938891436',
      '/img/departments/logos/29_logo.jpg',
      '/img/departments/wallpapers/29_wallpaper.jpg',
      '/img/departments/thumbnails/29_thumbnail.jpg',
      'Nổi bật khắp HCM với không gian xanh đẳng cấp rộng hơn 3.000m2 và đầy đủ bộ môn, S''Life Quận 10 sẽ mang đến cho bạn những trải nghiệm tuyệt vời và hiệu quả nhất.',
      10.776571562971277, 106.6669378322132, 400, 3000,'Hồ Chí Minh'),
     (30, 3, 54, 1, 'Phòng tập Gym S''Life Quận 6',
-     '893 Đ. Hậu Giang, P.11, Quận 6, Thành phố Hồ Chí Minh', '(090) 263-5124',
+     '893 Đ. Hậu Giang, P.11, Quận 6, Thành phố Hồ Chí Minh', '0902635124',
      '/img/departments/logos/30_logo.jpg',
      '/img/departments/wallpapers/30_wallpaper.jpg',
      '/img/departments/thumbnails/30_thumbnail.jpg',
      'Bạn đang tìm kiếm phòng tập tại quận 6? S''Life GYM chính là sự lựa chọn dành cho bạn với chất lượng hàng đầu',
      10.746277023301626, 106.62821508856594, 300, 2000,'Hồ Chí Minh'),
     (31, 3, 55, 1, 'Phòng tập Gym S''Life Bình Chánh',
-     '34 Đ. Phạm Hùng, Bình Hưng, Bình Chánh, Thành phố Hồ Chí Minh', '(090) 263-5124',
+     '34 Đ. Phạm Hùng, Bình Hưng, Bình Chánh, Thành phố Hồ Chí Minh', '0902635124',
      '/img/departments/logos/31_logo.jpg',
      '/img/departments/wallpapers/31_wallpaper.jpg',
      '/img/departments/thumbnails/31_thumbnail.jpg',
      '"Với không gian đẳng cấp và sang trọng, S''Life GYM Bình Chánh chính là sự lựa chọn hoàn hảo dành cho bạn để cải thiện sức khỏe và vóc dáng hiệu quả.',
      10.73050975241317, 106.67597421199494, 260, 1800, 'Hồ Chí Minh'),
     (32, 3, 56, 1, 'Phòng tập Gym S''Life Bình Thạch',
-     '26 Nguyễn Huy Lượng, Phường 14, Bình Thạnh, Thành phố Hồ Chí Minh, Vietnam', '(090) 263-5124',
+     '26 Nguyễn Huy Lượng, Phường 14, Bình Thạnh, Thành phố Hồ Chí Minh, Vietnam', '0902635124',
      '/img/departments/logos/32_logo.jpg',
      '/img/departments/wallpapers/32_wallpaper.jpg',
      '/img/departments/thumbnails/32_thumbnail.jpg',
@@ -2716,7 +2716,7 @@ Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực 
      'Viên kim cương khổng lồ Diamond Fitness Paragon tại TD Plaza, Lê Hồng Phong, TP Hải Phòng là dự án lớn nhất TP Hải Phòng với dòng thiết bị cao cấp nhất Hàn Quốc – DRAX cùng 2 phân khu đẳng cấp nhất.',
      20.846699998604187, 106.70741856252596, 400, 3000,'Hồ Chí Minh'),
     (36, 4, 60, 1, 'Diamond Fitness Paragon Bạch Đằng',
-     '97 Bạch Đằng, Hạ Lý, Hồng Bàng, Hải Phòng', '(089) 916-4562',
+     '97 Bạch Đằng, Hạ Lý, Hồng Bàng, Hải Phòng', '0899164562',
      '/img/departments/logos/36_logo.jpg',
      '/img/departments/wallpapers/36_wallpaper.jpg',
      '/img/departments/thumbnails/36_thumbnail.jpg',

@@ -234,15 +234,6 @@
         </div>
         <div class="pagination-wrapper">
             <div class="pagination justify-content-center" id="paginationFeedback">
-<!--                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"-->
-<!--                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>-->
-<!--                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">-->
-<!--                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"-->
-<!--                       th:classappend="${pageNumber == currentPage}? 'current' : ''"-->
-<!--                       th:text="${pageNumber}"></a>-->
-<!--                </span>-->
-<!--                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"-->
-<!--                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>-->
             </div>
         </div>
     </div>
@@ -636,7 +627,7 @@
 
 
                     var prevPage = data.currentPage - 1;
-                    paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">prev</a> ';
+                    paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">Trước</a> ';
 
 
                     for (var i = 1; i <= data.totalPage; i++) {
@@ -650,7 +641,7 @@
 
 
                     var nextPage = data.currentPage + 1;
-                    paginationHtml += '<a class="next page-numbers' + (data.currentPage === data.totalPage ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + nextPage + ')">next</a> ';
+                    paginationHtml += '<a class="next page-numbers' + (data.currentPage === data.totalPage ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + nextPage + ')">Sau</a> ';
 
                     $('#paginationFeedback').empty().html(paginationHtml);
                 }
