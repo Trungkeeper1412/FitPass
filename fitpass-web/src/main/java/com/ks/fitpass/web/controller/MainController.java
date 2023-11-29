@@ -1,5 +1,6 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpSession session) {
+        User user = (User) session.getAttribute("userInfo");
+        if (user != null) {
+            return "redirect:/user/homepage";
+        }
         return "login";
     }
 
