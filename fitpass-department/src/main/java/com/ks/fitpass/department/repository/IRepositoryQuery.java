@@ -553,6 +553,11 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 FROM features WHERE feature_status = 1;
             """;
 
+    String GET_ALL_FEATURES = """
+                SELECT feature_id, feature_icon, feature_name, feature_status
+                FROM features;
+            """;
+
     String UPDATE_GYM_OWNER_DEPARTMENT_INFO = """
                 UPDATE gym_department
                 SET
@@ -645,6 +650,30 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 SET first_time = 0
                 WHERE gym_department_id = ?;
             """;
+            
+             String  GET_FEATURE_BY_FEATURE_ID = """
+                SELECT feature_id, feature_icon, feature_name, feature_status
+                FROM features WHERE feature_id = ?;
+            """;
+
+    String INSERT_FEATURE = """
+                INSERT INTO features
+                (feature_name, feature_icon, feature_status)
+                VALUES(?, ?, ?);
+            """;
+
+    String UPDATE_FEATURE = """
+                UPDATE features
+                SET feature_name = ?, feature_icon = ?
+                WHERE feature_id = ?;
+            """;
+
+    String UPDATE_FEATURE_STATUS = """
+                UPDATE features
+                SET feature_status = ?
+                WHERE feature_id = ?;
+            """;
+            
 
     String COUNT_ALL_FEEDBACK = """
                 SELECT COUNT(*)
