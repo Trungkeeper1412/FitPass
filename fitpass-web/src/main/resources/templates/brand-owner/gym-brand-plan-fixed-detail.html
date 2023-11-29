@@ -72,6 +72,9 @@
                                                 <div class="form-check form-check-inline">
                                                     <input th:field="${b.status}" type="radio" name="actived" id="inlineradio2"
                                                            value="2" th:checked="${b.status != 1}">&nbsp;Ngừng hoạt động
+                                                    <div>
+                                                        <span class="text-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Status Error</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
