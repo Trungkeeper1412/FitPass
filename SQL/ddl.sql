@@ -364,6 +364,10 @@ CREATE TABLE IF NOT EXISTS request_withdrawal_history (
                                                           FOREIGN KEY (credit_card_id) REFERENCES credit_card(credit_card_id)
 );
 
+
+
+
+
 DELIMITER $$
 CREATE TRIGGER update_gym_rating_avg
     AFTER INSERT ON user_feedback
