@@ -2730,8 +2730,14 @@ a:link {
 }
 
 .user-basic-info .user {
+<<<<<<< HEAD
+  position: relative;
+  margin-left: 10px;
+  font-size: 14px;
+=======
     margin-left: 10px;
     font-size: 14px;
+>>>>>>> a213655f133c4a9ac04b509c5573307effb77782
 }
 
 .user-basic-info .name {
