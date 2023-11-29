@@ -34,7 +34,8 @@ public class WebSecurityConfig {
                                 .requestMatchers("/cart/**").permitAll()
                                 .requestMatchers("/upload/**").permitAll()
                                 .requestMatchers("/user/**").permitAll()
-                                .anyRequest().authenticated()
+                                .requestMatchers("/become-a-partner/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                         //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
@@ -78,4 +79,7 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
 }
