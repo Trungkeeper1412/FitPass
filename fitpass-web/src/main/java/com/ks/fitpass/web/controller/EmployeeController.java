@@ -7,6 +7,9 @@ import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.UserDetail;
+import com.ks.fitpass.core.repository.UserRepository;
+import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.employee.dto.*;
@@ -32,6 +35,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -50,10 +54,15 @@ public class EmployeeController {
     private final BrandService brandService;
     private final DepartmentService departmentService;
     private final TransactionService transactionService;
+    private final UserRepository userRepository;
+    private final UserService userService;
+
 
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
                               NotificationService notificationService, CheckInHistoryService checkInHistoryService,
-                              WalletService walletService, WebSocketService webSocketService, BrandService brandService, DepartmentService departmentService, TransactionService transactionService) {
+                              WalletService walletService, WebSocketService webSocketService, BrandService brandService,
+                              DepartmentService departmentService, TransactionService transactionService,
+                              UserRepository userRepository, UserService userService) {
         this.employeeService = employeeService;
         this.orderDetailService = orderDetailService;
         this.notificationService = notificationService;
@@ -63,9 +72,11 @@ public class EmployeeController {
         this.brandService = brandService;
         this.departmentService = departmentService;
         this.transactionService = transactionService;
+        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
-  @GetMapping("/check-in/fixed")
+    @GetMapping("/check-in/fixed")
 public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
     try {
         List<CheckInFixedDTO> checkInFixedDTOList = employeeService.getListNeedCheckInFixedByDepartmentId(departmentId);
@@ -175,12 +186,14 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         String departmentName = departmentNotificationDTO.getDepartmentName();
         String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
 
+        UserDetail employeeDetail = userService.getUserDetailByUserDetailId(user.getUserId());
+        String usernameSend = employeeDetail.getFirstName().concat(" ").concat(employeeDetail.getLastName());
+
         int userIdSend = user.getUserId();
-        String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
 
-        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentId + ". Hãy xác nhận ngay!";
+        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentName  + ". Hãy xác nhận ngay!";
 
         // Truyền nội dung notification
         Notification notification = Notification.builder()
@@ -231,12 +244,14 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         String departmentName = departmentNotificationDTO.getDepartmentName();
         String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
 
+        UserDetail employeeDetail = userService.getUserDetailByUserDetailId(user.getUserId());
+        String usernameSend = employeeDetail.getFirstName().concat(" ").concat(employeeDetail.getLastName());
+
         int userIdSend = user.getUserId();
-        String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check out";
         String employeeMessage = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check out ở phòng tập " +
-                departmentId + ". Hãy bấm vào để xem chi tiết.";
+                departmentName + ". Hãy bấm vào để xem chi tiết.";
         dataSendCheckOutFlexibleDTO.setEmployeeMessage(employeeMessage);
 
         // Lấy ra hết thông tin gửi từ check out + Set các thông tin cần gửi về front
@@ -260,7 +275,6 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         // Extract JSON strings for orderDetailConfirmCheckOut and dataSendCheckOutFlexible
         String orderDetailConfirmCheckOutJson = new ObjectMapper().writeValueAsString(orderCheckOut);
         String dataSendCheckOutFlexibleJson = new ObjectMapper().writeValueAsString(dataSendCheckOutFlexibleDTO);
-
 
         // Truyền nội dung notification
         Notification notification = Notification.builder()
@@ -431,7 +445,7 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
-        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentId + ". Hãy xác nhận ngay!";
+        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentName + ". Hãy xác nhận ngay!";
 
         // Truyền nội dung notification
         Notification notification = Notification.builder()
@@ -539,4 +553,10 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         List<CheckInHistoryFixed> listFlexible = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
         return ResponseEntity.ok(listFlexible);
     }
+
+    @GetMapping("/changePassword")
+    public String getRegistrationList() {
+        return "employee/change-password";
+    }
+
 }

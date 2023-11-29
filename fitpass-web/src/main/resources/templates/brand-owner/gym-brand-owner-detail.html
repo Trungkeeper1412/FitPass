@@ -37,7 +37,7 @@
                                             <img class="show-department-img" th:src="${gymOwner.getImageUrl()}">
                                             <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" style="display: none;" onchange="uploadImage(this);">
                                             <div class="d-flex justify-content-center mt-3">
-                                                <button type="button" class="btn btn-primary" onclick="document.getElementById('department-img').click();">
+                                                <button type="button" class="btn btn-upload-img" onclick="document.getElementById('department-img').click();">
                                                     Chọn ảnh
                                                 </button>
                                             </div>

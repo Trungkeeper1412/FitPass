@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.getUserEmailByUserId(userId);
     }
 
+
     @Override
     public int insertIntoUser(User user) {
         return userRepository.insertIntoUser(user);
@@ -145,5 +146,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public int getNumberOfAccountCreatedByDepartmentId(int departmentId) {
         return userRepository.getNumberOfAccountCreatedByDepartmentId(departmentId);
+    }
+
+    @Override
+    public User getUserByAccount(String username) {
+        return userRepository.findByAccount(username);
     }
 }

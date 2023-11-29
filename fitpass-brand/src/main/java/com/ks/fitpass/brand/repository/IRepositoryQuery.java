@@ -168,6 +168,11 @@ public interface IRepositoryQuery {
                 WHERE amenitie_id=?;
             """;
 
+    String GET_ALL_BRAND_ADMIN_LIST = """
+                SELECT b.brand_id, b.name,  b.contact_number,
+                       b.contact_email, b.brand_status_key, b.money_percent
+                FROM brand b
+     """;
     String GET_ALL_FEEDBACK_OF_BRAND = """
                 SELECT
                     uf.feedback_id,
@@ -190,6 +195,18 @@ public interface IRepositoryQuery {
                     gd.brand_id = :brandId
             """;
 
+  String UPDATE_BRAND_MONEY_PERCENT = """
+                UPDATE brand
+                SET money_percent=?
+                WHERE brand_id=?;
+            """;
+            
+            
+    String GET_BRAND_MONEY_PERCENT = """
+                SELECT money_percent
+                FROM brand
+                WHERE brand_id=?;
+                        """;
     String GET_FEEDBACK_OF_BRAND_STAT = """
                 SELECT
                     gd.brand_id,

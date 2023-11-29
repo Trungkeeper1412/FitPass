@@ -63,4 +63,43 @@ public class DepartmentFeatureRepositoryImpl implements DepartmentFeatureReposit
     public int deleteAllDepartmentFeatures(int gymDepartmentId) {
         return jdbcTemplate.update(DELETE_ALL_DEPARTMENT_FEATURES, gymDepartmentId);
     }
+
+    @Override
+    public Feature getByFeatureId(int featureId) {
+        return jdbcTemplate.queryForObject(GET_FEATURE_BY_FEATURE_ID, new Object[]{featureId}, (rs, rowNum) -> {
+            Feature feature = new Feature();
+            feature.setFeatureID(rs.getInt("feature_id"));
+            feature.setFeatureName(rs.getString("feature_name"));
+            feature.setFeatureIcon(rs.getString("feature_icon"));
+            feature.setFeatureStatus(rs.getInt("feature_status"));
+            return feature;
+        });
+    }
+
+    @Override
+    public int insertFeature(Feature feature) {
+        return jdbcTemplate.update(INSERT_FEATURE, feature.getFeatureName(), feature.getFeatureIcon(), feature.getFeatureStatus());
+    }
+
+    @Override
+    public int updateFeature(Feature feature) {
+        return jdbcTemplate.update(UPDATE_FEATURE, feature.getFeatureName(), feature.getFeatureIcon(), feature.getFeatureID())  ;
+    }
+
+    @Override
+    public int updateFeatureStatus(int featureId, int status) {
+        return jdbcTemplate.update(UPDATE_FEATURE_STATUS, status, featureId);
+    }
+
+    @Override
+    public List<Feature> getAllFeatureNoStatus() {
+        return jdbcTemplate.query(GET_ALL_FEATURES, (rs, rowNum) -> {
+            Feature feature = new Feature();
+            feature.setFeatureID(rs.getInt("feature_id"));
+            feature.setFeatureName(rs.getString("feature_name"));
+            feature.setFeatureIcon(rs.getString("feature_icon"));
+            feature.setFeatureStatus(rs.getInt("feature_status"));
+            return feature;
+        });
+    }
 }

@@ -18,8 +18,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
-    // Add Logger
-    private static final Logger logger = LogManager.getLogger(ProfileController.class);
     private final TransactionService transactionService;
     private final UserService userService;
 

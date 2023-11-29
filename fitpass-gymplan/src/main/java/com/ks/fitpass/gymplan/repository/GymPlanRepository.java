@@ -39,4 +39,6 @@ public interface GymPlanRepository {
     List<GymPlanDepartmentNameDto> getGymPlanDepartmentFlexByDepartmentId(int departmentId);
 
     int deleteAllGymPlanByDepartmentId(int departmentId);
+
+    int checkGymPlanInDepartmentUse(int gymPlanId);
 }

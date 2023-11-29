@@ -23,15 +23,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
-
     private final DepartmentService departmentService;
     private final GymPlanService gymPlanService;
     private final DepartmentScheduleService departmentScheduleService;
     private final DepartmentAlbumsService departmentAlbumsService;
     private final DepartmentFeatureService departmentFeatureService;
-
     private  final DepartmentAmenitieService departmentAmenitieService;
-
 
     @Autowired
     public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService,

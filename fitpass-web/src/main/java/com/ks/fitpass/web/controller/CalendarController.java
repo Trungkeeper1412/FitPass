@@ -74,10 +74,7 @@ public class CalendarController {
                                @RequestParam("feedbackId") int feedbackId,
                                @RequestParam("departmentId") int departmentId,
                                @RequestParam("rating") int rating,
-                               @RequestParam("thoughts") String comments,
-                               HttpSession session) {
-        User user = (User) session.getAttribute("userInfo");
-
+                               @RequestParam("thoughts") String comments) {
         UserFeedback userFeedback = new UserFeedback();
         userFeedback.setFeedbackId(feedbackId);
         userFeedback.setRating(rating);

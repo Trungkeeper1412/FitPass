@@ -19,49 +19,51 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private final UserServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(UserServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
-                .requestMatchers("/user-homepage-assets/**").permitAll()
-                .requestMatchers("/employee-assets/**").permitAll()
-                .requestMatchers("/login", "/logout").permitAll()
-                .requestMatchers("/user/**").permitAll()
-                .requestMatchers("/cart/**").permitAll()
-                            .requestMatchers("/upload/**").permitAll()
-                            .requestMatchers("/user/**").permitAll()
-//                .requestMatchers("/gym-owner/**").hasRole("MANAGER")
-//                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .requestMatchers("/employee").hasRole("EMPLOYEE")
-                .requestMatchers("/employee").permitAll()
-                .requestMatchers("/send-message").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(formLogin -> formLogin
-                //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
-                .loginPage("/login")
-                .usernameParameter("account")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/user/homepage", true)
-                .failureUrl("/login?error=true")
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")                               // default url
-                .logoutSuccessUrl("/login?logout")                  // default url
-                .invalidateHttpSession(true)                        // default: true
-                .deleteCookies("JSESSIONID")
-            )
-            .rememberMe((remember) -> remember
-                    .rememberMeServices(rememberMeServices)
-            );
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
+                        .requestMatchers("/user-homepage-assets/**","/employee-assets/**", "/upload/**").permitAll()
+                        .requestMatchers("/login", "/logout").permitAll()
+                        .requestMatchers("/landing-page").permitAll()
+                        .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/cart/**").permitAll()
+                        .requestMatchers("/become-a-partner/**").permitAll()
+                        .requestMatchers("/profile/**").hasRole("USER")
+                        .requestMatchers("/item/**").hasRole("USER")
+                        .requestMatchers("/inventory/**").hasRole("USER")
+                        .requestMatchers("/payment/**").hasRole("USER")
+
+                        .requestMatchers("/employee/**").hasRole("EMPLOYEE")
+                        .requestMatchers("/gym-owner/**").hasRole("GYM_OWNER")
+                        .requestMatchers("/brand-owner/**").hasRole("BRAND_OWNER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                        //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
+                        .loginPage("/login")
+                        .usernameParameter("account")
+                        .passwordParameter("password")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .failureUrl("/login?error=true")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")                               // default url
+                        .logoutSuccessUrl("/login?logout")                  // default url
+                        .invalidateHttpSession(true)                        // default: true
+                        .deleteCookies("JSESSIONID")
+                )
+                .rememberMe((remember) -> remember
+                        .rememberMeServices(rememberMeServices)
+                        .rememberMeParameter("remember-me")
+                );
         return http.build();
     }
 
@@ -70,16 +72,12 @@ public class WebSecurityConfig {
         TokenBasedRememberMeServices.RememberMeTokenAlgorithm encodingAlgorithm = TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256;
         TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("FitPass", userDetailsService, encodingAlgorithm);
         rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256);
+        rememberMe.setTokenValiditySeconds(3000);
         return rememberMe;
     }
 
-//    @Bean
-//    public PersistentTokenRepository persistentTokenRepository() {
-//        // Save remember me in memory (RAM)
-//        return new InMemoryTokenRepositoryImpl();
-//    }
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -87,6 +85,4 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

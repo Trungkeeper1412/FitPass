@@ -43,4 +43,29 @@ public class DepartmentFeatureServiceImpl implements DepartmentFeatureService {
     public int deleteAllDepartmentFeatures(int gymDepartmentId) {
         return departmentFeatureRepository.deleteAllDepartmentFeatures(gymDepartmentId);
     }
+
+    @Override
+    public Feature getByFeatureId(int featureId) {
+        return departmentFeatureRepository.getByFeatureId(featureId);
+    }
+
+    @Override
+    public int insertFeature(Feature feature) {
+        return departmentFeatureRepository.insertFeature(feature);
+    }
+
+    @Override
+    public int updateFeature(Feature feature) {
+        return departmentFeatureRepository.updateFeature(feature);
+    }
+
+    @Override
+    public int updateFeatureStatus(int featureId, int status) {
+        return departmentFeatureRepository.updateFeatureStatus(featureId, status);
+    }
+
+    @Override
+    public List<Feature> getAllFeatureNoStatus() {
+        return departmentFeatureRepository.getAllFeatureNoStatus();
+    }
 }

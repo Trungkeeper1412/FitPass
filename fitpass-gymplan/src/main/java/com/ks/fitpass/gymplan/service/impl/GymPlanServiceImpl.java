@@ -143,4 +143,9 @@ public class GymPlanServiceImpl implements GymPlanService {
     public int deleteAllGymPlanByDepartmentId(int departmentId) {
         return gymPlanRepository.deleteAllGymPlanByDepartmentId(departmentId);
     }
+
+    @Override
+    public int checkGymPlanInDepartmentUse(int gymPlanId) {
+        return gymPlanRepository.checkGymPlanInDepartmentUse(gymPlanId);
+    }
 }
