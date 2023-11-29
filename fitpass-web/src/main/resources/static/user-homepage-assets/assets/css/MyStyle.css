@@ -4288,10 +4288,12 @@ section {
 }
 
 .gym-department-plan {
-    display: grid;
+    /*display: grid;*/
     background-color: white;
-    grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
+    /*grid-template-columns: 1fr 8fr 4fr 2fr 2fr;*/
     height: fit-content;
+    /*display: flex;*/
+    align-items: center;
     min-height: 170px;
     /* background-color: #000; */
 }
@@ -4369,7 +4371,7 @@ section {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
         height: 75%;
-        width: 80%;
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr 2fr 1.5fr;
         margin: auto 0;
@@ -4398,12 +4400,12 @@ section {
     height: 80px;
     margin: auto;
 }
-
-.gym-department-plan button {
-    width: 50px;
+.gym-department-plan .delete-btn{
+    display: flex;
+    align-items: center;
+    margin: auto;
     height: 40px;
     border-radius: 15px;
-    margin: auto;
 }
 
 .plan-info-mc {

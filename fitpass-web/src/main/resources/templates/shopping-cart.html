@@ -73,13 +73,16 @@
                     <!-- Từng gym plan -->
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
-                        <div class="form-check">
+                        <div class="col-1">
+                            <div class="form-check">
                             <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value=""
                                    th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()},
                                    data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()},
                                    data-plan-price=${cartItem.getGymPlan().getPrice()}"/>
                             <label class="" for="flexCheckChecked"> </label>
+                            </div>
                         </div>
+                        <div class="col-5">
                         <div class="plan-card-mc">
                             <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}" alt="Logo phòng tập"/>
                             <div class="plan-info-mc">
@@ -90,20 +93,26 @@
                                 Kích hoạt trong vòng 10 ngày
                             </div>
                         </div>
-                        <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                        </div>
+                        <div class="col-2">
+                            <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
                             200
+                            </div>
                         </div>
-                        <div class="num-of-plan-mc" >
-                            <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
+                        <div class="col-2">
+                            <div class="num-of-plan-mc" >
+                                <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
+                            </div>
                         </div>
-
-                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <div class="col-2">
+                            <button type="button" class="btn btn-warning delete-btn" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
                                 />
-                            </svg>
-                        </button>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </th:block>
             </th:block>
