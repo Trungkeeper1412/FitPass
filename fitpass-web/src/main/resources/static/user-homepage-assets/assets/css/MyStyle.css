@@ -4185,7 +4185,8 @@ section {
 
 .my-card-container .my-card-title {
     margin-top: 50px;
-    height: 60px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     display: flex;
     align-items: center;
     background-color: white;
@@ -4270,7 +4271,7 @@ section {
 
 .plan-in-my-card {
     margin-top: 20px;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .all-plan-of-gym {
@@ -4307,26 +4308,19 @@ section {
     .my-card-container .line{
         width: 50%;
     }
-    .my-card-title .form-check{
-        margin-left: -10px;
-    }
     .my-card-title{
-        font-size: 13px;
+        font-size: 12px;
     }
     .my-card-title .price-title, .num-of-plan-title, .action-title{
         display: none;
     }
     .plan-in-my-card .gym-name-mc{
-        font-size: 13px;
+        font-size: 12px;
     }
     .my-card-title input {
         border: 1px solid orange;
-        width: 15px;
-        height: 15px;
-    }
-    .gym-department-plan .plan-price-mc{
-        grid-column-start: 1;
-        grid-column-end: 4;
+        width: 10px;
+        height: 10px;
     }
 }
 @media only screen and (min-width: 375px) {

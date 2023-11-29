@@ -55,16 +55,16 @@
     </div>
     <!-- Để foreach ở đây -->
     <div class="plan-in-cart-wrapper container-fluid">
-    <div th:each="department : ${departmentList}">
+    <div  th:each="department : ${departmentList}">
         <div class="plan-in-my-card">
-            <div class="all-plan-of-gym row">
-                <div class="col-1">
+            <div class="row all-plan-of-gym">
+                <div class="col-md-1 col-lg-1 col-xs-1">
                     <div class="form-check">
                         <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
                         <label class="" for="flexCheckChecked"> </label>
                     </div>
                 </div>
-                <div class="col-11">
+                <div class="col-md-11 col-lg-11 col-xs-11">
                     <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <!-- Từng gym plan -->
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
-                        <div class="col-1">
+                        <div class="col-xs-1">
                             <div class="form-check">
                             <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value=""
                                    th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()},
@@ -82,7 +82,7 @@
                             <label class="" for="flexCheckChecked"> </label>
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-s-5">
                         <div class="plan-card-mc">
                             <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}" alt="Logo phòng tập"/>
                             <div class="plan-info-mc">
@@ -94,17 +94,17 @@
                             </div>
                         </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-xs-2">
                             <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
                             200
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-xs-2">
                             <div class="num-of-plan-mc" >
                                 <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-xs-2">
                             <button type="button" class="btn btn-warning delete-btn" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
@@ -248,7 +248,7 @@
 
     // check all in each gym department
     for(var i=0; i<dept_checkboxes.length; i++){
-        let cbActual1 = dept_checkboxes[i].parentElement.parentElement.parentElement.querySelectorAll('input:not([class=dept-checkbox])');
+        let cbActual1 = dept_checkboxes[i].parentElement.parentElement.parentElement.parentElement.querySelectorAll('input:not([class=dept-checkbox])');
         console.log(cbActual1);
         cbActual1.forEach(cb1 => {
             cb1.addEventListener('change', (event) =>{
@@ -269,8 +269,8 @@
                         addToUniqueArray(selectedDept, p.deptId);
                         addToUniqueArray(selectedPrice, p.price);
                     }
-                    let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
-                    cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
+                    let test = cb1.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
+                    cb1.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
                 } else{
                     let plan = {planId: cb1.getAttribute("data-product-id"),
                         deptId: cb1.getAttribute("data-dept-id"),
@@ -287,7 +287,7 @@
                         addToUniqueArray(selectedPrice, p.price);
                     }
                     if([...cbActual1].every(cb1=>cb1.checked == true)){
-                        cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
+                        cb1.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
 
@@ -307,7 +307,7 @@
     }
 
     function checkAllGym(myCheckAll){
-        let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
+        let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
         total_price = 0;
         if(myCheckAll.checked === true){
             document.querySelector('.buy-button-mc button').disabled = false;
