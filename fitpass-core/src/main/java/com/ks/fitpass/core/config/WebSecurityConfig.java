@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
@@ -38,10 +39,11 @@ public class WebSecurityConfig {
                 .requestMatchers("/cart/**").permitAll()
                             .requestMatchers("/upload/**").permitAll()
                             .requestMatchers("/user/**").permitAll()
-//                .requestMatchers("/gym-owner/**").hasRole("MANAGER")
+//                .requestMatchers("/gym-owner/**").hasRole("GYM_OWNER")
 //                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .requestMatchers("/employee").hasRole("EMPLOYEE")
-                .requestMatchers("/employee").permitAll()
+//                .requestMatchers("/employee/**").hasRole("EMPLOYEE")
+//                .requestMatchers("/brand-owner/**").hasRole("BRAND_OWNER")
+                //.requestMatchers("/employee").permitAll()
                 .requestMatchers("/send-message").permitAll()
                 .anyRequest().authenticated()
             )
@@ -50,6 +52,7 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("account")
                 .passwordParameter("password")
+                    //.successHandler(authenticationSuccessHandler())
                 .defaultSuccessUrl("/user/homepage", true)
                 .failureUrl("/login?error=true")
             )
@@ -88,5 +91,16 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
+    private AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            if (authentication.getAuthorities().stream()
+                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
+                // Chuyển hướng người dùng có quyền admin đến trang cụ thể
+                response.sendRedirect("/admin/index");
+            } else {
+                // Chuyển hướng người dùng khác đến trang mặc định
+                response.sendRedirect("/user/homepage");
+            }
+        };
+    }
 }
