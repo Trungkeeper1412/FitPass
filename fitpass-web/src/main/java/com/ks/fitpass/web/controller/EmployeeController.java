@@ -7,6 +7,8 @@ import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
+import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.employee.dto.*;
 import com.ks.fitpass.employee.service.EmployeeService;
 import com.ks.fitpass.notification.dto.UserReceiveMessageDTO;
@@ -46,11 +48,12 @@ public class EmployeeController {
     private final WalletService walletService;
     private final WebSocketService webSocketService;
     private final BrandService brandService;
+    private final DepartmentService departmentService;
     private final TransactionService transactionService;
 
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
                               NotificationService notificationService, CheckInHistoryService checkInHistoryService,
-                              WalletService walletService, WebSocketService webSocketService, BrandService brandService, TransactionService transactionService) {
+                              WalletService walletService, WebSocketService webSocketService, BrandService brandService, DepartmentService departmentService, TransactionService transactionService) {
         this.employeeService = employeeService;
         this.orderDetailService = orderDetailService;
         this.notificationService = notificationService;
@@ -58,6 +61,7 @@ public class EmployeeController {
         this.walletService = walletService;
         this.webSocketService = webSocketService;
         this.brandService = brandService;
+        this.departmentService = departmentService;
         this.transactionService = transactionService;
     }
 
@@ -165,11 +169,17 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         // Lấy ra thông tin người cần gửi đến (người dùng checkin)
         UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(orderDetailId);
 
+        int departmentId = userReceiveMessageDTO.getGymDepartmentId();
+        DepartmentNotificationDTO departmentNotificationDTO = departmentService.getDepartmentNotificationDtoById(departmentId);
+
+        String departmentName = departmentNotificationDTO.getDepartmentName();
+        String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
+
         int userIdSend = user.getUserId();
         String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
-        int departmentId = userReceiveMessageDTO.getGymDepartmentId();
+
         String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentId + ". Hãy xác nhận ngay!";
 
         // Truyền nội dung notification
@@ -180,6 +190,8 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                 .messageType(messageType)
                 .message(message)
                 .departmentId(departmentId)
+                .departmentName(departmentName)
+                .departmentLogoUrl(departmentLogoUrl)
                 .timeSend(new Timestamp(System.currentTimeMillis()))
                 .build();
 
@@ -213,11 +225,16 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         // Lấy ra thông tin người cần gửi đến (người dùng cần checkout)
         UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(orderDetailId);
 
+        int departmentId = userReceiveMessageDTO.getGymDepartmentId();
+        DepartmentNotificationDTO departmentNotificationDTO = departmentService.getDepartmentNotificationDtoById(departmentId);
+
+        String departmentName = departmentNotificationDTO.getDepartmentName();
+        String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
+
         int userIdSend = user.getUserId();
         String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check out";
-        int departmentId = userReceiveMessageDTO.getGymDepartmentId();
         String employeeMessage = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check out ở phòng tập " +
                 departmentId + ". Hãy bấm vào để xem chi tiết.";
         dataSendCheckOutFlexibleDTO.setEmployeeMessage(employeeMessage);
@@ -254,6 +271,8 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                 // Truyền message dưới dạng json string để về sau hiện pop up confirm check out xử lí
                 .message(orderDetailConfirmCheckOutJson + "|" + dataSendCheckOutFlexibleJson)  // Combine the two JSON strings using a separator, e.g., "|"
                 .departmentId(departmentId)
+                .departmentName(departmentName)
+                .departmentLogoUrl(departmentLogoUrl)
                 .timeSend(new Timestamp(System.currentTimeMillis()))
                 .build();
 
@@ -402,11 +421,16 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         // Lấy ra thông tin người cần gửi đến (người dùng checkin)
         UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(orderDetailId);
 
+        int departmentId = userReceiveMessageDTO.getGymDepartmentId();
+        DepartmentNotificationDTO departmentNotificationDTO = departmentService.getDepartmentNotificationDtoById(departmentId);
+
+        String departmentName = departmentNotificationDTO.getDepartmentName();
+        String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
+
         int userIdSend = user.getUserId();
         String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
-        int departmentId = userReceiveMessageDTO.getGymDepartmentId();
         String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentId + ". Hãy xác nhận ngay!";
 
         // Truyền nội dung notification
@@ -417,11 +441,27 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
                 .messageType(messageType)
                 .message(message)
                 .departmentId(departmentId)
+                .departmentName(departmentName)
+                .departmentLogoUrl(departmentLogoUrl)
                 .timeSend(new Timestamp(System.currentTimeMillis()))
                 .build();
 
-        webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
-        int insertStatus = notificationService.insertNotification(notification);
+        int insertStatus = 0;
+
+        try {
+            //insert vào db
+            insertStatus = notificationService.insertNotification(notification);
+
+            // Retrieve the generated ID after insertion
+            if (insertStatus > 0) {
+                webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
+                return ResponseEntity.ok(insertStatus);
+            } else {
+                logger.error("Notification insertion failed for some reason.");
+            }
+        } catch (DataAccessException e) {
+            logger.error("Error during notification insertion", e);
+        }
 
         return ResponseEntity.ok(insertStatus);
     }
