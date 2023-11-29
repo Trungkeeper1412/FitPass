@@ -35,4 +35,5 @@ public interface GymPlanService {
     List<GymPlanDepartmentNameDto> getGymPlanDepartmentFixedByDepartmentId(int departmentId);
 
     int deleteAllGymPlanByDepartmentId(int departmentId);
+    int checkGymPlanInDepartmentUse(int gymPlanId);
 }
