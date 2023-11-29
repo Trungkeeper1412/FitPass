@@ -12,11 +12,26 @@ public interface IRepositoryQuery {
                 WHERE notification_id = ?;
             """;
     String GET_ALL_NOTIFICATION_FOR_USER = """
-            SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, order_detail_id, message_type, status
-            FROM notification
-            WHERE user_id_receive = ?
-            ORDER BY status, time_send DESC
-            LIMIT ? OFFSET ?
+            SELECT\s
+                n.notification_id,\s
+                n.user_id_send,\s
+                n.user_id_receive,\s
+                n.message,\s
+                n.time_send,\s
+                n.department_id,\s
+                n.order_detail_id,\s
+                n.message_type,\s
+                n.status,
+                gd.name AS department_name,
+                gd.logo_url AS department_logo
+            FROM
+                notification n
+            JOIN
+                gym_department gd ON n.department_id = gd.gym_department_id
+            WHERE
+                n.user_id_receive = ?
+            ORDER BY n.status, n.time_send DESC
+            LIMIT ? OFFSET ?;
             """;
     String GET_ALL_3_NEWEST_UNSEEN_NOTIFICATION_FOR_USER = """
             SELECT notification_id, user_id_send, user_id_receive, message, time_send, department_id, order_detail_id, message_type, status

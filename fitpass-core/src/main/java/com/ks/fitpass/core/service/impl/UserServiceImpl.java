@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.getUserEmailByUserId(userId);
     }
 
+
     @Override
     public int insertIntoUser(User user) {
         return userRepository.insertIntoUser(user);

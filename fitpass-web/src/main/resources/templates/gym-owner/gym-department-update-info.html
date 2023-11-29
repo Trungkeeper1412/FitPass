@@ -159,6 +159,7 @@
                                             <div class="pl-3" id="selectedOpenHours">
                                                 <label style="margin: 0" id="resultText"></label>
                                             </div>
+                                            <span th:if="${#fields.hasErrors('validSchedule')}" th:errors="*{validSchedule}">Error</span>
                                         </div>
                                         <!-- Modal -->
                                         <div class="modal fade" id="selectOpenHoursModal" tabindex="-1" role="dialog"
@@ -313,10 +314,12 @@
         }
     }
 
-    $("#saveChangesButton").click(function () {
-        // Call the updateExistingTimeInputs function when the button is clicked
-        updateExistingTimeInputs();
-    });
+    // $("#saveChangesButton").click(function () {
+    //     // Call the updateExistingTimeInputs function when the button is clicked
+    //     updateExistingTimeInputs();
+    // });
+    updateExistingTimeInputs();
+
 </script>
 </body>
 
