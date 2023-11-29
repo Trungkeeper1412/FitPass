@@ -348,6 +348,7 @@ CREATE TABLE IF NOT EXISTS credit_card (
                                            card_owner_name           VARCHAR(100) NOT NULL,
                                            card_number       varchar(25) NOT NULL,
                                            status           VARCHAR(30) NOT NULL,
+                                           bank_name           VARCHAR(100) NOT NULL,
                                            FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
@@ -355,7 +356,7 @@ CREATE TABLE IF NOT EXISTS credit_card (
 CREATE TABLE IF NOT EXISTS request_withdrawal_history (
                                                           request_withdrawal_history_id   INT AUTO_INCREMENT PRIMARY KEY,
                                                           credit_card_id INT not null,
-                                                          withdrawal_code        INT NOT NULL,
+                                                          withdrawal_code        VARCHAR(100) NOT NULL,
                                                           withdrawal_time   timestamp,
                                                           amount_credit    INT NOT NULL,
                                                           actual_money     INT NOT NULL,
