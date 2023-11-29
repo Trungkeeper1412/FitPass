@@ -73,7 +73,7 @@
                     <!-- Từng gym plan -->
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
-                        <div class="col-xs-1">
+                        <div class="col-sm-1 col-xs-3">
                             <div class="form-check">
                             <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value=""
                                    th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()},
@@ -82,7 +82,7 @@
                             <label class="" for="flexCheckChecked"> </label>
                             </div>
                         </div>
-                        <div class="col-s-5">
+                        <div class="col-sm-5 col-xs-5">
                         <div class="plan-card-mc">
                             <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}" alt="Logo phòng tập"/>
                             <div class="plan-info-mc">
@@ -94,17 +94,17 @@
                             </div>
                         </div>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
                             200
                             </div>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <div class="num-of-plan-mc" >
                                 <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
                             </div>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <button type="button" class="btn btn-warning delete-btn" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path

@@ -4201,6 +4201,7 @@ section {
     /*margin-left: -25px;*/
 }
 .my-card-container .form-check {
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4293,7 +4294,7 @@ section {
     background-color: white;
     /*grid-template-columns: 1fr 8fr 4fr 2fr 2fr;*/
     height: fit-content;
-    /*display: flex;*/
+    display: flex;
     align-items: center;
     min-height: 170px;
     /* background-color: #000; */
@@ -4302,6 +4303,7 @@ section {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 280px) and (max-width: 375px) {
+
     .shopping-cart-title{
         font-size: 19px;
     }
@@ -4323,15 +4325,15 @@ section {
         height: 10px;
     }
 }
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 280px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
         height: 90%;
-        width: 90%;
+        width: 100%;
         padding: 10px;
         display: grid;
-        /* grid-template-rows: 1fr 2fr 1.5fr;  */
+        grid-template-columns: 1fr 2fr 1.5fr;
         margin: auto 0;
         border-radius: 10px;
     }
@@ -4365,7 +4367,7 @@ section {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
         height: 75%;
-        width: 100%;
+        width: 90%;
         display: grid;
         grid-template-columns: 1fr 2fr 1.5fr;
         margin: auto 0;
@@ -4575,7 +4577,10 @@ section {
 @media only screen and (min-width: 1400px) {
     .body-checkout {
     }
-
+    .plan-card-mc {
+        height: 90%;
+        width: 80%;
+    }
     .body-checkout .plan-card-mc .duration {
         font-size: 14px;
         padding: 4px;
