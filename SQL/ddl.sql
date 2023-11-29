@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS wallet;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_detail;
-
+DROP TABLE IF EXISTS become_a_partner_request_history;
 
 CREATE TABLE IF NOT EXISTS user_detail (
                                            user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -362,6 +362,23 @@ CREATE TABLE IF NOT EXISTS request_withdrawal_history (
                                                           actual_money     INT NOT NULL,
                                                           status           VARCHAR(30) NOT NULL,
                                                           FOREIGN KEY (credit_card_id) REFERENCES credit_card(credit_card_id)
+);
+-- Bảng become a partner
+
+CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
+                                                                become_a_partner_request_history_id   INT AUTO_INCREMENT PRIMARY KEY,
+                                                                brand_name      VARCHAR(100) NOT NULL,
+                                                                brand_owner_name      VARCHAR(100) NOT NULL,
+                                                                contact_number   VARCHAR(20) NOT NULL,
+                                                                address      VARCHAR(150) NOT NULL,
+                                                                web_url      VARCHAR(100) ,
+                                                                contact_email      VARCHAR(100) NOT NULL,
+                                                                send_request_time   timestamp, -- thời gian gửi đơn
+                                                                start_handle_request_time   timestamp, -- thời gian bắt đầu xử lý
+                                                                cancel_request_time   timestamp,-- thời gian hủy yêu cầu
+                                                                approve_request_time   timestamp,-- thời gian xác nhận yêu cầu thành công
+                                                                cancel_reason VARCHAR(350) ,
+                                                                status           VARCHAR(30) NOT NULL
 );
 
 
