@@ -41,7 +41,7 @@ public interface IRepositoryQuery {
     String CHECK_CREDIT_CARD_EXIST = """
                 SELECT COUNT(credit_card_id)
                 FROM credit_card
-                WHERE card_number = ? AND bank_name = ?
+                WHERE card_number = ? AND bank_name = ? AND status = 'Đang hoạt động'
                 AND user_id = ?;
             """;
 }
