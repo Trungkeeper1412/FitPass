@@ -4186,9 +4186,9 @@ section {
 .my-card-container .my-card-title {
     margin-top: 50px;
     height: 60px;
-    display: grid;
+    display: flex;
+    align-items: center;
     background-color: white;
-    grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
 }
 
 .my-card-title input {
@@ -4197,7 +4197,7 @@ section {
     height: 20px;
 }
 .my-card-title .form-check {
-    margin-left: -25px;
+    /*margin-left: -25px;*/
 }
 .my-card-container .form-check {
     display: flex;
@@ -4275,10 +4275,9 @@ section {
 
 .all-plan-of-gym {
     height: 60px;
-    margin-top: 0px;
-    display: grid;
+    display: flex;
     background-color: white;
-    grid-template-columns: 1fr 16fr;
+    align-items: center;
     border-bottom: 1px solid rgb(203, 203, 203);
 }
 
@@ -4299,15 +4298,33 @@ section {
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 280px) {
+@media only screen and (min-width: 280px) and (max-width: 375px) {
     .shopping-cart-title{
         font-size: 19px;
     }
     .my-card-container .line{
         width: 50%;
     }
+    .my-card-title .form-check{
+        margin-left: -10px;
+    }
     .my-card-title{
-        font-size: 12px;
+        font-size: 13px;
+    }
+    .my-card-title .price-title, .num-of-plan-title, .action-title{
+        display: none;
+    }
+    .plan-in-my-card .gym-name-mc{
+        font-size: 13px;
+    }
+    .my-card-title input {
+        border: 1px solid orange;
+        width: 15px;
+        height: 15px;
+    }
+    .gym-department-plan .plan-price-mc{
+        grid-column-start: 1;
+        grid-column-end: 4;
     }
 }
 @media only screen and (min-width: 375px) {

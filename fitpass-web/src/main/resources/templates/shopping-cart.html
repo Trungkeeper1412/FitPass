@@ -31,26 +31,42 @@
         </div>
     </th:block>
     <th:block th:if="${cartItems.size() > 0}">
-    <div class="my-card-title container-fluid">
-        <div class="form-check">
-            <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
-            <label class="" for="flexCheckChecked"> </label>
+    <div class="container-fluid">
+        <div class="row my-card-title">
+            <div class="col-1">
+                <div class="form-check">
+                    <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
+                    <label class="" for="flexCheckChecked"> </label>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="my-plan-title">Gói tập</div>
+            </div>
+            <div class="col-2">
+                <div class="price-title">Đơn giá (credits)</div>
+            </div>
+            <div class="col-2">
+                <div class="num-of-plan-title">Số lượng</div>
+            </div>
+            <div class="col-2">
+                <div class="action-title">Thao tác</div>
+            </div>
         </div>
-        <div class="my-plan-title">Gói tập</div>
-        <div class="price-title">Đơn giá (credits)</div>
-        <div class="num-of-plan-title">Số lượng</div>
-        <div class="action-title">Thao tác</div>
     </div>
     <!-- Để foreach ở đây -->
     <div class="plan-in-cart-wrapper container-fluid">
     <div th:each="department : ${departmentList}">
         <div class="plan-in-my-card">
             <div class="all-plan-of-gym row">
-                <div class="form-check">
-                    <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
-                    <label class="" for="flexCheckChecked"> </label>
+                <div class="col-1">
+                    <div class="form-check">
+                        <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
+                        <label class="" for="flexCheckChecked"> </label>
+                    </div>
                 </div>
-                <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
+                <div class="col-11">
+                    <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
+                </div>
             </div>
             <th:block th:each="cartItem: ${cartItems}">
                 <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
