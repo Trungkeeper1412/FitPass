@@ -8,7 +8,6 @@ import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
-import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.credit_card.dto.CreditCard;
 import com.ks.fitpass.credit_card.service.CreditCardService;
@@ -589,8 +588,6 @@ public class BrandOwnerController {
             // Get all credit card by user id
             List<CreditCard> creditCardList = creditCardService.getAllByUserId(user.getUserId());
             model.addAttribute("creditCardList", creditCardList);
-        } catch (EmptyResultDataAccessException e) {
-
         } catch (DataAccessException e) {
 
         }
