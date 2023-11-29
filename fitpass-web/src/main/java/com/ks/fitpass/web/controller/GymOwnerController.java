@@ -1,6 +1,5 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
@@ -13,7 +12,6 @@ import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFixedDTO;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
 import com.ks.fitpass.gymplan.service.GymPlanService;
-import com.ks.fitpass.wallet.entity.Wallet;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.TimeConversionUtil;
@@ -23,7 +21,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,8 +29,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.*;
 import java.util.stream.Collectors;
