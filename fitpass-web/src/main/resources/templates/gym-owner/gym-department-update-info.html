@@ -152,15 +152,14 @@
                                     <div class="col-12">
                                         <label class="fw-bold" for="openHours">Giờ hoạt động:</label><br>
                                         <div class="mb-3 d-flex align-items-center align-content-center">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#selectOpenHoursModal">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectOpenHoursModal">
                                                 Chọn giờ
                                             </button>
                                             <div class="pl-3" id="selectedOpenHours">
                                                 <label style="margin: 0" id="resultText"></label>
                                             </div>
-                                            <span th:if="${#fields.hasErrors('validSchedule')}" th:errors="*{validSchedule}">Error</span>
                                         </div>
+                                        <span th:if="${#fields.hasErrors('validSchedule')}" th:errors="*{validSchedule}" style="color: red; font-size: 12px;">Error</span>
                                         <!-- Modal -->
                                         <div class="modal fade" id="selectOpenHoursModal" tabindex="-1" role="dialog"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -216,7 +215,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 pt-2">
                                     <label for="description" class="form-label fw-bold">Mô tả :</label>
                                     <textarea th:field="*{departmentDescription}" style="width: 100%; padding: 10px;"
                                               rows="4" cols="50" name="comment"
