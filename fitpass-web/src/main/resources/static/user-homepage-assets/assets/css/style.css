@@ -232,11 +232,9 @@ h6 {
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  left: 14px;
-  top: calc(100% + 30px);
-  margin: 0;
-  padding: 10px 0;
-  z-index: 99;
+  right: 0;
+  top: calc(100% + 50px);
+  margin-top: 10px;
   opacity: 0;
   visibility: hidden;
   background: #fff;
@@ -272,7 +270,9 @@ h6 {
 }
 
 .navbar .dropdown ul li {
-  min-width: 200px;
+  min-width: 320px;
+  border-radius: 5px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .navbar .dropdown ul a {
@@ -2761,3 +2761,66 @@ td div div div a:hover {
   border-radius: 10px;
   box-shadow: 2px 2px 6px rgba(0, 0, 1.8, 1.8);
 }
+
+/*Notification in navbar*/
+.view-all-notification-link{
+  position: absolute;
+  bottom: 0;
+}
+.view-all-notification-link button{
+  padding: 9px;
+  height: 100%;
+  font-size: 12px;
+  border: hidden;
+  font-weight: 600;
+  width: 100%;
+  background-color: #e1e1e1;
+}
+.no-notification {
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+.no-notification .notification-icon {
+  margin-bottom: 10px;
+}
+
+.no-notification .notification-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.no-notification .notification-description {
+  font-size: 14px;
+  color: #777;
+  font-style: italic;
+}
+
+.notification-card-nav img{
+  width: 35px;
+}
+.notification-card-nav .notification-card-nav-time{
+  color: #9f9f9f;
+  font-weight: 600;
+  font-size: 12px;
+}
+.notification-card-nav .notification-card-nav-title{
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+  background-color: aliceblue;
+}
+
+

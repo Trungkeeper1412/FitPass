@@ -306,11 +306,9 @@ a:hover {
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  /*left: 0px;*/
   right: 0;
   top: calc(100% + 50px);
   margin-top: 10px;
-  /*padding: 10px 0;*/
   opacity: 0;
   visibility: hidden;
   background: #fff;
@@ -2979,16 +2977,10 @@ input[type="radio"]:checked{
   accent-color: rgb(0, 0, 0);
 }
 .user-edit-profile input[type='radio']:focus{
-  border-color:none;
   background-color: black;
   box-shadow:none;
 }
-/*.user-change-ava{*/
-/*  border-radius: 10px;*/
-/*  background-color: white;*/
-/*  padding: 20px;*/
-/*  margin: auto;*/
-/*}*/
+
 .change-ava-btn{
   display: flex;
   align-items: center;
