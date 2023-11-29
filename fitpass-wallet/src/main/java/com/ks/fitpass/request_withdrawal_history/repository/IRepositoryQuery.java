@@ -36,8 +36,8 @@ public interface IRepositoryQuery {
             """;
 
     String GET_STATS_BY_USER_ID = """
-                SELECT SUM(rwh.amount_credit) AS total_amount_credit,
-                       SUM(rwh.actual_money) AS total_actual_money,
+                SELECT SUM(CASE WHEN rwh.status = 'Thành công' THEN rwh.amount_credit ELSE 0 END) AS total_amount_credit,
+                       SUM(CASE WHEN rwh.status = 'Thành công' THEN rwh.actual_money ELSE 0 END) AS total_actual_money,
                        COUNT(rwh.request_withdrawal_history_id) AS total_request,
                        COUNT(CASE WHEN rwh.status = 'Đang xử lý' THEN 1 END) AS total_pending,
                        COUNT(CASE WHEN rwh.status = 'Thành công' THEN 1 END) AS total_approved
@@ -48,11 +48,12 @@ public interface IRepositoryQuery {
             """;
 
     String GET_ALL_STATS = """
-                SELECT SUM(rwh.amount_credit) AS total_amount_credit,
-                       SUM(rwh.actual_money) AS total_actual_money,
-                       COUNT(rwh.request_withdrawal_history_id) AS total_request,
-                       COUNT(CASE WHEN rwh.status = 'Đang xử lý' THEN 1 END) AS total_pending,
-                       COUNT(CASE WHEN rwh.status = 'Thành công' THEN 1 END) AS total_approved
+                SELECT\s
+                    SUM(CASE WHEN rwh.status = 'Thành công' THEN rwh.amount_credit ELSE 0 END) AS total_amount_credit,
+                    SUM(CASE WHEN rwh.status = 'Thành công' THEN rwh.actual_money ELSE 0 END) AS total_actual_money,
+                    COUNT(rwh.request_withdrawal_history_id) AS total_request,
+                    COUNT(CASE WHEN rwh.status = 'Đang xử lý' THEN 1 END) AS total_pending,
+                    COUNT(CASE WHEN rwh.status = 'Thành công' THEN 1 END) AS total_approved
                 FROM request_withdrawal_history rwh;
             """;
 
