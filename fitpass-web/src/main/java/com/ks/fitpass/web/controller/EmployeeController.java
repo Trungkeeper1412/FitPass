@@ -539,4 +539,10 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         List<CheckInHistoryFixed> listFlexible = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
         return ResponseEntity.ok(listFlexible);
     }
+
+    @GetMapping("/changePassword")
+    public String getRegistrationList() {
+        return "employee/change-password";
+    }
+
 }
