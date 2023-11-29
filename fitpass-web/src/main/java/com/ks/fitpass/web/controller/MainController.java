@@ -40,4 +40,9 @@ public class MainController {
         model.addAttribute("userRole", authentication.getAuthorities());
         return "show-info";
     }
+
+    @GetMapping("/login-register")
+    public String loginAndRegister() {
+        return "login-register";
+    }
 }
