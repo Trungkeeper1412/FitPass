@@ -298,7 +298,6 @@ public class GymOwnerController {
             for(String key: errors.keySet()){
                 errorMsg+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
             }
-
             return ResponseEntity.badRequest().body(errorMsg);
         }
 
@@ -412,7 +411,6 @@ public class GymOwnerController {
         if(bindingResult.hasErrors()) {
             logger.error("Binding errors found:");
             bindingResult.getAllErrors().forEach(error -> logger.error(error.toString()));
-
 
             User user = (User) session.getAttribute("userInfo");
             Department departmentDetails = departmentService.getByUserId(user.getUserId());
