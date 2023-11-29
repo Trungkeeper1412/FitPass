@@ -1,5 +1,6 @@
 package com.ks.fitpass.brand.service;
 
+import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.dto.BrandDetailFeedback;
@@ -21,6 +22,12 @@ public interface BrandService {
     Brand getBrandDetail(int userId);
 
     int updateBrandDetail(BrandOwnerProfile brandOwnerProfile);
+    
+    List<BrandAdminList> getAllBrand();
+    
+    int updateBrandMoneyPercent(int brandId, int moneyPercent);
+    
+    int getBrandMoneyPercent(int brandId);
 
     List<BrandDetailFeedback> getFeedbackOfBrandDetail(int brandId, int page, int size, String sortRating);
 

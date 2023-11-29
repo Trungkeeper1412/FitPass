@@ -1,4 +1,5 @@
 package com.ks.fitpass.brand.service.impl;
+import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
@@ -48,6 +49,21 @@ public class BrandServiceImpl implements BrandService{
     @Override
     public int updateBrandDetail(BrandOwnerProfile brandOwnerProfile) {
         return brandRepository.updateBrandDetail(brandOwnerProfile);
+    }
+
+   @Override
+    public List<BrandAdminList> getAllBrand() {
+        return brandRepository.getAllBrand();
+    }
+
+    @Override
+    public int updateBrandMoneyPercent(int brandId, int moneyPercent) {
+        return brandRepository.updateBrandMoneyPercent(brandId, moneyPercent);
+    }
+
+    @Override
+    public int getBrandMoneyPercent(int brandId) {
+        return brandRepository.getBrandMoneyPercent(brandId);
     }
 
     @Override
