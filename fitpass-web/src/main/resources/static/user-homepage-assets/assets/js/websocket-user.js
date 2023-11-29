@@ -35,12 +35,12 @@ function connect() {
 
         stompClient.subscribe('/all/global-notifications', function () {
             notificationCount = notificationCount + 1;
-            updateNotificationDisplay();
+            updateNotificationBellDisplay();
         });
 
         stompClient.subscribe('/user/specific/private-notifications', function () {
             notificationCount = notificationCount + 1;
-            updateNotificationDisplay();
+            updateNotificationBellDisplay();
         });
     });
 }
@@ -60,7 +60,7 @@ async function getTotalPages() {
     }
 }
 
-function updateNotificationDisplay() {
+function updateNotificationBellDisplay() {
     let notificationNum = document.querySelector(".notification-badge")
     notificationNum.textContent = notificationCount;
     if (notificationCount === 0) {
@@ -88,7 +88,7 @@ function updateNotificationDisplay() {
     }
 }
 
-function updateCurrentPage(page) {
+function updateCurrentPageNumber(page) {
     return globalCurrentPage = page;
 }
 
@@ -98,7 +98,7 @@ function sendSeenNotification(id) {
         url: `/notification/seen?id=${id}`,
         success: function (data) {
             notificationCount = notificationCount - 1
-            updateNotificationDisplay()
+            updateNotificationBellDisplay()
             console.log("Trạng thái update status seen notification: ", data)
         },
         error: function () {
@@ -347,7 +347,7 @@ function renderPaginationLinks(currentPage, totalPages) {
 
 // Function to handle pagination clicks
 function paginationClick(page) {
-    updateCurrentPage(page)
+    updateCurrentPageNumber(page)
     loadNotificationsFromDB(page, 4);
 }
 
@@ -400,8 +400,7 @@ function insertCheckInNotificationDiv(notification, order) {
         .attr("data-notification-id", notification.notificationId);
 
     // Add the image to the notification div
-    notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"'
-        + ' alt="Gym Logo">');
+    notiDiv.append(`<img src=${notification.departmentLogoUrl} alt="Gym Logo">`);
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -410,7 +409,7 @@ function insertCheckInNotificationDiv(notification, order) {
     notiContentDiv.append(
         '<div>' +
         '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png" alt="Bell icon"></span>' +
-        '<span class="fw-bold">' + notification.departmentId + ' -</span>' +
+        '<span class="fw-bold">' + notification.departmentName + ' - </span>' +
         '<span class="noti-message-type">' + notification.messageType + '</span>' +
         '</div>'
     );
@@ -528,8 +527,7 @@ function insertCheckOutNotificationDiv(notification, order) {
         .attr("data-notification-id", notification.notificationId);
 
     // Add the image to the notification div
-    notiDiv.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXo8tBKTv61IkzWgar_hGTXyBlPwxG1A2bFsOPrswPHT74xV2kac_fNtMMCnhpDC9pMI&usqp=CAU"'
-        + ' alt="Gym Logo">');
+    notiDiv.append(`<img src=${notification.departmentLogoUrl} alt="Gym Logo">`);
 
     // Create the noti-content div
     const notiContentDiv = $("<div>").addClass("noti-content");
@@ -538,7 +536,7 @@ function insertCheckOutNotificationDiv(notification, order) {
     notiContentDiv.append(
         '<div>' +
         '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png" alt="Bell icon"></span>' +
-        '<span class="fw-bold">' + notification.departmentId + ' -</span>' +
+        '<span class="fw-bold">' + notification.departmentName + ' -</span>' +
         '<span>' + notification.messageType + '</span>' +
         '</div>'
     );

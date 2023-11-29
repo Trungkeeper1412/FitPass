@@ -81,6 +81,8 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                         notification.setOrderDetailId(rs.getInt("order_detail_id"));
                         notification.setMessageType(rs.getString("message_type"));
                         notification.setStatus(rs.getInt("status"));
+                        notification.setDepartmentName(rs.getString("department_name"));
+                        notification.setDepartmentLogoUrl(rs.getString("department_logo"));
                         return notification;
                     },
                     userIdReceive, size, offset);
