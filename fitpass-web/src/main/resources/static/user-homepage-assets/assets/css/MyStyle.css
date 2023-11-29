@@ -4196,7 +4196,9 @@ section {
     width: 20px;
     height: 20px;
 }
-
+.my-card-title .form-check {
+    margin-left: -25px;
+}
 .my-card-container .form-check {
     display: flex;
     align-items: center;
@@ -4219,7 +4221,7 @@ section {
 .my-plan-title {
     display: flex;
     align-items: center;
-    margin-left: -10px;
+    margin-left: 10px;
     color: rgb(0, 0, 0)
 }
 
@@ -4297,6 +4299,17 @@ section {
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 280px) {
+    .shopping-cart-title{
+        font-size: 19px;
+    }
+    .my-card-container .line{
+        width: 50%;
+    }
+    .my-card-title{
+        font-size: 12px;
+    }
+}
 @media only screen and (min-width: 375px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
@@ -4332,13 +4345,6 @@ section {
         font-size: 14px;
     }
 }
-
-/* Medium devices (landscape tablets, 768px and up) */
-/* @media only screen and (min-width: 768px) {
-  .plan-card-mc {
-    background: blue;
-  }
-}  */
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
