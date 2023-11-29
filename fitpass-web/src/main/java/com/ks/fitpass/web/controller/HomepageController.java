@@ -3,6 +3,7 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
@@ -34,10 +35,9 @@ public class HomepageController {
 
     @GetMapping("/homepage")
     public String getHomepage(Principal principal, HttpSession session) {
-        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        double credit = walletService.getBalanceByUserId(user.getUserId());
+        User userSession = (User) session.getAttribute("userInfo");
+        double credit = walletService.getBalanceByUserId(userSession.getUserId());
         session.setAttribute("userCredit", credit);
-        session.setAttribute("userInfo", user);
         return "homepage-user";
     }
 
