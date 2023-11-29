@@ -33,4 +33,6 @@ public interface UserService {
     int updateFirstTimeLoginStatus(int userId, int status);
     List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId);
     int getNumberOfAccountCreatedByDepartmentId(int departmentId);
+
+    User getUserByAccount(String username);
 }
