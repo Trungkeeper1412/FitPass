@@ -1599,7 +1599,7 @@ h6 {
 #footer .footer-top {
   background: black;
   border-bottom: 1px solid #222222;
-  padding: 60px 0 30px 0;
+  padding: 50px 0 20px 0;
 }
 
 #footer .footer-top .footer-info {
@@ -1623,7 +1623,6 @@ h6 {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
   color: #fff;
 }
 
@@ -2823,4 +2822,11 @@ td div div div a:hover {
   background-color: aliceblue;
 }
 
-
+.sentence {
+  font-size: 20px;
+  color: grey;
+  font-weight: bold;
+  padding-top: 40px;
+  text-transform: uppercase;
+  text-shadow: 3px 1px 3px dimgray;
+}
