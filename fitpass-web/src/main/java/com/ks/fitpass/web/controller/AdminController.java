@@ -124,8 +124,7 @@ public class AdminController {
     }
 
     @GetMapping("/withdrawal")
-    public String getWithdrawalList(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("userInfo");
+    public String getWithdrawalList(Model model) {
         List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListPending = requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý");
         List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListAll = requestWithdrawHistoryService.getAllWithBrandName();
         RequestHistoryStats requestHistoryStats = requestWithdrawHistoryService.getAllStats();
