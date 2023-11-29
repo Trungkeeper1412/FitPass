@@ -84,8 +84,8 @@ function showCardInfo(item) {
             <input type="text" class="form-control" id="cardHolderName" value="${cardHolder}">
          </div>
          <div class="mb-3">
-            <label for="bankType" class="form-label">Loại ngân hàng :</label>
-            <select class="form-select" id="bankType" name="bankType" required>
+            <label for="bankTypeUpdate" class="form-label">Loại ngân hàng :</label>
+            <select class="form-select" id="bankTypeUpdate" name="bankType" required>
                 <option value="acb" ${bankType === 'acb' ? 'selected' : ''}>ACB</option>
                 <option value="agribank" ${bankType === 'agribank' ? 'selected' : ''}>Agribank</option>
                 <option value="bacabank" ${bankType === 'bacabank' ? 'selected' : ''}>Bac A Bank</option>
@@ -118,7 +118,7 @@ function showCardInfo(item) {
 function updateCard() {
     let creditCardId = document.getElementById("creditCardId").value;
     let cardHolder = document.getElementById("cardHolderName").value;
-    let bankType = document.getElementById("bankType").value;
+    let bankType = document.getElementById("bankTypeUpdate").value;
     let accountNumber = document.getElementById("receiverAccount").value;
 
     let creditCardData = {
@@ -161,7 +161,7 @@ function updateCard() {
 
 // Function to delete the selected card
 function deleteCard() {
-    if (selectedCardItem) {
+
         // Use SweetAlert for confirmation
         Swal.fire({
             title: 'Bạn chắc chắn muốn xóa thẻ?',
@@ -179,7 +179,6 @@ function deleteCard() {
                 Swal.fire('Đã xóa!', 'Thẻ đã được xóa thành công.', 'success');
             }
         });
-    }
 }
 
 function deleteCardFromDB(creditCardId) {
