@@ -426,24 +426,97 @@ VALUES (3, 'Nguyen Van Bao', 'Linh', 'cuongbulu@gmail.com', '0987654321', '123 M
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (3, 'employee', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 3);
 
--- User creation
+/************************** User creation ******************************/
+-- TuanLD
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
                          gender, image_url)
-VALUES (4, 'Le Dinh', 'Tuan', 'tuana1@gmail.com', '0987654321', '123 Main St',
+VALUES (4, 'Lê Đình', 'Tuấn', 'tuana1@gmail.com', '0987654321', '123 Main St',
         '2001-01-01', 'Male', '/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (4, 'tuanld', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 4);
 
+-- AnhDT
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
                          gender, image_url)
-VALUES (5, 'Dinh', 'Tuan Anh', 'tuananh@gmail.com', '0987654321', '123 Main St',
+VALUES (5, 'Đinh', 'Tuấn Anh', 'tuananh@gmail.com', '0987654321', '123 Main St',
         '1995-01-01', 'Male', '/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (5, 'anhdt', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 5);
+
+-- User 64
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (64, 'Ngọc', 'Trần', 'ngoc.tran@example.com', '1234567890', '456 Cầu Giấy',
+        '1990-03-15', 'Female', '/images/system/ngoc.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (64, 'ngoctran', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 64);
+
+-- User 65
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (65, 'Minh', 'Nguyễn', 'minh.nguyen@example.com', '0987654321', '789 Hoàn Kiếm',
+        '1985-08-22', 'Male', '/images/system/minh.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (65, 'minhnguyen', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 65);
+
+-- User 66
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (66, 'Linh', 'Phạm', 'linh.pham@example.com', '9876543210', '101 Đống Đa',
+        '1992-03-10', 'Female', '/images/system/linh.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (66, 'linhpham', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 66);
+
+-- User 67
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (67, 'Hải', 'Lê', 'hai.le@example.com', '8765432109', '202 Thanh Xuân',
+        '1988-12-05', 'Male', '/images/system/hai.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (67, 'haile', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 67);
+
+-- User 68
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (68, 'Tuấn', 'Nguyễn', 'tuan.nguyen@example.com', '1234567890', '456 Cầu Giấy',
+        '1990-03-15', 'Male', '/images/system/tuan.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (68, 'tuannguyen', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 68);
+
+-- User 69
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (69, 'Hằng', 'Vũ', 'hang.vu@example.com', '0987654321', '789 Hoàn Kiếm',
+        '1985-08-22', 'Female', '/images/system/hang.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (69, 'hangvu', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 69);
+
+-- User 70
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url)
+VALUES (70, 'Nam', 'Lê', 'nam.le@example.com', '9876543210', '101 Đống Đa',
+        '1992-03-10', 'Male', '/images/system/nam.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (70, 'namle', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 70);
+
 -- Assign role for users
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (1, 1, 1);
@@ -576,6 +649,22 @@ VALUES (62, 62, 2);
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (63, 63, 2);
 
+-- User roles creation
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (64, 64, 4); -- User 64
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (65, 65, 4); -- User 65
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (66, 66, 4); -- User 66
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (67, 67, 4); -- User 67
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (68, 68, 4); -- User 68
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (69, 69, 4); -- User 69
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (70, 70, 4); -- User 70
+
 -- User Wallet insert
 INSERT INTO wallet (user_id, balance)
 VALUES (1, 20000);
@@ -615,11 +704,26 @@ VALUES (17, 20000);
 INSERT INTO wallet (user_id, balance)
 VALUES (18, 20000);
 
+-- User balances
 INSERT INTO wallet (user_id, balance)
-VALUES (19, 20000);
+VALUES (64, 350); -- User 64
+INSERT INTO wallet (user_id, balance)
+VALUES (65, 420); -- User 65
+INSERT INTO wallet (user_id, balance)
+VALUES (66, 250); -- User 66
+INSERT INTO wallet (user_id, balance)
+VALUES (67, 480); -- User 67
+INSERT INTO wallet (user_id, balance)
+VALUES (68, 310); -- User 68
+INSERT INTO wallet (user_id, balance)
+VALUES (69, 270); -- User 69
+INSERT INTO wallet (user_id, balance)
+VALUES (70, 400); -- User 70
 
+-- Gym Owner balance ?
 INSERT INTO wallet (user_id, balance)
 VALUES
+    (19,20000),
     (20, 0),
     (21, 0),
     (22, 0),
@@ -720,13 +824,6 @@ VALUES (1, 5, '/img/brandAmenities/1701103600069_brandAmenities.jpg', 'MÁY TẬ
         'VƯỜN YOGA THƯ THÁI',
         'Lớp học yoga buổi sáng được tổ chức ngoài trời để hội viên được hít thở không khí trong lành và tươi mát của cây xanh, mang lại tinh thần thư thái cho hội viên.',
         1),
-
-
-
-
-
-
-
        (7, 6, '/img/brandAmenities/1701104592515_brandAmenities.jpg', 'PHÒNG TẬP THỂ DỤC',
         'Cung cấp các thiết bị hiện đại để tập luyện cardio và tăng cường cơ bắp. Phòng tập chuyên biệt cho các hoạt động như tập TRX, tập luyện chịu lực, và các lớp tập luyện nhóm.',
         1),
@@ -742,13 +839,6 @@ VALUES (1, 5, '/img/brandAmenities/1701103600069_brandAmenities.jpg', 'MÁY TẬ
         'Các tiện nghi như phòng xông hơi, sauna, và các liệu pháp spa để thư giãn và tái tạo năng lượng.', 1),
        (12, 6, '/img/brandAmenities/1701104679085_brandAmenities.jpg', 'TRUNG TÂM DINH DƯỠNG',
         'Cung cấp tư vấn dinh dưỡng và chế độ ăn lành mạnh để hỗ trợ mục tiêu tập luyện của khách hàng.', 1),
-
-
-
-
-
-
-
        (13, 7, '/img/brandAmenities/1701105355258_brandAmenities.jpg', 'GROUPX-DANCE',
         'Các bộ môn luyện tập theo nhóm như Zumba, BodyCombat, Body pump, B&T… trên nền nhạc sôi động sẽ mang cho bạn những sẽ mang đến cho bạn những buổi tập năng lượng và vui tươi.',
         1),
@@ -1323,7 +1413,6 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (5, 3, 3, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
        (5, 1, 4, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
 
-
        (1, 1, 5, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
        (4, 2, 6, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
        (5, 3, 7, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
@@ -1399,12 +1488,6 @@ VALUES (51, 8, '/img/brandAmenities/1701107286929_brandAmenities.jpg', 'Yoga Mas
         'Học viên sẽ được hướng dẫn kỹ thuật đấm bốc từ các huấn luyện viên chuyên nghiệp.', 1),
        (57, 9, '/img/brandAmenities/1701107936213_brandAmenities.jpg', 'Khóa Học Yoga Cấp Độ Cao',
         'Tham gia các khóa học yoga cấp độ cao, tập trung vào các động tác phức tạp và hiểu sâu về yoga.', 1);
-
---
-
-
-
-
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
 VALUES (59, 10, '/img/brandAmenities/1701108717831_brandAmenities.jpg', 'Hồ Massage Thủy Lực',
@@ -1679,9 +1762,6 @@ INSERT INTO gym_department_plans(gym_department_id, plan_id)
 VALUES (52, 57), -- Gói Linh Hoạt
        (52, 58), -- Gói 1 tháng
        (52, 59); -- Gói 3 tháng
-
-
--- Create Gym Department Gallery
 
 -- Create Gym Department Gallery
 
