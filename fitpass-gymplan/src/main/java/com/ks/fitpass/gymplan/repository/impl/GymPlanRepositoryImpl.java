@@ -210,4 +210,9 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
     public int deleteAllGymPlanByDepartmentId(int departmentId) {
         return jdbcTemplate.update(IRepositoryQuery.DELETE_ALL_GYM_PLAN_BY_DEPARTMENT_ID, departmentId);
     }
+
+    @Override
+    public int checkGymPlanInDepartmentUse(int gymPlanId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.CHECK_GYM_PLAN_IN_DEPARTMENT_USE, Integer.class, gymPlanId);
+    }
 }
