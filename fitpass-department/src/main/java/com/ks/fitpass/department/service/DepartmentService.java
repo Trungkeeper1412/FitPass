@@ -7,7 +7,6 @@ import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
-import java.util.Map;
 
 
 public interface DepartmentService {
@@ -19,8 +18,6 @@ public interface DepartmentService {
     List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException;
 
     List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
-
-//    List<Department> getAllByStatus(int status) throws DataAccessException;
 
     Department getOne(int id) throws DataAccessException;
 
@@ -68,4 +65,6 @@ public interface DepartmentService {
     int updateFirstTimeDepartmentCreated(int departmentId);
 
     int countAllFeedback(int departmentId, String sortRating);
+
+    DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
 }

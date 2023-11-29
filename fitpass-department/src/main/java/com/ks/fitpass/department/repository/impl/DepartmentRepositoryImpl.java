@@ -1,6 +1,8 @@
 package com.ks.fitpass.department.repository.impl;
 
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+
+import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
 import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
@@ -20,9 +22,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository, IRepositoryQuery {
@@ -158,7 +158,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size, String sortRating) {
-        String sql = GET_DEPARTMENT_FEEDBACK_PAGNITION;
+        String sql = GET_DEPARTMENT_FEEDBACK_PAGINATION;
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("departmentId", departmentId);
@@ -343,6 +343,20 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         }
 
         return namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);
+    }
+
+    @Override
+    public DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId) {
+        return jdbcTemplate.queryForObject(
+                IRepositoryQuery.GET_ALL_DEPARTMENT_NAME_AND_LOGO_BY_ID,
+                (resultSet, rowNum) -> {
+                    DepartmentNotificationDTO departmentNotificationDTO = new DepartmentNotificationDTO();
+                    departmentNotificationDTO.setDepartmentName(resultSet.getString("name"));
+                    departmentNotificationDTO.setDepartmentLogoUrl(resultSet.getString("logo_url"));
+                    return departmentNotificationDTO;
+                },
+                departmentId
+        );
     }
 
 }

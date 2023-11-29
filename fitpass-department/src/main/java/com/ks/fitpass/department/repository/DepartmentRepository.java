@@ -2,6 +2,7 @@ package com.ks.fitpass.department.repository;
 
 
 import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
 import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
 import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
@@ -59,4 +60,6 @@ public interface DepartmentRepository {
     int updateFirstTimeDepartmentCreated(int departmentId);
 
     int countAllFeedback(int departmentId, String sortRating);
+
+    DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
 }

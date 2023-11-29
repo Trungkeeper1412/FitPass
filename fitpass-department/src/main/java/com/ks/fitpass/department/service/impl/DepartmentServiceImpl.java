@@ -268,6 +268,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.countAllFeedback(departmentId, sortRating);
     }
 
+    @Override
+    public DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId) {
+        return departmentRepository.getDepartmentNotificationDtoById(departmentId);
+    }
+
 }
 
 
