@@ -20,8 +20,6 @@ public interface DepartmentService {
 
     List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
 
-//    List<Department> getAllByStatus(int status) throws DataAccessException;
-
     Department getOne(int id) throws DataAccessException;
 
     boolean update(Department department) throws DataAccessException;
@@ -68,4 +66,6 @@ public interface DepartmentService {
     int updateFirstTimeDepartmentCreated(int departmentId);
 
     int countAllFeedback(int departmentId, String sortRating);
+
+    DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
 }
