@@ -17,6 +17,9 @@ public class Notification {
     private String message;
     private Timestamp timeSend;
     private int departmentId;
+    private String departmentName;
+    private String departmentLogoUrl;
+    private String employeeName;
     private String messageType;
     private int status;
 }
