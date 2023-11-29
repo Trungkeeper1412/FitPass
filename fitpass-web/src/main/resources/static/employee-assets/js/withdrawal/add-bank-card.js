@@ -7,29 +7,80 @@ function addBankCard() {
 
     var maskedAccountNumber = "**** **** **** " + accountNumber.slice(-4);
 
-    var cardItem = document.createElement("li");
-    cardItem.className = "list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-3";
-    cardItem.innerHTML =
-        `<div class="d-flex align-items-center">
+    let creditCardData = {
+        creditCardId: 0,
+        userId: 0,
+        cardOwnerName: cardHolder,
+        cardNumber: accountNumber,
+        status: "",
+        bankName: bankType,
+    }
+
+    // Add card to DB
+    $.ajax({
+        type: "POST",
+        url: "/brand-owner/withdrawal/card/add-bank-card",
+        data: JSON.stringify(creditCardData),
+        contentType: "application/json",
+        success: function (response) {
+            let creditCardId = response;
+            if(creditCardId === -1) {
+                Swal.fire("Thất bại!", "Thẻ đã tồn tại.", "error");
+                return;
+            }
+                Swal.fire({
+                    title: 'Thành công!',
+                    text: 'Thẻ đã được thêm thành công.',
+                    icon: 'success',
+                    confirmButtonText: 'Đóng'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var cardItem = document.createElement("li");
+                        cardItem.className = "list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-3";
+                        cardItem.setAttribute("data-creditCardId", creditCardId);
+                        cardItem.setAttribute("data-cardHolder", cardHolder);
+                        cardItem.setAttribute("data-bankType", bankType);
+                        cardItem.setAttribute("data-accountNumber", accountNumber);
+                        cardItem.innerHTML =
+                            `<div class="d-flex align-items-center">
             <i class="bi bi-credit-card-2-front fs-1 pr-3"></i>
             <span class="fs-4 text-uppercase">${bankType}</span>
         </div>
         <span class="fs-5">${maskedAccountNumber}</span>`;
 
-    cardItem.onclick = function () {
-        selectedCardItem = cardItem;
-        showCardInfo(cardHolder, bankType, accountNumber);
-    };
-    document.getElementById("cardList").appendChild(cardItem);
-    document.getElementById("cardHolder").value = "";
-    document.getElementById("bankType").value = "";
-    document.getElementById("accountNumber").value = "";
+                        cardItem.onclick = function () {
+                            selectedCardItem = cardItem;
+                            showCardInfo(this);
+                            //showCardInfo(creditCardId ,cardHolder, bankType, accountNumber);
+                        };
+                        document.getElementById("cardList").appendChild(cardItem);
+                        document.getElementById("cardHolder").value = "";
+                        document.getElementById("bankType").value = "";
+                        document.getElementById("accountNumber").value = "";
+                    }
+                });
+
+        },
+        error: function (e) {
+            Swal.fire({
+                title: 'Thất bại!',
+                text: 'Thêm thẻ thất bại.',
+                icon: 'error',
+                confirmButtonText: 'Đóng'
+            });
+        }
+    });
 }
 
-function showCardInfo(cardHolder, bankType, accountNumber) {
+function showCardInfo(item) {
+    let creditCardId = item.getAttribute("data-creditCardId");
+    let cardHolder = item.getAttribute("data-cardHolder");
+    let bankType = item.getAttribute("data-bankType");
+    let accountNumber = item.getAttribute("data-accountNumber");
     document.getElementById("modalCardInfo").innerHTML =
         `<div class="mb-3">
             <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
+            <input type="hidden" class="form-control" id="creditCardId" value="${creditCardId}">
             <input type="text" class="form-control" id="cardHolderName" value="${cardHolder}">
          </div>
          <div class="mb-3">
@@ -64,6 +115,50 @@ function showCardInfo(cardHolder, bankType, accountNumber) {
     cardInfoModal.show();
 }
 
+function updateCard() {
+    let creditCardId = document.getElementById("creditCardId").value;
+    let cardHolder = document.getElementById("cardHolderName").value;
+    let bankType = document.getElementById("bankType").value;
+    let accountNumber = document.getElementById("receiverAccount").value;
+
+    let creditCardData = {
+        creditCardId: creditCardId,
+        userId: 0,
+        cardOwnerName: cardHolder,
+        cardNumber: accountNumber,
+        status: "Đang hoạt động",
+        bankName: bankType,
+    }
+
+    // Update card to DB
+    $.ajax({
+        type: "POST",
+        url: "/brand-owner/withdrawal/card/update-bank-card",
+        data: JSON.stringify(creditCardData),
+        contentType: "application/json",
+        success: function (response) {
+            Swal.fire({
+                title: 'Thành công!',
+                text: 'Thẻ đã được cập nhật thành công.',
+                icon: 'success',
+                confirmButtonText: 'Đóng'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        },
+        error: function (e) {
+            Swal.fire({
+                title: 'Thất bại!',
+                text: 'Cập nhật thẻ thất bại.',
+                icon: 'error',
+                confirmButtonText: 'Đóng'
+            });
+        }
+    });
+}
+
 // Function to delete the selected card
 function deleteCard() {
     if (selectedCardItem) {
@@ -76,12 +171,45 @@ function deleteCard() {
             cancelButtonText: 'Hủy bỏ'
         }).then((result) => {
             if (result.isConfirmed) {
-                selectedCardItem.remove();
+                // Delete card from DB
+                let creditCardId = document.getElementById("creditCardId").value;
+                deleteCardFromDB(creditCardId);
+                // selectedCardItem.remove();
                 selectedCardItem = null;
                 Swal.fire('Đã xóa!', 'Thẻ đã được xóa thành công.', 'success');
             }
         });
     }
+}
+
+function deleteCardFromDB(creditCardId) {
+    // Delete card from DB
+    $.ajax({
+        type: "POST",
+        url: "/brand-owner/withdrawal/card/delete-bank-card",
+        data: JSON.stringify(creditCardId),
+        contentType: "application/json",
+        success: function (response) {
+            Swal.fire({
+                title: 'Thành công!',
+                text: 'Thẻ đã được cập nhật thành công.',
+                icon: 'success',
+                confirmButtonText: 'Đóng'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        },
+        error: function (e) {
+            Swal.fire({
+                title: 'Thất bại!',
+                text: 'Cập nhật thẻ thất bại.',
+                icon: 'error',
+                confirmButtonText: 'Đóng'
+            });
+        }
+    });
 }
 
 document.getElementById("deleteCardBtn").addEventListener("click", deleteCard);
