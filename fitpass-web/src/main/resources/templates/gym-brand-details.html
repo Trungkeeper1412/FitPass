@@ -153,7 +153,7 @@
         </div>
         <div class="pagination-wrapper container">
             <div class="pagination col justify-content-center" id="paginationFeedback">
-                <a class="page-numbers" href="javascript:;">prev</a>
+                <a class="page-numbers" href="javascript:;">Trước</a>
                 <span aria-current="page" class="page-numbers current">1</span>
                 <a class="page-numbers" href="javascript:;">2</a>
                 <a class="page-numbers" href="javascript:;">3</a>
@@ -161,7 +161,7 @@
                 <a class="page-numbers" href="javascript:;">5</a>
                 <a class="page-numbers" href="javascript:;">6</a>
                 <a class="page-numbers" href="javascript:;">7</a>
-                <a class="page-numbers" href="javascript:;">next</a>
+                <a class="page-numbers" href="javascript:;">Sau</a>
             </div>
         </div>
     </div>
@@ -294,7 +294,7 @@
 
 
                     var prevPage = data.currentPage - 1;
-                    paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">prev</a> ';
+                    paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">Trước</a> ';
 
                     for (var i = 1; i <= data.totalPage; i++) {
                         var currentPage = data.currentPage;
@@ -307,7 +307,7 @@
 
 
                     var nextPage = data.currentPage + 1;
-                    paginationHtml += '<a class="next page-numbers' + (data.currentPage === data.totalPage ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + nextPage + ')">next</a> ';
+                    paginationHtml += '<a class="next page-numbers' + (data.currentPage === data.totalPage ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + nextPage + ')">Sau</a> ';
 
                     $('#paginationFeedback').empty().html(paginationHtml);
                 }
