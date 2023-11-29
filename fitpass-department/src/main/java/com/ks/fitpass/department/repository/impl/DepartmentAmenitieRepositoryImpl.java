@@ -27,7 +27,7 @@ public class DepartmentAmenitieRepositoryImpl implements DepartmentAmenitieRepos
 
     @Override
     public List<DepartmentAmenitie> getAllAmenitieOfDepartment(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_ALL_AMENITIE_OF_DEPARTMENT, (rs, rowNum) -> {
+        return jdbcTemplate.query(IRepositoryQuery.GET_ALL_AMENITIES_OF_DEPARTMENT, (rs, rowNum) -> {
             DepartmentAmenitie a = new DepartmentAmenitie();
             a.setAmenitieId(rs.getInt("amenitie_id"));
             a.setBrandId(rs.getInt("brand_id"));
@@ -40,7 +40,7 @@ public class DepartmentAmenitieRepositoryImpl implements DepartmentAmenitieRepos
 
     @Override
     public int[] insertDepartmentAmenitie(int gymDepartmentId, List<Integer> amenitieId) {
-        return jdbcTemplate.batchUpdate(IRepositoryQuery.INSERT_DEPARTMENT_AMENITIE, new BatchPreparedStatementSetter() {
+        return jdbcTemplate.batchUpdate(IRepositoryQuery.INSERT_DEPARTMENT_AMENITY, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
 
@@ -57,6 +57,6 @@ public class DepartmentAmenitieRepositoryImpl implements DepartmentAmenitieRepos
 
     @Override
     public int deleteAllDepartmentAmenitie(int gymDepartmentId) {
-        return jdbcTemplate.update(IRepositoryQuery.DELETE_ALL_DEPARTMENT_AMENITIE, gymDepartmentId);
+        return jdbcTemplate.update(IRepositoryQuery.DELETE_ALL_DEPARTMENT_AMENITY, gymDepartmentId);
     }
 }

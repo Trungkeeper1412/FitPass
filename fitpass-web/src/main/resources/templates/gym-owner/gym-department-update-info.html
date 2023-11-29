@@ -269,17 +269,17 @@
 
     function convertDay(day) {
         switch (day) {
-            case 'thứ hai.':
+            case 'thứ 2':
                 return 'Monday';
-            case 'thứ ba':
+            case 'thứ 3':
                 return 'Tuesday';
-            case 'thứ tư':
+            case 'thứ 4':
                 return 'Wednesday';
-            case 'thứ năm':
+            case 'thứ 5':
                 return 'Thursday';
-            case 'thứ sáu':
+            case 'thứ 6':
                 return 'Friday';
-            case 'thứ bảy':
+            case 'thứ 7':
                 return 'Saturday';
             case 'chủ nhật':
                 return 'Sunday';
@@ -305,17 +305,10 @@
                 var dayText = dayCell.textContent.trim().toLowerCase();
                 var convertedDay = convertDay(dayText);
 
-                console.log(convertedDay)
-
                 openTimeInput.id = convertedDay.toLowerCase() + 'OpenTime';
                 openTimeInput.name = convertedDay.toLowerCase() + 'OpenTime';
                 closeTimeInput.id = convertedDay.toLowerCase() + 'CloseTime';
                 closeTimeInput.name = convertedDay.toLowerCase() + 'CloseTime';
-
-                console.log(openTimeInput.id)
-                console.log(openTimeInput.name)
-                console.log(closeTimeInput.id)
-                console.log(closeTimeInput.name)
             }
         }
     }
