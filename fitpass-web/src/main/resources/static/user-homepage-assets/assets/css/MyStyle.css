@@ -5641,7 +5641,12 @@ body {
 .login-register-body {
     font-family: 'Times New Roman', Times, serif;
 }
-
+.login-register-body form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .login-register-body .banner {
     display: flex;
     justify-content: center;
