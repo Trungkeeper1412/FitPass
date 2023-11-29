@@ -151,7 +151,7 @@
                             <div class="transactions-money">
                                 <i class="bi bi-wallet2 fs-3"></i>
                                 <label>Tổng số tiền đã nhận:
-                                    <span class="text-money"><span th:text="${requestHistoryStats.getTotalMoney()}">9200000</span><i class="fa-solid fa-dong-sign pl-2"></i></span>
+                                    <span class="text-money" th:text="${requestHistoryStats.getTotalMoney() + ' ' + 'đ'}"></span>
                                 </label>
                             </div>
                         </div>
@@ -210,12 +210,6 @@
 
 <th:block th:replace="brand-owner/common/script"></th:block>
     <script>
-        var table =$("#table-withdrawal-success").DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
-            }
-        });
-
         $('#filterButtonPending').on('click', function () {
             // Lọc theo trạng thái 'Active'
             table.columns(5).search('Đang xử lý').draw();

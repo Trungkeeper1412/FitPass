@@ -381,6 +381,10 @@ CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
                                                                 status           VARCHAR(30) NOT NULL
 );
 
+
+
+
+
 DELIMITER $$
 CREATE TRIGGER update_gym_rating_avg
     AFTER INSERT ON user_feedback
