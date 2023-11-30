@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Chi tiết chi nhánh </title>
+    <title> Chi tiết thương hiệu </title>
     <meta name="description" content="Gym Brand Details Page">
     <meta name="keywords" content="My">
 
@@ -84,8 +84,8 @@
     <div class="list-gym-department container">
         <div th:each="dept : ${departments}">
             <a class="department" th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
-            <div class="dept-img"
-                 th:style="'background-image: url(\'' + ${dept.getDepartmentThumbnailUrl()} + '\'); background-size: cover;'">
+            <div class="dept-img">
+                <img th:src="${dept.getDepartmentThumbnailUrl()}">
             </div>
             <div class="dept-info">
                 <h4 class="fw-bold" th:text="${dept.getDepartmentName()}">City Gym</h4>
