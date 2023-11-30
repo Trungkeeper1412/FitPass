@@ -36,7 +36,7 @@ public class GymOwnerUpdateDTO {
     private String phone;
 
     @NotEmpty(message = "Vui lòng nhập địa chỉ !")
-    @Size(max = 25, message = "Địa chỉ không được vượt quá 150 kí tự !")
+    @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
     private String address;
 
     @NotNull(message = "Vui lòng nhập ngày sinh !")
