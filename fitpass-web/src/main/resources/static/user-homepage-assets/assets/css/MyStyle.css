@@ -2849,7 +2849,8 @@ a:link {
 
 .add-money-btn {
     background-color: #000;
-    padding: 11px;
+    width: 100%;
+    padding: 9px;
     cursor: pointer;
     color: white;
     font-weight: 600;
