@@ -137,6 +137,12 @@ function updateCard() {
         data: JSON.stringify(creditCardData),
         contentType: "application/json",
         success: function (response) {
+
+            if(creditCardId === -1) {
+                Swal.fire("Thất bại!", "Thẻ đã tồn tại.", "error");
+                return;
+            }
+
             Swal.fire({
                 title: 'Thành công!',
                 text: 'Thẻ đã được cập nhật thành công.',
