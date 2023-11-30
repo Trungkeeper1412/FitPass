@@ -2,7 +2,10 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.service.BrandService;
+
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.UserDTO;
+import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
@@ -28,7 +31,7 @@ public class AdminController {
     private final RequestWithdrawHistoryService requestWithdrawHistoryService;
     private final CreditCardService creditCardService;
     private final DepartmentFeatureService departmentFeatureService;
-
+    private final UserService userService;
     //Index (Statistic Dashboard)
     @GetMapping("/index")
     public String getAdminIndex() {
@@ -109,7 +112,9 @@ public class AdminController {
     }
 
     @GetMapping("/account/brand")
-    public String getAccountBrandList() {
+    public String getAccountBrandList(Model model) {
+        List<BrandAdminList> brandList = brandService.getAllBrand();
+        model.addAttribute("brandList", brandList);
         return "admin/admin-account-brand";
     }
 
@@ -119,7 +124,9 @@ public class AdminController {
     }
 
     @GetMapping("/account/user")
-    public String getAccountUserList() {
+    public String getAccountUserList(Model model) {
+        List<UserDTO> userDTOList = userService.getAllAccountUser();
+        model.addAttribute("userDTOList", userDTOList);
         return "admin/admin-account-user";
     }
 

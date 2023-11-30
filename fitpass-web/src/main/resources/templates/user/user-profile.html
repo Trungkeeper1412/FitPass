@@ -23,83 +23,104 @@
 
         <div class="col-md-8 col-lg-8 col-xl-9 col-xs-12 content-by-option">
             <!-- Common components in tab -->
-            <div class="add-money-tab">
-                <th:block th:insert="~{user/fragments/money-tab :: money-tab}"></th:block>
-                <!-- User profile tab -->
-                <div class="mt-4 mb-5 user-profile" id="user-profile">
-                    <div class="row user-change-ava justify-content-center">
-                        <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6 mb-3">
-                            <div class="user-img">
-                                <img id="user-ava"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfzmhjOE-yilOK41XrpuN4If42UNoLOCyn7Q&usqp=CAU">
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-3">
-                            <form>
-                                <div class="form-group">
-                                    <input type="file" class="custom-file-input">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-12 mt-4 user-edit-profile">
-                            <div class="row">
-                                <div class="col-md-6 col-xs-12">
-                                    <div class="input-title">Email</div>
-                                    <input type="text" placeholder="nguyenvana@gmail.com" value="nguyenvana@gmail.com" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-title">Họ</div>
-                                    <input type="text" value="Nguyễn" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-title">Tên</div>
-                                    <input type="text" value="Văn A" required>
+            <form id="formSubmit" action="/profile/my-profile/update" method="post"
+                  th:object="${userUpdateDTO}">
+                <div class="add-money-tab">
+                    <th:block th:insert="~{user/fragments/money-tab :: money-tab}"></th:block>
+                    <!-- User profile tab -->
+                    <div class="mt-4 mb-5 user-profile" id="user-profile">
+                        <!--                    <form id="formSubmit" action="/profile/my-profile/update" method="post"-->
+                        <!--                          th:object="${userUpdateDTO}">-->
+
+                        <div class="row user-change-ava justify-content-center">
+                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6 mb-3">
+                                <div class="user-img">
+                                    <img class="show-department-img" id="user-ava"
+                                         th:src="${userUpdateDTO.getImageUrl()}">
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="input-title">Ngày sinh</div>
-                                    <input type="date" value="2014-12-29">
+                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-3">
+                                <input type="file" class="form-control mt-2" id="avatar-img" name="avatar-img"
+                                       accept="image/*" style="display: none;" onchange="uploadImage(this);">
+                                <div class="d-flex justify-content-start align-items-center mt-3">
+                                    <button type="button" class="btn btn-upload-img"
+                                            onclick="document.getElementById('avatar-img').click();">
+                                        Chọn ảnh
+                                    </button>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="input-title">Số điện thoại</div>
-                                    <input type="number" value="0123456789" required>
-                                </div>
+                                <input th:field="*{imageUrl}" type="hidden" id="avatarImg"
+                                       th:value="${userUpdateDTO.getImageUrl()}" name="imageUrl">
+                                <input th:field="*{userId}" type="hidden" th:value="${userId}" name="userId">
+                                <input th:field="*{userDetailId}" type="hidden"
+                                       th:value="${userUpdateDTO.getUserDetailId()}" name="userDetailId">
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="input-title">Giới tính</div>
-                                    <div class="mt-2" style="display: flex;">
-                                        <div style="display: flex;">
-                                            <input type="radio" name="gender" value="male" checked>
-                                            <span style="margin-left: 4px">nam</span>
-                                        </div>
-                                        <div style="display: flex; margin-left: 15px;">
-                                            <input type="radio" name="gender" value="female">
-                                            <span style="margin-left: 4px">nữ</span>
-                                        </div>
-                                        <div style="display: flex; margin-left: 15px;">
-                                            <input type="radio" name="gender" value="other">
-                                            <span style="margin-left: 4px">khác</span>
-                                        </div>
+                            <div class="col-12 mt-4 user-edit-profile">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12">
+                                        <div class="input-title">Email</div>
+                                        <input th:field="*{email}" th:value="${userUpdateDTO.getEmail()}" type="text"
+                                               placeholder="nguyenvana@gmail.com" value="nguyenvana@gmail.com" required>
+                                        <input th:field="*{oldEmail}" th:value="${userUpdateDTO.getEmail()}"
+                                               type="hidden">
+                                        <span th:if="${#fields.hasErrors('email')}"
+                                              th:errors="*{email}">email Error</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-title">Họ</div>
+                                        <input th:field="*{firstName}" th:value="${userUpdateDTO.getFirstName()}"
+                                               type="text" value="Nguyễn" required>
+                                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-title">Tên</div>
+                                        <input th:field="*{lastName}" th:value="${userUpdateDTO.getLastName()}"
+                                               type="text" value="Văn A" required>
+                                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="input-title">Đia chỉ</div>
-                                    <input type="text" value="526 Điện Biên Phủ, Phường 21, Quận Bình Thạnh, Thành phố Hồ Chí Minh" required>
+                                <div class="row mt-3">
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <div class="input-title">Ngày sinh</div>
+                                        <input th:field="*{dateOfBirth}" th:value="${userUpdateDTO.getDateOfBirth()}"
+                                               type="date" value="2014-12-29">
+                                        <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth Error</span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="input-title">Số điện thoại</div>
+                                        <input th:field="*{phoneNumber}" th:value="${userUpdateDTO.getPhoneNumber()}"
+                                               type="number" value="0123456789" required>
+                                        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone Error</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row justify-content-center mt-3">
-                                <div class="col-12 mx-auto">
-                                    <button class="btn save-changes">Lưu thay đổi</button>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="input-title">Đia chỉ</div>
+                                        <input th:field="*{address}" th:value="${userUpdateDTO.getAddress()}"
+                                               type="text" required>
+                                        <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="input-title">Giới Tính :</div>
+                                        <select th:field="*{gender}" class="form-select" id="gender" name="gender">
+                                            <option value="">Chọn giới tính</option>
+                                            <option value="Male"  th:selected="${userUpdateDTO.getGender().equals('Male')}">Nam</option>
+                                            <option value="Female" th:selected="${userUpdateDTO.getGender().equals('Female')}">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                        <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
+                                    </div>
+
+                                </div>
+                                <div class="row justify-content-center mt-3">
+                                    <div class="col-12 mx-auto">
+                                        <button class="btn save-changes" type="submit" >Lưu thay đổi</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-            </div>
+            </form>
         </div>
     </div>
 
@@ -137,6 +158,38 @@
 <th:block th:include="common/vendor-script"></th:block>
 <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.js"></script>
 <script>
+    function uploadImage(input) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            var formData = new FormData();
+            formData.append("file", file);
+            $.ajax({
+                type: "POST",
+                url: `/upload/uploadAvatar`,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response)
+                    $("#avatarImg").val(response);
+                },
+                error: function () {
+                    console.log("Failed to upload file");
+                }
+            });
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.querySelector('.show-department-img');
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     new DataTable('#transaction-history-tb', {
         language: {
             processing: "Đang tải dữ liệu",
@@ -177,22 +230,22 @@
     });
 
 
-        $("#paymentSubmit").click(function() {
-            var selectedAmount = $("#moneyAmount").val();
+    $("#paymentSubmit").click(function () {
+        var selectedAmount = $("#moneyAmount").val();
 
-            // Gửi giá trị lên server thông qua một POST request
-            $.ajax({
-                type: "POST",
-                url: "/payment/create-session",
-                data: {
-                    amount: selectedAmount
-                },
-                success: function(response) {
-                    // Xử lý kết quả trả về từ server (nếu cần)
-                    window.location.href = response;
-                }
-            });
+        // Gửi giá trị lên server thông qua một POST request
+        $.ajax({
+            type: "POST",
+            url: "/payment/create-session",
+            data: {
+                amount: selectedAmount
+            },
+            success: function (response) {
+                // Xử lý kết quả trả về từ server (nếu cần)
+                window.location.href = response;
+            }
         });
+    });
 
     function updateInputValue(value, creditTrans) {
         document.getElementById('moneyAmount').value = value;
@@ -205,7 +258,7 @@
     const addButton = document.querySelector('.add-money-btn');
 
     // Add a click event listener to the button
-    addButton.addEventListener('click', function() {
+    addButton.addEventListener('click', function () {
         // Get the value from the input element
         let inputValue = moneyInput.value;
         inputValue = parseInt(inputValue);
@@ -217,7 +270,7 @@
         document.querySelector('.money').textContent = inputValue;
 
         // Update the text content of the creditConfirm element with the selected credit-trans text
-        document.querySelector('.creditConfirm').textContent = moneyInput.value/1000;
+        document.querySelector('.creditConfirm').textContent = moneyInput.value / 1000;
     });
 
     // JS add money
@@ -248,11 +301,11 @@
         momo_payment.style.display = "block";
     });
 
-    document.getElementById("moneyAmount").oninput = function(){
+    document.getElementById("moneyAmount").oninput = function () {
         let money_value = document.getElementById("moneyAmount").value;
         // document.getElementById("moneyAmount").value = parseInt(money_value).toLocaleString("de-DE");
         console.log(document.getElementById("moneyAmount").value.replace('.', ''));
-        if (money_value === ""){
+        if (money_value === "") {
             document.querySelector('input[name="money"]:checked').checked = false;
         }
     };

@@ -594,8 +594,10 @@ public class BrandOwnerController {
         return "brand-owner/gym-brand-withdrawal-card-add";
     }
 
+
     @PostMapping("/withdrawal/card/add-bank-card")
-    public ResponseEntity<Integer> addBankCard(@RequestBody CreditCard creditCard, HttpSession session) {
+    public ResponseEntity<Integer> addBankCard( @RequestBody CreditCard creditCard,
+                                               HttpSession session) {
         try {
             User user = (User) session.getAttribute("userInfo");
             creditCard.setUserId(user.getUserId());
@@ -629,6 +631,10 @@ public class BrandOwnerController {
     public ResponseEntity<Integer> updateBankCard(@RequestBody CreditCard creditCard) {
         int rowAffect;
         try {
+            if(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())) {
+                return ResponseEntity.ok(-1);
+            }
+
             rowAffect = creditCardService.updateCreditCard(creditCard);
         } catch (DataAccessException e) {
             return ResponseEntity.badRequest().build();

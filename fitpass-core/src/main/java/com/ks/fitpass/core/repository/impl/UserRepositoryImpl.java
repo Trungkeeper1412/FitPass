@@ -2,6 +2,7 @@ package com.ks.fitpass.core.repository.impl;
 
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.mapper.UserMapper;
 import com.ks.fitpass.core.repository.IRepositoryQuery;
@@ -22,6 +23,22 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     @Autowired
     public UserRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<UserDTO> getAllAccountUser() {
+        return jdbcTemplate.query(GET_ALL_USER_BY_ROLE_USER, (rs, rowNum) -> {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserId(rs.getInt("user_id"));
+            userDTO.setUserDetailId(rs.getInt("user_detail_id"));
+            userDTO.setFirstName(rs.getString("first_name"));
+            userDTO.setLastName(rs.getString("last_name"));
+            userDTO.setEmail(rs.getString("email"));
+            userDTO.setPhoneNumber(rs.getString("phone_number"));
+            userDTO.setImageUrl(rs.getString("image_url"));
+            userDTO.setUserDeleted(rs.getBoolean("user_deleted"));
+            return userDTO;
+        });
     }
 
     @Override
@@ -132,6 +149,25 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
             userDetail.setSecurityId(rs.getString("securityId"));
             userDetail.setUserDeleted(rs.getBoolean("user_deleted"));
             userDetail.setGymDepartmentId(rs.getInt("gym_department_id"));
+            return  userDetail;
+        }, userId);
+    }
+
+
+    @Override
+    public UserDetail getUserDetailByUserId(int userId) {
+        return jdbcTemplate.queryForObject(GET_USER_DETAIL_BY_USER_ID, (rs, rowNum) -> {
+            UserDetail userDetail = new UserDetail();
+            userDetail.setUserDetailId(rs.getInt("user_detail_id"));
+            userDetail.setFirstName(rs.getString("first_name"));
+            userDetail.setLastName(rs.getString("last_name"));
+            userDetail.setEmail(rs.getString("email"));
+            userDetail.setPhoneNumber(rs.getString("phone_number"));
+            userDetail.setAddress(rs.getString("address"));
+            userDetail.setDateOfBirth(rs.getObject("date_of_birth", LocalDate.class));
+            userDetail.setGender(rs.getString("gender"));
+            userDetail.setImageUrl(rs.getString("image_url"));
+            userDetail.setUserDeleted(rs.getBoolean("user_deleted"));
             return  userDetail;
         }, userId);
     }

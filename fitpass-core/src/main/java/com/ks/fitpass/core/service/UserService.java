@@ -2,11 +2,15 @@ package com.ks.fitpass.core.service;
 
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.entity.UserDetail;
 
 import java.util.List;
 
 public interface UserService {
+
+    List<UserDTO> getAllAccountUser();
+
     int insertIntoUserDetail(UserDetail userDetail);
 
     int getLastInsertUserDetailId(UserDetail userDetail);
@@ -26,6 +30,7 @@ public interface UserService {
     int updateUserDetail(UserDetail userDetail);
     int updateUserStatusByUserId(int userId, int status);
     UserDetail getUserDetailByUserDetailId(int userId);
+    UserDetail getUserDetailByUserId(int userId);
 
     boolean checkEmailExist(String email);
     boolean checkUsernameExist(String username);
