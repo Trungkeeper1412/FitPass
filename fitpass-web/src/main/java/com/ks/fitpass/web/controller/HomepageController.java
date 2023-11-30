@@ -4,12 +4,10 @@ import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
-import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
-import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
