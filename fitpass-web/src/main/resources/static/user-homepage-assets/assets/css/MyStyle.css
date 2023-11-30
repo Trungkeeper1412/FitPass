@@ -24,7 +24,7 @@ h6 {
 .cart-badge {
     position: absolute;
     top: 0;
-    right: -20px;
+    left: 57px;
     background-color: orangered;
     color: white;
     border-radius: 10px;
@@ -38,8 +38,8 @@ h6 {
 
 .notification-badge {
     position: absolute;
-    top: 0px;
-    right: -20px;
+    top: 0;
+    left: 57px;
     background-color: orange;
     color: white;
     border-radius: 10px;
@@ -57,6 +57,7 @@ h6 {
     border: 1px solid #ccc;
     border-radius: 20px;
     padding: 5px;
+    margin: 0 10px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -282,7 +283,6 @@ a:hover {
 .navbar a:focus {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 10px 0 10px 30px;
     font-size: 15px;
     font-weight: 600;
