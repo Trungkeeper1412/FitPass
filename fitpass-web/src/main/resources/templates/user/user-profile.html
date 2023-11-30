@@ -100,7 +100,7 @@
                                         <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="gender" class="form-label">Giới Tính :</label>
+                                        <div class="input-title">Giới Tính :</div>
                                         <select th:field="*{gender}" class="form-select" id="gender" name="gender">
                                             <option value="">Chọn giới tính</option>
                                             <option value="Male"  th:selected="${userUpdateDTO.getGender().equals('Male')}">Nam</option>
