@@ -206,6 +206,7 @@
     document.getElementById("alertsDropdown").addEventListener('click', function(){
         document.getElementById("notifications-list").style.display = "block";
         count ++;
+        console.log(count);
         if(count % 2 == 0){
             document.getElementById("notifications-list").style.display = "none";
         }
