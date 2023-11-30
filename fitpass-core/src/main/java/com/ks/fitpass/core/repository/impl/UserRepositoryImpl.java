@@ -153,6 +153,25 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         }, userId);
     }
 
+
+    @Override
+    public UserDetail getUserDetailByUserId(int userId) {
+        return jdbcTemplate.queryForObject(GET_USER_DETAIL_BY_USER_ID, (rs, rowNum) -> {
+            UserDetail userDetail = new UserDetail();
+            userDetail.setUserDetailId(rs.getInt("user_detail_id"));
+            userDetail.setFirstName(rs.getString("first_name"));
+            userDetail.setLastName(rs.getString("last_name"));
+            userDetail.setEmail(rs.getString("email"));
+            userDetail.setPhoneNumber(rs.getString("phone_number"));
+            userDetail.setAddress(rs.getString("address"));
+            userDetail.setDateOfBirth(rs.getObject("date_of_birth", LocalDate.class));
+            userDetail.setGender(rs.getString("gender"));
+            userDetail.setImageUrl(rs.getString("image_url"));
+            userDetail.setUserDeleted(rs.getBoolean("user_deleted"));
+            return  userDetail;
+        }, userId);
+    }
+
     @Override
     public boolean checkEmailExist(String email) {
         int count = jdbcTemplate.queryForObject(CHECK_EMAIL_EXIST, Integer.class, email);

@@ -34,6 +34,9 @@ public interface UserRepository {
 
     UserDetail getUserDetailByUserDetailId(int userId);
 
+    UserDetail getUserDetailByUserId(int userId);
+
+
     boolean checkEmailExist(String email);
 
     boolean checkUsernameExist(String username);

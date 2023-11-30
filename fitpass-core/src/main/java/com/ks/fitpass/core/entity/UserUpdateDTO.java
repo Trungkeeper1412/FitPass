@@ -1,21 +1,15 @@
-package com.ks.fitpass.brand.dto;
+package com.ks.fitpass.core.entity;
 
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.time.LocalDate;
 
 @Data
-public class GymOwnerUpdateDTO {
-    @NotNull
-    private Integer userDetailId;
+public class UserUpdateDTO {
+    private int userId;
+    private int userDetailId;
 
     @Size(max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập họ của bạn !")
@@ -33,7 +27,7 @@ public class GymOwnerUpdateDTO {
 
     @NotEmpty(message = "Vui lòng nhập số điện thoại !")
     @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
-    private String phone;
+    private String phoneNumber;
 
     @NotEmpty(message = "Vui lòng nhập địa chỉ !")
     @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
@@ -44,36 +38,14 @@ public class GymOwnerUpdateDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @NotEmpty(message = "Vui lòng nhập số căn cước công dân !")
-    @Size(min = 12, max = 12, message = "Số căn cước công dân phải là 12 chữ số !")
-    @ValidateIdCard(message = "Số căn cước công dân không hợp lệ !")
-    private String idCard;
-
     @NotEmpty(message = "Vui lòng chọn giới tính !")
     private String gender;
 
     @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String imageUrl;
 
-    private String active;
     private boolean userDeleted;
 
-    private Integer oldDepartmentId;
-
-    private Integer departmentId;
-    private Integer userId;
     private String oldEmail;
-
-
-    @Target({ ElementType.FIELD })
-    @Retention(RetentionPolicy.RUNTIME)
-    @Constraint(validatedBy = ValidateIdCardValidator.class)
-    public @interface ValidateIdCard {
-        String message() default "Số căn cước công dân không hợp lệ !";
-
-        Class<?>[] groups() default {};
-
-        Class<? extends Payload>[] payload() default {};
-    }
 
 }

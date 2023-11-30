@@ -125,6 +125,14 @@ public interface IRepositoryQuery {
             WHERE ud.user_detail_id = ?
             """;
 
+    String GET_USER_DETAIL_BY_USER_ID = """
+            SELECT u.user_id ,ud.user_detail_id, first_name, last_name, email, phone_number, ud.address, date_of_birth, gender, image_url, u.user_deleted
+            FROM user_detail ud
+            JOIN `user` u  ON u.user_detail_id = ud.user_detail_id
+            WHERE u.user_id = ?
+            """;
+
+
     String UPDATE_USER_DETAIL_BY_USER_DETAIL_ID = """
                 UPDATE user_detail
                 SET first_name=?, last_name=?, email=?, phone_number=?, address=?, date_of_birth=?, gender=?, image_url=?, securityId = ?

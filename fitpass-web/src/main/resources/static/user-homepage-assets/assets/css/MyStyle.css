@@ -3167,7 +3167,16 @@ a:link {
     box-sizing: border-box;
     transition: .3s;
 }
-
+.user-edit-profile select {
+    width: 100%;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    margin: 2px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
 .user-edit-profile .input-title {
     font-weight: 600;
     font-size: 14px;
