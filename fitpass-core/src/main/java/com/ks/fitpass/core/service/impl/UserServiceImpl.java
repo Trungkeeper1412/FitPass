@@ -63,6 +63,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public List<UserDTO> getAllAccountUser() {
+        return userRepository.getAllAccountUser();
+    }
+
+    @Override
     public int insertIntoUserDetail(UserDetail userDetail) {
         return userRepository.insertIntoUserDetail(userDetail);
     }
