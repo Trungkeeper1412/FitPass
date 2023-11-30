@@ -6,275 +6,282 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-  <!-- Sidebar -->
-  <th:block th:replace="admin/common/sidebar"></th:block>
-  <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="admin/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Main Content -->
-    <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-      <!-- Topbar -->
-      <th:block th:replace="admin/common/navbar"></th:block>
-      <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="admin/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-        <div class="card">
-          <div class="card-header py-3 d-flex justify-content-between">
-            <h2 class="m-0 font-weight-bold text-primary">Danh sách tiện ích</h2>
-            <div class="btn btn-primary" data-toggle="modal" data-target="#addModalFeature">
-              <i class="fas fa-plus"></i> <span class="ml-1">Thêm mới</span>
-            </div>
-          </div>
-          <!-- Modal Add Feature-->
-          <div class="modal fade" id="addModalFeature" role="dialog" aria-labelledby="addFeature" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <form action="/admin/feature/add" method="post">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addFeature">Thêm tiện ích mới</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <!-- Form thêm mới tiện ích -->
-                    <div class="form-group">
-                      <label for="name">Tên tiện ích:</label>
-                      <input type="text" name="featureName" class="form-control" id="name" placeholder="Nhập tên tiện ích">
-                    </div>
-                    <div class="form-group">
-                      <label for="icon">Chọn biểu tượng:</label>
-                      <div class="row">
-                        <div class="select2-wrapper" id="icon">
-                          <select class="input icons_select2" name="featureIcon">
-                            <option value="bi-p-circle" data-icon="bi-p-circle">Bãi đỗ xe</option>
-                            <option value="fa-scroll" data-icon="fa-scroll">Khăn miễn phí</option>
-                            <option value="fa-medkit" data-icon="fa-medkit">Phòng y tế</option>
-                            <option value="fa-cocktail" data-icon="fa-cocktail">Quầy nước</option>
-                            <option value="bi-cloud-haze2" data-icon="bi-cloud-haze2">Phòng xông hơi</option>
-                            <option value="fa-shower" data-icon="fa-shower">Phòng tắm</option>
-                            <option value="fa fa-bed" data-icon="fa fa-bed">Phòng thay đồ</option>
-                            <option value="fa fa-coffee" data-icon="fa fa-coffee">Khu vực nghỉ ngơi</option>
-                            <option value="fa fa-utensils" data-icon="fa fa-utensils">Khu vực ăn uống</option>
-                            <option value="bi-bicycle" data-icon="bi-bicycle">Khu vực đạp xe</option>
-                            <option value="bi-calendar" data-icon="bi-calendar">Lịch hẹn</option>
-                            <option value="fa fa-wifi" data-icon="fa fa-wifi">Wi-Fi</option>
-                            <option value="fa fa-fire-extinguisher" data-icon="fa fa-fire-extinguisher">Hệ thống an toàn</option>
-                            <option value="fa fa-thermometer" data-icon="fa fa-thermometer">Đo nhiệt độ</option>
-                            <option value="fa fa-music" data-icon="fa fa-music">Âm nhạc</option>
-                            <option value="bi-person" data-icon="bi-person">Hướng dẫn viên</option>
-                            <option value="fa fa-spa" data-icon="fa fa-spa">Khu vực Spa</option>
-                            <option value="fa fa-smoking" data-icon="fa fa-smoking">Khu vực hút thuốc</option>
-                            <option value="fa fa-child" data-icon="fa fa-child">Khu vực trẻ em</option>
-                            <option value="fa fa-tree" data-icon="fa fa-tree">Khu vực tập luyện ngoại ô</option>
-                          </select>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header py-3 d-flex justify-content-between">
+                        <h2 class="m-0 font-weight-bold text-primary">Danh sách tiện ích</h2>
+                        <div class="btn btn-primary" data-toggle="modal" data-target="#addModalFeature">
+                            <i class="fas fa-plus"></i> <span class="ml-1">Thêm mới</span>
                         </div>
-                      </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                  <button type="submit" class="btn btn-primary">Thêm mới</button>
-                </div>
-                </form>
+                    <!-- Modal Add Feature-->
+                    <div class="modal fade" id="addModalFeature" role="dialog" aria-labelledby="addFeature" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="/admin/feature/add" method="post">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addFeature">Thêm tiện ích mới</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form thêm mới tiện ích -->
+                                        <div class="form-group">
+                                            <label for="name">Tên tiện ích:</label>
+                                            <input type="text" name="featureName" class="form-control" id="name" placeholder="Nhập tên tiện ích">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="icon">Chọn biểu tượng:</label>
+                                            <div class="row">
+                                                <div class="select2-wrapper" id="icon">
+                                                    <select class="input icons_select2" name="featureIcon">
+                                                        <option value="bi-p-circle" data-icon="bi-p-circle">Bãi đỗ xe</option>
+                                                        <option value="fa-scroll" data-icon="fa-scroll">Khăn miễn phí</option>
+                                                        <option value="fa-medkit" data-icon="fa-medkit">Phòng y tế</option>
+                                                        <option value="fa-cocktail" data-icon="fa-cocktail">Quầy nước</option>
+                                                        <option value="bi-cloud-haze2" data-icon="bi-cloud-haze2">Phòng xông hơi</option>
+                                                        <option value="fa-shower" data-icon="fa-shower">Phòng tắm</option>
+                                                        <option value="fa fa-bed" data-icon="fa fa-bed">Phòng thay đồ</option>
+                                                        <option value="fa fa-coffee" data-icon="fa fa-coffee">Khu vực nghỉ ngơi</option>
+                                                        <option value="fa fa-utensils" data-icon="fa fa-utensils">Khu vực ăn uống</option>
+                                                        <option value="bi-bicycle" data-icon="bi-bicycle">Khu vực đạp xe</option>
+                                                        <option value="bi-calendar" data-icon="bi-calendar">Lịch hẹn</option>
+                                                        <option value="fa fa-wifi" data-icon="fa fa-wifi">Wi-Fi</option>
+                                                        <option value="fa fa-fire-extinguisher" data-icon="fa fa-fire-extinguisher">Hệ thống an toàn</option>
+                                                        <option value="fa fa-thermometer" data-icon="fa fa-thermometer">Đo nhiệt độ</option>
+                                                        <option value="fa fa-music" data-icon="fa fa-music">Âm nhạc</option>
+                                                        <option value="bi-person" data-icon="bi-person">Hướng dẫn viên</option>
+                                                        <option value="fa fa-spa" data-icon="fa fa-spa">Khu vực Spa</option>
+                                                        <option value="fa fa-smoking" data-icon="fa fa-smoking">Khu vực hút thuốc</option>
+                                                        <option value="fa fa-child" data-icon="fa fa-child">Khu vực trẻ em</option>
+                                                        <option value="fa fa-tree" data-icon="fa fa-tree">Khu vực tập luyện ngoại ô</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                    </div>
+                                </form>
 
-              </div>
-            </div>
-          </div>
-          <!-- Modal Update Feature -->
-          <div class="modal fade" id="updateModalFeature" role="dialog" aria-labelledby="updateFeature" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="updateFeature">Cập nhật tiện ích</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <!-- Form cập nhật tiện ích -->
-                  <form>
-                    <div class="form-group">
-                      <label for="updateName">Tên tiện ích:</label>
-                      <input type="hidden" id="updateFeatureId" value="1">
-                      <input type="text" class="form-control" id="updateName" value="Bãi đỗ xe">
-                    </div>
-                    <div class="form-group">
-                      <label for="icon-update">Chọn biểu tượng:</label>
-                      <div class="row">
-                        <div class="select2-wrapper" id="icon-update">
-                          <select class="input icons_select2" id="selectUpdate">
-                            <option value="bi-p-circle" data-icon="bi-p-circle">Bãi đỗ xe</option>
-                            <option value="fa-scroll" data-icon="fa-scroll">Khăn miễn phí</option>
-                            <option value="fa-medkit" data-icon="fa-medkit">Phòng y tế</option>
-                            <option value="fa-cocktail" data-icon="fa-cocktail">Quầy nước</option>
-                            <option value="bi-cloud-haze2" data-icon="bi-cloud-haze2">Phòng xông hơi</option>
-                            <option value="fa-shower" data-icon="fa-shower">Phòng tắm</option>
-                            <option value="fa fa-bed" data-icon="fa fa-bed">Phòng thay đồ</option>
-                            <option value="fa fa-coffee" data-icon="fa fa-coffee">Khu vực nghỉ ngơi</option>
-                            <option value="fa fa-utensils" data-icon="fa fa-utensils">Khu vực ăn uống</option>
-                            <option value="bi-bicycle" data-icon="bi-bicycle">Khu vực đạp xe</option>
-                            <option value="bi-calendar" data-icon="bi-calendar">Lịch hẹn</option>
-                            <option value="fa fa-wifi" data-icon="fa fa-wifi">Wi-Fi</option>
-                            <option value="fa fa-fire-extinguisher" data-icon="fa fa-fire-extinguisher">Hệ thống an toàn</option>
-                            <option value="fa fa-thermometer" data-icon="fa fa-thermometer">Đo nhiệt độ</option>
-                            <option value="fa fa-music" data-icon="fa fa-music">Âm nhạc</option>
-                            <option value="bi-person" data-icon="bi-person">Hướng dẫn viên</option>
-                            <option value="fa fa-spa" data-icon="fa fa-spa">Khu vực Spa</option>
-                            <option value="fa fa-smoking" data-icon="fa fa-smoking">Khu vực hút thuốc</option>
-                            <option value="fa fa-child" data-icon="fa fa-child">Khu vực trẻ em</option>
-                            <option value="fa fa-tree" data-icon="fa fa-tree">Khu vực tập luyện ngoại ô</option>
-                          </select>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                  <button type="button" class="btn btn-primary" onclick="updateFeature()" data-dismiss="modal">Cập nhật</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="text-start">
-                <table class="table table-bordered" id="dataTable" width="100%"
-                       cellspacing="0">
-                  <thead>
-                  <tr>
-                    <th>Thứ tự</th>
-                    <th>Tên tiện ích</th>
-                    <th>Biểu tượng</th>
-                    <th class="status-active">Trạng thái</th>
-                    <th class="table-action">Hành động</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <th:block th:each="f : ${featureList}">
-                      <tr>
-                        <td th:text="${fStat.index + 1}">1</td>
-                        <td th:text="${f.getFeatureName()}">Bãi đỗ xe</td>
-                        <td th:utext="${f.getFeatureIcon()}"><i class="bi bi-p-circle"></i></td>
-                        <td>
-                          <select class="form-select" id="set-active"
-                                    name="set-active" th:attr="onchange='updateFeatureStatus('+${f.getFeatureID()}+',this)'">
-                            <option value="active" th:selected="${f.getFeatureStatus() == 1}">Hoạt động</option>
-                            <option value="deactive" th:selected="${f.getFeatureStatus() != 1}">Không hoạt động</option>
-                          </select>
-                        </td>
-                        <td><div class="btn btn-primary" th:attr="onclick='getDetail('+${f.getFeatureID()}+')'" data-toggle="modal" data-target="#updateModalFeature">Cập nhật</div></td>
-                      </tr>
-                    </th:block>
+                    <!-- Modal Update Feature -->
+                    <div class="modal fade" id="updateModalFeature" role="dialog" aria-labelledby="updateFeature" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="updateFeature">Cập nhật tiện ích</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form cập nhật tiện ích -->
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="updateName">Tên tiện ích:</label>
+                                            <input type="hidden" id="updateFeatureId" value="1">
+                                            <input type="text" class="form-control" id="updateName" value="Bãi đỗ xe">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="icon-update">Chọn biểu tượng:</label>
+                                            <div class="row">
+                                                <div class="select2-wrapper" id="icon-update">
+                                                    <select class="input icons_select2" id="selectUpdate">
+                                                        <option value="bi-p-circle" data-icon="bi-p-circle">Bãi đỗ xe</option>
+                                                        <option value="fa-scroll" data-icon="fa-scroll">Khăn miễn phí</option>
+                                                        <option value="fa-medkit" data-icon="fa-medkit">Phòng y tế</option>
+                                                        <option value="fa-cocktail" data-icon="fa-cocktail">Quầy nước</option>
+                                                        <option value="bi-cloud-haze2" data-icon="bi-cloud-haze2">Phòng xông hơi</option>
+                                                        <option value="fa-shower" data-icon="fa-shower">Phòng tắm</option>
+                                                        <option value="fa fa-bed" data-icon="fa fa-bed">Phòng thay đồ</option>
+                                                        <option value="fa fa-coffee" data-icon="fa fa-coffee">Khu vực nghỉ ngơi</option>
+                                                        <option value="fa fa-utensils" data-icon="fa fa-utensils">Khu vực ăn uống</option>
+                                                        <option value="bi-bicycle" data-icon="bi-bicycle">Khu vực đạp xe</option>
+                                                        <option value="bi-calendar" data-icon="bi-calendar">Lịch hẹn</option>
+                                                        <option value="fa fa-wifi" data-icon="fa fa-wifi">Wi-Fi</option>
+                                                        <option value="fa fa-fire-extinguisher" data-icon="fa fa-fire-extinguisher">Hệ thống an toàn</option>
+                                                        <option value="fa fa-thermometer" data-icon="fa fa-thermometer">Đo nhiệt độ</option>
+                                                        <option value="fa fa-music" data-icon="fa fa-music">Âm nhạc</option>
+                                                        <option value="bi-person" data-icon="bi-person">Hướng dẫn viên</option>
+                                                        <option value="fa fa-spa" data-icon="fa fa-spa">Khu vực Spa</option>
+                                                        <option value="fa fa-smoking" data-icon="fa fa-smoking">Khu vực hút thuốc</option>
+                                                        <option value="fa fa-child" data-icon="fa fa-child">Khu vực trẻ em</option>
+                                                        <option value="fa fa-tree" data-icon="fa fa-tree">Khu vực tập luyện ngoại ô</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <button type="button" class="btn btn-primary" onclick="updateFeature()" data-dismiss="modal">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="text-start">
+                                <table class="table table-bordered" id="dataTable" width="100%"
+                                       cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Thứ tự</th>
+                                        <th>Tên tiện ích</th>
+                                        <th>Biểu tượng</th>
+                                        <th class="status-active">Trạng thái</th>
+                                        <th class="table-action">Hành động</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="f : ${featureList}">
+                                        <tr>
+                                            <td th:text="${fStat.index + 1}">1</td>
+                                            <td th:text="${f.getFeatureName()}">Bãi đỗ xe</td>
+                                            <td th:utext="${f.getFeatureIcon()}"><i class="bi bi-p-circle"></i></td>
+                                            <td>
+                                                <select class="form-select" id="set-active"
+                                                        name="set-active" th:attr="onchange='updateFeatureStatus('+${f.getFeatureID()}+',this)'">
+                                                    <option value="active" th:selected="${f.getFeatureStatus() == 1}">Hoạt động</option>
+                                                    <option value="deactive" th:selected="${f.getFeatureStatus() != 1}">Không hoạt động</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <div class="btn btn-primary" th:attr="onclick='getDetail('+${f.getFeatureID()}+')'" data-toggle="modal" data-target="#updateModalFeature">Cập nhật</div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
 
-                  </tbody>
-                </table>
-              </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <!-- /.container-fluid -->
+
         </div>
-      </div>
-      <!-- /.container-fluid -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="admin/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <th:block th:replace="admin/common/footer"></th:block>
-    <!-- End of Footer -->
-
-  </div>
-  <!-- End of Content Wrapper -->
+    <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
+    <i class="fas fa-angle-up"></i>
 </a>
+
+<!-- Logout Modal-->
+<th:block th:replace="brand-owner/common/logout-modal"></th:block>
+
 <th:block th:replace="admin/common/script"></th:block>
-  <script>
+
+<script>
     function updateFeatureStatus(featureId, selectObject) {
-      let selectedValue = selectObject.value;
-      let feature = {
-        featureID: featureId,
-        featureName: "",
-        featureIcon: "",
-        featureStatus: selectedValue === "active" ? 1 : 0
-      }
-      Swal.fire({
-        title: 'Bạn có chắc chắn muốn thay đổi trạng thái?',
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: `Đồng ý`,
-        denyButtonText: `Không đồng ý`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-            url: "/admin/feature/updateStatus",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(feature),
-            success: function (data) {
-              console.log(data);
-              Swal.fire("Thay đổi trạng thái thành công", "", "success");
-              window.location.reload();
-            }
-          });
-        } else {
-          window.location.reload();
+        let selectedValue = selectObject.value;
+        let feature = {
+            featureID: featureId,
+            featureName: "",
+            featureIcon: "",
+            featureStatus: selectedValue === "active" ? 1 : 0
         }
-      })
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn thay đổi trạng thái?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: `Đồng ý`,
+            denyButtonText: `Không đồng ý`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/admin/feature/updateStatus",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(feature),
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire("Thay đổi trạng thái thành công", "", "success");
+                        window.location.reload();
+                    }
+                });
+            } else {
+                window.location.reload();
+            }
+        })
 
 
     }
 
     function getDetail(featureId) {
-      $.ajax({
-        url: "/admin/feature/detail/" + featureId,
-        type: "GET",
-        success: function (data) {
-          console.log(data);
-          let iconString = data.featureIcon;
-          let icon = $(iconString);
-          let className = icon.attr('class');
-          $("#updateFeatureId").val(data.featureID);
-          $("#updateName").val(data.featureName);
-          $("#selectUpdate").val(className);
-          $("#selectUpdate").trigger('change');
-        }
-      });
+        $.ajax({
+            url: "/admin/feature/detail/" + featureId,
+            type: "GET",
+            success: function (data) {
+                console.log(data);
+                let iconString = data.featureIcon;
+                let icon = $(iconString);
+                let className = icon.attr('class');
+                $("#updateFeatureId").val(data.featureID);
+                $("#updateName").val(data.featureName);
+                $("#selectUpdate").val(className);
+                $("#selectUpdate").trigger('change');
+            }
+        });
     }
 
     function updateFeature() {
-      let featureId = $("#updateFeatureId").val();
-      let featureName = $("#updateName").val();
-      let featureIcon = $("#selectUpdate").val();
-      let feature = {
-        featureID: featureId,
-        featureName: featureName,
-        featureIcon: featureIcon,
-        featureStatus: 0
-      }
-      $.ajax({
-        url: "/admin/feature/update",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(feature),
-        success: function (data) {
-          console.log(data);
-          Swal.fire("Cập nhật thành công", "", "success");
-          window.location.reload();
+        let featureId = $("#updateFeatureId").val();
+        let featureName = $("#updateName").val();
+        let featureIcon = $("#selectUpdate").val();
+        let feature = {
+            featureID: featureId,
+            featureName: featureName,
+            featureIcon: featureIcon,
+            featureStatus: 0
         }
-      });
+        $.ajax({
+            url: "/admin/feature/update",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(feature),
+            success: function (data) {
+                console.log(data);
+                Swal.fire("Cập nhật thành công", "", "success");
+                window.location.reload();
+            }
+        });
     }
-  </script>
+</script>
 </body>
 
 </html>
