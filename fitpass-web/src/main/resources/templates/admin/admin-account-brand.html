@@ -27,7 +27,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
                         <h2 class="m-0 font-weight-bold text-primary">Danh sách tài khoản thương hiệu</h2>
-                        <a  th:href="@{/admin/account/brand/add}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Tạo tài khoản thương hiệu">
+                        <a th:href="@{/admin/account/brand/add}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Tạo tài khoản thương hiệu">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -46,14 +46,14 @@
                                 </thead>
                                 <tbody>
                                 <th:block th:each="b : ${brandList}">
-                                <tr>
-                                    <td th:text="${bStat.index + 1}">1</td>
-                                    <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
-                                    <td th:text="${b.getBrandContactNumber()}">0987654321</td>
-                                    <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
-                                    <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
-                                    <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                                </tr>
+                                    <tr>
+                                        <td th:text="${bStat.index + 1}">1</td>
+                                        <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
+                                        <td th:text="${b.getBrandContactNumber()}">0987654321</td>
+                                        <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
+                                        <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
+                                        <td><a class="btn btn-danger">Khóa tài khoản</a></td>
+                                    </tr>
                                 </th:block>
                                 </tbody>
                             </table>
@@ -81,7 +81,11 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- Logout Modal-->
+<th:block th:replace="brand-owner/common/logout-modal"></th:block>
+
 <th:block th:replace="admin/common/script"></th:block>
+
 </body>
 
 </html>
