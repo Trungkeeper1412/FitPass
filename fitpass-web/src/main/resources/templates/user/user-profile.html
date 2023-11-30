@@ -35,11 +35,12 @@
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-3">
-                            <form>
-                                <div class="form-group">
-                                    <input type="file" class="custom-file-input">
-                                </div>
-                            </form>
+                            <input type="file" class="form-control mt-2" id="avatar-img" name="avatar-img" accept="image/*" style="display: none;" onchange="uploadImage(this);">
+                            <div class="d-flex justify-content-start align-items-center mt-3">
+                                <button type="button" class="btn btn-upload-img" onclick="document.getElementById('avatar-img').click();">
+                                    Chọn ảnh
+                                </button>
+                            </div>
                         </div>
                         <div class="col-12 mt-4 user-edit-profile">
                             <div class="row">
