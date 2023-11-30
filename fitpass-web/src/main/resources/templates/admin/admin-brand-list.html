@@ -33,26 +33,26 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form action="/admin/brand/number-percentage" method="post">
-                                <div class="modal-header">
-                                    <div class="text-center" style="width: 95%; margin-left: 20px">
-                                        <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí giao dịch áp dụng</h5>
+                                    <div class="modal-header">
+                                        <div class="text-center" style="width: 95%; margin-left: 20px">
+                                            <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí giao dịch áp dụng</h5>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                        </div>
                                     </div>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    <div class="modal-body">
+                                        <label for="editPercentage">Phần trăm phí rút tiền:</label>
+                                        <input type="hidden" id="brandId" name="brandId">
+                                        <input type="text" class="form-control" id="editPercentage" name="numberPercentage" value="10">
+                                        <small id="percentageNote" class="form-text text-danger">
+                                            Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí rút tiền được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
+                                        </small>
                                     </div>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="editPercentage">Phần trăm phí rút tiền:</label>
-                                    <input type="hidden" id="brandId" name="brandId">
-                                    <input type="text" class="form-control" id="editPercentage" name="numberPercentage" value="10">
-                                    <small id="percentageNote" class="form-text text-danger">
-                                        Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí rút tiền được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
-                                    </small>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                    </div>
 
                                 </form>
                             </div>
@@ -72,26 +72,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <th:block th:each="b : ${brandList}">
-                                        <tr>
-                                            <td th:text="${bStat.index + 1}">1</td>
-                                            <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
-                                            <td th:text="${b.getBrandContactNumber()}">0987654321</td>
-                                            <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
-                                            <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
-                                            <td>
-                                                <div class="d-flex justify-content-evenly align-items-center">
-                                                    <span class="fw-bold" th:text="${b.getMoneyPercent() + '%'}">10%</span>
-                                                    <div class="btn" data-toggle="modal" data-target="#editModal"
-                                                         th:data-brandId="${b.getBrandId()}"
-                                                         th:data-numberPercentage="${b.getMoneyPercent()}"
-                                                         th:onclick="passValueToForm(this)">
-                                                        <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
-                                                    </div>
+                                <th:block th:each="b : ${brandList}">
+                                    <tr>
+                                        <td th:text="${bStat.index + 1}">1</td>
+                                        <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
+                                        <td th:text="${b.getBrandContactNumber()}">0987654321</td>
+                                        <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
+                                        <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
+                                        <td>
+                                            <div class="d-flex justify-content-evenly align-items-center">
+                                                <span class="fw-bold" th:text="${b.getMoneyPercent() + '%'}">10%</span>
+                                                <div class="btn" data-toggle="modal" data-target="#editModal"
+                                                     th:data-brandId="${b.getBrandId()}"
+                                                     th:data-numberPercentage="${b.getMoneyPercent()}"
+                                                     th:onclick="passValueToForm(this)">
+                                                    <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    </th:block>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -119,17 +119,21 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- Logout Modal-->
+<th:block th:replace="brand-owner/common/logout-modal"></th:block>
+
 <th:block th:replace="admin/common/script"></th:block>
-    <script>
-        function passValueToForm(btn) {
-            console.log(btn);
-            var brandId = btn.getAttribute("data-brandId");
-            var numberPercentage = btn.getAttribute("data-numberPercentage");
-            console.log(numberPercentage);
-            $("#brandId").val(brandId);
-            $("#editPercentage").val(numberPercentage);
-        }
-    </script>
+
+<script>
+    function passValueToForm(btn) {
+        console.log(btn);
+        var brandId = btn.getAttribute("data-brandId");
+        var numberPercentage = btn.getAttribute("data-numberPercentage");
+        console.log(numberPercentage);
+        $("#brandId").val(brandId);
+        $("#editPercentage").val(numberPercentage);
+    }
+</script>
 </body>
 
 </html>
