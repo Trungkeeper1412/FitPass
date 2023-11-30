@@ -3187,12 +3187,6 @@ input[type="radio"]:checked {
     box-shadow: none;
 }
 
-.change-ava-btn {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-}
-
 .user-change-ava .user-img {
     border: 3px solid rgb(255, 217, 0);
     border-radius: 50%;
@@ -5928,4 +5922,14 @@ body {
     padding-top: 40px;
     text-transform: uppercase;
     text-shadow: 3px 1px 3px dimgray;
+}
+
+.btn-upload-img {
+    border: 1px solid #d1d3e2;
+    background-color: #e9ecef;
+}
+
+.btn-upload-img:hover {
+    border: 1px solid #d1d3e2;
+    background-color: #dde0e3;
 }
