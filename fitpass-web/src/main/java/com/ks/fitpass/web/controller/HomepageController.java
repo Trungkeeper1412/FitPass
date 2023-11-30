@@ -4,12 +4,10 @@ import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
-import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
-import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,21 +18,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class HomepageController {
-    private final UserRepository userRepository;
     private final DepartmentService departmentService;
     private final BrandService brandService;
     private final WalletService walletService;
-    private final TransactionService transactionService;
 
     @GetMapping("/homepage")
-    public String getHomepage(Principal principal, HttpSession session) {
+    public String getHomepage(HttpSession session) {
         User userSession = (User) session.getAttribute("userInfo");
         double credit = walletService.getBalanceByUserId(userSession.getUserId());
         session.setAttribute("userCredit", credit);

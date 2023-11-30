@@ -103,29 +103,6 @@
             emptyTable: "Không có dữ liệu",
         }
     });
-
-    const modal = document.querySelector(".add-money-modal");
-    const triggers = document.querySelectorAll(".trigger");
-    const closeButton = document.querySelector(".close-button");
-    const cancel = document.querySelector(".cancel");
-
-    function toggleModal() {
-        modal.classList.toggle("show-modal");
-    }
-
-    function windowOnClick(event) {
-        if (event.target === modal) {
-            toggleModal();
-        }
-    }
-
-    for (var i = 0, len = triggers.length; i < len; i++) {
-        triggers[i].addEventListener("click", toggleModal);
-    }
-    closeButton.addEventListener("click", toggleModal);
-    cancel.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
-
 </script>
 </body>
 </html>
