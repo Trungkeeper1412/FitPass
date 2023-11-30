@@ -617,16 +617,23 @@
                 $("#paymentSubmit").click(function () {
                     var selectedAmount = $("#paymentAmount").val();
 
+                    // Create a data object with 'amount' property
+                    var requestData = {
+                        amount: selectedAmount
+                    };
+
                     // Gửi giá trị lên server thông qua một POST request
                     $.ajax({
                         type: "POST",
                         url: "/payment/create-session",
-                        data: {
-                            amount: selectedAmount
-                        },
+                        contentType: "application/json", // Set content type to JSON
+                        data: JSON.stringify(requestData), // Convert data object to JSON string
                         success: function (response) {
                             // Xử lý kết quả trả về từ server (nếu cần)
                             window.location.href = response;
+                        },
+                        error: function (error) {
+                            console.error("Error:", error);
                         }
                     });
                 });
