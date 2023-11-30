@@ -32,14 +32,13 @@
         <!-- Nav Item - Notifications -->
         <li class="nav-item dropdown no-arrow mx-1">
             <!-- Notification Bell -->
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button">
                 <i class="fas fa-bell fa-fw"></i>
                 <span class="badge badge-danger badge-counter" id="notificationCounter">0</span>
             </a>
 
             <!-- Dropdown - Notifications -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
+            <div id="notifications-list" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
                 <div style="color: black" class="bg-light border border-bottom border-light dropdown-header pt-3 pb-3">
                     <span class="h6" style="font-weight: lighter">Thông báo</span>
                     <span style="font-weight: lighter" id="unread-noti" class="ms-4 rounded-pill border border-white p-2">Chưa đọc</span>
@@ -201,6 +200,15 @@
         document.getElementById("read-noti-tab").style.display = "none";
         document.getElementById("unread-noti-tab").style.display = "block";
 
+    });
+
+    let count = 0;
+    document.getElementById("alertsDropdown").addEventListener('click', function(){
+        document.getElementById("notifications-list").style.display = "block";
+        count ++;
+        if(count % 2 == 0){
+            document.getElementById("notifications-list").style.display = "none";
+        }
     });
 
 </script>
