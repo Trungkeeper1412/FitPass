@@ -40,10 +40,10 @@
 
             <!-- Dropdown - Notifications -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                <div class="dropdown-header pt-3 pb-3">
-                    <span class="h7" style="font-weight: lighter">Thông báo</span>
-                    <span style="font-weight: lighter" id="read-noti" class="ms-4 rounded border border-white p-1">Đã đọc</span>
-                    <span style="font-weight: lighter" id="unread-noti" class="ms-4 rounded border border-white p-1">Chưa đọc</span>
+                <div style="color: black" class="bg-light border border-bottom border-light dropdown-header pt-3 pb-3">
+                    <span class="h6" style="font-weight: lighter">Thông báo</span>
+                    <span style="font-weight: lighter" id="unread-noti" class="ms-4 rounded-pill border border-white p-2">Chưa đọc</span>
+                    <span style="font-weight: lighter" id="read-noti" class="ms-4 rounded-pill border border-white p-2">Đã đọc</span>
                 </div>
 
                 <div class="notification-íist" id="unread-noti-tab">
@@ -179,22 +179,28 @@
     </ul>
 </nav>
 <script>
+    document.getElementById("unread-noti").style.backgroundColor = "#d5e9ff";
+    document.getElementById("unread-noti").style.color = "blue";
     document.getElementById("read-noti-tab").style.display = "none";
+    document.getElementById("read-noti").style.backgroundColor = '#e7e7e7';
+
+
     document.getElementById("read-noti").addEventListener('click', function(){
-        document.getElementById("read-noti").style.backgroundColor = "white";
+        document.getElementById("read-noti").style.backgroundColor = "#d5e9ff";
         document.getElementById("read-noti").style.color = "blue";
-        document.getElementById("unread-noti").style.backgroundColor = "";
+        document.getElementById("unread-noti").style.backgroundColor = '#e7e7e7';
         document.getElementById("unread-noti").style.color = "";
         document.getElementById("read-noti-tab").style.display = "block";
         document.getElementById("unread-noti-tab").style.display = "none";
     });
     document.getElementById("unread-noti").addEventListener('click', function(){
-        document.getElementById("unread-noti").style.backgroundColor = "white";
+        document.getElementById("unread-noti").style.backgroundColor = "#d5e9ff";
         document.getElementById("unread-noti").style.color = "blue";
-        document.getElementById("read-noti").style.backgroundColor = "";
+        document.getElementById("read-noti").style.backgroundColor = '#e7e7e7';
         document.getElementById("read-noti").style.color = "";
         document.getElementById("read-noti-tab").style.display = "none";
         document.getElementById("unread-noti-tab").style.display = "block";
+
     });
 
 </script>
@@ -213,7 +219,7 @@
     .notification-íist::-webkit-scrollbar {
         width: 8px;
         height: 4px;
-        background-color: #ffae00;
+        background-color: #d5e9ff;
     }
     .notification-íist::-webkit-scrollbar-thumb {
         background-color: #c6c6c6;
