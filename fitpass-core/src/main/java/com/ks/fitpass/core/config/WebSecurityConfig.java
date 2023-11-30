@@ -34,7 +34,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/cart/**").permitAll()
                         .requestMatchers("/become-a-partner/**").permitAll()
-                        .requestMatchers("/profile/**").hasAuthority("USER")
+//                        .requestMatchers("/profile/**").hasAuthority("USER")
                         .requestMatchers("/item/**").hasAuthority("USER")
                         .requestMatchers("/inventory/**").hasAuthority("USER")
                         .requestMatchers("/payment/**").hasAuthority("USER")

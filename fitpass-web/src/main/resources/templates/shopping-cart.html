@@ -58,13 +58,13 @@
     <div  th:each="department : ${departmentList}">
         <div class="plan-in-my-card">
             <div class="row all-plan-of-gym">
-                <div class="col-md-1 col-lg-1 col-xs-1">
+                <div class="col-md-1 col-lg-1 col-xs-3">
                     <div class="form-check">
                         <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
                         <label class="" for="flexCheckChecked"> </label>
                     </div>
                 </div>
-                <div class="col-md-11 col-lg-11 col-xs-11">
+                <div class="col-md-11 col-lg-11 col-xs-9">
                     <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
                 </div>
             </div>

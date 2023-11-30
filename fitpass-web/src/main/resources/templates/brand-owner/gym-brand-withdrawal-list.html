@@ -46,16 +46,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <th:block th:each="h : ${requestWithdrawHistoryListPending}">
-                                        <tr>
-                                            <td th:text="${hStat.index + 1}">1</td>
-                                            <td th:text="${h.getWithdrawalCode()}">10001321</td>
-                                            <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
-                                            <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
-                                            <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
-                                            <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
-                                        </tr>
-                                    </th:block>
+                                <th:block th:each="h : ${requestWithdrawHistoryListPending}">
+                                    <tr>
+                                        <td th:text="${hStat.index + 1}">1</td>
+                                        <td th:text="${h.getWithdrawalCode()}">10001321</td>
+                                        <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
+                                        <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
+                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
+                                    </tr>
+                                </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -80,7 +80,8 @@
                                             <select class="form-select" id="cardSelect" name="cardId">
                                                 <option disabled selected readonly>Các thẻ có sẵn</option>
                                                 <th:block th:each="c : ${creditCardList}">
-                                                    <option th:value="${c.getCreditCardId()}"><span th:text="${c.getBankName().toUpperCase()}">ACB</span>
+                                                    <option th:value="${c.getCreditCardId()}">
+                                                        <span th:text="${c.getBankName().toUpperCase()}">ACB</span>
                                                         **** **** ****
                                                         <span th:text="${c.getCardNumber().
                                                         substring(c.getCardNumber().length() - 4)}">1234</span>
@@ -97,7 +98,7 @@
                                             <input name="creditAmount" type="number" class="form-control" id="amount" placeholder="Nhập số credit" required oninput="updateConversionRate()">
                                         </div>
                                         <label data-toggle="tooltip" data-placement="top" title="xnxx" class="fw-bold">
-                                                Phí giao dịch (<span id="withdrawal-fee" th:text="${moneyPercent}">10</span>%)
+                                            Phí giao dịch (<span id="withdrawal-fee" th:text="${moneyPercent}">10</span>%)
                                         </label>
                                         <div class="mb-3">
                                             <label for="conversionRate">Số tiền quy đổi (VND) :</label>
@@ -105,7 +106,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                            <button type="submit" class="btn btn-primary" >Gửi Xác Nhận</button>
+                                            <button type="submit" class="btn btn-primary">Gửi Xác Nhận</button>
                                         </div>
                                     </form>
                                     <script>
@@ -124,19 +125,22 @@
                         <div class="col-md-4 col-lg-4 col-xl-2">
                             <div class="transactions btn-transactions" id="filterButtonAll">
                                 <i class="bi bi-list-check fs-3"></i>
-                                <label >Tổng số giao dịch: <span th:text="${requestHistoryStats.getTotalRequest()}">3</span></label>
+                                <label>Tổng số giao dịch:
+                                    <span th:text="${requestHistoryStats.getTotalRequest()}">3</span></label>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
                             <div class="transactions btn-transactions" id="filterButtonSuccess">
                                 <i class="bi bi-check-circle fs-3"></i>
-                                <label >Giao dịch thành công: <span th:text="${requestHistoryStats.getTotalApproved()}">3</span></label>
+                                <label>Giao dịch thành công:
+                                    <span th:text="${requestHistoryStats.getTotalApproved()}">3</span></label>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
                             <div class="transactions btn-transactions" id="filterButtonPending">
                                 <i class="bi bi-clock fs-3"></i>
-                                <label >Giao dịch đang xử lý: <span th:text="${requestHistoryStats.getTotalPending()}">3</span></label>
+                                <label>Giao dịch đang xử lý:
+                                    <span th:text="${requestHistoryStats.getTotalPending()}">3</span></label>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-2">
@@ -170,18 +174,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <th:block th:each="h : ${requestWithdrawHistoryListAll}">
-                                        <tr>
-                                            <td th:text="${hStat.index + 1}">1</td>
-                                            <td th:text="${h.getWithdrawalCode()}">10001321</td>
-                                            <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
-                                            <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
-                                            <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
-                                            <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
-                                            <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
-                                            <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">Không thành công</td>
-                                        </tr>
-                                    </th:block>
+                                <th:block th:each="h : ${requestWithdrawHistoryListAll}">
+                                    <tr>
+                                        <td th:text="${hStat.index + 1}">1</td>
+                                        <td th:text="${h.getWithdrawalCode()}">10001321</td>
+                                        <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
+                                        <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
+                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
+                                        <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
+                                        <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">Không thành công</td>
+                                    </tr>
+                                </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -208,23 +212,27 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- Logout Modal-->
+<th:block th:replace="brand-owner/common/logout-modal"></th:block>
+
 <th:block th:replace="brand-owner/common/script"></th:block>
-    <script>
-        $('#filterButtonPending').on('click', function () {
-            // Lọc theo trạng thái 'Active'
-            table.columns(5).search('Đang xử lý').draw();
-        });
 
-        $('#filterButtonAll').on('click', function () {
-            // Lọc theo trạng thái 'Active'
-            table.columns(5).search('').draw();
-        });
+<script>
+    $('#filterButtonPending').on('click', function () {
+        // Lọc theo trạng thái 'Active'
+        table.columns(5).search('Đang xử lý').draw();
+    });
 
-        $('#filterButtonSuccess').on('click', function () {
-            // Lọc theo trạng thái 'Active'
-            table.columns(5).search('Thành công').draw();
-        });
-    </script>
+    $('#filterButtonAll').on('click', function () {
+        // Lọc theo trạng thái 'Active'
+        table.columns(5).search('').draw();
+    });
+
+    $('#filterButtonSuccess').on('click', function () {
+        // Lọc theo trạng thái 'Active'
+        table.columns(5).search('Thành công').draw();
+    });
+</script>
 </body>
 
 </html>
