@@ -32,15 +32,20 @@
                     <div class="card-body">
                         <div class="card-box">
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                            <form action="/gym-owner/employee/update" method="post" th:object="${employeeInfo}">
+                            <form id="formSubmit" action="/gym-owner/employee/update" method="post" th:object="${employeeInfo}">
                                 <div class="row">
                                     <div class="col-md-2 mb-3">
                                         <label for="department-img" class="form-label fw-bold w-100">Ảnh :</label>
                                         <img class="show-department-img" th:src="${employeeInfo.getImageUrl()}">
-                                        <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" onchange="uploadImage(this);">
                                         <input th:field="*{imageUrl}" type="hidden" id="avatarImg" th:value="${employeeInfo.getImageUrl()}" name="imageUrl">
                                         <input th:field="*{userId}" type="hidden" th:value="${userId}" name="userId">
                                         <input th:field="*{userDetailId}" type="hidden" th:value="${employeeInfo.getUserDetailId()}" name="userDetailId">
+                                        <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" style="display: none;" onchange="uploadImage(this);">
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button type="button" class="btn btn-upload-img" onclick="document.getElementById('department-img').click();">
+                                                Chọn ảnh
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-md-5 mb-3">
                                         <div class="mb-3">
@@ -108,7 +113,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi" id="updateInfo">
                                     </div>
                                 </div>
                             </form>
@@ -174,6 +179,39 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#updateInfo").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin không?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
 
 </script>
 
