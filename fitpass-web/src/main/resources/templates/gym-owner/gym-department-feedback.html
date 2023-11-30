@@ -4,31 +4,31 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="gym-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="gym-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h2 class="m-0 font-weight-bold text-primary">Chi tiết đánh giá</h2>
-                            <div class="feedback-img col-lg-12" th:style="'background-image: url(' + ${departmentDetails.getDepartmentWallpaperUrl()} + ');'">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Chi tiết đánh giá</h2>
+                        <div class="feedback-img col-lg-12" th:style="'background-image: url(' + ${departmentDetails.getDepartmentWallpaperUrl()} + ');'">
                             <div class="feedback-img col-lg-12">
                                 <h2 class="title-feedback" th:text="${departmentDetails.getDepartmentName()}">Cơ sở Cầu Giấy</h2>
                             </div>
@@ -37,31 +37,32 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
-                                            <th>Thứ tự</th>
-                                            <th>Tên người đánh giá</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Email</th>
-                                            <th>Tên gói tập</th>
-                                            <th>Ngày đánh giá</th>
-                                            <th>Số sao đánh giá</th>
-                                            <th style="width: 350px;">Nội dung đánh giá</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Thứ tự</th>
+                                        <th>Tên người đánh giá</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Tên gói tập</th>
+                                        <th>Ngày đánh giá</th>
+                                        <th>Số sao đánh giá</th>
+                                        <th style="width: 350px;">Nội dung đánh giá</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <th:block th:each="f : ${userFeedbackList}">
-                                            <tr>
-                                                <td th:text="${fStat.index + 1}">1</td>
-                                                <td th:text="${f.userName}">Lê Đình Tuấn</td>
-                                                <td th:text="${f.phoneNumber}">0987654321</td>
-                                                <td th:text="${f.email}">tuanld2001@gmail.com</td>
-                                                <td th:text="${f.gymPlanName}">Gói linh hoạt</td>
-                                                <td th:text="${#temporals.format(f.getFeedbackTime(), 'dd-MM-yyyy HH:mm:ss')}">2023-10-15</td>
-                                                <td><i data-star="4" th:attr="data-star=${f.getRating()}"></i></td>
-                                                <td th:text="${f.comments}">Hôm nay phòng tập hơi đông, điều hòa không đủ mát. Rất mong mọi người có
-                                                    thể khắc phục sự bất tiện này</td>
-                                            </tr>
-                                        </th:block>
+                                    <th:block th:each="f : ${userFeedbackList}">
+                                        <tr>
+                                            <td th:text="${fStat.index + 1}">1</td>
+                                            <td th:text="${f.userName}">Lê Đình Tuấn</td>
+                                            <td th:text="${f.phoneNumber}">0987654321</td>
+                                            <td th:text="${f.email}">tuanld2001@gmail.com</td>
+                                            <td th:text="${f.gymPlanName}">Gói linh hoạt</td>
+                                            <td th:text="${#temporals.format(f.getFeedbackTime(), 'dd-MM-yyyy HH:mm:ss')}">2023-10-15</td>
+                                            <td><i data-star="4" th:attr="data-star=${f.getRating()}"></i></td>
+                                            <td th:text="${f.comments}">Hôm nay phòng tập hơi đông, điều hòa không đủ mát. Rất mong mọi người có
+                                                thể khắc phục sự bất tiện này
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>
@@ -80,15 +81,21 @@
 
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <th:block th:replace="gym-owner/common/script"></th:block>
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<th:block th:replace="gym-owner/common/logout-modal"></th:block>
+
+<th:block th:replace="gym-owner/common/script"></th:block>
+
 </body>
 
 </html>
