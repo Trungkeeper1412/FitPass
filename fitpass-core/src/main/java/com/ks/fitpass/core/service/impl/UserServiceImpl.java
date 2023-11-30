@@ -124,6 +124,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public UserDetail getUserDetailByUserId(int userId) {
+        return userRepository.getUserDetailByUserId(userId);
+    }
+
+    @Override
     public boolean checkEmailExist(String email) {
         return userRepository.checkEmailExist(email);
     }

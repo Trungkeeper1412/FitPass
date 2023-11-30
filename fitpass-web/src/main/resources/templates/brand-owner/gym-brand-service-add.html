@@ -3,122 +3,126 @@
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="brand-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="brand-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="brand-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="brand-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h2 class="m-0 font-weight-bold text-primary">Thêm dịch vụ</h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-box">
-                                <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                                <form id="formSubmit" action="/brand-owner/service/add" method="post" th:object="${createService}">
-                                    <div class="row">
-                                        <div class="col-md-1 mb-4">
-                                        </div>
-                                        <div class="col-md-3 mb-4">
-                                            <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
-                                            <img class="show-service-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
-                                            <input name="department-img" type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
-                                            <input th:field="*{photoUrl}" id="photoUrl" type="hidden" name="photoUrl">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Thêm dịch vụ</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-box">
+                            <h2 class="fs-title text-center">Thông tin cơ bản</h2>
+                            <form id="formSubmit" action="/brand-owner/service/add" method="post" th:object="${createService}">
+                                <div class="row">
+                                    <div class="col-md-1 mb-4">
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                        <label for="service-img" class="form-label fw-bold w-100">Ảnh :</label>
+                                        <img class="show-service-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
+                                        <input name="department-img" type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
+                                        <input th:field="*{photoUrl}" id="photoUrl" type="hidden" name="photoUrl">
+                                        <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
+                                    </div>
+                                    <div class="col-md-7 mb-4">
+                                        <div class="mb-4">
+                                            <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
+                                            <input th:field="*{amenitieName}" name="amenitieName" type="text" class="form-control" id="name-service"
+                                                   placeholder="Hệ thống tủ khóa">
                                             <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
                                         </div>
-                                        <div class="col-md-7 mb-4">
-                                            <div class="mb-4">
-                                                <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
-                                                <input th:field="*{amenitieName}" name="amenitieName" type="text" class="form-control" id="name-service"
-                                                    placeholder="Hệ thống tủ khóa">
-                                                <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
-                                                <textarea th:field="*{description}" name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
-                                                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">photoUrl Error</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 text-center">
-                                            <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
+                                        <div class="mb-4">
+                                            <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
+                                            <textarea th:field="*{description}" name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
+                                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">photoUrl Error</span>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="col-md-12 text-center">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="brand-owner/common/footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="brand-owner/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <th:block th:replace="brand-owner/common/script"></th:block>
-    <script>
-        function uploadImage(input) {
-            if (input.files && input.files[0]) {
-                const file = input.files[0];
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-                var formData = new FormData();
-                formData.append("file", file);
-                $.ajax({
-                    type: "POST",
-                    url: `/upload/uploadImageBrandAmenities/0`,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        console.log(response)
-                        $("#photoUrl").val(response);
-                    },
-                    error: function () {
-                        console.log("Failed to upload file");
-                    }
-                });
+<!-- Logout Modal-->
+<th:block th:replace="brand-owner/common/logout-modal"></th:block>
 
-                var reader = new FileReader();
+<th:block th:replace="brand-owner/common/script"></th:block>
 
-                reader.onload = function (e) {
-                    var img = document.querySelector('.show-service-img');
-                    img.src = e.target.result;
-                };
+<script>
+    function uploadImage(input) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
 
-                reader.readAsDataURL(input.files[0]);
-            }
+            var formData = new FormData();
+            formData.append("file", file);
+            $.ajax({
+                type: "POST",
+                url: `/upload/uploadImageBrandAmenities/0`,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response)
+                    $("#photoUrl").val(response);
+                },
+                error: function () {
+                    console.log("Failed to upload file");
+                }
+            });
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.querySelector('.show-service-img');
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
         }
-    </script>
+    }
+</script>
 </body>
 
 </html>
