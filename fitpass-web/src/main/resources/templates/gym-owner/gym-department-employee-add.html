@@ -29,42 +29,42 @@
                         <h2 class="m-0 font-weight-bold text-primary">Thêm nhân viên mới</h2>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/gym-owner/employee/add" th:object="${employeeInfo}">
+                        <form id="formSubmit" method="post" action="/gym-owner/employee/add" th:object="${employeeInfo}">
 
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Thông tin cơ bản</h2>
                                 <div class="row">
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-2 mb-4">
                                         <label for="department-img" class="form-label fw-bold w-100">Ảnh :</label>
                                         <img class="show-department-img" th:src="@{/images/system/no_image.png}">
                                         <input type="file" class="form-control mt-2" id="department-img" name="department-img" accept="image/*" onchange="uploadImage(this);">
                                         <input th:field="*{imageUrl}" type="hidden" id="avatarImg" name="imageUrl">
                                         <span th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}">imageUrl Error</span>
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <div class="mb-3">
+                                    <div class="col-md-5 mb-4">
+                                        <div class="mb-4">
                                             <label for="firt-name" class="form-label fw-bold">Họ :</label>
                                             <input th:field="*{firstName}" type="text" class="form-control" id="firt-name"
                                                    name="firt-name" placeholder="Nhập họ">
                                             <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="email" class="form-label fw-bold">Email :</label>
                                             <input th:field="*{email}" type="text" class="form-control" id="email"
                                                    placeholder="Nhập gmail">
                                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">lastName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="address" class="form-label fw-bold">Địa chỉ :</label>
                                             <input th:field="*{address}" type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
                                             <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh :</label>
                                             <input th:field="*{dateOfBirth}" type="date" class="form-control" id="date-of-birth" name="date-of-birth">
                                             <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="gender" class="form-label fw-bold">Giới Tính :</label>
                                             <select th:field="*{gender}" class="form-select" id="gender" name="gender">
                                                 <option value="">Chọn giới tính</option>
@@ -75,31 +75,31 @@
                                             <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <div class="mb-3">
+                                    <div class="col-md-5 mb-4">
+                                        <div class="mb-4">
                                             <label for="last-name" class="form-label fw-bold">Tên :</label>
                                             <input th:field="*{lastName}" type="text" class="form-control" id="last-name"
                                                    name="last-name" placeholder="Nhập tên">
                                             <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="username" class="form-label fw-bold">Tên đăng nhập :</label>
                                             <input th:field="*{username}" type="text" class="form-control" id="username" name="username" placeholder="Nhập tên người dùng">
                                             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
                                             <input th:field="*{phone}" type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại">
                                             <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
                                             <input th:field="*{idCard}" type="text" class="form-control" id="id-card" name="id-card" placeholder="Nhập số căn cước">
                                             <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">idCard Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Thêm nhân viên">
+                                        <input class="btn btn-submit" type="submit" value="Thêm nhân viên" id="createNewEmployee">
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +166,40 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#createNewEmployee").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn thêm nhân viên mới không?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Nhân viên mới đã được thêm thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Nhân viên mới chưa được thêm.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
 </script>
 
 </body>
