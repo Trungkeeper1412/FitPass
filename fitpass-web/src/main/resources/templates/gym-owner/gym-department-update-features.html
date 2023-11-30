@@ -53,10 +53,10 @@
                                 </table>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <form method="post" action="/gym-owner/department/features">
+                                <form id="formSubmit" method="post" action="/gym-owner/department/features">
                                     <input type="hidden" id="selectedFeatureId" name="selectedFeatureId">
                                     <input type="hidden" th:value="${departmentId}" name="departmentId">
-                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                    <button type="submit" class="btn btn-primary" id="updateInfo">Lưu thay đổi</button>
                                 </form>
                             </div>
                         </div>
@@ -93,6 +93,40 @@
 <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
 <script>
+
+    $("#updateInfo").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin không?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
     $(document).ready(function () {
 
         $.fn.dataTable.ext.order['dom-checkbox'] = function (settings, col) {
