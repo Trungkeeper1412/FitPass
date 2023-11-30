@@ -28,7 +28,7 @@
                         <h2 class="fw-bold text-primary">Cập nhật thông tin</h2>
                     </div>
                     <div class="card-body">
-                        <form action="/gym-owner/department/info" method="post"
+                        <form id="formSubmit" action="/gym-owner/department/info" method="post"
                               th:object="${updateGymOwnerDepartmentInfo}">
                             <div class="row">
                                 <div class="row">
@@ -226,7 +226,7 @@
                                 </div>
                             </div>
                             <div class="pt-3 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                <button type="submit" class="btn btn-primary" id="updateInfo">Lưu thay đổi</button>
                             </div>
                         </form>
                     </div>
@@ -257,6 +257,40 @@
 <th:block th:replace="gym-owner/common/script"></th:block>
 
 <script>
+
+    $("#updateInfo").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin không?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
     function convertTimeStringToTimeValue(timeString) {
         // Tạo đối tượng Date từ chuỗi thời gian
         const timeValue = new Date("January 1, 2023 " + timeString);
