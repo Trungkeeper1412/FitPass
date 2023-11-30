@@ -250,7 +250,12 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
+<!-- Logout Modal-->
+<th:block th:replace="gym-owner/common/logout-modal"></th:block>
+
 <th:block th:replace="gym-owner/common/script"></th:block>
+
 <script>
     function convertTimeStringToTimeValue(timeString) {
         // Tạo đối tượng Date từ chuỗi thời gian
