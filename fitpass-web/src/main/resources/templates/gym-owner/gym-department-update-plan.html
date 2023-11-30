@@ -3,523 +3,529 @@
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="gym-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="gym-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="fw-bold text-primary">Cập nhật gói tập</h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <section>
-                                    <ul class="nav nav-tabs" id="myTabs" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" id="flexible-tab" data-toggle="tab"
-                                                href="#flexible" role="tab" aria-controls="flexible"
-                                                aria-selected="true">Gói linh hoạt</a>
-                                            <input type="hidden" th:value="${selectedFlexId}" id="selectedFlexIdDB">
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="fixed-tab" data-toggle="tab"
-                                                href="#fixed" role="tab" aria-controls="fixed"
-                                                aria-selected="false">Gói cố định</a>
-                                            <input type="hidden" th:value="${selectedFixedId}" id="selectedFixedIdDB">
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content mt-4">
-                                        <div class="tab-pane fade show active" id="flexible" role="tabpanel"
-                                            aria-labelledby="flexible-tab">
-                                            <div class="row">
-                                                <div class="text-start">
-                                                    <table class="table table-bordered"
-                                                        id="dataTableCheckedFlexible" width="100%"
-                                                        cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>ID</th>
-                                                                <th>Tên gói tập</th>
-                                                                <th>Số credits/giờ</th>
-                                                                <th data-toggle="tooltip"
-                                                                    data-placement="top"
-                                                                    title="Đây là mô tả của thời gian trước khi kích hoạt">
-                                                                    Thời hạn trước khi kích hoạt</th>
-                                                                <th data-toggle="tooltip"
-                                                                    data-placement="top"
-                                                                    title="Đây là mô tả của thời gian sau khi kích hoạt">
-                                                                    Thời hạn sau khi kích hoạt</th>
-                                                                <th style="width: 600px;" class="plan-description">Mô tả</th>
-                                                                <th>Chọn gói tập</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <th:block th:each="gf : ${listFlexGymPlan}">
-                                                                <tr>
-                                                                    <td th:text="${gf.gymPlanId}"></td>
-                                                                    <td th:text="${gf.gymPlanName}">Gói linh hoạt tiết kiệm</td>
-                                                                    <td th:text="${gf.pricePerHours}">5</td>
-                                                                    <td th:text="${gf.planBeforeActive}">30 ngày</td>
-                                                                    <td th:text="${gf.planAfterActive}">60 ngày</td>
-                                                                    <td th:text="${gf.description}">Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                        tập gym
-                                                                        California Gym and Fitness mang đến cho
-                                                                        bạn trải
-                                                                        nghiệm luyện tập hoàn hảo theo tiêu
-                                                                        chuẩn 5 sao, với
-                                                                        sự chăm sóc tận tâm và một loạt các tiện
-                                                                        nghi cao
-                                                                        cấp</td>
-                                                                    <td></td>
-                                                                </tr>
-                                                            </th:block>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="fixed" role="tabpanel"
-                                            aria-labelledby="fixed-tab">
-                                            <div class="row">
-                                                <div class="text-start">
-                                                    <table class="table table-bordered"
-                                                        id="dataTableCheckedFixed" width="100%"
-                                                        cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>ID</th>
-                                                                <th>Tên gói tập</th>
-                                                                <th>Số credits</th>
-                                                                <th>Thời lượng tập</th>
-                                                                <th data-toggle="tooltip"
-                                                                    data-placement="top"
-                                                                    title="Đây là mô tả của thời gian trước khi kích hoạt">
-                                                                    Thời hạn trước khi kích hoạt</th>
-                                                                <th data-toggle="tooltip"
-                                                                    data-placement="top"
-                                                                    title="Đây là mô tả của thời gian sau khi kích hoạt">
-                                                                    Thời hạn sau khi kích hoạt</th>
-                                                                <th class="fixed-description">Mô tả</th>
-                                                                <th>Chọn gói tập</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <th:block th:each=" gf : ${listFixedGymPlan}">
-                                                                <tr>
-                                                                    <td th:text="${gf.gymPlanId}"></td>
-                                                                    <td th:text="${gf.gymPlanName}">Gói 1</td>
-                                                                    <td th:text="${gf.price}">5</td>
-                                                                    <td th:text="${gf.duration}">30 ngày</td>
-                                                                    <td th:text="${gf.planBeforeActive}">10 ngày</td>
-                                                                    <td th:text="${gf.planAfterActive}">30 ngày</td>
-                                                                    <td th:text="${gf.description}">Gói Cố Định Đầy Đủ Chức Năng của phòng
-                                                                        tập gym
-                                                                        California Gym and Fitness mang đến cho
-                                                                        bạn trải
-                                                                        nghiệm luyện tập hoàn hảo theo tiêu
-                                                                        chuẩn 5 sao, với
-                                                                        sự chăm sóc tận tâm và một loạt các tiện
-                                                                        nghi cao
-                                                                        cấp</td>
-                                                                    <td></td>
-                                                                </tr>
-                                                            </th:block>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="fw-bold text-primary">Cập nhật gói tập</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <section>
+                                <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="flexible-tab" data-toggle="tab"
+                                           href="#flexible" role="tab" aria-controls="flexible"
+                                           aria-selected="true">Gói linh hoạt</a>
+                                        <input type="hidden" th:value="${selectedFlexId}" id="selectedFlexIdDB">
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="fixed-tab" data-toggle="tab"
+                                           href="#fixed" role="tab" aria-controls="fixed"
+                                           aria-selected="false">Gói cố định</a>
+                                        <input type="hidden" th:value="${selectedFixedId}" id="selectedFixedIdDB">
+                                    </li>
+                                </ul>
+                                <div class="tab-content mt-4">
+                                    <div class="tab-pane fade show active" id="flexible" role="tabpanel"
+                                         aria-labelledby="flexible-tab">
+                                        <div class="row">
+                                            <div class="text-start">
+                                                <table class="table table-bordered"
+                                                       id="dataTableCheckedFlexible" width="100%"
+                                                       cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Tên gói tập</th>
+                                                        <th>Số credits/giờ</th>
+                                                        <th data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                            Thời hạn trước khi kích hoạt
+                                                        </th>
+                                                        <th data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                            Thời hạn sau khi kích hoạt
+                                                        </th>
+                                                        <th style="width: 600px;" class="plan-description">Mô tả</th>
+                                                        <th>Chọn gói tập</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <th:block th:each="gf : ${listFlexGymPlan}">
+                                                        <tr>
+                                                            <td th:text="${gf.gymPlanId}"></td>
+                                                            <td th:text="${gf.gymPlanName}">Gói linh hoạt tiết kiệm</td>
+                                                            <td th:text="${gf.pricePerHours}">5</td>
+                                                            <td th:text="${gf.planBeforeActive}">30 ngày</td>
+                                                            <td th:text="${gf.planAfterActive}">60 ngày</td>
+                                                            <td th:text="${gf.description}">Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                tập gym
+                                                                California Gym and Fitness mang đến cho
+                                                                bạn trải
+                                                                nghiệm luyện tập hoàn hảo theo tiêu
+                                                                chuẩn 5 sao, với
+                                                                sự chăm sóc tận tâm và một loạt các tiện
+                                                                nghi cao
+                                                                cấp
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </th:block>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                                <div class="d-flex justify-content-center">
-                                    <form method="post" action="/gym-owner/department/gym-plans">
-                                        <input type="hidden" id="selectedFixedId" name="selectedFixedId">
-                                        <input type="hidden" id="selectedFlexId" name="selectedFlexId">
-                                        <input type="hidden" th:value="${departmentId}" name="departmentId">
-                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                                    </form>
+
+                                    <div class="tab-pane fade" id="fixed" role="tabpanel"
+                                         aria-labelledby="fixed-tab">
+                                        <div class="row">
+                                            <div class="text-start">
+                                                <table class="table table-bordered"
+                                                       id="dataTableCheckedFixed" width="100%"
+                                                       cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Tên gói tập</th>
+                                                        <th>Số credits</th>
+                                                        <th>Thời lượng tập</th>
+                                                        <th data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Đây là mô tả của thời gian trước khi kích hoạt">
+                                                            Thời hạn trước khi kích hoạt
+                                                        </th>
+                                                        <th data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Đây là mô tả của thời gian sau khi kích hoạt">
+                                                            Thời hạn sau khi kích hoạt
+                                                        </th>
+                                                        <th class="fixed-description">Mô tả</th>
+                                                        <th>Chọn gói tập</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <th:block th:each=" gf : ${listFixedGymPlan}">
+                                                        <tr>
+                                                            <td th:text="${gf.gymPlanId}"></td>
+                                                            <td th:text="${gf.gymPlanName}">Gói 1</td>
+                                                            <td th:text="${gf.price}">5</td>
+                                                            <td th:text="${gf.duration}">30 ngày</td>
+                                                            <td th:text="${gf.planBeforeActive}">10 ngày</td>
+                                                            <td th:text="${gf.planAfterActive}">30 ngày</td>
+                                                            <td th:text="${gf.description}">Gói Cố Định Đầy Đủ Chức Năng của phòng
+                                                                tập gym
+                                                                California Gym and Fitness mang đến cho
+                                                                bạn trải
+                                                                nghiệm luyện tập hoàn hảo theo tiêu
+                                                                chuẩn 5 sao, với
+                                                                sự chăm sóc tận tâm và một loạt các tiện
+                                                                nghi cao
+                                                                cấp
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </th:block>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </section>
+                            <div class="d-flex justify-content-center">
+                                <form method="post" action="/gym-owner/department/gym-plans">
+                                    <input type="hidden" id="selectedFixedId" name="selectedFixedId">
+                                    <input type="hidden" id="selectedFlexId" name="selectedFlexId">
+                                    <input type="hidden" th:value="${departmentId}" name="departmentId">
+                                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="gym-owner/common/footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="gym-owner/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <th:block th:replace="gym-owner/common/script"></th:block>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+<!-- Logout Modal-->
+<th:block th:replace="gym-owner/common/logout-modal"></th:block>
 
-    <script>
-        $(document).ready(function () {
+<th:block th:replace="gym-owner/common/script"></th:block>
 
-            var selectedFixedIdDB = $("#selectedFixedIdDB").val().split(',').map(function(item) {
-                return item.trim();
-            });
-            var selectedFlexibleIdDB = $("#selectedFlexIdDB").val().split(',').map(function(item) {
-                return item.trim();
-            });
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
-            // Khởi tạo đối tượng để lưu trữ các selectedIds cho từng bảng
-            var selectedIdsObject = {
+<script>
+    $(document).ready(function () {
 
-            }
-
-            $.fn.dataTable.ext.order['dom-checkbox'] = function  ( settings, col )
-            {
-                return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
-                    return $(td).closest('tr').hasClass('selected') ? '1' : '0';
-                } );
-            }
-
-            function configureDataTable(tableId, checkboxColumnIndex, idColumnIndex, selectedInputId) {
-                var dataTable = $(tableId).DataTable({
-                    select: {
-                        style: 'multi',
-                        selector: 'td:last-child'
-                    },
-                    columnDefs: [
-                        {
-                            className: 'select-checkbox',
-                            targets: checkboxColumnIndex,
-                            orderDataType: 'dom-checkbox'
-                        },
-                        {
-                            targets: [idColumnIndex],
-                            visible: false,
-                            data: "ID"
-                        }
-                    ],
-                    language: {
-                        "processing": "Đang xử lý...",
-                        "aria": {
-                            "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                            "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                        },
-                        "autoFill": {
-                            "cancel": "Hủy",
-                            "fill": "Điền tất cả ô với <i>%d<\/i>",
-                            "fillHorizontal": "Điền theo hàng ngang",
-                            "fillVertical": "Điền theo hàng dọc"
-                        },
-                        "buttons": {
-                            "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                            "colvis": "Hiển thị theo cột",
-                            "colvisRestore": "Khôi phục hiển thị",
-                            "copy": "Sao chép",
-                            "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                            "copySuccess": {
-                                "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                                "_": "Đã sao chép %d dòng vào clipboard"
-                            },
-                            "copyTitle": "Sao chép vào clipboard",
-                            "pageLength": {
-                                "-1": "Xem tất cả các dòng",
-                                "_": "Hiển thị %d dòng",
-                                "1": "Hiển thị 1 dòng"
-                            },
-                            "print": "In ấn",
-                            "createState": "Tạo trạng thái",
-                            "csv": "CSV",
-                            "excel": "Excel",
-                            "pdf": "PDF",
-                            "removeAllStates": "Xóa hết trạng thái",
-                            "removeState": "Xóa",
-                            "renameState": "Đổi tên",
-                            "savedStates": "Trạng thái đã lưu",
-                            "stateRestore": "Trạng thái %d",
-                            "updateState": "Cập nhật"
-                        },
-                        "select": {
-                            "rows": {
-                                "1": "1 mục đang được chọn",
-                                "_": "%d mục đang được chọn"
-                            }
-                        },
-                        "searchBuilder": {
-                            "title": {
-                                "_": "Thiết lập tìm kiếm (%d)",
-                                "0": "Thiết lập tìm kiếm"
-                            },
-                            "button": {
-                                "0": "Thiết lập tìm kiếm",
-                                "_": "Thiết lập tìm kiếm (%d)"
-                            },
-                            "value": "Giá trị",
-                            "clearAll": "Xóa hết",
-                            "condition": "Điều kiện",
-                            "conditions": {
-                                "date": {
-                                    "after": "Sau",
-                                    "before": "Trước",
-                                    "between": "Nằm giữa",
-                                    "empty": "Rỗng",
-                                    "equals": "Bằng với",
-                                    "not": "Không phải",
-                                    "notBetween": "Không nằm giữa",
-                                    "notEmpty": "Không rỗng"
-                                },
-                                "number": {
-                                    "between": "Nằm giữa",
-                                    "empty": "Rỗng",
-                                    "equals": "Bằng với",
-                                    "gt": "Lớn hơn",
-                                    "gte": "Lớn hơn hoặc bằng",
-                                    "lt": "Nhỏ hơn",
-                                    "lte": "Nhỏ hơn hoặc bằng",
-                                    "not": "Không phải",
-                                    "notBetween": "Không nằm giữa",
-                                    "notEmpty": "Không rỗng"
-                                },
-                                "string": {
-                                    "contains": "Chứa",
-                                    "empty": "Rỗng",
-                                    "endsWith": "Kết thúc bằng",
-                                    "equals": "Bằng",
-                                    "not": "Không phải",
-                                    "notEmpty": "Không rỗng",
-                                    "startsWith": "Bắt đầu với",
-                                    "notContains": "Không chứa",
-                                    "notEndsWith": "Không kết thúc với",
-                                    "notStartsWith": "Không bắt đầu với"
-                                },
-                                "array": {
-                                    "equals": "Bằng",
-                                    "empty": "Trống",
-                                    "contains": "Chứa",
-                                    "not": "Không",
-                                    "notEmpty": "Không được rỗng",
-                                    "without": "không chứa"
-                                }
-                            },
-                            "logicAnd": "Và",
-                            "logicOr": "Hoặc",
-                            "add": "Thêm điều kiện",
-                            "data": "Dữ liệu",
-                            "deleteTitle": "Xóa quy tắc lọc",
-                            "leftTitle": "Giảm thụt lề",
-                            "rightTitle": "Tăng thụt lề"
-                        },
-                        "searchPanes": {
-                            "countFiltered": "{shown} ({total})",
-                            "emptyPanes": "Không có phần tìm kiếm",
-                            "clearMessage": "Xóa hết",
-                            "loadMessage": "Đang load phần tìm kiếm",
-                            "collapse": {
-                                "0": "Phần tìm kiếm",
-                                "_": "Phần tìm kiếm (%d)"
-                            },
-                            "title": "Bộ lọc đang hoạt động - %d",
-                            "count": "{total}",
-                            "collapseMessage": "Thu gọn tất cả",
-                            "showMessage": "Hiện tất cả"
-                        },
-                        "datetime": {
-                            "hours": "Giờ",
-                            "minutes": "Phút",
-                            "next": "Sau",
-                            "previous": "Trước",
-                            "seconds": "Giây",
-                            "amPm": [
-                                "am",
-                                "pm"
-                            ],
-                            "unknown": "-",
-                            "weekdays": [
-                                "Chủ nhật"
-                            ],
-                            "months": [
-                                "Tháng Một",
-                                "Tháng Hai",
-                                "Tháng Ba",
-                                "Tháng Tư",
-                                "Tháng Năm",
-                                "Tháng Sáu",
-                                "Tháng Bảy",
-                                "Tháng Tám",
-                                "Tháng Chín",
-                                "Tháng Mười",
-                                "Tháng Mười Một",
-                                "Tháng Mười Hai"
-                            ]
-                        },
-                        "emptyTable": "Không có dữ liệu",
-                        "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                        "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                        "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                        "loadingRecords": "Đang tải...",
-                        "paginate": {
-                            "first": "Đầu tiên",
-                            "last": "Cuối cùng",
-                            "next": "Sau",
-                            "previous": "Trước"
-                        },
-                        "search": "Tìm kiếm:",
-                        "zeroRecords": "Không tìm thấy kết quả",
-                        "decimal": ",",
-                        "editor": {
-                            "close": "Đóng",
-                            "create": {
-                                "button": "Thêm",
-                                "submit": "Thêm",
-                                "title": "Thêm mục mới"
-                            },
-                            "edit": {
-                                "button": "Sửa",
-                                "submit": "Cập nhật",
-                                "title": "Sửa mục"
-                            },
-                            "error": {
-                                "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                            },
-                            "multi": {
-                                "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                                "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                                "restore": "Hoàn tác thay đổi",
-                                "title": "Nhiều giá trị"
-                            },
-                            "remove": {
-                                "button": "Xóa",
-                                "confirm": {
-                                    "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                    "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                                },
-                                "submit": "Xóa",
-                                "title": "Xóa"
-                            }
-                        },
-                        "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                        "searchPlaceholder": "Nhập tìm kiếm...",
-                        "stateRestore": {
-                            "creationModal": {
-                                "button": "Thêm",
-                                "columns": {
-                                    "search": "Tìm kiếm cột",
-                                    "visible": "Khả năng hiển thị cột"
-                                },
-                                "name": "Tên:",
-                                "order": "Sắp xếp",
-                                "paging": "Phân trang",
-                                "scroller": "Cuộn vị trí",
-                                "search": "Tìm kiếm",
-                                "searchBuilder": "Trình tạo tìm kiếm",
-                                "select": "Chọn",
-                                "title": "Thêm trạng thái",
-                                "toggleLabel": "Bao gồm:"
-                            },
-                            "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                            "emptyError": "Tên không được để trống.",
-                            "emptyStates": "Không có trạng thái đã lưu",
-                            "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                            "removeError": "Không xóa được trạng thái.",
-                            "removeJoiner": "và",
-                            "removeSubmit": "Xóa",
-                            "removeTitle": "Xóa trạng thái",
-                            "renameButton": "Đổi tên",
-                            "renameLabel": "Tên mới cho %s:",
-                            "renameTitle": "Đổi tên trạng thái"
-                        },
-                        "infoThousands": ".",
-                        "thousands": "."
-                    }
-                });
-
-                // Sự kiện khi hàng được chọn
-                dataTable.on('select', function (e, dt, type, indexes) {
-                    var rowData = dataTable.rows(indexes).data().toArray();
-                    rowData.forEach(function (row) {
-                        console.log(row);
-                        // Lấy tên của bảng (tableId) để xác định mảng selectedIds tương ứng
-                        var tableName = $(tableId).attr('id');
-                        if (!selectedIdsObject[tableName]) {
-                            selectedIdsObject[tableName] = [];
-                        }
-                        selectedIdsObject[tableName].push(row.ID); // Thêm ID vào mảng
-
-                        // Cập nhật giá trị của input type = hidden
-                        updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
-                    });
-                    console.log("Selected IDs:", selectedIdsObject);
-                });
-
-                // Sự kiện khi hàng bị hủy chọn
-                dataTable.on('deselect', function (e, dt, type, indexes) {
-                    var rowData = dataTable.rows(indexes).data().toArray();
-                    rowData.forEach(function (row) {
-                        var tableName = $(tableId).attr('id');
-                        var index = selectedIdsObject[tableName].indexOf(row.ID);
-                        if (index !== -1) {
-                            selectedIdsObject[tableName].splice(index, 1); // Xóa ID khỏi mảng
-                        }
-
-                        // Cập nhật giá trị của input type = hidden
-                        updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
-                    });
-                    console.log("Selected IDs:", selectedIdsObject);
-                });
-            }
-
-            configureDataTable('#dataTableCheckedFlexible', 6, 0, 'selectedFlexId');
-            configureDataTable('#dataTableCheckedFixed', 7, 0, 'selectedFixedId');
-
-            var dataTableFlex = $("#dataTableCheckedFlexible").DataTable();
-            var dataTableFixed = $("#dataTableCheckedFixed").DataTable();
-
-            selectedFixedIdDB.forEach(function(id) {
-                dataTableFixed.rows(function (idx, data, node) {
-                    return data.ID === id;
-                }).select();
-            });
-
-            selectedFlexibleIdDB.forEach(function(id) {
-                dataTableFlex.rows(function (idx, data, node) {
-                    return data.ID === id;
-                }).select();
-            });
-
-            dataTableFlex.order([
-                [7, 'desc'] // Sắp xếp theo cột chọn (checkbox) theo thứ tự giảm dần
-            ]).draw();
-
-            dataTableFixed.order([
-                [8, 'desc'] // Sắp xếp theo cột chọn (checkbox) theo thứ tự giảm dần
-            ]).draw();
+        var selectedFixedIdDB = $("#selectedFixedIdDB").val().split(',').map(function (item) {
+            return item.trim();
         });
-    </script>
+        var selectedFlexibleIdDB = $("#selectedFlexIdDB").val().split(',').map(function (item) {
+            return item.trim();
+        });
+
+        // Khởi tạo đối tượng để lưu trữ các selectedIds cho từng bảng
+        var selectedIdsObject = {}
+
+        $.fn.dataTable.ext.order['dom-checkbox'] = function (settings, col) {
+            return this.api().column(col, {order: 'index'}).nodes().map(function (td, i) {
+                return $(td).closest('tr').hasClass('selected') ? '1' : '0';
+            });
+        }
+
+        function configureDataTable(tableId, checkboxColumnIndex, idColumnIndex, selectedInputId) {
+            var dataTable = $(tableId).DataTable({
+                select: {
+                    style: 'multi',
+                    selector: 'td:last-child'
+                },
+                columnDefs: [
+                    {
+                        className: 'select-checkbox',
+                        targets: checkboxColumnIndex,
+                        orderDataType: 'dom-checkbox'
+                    },
+                    {
+                        targets: [idColumnIndex],
+                        visible: false,
+                        data: "ID"
+                    }
+                ],
+                language: {
+                    "processing": "Đang xử lý...",
+                    "aria": {
+                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
+                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
+                    },
+                    "autoFill": {
+                        "cancel": "Hủy",
+                        "fill": "Điền tất cả ô với <i>%d<\/i>",
+                        "fillHorizontal": "Điền theo hàng ngang",
+                        "fillVertical": "Điền theo hàng dọc"
+                    },
+                    "buttons": {
+                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+                        "colvis": "Hiển thị theo cột",
+                        "colvisRestore": "Khôi phục hiển thị",
+                        "copy": "Sao chép",
+                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
+                        "copySuccess": {
+                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
+                            "_": "Đã sao chép %d dòng vào clipboard"
+                        },
+                        "copyTitle": "Sao chép vào clipboard",
+                        "pageLength": {
+                            "-1": "Xem tất cả các dòng",
+                            "_": "Hiển thị %d dòng",
+                            "1": "Hiển thị 1 dòng"
+                        },
+                        "print": "In ấn",
+                        "createState": "Tạo trạng thái",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pdf": "PDF",
+                        "removeAllStates": "Xóa hết trạng thái",
+                        "removeState": "Xóa",
+                        "renameState": "Đổi tên",
+                        "savedStates": "Trạng thái đã lưu",
+                        "stateRestore": "Trạng thái %d",
+                        "updateState": "Cập nhật"
+                    },
+                    "select": {
+                        "rows": {
+                            "1": "1 mục đang được chọn",
+                            "_": "%d mục đang được chọn"
+                        }
+                    },
+                    "searchBuilder": {
+                        "title": {
+                            "_": "Thiết lập tìm kiếm (%d)",
+                            "0": "Thiết lập tìm kiếm"
+                        },
+                        "button": {
+                            "0": "Thiết lập tìm kiếm",
+                            "_": "Thiết lập tìm kiếm (%d)"
+                        },
+                        "value": "Giá trị",
+                        "clearAll": "Xóa hết",
+                        "condition": "Điều kiện",
+                        "conditions": {
+                            "date": {
+                                "after": "Sau",
+                                "before": "Trước",
+                                "between": "Nằm giữa",
+                                "empty": "Rỗng",
+                                "equals": "Bằng với",
+                                "not": "Không phải",
+                                "notBetween": "Không nằm giữa",
+                                "notEmpty": "Không rỗng"
+                            },
+                            "number": {
+                                "between": "Nằm giữa",
+                                "empty": "Rỗng",
+                                "equals": "Bằng với",
+                                "gt": "Lớn hơn",
+                                "gte": "Lớn hơn hoặc bằng",
+                                "lt": "Nhỏ hơn",
+                                "lte": "Nhỏ hơn hoặc bằng",
+                                "not": "Không phải",
+                                "notBetween": "Không nằm giữa",
+                                "notEmpty": "Không rỗng"
+                            },
+                            "string": {
+                                "contains": "Chứa",
+                                "empty": "Rỗng",
+                                "endsWith": "Kết thúc bằng",
+                                "equals": "Bằng",
+                                "not": "Không phải",
+                                "notEmpty": "Không rỗng",
+                                "startsWith": "Bắt đầu với",
+                                "notContains": "Không chứa",
+                                "notEndsWith": "Không kết thúc với",
+                                "notStartsWith": "Không bắt đầu với"
+                            },
+                            "array": {
+                                "equals": "Bằng",
+                                "empty": "Trống",
+                                "contains": "Chứa",
+                                "not": "Không",
+                                "notEmpty": "Không được rỗng",
+                                "without": "không chứa"
+                            }
+                        },
+                        "logicAnd": "Và",
+                        "logicOr": "Hoặc",
+                        "add": "Thêm điều kiện",
+                        "data": "Dữ liệu",
+                        "deleteTitle": "Xóa quy tắc lọc",
+                        "leftTitle": "Giảm thụt lề",
+                        "rightTitle": "Tăng thụt lề"
+                    },
+                    "searchPanes": {
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Không có phần tìm kiếm",
+                        "clearMessage": "Xóa hết",
+                        "loadMessage": "Đang load phần tìm kiếm",
+                        "collapse": {
+                            "0": "Phần tìm kiếm",
+                            "_": "Phần tìm kiếm (%d)"
+                        },
+                        "title": "Bộ lọc đang hoạt động - %d",
+                        "count": "{total}",
+                        "collapseMessage": "Thu gọn tất cả",
+                        "showMessage": "Hiện tất cả"
+                    },
+                    "datetime": {
+                        "hours": "Giờ",
+                        "minutes": "Phút",
+                        "next": "Sau",
+                        "previous": "Trước",
+                        "seconds": "Giây",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "unknown": "-",
+                        "weekdays": [
+                            "Chủ nhật"
+                        ],
+                        "months": [
+                            "Tháng Một",
+                            "Tháng Hai",
+                            "Tháng Ba",
+                            "Tháng Tư",
+                            "Tháng Năm",
+                            "Tháng Sáu",
+                            "Tháng Bảy",
+                            "Tháng Tám",
+                            "Tháng Chín",
+                            "Tháng Mười",
+                            "Tháng Mười Một",
+                            "Tháng Mười Hai"
+                        ]
+                    },
+                    "emptyTable": "Không có dữ liệu",
+                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
+                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+                    "loadingRecords": "Đang tải...",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "search": "Tìm kiếm:",
+                    "zeroRecords": "Không tìm thấy kết quả",
+                    "decimal": ",",
+                    "editor": {
+                        "close": "Đóng",
+                        "create": {
+                            "button": "Thêm",
+                            "submit": "Thêm",
+                            "title": "Thêm mục mới"
+                        },
+                        "edit": {
+                            "button": "Sửa",
+                            "submit": "Cập nhật",
+                            "title": "Sửa mục"
+                        },
+                        "error": {
+                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
+                        },
+                        "multi": {
+                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
+                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
+                            "restore": "Hoàn tác thay đổi",
+                            "title": "Nhiều giá trị"
+                        },
+                        "remove": {
+                            "button": "Xóa",
+                            "confirm": {
+                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
+                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
+                            },
+                            "submit": "Xóa",
+                            "title": "Xóa"
+                        }
+                    },
+                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
+                    "searchPlaceholder": "Nhập tìm kiếm...",
+                    "stateRestore": {
+                        "creationModal": {
+                            "button": "Thêm",
+                            "columns": {
+                                "search": "Tìm kiếm cột",
+                                "visible": "Khả năng hiển thị cột"
+                            },
+                            "name": "Tên:",
+                            "order": "Sắp xếp",
+                            "paging": "Phân trang",
+                            "scroller": "Cuộn vị trí",
+                            "search": "Tìm kiếm",
+                            "searchBuilder": "Trình tạo tìm kiếm",
+                            "select": "Chọn",
+                            "title": "Thêm trạng thái",
+                            "toggleLabel": "Bao gồm:"
+                        },
+                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
+                        "emptyError": "Tên không được để trống.",
+                        "emptyStates": "Không có trạng thái đã lưu",
+                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
+                        "removeError": "Không xóa được trạng thái.",
+                        "removeJoiner": "và",
+                        "removeSubmit": "Xóa",
+                        "removeTitle": "Xóa trạng thái",
+                        "renameButton": "Đổi tên",
+                        "renameLabel": "Tên mới cho %s:",
+                        "renameTitle": "Đổi tên trạng thái"
+                    },
+                    "infoThousands": ".",
+                    "thousands": "."
+                }
+            });
+
+            // Sự kiện khi hàng được chọn
+            dataTable.on('select', function (e, dt, type, indexes) {
+                var rowData = dataTable.rows(indexes).data().toArray();
+                rowData.forEach(function (row) {
+                    console.log(row);
+                    // Lấy tên của bảng (tableId) để xác định mảng selectedIds tương ứng
+                    var tableName = $(tableId).attr('id');
+                    if (!selectedIdsObject[tableName]) {
+                        selectedIdsObject[tableName] = [];
+                    }
+                    selectedIdsObject[tableName].push(row.ID); // Thêm ID vào mảng
+
+                    // Cập nhật giá trị của input type = hidden
+                    updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
+                });
+                console.log("Selected IDs:", selectedIdsObject);
+            });
+
+            // Sự kiện khi hàng bị hủy chọn
+            dataTable.on('deselect', function (e, dt, type, indexes) {
+                var rowData = dataTable.rows(indexes).data().toArray();
+                rowData.forEach(function (row) {
+                    var tableName = $(tableId).attr('id');
+                    var index = selectedIdsObject[tableName].indexOf(row.ID);
+                    if (index !== -1) {
+                        selectedIdsObject[tableName].splice(index, 1); // Xóa ID khỏi mảng
+                    }
+
+                    // Cập nhật giá trị của input type = hidden
+                    updateHiddenInput(selectedInputId, selectedIdsObject[tableName].join(','));
+                });
+                console.log("Selected IDs:", selectedIdsObject);
+            });
+        }
+
+        configureDataTable('#dataTableCheckedFlexible', 6, 0, 'selectedFlexId');
+        configureDataTable('#dataTableCheckedFixed', 7, 0, 'selectedFixedId');
+
+        var dataTableFlex = $("#dataTableCheckedFlexible").DataTable();
+        var dataTableFixed = $("#dataTableCheckedFixed").DataTable();
+
+        selectedFixedIdDB.forEach(function (id) {
+            dataTableFixed.rows(function (idx, data, node) {
+                return data.ID === id;
+            }).select();
+        });
+
+        selectedFlexibleIdDB.forEach(function (id) {
+            dataTableFlex.rows(function (idx, data, node) {
+                return data.ID === id;
+            }).select();
+        });
+
+        dataTableFlex.order([
+            [7, 'desc'] // Sắp xếp theo cột chọn (checkbox) theo thứ tự giảm dần
+        ]).draw();
+
+        dataTableFixed.order([
+            [8, 'desc'] // Sắp xếp theo cột chọn (checkbox) theo thứ tự giảm dần
+        ]).draw();
+    });
+</script>
 </body>
 </html>
