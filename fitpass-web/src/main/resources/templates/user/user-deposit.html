@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Trang Cá Nhân</title>
-    <meta name="description" content="Profile Page">
-    <meta name="keywords" content="My">
+    <meta content="Profile Page" name="description">
+    <meta content="My" name="keywords">
 
     <th:block th:insert="~{common/vendor-head}"></th:block>
 
     <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.css" rel="stylesheet">
-    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
 </head>
 <body style="background-color: rgb(238, 238, 238);">
 <!-- ======= Header ======= -->
@@ -32,7 +32,7 @@
                     <div class="row banking-card-list mt-2 justify-content-center">
                         <div class="col-md-4 col-lg-4 col-sm-4">
                             <label>
-                                <input id="choose-visa" type="radio" name="product" class="card-input-element" checked />
+                                <input checked class="card-input-element" id="choose-visa" name="product" type="radio"/>
                                 <div class="panel panel-default card-input">
                                     <div class="panel-body">
                                         <span><img src="https://cdn-icons-png.flaticon.com/128/349/349221.png"></span>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-4">
                             <label>
-                                <input id="choose-vnpay" type="radio" name="product" class="card-input-element" />
+                                <input class="card-input-element" id="choose-vnpay" name="product" type="radio"/>
                                 <div class="panel panel-default card-input">
                                     <div class="panel-body">
                                         <div>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-4">
                             <label>
-                                <input id="choose-momo" type="radio" name="product" class="card-input-element" />
+                                <input class="card-input-element" id="choose-momo" name="product" type="radio"/>
                                 <div class="panel panel-default card-input">
                                     <div class="panel-body">
                                         <div>
@@ -75,7 +75,7 @@
                         <div class="row mt-2 justify-content-center add-money">
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('50000', '50 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('50000', '50 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('100000', '100 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('100000', '100 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('200000', '200 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('200000', '200 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('300000', '300 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('300000', '300 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('500000', '500 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('500000', '500 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('1000000', '1000 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('1000000', '1000 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -159,7 +159,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('2000000', '2000 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('2000000', '2000 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
@@ -173,12 +173,12 @@
                             </div>
                             <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input type="radio" name="money" class="card-input-element" onclick="updateInputValue('3000000', '3000 credits tương ứng')"/>
+                                    <input class="card-input-element" name="money" onclick="updateInputValue('3000000', '3000 credits tương ứng')" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">3.000.000</h3>
-                        </span>
+                                            <span>
+                                                <h3 class="fw-bold">3.000.000</h3>
+                                             </span>
                                             <span><img src="https://cdn-icons-png.flaticon.com/128/11197/11197884.png"></span>
                                         </div>
                                         <div class="credit-trans">3000 credits tương ứng</div>
@@ -186,24 +186,26 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-6 mb-4 input-money">
-                                <input id="moneyAmount" type="text" placeholder="Nhập số tiền cần nạp...">
+                        <form id="moneyForm">
+                            <div class="row justify-content-center">
+                                <div class="col-6 mb-4 input-money">
+                                    <input id="moneyAmount" name="moneyAmount" placeholder="Nhập số tiền cần nạp..." type="number">
+                                </div>
+                                <div class="col-6 mb-4" id="add-money">
+                                    <div class="add-money-btn trigger" id="add-money-btn">Nạp tiền</div>
+                                </div>
                             </div>
-                            <div class="col-6 mb-4" id="add-money">
-                                <div class="add-money-btn trigger">Nạp tiền</div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
 
-                    <div id="vnpay-payment" class="mb-4">
+                    <div class="mb-4" id="vnpay-payment">
                         <div class="mt-4" style="font-weight: 500;">Thanh toán bằng vnpay</div>
                         <div class="row mt-2 justify-content-center add-money">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -217,7 +219,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -231,7 +233,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -245,7 +247,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -259,7 +261,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -273,7 +275,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -287,7 +289,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -301,7 +303,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -317,21 +319,21 @@
                             </div>
 
                             <div class="col-md-6 vnpay-img">
-                                <img style="width: 95%; height: 95%"
-                                     src="https://kalite.vn/wp-content/uploads/2021/09/maqrkalite.jpg">
+                                <img src="https://kalite.vn/wp-content/uploads/2021/09/maqrkalite.jpg"
+                                     style="width: 95%; height: 95%">
                             </div>
                         </div>
                     </div>
 
                     <!-- Tab thanh toán bằng ví momo -->
-                    <div id="momo-payment" class="mb-4">
+                    <div class="mb-4" id="momo-payment">
                         <div class="mt-4" style="font-weight: 500;">Thanh toán bằng momo</div>
                         <div class="row mt-2 justify-content-center add-money">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -345,7 +347,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -359,7 +361,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -373,7 +375,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -387,7 +389,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -401,7 +403,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -415,7 +417,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -429,7 +431,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
                                         <label>
-                                            <input type="radio" name="money" class="card-input-element" />
+                                            <input class="card-input-element" name="money" type="radio"/>
                                             <div class="panel panel-default card-input">
                                                 <div class="panel-body">
                             <span>
@@ -444,8 +446,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6 vnpay-img">
-                                <img style="width: 95%; height: 95%"
-                                     src="https://homepage.momocdn.net/blogscontents/momo-upload-api-220810110042-637957260425550228.webp">
+                                <img src="https://homepage.momocdn.net/blogscontents/momo-upload-api-220810110042-637957260425550228.webp"
+                                     style="width: 95%; height: 95%">
                             </div>
                         </div>
                     </div>
@@ -474,7 +476,7 @@
                 <span>sẽ được cộng vào ví của bạn!</span>
             </div>
             <div class="btn-option">
-                <button id="paymentSubmit" class="confirm">Xác nhận và thanh toán</button>
+                <button class="confirm" id="paymentSubmit">Xác nhận và thanh toán</button>
                 <button class="cancel">Hủy</button>
             </div>
         </div>
@@ -484,7 +486,7 @@
 <!-- ======= Footer ======= -->
 
 <div id="preloader"></div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
         class="bi bi-arrow-up-short"></i></a>
 
 <th:block th:include="common/vendor-script"></th:block>
@@ -531,7 +533,7 @@
     });
 
 
-    $("#paymentSubmit").click(function() {
+    $("#paymentSubmit").click(function () {
         var selectedAmount = $("#moneyAmount").val();
 
         // Gửi giá trị lên server thông qua một POST request
@@ -541,7 +543,7 @@
             data: {
                 amount: selectedAmount
             },
-            success: function(response) {
+            success: function (response) {
                 // Xử lý kết quả trả về từ server (nếu cần)
                 window.location.href = response;
             }
@@ -559,7 +561,7 @@
     const addButton = document.querySelector('.add-money-btn');
 
     // Add a click event listener to the button
-    addButton.addEventListener('click', function() {
+    addButton.addEventListener('click', function () {
         // Get the value from the input element
         let inputValue = moneyInput.value;
         inputValue = parseInt(inputValue);
@@ -571,7 +573,7 @@
         document.querySelector('.money').textContent = inputValue;
 
         // Update the text content of the creditConfirm element with the selected credit-trans text
-        document.querySelector('.creditConfirm').textContent = moneyInput.value/1000;
+        document.querySelector('.creditConfirm').textContent = moneyInput.value / 1000;
     });
 
     // JS add money
@@ -602,11 +604,11 @@
         momo_payment.style.display = "block";
     });
 
-    document.getElementById("moneyAmount").oninput = function(){
+    document.getElementById("moneyAmount").oninput = function () {
         let money_value = document.getElementById("moneyAmount").value;
         // document.getElementById("moneyAmount").value = parseInt(money_value).toLocaleString("de-DE");
         console.log(document.getElementById("moneyAmount").value.replace('.', ''));
-        if (money_value === ""){
+        if (money_value === "") {
             document.querySelector('input[name="money"]:checked').checked = false;
         }
     };
