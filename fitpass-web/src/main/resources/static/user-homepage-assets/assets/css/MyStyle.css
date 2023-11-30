@@ -1499,6 +1499,11 @@ section {
     margin-top: 25px;
 }
 
+.error{
+    padding-top: 5px;
+    color: red;
+}
+
 .contact .php-email-form .sent-message {
     display: none;
     color: #fff;
@@ -2854,7 +2859,7 @@ a:link {
     margin: 0 auto;
 }
 
-.input-money input[type=text] {
+.input-money input[type=number] {
     width: 100%;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
@@ -2864,7 +2869,7 @@ a:link {
     transition: .3s;
 }
 
-.input-money input[type=text]:focus {
+.input-money input[type=number]:focus {
     border-color: rgba(255, 200, 0, 0.577);
     box-shadow: 0 0 8px 0 rgba(255, 200, 0, 0.658);
 }
