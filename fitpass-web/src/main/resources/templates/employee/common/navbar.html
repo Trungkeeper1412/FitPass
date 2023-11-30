@@ -39,10 +39,117 @@
             </a>
 
             <!-- Dropdown - Notifications -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                 aria-labelledby="alertsDropdown" id="employee-notification-dropdown">
-                <h6 class="dropdown-header" id="employee-notification-label"> Thông báo </h6>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                <div style="color: black" class="bg-light border border-bottom border-light dropdown-header pt-3 pb-3">
+                    <span class="h6" style="font-weight: lighter">Thông báo</span>
+                    <span style="font-weight: lighter" id="unread-noti" class="ms-4 rounded-pill border border-white p-2">Chưa đọc</span>
+                    <span style="font-weight: lighter" id="read-noti" class="ms-4 rounded-pill border border-white p-2">Đã đọc</span>
+                </div>
+
+                <div class="notification-íist" id="unread-noti-tab">
+                    <a class="dropdown-item d-flex align-items-center">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-file-alt text-white"></i>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <div class="small text-gray-500">December 12, 2019</div>
+                            <span class="font-weight-bold">A new monthly report is ready to download! (chưa đọc)</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-success">
+                                <i class="fas fa-donate text-white"></i>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <div class="small text-gray-500">December 7, 2019</div>
+                            $290.29 has been deposited into your account!
+                        </div>
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                                <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <div class="small text-gray-500">December 2, 2019</div>
+                            Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                                <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <div class="small text-gray-500">December 2, 2019</div>
+                            Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                                <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <div class="small text-gray-500">December 2, 2019</div>
+                            Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                    </a>
+                </div>
+
+                <div id="read-noti-tab">
+                <a class="dropdown-item d-flex align-items-center">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div style="margin-left: 10px">
+                        <div class="small text-gray-500">December 12, 2019</div>
+                        <span class="font-weight-bold">A new monthly report is ready to download! (đã đọc)</span>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i class="fas fa-donate text-white"></i>
+                        </div>
+                    </div>
+                    <div style="margin-left: 10px">
+                        <div class="small text-gray-500">December 7, 2019</div>
+                        $290.29 has been deposited into your account!
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                            <i class="fas fa-exclamation-triangle text-white"></i>
+                        </div>
+                    </div>
+                    <div style="margin-left: 10px">
+                        <div class="small text-gray-500">December 2, 2019</div>
+                        Spending Alert: We've noticed unusually high spending for your account.
+                    </div>
+                </a>
+                    <a class="dropdown-item d-flex align-items-center">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                                <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <div class="small text-gray-500">December 2, 2019</div>
+                            Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                    </a>
+                </div>
             </div>
         </li>
 
@@ -71,3 +178,51 @@
         </li>
     </ul>
 </nav>
+<script>
+    document.getElementById("unread-noti").style.backgroundColor = "#d5e9ff";
+    document.getElementById("unread-noti").style.color = "blue";
+    document.getElementById("read-noti-tab").style.display = "none";
+    document.getElementById("read-noti").style.backgroundColor = '#e7e7e7';
+
+
+    document.getElementById("read-noti").addEventListener('click', function(){
+        document.getElementById("read-noti").style.backgroundColor = "#d5e9ff";
+        document.getElementById("read-noti").style.color = "blue";
+        document.getElementById("unread-noti").style.backgroundColor = '#e7e7e7';
+        document.getElementById("unread-noti").style.color = "";
+        document.getElementById("read-noti-tab").style.display = "block";
+        document.getElementById("unread-noti-tab").style.display = "none";
+    });
+    document.getElementById("unread-noti").addEventListener('click', function(){
+        document.getElementById("unread-noti").style.backgroundColor = "#d5e9ff";
+        document.getElementById("unread-noti").style.color = "blue";
+        document.getElementById("read-noti").style.backgroundColor = '#e7e7e7';
+        document.getElementById("read-noti").style.color = "";
+        document.getElementById("read-noti-tab").style.display = "none";
+        document.getElementById("unread-noti-tab").style.display = "block";
+
+    });
+
+</script>
+<style>
+    .notification-íist{
+        max-height: 358px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    .notification-íist::-webkit-scrollbar-track {
+        background-color: #ffffff;
+    }
+
+    .notification-íist::-webkit-scrollbar {
+        width: 8px;
+        height: 4px;
+        background-color: #d5e9ff;
+    }
+    .notification-íist::-webkit-scrollbar-thumb {
+        background-color: #c6c6c6;
+        border: 2px solid #c6c6c6;
+    }
+</style>

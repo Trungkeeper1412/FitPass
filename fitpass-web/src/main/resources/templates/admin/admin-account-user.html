@@ -42,36 +42,13 @@
                 </tr>
                 </thead>
                 <tbody>
+                <th:block th:each="userDTOList : ${userDTOList}">
                 <tr>
-                  <td>1</td>
-                  <td>Lê Đình Tuấn</td>
-                  <td>0987654321</td>
-                  <td>tuanld@fpt.com</td>
-                  <td>Hoạt động</td>
-                  <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Nguyễn Văn Trung</td>
-                  <td>0987654321</td>
-                  <td>trungnv@fpt.com</td>
-                  <td>Hoạt động</td>
-                  <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Lê Trung Đức</td>
-                  <td>0987654321</td>
-                  <td>duclt@fpt.com</td>
-                  <td>Hoạt động</td>
-                  <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Nguyễn Văn Bảo Linh</td>
-                  <td>0987654321</td>
-                  <td>linhnvb2@fpt.com</td>
-                  <td>Khóa tài khoản</td>
+                  <td th:text="${userDTOListStat.index + 1}" >1</td>
+                  <td th:text="${userDTOList.getFirstName()} + ' ' +  ${userDTOList.getLastName()} ">Lê Đình Tuấn</td>
+                  <td th:text="${userDTOList.getPhoneNumber()}" >0987654321</td>
+                  <td th:text="${userDTOList.getEmail()}" >tuanld@fpt.com</td>
+                  <td th:text="${userDTOList.isUserDeleted() == 1 ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
                   <td><a class="btn btn-danger">Khóa tài khoản</a></td>
                 </tr>
                 </tbody>

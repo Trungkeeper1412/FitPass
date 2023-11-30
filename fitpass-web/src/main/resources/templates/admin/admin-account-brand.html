@@ -38,47 +38,23 @@
                                 <tr>
                                     <th>Thứ tự</th>
                                     <th>Tên brand</th>
+                                    <th>Số liên hệ cơ sở</th>
                                     <th>Email</th>
                                     <th class="status-active">Trạng thái</th>
                                     <th class="table-action-lock">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <th:block th:each="b : ${brandList}">
                                 <tr>
-                                    <td>1</td>
-                                    <td>California Fitness & Yoga</td>
-                                    <td>linhnvb@gmail.com</td>
-                                    <td>Hoạt động</td>
+                                    <td th:text="${bStat.index + 1}">1</td>
+                                    <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
+                                    <td th:text="${b.getBrandContactNumber()}">0987654321</td>
+                                    <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
+                                    <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                     <td><a class="btn btn-danger">Khóa tài khoản</a></td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Kickfit Sport</td>
-                                    <td>linhnvb@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Elite Fitness</td>
-                                    <td>linhnvb@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>The New Gym</td>
-                                    <td>linhnvb@gmail.com</td>
-                                    <td>Hoạt động</td>
-                                    <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Fit Way Gym</td>
-                                    <td>linhnvb@gmail.com</td>
-                                    <td>Khóa tài khoản</td>
-                                    <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                                </tr>
+                                </th:block>
                                 </tbody>
                             </table>
                         </div>

@@ -2735,8 +2735,14 @@ a:link {
 }
 
 .user-basic-info .user {
+<<<<<<< HEAD
+  position: relative;
+  margin-left: 10px;
+  font-size: 14px;
+=======
     margin-left: 10px;
     font-size: 14px;
+>>>>>>> a213655f133c4a9ac04b509c5573307effb77782
 }
 
 .user-basic-info .name {
@@ -4130,14 +4136,15 @@ section {
 }
 
 .squares > div {
+    position: relative;
     width: 300px;
     height: 300px;
-    /*margin: 20px;*/
+    margin-right: 20px;
 }
 
 .squares div img {
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 300px;
     border-radius: 6px;
     object-fit: cover;
 }
@@ -4184,10 +4191,11 @@ section {
 
 .my-card-container .my-card-title {
     margin-top: 50px;
-    height: 60px;
-    display: grid;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
     background-color: white;
-    grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
 }
 
 .my-card-title input {
@@ -4195,8 +4203,11 @@ section {
     width: 20px;
     height: 20px;
 }
-
+.my-card-title .form-check {
+    /*margin-left: -25px;*/
+}
 .my-card-container .form-check {
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4218,7 +4229,7 @@ section {
 .my-plan-title {
     display: flex;
     align-items: center;
-    margin-left: -10px;
+    margin-left: 10px;
     color: rgb(0, 0, 0)
 }
 
@@ -4267,15 +4278,14 @@ section {
 
 .plan-in-my-card {
     margin-top: 20px;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .all-plan-of-gym {
     height: 60px;
-    margin-top: 0px;
-    display: grid;
+    display: flex;
     background-color: white;
-    grid-template-columns: 1fr 16fr;
+    align-items: center;
     border-bottom: 1px solid rgb(203, 203, 203);
 }
 
@@ -4286,25 +4296,50 @@ section {
 }
 
 .gym-department-plan {
-    display: grid;
+    /*display: grid;*/
     background-color: white;
-    grid-template-columns: 1fr 8fr 4fr 2fr 2fr;
+    /*grid-template-columns: 1fr 8fr 4fr 2fr 2fr;*/
     height: fit-content;
+    display: flex;
+    align-items: center;
     min-height: 170px;
     /* background-color: #000; */
 }
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 280px) and (max-width: 375px) {
+
+    .shopping-cart-title{
+        font-size: 19px;
+    }
+    .my-card-container .line{
+        width: 50%;
+    }
+    .my-card-title{
+        font-size: 12px;
+    }
+    .my-card-title .price-title, .num-of-plan-title, .action-title{
+        display: none;
+    }
+    .plan-in-my-card .gym-name-mc{
+        font-size: 12px;
+    }
+    .my-card-title input {
+        border: 1px solid orange;
+        width: 10px;
+        height: 10px;
+    }
+}
+@media only screen and (min-width: 280px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
         height: 90%;
-        width: 90%;
+        width: 100%;
         padding: 10px;
         display: grid;
-        /* grid-template-rows: 1fr 2fr 1.5fr;  */
+        grid-template-columns: 1fr 2fr 1.5fr;
         margin: auto 0;
         border-radius: 10px;
     }
@@ -4332,20 +4367,13 @@ section {
     }
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-/* @media only screen and (min-width: 768px) {
-  .plan-card-mc {
-    background: blue;
-  }
-}  */
-
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
         height: 75%;
-        width: 80%;
+        width: 90%;
         display: grid;
         grid-template-columns: 1fr 2fr 1.5fr;
         margin: auto 0;
@@ -4374,12 +4402,12 @@ section {
     height: 80px;
     margin: auto;
 }
-
-.gym-department-plan button {
-    width: 50px;
+.gym-department-plan .delete-btn{
+    display: flex;
+    align-items: center;
+    margin: auto;
     height: 40px;
     border-radius: 15px;
-    margin: auto;
 }
 
 .plan-info-mc {
@@ -4555,7 +4583,10 @@ section {
 @media only screen and (min-width: 1400px) {
     .body-checkout {
     }
-
+    .plan-card-mc {
+        height: 90%;
+        width: 80%;
+    }
     .body-checkout .plan-card-mc .duration {
         font-size: 14px;
         padding: 4px;
@@ -4779,25 +4810,35 @@ section {
     padding: 20px
 }
 
-.club-view {
-    min-height: 300px;
-    background-image: url("https://i.pinimg.com/originals/98/83/2b/98832bffcec22fcbdb2759eb1335182e.jpg");
-    background-size: cover;
-}
+/*.club-view {*/
+/*    min-height: 300px;*/
+/*    background-size: cover;*/
+/*}*/
 
 .club-view-bg {
+    height: 100%;
     margin-left: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 }
-
+.club-view-bg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .club-view-bg button {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top : 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    margin-top: 160px;
-    margin-left: -10px;
 }
 
 .brand-contact {
@@ -4955,10 +4996,16 @@ section {
 }
 
 .gym-brand-content .department .dept-img {
+    position: relative;
     border-radius: 10px;
     height: 250px;
 }
-
+.gym-brand-content .department .dept-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
 .gym-brand-content .list-gym-department .dept-description {
     padding-left: 20px;
     border-left: 2px solid rgb(227, 227, 227);
@@ -5098,6 +5145,15 @@ section {
 
     .page-numbers {
         line-height: 20px;
+    }
+    .squares > div {
+        width: 200px;
+        height: 200px;
+    }
+
+    .squares div img {
+        width: 200px;
+        height: 200px;
     }
 }
 
@@ -5640,7 +5696,12 @@ body {
 .login-register-body {
     font-family: 'Times New Roman', Times, serif;
 }
-
+.login-register-body form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .login-register-body .banner {
     display: flex;
     justify-content: center;

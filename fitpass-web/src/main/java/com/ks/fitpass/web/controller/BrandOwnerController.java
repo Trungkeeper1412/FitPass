@@ -8,12 +8,14 @@ import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
-import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.credit_card.dto.CreditCard;
 import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.dto.*;
-import com.ks.fitpass.department.entity.*;
+import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.department.entity.DepartmentAlbums;
+import com.ks.fitpass.department.entity.DepartmentFeature;
+import com.ks.fitpass.department.entity.DepartmentSchedule;
 import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.dto.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
@@ -36,7 +38,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +46,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/brand-owner")
 @RequiredArgsConstructor
 public class BrandOwnerController {
-    private final UserRepository userRepository;
     private final UserService userService;
     private final WalletService walletService;
     private final Email emailService;
@@ -63,9 +63,7 @@ public class BrandOwnerController {
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
-    public String getBOIndex(Principal principal, HttpSession session) {
-        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        session.setAttribute("userInfo", user);
+    public String getBOIndex() {
         return "brand-owner/index";
     }
 
@@ -81,8 +79,7 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/updateProfile")
-    public ResponseEntity<Integer> updateBrandProfile(@RequestBody BrandOwnerProfile brandOwnerProfile,
-                                                      HttpSession session) {
+    public ResponseEntity<Integer> updateBrandProfile(@RequestBody BrandOwnerProfile brandOwnerProfile) {
         int updateResult = brandService.updateBrandDetail(brandOwnerProfile);
         return ResponseEntity.ok(updateResult);
     }
@@ -591,16 +588,16 @@ public class BrandOwnerController {
             // Get all credit card by user id
             List<CreditCard> creditCardList = creditCardService.getAllByUserId(user.getUserId());
             model.addAttribute("creditCardList", creditCardList);
-        } catch (EmptyResultDataAccessException e) {
-
         } catch (DataAccessException e) {
 
         }
         return "brand-owner/gym-brand-withdrawal-card-add";
     }
 
+
     @PostMapping("/withdrawal/card/add-bank-card")
-    public ResponseEntity<Integer> addBankCard(@RequestBody CreditCard creditCard, HttpSession session) {
+    public ResponseEntity<Integer> addBankCard( @RequestBody CreditCard creditCard,
+                                               HttpSession session) {
         try {
             User user = (User) session.getAttribute("userInfo");
             creditCard.setUserId(user.getUserId());
@@ -621,7 +618,7 @@ public class BrandOwnerController {
     }
 
     @GetMapping("/withdrawal/card/details")
-    public ResponseEntity<CreditCard> getBankCardDetails(@RequestParam("id") int creditCardId, Model model) {
+    public ResponseEntity<CreditCard> getBankCardDetails(@RequestParam("id") int creditCardId) {
         try {
             CreditCard creditCard = creditCardService.getOne(creditCardId);
             return ResponseEntity.ok(creditCard);
@@ -631,9 +628,13 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/withdrawal/card/update-bank-card")
-    public ResponseEntity<Integer> updateBankCard(@RequestBody CreditCard creditCard, HttpSession session) {
+    public ResponseEntity<Integer> updateBankCard(@RequestBody CreditCard creditCard) {
         int rowAffect;
         try {
+            if(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())) {
+                return ResponseEntity.ok(-1);
+            }
+
             rowAffect = creditCardService.updateCreditCard(creditCard);
         } catch (DataAccessException e) {
             return ResponseEntity.badRequest().build();
@@ -642,7 +643,7 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/withdrawal/card/delete-bank-card")
-    public ResponseEntity<Integer> deleteBankCard(@RequestBody Integer creditCardId, HttpSession session) {
+    public ResponseEntity<Integer> deleteBankCard(@RequestBody Integer creditCardId) {
         int rowAffect;
         try {
             rowAffect = creditCardService.deleteCreditCard(creditCardId);

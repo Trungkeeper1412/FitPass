@@ -1,6 +1,7 @@
 package com.ks.fitpass.core.repository;
 
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
+import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import org.springframework.dao.DataAccessException;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public interface UserRepository {
+    List<UserDTO> getAllAccountUser();
 
     User findByAccount(String email);
 

@@ -55,7 +55,6 @@ public class EmployeeController {
     private final DepartmentService departmentService;
     private final TransactionService transactionService;
     private final UserRepository userRepository;
-
     private final UserService userService;
 
 
@@ -76,13 +75,6 @@ public class EmployeeController {
         this.userRepository = userRepository;
         this.userService = userService;
     }
-
-    @ModelAttribute
-    public void populateSession(HttpSession session, Principal principal) {
-        com.ks.fitpass.core.entity.User user = userRepository.findByAccount(principal.getName());
-        session.setAttribute("userInfo", user);
-    }
-
 
     @GetMapping("/check-in/fixed")
 public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
