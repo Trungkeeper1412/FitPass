@@ -1499,6 +1499,11 @@ section {
     margin-top: 25px;
 }
 
+.error{
+    padding-top: 5px;
+    color: red;
+}
+
 .contact .php-email-form .sent-message {
     display: none;
     color: #fff;
@@ -2860,7 +2865,7 @@ a:link {
     margin: 0 auto;
 }
 
-.input-money input[type=text] {
+.input-money input[type=number] {
     width: 100%;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
@@ -2870,7 +2875,7 @@ a:link {
     transition: .3s;
 }
 
-.input-money input[type=text]:focus {
+.input-money input[type=number]:focus {
     border-color: rgba(255, 200, 0, 0.577);
     box-shadow: 0 0 8px 0 rgba(255, 200, 0, 0.658);
 }
@@ -3180,12 +3185,6 @@ input[type="radio"]:checked {
 .user-edit-profile input[type='radio']:focus {
     background-color: black;
     box-shadow: none;
-}
-
-.change-ava-btn {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
 }
 
 .user-change-ava .user-img {
@@ -5922,4 +5921,14 @@ body {
     padding-top: 40px;
     text-transform: uppercase;
     text-shadow: 3px 1px 3px dimgray;
+}
+
+.btn-upload-img {
+    border: 1px solid #d1d3e2;
+    background-color: #e9ecef;
+}
+
+.btn-upload-img:hover {
+    border: 1px solid #d1d3e2;
+    background-color: #dde0e3;
 }
