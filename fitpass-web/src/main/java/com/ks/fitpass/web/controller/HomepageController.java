@@ -27,14 +27,12 @@ import java.util.*;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class HomepageController {
-    private final UserRepository userRepository;
     private final DepartmentService departmentService;
     private final BrandService brandService;
     private final WalletService walletService;
-    private final TransactionService transactionService;
 
     @GetMapping("/homepage")
-    public String getHomepage(Principal principal, HttpSession session) {
+    public String getHomepage(HttpSession session) {
         User userSession = (User) session.getAttribute("userInfo");
         double credit = walletService.getBalanceByUserId(userSession.getUserId());
         session.setAttribute("userCredit", credit);

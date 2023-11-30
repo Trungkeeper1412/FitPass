@@ -64,10 +64,6 @@ public class DepartmentController {
             List<DepartmentAlbums> departmentAlbums = departmentAlbumsService.getAllByDepartmentID(departmentId);
             model.addAttribute("departmentAlbums", departmentAlbums);
 
-            // Get list of user feedback for the department
-//            List<UserFeedback> userFeedbacks = departmentService.getDepartmentFeedback(departmentId, page, size);
-//            model.addAttribute("userFeedbacks", userFeedbacks);
-
             // Calculate the rating statistics
             DepartmentDTO departmentDTO = departmentService.filterDepartmentFeedbacks(departmentId);
             model.addAttribute("departmentFeedbacks", departmentDTO);

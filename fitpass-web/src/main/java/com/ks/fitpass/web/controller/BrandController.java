@@ -54,7 +54,6 @@ public class BrandController {
             List<DepartmentDTO> departmentDTOList = departmentService.getDepartmentByBrandID(brandId);
             model.addAttribute("departments", departmentDTOList);
 
-
             List<ListBrandDepartmentFeedback> departmentFeedback = departmentService.getDepartmentFeedbackOfBrandOwner(brandId);
             model.addAttribute("departmentFeedback", departmentFeedback);
 
