@@ -40,23 +40,23 @@
                                         <img class="show-service-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
                                         <input name="department-img" type="file" class="form-control mt-2" style="width: 230px;" id="service-img" accept="image/*" onchange="uploadImage(this);">
                                         <input th:field="*{photoUrl}" id="photoUrl" type="hidden" name="photoUrl">
-                                        <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
+                                        <span th:if="${#fields.hasErrors('photoUrl')}" class="error" th:errors="*{photoUrl}">photoUrl Error</span>
                                     </div>
                                     <div class="col-md-7 mb-4">
                                         <div class="mb-4">
                                             <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
                                             <input th:field="*{amenitieName}" name="amenitieName" type="text" class="form-control" id="name-service"
                                                    placeholder="Hệ thống tủ khóa">
-                                            <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('photoUrl')}" class="error" th:errors="*{photoUrl}">photoUrl Error</span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
                                             <textarea th:field="*{description}" name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ"></textarea>
-                                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">photoUrl Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi" id="addService">
                                     </div>
                                 </div>
                             </form>
@@ -122,6 +122,40 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#addService").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn thêm dịch vụ mới ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Dịch vụ mới đã được thêm thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Dịch vụ mới chưa được thêm.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
 </script>
 </body>
 
