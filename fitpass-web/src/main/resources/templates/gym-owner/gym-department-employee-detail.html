@@ -34,7 +34,7 @@
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
                             <form id="formSubmit" action="/gym-owner/employee/update" method="post" th:object="${employeeInfo}">
                                 <div class="row">
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-2 mb-4">
                                         <label for="department-img" class="form-label fw-bold w-100">Ảnh :</label>
                                         <img class="show-department-img" th:src="${employeeInfo.getImageUrl()}">
                                         <input th:field="*{imageUrl}" type="hidden" id="avatarImg" th:value="${employeeInfo.getImageUrl()}" name="imageUrl">
@@ -47,32 +47,32 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <div class="mb-3">
+                                    <div class="col-md-5 mb-4">
+                                        <div class="mb-4">
                                             <label for="firt-name" class="form-label fw-bold">Họ :</label>
                                             <input type="text" class="form-control" id="firt-name"
                                                    name="firt-name" th:value="${employeeInfo.firstName}"
                                                    th:field="*{firstName}">
-                                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</span>
+                                            <span th:if="${#fields.hasErrors('firstName')}" class="error" th:errors="*{firstName}">firstName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="email" class="form-label fw-bold">Email :</label>
                                             <input th:field="*{email}" th:value="${employeeInfo.getEmail()}" type="text" class="form-control" id="email"
                                                    name="email" placeholder="Nhập gmail">
                                             <input th:field="*{oldEmail}" th:value="${employeeInfo.getEmail()}" type="hidden">
-                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</span>
+                                            <span th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}">email Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="address" class="form-label fw-bold">Địa chỉ :</label>
                                             <input th:field="*{address}" th:value="${employeeInfo.address}" type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
-                                            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">firstName Error</span>
+                                            <span th:if="${#fields.hasErrors('address')}" class="error" th:errors="*{address}">firstName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh :</label>
                                             <input th:field="*{dateOfBirth}" th:value="${employeeInfo.dateOfBirth}" type="date" class="form-control" id="date-of-birth" name="date-of-birth">
-                                            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">firstName Error</span>
+                                            <span th:if="${#fields.hasErrors('dateOfBirth')}" class="error" th:errors="*{dateOfBirth}">firstName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label class="d-block fw-bold">Trạng thái :</label>
                                             <div class="form-check form-check-inline">
                                                 <input th:field="*{userDeleted}" type="radio" name="actived" id="inlineradio1"
@@ -84,24 +84,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <div class="mb-3">
+                                    <div class="col-md-5 mb-4">
+                                        <div class="mb-4">
                                             <label for="last-name" class="form-label fw-bold">Tên :</label>
                                             <input th:field="*{lastName}" th:value="${employeeInfo.lastName}" type="text" class="form-control" id="last-name"
                                                    name="last-name">
-                                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</span>
+                                            <span th:if="${#fields.hasErrors('lastName')}" class="error" th:errors="*{lastName}">lastName Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
                                             <input th:field="*{phone}" th:value="${employeeInfo.phone}" type="text" class="form-control" id="phone" name="phone" value="0987654321">
-                                            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phoneNumber Error</span>
+                                            <span th:if="${#fields.hasErrors('phone')}" class="error" th:errors="*{phone}">phoneNumber Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
                                             <input th:field="*{idCard}" th:value="${employeeInfo.getIdCard()}" type="text" class="form-control" id="id-card" name="id-card" placeholder="Nhập số căn cước">
-                                            <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">idCard Error</span>
+                                            <span th:if="${#fields.hasErrors('idCard')}" class="error" th:errors="*{idCard}">idCard Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="gender" class="form-label fw-bold">Giới Tính :</label>
                                             <select th:field="*{gender}" th:value="${employeeInfo.gender}" class="form-select" id="gender" name="gender">
                                                 <option value="">Chọn giới tính</option>
@@ -109,7 +109,7 @@
                                                 <option value="Nữ">Nữ</option>
                                                 <option value="Khác">Khác</option>
                                             </select>
-                                            <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
+                                            <span th:if="${#fields.hasErrors('gender')}" class="error" th:errors="*{gender}">gender Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
@@ -185,7 +185,7 @@
         // Thực hiện validation trước khi xử lý form
         if ($("#formSubmit").valid()) {
             Swal.fire({
-                title: 'Bạn có muốn cập nhật thông tin không?',
+                title: 'Bạn có muốn cập nhật thông tin',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Có',
