@@ -7,6 +7,8 @@ import com.ks.fitpass.department.entity.*;
 import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.web.enums.PageEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,7 +31,7 @@ public class DepartmentController {
     private final DepartmentAlbumsService departmentAlbumsService;
     private final DepartmentFeatureService departmentFeatureService;
     private  final DepartmentAmenitieService departmentAmenitieService;
-
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     public DepartmentController(DepartmentService departmentService, GymPlanService gymPlanService,
                                 DepartmentScheduleService departmentScheduleService,
