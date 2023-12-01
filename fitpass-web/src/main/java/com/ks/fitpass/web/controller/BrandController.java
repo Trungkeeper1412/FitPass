@@ -11,8 +11,13 @@ import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.web.enums.PageEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +37,7 @@ public class BrandController {
     private final DepartmentService departmentService;
     private final DepartmentFeatureService departmentFeatureService;
 
-
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     public BrandController(BrandService brandService, BrandAmenitieService brandAmenitieService, DepartmentService departmentService, DepartmentFeatureService departmentFeatureService) {
         this.brandService = brandService;
@@ -71,8 +76,22 @@ public class BrandController {
             model.addAttribute("departmentFeatures", departmentFeatures);
 
             return "gym-brand-details";
-        } catch (EmptyResultDataAccessException e) {
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
             return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
     }
 
@@ -97,6 +116,18 @@ public class BrandController {
             return ResponseEntity.ok(brandDetailFeedbackPaginition);
         } catch (EmptyResultDataAccessException e) {
             return ResponseEntity.notFound().build();
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        }  catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
         }
     }
 }
