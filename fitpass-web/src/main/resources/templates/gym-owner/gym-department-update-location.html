@@ -37,24 +37,24 @@
                                         <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="latitude" class="form-label fw-bold">Vĩ độ :</label>
                                             <input th:value="${updateGymOwnerDepartmentLocation.getLatitude()}" type="text" class="form-control" id="latitude" name="latitude"
                                                    placeholder="Nhập kinh độ" th:field="*{latitude}"/>
-                                            <span th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}" class="text-danger"></span>
+                                            <span th:if="${#fields.hasErrors('latitude')}" class="error" th:errors="*{latitude}"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="longitude" class="form-label fw-bold">Kinh độ
                                                 :</label>
                                             <input th:value="${updateGymOwnerDepartmentLocation.getLongitude()}" type="text" class="form-control" id="longitude" name="longitude"
                                                    placeholder="Nhập kinh độ" th:field="*{longitude}"/>
-                                            <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}" class="text-danger"></span>
+                                            <span th:if="${#fields.hasErrors('longitude')}" class="error" th:errors="*{longitude}"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-2">
                                     <button type="submit" class="btn btn-primary" id="updateInfo">Lưu thay đổi</button>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
         // Thực hiện validation trước khi xử lý form
         if ($("#formSubmit").valid()) {
             Swal.fire({
-                title: 'Bạn có muốn cập nhật thông tin không?',
+                title: 'Bạn có muốn cập nhật thông tin',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Có',
