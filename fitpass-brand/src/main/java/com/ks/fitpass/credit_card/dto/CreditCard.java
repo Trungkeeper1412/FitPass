@@ -1,6 +1,8 @@
 package com.ks.fitpass.credit_card.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -10,15 +12,19 @@ public class CreditCard {
 
     private int userId;
 
-    @NotEmpty(message = "Department Address is required")
+
+    @Size(max = 100, message = "Tên của bạn không được vượt quá 100 kí tự !")
+    @NotEmpty(message = "Vui lòng nhập họ của bạn !")
+    @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")
     private String cardOwnerName;
 
-    @NotEmpty(message = "Department Address is required")
+    @NotEmpty(message = "Vui lòng nhập số tài khoản !")
+    @Size(min = 12, max = 12, message = "Số tài khoản phải là 12 số !")
     private String cardNumber;
 
     private String status;
 
-    @NotEmpty(message = "Department Address is required")
+    @NotEmpty(message = "Vui lòng chọn loại tài khoản !")
     private String bankName;
 
 }

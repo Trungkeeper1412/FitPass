@@ -568,7 +568,16 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/withdrawal/add")
-    public String addWithdrawal(@RequestParam int cardId, @RequestParam int creditAmount, @RequestParam  int moneyAmount) {
+    public String addWithdrawal(@RequestParam int cardId, @RequestParam double creditAmount,
+                                @RequestParam  double moneyAmount, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("userInfo");
+        double userBalance = walletService.getBalanceByUserId(user.getUserId());
+
+        if (creditAmount > userBalance) {
+            model.addAttribute("error", "Số Credit muốn rút không được lớn hơn số dư hiện tại (Credit)");
+            return "redirect:/brand-owner/withdrawal/list";
+        }
+
         RequestWithdrawHistory requestWithdrawHistory = new RequestWithdrawHistory();
         requestWithdrawHistory.setCreditCardId(cardId);
         requestWithdrawHistory.setAmountCredit((long) creditAmount);
