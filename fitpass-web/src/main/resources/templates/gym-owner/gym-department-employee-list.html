@@ -50,7 +50,9 @@
                                 <th:block th:each="e : ${listOfEmployee}">
                                     <tr>
                                         <td th:text="${eStat.index + 1}">1</td>
-                                        <td><img th:src="${e.getImageUrl()}" alt="Thumbnail 1"></td>
+                                        <td>
+                                            <img th:src="${e.getImageUrl() != null ? e.getImageUrl() : '/images/system/no_image.png'}" alt="Image">
+                                        </td>
                                         <td th:text="${e.getFirstName() + ' ' + e.getLastName()}">Lê Đình Tuấn</td>
                                         <td th:text="${e.getPhoneNumber()}">0987654321</td>
                                         <td th:text="${e.getEmail()}">ldt2001@gmail.com</td>
