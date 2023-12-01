@@ -49,10 +49,20 @@ $.validator.addMethod("validateIdCard", function(value, element) {
     return true; // Các mã tỉnh và số tiếp theo đều hợp lệ
 }, "Số căn cước công dân không đúng định dạng !");
 
+$.validator.addMethod("correctNumber", function(value, element) {
+    var correctNumber;
+    if (value.startsWith("1900") || value.startsWith("1800")) {
+        correctNumber = /^(1800|1900)\d{4}$/;
+    } else {
+        correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
+    }
+    return this.optional(element) || correctNumber.test(value);
+}, "Đầu số không đúng định dạng !");
+
 $(document).ready(function () {
     $("#formSubmit").validate({
         rules: {
-            // Validate Owner
+            // Validate employee
             'department-img': {
                 required: true
             },
@@ -95,6 +105,12 @@ $(document).ready(function () {
                 maxlength: 11,
                 pattern: /^(0|84)(9|3|7|8|5)\d{8}$/
             },
+            phoneDepartment: {
+                required: true,
+                minlength: 8,
+                maxlength: 11,
+                correctNumber: true
+            },
             idCard: {
                 required: true,
                 number: true,
@@ -103,16 +119,27 @@ $(document).ready(function () {
                 pattern: /^[0-9]{12}$/,
                 validateIdCard: true,
             },
-
-            // Validate service
-            amenitieName: {
+            capacity: {
                 required: true,
-                minlength: 2,
-                maxlength: 50,
-            }
+                number: true,
+                min: 0.01,
+            },
+            area: {
+                required: true,
+                number: true,
+                min: 0.01,
+            },
+            latitude: {
+                required: true,
+                pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/,
+            },
+            longitude: {
+                required: true,
+                pattern: /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/,
+            },
         },
         messages: {
-            // Validate Owner
+            // Validate employee
             'department-img': {
                 required: "Vui lòng chọn ảnh !"
             },
@@ -154,6 +181,13 @@ $(document).ready(function () {
                 maxlength: 'Số điện thoại có tối đa 11 số !',
                 pattern: 'Số điện thoại không đúng định dạng !'
             },
+            phoneDepartment: {
+                required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập số điện thoại !",
+                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                correctNumber: "Đầu số không đúng định dạng !"
+            },
             idCard: {
                 required: "Vui lòng nhập số căn cước công dân !",
                 number: "Đã bảo nhập số rồi còn nhập cái gì đấy ?",
@@ -161,13 +195,24 @@ $(document).ready(function () {
                 maxlength: "Số căn cước công dân không được vượt quá 12 chữ số !",
                 pattern: "Số căn cước công dân không hợp lệ !",
             },
-
-            // Validate service
-            amenitieName: {
-                required: "Vui lòng nhập tên dịch vụ !",
-                minlength: "Tên dịch vụ phải có ít nhất 2 kí tự !",
-                maxlength: "Tên dịch vụ không được vượt quá 50 kí tự !",
-            }
+            capacity: {
+                required: "Vui lòng nhập sức chứa !",
+                number: "Vui lòng nhập số !",
+                min: "Sức chứa phải lớn hơn 0",
+            },
+            area: {
+                required: "Vui lòng nhập diện tích !",
+                number: "Vui lòng nhập số !",
+                min: "Diện tích phải lớn hơn 0",
+            },
+            latitude: {
+                required: "Vui lòng nhập kinh độ!",
+                pattern: "Kinh độ của bạn không hợp lệ!",
+            },
+            longitude: {
+                required: "Vui lòng nhập vĩ độ!",
+                pattern: "Vĩ độ của bạn không hợp lệ!",
+            },
         },
         errorPlacement: function (error, element) {
             if (element.attr("type") === "radio") {
@@ -178,7 +223,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#createNewDepartment").click(function () {
+    $("#updateInfo").click(function () {
         if (!$("#formSubmit").valid()) {
             return false;
         }
