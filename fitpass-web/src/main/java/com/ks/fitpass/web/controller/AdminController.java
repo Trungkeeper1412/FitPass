@@ -15,7 +15,12 @@ import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithB
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +37,8 @@ public class AdminController {
     private final CreditCardService creditCardService;
     private final DepartmentFeatureService departmentFeatureService;
     private final UserService userService;
+
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     //Index (Statistic Dashboard)
     @GetMapping("/index")
     public String getAdminIndex() {
@@ -40,9 +47,27 @@ public class AdminController {
 
     @GetMapping("/feature")
     public String getFeature(Model model) {
-        List<Feature> featureList = departmentFeatureService.getAllFeatureNoStatus();
-        model.addAttribute("featureList", featureList);
-        return "admin/admin-feature";
+        try {
+            List<Feature> featureList = departmentFeatureService.getAllFeatureNoStatus();
+            model.addAttribute("featureList", featureList);
+            return "admin/admin-feature";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @PostMapping("/feature/add")
@@ -56,8 +81,22 @@ public class AdminController {
                     .build();
             departmentFeatureService.insertFeature(feature);
             return "redirect:/admin/feature";
-        } catch (DataAccessException e) {
-            return "error/500";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
     }
 
@@ -93,9 +132,19 @@ public class AdminController {
 
     @GetMapping("/brand/list")
     public String getBrandList(Model model) {
-        List<BrandAdminList> brandList = brandService.getAllBrand();
-        model.addAttribute("brandList", brandList);
-        return "admin/admin-brand-list";
+        try {
+
+
+            List<BrandAdminList> brandList = brandService.getAllBrand();
+            model.addAttribute("brandList", brandList);
+            return "admin/admin-brand-list";
+
+        }catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
+
     }
 
     @PostMapping("/brand/number-percentage")
@@ -106,16 +155,22 @@ public class AdminController {
                 throw new DataAccessException("Update fail", null) {};
             }
         } catch (DataAccessException e) {
-            return "error/500";
+            return "error/data-access-error";
         }
         return "redirect:/admin/brand/list";
     }
 
     @GetMapping("/account/brand")
     public String getAccountBrandList(Model model) {
-        List<BrandAdminList> brandList = brandService.getAllBrand();
-        model.addAttribute("brandList", brandList);
-        return "admin/admin-account-brand";
+        try {
+            List<BrandAdminList> brandList = brandService.getAllBrand();
+            model.addAttribute("brandList", brandList);
+            return "admin/admin-account-brand";
+        }catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @GetMapping("/account/brand/add")
@@ -125,22 +180,37 @@ public class AdminController {
 
     @GetMapping("/account/user")
     public String getAccountUserList(Model model) {
-        List<UserDTO> userDTOList = userService.getAllAccountUser();
-        model.addAttribute("userDTOList", userDTOList);
-        return "admin/admin-account-user";
+        try {
+
+
+            List<UserDTO> userDTOList = userService.getAllAccountUser();
+            model.addAttribute("userDTOList", userDTOList);
+            return "admin/admin-account-user";
+        }
+        catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @GetMapping("/withdrawal")
     public String getWithdrawalList(Model model) {
-        List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListPending = requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý");
-        List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListAll = requestWithdrawHistoryService.getAllWithBrandName();
-        RequestHistoryStats requestHistoryStats = requestWithdrawHistoryService.getAllStats();
+        try {
+            List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListPending = requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý");
+            List<RequestWithdrawHistoryWithBrandName> requestWithdrawHistoryListAll = requestWithdrawHistoryService.getAllWithBrandName();
+            RequestHistoryStats requestHistoryStats = requestWithdrawHistoryService.getAllStats();
 
-        model.addAttribute("requestWithdrawHistoryListPending", requestWithdrawHistoryListPending);
-        model.addAttribute("requestWithdrawHistoryListAll", requestWithdrawHistoryListAll);
-        model.addAttribute("requestHistoryStats", requestHistoryStats);
+            model.addAttribute("requestWithdrawHistoryListPending", requestWithdrawHistoryListPending);
+            model.addAttribute("requestWithdrawHistoryListAll", requestWithdrawHistoryListAll);
+            model.addAttribute("requestHistoryStats", requestHistoryStats);
 
-        return "admin/admin-withdrawal-list";
+            return "admin/admin-withdrawal-list";
+        }catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @GetMapping("/withdrawal/detail/{requestHistoryId}")
@@ -171,7 +241,7 @@ public class AdminController {
                 throw new DataAccessException("Update fail", null) {};
             }
         } catch (DataAccessException e) {
-            return "error/500";
+            return "error/data-access-error";
         }
         return "redirect:/admin/withdrawal";
     }
