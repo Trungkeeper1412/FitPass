@@ -125,7 +125,21 @@ public class DepartmentController {
             departmentDetailsFeedback.setCurrentPage(page);
 
             return ResponseEntity.ok(departmentDetailsFeedback);
-        } catch (EmptyResultDataAccessException e) {
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
             return ResponseEntity.badRequest().build();
         }
     }
