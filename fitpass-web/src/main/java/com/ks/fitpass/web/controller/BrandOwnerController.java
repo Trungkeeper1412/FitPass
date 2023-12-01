@@ -558,7 +558,6 @@ public class BrandOwnerController {
         Brand b = brandService.getBrandDetail(user.getUserId());
         int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
 
-
         model.addAttribute("moneyPercent", moneyPercent);
         model.addAttribute("userBalance", userBalance);
         model.addAttribute("requestWithdrawHistoryListPending", requestWithdrawHistoryListPending);
@@ -596,8 +595,13 @@ public class BrandOwnerController {
 
 
     @PostMapping("/withdrawal/card/add-bank-card")
-    public ResponseEntity<Integer> addBankCard( @RequestBody CreditCard creditCard,
-                                               HttpSession session) {
+    public ResponseEntity<Integer> addBankCard(@Valid @RequestBody CreditCard creditCard,
+                                               HttpSession session, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // Handle validation errors
+            return ResponseEntity.badRequest().build();
+        }
+
         try {
             User user = (User) session.getAttribute("userInfo");
             creditCard.setUserId(user.getUserId());
@@ -628,7 +632,13 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/withdrawal/card/update-bank-card")
-    public ResponseEntity<Integer> updateBankCard(@RequestBody CreditCard creditCard) {
+    public ResponseEntity<Integer> updateBankCard(@Valid @RequestBody CreditCard creditCard,
+                                                  BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            // Handle validation errors
+            return ResponseEntity.badRequest().build();
+        }
         int rowAffect;
         try {
             if(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())) {

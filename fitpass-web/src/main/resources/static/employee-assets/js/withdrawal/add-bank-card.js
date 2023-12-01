@@ -28,6 +28,12 @@ function addBankCard() {
                 Swal.fire("Thất bại!", "Thẻ đã tồn tại.", "error");
                 return;
             }
+            if (response.errors) {
+                // Handle validation errors
+                handleValidationErrors(response.errors);
+                return;
+            }
+
                 Swal.fire({
                     title: 'Thành công!',
                     text: 'Thẻ đã được thêm thành công.',
@@ -63,8 +69,8 @@ function addBankCard() {
         },
         error: function (e) {
             Swal.fire({
-                title: 'Thất bại!',
-                text: 'Thêm thẻ thất bại.',
+                title: 'Thêm thẻ thất bại !',
+                text: 'Kiểm tra lại Họ tên chủ thẻ và số tài khoản !',
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });
@@ -143,6 +149,12 @@ function updateCard() {
                 return;
             }
 
+            if (response.errors) {
+                // Handle validation errors
+                handleValidationErrors(response.errors);
+                return;
+            }
+
             Swal.fire({
                 title: 'Thành công!',
                 text: 'Thẻ đã được cập nhật thành công.',
@@ -156,8 +168,8 @@ function updateCard() {
         },
         error: function (e) {
             Swal.fire({
-                title: 'Thất bại!',
-                text: 'Cập nhật thẻ thất bại.',
+                title: 'Thêm thẻ thất bại !',
+                text: 'Kiểm tra lại Họ tên chủ thẻ và số tài khoản !',
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });
@@ -213,6 +225,21 @@ function deleteCardFromDB(creditCardId) {
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });
+        }
+    });
+}
+
+// Function to handle validation errors
+function handleValidationErrors(errors) {
+    Object.keys(errors).forEach((field) => {
+        const error = errors[field];
+        const inputElement = document.getElementById(field);
+        if (inputElement) {
+            // Display error message near the corresponding input field
+            const errorContainer = document.createElement("div");
+            errorContainer.className = "text-danger";
+            errorContainer.innerText = error;
+            inputElement.parentNode.appendChild(errorContainer);
         }
     });
 }
