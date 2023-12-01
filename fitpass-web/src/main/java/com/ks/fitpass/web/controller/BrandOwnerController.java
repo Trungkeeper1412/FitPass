@@ -364,7 +364,7 @@ public class BrandOwnerController {
     public String createGymOwner(@Valid @ModelAttribute("gymOwner") GymOwnerCreateDTO gymOwnerCreateDTO,
                                  BindingResult bindingResult, HttpSession session) {
         if(userService.checkEmailExist(gymOwnerCreateDTO.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email already exist");
+            bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
         }
 
         if(bindingResult.hasErrors()) {
