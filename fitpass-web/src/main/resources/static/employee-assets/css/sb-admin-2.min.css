@@ -13564,6 +13564,7 @@ tr td i {
     object-fit: cover;
     margin-top: 180px;
     margin-left: 80px;
+    border: 1px solid darkgray;
 }
 
 #progressbar li.w-50::after {
