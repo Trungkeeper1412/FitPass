@@ -13795,6 +13795,14 @@ td, th {
     flex: 1; /* Take remaining space */
 }
 
+span.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
+}
+
 label.error {
     color: red;
     font-size: 14px;
