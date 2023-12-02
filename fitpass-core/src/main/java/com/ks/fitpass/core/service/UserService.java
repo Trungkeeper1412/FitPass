@@ -4,10 +4,11 @@ import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.entity.UserDetail;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     List<UserDTO> getAllAccountUser();
 
