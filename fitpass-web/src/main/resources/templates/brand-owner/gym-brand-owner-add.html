@@ -41,33 +41,33 @@
                                                name="department-img" accept="image/*"
                                                onchange="uploadImage(this);">
                                         <input th:field="*{imageUrl}" type="hidden" id="avatarImg" name="imageUrl">
-                                        <span th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}">photoUrl Error</span>
+                                        <span th:if="${#fields.hasErrors('imageUrl')}" class="error" th:errors="*{imageUrl}"></span>
                                     </div>
                                     <div class="col-md-5 mb-4">
                                         <div class="mb-4">
                                             <label for="first-name" class="form-label fw-bold">Họ :</label>
                                             <input th:field="*{firstName}" type="text" class="form-control" id="first-name"
                                                    name="firstName" placeholder="Nhập họ">
-                                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('firstName')}" class="error" th:errors="*{firstName}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="email" class="form-label fw-bold">Email :</label>
                                             <input th:field="*{email}" type="text" class="form-control" id="email" name="email"
                                                    placeholder="Nhập gmail">
-                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="address" class="form-label fw-bold">Địa chỉ :</label>
                                             <input th:field="*{address}" type="text" class="form-control" id="address" name="address"
                                                    placeholder="Nhập địa chỉ">
-                                            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('address')}" class="error" th:errors="*{address}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="date-of-birth" class="form-label fw-bold">Ngày Sinh
                                                 :</label>
                                             <input th:field="*{dateOfBirth}" type="date" class="form-control" id="date-of-birth"
                                                    name="dateOfBirth">
-                                            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('dateOfBirth')}" class="error" th:errors="*{dateOfBirth}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="gender" class="form-label fw-bold">Giới Tính :</label>
@@ -77,7 +77,7 @@
                                                 <option value="Female">Nữ</option>
                                                 <option value="Khác">Khác</option>
                                             </select>
-                                            <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('gender')}" class="error" th:errors="*{gender}"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-4">
@@ -85,32 +85,32 @@
                                             <label for="last-name" class="form-label fw-bold">Tên :</label>
                                             <input th:field="*{lastName}" type="text" class="form-control" id="last-name"
                                                    name="lastName" placeholder="Nhập tên">
-                                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('lastName')}" class="error" th:errors="*{lastName}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="username" class="form-label fw-bold">Tên đăng nhập
                                                 :</label>
                                             <input th:field="*{username}" type="text" class="form-control" id="username" name="username"
                                                    placeholder="Nhập tên người dùng">
-                                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('username')}" class="error" th:errors="*{username}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="phone" class="form-label fw-bold">Số Điện Thoại
                                                 :</label>
                                             <input th:field="*{phone}" type="number" class="form-control" id="phone" name="phone"
                                                    placeholder="Nhập số điện thoại">
-                                            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('phone')}" class="error" th:errors="*{phone}"></span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước
                                                 :</label>
                                             <input th:field="*{idCard}" type="text" class="form-control" id="id-card" name="idCard"
                                                    placeholder="Nhập số căn cước">
-                                            <span th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('idCard')}" class="error" th:errors="*{idCard}"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input id="addGymownerBtn" class="btn btn-submit" type="submit" value="Thêm chủ cơ sở">
+                                        <input id="addGymOwner" class="btn btn-submit" type="submit" value="Thêm chủ cơ sở">
                                     </div>
                                 </div>
                             </form>
@@ -174,22 +174,54 @@
         }
     }
 
-    $("#addGymownerBtn").click(function (event) {
-        event.preventDefault()
-        Swal.fire({
-            title: 'Bạn có muốn thêm chủ deparment mới không?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Có',
-            cancelButtonText: 'Không'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $("#formSubmit").submit();
-            } else {
+    $("#addGymOwner").click(function (e) {
+        e.preventDefault();
 
-            }
-        });
-    })
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn thêm chủ cơ sở mới ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Vui lòng đợi...',
+                        icon: 'info',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            setTimeout(() => {
+                                $("#formSubmit").submit();
+                                Swal.close();
+                            }, 2000);
+                        },
+                        didClose: () => {
+                            Swal.fire({
+                                title: 'Thành công!',
+                                text: 'Chủ cơ sở mới đã được thêm thành công.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Chủ cơ sở mới chưa được thêm.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
 </script>
 
 </body>

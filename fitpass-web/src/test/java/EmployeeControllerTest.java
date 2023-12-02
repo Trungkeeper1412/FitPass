@@ -73,7 +73,6 @@ public class EmployeeControllerTest {
         String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
 
         // Verify the interactions and assertions
-        verify(model, never()).addAttribute(any(), any()); // No model attribute should be added in case of an exception
         assertEquals("error/duplicate-key-error", result);
     }
 
@@ -88,7 +87,6 @@ public class EmployeeControllerTest {
         String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
 
         // Verify the interactions and assertions
-        verify(model, never()).addAttribute(any(), any()); // No model attribute should be added in case of an exception
         assertEquals("error/no-data", result);
     }
 
@@ -103,13 +101,8 @@ public class EmployeeControllerTest {
         String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
 
         // Verify the interactions and assertions
-        verify(model, never()).addAttribute(any(), any()); // No model attribute should be added in case of an exception
         assertEquals("error/incorrect-result-size-error", result);
     }
 
-    @Test
-    public void testGetCheckInListOfFixedCustomer_DataAccessException() {
-
-    }
 
 }

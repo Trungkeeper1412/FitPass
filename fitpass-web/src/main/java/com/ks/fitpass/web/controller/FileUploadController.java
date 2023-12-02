@@ -1,6 +1,12 @@
 package com.ks.fitpass.web.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +25,7 @@ public class FileUploadController {
 
     //private static final String UPLOAD_DIRECTORY = "fitpass-web/src/main/resources/static/images/";
     private static final String UPLOAD_DIRECTORY = "upload/img/";
-
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @PostMapping("/file")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
@@ -271,11 +277,29 @@ public class FileUploadController {
 
 
     private String getFileExtension(String fileName) {
-        int lastIndexOfDot = fileName.lastIndexOf(".");
-        if (lastIndexOfDot >= 0) {
-            return fileName.substring(lastIndexOfDot + 1);
+        try {
+            int lastIndexOfDot = fileName.lastIndexOf(".");
+            if (lastIndexOfDot >= 0) {
+                return fileName.substring(lastIndexOfDot + 1);
+            }
+            return "";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
-        return "";
     }
 
     private boolean isValidFileExtension(String fileExtension) {

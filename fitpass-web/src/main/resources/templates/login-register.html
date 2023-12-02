@@ -44,13 +44,15 @@
                         <label for="wp-comment-cookies-consent">Remember me
                         </label>
                     </div>
-                    <a class="forgot-pw" href="forgot-pw.html">Quên mật khẩu?</a>
+                    <a class="forgot-pw" th:href="@{/forgot-pw}">Quên mật khẩu?</a>
                 </div>
             </div>
             <button class="login">Đăng nhập</button>
             </form>
-            <div th:if="${param.logout}" id="toast-info">Đăng xuất thành công.</div>
-            <div th:if="${param.error}" id="toast-error">Email hoặc mật khẩu không chính xác.</div>
+            <div th:if="${param.logout}" id="toast-info" class="alert alert-success">Đăng xuất thành công.</div>
+            <div th:if="${param.error}" id="toast-error" class="alert alert-danger" role="alert">
+                Email hoặc mật khẩu không chính xác.
+            </div>
         </div>
 
 
@@ -58,23 +60,29 @@
             <h1 class="fw-bold">ĐĂNG KÝ</h1>
             <div class="line"></div>
             <div class="input-fields">
-                <div class="input-field">
-                    <div class="input-title">Email</div>
-                    <input type="number" name="email" value="">
+                <div class="name" style="display: flex;">
+                    <div class="input-field fname">
+                        <div class="input-title">Họ và tên đệm</div>
+                        <input type="text" name="fist-name" value="">
+                    </div>
+                    <div class="input-field lname">
+                        <div class="input-title">Tên</div>
+                        <input type="text" name="last-name" value="">
+                    </div>
+                </div>
+                <div class="name" style="display: flex;">
+                    <div class="input-field fname">
+                        <div class="input-title">Gmail</div>
+                        <input type="text" name="email" value="">
+                    </div>
+                    <div class="input-field lname">
+                        <div class="input-title">Số điện thoại</div>
+                        <input type="number" name="phone" value="">
+                    </div>
                 </div>
                 <div class="input-field">
                     <div class="input-title">Tên đăng nhâp</div>
                     <input type="number" name="username" value="">
-                </div>
-                <div class="name" style="display: flex;">
-                    <div class="input-field fname">
-                        <div class="input-title">Họ và tên đệm</div>
-                        <input type="number" name="fist-name" value="">
-                    </div>
-                    <div class="input-field lname">
-                        <div class="input-title">Tên</div>
-                        <input type="number" name="last-name" value="">
-                    </div>
                 </div>
                 <div class="input-field">
                     <div class="input-title">Mật khẩu</div>
@@ -112,21 +120,23 @@
         </div>
     </div>
 </div>
+
 <script th:if="${param.logout}">
     const toastInfo = document.getElementById("toast-info");
-    toastInfo.className = "show success";
+    toastInfo.classList.add("show", "alert", "alert-success");
     setTimeout(function () {
-        toastInfo.className = toastInfo.className.replace("show", "");
+        toastInfo.classList.remove("show");
     }, 2800);
 </script>
 
 <script th:if="${param.error}">
     const toastError = document.getElementById("toast-error");
-    toastError.className = "show danger";
+    toastError.classList.add("show");
     setTimeout(function () {
-        toastError.className = toastError.className.replace("show", "");
+        toastError.classList.remove("show");
     }, 2800);
 </script>
+
 <script>
     const registerTab = document.getElementById("register-tab");
     // loginTab.style.display = "block";

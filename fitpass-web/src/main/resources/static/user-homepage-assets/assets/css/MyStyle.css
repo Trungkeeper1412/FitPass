@@ -2849,7 +2849,8 @@ a:link {
 
 .add-money-btn {
     background-color: #000;
-    padding: 11px;
+    width: 100%;
+    padding: 9px;
     cursor: pointer;
     color: white;
     font-weight: 600;
@@ -5869,7 +5870,7 @@ body {
 }
 
 .login-register-body .login {
-    margin-top: 50px;
+    margin: 30px 0;
     background-color: black;
     color: rgb(255, 196, 0);
     font-weight: 600;
@@ -5966,4 +5967,96 @@ body {
 .btn-upload-img:hover {
     border: 1px solid #d1d3e2;
     background-color: #dde0e3;
+}
+
+/* CSS FOR FORGOT PW PAGE */
+.forgot-pw-body{
+    background-color: rgb(238, 238, 238);
+}
+.forgot-pw-body header{
+    position: relative;
+}
+.forgot-pw-body .forgot-pw-title{
+    color: white;
+    background-color: none;
+}
+.forgot-pw-body .box{
+    margin: auto;
+    /* width:  50%; */
+    height: fit-content;
+    padding-bottom: 60px;
+    background-color: white;
+    box-shadow:0 0 8px 0 rgb(193, 193, 193);
+}
+.forgot-pw-content{
+    padding: 130px 0;
+}
+.forgot-pw-content .head{
+    width: 100%;
+    height: 60px;
+    /* background-color: rgb(237, 237, 237); */
+}
+.forgot-pw-content .head .head-title{
+    font-weight: 500;
+    font-size: 20px;
+    margin: auto;
+}
+
+.forgot-pw-content .head{
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+}
+.forgot-pw-content .head .back-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.forgot-pw-content input{
+    width: 65%;
+    border:2px solid #e1e1e1;
+    outline:none;
+    padding:6px;
+    margin-top: 30px;
+    box-sizing:border-box;
+    transition:.3s;
+}
+.forgot-pw-content input:focus{
+    border-color:rgb(223, 223, 223);
+    box-shadow:0 0 8px 0 rgb(193, 193, 193);
+}
+.forgot-pw-content .next-btn{
+    width: 65%;
+    margin-top: 25px;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 7px;
+    text-align: center;
+    background-color: rgb(255, 196, 0);
+}
+.noti-text{
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+.forgot-pw-content .gmail-icon img{
+    width: 120px;
+}
+
+.forgot-pw-content .field-icon{
+    float: right;
+    margin-left: 250px;
+    margin-top: -32px;
+    margin-right: 8px;
+    position: absolute;
+    z-index: 2;
+}
+.forgot-pw-content .new-pw-form{
+    color: rgb(192, 192, 192);
+    padding-left: 0;
+    font-size: 15px;
+    width: 65%;
+    margin: auto;
 }

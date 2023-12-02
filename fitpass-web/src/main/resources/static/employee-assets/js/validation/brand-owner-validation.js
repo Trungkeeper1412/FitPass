@@ -49,6 +49,17 @@ $.validator.addMethod("validateIdCard", function(value, element) {
     return true; // Các mã tỉnh và số tiếp theo đều hợp lệ
 }, "Số căn cước công dân không đúng định dạng !");
 
+$.validator.addMethod("correctNumber", function(value, element) {
+    var correctNumber;
+    if (value.startsWith("1900") || value.startsWith("1800")) {
+        correctNumber = /^(1800|1900)\d{4}$/;
+    } else {
+        correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
+    }
+    return this.optional(element) || correctNumber.test(value);
+}, "Đầu số không đúng định dạng !");
+
+
 $(document).ready(function () {
     $("#formSubmit").validate({
         rules: {
@@ -140,9 +151,9 @@ $(document).ready(function () {
             },
             phone: {
                 required: true,
-                minlength: 10,
+                minlength: 8,
                 maxlength: 11,
-                pattern: /^(0|84)(9|3|7|8|5)\d{8}$/
+                correctNumber: true
             },
             idCard: {
                 required: true,
@@ -246,9 +257,9 @@ $(document).ready(function () {
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
                 number: "Vui lòng nhập số điện thoại !",
-                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                minlength: 'Đầu số phải có ít nhất 8 số !',
                 maxlength: 'Số điện thoại có tối đa 11 số !',
-                pattern: 'Số điện thoại không đúng định dạng !'
+                correctNumber: "Đầu số không đúng định dạng !",
             },
             idCard: {
                 required: "Vui lòng nhập số căn cước công dân !",

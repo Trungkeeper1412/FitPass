@@ -35,38 +35,38 @@
                                     <div class="col-md-6 mb-4">
                                         <label for="packageName" class="form-label fw-bold">Tên gói tập :</label>
                                         <input name="gymPlanName" th:field="*{gymPlanName}" type="text" class="form-control" id="packageName" placeholder="Nhập tên gói tập">
-                                        <span th:if="${#fields.hasErrors('gymPlanName')}" th:errors="*{gymPlanName}">Gym Plan Name Error</span>
+                                        <span th:if="${#fields.hasErrors('gymPlanName')}" class="error" th:errors="*{gymPlanName}">Gym Plan Name Error</span>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <label for="credits" class="form-label fw-bold">Số credits :</label>
                                         <input name="price" th:field="*{price}" type="number" class="form-control" id="credits" placeholder="Nhập số credits">
-                                        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+                                        <span th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}">Price Error</span>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <label for="activationBefore" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
                                                title="Đây là mô tả của thời gian trước khi kích hoạt">Thời hạn trước khi kích hoạt:</label>
                                         <input name="planBeforeActive" th:field="*{planBeforeActive}" type="number" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
-                                        <span th:if="${#fields.hasErrors('planBeforeActive')}" th:errors="*{planBeforeActive}">Plan Before Active Error</span>
+                                        <span th:if="${#fields.hasErrors('planBeforeActive')}" class="error" th:errors="*{planBeforeActive}">Plan Before Active Error</span>
                                     </div>
 
                                     <div class="col-md-6 mb-4">
                                         <label for="activationAfter" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
                                                title="Đây là mô tả của thời gian sau khi kích hoạt">Thời hạn sau khi kích hoạt:</label>
                                         <input name="planAfterActive" th:field="*{planAfterActive}" type="number" class="form-control" id="activationAfter" placeholder="Nhập thời hạn sau khi kích hoạt">
-                                        <span th:if="${#fields.hasErrors('planAfterActive')}" th:errors="*{planAfterActive}">Plan After Active Error</span>
+                                        <span th:if="${#fields.hasErrors('planAfterActive')}" class="error" th:errors="*{planAfterActive}">Plan After Active Error</span>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <label for="packageDuration" class="form-label fw-bold">Thời lượng gói tập:</label>
                                         <input name="duration" th:field="*{duration}" type="number" class="form-control" id="packageDuration" placeholder="Nhập thời lượng gói tập">
-                                        <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration Error</span>
+                                        <span th:if="${#fields.hasErrors('duration')}" class="error" th:errors="*{duration}">Duration Error</span>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="packageDescription" class="form-label fw-bold">Mô tả gói tập:</label>
                                         <textarea name="description" th:field="*{description}" class="form-control" id="packageDescription" rows="4" placeholder="Nhập mô tả gói tập"></textarea>
-                                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
+                                        <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">Description Error</span>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Thêm gói tập">
+                                        <input class="btn btn-submit" type="submit" value="Thêm gói tập" id="addFixedPlan">
                                     </div>
                                 </div>
                             </form>
@@ -97,6 +97,43 @@
     <th:block th:replace="brand-owner/common/script"></th:block>
 
 </div>
+
+<script>
+
+    $("#addFixedPlan").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn thêm gói cố định mới ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Gói tập mới đã được thêm thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Gói tập mới chưa được thêm.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
+</script>
 
 </body>
 

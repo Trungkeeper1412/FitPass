@@ -13564,6 +13564,7 @@ tr td i {
     object-fit: cover;
     margin-top: 180px;
     margin-left: 80px;
+    border: 1px solid darkgray;
 }
 
 #progressbar li.w-50::after {
@@ -13792,6 +13793,14 @@ td, th {
 
 .modal-title-container {
     flex: 1; /* Take remaining space */
+}
+
+span.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
 }
 
 label.error {

@@ -102,7 +102,6 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="input-title">Giới Tính :</div>
                                         <select th:field="*{gender}" class="form-select" id="gender" name="gender">
-                                            <option value="">Chọn giới tính</option>
                                             <option value="Male"  th:selected="${userUpdateDTO.getGender().equals('Male')}">Nam</option>
                                             <option value="Female" th:selected="${userUpdateDTO.getGender().equals('Female')}">Nữ</option>
                                             <option value="Khác">Khác</option>

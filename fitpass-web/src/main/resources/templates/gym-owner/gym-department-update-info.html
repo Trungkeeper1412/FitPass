@@ -28,62 +28,61 @@
                         <h2 class="fw-bold text-primary">Cập nhật thông tin</h2>
                     </div>
                     <div class="card-body">
-                        <form action="/gym-owner/department/info" method="post"
+                        <form id="formSubmit" action="/gym-owner/department/info" method="post"
                               th:object="${updateGymOwnerDepartmentInfo}">
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <input type="hidden" th:field="*{departmentId}"
                                                    th:value="${updateGymOwnerDepartmentInfo.departmentId}">
                                             <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                                 :</label>
                                             <input th:field="*{departmentName}" type="text" class="form-control"
-                                                   id="name-brand"
-                                                   name="name-brand"
+                                                   id="name-brand" name="name-brand"
                                                    th:value="${updateGymOwnerDepartmentInfo.getDepartmentName()}"
                                                    readonly>
                                             <span th:if="${#fields.hasErrors('departmentName')}"
-                                                  th:errors="*{departmentName}">Error</span>
+                                                  class="error" th:errors="*{departmentName}">Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="phone" class="form-label fw-bold">Số điện thoại
                                                 :</label>
-                                            <input th:field="*{departmentContactNumber}" type="text"
-                                                   class="form-control" id="phone" name="phone"
+                                            <input th:field="*{departmentContactNumber}" type="number"
+                                                   class="form-control" id="phone" name="phoneDepartment"
                                                    placeholder="Nhập số điện thoại"
                                                    th:value="${updateGymOwnerDepartmentInfo.getDepartmentContactNumber()}">
                                             <span th:if="${#fields.hasErrors('departmentContactNumber')}"
-                                                  th:errors="*{departmentContactNumber}">Error</span>
+                                                  class="error" th:errors="*{departmentContactNumber}">Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="address" class="form-label fw-bold">Địa chỉ
                                                 :</label>
                                             <input th:field="*{departmentAddress}" type="text" class="form-control"
-                                                   placeholder="Địa chỉ"
+                                                   placeholder="Địa chỉ" name="address"
                                                    th:value="${updateGymOwnerDepartmentInfo.getDepartmentAddress()}">
                                             <span th:if="${#fields.hasErrors('departmentAddress')}"
-                                                  th:errors="*{departmentAddress}">Error</span>
+                                                  class="error" th:errors="*{departmentAddress}">Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="capacity" class="form-label fw-bold">Sức chứa (Người):</label>
                                             <input th:field="*{capacity}" type="number" class="form-control"
                                                    id="capacity"
                                                    name="capacity"
                                                    th:value="${updateGymOwnerDepartmentInfo.getCapacity()}">
                                             <span th:if="${#fields.hasErrors('capacity')}"
-                                                  th:errors="*{capacity}">Error</span>
+                                                  class="error" th:errors="*{capacity}">Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="area" class="form-label fw-bold">Diện tích (m2) :</label>
-                                            <input th:field="*{area}" type="text" class="form-control" id="area"
+                                            <input th:field="*{area}" type="number" class="form-control" id="area"
                                                    name="area"
                                                    th:value="${updateGymOwnerDepartmentInfo.getArea()}">
-                                            <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Error</span>
+                                            <span th:if="${#fields.hasErrors('area')}" class="error" th:errors="*{area}">Error</span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="provinceDropdown" class="form-label fw-bold">Chọn tỉnh/thành
                                                 phố:</label>
                                             <select th:field="*{city}" class="form-select" id="provinceDropdown"
@@ -146,12 +145,12 @@
                                                 <option value="Vĩnh Phúc">Vĩnh Phúc</option>
                                                 <option value="Yên Bái">Yên Bái</option>
                                             </select>
-                                            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Error</span>
+                                            <span th:if="${#fields.hasErrors('city')}" class="error" th:errors="*{city}">Error</span>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <label class="fw-bold" for="openHours">Giờ hoạt động:</label><br>
-                                        <div class="mb-3 d-flex align-items-center align-content-center">
+                                        <div class="mb-4 d-flex align-items-center align-content-center">
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectOpenHoursModal">
                                                 Chọn giờ
                                             </button>
@@ -159,7 +158,7 @@
                                                 <label style="margin: 0" id="resultText"></label>
                                             </div>
                                         </div>
-                                        <span th:if="${#fields.hasErrors('validSchedule')}" th:errors="*{validSchedule}" style="color: red; font-size: 12px;">Error</span>
+                                        <span th:if="${#fields.hasErrors('validSchedule')}" th:errors="*{validSchedule}" style="color: red; font-size: 14px;">Error</span>
                                         <!-- Modal -->
                                         <div class="modal fade" id="selectOpenHoursModal" tabindex="-1" role="dialog"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -222,11 +221,11 @@
                                               th:text="${updateGymOwnerDepartmentInfo.getDepartmentDescription()}">
                                     </textarea>
                                     <span th:if="${#fields.hasErrors('departmentDescription')}"
-                                          th:errors="*{departmentDescription}">Error</span>
+                                          class="error" th:errors="*{departmentDescription}">Error</span>
                                 </div>
                             </div>
                             <div class="pt-3 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                <button type="submit" class="btn btn-primary" id="updateInfo">Lưu thay đổi</button>
                             </div>
                         </form>
                     </div>
@@ -257,6 +256,55 @@
 <th:block th:replace="gym-owner/common/script"></th:block>
 
 <script>
+
+    $("#updateInfo").click(function (e) {
+        e.preventDefault();
+
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin cơ sở',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Vui lòng đợi...',
+                        icon: 'info',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            setTimeout(() => {
+                                $("#formSubmit").submit();
+                                Swal.close();
+                            }, 2000);
+                        },
+                        didClose: () => {
+                            Swal.fire({
+                                title: 'Thành công!',
+                                text: 'Cập nhật thông tin thành công.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Cập nhật thông tin thất bại.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
     function convertTimeStringToTimeValue(timeString) {
         // Tạo đối tượng Date từ chuỗi thời gian
         const timeValue = new Date("January 1, 2023 " + timeString);
