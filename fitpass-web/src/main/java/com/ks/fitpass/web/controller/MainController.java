@@ -36,8 +36,8 @@ public class MainController {
         return "show-info";
     }
 
-    @GetMapping("/login-register")
-    public String loginAndRegister() {
-        return "login-register";
+    @GetMapping("/forgot-pw")
+    public String forgotPw() {
+        return "forgot-password";
     }
 }
