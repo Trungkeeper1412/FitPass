@@ -22,7 +22,14 @@ function connect() {
             showNotificationMessage(message);
         });
         stompClient.subscribe('/user/specific/private-response', function (message) {
-            showNotificationMessage(message);
+            if (message.body) {
+                showNotificationMessage(message);
+            } else {
+                alert("Received empty message");
+            }
+
+        }, function (error){
+            console.error("Error occurred while subscribing:", error);
         });
 
         stompClient.subscribe('/all/global-notifications', function (message) {

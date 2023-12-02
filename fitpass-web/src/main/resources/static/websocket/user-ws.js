@@ -4,7 +4,7 @@ let globalCurrentPage = 1;
 let defaultPageSize = 4;
 
 // ******************** Create WS client & methods ************************ //
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
     connect();
     (async () => {
         try {
@@ -29,8 +29,14 @@ function connect() {
             insertWebSocketNavbarNotification(message);
         });
         stompClient.subscribe('/user/specific/private-messages', function (message) {
-            insertWebSocketNotification(message);
-            insertWebSocketNavbarNotification(message);
+            if (message.body) {
+                insertWebSocketNotification(message);
+                insertWebSocketNavbarNotification(message);
+            } else {
+                alert("Received empty message");
+            }
+        }, function (error) {
+            console.error("Error occurred while subscribing:", error);
         });
 
         stompClient.subscribe('/all/global-notifications', function () {
@@ -57,6 +63,21 @@ async function getTotalPages() {
     } catch (error) {
         console.error('Error fetching total pages:', error);
         throw error; // Re-throw the error to be caught by the caller if needed
+    }
+}
+
+async function getTotalUnseenNotificationNumber() {
+    try {
+        const response = await fetch(`/notification/user/get-total-unseen`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching total notifications number:', error);
+        throw error;
     }
 }
 
@@ -111,7 +132,6 @@ function sendSeenNotification(id) {
 
 function insertWebSocketNotification(message) {
     let notification;
-
     try {
         notification = JSON.parse(message.body);
         if (notification.messageType != null) {
@@ -371,25 +391,42 @@ function loadNotificationsFromDB(page, size) {
 }
 
 function renderPage(notifications) {
-    $(".my-notifications").html('');
-    notifications.forEach(notification => {
-        if (notification.messageType != null) {
-            switch (notification.messageType) {
-                // append = from top to bottom, for showing a list
-                case "Xác nhận check in":
-                    insertCheckInNotificationDiv(notification, "append");
-                    break;
-                case "Xác nhận check out":
-                    insertCheckOutNotificationDiv(notification, "append");
-                    break;
-                default:
-                    console.log("Unknown message type");
-                    break;
-            }
-        } else {
-            console.log("Null message type");
+    const pagination = document.querySelector("#notification-list .pagination");
+
+    if(notifications.length === 0 ) {
+        $(".my-notifications").html('' +
+            '<div class="empty-notification">\n' +
+            '            <img src="/user-homepage-assets/assets/img/no-notification.png" alt="Image">\n' +
+            '                <h2>Không có thông báo nào</h2>\n' +
+            '                <p>Hãy quay lại sau nhé</p>\n' +
+            '        </div>');
+        if (pagination) {
+            pagination.style.boxShadow = "none";
         }
-    })
+    } else{
+        $(".my-notifications").html('');
+        if (pagination) {
+            pagination.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.2)";
+        }
+        notifications.forEach(notification => {
+            if (notification.messageType != null) {
+                switch (notification.messageType) {
+                    // append = from top to bottom, for showing a list
+                    case "Xác nhận check in":
+                        insertCheckInNotificationDiv(notification, "append");
+                        break;
+                    case "Xác nhận check out":
+                        insertCheckOutNotificationDiv(notification, "append");
+                        break;
+                    default:
+                        console.log("Unknown message type");
+                        break;
+                }
+            } else {
+                console.log("Null message type");
+            }
+        })
+    }
 }
 
 // ******************** Function to handle check in notification ************************ //
@@ -468,7 +505,7 @@ function handleCheckInNotificationClick(notification) {
         sendSeenNotification(notification.notificationId);
         $.ajax({
             type: "GET",
-            url: "/employee/flexible/checkin",
+            url: "/confirm/checkin",
             data: {
                 id: notification.orderDetailId,
                 uis: notification.userIdReceive, //id của người dùng để xác nhận check in vào db
@@ -493,7 +530,7 @@ function handleCheckInNotificationClick(notification) {
         sendSeenNotification(notification.notificationId);
         $.ajax({
             type: "GET",
-            url: "/employee/flexible/checkin",
+            url: "/confirm/checkin",
             data: {
                 id: notification.orderDetailId,
                 uis: notification.userIdReceive,
@@ -588,9 +625,11 @@ function handleCheckOutNotificationClick(notification) {
                 <p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${orderDetailConfirmCheckOut.creditAfterPay} credit</span></p>
                 `,
                     showCancelButton: true,
-                    confirmButtonText: 'Nạp thêm credit',
+                    confirmButtonText: '<a href="profile/deposit/">Nạp thêm credit</a>',
                     cancelButtonText: 'No',
                     reverseButtons: true,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false
                 })
             } else {
                 Swal.fire({
@@ -609,6 +648,8 @@ function handleCheckOutNotificationClick(notification) {
                     confirmButtonText: 'Yes',
                     cancelButtonText: 'No',
                     reverseButtons: true,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false
                 }).then((result) => {
                     // Handle user's choice based on result.isConfirmed
                     if (result.isConfirmed) {
@@ -648,7 +689,7 @@ function handleCheckOutNotificationClick(notification) {
         };
         $.ajax({
             type: "POST",
-            url: `/employee/flexible/checkout`,
+            url: `/confirm/checkout`,
             headers: {
                 "Content-Type": "application/json",
             },
@@ -688,7 +729,7 @@ function handleCheckOutNotificationClick(notification) {
         };
         $.ajax({
             type: "POST",
-            url: `/employee/flexible/checkout`,
+            url: `/confirm/checkout`,
             headers: {
                 "Content-Type": "application/json",
             },
