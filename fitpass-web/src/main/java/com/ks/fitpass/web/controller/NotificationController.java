@@ -75,8 +75,11 @@ public class NotificationController {
     @GetMapping("/user/get-total-unseen")
     public ResponseEntity<Integer> getTotalUnseenNumberForUser(HttpSession session){
         User user = (User) session.getAttribute("userInfo");
-        int totalUnseenNotifications = notificationService.getNumberOfUnseenNotification(user.getUserId());
-        return ResponseEntity.ok(totalUnseenNotifications);
+        if(user != null){
+            int totalUnseenNotifications = notificationService.getNumberOfUnseenNotification(user.getUserId());
+            return ResponseEntity.ok(totalUnseenNotifications);
+        }
+        return ResponseEntity.ok(200);
     }
 
     @GetMapping("/user/newest-unseen")
