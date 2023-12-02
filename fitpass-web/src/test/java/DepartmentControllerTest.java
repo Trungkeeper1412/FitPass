@@ -54,7 +54,7 @@ class DepartmentControllerTest {
     }
 
     @Test
-    void testGetDepartment() {
+    void testGetDepartmentSuccess() {
         // Mock data for successful execution
         Department mockDepartment = new Department();
         when(departmentService.getOne(anyInt())).thenReturn(mockDepartment);
@@ -92,30 +92,33 @@ class DepartmentControllerTest {
 
     @Test
     void testGetDepartmentDuplicateKeyException() {
-        // Mock DuplicateKeyException
+        // Arrange
         when(departmentService.getOne(anyInt())).thenThrow(DuplicateKeyException.class);
-
+        // Act
         String viewName = departmentController.getDepartment(1, model, 1, 7);
+        //Assert
         assertEquals("error/duplicate-key-error", viewName);
 
     }
 
     @Test
     void testGetDepartmentEmptyResultDataAccessException() {
-        // Mock EmptyResultDataAccessException
+        //Assert
         when(departmentService.getOne(anyInt())).thenThrow(EmptyResultDataAccessException.class);
-
+        // Act
         String viewName = departmentController.getDepartment(1, model, 1, 7);
+        //Assert
         assertEquals("error/no-data", viewName);
-        // Add more assertions if needed
+
     }
 
     @Test
     void testGetDepartmentIncorrectResultSizeDataAccessException() {
-        // Mock IncorrectResultSizeDataAccessException
+        // Arrange
         when(departmentService.getOne(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
-
+        // Act
         String viewName = departmentController.getDepartment(1, model, 1, 7);
+        //Assert
         assertEquals("error/incorrect-result-size-error", viewName);
 
     }
