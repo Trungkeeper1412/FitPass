@@ -537,6 +537,79 @@ public class AdminControllerTest {
         verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
     }
 
+    @Test
+    public void testGetWithdrawalNumberPercentageSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        int mockNumberPercentage = 50;
+        when(requestWithdrawHistoryService.getNumberPercentage(requestHistoryId)).thenReturn(mockNumberPercentage);
+
+        // Act
+        ResponseEntity<Integer> result = adminController.getWithdrawalNumberPercentage(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(mockNumberPercentage, result.getBody());
+        verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
+    }
+
+    @Test
+    public void testGetWithdrawalNumberPercentageDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.getNumberPercentage(requestHistoryId)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<Integer> result = adminController.getWithdrawalNumberPercentage(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        Assertions.assertNull(result.getBody()); // Ensure the body is null for a bad request
+        verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
+    }
+    @Test
+    public void testUpdateWithdrawalStatusSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+
+        // Assert
+        assertEquals("redirect:/admin/withdrawal", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+    }
+
+    @Test
+    public void testUpdateWithdrawalStatusUpdateFail() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+    }
+
+    @Test
+    public void testUpdateWithdrawalStatusDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+    }
+
+
 }
 
 
