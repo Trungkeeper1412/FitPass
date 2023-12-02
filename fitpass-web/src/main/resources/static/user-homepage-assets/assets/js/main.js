@@ -6,16 +6,7 @@
  * License: https://bootstrapmade.com/license/
  */
 document.addEventListener('DOMContentLoaded', function () {
-    (async () => {
-        try {
-            updateQuantityCart();
-            notificationCount = await getTotalUnseenNotificationNumber();
-            let notificationNum = document.querySelector(".notification-badge")
-            notificationNum.textContent = notificationCount;
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    })();
+    updateQuantityCart()
 });
 
 function updateQuantityCart() {
@@ -40,20 +31,7 @@ function updateQuantityCart() {
             console.error("Error:", error);
         });
 }
-async function getTotalUnseenNotificationNumber() {
-    try {
-        const response = await fetch(`/notification/user/get-total-unseen`);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching total notifications number:', error);
-        throw error;
-    }
-}
 
 (function () {
     "use strict";
