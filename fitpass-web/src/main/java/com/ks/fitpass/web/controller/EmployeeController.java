@@ -35,7 +35,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -54,15 +53,13 @@ public class EmployeeController {
     private final BrandService brandService;
     private final DepartmentService departmentService;
     private final TransactionService transactionService;
-    private final UserRepository userRepository;
     private final UserService userService;
 
 
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
                               NotificationService notificationService, CheckInHistoryService checkInHistoryService,
                               WalletService walletService, WebSocketService webSocketService, BrandService brandService,
-                              DepartmentService departmentService, TransactionService transactionService,
-                              UserRepository userRepository, UserService userService) {
+                              DepartmentService departmentService, TransactionService transactionService, UserService userService) {
         this.employeeService = employeeService;
         this.orderDetailService = orderDetailService;
         this.notificationService = notificationService;
@@ -72,58 +69,57 @@ public class EmployeeController {
         this.brandService = brandService;
         this.departmentService = departmentService;
         this.transactionService = transactionService;
-        this.userRepository = userRepository;
         this.userService = userService;
     }
 
     @GetMapping("/check-in/fixed")
-public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
-    try {
-        List<CheckInFixedDTO> checkInFixedDTOList = employeeService.getListNeedCheckInFixedByDepartmentId(departmentId);
-        List<CheckedInFixedDTO> checkedInDTOList = employeeService.getListCheckedInFixedByDepartmentId(departmentId);
-        model.addAttribute("checkInList", checkInFixedDTOList);
-        model.addAttribute("checkedInList", checkedInDTOList);
-        model.addAttribute("departmentId", departmentId);
-        return "employee/employee-check-in-fixed";
-    } catch (DuplicateKeyException ex) {
-        // Handle duplicate key violation
-        return "error/duplicate-key-error";
-    } catch (EmptyResultDataAccessException ex) {
-        // Handle empty result set
-        return "error/no-data";
-    } catch (IncorrectResultSizeDataAccessException ex) {
-        // Handle incorrect result size
-        return "error/incorrect-result-size-error";
-    } catch (DataAccessException ex) {
-        // Handle other data access issues
-        return "error/data-access-error";
+    public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+        try {
+            List<CheckInFixedDTO> checkInFixedDTOList = employeeService.getListNeedCheckInFixedByDepartmentId(departmentId);
+            List<CheckedInFixedDTO> checkedInDTOList = employeeService.getListCheckedInFixedByDepartmentId(departmentId);
+            model.addAttribute("checkInList", checkInFixedDTOList);
+            model.addAttribute("checkedInList", checkedInDTOList);
+            model.addAttribute("departmentId", departmentId);
+            return "employee/employee-check-in-fixed";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            return "error/data-access-error";
+        }
     }
-}
 
 
-@GetMapping("/check-in/flexible")
-public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model) {
-    try {
-        List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId);
-        List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
-        model.addAttribute("checkInList", checkInFlexibleDTOList);
-        model.addAttribute("checkOutList", checkOutFlexibleDTOList);
-        model.addAttribute("departmentId", departmentId);
-        return "employee/employee-check-in-flexible";
-    } catch (DuplicateKeyException ex) {
-        // Handle duplicate key violation
-        return "error/duplicate-key-error";
-    } catch (EmptyResultDataAccessException ex) {
-        // Handle empty result set
-        return "error/no-data";
-    } catch (IncorrectResultSizeDataAccessException ex) {
-        // Handle incorrect result size
-        return "error/incorrect-result-size-error";
-    } catch (DataAccessException ex) {
-        // Handle other data access issues
-        return "error/data-access-error";
+    @GetMapping("/check-in/flexible")
+    public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+        try {
+            List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId);
+            List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
+            model.addAttribute("checkInList", checkInFlexibleDTOList);
+            model.addAttribute("checkOutList", checkOutFlexibleDTOList);
+            model.addAttribute("departmentId", departmentId);
+            return "employee/employee-check-in-flexible";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            return "error/data-access-error";
+        }
     }
-}
 
 
     @GetMapping("/searchListCheckIn")
@@ -193,7 +189,7 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
 
-        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentName  + ". Hãy xác nhận ngay!";
+        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentName + ". Hãy xác nhận ngay!";
 
         // Truyền nội dung notification
         Notification notification = Notification.builder()
@@ -216,8 +212,9 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
 
             // Retrieve the generated ID after insertion
             if (insertStatus > 0) {
+                logger.info("The User Received id ={}", userIdReceived);
                 // Gửi thông báo đến người dùng
-                webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
+                webSocketService.notifyUser(userIdReceived, notification);
                 return ResponseEntity.ok(insertStatus);
             } else {
                 logger.error("Notification insertion failed for some reason.");
@@ -310,112 +307,112 @@ public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int
         return ResponseEntity.ok(insertStatus);
     }
 
-    @GetMapping("/flexible/checkin")
-    public ResponseEntity<Integer> performFlexibleCheckIn(@RequestParam("id") int orderDetailId,
-                                                          @RequestParam("uis") int userIdSend, @RequestParam("uir") int userIdReceive,
-                                                          @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
-        // Nếu người dùng không nhấn cancel thì check in
-        String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
-        if (cancel.equals("no")) {
-            // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
-            Notification successNotification = Notification.builder()
-                    .userIdSend(userIdSend) //Khách hàng
-                    .userIdReceive(userIdReceive) //Nhân viên
-                    .messageType("Thông báo checkin thành công tới employee")
-                    .message(username + " đã xác nhận check in thành công")
-                    .departmentId(departmentId)
-                    .orderDetailId(orderDetailId)
-                    .timeSend(new Timestamp(System.currentTimeMillis()))
-                    .build();
-            notificationService.insertNotification(successNotification);
-            webSocketService.notifyEmployee(userIdReceive, successNotification);
-
-            // Update bảng check in history
-            employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
-                    null, 0, userIdSend);
-            // Thay đổi status thành đang tập để chuyển sang tab check in
-            orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
-
-            // Kiểm tra xem nếu khi check in là gói cố định thì phải trừ cả duration đi nữa
-            if (orderDetailService.isFixedGymPlan(orderDetailId)) {
-                orderDetailService.decreaseDuration(orderDetailId);
-            }
-        } else {
-            // Gửi lại thông báo cho employee là người dùng đã hủy
-            Notification cancelNotification = Notification.builder()
-                    .userIdSend(userIdSend) //Khách hàng
-                    .userIdReceive(userIdReceive) //Nhân viên
-                    .messageType("Thông báo hủy checkin tới employee")
-                    .message(username + " đã hủy check in")
-                    .departmentId(departmentId)
-                    .orderDetailId(orderDetailId)
-                    .timeSend(new Timestamp(System.currentTimeMillis()))
-                    .build();
-            notificationService.insertNotification(cancelNotification);
-            webSocketService.notifyEmployee(userIdReceive, cancelNotification);
-        }
-        // Ngược lại trừ duration trong order detail
-        return ResponseEntity.ok(1);
-    }
-
-    @PostMapping("/flexible/checkout")
-    public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) throws JsonProcessingException {
-        if (updateCheckInHistory.getCancel().equals("No")) {
-            User user = (User) session.getAttribute("userInfo");
-
-            // Lấy ra notification từ UpdateCheckInHistory để gửi cho employee + update thông tin cho notification
-            Notification successNotification = updateCheckInHistory.getNotification();
-            String username = orderDetailService.getUserNameByOrderDetailId(successNotification.getOrderDetailId());
-            successNotification.setMessageType("Thông báo checkout thành công tới employee");
-            successNotification.setMessage(username + " đã thanh toán thành công");
-            successNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
-
-            // Gửi lại thông báo cho employee là đã thanh toán thành công + insert vào db
-            notificationService.insertNotification(successNotification);
-            webSocketService.notifyEmployee(successNotification.getUserIdReceive(), successNotification);
-
-            // Trừ credit của người dùng
-            walletService.updateBalanceByUderId(user.getUserId(), updateCheckInHistory.getCreditAfterPay());
-            double credit = walletService.getBalanceByUserId(user.getUserId());
-
-            // Cộng credit cho brand owner
-            int brandOwnerId = brandService.getBrandOwnerIdByDepartmentId(successNotification.getDepartmentId());
-            double brandOwnerBalance = walletService.getBalanceByUserId(brandOwnerId);
-            double brandOwnerCreditAfter = brandOwnerBalance + updateCheckInHistory.getTotalCredit();
-            walletService.updateBalanceByUderId(brandOwnerId, brandOwnerCreditAfter);
-
-            // Update bảng Transfer History
-            TransferCreditHistory transferCreditHistory = new TransferCreditHistory();
-            transferCreditHistory.setSenderUserId(user.getUserId());
-            transferCreditHistory.setReceiverUserId(brandOwnerId);
-            transferCreditHistory.setAmount(updateCheckInHistory.getTotalCredit());
-            transferCreditHistory.setOrderDetailId(successNotification.getOrderDetailId());
-            transferCreditHistory.setTransferDate(new Timestamp(System.currentTimeMillis()));
-
-            transactionService.insertTransferCreditHistory(transferCreditHistory);
-
-            session.setAttribute("userCredit", credit);
-            // Update status use của order detail id thành chưa tập
-            orderDetailService.updateOrderDetailsUseStatus(updateCheckInHistory.getOrderDetailId(), "Chưa tập");
-            // Update bảng check in history
-            checkInHistoryService.updateCheckOutTimeAndCredit(updateCheckInHistory.getCheckInHistoryId(), updateCheckInHistory.getCheckOutTime(), updateCheckInHistory.getTotalCredit());
-
-        } else {
-            // Lấy ra notification từ UpdateCheckInHistory để gửi cho employee + update thông tin cho notification
-            Notification cancelNotification = updateCheckInHistory.getNotification();
-            String username = orderDetailService.getUserNameByOrderDetailId(cancelNotification.getOrderDetailId());
-            cancelNotification.setMessageType("Thông báo hủy checkout tới employee");
-            cancelNotification.setMessage(username + " đã hủy checkout");
-            cancelNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
-
-            // Gửi lại thông báo cho employee là đã check in thất bại + insert vào db
-            notificationService.insertNotification(cancelNotification);
-            webSocketService.notifyEmployee(cancelNotification.getUserIdReceive(), cancelNotification);
-
-        }
-
-        return ResponseEntity.ok(1);
-    }
+//    @GetMapping("/flexible/checkin")
+//    public ResponseEntity<Integer> performFlexibleCheckIn(@RequestParam("id") int orderDetailId,
+//                                                          @RequestParam("uis") int userIdSend, @RequestParam("uir") int userIdReceive,
+//                                                          @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
+//        // Nếu người dùng không nhấn cancel thì check in
+//        String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
+//        if (cancel.equals("no")) {
+//            // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
+//            Notification successNotification = Notification.builder()
+//                    .userIdSend(userIdSend) //Khách hàng
+//                    .userIdReceive(userIdReceive) //Nhân viên
+//                    .messageType("Thông báo checkin thành công tới employee")
+//                    .message(username + " đã xác nhận check in thành công")
+//                    .departmentId(departmentId)
+//                    .orderDetailId(orderDetailId)
+//                    .timeSend(new Timestamp(System.currentTimeMillis()))
+//                    .build();
+//            notificationService.insertNotification(successNotification);
+//            webSocketService.notifyEmployee(userIdReceive, successNotification);
+//
+//            // Update bảng check in history
+//            employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
+//                    null, 0, userIdSend);
+//            // Thay đổi status thành đang tập để chuyển sang tab check in
+//            orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
+//
+//            // Kiểm tra xem nếu khi check in là gói cố định thì phải trừ cả duration đi nữa
+//            if (orderDetailService.isFixedGymPlan(orderDetailId)) {
+//                orderDetailService.decreaseDuration(orderDetailId);
+//            }
+//        } else {
+//            // Gửi lại thông báo cho employee là người dùng đã hủy
+//            Notification cancelNotification = Notification.builder()
+//                    .userIdSend(userIdSend) //Khách hàng
+//                    .userIdReceive(userIdReceive) //Nhân viên
+//                    .messageType("Thông báo hủy checkin tới employee")
+//                    .message(username + " đã hủy check in")
+//                    .departmentId(departmentId)
+//                    .orderDetailId(orderDetailId)
+//                    .timeSend(new Timestamp(System.currentTimeMillis()))
+//                    .build();
+//            notificationService.insertNotification(cancelNotification);
+//            webSocketService.notifyEmployee(userIdReceive, cancelNotification);
+//        }
+//        // Ngược lại trừ duration trong order detail
+//        return ResponseEntity.ok(1);
+//    }
+//
+//    @PostMapping("/flexible/checkout")
+//    public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) throws JsonProcessingException {
+//        if (updateCheckInHistory.getCancel().equals("No")) {
+//            User user = (User) session.getAttribute("userInfo");
+//
+//            // Lấy ra notification từ UpdateCheckInHistory để gửi cho employee + update thông tin cho notification
+//            Notification successNotification = updateCheckInHistory.getNotification();
+//            String username = orderDetailService.getUserNameByOrderDetailId(successNotification.getOrderDetailId());
+//            successNotification.setMessageType("Thông báo checkout thành công tới employee");
+//            successNotification.setMessage(username + " đã thanh toán thành công");
+//            successNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+//
+//            // Gửi lại thông báo cho employee là đã thanh toán thành công + insert vào db
+//            notificationService.insertNotification(successNotification);
+//            webSocketService.notifyEmployee(successNotification.getUserIdReceive(), successNotification);
+//
+//            // Trừ credit của người dùng
+//            walletService.updateBalanceByUderId(user.getUserId(), updateCheckInHistory.getCreditAfterPay());
+//            double credit = walletService.getBalanceByUserId(user.getUserId());
+//
+//            // Cộng credit cho brand owner
+//            int brandOwnerId = brandService.getBrandOwnerIdByDepartmentId(successNotification.getDepartmentId());
+//            double brandOwnerBalance = walletService.getBalanceByUserId(brandOwnerId);
+//            double brandOwnerCreditAfter = brandOwnerBalance + updateCheckInHistory.getTotalCredit();
+//            walletService.updateBalanceByUderId(brandOwnerId, brandOwnerCreditAfter);
+//
+//            // Update bảng Transfer History
+//            TransferCreditHistory transferCreditHistory = new TransferCreditHistory();
+//            transferCreditHistory.setSenderUserId(user.getUserId());
+//            transferCreditHistory.setReceiverUserId(brandOwnerId);
+//            transferCreditHistory.setAmount(updateCheckInHistory.getTotalCredit());
+//            transferCreditHistory.setOrderDetailId(successNotification.getOrderDetailId());
+//            transferCreditHistory.setTransferDate(new Timestamp(System.currentTimeMillis()));
+//
+//            transactionService.insertTransferCreditHistory(transferCreditHistory);
+//
+//            session.setAttribute("userCredit", credit);
+//            // Update status use của order detail id thành chưa tập
+//            orderDetailService.updateOrderDetailsUseStatus(updateCheckInHistory.getOrderDetailId(), "Chưa tập");
+//            // Update bảng check in history
+//            checkInHistoryService.updateCheckOutTimeAndCredit(updateCheckInHistory.getCheckInHistoryId(), updateCheckInHistory.getCheckOutTime(), updateCheckInHistory.getTotalCredit());
+//
+//        } else {
+//            // Lấy ra notification từ UpdateCheckInHistory để gửi cho employee + update thông tin cho notification
+//            Notification cancelNotification = updateCheckInHistory.getNotification();
+//            String username = orderDetailService.getUserNameByOrderDetailId(cancelNotification.getOrderDetailId());
+//            cancelNotification.setMessageType("Thông báo hủy checkout tới employee");
+//            cancelNotification.setMessage(username + " đã hủy checkout");
+//            cancelNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+//
+//            // Gửi lại thông báo cho employee là đã check in thất bại + insert vào db
+//            notificationService.insertNotification(cancelNotification);
+//            webSocketService.notifyEmployee(cancelNotification.getUserIdReceive(), cancelNotification);
+//
+//        }
+//
+//        return ResponseEntity.ok(1);
+//    }
 
     @GetMapping("/flexible/getCheckInTime")
     public ResponseEntity<DetailCheckOutDTO> showDetail(@RequestParam("id") int orderDetailId) {
