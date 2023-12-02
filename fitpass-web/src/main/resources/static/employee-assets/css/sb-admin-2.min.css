@@ -13827,3 +13827,24 @@ label.error {
     color: darkblue;
     background-color: #cae8fd;
 }
+
+.w3-modal{
+    width: 100%;
+}
+
+    .w3-animate-zoom {
+        /*width: 100%;*/
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .w3-animate-zoom img {
+        width: 60%;
+        height: 60%;
+        object-fit: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
