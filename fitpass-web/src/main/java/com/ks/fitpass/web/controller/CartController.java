@@ -144,10 +144,4 @@ public String removeItem(@RequestParam int gymPlanId, @RequestParam int departme
         }
         return ResponseEntity.badRequest().body("Cart not found");
     }
-
-    //Test method
-    @GetMapping("/checkout")
-    public String showCheckout() {
-        return "check-out";
-    }
 }
