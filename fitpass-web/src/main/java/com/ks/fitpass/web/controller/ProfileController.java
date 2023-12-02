@@ -33,7 +33,7 @@ public class ProfileController {
     }
 
     @ModelAttribute
-    public void populateModel(HttpSession session, Model model) {
+    public void populateModel(HttpSession session) {
         Object userInfo = session.getAttribute("userInfo");
         if (userInfo != null) {
             User user = (User) userInfo;
@@ -41,7 +41,7 @@ public class ProfileController {
             Double userTotalDeposit = transactionService.getTotalAmountOfTransactionByUserId(user.getUserId());
             String userEmail = userService.getUserEmailByUserId(user.getUserId());
 
-            model.addAttribute("userEmail", userEmail);
+            session.setAttribute("userEmail", userEmail);
             session.setAttribute("userTotalDeposit", userTotalDeposit);
         }
     }
