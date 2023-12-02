@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS user_detail (
                                            last_name     VARCHAR(50) NOT NULL,
                                            email         VARCHAR(100) UNIQUE,
                                            phone_number  VARCHAR(20) NOT NULL,
-                                           address       VARCHAR(255) NOT NULL,
+                                           address       VARCHAR(255),
                                            date_of_birth DATE NOT NULL,
                                            gender        VARCHAR(10) NOT NULL,
                                            securityId   varchar(12) null,
