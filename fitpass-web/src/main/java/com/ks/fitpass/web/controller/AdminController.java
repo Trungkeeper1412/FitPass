@@ -102,8 +102,24 @@ public class AdminController {
 
     @GetMapping("/feature/detail/{featureId}")
     public ResponseEntity<Feature> getFeatureDetail(@PathVariable int featureId) {
-        Feature feature = departmentFeatureService.getByFeatureId(featureId);
-        return ResponseEntity.ok(feature);
+        try {
+            Feature feature = departmentFeatureService.getByFeatureId(featureId);
+            return ResponseEntity.ok(feature);
+        }catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.notFound().build();
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        }  catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/feature/update")
