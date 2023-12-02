@@ -1,32 +1,33 @@
-package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.service.BrandService;
-import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.service.UserService;
-import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
-import jakarta.servlet.http.HttpSession;
+import com.ks.fitpass.web.controller.AdminController;
+import lombok.Value;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -37,10 +38,35 @@ public class AdminControllerTest {
     private DepartmentFeatureService departmentFeatureService;
     @Mock
     private Model model;
+    @Mock
+    private BrandService brandService;
+    @Mock
+    private UserService userService;
 
+    @Mock
+    private RequestWithdrawHistoryService requestWithdrawHistoryService;
+
+
+
+
+    @Captor
+    private ArgumentCaptor<List<UserDTO>> userDTOListCaptor;
+    @Captor
+    private ArgumentCaptor<List<RequestWithdrawHistoryWithBrandName>> historyListPendingCaptor;
+
+    @Captor
+    private ArgumentCaptor<List<RequestWithdrawHistoryWithBrandName>> historyListAllCaptor;
+
+    @Captor
+    private ArgumentCaptor<RequestHistoryStats> historyStatsCaptor;
 
     @InjectMocks
     private AdminController adminController;
+
+
+
+    @Captor
+    private ArgumentCaptor<List<BrandAdminList>> brandListCaptor;
 
     @BeforeEach
     public void setUp() {
@@ -111,7 +137,482 @@ public class AdminControllerTest {
         verify(departmentFeatureService, times(1)).getAllFeatureNoStatus();
         verify(model, never()).addAttribute(eq("featureList"), any());
     }
+
+    @Test
+    public void testAddFeatureSuccess() {
+        // Arrange
+        when(departmentFeatureService.insertFeature(any())).thenReturn(1);
+
+        // Act
+        String result = adminController.addFeature("TestFeature", "test-icon");
+
+        // Assert
+        assertEquals("redirect:/admin/feature", result);
+        verify(departmentFeatureService, times(1)).insertFeature(any());
+    }
+
+    @Test
+    public void testAddFeatureDuplicateKeyException() {
+        // Arrange
+        when(departmentFeatureService.insertFeature(any())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = adminController.addFeature("TestFeature", "test-icon");
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+        verify(departmentFeatureService, times(1)).insertFeature(any());
+    }
+
+    @Test
+    public void testAddFeatureEmptyResultDataAccessException() {
+        // Arrange
+        when(departmentFeatureService.insertFeature(any())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = adminController.addFeature("TestFeature", "test-icon");
+
+        // Assert
+        assertEquals("error/no-data", result);
+        verify(departmentFeatureService, times(1)).insertFeature(any());
+    }
+
+    @Test
+    public void testAddFeatureIncorrectResultSizeDataAccessException() {
+        // Arrange
+        when(departmentFeatureService.insertFeature(any())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = adminController.addFeature("TestFeature", "test-icon");
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+        verify(departmentFeatureService, times(1)).insertFeature(any());
+    }
+    @Test
+    public void testGetFeatureDetailSuccess() {
+        // Arrange
+        int featureId = 1;
+        Feature expectedFeature = new Feature();
+        when(departmentFeatureService.getByFeatureId(featureId)).thenReturn(expectedFeature);
+
+        // Act
+        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(expectedFeature, result.getBody());
+        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
+    }
+
+    @Test
+    public void testGetFeatureDetailEmptyResultDataAccessException() {
+        // Arrange
+        int featureId = 1;
+        when(departmentFeatureService.getByFeatureId(featureId)).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
+
+        // Assert
+        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+        Assertions.assertNull(result.getBody());
+        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
+    }
+
+    @Test
+    public void testGetFeatureDetailDuplicateKeyException() {
+        // Arrange
+        int featureId = 1;
+        when(departmentFeatureService.getByFeatureId(featureId)).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        Assertions.assertNull(result.getBody());
+        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
+    }
+
+    @Test
+    public void testGetFeatureDetailIncorrectResultSizeDataAccessException() {
+        // Arrange
+        int featureId = 1;
+        when(departmentFeatureService.getByFeatureId(featureId)).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        assertNull(result.getBody());
+        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
+    }
+
+
+    @Test
+    public void testUpdateFeatureSuccess() {
+        // Arrange
+        Feature featureToUpdate = new Feature();
+        when(departmentFeatureService.updateFeature(featureToUpdate)).thenReturn(1);
+
+        // Act
+        ResponseEntity<String> result = adminController.updateFeature(featureToUpdate);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals("Update feature success", result.getBody());
+        verify(departmentFeatureService, times(1)).updateFeature(featureToUpdate);
+    }
+
+    @Test
+    public void testUpdateFeatureDataAccessException() {
+        // Arrange
+        Feature featureToUpdate = new Feature();
+        when(departmentFeatureService.updateFeature(featureToUpdate)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<String> result = adminController.updateFeature(featureToUpdate);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        verify(departmentFeatureService, times(1)).updateFeature(featureToUpdate);
+    }
+
+    // CustomDataAccessException implementation for testing
+    private static class CustomDataAccessException extends DataAccessException {
+        public CustomDataAccessException(String msg) {
+            super(msg);
+        }
+    }
+    @Test
+    public void testUpdateFeatureStatusSuccess() {
+        // Arrange
+        Feature featureToUpdate = new Feature();
+        featureToUpdate.setFeatureID(1); // Set a valid feature ID for testing
+        featureToUpdate.setFeatureStatus(1); // Set a valid feature status for testing
+
+        // Act
+        ResponseEntity<String> result = adminController.updateFeatureStatus(featureToUpdate);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals("Update feature status success", result.getBody());
+        verify(departmentFeatureService, times(1)).updateFeatureStatus(1, 1);
+    }
+
+    @Test
+    public void testUpdateFeatureStatusDataAccessException() {
+        // Arrange
+        Feature featureToUpdate = new Feature();
+        featureToUpdate.setFeatureID(1); // Set a valid feature ID for testing
+        featureToUpdate.setFeatureStatus(1); // Set a valid feature status for testing
+        when(departmentFeatureService.updateFeatureStatus(1, 1)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<String> result = adminController.updateFeatureStatus(featureToUpdate);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        verify(departmentFeatureService, times(1)).updateFeatureStatus(1, 1);
+    }
+
+    @Test
+    public void testGetBrandListSuccess() {
+        // Arrange
+        List<BrandAdminList> mockBrandList = Arrays.asList(new BrandAdminList(), new BrandAdminList());
+        when(brandService.getAllBrand()).thenReturn(mockBrandList);
+
+        // Act
+        String resultView = adminController.getBrandList(model);
+
+        // Assert
+        assertEquals("admin/admin-brand-list", resultView);
+        verify(brandService, times(1)).getAllBrand();
+        verify(model, times(1)).addAttribute(eq("brandList"), brandListCaptor.capture());
+        List<BrandAdminList> capturedBrandList = brandListCaptor.getValue();
+        assertEquals(mockBrandList, capturedBrandList);
+    }
+
+    @Test
+    public void testGetBrandListDataAccessException() {
+        // Arrange
+        when(brandService.getAllBrand()).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getBrandList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).getAllBrand();
+        verify(model, never()).addAttribute(anyString(), any());
+
+    }
+    @Test
+    public void testUpdateBrandNumberPercentageSuccess() {
+        // Arrange
+        int brandId = 1;
+        int numberPercentage = 50;
+        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(1);
+
+        // Act
+        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+
+        // Assert
+        assertEquals("redirect:/admin/brand/list", resultView);
+        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+    }
+
+    @Test
+    public void testUpdateBrandNumberPercentageUpdateFail() {
+        // Arrange
+        int brandId = 1;
+        int numberPercentage = 50;
+        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(0);
+
+        // Act
+        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+    }
+
+    @Test
+    public void testUpdateBrandNumberPercentageDataAccessException() {
+        // Arrange
+        int brandId = 1;
+        int numberPercentage = 50;
+        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+    }
+
+    @Test
+    public void testGetAccountBrandListSuccess() {
+        // Arrange
+        List<BrandAdminList> mockBrandList = Arrays.asList(new BrandAdminList(), new BrandAdminList());
+        when(brandService.getAllBrand()).thenReturn(mockBrandList);
+
+        // Act
+        String resultView = adminController.getAccountBrandList(model);
+
+        // Assert
+        assertEquals("admin/admin-account-brand", resultView);
+        verify(brandService, times(1)).getAllBrand();
+        verify(model, times(1)).addAttribute(eq("brandList"), brandListCaptor.capture());
+        List<BrandAdminList> capturedBrandList = brandListCaptor.getValue();
+        assertEquals(mockBrandList, capturedBrandList);
+    }
+
+    @Test
+    public void testGetAccountBrandListDataAccessException() {
+        // Arrange
+        when(brandService.getAllBrand()).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getAccountBrandList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).getAllBrand();
+        verify(model, never()).addAttribute(anyString(), any());
+        // You may add more assertions based on your error handling logic
+    }
+
+    @Test
+    public void testGetAccountUserListSuccess() {
+        // Arrange
+        List<UserDTO> mockUserDTOList = Arrays.asList(new UserDTO(), new UserDTO());
+        when(userService.getAllAccountUser()).thenReturn(mockUserDTOList);
+
+        // Act
+        String resultView = adminController.getAccountUserList(model);
+
+        // Assert
+        assertEquals("admin/admin-account-user", resultView);
+        verify(userService, times(1)).getAllAccountUser();
+        verify(model, times(1)).addAttribute(eq("userDTOList"), userDTOListCaptor.capture());
+        List<UserDTO> capturedUserDTOList = userDTOListCaptor.getValue();
+        assertEquals(mockUserDTOList, capturedUserDTOList);
+    }
+
+    @Test
+    public void testGetAccountUserListDataAccessException() {
+        // Arrange
+        when(userService.getAllAccountUser()).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getAccountUserList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(userService, times(1)).getAllAccountUser();
+        verify(model, never()).addAttribute(anyString(), any());
+        // You may add more assertions based on your error handling logic
+    }
+
+    @Test
+    public void testGetWithdrawalListSuccess() {
+        // Arrange
+        List<RequestWithdrawHistoryWithBrandName> mockHistoryListPending = Arrays.asList(new RequestWithdrawHistoryWithBrandName(), new RequestWithdrawHistoryWithBrandName());
+        List<RequestWithdrawHistoryWithBrandName> mockHistoryListAll = Arrays.asList(new RequestWithdrawHistoryWithBrandName(), new RequestWithdrawHistoryWithBrandName());
+        RequestHistoryStats mockHistoryStats = new RequestHistoryStats();
+        when(requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý")).thenReturn(mockHistoryListPending);
+        when(requestWithdrawHistoryService.getAllWithBrandName()).thenReturn(mockHistoryListAll);
+        when(requestWithdrawHistoryService.getAllStats()).thenReturn(mockHistoryStats);
+
+        // Act
+        String resultView = adminController.getWithdrawalList(model);
+
+        // Assert
+        assertEquals("admin/admin-withdrawal-list", resultView);
+        verify(requestWithdrawHistoryService, times(1)).getAllByStatusWithBrandName("Đang xử lý");
+        verify(requestWithdrawHistoryService, times(1)).getAllWithBrandName();
+        verify(requestWithdrawHistoryService, times(1)).getAllStats();
+        verify(model, times(1)).addAttribute(eq("requestWithdrawHistoryListPending"), historyListPendingCaptor.capture());
+        verify(model, times(1)).addAttribute(eq("requestWithdrawHistoryListAll"), historyListAllCaptor.capture());
+        verify(model, times(1)).addAttribute(eq("requestHistoryStats"), historyStatsCaptor.capture());
+
+        List<RequestWithdrawHistoryWithBrandName> capturedHistoryListPending = historyListPendingCaptor.getValue();
+        List<RequestWithdrawHistoryWithBrandName> capturedHistoryListAll = historyListAllCaptor.getValue();
+        RequestHistoryStats capturedHistoryStats = historyStatsCaptor.getValue();
+
+        assertEquals(mockHistoryListPending, capturedHistoryListPending);
+        assertEquals(mockHistoryListAll, capturedHistoryListAll);
+        assertEquals(mockHistoryStats, capturedHistoryStats);
+    }
+
+    @Test
+    public void testGetWithdrawalListDataAccessException() {
+        // Arrange
+        when(requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getWithdrawalList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(requestWithdrawHistoryService, times(1)).getAllByStatusWithBrandName("Đang xử lý");
+        verify(requestWithdrawHistoryService, never()).getAllWithBrandName();
+        verify(requestWithdrawHistoryService, never()).getAllStats();
+        verify(model, never()).addAttribute(anyString(), any());
+
+    }
+
+    @Test
+    public void testGetWithdrawalDetailSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        RequestHistoryAdmin mockRequestWithdrawHistory = new RequestHistoryAdmin();
+        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenReturn(mockRequestWithdrawHistory);
+
+        // Act
+        ResponseEntity<RequestHistoryAdmin> result = adminController.getWithdrawalDetail(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(mockRequestWithdrawHistory, result.getBody());
+        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
+    }
+
+    @Test
+    public void testGetWithdrawalDetailDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<RequestHistoryAdmin> result = adminController.getWithdrawalDetail(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        Assertions.assertNull(result.getBody() ); // Ensure the body is null for a bad request
+        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
+    }
+
+    @Test
+    public void testGetWithdrawalNumberPercentageSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        int mockNumberPercentage = 50;
+        when(requestWithdrawHistoryService.getNumberPercentage(requestHistoryId)).thenReturn(mockNumberPercentage);
+
+        // Act
+        ResponseEntity<Integer> result = adminController.getWithdrawalNumberPercentage(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(mockNumberPercentage, result.getBody());
+        verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
+    }
+
+    @Test
+    public void testGetWithdrawalNumberPercentageDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.getNumberPercentage(requestHistoryId)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<Integer> result = adminController.getWithdrawalNumberPercentage(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        Assertions.assertNull(result.getBody()); // Ensure the body is null for a bad request
+        verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
+    }
+    @Test
+    public void testUpdateWithdrawalStatusSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+
+        // Assert
+        assertEquals("redirect:/admin/withdrawal", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+    }
+
+    @Test
+    public void testUpdateWithdrawalStatusUpdateFail() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+    }
+
+    @Test
+    public void testUpdateWithdrawalStatusDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+    }
+
+
 }
+
+
 
 
 
