@@ -444,6 +444,79 @@ VALUES (5, 'Dinh', 'Tuan Anh', 'tuananh@gmail.com', '0987654321', '123 Main St',
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (5, 'anhdt', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 5);
+
+-- User 64
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (64, 'Nguyễn', 'Trần', 'nguyentran@example.com', '0987654321', '123 Đường Trần Phú', '1990-01-01', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (64, 'nguyentran', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 64);
+
+-- User 65
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (65, 'Nguyễn', 'Đặng', 'nguyendang@example.com', '0987654321', '456 Đường Nguyễn Văn Linh', '1991-02-02', 'Female', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (65, 'nguyendang', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 65);
+
+-- User 66
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (66, 'Trần', 'Lê', 'tranle@example.com', '0987654321', '789 Đường Trần Hưng Đạo', '1992-03-03', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (66, 'tranle', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 66);
+
+-- User 67
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (67, 'Lê', 'Phạm', 'lepham@example.com', '0987654321', '123 Đường Lê Lợi', '1993-04-04', 'Female', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (67, 'lepham', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 67);
+
+-- User 68
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (68, 'Phạm', 'Hoàng', 'phamhoang@example.com', '0987654321', '456 Đường Phạm Văn Đồng', '1994-05-05', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (68, 'phamhoang', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 68);
+
+-- User 69
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (69, 'Hoàng', 'Nguyễn', 'hoangnguyen@example.com', '0987654321', '789 Đường Hoàng Văn Thụ', '1995-06-06', 'Female', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (69, 'hoangnguyen', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 69);
+
+-- User 70
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (70, 'Vũ', 'Nguyễn', 'vunguyen@example.com', '0987654321', '123 Đường Vũ Trọng Phụng', '1996-07-07', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (70, 'vunguyen', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 70);
+
+-- User 71
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (71, 'Nguyễn', 'Lý', 'nguyenly@example.com', '0987654321', '456 Đường Lý Thường Kiệt', '1997-08-08', 'Female', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (71, 'nguyenly', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 71);
+
+-- User 72
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (72, 'Lý', 'Trần', 'lytran@example.com', '0987654321', '789 Đường Trần Quang Diệu', '1998-09-09', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (72, 'lytran', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 72);
+
+-- User 73
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (73, 'Trần', 'Đặng', 'trandang@example.com', '0987654321', '123 Đường Đặng Thai Mai', '1999-10-10', 'Female', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (73, 'trandang', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 73);
+
+-- User 74
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (74, 'Đặng', 'Bùi', 'dangbui@example.com', '0987654321', '456 Đường Bùi Thị Xuân', '2000-11-11', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (74, 'dangbui', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 74);
+
+-- User 75
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, image_url)
+VALUES (75, 'Phan', 'Ngô', 'phango@example.com', '0987654321', '123 Đường Ngô Gia Tự', '2002-01-01', 'Male', '/images/system/v.png');
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (75, 'phanngo', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 75);
+
 -- Assign role for users
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (1, 1, 1);
@@ -455,6 +528,20 @@ INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (4, 4, 4);
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (5, 5, 4);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES
+    (64, 64, 4),
+    (65, 65, 4),
+    (66, 66, 4),
+    (67, 67, 4),
+    (68, 68, 4),
+    (69, 69, 4),
+    (70, 70, 4),
+    (71, 71, 4),
+    (72, 72, 4),
+    (73, 73, 4),
+    (74, 74, 4),
+    (75, 75, 4);
 
 -- Assign role for brand owner
 INSERT INTO user_role (user_role_id, user_id, role_id)
@@ -587,6 +674,21 @@ INSERT INTO wallet (user_id, balance)
 VALUES (4, 1000);
 INSERT INTO wallet (user_id, balance)
 VALUES (5, 1000);
+INSERT INTO wallet (user_id, balance)
+VALUES
+    (64, 2500),
+    (65, 3000),
+    (66, 4000),
+    (67, 3500),
+    (68, 2200),
+    (69, 4800),
+    (70, 2700),
+    (71, 4200),
+    (72, 3900),
+    (73, 2100),
+    (74, 4700),
+    (75, 3200);
+
 -- Brand Owner Wallet insert
 INSERT INTO wallet (user_id, balance)
 VALUES (6, 20000);
