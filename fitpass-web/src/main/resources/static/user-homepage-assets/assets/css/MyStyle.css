@@ -1499,11 +1499,6 @@ section {
     margin-top: 25px;
 }
 
-.error{
-    padding-top: 5px;
-    color: red;
-}
-
 .contact .php-email-form .sent-message {
     display: none;
     color: #fff;
@@ -2771,9 +2766,9 @@ a:link {
 }
 
 .user-img img {
-    width: 60px;
+    width: 150px;
     border-radius: 50%;
-    height: 60px;
+    height: 150px;
     padding: 5px;
 }
 
@@ -3162,7 +3157,7 @@ a:link {
     width: 100%;
     border: 2px solid #e1e1e1;
     border-radius: 8px;
-    margin: 2px 0;
+    /*margin: 2px 0;*/
     outline: none;
     padding: 8px;
     box-sizing: border-box;
@@ -3180,7 +3175,7 @@ a:link {
 }
 .user-edit-profile .input-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .user-edit-profile input:focus {
@@ -3218,7 +3213,12 @@ input[type="radio"]:checked {
     width: fit-content;
     color: white;
     background-color: black;
-    border-radius: 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.user-edit-profile .save-changes:hover {
+    background-color: orange;
 }
 
 .transaction-history .paginate_button .page-item.active {
@@ -6033,4 +6033,24 @@ body {
     font-size: 15px;
     width: 65%;
     margin: auto;
+}
+
+span.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
+}
+
+label.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
+}
+
+.input-title {
+    padding-bottom: 3px;
 }
