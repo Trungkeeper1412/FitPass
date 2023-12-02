@@ -24,21 +24,24 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user")
+//@RequestMapping("/user")
+@RequestMapping("/homepage")
 public class HomepageController {
     private final DepartmentService departmentService;
     private final BrandService brandService;
     private final WalletService walletService;
 
-    @GetMapping("/homepage")
+    @GetMapping("")
     public String getHomepage(HttpSession session) {
         User userSession = (User) session.getAttribute("userInfo");
-        double credit = walletService.getBalanceByUserId(userSession.getUserId());
-        session.setAttribute("userCredit", credit);
+        if(userSession != null){
+            double credit = walletService.getBalanceByUserId(userSession.getUserId());
+            session.setAttribute("userCredit", credit);
+        }
         return "homepage-user";
     }
 
-    @GetMapping("/homepage/brand")
+    @GetMapping("/brand")
     public ResponseEntity<BrandPagnition> getBrandWithPagination(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "2") int size,
@@ -76,7 +79,7 @@ public class HomepageController {
         }
     }
 
-    @PostMapping("/homepage")
+    @PostMapping("")
     public ResponseEntity<DepartmentHomePagePagnition> getNearByDepartmentList(
             @RequestParam("userLatitude") double userLatitude,
             @RequestParam("userLongitude") double userLongitude,
