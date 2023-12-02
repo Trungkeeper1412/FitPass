@@ -431,18 +431,20 @@
                     <a href="/department/department-detail/${department.departmentId}">
                     <div class="card">
                             <div class="distance-flag">
-                                <span><img src="https://cdn-icons-png.flaticon.com/128/5774/5774388.png"></span>
+                                <i class="bi bi-geo-alt-fill"></i>
                                 <span>Cách bạn ${roundToTwoDecimalPlaces(+department.distance)} km</span>
                             </div>
-                            <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            <div class="list-img">
+                                <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            </div>
                             <div class="card-body">
-                                   <h3 class="card-title">${department.departmentName}</h3>
-                                    <p class="card-text">
+                                   <h4 class="card-title fw-bold">${department.departmentName}</h4>
+                                    <div class="card-text">
                                        <i class="bi bi-geo-alt"></i> ${department.departmentAddress}
-                                    </p>
-                                    <p class="phone-number">
+                                    </div>
+                                    <div class="phone-number">
                                            <i class="bi bi-telephone"></i> ${department.departmentContactNumber}
-                                    </p>
+                                    </div>
                 <div class="review-section mb-3">
                     Đánh giá:
                     <div class="rating" data-star="${department.rating}"></div>
@@ -492,15 +494,17 @@
                 <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
                     <a href="/department/department-detail/${department.departmentId}">
                     <div class="card">
-                            <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            <div class="list-img">
+                                <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            </div>
                             <div class="card-body">
-                                   <h3 class="card-title">${department.departmentName}</h3>
-                                    <p class="card-text">
+                                   <h4 class="card-title fw-bold">${department.departmentName}</h4>
+                                    <div class="card-text">
                                        <i class="bi bi-geo-alt"></i> ${department.departmentAddress}
-                                    </p>
-                                    <p class="phone-number">
+                                    </div>
+                                    <div class="phone-number">
                                            <i class="bi bi-telephone"></i> ${department.departmentContactNumber}
-                                    </p>
+                                    </div>
                 <div class="review-section mb-3">
                     Đánh giá:
                     <div class="rating" data-star="${department.rating}"></div>
