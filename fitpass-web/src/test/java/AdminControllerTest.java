@@ -1,9 +1,16 @@
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.UserDTO;
+import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
+import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
 import com.ks.fitpass.web.controller.AdminController;
+import lombok.Value;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,9 +40,30 @@ public class AdminControllerTest {
     private Model model;
     @Mock
     private BrandService brandService;
+    @Mock
+    private UserService userService;
+
+    @Mock
+    private RequestWithdrawHistoryService requestWithdrawHistoryService;
+
+
+
+
+    @Captor
+    private ArgumentCaptor<List<UserDTO>> userDTOListCaptor;
+    @Captor
+    private ArgumentCaptor<List<RequestWithdrawHistoryWithBrandName>> historyListPendingCaptor;
+
+    @Captor
+    private ArgumentCaptor<List<RequestWithdrawHistoryWithBrandName>> historyListAllCaptor;
+
+    @Captor
+    private ArgumentCaptor<RequestHistoryStats> historyStatsCaptor;
 
     @InjectMocks
     private AdminController adminController;
+
+
 
     @Captor
     private ArgumentCaptor<List<BrandAdminList>> brandListCaptor;
@@ -321,7 +349,193 @@ public class AdminControllerTest {
         verify(model, never()).addAttribute(anyString(), any());
 
     }
+    @Test
+    public void testUpdateBrandNumberPercentageSuccess() {
+        // Arrange
+        int brandId = 1;
+        int numberPercentage = 50;
+        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(1);
 
+        // Act
+        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+
+        // Assert
+        assertEquals("redirect:/admin/brand/list", resultView);
+        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+    }
+
+    @Test
+    public void testUpdateBrandNumberPercentageUpdateFail() {
+        // Arrange
+        int brandId = 1;
+        int numberPercentage = 50;
+        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(0);
+
+        // Act
+        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+    }
+
+    @Test
+    public void testUpdateBrandNumberPercentageDataAccessException() {
+        // Arrange
+        int brandId = 1;
+        int numberPercentage = 50;
+        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+    }
+
+    @Test
+    public void testGetAccountBrandListSuccess() {
+        // Arrange
+        List<BrandAdminList> mockBrandList = Arrays.asList(new BrandAdminList(), new BrandAdminList());
+        when(brandService.getAllBrand()).thenReturn(mockBrandList);
+
+        // Act
+        String resultView = adminController.getAccountBrandList(model);
+
+        // Assert
+        assertEquals("admin/admin-account-brand", resultView);
+        verify(brandService, times(1)).getAllBrand();
+        verify(model, times(1)).addAttribute(eq("brandList"), brandListCaptor.capture());
+        List<BrandAdminList> capturedBrandList = brandListCaptor.getValue();
+        assertEquals(mockBrandList, capturedBrandList);
+    }
+
+    @Test
+    public void testGetAccountBrandListDataAccessException() {
+        // Arrange
+        when(brandService.getAllBrand()).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getAccountBrandList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(brandService, times(1)).getAllBrand();
+        verify(model, never()).addAttribute(anyString(), any());
+        // You may add more assertions based on your error handling logic
+    }
+
+    @Test
+    public void testGetAccountUserListSuccess() {
+        // Arrange
+        List<UserDTO> mockUserDTOList = Arrays.asList(new UserDTO(), new UserDTO());
+        when(userService.getAllAccountUser()).thenReturn(mockUserDTOList);
+
+        // Act
+        String resultView = adminController.getAccountUserList(model);
+
+        // Assert
+        assertEquals("admin/admin-account-user", resultView);
+        verify(userService, times(1)).getAllAccountUser();
+        verify(model, times(1)).addAttribute(eq("userDTOList"), userDTOListCaptor.capture());
+        List<UserDTO> capturedUserDTOList = userDTOListCaptor.getValue();
+        assertEquals(mockUserDTOList, capturedUserDTOList);
+    }
+
+    @Test
+    public void testGetAccountUserListDataAccessException() {
+        // Arrange
+        when(userService.getAllAccountUser()).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getAccountUserList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(userService, times(1)).getAllAccountUser();
+        verify(model, never()).addAttribute(anyString(), any());
+        // You may add more assertions based on your error handling logic
+    }
+
+    @Test
+    public void testGetWithdrawalListSuccess() {
+        // Arrange
+        List<RequestWithdrawHistoryWithBrandName> mockHistoryListPending = Arrays.asList(new RequestWithdrawHistoryWithBrandName(), new RequestWithdrawHistoryWithBrandName());
+        List<RequestWithdrawHistoryWithBrandName> mockHistoryListAll = Arrays.asList(new RequestWithdrawHistoryWithBrandName(), new RequestWithdrawHistoryWithBrandName());
+        RequestHistoryStats mockHistoryStats = new RequestHistoryStats();
+        when(requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý")).thenReturn(mockHistoryListPending);
+        when(requestWithdrawHistoryService.getAllWithBrandName()).thenReturn(mockHistoryListAll);
+        when(requestWithdrawHistoryService.getAllStats()).thenReturn(mockHistoryStats);
+
+        // Act
+        String resultView = adminController.getWithdrawalList(model);
+
+        // Assert
+        assertEquals("admin/admin-withdrawal-list", resultView);
+        verify(requestWithdrawHistoryService, times(1)).getAllByStatusWithBrandName("Đang xử lý");
+        verify(requestWithdrawHistoryService, times(1)).getAllWithBrandName();
+        verify(requestWithdrawHistoryService, times(1)).getAllStats();
+        verify(model, times(1)).addAttribute(eq("requestWithdrawHistoryListPending"), historyListPendingCaptor.capture());
+        verify(model, times(1)).addAttribute(eq("requestWithdrawHistoryListAll"), historyListAllCaptor.capture());
+        verify(model, times(1)).addAttribute(eq("requestHistoryStats"), historyStatsCaptor.capture());
+
+        List<RequestWithdrawHistoryWithBrandName> capturedHistoryListPending = historyListPendingCaptor.getValue();
+        List<RequestWithdrawHistoryWithBrandName> capturedHistoryListAll = historyListAllCaptor.getValue();
+        RequestHistoryStats capturedHistoryStats = historyStatsCaptor.getValue();
+
+        assertEquals(mockHistoryListPending, capturedHistoryListPending);
+        assertEquals(mockHistoryListAll, capturedHistoryListAll);
+        assertEquals(mockHistoryStats, capturedHistoryStats);
+    }
+
+    @Test
+    public void testGetWithdrawalListDataAccessException() {
+        // Arrange
+        when(requestWithdrawHistoryService.getAllByStatusWithBrandName("Đang xử lý")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getWithdrawalList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+        verify(requestWithdrawHistoryService, times(1)).getAllByStatusWithBrandName("Đang xử lý");
+        verify(requestWithdrawHistoryService, never()).getAllWithBrandName();
+        verify(requestWithdrawHistoryService, never()).getAllStats();
+        verify(model, never()).addAttribute(anyString(), any());
+
+    }
+
+    @Test
+    public void testGetWithdrawalDetailSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        RequestHistoryAdmin mockRequestWithdrawHistory = new RequestHistoryAdmin();
+        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenReturn(mockRequestWithdrawHistory);
+
+        // Act
+        ResponseEntity<RequestHistoryAdmin> result = adminController.getWithdrawalDetail(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(mockRequestWithdrawHistory, result.getBody());
+        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
+    }
+
+    @Test
+    public void testGetWithdrawalDetailDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<RequestHistoryAdmin> result = adminController.getWithdrawalDetail(requestHistoryId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        Assertions.assertNull(result.getBody() ); // Ensure the body is null for a bad request
+        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
+    }
 
 }
 
