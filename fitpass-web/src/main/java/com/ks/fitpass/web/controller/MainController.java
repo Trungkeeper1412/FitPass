@@ -10,20 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("")
-    public String getLandingPage(HttpSession session){
+    @GetMapping("/")
+    public String checkFirstTimeLogin(HttpSession session){
         User user = (User) session.getAttribute("userInfo");
         if (user != null) {
-            return "redirect:/user/homepage";
+            return "redirect:/homepage";
         }
         return "landing";
     }
+
+    @GetMapping("/landing-page")
+    public String getLandingPage(){
+        return "landing";
+    }
+
 
     @GetMapping("/login")
     public String login(HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
         if (user != null) {
-            return "redirect:/user/homepage";
+            return "redirect:/homepage";
         }
         return "login-register";
     }
