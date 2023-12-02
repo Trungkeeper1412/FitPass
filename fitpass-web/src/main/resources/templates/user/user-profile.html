@@ -29,17 +29,14 @@
                     <th:block th:insert="~{user/fragments/money-tab :: money-tab}"></th:block>
                     <!-- User profile tab -->
                     <div class="mt-4 mb-5 user-profile" id="user-profile">
-                        <!--                    <form id="formSubmit" action="/profile/my-profile/update" method="post"-->
-                        <!--                          th:object="${userUpdateDTO}">-->
-
                         <div class="row user-change-ava justify-content-center">
-                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6 mb-3">
+                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6 mb-4">
                                 <div class="user-img">
                                     <img class="show-department-img" id="user-ava"
                                          th:src="${userUpdateDTO.getImageUrl()}">
                                 </div>
                             </div>
-                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-3">
+                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-4">
                                 <input type="file" class="form-control mt-2" id="avatar-img" name="avatar-img"
                                        accept="image/*" style="display: none;" onchange="uploadImage(this);">
                                 <div class="d-flex justify-content-start align-items-center mt-3">
@@ -56,63 +53,62 @@
                             </div>
                             <div class="col-12 mt-4 user-edit-profile">
                                 <div class="row">
-                                    <div class="col-md-6 col-xs-12">
+                                    <div class="col-md-6 col-xs-12 mb-4">
                                         <div class="input-title">Email</div>
-                                        <input th:field="*{email}" th:value="${userUpdateDTO.getEmail()}" type="text"
-                                               placeholder="nguyenvana@gmail.com" value="nguyenvana@gmail.com" required>
+                                        <input th:field="*{email}" th:value="${userUpdateDTO.getEmail()}" type="email"
+                                               placeholder="nguyenvana@gmail.com" name="email">
                                         <input th:field="*{oldEmail}" th:value="${userUpdateDTO.getEmail()}"
                                                type="hidden">
                                         <span th:if="${#fields.hasErrors('email')}"
                                               th:errors="*{email}">email Error</span>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mb-4">
                                         <div class="input-title">Họ</div>
                                         <input th:field="*{firstName}" th:value="${userUpdateDTO.getFirstName()}"
-                                               type="text" value="Nguyễn" required>
+                                               type="text" name="firstName">
                                         <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</span>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mb-4">
                                         <div class="input-title">Tên</div>
                                         <input th:field="*{lastName}" th:value="${userUpdateDTO.getLastName()}"
-                                               type="text" value="Văn A" required>
+                                               type="text" name="lastName">
                                         <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</span>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-6 col-sm-12 mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 mb-4">
                                         <div class="input-title">Ngày sinh</div>
                                         <input th:field="*{dateOfBirth}" th:value="${userUpdateDTO.getDateOfBirth()}"
-                                               type="date" value="2014-12-29">
+                                               type="date" name="dateOfBirth">
                                         <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth Error</span>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-6 col-sm-12 mb-4">
                                         <div class="input-title">Số điện thoại</div>
                                         <input th:field="*{phoneNumber}" th:value="${userUpdateDTO.getPhoneNumber()}"
-                                               type="number" value="0123456789" required>
+                                               type="number" name="phone">
                                         <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone Error</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-4">
                                         <div class="input-title">Đia chỉ</div>
                                         <input th:field="*{address}" th:value="${userUpdateDTO.getAddress()}"
-                                               type="text" required>
+                                               type="text" name="address">
                                         <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-4">
                                         <div class="input-title">Giới Tính :</div>
                                         <select th:field="*{gender}" class="form-select" id="gender" name="gender">
                                             <option value="Male"  th:selected="${userUpdateDTO.getGender().equals('Male')}">Nam</option>
                                             <option value="Female" th:selected="${userUpdateDTO.getGender().equals('Female')}">Nữ</option>
-                                            <option value="Khác">Khác</option>
                                         </select>
                                         <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
                                     </div>
 
                                 </div>
-                                <div class="row justify-content-center mt-3">
-                                    <div class="col-12 mx-auto">
-                                        <button class="btn save-changes" type="submit" >Lưu thay đổi</button>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <button class="btn save-changes" type="submit" id="updateProfile">Lưu thay đổi</button>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +152,9 @@
 
 <th:block th:include="common/vendor-script"></th:block>
 <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.js"></script>
+
 <script>
+
     function uploadImage(input) {
         if (input.files && input.files[0]) {
             const file = input.files[0];
@@ -188,6 +186,40 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#updateInfo").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin chủ cơ sở ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
 </script>
 </body>
 </html>
