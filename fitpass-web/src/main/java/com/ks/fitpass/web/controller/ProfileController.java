@@ -45,7 +45,9 @@ public class ProfileController {
 
             Double userTotalDeposit = transactionService.getTotalAmountOfTransactionByUserId(user.getUserId());
             String userEmail = userService.getUserEmailByUserId(user.getUserId());
+            String imgUrl = userService.getUserImgByUserId(user.getUserId());
 
+            model.addAttribute("imgUrl", imgUrl);
             model.addAttribute("userEmail", userEmail);
             session.setAttribute("userTotalDeposit", userTotalDeposit);
         }
