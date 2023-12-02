@@ -44,7 +44,7 @@
                         <label for="wp-comment-cookies-consent">Remember me
                         </label>
                     </div>
-                    <a class="forgot-pw" href="forgot-pw.html">Quên mật khẩu?</a>
+                    <a class="forgot-pw" th:href="@{/forgot-pw}">Quên mật khẩu?</a>
                 </div>
             </div>
             <button class="login">Đăng nhập</button>
@@ -58,23 +58,29 @@
             <h1 class="fw-bold">ĐĂNG KÝ</h1>
             <div class="line"></div>
             <div class="input-fields">
-                <div class="input-field">
-                    <div class="input-title">Email</div>
-                    <input type="number" name="email" value="">
+                <div class="name" style="display: flex;">
+                    <div class="input-field fname">
+                        <div class="input-title">Họ và tên đệm</div>
+                        <input type="text" name="fist-name" value="">
+                    </div>
+                    <div class="input-field lname">
+                        <div class="input-title">Tên</div>
+                        <input type="text" name="last-name" value="">
+                    </div>
+                </div>
+                <div class="name" style="display: flex;">
+                    <div class="input-field fname">
+                        <div class="input-title">Gmail</div>
+                        <input type="text" name="email" value="">
+                    </div>
+                    <div class="input-field lname">
+                        <div class="input-title">Số điện thoại</div>
+                        <input type="number" name="phone" value="">
+                    </div>
                 </div>
                 <div class="input-field">
                     <div class="input-title">Tên đăng nhâp</div>
                     <input type="number" name="username" value="">
-                </div>
-                <div class="name" style="display: flex;">
-                    <div class="input-field fname">
-                        <div class="input-title">Họ và tên đệm</div>
-                        <input type="number" name="fist-name" value="">
-                    </div>
-                    <div class="input-field lname">
-                        <div class="input-title">Tên</div>
-                        <input type="number" name="last-name" value="">
-                    </div>
                 </div>
                 <div class="input-field">
                     <div class="input-title">Mật khẩu</div>
