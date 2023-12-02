@@ -1,13 +1,13 @@
-<header id="header" class="fixed-top" th:fragment="navbar">
+<header class="fixed-top" id="header" th:fragment="navbar">
 
     <div class="container d-flex align-items-center justify-content-lg-between">
 
         <h1 class="logo me-auto me-lg-0"><a th:href="@{/user/homepage}">Fitpass<span>.</span></a></h1>
 
-        <nav id="navbar" class="navbar order-last order-lg-0">
+        <nav class="navbar order-last order-lg-0" id="navbar">
             <ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="Nhập tên thương hiệu...">
+                    <input placeholder="Nhập tên thương hiệu..." type="text">
                     <button class="search-button">
                         <i class="fas fa-search"></i>
                     </button>
@@ -26,9 +26,9 @@
                         <i class="bi bi-cart3 fs-4"></i>
                     </a>
                 </li>
-                <li >
+                <li>
                     <div class="dropdown w-100">
-                        <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
+                        <a class="nav-link" id="notification-btn" th:href="@{/profile/my-notifications}">
                             <span class="notification-badge" id="notification-badge">0</span>
                             <i class="bi bi-bell fs-4 dropbtn"></i>
                         </a>
@@ -43,14 +43,19 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
+            <button aria-expanded="false" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    id="dropdownMenuButton1" type="button">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png" style="width: 30px;"></a>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
-                <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a></li>
-                <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+            <ul aria-labelledby="dropdownMenuButton1" class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a>
+                </li>
+                <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a>
+                </li>
+                <li>
+                    <a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -64,7 +69,7 @@
     }
 
     // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
