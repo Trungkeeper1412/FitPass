@@ -3,87 +3,92 @@
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="gym-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="gym-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h2 class="m-0 font-weight-bold text-primary">Đổi mật khẩu</h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-box">
-                                <h2 class="fs-title text-center">Đổi mật khẩu</h2>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Đổi mật khẩu</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-box">
+                            <h2 class="fs-title text-center">Đổi mật khẩu</h2>
+                            <div class="row">
                                 <div class="row">
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3 mx-auto">
-                                            <div class="mb-3">
-                                                <label for="old-password" class="form-label fw-bold">Mật khẩu cũ:</label>
-                                                <input type="password" class="form-control" id="old-password" name="old-password" placeholder="Nhập mật khẩu cũ">
-                                            </div>
+                                    <div class="col-md-5 mb-3 mx-auto">
+                                        <div class="mb-3">
+                                            <label for="old-password" class="form-label fw-bold">Mật khẩu cũ:</label>
+                                            <input type="password" class="form-control" id="old-password" name="old-password" placeholder="Nhập mật khẩu cũ">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3 mx-auto">
-                                            <div class="mb-3">
-                                                <label for="new-password" class="form-label fw-bold">Mật khẩu mới:</label>
-                                                <input type="password" class="form-control" id="new-password" name="new-password" placeholder="Nhập mật khẩu mới">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3 mx-auto">
+                                        <div class="mb-3">
+                                            <label for="new-password" class="form-label fw-bold">Mật khẩu mới:</label>
+                                            <input type="password" class="form-control" id="new-password" name="new-password" placeholder="Nhập mật khẩu mới">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3 mx-auto">
-                                            <div class="mb-3">
-                                                <label for="confirm-password" class="form-label fw-bold">Xác nhận mật khẩu mới:</label>
-                                                <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu mới">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3 mx-auto">
+                                        <div class="mb-3">
+                                            <label for="confirm-password" class="form-label fw-bold">Xác nhận mật khẩu mới:</label>
+                                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu mới">
                                         </div>
                                     </div>
-                                    <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Lưu mật khẩu">
-                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <input class="btn btn-submit" type="submit" value="Lưu mật khẩu">
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="gym-owner/common/footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="gym-owner/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <th:block th:replace="gym-owner/common/script"></th:block>
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<th:block th:replace="gym-owner/common/logout-modal"></th:block>
+
+<th:block th:replace="gym-owner/common/script"></th:block>
+
 </body>
 
 </html>

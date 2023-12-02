@@ -3,108 +3,144 @@
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="gym-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="gym-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="fw-bold text-primary">Cập nhật dịch vụ</h2>
-                            <input type="hidden" th:value="${selectedId}" id="selectedIdDB">
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="text-start">
-                                    <table class="table table-bordered" id="dataTableAmenities" width="100%"
-                                        cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Tên dịch vụ</th>
-                                                <th>Ảnh dịch vụ</th>
-                                                <th class="plan-description">Mô tả</th>
-                                                <th>Chọn tiện tích</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <th:block th:each="s : ${brandAmenitie}">
-                                                <tr>
-                                                    <td th:text="${s.getAmenitieId()}"></td>
-                                                    <td th:text="${s.getAmenitieName()}">Hệ thống tủ khóa</td>
-                                                    <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
-                                                    <td th:text="${s.getDescription()}">Mô tả</td>
-                                                    <td></td>
-                                                </tr>
-                                            </th:block>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <form method="post" action="/gym-owner/department/amenities">
-                                        <input type="hidden" id="selectedAmenitieId" name="selectedAmenitieId">
-                                        <input type="hidden" th:value="${departmentId}" name="departmentId">
-                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                                    </form>
-                                </div>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="fw-bold text-primary">Cập nhật dịch vụ</h2>
+                        <input type="hidden" th:value="${selectedId}" id="selectedIdDB">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="text-start">
+                                <table class="table table-bordered" id="dataTableAmenities" width="100%"
+                                       cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên dịch vụ</th>
+                                        <th>Ảnh dịch vụ</th>
+                                        <th class="plan-description">Mô tả</th>
+                                        <th>Chọn tiện tích</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="s : ${brandAmenitie}">
+                                        <tr>
+                                            <td th:text="${s.getAmenitieId()}"></td>
+                                            <td th:text="${s.getAmenitieName()}">Hệ thống tủ khóa</td>
+                                            <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
+                                            <td th:text="${s.getDescription()}">Mô tả</td>
+                                            <td></td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <form id="formSubmit" method="post" action="/gym-owner/department/amenities">
+                                    <input type="hidden" id="selectedAmenitieId" name="selectedAmenitieId">
+                                    <input type="hidden" th:value="${departmentId}" name="departmentId">
+                                    <button type="submit" class="btn btn-primary" id="updateInfo">Lưu thay đổi</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="gym-owner/common/footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="gym-owner/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <th:block th:replace="gym-owner/common/script"></th:block>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+<!-- Logout Modal-->
+<th:block th:replace="gym-owner/common/logout-modal"></th:block>
 
-    <script>
-        $(document).ready(function () {
+<th:block th:replace="gym-owner/common/script"></th:block>
 
-            $.fn.dataTable.ext.order['dom-checkbox'] = function  ( settings, col )
-            {
-                return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
-                    return $(td).closest('tr').hasClass('selected') ? '1' : '0';
-                } );
-            }
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
-            configureDataTable('#dataTableAmenities', 4, 0, 'selectedAmenitieId');
+<script>
 
-        });
-    </script>
+    $("#updateInfo").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
+    $(document).ready(function () {
+
+        $.fn.dataTable.ext.order['dom-checkbox'] = function (settings, col) {
+            return this.api().column(col, {order: 'index'}).nodes().map(function (td, i) {
+                return $(td).closest('tr').hasClass('selected') ? '1' : '0';
+            });
+        }
+
+        configureDataTable('#dataTableAmenities', 4, 0, 'selectedAmenitieId');
+
+    });
+</script>
 
 </body>
 

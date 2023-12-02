@@ -420,7 +420,7 @@ VALUES (63, 'gymowner45', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9J
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
                          gender, image_url)
-VALUES (3, 'Nguyen Van Bao', 'Linh', 'cuongbulu@gmail.com', '0987654321', '123 Main St',
+VALUES (3, 'Nguyen Van Bao', 'Linh', 'linhnvb2@fpt.com', '0987654321', '123 Main St',
         '2001-01-01', 'Male', '/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)

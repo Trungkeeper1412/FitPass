@@ -26,28 +26,19 @@
                         <i class="bi bi-cart3 fs-4"></i>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
-                        <span class="notification-badge" id="notification-badge">0</span>
-                        <i class="bi bi-bell fs-4 dropbtn"></i>
-                    </a>
-                    <ul id="notification-dropdown">
-                        <li class="view-all-notification-link">
-                            <button onclick="window.location.href='/profile/my-notifications'">Xem tất cả</button>
-                        </li>
-                    </ul>
+                <li >
+                    <div class="dropdown w-100">
+                        <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
+                            <span class="notification-badge" id="notification-badge">0</span>
+                            <i class="bi bi-bell fs-4 dropbtn"></i>
+                        </a>
+                        <ul id="notification-dropdown">
+                            <li class="view-all-notification-link">
+                                <button onclick="window.location.href='/profile/my-notifications'">Xem tất cả</button>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-<!--                <li class="dropdown dropdown-noti">-->
-<!--                    <a class="nav-link" href="#notification" id="notification-btn">-->
-<!--                        <span class="notification-badge" id="notification-badge">0</span>-->
-<!--                        <i class="bi bi-bell fs-4 dropbtn" onclick="openNotifications()"></i>-->
-<!--                    </a>-->
-<!--                    <div id="myDropdown" class="dropdown-content">-->
-<!--                        <a href="#home">Home</a>-->
-<!--                        <a href="#about">About</a>-->
-<!--                        <a href="#contact">Contact</a>-->
-<!--                    </div>-->
-<!--                </li>-->
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

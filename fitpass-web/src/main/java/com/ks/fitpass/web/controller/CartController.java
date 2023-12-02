@@ -9,7 +9,13 @@ import com.ks.fitpass.order.dto.CartUpdateRequestDto;
 import com.ks.fitpass.order.entity.cart.Cart;
 import com.ks.fitpass.order.entity.cart.CartItem;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +30,7 @@ public class CartController {
 
     private final GymPlanService gymPlanService;
 
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     public CartController(GymPlanService gymPlanService) {
         this.gymPlanService = gymPlanService;
@@ -76,42 +83,77 @@ public class CartController {
     @GetMapping("/quantityInCart")
     @ResponseBody
     public ResponseEntity<Integer> getQuantityInCart(HttpSession session) {
-
-            Cart cart = (Cart) session.getAttribute("cart");
-            int quantity = 0;
-            if(cart != null) {
-                quantity = cart.getItems().size();
-            }
-        return ResponseEntity.ok(quantity);
+try {
+    Cart cart = (Cart) session.getAttribute("cart");
+    int quantity = 0;
+    if (cart != null) {
+        quantity = cart.getItems().size();
+    }
+    return ResponseEntity.ok(quantity);
+}catch (DuplicateKeyException ex) {
+    // Handle duplicate key violation
+    logger.error("DuplicateKeyException occurred", ex);
+    return ResponseEntity.badRequest().build();
+} catch (EmptyResultDataAccessException ex) {
+    // Handle empty result set
+    logger.error("EmptyResultDataAccessException occurred", ex);
+    return ResponseEntity.badRequest().build();
+} catch (IncorrectResultSizeDataAccessException ex) {
+    // Handle incorrect result size
+    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+    return ResponseEntity.badRequest().build();
+} catch (DataAccessException ex) {
+    // Handle other data access issues
+    logger.error("DataAccessException occurred", ex);
+    return ResponseEntity.badRequest().build();
+}
     }
 
     @GetMapping("/view")
     public String viewCart(Model model,  HttpSession session) {
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
-        List<CartItem> cartItems;
-        cartItems = cart.getItems();
-
-        List<Department> departmentList = new ArrayList<>();
-
-        for (CartItem item:
-             cartItems) {
-            GymPlanDepartmentNameDto gymPlanDepartmentNameDto = item.getGymPlan();
-
-            if(departmentList.stream().noneMatch(e ->  e.getDepartmentId() == gymPlanDepartmentNameDto.getGymDepartmentId())) {
-                Department department = new Department();
-                department.setDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
-                department.setDepartmentName(gymPlanDepartmentNameDto.getGymDepartmentName());
-                departmentList.add(department);
+        try {
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new Cart();
+                session.setAttribute("cart", cart);
             }
-        }
+            List<CartItem> cartItems;
+            cartItems = cart.getItems();
 
-        model.addAttribute("departmentList", departmentList);
-        model.addAttribute("cartItems", cartItems);
-        return "shopping-cart";
+            List<Department> departmentList = new ArrayList<>();
+
+            for (CartItem item :
+                    cartItems) {
+                GymPlanDepartmentNameDto gymPlanDepartmentNameDto = item.getGymPlan();
+
+                if (departmentList.stream().noneMatch(e -> e.getDepartmentId() == gymPlanDepartmentNameDto.getGymDepartmentId())) {
+                    Department department = new Department();
+                    department.setDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
+                    department.setDepartmentName(gymPlanDepartmentNameDto.getGymDepartmentName());
+                    departmentList.add(department);
+                }
+            }
+
+            model.addAttribute("departmentList", departmentList);
+            model.addAttribute("cartItems", cartItems);
+            return "shopping-cart";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
 @GetMapping("/remove")

@@ -206,7 +206,6 @@ h6 {
 .navbar a:focus {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 15px;
   font-weight: 600;
@@ -371,7 +370,7 @@ h6 {
   left: 15px;
   padding: 10px 0;
   background-color: #fff;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   transition: 0.3s;
 }
 
@@ -2666,13 +2665,12 @@ body {
 
 .cart-badge {
   position: absolute;
-  top: 0px;
-  right: -20px;
+  top: 0;
+  left: 57px;
   background-color: orangered;
   color: white;
   border-radius: 10px;
   width: 30px;
-  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2681,13 +2679,12 @@ body {
 
 .notification-badge {
   position: absolute;
-  top: 0px;
-  right: -20px;
+  top: 0;
+  left: 57px;
   background-color: orange;
   color: white;
   border-radius: 10px;
   width: 30px;
-  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2822,6 +2819,11 @@ td div div div a:hover {
   background-color: aliceblue;
 }
 
+.fc-toolbar-title {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
 .sentence {
   font-size: 20px;
   color: grey;
@@ -2829,4 +2831,174 @@ td div div div a:hover {
   padding-top: 40px;
   text-transform: uppercase;
   text-shadow: 3px 1px 3px dimgray;
+}
+
+@media only screen and (max-width: 1200px) {
+  .fc .fc-button {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 18px;
+    text-transform: capitalize;
+    padding: 15px 0;
+  }
+
+  .fc-header-toolbar {
+    align-items: center;
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    > * {
+      margin: 10px;
+    }
+  }
+
+  .fc-event {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .fc-day {
+    font-size: 14px;
+  }
+
+  .fc-time {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .fc .fc-button {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 18px;
+    text-transform: capitalize;
+    padding: 5px 0;
+  }
+
+  .fc-header-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    > * {
+      margin: 10px;
+    }
+  }
+
+  .fc-event {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .fc-day {
+    font-size: 14px;
+  }
+
+  .fc-time {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .fc-button {
+    font-size: 12px;
+    padding: 3px;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 16px;
+    text-transform: capitalize;
+    padding: 10px 0;
+  }
+
+  .fc-header-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    > * {
+      margin: 5px;
+    }
+  }
+
+  .fc-event {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .fc-day {
+    font-size: 12px;
+  }
+
+  .fc-time {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .fc .fc-button {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 14px;
+    text-transform: capitalize;
+    padding: 10px 0;
+  }
+
+  .fc-header-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    > * {
+      margin: 2px;
+    }
+  }
+
+  .fc-event {
+    font-size: 12px;
+    padding: 3px;
+  }
+
+  .fc-day {
+    font-size: 9px;
+  }
+
+  .fc-time {
+    font-size: 9px;
+  }
 }

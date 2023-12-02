@@ -40,7 +40,7 @@
                                         <img class="show-service-img" th:src="${brandAmenitie.getPhotoUrl()}" alt="Hình ảnh">
                                         <input th:field="*{photoUrl}" id="photoUrl" type="hidden" name="photoUrl" th:value="${brandAmenitie.getPhotoUrl()}">
                                         <input th:field="*{amenitieId}" id="amenitieId" type="hidden" name="amenitieId" th:value="${brandAmenitie.getAmenitieId()}">
-                                        <span th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}">photoUrl Error</span>
+                                        <span th:if="${#fields.hasErrors('photoUrl')}" class="error" th:errors="*{photoUrl}">photoUrl Error</span>
                                         <input type="file" class="form-control mt-2" style="display: none;" id="service-img" accept="image/*" onchange="uploadImage(this);">
                                         <div class="d-flex justify-content-center mt-3" style="width: 230px">
                                             <button type="button" class="btn btn-upload-img" onclick="document.getElementById('service-img').click();">
@@ -53,7 +53,7 @@
                                             <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
                                             <input th:field="*{amenitieName}" name="amenitieName" th:value="${brandAmenitie.getAmenitieName()}" type="text" class="form-control" id="name-service"
                                                    placeholder="Hệ thống tủ khóa">
-                                            <span th:if="${#fields.hasErrors('amenitieName')}" th:errors="*{amenitieName}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('amenitieName')}" class="error" th:errors="*{amenitieName}">photoUrl Error</span>
                                         </div>
                                         <div class="mb-4">
                                             <label class="d-block fw-bold">Trạng thái :</label>
@@ -69,11 +69,11 @@
                                         <div class="mb-4">
                                             <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
                                             <textarea th:field="*{description}" name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ" th:text="${brandAmenitie.getDescription()}"></textarea>
-                                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">photoUrl Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi" id="updateService">
                                     </div>
                                 </div>
                             </form>
@@ -139,6 +139,40 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#updateService").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin dịch vụ ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
 </script>
 </body>
 

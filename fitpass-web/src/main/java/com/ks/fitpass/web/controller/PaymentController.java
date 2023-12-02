@@ -3,6 +3,7 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
+import com.ks.fitpass.wallet.entity.CreateSessionRequest;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.constant.Constants;
 import com.stripe.Stripe;
@@ -11,13 +12,19 @@ import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 
@@ -29,11 +36,12 @@ public class PaymentController {
 
     private final WalletService walletService;
     private final TransactionService transactionService;
-
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @PostMapping("/create-session")
-    public ResponseEntity<String> createCheckoutSession(@RequestParam("amount") String selectedAmount) {
+    public ResponseEntity<String> createCheckoutSession(@RequestBody CreateSessionRequest request, HttpSession session) {
         Stripe.apiKey = Constants.STRIPE_API_KEY;
-        Long amount = Long.parseLong(selectedAmount);
+        Long amount = request.getAmount();
+
         try {
             SessionCreateParams.LineItem.PriceData priceData = SessionCreateParams.LineItem.PriceData.builder()
                     .setCurrency("vnd")
@@ -48,19 +56,19 @@ public class PaymentController {
             SessionCreateParams params =
                     SessionCreateParams.builder()
                             .setMode(SessionCreateParams.Mode.PAYMENT)
-                            .setSuccessUrl(Constants.DOMAIN_NAME + "/payment/success?amount=" + amount)
-                            .setCancelUrl(Constants.DOMAIN_NAME + "/payment/cancel?amount=" + amount)
+                            .setSuccessUrl(Constants.DOMAIN_NAME + "/payment/success")
+                            .setCancelUrl(Constants.DOMAIN_NAME + "/payment/cancel")
                             .addLineItem(
                                     SessionCreateParams.LineItem.builder()
                                             .setQuantity(1L)
-                                            .setPriceData(
-                                                    priceData
-                                            )
+                                            .setPriceData(priceData)
                                             .build())
                             .build();
-            Session session = Session.create(params);
+            Session stripeSession = Session.create(params);
 
-            String test = session.getUrl();
+            String test = stripeSession.getUrl();
+
+            session.setAttribute("amount", amount);
 
             return ResponseEntity.ok(test);
         } catch (StripeException e) {
@@ -70,42 +78,83 @@ public class PaymentController {
     }
 
     @GetMapping("/success")
-    public String processSuccessPayment(@RequestParam("amount") long amount, HttpSession session, Model model) {
-        User user = (User) session.getAttribute("userInfo");
-        double balance = walletService.getBalanceByUserId(user.getUserId());
-        double userTotalDeposit = transactionService.getTotalAmountOfTransactionByUserId(user.getUserId());
+    public String processSuccessPayment(HttpSession session, Model model) {
+        try {
+            Long amount = (Long) session.getAttribute("amount");
+            User user = (User) session.getAttribute("userInfo");
+            double balance = walletService.getBalanceByUserId(user.getUserId());
+            double userTotalDeposit = transactionService.getTotalAmountOfTransactionByUserId(user.getUserId());
 
-        double depositAmount = (double) amount / 1000;
+            double depositAmount = (double) amount / 1000;
 
-        double creditAfterPayment = balance + depositAmount;
-        double totalDepositAfterPayment = userTotalDeposit + depositAmount;
-        walletService.updateBalanceByUderId(user.getUserId(), creditAfterPayment);
+            double creditAfterPayment = balance + depositAmount;
+            double totalDepositAfterPayment = userTotalDeposit + depositAmount;
+            walletService.updateBalanceByUderId(user.getUserId(), creditAfterPayment);
 
-        // Insert vao bang transaction
-        TransactionDTO transactionDTO = new TransactionDTO();
-        transactionDTO.setAmount((int) amount);
-        transactionDTO.setTransactionDate(new Timestamp(System.currentTimeMillis()));
-        transactionDTO.setStatus("Thành công");
-        transactionDTO.setWalletId(walletService.getWalletIdByUserId(user.getUserId()));
-        transactionService.insertTransaction(transactionDTO);
+            // Insert vao bang transaction
+            TransactionDTO transactionDTO = new TransactionDTO();
+            transactionDTO.setAmount(Math.toIntExact(amount));
+            transactionDTO.setTransactionDate(new Timestamp(System.currentTimeMillis()));
+            transactionDTO.setStatus("Thành công");
+            transactionDTO.setWalletId(walletService.getWalletIdByUserId(user.getUserId()));
+            transactionService.insertTransaction(transactionDTO);
 
-        session.setAttribute("userCredit", creditAfterPayment);
-        session.setAttribute("userTotalDeposit",totalDepositAfterPayment);
-        model.addAttribute("redirectCountdown", 5); // Set the redirect countdown value (e.g., 5 seconds)
-        return "user/paymentSuccess";
+            session.removeAttribute("amount");
+            session.setAttribute("userCredit", creditAfterPayment);
+            session.setAttribute("userTotalDeposit", totalDepositAfterPayment);
+            model.addAttribute("redirectCountdown", 5); // Set the redirect countdown value (e.g., 5 seconds)
+            return "user/paymentSuccess";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
-    @GetMapping("/cancel")
-    public String processCancelPayment(@RequestParam("amount") long amount, HttpSession session) {
-        User user = (User) session.getAttribute("userInfo");
-        // Insert vao bang transaction
-        TransactionDTO transactionDTO = new TransactionDTO();
-        transactionDTO.setAmount((int) amount);
-        transactionDTO.setTransactionDate(new Timestamp(System.currentTimeMillis()));
-        transactionDTO.setStatus("Đã hủy");
-        transactionDTO.setWalletId(walletService.getWalletIdByUserId(user.getUserId()));
-        transactionService.insertTransaction(transactionDTO);
-        return "user/paymentCancel";
+    @PostMapping("/cancel")
+    public String processCancelPayment(HttpSession session, Model model) {
+        try {
+            Long amount = (Long) session.getAttribute("amount");
+            User user = (User) session.getAttribute("userInfo");
+            // Insert vao bang transaction
+            TransactionDTO transactionDTO = new TransactionDTO();
+            transactionDTO.setAmount(Math.toIntExact(amount));
+            transactionDTO.setTransactionDate(new Timestamp(System.currentTimeMillis()));
+            transactionDTO.setStatus("Đã hủy");
+            transactionDTO.setWalletId(walletService.getWalletIdByUserId(user.getUserId()));
+            transactionService.insertTransaction(transactionDTO);
+
+            session.removeAttribute("amount");
+            return "user/paymentCancel";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
 }

@@ -25,8 +25,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h1 class="fw-bold text-primary">Thông tin chi tiết cơ sở</h1>
-                        <div class="show-wallpaper-brand col-lg-12" th:style="'background-image: url(' + ${department.getDepartmentWallpaperUrl()} + ');'">
-                            <img class="show-logo-brand" th:src="${department.getDepartmentLogoUrl()}" alt="Hình ảnh">
+                        <div class="show-wallpaper-brand col-lg-12" th:style="'background-image: url(' + ${department.getDepartmentWallpaperUrl() != null ? department.getDepartmentWallpaperUrl() : '/images/system/background-empty.jpg'} + ');'">
+                            <img class="show-logo-brand" th:src="${department.getDepartmentLogoUrl() != null ? department.getDepartmentLogoUrl() : '/images/system/no_image.png'}" alt="Hình ảnh">
                         </div>
                     </div>
                     <div class="card-body">

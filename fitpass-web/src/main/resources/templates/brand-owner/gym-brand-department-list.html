@@ -49,10 +49,12 @@
                                 <th:block th:each="d : ${departmentList}">
                                     <tr>
                                         <td th:text="${dStat.index}">1</td>
-                                        <td th:text="${d.getDepartmentName()}">Cơ sở Đống Đa</td>
-                                        <td th:text="${d.getUserName()}">Lê Đình Tuấn</td>
-                                        <td><img th:src="${d.getDepartmentThumbnailUrl()}" alt="Thumbnail 1"></td>
-                                        <td th:text="${d.getDepartmentContactNumber()}">0987654321</td>
+                                        <td th:text="${d.getDepartmentName()}"></td>
+                                        <td th:text="${d.getUserName() != null ? d.getUserName() : 'Chưa có dữ liệu'}"></td>
+                                        <td>
+                                            <img th:src="${d.getDepartmentThumbnailUrl() != null ? d.getDepartmentThumbnailUrl() : '/images/system/no_image.png'}" alt="Image">
+                                        </td>
+                                        <td th:text="${d.getDepartmentContactNumber() != null ? d.getDepartmentContactNumber() : 'Chưa có dữ liệu'}"></td>
                                         <td>
                                             <select class="form-select set-active" th:onchange="'updateStatus(\'' + ${d.getDepartmentId()} + '\', this.value, this)'"
                                                     name="set-active">

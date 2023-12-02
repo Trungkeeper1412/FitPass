@@ -31,7 +31,7 @@
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
                             <div class="row text-start">
                                 <form id="formSubmit" action="/brand-owner/department/add" method="post">
-                                    <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center mb-3">
                                         <div class="col-md-4">
                                             <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                                 :</label>
@@ -76,19 +76,36 @@
 <th:block th:replace="brand-owner/common/script"></th:block>
 <script>
     $("#createNewDepartment").click(function () {
-        Swal.fire({
-            title: 'Bạn có muốn thêm cơ sở mới không?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Có',
-            cancelButtonText: 'Không'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $("#formSubmit").submit();
-            } else {
-
-            }
-        });
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn thêm cơ sở mới không?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Chỉ submit form nếu người dùng chấp nhận
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Cơ sở mới đã được thêm thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Cơ sở mới chưa được thêm.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
     });
 </script>
 </body>
