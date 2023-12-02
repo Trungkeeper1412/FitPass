@@ -249,7 +249,7 @@
 
     function loadBrand(page) {
         $.ajax({
-            url: '/user/homepage/brand',
+            url: '/homepage/brand',
             type: 'GET',
             data: {
                 page: page,
@@ -372,7 +372,7 @@
     function loadDepartmentData(userLatitude, userLongitude, belowDistance, city, sortPrice, sortRating, page, size) {
         $.ajax({
             type: "POST",
-            url: "/user/homepage",
+            url: "/homepage",
             data: {
                 userLatitude: userLatitude,
                 userLongitude: userLongitude,
@@ -395,7 +395,7 @@
     function loadDepartmentDataWithNoGeolocation(userLatitude, userLongitude, belowDistance, city, sortPrice, sortRating, page, size) {
         $.ajax({
             type: "POST",
-            url: "/user/homepage",
+            url: "/homepage",
             data: {
                 userLatitude: userLatitude,
                 userLongitude: userLongitude,
