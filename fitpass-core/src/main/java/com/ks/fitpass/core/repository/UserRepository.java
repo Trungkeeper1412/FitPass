@@ -50,4 +50,7 @@ public interface UserRepository {
     int getNumberOfAccountCreatedByDepartmentId(int departmentId);
 
     String getUserEmailByUserId(int userId);
+
+    String getUserImgByUserId(int userId);
+
 }

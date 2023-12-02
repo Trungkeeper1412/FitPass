@@ -195,4 +195,11 @@ public interface IRepositoryQuery {
                 JOIN user u ON u.user_detail_id = ud.user_detail_id
             WHERE u.user_id = ?;
             """;
+
+    String GET_USER_IMG_BY_USER_ID = """
+            SELECT ud.image_url
+                FROM user_detail ud
+                JOIN user u ON u.user_detail_id = ud.user_detail_id
+            WHERE u.user_id = ?;
+            """;
 }

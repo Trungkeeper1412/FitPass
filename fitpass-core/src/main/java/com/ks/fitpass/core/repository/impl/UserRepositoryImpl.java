@@ -221,4 +221,9 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     public String getUserEmailByUserId(int userId) {
         return jdbcTemplate.queryForObject(GET_USER_EMAIL_BY_USER_ID, String.class, userId);
     }
+
+    @Override
+    public String getUserImgByUserId(int userId) {
+        return jdbcTemplate.queryForObject(GET_USER_IMG_BY_USER_ID, String.class, userId);
+    }
 }
