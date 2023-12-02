@@ -1,18 +1,21 @@
 package com.ks.fitpass.core.config;
 
-import com.ks.fitpass.core.service.impl.UserServiceImpl;
+import com.ks.fitpass.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
@@ -23,21 +26,34 @@ public class WebSecurityConfig {
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+    @Autowired
+    private UserService userService;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
-                        .requestMatchers("/user-homepage-assets/**","/employee-assets/**", "/upload/**").permitAll()
+                .addFilterAfter(new AuditInterceptor(), AnonymousAuthenticationFilter.class)
+                .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
+                        .requestMatchers("/websocket/**").hasAnyAuthority("USER", "EMPLOYEE")
                         .requestMatchers("/login", "/logout").permitAll()
+                        .requestMatchers("/").permitAll()
+
                         .requestMatchers("/landing-page").permitAll()
-                        .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/homepage/**").permitAll()
+                        .requestMatchers("/brand/**").permitAll()
+                        .requestMatchers("/department/**").permitAll()
                         .requestMatchers("/cart/**").permitAll()
                         .requestMatchers("/become-a-partner/**").permitAll()
-//                        .requestMatchers("/profile/**").hasAuthority("USER")
+
+                        .requestMatchers("/checkout/**").hasAuthority("USER")
+                        .requestMatchers("/profile/**").hasAuthority("USER")
+                        .requestMatchers("/user/**").hasAuthority("USER")
                         .requestMatchers("/item/**").hasAuthority("USER")
                         .requestMatchers("/inventory/**").hasAuthority("USER")
                         .requestMatchers("/payment/**").hasAuthority("USER")
+                        .requestMatchers("/confirm/**").hasAuthority("USER")
 
                         .requestMatchers("/employee/**").hasAuthority("EMPLOYEE")
                         .requestMatchers("/gym-owner/**").hasAuthority("GYM_OWNER")
@@ -67,10 +83,16 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+
     @Bean
-    RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
+    public WebSecurityCustomizer ignoringCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/img/**", "/assets/**", "/ws/**", "/error/**", "/notification/**");
+    }
+
+    @Bean
+    RememberMeServices rememberMeServices(UserService userService) {
         TokenBasedRememberMeServices.RememberMeTokenAlgorithm encodingAlgorithm = TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256;
-        TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("FitPass", userDetailsService, encodingAlgorithm);
+        TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("FitPass", userService, encodingAlgorithm);
         rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256);
         rememberMe.setTokenValiditySeconds(3000);
         return rememberMe;
@@ -86,3 +108,4 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
