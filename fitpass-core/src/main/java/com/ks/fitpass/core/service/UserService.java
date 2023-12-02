@@ -17,6 +17,9 @@ public interface UserService {
 
     String getUserEmailByUserId(int userId);
 
+    String getUserImgByUserId(int userId);
+
+
     int insertIntoUser(User user);
 
     int getLastUserInsertId(User user);

@@ -82,6 +82,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.getUserEmailByUserId(userId);
     }
 
+    @Override
+    public String getUserImgByUserId(int userId) {
+        return userRepository.getUserImgByUserId(userId);
+    }
 
     @Override
     public int insertIntoUser(User user) {
