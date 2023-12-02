@@ -5,8 +5,8 @@
     </div>
     <div class="user">
       <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
-        <div class="gmail" th:if="${userEmail != null}">
-            <span th:text="${userEmail}"></span>
+        <div class="gmail" th:if="${session.userEmail != null}">
+            <span th:text="${session.userEmail}"></span>
         </div>
     </div>
   </div>

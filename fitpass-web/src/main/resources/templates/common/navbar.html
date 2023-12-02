@@ -2,7 +2,7 @@
 
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a th:href="@{/user/homepage}">Fitpass<span>.</span></a></h1>
+        <h1 class="logo me-auto me-lg-0"><a th:href="@{/homepage}">Fitpass<span>.</span></a></h1>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
@@ -12,46 +12,55 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <li><a class="nav-link scrollto active" th:href="@{/user/homepage}">Trang chủ</a></li>
-                <li><a class="nav-link scrollto" th:href="@{/}">Giới thiệu</a></li>
+                <li><a class="nav-link scrollto active" th:href="@{/homepage}">Trang chủ</a></li>
+                <li><a class="nav-link scrollto" th:href="@{/landing-page}">Giới thiệu</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/calendar/view}">Lịch tập</a></li>
-                <li>
-                    <a th:href="@{/profile/deposit}">
-                        <span class="text-money" th:text="${session.userCredit}"></span>&nbsp<span class="credit">Credit</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link scrollto" th:href="@{/cart/view}">
-                        <span class="cart-badge" id="card-badge">0</span>
-                        <i class="bi bi-cart3 fs-4"></i>
-                    </a>
-                </li>
-                <li >
-                    <div class="dropdown w-100">
-                        <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
-                            <span class="notification-badge" id="notification-badge">0</span>
-                            <i class="bi bi-bell fs-4 dropbtn"></i>
+                <th:block th:if="${session.userInfo != null}">
+                    <li>
+                        <a th:href="@{/profile/deposit}">
+                            <span class="text-money" th:text="${session.userCredit}"></span>&nbsp<span class="credit">Credit</span>
                         </a>
-                        <ul id="notification-dropdown">
-                            <li class="view-all-notification-link">
-                                <button onclick="window.location.href='/profile/my-notifications'">Xem tất cả</button>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                    </li>
+                </th:block>
+                    <li>
+                        <a class="nav-link scrollto" th:href="@{/cart/view}">
+                            <span class="cart-badge" id="card-badge">0</span>
+                            <i class="bi bi-cart3 fs-4"></i>
+                        </a>
+                    </li>
+                <th:block th:if="${session.userInfo != null}">
+                    <li >
+                        <div class="dropdown w-100">
+                            <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
+                                <span class="notification-badge" id="notification-badge">0</span>
+                                <i class="bi bi-bell fs-4 dropbtn"></i>
+                            </a>
+                            <ul id="notification-dropdown">
+                                <li class="view-all-notification-link">
+                                    <button onclick="window.location.href='/profile/my-notifications'">Xem tất cả</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </th:block>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
-                <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a></li>
-                <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
-            </ul>
+        <th:block th:if="${session.userInfo != null}">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ sơ người dùng</a></li>
+                    <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi đồ</a></li>
+                    <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                </ul>
+            </div>
+        </th:block>
+        <div th:unless="${session.userInfo != null}">
+            <a th:href="@{/login}" class="get-started-btn scrollto">Đăng nhập ngay</a>
         </div>
     </div>
 
