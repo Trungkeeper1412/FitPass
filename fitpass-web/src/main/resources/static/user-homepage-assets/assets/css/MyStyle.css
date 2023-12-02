@@ -3815,7 +3815,6 @@ input:checked + .toggle-slider:before {
 
 .gym-intro {
     margin-top: 30px;
-    padding: 10px;
     width: 100%;
 }
 
@@ -5401,7 +5400,7 @@ section {
     min-height: 300px;
     max-height: 300px;
     object-fit: cover;
-    padding: 20px;
+    padding: 15px;
 }
 
 .list-of-brand .brand-image img {
@@ -5667,7 +5666,6 @@ section {
     border-radius: 20px 0;
     background-color: orange;
     border: 1px solid darkorange;
-    width: 60%;
     text-align: center;
     font-size: 16px;
     color: white;
@@ -5681,11 +5679,14 @@ section {
     height: fit-content;
 }
 
+.list-img {
+    padding: 15px 15px 0 15px;
+}
+
 .list-of-gym .card-img-top {
-    /*padding-top: 5px;*/
+    border-radius: 10px;
     width: 100%;
     height: 250px;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
 }
 
 .list-of-gym .card-body label {
