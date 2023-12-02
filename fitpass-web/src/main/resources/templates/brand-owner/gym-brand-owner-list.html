@@ -49,7 +49,7 @@
                                 <th:block th:each="gymOwner : ${gymOwnerList}">
                                     <tr>
                                         <td th:text="${gymOwnerStat.index + 1}"></td>
-                                        <td><img th:src="${gymOwner.getImageUrl()}"/></td>
+                                        <td><img class="go-image" th:src="${gymOwner.getImageUrl()}"/></td>
                                         <td th:text="${gymOwner.getFirstName() + ' ' + gymOwner.getLastName()}">Lê Đình Tuấn</td>
                                         <td th:text="${gymOwner.getPhoneNumber()}">0987654321</td>
                                         <td th:text="${gymOwner.getEmail()}">ldt2001@gmail.com</td>
@@ -89,8 +89,12 @@
 
 <!-- Logout Modal-->
 <th:block th:replace="brand-owner/common/logout-modal"></th:block>
-
 <th:block th:replace="brand-owner/common/script"></th:block>
+
+<script>
+    let list_go_img = document.getElementsByClassName("go-image");
+    console.log(list_go_img)
+</script>
 
 </body>
 
