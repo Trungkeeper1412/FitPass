@@ -167,4 +167,9 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
     public Integer getNumberPercentage(int requestHistoryId) {
         return jdbcTemplate.queryForObject(GET_NUMBER_PERCENTAGE, Integer.class, requestHistoryId);
     }
+
+    @Override
+    public int getUserIdByRequestHistoryId(int requestHistoryId) {
+        return jdbcTemplate.queryForObject(GET_USER_ID_BY_REQUEST_HISTORY_ID, Integer.class, requestHistoryId);
+    }
 }
