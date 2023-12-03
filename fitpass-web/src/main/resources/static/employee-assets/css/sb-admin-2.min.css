@@ -13811,19 +13811,47 @@ label.error {
     position: absolute;
 }
 @media (max-width: 1600px) {
-.user-status{
-    text-align: center;
-    margin:auto;
-    width: 110px;
-    margin-left: 15px;
-    background-color: #e5e5e5;
-    color: grey;
-    font-size: 12px;
-    font-weight: 450;
-    padding: 6px 12px;
-    border-radius: 20px;
+    .user-status {
+        text-align: center;
+        margin: auto;
+        width: 110px;
+        margin-left: 15px;
+        background-color: #e5e5e5;
+        color: grey;
+        font-size: 12px;
+        font-weight: 450;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
 }
 .working{
     color: darkblue;
     background-color: #cae8fd;
+}
+
+.w3-modal{
+    width: 100%;
+}
+
+.w3-animate-zoom {
+    position: relative;
+    margin: auto;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.w3-animate-zoom img {
+    width: 80%;
+    height: 30%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.w3-button{
+    position: absolute;
+    top: 3%;
+    right: 14%;
 }

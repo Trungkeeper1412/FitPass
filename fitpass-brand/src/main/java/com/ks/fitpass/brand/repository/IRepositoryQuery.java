@@ -242,5 +242,8 @@ public interface IRepositoryQuery {
                 WHERE gd.`gym_department_id` = ?;
             """;
 
-
+    String CREATE_BRAND_WITH_BRAND_NAME = """
+                INSERT INTO brand (user_id, name, brand_status_key,first_time)
+                VALUES (?, ?, ?,?);
+            """;
 }

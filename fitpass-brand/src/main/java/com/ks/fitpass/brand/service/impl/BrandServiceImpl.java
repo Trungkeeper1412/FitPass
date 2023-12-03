@@ -85,4 +85,9 @@ public class BrandServiceImpl implements BrandService{
     public int getBrandOwnerIdByDepartmentId(int departmentId) {
         return brandRepository.getBrandOwnerIdByDepartmentId(departmentId);
     }
+
+    @Override
+    public int createBrandWithBrandName(int userId, String brandName) {
+        return brandRepository.createBrandWithBrandName(userId, brandName);
+    }
 }

@@ -325,8 +325,9 @@ public class GymOwnerController {
             newUser.setUserDeleted(userDelete);
             newUser.setUserDetailId(userDetailId);
             newUser.setCreatedBy(user.getUserId());
+            newUser.setInDepartmentId(departmentDetails.getDepartmentId());
             // Insert into User
-            userService.insertIntoUser(newUser);
+            userService.createEmployee(newUser);
             // Get last user insert id
             int userInsertId = userService.getLastUserInsertId(newUser);
             // Insert into user_role

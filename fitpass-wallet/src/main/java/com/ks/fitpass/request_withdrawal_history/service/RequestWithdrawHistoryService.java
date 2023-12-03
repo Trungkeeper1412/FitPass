@@ -23,4 +23,5 @@ public interface RequestWithdrawHistoryService {
     RequestHistoryAdmin getById(int requestHistoryId);
     int updateStatus(int requestHistoryId, String status);
     Integer getNumberPercentage(int requestHistoryId);
+    int getUserIdByRequestHistoryId(int requestHistoryId);
 }

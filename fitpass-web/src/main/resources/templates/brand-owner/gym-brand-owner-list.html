@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
-<body id="page-top">
+<body id="page-top" style="position: relative">
 
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -49,7 +49,7 @@
                                 <th:block th:each="gymOwner : ${gymOwnerList}">
                                     <tr>
                                         <td th:text="${gymOwnerStat.index + 1}"></td>
-                                        <td><img class="go-image" th:src="${gymOwner.getImageUrl()}"/></td>
+                                        <td><img onclick="onClickImage(this)" class="w3-hover-opacity go-image" th:src="${gymOwner.getImageUrl()}"/></td>
                                         <td th:text="${gymOwner.getFirstName() + ' ' + gymOwner.getLastName()}">Lê Đình Tuấn</td>
                                         <td th:text="${gymOwner.getPhoneNumber()}">0987654321</td>
                                         <td th:text="${gymOwner.getEmail()}">ldt2001@gmail.com</td>
@@ -62,6 +62,16 @@
                                 </th:block>
                                 </tbody>
                             </table>
+                        </div>
+                        <div id="modal01" class="w3-modal" style="display: none">
+                            <div style="text-align: center; position: relative">
+                                <div class="w3-animate-zoom" >
+                                    <img id="img01" >
+                                    <span class="w3-button">
+                                      <img id="close-img"  style="width: 25px" src="https://cdn-icons-png.flaticon.com/128/660/660252.png">
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,8 +102,17 @@
 <th:block th:replace="brand-owner/common/script"></th:block>
 
 <script>
-    let list_go_img = document.getElementsByClassName("go-image");
-    console.log(list_go_img)
+    let close_image_bnt = document.getElementById("close-img");
+    close_image_bnt.addEventListener('click', function() {
+        console.log("delete");
+        document.getElementById("modal01").style.display = "none";
+    })
+    function onClickImage(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        document.getElementById("modal01").style.position = "absolute";
+        document.getElementById("modal01").style.top = "10%";
+    }
 </script>
 
 </body>

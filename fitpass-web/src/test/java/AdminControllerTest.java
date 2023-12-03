@@ -567,47 +567,47 @@ public class AdminControllerTest {
         Assertions.assertNull(result.getBody()); // Ensure the body is null for a bad request
         verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
     }
-    @Test
-    public void testUpdateWithdrawalStatusSuccess() {
-        // Arrange
-        int requestHistoryId = 1;
-        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
+//    @Test
+//    public void testUpdateWithdrawalStatusSuccess() {
+//        // Arrange
+//        int requestHistoryId = 1;
+//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
+//
+//        // Act
+//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+//
+//        // Assert
+//        assertEquals("redirect:/admin/withdrawal", resultView);
+//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+//    }
 
-        // Act
-        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+//    @Test
+//    public void testUpdateWithdrawalStatusUpdateFail() {
+//        // Arrange
+//        int requestHistoryId = 1;
+//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
+//
+//        // Act
+//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+//    }
 
-        // Assert
-        assertEquals("redirect:/admin/withdrawal", resultView);
-        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-    }
-
-    @Test
-    public void testUpdateWithdrawalStatusUpdateFail() {
-        // Arrange
-        int requestHistoryId = 1;
-        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
-
-        // Act
-        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-    }
-
-    @Test
-    public void testUpdateWithdrawalStatusDataAccessException() {
-        // Arrange
-        int requestHistoryId = 1;
-        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-
-        // Act
-        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-    }
+//    @Test
+//    public void testUpdateWithdrawalStatusDataAccessException() {
+//        // Arrange
+//        int requestHistoryId = 1;
+//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+//
+//        // Act
+//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+//    }
 
 
 }

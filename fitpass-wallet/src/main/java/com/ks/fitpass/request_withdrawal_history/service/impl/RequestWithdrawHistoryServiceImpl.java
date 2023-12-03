@@ -75,4 +75,9 @@ public class RequestWithdrawHistoryServiceImpl implements RequestWithdrawHistory
     public Integer getNumberPercentage(int requestHistoryId) {
         return requestWithdrawHistoryRepository.getNumberPercentage(requestHistoryId);
     }
+
+    @Override
+    public int getUserIdByRequestHistoryId(int requestHistoryId) {
+        return requestWithdrawHistoryRepository.getUserIdByRequestHistoryId(requestHistoryId);
+    }
 }

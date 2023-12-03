@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `user` (
                                       user_deleted     TINYINT NOT NULL,
                                       created_by INT NULL,
                                       first_time boolean default 1,
+                                      in_department_id INT NULL,
                                       FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id),
                                       CONSTRAINT user_FK FOREIGN KEY (created_by) REFERENCES `user`(user_id)
 );
@@ -86,14 +87,14 @@ CREATE TABLE IF NOT EXISTS user_role (
 CREATE TABLE IF NOT EXISTS brand (
                                      brand_id                    INT AUTO_INCREMENT PRIMARY KEY,
                                      user_id                     INT,
-                                     name                        VARCHAR(50) NOT NULL,
-                                     logo_url                    VARCHAR(255) NOT NULL,
-                                     wallpaper_url               VARCHAR(255) NOT NULL,
-                                     thumbnail_url               VARCHAR(255) NOT NULL,
+                                     name                        VARCHAR(100) NOT NULL,
+                                     logo_url                    VARCHAR(255),
+                                     wallpaper_url               VARCHAR(255),
+                                     thumbnail_url               VARCHAR(255),
                                      description                 text,
                                      rating                      DECIMAL(10, 2) DEFAULT 0,
-                                     contact_number              VARCHAR(20) NOT NULL,
-                                     contact_email				VARCHAR(50) NOT NULL,
+                                     contact_number              VARCHAR(20),
+                                     contact_email				VARCHAR(50),
                                      brand_status_key   		    INT NOT NULL,
                                      money_percent               INT DEFAULT 0 ,
                                      first_time boolean default 1,

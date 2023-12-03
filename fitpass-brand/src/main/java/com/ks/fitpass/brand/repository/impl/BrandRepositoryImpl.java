@@ -3,7 +3,6 @@ package com.ks.fitpass.brand.repository.impl;
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.dto.BrandOwnerProfile;
 import com.ks.fitpass.brand.entity.Brand;
-import com.ks.fitpass.brand.entity.BrandStatus;
 import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;
 import com.ks.fitpass.brand.repository.IRepositoryQuery;
 import com.ks.fitpass.brand.repository.BrandRepository;
@@ -175,7 +174,13 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     public int getBrandOwnerIdByDepartmentId(int departmentId) {
         return jdbcTemplate.queryForObject(GET_BRAND_OWNER_ID_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
-       @Override
+
+    @Override
+    public int createBrandWithBrandName(int userId, String brandName) {
+        return jdbcTemplate.update(CREATE_BRAND_WITH_BRAND_NAME, userId, brandName, 1,1);
+    }
+
+    @Override
     public int getBrandMoneyPercent(int brandId) {
         return jdbcTemplate.queryForObject(GET_BRAND_MONEY_PERCENT, Integer.class, brandId);
     }
