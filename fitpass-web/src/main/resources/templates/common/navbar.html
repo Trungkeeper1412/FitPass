@@ -12,14 +12,8 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <li><a class="nav-link scrollto active" th:href="@{/homepage}">Trang chủ</a></li>
+                <li><a class="nav-link scrollto" th:href="@{/homepage}">Trang chủ</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/landing-page}">Giới thiệu</a></li>
-                <th:block th:unless="${session.userInfo != null}">
-                    <li><a class="nav-link scrollto" href="#services">Dịch vụ</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Bộ sưu tập</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Đội ngũ</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
-                </th:block>
                 <th:block th:if="${session.userInfo != null}">
                     <li><a class="nav-link scrollto" th:href="@{/calendar/view}">Lịch tập</a></li>
                     <li>
