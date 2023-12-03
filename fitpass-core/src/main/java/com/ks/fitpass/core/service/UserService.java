@@ -16,8 +16,6 @@ public interface UserService extends UserDetailsService {
 
     int getLastInsertUserDetailId(UserDetail userDetail);
 
-    String getUserEmailByUserId(int userId);
-
     int insertIntoUser(User user);
 
     int getLastUserInsertId(User user);
