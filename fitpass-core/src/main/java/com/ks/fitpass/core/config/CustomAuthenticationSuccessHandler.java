@@ -48,8 +48,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 response.sendRedirect("/gym-owner/index");
                 break;
             case "EMPLOYEE":
-                int departmentId = userRepository.getDepartmentIdByEmployeeId(userSession.getUserId()); // Replace with the actual employee ID
-                response.sendRedirect("/employee/history?id=" + departmentId);
+                Integer departmentId = userRepository.getDepartmentIdByEmployeeId(userSession.getUserId());
+                if (departmentId == null || departmentId == 0) {
+                    response.sendRedirect("/error/403");
+                } else {
+                    response.sendRedirect("/employee/history?id=" + departmentId);
+                }
                 break;
             case "USER":
                 response.sendRedirect("/homepage");
