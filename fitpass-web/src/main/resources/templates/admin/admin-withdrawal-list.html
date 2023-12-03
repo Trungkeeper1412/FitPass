@@ -222,20 +222,23 @@
 <th:block th:replace="admin/common/script"></th:block>
 
 <script>
+    $(document).ready(function() {
+        var table = $('#table-withdrawal-success').DataTable();
 
-    $('#filterButtonPending').on('click', function () {
-        // Lọc theo trạng thái 'Active'
-        table.columns(6).search('Đang xử lý').draw();
-    });
+        $('#filterButtonPending').on('click', function () {
+            // Lọc theo trạng thái 'Active'
+            table.columns(6).search('Đang xử lý').draw();
+        });
 
-    $('#filterButtonAll').on('click', function () {
-        // Lọc theo trạng thái 'Active'
-        table.columns(6).search('').draw();
-    });
+        $('#filterButtonAll').on('click', function () {
+            // Lọc theo trạng thái 'Active'
+            table.columns(6).search('').draw();
+        });
 
-    $('#filterButtonSuccess').on('click', function () {
-        // Lọc theo trạng thái 'Active'
-        table.columns(6).search('Thành công').draw();
+        $('#filterButtonSuccess').on('click', function () {
+            // Lọc theo trạng thái 'Active'
+            table.columns(6).search('Thành công').draw();
+        });
     });
 
     function getDetail(requestId) {

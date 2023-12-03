@@ -218,19 +218,23 @@
 <th:block th:replace="brand-owner/common/script"></th:block>
 
 <script>
-    $('#filterButtonPending').on('click', function () {
-        // Lọc theo trạng thái 'Active'
-        table.columns(5).search('Đang xử lý').draw();
-    });
+    $(document).ready(function() {
+        var table = $('#table-withdrawal-success').DataTable();
 
-    $('#filterButtonAll').on('click', function () {
-        // Lọc theo trạng thái 'Active'
-        table.columns(5).search('').draw();
-    });
+        $('#filterButtonPending').on('click', function () {
+            // Filter by status 'Đang xử lý'
+            table.columns(5).search('Đang xử lý').draw();
+        });
 
-    $('#filterButtonSuccess').on('click', function () {
-        // Lọc theo trạng thái 'Active'
-        table.columns(5).search('Thành công').draw();
+        $('#filterButtonAll').on('click', function () {
+            // Remove filter
+            table.columns(5).search('').draw();
+        });
+
+        $('#filterButtonSuccess').on('click', function () {
+            // Filter by status 'Thành công'
+            table.columns(5).search('Thành công').draw();
+        });
     });
 </script>
 </body>
