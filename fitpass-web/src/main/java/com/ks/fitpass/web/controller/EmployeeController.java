@@ -274,9 +274,9 @@ public class EmployeeController {
         double userBalance = walletService.getBalanceByUserId(userIdReceived);
         int checkInHistoryId = checkInHistoryService.getCheckInHistoryIdByOrderDetailIdAndCheckInTime(orderDetailId, checkInTime);
 
-        orderCheckOut.setCreditInWallet(userBalance);
+//        orderCheckOut.setCreditInWallet(userBalance);
         orderCheckOut.setCreditNeedToPay(totalCredit);
-        orderCheckOut.setCreditAfterPay(userBalance - totalCredit);
+//        orderCheckOut.setCreditAfterPay(userBalance - totalCredit);
         orderCheckOut.setDurationHavePractice(duration);
         orderCheckOut.setHistoryCheckInId(checkInHistoryId);
         orderCheckOut.setCheckOutTime(new Timestamp(checkOutTimeLong));

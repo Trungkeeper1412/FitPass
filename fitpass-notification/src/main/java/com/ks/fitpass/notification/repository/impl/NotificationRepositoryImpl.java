@@ -134,12 +134,12 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     }
 
     @Override
-    public int getNumberOfUnseenNotification(int userIdReceive) {
+    public Integer getNumberOfUnseenNotification(int userIdReceive) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_NUM_OF_UNSEEN_NOTIFICATION_BY_USER_RECEIVE_ID, Integer.class, userIdReceive);
     }
 
     @Override
-    public int getTotalNotificationsForUser(int userId) {
+    public Integer getTotalNotificationsForUser(int userId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_NUM_OF_TOTAL_NOTIFICATION_BY_USER_RECEIVE_ID, Integer.class, userId);
     }
 }

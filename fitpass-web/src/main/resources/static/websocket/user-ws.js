@@ -1,5 +1,4 @@
 let stompClient = null;
-let notificationCount = 0;
 let globalCurrentPage = 1;
 let defaultPageSize = 4;
 
@@ -10,8 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const totalPages = await getTotalPages();
             renderPaginationLinks(globalCurrentPage, totalPages);
-
-            notificationCount = await getTotalUnseenNotificationNumber();
         } catch (error) {
             console.error('Error:', error);
         }
@@ -29,24 +26,21 @@ function connect() {
             insertWebSocketNavbarNotification(message);
         });
         stompClient.subscribe('/user/specific/private-messages', function (message) {
-            if (message.body) {
-                insertWebSocketNotification(message);
-                insertWebSocketNavbarNotification(message);
-            } else {
-                alert("Received empty message");
-            }
+            insertWebSocketNotification(message);
+            insertWebSocketNavbarNotification(message);
         }, function (error) {
             console.error("Error occurred while subscribing:", error);
         });
 
         stompClient.subscribe('/all/global-notifications', function () {
             notificationCount = notificationCount + 1;
-            updateNotificationBellDisplay();
+            updateNotificationBellDisplay(notificationCount);
         });
 
         stompClient.subscribe('/user/specific/private-notifications', function () {
+            console.log(notificationCount)
             notificationCount = notificationCount + 1;
-            updateNotificationBellDisplay();
+            updateNotificationBellDisplay(notificationCount);
         });
     });
 }
@@ -66,24 +60,22 @@ async function getTotalPages() {
     }
 }
 
-async function getTotalUnseenNotificationNumber() {
-    try {
-        const response = await fetch(`/notification/user/get-total-unseen`);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching total notifications number:', error);
-        throw error;
-    }
+function getTotalUnseenNotificationNumber() {
+    return fetch(`/notification/user/get-total-unseen`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching total notifications number:', error);
+            throw error;
+        });
 }
 
-function updateNotificationBellDisplay() {
-    let notificationNum = document.querySelector(".notification-badge")
-    notificationNum.textContent = notificationCount;
+function updateNotificationBellDisplay(notificationCount) {
+    notificationCountElement.textContent = notificationCount;
     if (notificationCount === 0) {
         const noNotificationElement = document.createElement('li');
         noNotificationElement.classList.add('no-notification');
@@ -119,7 +111,7 @@ function sendSeenNotification(id) {
         url: `/notification/seen?id=${id}`,
         success: function (data) {
             notificationCount = notificationCount - 1
-            updateNotificationBellDisplay()
+            updateNotificationBellDisplay(notificationCount)
             console.log("Trạng thái update status seen notification: ", data)
         },
         error: function () {
@@ -202,34 +194,6 @@ function removeOldestNotificationFromPage() {
     }
 }
 
-function insertNotificationNavDiv(notification) {
-    const noNotificationElement = document.querySelector('#notification-dropdown .no-notification');
-    if (noNotificationElement) {
-        noNotificationElement.remove();
-    }
-    const notificationsContainer = document.querySelector('#notification-dropdown');
-    const notificationNavCards = notificationsContainer.querySelectorAll('.notification-card-nav');
-    // If there are more than 3 notifications, remove the oldest one
-    if (notificationNavCards.length >= 3) {
-        // Remove the last notification (oldest) from the DOM
-        notificationsContainer.removeChild(notificationNavCards[notificationNavCards.length - 1]);
-    }
-
-    const navItem = document.createElement('li');
-    navItem.className = 'notification-dropdown-card';
-    navItem.setAttribute('nav-notification-id', notification.notificationId);
-    navItem.innerHTML = `
-            <a href="/profile/my-notifications" class="notification-card-nav">
-                <img src="/user-homepage-assets/assets/img/new-message.png" alt="Alert">
-                <div>  
-                    <div class="notification-card-nav-time">${notification.timeSend}</div>
-                    <div class="notification-card-nav-title">${notification.messageType}</div>
-                </div>
-            </a>
-        `;
-    notificationsContainer.prepend(navItem);
-}
-
 function insertWebSocketNavbarNotification(message) {
     let notification;
 
@@ -248,6 +212,35 @@ function insertWebSocketNavbarNotification(message) {
         console.error("Error parsing JSON:", error);
     }
 }
+
+function insertNotificationNavDiv(notification) {
+    const noNotificationElement = document.querySelector('#notification-dropdown .no-notification');
+    if (noNotificationElement) {
+        noNotificationElement.remove();
+    }
+    const notificationsContainer = document.querySelector('#notification-dropdown');
+    const notificationNavCards = notificationsContainer.querySelectorAll('.notification-card-nav');
+    // If there are more than 3 notifications, remove the oldest one
+    if (notificationNavCards.length >= 3) {
+        // Remove the last notification (oldest) from the DOM
+        notificationNavCards[notificationNavCards.length - 1].remove();
+    }
+
+    const navItem = document.createElement('li');
+    navItem.className = 'notification-dropdown-card';
+    navItem.setAttribute('nav-notification-id', notification.notificationId);
+    navItem.innerHTML = `
+            <a href="/profile/my-notifications" class="notification-card-nav">
+                <img src="/user-homepage-assets/assets/img/new-message.png" alt="Alert">
+                <div>  
+                    <div class="notification-card-nav-time">${new Date(notification.timeSend).toLocaleString()}</div>
+                    <div class="notification-card-nav-title">${notification.messageType}</div>
+                </div>
+            </a>
+        `;
+    notificationsContainer.prepend(navItem);
+}
+
 
 // ******************** Load newest notification for navbar bell ************************ //
 function getNewestUnseenNotifications() {
@@ -308,6 +301,8 @@ function loadNotificationDropdown(unseenNotifications) {
     notificationNavCards.forEach((card) => {
         card.remove();
     });
+    // Get the "View All" button
+    const viewAllButton = document.querySelector('.view-all-notification-link');
 
     // Iterate over notifications and append them to the dropdown
     unseenNotifications.forEach(notification => {
@@ -323,8 +318,10 @@ function loadNotificationDropdown(unseenNotifications) {
                 </div>
             </a>
         `;
-        $("#notification-dropdown").prepend(listItem);
+        notificationsContainer.insertBefore(listItem, viewAllButton);
     });
+
+
 }
 
 function deleteNavNotificationItem(notificationId) {
@@ -393,7 +390,7 @@ function loadNotificationsFromDB(page, size) {
 function renderPage(notifications) {
     const pagination = document.querySelector("#notification-list .pagination");
 
-    if(notifications.length === 0 ) {
+    if (notifications.length === 0) {
         $(".my-notifications").html('' +
             '<div class="empty-notification">\n' +
             '            <img src="/user-homepage-assets/assets/img/no-notification.png" alt="Image">\n' +
@@ -403,7 +400,7 @@ function renderPage(notifications) {
         if (pagination) {
             pagination.style.boxShadow = "none";
         }
-    } else{
+    } else {
         $(".my-notifications").html('');
         if (pagination) {
             pagination.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.2)";
@@ -486,6 +483,8 @@ function handleCheckInNotificationClick(notification) {
             confirmButtonText: 'Yes',
             cancelButtonText: 'No',
             reverseButtons: true,
+            allowEscapeKey: false,
+            allowOutsideClick: false
         }).then((result) => {
             // Handle user's choice based on result.isConfirmed
             if (result.isConfirmed) {
@@ -514,13 +513,51 @@ function handleCheckInNotificationClick(notification) {
                 cancel: "no"
             },
             success: function () {
-                console.log("Đã gửi thông báo check in thành công đến nhân viên");
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("Đã gửi thông báo check in thành công đến nhân viên");
+                // add seen class to the notification list
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
                     .removeClass("unseen-notification").addClass("seen-notification");
+                // read it
                 deleteNavNotificationItem(notification.notificationId);
             },
             error: function () {
-                alert("Đã xảy ra lỗi gửi check in thành công");
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.error("Đã xảy ra lỗi gửi check in thành công");
             }
         });
     }
@@ -539,13 +576,49 @@ function handleCheckInNotificationClick(notification) {
                 cancel: "yes"
             },
             success: function () {
-                console.log("Đã gửi thông báo hủy xác nhận check in thành công")
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "4000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("Đã gửi thông báo hủy xác nhận check in thành công");
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
                     .removeClass("unseen-notification").addClass("seen-notification");
                 deleteNavNotificationItem(notification.notificationId);
             },
             error: function () {
-                alert("Đã xảy ra lỗi khi gửi yêu cầu hủy check in");
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.error("Đã xảy ra lỗi khi gửi yêu cầu hủy check in")
             }
         });
     }
@@ -573,7 +646,7 @@ function insertCheckOutNotificationDiv(notification, order) {
     notiContentDiv.append(
         '<div>' +
         '<span><img style="width: 18px; height: 18px;" src="/user-homepage-assets/assets/img/small-bell.png" alt="Bell icon"></span>' +
-        '<span class="fw-bold">' + notification.departmentName + ' -</span>' +
+        '<span class="fw-bold">' + notification.departmentName + ' - </span>' +
         '<span>' + notification.messageType + '</span>' +
         '</div>'
     );
@@ -609,9 +682,10 @@ function handleCheckOutNotificationClick(notification) {
         let [orderDetailConfirmCheckOutJson, dataSendCheckOutFlexibleJson] = notification.message.split('|');
         let orderDetailConfirmCheckOut = JSON.parse(orderDetailConfirmCheckOutJson);
         let dataSendCheckOutFlexible = JSON.parse(dataSendCheckOutFlexibleJson);
+        let userBalance = parseFloat(document.getElementById('user-balance').textContent);
 
         if (orderDetailConfirmCheckOut.durationHavePractice > 0) {
-            if (orderDetailConfirmCheckOut.creditAfterPay < 0) {
+            if (userBalance < orderDetailConfirmCheckOut.creditNeedToPay) {
                 Swal.fire({
                     title: `Bạn không đủ số dư credit để thanh toán`,
                     icon: 'error',
@@ -620,9 +694,8 @@ function handleCheckOutNotificationClick(notification) {
                 <p  class="fw-bold">Gói tập: <span class="fw-normal">${orderDetailConfirmCheckOut.gymPlanName}</span></p>
                 <p  class="fw-bold">Giá gói: <span class="fw-normal">${orderDetailConfirmCheckOut.pricePerHours} credit/giờ</span></p>
                 <p  class="fw-bold">Đã tập: <span class="fw-normal">${orderDetailConfirmCheckOut.durationHavePractice} phút</span></p>
-                <p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${orderDetailConfirmCheckOut.creditInWallet} credit</span></p>
+                <p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${userBalance} credit</span></p>
                 <p  class="fw-bold">Số credit cần trả: <span class="fw-normal">${orderDetailConfirmCheckOut.creditNeedToPay} credit</span></p>
-                <p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${orderDetailConfirmCheckOut.creditAfterPay} credit</span></p>
                 `,
                     showCancelButton: true,
                     confirmButtonText: '<a href="deposit">Nạp thêm credit</a>',
@@ -640,9 +713,9 @@ function handleCheckOutNotificationClick(notification) {
                 <p  class="fw-bold">Gói tập: <span class="fw-normal">${orderDetailConfirmCheckOut.gymPlanName}</span></p>
                 <p  class="fw-bold">Giá gói: <span class="fw-normal">${orderDetailConfirmCheckOut.pricePerHours} credit/giờ</span></p>
                 <p  class="fw-bold">Đã tập: <span class="fw-normal">${orderDetailConfirmCheckOut.durationHavePractice} phút</span></p>
-                <p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${orderDetailConfirmCheckOut.creditInWallet} credit</span></p>
+                <p  class="fw-bold">Số dư credit trong ví: <span class="fw-normal">${userBalance} credit</span></p>
                 <p  class="fw-bold">Số credit cần trả: <span class="fw-normal">${orderDetailConfirmCheckOut.creditNeedToPay} credit</span></p>
-                <p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${orderDetailConfirmCheckOut.creditAfterPay} credit</span></p>
+                <p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${userBalance - orderDetailConfirmCheckOut.creditNeedToPay} credit</span></p>
                 `,
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
@@ -653,7 +726,7 @@ function handleCheckOutNotificationClick(notification) {
                 }).then((result) => {
                     // Handle user's choice based on result.isConfirmed
                     if (result.isConfirmed) {
-                        handleCheckOutConfirmation(notification);
+                        handleCheckOutConfirmation(notification, userBalance);
                     } else {
                         handleCheckOutCancellation(notification);
                     }
@@ -667,7 +740,7 @@ function handleCheckOutNotificationClick(notification) {
 
 
     // Function to handle check-in confirmation when user clicks "Yes" in Swal dialog
-    function handleCheckOutConfirmation(notification) {
+    function handleCheckOutConfirmation(notification, userBalance) {
         sendSeenNotification(notification.notificationId);
         let [orderDetailConfirmCheckOutJson, dataSendCheckOutFlexibleJson] = notification.message.split('|');
         let orderDetailConfirmCheckOut = JSON.parse(orderDetailConfirmCheckOutJson);
@@ -678,7 +751,7 @@ function handleCheckOutNotificationClick(notification) {
             checkInHistoryId: orderDetailConfirmCheckOut.historyCheckInId,
             checkOutTime: orderDetailConfirmCheckOut.checkOutTime,
             totalCredit: orderDetailConfirmCheckOut.creditNeedToPay,
-            creditAfterPay: orderDetailConfirmCheckOut.creditAfterPay,
+            creditAfterPay: userBalance - orderDetailConfirmCheckOut.creditNeedToPay,
             notification: {
                 orderDetailId: notification.orderDetailId,
                 userIdSend: notification.userIdReceive, //id của người dùng để xác nhận check in vào db
@@ -695,14 +768,50 @@ function handleCheckOutNotificationClick(notification) {
             },
             data: JSON.stringify(dataToSend),
             success: function (data) {
-                console.log("Update check out time vào db check in history thành công", data)
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false, // Turn off progress bar
+                    "positionClass": "toast-bottom-right", // Change position to bottom right
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "500", // Increase show duration
+                    "hideDuration": "2000", // Increase hide duration
+                    "timeOut": "7000", // Show for longer
+                    "extendedTimeOut": "2000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "slideDown", // Change show animation
+                    "hideMethod": "slideUp" // Change hide animation
+                };
+
+                toastr.success("Đã thanh toán thành công");
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
                     .removeClass("unseen-notification").addClass("seen-notification");
                 deleteNavNotificationItem(notification.notificationId);
 
             },
             error: function () {
-                alert("Đã xảy ra lỗi trong quá trình xác nhận check out");
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.error("Đã xảy ra lỗi trong quá trình xác nhận check out");
             }
         });
     }
@@ -740,8 +849,8 @@ function handleCheckOutNotificationClick(notification) {
                     .removeClass("unseen-notification").addClass("seen-notification");
                 deleteNavNotificationItem(notification.notificationId);
             },
-            error: function () {
-                alert("Đã xảy ra lỗi trong quá trình hủy check out");
+            error: function (data) {
+                console.log("Đã xảy ra lỗi trong quá trình hủy check out", data)
             }
         });
     }
