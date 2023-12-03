@@ -25,9 +25,6 @@ public class WebSecurityConfig {
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    @Autowired
-    private UserService userService;
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
