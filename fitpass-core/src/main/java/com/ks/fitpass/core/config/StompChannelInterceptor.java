@@ -21,11 +21,11 @@ public class StompChannelInterceptor implements ChannelInterceptor {
 
         if (StompCommand.CONNECT.equals(accessor.getCommand())) {
             Object raw = message.getHeaders().get(SimpMessageHeaderAccessor.NATIVE_HEADERS);
-            logger.error("The raw message header {}:", raw);
+            logger.warn("The raw message header {}:", raw);
 
         }
 
-        logger.error("The raw message {}:", message);
+        logger.warn("The raw message {}:", message);
         return message;
     }
 }
