@@ -30,13 +30,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String userRole = determineUserRole(authentication);
         HttpSession session = request.getSession();
         CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        com.ks.fitpass.core.entity.User userSession;
         switch (userRole) {
             case "ADMIN":
             case "GYM_OWNER":
             case "EMPLOYEE":
             case "USER":
             case "BRAND_OWNER":
-                com.ks.fitpass.core.entity.User userSession = userRepository.findByAccount(customUser.getUsername());
+                userSession = userRepository.findByAccount(customUser.getUsername());
                 session.setAttribute("userInfo", userSession);
                 break;
             default:
@@ -52,8 +53,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 response.sendRedirect("/gym-owner/index");
                 break;
             case "EMPLOYEE":
-                String employeeId = "1"; // Replace with the actual employee ID
-                response.sendRedirect("/employee/history?id=" + employeeId);
+                int departmentId = userRepository.getDepartmentIdByEmployeeId(userSession.getUserId()); // Replace with the actual employee ID
+                response.sendRedirect("/employee/history?id=" + departmentId);
                 break;
             case "USER":
                 response.sendRedirect("/homepage");

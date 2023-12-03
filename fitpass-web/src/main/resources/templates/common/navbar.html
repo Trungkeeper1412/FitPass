@@ -1,13 +1,13 @@
-<header id="header" class="fixed-top" th:fragment="navbar">
+<header class="fixed-top" id="header" th:fragment="navbar">
 
     <div class="container d-flex align-items-center justify-content-lg-between">
 
         <h1 class="logo me-auto me-lg-0"><a th:href="@{/homepage}">Fitpass<span>.</span></a></h1>
 
-        <nav id="navbar" class="navbar order-last order-lg-0">
+        <nav class="navbar order-last order-lg-0" id="navbar">
             <ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="Nhập tên thương hiệu...">
+                    <input placeholder="Nhập tên thương hiệu..." type="text">
                     <button class="search-button">
                         <i class="fas fa-search"></i>
                     </button>
@@ -73,7 +73,7 @@
     }
 
     // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;

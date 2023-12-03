@@ -65,7 +65,7 @@ public class GymOwnerController {
                 return "redirect:/gym-owner/department/update-details";
             }
             return "gym-owner/index";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -94,7 +94,7 @@ public class GymOwnerController {
                 return "redirect:/gym-owner/department/update-details";
             }
             return "gym-owner/gym-department-profile";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -128,7 +128,7 @@ public class GymOwnerController {
 
             model.addAttribute("listOfEmployee", listOfEmployee);
             return "gym-owner/gym-department-employee-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -148,7 +148,7 @@ public class GymOwnerController {
     }
 
     @GetMapping("/employee/details")
-    public String getEmployeeDetails(HttpSession session, Model model,@RequestParam("id1") int userId, @RequestParam("id2") int userDetailId) {
+    public String getEmployeeDetails(HttpSession session, Model model, @RequestParam("id1") int userId, @RequestParam("id2") int userDetailId) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
             if (isFirstTime) {
@@ -174,7 +174,7 @@ public class GymOwnerController {
 
             model.addAttribute("employeeInfo", employeUpdateDTO);
             return "gym-owner/gym-department-employee-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -198,50 +198,50 @@ public class GymOwnerController {
                                         @Valid @ModelAttribute("employeeInfo") EmployeUpdateDTO employeeInfo,
                                         BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-try {
-    if (!employeeInfo.getEmail().equals(employeeInfo.getOldEmail())) {
-        if (userService.checkEmailExist(employeeInfo.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+        try {
+            if (!employeeInfo.getEmail().equals(employeeInfo.getOldEmail())) {
+                if (userService.checkEmailExist(employeeInfo.getEmail())) {
+                    bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+                }
+            }
+
+            if (bindingResult.hasErrors()) {
+                return "/gym-owner/gym-department-employee-detail";
+            }
+            UserDetail userDetail = new UserDetail();
+            userDetail.setUserDetailId(employeeInfo.getUserDetailId());
+            userDetail.setFirstName(employeeInfo.getFirstName());
+            userDetail.setLastName(employeeInfo.getLastName());
+            userDetail.setEmail(employeeInfo.getEmail());
+            userDetail.setPhoneNumber(employeeInfo.getPhone());
+            userDetail.setAddress(employeeInfo.getAddress());
+            userDetail.setDateOfBirth(employeeInfo.getDateOfBirth());
+            userDetail.setImageUrl(employeeInfo.getImageUrl());
+            userDetail.setGender(employeeInfo.getGender());
+            userDetail.setSecurityId(employeeInfo.getIdCard());
+
+            userService.updateUserDetail(userDetail);
+
+            userService.updateUserStatusByUserId(employeeInfo.getUserId(), employeeInfo.isUserDeleted() ? 1 : 0);
+
+            return "redirect:/gym-owner/employee/list";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
-    }
-
-    if (bindingResult.hasErrors()) {
-        return "/gym-owner/gym-department-employee-detail";
-    }
-    UserDetail userDetail = new UserDetail();
-    userDetail.setUserDetailId(employeeInfo.getUserDetailId());
-    userDetail.setFirstName(employeeInfo.getFirstName());
-    userDetail.setLastName(employeeInfo.getLastName());
-    userDetail.setEmail(employeeInfo.getEmail());
-    userDetail.setPhoneNumber(employeeInfo.getPhone());
-    userDetail.setAddress(employeeInfo.getAddress());
-    userDetail.setDateOfBirth(employeeInfo.getDateOfBirth());
-    userDetail.setImageUrl(employeeInfo.getImageUrl());
-    userDetail.setGender(employeeInfo.getGender());
-    userDetail.setSecurityId(employeeInfo.getIdCard());
-
-    userService.updateUserDetail(userDetail);
-
-    userService.updateUserStatusByUserId(employeeInfo.getUserId(), employeeInfo.isUserDeleted() ? 1 : 0);
-
-    return "redirect:/gym-owner/employee/list";
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return "error/duplicate-key-error";
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return "error/no-data";
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return "error/incorrect-result-size-error";
-} catch (DataAccessException ex) {
-    // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
-    return "error/data-access-error";
-}
     }
 
     @GetMapping("/employee/add")
@@ -253,7 +253,7 @@ try {
             }
             model.addAttribute("employeeInfo", new EmployeeCreateDTO());
             return "gym-owner/gym-department-employee-add";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -277,93 +277,94 @@ try {
                                  @Valid @ModelAttribute("employeeInfo") EmployeeCreateDTO employeeInfo,
                                  BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-try {
-    if (userService.checkEmailExist(employeeInfo.getEmail())) {
-        bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
-    }
+        try {
+            if (userService.checkEmailExist(employeeInfo.getEmail())) {
+                bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+            }
 
-    if (bindingResult.hasErrors()) {
-        return "/gym-owner/gym-department-employee-add";
-    }
-    User user = (User) session.getAttribute("userInfo");
-    UserDetail userDetail = new UserDetail();
-    userDetail.setFirstName(employeeInfo.getFirstName());
-    userDetail.setLastName(employeeInfo.getLastName());
-    userDetail.setEmail(employeeInfo.getEmail());
-    userDetail.setPhoneNumber(employeeInfo.getPhone());
-    userDetail.setAddress(employeeInfo.getAddress());
-    userDetail.setDateOfBirth(employeeInfo.getDateOfBirth());
-    userDetail.setImageUrl(employeeInfo.getImageUrl());
-    userDetail.setSecurityId(employeeInfo.getIdCard());
-    userDetail.setGender(employeeInfo.getGender());
+            if (bindingResult.hasErrors()) {
+                return "/gym-owner/gym-department-employee-add";
+            }
+            User user = (User) session.getAttribute("userInfo");
+            UserDetail userDetail = new UserDetail();
+            userDetail.setFirstName(employeeInfo.getFirstName());
+            userDetail.setLastName(employeeInfo.getLastName());
+            userDetail.setEmail(employeeInfo.getEmail());
+            userDetail.setPhoneNumber(employeeInfo.getPhone());
+            userDetail.setAddress(employeeInfo.getAddress());
+            userDetail.setDateOfBirth(employeeInfo.getDateOfBirth());
+            userDetail.setImageUrl(employeeInfo.getImageUrl());
+            userDetail.setSecurityId(employeeInfo.getIdCard());
+            userDetail.setGender(employeeInfo.getGender());
 
-    // Insert into User Detail
-    userService.insertIntoUserDetail(userDetail);
-    // Get last insert user detail id
-    int userDetailId = userService.getLastInsertUserDetailId(userDetail);
-    // Get deparmentId by userId
-    Department departmentDetails = departmentService.getByUserId(user.getUserId());
-    String departmentName = departmentDetails.getDepartmentName();
-    // Get number of account gym-owner by brand id
-    int numberOfAccountCreated = userService.getNumberOfAccountCreatedByDepartmentId(departmentDetails.getDepartmentId());
-    // Create userName
-    String accountName = "fp_" + departmentName.replaceAll("\\s+", "") + "_" + ++numberOfAccountCreated + "_" + employeeInfo.getUsername();
-    // Create password random
-    String randomPassword = WebUtil.generateRandomPassword();
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    String hashedPassword = passwordEncoder.encode(randomPassword);
-    // Create user create time
-    Long userCreateTimeLong = System.currentTimeMillis();
-    String createTime = userCreateTimeLong.toString();
-    // Create user_deleted = 0;
-    boolean userDelete = false;
-    // Create new User
-    User newUser = new User();
-    newUser.setUserAccount(accountName);
-    newUser.setUserCreateTime(userCreateTimeLong);
-    newUser.setUserPassword(hashedPassword);
-    newUser.setUserDeleted(userDelete);
-    newUser.setUserDetailId(userDetailId);
-    newUser.setCreatedBy(user.getUserId());
-    // Insert into User
-    userService.insertIntoUser(newUser);
-    // Get last user insert id
-    int userInsertId = userService.getLastUserInsertId(newUser);
-    // Insert into user_role
-    userService.insertIntoUserRole(userInsertId, 3);
-    // Insert into wallet
-    walletService.insertWallet(userInsertId, 0);
+            // Insert into User Detail
+            userService.insertIntoUserDetail(userDetail);
+            // Get last insert user detail id
+            int userDetailId = userService.getLastInsertUserDetailId(userDetail);
+            // Get deparmentId by userId
+            Department departmentDetails = departmentService.getByUserId(user.getUserId());
+            String departmentName = departmentDetails.getDepartmentName();
+            // Get number of account gym-owner by brand id
+            int numberOfAccountCreated = userService.getNumberOfAccountCreatedByDepartmentId(departmentDetails.getDepartmentId());
+            // Create userName
+            String accountName = "fp_" + departmentName.replaceAll("\\s+", "") + "_" + ++numberOfAccountCreated + "_" + employeeInfo.getUsername();
+            // Create password random
+            String randomPassword = WebUtil.generateRandomPassword();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(randomPassword);
+            // Create user create time
+            Long userCreateTimeLong = System.currentTimeMillis();
+            String createTime = userCreateTimeLong.toString();
+            // Create user_deleted = 0;
+            boolean userDelete = false;
+            // Create new User
+            User newUser = new User();
+            newUser.setUserAccount(accountName);
+            newUser.setUserCreateTime(userCreateTimeLong);
+            newUser.setUserPassword(hashedPassword);
+            newUser.setUserDeleted(userDelete);
+            newUser.setUserDetailId(userDetailId);
+            newUser.setCreatedBy(user.getUserId());
+            newUser.setInDepartmentId(departmentDetails.getDepartmentId());
+            // Insert into User
+            userService.createEmployee(newUser);
+            // Get last user insert id
+            int userInsertId = userService.getLastUserInsertId(newUser);
+            // Insert into user_role
+            userService.insertIntoUserRole(userInsertId, 3);
+            // Insert into wallet
+            walletService.insertWallet(userInsertId, 0);
 
-    // Send email to user email
-    // Todo: trang tri trang html
-    emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
-            userDetail.getEmail());
+            // Send email to user email
+            // Todo: trang tri trang html
+            emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
+                    userDetail.getEmail());
 
-    return "redirect:/gym-owner/employee/list";
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return "error/duplicate-key-error";
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return "error/no-data";
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return "error/incorrect-result-size-error";
-} catch (DataAccessException ex) {
-    // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
-    return "error/data-access-error";
-}
+            return "redirect:/gym-owner/employee/list";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     //Feedback Management
     @GetMapping("/feedback/list")
     public String getListOfFeedback(HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-        if(isFirstTime) {
+        if (isFirstTime) {
             return "redirect:/gym-owner/department/update-details";
         }
         User user = (User) session.getAttribute("userInfo");
@@ -379,163 +380,163 @@ try {
     @GetMapping("/department/update-details")
     public String addDepartmentDetails(HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-try {
-    if (!isFirstTime) {
-        return "redirect:/gym-owner/department/info";
-    }
+        try {
+            if (!isFirstTime) {
+                return "redirect:/gym-owner/department/info";
+            }
 
-    User user = (User) session.getAttribute("userInfo");
-    Department departmentDetails = departmentService.getByUserId(user.getUserId());
+            User user = (User) session.getAttribute("userInfo");
+            Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-    // Get List Of fixed gym plan by brand id
-    List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandIdActive(departmentDetails.getBrandId());
-    // Get List Of flexible gym plan by brand id
-    List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandIdActive(departmentDetails.getBrandId());
-    // Get list brand amenitie
-    List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(departmentDetails.getBrandId());
+            // Get List Of fixed gym plan by brand id
+            List<BrandGymPlanFixedDTO> listFixedGymPlan = gymPlanService.getAllGymPlanFixedByBrandIdActive(departmentDetails.getBrandId());
+            // Get List Of flexible gym plan by brand id
+            List<BrandGymPlanFlexDTO> listFlexGymPlan = gymPlanService.getAllGymPlanFlexByBrandIdActive(departmentDetails.getBrandId());
+            // Get list brand amenitie
+            List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(departmentDetails.getBrandId());
 
-    // Get list feature
-    List<Feature> features = departmentFeatureService.getAllFeatures();
+            // Get list feature
+            List<Feature> features = departmentFeatureService.getAllFeatures();
 
-    model.addAttribute("features", features);
-    model.addAttribute("brandAmenitie", brandAmenitie);
-    model.addAttribute("listFlexGymPlan", listFlexGymPlan);
-    model.addAttribute("listFixedGymPlan", listFixedGymPlan);
-    model.addAttribute("departmentName", departmentDetails.getDepartmentName());
-    model.addAttribute("departmentId", departmentDetails.getDepartmentId());
-    model.addAttribute("departmentInfo", new GODepartmentUpdateDetail());
+            model.addAttribute("features", features);
+            model.addAttribute("brandAmenitie", brandAmenitie);
+            model.addAttribute("listFlexGymPlan", listFlexGymPlan);
+            model.addAttribute("listFixedGymPlan", listFixedGymPlan);
+            model.addAttribute("departmentName", departmentDetails.getDepartmentName());
+            model.addAttribute("departmentId", departmentDetails.getDepartmentId());
+            model.addAttribute("departmentInfo", new GODepartmentUpdateDetail());
 
-    return "gym-owner/gym-department-update-detail";
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return "error/duplicate-key-error";
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return "error/no-data";
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return "error/incorrect-result-size-error";
-} catch (DataAccessException ex) {
-    // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
-    return "error/data-access-error";
-}
+            return "gym-owner/gym-department-update-detail";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @PostMapping("/department/update-details")
     public ResponseEntity<String> createDepartmentDetails(HttpSession session, Model model,
-                                                  @Valid @RequestBody GODepartmentUpdateDetail departmentInfo,
-                                                  BindingResult bindingResult) {
+                                                          @Valid @RequestBody GODepartmentUpdateDetail departmentInfo,
+                                                          BindingResult bindingResult) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-try {
-    if (bindingResult.hasErrors()) {
-        // Tạo một Map chứa thông tin về lỗi
-        Map<String, Object> errors = new HashMap<>();
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        try {
+            if (bindingResult.hasErrors()) {
+                // Tạo một Map chứa thông tin về lỗi
+                Map<String, Object> errors = new HashMap<>();
+                for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                    errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+                }
+
+                String errorMsg = "";
+
+                for (String key : errors.keySet()) {
+                    errorMsg += "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+                }
+                return ResponseEntity.badRequest().body(errorMsg);
+            }
+
+            // Update department information
+            Department department = Department.builder()
+                    .departmentId(departmentInfo.getDepartmentId())
+                    .departmentAddress(departmentInfo.getDepartmentAddress())
+                    .departmentContactNumber(departmentInfo.getDepartmentContactNumber())
+                    .departmentDescription(departmentInfo.getDepartmentDescription())
+                    .capacity(departmentInfo.getCapacity())
+                    .area(departmentInfo.getArea())
+                    .city(departmentInfo.getCity())
+                    .latitude(departmentInfo.getLatitude())
+                    .longitude(departmentInfo.getLongitude())
+                    .build();
+            int numRowUpdateDepartment = departmentService.updateGymOwnerDepartmentInfoDetails(department);
+
+            // Parse time into string
+            String mondayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getMondayOpenTime());
+            String mondayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getMondayCloseTime());
+            String tuesdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getTuesdayOpenTime());
+            String tuesdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getTuesdayCloseTime());
+            String wednesdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getWednesdayOpenTime());
+            String wednesdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getWednesdayCloseTime());
+            String thursdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getThursdayOpenTime());
+            String thursdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getThursdayCloseTime());
+            String fridayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getFridayOpenTime());
+            String fridayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getFridayCloseTime());
+            String saturdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSaturdayOpenTime());
+            String saturdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSaturdayCloseTime());
+            String sundayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSundayOpenTime());
+            String sundayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSundayCloseTime());
+
+            Map<String, String> dayToTimeMap = new LinkedHashMap<>();
+            dayToTimeMap.put("Thứ 2", mondayOpenTime + "-" + mondayCloseTime);
+            dayToTimeMap.put("Thứ 3", tuesdayOpenTime + "-" + tuesdayCloseTime);
+            dayToTimeMap.put("Thứ 4", wednesdayOpenTime + "-" + wednesdayCloseTime);
+            dayToTimeMap.put("Thứ 5", thursdayOpenTime + "-" + thursdayCloseTime);
+            dayToTimeMap.put("Thứ 6", fridayOpenTime + "-" + fridayCloseTime);
+            dayToTimeMap.put("Thứ 7", saturdayOpenTime + "-" + saturdayCloseTime);
+            dayToTimeMap.put("Chủ Nhật", sundayOpenTime + "-" + sundayCloseTime);
+
+            // Insert into department schedule
+            int[] numRowInsertScheduleResult = departmentScheduleService.addDepartmentSchedule(dayToTimeMap, departmentInfo.getDepartmentId());
+            int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
+
+            // Insert into gym plan department
+            List<Integer> gymPlanFlexList = WebUtil.parseIntegerList(departmentInfo.getListSelectedFlexGymPlanId());
+            List<Integer> gymPlanFixedList = WebUtil.parseIntegerList(departmentInfo.getListSelectedFixedGymPlanId());
+            int departmentId = departmentInfo.getDepartmentId();
+            List<Integer> gymPlan = Stream.concat(gymPlanFixedList.stream(), gymPlanFlexList.stream()).collect(Collectors.toList());
+            int[] resultGymPlan = gymPlanService.insertGymPlanDepartment(departmentId, gymPlan);
+            int rowGymPlan = Arrays.stream(resultGymPlan).sum();
+
+            // Insert into department amenitie
+            List<Integer> deparmentAmenitie = WebUtil.parseIntegerList(departmentInfo.getListSelectedAmenitiesId());
+            int[] resultAmenitie = departmentAmenitieService.insertDepartmentAmenitie(departmentId, deparmentAmenitie);
+            int rowAmenitie = Arrays.stream(resultAmenitie).sum();
+
+            // Insert into department feature
+            List<Integer> departmentFeature = WebUtil.parseIntegerList(departmentInfo.getListSelectedFeaturesId());
+            int[] resultFeature = departmentFeatureService.insertDepartmentFeature(departmentId, departmentFeature);
+            int rowFeature = Arrays.stream(resultFeature).sum();
+
+            // Update first time login status
+            User user = (User) session.getAttribute("userInfo");
+            Department departmentDetails = departmentService.getByUserId(user.getUserId());
+            int rowfirstTimeLogin = departmentService.updateFirstTimeDepartmentCreated(departmentDetails.getDepartmentId());
+
+            // Check if any row is 0
+            if (numRowInsertSchedule == 0 || numRowUpdateDepartment == 0 || rowFeature == 0 || rowfirstTimeLogin == 0
+                    || rowAmenitie == 0 || rowGymPlan == 0) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cập nhật thất bại");
+            }
+
+            return ResponseEntity.ok("Cập nhật thành công");
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
         }
-
-        String errorMsg = "";
-
-        for (String key : errors.keySet()) {
-            errorMsg += "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
-        }
-        return ResponseEntity.badRequest().body(errorMsg);
-    }
-
-    // Update department information
-    Department department = Department.builder()
-            .departmentId(departmentInfo.getDepartmentId())
-            .departmentAddress(departmentInfo.getDepartmentAddress())
-            .departmentContactNumber(departmentInfo.getDepartmentContactNumber())
-            .departmentDescription(departmentInfo.getDepartmentDescription())
-            .capacity(departmentInfo.getCapacity())
-            .area(departmentInfo.getArea())
-            .city(departmentInfo.getCity())
-            .latitude(departmentInfo.getLatitude())
-            .longitude(departmentInfo.getLongitude())
-            .build();
-    int numRowUpdateDepartment = departmentService.updateGymOwnerDepartmentInfoDetails(department);
-
-    // Parse time into string
-    String mondayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getMondayOpenTime());
-    String mondayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getMondayCloseTime());
-    String tuesdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getTuesdayOpenTime());
-    String tuesdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getTuesdayCloseTime());
-    String wednesdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getWednesdayOpenTime());
-    String wednesdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getWednesdayCloseTime());
-    String thursdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getThursdayOpenTime());
-    String thursdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getThursdayCloseTime());
-    String fridayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getFridayOpenTime());
-    String fridayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getFridayCloseTime());
-    String saturdayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSaturdayOpenTime());
-    String saturdayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSaturdayCloseTime());
-    String sundayOpenTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSundayOpenTime());
-    String sundayCloseTime = TimeConversionUtil.convertTo12HourFormat(departmentInfo.getSundayCloseTime());
-
-    Map<String, String> dayToTimeMap = new LinkedHashMap<>();
-    dayToTimeMap.put("Thứ 2", mondayOpenTime + "-" + mondayCloseTime);
-    dayToTimeMap.put("Thứ 3", tuesdayOpenTime + "-" + tuesdayCloseTime);
-    dayToTimeMap.put("Thứ 4", wednesdayOpenTime + "-" + wednesdayCloseTime);
-    dayToTimeMap.put("Thứ 5", thursdayOpenTime + "-" + thursdayCloseTime);
-    dayToTimeMap.put("Thứ 6", fridayOpenTime + "-" + fridayCloseTime);
-    dayToTimeMap.put("Thứ 7", saturdayOpenTime + "-" + saturdayCloseTime);
-    dayToTimeMap.put("Chủ Nhật", sundayOpenTime + "-" + sundayCloseTime);
-
-    // Insert into department schedule
-    int[] numRowInsertScheduleResult = departmentScheduleService.addDepartmentSchedule(dayToTimeMap, departmentInfo.getDepartmentId());
-    int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
-
-    // Insert into gym plan department
-    List<Integer> gymPlanFlexList = WebUtil.parseIntegerList(departmentInfo.getListSelectedFlexGymPlanId());
-    List<Integer> gymPlanFixedList = WebUtil.parseIntegerList(departmentInfo.getListSelectedFixedGymPlanId());
-    int departmentId = departmentInfo.getDepartmentId();
-    List<Integer> gymPlan = Stream.concat(gymPlanFixedList.stream(), gymPlanFlexList.stream()).collect(Collectors.toList());
-    int[] resultGymPlan = gymPlanService.insertGymPlanDepartment(departmentId, gymPlan);
-    int rowGymPlan = Arrays.stream(resultGymPlan).sum();
-
-    // Insert into department amenitie
-    List<Integer> deparmentAmenitie = WebUtil.parseIntegerList(departmentInfo.getListSelectedAmenitiesId());
-    int[] resultAmenitie = departmentAmenitieService.insertDepartmentAmenitie(departmentId, deparmentAmenitie);
-    int rowAmenitie = Arrays.stream(resultAmenitie).sum();
-
-    // Insert into department feature
-    List<Integer> departmentFeature = WebUtil.parseIntegerList(departmentInfo.getListSelectedFeaturesId());
-    int[] resultFeature = departmentFeatureService.insertDepartmentFeature(departmentId, departmentFeature);
-    int rowFeature = Arrays.stream(resultFeature).sum();
-
-    // Update first time login status
-    User user = (User) session.getAttribute("userInfo");
-    Department departmentDetails = departmentService.getByUserId(user.getUserId());
-    int rowfirstTimeLogin = departmentService.updateFirstTimeDepartmentCreated(departmentDetails.getDepartmentId());
-
-    // Check if any row is 0
-    if (numRowInsertSchedule == 0 || numRowUpdateDepartment == 0 || rowFeature == 0 || rowfirstTimeLogin == 0
-            || rowAmenitie == 0 || rowGymPlan == 0) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cập nhật thất bại");
-    }
-
-    return ResponseEntity.ok("Cập nhật thành công");
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return ResponseEntity.badRequest().build();
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return ResponseEntity.badRequest().build();
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return ResponseEntity.badRequest().build();
-} catch (DataAccessException ex) {
-    // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
-    return ResponseEntity.badRequest().build();
-}
     }
 
     @GetMapping("/department/info")
@@ -565,7 +566,7 @@ try {
 
             model.addAttribute("updateGymOwnerDepartmentInfo", updateGymOwnerDepartmentInfo);
             return "gym-owner/gym-department-update-info";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -645,7 +646,7 @@ try {
             int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
 
             return "redirect:/gym-owner/department/info";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -689,7 +690,7 @@ try {
             model.addAttribute("brandAmenitie", brandAmenitie);
             model.addAttribute("departmentId", departmentDetails.getDepartmentId());
             return "gym-owner/gym-department-update-amenities";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -724,7 +725,7 @@ try {
             int rowInsert = Arrays.stream(rowInsertResult).sum();
 
             return "redirect:/gym-owner/department/amenities";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -771,7 +772,7 @@ try {
             model.addAttribute("departmentId", departmentId);
             model.addAttribute("allFeatures", allFeatures);
             return "gym-owner/gym-department-update-features";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -803,7 +804,7 @@ try {
             int[] insertRowResult = departmentFeatureService.insertDepartmentFeature(departmentId, selectedId);
             int insertRow = Arrays.stream(insertRowResult).sum();
             return "redirect:/gym-owner/department/features";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -838,7 +839,7 @@ try {
             model.addAttribute("departmentDetails", departmentDetails);
             model.addAttribute("departmentAlbums", departmentAlbums);
             return "gym-owner/gym-department-update-image";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -883,7 +884,7 @@ try {
             departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
 
             return "redirect:/gym-owner/department/image";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -919,8 +920,7 @@ try {
 
             model.addAttribute("updateGymOwnerDepartmentLocation", updateGymOwnerDepartmentLocation);
             return "gym-owner/gym-department-update-location";
-        }
-        catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -961,7 +961,7 @@ try {
                     Double.parseDouble(updateGymOwnerDepartmentLocation.getLatitude()));
 
             return "redirect:/gym-owner/department/location";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -1026,7 +1026,7 @@ try {
             model.addAttribute("departmentId", departmentId);
 
             return "gym-owner/gym-department-update-plan";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -1062,7 +1062,7 @@ try {
             int insertRow = Arrays.stream(insertRowResult).sum();
 
             return "redirect:/gym-owner/department/gym-plans";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";

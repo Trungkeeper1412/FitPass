@@ -77,6 +77,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.getLastInsertUserDetailId(userDetail);
     }
 
+    @Override
+    public String getUserEmailByUserId(int userId) {
+        return userRepository.getUserEmailByUserId(userId);
+    }
+
+    @Override
+    public String getUserImgByUserId(int userId) {
+        return userRepository.getUserImgByUserId(userId);
+    }
 
     @Override
     public int insertIntoUser(User user) {
@@ -158,4 +167,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.findByAccount(username);
     }
 
+
+    @Override
+    public int createEmployee(User user) {
+        return userRepository.createEmployee(user);
+    }
 }

@@ -42,7 +42,7 @@ public class MainController {
         return "show-info";
     }
 
-    @GetMapping("/forgot-pw")
+    @GetMapping("/forgot-password")
     public String forgotPw() {
         return "forgot-password";
     }

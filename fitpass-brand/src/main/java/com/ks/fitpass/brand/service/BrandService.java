@@ -34,4 +34,6 @@ public interface BrandService {
     BrandDetailFeedbackStat getFeedbackOfBrandDetailStat(int brandId);
     int countTotalFeedback(int brandId, String sortRating);
     int getBrandOwnerIdByDepartmentId(int departmentId);
+
+    int createBrandWithBrandName(int userId, String brandName);
 }

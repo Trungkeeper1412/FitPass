@@ -31,4 +31,6 @@ public interface RequestWithdrawHistoryRepository {
     int updateStatus(int requestHistoryId, String status);
 
     Integer getNumberPercentage(int requestHistoryId);
+
+    int getUserIdByRequestHistoryId(int requestHistoryId);
 }

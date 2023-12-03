@@ -57,39 +57,39 @@
                 <div class="container2 text-white" data-aos="zoom-in">
                     <h3 class="fw-bold mb-5">Sẵn sàng để bắt đầu kiếm thêm thu nhập?</h3>
                     <h4 class="mb-5">Đăng kí phòng tập của bạn trên FitPass, và kiếm thêm thu nhập.</h4>
-                    <form>
+                    <form method="post" action="/become-a-partner/submitForm" th:object="${becomePartnerForm}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="venueName" class="form-label">Tên thương hiệu :</label>
-                                <input type="text" class="form-control" id="venueName" required>
+                                <input th:field="*{brandName}" type="text" class="form-control" id="venueName" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="location" class="form-label">Địa chỉ :</label>
-                                <input type="text" class="form-control" id="location" required>
+                                <input th:field="*{address}" type="text" class="form-control" id="location" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="fullName" class="form-label">Họ và Tên :</label>
-                                <input type="text" class="form-control" id="fullName" required>
+                                <input th:field="*{brandOwnerName}" type="text" class="form-control" id="fullName" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="phoneNumber" class="form-label">Số điện thoại :</label>
-                                <input type="tel" class="form-control" id="phoneNumber" required>
+                                <input th:field="*{contactNumber}" type="tel" class="form-control" id="phoneNumber" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="websiteURL" class="form-label">Địa chỉ trang web ( nếu có )*</label>
-                                <input type="url" class="form-control" id="websiteURL" required>
+                                <input th:field="*{webUrl}" type="url" class="form-control" id="websiteURL" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Email liên hệ :</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <input th:field="*{contactEmail}" type="email" class="form-control" id="email" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <a th:href="@{/user/gym-brand-registration/successful}" type="submit" class="btn btn-primary mt-3">Đăng ký</a>
+                            <button type="submit" class="btn btn-primary mt-3">Đăng ký</button>
                         </div>
                     </form>
                 </div>
@@ -205,3 +205,4 @@
 
 </body>
 </html>
+

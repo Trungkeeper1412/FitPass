@@ -137,8 +137,6 @@ public class BrandOwnerController {
     @GetMapping("/department/list")
     public String getListOfDepartment(Model model, HttpSession session) {
         try {
-
-
             User user = (User) session.getAttribute("userInfo");
             // Get brandId by brandOwnerId
             Brand brand = brandService.getBrandDetail(user.getUserId());
@@ -284,6 +282,8 @@ public class BrandOwnerController {
                 return "brand-owner/gym-brand-department-add";
             }
             departmentService.createDepartmentWithBrandId(brandId, brandName);
+            Thread.sleep(1500);
+
             return "redirect:/brand-owner/department/list?id=" + brandId;
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -301,6 +301,8 @@ public class BrandOwnerController {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -308,7 +310,6 @@ public class BrandOwnerController {
     @GetMapping("/feedback/list")
     public String getListOfDepartmentFeedback(Model model, HttpSession session) {
         try {
-
 
             User user = (User) session.getAttribute("userInfo");
             // Get brandId by brandOwnerId
@@ -438,6 +439,7 @@ public class BrandOwnerController {
 
             // Thực hiện cập nhật dịch vụ trong CSDL
             brandAmenitieService.updateBrandAmenitie(brandAmenitie);
+            Thread.sleep(1300);
             return "redirect:/brand-owner/service/list";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -455,6 +457,8 @@ public class BrandOwnerController {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -481,6 +485,8 @@ public class BrandOwnerController {
           brandAmenitie.setDescription(serviceCreateDTO.getDescription());
           brandAmenitie.setStatus(1);
           brandAmenitieService.createBrandAmenitie(brandAmenitie);
+          Thread.sleep(1300);
+
           return "redirect:/brand-owner/service/list";
       }
       catch (DuplicateKeyException ex) {
@@ -499,6 +505,8 @@ public class BrandOwnerController {
           // Handle other data access issues
           logger.error("DataAccessException occurred", ex);
           return "error/data-access-error";
+      } catch (InterruptedException e) {
+          throw new RuntimeException(e);
       }
     }
 
@@ -639,6 +647,7 @@ try {
     if (gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
         departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
     }
+    Thread.sleep(1300);
     return "redirect:/brand-owner/gym-owner/list";
 }catch (DuplicateKeyException ex) {
     // Handle duplicate key violation
@@ -656,6 +665,8 @@ try {
     // Handle other data access issues
     logger.error("DataAccessException occurred", ex);
     return "error/data-access-error";
+} catch (InterruptedException e) {
+    throw new RuntimeException(e);
 }
     }
 
@@ -820,6 +831,8 @@ try {
             }
 
             gymPlanService.updateGymPlanFlex(brandDetails);
+
+            Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/flexible/list";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -837,20 +850,23 @@ try {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @GetMapping("/gym-plans/flexible/add")
     public String addFlexibleGymPlan(Model model) {
         try {
-
-
             model.addAttribute("brandCreateGymPlanFlexDTO", new BrandCreateGymPlanFlexDTO());
+            Thread.sleep(1500);
             return "brand-owner/gym-brand-plan-flexible-add";
         }catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -870,6 +886,7 @@ try {
             brandCreateGymPlanFlexDTO.setBrandId(brandId);
             brandCreateGymPlanFlexDTO.setStatus(1);
             gymPlanService.createGymPlanFlex(brandCreateGymPlanFlexDTO);
+            Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/flexible/list";
         }
         catch (DuplicateKeyException ex) {
@@ -888,6 +905,8 @@ try {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -961,6 +980,7 @@ try {
             }
 
             gymPlanService.updateGymPlanFixed(brandDetails);
+            Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/fixed/list";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -978,14 +998,14 @@ try {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @GetMapping("/gym-plans/fixed/add")
     public String addFixedGymPlan(Model model) {
         try {
-
-
             model.addAttribute("brandCreateGymPlanFixedDTO", new BrandCreateGymPlanFixedDTO());
             return "brand-owner/gym-brand-plan-fixed-add";
         }catch (DataAccessException ex) {
@@ -1009,11 +1029,14 @@ try {
             brandCreateGymPlanFixedDTO.setBrandId(brandId);
             brandCreateGymPlanFixedDTO.setStatus(1);
             gymPlanService.createGymPlanFixed(brandCreateGymPlanFixedDTO);
+            Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/fixed/list";
         }catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

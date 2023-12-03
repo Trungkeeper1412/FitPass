@@ -44,45 +44,46 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
+                                                    <input type="hidden" id="becomeAPartnerRequestIdPending" value="1">
                                                     <label for="brandName" class="form-label">Tên thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                    <input type="text" class="form-control" id="brandNamePending" value="Tên thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                    <input type="text" class="form-control" id="brandOwnerPending" value="Chủ thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                    <input type="email" class="form-control" id="emailPending" value="example@email.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
-                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="requestTimePending" value="15:45:PM-12/11/2024" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="phoneNumber" class="form-label">Số điện thoại:</label>
-                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                    <input type="tel" class="form-control" id="phoneNumberPending" value="0987654321" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label">Địa chỉ:</label>
-                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                    <input type="text" class="form-control" id="addressPending" value="Địa chỉ" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="website" class="form-label">Địa chỉ trang web:</label>
-                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                    <input type="text" class="form-control" id="websitePending" value="http://www.example.com" readonly>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation()">
+                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation('pending')">
                                         <i class="fas fa-times-circle mr-2"></i>
                                         Hủy đơn
                                     </button>
-                                    <button type="button" class="btn btn-warning ml-2" onclick="showProcessingConfirmation()">
+                                    <button type="button" class="btn btn-warning ml-2" onclick="showProcessingConfirmation('pending')">
                                         Xác nhận xử lý
                                         <i class="fas fa-check-circle ml-2"></i>
                                     </button>
@@ -109,48 +110,49 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="brandName" class="form-label">Tên thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                    <input type="hidden" id="becomeAPartnerRequestIdProcessing" value="">
+                                                    <input type="text" class="form-control" id="brandNameProcessing" value="Tên thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                    <input type="text" class="form-control" id="brandOwnerProcessing" value="Chủ thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                    <input type="email" class="form-control" id="emailProcessing" value="example@email.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
-                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="requestTimeProcessing" value="15:45:PM-12/11/2024" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="phoneNumber" class="form-label">Số điện thoại:</label>
-                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                    <input type="tel" class="form-control" id="phoneNumberProcessing" value="0987654321" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label">Địa chỉ:</label>
-                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                    <input type="text" class="form-control" id="addressProcessing" value="Địa chỉ" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="website" class="form-label">Địa chỉ trang web:</label>
-                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                    <input type="text" class="form-control" id="websiteProcessing" value="http://www.example.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
-                                                    <input type="text" class="form-control" id="requestTimeStart" value="10:22:PM-15/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="requestTimeStartProcessing" value="10:22:PM-15/11/2024" readonly>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation()">
+                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation('processing')">
                                         <i class="fas fa-times-circle mr-2"></i>
                                         Hủy đơn
                                     </button>
-                                    <button type="button" class="btn btn-success ml-2" onclick="showProcessingConfirmation()">
+                                    <button type="button" class="btn btn-success ml-2" onclick="showProcessingConfirmation('processing')">
                                         Xác nhận thành công
                                         <i class="fas fa-check-circle ml-2"></i>
                                     </button>
@@ -177,41 +179,42 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="brandName" class="form-label">Tên thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                    <input type="hidden" id="becomeAPartnerRequestIdSuccess">
+                                                    <input type="text" class="form-control" id="brandNameSuccess" value="Tên thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                    <input type="text" class="form-control" id="brandOwnerSuccess" value="Chủ thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                    <input type="email" class="form-control" id="emailSuccess" value="example@email.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
-                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="requestTimeSuccess" value="15:45:PM-12/11/2024" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTimeSuccess" class="form-label">Thời gian xác nhận thành công:</label>
-                                                    <input type="text" class="form-control" id="requestTimeSuccess" value="10:22:PM-15/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="requestTimeSuccessSuccess" value="10:22:PM-15/11/2024" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="phoneNumber" class="form-label">Số điện thoại:</label>
-                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                    <input type="tel" class="form-control" id="phoneNumberSuccess" value="0987654321" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label">Địa chỉ:</label>
-                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                    <input type="text" class="form-control" id="addressSuccess" value="Địa chỉ" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="website" class="form-label">Địa chỉ trang web:</label>
-                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                    <input type="text" class="form-control" id="websiteSuccess" value="http://www.example.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
-                                                    <input type="text" class="form-control" id="requestTimeStart" value="10:22:PM-15/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="requestTimeProcessSuccess" value="10:22:PM-15/11/2024" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,42 +241,42 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandName" value="Tên thương hiệu" readonly>
+                                                    <label for="brandNameCancel" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandNameCancel" value="Tên thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
-                                                    <input type="text" class="form-control" id="brandOwner" value="Chủ thương hiệu" readonly>
+                                                    <label for="brandOwnerCancel" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwnerCancel" value="Chủ thương hiệu" readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="email" class="form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                                                    <label for="emailCancel" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="emailCancel" value="example@email.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
-                                                    <input type="text" class="form-control" id="requestTime" value="15:45:PM-12/11/2024" readonly>
+                                                    <label for="requestTimeCancel" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTimeCancel" value="15:45:PM-12/11/2024" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="requestTimeCancel" class="form-label">Thời gian xác nhận hủy:</label>
-                                                    <input type="text" class="form-control" id="requestTimeCancel" value="10:22:PM-15/11/2024" readonly>
+                                                    <input type="text" class="form-control" id="cancelHandleRequest" value="10:22:PM-15/11/2024" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
-                                                    <input type="tel" class="form-control" id="phoneNumber" value="0987654321" readonly>
+                                                    <label for="phoneNumberCancel" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumberCancel" value="0987654321" readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="address" class="form-label">Địa chỉ:</label>
-                                                    <input type="text" class="form-control" id="address" value="Địa chỉ" readonly>
+                                                    <label for="addressCancel" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="addressCancel" value="Địa chỉ" readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
-                                                    <input type="text" class="form-control" id="website" value="http://www.example.com" readonly>
+                                                    <label for="websiteCancel" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="websiteCancel" value="http://www.example.com" readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
-                                                    <input type="text" class="form-control" id="requestTimeStart" value="10:22:PM-15/11/2024" readonly>
+                                                    <label for="requestTimeStartCancel" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeStartCancel" value="10:22:PM-15/11/2024" readonly>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="cancelReason" class="form-label">Lý do hủy:</label>
@@ -304,54 +307,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-info fw-bold">Chưa xử lý</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#pendingModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-info fw-bold">Chưa xử lý</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#pendingModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-warning fw-bold">Đang xử lý</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#processingModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-warning fw-bold">Đang xử lý</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#processingModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
+                                    <th:block th:each="b : ${becomePartnerRequestListUp}">
+                                        <tr>
+                                            <td th:text="${bStat.index + 1}">1</td>
+                                            <td th:text="${b.getBrandName()}">Gym hòa lạc</td>
+                                            <td th:text="${b.getBrandOwnerName()}">Nguyễn Văn Bảo Linh</td>
+                                            <td th:text="${b.getContactEmail()}">cc@gmail.com</td>
+                                            <td th:text="${b.getContactNumber()}">0917359115</td>
+                                            <td > <a th:href="${b.getWebUrl()}" th:text="${b.getBrandName()}">Gym hòa lạc</a> </td>
+                                            <td th:if="${b.getStatus().equals('Đang chờ xử lý')}" class="text-info fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td th:if="${b.getStatus().equals('Đang xử lý')}" class="text-warning fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${b.getStatus().equals('Đang chờ xử lý')}"
+                                                     data-target="#pendingModal"
+                                                     th:attr="onclick='showDetailPending('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${!b.getStatus().equals('Đang chờ xử lý')}"
+                                                     data-target="#processingModal"
+                                                     th:attr="onclick='showDetailProcessing('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -377,54 +354,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-success fw-bold">Thành công</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#successModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-success fw-bold">Thành công</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#successModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-danger fw-bold">Từ chối đơn</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gym hòa lạc</td>
-                                    <td>Nguyễn Văn Bảo Linh</td>
-                                    <td>cc@gmail.com</td>
-                                    <td>0917359115</td>
-                                    <td><a href="https://www.facebook.com/acatmeowing">Gym hòa lạc</a></td>
-                                    <td class="text-danger fw-bold">Từ chối đơn</td>
-                                    <td>
-                                        <div class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">Xem chi tiết</div>
-                                    </td>
-                                </tr>
+                                    <th:block th:each="b : ${becomePartnerRequestListDown}">
+                                        <tr>
+                                            <td th:text="${bStat.index + 1}">1</td>
+                                            <td th:text="${b.getBrandName()}">Gym hòa lạc</td>
+                                            <td th:text="${b.getBrandOwnerName()}">Nguyễn Văn Bảo Linh</td>
+                                            <td th:text="${b.getContactEmail()}">cc@gmail.com</td>
+                                            <td th:text="${b.getContactNumber()}">0917359115</td>
+                                            <td > <a th:href="${b.getWebUrl()}" th:text="${b.getBrandName()}">Gym hòa lạc</a> </td>
+                                            <td th:if="${b.getStatus().equals('Thành công')}" class="text-success    fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td th:if="${b.getStatus().equals('Từ chối đơn')}" class="text-danger fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${b.getStatus().equals('Thành công')}"
+                                                     data-target="#successModal"
+                                                     th:attr="onclick='showDetailSuccess('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${!b.getStatus().equals('Thành công')}"
+                                                     data-target="#cancelModal"
+                                                     th:attr="onclick='showDetailCancel('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+
                                 </tbody>
                             </table>
                         </div>
@@ -455,7 +407,7 @@
 <th:block th:replace="admin/common/logout-modal"></th:block>
 
 <th:block th:replace="admin/common/script"></th:block>
-
 </body>
 
 </html>
+

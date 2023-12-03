@@ -16,6 +16,11 @@ public interface UserService extends UserDetailsService {
 
     int getLastInsertUserDetailId(UserDetail userDetail);
 
+    String getUserEmailByUserId(int userId);
+
+    String getUserImgByUserId(int userId);
+
+
     int insertIntoUser(User user);
 
     int getLastUserInsertId(User user);
@@ -39,4 +44,6 @@ public interface UserService extends UserDetailsService {
     int getNumberOfAccountCreatedByDepartmentId(int departmentId);
 
     User getUserByAccount(String username);
+
+    int createEmployee(User user);
 }

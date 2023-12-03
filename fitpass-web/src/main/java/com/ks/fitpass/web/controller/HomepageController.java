@@ -140,4 +140,9 @@ public class HomepageController {
             throw new IllegalArgumentException("Invalid distance format.");
         }
     }
+
+    @GetMapping("/homepage/search")
+    public String getSearchResult(HttpSession session) {
+        return "search-gym-result";
+    }
 }

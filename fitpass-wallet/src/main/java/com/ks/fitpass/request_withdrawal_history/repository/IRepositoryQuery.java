@@ -125,4 +125,12 @@ public interface IRepositoryQuery {
                 JOIN brand b ON cc.user_id = b.user_id
                 WHERE request_withdrawal_history_id = ?;
             """;
+
+    String GET_USER_ID_BY_REQUEST_HISTORY_ID = """
+                SELECT u.user_id
+                FROM request_withdrawal_history rwh
+                JOIN credit_card cc ON rwh.credit_card_id = cc.credit_card_id
+                JOIN user u ON cc.user_id = u.user_id
+                WHERE rwh.request_withdrawal_history_id = ?;
+            """;
 }

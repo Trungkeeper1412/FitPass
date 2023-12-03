@@ -1499,11 +1499,6 @@ section {
     margin-top: 25px;
 }
 
-.error{
-    padding-top: 5px;
-    color: red;
-}
-
 .contact .php-email-form .sent-message {
     display: none;
     color: #fff;
@@ -2771,9 +2766,9 @@ a:link {
 }
 
 .user-img img {
-    width: 60px;
+    width: 150px;
     border-radius: 50%;
-    height: 60px;
+    height: 150px;
     padding: 5px;
 }
 
@@ -3188,7 +3183,7 @@ a:link {
     width: 100%;
     border: 2px solid #e1e1e1;
     border-radius: 8px;
-    margin: 2px 0;
+    /*margin: 2px 0;*/
     outline: none;
     padding: 8px;
     box-sizing: border-box;
@@ -3206,7 +3201,7 @@ a:link {
 }
 .user-edit-profile .input-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .user-edit-profile input:focus {
@@ -3244,7 +3239,12 @@ input[type="radio"]:checked {
     width: fit-content;
     color: white;
     background-color: black;
-    border-radius: 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.user-edit-profile .save-changes:hover {
+    background-color: orange;
 }
 
 .transaction-history .paginate_button .page-item.active {
@@ -3841,7 +3841,6 @@ input:checked + .toggle-slider:before {
 
 .gym-intro {
     margin-top: 30px;
-    padding: 10px;
     width: 100%;
 }
 
@@ -5427,7 +5426,7 @@ section {
     min-height: 300px;
     max-height: 300px;
     object-fit: cover;
-    padding: 20px;
+    padding: 15px;
 }
 
 .list-of-brand .brand-image img {
@@ -5463,7 +5462,38 @@ section {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
-
+.list-of-brand .brand .description1 {
+    margin-top: 5px;
+    color: black;
+    font-size: 14px;
+    /*height: 42%;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 7;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.list-of-brand .brand .is-brand{
+    font-size: 17px;
+    position: absolute;
+    top:0;
+    left: 0;
+    color: white;
+    background-color: rgb(44, 44, 44);
+    padding: 5px 18px;
+    border-radius: 15px 0;
+}
+.list-of-brand .brand .is-dept{
+    font-size: 17px;
+    position: absolute;
+    top:0;
+    left: 0;
+    color: white;
+    background-color: rgb(255, 179, 0);
+    padding: 5px 18px;
+    border-radius: 15px 0;
+}
 .list-of-brand .basic-info {
     color: black;
     font-size: 12px;
@@ -5639,6 +5669,7 @@ section {
 }
 
 .list-of-gym .card {
+    position: relative;
     width: 95%;
     height: fit-content;
     margin: auto;
@@ -5655,12 +5686,15 @@ section {
 }
 
 .list-of-gym .card .distance-flag {
-    border-radius: 20px 20px 0 0;
-    background-color: rgb(214, 214, 214);
-    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px 0;
+    background-color: orange;
+    border: 1px solid darkorange;
     text-align: center;
-    font-size: 18px;
-    color: rgb(0, 0, 0);
+    font-size: 16px;
+    color: white;
     padding: 10px;
     font-weight: 600;
 }
@@ -5671,11 +5705,14 @@ section {
     height: fit-content;
 }
 
+.list-img {
+    padding: 15px 15px 0 15px;
+}
+
 .list-of-gym .card-img-top {
-    /*padding-top: 5px;*/
+    border-radius: 10px;
     width: 100%;
     height: 250px;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
 }
 
 .list-of-gym .card-body label {
@@ -6059,4 +6096,24 @@ body {
     font-size: 15px;
     width: 65%;
     margin: auto;
+}
+
+span.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
+}
+
+label.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
+}
+
+.input-title {
+    padding-bottom: 3px;
 }
