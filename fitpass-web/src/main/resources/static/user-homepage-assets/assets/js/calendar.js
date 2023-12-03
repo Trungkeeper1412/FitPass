@@ -108,7 +108,7 @@ function loadCalendar(data){
                     const colorInput = document.getElementById('event-color');
                     const submitButton = document.getElementById('submit-button');
                     const cancelButton = document.getElementById('cancel-button');
-                    modalTitle.innerHTML = 'Edit Event';
+                    modalTitle.innerHTML = 'Chỉnh sửa kế hoạch';
                     titleInput.value = info.event.title;
                     startDateInput.value = moment(info.event.start).format('YYYY-MM-DD');
                     endDateInput.value = moment(info.event.end, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');

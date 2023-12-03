@@ -233,4 +233,5 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
                 user.getUserDetailId(), user.getUserCreateTime(), user.isUserDeleted(),
                 user.getCreatedBy(), user.getInDepartmentId());
     }
+
 }

@@ -5,6 +5,12 @@ import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
 import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,30 +23,66 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class BORegisterController {
     private final BecomePartnerService becomePartnerService;
-
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @GetMapping("")
     public String getBrandOwnerRegister(Model model){
-        model.addAttribute("becomePartnerForm", new BecomePartnerForm());
-        return "gym-brand-registration";
+        try {
+            model.addAttribute("becomePartnerForm", new BecomePartnerForm());
+            return "gym-brand-registration";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @PostMapping("/submitForm")
     public String postBrandOwnerRegister(@Valid  @ModelAttribute BecomePartnerForm becomePartnerForm,
                                          BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return "gym-brand-registration";
+        try {
+            if (bindingResult.hasErrors()) {
+                return "gym-brand-registration";
+            }
+            BecomePartnerRequest becomePartnerRequest = new BecomePartnerRequest();
+            becomePartnerRequest.setBrandName(becomePartnerForm.getBrandName());
+            becomePartnerRequest.setBrandOwnerName(becomePartnerForm.getBrandOwnerName());
+            becomePartnerRequest.setContactNumber(becomePartnerForm.getContactNumber());
+            becomePartnerRequest.setAddress(becomePartnerForm.getAddress());
+            becomePartnerRequest.setWebUrl(becomePartnerForm.getWebUrl());
+            becomePartnerRequest.setContactEmail(becomePartnerForm.getContactEmail());
+            becomePartnerRequest.setSendRequestTime(new Timestamp(System.currentTimeMillis()));
+            becomePartnerRequest.setStatus("Đang chờ xử lý");
+            int row = becomePartnerService.create(becomePartnerRequest);
+            return "redirect:/become-a-partner/successful";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
-        BecomePartnerRequest becomePartnerRequest = new BecomePartnerRequest();
-        becomePartnerRequest.setBrandName(becomePartnerForm.getBrandName());
-        becomePartnerRequest.setBrandOwnerName(becomePartnerForm.getBrandOwnerName());
-        becomePartnerRequest.setContactNumber(becomePartnerForm.getContactNumber());
-        becomePartnerRequest.setAddress(becomePartnerForm.getAddress());
-        becomePartnerRequest.setWebUrl(becomePartnerForm.getWebUrl());
-        becomePartnerRequest.setContactEmail(becomePartnerForm.getContactEmail());
-        becomePartnerRequest.setSendRequestTime(new Timestamp(System.currentTimeMillis()));
-        becomePartnerRequest.setStatus("Đang chờ xử lý");
-        int row = becomePartnerService.create(becomePartnerRequest);
-        return "redirect:/become-a-partner/successful";
     }
     @GetMapping("/successful")
     public String getRegistrationSuccessful() {

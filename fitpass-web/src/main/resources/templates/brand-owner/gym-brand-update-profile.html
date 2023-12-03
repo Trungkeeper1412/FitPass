@@ -41,14 +41,14 @@
                                         <h2 class="fs-title">Thông tin cơ bản</h2>
                                         <div class="row text-start">
                                             <div class="col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <input type="hidden" id="brandId" th:value="${brandDetails.getBrandId()}"/>
                                                     <label for="name-brand" class="form-label fw-bold">Tên thương
                                                         hiệu</label>
                                                     <input type="text" class="form-control" id="name-brand"
-                                                           name="name-brand" placeholder="Nhập tên thương hiệu" th:value="${brandDetails.getBrandName()}">
+                                                           name="brandName" placeholder="Nhập tên thương hiệu" th:value="${brandDetails.getBrandName()}">
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="phone" class="form-label fw-bold">Số điện
                                                         thoại:</label>
                                                     <input type="text" class="form-control" id="phone" name="phone"
@@ -56,28 +56,28 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="email" class="form-label fw-bold">Email :</label>
                                                     <input type="email" class="form-control" id="email" name="email"
                                                            placeholder="Nhập email" th:value="${brandDetails.getBrandEmail()}">
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label class="d-block fw-bold">Trạng thái :</label>
                                                     <div class="form-check form-check-inline">
                                                         <input type="radio" name="actived" id="inlineradio1" value="false"
                                                                th:checked="${brandDetails.getBrandStatus().getBrandStatusCd() == 1}">
-                                                        <label class="active-check" for="inlineradio1">Hoạt động</label>
+                                                        <label class="active-check mt-1" for="inlineradio1">Hoạt động</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input type="radio" name="actived" id="inlineradio2" value="true"
                                                                th:checked="${brandDetails.getBrandStatus().getBrandStatusCd != 1}">
-                                                        <label class="active-check" for="inlineradio2">Ngưng hoạt động</label>
+                                                        <label class="active-check mt-1" for="inlineradio2">Ngưng hoạt động</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <label for="description" class="form-label fw-bold">Mô tả :</label>
-                                                <textarea id="description" th:text="${brandDetails.getBrandDescription()}" rows="4" cols="50" name="comment" form="usrform"
+                                                <textarea id="description" th:text="${brandDetails.getBrandDescription()}" rows="4" cols="50" name="comment"
                                                           placeholder="Mô tả về thương hiệu . . ."></textarea>
                                             </div>
                                         </div>

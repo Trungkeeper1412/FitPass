@@ -330,40 +330,6 @@ var current_fs, next_fs, previous_fs; // fieldsets
 var left, opacity, scale; // fieldset properties which we will animate
 var animating; // flag to prevent quick multi-click glitches
 
-$(".next").click(function () {
-    if (animating) return false;
-    animating = true;
-
-    current_fs = $(this).parent();
-    next_fs = $(this).parent().next();
-
-    // activate next step on progress bar using the index of next_fs
-    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-    // show the next fieldset
-    next_fs.show();
-    // hide the current fieldset with style
-    current_fs.animate({opacity: 0}, {
-        step: function (now, mx) {
-            // as the opacity of current_fs reduces to 0 - stored in "now"
-            // 1. scale current_fs down to 80%
-            scale = 1 - (1 - now) * 0.2;
-            // 2. bring next_fs from the right (50%)
-            left = (now * 50) + "%";
-            // 3. increase opacity of next_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({
-                transform: "scale(" + scale + ")", position: "absolute",
-            });
-            next_fs.css({left: left, opacity: opacity});
-        }, duration: 800, complete: function () {
-            current_fs.hide();
-            animating = false;
-        }, // this comes from the custom easing plugin
-        easing: "easeInOutBack",
-    });
-});
-
 $(".previous").click(function () {
     if (animating) return false;
     animating = true;
@@ -414,52 +380,183 @@ function previewImage(input) {
 }
 
 //Code Js submit update Profile
-$("#submitButton").click(function () {
-    var profileData = {
-        brandId: $("#brandId").val(),
-        userId: 1,
-        brandName: $("#name-brand").val(),
-        brandLogoUrl: $("#imageLogo").val(),
-        brandWallpaperUrl: $("#imageWallpaper").val(),
-        brandThumbnailUrl: $("#imageThumbnail").val(),
-        brandDescription: $("#description").val(),
-        brandContactNumber: $("#phone").val(),
-        brandEmail: $("#email").val(),
-        brandStatus: {
-            brandStatusCd: $("#inlineradio1").prop("checked") ? 1 : 2, brandStatusName: "",
-        }
-    };
+$.validator.addMethod("correctNumber", function(value, element) {
+    var correctNumber;
+    if (value.startsWith("1900") || value.startsWith("1800")) {
+        correctNumber = /^(1800|1900)\d{4}$/;
+    } else {
+        correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
+    }
+    return this.optional(element) || correctNumber.test(value);
+}, "Đầu số không đúng định dạng !");
 
-    // console.log(JSON.stringify(profileData));
-    $.ajax({
-        type: "POST",
-        url: "/brand-owner/updateProfile",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(profileData),
-        success: function (response) {
-            // console.log("Success:", response);
-            Swal.fire({
-                title: 'Đang cập nhật...', timer: 5000,
-                timerProgressBar: true,
-                allowOutsideClick: false,
-                onBeforeOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            setTimeout(function () {
-                Swal.fire({
-                    icon: 'success', title: 'Cập nhật thành công',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    window.location.href = "/brand-owner/profile"
-                });
-            }, 5000);
+$(document).ready(function () {
+    $("#msform").validate({
+        rules: {
+            brandName: {
+                required: true,
+                minlength: 3,
+                maxlength: 32,
+                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+            },
+            phone: {
+                required: true,
+                minlength: 8,
+                maxlength: 11,
+                correctNumber: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            comment: {
+                required: true,
+                minlength: 2,
+                maxlength: 700,
+            },
         },
-        error: function (error) {
-            console.error("Error:", error);
-            // Xử lý lỗi (nếu có)
+        messages: {
+            brandName: {
+                required: "Vui lòng nhập tên cơ sở !",
+                minlength: "Tên cơ sở phải có ít nhất 3 kí tự !",
+                maxlength: "Tên cơ sở không được vượt quá 32 kí tự !",
+                pattern: "Tên cơ sở không được chứa kí tự đặc biệt !",
+            },
+            phone: {
+                required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập số điện thoại !",
+                minlength: 'Đầu số phải có ít nhất 8 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                correctNumber: "Đầu số không đúng định dạng !",
+            },
+            email: {
+                required: "Vui lòng nhập email !",
+                email: "Vui lòng nhập địa chỉ email hợp lệ !"
+            },
+            comment: {
+                required: "Vui lòng nhập nhập mô tả gói tập !",
+                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
+                maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+            },
+        },
+    });
+
+    $(".next").click(function () {
+        if (!$("#msform").valid()) {
+            return false;
+        } else {
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            // activate next step on progress bar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            // show the next fieldset
+            next_fs.show();
+            // hide the current fieldset with style
+            current_fs.animate({opacity: 0}, {
+                step: function (now, mx) {
+                    // as the opacity of current_fs reduces to 0 - stored in "now"
+                    // 1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    // 2. bring next_fs from the right (50%)
+                    left = (now * 50) + "%";
+                    // 3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        transform: "scale(" + scale + ")", position: "absolute",
+                    });
+                    next_fs.css({left: left, opacity: opacity});
+                }, duration: 800, complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                }, // this comes from the custom easing plugin
+                easing: "easeInOutBack",
+            });
         }
     });
-})
+
+    // Handle "Submit" button click
+    $("#submitButton").click(function () {
+        // Validate the form
+        if ($("#msform").valid()) {
+            var profileData = {
+                brandId: $("#brandId").val(),
+                userId: 1,
+                brandName: $("#name-brand").val(),
+                brandLogoUrl: $("#imageLogo").val(),
+                brandWallpaperUrl: $("#imageWallpaper").val(),
+                brandThumbnailUrl: $("#imageThumbnail").val(),
+                brandDescription: $("#description").val(),
+                brandContactNumber: $("#phone").val(),
+                brandEmail: $("#email").val(),
+                brandStatus: {
+                    brandStatusCd: $("#inlineradio1").prop("checked") ? 1 : 2, brandStatusName: "",
+                }
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/brand-owner/updateProfile",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(profileData),
+                success: function (response) {
+                    if ($("#formSubmit").valid()) {
+                        Swal.fire({
+                            title: 'Bạn có muốn cập nhật thông tin ?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Có',
+                            cancelButtonText: 'Không',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    title: 'Vui lòng đợi...',
+                                    icon: 'info',
+                                    showConfirmButton: false,
+                                    timerProgressBar: true,
+                                    didOpen: () => {
+                                        Swal.showLoading();
+                                        setTimeout(() => {
+                                            $("#formSubmit").submit();
+                                            Swal.close();
+                                        }, 2000);
+                                    },
+                                    didClose: () => {
+                                        Swal.fire({
+                                            title: 'Thành công!',
+                                            text: 'Cập nhật thông tin thành công.',
+                                            icon: 'success',
+                                            showConfirmButton: false,
+                                            timer: 3000
+                                        });
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Thất bại!',
+                                    text: 'Cập nhật thông tin thất bại.',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Cập nhật thông tin thất bại.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+});

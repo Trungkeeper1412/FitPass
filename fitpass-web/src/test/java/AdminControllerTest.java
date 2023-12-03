@@ -1,6 +1,10 @@
 
+import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
+import com.ks.fitpass.become_a_partner.dto.BecomePartnerUpdateStatus;
+import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.entity.Feature;
@@ -9,7 +13,9 @@ import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
+import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.AdminController;
+import jakarta.servlet.http.HttpSession;
 import lombok.Value;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,10 +51,14 @@ public class AdminControllerTest {
 
     @Mock
     private RequestWithdrawHistoryService requestWithdrawHistoryService;
+    @Mock
+    private WalletService walletService;
 
+    @Mock
+    private HttpSession session;
 
-
-
+    @Mock
+    private BecomePartnerService becomePartnerService;
     @Captor
     private ArgumentCaptor<List<UserDTO>> userDTOListCaptor;
     @Captor
@@ -59,6 +69,13 @@ public class AdminControllerTest {
 
     @Captor
     private ArgumentCaptor<RequestHistoryStats> historyStatsCaptor;
+
+    @Captor
+    private ArgumentCaptor<List<BecomePartnerRequest>> requestListUpCaptor;
+
+    @Captor
+    private ArgumentCaptor<List<BecomePartnerRequest>> requestListDownCaptor;
+
 
     @InjectMocks
     private AdminController adminController;
@@ -280,12 +297,7 @@ public class AdminControllerTest {
         verify(departmentFeatureService, times(1)).updateFeature(featureToUpdate);
     }
 
-    // CustomDataAccessException implementation for testing
-    private static class CustomDataAccessException extends DataAccessException {
-        public CustomDataAccessException(String msg) {
-            super(msg);
-        }
-    }
+
     @Test
     public void testUpdateFeatureStatusSuccess() {
         // Arrange
@@ -567,48 +579,190 @@ public class AdminControllerTest {
         Assertions.assertNull(result.getBody()); // Ensure the body is null for a bad request
         verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
     }
-//    @Test
-//    public void testUpdateWithdrawalStatusSuccess() {
-//        // Arrange
-//        int requestHistoryId = 1;
-//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
-//
-//        // Act
-//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
-//
-//        // Assert
-//        assertEquals("redirect:/admin/withdrawal", resultView);
-//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-//    }
 
-//    @Test
-//    public void testUpdateWithdrawalStatusUpdateFail() {
-//        // Arrange
-//        int requestHistoryId = 1;
-//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
-//
-//        // Act
-//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
-//
-//        // Assert
-//        assertEquals("error/data-access-error", resultView);
-//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-//    }
+    @Test
+    public void testUpdateWithdrawalStatusSuccess() {
+        // Arrange
+        int requestHistoryId = 1;
+        User mockAdmin = new User();
+        mockAdmin.setUserId(123); // Set a valid admin user ID for testing
+        when(session.getAttribute("userInfo")).thenReturn(mockAdmin);
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
 
-//    @Test
-//    public void testUpdateWithdrawalStatusDataAccessException() {
-//        // Arrange
-//        int requestHistoryId = 1;
-//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-//
-//        // Act
-//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId);
-//
-//        // Assert
-//        assertEquals("error/data-access-error", resultView);
-//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-//    }
+        int userId = 456; // Set a valid user ID for testing
+        int adminId = mockAdmin.getUserId();
 
+        double userBalance = 100.0; // Set a valid user balance for testing
+        double adminBalance = 200.0; // Set a valid admin balance for testing
+        long amountCredit = 50;
+        RequestHistoryAdmin mockRequestWithdrawHistory = new RequestHistoryAdmin();
+        mockRequestWithdrawHistory.setAmountCredit(amountCredit); // Set a valid amount credit for testing
+        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenReturn(mockRequestWithdrawHistory);
+        when(requestWithdrawHistoryService.getUserIdByRequestHistoryId(requestHistoryId)).thenReturn(userId);
+
+        when(walletService.getBalanceByUserId(userId)).thenReturn(userBalance);
+        when(walletService.getBalanceByUserId(adminId)).thenReturn(adminBalance);
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
+
+        // Assert
+        assertEquals("redirect:/admin/withdrawal", resultView);
+        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+        verify(requestWithdrawHistoryService, times(1)).getUserIdByRequestHistoryId(requestHistoryId);
+        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
+        verify(walletService, times(1)).getBalanceByUserId(userId);
+        verify(walletService, times(1)).getBalanceByUserId(adminId);
+        verify(walletService, times(1)).updateBalanceByUderId(userId, userBalance - mockRequestWithdrawHistory.getAmountCredit());
+        verify(walletService, times(1)).updateBalanceByUderId(adminId, adminBalance + mockRequestWithdrawHistory.getAmountCredit());
+    }
+
+    @Test
+    public void testUpdateWithdrawalStatusUpdateFail() {
+        // Arrange
+        int requestHistoryId = 1;
+        User mockAdmin = new User();
+        when(session.getAttribute("userInfo")).thenReturn(mockAdmin);
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+
+    }
+
+    @Test
+    public void testUpdateWithdrawalStatusDataAccessException() {
+        // Arrange
+        int requestHistoryId = 1;
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+
+    }
+
+    @Test
+    public void testGetRegistrationListSuccess() {
+        // Arrange
+        List<BecomePartnerRequest> mockRequestListPending = Arrays.asList(new BecomePartnerRequest(), new BecomePartnerRequest());
+        List<BecomePartnerRequest> mockRequestListHandle = Arrays.asList(new BecomePartnerRequest(), new BecomePartnerRequest());
+        List<BecomePartnerRequest> mockRequestListSuccess = Arrays.asList(new BecomePartnerRequest(), new BecomePartnerRequest());
+        List<BecomePartnerRequest> mockRequestListFail = Arrays.asList(new BecomePartnerRequest(), new BecomePartnerRequest());
+
+        when(becomePartnerService.getAllBecomePartnerRequestByStatus("Đang chờ xử lý")).thenReturn(mockRequestListPending);
+        when(becomePartnerService.getAllBecomePartnerRequestByStatus("Đang xử lý")).thenReturn(mockRequestListHandle);
+        when(becomePartnerService.getAllBecomePartnerRequestByStatus("Thành công")).thenReturn(mockRequestListSuccess);
+        when(becomePartnerService.getAllBecomePartnerRequestByStatus("Từ chối đơn")).thenReturn(mockRequestListFail);
+
+        // Act
+        String resultView = adminController.getRegistrationList(model);
+
+        // Assert
+        assertEquals("admin/admin-registration-list", resultView);
+
+    }
+
+    @Test
+    public void testGetRegistrationListDataAccessException() {
+        // Arrange
+        when(becomePartnerService.getAllBecomePartnerRequestByStatus(anyString())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String resultView = adminController.getRegistrationList(model);
+
+        // Assert
+        assertEquals("error/data-access-error", resultView);
+
+
+    }
+    @Test
+    public void testGetRegistrationDetailSuccess() {
+        // Arrange
+        int becomeAPartnerRequestId = 1;
+        BecomePartnerRequest mockBecomePartnerRequest = new BecomePartnerRequest();
+        when(becomePartnerService.getById(becomeAPartnerRequestId)).thenReturn(mockBecomePartnerRequest);
+
+        // Act
+        ResponseEntity<BecomePartnerRequest> result = adminController.getRegistrationDetail(becomeAPartnerRequestId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        verify(becomePartnerService, times(1)).getById(becomeAPartnerRequestId);
+    }
+
+    @Test
+    public void testGetRegistrationDetailDataAccessException() {
+        // Arrange
+        int becomeAPartnerRequestId = 1;
+        when(becomePartnerService.getById(becomeAPartnerRequestId)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<BecomePartnerRequest> result = adminController.getRegistrationDetail(becomeAPartnerRequestId);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        verify(becomePartnerService, times(1)).getById(becomeAPartnerRequestId);
+    }
+
+    @Test
+    public void testUpdateRegistrationStatusSuccess() {
+        // Arrange
+        BecomePartnerUpdateStatus mockUpdateStatus = new BecomePartnerUpdateStatus();
+        mockUpdateStatus.setBecomeAPartnerRequestId(1);
+        mockUpdateStatus.setStatus("Đang xử lý");
+
+        when(becomePartnerService.updateStatus(mockUpdateStatus.getBecomeAPartnerRequestId(), mockUpdateStatus.getStatus())).thenReturn(1);
+
+        // Act
+        ResponseEntity<String> result = adminController.updateRegistrationStatus(mockUpdateStatus);
+
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals("Cập nhật thành công", result.getBody());
+        verify(becomePartnerService, times(1)).updateStatus(mockUpdateStatus.getBecomeAPartnerRequestId(), mockUpdateStatus.getStatus());
+
+    }
+
+    @Test
+    public void testUpdateRegistrationStatusUpdateFail() {
+        // Arrange
+        BecomePartnerUpdateStatus mockUpdateStatus = new BecomePartnerUpdateStatus();
+        mockUpdateStatus.setBecomeAPartnerRequestId(1);
+        mockUpdateStatus.setStatus("Đang xử lý");
+
+        when(becomePartnerService.updateStatus(mockUpdateStatus.getBecomeAPartnerRequestId(), mockUpdateStatus.getStatus())).thenReturn(0);
+
+        // Act
+        ResponseEntity<String> result = adminController.updateRegistrationStatus(mockUpdateStatus);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+
+    }
+
+    @Test
+    public void testUpdateRegistrationStatusDataAccessException() {
+        // Arrange
+        BecomePartnerUpdateStatus mockUpdateStatus = new BecomePartnerUpdateStatus();
+        mockUpdateStatus.setBecomeAPartnerRequestId(1);
+        mockUpdateStatus.setStatus("Đang xử lý");
+
+        when(becomePartnerService.updateStatus(mockUpdateStatus.getBecomeAPartnerRequestId(), mockUpdateStatus.getStatus())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<String> result = adminController.updateRegistrationStatus(mockUpdateStatus);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+
+    }
 
 }
 
