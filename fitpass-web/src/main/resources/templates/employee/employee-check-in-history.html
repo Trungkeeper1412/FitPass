@@ -43,7 +43,7 @@
                     </ul>
                     <!-- Tab Content -->
                     <div class="tab-content mt-4">
-                        <div class="tab-pane fade show active" id="flexible">
+                        <div class="tab-pane fade show active" id="flexible-tab">
                             <div class="search-flexible container pb-4">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
@@ -68,7 +68,7 @@
                                         <select id="search-by-flexible">
                                             <option value="" disabled selected>Tìm kiếm theo:</option>
                                             <option value="username">Tên người dùng</option>
-                                            <option value="phonenumber">Số điện thoại</option>
+                                            <option value="phone-number">Số điện thoại</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="fixed">
+                        <div class="tab-pane fade" id="fixed-tab">
                             <div class="search-fixed container pb-4">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
@@ -142,7 +142,7 @@
                                         <select id="search-by-fixed">
                                             <option value="" disabled selected>Tìm kiếm theo:</option>
                                             <option value="username">Tên người dùng</option>
-                                            <option value="phonenumber">Số điện thoại</option>
+                                            <option value="phone-number">Số điện thoại</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
@@ -245,7 +245,12 @@
 <script>
     let globalCurrentPage = 1;
     let defaultPageSize = 7;
-    const gymPlanType = "flexible";
+    let gymPlanType = null;
+    if ($("#flexible-tab").hasClass("show")) {
+        gymPlanType = "flexible";
+    } else if ($("#fixed-tab").hasClass("show")) {
+        gymPlanType = "flexible";
+    }
     const departmentId = $('#departmentId').val();
     $(document).ready(function () {
         try {
@@ -385,9 +390,9 @@
 
         let departmentId = $("#departmentId").val();
         // Gửi yêu cầu tìm kiếm bằng Ajax
-        if ($("#flexible").hasClass("show")) {
+        if ($("#flexible-tab").hasClass("show")) {
             searchListFlex(searchText, searchOption, filterDate, departmentId)
-        } else if ($("#fixed").hasClass("show")) {
+        } else if ($("#fixed-tab").hasClass("show")) {
             console.log("hello");
             searchListFixed(searchText, searchOption, filterDate, departmentId);
         }
@@ -398,7 +403,7 @@
 
         if (searchOption === 'username') {
             url = `/employee/history/searchFlex?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-        } else if (searchOption === 'phonenumber') {
+        } else if (searchOption === 'phone-number') {
             url = `/employee/history/searchFlex?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
         }
 
@@ -453,7 +458,7 @@
 
         if (searchOption === 'username') {
             url = `/employee/history/searchFixed?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-        } else if (searchOption === 'phonenumber') {
+        } else if (searchOption === 'phone-number') {
             url = `/employee/history/searchFixed?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
         }
 
