@@ -217,8 +217,4 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         return jdbcTemplate.queryForObject(GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 
-    @Override
-    public String getUserEmailByUserId(int userId) {
-        return jdbcTemplate.queryForObject(GET_USER_EMAIL_BY_USER_ID, String.class, userId);
-    }
 }
