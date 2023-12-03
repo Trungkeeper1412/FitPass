@@ -21,31 +21,31 @@ public interface IRepositoryQuery {
             """;
 
     String GET_USER_BY_USER_ACCOUNT = """
-                SELECT * FROM user WHERE user_account = ? AND user_deleted = 0
-            """;
+            SELECT * FROM user WHERE user_account = ? AND user_deleted = 0
+        """;
 
     String GET_ROLES_BY_USER_ACCOUNT = """
-                SELECT
-                    T3.role_id,
-                    T3.role_name
-                FROM user T1
-                LEFT JOIN user_role T2
-                    ON T1.user_id = T2.user_id
-                LEFT JOIN role T3
-                    ON T3.role_id = T2.role_id
-                WHERE T1.user_account = ?
-                    AND T1.user_deleted = 0
-            """;
+            SELECT
+                T3.role_id,
+                T3.role_name
+            FROM user T1
+            LEFT JOIN user_role T2
+                ON T1.user_id = T2.user_id
+            LEFT JOIN role T3
+                ON T3.role_id = T2.role_id
+            WHERE T1.user_account = ?
+                AND T1.user_deleted = 0
+        """;
 
     String UPDATE_USER_PASSWORD = """
-                UPDATE user
-                SET user_password = ?
-                WHERE user_id = ?
-            """;
+            UPDATE user
+            SET user_password = ?
+            WHERE user_id = ?
+        """;
 
     String GET_KBN_BY_NAME = """
-                SELECT * FROM mst_kbn WHERE mst_kbn_name = ?
-            """;
+            SELECT * FROM mst_kbn WHERE mst_kbn_name = ?
+        """;
     String GET_GYM_PLAN_TYPE_BY_PLAN_KEY = """
                 SELECT DISTINCT mkv.mst_kbn_value AS gym_plan_type
                             FROM gym_plan gp
@@ -93,6 +93,16 @@ public interface IRepositoryQuery {
                     user_account = ? AND
                     user_password = ? AND
                     user_detail_id = ? AND
+                    user_create_time = ?;
+            """;
+
+    String GET_LAST_USER_INSERT_ID_NULL = """
+                SELECT user_id
+                FROM user
+                WHERE\s
+                    user_account = ? AND
+                    user_password = ? AND
+                    user_detail_id IS NULL AND
                     user_create_time = ?;
             """;
 
@@ -164,17 +174,17 @@ public interface IRepositoryQuery {
             """;
 
     String GET_ALL_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID = """
-                 SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url,ud.securityId, u.user_deleted
-                                 FROM user u
-                                 JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
-                                 JOIN user_role ur ON u.user_id = ur.user_id
-                                 WHERE ur.role_id = 3
-            AND u.created_by IN (
-                SELECT user_id
-                FROM gym_department
-                WHERE gym_department_id = ?
-            );
-                 """;
+            SELECT u.user_id , u.user_detail_id , ud.first_name , ud.last_name , ud.email , ud.phone_number , ud.image_url,ud.securityId, u.user_deleted
+                            FROM user u
+                            JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
+                            JOIN user_role ur ON u.user_id = ur.user_id
+                            WHERE ur.role_id = 3
+							AND u.created_by IN (
+							    SELECT user_id
+							    FROM gym_department
+							    WHERE gym_department_id = ?
+							);
+            """;
 
     String GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID = """
             SELECT COUNT(u.user_id) AS total_accounts
@@ -196,6 +206,12 @@ public interface IRepositoryQuery {
             WHERE u.user_id = ?;
             """;
 
+    String GET_DEPARTMENT_ID_BY_EMPLOYEE_ID = """
+                SELECT gd.gym_department_id
+                FROM user u
+                JOIN gym_department gd ON u.created_by = gd.user_id
+                WHERE u.user_id = ?;
+            """;
     String GET_USER_IMG_BY_USER_ID = """
             SELECT ud.image_url
                 FROM user_detail ud
