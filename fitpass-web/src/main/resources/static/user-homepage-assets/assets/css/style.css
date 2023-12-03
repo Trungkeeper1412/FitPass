@@ -2713,7 +2713,8 @@ body {
 }
 
 .star-rating input[type="radio"] {
-  display: none;
+  position: absolute;
+  left: -9999px;
 }
 
 .star-rating label {
@@ -3085,4 +3086,20 @@ td div div div a:hover {
     display: none;
   }
 
+}
+
+span.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 3px;
+  display: block;
+  position: absolute;
+}
+
+label.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 3px;
+  display: block;
+  position: absolute;
 }
