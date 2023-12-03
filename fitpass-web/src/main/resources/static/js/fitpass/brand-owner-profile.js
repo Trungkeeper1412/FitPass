@@ -422,7 +422,7 @@ $("#submitButton").click(function () {
         brandLogoUrl: $("#imageLogo").val(),
         brandWallpaperUrl: $("#imageWallpaper").val(),
         brandThumbnailUrl: $("#imageThumbnail").val(),
-        brandDescription: $("#description").text(),
+        brandDescription: $("#description").val(),
         brandContactNumber: $("#phone").val(),
         brandEmail: $("#email").val(),
         brandStatus: {
@@ -430,16 +430,14 @@ $("#submitButton").click(function () {
         }
     };
 
-    console.log(JSON.stringify(profileData));
-
+    // console.log(JSON.stringify(profileData));
     $.ajax({
         type: "POST",
         url: "/brand-owner/updateProfile",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(profileData),
         success: function (response) {
-            console.log("Success:", response);
-
+            // console.log("Success:", response);
             Swal.fire({
                 title: 'Đang cập nhật...', timer: 5000,
                 timerProgressBar: true,
@@ -455,7 +453,7 @@ $("#submitButton").click(function () {
                     showConfirmButton: false,
                     timer: 2000
                 }).then(() => {
-                    window.location.href = "/brand-owner/department/list"
+                    window.location.href = "/brand-owner/profile"
                 });
             }, 5000);
         },
