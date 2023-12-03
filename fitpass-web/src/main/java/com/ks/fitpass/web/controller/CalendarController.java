@@ -37,7 +37,7 @@ public class CalendarController {
     public String viewCalendar() {
         try {
             return "user/calendar";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -63,7 +63,7 @@ public class CalendarController {
             // lấy ra danh sách check_in_history theo getUserId
             List<CheckInDataCalendarDTO> list = calendarService.getListCheckInCalendarByUserId(u.getUserId());
             return ResponseEntity.ok(list);
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return ResponseEntity.badRequest().build();
@@ -84,35 +84,36 @@ public class CalendarController {
 
     @GetMapping("/getDetail")
     public ResponseEntity<CheckInDataCalendarDetailDTO> getListCheckIn(@RequestParam("id") int checkInHistoryId, HttpSession session) {
-      try {
-          User u = (User) session.getAttribute("userInfo");
-          CheckInDataCalendarDetailDTO checkInDataCalendarDetailDTO = calendarService.getDetailByUserIdAndHistoryId(u.getUserId(), checkInHistoryId);
-          return ResponseEntity.ok(checkInDataCalendarDetailDTO);
-      }catch (DuplicateKeyException ex) {
-          // Handle duplicate key violation
-          logger.error("DuplicateKeyException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      } catch (EmptyResultDataAccessException ex) {
-          // Handle empty result set
-          logger.error("EmptyResultDataAccessException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      } catch (IncorrectResultSizeDataAccessException ex) {
-          // Handle incorrect result size
-          logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      } catch (DataAccessException ex) {
-          // Handle other data access issues
-          logger.error("DataAccessException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      }
+        try {
+            User u = (User) session.getAttribute("userInfo");
+            CheckInDataCalendarDetailDTO checkInDataCalendarDetailDTO = calendarService.getDetailByUserIdAndHistoryId(u.getUserId(), checkInHistoryId);
+            return ResponseEntity.ok(checkInDataCalendarDetailDTO);
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/submitReview")
-    public String submitReview(@RequestParam("checkInHistoryId") int checkInHistoryId,
-                               @RequestParam("departmentId") int departmentId,
-                               @RequestParam("rating") int rating,
-                               @RequestParam("thoughts") String comments,
-                               HttpSession session) {
+    public String submitReview(
+            @RequestParam("checkInHistoryId") int checkInHistoryId,
+            @RequestParam("departmentId") int departmentId,
+            @RequestParam(value = "rating", defaultValue = "5") int rating,
+            @RequestParam("thoughts") String comments,
+            HttpSession session) {
         try {
             User u = (User) session.getAttribute("userInfo");
 
@@ -130,7 +131,7 @@ public class CalendarController {
             // nhét nó lại vào bảng check_in_history
             calendarService.insertCheckInHistoryFeedback(feedbackId, checkInHistoryId);
             return "redirect:/calendar/view";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -163,7 +164,7 @@ public class CalendarController {
             userFeedback.setFeedbackTime(LocalDateTime.now());
             calendarService.updateCalendarFeedbackRating(feedbackId, userFeedback);
             return "redirect:/calendar/view";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -187,7 +188,7 @@ public class CalendarController {
         try {
             CalendarFeedbackDTO calendarFeedbackDTO = calendarService.getFeedbackByCheckInHistoryId(checkInHistoryId);
             return ResponseEntity.ok(calendarFeedbackDTO);
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return ResponseEntity.badRequest().build();
