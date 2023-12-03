@@ -43,4 +43,6 @@ public interface UserService {
     int getNumberOfAccountCreatedByDepartmentId(int departmentId);
 
     User getUserByAccount(String username);
+
+    int createEmployee(User user);
 }

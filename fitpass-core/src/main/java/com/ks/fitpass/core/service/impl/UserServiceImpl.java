@@ -166,4 +166,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public User getUserByAccount(String username) {
         return userRepository.findByAccount(username);
     }
+
+
+    @Override
+    public int createEmployee(User user) {
+        return userRepository.createEmployee(user);
+    }
 }
