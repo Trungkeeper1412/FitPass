@@ -4,6 +4,7 @@ import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDTO;
 import com.ks.fitpass.core.entity.UserDetail;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -42,4 +43,6 @@ public interface UserService extends UserDetailsService {
     User getUserByAccount(String username);
 
     int createEmployee(User user);
+
+    boolean updatePassword(String newPassword, int userId) throws DataAccessException;
 }
