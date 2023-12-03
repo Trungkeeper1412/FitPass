@@ -178,7 +178,7 @@ public interface IRepositoryQuery {
                             FROM user u
                             JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
                             JOIN user_role ur ON u.user_id = ur.user_id
-                            WHERE ur.role_id = 3		
+                            WHERE ur.role_id = 3
                             AND u.in_department_id = ?
             """;
 
@@ -200,23 +200,11 @@ public interface IRepositoryQuery {
                 VALUES (?, ?, ?, ?, ?, ?, ?);
             """;
 
-    String GET_USER_EMAIL_BY_USER_ID = """
-            SELECT ud.email
-                FROM user_detail ud
-                JOIN user u ON u.user_detail_id = ud.user_detail_id
-            WHERE u.user_id = ?;
-            """;
-
+    //Lay theo id cua department id
     String GET_DEPARTMENT_ID_BY_EMPLOYEE_ID = """
                 SELECT gd.gym_department_id
                 FROM user u
-                JOIN gym_department gd ON u.created_by = gd.user_id
+                JOIN gym_department gd ON u.in_department_id = gd.gym_department_id
                 WHERE u.user_id = ?;
-            """;
-    String GET_USER_IMG_BY_USER_ID = """
-            SELECT ud.image_url
-                FROM user_detail ud
-                JOIN user u ON u.user_detail_id = ud.user_detail_id
-            WHERE u.user_id = ?;
             """;
 }
