@@ -139,6 +139,7 @@ function showDetailPending(id) {
         url: '/admin/registration/detail/' + id,
         type: 'GET',
         success: function (result) {
+            console.log(result);
             $("#becomeAPartnerRequestIdPending").val(result.becomeAPartnerRequestId);
             $("#brandNamePending").val(result.brandName);
             $("#brandOwnerPending").val(result.brandOwnerName);
@@ -194,7 +195,6 @@ function showDetailCancel(id) {
         url: '/admin/registration/detail/' + id,
         type: 'GET',
         success: function (result) {
-            console.log(result);
             $("#becomeAPartnerRequestIdSuccess").val(result.becomeAPartnerRequestId);
             $("#brandNameCancel").val(result.brandName);
             $("#brandOwnerCancel").val(result.brandOwnerName);
@@ -211,8 +211,7 @@ function showDetailCancel(id) {
 
 function formatISODate(isoDateString) {
     const date = new Date(isoDateString);
-
-    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const hours = String(date.getUTCHours()+ 7).padStart(2, '0');
     const minutes = String(date.getUTCMinutes()).padStart(2, '0');
     const day = String(date.getUTCDate()).padStart(2, '0');
     const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
