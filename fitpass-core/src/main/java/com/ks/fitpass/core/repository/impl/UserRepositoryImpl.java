@@ -85,6 +85,12 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
 
     @Override
     public int getLastUserInsertId(User user) {
+        if(user.getUserDetailId() == null) {
+            return jdbcTemplate.queryForObject(GET_LAST_USER_INSERT_ID_NULL, Integer.class,
+                    user.getUserAccount(),
+                    user.getUserPassword(),
+                    user.getUserCreateTime());
+        }
         return jdbcTemplate.queryForObject(GET_LAST_USER_INSERT_ID,Integer.class,
                 user.getUserAccount(),
                 user.getUserPassword(),
@@ -220,6 +226,11 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     @Override
     public String getUserEmailByUserId(int userId) {
         return jdbcTemplate.queryForObject(GET_USER_EMAIL_BY_USER_ID, String.class, userId);
+    }
+    
+     @Override
+    public int getDepartmentIdByEmployeeId(int employeeId) {
+        return jdbcTemplate.queryForObject(GET_DEPARTMENT_ID_BY_EMPLOYEE_ID, Integer.class, employeeId);
     }
 
     @Override
