@@ -18,13 +18,12 @@
     <div class="row mx" style="height: 100%; width: 100%;">
         <div class="col-md-6 banner-wrapper">
             <div class="banner">
-                <div onclick="changeTab" id="changeTab" class="ghost_btn move_register">Đăng ký ngay</div>
+                <a th:href="@{/register}"  class="ghost_btn move_register">Đăng ký ngay</a>
             </div>
         </div>
 
         <!-- <div class="col-md-6 tab"> -->
         <div id="login-tab" class="col-md-6 login-tab">
-<!--            <form th:action="@{/login}" method='POST'>-->
             <h1 class="fw-bold">ĐĂNG NHẬP</h1>
             <div class="line"></div>
             <form th:action="@{/login}" method='POST'>
@@ -55,69 +54,6 @@
             </div>
         </div>
 
-
-        <div id="register-tab" class="col-md-6 register-tab">
-            <h1 class="fw-bold">ĐĂNG KÝ</h1>
-            <div class="line"></div>
-            <div class="input-fields">
-                <div class="name" style="display: flex;">
-                    <div class="input-field fname">
-                        <div class="input-title">Họ và tên đệm</div>
-                        <input type="text" name="fist-name" value="">
-                    </div>
-                    <div class="input-field lname">
-                        <div class="input-title">Tên</div>
-                        <input type="text" name="last-name" value="">
-                    </div>
-                </div>
-                <div class="name" style="display: flex;">
-                    <div class="input-field fname">
-                        <div class="input-title">Gmail</div>
-                        <input type="text" name="email" value="">
-                    </div>
-                    <div class="input-field lname">
-                        <div class="input-title">Số điện thoại</div>
-                        <input type="number" name="phone" value="">
-                    </div>
-                </div>
-                <div class="input-field">
-                    <div class="input-title">Tên đăng nhâp</div>
-                    <input type="number" name="username" value="">
-                </div>
-                <div class="input-field">
-                    <div class="input-title">Mật khẩu</div>
-                    <input type="password" name="password" value="">
-                </div>
-                <div class="input-field">
-                    <div class="input-title">Xác nhận mật khẩu</div>
-                    <input type="password" name="password" value="">
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px;">
-                    <div class="input-field dob">
-                        <div class="input-title">Ngày sinh</div>
-                        <input type="date" value="">
-                    </div>
-                    <div class="input-field gender">
-                        <div class="input-title">Giới tính</div>
-                        <div class="mt-2" style="display: flex;">
-                            <div style="display: flex;">
-                                <input type="radio" name="gender" value="male" checked>
-                                <span style="margin-left: 4px">nam</span>
-                            </div>
-                            <div style="display: flex; margin-left: 15px;">
-                                <input type="radio" name="gender" value="female">
-                                <span style="margin-left: 4px">nữ</span>
-                            </div>
-                            <div style="display: flex; margin-left: 15px;">
-                                <input type="radio" name="gender" value="other">
-                                <span style="margin-left: 4px">khác</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="login">Đăng ký</button>
-        </div>
     </div>
 </div>
 
@@ -138,23 +74,6 @@
 </script>
 
 <script>
-    const registerTab = document.getElementById("register-tab");
-    // loginTab.style.display = "block";
-    registerTab.style.display = "none";
-    const loginTab = document.getElementById("login-tab");
-    const changeTab = document.getElementById("changeTab");
-    changeTab.addEventListener("click", () => {
-        if(changeTab.innerHTML === "Đăng ký ngay"){
-            changeTab.innerHTML = "Đăng nhập";
-            loginTab.style.display = "none";
-            registerTab.style.display = "flex";
-        }
-        else if(changeTab.innerHTML === "Đăng nhập"){
-            loginTab.style.display = "flex";
-            registerTab.style.display = "none";
-            changeTab.innerHTML = "Đăng ký ngay";
-        }
-    });
 </script>
 </body>
 
