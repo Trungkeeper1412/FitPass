@@ -423,8 +423,8 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
 VALUES (3, 'Nguyen Van Bao', 'Linh', 'linhnvb2@fpt.com', '0987654321', '123 Main St',
         '2001-01-01', 'Male', '/images/system/v.png');
 
-INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
-VALUES (3, 'employee', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 3);
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, in_department_id)
+VALUES (3, 'employee', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 3, 1);
 
 -- User creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
