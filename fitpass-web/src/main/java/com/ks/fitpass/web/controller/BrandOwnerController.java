@@ -137,8 +137,6 @@ public class BrandOwnerController {
     @GetMapping("/department/list")
     public String getListOfDepartment(Model model, HttpSession session) {
         try {
-
-
             User user = (User) session.getAttribute("userInfo");
             // Get brandId by brandOwnerId
             Brand brand = brandService.getBrandDetail(user.getUserId());
