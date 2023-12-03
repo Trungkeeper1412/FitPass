@@ -23,12 +23,12 @@ public class UserHandshakeHandler extends DefaultHandshakeHandler {
                 if (session != null) {
                     User user = (User) session.getAttribute("userInfo");
                     if (user != null) {
-                        return () -> String.valueOf(user.getUserId()); //Returned Principal
+                        return () -> String.valueOf(user.getUserId());
                     } else {
-                        throw new Exception("No user found in session.");
+                        return () -> "default-user"; // Default Principal when there's no user in the session
                     }
                 } else {
-                    throw new Exception("No active session found.");
+                    return () -> "default-user"; // Default Principal when there's no active session
                 }
             } else {
                 throw new Exception("Request is not an instance of ServletServerHttpRequest.");
