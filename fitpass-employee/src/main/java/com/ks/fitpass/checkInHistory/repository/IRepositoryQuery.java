@@ -33,6 +33,7 @@ public interface IRepositoryQuery {
     String GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID = """
                 SELECT
                     CONCAT(ud.first_name, ' ', ud.last_name) AS username,
+                    ud.image_url,
                     ud.phone_number,
                     CONCAT(empd.first_name, ' ', empd.last_name) AS emp_name,
                     ci.check_in_time AS checkInTime,
@@ -53,6 +54,7 @@ public interface IRepositoryQuery {
     String GET_LIST_CHECK_IN_HISTORY_FIXED_BY_DEPARTMENT_ID = """
             SELECT
                                 CONCAT(ud.first_name, ' ', ud.last_name) AS username,
+                                ud.image_url,
                                 ud.phone_number,
                                 CONCAT(empd.first_name, ' ', empd.last_name) AS emp_name,
                                 ci.check_in_time AS checkInTime,
@@ -67,5 +69,27 @@ public interface IRepositoryQuery {
                             JOIN user_detail empd ON emp.user_detail_id = empd.user_detail_id
                             WHERE opd.gym_department_id = ?
                             AND opd.price  > 0
+            """;
+    String GET_TOTAL_LIST_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID = """
+            SELECT COUNT(*) FROM check_in_history ci
+                JOIN order_plan_detail opd ON ci.order_detail_id = opd.order_detail_id
+                JOIN `order` o ON opd.order_id = o.order_id
+                JOIN user u ON o.user_id = u.user_id
+                JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+                LEFT JOIN user emp ON ci.emp_checkin_id = emp.user_id
+                LEFT JOIN user_detail empd ON emp.user_detail_id = empd.user_detail_id
+                WHERE opd.gym_department_id = ?
+                AND opd.price_per_hours > 0
+            """;
+    String GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID = """
+            SELECT COUNT(*) FROM check_in_history ci
+                JOIN order_plan_detail opd ON ci.order_detail_id = opd.order_detail_id
+                JOIN `order` o ON opd.order_id = o.order_id
+                JOIN user u ON o.user_id = u.user_id
+                JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
+                JOIN user emp ON ci.emp_checkin_id = emp.user_id
+                JOIN user_detail empd ON emp.user_detail_id = empd.user_detail_id
+                WHERE opd.gym_department_id = ?
+                AND opd.price > 0
             """;
 }
