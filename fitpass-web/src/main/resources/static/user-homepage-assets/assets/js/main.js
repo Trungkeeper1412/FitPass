@@ -452,7 +452,6 @@ function updateQuantityCart() {
 })()
 $(function () {
     $("#include-navbar").load("navbar.html");
-    $("#include-footer").load("footer.html");
 });
 
 //change avatar

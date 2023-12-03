@@ -625,7 +625,7 @@ function handleCheckOutNotificationClick(notification) {
                 <p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${orderDetailConfirmCheckOut.creditAfterPay} credit</span></p>
                 `,
                     showCancelButton: true,
-                    confirmButtonText: '<a href="profile/deposit/">Nạp thêm credit</a>',
+                    confirmButtonText: '<a href="deposit">Nạp thêm credit</a>',
                     cancelButtonText: 'No',
                     reverseButtons: true,
                     allowEscapeKey: false,
