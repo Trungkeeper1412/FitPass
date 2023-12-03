@@ -222,21 +222,10 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
         return jdbcTemplate.queryForObject(GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 
-    @Override
-    public String getUserEmailByUserId(int userId) {
-        return jdbcTemplate.queryForObject(GET_USER_EMAIL_BY_USER_ID, String.class, userId);
-    }
-
      @Override
-    public int getDepartmentIdByEmployeeId(int employeeId) {
+    public Integer getDepartmentIdByEmployeeId(int employeeId) {
         return jdbcTemplate.queryForObject(GET_DEPARTMENT_ID_BY_EMPLOYEE_ID, Integer.class, employeeId);
     }
-
-    @Override
-    public String getUserImgByUserId(int userId) {
-        return jdbcTemplate.queryForObject(GET_USER_IMG_BY_USER_ID, String.class, userId);
-    }
-
 
     @Override
     public int createEmployee(User user) {

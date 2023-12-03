@@ -78,16 +78,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public String getUserEmailByUserId(int userId) {
-        return userRepository.getUserEmailByUserId(userId);
-    }
-
-    @Override
-    public String getUserImgByUserId(int userId) {
-        return userRepository.getUserImgByUserId(userId);
-    }
-
-    @Override
     public int insertIntoUser(User user) {
         return userRepository.insertIntoUser(user);
     }
