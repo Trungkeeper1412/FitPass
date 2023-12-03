@@ -350,24 +350,43 @@ public class AdminController {
 
     @GetMapping("/registration/list")
     public String getRegistrationList(Model model) {
-        List<BecomePartnerRequest> becomePartnerRequestListPending = becomePartnerService.getAllBecomePartnerRequestByStatus("Đang chờ xử lý");
-        List<BecomePartnerRequest> becomePartnerRequestListHandle = becomePartnerService.getAllBecomePartnerRequestByStatus("Đang xử lý");
-        List<BecomePartnerRequest> becomePartnerRequestListSuccess = becomePartnerService.getAllBecomePartnerRequestByStatus("Thành công");
-        List<BecomePartnerRequest> becomePartnerRequestListFail = becomePartnerService.getAllBecomePartnerRequestByStatus("Từ chối đơn");
+        try {
+            List<BecomePartnerRequest> becomePartnerRequestListPending = becomePartnerService.getAllBecomePartnerRequestByStatus("Đang chờ xử lý");
+            List<BecomePartnerRequest> becomePartnerRequestListHandle = becomePartnerService.getAllBecomePartnerRequestByStatus("Đang xử lý");
+            List<BecomePartnerRequest> becomePartnerRequestListSuccess = becomePartnerService.getAllBecomePartnerRequestByStatus("Thành công");
+            List<BecomePartnerRequest> becomePartnerRequestListFail = becomePartnerService.getAllBecomePartnerRequestByStatus("Từ chối đơn");
 
-        List<BecomePartnerRequest> becomePartnerRequestListUp =
-                Stream.concat(becomePartnerRequestListPending.stream(),
-                        becomePartnerRequestListHandle.stream()).distinct()
-                .toList();
+            List<BecomePartnerRequest> becomePartnerRequestListUp =
+                    Stream.concat(becomePartnerRequestListPending.stream(),
+                                    becomePartnerRequestListHandle.stream()).distinct()
+                            .toList();
 
-        List<BecomePartnerRequest> becomePartnerRequestListDown =
-                Stream.concat(becomePartnerRequestListSuccess.stream(),
-                        becomePartnerRequestListFail.stream()).distinct()
-                .toList();
+            List<BecomePartnerRequest> becomePartnerRequestListDown =
+                    Stream.concat(becomePartnerRequestListSuccess.stream(),
+                                    becomePartnerRequestListFail.stream()).distinct()
+                            .toList();
 
-        model.addAttribute("becomePartnerRequestListUp", becomePartnerRequestListUp);
-        model.addAttribute("becomePartnerRequestListDown", becomePartnerRequestListDown);
-        return "admin/admin-registration-list";
+            model.addAttribute("becomePartnerRequestListUp", becomePartnerRequestListUp);
+            model.addAttribute("becomePartnerRequestListDown", becomePartnerRequestListDown);
+            return "admin/admin-registration-list";
+        }
+        catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     @GetMapping("/registration/detail/{becomeAPartnerRequestId}")
