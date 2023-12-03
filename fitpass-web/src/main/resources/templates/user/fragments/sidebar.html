@@ -1,8 +1,11 @@
 <div class="col-md-4 col-lg-4 col-xl-3 menu-option mb-4" th:fragment="sidebar">
   <div class="user-basic-info">
-    <div class="user-img">
-      <img th:src="@{/images/system/v2.png}">
-    </div>
+      <div class="user-img" th:if="${session.userAvatar != null}">
+          <img th:src="@{${session.userAvatar}}" />
+      </div>
+      <div class="user-img" th:unless="${session.userAvatar != null}">
+          <img th:src="@{/images/system/v2.png}" />
+      </div>
     <div class="user">
       <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
         <div class="gmail" th:if="${session.userEmail != null}">

@@ -44,9 +44,10 @@ public class ProfileController {
             User user = (User) userInfo;
 
             Double userTotalDeposit = transactionService.getTotalAmountOfTransactionByUserId(user.getUserId());
-            String userEmail = userService.getUserEmailByUserId(user.getUserId());
+            UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
 
-            session.setAttribute("userEmail", userEmail);
+            session.setAttribute("userEmail", userDetail.getEmail());
+            session.setAttribute("userAvatar", userDetail.getImageUrl());
             session.setAttribute("userTotalDeposit", userTotalDeposit);
         }
     }
