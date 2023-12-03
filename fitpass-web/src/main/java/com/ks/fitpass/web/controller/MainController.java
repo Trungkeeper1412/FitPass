@@ -51,4 +51,9 @@ public class MainController {
     public String forgotPw() {
         return "forgot-password";
     }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
 }

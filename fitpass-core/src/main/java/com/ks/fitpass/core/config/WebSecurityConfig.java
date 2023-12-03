@@ -35,6 +35,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/websocket/**").hasAnyAuthority("USER", "EMPLOYEE")
                         .requestMatchers("/login", "/logout").permitAll()
                         .requestMatchers("/forgot-password/**").permitAll()
+                        .requestMatchers("/register").permitAll()
                         .requestMatchers("/").permitAll()
 
                         .requestMatchers("/landing-page").permitAll()

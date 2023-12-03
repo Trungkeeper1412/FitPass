@@ -103,3 +103,65 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+
+    $.validator.addMethod("starRequired", function (value, element) {
+        var rating = $("input[name='rating']:checked").val();
+        return (rating !== undefined);
+    }, "Vui lòng chọn đánh giá sao.");
+
+    $("#formReview").validate({
+        rules: {
+            rating: {
+                starRequired: true
+            },
+            thoughts: {
+                maxlength: 200,
+            },
+        },
+        messages: {
+            rating: {
+                starRequired: "Vui lòng chọn đánh giá sao."
+            },
+            thoughts: {
+                maxlength: "Đánh giá không được vượt quá 200 kí tự !",
+            },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "rating") {
+                error.insertAfter(".star-rating");
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    });
+
+    $("#submit-review").click(function () {
+        if (!$("#formReview").valid()) {
+            return false;
+        }
+    });
+});
+
+$(document).ready(function () {
+
+    $("#formReviewed").validate({
+        rules: {
+            thoughts: {
+                maxlength: 200,
+            },
+        },
+        messages: {
+            thoughts: {
+                maxlength: "Đánh giá không được vượt quá 200 kí tự !",
+            },
+        },
+    });
+
+    $("#edit-review").click(function () {
+        if (!$("#formReviewed").valid()) {
+            return false;
+        }
+    });
+});
