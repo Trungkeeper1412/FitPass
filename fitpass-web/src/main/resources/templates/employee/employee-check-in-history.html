@@ -5,263 +5,427 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <th:block th:replace="employee/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <th:block th:replace="employee/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Navbar -->
-                <th:block th:replace="employee/common/navbar"></th:block>
-                <!-- End of Navbar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Navbar -->
+            <th:block th:replace="employee/common/navbar"></th:block>
+            <!-- End of Navbar -->
 
-                <!-- Begin Page Content -->
-                <!-- ======= Breadcrumbs ======= -->
-                <section class="breadcrumbs">
-                    <div class="d-flex align-items-center justify-content-lg-between">
-                        <ol>
-                            <li><a href="#">Fitpass</a></li>
-                            <li>Lịch sử check-in</li>
-                        </ol>
-                    </div>
-                </section><!-- End Breadcrumbs -->
-                <div class="row">
-                    <div class="col">
-                        <div class="text-center fs-1 fw-bold">Danh sách người dùng:</div>
-                    </div>
+            <!-- Begin Page Content -->
+            <!-- ======= Breadcrumbs ======= -->
+            <section class="breadcrumbs">
+                <div class="d-flex align-items-center justify-content-lg-between">
+                    <ol>
+                        <li><a href="#">Fitpass</a></li>
+                        <li>Lịch sử check-in</li>
+                    </ol>
                 </div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                            <form
-                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="hidden" id="departmentId" th:value="${departmentId}">
-                                    <input type="text" class="form-control bg-light border-1 small" id="searchInput"
-                                        placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" id="searchButton">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
+            </section><!-- End Breadcrumbs -->
+            <div class="container-fluid">
+                <div class="separator-box">
+                    <ul class="nav nav-tabs" id="myTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="flexible-history-tab" data-toggle="tab"
+                               href="#flexible">Gói linh hoạt</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="fixed-history-tab" data-toggle="tab" href="#fixed">Gói cố
+                                định</a>
+                        </li>
+                    </ul>
+                    <!-- Tab Content -->
+                    <div class="tab-content mt-4">
+                        <div class="tab-pane fade show active" id="flexible">
+                            <div class="search-flexible container pb-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
+                                        <form
+                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="hidden" id="departmentId" th:value="${departmentId}">
+                                                <input type="text" class="form-control bg-light border-1 small"
+                                                       id="searchInputFlexible"
+                                                       placeholder="Tìm kiếm..." aria-label="Search"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button"
+                                                            id="searchButtonFlexible">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                        <select id="search-by-flexible">
+                                            <option value="" disabled selected>Tìm kiếm theo:</option>
+                                            <option value="username">Tên người dùng</option>
+                                            <option value="phonenumber">Số điện thoại</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                        <select id="filter-date-flexible">
+                                            <option value="" disabled selected>Sắp xếp theo:</option>
+                                            <option value="inDay">Trong ngày</option>
+                                            <option value="inWeek">Trong tuần</option>
+                                            <option value="inMonth">Trong tháng</option>
+                                            <option value="inYear">Trong năm</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="row">
+                                <table class="table table-striped rounded">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 105px;">Ảnh</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Tên nhân viên</th>
+                                        <th>Thời gian Check-in</th>
+                                        <th>Thời gian Check-out</th>
+                                        <th>Thời gian tập</th>
+                                        <th>Giá gói</th>
+                                        <th>Credit sử dụng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="listFlexible">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flexible-pagination-container">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="#page1">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#page2">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" tabindex="+1">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="search-by">
-                                <option value="" disabled selected>Tìm kiếm theo:</option>
-                                <option value="username">Tên người dùng</option>
-                                <option value="phonenumber">Số điện thoại</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="filter-date">
-                                <option value="" disabled selected>Sắp xếp theo:</option>
-                                <option value="inDay">Trong ngày</option>
-                                <option value="inWeek">Trong tuần</option>
-                                <option value="inMonth">Trong tháng</option>
-                                <option value="inYear">Trong năm</option>
-                            </select>
+
+                        <div class="tab-pane fade" id="fixed">
+                            <div class="search-fixed container pb-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
+                                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-1 small"
+                                                       id="searchInputFixed"
+                                                       placeholder="Tìm kiếm..." aria-label="Search"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button"
+                                                            id="searchButtonFixed">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                        <select id="search-by-fixed">
+                                            <option value="" disabled selected>Tìm kiếm theo:</option>
+                                            <option value="username">Tên người dùng</option>
+                                            <option value="phonenumber">Số điện thoại</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                        <select id="filter-date-fixed">
+                                            <option value="" disabled selected>Sắp xếp theo:</option>
+                                            <option value="inDay">Trong ngày</option>
+                                            <option value="inWeek">Trong tuần</option>
+                                            <option value="inMonth">Trong tháng</option>
+                                            <option value="inYear">Trong năm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <table class="table table-striped rounded">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 105px;">Ảnh</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Tên nhân viên</th>
+                                        <th>Thời gian Check-in</th>
+                                        <th>Tên gói</th>
+                                        <th>Giá gói</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="listFixed">
+                                    <th:block th:each="item : ${listFixed}">
+                                        <tr>
+                                            <td>
+                                                <button class="view-image-btn view-detail"
+                                                        th:attr="data-image-src=${item.getUserImageUrl()}">Xem ảnh
+                                                </button>
+                                            </td>
+                                            <td th:text="${item.getUsername()}">Nguyễn Trà My</td>
+                                            <td th:text="${item.getPhoneNumber()}">0987654321</td>
+                                            <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
+                                            <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}">
+                                                12-04-2023
+                                            </td>
+                                            <td th:text="${item.getGymPlanName()}">Gói 3 ngày</td>
+                                            <td>
+                                                <h5 class="text-money"><span th:text="${item.getCredit()}">100</span>
+                                                    <span class="credit">Credit</span></h5>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="fixed-pagination-container">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="#page1">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#page2">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" tabindex="+1">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid">
-                    <div class="separator-box">
-                        <ul class="nav nav-tabs" id="myTabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="flexible-history-tab" data-toggle="tab"
-                                    href="#flexible">Gói linh hoạt</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="fixed-history-tab" data-toggle="tab" href="#fixed">Gói cố
-                                    định</a>
-                            </li>
-                        </ul>
-                        <!-- Tab Content -->
-                        <div class="tab-content mt-4">
-                            <div class="tab-pane fade show active" id="flexible">
-                                <div class="row">
-                                    <table class="table table-striped rounded">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 105px;">Ảnh</th>
-                                                <th>Tên khách hàng</th>
-                                                <th>Số điện thoại</th>
-                                                <th>Tên nhân viên</th>
-<!--                                                <th>Ngày</th>-->
-                                                <th>Thời gian Check-in</th>
-                                                <th>Thời gian Check-out</th>
-                                                <th>Thời gian tập</th>
-                                                <th>Giá gói</th>
-                                                <th>Credit sử dụng</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="listFlexible">
-                                            <th:block th:each="item:${listFlexible}">
-
-                                                <tr>
-                                                    <td><button class="view-image-btn view-detail" data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-<!--                                                                th:attr="data-image-src=${item.image}"-->
-                                                    <td th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</td>
-                                                    <td th:text="${item.getPhoneNumber()}">0987654321</td>
-                                                    <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
-                                                    <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}"></td>
-                                                    <td th:text="${item.getCheckOutTime() == null ? 'Chưa check out' : #temporals.format(item.getCheckOutTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}"></td>
-                                                    <td th:text="${item.getDuration()}"></td>
-                                                    <td>
-                                                        <h5 class="text-money"><span th:text="${item.getPricePerHours()}">5</span> <span class="credit">Credit/Giờ</span></h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="text-money"><span th:text="${item.getTotalCredit() == null ? '0' : item.getTotalCredit()}">5</span> <span class="credit">Credit</span></h5>
-                                                    </td>
-                                                </tr>
-                                            </th:block>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="fixed">
-                                <div class="row">
-                                    <table class="table table-striped rounded">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 105px;">Ảnh</th>
-                                                <th>Tên khách hàng</th>
-                                                <th>Số điện thoại</th>
-                                                <th>Tên nhân viên</th>
-                                                <th>Thời gian Check-in</th>
-                                                <th>Tên gói</th>
-                                                <th>Giá gói</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="listFixed">
-                                            <th:block th:each="item : ${listFixed}">
-                                                <tr>
-                                                    <td><button class="view-image-btn view-detail"
-                                                            data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-                                                    <td th:text="${item.getUsername()}">Nguyễn Trà My</td>
-                                                    <td th:text="${item.getPhoneNumber()}">0987654321</td>
-                                                    <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
-                                                    <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}">12-04-2023</td>
-                                                    <td th:text="${item.getGymPlanName()}">Gói 3 ngày</td>
-                                                    <td>
-                                                        <h5 class="text-money"><span th:text="${item.getCredit()}">100</span> <span class="credit">Credit</span></h5>
-                                                    </td>
-                                                </tr>
-                                            </th:block>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="#page1">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#page2">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" tabindex="+1">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-                    <div id="imageModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close" id="closeModal">&times;</span>
-                            <img class="modal-image" id="modalImage" src="" alt="Ảnh người dùng">
-                        </div>
+                <!-- Modal -->
+                <div id="imageModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="closeModal">&times;</span>
+                        <img class="modal-image" id="modalImage" src="" alt="Ảnh người dùng">
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <th:block th:replace="employee/common/footer :: footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
         </div>
-        <!-- End of Content Wrapper -->
-
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <th:block th:replace="employee/common/footer :: footer"></th:block>
+        <!-- End of Footer -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <!-- Logout Modal-->
-    <th:block th:replace="employee/common/logout-modal"></th:block>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <!-- Script -->
-    <th:block th:replace="employee/common/script :: script"></th:block>
-    <script>
-        $("#searchButton").click(function () {
+<!-- Logout Modal-->
+<th:block th:replace="employee/common/logout-modal"></th:block>
+
+<!-- Script -->
+<th:block th:replace="employee/common/script :: script"></th:block>
+<script>
+    let globalCurrentPage = 1;
+    let defaultPageSize = 7;
+    const gymPlanType = "flexible";
+    const departmentId = $('#departmentId').val();
+    $(document).ready(function () {
+        try {
+            const params = new URLSearchParams();
+            params.set("id", departmentId);
+            params.set("plan", gymPlanType);
+            params.set("page", globalCurrentPage);
+            params.set("size", defaultPageSize);
+
+            fetch(`/employee/history/getListHistory?${params}`)
+                .then(response => response.json())
+                .then(data => {
+                    renderPagination(data.currentPage, data.totalPages);
+                    loadTable(data.currentPage, defaultPageSize);
+                });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    function renderPagination(currentPage, totalPages) {
+        const paginationContainer = $('.flexible-pagination-container ul');
+        paginationContainer.empty();
+
+        // Generate the previous button
+        const previousLink = $('<a>').addClass('page-link').attr('href', '#').text('Previous');
+        const previousLi = $('<li>').addClass('page-item').append(previousLink);
+        paginationContainer.append(previousLi);
+
+        // Generate the pagination links dynamically
+        for (let page = 1; page <= totalPages; page++) {
+            const link = $('<a>').addClass('page-link').attr('href', `#page${page}`).text(page);
+            const li = $('<li>').addClass('page-item').append(link);
+            if (page === currentPage) {
+                li.addClass('active'); // Add the "active" class to the current page item
+            }
+            link.on('click', function (event) {
+                event.preventDefault();
+                currentPage = page; // Update the currentPage
+                renderPagination(currentPage, totalPages);
+                paginationClick(page); // Call your paginationClick function with the current page
+                loadTable(currentPage, defaultPageSize); // Load the table for the current page
+            });
+            paginationContainer.append(li);
+        }
+
+        // Generate the next button
+        const nextLink = $('<a>').addClass('page-link').attr('href', '#').text('Next');
+        const nextLi = $('<li>').addClass('page-item').append(nextLink);
+        paginationContainer.append(nextLi);
+
+        // Event handler for the previous button
+        previousLink.on('click', function (event) {
             event.preventDefault();
-            console.log("click");
-            // Lấy giá trị từ ô nhập liệu
-            let searchText = $("#searchInput").val();
-            // Lấy giá trị từ dropdown chọn
-            let searchOption = $("#search-by").val();
-
-            let filterDate = $("#filter-date").val();
-
-            let departmentId = $("#departmentId").val();
-            // Gửi yêu cầu tìm kiếm bằng Ajax
-            if ($("#flexible").hasClass("show")) {
-                searchListFlex(searchText, searchOption, filterDate, departmentId)
-            } else if($("#fixed").hasClass("show")) {
-                console.log("hello");
-                searchListFixed(searchText, searchOption, filterDate, departmentId);
+            if (currentPage > 1) {
+                currentPage--;
+                renderPagination(currentPage, totalPages);
+                paginationClick(currentPage);
+                loadTable(currentPage, defaultPageSize);
             }
         });
 
-        function searchListFlex(searchText, searchOption, filterDate, departmentId) {
-            let url;
-
-            if (searchOption === 'username') {
-                url = `/employee/history/searchFlex?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-            } else if (searchOption === 'phonenumber') {
-                url = `/employee/history/searchFlex?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+        // Event handler for the next button
+        nextLink.on('click', function (event) {
+            event.preventDefault();
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPagination(currentPage, totalPages);
+                paginationClick(currentPage);
+                loadTable(currentPage, defaultPageSize);
             }
+        });
+    }
 
-            if (url) {
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    success: function (data) {
-                        console.log(data);
-                        displaySearchListFlex(data);
-                    },
-                    error: function () {
-                        alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-                    }
-                });
-            }
+    function paginationClick(page) {
+        loadTable(page, defaultPageSize)
+    }
+
+    function loadTable(page, size) {
+        const loadParams = new URLSearchParams()
+        loadParams.set("id", departmentId)
+        loadParams.set("plan", gymPlanType)
+        loadParams.set("page", page)
+        loadParams.set("size", size)
+
+        fetch(`/employee/history/getListHistory?${loadParams}`)
+            .then(data => {
+                if (!data.ok) {
+                    throw new Error(`HTTP error! Status: ${data.status}`);
+                }
+                return data.json()
+            })
+            .then(data => {
+                // Update the table content with the fetched data
+                const tableContent = $('#listFlexible');
+                tableContent.empty(); // Clear the existing table content
+                // Loop through the data and create table rows dynamically
+                $.each(data.listFlexible, function (index, rowData) {
+                    // Create the table row HTML
+                    const rowHtml = `
+                    <tr>
+                        <td>
+                            <button class="view-image-btn view-detail" data-image-src="${rowData.userImageUrl}">Xem ảnh</button>
+                        </td>
+                        <td>${rowData.username}</td>
+                        <td>${rowData.phoneNumber}</td>
+                        <td>${rowData.empName}</td>
+                        <td>${new Date(rowData.checkInTime).toLocaleString()}</td>
+                        <td>${rowData.checkOutTime !== null ? new Date(rowData.checkOutTime).toLocaleString() : 'Chưa check out'}</td>
+                        <td>${rowData.duration}</td>
+                        <td>
+                            <h5 class="text-money"><span>${rowData.pricePerHours}</span> <span class="credit">Credit/Giờ</span></h5>
+                        </td>
+                        <td>
+                            <h5 class="text-money"><span>${rowData.totalCredit !== null ? rowData.totalCredit : '0'}</span> <span class="credit">Credit</span></h5>
+                        </td>
+                    </tr>
+                `;
+                    // Append the HTML to the table content
+                    tableContent.append(rowHtml);
+                })
+            })
+            .catch(error => {
+                console.error('Error fetching notifications:', error);
+            });
+    }
+
+    $("#searchButton").click(function () {
+        event.preventDefault();
+        console.log("click");
+        // Lấy giá trị từ ô nhập liệu
+        let searchText = $("#searchInput").val();
+        // Lấy giá trị từ dropdown chọn
+        let searchOption = $("#search-by").val();
+
+        let filterDate = $("#filter-date").val();
+
+        let departmentId = $("#departmentId").val();
+        // Gửi yêu cầu tìm kiếm bằng Ajax
+        if ($("#flexible").hasClass("show")) {
+            searchListFlex(searchText, searchOption, filterDate, departmentId)
+        } else if ($("#fixed").hasClass("show")) {
+            console.log("hello");
+            searchListFixed(searchText, searchOption, filterDate, departmentId);
+        }
+    });
+
+    function searchListFlex(searchText, searchOption, filterDate, departmentId) {
+        let url;
+
+        if (searchOption === 'username') {
+            url = `/employee/history/searchFlex?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+        } else if (searchOption === 'phonenumber') {
+            url = `/employee/history/searchFlex?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
         }
 
-        function displaySearchListFlex(results) {
-            // Xóa các kết quả hiện tại
-            $("#listFlexible").empty();
+        if (url) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    console.log(data);
+                    displaySearchListFlex(data);
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+                }
+            });
+        }
+    }
 
-            // Hiển thị kết quả tìm kiếm
-            if (results.length > 0) {
-                var resultHtml = "";
-                for (var i = 0; i < results.length; i++) {
-                    resultHtml += `<tr>
+    function displaySearchListFlex(results) {
+        // Xóa các kết quả hiện tại
+        $("#listFlexible").empty();
+
+        // Hiển thị kết quả tìm kiếm
+        if (results.length > 0) {
+            var resultHtml = "";
+            for (var i = 0; i < results.length; i++) {
+                resultHtml += `<tr>
                                                 <td><button class="view-image-btn view-detail"
                                                             data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
                                                 <td>${results[i].username}</td>
@@ -277,46 +441,46 @@
                                                     <h5 class="text-money"><span>${results[i].totalCredit}</span> <span class="credit">Credit</span></h5>
                                                 </td>
                                             </tr>`;
+            }
+            $("#listFlexible").append(resultHtml);
+        } else {
+            $("#listFlexible").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+        }
+    }
+
+    function searchListFixed(searchText, searchOption, filterDate, departmentId) {
+        let url;
+
+        if (searchOption === 'username') {
+            url = `/employee/history/searchFixed?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+        } else if (searchOption === 'phonenumber') {
+            url = `/employee/history/searchFixed?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+        }
+
+        if (url) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    console.log(data);
+                    displaySearchListFixed(data);
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
                 }
-                $("#listFlexible").append(resultHtml);
-            } else {
-                $("#listFlexible").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
-            }
+            });
         }
+    }
 
-        function searchListFixed(searchText, searchOption, filterDate, departmentId) {
-            let url;
+    function displaySearchListFixed(results) {
+        // Xóa các kết quả hiện tại
+        $("#listFixed").empty();
 
-            if (searchOption === 'username') {
-                url = `/employee/history/searchFixed?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-            } else if (searchOption === 'phonenumber') {
-                url = `/employee/history/searchFixed?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-            }
-
-            if (url) {
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    success: function (data) {
-                        console.log(data);
-                        displaySearchListFixed(data);
-                    },
-                    error: function () {
-                        alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-                    }
-                });
-            }
-        }
-
-        function displaySearchListFixed(results) {
-            // Xóa các kết quả hiện tại
-            $("#listFixed").empty();
-
-            // Hiển thị kết quả tìm kiếm
-            if (results.length > 0) {
-                var resultHtml = "";
-                for (var i = 0; i < results.length; i++) {
-                    resultHtml +=   `<tr>
+        // Hiển thị kết quả tìm kiếm
+        if (results.length > 0) {
+            var resultHtml = "";
+            for (var i = 0; i < results.length; i++) {
+                resultHtml += `<tr>
                                                     <td><button class="view-image-btn view-detail"
                                                             data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
                                                     <td>${results[i].username}</td>
@@ -328,31 +492,31 @@
                                                         <h5 class="text-money"><span>${results[i].credit}</span> <span class="credit">Credit</span></h5>
                                                     </td>
                                                 </tr>`;
-                }
-                $("#listFixed").append(resultHtml);
-            } else {
-                $("#listFixed").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
             }
+            $("#listFixed").append(resultHtml);
+        } else {
+            $("#listFixed").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
         }
+    }
 
-        function formatDateTime(dateTimeString) {
-            const date = new Date(dateTimeString);
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // Tháng bắt đầu từ 0
-            const year = date.getFullYear();
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            const seconds = date.getSeconds();
+    function formatDateTime(dateTimeString) {
+        const date = new Date(dateTimeString);
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // Tháng bắt đầu từ 0
+        const year = date.getFullYear();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
 
-            // Đảm bảo rằng tháng và ngày có hai chữ số
-            const formattedMonth = month < 10 ? `0${month}` : month;
-            const formattedDay = day < 10 ? `0${day}` : day;
-            const formattedHours = hours < 10 ? `0${hours}` : hours;
-            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-            const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+        // Đảm bảo rằng tháng và ngày có hai chữ số
+        const formattedMonth = month < 10 ? `0${month}` : month;
+        const formattedDay = day < 10 ? `0${day}` : day;
+        const formattedHours = hours < 10 ? `0${hours}` : hours;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
-            return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-        }
-    </script>
+        return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    }
+</script>
 </body>
 </html>
