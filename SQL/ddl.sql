@@ -47,13 +47,13 @@ CREATE TABLE IF NOT EXISTS user_detail (
 );
 -- User table to store user information
 CREATE TABLE IF NOT EXISTS `user` (
-                                      user_id          INT AUTO_INCREMENT PRIMARY KEY,
-                                      user_account     VARCHAR(250) NOT NULL,
-                                      user_password    VARCHAR(100) NOT NULL,
-                                      user_detail_id        INT ,
-                                      user_create_time VARCHAR(20) NOT NULL,
-                                      user_deleted     TINYINT NOT NULL,
-                                      created_by INT NULL,
+                                      user_id          	INT AUTO_INCREMENT PRIMARY KEY,
+                                      user_account     	VARCHAR(250) NOT NULL,
+                                      user_password    	VARCHAR(100) NOT NULL,
+                                      user_detail_id    INT,
+                                      user_create_time 	VARCHAR(20) NOT NULL,
+                                      user_deleted     	TINYINT NOT NULL,
+                                      created_by INT 	NULL,
                                       first_time boolean default 1,
                                       in_department_id INT NULL,
                                       FOREIGN KEY (user_detail_id) REFERENCES user_detail(user_detail_id),
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               gym_department_id           INT AUTO_INCREMENT PRIMARY KEY,
                                               gym_department_status_key   INT NOT NULL,
                                               brand_id                    INT NOT NULL,
-                                              user_id                     INT,
+                                              user_id                     INT NULL,
                                               name                        VARCHAR(255) NOT NULL,
                                               address                     VARCHAR(255),
                                               contact_number              VARCHAR(20),
@@ -134,7 +134,8 @@ CREATE TABLE IF NOT EXISTS gym_department (
                                               area                        DECIMAL(10, 2),
                                               city                        VARCHAR(255),
                                               first_time boolean default 0,
-                                              FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
+                                              FOREIGN KEY (brand_id) REFERENCES brand(brand_id),
+                                              FOREIGN KEY (user_id) REFERENCES `user`(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS gym_department_albums (
@@ -364,8 +365,8 @@ CREATE TABLE IF NOT EXISTS request_withdrawal_history (
                                                           status           VARCHAR(30) NOT NULL,
                                                           FOREIGN KEY (credit_card_id) REFERENCES credit_card(credit_card_id)
 );
--- Bảng become a partner
 
+-- Bảng become a partner
 CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
                                                                 become_a_partner_request_history_id   INT AUTO_INCREMENT PRIMARY KEY,
                                                                 brand_name      VARCHAR(100) NOT NULL,
