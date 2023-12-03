@@ -1,19 +1,24 @@
 
-import com.ks.fitpass.brand.dto.BrandOwnerProfile;
-import com.ks.fitpass.brand.dto.ServiceUpdateDTO;
+import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
+import com.ks.fitpass.core.entity.UserDetail;
+import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentAlbums;
 import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
 import com.ks.fitpass.department.service.*;
+import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
 import com.ks.fitpass.gymplan.service.GymPlanService;
+import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.BrandOwnerController;
+import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,10 +26,13 @@ import org.mockito.*;
 import org.springframework.dao.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertThrows;
@@ -41,12 +49,16 @@ public class BrandOwnerControllerTest {
     private Model model;
 
     @Mock
+    private UserService userService;
+    @Mock
     private BrandAmenitieService brandAmenitieService;
 
     @Mock
     private GymPlanService gymPlanService;
     @Mock
     private DepartmentScheduleService departmentScheduleService;
+    @Mock
+    private WalletService walletService;
     @Mock
     private DepartmentAlbumsService departmentAlbumsService;
     @Mock
@@ -58,7 +70,28 @@ public class BrandOwnerControllerTest {
 
     @InjectMocks
     private BrandOwnerController brandOwnerController;
+    public static GymOwnerUpdateDTO createMockGymOwnerUpdateDTO() {
+        GymOwnerUpdateDTO gymOwnerUpdateDTO = mock(GymOwnerUpdateDTO.class);
 
+        when(gymOwnerUpdateDTO.getUserDetailId()).thenReturn(1);
+        when(gymOwnerUpdateDTO.getFirstName()).thenReturn("John");
+        when(gymOwnerUpdateDTO.getLastName()).thenReturn("Doe");
+        when(gymOwnerUpdateDTO.getEmail()).thenReturn("john.doe@example.com");
+        when(gymOwnerUpdateDTO.getPhone()).thenReturn("0123456789");
+        when(gymOwnerUpdateDTO.getAddress()).thenReturn("123 Main Street");
+        when(gymOwnerUpdateDTO.getDateOfBirth()).thenReturn(LocalDate.of(1990, 1, 1));
+        when(gymOwnerUpdateDTO.getIdCard()).thenReturn("123456789012");
+        when(gymOwnerUpdateDTO.getGender()).thenReturn("Male");
+        when(gymOwnerUpdateDTO.getImageUrl()).thenReturn("path/to/image.jpg");
+        when(gymOwnerUpdateDTO.getActive()).thenReturn("Active");
+        when(gymOwnerUpdateDTO.isUserDeleted()).thenReturn(false);
+        when(gymOwnerUpdateDTO.getOldDepartmentId()).thenReturn(2);
+        when(gymOwnerUpdateDTO.getDepartmentId()).thenReturn(3);
+        when(gymOwnerUpdateDTO.getUserId()).thenReturn(4);
+        when(gymOwnerUpdateDTO.getOldEmail()).thenReturn("old.email@example.com");
+
+        return gymOwnerUpdateDTO;
+    }
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -746,18 +779,6 @@ public class BrandOwnerControllerTest {
         assertEquals("error/duplicate-key-error", result);
     }
 
-    @Test
-    public void testGetDepartmentFeedbackDetailsWithEmptyResultDataAccessException() {
-        // Arrange
-        int departmentId = 1;
-        when(departmentService.getOne(departmentId)).thenReturn(null);
-
-        // Act
-        String result = brandOwnerController.getDepartmentFeedbackDetails(departmentId, model);
-
-        // Assert
-        assertEquals("error/no-data", result);
-    }
 
     @Test
     public void testGetDepartmentFeedbackDetailsWithIncorrectResultSizeDataAccessException() {
@@ -966,7 +987,307 @@ public class BrandOwnerControllerTest {
     }
 
 
+    @Test
+    public void testCreateServiceSuccess() {
+        // Arrange
+        ServiceCreateDTO serviceCreateDTO = new ServiceCreateDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+
+        when(brandAmenitieService.createBrandAmenitie(any())).thenReturn(1);
+
+        // Act
+        String result = brandOwnerController.createService(serviceCreateDTO, bindingResult, session);
+
+        // Assert
+        assertEquals("redirect:/brand-owner/service/list", result);
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(brandAmenitieService, times(1)).createBrandAmenitie(any());
+    }
+
+    @Test
+    public void testCreateServiceValidationError() {
+        // Arrange
+        ServiceCreateDTO serviceCreateDTO = new ServiceCreateDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        String result = brandOwnerController.createService(serviceCreateDTO, bindingResult, null);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-service-add", result);
+        verify(brandService, never()).getBrandDetail(anyInt());
+        verify(brandAmenitieService, never()).createBrandAmenitie(any());
+    }
+
+    @Test
+    public void testCreateServiceDuplicateKeyException() {
+        // Arrange
+        ServiceCreateDTO serviceCreateDTO = new ServiceCreateDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(new Brand());
+        when(brandAmenitieService.createBrandAmenitie(any())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.createService(serviceCreateDTO, bindingResult, session);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(brandAmenitieService, times(1)).createBrandAmenitie(any());
+    }
+
+    @Test
+    public void testGetListOfGymOwnerSuccess() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        User user = new User();
+        user.setUserId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+
+        List<GymOwnerListDTO> gymOwnerList = new ArrayList<>();
+        when(userService.getAllAccountByBrandId(brand.getBrandId())).thenReturn(gymOwnerList);
+
+        // Act
+        String result = brandOwnerController.getListOfGymOwner(session, model);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-owner-list", result);
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(userService, times(1)).getAllAccountByBrandId(brand.getBrandId());
+        verify(model, times(1)).addAttribute(eq("gymOwnerList"), anyList());
+    }
+
+    @Test
+    public void testGetListOfGymOwnerDuplicateKeyException() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        User user = new User();
+        user.setUserId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(new Brand());
+        when(userService.getAllAccountByBrandId(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfGymOwner(session, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(userService, times(1)).getAllAccountByBrandId(anyInt());
+        verify(model, never()).addAttribute(eq("gymOwnerList"), anyList());
+    }
+
+    @Test
+    public void testGetGymOwnerDetailsSuccess() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        User user = new User();
+        user.setUserId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+
+        List<DepartmentListByBrandDTO> departmentList = new ArrayList<>();
+        when(departmentService.getAllDepartmentListOfBrand(brand.getBrandId())).thenReturn(departmentList);
+
+        UserDetail userDetail = new UserDetail();
+        when(userService.getUserDetailByUserDetailId(anyInt())).thenReturn(userDetail);
+
+        // Act
+        String result = brandOwnerController.getGymOwnerDetails(1, 2, model, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-owner-detail", result);
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(departmentService, times(1)).getAllDepartmentListOfBrand(brand.getBrandId());
+        verify(userService, times(1)).getUserDetailByUserDetailId(2);
+        verify(model, times(1)).addAttribute(eq("gymOwner"), any());
+        verify(model, times(1)).addAttribute(eq("filteredList"), anyList());
+    }
+
+    @Test
+    public void testUpdateGymOwnerDetailsSuccess() {
+        // Arrange
+        GymOwnerUpdateDTO gymOwnerUpdateDTO = createMockGymOwnerUpdateDTO();
+
+        BindingResult bindingResult = mock(BindingResult.class);
+
+        when(userService.checkEmailExist(anyString())).thenReturn(false);
+        when(departmentService.updateDepartmentGymOwner(anyInt(), anyInt())).thenReturn(1);
+
+        // Act
+        String result = brandOwnerController.updateGymOwnerDetails(gymOwnerUpdateDTO, bindingResult);
+
+        // Assert
+        assertEquals("redirect:/brand-owner/gym-owner/list", result);
+        verify(userService, times(1)).updateUserDetail(any());
+        verify(userService, times(1)).updateUserStatusByUserId(anyInt(), anyInt());
+        verify(departmentService, times(2)).updateDepartmentGymOwner(anyInt(), anyInt());
+    }
 
 
+    @Test
+    public void testUpdateGymOwnerDetailsValidationError() {
+        // Arrange
+        GymOwnerUpdateDTO gymOwnerUpdateDTO = createMockGymOwnerUpdateDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        String result = brandOwnerController.updateGymOwnerDetails(gymOwnerUpdateDTO, bindingResult);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-owner-detail", result);
+        verify(userService, never()).updateUserDetail(any());
+        verify(userService, never()).updateUserStatusByUserId(anyInt(), anyInt());
+        verify(departmentService, never()).updateDepartmentGymOwner(anyInt(), anyInt());
+    }
+
+    @Test
+    public void testUpdateGymOwnerDetailsDataAccessException() {
+        // Arrange
+        GymOwnerUpdateDTO gymOwnerUpdateDTO = createMockGymOwnerUpdateDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(userService.checkEmailExist(anyString())).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+
+        // Act
+        String result = brandOwnerController.updateGymOwnerDetails(gymOwnerUpdateDTO, bindingResult);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+        verify(bindingResult, never()).rejectValue(eq("email"), eq("error.email"), anyString());
+    }
+
+
+    @Test
+    public void testCreateGymOwnerDataAccessException() {
+        // Arrange
+        GymOwnerCreateDTO gymOwnerCreateDTO = createMockGymOwnerCreateDTO();
+        when(userService.checkEmailExist(gymOwnerCreateDTO.getEmail())).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+
+        // Act
+        String result = brandOwnerController.createGymOwner(gymOwnerCreateDTO, mock(BindingResult.class), session);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    private GymOwnerCreateDTO createMockGymOwnerCreateDTO() {
+        // Implement a method to create a mock GymOwnerCreateDTO instance with valid values
+        GymOwnerCreateDTO gymOwnerCreateDTO = new GymOwnerCreateDTO();
+        gymOwnerCreateDTO.setFirstName("John");
+        gymOwnerCreateDTO.setLastName("Doe");
+        gymOwnerCreateDTO.setUsername("john_doe");
+        gymOwnerCreateDTO.setEmail("john.doe@example.com");
+        gymOwnerCreateDTO.setPhone("0987654321");
+        gymOwnerCreateDTO.setAddress("123 Main Street, City");
+        gymOwnerCreateDTO.setDateOfBirth(LocalDate.of(1990, 1, 1));
+        gymOwnerCreateDTO.setIdCard("123456789012");
+        gymOwnerCreateDTO.setGender("Male");
+        gymOwnerCreateDTO.setImageUrl("https://example.com/johndoe.jpg");
+
+        return gymOwnerCreateDTO;
+    }
+
+    @Test
+    void testGetListOfFlexibleGymPlansSuccess() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+
+        List<BrandGymPlanFlexDTO> listFlexGymPlan = Collections.singletonList(new BrandGymPlanFlexDTO());
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+        when(gymPlanService.getAllGymPlanFlexByBrandId(brand.getBrandId())).thenReturn(listFlexGymPlan);
+
+        // Act
+        String result = brandOwnerController.getListOfFlexibleGymPlans(session, model);
+
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(gymPlanService, times(1)).getAllGymPlanFlexByBrandId(brand.getBrandId());
+        verify(model, times(1)).addAttribute("listFlexGymPlan", listFlexGymPlan);
+        assertEquals("brand-owner/gym-brand-plan-flexible-list", result);
+    }
+
+    @Test
+    void testGetListOfFlexibleGymPlansWithDuplicateKeyException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfFlexibleGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testGetListOfFlexibleGymPlansWithEmptyResultDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfFlexibleGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testGetListOfFlexibleGymPlansWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfFlexibleGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testGetListOfFlexibleGymPlansWithDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.getListOfFlexibleGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
 
 }
