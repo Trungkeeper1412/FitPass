@@ -55,7 +55,7 @@ public class ConfirmRequestController {
 
             // Update bảng check in history
             employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
-                    null, 0, userIdSend);
+                    null, 0, userIdReceive);
             // Thay đổi status thành đang tập để chuyển sang tab check in
             orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
 
