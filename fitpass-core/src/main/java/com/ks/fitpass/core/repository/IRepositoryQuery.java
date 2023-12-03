@@ -178,12 +178,8 @@ public interface IRepositoryQuery {
                             FROM user u
                             JOIN user_detail ud ON ud.user_detail_id  = u.user_detail_id
                             JOIN user_role ur ON u.user_id = ur.user_id
-                            WHERE ur.role_id = 3
-							AND u.created_by IN (
-							    SELECT user_id
-							    FROM gym_department
-							    WHERE gym_department_id = ?
-							);
+                            WHERE ur.role_id = 3		
+                            AND u.in_department_id = ?
             """;
 
     String GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID = """
@@ -197,6 +193,11 @@ public interface IRepositoryQuery {
                 			JOIN user u2 ON gd.user_id = u2.user_id
                 			WHERE gd.gym_department_id = ?
                 		)
+            """;
+
+    String CREATE_EMPLOYEE = """
+                INSERT INTO user (user_account, user_password, user_detail_id, user_create_time, user_deleted, created_by, in_department_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?);
             """;
 
     String GET_USER_EMAIL_BY_USER_ID = """

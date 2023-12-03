@@ -237,4 +237,12 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     public String getUserImgByUserId(int userId) {
         return jdbcTemplate.queryForObject(GET_USER_IMG_BY_USER_ID, String.class, userId);
     }
+
+
+    @Override
+    public int createEmployee(User user) {
+        return jdbcTemplate.update(CREATE_EMPLOYEE, user.getUserAccount(), user.getUserPassword(),
+                user.getUserDetailId(), user.getUserCreateTime(), user.isUserDeleted(),
+                user.getCreatedBy(), user.getInDepartmentId());
+    }
 }
