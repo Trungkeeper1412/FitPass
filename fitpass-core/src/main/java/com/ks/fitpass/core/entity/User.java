@@ -16,6 +16,6 @@ public class User implements Serializable {
     private String userPassword;
     private long userCreateTime;
     private boolean userDeleted;
-    private int userDetailId;
+    private Integer userDetailId;
     private int createdBy;
 }
