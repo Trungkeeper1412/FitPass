@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getLastInsertUserDetailId(UserDetail userDetail) {
+    public Integer getLastInsertUserDetailId(UserDetail userDetail) {
         return jdbcTemplate.queryForObject(GET_LAST_INSERT_USER_DETAIL_ID, Integer.class,
                 userDetail.getFirstName(), userDetail.getLastName(),
                 userDetail.getEmail(), userDetail.getPhoneNumber(),
@@ -84,7 +84,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getLastUserInsertId(User user) {
+    public Integer getLastUserInsertId(User user) {
         return jdbcTemplate.queryForObject(GET_LAST_USER_INSERT_ID,Integer.class,
                 user.getUserAccount(),
                 user.getUserPassword(),
@@ -98,7 +98,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getNumberOfAccountCreatedByBrandId(int brandId) {
+    public Integer getNumberOfAccountCreatedByBrandId(int brandId) {
         return jdbcTemplate.queryForObject(GET_NUMBER_OF_ACCOUNT_CREATED_BY_BRAND_ID, Integer.class, brandId);
     }
 
@@ -135,22 +135,21 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
 
     @Override
     public UserDetail getUserDetailByUserDetailId(int userId) {
-        return jdbcTemplate.queryForObject(GET_USER_DETAIL_BY_USER_DETAIL_ID, (rs, rowNum) -> {
-            UserDetail userDetail = new UserDetail();
-            userDetail.setUserDetailId(rs.getInt("user_detail_id"));
-            userDetail.setFirstName(rs.getString("first_name"));
-            userDetail.setLastName(rs.getString("last_name"));
-            userDetail.setEmail(rs.getString("email"));
-            userDetail.setPhoneNumber(rs.getString("phone_number"));
-            userDetail.setAddress(rs.getString("address"));
-            userDetail.setDateOfBirth(rs.getObject("date_of_birth", LocalDate.class));
-            userDetail.setGender(rs.getString("gender"));
-            userDetail.setImageUrl(rs.getString("image_url"));
-            userDetail.setSecurityId(rs.getString("securityId"));
-            userDetail.setUserDeleted(rs.getBoolean("user_deleted"));
-            userDetail.setGymDepartmentId(rs.getInt("gym_department_id"));
-            return  userDetail;
-        }, userId);
+        return jdbcTemplate.queryForObject(GET_USER_DETAIL_BY_USER_DETAIL_ID, (rs, rowNum) ->
+                        UserDetail.builder()
+                                .userDetailId(rs.getInt("user_detail_id"))
+                                .firstName(rs.getString("first_name"))
+                                .lastName(rs.getString("last_name"))
+                                .email(rs.getString("email"))
+                                .phoneNumber(rs.getString("phone_number"))
+                                .address(rs.getString("address"))
+                                .dateOfBirth(rs.getObject("date_of_birth", LocalDate.class))
+                                .gender(rs.getString("gender"))
+                                .imageUrl(rs.getString("image_url"))
+                                .securityId(rs.getString("securityId"))
+                                .userDeleted(rs.getBoolean("user_deleted"))
+                                .gymDepartmentId(rs.getInt("gym_department_id"))
+                                .build(), userId);
     }
 
 
@@ -174,20 +173,20 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
 
     @Override
     public boolean checkEmailExist(String email) {
-        int count = jdbcTemplate.queryForObject(CHECK_EMAIL_EXIST, Integer.class, email);
-        return count > 0;
+        Integer count = jdbcTemplate.queryForObject(CHECK_EMAIL_EXIST, Integer.class, email);
+        return count != null && count > 0;
     }
 
     @Override
     public boolean checkUsernameExist(String username) {
-        int count = jdbcTemplate.queryForObject(CHECK_USERNAME_EXIST, Integer.class, username);
-        return count > 0;
+        Integer count = jdbcTemplate.queryForObject(CHECK_USERNAME_EXIST, Integer.class, username);
+        return count != null && count > 0;
     }
 
     @Override
     public boolean checkAccountFirstTimeLogin(int userId) {
-        int count = jdbcTemplate.queryForObject(CHECK_ACCOUNT_FIRST_TIME_LOGIN, Integer.class, userId);
-        return count > 0;
+        Integer count = jdbcTemplate.queryForObject(CHECK_ACCOUNT_FIRST_TIME_LOGIN, Integer.class, userId);
+        return count != null && count > 0;
     }
 
     @Override
@@ -213,7 +212,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getNumberOfAccountCreatedByDepartmentId(int departmentId) {
+    public Integer getNumberOfAccountCreatedByDepartmentId(int departmentId) {
         return jdbcTemplate.queryForObject(GET_NUMBER_OF_ACCOUNT_EMPLOYEE_CREATED_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 

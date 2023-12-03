@@ -17,15 +17,15 @@ public interface UserRepository {
 
     int insertIntoUserDetail(UserDetail userDetail);
 
-    int getLastInsertUserDetailId(UserDetail userDetail);
+    Integer getLastInsertUserDetailId(UserDetail userDetail);
 
     int insertIntoUser(User user);
 
-    int getLastUserInsertId(User user);
+    Integer getLastUserInsertId(User user);
 
     int insertIntoUserRole(int userId, int roleId);
 
-    int getNumberOfAccountCreatedByBrandId(int brandId);
+    Integer getNumberOfAccountCreatedByBrandId(int brandId);
     List<GymOwnerListDTO> getAllAccountByBrandId(int brandId);
 
     int updateUserDetail(UserDetail userDetail);
@@ -47,5 +47,5 @@ public interface UserRepository {
 
     List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId);
 
-    int getNumberOfAccountCreatedByDepartmentId(int departmentId);
+    Integer getNumberOfAccountCreatedByDepartmentId(int departmentId);
 }
