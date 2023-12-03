@@ -5,6 +5,7 @@ import com.ks.fitpass.core.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -48,11 +49,15 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 response.sendRedirect("/gym-owner/index");
                 break;
             case "EMPLOYEE":
-                Integer departmentId = userRepository.getDepartmentIdByEmployeeId(userSession.getUserId());
-                if (departmentId == null || departmentId == 0) {
-                    response.sendRedirect("/error/403");
-                } else {
-                    response.sendRedirect("/employee/history?id=" + departmentId);
+                try {
+                    Integer departmentId = userRepository.getDepartmentIdByEmployeeId(userSession.getUserId());
+                    if (departmentId == null || departmentId == 0) {
+                        response.sendRedirect("/403");
+                    } else {
+                        response.sendRedirect("/employee/history?id=" + departmentId);
+                    }
+                } catch (EmptyResultDataAccessException e) {
+                    response.sendRedirect("/403");
                 }
                 break;
             case "USER":
