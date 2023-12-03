@@ -368,7 +368,7 @@ function renderPaginationLinks(currentPage, totalPages) {
 // Function to handle pagination clicks
 function paginationClick(page) {
     updateCurrentPageNumber(page)
-    loadNotificationsFromDB(page, 4);
+    loadNotificationsFromDB(page, defaultPageSize);
 }
 
 function loadNotificationsFromDB(page, size) {
