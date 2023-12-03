@@ -8,14 +8,19 @@ import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.service.UserService;
+import com.ks.fitpass.credit_card.dto.CreditCard;
+import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentAlbums;
 import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.entity.DepartmentSchedule;
 import com.ks.fitpass.department.service.*;
-import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
+import com.ks.fitpass.gymplan.dto.*;
 import com.ks.fitpass.gymplan.service.GymPlanService;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
+import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.BrandOwnerController;
 import com.ks.fitpass.web.util.WebUtil;
@@ -48,6 +53,13 @@ public class BrandOwnerControllerTest {
     @Mock
     private Model model;
 
+
+    @Mock
+    private RequestWithdrawHistoryService requestWithdrawHistoryService;
+    @Mock
+    private CreditCardService creditCardService;
+    @Mock
+    private BindingResult bindingResult;
     @Mock
     private UserService userService;
     @Mock
@@ -1288,6 +1300,869 @@ public class BrandOwnerControllerTest {
 
         // Assert
         assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testGetFlexibleGymPlanDetailsSuccess() {
+        // Arrange
+        int gymPlanId = 1;
+        BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO = new BrandUpdateGymPlanFlexDTO();
+        when(gymPlanService.getGymPlanFlexDetail(gymPlanId)).thenReturn(brandUpdateGymPlanFlexDTO);
+
+        // Act
+        String result = brandOwnerController.getFlexibleGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        verify(gymPlanService, times(1)).getGymPlanFlexDetail(gymPlanId);
+        verify(model, times(1)).addAttribute("b", brandUpdateGymPlanFlexDTO);
+        assertEquals("brand-owner/gym-brand-plan-flexible-detail", result);
+    }
+
+    @Test
+    void testGetFlexibleGymPlanDetailsWithDuplicateKeyException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFlexDetail(gymPlanId)).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getFlexibleGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testGetFlexibleGymPlanDetailsWithEmptyResultDataAccessException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFlexDetail(gymPlanId)).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getFlexibleGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testGetFlexibleGymPlanDetailsWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFlexDetail(gymPlanId)).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getFlexibleGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testGetFlexibleGymPlanDetailsWithDataAccessException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFlexDetail(gymPlanId)).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.getFlexibleGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testUpdateFlexibleGymPlanDetailsSuccess() throws Exception {
+        // Arrange
+        BrandUpdateGymPlanFlexDTO brandDetails = new BrandUpdateGymPlanFlexDTO();
+        brandDetails.setGymPlanId(1);
+        brandDetails.setStatus(1);
+
+        when(gymPlanService.checkGymPlanInDepartmentUse(brandDetails.getGymPlanId())).thenReturn(0);
+
+        // Act
+        String result = brandOwnerController.updateFlexibleGymPlanDetails(brandDetails, bindingResult);
+
+        // Assert
+        verify(gymPlanService, times(1)).checkGymPlanInDepartmentUse(brandDetails.getGymPlanId());
+        verify(gymPlanService, times(1)).updateGymPlanFlex(brandDetails);
+        assertEquals("redirect:/brand-owner/gym-plans/flexible/list", result);
+    }
+
+
+    @Test
+    void testUpdateFlexibleGymPlanDetailsWithValidationError() {
+        // Arrange
+        BrandUpdateGymPlanFlexDTO brandDetails = new BrandUpdateGymPlanFlexDTO();
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        String result = brandOwnerController.updateFlexibleGymPlanDetails(brandDetails, bindingResult);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-plan-flexible-detail", result);
+    }
+
+    @Test
+    void testUpdateFlexibleGymPlanDetailsWithDuplicateKeyException() {
+        // Arrange
+        BrandUpdateGymPlanFlexDTO brandDetails = new BrandUpdateGymPlanFlexDTO();
+        when(gymPlanService.updateGymPlanFlex(any())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.updateFlexibleGymPlanDetails(brandDetails, bindingResult);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testUpdateFlexibleGymPlanDetailsWithEmptyResultDataAccessException() {
+        // Arrange
+        BrandUpdateGymPlanFlexDTO brandDetails = new BrandUpdateGymPlanFlexDTO();
+        when(gymPlanService.updateGymPlanFlex(any())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.updateFlexibleGymPlanDetails(brandDetails, bindingResult);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testUpdateFlexibleGymPlanDetailsWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        BrandUpdateGymPlanFlexDTO brandDetails = new BrandUpdateGymPlanFlexDTO();
+        when(gymPlanService.updateGymPlanFlex(any())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.updateFlexibleGymPlanDetails(brandDetails, bindingResult);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testUpdateFlexibleGymPlanDetailsWithDataAccessException() {
+        // Arrange
+        BrandUpdateGymPlanFlexDTO brandDetails = new BrandUpdateGymPlanFlexDTO();
+        when(gymPlanService.updateGymPlanFlex(any())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.updateFlexibleGymPlanDetails(brandDetails, bindingResult);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testAddFlexibleGymPlanSuccess() throws Exception {
+        // Arrange
+        when(model.addAttribute(eq("brandCreateGymPlanFlexDTO"), any(BrandCreateGymPlanFlexDTO.class))).thenReturn(model);
+
+        // Act
+        String result = brandOwnerController.addFlexibleGymPlan(model);
+
+        // Assert
+        verify(model, times(1)).addAttribute(eq("brandCreateGymPlanFlexDTO"), any(BrandCreateGymPlanFlexDTO.class));
+        assertEquals("brand-owner/gym-brand-plan-flexible-add", result);
+    }
+
+    @Test
+    void testAddFlexibleGymPlanWithDataAccessException() {
+        // Arrange
+        when(model.addAttribute(eq("brandCreateGymPlanFlexDTO"), any(BrandCreateGymPlanFlexDTO.class)))
+                .thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.addFlexibleGymPlan(model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testCreateFlexibleGymPlanSuccess()  {
+        // Arrange
+        BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO = new BrandCreateGymPlanFlexDTO();
+        User user = new User();
+        user.setUserId(1);
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+
+        // Act
+        String result = brandOwnerController.createFlexibleGymPlan(brandCreateGymPlanFlexDTO, bindingResult, session);
+
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(gymPlanService, times(1)).createGymPlanFlex(brandCreateGymPlanFlexDTO);
+        assertEquals("redirect:/brand-owner/gym-plans/flexible/list", result);
+    }
+
+    @Test
+    void testCreateFlexibleGymPlanWithValidationError() {
+        // Arrange
+        BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO = new BrandCreateGymPlanFlexDTO();
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        String result = brandOwnerController.createFlexibleGymPlan(brandCreateGymPlanFlexDTO, bindingResult, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-plan-flexible-add", result);
+    }
+
+    @Test
+    void testGetListOfFixedGymPlansSuccess() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+        List<BrandGymPlanFixedDTO> listFixedGymPlan = Collections.singletonList(new BrandGymPlanFixedDTO()) ;
+
+                when(session.getAttribute("userInfo")).thenReturn(user);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+        when(gymPlanService.getAllGymPlanFixedByBrandId(brand.getBrandId())).thenReturn(listFixedGymPlan);
+
+        // Act
+        String result = brandOwnerController.getListOfFixedGymPlans(session, model);
+
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(gymPlanService, times(1)).getAllGymPlanFixedByBrandId(brand.getBrandId());
+        verify(model, times(1)).addAttribute("listFixedGymPlan", listFixedGymPlan);
+        assertEquals("brand-owner/gym-brand-plan-fixed-list", result);
+    }
+
+    @Test
+    void testGetListOfFixedGymPlansWithDuplicateKeyException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfFixedGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testGetListOfFixedGymPlansWithEmptyResultDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfFixedGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testGetListOfFixedGymPlansWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfFixedGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testGetListOfFixedGymPlansWithDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.getListOfFixedGymPlans(session, model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testGetFixedGymPlanDetailsSuccess() {
+        // Arrange
+        int gymPlanId = 1;
+        BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO = new BrandUpdateGymPlanFixedDTO();
+
+        when(gymPlanService.getGymPlanFixedDetail(gymPlanId)).thenReturn(brandUpdateGymPlanFixedDTO);
+
+        // Act
+        String result = brandOwnerController.getFixedGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        verify(gymPlanService, times(1)).getGymPlanFixedDetail(gymPlanId);
+        verify(model, times(1)).addAttribute("b", brandUpdateGymPlanFixedDTO);
+        assertEquals("brand-owner/gym-brand-plan-fixed-detail", result);
+    }
+
+    @Test
+    void testGetFixedGymPlanDetailsWithDuplicateKeyException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFixedDetail(gymPlanId)).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getFixedGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testGetFixedGymPlanDetailsWithEmptyResultDataAccessException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFixedDetail(gymPlanId)).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getFixedGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testGetFixedGymPlanDetailsWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFixedDetail(gymPlanId)).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getFixedGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testGetFixedGymPlanDetailsWithDataAccessException() {
+        // Arrange
+        int gymPlanId = 1;
+        when(gymPlanService.getGymPlanFixedDetail(gymPlanId)).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.getFixedGymPlanDetails(gymPlanId, model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testUpdateFixedGymPlanDetailsSuccess() {
+        // Arrange
+        BrandUpdateGymPlanFixedDTO brandDetails = new BrandUpdateGymPlanFixedDTO();
+        brandDetails.setGymPlanId(1);
+
+        when(gymPlanService.checkGymPlanInDepartmentUse(brandDetails.getGymPlanId())).thenReturn(0);
+
+        // Act
+        String result = brandOwnerController.updateFixedGymPlanDetails(brandDetails, mock(BindingResult.class));
+
+        // Assert
+        verify(gymPlanService, times(1)).checkGymPlanInDepartmentUse(brandDetails.getGymPlanId());
+        verify(gymPlanService, times(1)).updateGymPlanFixed(brandDetails);
+        assertEquals("redirect:/brand-owner/gym-plans/fixed/list", result);
+    }
+
+
+
+    @Test
+    void testAddFixedGymPlanSuccess() {
+        // Act
+        String result = brandOwnerController.addFixedGymPlan(model);
+
+        // Assert
+        verify(model, times(1)).addAttribute("brandCreateGymPlanFixedDTO", new BrandCreateGymPlanFixedDTO());
+        assertEquals("brand-owner/gym-brand-plan-fixed-add", result);
+    }
+
+    @Test
+    void testAddFixedGymPlanWithDataAccessException() {
+        // Arrange
+        doThrow(new DataAccessException("Simulated DataAccessException") {}).when(model).addAttribute(anyString(), any());
+
+        // Act
+        String result = brandOwnerController.addFixedGymPlan(model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testCreateFixedGymPlanSuccess() {
+        // Arrange
+        BrandCreateGymPlanFixedDTO brandCreateGymPlanFixedDTO = new BrandCreateGymPlanFixedDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        User user = new User();
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+
+        // Act
+        String result = brandOwnerController.createFixedGymPlan(brandCreateGymPlanFixedDTO, bindingResult, session);
+
+        // Assert
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(gymPlanService, times(1)).createGymPlanFixed(brandCreateGymPlanFixedDTO);
+        assertEquals("redirect:/brand-owner/gym-plans/fixed/list", result);
+    }
+
+    @Test
+    void testCreateFixedGymPlanWithValidationError() {
+        // Arrange
+        BrandCreateGymPlanFixedDTO brandCreateGymPlanFixedDTO = new BrandCreateGymPlanFixedDTO();
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        String result = brandOwnerController.createFixedGymPlan(brandCreateGymPlanFixedDTO, bindingResult, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-plan-fixed-add", result);
+    }
+
+
+    @Test
+    void testGetWithdrawalSuccess() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        Brand brand = new Brand();
+        brand.setBrandId(1);
+        List<RequestWithdrawHistory> requestWithdrawHistoryListPending = new ArrayList<>();
+        List<RequestWithdrawHistory> requestWithdrawHistoryListAll = new ArrayList<>();
+        RequestHistoryStats requestHistoryStats = new RequestHistoryStats();
+        List<CreditCard> creditCardList = new ArrayList<>();
+        double userBalance = 100.0;
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(brandService.getBrandDetail(user.getUserId())).thenReturn(brand);
+        when(requestWithdrawHistoryService.getAllByUserIdAndStatus(user.getUserId(), "Đang xử lý")).thenReturn(requestWithdrawHistoryListPending);
+        when(requestWithdrawHistoryService.getAllByUserId(user.getUserId())).thenReturn(requestWithdrawHistoryListAll);
+        when(requestWithdrawHistoryService.getStatsByUserId(user.getUserId())).thenReturn(requestHistoryStats);
+        when(creditCardService.getAllByUserId(user.getUserId())).thenReturn(creditCardList);
+        when(walletService.getBalanceByUserId(user.getUserId())).thenReturn(userBalance);
+
+        // Act
+        String result = brandOwnerController.getWithdrawal(model, session);
+
+        // Assert
+        verify(brandService, times(1)).getBrandDetail(user.getUserId());
+        verify(requestWithdrawHistoryService, times(1)).getAllByUserIdAndStatus(user.getUserId(), "Đang xử lý");
+        verify(requestWithdrawHistoryService, times(1)).getAllByUserId(user.getUserId());
+        verify(requestWithdrawHistoryService, times(1)).getStatsByUserId(user.getUserId());
+        verify(creditCardService, times(1)).getAllByUserId(user.getUserId());
+        verify(walletService, times(1)).getBalanceByUserId(user.getUserId());
+
+        assertEquals("brand-owner/gym-brand-withdrawal-list", result);
+    }
+
+    @Test
+    void testGetWithdrawalWithDuplicateKeyException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getWithdrawal(model, session);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testGetWithdrawalWithEmptyResultDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getWithdrawal(model, session);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testGetWithdrawalWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getWithdrawal(model, session);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testGetWithdrawalWithDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(brandService.getBrandDetail(anyInt())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.getWithdrawal(model, session);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+
+    @Test
+    void testAddWithdrawalSuccess() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        double userBalance = 100.0;
+        long creditAmount = 50L;
+        long moneyAmount = 50L;
+        int cardId = 1;
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(walletService.getBalanceByUserId(user.getUserId())).thenReturn(userBalance);
+
+        // Act
+        String result = brandOwnerController.addWithdrawal(cardId, creditAmount, moneyAmount, session, model);
+
+        // Assert
+        verify(walletService, times(1)).getBalanceByUserId(user.getUserId());
+        verify(requestWithdrawHistoryService, times(1)).create(any(RequestWithdrawHistory.class));
+        assertEquals("redirect:/brand-owner/withdrawal/list", result);
+    }
+
+    @Test
+    void testAddWithdrawalWithInsufficientBalance() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        double userBalance = 50.0; // Less than creditAmount
+        long creditAmount = 100L;
+        long moneyAmount = 100L;
+        int cardId = 1;
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(walletService.getBalanceByUserId(user.getUserId())).thenReturn(userBalance);
+
+        // Act
+        String result = brandOwnerController.addWithdrawal(cardId, creditAmount, moneyAmount, session, model);
+
+        // Assert
+        verify(walletService, times(1)).getBalanceByUserId(user.getUserId());
+        verify(requestWithdrawHistoryService, never()).create(any(RequestWithdrawHistory.class));
+        assertEquals("redirect:/brand-owner/withdrawal/list", result); // It should redirect without creating a withdrawal request
+    }
+
+    @Test
+    void testAddWithdrawalWithDuplicateKeyException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(walletService.getBalanceByUserId(anyInt())).thenReturn(100.0);
+        when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testAddWithdrawalWithEmptyResultDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(walletService.getBalanceByUserId(anyInt())).thenReturn(100.0);
+        when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testAddWithdrawalWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(walletService.getBalanceByUserId(anyInt())).thenReturn(100.0);
+        when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testAddWithdrawalWithDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(walletService.getBalanceByUserId(anyInt())).thenReturn(100.0);
+        when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testGetWithdrawalCardSuccess() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        List<CreditCard> creditCardList = new ArrayList<>();
+        creditCardList.add(new CreditCard());
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(creditCardService.getAllByUserId(user.getUserId())).thenReturn(creditCardList);
+
+        // Act
+        String result = brandOwnerController.getWithdrawalCard(model, session);
+
+        // Assert
+        verify(creditCardService, times(1)).getAllByUserId(user.getUserId());
+        assertEquals("brand-owner/gym-brand-withdrawal-card-add", result);
+        verify(model, times(1)).addAttribute("creditCardList", creditCardList);
+    }
+
+    @Test
+    void testGetWithdrawalCardWithDuplicateKeyException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(creditCardService.getAllByUserId(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getWithdrawalCard(model, session);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    void testGetWithdrawalCardWithEmptyResultDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(creditCardService.getAllByUserId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getWithdrawalCard(model, session);
+
+        // Assert
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    void testGetWithdrawalCardWithIncorrectResultSizeDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(creditCardService.getAllByUserId(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = brandOwnerController.getWithdrawalCard(model, session);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testGetWithdrawalCardWithDataAccessException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(creditCardService.getAllByUserId(anyInt())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+
+        // Act
+        String result = brandOwnerController.getWithdrawalCard(model, session);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testAddBankCardSuccess() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        CreditCard creditCard = new CreditCard();
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(bindingResult.hasErrors()).thenReturn(false);
+        when(creditCardService.checkCreditCardExist(creditCard, user.getUserId())).thenReturn(false);
+        when(creditCardService.createCreditCard(creditCard)).thenReturn(1);
+        when(creditCardService.getLastCreditCardId()).thenReturn(123);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.addBankCard(creditCard, session, bindingResult);
+
+        // Assert
+        assertEquals(ResponseEntity.ok(123), result);
+    }
+
+    @Test
+    void testAddBankCardValidationErrors() {
+        // Arrange
+        CreditCard creditCard = new CreditCard();
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.addBankCard(creditCard, session, bindingResult);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+    @Test
+    void testAddBankCardCreditCardExists() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        CreditCard creditCard = new CreditCard();
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(bindingResult.hasErrors()).thenReturn(false);
+        when(creditCardService.checkCreditCardExist(creditCard, user.getUserId())).thenReturn(true);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.addBankCard(creditCard, session, bindingResult);
+
+        // Assert
+        assertEquals(ResponseEntity.ok(-1), result);
+    }
+
+    @Test
+    void testGetBankCardDetailsSuccess() {
+        // Arrange
+        int creditCardId = 1;
+        CreditCard expectedCreditCard = new CreditCard();
+
+        when(creditCardService.getOne(creditCardId)).thenReturn(expectedCreditCard);
+
+        // Act
+        ResponseEntity<CreditCard> result = brandOwnerController.getBankCardDetails(creditCardId);
+
+        // Assert
+        assertEquals(ResponseEntity.ok(expectedCreditCard), result);
+    }
+
+    @Test
+    void testGetBankCardDetailsDataAccessException() {
+        // Arrange
+        int creditCardId = 1;
+
+        when(creditCardService.getOne(creditCardId)).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+
+        // Act
+        ResponseEntity<CreditCard> result = brandOwnerController.getBankCardDetails(creditCardId);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+    @Test
+    void testUpdateBankCardSuccess() {
+        // Arrange
+        CreditCard creditCard = new CreditCard();
+        int expectedRowAffect = 1;
+
+        when(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())).thenReturn(false);
+        when(creditCardService.updateCreditCard(creditCard)).thenReturn(expectedRowAffect);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.updateBankCard(creditCard, mock(BindingResult.class));
+
+        // Assert
+        assertEquals(ResponseEntity.ok(expectedRowAffect), result);
+    }
+
+    @Test
+    void testUpdateBankCardValidationError() {
+        // Arrange
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.updateBankCard(new CreditCard(), bindingResult);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+    @Test
+    void testUpdateBankCardDuplicateCardExist() {
+        // Arrange
+        CreditCard creditCard = new CreditCard();
+
+        when(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())).thenReturn(true);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.updateBankCard(creditCard, mock(BindingResult.class));
+
+        // Assert
+        assertEquals(ResponseEntity.ok(-1), result);
+    }
+
+    @Test
+    void testUpdateBankCardDataAccessException() {
+        // Arrange
+        CreditCard creditCard = new CreditCard();
+
+        when(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())).thenReturn(false);
+        when(creditCardService.updateCreditCard(creditCard)).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.updateBankCard(creditCard, mock(BindingResult.class));
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+
+    @Test
+    void testDeleteBankCardSuccess() {
+        // Arrange
+        Integer creditCardId = 1;
+        int expectedRowAffect = 1;
+
+        when(creditCardService.deleteCreditCard(creditCardId)).thenReturn(expectedRowAffect);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.deleteBankCard(creditCardId);
+
+        // Assert
+        assertEquals(ResponseEntity.ok(expectedRowAffect), result);
+    }
+
+    @Test
+    void testDeleteBankCardDataAccessException() {
+        // Arrange
+        Integer creditCardId = 1;
+
+        when(creditCardService.deleteCreditCard(creditCardId)).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.deleteBankCard(creditCardId);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
     }
 
 }
