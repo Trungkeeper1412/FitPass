@@ -2,6 +2,7 @@ import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryPage;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
+import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.employee.dto.CheckInFixedDTO;
@@ -21,7 +22,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -144,11 +144,12 @@ public class EmployeeControllerTest {
         DepartmentService departmentService = Mockito.mock(DepartmentService.class);
         TransactionService transactionService = Mockito.mock(TransactionService.class);
         UserService userService = Mockito.mock(UserService.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
 
         // Create the controller instance using the mocked services
         EmployeeController employeeController = new EmployeeController(employeeService, orderDetailService,
                 notificationService, checkInHistoryService, walletService, webSocketService, brandService,
-                departmentService, transactionService, userService);
+                departmentService, transactionService, userService, userRepository);
 
 
         // Query CheckInHistoryPage for each page

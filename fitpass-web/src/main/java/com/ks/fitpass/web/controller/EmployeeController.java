@@ -6,10 +6,10 @@ import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryPage;
-import com.ks.fitpass.checkInHistory.entity.CheckInHistory;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
+import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
 import com.ks.fitpass.department.service.DepartmentService;
@@ -24,7 +24,6 @@ import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -56,12 +55,12 @@ public class EmployeeController {
     private final TransactionService transactionService;
     private final UserService userService;
 
-
+    private final UserRepository userRepository;
 
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
                               NotificationService notificationService, CheckInHistoryService checkInHistoryService,
                               WalletService walletService, WebSocketService webSocketService, BrandService brandService,
-                              DepartmentService departmentService, TransactionService transactionService, UserService userService) {
+                              DepartmentService departmentService, TransactionService transactionService, UserService userService, UserRepository userRepository) {
         this.employeeService = employeeService;
         this.orderDetailService = orderDetailService;
         this.notificationService = notificationService;
@@ -72,6 +71,13 @@ public class EmployeeController {
         this.departmentService = departmentService;
         this.transactionService = transactionService;
         this.userService = userService;
+        this.userRepository = userRepository;
+    }
+
+    public boolean checkValidDepartmentParameter(HttpSession session, int departmentId){
+        User user = (User) session.getAttribute("userInfo");
+        int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+        return departmentId == userDepartmentId;
     }
 
     @GetMapping("/changePassword")
@@ -141,7 +147,7 @@ public class EmployeeController {
         if ("username".equals(searchOption)) {
             // Tìm kiếm theo tên (username)
             searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
-        } else if ("phonenumber".equals(searchOption)) {
+        } else if ("phone-number".equals(searchOption)) {
             // Tìm kiếm theo số điện thoại (phone number)
             searchResults = employeeService.searchListCheckInByPhoneNumber(searchText, departmentId);
         } else {
@@ -164,7 +170,7 @@ public class EmployeeController {
         if ("username".equals(searchOption)) {
             // Tìm kiếm theo tên (username)
             searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
-        } else if ("phonenumber".equals(searchOption)) {
+        } else if ("phone-number".equals(searchOption)) {
             // Tìm kiếm theo số điện thoại (phone number)
             searchResults = employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId);
         } else {
@@ -422,7 +428,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/history")
-    public String getCheckInHistory(@RequestParam("id") int departmentId, Model model) {
+    public String getCheckInHistory(@RequestParam("id") int departmentId, Model model, HttpSession session) {
+        if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+            return "error/403";
+        }
         model.addAttribute("departmentId", departmentId);
         return "employee/employee-check-in-history";
     }
