@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 @Getter
 public class CheckInHistoryFlexible {
     private String username;
+    private String userImageUrl;
     private String phoneNumber;
     private String empName;
     private Timestamp checkInTime;
