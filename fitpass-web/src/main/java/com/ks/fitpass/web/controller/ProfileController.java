@@ -1,6 +1,5 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.brand.dto.GymOwnerUpdateDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.entity.UserUpdateDTO;
@@ -9,7 +8,6 @@ import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
