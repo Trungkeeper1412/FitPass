@@ -2436,7 +2436,7 @@ select {
   background-color: white;
   padding: 25px 25px 0px 25px;
   border-radius: 10px;
-  min-height: 640px;
+  min-height: 630px;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -2459,17 +2459,32 @@ select {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 350px;
+  width: 300px;
+}
+
+.text-inactive-card {
+  color: #a0d468;
+  font-weight: bold;
+}
+
+.text-active-card {
+  color: #fcc107;
+  font-weight: bold;
+}
+
+.text-activated-card {
+  color: #e74c3c;
+  font-weight: bold;
 }
 
 /* Scrollbars */
 
-.col-md-8 {
+.col-lg-8 {
   overflow-y: auto;
-  max-height: 510px;
+  max-height: 710px;
 }
 
-.col-md-8::-webkit-scrollbar {
+.col-lg-8::-webkit-scrollbar {
   display: none;
 }
 
@@ -2561,7 +2576,7 @@ body {
 
 .context-menu {
   position: absolute;
-  z-index: 1000;
+  z-index: 10000;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -2872,6 +2887,10 @@ td div div div a:hover {
   .fc-time {
     font-size: 14px;
   }
+
+  .show-title {
+    max-width: 230px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
@@ -2915,7 +2934,21 @@ td div div div a:hover {
   .fc-time {
     font-size: 14px;
   }
+
+  .col-lg-8 {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+
+  .show-title {
+    max-width: 230px;
+  }
 }
+
+@media only screen and (max-width: 768px) {
+  .show-title {
+    display: none;
+  }
 
 @media only screen and (max-width: 600px) {
   .fc-button {
@@ -2958,6 +2991,34 @@ td div div div a:hover {
   .fc-time {
     font-size: 12px;
   }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(120px, 200px);
+    grid-gap: 10px;
+  }
+
+  .item-card-all,
+  .item-card-unactivated,
+  .item-card-active,
+  .item-card-activated {
+    height: auto;
+  }
+
+  .col-lg-8 {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+
+  .show-title {
+    display: none;
+  }
+
+  .text-money {
+    display: none;
+  }
+}
 }
 
 @media only screen and (max-width: 400px) {
@@ -3001,4 +3062,27 @@ td div div div a:hover {
   .fc-time {
     font-size: 9px;
   }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(120px, 150px);
+    grid-gap: 10px;
+  }
+
+  .item-card-all,
+  .item-card-unactivated,
+  .item-card-active,
+  .item-card-activated {
+    height: auto;
+  }
+
+  .show-title {
+    display: none;
+  }
+
+  .text-money {
+    display: none;
+  }
+
 }
