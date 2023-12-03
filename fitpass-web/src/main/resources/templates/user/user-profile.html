@@ -30,16 +30,16 @@
                     <!-- User profile tab -->
                     <div class="mt-4 mb-5 user-profile" id="user-profile">
                         <div class="row user-change-ava justify-content-center">
-                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6 mb-4">
+                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6">
                                 <div class="user-img">
                                     <img class="show-department-img" id="user-ava"
                                          th:src="${userUpdateDTO.getImageUrl()}">
                                 </div>
                             </div>
-                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-4">
+                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn">
                                 <input type="file" class="form-control mt-2" id="avatar-img" name="avatar-img"
                                        accept="image/*" style="display: none;" onchange="uploadImage(this);">
-                                <div class="d-flex justify-content-start align-items-center mt-3">
+                                <div class="d-flex justify-content-start align-items-center">
                                     <button type="button" class="btn btn-upload-img"
                                             onclick="document.getElementById('avatar-img').click();">
                                         Chọn ảnh

@@ -2588,7 +2588,10 @@ a:link {
     background-color: white;
     padding: 20px;
 }
-
+.change-ava-btn{
+    display: flex;
+    align-items: center;
+}
 .user-profile-content {
     margin-top: 130px;
     width: 90%;
@@ -3223,6 +3226,8 @@ input[type="radio"]:checked {
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    display: flex;
+    align-items: center;
 }
 
 .user-change-ava .user-img img {
