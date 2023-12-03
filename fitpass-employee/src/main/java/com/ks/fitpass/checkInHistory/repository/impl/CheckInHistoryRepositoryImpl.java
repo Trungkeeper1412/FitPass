@@ -5,6 +5,7 @@ import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.repository.CheckInHistoryRepository;
 import com.ks.fitpass.checkInHistory.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -44,10 +45,11 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
     }
 
     @Override
-    public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
-        List<CheckInHistoryFlexible> list = jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int offset, int size) {
+        List<CheckInHistoryFlexible> list = jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID + " LIMIT ?, ?", (rs, rowNum) -> {
             CheckInHistoryFlexible checkInHistoryFlexible = new CheckInHistoryFlexible();
             checkInHistoryFlexible.setUsername(rs.getString("username"));
+            checkInHistoryFlexible.setUserImageUrl(rs.getString("image_url"));
             checkInHistoryFlexible.setPhoneNumber(rs.getString("phone_number"));
             checkInHistoryFlexible.setEmpName(rs.getString("emp_name"));
             checkInHistoryFlexible.setCheckInTime(rs.getTimestamp("checkInTime"));
@@ -60,22 +62,23 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             }
             checkInHistoryFlexible.setDuration(duration);
             return checkInHistoryFlexible;
-        }, departmentId);
+        }, departmentId, offset, size);
         return list;
     }
 
     @Override
-    public List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FIXED_BY_DEPARTMENT_ID + " LIMIT ?, ?", (rs, rowNum) -> {
             CheckInHistoryFixed checkInHistoryFixed = new CheckInHistoryFixed();
             checkInHistoryFixed.setUsername(rs.getString("username"));
+            checkInHistoryFixed.setUserImageUrl(rs.getString("image_url"));
             checkInHistoryFixed.setPhoneNumber(rs.getString("phone_number"));
             checkInHistoryFixed.setEmpName(rs.getString("emp_name"));
             checkInHistoryFixed.setCheckInTime(rs.getTimestamp("checkInTime"));
             checkInHistoryFixed.setGymPlanName(rs.getString("name"));
             checkInHistoryFixed.setCredit(rs.getDouble("price"));
             return checkInHistoryFixed;
-        }, departmentId);
+        }, departmentId, offset, size);
     }
 
     @Override
@@ -164,6 +167,16 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             return Collections.emptyList();
         }
         return list;
+    }
+
+    @Override
+    public int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class,departmentId);
+    }
+
+    @Override
+    public int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID, Integer.class,departmentId);
     }
 
     private String calculateDuration(Timestamp checkInTime, Timestamp checkOutTime) {
