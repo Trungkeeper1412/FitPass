@@ -32,9 +32,9 @@
     </div>
 </div>
 <div class="gym-container container">
-    <div class="about-our-gym row justify-content-center">
+    <div class="about-our-gym row justify-content-center mt-4">
         <div class="about-our-gym-1 col-md-6">
-            <h3 class="info-title" style="color: black;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
+            <h3 class="info-title">Về phòng gym của chúng tôi</h3>
             <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
             <div class="gym-intro"  th:text="${department.departmentDescription}"></div>
             <hr style="margin-top: 20px; color: black">
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="blank col-md-6 mt-4" style="background-color: white; border-radius: 10px;">
+        <div class="blank col-md-6 mt-4" style="border-radius: 10px;">
             <iframe
                     width="100%"
                     height="100%"
@@ -111,7 +111,7 @@
     <h3 class="info-title" style="color: black; margin-top: 30px; font-weight: 600">Dịch vụ</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
     <div class="list-service-wrapper container mt-2">
-        <button class="left" onclick="leftScroll()">
+        <button th:if="${departmentAmenities.size() > 4}" class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
         </button>
         <div class="scroll-services row mt-4">
@@ -123,7 +123,7 @@
                 </div>
             </div>
         </div>
-        <button class="right" onclick="rightScroll()">
+        <button th:if="${departmentAmenities.size() > 4}" class="right" onclick="rightScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
         </button>
     </div>
@@ -131,7 +131,7 @@
     <h3 class="info-title" style="color: black; margin-top: 40px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="list-plan-wrapper container">
-        <button class="left l1" onclick="leftScroll()">
+        <button th:if="${gymPlans.size() > 3}" class="left l1" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
         </button>
         <div class="scroll-plans row">
@@ -163,7 +163,7 @@
             </div>
 
         </div>
-        <button class="right r1" onclick="rightScroll()">
+        <button th:if="${gymPlans.size() > 3}" class="right r1" onclick="rightScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
         </button>
     </div>

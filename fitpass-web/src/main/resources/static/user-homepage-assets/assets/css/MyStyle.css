@@ -3724,6 +3724,10 @@ input:checked + .toggle-slider:before {
     }
 }
 
+.info-title {
+    color: black;
+    font-weight: 600;
+}
 @media only screen and (min-width: 280px) and (max-width: 799px) {
     .gym-name-cover h3 {
         text-align: left;
@@ -3841,6 +3845,9 @@ input:checked + .toggle-slider:before {
 
 .gym-intro {
     margin-top: 30px;
+    border: 1px solid #afafaf;
+    border-radius: 10px;
+    padding: 20px;
     width: 100%;
 }
 
@@ -4834,8 +4841,11 @@ section {
 }
 
 .brand-first-info {
+    position: relative;
     background-color: rgb(255, 255, 255);
-    padding: 20px
+    border: 1px solid #afafaf;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 /*.club-view {*/
@@ -4845,10 +4855,11 @@ section {
 
 .club-view-bg {
     height: 100%;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     position: relative;
 }
 .club-view-bg img{
+    border-radius: 10px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -4885,6 +4896,7 @@ section {
     width: 90%;
     margin: auto;
     display: flex;
+    justify-content: center;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -4923,6 +4935,7 @@ section {
 .brand-service-img {
     height: 300px;
     width: 100%;
+    border-radius: 10px;
     margin-left: 0;
 }
 

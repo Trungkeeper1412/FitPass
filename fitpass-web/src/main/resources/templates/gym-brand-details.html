@@ -29,7 +29,7 @@
         <input type="hidden" id="brandId" th:value="${brand.getBrandId()}">
         <h2 class="text-center fw-bold" th:text="${brand.getBrandName()}"></h2>
     </div>
-    <div class="row brand-info justify-content-center">
+    <div class="row brand-info">
         <div class="col-md-7 col-lg-7 col-sm-6 brand-first-info">
             <div class="brand-descript" th:text="${brand.brandDescription}">
                 Hệ thống phòng tập gym và yoga của CITIGYM có mặt khắp các quận TPHCM.Lựa chọn phòng tập gần bạn nhất để có
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-lg-5 col-sm-6 club-view">
+        <div class="col-md-5 col-lg-5 col-sm-6">
             <div class="club-view-bg">
                 <img th:src="${brand.getBrandWallpaperUrl()}">
                 <a href="#club">
@@ -61,7 +61,7 @@
     <h4 class="row fw-bold mt-5">Dịch vụ</h4>
     <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 50px;"></div>
     <div class="list-service-wrapper  mt-4">
-        <button class="left" onclick="leftScroll()">
+        <button th:if="${brandAmenitie.size() > 4}" class="left" onclick="leftScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
         </button>
         <div class="scroll-services row mt-4">
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <button class="right" onclick="rightScroll()">
+        <button th:if="${brandAmenitie.size() > 4}" class="right" onclick="rightScroll()">
             <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
         </button>
     </div>
