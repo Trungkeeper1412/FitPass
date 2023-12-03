@@ -18,4 +18,5 @@ public class User implements Serializable {
     private boolean userDeleted;
     private Integer userDetailId;
     private int createdBy;
+    private int inDepartmentId;
 }
