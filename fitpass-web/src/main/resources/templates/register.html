@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <th:block th:include="common/vendor-head"></th:block>
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+
+<body class="login-register-body">
+<div style="height: 100%; width: 100%;">
+    <div class="row mx" style="height: 100%; width: 100%;">
+        <div class="col-md-6 banner-wrapper">
+            <div class="banner">
+                <a th:href="@{/reigster}" onclick="changeTab" id="changeTab" class="ghost_btn move_register">Đăng nhập</a>
+            </div>
+        </div>
+
+        <div id="register-tab" class="col-md-6 register-tab">
+            <h1 class="fw-bold">ĐĂNG KÝ</h1>
+            <div class="line"></div>
+            <div class="input-fields">
+                <div class="name" style="display: flex;">
+                    <div class="input-field fname">
+                        <div class="input-title">Họ và tên đệm</div>
+                        <input type="text" name="fist-name" value="">
+                    </div>
+                    <div class="input-field lname">
+                        <div class="input-title">Tên</div>
+                        <input type="text" name="last-name" value="">
+                    </div>
+                </div>
+                <div class="name" style="display: flex;">
+                    <div class="input-field fname">
+                        <div class="input-title">Gmail</div>
+                        <input type="text" name="email" value="">
+                    </div>
+                    <div class="input-field lname">
+                        <div class="input-title">Số điện thoại</div>
+                        <input type="number" name="phone" value="">
+                    </div>
+                </div>
+                <div class="input-field">
+                    <div class="input-title">Tên đăng nhâp</div>
+                    <input type="number" name="username" value="">
+                </div>
+                <div class="input-field">
+                    <div class="input-title">Mật khẩu</div>
+                    <input type="password" name="password" value="">
+                </div>
+                <div class="input-field">
+                    <div class="input-title">Xác nhận mật khẩu</div>
+                    <input type="password" name="password" value="">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px;">
+                    <div class="input-field dob">
+                        <div class="input-title">Ngày sinh</div>
+                        <input type="date" value="">
+                    </div>
+                    <div class="input-field gender">
+                        <div class="input-title">Giới tính</div>
+                        <div class="mt-2" style="display: flex;">
+                            <div style="display: flex;">
+                                <input type="radio" name="gender" value="male" checked>
+                                <span style="margin-left: 4px">nam</span>
+                            </div>
+                            <div style="display: flex; margin-left: 15px;">
+                                <input type="radio" name="gender" value="female">
+                                <span style="margin-left: 4px">nữ</span>
+                            </div>
+                            <div style="display: flex; margin-left: 15px;">
+                                <input type="radio" name="gender" value="other">
+                                <span style="margin-left: 4px">khác</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="login">Đăng ký</button>
+        </div>
+    </div>
+</div>
+
+<script th:if="${param.logout}">
+    const toastInfo = document.getElementById("toast-info");
+    toastInfo.classList.add("show", "alert", "alert-success");
+    setTimeout(function () {
+        toastInfo.classList.remove("show");
+    }, 2800);
+</script>
+
+<script th:if="${param.error}">
+    const toastError = document.getElementById("toast-error");
+    toastError.classList.add("show");
+    setTimeout(function () {
+        toastError.classList.remove("show");
+    }, 2800);
+</script>
+
+<script>
+</script>
+</body>
+
+</html>
