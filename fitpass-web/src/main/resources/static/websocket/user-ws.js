@@ -343,22 +343,67 @@ if (window.location.pathname === '/profile/my-notifications') {
 }
 
 // Function to render pagination links
+function makePageLink(page, isActive = false) {
+    const pageLink = document.createElement('a');
+    pageLink.href = '#';
+    pageLink.textContent = page;
+
+    if (isActive) {
+        pageLink.classList.add('active');
+    }
+
+    pageLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        paginationClick(page);
+    });
+
+    return pageLink;
+}
+
 function renderPaginationLinks(currentPage, totalPages) {
     const paginationContainer = document.getElementById('paginationNotification');
     paginationContainer.innerHTML = '';
 
-    for (let i = 1; i <= totalPages; i++) {
-        const pageLink = document.createElement('a');
-        pageLink.href = '#';
-        pageLink.textContent = i;
+    // Determine the range of page links to be displayed (we want 5 at most)
+    let startPage = Math.max(currentPage - 2, 1);
+    let endPage = Math.min(startPage + 4, totalPages);
 
-        // Add the 'active' class if the current page matches the loop variable
-        if (i === currentPage) {
-            pageLink.classList.add('active');
-        }
+    // Adjust if we're at the end of the page range
+    if (endPage === totalPages) {
+        startPage = Math.max(endPage - 4, 1);
+    }
 
-        pageLink.addEventListener('click', () => paginationClick(i));
+    // Add a previous page link
+    if (currentPage > 1) {
+        const prevLink = makePageLink(currentPage - 1);
+        prevLink.textContent = 'Previous';
+        paginationContainer.appendChild(prevLink);
+    }
+
+    // Add a "..." link for hidden lower pages
+    if (startPage > 1) {
+        const dotsLink = document.createElement('span');
+        dotsLink.textContent = '...';
+        paginationContainer.appendChild(dotsLink);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const pageLink = makePageLink(i, i === currentPage);
         paginationContainer.appendChild(pageLink);
+    }
+
+    // Add a "..." link for hidden higher pages
+    if (endPage < totalPages) {
+        const dotsLink = document.createElement('span');
+        dotsLink.textContent = '...';
+        paginationContainer.appendChild(dotsLink);
+    }
+
+    // Add a next page link
+    if (currentPage < totalPages) {
+        const nextLink = makePageLink(currentPage + 1);
+        nextLink.textContent = 'Next';
+        paginationContainer.appendChild(nextLink);
     }
 }
 

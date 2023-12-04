@@ -20,6 +20,7 @@ public class CheckInHistoryFlexible {
     private String empName;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
+    private String gymPlanName;
     private double pricePerHours;
     private double totalCredit;
     private String duration;

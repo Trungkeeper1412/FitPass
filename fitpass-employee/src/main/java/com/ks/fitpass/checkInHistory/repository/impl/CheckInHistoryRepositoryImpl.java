@@ -54,6 +54,7 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             checkInHistoryFlexible.setEmpName(rs.getString("emp_name"));
             checkInHistoryFlexible.setCheckInTime(rs.getTimestamp("checkInTime"));
             checkInHistoryFlexible.setCheckOutTime(rs.getTimestamp("checkOutTime"));
+            checkInHistoryFlexible.setGymPlanName(rs.getString("name"));
             checkInHistoryFlexible.setPricePerHours(rs.getDouble("pricePerHours"));
             checkInHistoryFlexible.setTotalCredit(rs.getDouble("totalCredit"));
             String duration = "";
