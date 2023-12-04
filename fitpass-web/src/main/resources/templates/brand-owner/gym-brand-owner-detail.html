@@ -92,12 +92,12 @@
                                         </div>
                                         <div class="mb-4">
                                             <label for="phone" class="form-label fw-bold">Số Điện Thoại :</label>
-                                            <input th:field="*{phone}" th:value="${gymOwner.getPhone()}" type="text" class="form-control" id="phone" name="phone" value="0987654321">
+                                            <input th:field="*{phone}" th:value="${gymOwner.getPhone()}" type="number" class="form-control" id="phone" name="phone" value="0987654321">
                                             <span th:if="${#fields.hasErrors('phone')}" class="error" th:errors="*{phone}">phone Error</span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước :</label>
-                                            <input th:field="*{idCard}" th:value="${gymOwner.getIdCard()}" type="text" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
+                                            <input th:field="*{idCard}" th:value="${gymOwner.getIdCard()}" type="number" class="form-control" id="id-card" name="idCard" placeholder="Nhập số căn cước">
                                             <span th:if="${#fields.hasErrors('idCard')}" class="error" th:errors="*{idCard}">idCard Error</span>
                                         </div>
                                         <div class="mb-4">

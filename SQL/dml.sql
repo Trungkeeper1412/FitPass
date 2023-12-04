@@ -792,9 +792,9 @@ VALUES (5, 6, 'Citi Gym',
 
 
        (7, 8, 'Fit 24 – Fitness & Yoga Center',
-        '/img/brands/logos/7_logo.jpg',
-        '/img/brands/wallpapers/7_wallpaper.jpg',
-        '/img/brands/thumbnails/7_thumbnail.jpg',
+        '/img/brands/logos/7_logo.png',
+        '/img/brands/wallpapers/7_wallpaper.png',
+        '/img/brands/thumbnails/7_thumbnail.png',
         'Bạn sẽ được trải nghiệm đa dạng các lớp từ Dance cho đến Yoga, được hướng dẫn bài bản để học viên đạt được mục tiêu trong thời gian ngắn nhất.
 
   Trong đó, Yoga sẽ được hướng dẫn bởi master Ấn Độ và Việt Nam giàu kinh nghiệm, tận tâm, gym cùng các chuyên gia hàng đầu. FIT24 tổ chức cả lớp nhảy dành cho các bạn nhỏ.',
