@@ -50,7 +50,5 @@ public class GlobalErrorController implements ErrorController {
         }
         return "error/403";
     }
-    public String getErrorPath(){
-        return "/error";
-    }
+
 }

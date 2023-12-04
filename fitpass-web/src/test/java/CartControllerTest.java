@@ -202,5 +202,140 @@ public class CartControllerTest {
         assertEquals("shopping-cart", result);
 
     }
-    
+
+    @Test
+    void testGetQuantityInCart_WhenCartExists() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        Cart cart = new Cart();
+        cart.addItem(new GymPlanDepartmentNameDto() , 2);
+        when(session.getAttribute("cart")).thenReturn(cart);
+
+        // Act
+        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
+
+        // Assert
+        assertEquals(ResponseEntity.ok(1), response);
+
+    }
+
+    @Test
+    void testGetQuantityInCart_WhenCartDoesNotExist() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(session.getAttribute("cart")).thenReturn(null);
+
+        // Act
+        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
+
+        // Assert
+        assertEquals(ResponseEntity.ok(0), response);
+
+    }
+
+    @Test
+    void testViewCart_WhenCartExistsWithItems() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        Cart cart = new Cart();
+        cart.addItem(new GymPlanDepartmentNameDto(), 2);
+        when(session.getAttribute("cart")).thenReturn(cart);
+
+        // Act
+        String viewName = cartController.viewCart(model, session);
+
+        // Assert
+        assertEquals("shopping-cart", viewName);
+
+    }
+
+    @Test
+    void testViewCart_WhenCartExistsWithoutItems() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        Cart cart = new Cart();
+        when(session.getAttribute("cart")).thenReturn(cart);
+
+        // Act
+        String viewName = cartController.viewCart(model, session);
+
+        // Assert
+        assertEquals("shopping-cart", viewName);
+        verify(session, times(1)).getAttribute("cart");
+        verify(model, times(1)).addAttribute(eq("departmentList"), anyList());
+        verify(model, times(1)).addAttribute(eq("cartItems"), anyList());
+        verify(session, never()).setAttribute(eq("cart"), any(Cart.class));
+        verifyNoMoreInteractions(session, model);
+    }
+
+    @Test
+    void testViewCart_WhenExceptionOccurs() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(session.getAttribute("cart")).thenThrow(new RuntimeException("Test Exception"));
+
+        // Act
+        String viewName = cartController.viewCart(model, session);
+
+        // Assert
+        assertEquals("error/error", viewName);
+        verify(session, times(1)).getAttribute("cart");
+        verify(model, never()).addAttribute(anyString(), any());
+        verify(session, never()).setAttribute(anyString(), any());
+
+    }
+    @Test
+    void testGetQuantityInCart_ExceptionHandling() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(session.getAttribute("cart")).thenThrow(RuntimeException.class);
+
+        // Act
+        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), response);
+
+    }
+
+    @Test
+    void testUpdateCartQuantity_WhenCartExists() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        Cart cart = new Cart();
+        cart.addItem(new GymPlanDepartmentNameDto(),2);
+
+        when(session.getAttribute("cart")).thenReturn(cart);
+
+        CartUpdateRequestDto request = new CartUpdateRequestDto(1, 5);
+
+        // Act
+        ResponseEntity<String> response = cartController.updateCartQuantity(request, session);
+
+        // Assert
+        assertEquals(ResponseEntity.ok("Cart updated successfully"), response);
+        assertEquals(2, cart.getItems().get(0).getQuantity());
+        verify(session, times(1)).getAttribute("cart");
+        verify(session, times(1)).setAttribute("cart", cart);
+        verifyNoMoreInteractions(session);
+    }
+
+    @Test
+    void testUpdateCartQuantity_WhenCartDoesNotExist() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(session.getAttribute("cart")).thenReturn(null);
+
+        CartUpdateRequestDto request = new CartUpdateRequestDto(1, 5);
+
+        // Act
+        ResponseEntity<String> response = cartController.updateCartQuantity(request, session);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().body("Cart not found"), response);
+        verify(session, times(1)).getAttribute("cart");
+        verifyNoMoreInteractions(session);
+    }
+
+
 }

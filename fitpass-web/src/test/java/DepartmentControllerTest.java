@@ -1,4 +1,5 @@
 import com.ks.fitpass.department.dto.DepartmentDTO;
+import com.ks.fitpass.department.dto.DepartmentDetailsFeedback;
 import com.ks.fitpass.department.dto.GymPlanDto;
 import com.ks.fitpass.department.entity.*;
 import com.ks.fitpass.department.service.*;
@@ -12,6 +13,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -121,6 +124,77 @@ class DepartmentControllerTest {
         //Assert
         assertEquals("error/incorrect-result-size-error", viewName);
 
+    }
+
+    @Test
+    void testGetDepartmentFeedbackSuccess() {
+        // Arrange
+        int departmentId = 1;
+        int page = 1;
+        int size = 7;
+        String sortRating = "asc";
+        List<UserFeedback> mockUserFeedbacks = Arrays.asList(new UserFeedback(), new UserFeedback());
+        when(departmentService.getDepartmentFeedback(anyInt(), anyInt(), anyInt(), anyString())).thenReturn(mockUserFeedbacks);
+        when(departmentService.countAllFeedback(anyInt(), anyString())).thenReturn(10);
+
+        // Act
+        ResponseEntity<DepartmentDetailsFeedback> responseEntity = departmentController.getDepartmentFeedback(departmentId, page, size, sortRating);
+
+        // Assert
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+    }
+
+    @Test
+    void testGetDepartmentFeedbackDuplicateKeyException() {
+        // Arrange
+        int departmentId = 1;
+        when(departmentService.getDepartmentFeedback(anyInt(), anyInt(), anyInt(), anyString())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        ResponseEntity<DepartmentDetailsFeedback> responseEntity = departmentController.getDepartmentFeedback(departmentId, 1, 7, "asc");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+    }
+
+    @Test
+    void testGetDepartmentFeedbackEmptyResultDataAccessException() {
+        // Arrange
+        int departmentId = 1;
+        when(departmentService.getDepartmentFeedback(anyInt(), anyInt(), anyInt(), anyString())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        ResponseEntity<DepartmentDetailsFeedback> responseEntity = departmentController.getDepartmentFeedback(departmentId, 1, 7, "asc");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+    }
+
+    @Test
+    void testGetDepartmentFeedbackIncorrectResultSizeDataAccessException() {
+        // Arrange
+        int departmentId = 1;
+        when(departmentService.getDepartmentFeedback(anyInt(), anyInt(), anyInt(), anyString())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        ResponseEntity<DepartmentDetailsFeedback> responseEntity = departmentController.getDepartmentFeedback(departmentId, 1, 7, "asc");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+    }
+
+    @Test
+    void testGetDepartmentFeedbackDataAccessException() {
+        // Arrange
+        int departmentId = 1;
+        when(departmentService.getDepartmentFeedback(anyInt(), anyInt(), anyInt(), anyString())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        ResponseEntity<DepartmentDetailsFeedback> responseEntity = departmentController.getDepartmentFeedback(departmentId, 1, 7, "asc");
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 
 }
