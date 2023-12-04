@@ -4,7 +4,6 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.entity.UserUpdateDTO;
 import com.ks.fitpass.core.service.UserService;
-import com.ks.fitpass.department.dto.EmployeeCreateDTO;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,7 +69,7 @@ public class MainController {
 
     @PostMapping("/register")
     public String registered(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
-                             BindingResult bindingResult,Model model) {
+                             BindingResult bindingResult,Model model, RedirectAttributes redirectAttributes) {
 
         if (userService.checkEmailExist(userUpdateDTO.getEmail())) {
             bindingResult.rejectValue("email", "error.email", "Email đã tồn tại !");
@@ -122,7 +122,7 @@ public class MainController {
         userService.insertIntoUserRole(userInsertId, 4);
         // Insert into wallet
         walletService.insertWallet(userInsertId, 0);
-
+        redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/register";
     }
 }
