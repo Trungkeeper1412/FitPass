@@ -5,6 +5,7 @@ import com.ks.fitpass.core.repository.RoleRepository;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -162,4 +163,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public int createEmployee(User user) {
         return userRepository.createEmployee(user);
     }
+
+
+    @Override
+    public boolean updatePassword(String newPassword, int userId){
+        return userRepository.updatePassword(newPassword, userId);
+    }
+
 }

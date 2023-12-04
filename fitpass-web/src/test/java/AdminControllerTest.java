@@ -297,12 +297,7 @@ public class AdminControllerTest {
         verify(departmentFeatureService, times(1)).updateFeature(featureToUpdate);
     }
 
-    // CustomDataAccessException implementation for testing
-    private static class CustomDataAccessException extends DataAccessException {
-        public CustomDataAccessException(String msg) {
-            super(msg);
-        }
-    }
+
     @Test
     public void testUpdateFeatureStatusSuccess() {
         // Arrange

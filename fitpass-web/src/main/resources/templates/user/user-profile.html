@@ -30,16 +30,16 @@
                     <!-- User profile tab -->
                     <div class="mt-4 mb-5 user-profile" id="user-profile">
                         <div class="row user-change-ava justify-content-center">
-                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6 mb-4">
+                            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-4 col-xs-6">
                                 <div class="user-img">
                                     <img class="show-department-img" id="user-ava"
                                          th:src="${userUpdateDTO.getImageUrl()}">
                                 </div>
                             </div>
-                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn mb-4">
+                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-8 col-xs-6 change-ava-btn">
                                 <input type="file" class="form-control mt-2" id="avatar-img" name="avatar-img"
                                        accept="image/*" style="display: none;" onchange="uploadImage(this);">
-                                <div class="d-flex justify-content-start align-items-center mt-3">
+                                <div class="d-flex justify-content-start align-items-center">
                                     <button type="button" class="btn btn-upload-img"
                                             onclick="document.getElementById('avatar-img').click();">
                                         Chọn ảnh
@@ -142,6 +142,17 @@
             </div>
         </div>
     </div>
+
+    <div id="modal01" class="w3-modal" style="display: none">
+        <div style="text-align: center; position: relative">
+            <div class="ava-zoom" >
+                <img id="img01">
+            </div>
+            <span class="w3-button">
+                 <img id="close-img"  style="width: 25px" src="https://cdn-icons-png.flaticon.com/128/660/660252.png">
+            </span>
+        </div>
+    </div>
 </div>
 
 <!-- ======= Footer ======= -->
@@ -152,6 +163,20 @@
 
 <th:block th:include="common/vendor-script"></th:block>
 <script>
+    let close_image_bnt = document.getElementById("close-img");
+    close_image_bnt.addEventListener('click', function() {
+        console.log("delete");
+        document.getElementById("modal01").style.display = "none";
+    })
+    function onClickImage(element) {
+        console.log(element.src);
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        document.getElementById("modal01").style.position = "absolute";
+        document.getElementById("modal01").style.top = "25%";
+        document.getElementById("modal01").style.left = "0";
+        document.getElementById("modal01").style.right = "0";
+    }
     function uploadImage(input) {
         if (input.files && input.files[0]) {
             const file = input.files[0];

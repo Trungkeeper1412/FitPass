@@ -14,6 +14,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -177,8 +179,37 @@ try {
         }
     }
 
-    @GetMapping("change-password")
+    @GetMapping("/change-password")
     public String showChangePwPage() {
         return "user/user-change-password";
     }
+
+    @PostMapping("/change-password")
+    public String changePassword(@RequestParam String currentPassword,
+                                 @RequestParam String newPassword,
+                                 @RequestParam String confirmPassword,
+                                 Model model,HttpSession session) {
+
+        User user = (User) session.getAttribute("userInfo");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!passwordEncoder.matches(user.getUserPassword(),passwordEncoder.encode(currentPassword))) {
+            model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+            return "user/user-change-password";
+        }
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+            return "user/user-change-password";
+        }
+        String hashedPassword = passwordEncoder.encode(newPassword);
+        // Cập nhật mật khẩu mới
+        userService.updatePassword(hashedPassword, user.getUserId());
+
+        // Redirect hoặc hiển thị thông báo thành công
+        model.addAttribute("success", true);
+        return "redirect:/change-password";
+    }
+
 }
