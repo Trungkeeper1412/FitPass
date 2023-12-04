@@ -66,12 +66,29 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
+    public int insertIntoUserDetailRegister(UserDetail userDetail) {
+        return jdbcTemplate.update(INSERT_INTO_USER_DETAIL_REGISTER,
+                userDetail.getFirstName(), userDetail.getLastName(),
+                userDetail.getEmail(), userDetail.getPhoneNumber(),
+                userDetail.getDateOfBirth(),userDetail.getGender()
+        );
+    }
+
+    @Override
     public Integer getLastInsertUserDetailId(UserDetail userDetail) {
         return jdbcTemplate.queryForObject(GET_LAST_INSERT_USER_DETAIL_ID, Integer.class,
                 userDetail.getFirstName(), userDetail.getLastName(),
                 userDetail.getEmail(), userDetail.getPhoneNumber(),
                 userDetail.getAddress(), userDetail.getDateOfBirth(),
                 userDetail.getImageUrl(), userDetail.getSecurityId()
+        );
+    }
+
+    @Override
+    public Integer getLastInsertUserDetailIdRegister(UserDetail userDetail) {
+        return jdbcTemplate.queryForObject(GET_LAST_INSERT_USER_REGISTER_DETAIL_ID, Integer.class,
+                userDetail.getFirstName(), userDetail.getLastName(),
+                userDetail.getEmail(), userDetail.getPhoneNumber(), userDetail.getDateOfBirth()
         );
     }
 
