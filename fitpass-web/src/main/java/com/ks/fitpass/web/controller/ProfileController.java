@@ -32,6 +32,7 @@ public class ProfileController {
     private final TransactionService transactionService;
     private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
+
     public ProfileController(TransactionService transactionService, UserService userService) {
         this.transactionService = transactionService;
         this.userService = userService;
@@ -53,7 +54,7 @@ public class ProfileController {
     }
 
     @GetMapping("/my-profile")
-    public String showProfile(HttpSession session, Model model ) {
+    public String showProfile(HttpSession session, Model model) {
         try {
             User user = (User) session.getAttribute("userInfo");
             UserDetail ud = userService.getUserDetailByUserId(user.getUserId());
@@ -75,7 +76,7 @@ public class ProfileController {
 
             model.addAttribute("userUpdateDTO", userUpdateDTO);
             return "user/user-profile";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -97,49 +98,49 @@ public class ProfileController {
     @PostMapping("/my-profile/update")
     public String updateGymOwnerDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
                                         BindingResult bindingResult) {
-try {
-    if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
-        if (userService.checkEmailExist(userUpdateDTO.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+        try {
+            if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
+                if (userService.checkEmailExist(userUpdateDTO.getEmail())) {
+                    bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+                }
+            }
+
+            if (bindingResult.hasErrors()) {
+                return "user/user-profile";
+            }
+
+            UserDetail userDetail = new UserDetail();
+            userDetail.setUserDetailId(userUpdateDTO.getUserDetailId());
+            userDetail.setFirstName(userUpdateDTO.getFirstName());
+            userDetail.setLastName(userUpdateDTO.getLastName());
+            userDetail.setEmail(userUpdateDTO.getEmail());
+            userDetail.setDateOfBirth(userUpdateDTO.getDateOfBirth());
+            userDetail.setAddress(userUpdateDTO.getAddress());
+            userDetail.setPhoneNumber(userUpdateDTO.getPhoneNumber());
+            userDetail.setGender(userUpdateDTO.getGender());
+            userDetail.setImageUrl(userUpdateDTO.getImageUrl());
+
+            // Update user detail
+            userService.updateUserDetail(userDetail);
+
+            return "redirect:/profile/my-profile";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
-    }
-
-    if (bindingResult.hasErrors()) {
-        return "user/user-profile";
-    }
-
-    UserDetail userDetail = new UserDetail();
-    userDetail.setUserDetailId(userUpdateDTO.getUserDetailId());
-    userDetail.setFirstName(userUpdateDTO.getFirstName());
-    userDetail.setLastName(userUpdateDTO.getLastName());
-    userDetail.setEmail(userUpdateDTO.getEmail());
-    userDetail.setDateOfBirth(userUpdateDTO.getDateOfBirth());
-    userDetail.setAddress(userUpdateDTO.getAddress());
-    userDetail.setPhoneNumber(userUpdateDTO.getPhoneNumber());
-    userDetail.setGender(userUpdateDTO.getGender());
-    userDetail.setImageUrl(userUpdateDTO.getImageUrl());
-
-    // Update user detail
-    userService.updateUserDetail(userDetail);
-
-    return "redirect:/profile/my-profile";
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return "error/duplicate-key-error";
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return "error/no-data";
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return "error/incorrect-result-size-error";
-} catch (DataAccessException ex) {
-    // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
-    return "error/data-access-error";
-}
     }
 
 
@@ -160,7 +161,7 @@ try {
             List<TransactionDTO> transactionDTOList = transactionService.getListTransactionByUserId(user.getUserId());
             model.addAttribute("transactionList", transactionDTOList);
             return "user/user-transaction-history";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -188,13 +189,13 @@ try {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model,HttpSession session) {
+                                 Model model, HttpSession session) {
 
         User user = (User) session.getAttribute("userInfo");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         // Kiểm tra mật khẩu hiện tại
-        if (!passwordEncoder.matches(user.getUserPassword(),passwordEncoder.encode(currentPassword))) {
+        if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
             model.addAttribute("error", "Mật khẩu hiện tại không đúng");
             return "user/user-change-password";
         }
@@ -209,7 +210,7 @@ try {
 
         // Redirect hoặc hiển thị thông báo thành công
         model.addAttribute("success", true);
-        return "redirect:/change-password";
+        return "redirect:/profile/change-password";
     }
 
 }
