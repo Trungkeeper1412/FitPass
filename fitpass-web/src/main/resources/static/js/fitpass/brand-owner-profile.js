@@ -397,7 +397,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 3,
                 maxlength: 32,
-                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
+                pattern: /^(?!\s+$).+/,
             },
             phone: {
                 required: true,
@@ -408,7 +408,7 @@ $(document).ready(function () {
             address: {
                 required: true,
                 maxlength: 150,
-                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
+                pattern: /^(?!\s+$).+/,
             },
             email: {
                 required: true,
@@ -418,6 +418,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 2,
                 maxlength: 700,
+                pattern: /^(?!\s+$).+/,
             },
             capacity: {
                 required: true,
@@ -446,7 +447,7 @@ $(document).ready(function () {
                 required: "Vui lòng nhập tên cơ sở !",
                 minlength: "Tên thương hiệu phải có ít nhất 3 kí tự !",
                 maxlength: "Tên thương hiệu không được vượt quá 32 kí tự !",
-                pattern: "Tên thương hiệu không hợp lệ !",
+                pattern: "Tên thương hiệu đang bị trống !",
             },
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
@@ -458,7 +459,7 @@ $(document).ready(function () {
             address: {
                 required: "Vui lòng nhập địa chỉ !",
                 maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
-                pattern: "Địa chỉ không hợp lệ !",
+                pattern: "Địa chỉ đang bị trống !",
             },
             email: {
                 required: "Vui lòng nhập email !",
@@ -468,6 +469,7 @@ $(document).ready(function () {
                 required: "Vui lòng nhập nhập mô tả gói tập !",
                 minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
                 maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+                pattern: "Mô tả gói tập đang bị trống !",
             },
             capacity: {
                 required: "Vui lòng nhập sức chứa !",
