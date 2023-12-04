@@ -67,6 +67,11 @@ public interface IRepositoryQuery {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);
             """;
 
+    String INSERT_INTO_USER_DETAIL_REGISTER = """
+                INSERT INTO user_detail (first_name, last_name, email, phone_number, date_of_birth, gender)
+                VALUES (?, ?, ?, ?, ?, ?);
+            """;
+
     String GET_LAST_INSERT_USER_DETAIL_ID = """
                 SELECT user_detail_id
                 FROM user_detail
@@ -79,6 +84,17 @@ public interface IRepositoryQuery {
                     date_of_birth = ? AND
                     image_url = ? AND
                     securityId =?;
+            """;
+
+    String GET_LAST_INSERT_USER_REGISTER_DETAIL_ID = """
+                SELECT user_detail_id
+                FROM user_detail
+                WHERE\s
+                    first_name = ? AND
+                    last_name = ? AND
+                    email = ? AND
+                    phone_number = ? AND
+                    date_of_birth = ?;
             """;
 
     String INSERT_INTO_USER = """

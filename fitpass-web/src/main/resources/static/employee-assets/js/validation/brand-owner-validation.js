@@ -68,7 +68,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 3,
                 maxlength: 32,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
 
             // Validate Plan
@@ -76,7 +76,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 2,
                 maxlength: 26,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             pricePerHours: {
                 required: true,
@@ -95,6 +95,7 @@ $(document).ready(function () {
             },
             description: {
                 required: true,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
                 minlength: 2,
                 maxlength: 250,
             },
@@ -119,7 +120,7 @@ $(document).ready(function () {
             firstName: {
                 required: true,
                 maxlength: 25,
-                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             email: {
                 required: true,
@@ -141,7 +142,7 @@ $(document).ready(function () {
             lastName: {
                 required: true,
                 maxlength: 25,
-                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             username: {
                 required: true,
@@ -169,21 +170,22 @@ $(document).ready(function () {
                 required: true,
                 minlength: 2,
                 maxlength: 50,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             }
         },
         messages: {
             // Validate Plan
             brandName: {
                 required: "Vui lòng nhập tên cơ sở !",
-                minlength: "Tên cơ sở phải có ít nhất 3 kí tự !",
-                maxlength: "Tên cơ sở không được vượt quá 32 kí tự !",
-                pattern: "Tên cơ sở không được chứa kí tự đặc biệt !",
+                minlength: "Tên thương hiệu phải có ít nhất 3 kí tự !",
+                maxlength: "Tên thương hiệu không được vượt quá 32 kí tự !",
+                pattern: "Tên thương hiệu không hợp lệ !",
             },
             gymPlanName: {
                 required: "Vui lòng nhập tên gói tập !",
                 minlength: "Tên gói tập phải có ít nhất 2 kí tự !",
                 maxlength: "Tên gói tập không được vượt quá 32 kí tự !",
-                pattern: "Tên gói tập không được chứa kí tự đặc biệt !",
+                pattern: "Tên gói tập không hợp lệ !",
             },
             pricePerHours: {
                 required: "Vui lòng nhập số credits !",
@@ -226,7 +228,7 @@ $(document).ready(function () {
             firstName: {
                 required: "Vui lòng nhập họ của bạn !",
                 maxlength: "Họ của bạn không được vượt quá 25 kí tự !",
-                pattern: "Họ của bạn không được chứa kí tự đặc biệt !",
+                pattern: "Họ của bạn không hợp lệ !",
             },
             email: {
                 required: "Vui lòng nhập email !",
@@ -246,7 +248,7 @@ $(document).ready(function () {
             lastName: {
                 required: "Vui lòng nhập tên của bạn !",
                 maxlength: "Tên của bạn không được vượt quá 25 kí tự !",
-                pattern: "Tên của bạn không được chứa kí tự đặc biệt !",
+                pattern: "Tên của bạn không hợp lệ !",
             },
             username: {
                 required: "Vui lòng nhập tên đăng nhập !",
@@ -274,6 +276,7 @@ $(document).ready(function () {
                 required: "Vui lòng nhập tên dịch vụ !",
                 minlength: "Tên dịch vụ phải có ít nhất 2 kí tự !",
                 maxlength: "Tên dịch vụ không được vượt quá 50 kí tự !",
+                pattern: "Tên dịch vụ không hợp lệ !",
             }
         },
         errorPlacement: function (error, element) {

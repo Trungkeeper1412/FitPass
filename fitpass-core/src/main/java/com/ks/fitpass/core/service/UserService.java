@@ -15,8 +15,11 @@ public interface UserService extends UserDetailsService {
 
     int insertIntoUserDetail(UserDetail userDetail);
 
+    int insertIntoUserDetailRegister(UserDetail userDetail);
+
     int getLastInsertUserDetailId(UserDetail userDetail);
 
+    int getLastInsertUserDetailIdRegister(UserDetail userDetail);
 
     int insertIntoUser(User user);
 

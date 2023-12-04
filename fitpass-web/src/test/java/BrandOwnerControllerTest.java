@@ -32,6 +32,7 @@ import org.springframework.dao.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -2163,6 +2164,123 @@ public class BrandOwnerControllerTest {
 
         // Assert
         assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+    @Test
+    void testChangePasswordSuccess() {
+        // Arrange
+        String currentPassword = "currentPass";
+        String newPassword = "newPass";
+        String confirmPassword = "newPass";
+        Model model = mock(Model.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode(currentPassword));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(userService.updatePassword(anyString(), eq(user.getUserId()))).thenReturn(true);
+
+        // Act
+        String result = brandOwnerController.changePassword(currentPassword, newPassword, confirmPassword, model, session);
+
+        // Assert
+        assertEquals("redirect:/brand-owner/password", result);
+        verify(model, times(1)).addAttribute("success", true);
+    }
+
+    @Test
+    void testChangePasswordIncorrectCurrentPassword() {
+        // Arrange
+        String currentPassword = "incorrectPass";
+        String newPassword = "newPass";
+        String confirmPassword = "newPass";
+        Model model = mock(Model.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPass"));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        // Act
+        String result = brandOwnerController.changePassword(currentPassword, newPassword, confirmPassword, model, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-update-password", result);
+        verify(model, times(1)).addAttribute("error", "Mật khẩu hiện tại không đúng");
+    }
+
+    @Test
+    void testChangePasswordMismatchedNewPassword() {
+        // Arrange
+        String currentPassword = "currentPass";
+        String newPassword = "newPass";
+        String confirmPassword = "mismatchedPass";
+        Model model = mock(Model.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode(currentPassword));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        // Act
+        String result = brandOwnerController.changePassword(currentPassword, newPassword, confirmPassword, model, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-update-password", result);
+        verify(model, times(1)).addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+    }
+
+    @Test
+    void testChangePasswordMismatchedNewPasswordAndConfirmPassword() {
+        // Arrange
+        String currentPassword = "currentPass";
+        String newPassword = "newPass";
+        String confirmPassword = "mismatchedPass";
+        Model model = mock(Model.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode(currentPassword));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        // Act
+        String result = brandOwnerController.changePassword(currentPassword, newPassword, confirmPassword, model, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-update-password", result);
+        verify(model, times(1)).addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+    }
+
+    @Test
+    void testChangePasswordException() {
+        // Arrange
+        String currentPassword = "currentPass";
+        String newPassword = "newPass";
+        String confirmPassword = "newPass";
+        Model model = mock(Model.class);
+        HttpSession session = mock(HttpSession.class);
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode(currentPassword));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(userService.updatePassword(anyString(), eq(user.getUserId()))).thenThrow(RuntimeException.class);
+
+        // Act
+        String result = brandOwnerController.changePassword(currentPassword, newPassword, confirmPassword, model, session);
+
+        // Assert
+        assertEquals("brand-owner/gym-brand-update-password", result);
+        verify(model, times(1)).addAttribute("error", "Đã xảy ra lỗi khi thay đổi mật khẩu");
     }
 
 }

@@ -74,8 +74,18 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public int insertIntoUserDetailRegister(UserDetail userDetail) {
+        return userRepository.insertIntoUserDetailRegister(userDetail);
+    }
+
+    @Override
     public int getLastInsertUserDetailId(UserDetail userDetail) {
         return userRepository.getLastInsertUserDetailId(userDetail);
+    }
+
+    @Override
+    public int getLastInsertUserDetailIdRegister(UserDetail userDetail) {
+        return userRepository.getLastInsertUserDetailIdRegister(userDetail);
     }
 
     @Override

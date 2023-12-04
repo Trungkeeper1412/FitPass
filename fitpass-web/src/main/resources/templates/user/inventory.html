@@ -62,8 +62,14 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
                                     <div class="item-grid" id="grid-container" >
+                                        <div th:if="${#lists.isEmpty(itemList)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemList}">
-
                                             <div class="text-light item-card-all mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
@@ -151,6 +157,13 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8 mb-3">
                                     <div class="item-grid" id="grid-container">
+                                        <div th:if="${#lists.isEmpty(itemListNotActive)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemListNotActive}">
                                             <div class="text-light item-card-unactivated mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
@@ -233,6 +246,13 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8 mb-3">
                                     <div class="item-grid" id="grid-container">
+                                        <div th:if="${#lists.isEmpty(itemListActive)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemListActive}">
                                             <div class="text-light item-card-active mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
@@ -311,6 +331,13 @@
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
                                 <div class="col-md-8 mb-3">
                                     <div class="item-grid" id="grid-container">
+                                        <div th:if="${#lists.isEmpty(itemListExpired)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemListExpired}">
                                             <div class="text-light item-card-activated mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},

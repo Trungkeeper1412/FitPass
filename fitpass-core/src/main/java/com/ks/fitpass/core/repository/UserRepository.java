@@ -17,7 +17,12 @@ public interface UserRepository {
 
     int insertIntoUserDetail(UserDetail userDetail);
 
+    int insertIntoUserDetailRegister(UserDetail userDetail);
+
     Integer getLastInsertUserDetailId(UserDetail userDetail);
+
+    Integer getLastInsertUserDetailIdRegister(UserDetail userDetail);
+
 
     int insertIntoUser(User user);
 
