@@ -11,6 +11,17 @@ public class UserUpdateDTO {
     private int userId;
     private int userDetailId;
 
+    @NotEmpty(message = "Vui lòng nhập tên đăng nhập!")
+
+    private String userAccount;
+    @NotEmpty(message = "Vui lòng nhập mật khẩu !")
+
+    private String userPassword;
+    @NotEmpty(message = "Vui lòng xác nhận mật khẩu !")
+
+    private String reUserPassword;
+
+
     @Size(max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập họ của bạn !")
     @Pattern(regexp = "^[a-zA-Z\\u00C0-\\u1EF9\\s]*$", message = "Họ của bạn không được chứa kí tự đặc biệt !")

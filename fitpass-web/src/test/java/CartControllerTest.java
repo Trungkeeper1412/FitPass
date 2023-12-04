@@ -4,7 +4,9 @@ import static org.mockito.Mockito.*;
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.gymplan.service.GymPlanService;
 import com.ks.fitpass.order.dto.AddToCartRequestDTO;
+import com.ks.fitpass.order.dto.CartUpdateRequestDto;
 import com.ks.fitpass.order.entity.cart.Cart;
+import com.ks.fitpass.order.entity.cart.CartItem;
 import com.ks.fitpass.web.controller.CartController;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +16,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartControllerTest {
-
+    @Mock
+    private HttpSession session;
+    @Mock
+    private Model model;
 
     @Mock
     private GymPlanService gymPlanService;
@@ -160,5 +169,38 @@ public class CartControllerTest {
         assertEquals("redirect:/error/error", redirectResult);
     }
 
+    @Test
+    void testViewCartWithEmptyCart() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(session.getAttribute("cart")).thenReturn(null);
 
+        // Act
+        String result = cartController.viewCart(model, session);
+
+        // Assert
+        assertEquals("shopping-cart", result);
+        verify(model, times(1)).addAttribute("departmentList", new ArrayList<>());
+        verify(model, times(1)).addAttribute("cartItems", new ArrayList<>());
+
+
+    }
+
+    @Test
+    void testViewCartWithNonEmptyCart() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        Cart cart = new Cart();
+        List<CartItem> cartItems = new ArrayList<>();
+
+        when(session.getAttribute("cart")).thenReturn(cart);
+
+        // Act
+        String result = cartController.viewCart(model, session);
+
+        // Assert
+        assertEquals("shopping-cart", result);
+
+    }
+    
 }
