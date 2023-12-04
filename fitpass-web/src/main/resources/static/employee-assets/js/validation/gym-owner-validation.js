@@ -69,7 +69,7 @@ $(document).ready(function () {
             firstName: {
                 required: true,
                 maxlength: 25,
-                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             email: {
                 required: true,
@@ -78,6 +78,7 @@ $(document).ready(function () {
             address: {
                 required: true,
                 maxlength: 150,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             dateOfBirth: {
                 required: true,
@@ -91,7 +92,7 @@ $(document).ready(function () {
             lastName: {
                 required: true,
                 maxlength: 25,
-                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             username: {
                 required: true,
@@ -146,7 +147,7 @@ $(document).ready(function () {
             firstName: {
                 required: "Vui lòng nhập họ của bạn !",
                 maxlength: "Họ của bạn không được vượt quá 25 kí tự !",
-                pattern: "Họ của bạn không được chứa kí tự đặc biệt !",
+                pattern: "Họ của bạn không hợp lệ !",
             },
             email: {
                 required: "Vui lòng nhập email !",
@@ -155,6 +156,7 @@ $(document).ready(function () {
             address: {
                 required: "Vui lòng nhập địa chỉ !",
                 maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
+                pattern: "Địa chỉ không hợp lệ !",
             },
             dateOfBirth: {
                 required: "Vui lòng nhập ngày sinh !",
@@ -166,7 +168,7 @@ $(document).ready(function () {
             lastName: {
                 required: "Vui lòng nhập tên của bạn !",
                 maxlength: "Tên của bạn không được vượt quá 25 kí tự !",
-                pattern: "Tên của bạn không được chứa kí tự đặc biệt !",
+                pattern: "Tên của bạn không hợp lệ !",
             },
             username: {
                 required: "Vui lòng nhập tên đăng nhập !",

@@ -67,64 +67,64 @@
                                                         <tr>
                                                             <td>Thứ 2</td>
                                                             <td><input type="time" id="mondayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="mondayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Thứ 3</td>
                                                             <td><input type="time" id="tuesdayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="tuesdayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Thứ 4</td>
                                                             <td><input type="time" id="wednesdayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="wednesdayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Thứ 5</td>
                                                             <td><input type="time" id="thursdayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="thursdayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Thứ 6</td>
                                                             <td><input type="time" id="fridayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="fridayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Thứ 7</td>
                                                             <td><input type="time" id="saturdayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="saturdayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Chủ Nhật</td>
                                                             <td><input type="time" id="sundayOpenTime"
-                                                                       class="form-control start-time-input">
+                                                                       class="form-control start-time-input" required>
                                                             </td>
                                                             <td><input type="time" id="sundayCloseTime"
-                                                                       class="form-control end-time-input">
+                                                                       class="form-control end-time-input" data-rule-greaterThan="#mondayOpenTime" required>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -146,7 +146,7 @@
                                         <h2 class="fs-title">Thông tin cơ bản</h2>
                                         <div class="row text-start">
                                             <div class="col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <input type="hidden" id="departmentId" th:value="${departmentId}"/>
                                                     <label for="name-brand" class="form-label fw-bold">Tên cơ sở
                                                         :</label>
@@ -156,14 +156,14 @@
                                                            name="name-brand" placeholder="Cơ sở Cầu Giấy"
                                                            readonly>
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="phone" class="form-label fw-bold">Số điện thoại
                                                         :</label>
-                                                    <input type="text" class="form-control" id="phone"
+                                                    <input type="number" class="form-control" id="phone"
                                                            name="phone"
                                                            placeholder="Nhập số điện thoại">
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="address" class="form-label fw-bold">Địa chỉ
                                                         :</label>
                                                     <input type="text" class="form-control" id="address"
@@ -171,18 +171,18 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="capacity" class="form-label fw-bold">Sức chứa (Người):</label>
                                                     <input type="number" class="form-control" id="capacity"
                                                            name="capacity" placeholder="Sức Chứa">
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="area" class="form-label fw-bold">Diện tích (m2):</label>
-                                                    <input type="text" class="form-control" id="area"
+                                                    <input type="number" class="form-control" id="area"
                                                            name="area"
                                                            placeholder="Diện tích">
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="provinceDropdown" class="form-label fw-bold">Chọn
                                                         tỉnh/thành phố:</label>
                                                     <select class="form-select" id="provinceDropdown"
@@ -250,7 +250,7 @@
                                             <div class="col-12">
                                                 <label class="fw-bold" for="openHours">Giờ hoạt
                                                     động:</label><br>
-                                                <div class="mb-3 d-flex align-items-center align-content-center">
+                                                <div class="mb-4 d-flex align-items-center align-content-center">
                                                     <button type="button" class="btn btn-primary"
                                                             data-toggle="modal"
                                                             data-target="#selectOpenHoursModal">
@@ -323,34 +323,18 @@
                                                                 <tbody>
                                                                 <th:block th:each="g : ${listFlexGymPlan}">
                                                                     <tr>
-                                                                        <td th:text="${gStat.index + 1}">1
+                                                                        <td th:text="${gStat.index + 1}">
                                                                         </td>
                                                                         <td th:text="${g.gymPlanId}"></td>
-                                                                        <td th:text="${g.gymPlanName}">Gói
-                                                                            linh hoạt tiết kiệm
+                                                                        <td th:text="${g.gymPlanName}">
                                                                         </td>
-                                                                        <td th:text="${g.pricePerHours}">5
+                                                                        <td th:text="${g.pricePerHours}">
                                                                         </td>
                                                                         <td th:text="${g.planBeforeActive + ' ngày'}">
-                                                                            30 ngày
                                                                         </td>
                                                                         <td th:text="${g.planAfterActive + ' ngày'}">
-                                                                            60 ngày
                                                                         </td>
-                                                                        <td th:text="${g.description}">Gói
-                                                                            Cố Định Đầy Đủ Chức Năng của
-                                                                            phòng
-                                                                            tập gym
-                                                                            California Gym and Fitness mang
-                                                                            đến cho
-                                                                            bạn trải
-                                                                            nghiệm luyện tập hoàn hảo theo
-                                                                            tiêu
-                                                                            chuẩn 5 sao, với
-                                                                            sự chăm sóc tận tâm và một loạt
-                                                                            các tiện
-                                                                            nghi cao
-                                                                            cấp
+                                                                        <td th:text="${g.description}">
                                                                         </td>
                                                                         <td></td>
                                                                     </tr>
@@ -358,16 +342,6 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                        <style>
-                                                            .dataTables_length {
-                                                                float: left;
-                                                            }
-
-                                                            .dataTables_filter {
-                                                                margin-right: 75px;
-                                                                float: right;
-                                                            }
-                                                        </style>
                                                     </div>
                                                 </div>
 
@@ -405,36 +379,19 @@
                                                                 <tbody>
                                                                 <th:block th:each="g : ${listFixedGymPlan}">
                                                                     <tr>
-                                                                        <td th:text="${gStat.index + 1}">1
+                                                                        <td th:text="${gStat.index + 1}">
                                                                         </td>
                                                                         <td th:text="${g.gymPlanId}"></td>
-                                                                        <td th:text="${g.gymPlanName}">Gói
-                                                                            1
+                                                                        <td th:text="${g.gymPlanName}">
                                                                         </td>
-                                                                        <td th:text="${g.price}">5</td>
+                                                                        <td th:text="${g.price}"></td>
                                                                         <td th:text="${g.duration + ' ngày'}">
-                                                                            30 ngày
                                                                         </td>
                                                                         <td th:text="${g.planBeforeActive + ' ngày'}">
-                                                                            10 ngày
                                                                         </td>
                                                                         <td th:text="${g.planAfterActive + ' ngày'}">
-                                                                            30 ngày
                                                                         </td>
-                                                                        <td th:text="${g.description}">Gói
-                                                                            Cố Định Đầy Đủ Chức Năng của
-                                                                            phòng
-                                                                            tập gym
-                                                                            California Gym and Fitness mang
-                                                                            đến cho
-                                                                            bạn trải
-                                                                            nghiệm luyện tập hoàn hảo theo
-                                                                            tiêu
-                                                                            chuẩn 5 sao, với
-                                                                            sự chăm sóc tận tâm và một loạt
-                                                                            các tiện
-                                                                            nghi cao
-                                                                            cấp
+                                                                        <td th:text="${g.description}">
                                                                         </td>
                                                                         <td></td>
                                                                     </tr>
@@ -466,24 +423,19 @@
                                                     <th>Tên dịch vụ</th>
                                                     <th>Ảnh dịch vụ</th>
                                                     <th class="plan-description">Mô tả</th>
-                                                    <th><input type="checkbox" id="checkAll">
-                                                    </th>
+                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <th:block th:each="b : ${brandAmenitie}">
                                                     <tr>
-                                                        <td th:text="${bStat.index + 1}">1</td>
+                                                        <td th:text="${bStat.index + 1}"></td>
                                                         <td th:text="${b.getAmenitieId()}"></td>
-                                                        <td th:text="${b.amenitieName}">Hệ thống tủ khóa
+                                                        <td th:text="${b.amenitieName}">
                                                         </td>
                                                         <td><img th:src="${b.photoUrl}"
                                                                  alt=""></td>
-                                                        <td th:text="${b.description}">Hệ thống khóa từ
-                                                            thông minh bảo mật tối đa Esmart Lock
-                                                            đầu tiên tại Việt Nam. Hội viên có thể yên tâm
-                                                            gửi đồ và
-                                                            khóa tủ bằng vòng tay locker tự động
+                                                        <td th:text="${b.description}">
                                                         </td>
                                                         <td></td>
                                                     </tr>
@@ -510,8 +462,7 @@
                                                     <th>ID</th>
                                                     <th>Tên tiện ích</th>
                                                     <th>Icon</th>
-                                                    <th><input type="checkbox" id="checkAll">
-                                                    </th>
+                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -545,18 +496,18 @@
                                                 <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="latitude" class="form-label fw-bold">Vĩ độ
                                                         :</label>
-                                                    <input type="text" class="form-control" id="latitude"
+                                                    <input type="number" class="form-control" id="latitude"
                                                            name="latitude" placeholder="Nhập vĩ độ">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="longitude" class="form-label fw-bold">Kinh độ
                                                         :</label>
-                                                    <input type="text" class="form-control" id="longitude"
+                                                    <input type="number" class="form-control" id="longitude"
                                                            name="longitude" placeholder="Nhập kinh độ">
                                                 </div>
                                             </div>
@@ -899,6 +850,17 @@
         configureDataTable('#dataTableFeatures', 4, 1, 'selectedFeatureId');
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        // Add custom validation method
+        $.validator.addMethod("greaterThan", function (value, element, param) {
+            var start_time = $(param).val();
+            return value > start_time;
+        }, "Thời gian không đúng !.");
+    });
+</script>
+
 <script>
     $("#submitForm").click(function () {
         var formData = {
@@ -952,9 +914,9 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Cập nhật không thành công',
-                    text: 'Hãy Kiểm tra lại các bước !',
+                    text: 'Hãy điền đầy đủ thông tin ở các bước !',
                     showConfirmButton: false,
-                    timer: 2000 // Hiển thị thông báo trong 2 giây
+                    timer: 3000 // Hiển thị thông báo trong 2 giây
                 })
                 console.log(error);
             }
