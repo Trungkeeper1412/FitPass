@@ -7,22 +7,22 @@ import lombok.Data;
 
 @Data
 public class BecomePartnerForm {
-    @NotBlank(message = "Brand Name is required")
+    @NotBlank(message = "Bạn cần nhập tên thương hiêu")
     private String brandName;
 
-    @NotBlank(message = "Brand Owner Name is required")
+    @NotBlank(message = "Bạn cần nhập tên chủ thương hiệu")
     private String brandOwnerName;
 
-    @NotBlank(message = "Contact Number is required")
+    @NotBlank(message = "Bạn cần nhập số điện thoại")
     @Pattern(regexp = "\\d{10,15}", message = "Invalid Contact Number")
     private String contactNumber;
 
-    @NotBlank(message = "Address is required")
+    @NotBlank(message = "Bạn cần nhập dịa chỉ")
     private String address;
 
     private String webUrl;
 
-    @NotBlank(message = "Contact Email is required")
-    @Email(message = "Invalid Email Format")
+    @NotBlank(message = "Bạn cần nhập email liên hệ")
+    @Email(message = "Định dạng email không chính xác")
     private String contactEmail;
 }
