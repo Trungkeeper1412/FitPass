@@ -397,13 +397,18 @@ $(document).ready(function () {
                 required: true,
                 minlength: 3,
                 maxlength: 32,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             phone: {
                 required: true,
                 minlength: 8,
                 maxlength: 11,
                 correctNumber: true
+            },
+            address: {
+                required: true,
+                maxlength: 150,
+                pattern: /^(?:(?![ ]{2,}|^ )[\w\u00C0-\u1EF9 ])*$/,
             },
             email: {
                 required: true,
@@ -414,13 +419,34 @@ $(document).ready(function () {
                 minlength: 2,
                 maxlength: 700,
             },
+            capacity: {
+                required: true,
+                number: true,
+                min: 0.01,
+            },
+            area: {
+                required: true,
+                number: true,
+                min: 0.01,
+            },
+            province: {
+                required: true,
+            },
+            latitude: {
+                required: true,
+                pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/,
+            },
+            longitude: {
+                required: true,
+                pattern: /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/,
+            },
         },
         messages: {
             brandName: {
                 required: "Vui lòng nhập tên cơ sở !",
-                minlength: "Tên cơ sở phải có ít nhất 3 kí tự !",
-                maxlength: "Tên cơ sở không được vượt quá 32 kí tự !",
-                pattern: "Tên cơ sở không được chứa kí tự đặc biệt !",
+                minlength: "Tên thương hiệu phải có ít nhất 3 kí tự !",
+                maxlength: "Tên thương hiệu không được vượt quá 32 kí tự !",
+                pattern: "Tên thương hiệu không hợp lệ !",
             },
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
@@ -428,6 +454,11 @@ $(document).ready(function () {
                 minlength: 'Đầu số phải có ít nhất 8 số !',
                 maxlength: 'Số điện thoại có tối đa 11 số !',
                 correctNumber: "Đầu số không đúng định dạng !",
+            },
+            address: {
+                required: "Vui lòng nhập địa chỉ !",
+                maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
+                pattern: "Địa chỉ không hợp lệ !",
             },
             email: {
                 required: "Vui lòng nhập email !",
@@ -437,6 +468,27 @@ $(document).ready(function () {
                 required: "Vui lòng nhập nhập mô tả gói tập !",
                 minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
                 maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+            },
+            capacity: {
+                required: "Vui lòng nhập sức chứa !",
+                number: "Vui lòng nhập số !",
+                min: "Sức chứa phải lớn hơn 0",
+            },
+            area: {
+                required: "Vui lòng nhập diện tích !",
+                number: "Vui lòng nhập số !",
+                min: "Diện tích phải lớn hơn 0",
+            },
+            province: {
+                required: "Vui lòng chọn tỉnh/thành phố !",
+            },
+            latitude: {
+                required: "Vui lòng nhập kinh độ!",
+                pattern: "Kinh độ của bạn không hợp lệ!",
+            },
+            longitude: {
+                required: "Vui lòng nhập vĩ độ!",
+                pattern: "Vĩ độ của bạn không hợp lệ!",
             },
         },
     });
