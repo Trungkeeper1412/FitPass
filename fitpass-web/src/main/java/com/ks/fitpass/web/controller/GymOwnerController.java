@@ -112,6 +112,54 @@ public class GymOwnerController {
             return "error/data-access-error";
         }
     }
+    @PostMapping("/profile")
+    public String changePassword(@RequestParam String currentPassword,
+                                 @RequestParam String newPassword,
+                                 @RequestParam String confirmPassword,
+                                 Model model,HttpSession session) {
+
+        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+        try {
+            if (isFirstTime) {
+                return "redirect:/gym-owner/department/update-details";
+            }
+            User user = (User) session.getAttribute("userInfo");
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+            // Kiểm tra mật khẩu hiện tại
+            if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
+                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                return "gym-owner/gym-department-profile";
+            }
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+            if (!newPassword.equals(confirmPassword)) {
+                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                return "gym-owner/gym-department-profile";
+            }
+            String hashedPassword = passwordEncoder.encode(newPassword);
+            // Cập nhật mật khẩu mới
+            userService.updatePassword(hashedPassword, user.getUserId());
+            // Redirect hoặc hiển thị thông báo thành công
+            model.addAttribute("success", true);
+            return "redirect:/gym-owner/profile";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
+    }
 
     //Employee Management
     @GetMapping("/employee/list")
