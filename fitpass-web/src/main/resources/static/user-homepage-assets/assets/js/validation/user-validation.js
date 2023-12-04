@@ -35,6 +35,7 @@ $(document).ready(function () {
             address: {
                 required: true,
                 maxlength: 150,
+                pattern: /^(?!\s+$).+/,
             },
             dateOfBirth: {
                 required: true,
@@ -74,6 +75,7 @@ $(document).ready(function () {
             address: {
                 required: "Vui lòng nhập địa chỉ !",
                 maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
+                pattern: "Địa chỉ đang bị trống !",
             },
             dateOfBirth: {
                 required: "Vui lòng nhập ngày sinh !",
