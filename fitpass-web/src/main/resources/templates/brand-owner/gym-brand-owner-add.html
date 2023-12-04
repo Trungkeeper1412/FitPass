@@ -104,7 +104,7 @@
                                         <div class="mb-4">
                                             <label for="id-card" class="form-label fw-bold">Số Căn Cước
                                                 :</label>
-                                            <input th:field="*{idCard}" type="text" class="form-control" id="id-card" name="idCard"
+                                            <input th:field="*{idCard}" type="number" class="form-control" id="id-card" name="idCard"
                                                    placeholder="Nhập số căn cước">
                                             <span th:if="${#fields.hasErrors('idCard')}" class="error" th:errors="*{idCard}"></span>
                                         </div>
