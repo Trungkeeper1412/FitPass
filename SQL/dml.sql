@@ -792,9 +792,9 @@ VALUES (5, 6, 'Citi Gym',
 
 
        (7, 8, 'Fit 24 – Fitness & Yoga Center',
-        '/img/brands/logos/7_logo.jpg',
-        '/img/brands/wallpapers/7_wallpaper.jpg',
-        '/img/brands/thumbnails/7_thumbnail.jpg',
+        '/img/brands/logos/7_logo.png',
+        '/img/brands/wallpapers/7_wallpaper.png',
+        '/img/brands/thumbnails/7_thumbnail.png',
         'Bạn sẽ được trải nghiệm đa dạng các lớp từ Dance cho đến Yoga, được hướng dẫn bài bản để học viên đạt được mục tiêu trong thời gian ngắn nhất.
 
   Trong đó, Yoga sẽ được hướng dẫn bởi master Ấn Độ và Việt Nam giàu kinh nghiệm, tận tâm, gym cùng các chuyên gia hàng đầu. FIT24 tổ chức cả lớp nhảy dành cho các bạn nhỏ.',
@@ -1493,7 +1493,7 @@ VALUES (51, 8, '/img/brandAmenities/1701107286929_brandAmenities.jpg', 'Yoga Mas
        (52, 8, '/img/brandAmenities/1701107294515_brandAmenities.jpg', 'Yoga 1:1', 'Trải nghiệm mới mẻ cùng Yoga', 1),
        (53, 8, '/img/brandAmenities/1701107307246_brandAmenities.jpg', 'Boxing cùng HLV', 'Boxing cùng những huấn luyện viên chuyên nghiệp', 1),
 
-       (54, 9, '/img/brandAmenities/1701107912519_brandAmenities.jpgr', 'Yoga Thiền Cho Sức Khỏe Tinh Thần',
+       (54, 9, '/img/brandAmenities/1701705495776_brandAmenities.jpg', 'Yoga Thiền Cho Sức Khỏe Tinh Thần',
         'Tham gia các buổi thiền yoga giúp giảm căng thẳng, tăng cường sức khỏe tinh thần một cách tự nhiên.', 1),
        (55, 9, '/img/brandAmenities/1701107919873_brandAmenities.jpg', 'Lớp học độc quyền LESMILLS ',
         'Chương trình bài tập LESMILLS sôi động, giúp đốt cháy calo và tăng cường sức bền.', 1),
