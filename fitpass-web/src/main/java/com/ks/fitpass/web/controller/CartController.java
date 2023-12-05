@@ -57,7 +57,6 @@ public class CartController {
 /*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;
-
                 }
             }
 
@@ -87,21 +86,9 @@ try {
         quantity = cart.getItems().size();
     }
     return ResponseEntity.ok(quantity);
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return ResponseEntity.badRequest().build();
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return ResponseEntity.badRequest().build();
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return ResponseEntity.badRequest().build();
-} catch (DataAccessException ex) {
+} catch (RuntimeException ex) {
     // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
+    logger.error("RunTimeException occurred", ex);
     return ResponseEntity.badRequest().build();
 }
     }
@@ -134,22 +121,10 @@ try {
             model.addAttribute("departmentList", departmentList);
             model.addAttribute("cartItems", cartItems);
             return "shopping-cart";
-        }catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
-            // Handle empty result set
-            logger.error("EmptyResultDataAccessException occurred", ex);
-            return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
-        } catch (DataAccessException ex) {
-            // Handle other data access issues
-            logger.error("DataAccessException occurred", ex);
-            return "error/data-access-error";
+        } catch (Exception ex) {
+            // Handle any unexpected exceptions
+            logger.error("An unexpected exception occurred", ex);
+            return "error/error";
         }
     }
 

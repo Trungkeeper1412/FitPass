@@ -373,7 +373,7 @@ CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
                                                                 brand_owner_name      VARCHAR(100) NOT NULL,
                                                                 contact_number   VARCHAR(20) NOT NULL,
                                                                 address      VARCHAR(150) NOT NULL,
-                                                                web_url      VARCHAR(100) ,
+                                                                web_url      VARCHAR(250) ,
                                                                 contact_email      VARCHAR(100) NOT NULL,
                                                                 send_request_time   timestamp, -- thời gian gửi đơn
                                                                 start_handle_request_time   timestamp, -- thời gian bắt đầu xử lý
