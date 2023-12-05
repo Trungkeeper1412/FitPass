@@ -192,4 +192,30 @@ class MainControllerTest {
         verify(model, never()).addAttribute(anyString(), any());
     }
 
+    @Test
+    void testGetLandingPage() {
+        // Arrange & Act
+        String result = mainController.getLandingPage();
+
+        // Assert
+        assertEquals("landing", result);
+    }
+
+
+    @Test
+    void testShowInfo() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        Authentication authentication = mock(Authentication.class);
+        User mockUser = new User();
+        when(session.getAttribute("userInfo")).thenReturn(mockUser);
+
+        // Act
+        String result = mainController.admin(model, session, authentication);
+
+        // Assert
+        assertEquals("show-info", result);
+    }
+
+
 }
