@@ -113,7 +113,7 @@ function loadCalendar(data){
                     startDateInput.value = moment(info.event.start).format('YYYY-MM-DD');
                     endDateInput.value = moment(info.event.end, 'YYYY-MM-DD').subtract(1, 'day').format('YYYY-MM-DD');
                     colorInput.value = info.event.backgroundColor;
-                    submitButton.innerHTML = 'Save Changes';
+                    submitButton.innerHTML = 'Lưu chỉnh sửa';
 
                     editModal.show();
                     submitButton.classList.remove('btn-success');
