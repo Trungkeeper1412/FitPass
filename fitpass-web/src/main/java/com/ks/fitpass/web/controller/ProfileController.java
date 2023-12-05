@@ -76,18 +76,10 @@ public class ProfileController {
 
             model.addAttribute("userUpdateDTO", userUpdateDTO);
             return "user/user-profile";
-        } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
+        }  catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
         } catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
@@ -124,19 +116,11 @@ public class ProfileController {
             userService.updateUserDetail(userDetail);
 
             return "redirect:/profile/my-profile";
-        } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
+        }catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
-        } catch (DataAccessException ex) {
+        }  catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
@@ -161,10 +145,6 @@ public class ProfileController {
             List<TransactionDTO> transactionDTOList = transactionService.getListTransactionByUserId(user.getUserId());
             model.addAttribute("transactionList", transactionDTOList);
             return "user/user-transaction-history";
-        } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
         } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
@@ -190,27 +170,34 @@ public class ProfileController {
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
                                  Model model, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("userInfo");
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        User user = (User) session.getAttribute("userInfo");
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            // Kiểm tra mật khẩu hiện tại
+            if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
+                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                return "user/user-change-password";
+            }
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+            if (!newPassword.equals(confirmPassword)) {
+                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                return "user/user-change-password";
+            }
+            String hashedPassword = passwordEncoder.encode(newPassword);
+            // Cập nhật mật khẩu mới
+            userService.updatePassword(hashedPassword, user.getUserId());
 
-        // Kiểm tra mật khẩu hiện tại
-        if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-            model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+            // Redirect hoặc hiển thị thông báo thành công
+            model.addAttribute("success", true);
+            return "redirect:/profile/change-password";
+        }
+        catch (Exception e) {
+            // Handle the exception, you can log it or return an error response
+            logger.error("Exception occurred", e);
+            model.addAttribute("error", "Có lỗi xảy ra khi thay đổi mật khẩu");
             return "user/user-change-password";
         }
-        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-        if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
-            return "user/user-change-password";
-        }
-        String hashedPassword = passwordEncoder.encode(newPassword);
-        // Cập nhật mật khẩu mới
-        userService.updatePassword(hashedPassword, user.getUserId());
-
-        // Redirect hoặc hiển thị thông báo thành công
-        model.addAttribute("success", true);
-        return "redirect:/profile/change-password";
     }
 
 }
