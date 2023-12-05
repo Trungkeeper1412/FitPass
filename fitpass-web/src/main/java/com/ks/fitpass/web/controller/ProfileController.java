@@ -18,13 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/profile")
@@ -36,6 +35,12 @@ public class ProfileController {
     public ProfileController(TransactionService transactionService, UserService userService) {
         this.transactionService = transactionService;
         this.userService = userService;
+    }
+
+    @InitBinder("userUpdateDTO")
+    public void initUserUpdateDTOBinder(WebDataBinder binder) {
+        logger.info("set disallowed field");
+        binder.setDisallowedFields("userPassword", "reUserPassword", "userAccount");
     }
 
     @ModelAttribute
@@ -88,7 +93,7 @@ public class ProfileController {
     }
 
     @PostMapping("/my-profile/update")
-    public String updateGymOwnerDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
+    public String updateGymOwnerDetails(@ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
                                         BindingResult bindingResult) {
         try {
             if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
@@ -98,6 +103,9 @@ public class ProfileController {
             }
 
             if (bindingResult.hasErrors()) {
+                for (FieldError error : bindingResult.getFieldErrors()) {
+                    logger.error("Error in field '{}': {}", error.getField(), error.getDefaultMessage());
+                }
                 return "user/user-profile";
             }
 
@@ -114,6 +122,7 @@ public class ProfileController {
 
             // Update user detail
             userService.updateUserDetail(userDetail);
+
 
             return "redirect:/profile/my-profile";
         }catch (EmptyResultDataAccessException ex) {

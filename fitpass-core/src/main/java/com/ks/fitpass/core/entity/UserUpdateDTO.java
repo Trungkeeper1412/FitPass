@@ -18,7 +18,6 @@ public class UserUpdateDTO {
 
     private String userPassword;
     @NotEmpty(message = "Vui lòng xác nhận mật khẩu !")
-
     private String reUserPassword;
 
 
