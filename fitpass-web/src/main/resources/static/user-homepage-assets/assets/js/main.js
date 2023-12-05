@@ -5,8 +5,15 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
+let notificationCountElement = document.querySelector(".notification-badge");
+let notificationCount;
 document.addEventListener('DOMContentLoaded', function () {
     updateQuantityCart()
+    getTotalUnseenNotificationNumber()
+        .then(num => {
+            notificationCount = num;
+            notificationCountElement.textContent = num;
+        });
 });
 
 function updateQuantityCart() {

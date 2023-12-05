@@ -283,22 +283,16 @@ public class FileUploadController {
                 return fileName.substring(lastIndexOfDot + 1);
             }
             return "";
-        }catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
-            // Handle empty result set
-            logger.error("EmptyResultDataAccessException occurred", ex);
-            return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
-        } catch (DataAccessException ex) {
-            // Handle other data access issues
-            logger.error("DataAccessException occurred", ex);
-            return "error/data-access-error";
+        }catch (IndexOutOfBoundsException e) {
+            // Handle the IndexOutOfBoundsException
+            System.err.println("Error: IndexOutOfBoundsException occurred");
+            e.printStackTrace(); // You can log or print the stack trace for debugging
+            return ""; // Or throw a custom exception, depending on your requirements
+        } catch (Exception e) {
+            // Handle other exceptions if necessary
+            System.err.println("Error: An unexpected exception occurred");
+            e.printStackTrace(); // You can log or print the stack trace for debugging
+            return ""; // Or throw a custom exception, depending on your requirements
         }
     }
 

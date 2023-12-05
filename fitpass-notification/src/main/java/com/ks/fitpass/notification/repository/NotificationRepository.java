@@ -15,7 +15,7 @@ public interface NotificationRepository {
 
     List<Notification> getAllNotificationForEmployee(int empIdReceive);
 
-    int getNumberOfUnseenNotification(int userIdReceive);
+    Integer getNumberOfUnseenNotification(int userIdReceive);
 
-    int getTotalNotificationsForUser(int userId);
+    Integer getTotalNotificationsForUser(int userId);
 }

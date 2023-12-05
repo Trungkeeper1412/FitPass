@@ -31,7 +31,7 @@
             </section><!-- End Breadcrumbs -->
             <div class="container-fluid">
                 <div class="separator-box">
-                    <ul class="nav nav-tabs" id="myTabs">
+                    <ul class="nav nav-tabs" id="checkInHistoryTabs">
                         <li class="nav-item">
                             <a class="nav-link active" id="flexible-history-tab" data-toggle="tab"
                                href="#flexible">Gói linh hoạt</a>
@@ -90,6 +90,7 @@
                                         <th>Tên khách hàng</th>
                                         <th>Số điện thoại</th>
                                         <th>Tên nhân viên</th>
+                                        <th>Tên gói</th>
                                         <th>Thời gian Check-in</th>
                                         <th>Thời gian Check-out</th>
                                         <th>Thời gian tập</th>
@@ -164,32 +165,12 @@
                                         <th>Tên khách hàng</th>
                                         <th>Số điện thoại</th>
                                         <th>Tên nhân viên</th>
-                                        <th>Thời gian Check-in</th>
                                         <th>Tên gói</th>
+                                        <th>Thời gian Check-in</th>
                                         <th>Giá gói</th>
                                     </tr>
                                     </thead>
                                     <tbody id="listFixed">
-                                    <th:block th:each="item : ${listFixed}">
-                                        <tr>
-                                            <td>
-                                                <button class="view-image-btn view-detail"
-                                                        th:attr="data-image-src=${item.getUserImageUrl()}">Xem ảnh
-                                                </button>
-                                            </td>
-                                            <td th:text="${item.getUsername()}">Nguyễn Trà My</td>
-                                            <td th:text="${item.getPhoneNumber()}">0987654321</td>
-                                            <td th:text="${item.getEmpName()}">Nguyễn Ngọc Ánh</td>
-                                            <td th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'dd/MM/yyyy HH:mm:ss')}">
-                                                12-04-2023
-                                            </td>
-                                            <td th:text="${item.getGymPlanName()}">Gói 3 ngày</td>
-                                            <td>
-                                                <h5 class="text-money"><span th:text="${item.getCredit()}">100</span>
-                                                    <span class="credit">Credit</span></h5>
-                                            </td>
-                                        </tr>
-                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>
@@ -245,34 +226,46 @@
 <script>
     let globalCurrentPage = 1;
     let defaultPageSize = 7;
-    let gymPlanType = null;
-    if ($("#flexible-tab").hasClass("show")) {
-        gymPlanType = "flexible";
-    } else if ($("#fixed-tab").hasClass("show")) {
-        gymPlanType = "flexible";
-    }
+    let gymPlanType = "flexible";
     const departmentId = $('#departmentId').val();
     $(document).ready(function () {
-        try {
-            const params = new URLSearchParams();
-            params.set("id", departmentId);
-            params.set("plan", gymPlanType);
-            params.set("page", globalCurrentPage);
-            params.set("size", defaultPageSize);
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            let targetId = $(e.target).attr("href");
+            let gymPlanType = targetId === "#flexible" ? "flexible" : "fixed";
 
-            fetch(`/employee/history/getListHistory?${params}`)
-                .then(response => response.json())
-                .then(data => {
-                    renderPagination(data.currentPage, data.totalPages);
-                    loadTable(data.currentPage, defaultPageSize);
-                });
-        } catch (error) {
-            console.error('Error:', error);
-        }
+            console.log("shown.bs.tab event triggered - targetId: " + targetId + ", gymPlanType: " + gymPlanType);
+
+            // Add 'show' and 'active' classes to the shown tab content
+            $(targetId + '-tab').addClass('show active');
+
+            // If the other tab was previously active, remove 'show' and 'active' from it
+            let otherTabId = gymPlanType === "flexible" ? "#fixed-tab" : "#flexible-tab";
+            $(otherTabId).removeClass('show active');
+
+            try {
+                const params = new URLSearchParams();
+                params.set("id", departmentId);
+                params.set("plan", gymPlanType);
+                params.set("page", globalCurrentPage);
+                params.set("size", defaultPageSize);
+
+                fetch(`/employee/history/getListHistory?${params}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        renderPagination(data.currentPage, data.totalPages, gymPlanType);
+                        loadTable(data.currentPage, defaultPageSize, gymPlanType);
+                    });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+        // Manually show the #flexible-tab
+        $('a[href="#flexible"]').trigger('shown.bs.tab');
     });
 
-    function renderPagination(currentPage, totalPages) {
-        const paginationContainer = $('.flexible-pagination-container ul');
+    function renderPagination(currentPage, totalPages, gymPlanType) {
+        const paginationContainer = $(`.${gymPlanType}-pagination-container ul`);
+        paginationContainer.empty();
         paginationContainer.empty();
 
         // Generate the previous button
@@ -290,9 +283,9 @@
             link.on('click', function (event) {
                 event.preventDefault();
                 currentPage = page; // Update the currentPage
-                renderPagination(currentPage, totalPages);
+                renderPagination(currentPage, totalPages, gymPlanType);
                 paginationClick(page); // Call your paginationClick function with the current page
-                loadTable(currentPage, defaultPageSize); // Load the table for the current page
+                loadTable(currentPage, defaultPageSize, gymPlanType); // Load the table for the current page
             });
             paginationContainer.append(li);
         }
@@ -307,9 +300,9 @@
             event.preventDefault();
             if (currentPage > 1) {
                 currentPage--;
-                renderPagination(currentPage, totalPages);
+                renderPagination(currentPage, totalPages, gymPlanType);
                 paginationClick(currentPage);
-                loadTable(currentPage, defaultPageSize);
+                loadTable(currentPage, defaultPageSize, gymPlanType);
             }
         });
 
@@ -318,18 +311,20 @@
             event.preventDefault();
             if (currentPage < totalPages) {
                 currentPage++;
-                renderPagination(currentPage, totalPages);
+                renderPagination(currentPage, totalPages, gymPlanType);
                 paginationClick(currentPage);
-                loadTable(currentPage, defaultPageSize);
+                loadTable(currentPage, defaultPageSize, gymPlanType);
             }
         });
     }
 
     function paginationClick(page) {
-        loadTable(page, defaultPageSize)
+        loadTable(page, defaultPageSize, gymPlanType)
     }
 
-    function loadTable(page, size) {
+    function loadTable(page, size, gymPlanType) {
+        console.log("loading table")
+        console.log(gymPlanType)
         const loadParams = new URLSearchParams()
         loadParams.set("id", departmentId)
         loadParams.set("plan", gymPlanType)
@@ -344,34 +339,47 @@
                 return data.json()
             })
             .then(data => {
-                // Update the table content with the fetched data
-                const tableContent = $('#listFlexible');
-                tableContent.empty(); // Clear the existing table content
-                // Loop through the data and create table rows dynamically
-                $.each(data.listFlexible, function (index, rowData) {
-                    // Create the table row HTML
-                    const rowHtml = `
+                let tableContent;
+                if (gymPlanType === 'flexible') {
+                    tableContent = $('#listFlexible');
+                    tableContent.empty(); // Clear the existing table content
+
+                    $.each(data.listFlexible, function (index, rowData) {
+                        let rowHtml = `
                     <tr>
-                        <td>
-                            <button class="view-image-btn view-detail" data-image-src="${rowData.userImageUrl}">Xem ảnh</button>
-                        </td>
+                        <td><button class="view-image-btn view-detail" data-image-src="${rowData.userImageUrl}">Xem ảnh</button></td>
                         <td>${rowData.username}</td>
                         <td>${rowData.phoneNumber}</td>
                         <td>${rowData.empName}</td>
+                        <td>${rowData.gymPlanName}</td>
                         <td>${new Date(rowData.checkInTime).toLocaleString()}</td>
                         <td>${rowData.checkOutTime !== null ? new Date(rowData.checkOutTime).toLocaleString() : 'Chưa check out'}</td>
                         <td>${rowData.duration}</td>
-                        <td>
-                            <h5 class="text-money"><span>${rowData.pricePerHours}</span> <span class="credit">Credit/Giờ</span></h5>
-                        </td>
-                        <td>
-                            <h5 class="text-money"><span>${rowData.totalCredit !== null ? rowData.totalCredit : '0'}</span> <span class="credit">Credit</span></h5>
-                        </td>
+                        <td><h5 class="text-money"><span>${rowData.pricePerHours}</span> <span class="credit">Credit/Giờ</span></h5></td>
+                        <td><h5 class="text-money"><span>${rowData.totalCredit !== null ? rowData.totalCredit : '0'}</span> <span class="credit">Credit</span></h5></td>
                     </tr>
-                `;
-                    // Append the HTML to the table content
-                    tableContent.append(rowHtml);
-                })
+                    `;
+                        tableContent.append(rowHtml);
+                    });
+                } else if (gymPlanType === 'fixed') {
+                    tableContent = $('#listFixed');
+                    tableContent.empty(); // Clear the existing table content
+
+                    $.each(data.listFixed, function (index, rowData) {
+                        let rowHtml = `
+                    <tr>
+                        <td><button class="view-image-btn view-detail" data-image-src="${rowData.userImageUrl}">Xem ảnh</button></td>
+                        <td>${rowData.username}</td>
+                        <td>${rowData.phoneNumber}</td>
+                        <td>${rowData.empName}</td>
+                        <td>${rowData.gymPlanName}</td>
+                        <td>${new Date(rowData.checkInTime).toLocaleString()}</td>
+                        <td><h5 class="text-money"><span>${rowData.credit}</span> <span class="credit">Credit</span></h5></td>
+                    </tr>
+                    `;
+                        tableContent.append(rowHtml);
+                    });
+                }
             })
             .catch(error => {
                 console.error('Error fetching notifications:', error);

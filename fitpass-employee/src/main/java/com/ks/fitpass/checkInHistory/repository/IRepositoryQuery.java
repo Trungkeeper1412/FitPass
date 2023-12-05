@@ -39,7 +39,8 @@ public interface IRepositoryQuery {
                     ci.check_in_time AS checkInTime,
                     ci.check_out_time AS checkOutTime,
                     opd.price_per_hours AS pricePerHours,
-                    ci.total_credit AS totalCredit
+                    ci.total_credit AS totalCredit,
+                    opd.name
                 FROM check_in_history ci
                 JOIN order_plan_detail opd ON ci.order_detail_id = opd.order_detail_id
                 JOIN `order` o ON opd.order_id = o.order_id

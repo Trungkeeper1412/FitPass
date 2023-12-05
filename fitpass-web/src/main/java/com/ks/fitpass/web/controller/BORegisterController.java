@@ -3,6 +3,7 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.become_a_partner.dto.BecomePartnerForm;
 import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
 import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
+import com.ks.fitpass.core.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class BORegisterController {
     private final BecomePartnerService becomePartnerService;
+    private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @GetMapping("")
     public String getBrandOwnerRegister(Model model){
@@ -52,9 +54,14 @@ public class BORegisterController {
     public String postBrandOwnerRegister(@Valid  @ModelAttribute BecomePartnerForm becomePartnerForm,
                                          BindingResult bindingResult){
         try {
+            if (userService.checkEmailExist(becomePartnerForm.getContactEmail())) {
+                bindingResult.rejectValue("contactEmail", "error.contactEmail", "Email đã tồn tại");
+            }
+
             if (bindingResult.hasErrors()) {
                 return "gym-brand-registration";
             }
+
             BecomePartnerRequest becomePartnerRequest = new BecomePartnerRequest();
             becomePartnerRequest.setBrandName(becomePartnerForm.getBrandName());
             becomePartnerRequest.setBrandOwnerName(becomePartnerForm.getBrandOwnerName());

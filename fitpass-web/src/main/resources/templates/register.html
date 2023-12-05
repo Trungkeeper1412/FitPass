@@ -89,26 +89,17 @@
                 </div>
                 <button type="submit" class="login">Đăng ký</button>
             </form>
+            <div th:if="${param.success}" id="toast-info" class="alert alert-success"> Đăng ký thành công </div>
         </div>
     </div>
 </div>
-
-<script th:if="${param.logout}">
-    const toastInfo = document.getElementById("toast-info");
-    toastInfo.classList.add("show", "alert", "alert-success");
-    setTimeout(function () {
-        toastInfo.classList.remove("show");
-    }, 2800);
-</script>
-
-<script th:if="${param.error}">
-    const toastError = document.getElementById("toast-error");
+<script th:if="${param.success}">
+    const toastError = document.getElementById("toast-info");
     toastError.classList.add("show");
     setTimeout(function () {
         toastError.classList.remove("show");
     }, 2800);
 </script>
-
 <script>
 </script>
 </body>
