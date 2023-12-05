@@ -34,7 +34,8 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-withdrawal-waiting" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="table-withdrawal-waiting" width="100%"
+                                   cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
@@ -66,7 +67,8 @@
                     </div>
 
                     <!-- Modal Rút Tiền -->
-                    <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalLabel"
+                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -74,42 +76,60 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Form Rút Tiền -->
-                                    <form id="withdrawForm" method="post" action="/brand-owner/withdrawal/add">
+                                    <form id="withdrawForm" method="post" action="/brand-owner/withdrawal/add"
+                                          onsubmit="return validateForm()">
                                         <div class="mb-3">
                                             <label for="cardSelect" class="form-label">Chọn thẻ ngân hàng :</label>
                                             <select class="form-select" id="cardSelect" name="cardId">
-                                                <option disabled selected readonly>Các thẻ có sẵn</option>
                                                 <th:block th:each="c : ${creditCardList}">
                                                     <option th:value="${c.getCreditCardId()}">
                                                         <span th:text="${c.getBankName().toUpperCase()}">ACB</span>
                                                         **** **** ****
-                                                        <span th:text="${c.getCardNumber().
-                                                        substring(c.getCardNumber().length() - 4)}">1234</span>
+                                                        <span th:text="${c.getCardNumber().substring(c.getCardNumber().length() - 4)}">1234</span>
                                                     </option>
                                                 </th:block>
                                             </select>
+                                            <span id="errorCard" class="text-danger"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="currentBalance">Số dư hiện tại (Credit) :</label>
-                                            <input th:value="${userBalance}" type="number" class="form-control" id="currentBalance" placeholder="Số dư hiện tại" readonly>
+                                            <input th:value="${userBalance}" type="number" class="form-control"
+                                                   id="currentBalance" placeholder="Số dư hiện tại" readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="amount">Số Credit muốn rút :</label>
-                                            <input name="creditAmount" type="number" class="form-control" id="amount" placeholder="Nhập số credit" required oninput="updateConversionRate()">
+                                            <input name="creditAmount" type="number" class="form-control" id="amount"
+                                                   placeholder="Nhập số credit" required
+                                                   oninput="updateConversionRate()">
+                                            <span th:text="${errorCreadit}" class="text-danger"></span>
                                         </div>
                                         <label data-toggle="tooltip" data-placement="top" title="xnxx" class="fw-bold">
                                             Phí giao dịch (<span id="withdrawal-fee" th:text="${moneyPercent}">10</span>%)
                                         </label>
                                         <div class="mb-3">
                                             <label for="conversionRate">Số tiền quy đổi (VND) :</label>
-                                            <input name="moneyAmount" type="text" class="form-control" id="conversionRate" value="0" readonly>
+                                            <input name="moneyAmount" type="text" class="form-control"
+                                                   id="conversionRate" value="0" readonly>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                                            </button>
                                             <button type="submit" class="btn btn-primary">Gửi Xác Nhận</button>
                                         </div>
                                     </form>
                                     <script>
+
+                                        function validateForm() {
+                                            var selectedCard = document.getElementById('cardSelect').value;
+                                            if (selectedCard === "") {
+                                                document.getElementById('errorCard').innerText = "Vui lòng chọn thẻ ngân hàng";
+                                                return false; // Prevent form submission
+                                            } else {
+                                                document.getElementById('errorCard').innerText = ""; // Clear error message
+                                                return true; // Allow form submission
+                                            }
+                                        }
+
                                         function updateConversionRate() {
                                             var amount = document.getElementById('amount').value;
                                             var withdrawalFee = document.getElementById('withdrawal-fee').innerText;
@@ -147,7 +167,8 @@
                             <div class="transactions-money">
                                 <i class="bi bi-cash fs-3"></i>
                                 <label>Tổng số credit đã rút:
-                                    <span class="text-money" th:text="${requestHistoryStats.getTotalCredit() + ' Credit'}">92000 Credit</span>
+                                    <span class="text-money"
+                                          th:text="${requestHistoryStats.getTotalCredit() + ' Credit'}">92000 Credit</span>
                                 </label>
                             </div>
                         </div>
@@ -155,14 +176,16 @@
                             <div class="transactions-money">
                                 <i class="bi bi-wallet2 fs-3"></i>
                                 <label>Tổng số tiền đã nhận:
-                                    <span class="text-money" th:text="${requestHistoryStats.getTotalMoney() + ' ' + 'đ'}"></span>
+                                    <span class="text-money"
+                                          th:text="${requestHistoryStats.getTotalMoney() + ' ' + 'đ'}"></span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-withdrawal-success" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="table-withdrawal-success" width="100%"
+                                   cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
@@ -181,9 +204,15 @@
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
                                         <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
-                                        <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
-                                        <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
-                                        <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">Không thành công</td>
+                                        <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành
+                                            công
+                                        </td>
+                                        <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang
+                                            xử lý
+                                        </td>
+                                        <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">
+                                            Không thành công
+                                        </td>
                                     </tr>
                                 </th:block>
                                 </tbody>
@@ -218,7 +247,7 @@
 <th:block th:replace="brand-owner/common/script"></th:block>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var table = $('#table-withdrawal-success').DataTable();
 
         $('#filterButtonPending').on('click', function () {
