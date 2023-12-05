@@ -75,7 +75,7 @@ public class HomepageController {
             // Log the exception for debugging purposes
             e.printStackTrace();
             // Return an appropriate error response
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(400).build();
         }
     }
 
