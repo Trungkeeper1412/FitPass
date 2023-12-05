@@ -14,7 +14,7 @@ public class BecomePartnerForm {
     private String brandOwnerName;
 
     @NotBlank(message = "Bạn cần nhập số điện thoại")
-    @Pattern(regexp = "\\d{10,15}", message = "Invalid Contact Number")
+    @Pattern(regexp = "\\d{10,15}", message = "Định dạng số điện thoại không chính xác")
     private String contactNumber;
 
     @NotBlank(message = "Bạn cần nhập dịa chỉ")

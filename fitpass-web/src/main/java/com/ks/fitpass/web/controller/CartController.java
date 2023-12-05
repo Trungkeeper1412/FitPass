@@ -62,7 +62,7 @@ public class CartController {
             }
 
             if(productExistsInCart) {
-                return ResponseEntity.badRequest().body("Sản phẩm này đã add vào giỏ hàng");
+                return ResponseEntity.badRequest().body("Sản phẩm này đã có sẵn vào giỏ hàng");
             } else{
                 cart.addItem(product, quantity);
             }
