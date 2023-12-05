@@ -61,31 +61,37 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="venueName" class="form-label">Tên thương hiệu :</label>
-                                <input th:field="*{brandName}" type="text" class="form-control" id="venueName" required>
+                                <input th:field="*{brandName}" type="text" class="form-control" id="venueName">
+                                <span th:if="${#fields.hasErrors('brandName')}" class="error" th:errors="*{brandName}">photoUrl Error</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="location" class="form-label">Địa chỉ :</label>
-                                <input th:field="*{address}" type="text" class="form-control" id="location" required>
+                                <input th:field="*{address}" type="text" class="form-control" id="location">
+                                <span th:if="${#fields.hasErrors('address')}" class="error" th:errors="*{address}">photoUrl Error</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="fullName" class="form-label">Họ và Tên :</label>
-                                <input th:field="*{brandOwnerName}" type="text" class="form-control" id="fullName" required>
+                                <input th:field="*{brandOwnerName}" type="text" class="form-control" id="fullName">
+                                <span th:if="${#fields.hasErrors('brandOwnerName')}" class="error" th:errors="*{brandOwnerName}">photoUrl Error</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="phoneNumber" class="form-label">Số điện thoại :</label>
-                                <input th:field="*{contactNumber}" type="tel" class="form-control" id="phoneNumber" required>
+                                <input th:field="*{contactNumber}" type="tel" class="form-control" id="phoneNumber">
+                                <span th:if="${#fields.hasErrors('contactNumber')}" class="error" th:errors="*{contactNumber}">photoUrl Error</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="websiteURL" class="form-label">Địa chỉ trang web ( nếu có )*</label>
-                                <input th:field="*{webUrl}" type="url" class="form-control" id="websiteURL" required>
+                                <input th:field="*{webUrl}" type="url" class="form-control" id="websiteURL">
+                                <span th:if="${#fields.hasErrors('webUrl')}" class="error" th:errors="*{webUrl}">photoUrl Error</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Email liên hệ :</label>
-                                <input th:field="*{contactEmail}" type="email" class="form-control" id="email" required>
+                                <input th:field="*{contactEmail}" type="email" class="form-control" id="email">
+                                <span th:if="${#fields.hasErrors('contactEmail')}" class="error" th:errors="*{contactEmail}">photoUrl Error</span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
