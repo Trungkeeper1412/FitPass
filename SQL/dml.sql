@@ -1144,13 +1144,13 @@ VALUES (1, 1),
        (11, 9);
 
 INSERT INTO features (feature_icon, feature_name, feature_status)
-VALUES ('<i class="bi bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
+VALUES ('<i class="bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
        ('<i class="fa-solid fa-shower"></i>', 'Phòng Tắm Nóng Lạnh', 1),
        ('<i class="fa-solid fa-wifi"></i>', 'WIFI', 1),
-       ('<i class="fas fa-scroll"></i>', 'Khăn Miễn Phí', 1),
+       ('<i class="fa-solid fa-scroll"></i>', 'Khăn Miễn Phí', 1),
        ('<i class="fa-solid fa-couch"></i>', 'Khu Nghỉ Ngơi', 1),
-       ('<i class="fa-solid fa-martini-glass-citrus"></i>', 'Quầy Nước', 1),
-       ('<i class="fa-solid fa-suitcase-medical"></i>', 'Phòng Y Tế', 1);
+       ('<i class="fa-solid fa-cocktail"></i>', 'Quầy Nước', 1),
+       ('<i class="fa-solid fa-medkit"></i>', 'Phòng Y Tế', 1);
 
 -- Create Gym Department Features
 INSERT INTO gym_department_features (feature_id, gym_department_id, feature_status)
