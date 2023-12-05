@@ -84,7 +84,7 @@ public class BrandOwnerController {
             model.addAttribute("time", System.currentTimeMillis());
             model.addAttribute("brandDetails", brandDetails);
             return "brand-owner/gym-brand-update-profile";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -108,7 +108,7 @@ public class BrandOwnerController {
         try {
             int updateResult = brandService.updateBrandDetail(brandOwnerProfile);
             return ResponseEntity.ok(updateResult);
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return ResponseEntity.badRequest().build();
@@ -137,35 +137,34 @@ public class BrandOwnerController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model,HttpSession session) {
-      try {
-          User user = (User) session.getAttribute("userInfo");
-          BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                                 Model model, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("userInfo");
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-          // Kiểm tra mật khẩu hiện tại
-          if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-              model.addAttribute("error", "Mật khẩu hiện tại không đúng");
-              return "brand-owner/gym-brand-update-password";
-          }
-          // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-          if (!newPassword.equals(confirmPassword)) {
-              model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
-              return "brand-owner/gym-brand-update-password";
-          }
-          String hashedPassword = passwordEncoder.encode(newPassword);
-          // Cập nhật mật khẩu mới
-          userService.updatePassword(hashedPassword, user.getUserId());
+            // Kiểm tra mật khẩu hiện tại
+            if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
+                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                return "brand-owner/gym-brand-update-password";
+            }
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+            if (!newPassword.equals(confirmPassword)) {
+                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                return "brand-owner/gym-brand-update-password";
+            }
+            String hashedPassword = passwordEncoder.encode(newPassword);
+            // Cập nhật mật khẩu mới
+            userService.updatePassword(hashedPassword, user.getUserId());
 
-          // Redirect hoặc hiển thị thông báo thành công
-          model.addAttribute("success", true);
-          return "redirect:/brand-owner/password";
-      }
-      catch (Exception ex) {
-          // Handle other exceptions
-          logger.error("Exception occurred in changePassword", ex);
-          model.addAttribute("error", "Đã xảy ra lỗi khi thay đổi mật khẩu");
-          return "brand-owner/gym-brand-update-password";
-      }
+            // Redirect hoặc hiển thị thông báo thành công
+            model.addAttribute("success", true);
+            return "redirect:/brand-owner/password";
+        } catch (Exception ex) {
+            // Handle other exceptions
+            logger.error("Exception occurred in changePassword", ex);
+            model.addAttribute("error", "Đã xảy ra lỗi khi thay đổi mật khẩu");
+            return "brand-owner/gym-brand-update-password";
+        }
     }
 
     //Department Management
@@ -181,7 +180,7 @@ public class BrandOwnerController {
             model.addAttribute("brandId", brandId);
             model.addAttribute("departmentList", departmentDTOList);
             return "brand-owner/gym-brand-department-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -232,7 +231,7 @@ public class BrandOwnerController {
 
             model.addAttribute("departmentId", departmentId);
             return "brand-owner/gym-brand-department-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -252,30 +251,30 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/department/updateStatus")
-    public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status,@RequestParam int departmentId) {
-      try {
-          int update = departmentService.updateDepartmentStatus(status, departmentId);
-          if (status == 0) {
-              departmentService.updateDepartmentGymOwner(departmentId, 0);
-          }
-          return ResponseEntity.ok(update);
-      }catch (DuplicateKeyException ex) {
-          // Handle duplicate key violation
-          logger.error("DuplicateKeyException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      } catch (EmptyResultDataAccessException ex) {
-          // Handle empty result set
-          logger.error("EmptyResultDataAccessException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      } catch (IncorrectResultSizeDataAccessException ex) {
-          // Handle incorrect result size
-          logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      } catch (DataAccessException ex) {
-          // Handle other data access issues
-          logger.error("DataAccessException occurred", ex);
-          return ResponseEntity.badRequest().build();
-      }
+    public ResponseEntity<Integer> updateStatusDepartment(@RequestParam int status, @RequestParam int departmentId) {
+        try {
+            int update = departmentService.updateDepartmentStatus(status, departmentId);
+            if (status == 0) {
+                departmentService.updateDepartmentGymOwner(departmentId, 0);
+            }
+            return ResponseEntity.ok(update);
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/department/add")
@@ -285,8 +284,7 @@ public class BrandOwnerController {
 
             model.addAttribute("brandId", brandId);
             return "brand-owner/gym-brand-department-add";
-        }
-        catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -304,6 +302,7 @@ public class BrandOwnerController {
             return "error/data-access-error";
         }
     }
+
     @PostMapping("/department/add")
     public String createDepartment(@RequestParam int brandId,
                                    @RequestParam String brandName,
@@ -320,7 +319,7 @@ public class BrandOwnerController {
             Thread.sleep(1500);
 
             return "redirect:/brand-owner/department/list?id=" + brandId;
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -354,7 +353,7 @@ public class BrandOwnerController {
 
             model.addAttribute("listDepartment", departments);
             return "brand-owner/gym-brand-feedback-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -382,7 +381,7 @@ public class BrandOwnerController {
             List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentId);
             model.addAttribute("userFeedbackList", userFeedbackList);
             return "brand-owner/gym-brand-feedback-list-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -413,7 +412,7 @@ public class BrandOwnerController {
             List<BrandAmenitie> brandAmenitieList = brandAmenitieService.getAllByBrandID(brandId);
             model.addAttribute("brandAmenitiesList", brandAmenitieList);
             return "brand-owner/gym-brand-service-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -438,7 +437,7 @@ public class BrandOwnerController {
             BrandAmenitie brandAmenitie = brandAmenitieService.getAmenitieDetail(id);
             model.addAttribute("brandAmenitie", brandAmenitie);
             return "brand-owner/gym-brand-service-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -476,7 +475,7 @@ public class BrandOwnerController {
             brandAmenitieService.updateBrandAmenitie(brandAmenitie);
             Thread.sleep(1300);
             return "redirect:/brand-owner/service/list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -504,45 +503,44 @@ public class BrandOwnerController {
 
     @PostMapping("/service/add")
     public String createService(@Valid @ModelAttribute("createService") ServiceCreateDTO serviceCreateDTO, BindingResult bindingResult, HttpSession session) {
-      try {
-          if (bindingResult.hasErrors()) {
-              return "brand-owner/gym-brand-service-add"; // Trả về trang form và hiển thị thông báo lỗi
-          }
-          User user = (User) session.getAttribute("userInfo");
-          // Get brandId by brandOwnerId
-          Brand brand = brandService.getBrandDetail(user.getUserId());
-          int brandId = brand.getBrandId();
+        try {
+            if (bindingResult.hasErrors()) {
+                return "brand-owner/gym-brand-service-add"; // Trả về trang form và hiển thị thông báo lỗi
+            }
+            User user = (User) session.getAttribute("userInfo");
+            // Get brandId by brandOwnerId
+            Brand brand = brandService.getBrandDetail(user.getUserId());
+            int brandId = brand.getBrandId();
 
-          BrandAmenitie brandAmenitie = new BrandAmenitie();
-          brandAmenitie.setBrandId(brandId);
-          brandAmenitie.setAmenitieName(serviceCreateDTO.getAmenitieName());
-          brandAmenitie.setPhotoUrl(serviceCreateDTO.getPhotoUrl());
-          brandAmenitie.setDescription(serviceCreateDTO.getDescription());
-          brandAmenitie.setStatus(1);
-          brandAmenitieService.createBrandAmenitie(brandAmenitie);
-          Thread.sleep(1300);
+            BrandAmenitie brandAmenitie = new BrandAmenitie();
+            brandAmenitie.setBrandId(brandId);
+            brandAmenitie.setAmenitieName(serviceCreateDTO.getAmenitieName());
+            brandAmenitie.setPhotoUrl(serviceCreateDTO.getPhotoUrl());
+            brandAmenitie.setDescription(serviceCreateDTO.getDescription());
+            brandAmenitie.setStatus(1);
+            brandAmenitieService.createBrandAmenitie(brandAmenitie);
+            Thread.sleep(1300);
 
-          return "redirect:/brand-owner/service/list";
-      }
-      catch (DuplicateKeyException ex) {
-          // Handle duplicate key violation
-          logger.error("DuplicateKeyException occurred", ex);
-          return "error/duplicate-key-error";
-      } catch (EmptyResultDataAccessException ex) {
-          // Handle empty result set
-          logger.error("EmptyResultDataAccessException occurred", ex);
-          return "error/no-data";
-      } catch (IncorrectResultSizeDataAccessException ex) {
-          // Handle incorrect result size
-          logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-          return "error/incorrect-result-size-error";
-      } catch (DataAccessException ex) {
-          // Handle other data access issues
-          logger.error("DataAccessException occurred", ex);
-          return "error/data-access-error";
-      } catch (InterruptedException e) {
-          throw new RuntimeException(e);
-      }
+            return "redirect:/brand-owner/service/list";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //Gym Owner Management
@@ -558,7 +556,7 @@ public class BrandOwnerController {
             model.addAttribute("gymOwnerList", gymOwnerList);
 
             return "brand-owner/gym-brand-owner-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -614,7 +612,7 @@ public class BrandOwnerController {
             model.addAttribute("gymOwner", gymOwnerUpdateDTO);
             model.addAttribute("filteredList", filteredList);
             return "brand-owner/gym-brand-owner-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -634,79 +632,79 @@ public class BrandOwnerController {
     }
 
     @PostMapping("/gym-owner/update")
-    public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner")GymOwnerUpdateDTO gymOwnerUpdateDTO,
+    public String updateGymOwnerDetails(@Valid @ModelAttribute("gymOwner") GymOwnerUpdateDTO gymOwnerUpdateDTO,
                                         BindingResult bindingResult) {
-try {
-    if (!gymOwnerUpdateDTO.getEmail().equals(gymOwnerUpdateDTO.getOldEmail())) {
-        if (userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+        try {
+            if (!gymOwnerUpdateDTO.getEmail().equals(gymOwnerUpdateDTO.getOldEmail())) {
+                if (userService.checkEmailExist(gymOwnerUpdateDTO.getEmail())) {
+                    bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
+                }
+            }
+
+            if (bindingResult.hasErrors()) {
+                return "brand-owner/gym-brand-owner-detail";
+            }
+            UserDetail userDetail = new UserDetail();
+            userDetail.setUserDetailId(gymOwnerUpdateDTO.getUserDetailId());
+            userDetail.setFirstName(gymOwnerUpdateDTO.getFirstName());
+            userDetail.setLastName(gymOwnerUpdateDTO.getLastName());
+            userDetail.setEmail(gymOwnerUpdateDTO.getEmail());
+            userDetail.setDateOfBirth(gymOwnerUpdateDTO.getDateOfBirth());
+            userDetail.setAddress(gymOwnerUpdateDTO.getAddress());
+            userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
+            userDetail.setGender(gymOwnerUpdateDTO.getGender());
+            userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
+            userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard());
+
+            // Update user detail
+            userService.updateUserDetail(userDetail);
+
+            userService.updateUserStatusByUserId(gymOwnerUpdateDTO.getUserId(), gymOwnerUpdateDTO.isUserDeleted() ? 1 : 0);
+
+            if (gymOwnerUpdateDTO.getDepartmentId() == -1) {
+                if (gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
+                    departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
+                }
+                return "redirect:/brand-owner/gym-owner/list";
+            }
+            // Nếu trạng thái là 0 thì đá khỏi cơ sở
+            if (gymOwnerUpdateDTO.isUserDeleted() && gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
+                departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
+            }
+
+            // Update user department
+            if (gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+                departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
+            }
+
+            if (gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+                departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
+            }
+            Thread.sleep(1300);
+            return "redirect:/brand-owner/gym-owner/list";
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    if (bindingResult.hasErrors()) {
-        return "brand-owner/gym-brand-owner-detail";
-    }
-    UserDetail userDetail = new UserDetail();
-    userDetail.setUserDetailId(gymOwnerUpdateDTO.getUserDetailId());
-    userDetail.setFirstName(gymOwnerUpdateDTO.getFirstName());
-    userDetail.setLastName(gymOwnerUpdateDTO.getLastName());
-    userDetail.setEmail(gymOwnerUpdateDTO.getEmail());
-    userDetail.setDateOfBirth(gymOwnerUpdateDTO.getDateOfBirth());
-    userDetail.setAddress(gymOwnerUpdateDTO.getAddress());
-    userDetail.setPhoneNumber(gymOwnerUpdateDTO.getPhone());
-    userDetail.setGender(gymOwnerUpdateDTO.getGender());
-    userDetail.setImageUrl(gymOwnerUpdateDTO.getImageUrl());
-    userDetail.setSecurityId(gymOwnerUpdateDTO.getIdCard());
-
-    // Update user detail
-    userService.updateUserDetail(userDetail);
-
-    userService.updateUserStatusByUserId(gymOwnerUpdateDTO.getUserId(), gymOwnerUpdateDTO.isUserDeleted() ? 1 : 0);
-
-    if (gymOwnerUpdateDTO.getDepartmentId() == -1) {
-        if (gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
-            departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
-        }
-        return "redirect:/brand-owner/gym-owner/list";
-    }
-    // Nếu trạng thái là 0 thì đá khỏi cơ sở
-    if (gymOwnerUpdateDTO.isUserDeleted() && gymOwnerUpdateDTO.getOldDepartmentId() != 0) {
-        departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
-    }
-
-    // Update user department
-    if (gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
-        departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
-    }
-
-    if (gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
-        departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
-    }
-    Thread.sleep(1300);
-    return "redirect:/brand-owner/gym-owner/list";
-}catch (DuplicateKeyException ex) {
-    // Handle duplicate key violation
-    logger.error("DuplicateKeyException occurred", ex);
-    return "error/duplicate-key-error";
-} catch (EmptyResultDataAccessException ex) {
-    // Handle empty result set
-    logger.error("EmptyResultDataAccessException occurred", ex);
-    return "error/no-data";
-} catch (IncorrectResultSizeDataAccessException ex) {
-    // Handle incorrect result size
-    logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-    return "error/incorrect-result-size-error";
-} catch (DataAccessException ex) {
-    // Handle other data access issues
-    logger.error("DataAccessException occurred", ex);
-    return "error/data-access-error";
-} catch (InterruptedException e) {
-    throw new RuntimeException(e);
-}
     }
 
     @GetMapping("/gym-owner/add")
-    public String addGymOwner(@ModelAttribute("gymOwner")GymOwnerCreateDTO gymOwnerCreateDTO) {
+    public String addGymOwner(@ModelAttribute("gymOwner") GymOwnerCreateDTO gymOwnerCreateDTO) {
         return "brand-owner/gym-brand-owner-add";
     }
 
@@ -776,7 +774,7 @@ try {
             emailService.send("Test", "Account: " + accountName + ", Password: " + randomPassword,
                     userDetail.getEmail());
             return "redirect:/brand-owner/gym-owner/list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -809,7 +807,7 @@ try {
             // Send to front
             model.addAttribute("listFlexGymPlan", listFlexGymPlan);
             return "brand-owner/gym-brand-plan-flexible-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -834,7 +832,7 @@ try {
             BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO = gymPlanService.getGymPlanFlexDetail(gymPlanId);
             model.addAttribute("b", brandUpdateGymPlanFlexDTO);
             return "brand-owner/gym-brand-plan-flexible-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -869,7 +867,7 @@ try {
 
             Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/flexible/list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -896,7 +894,7 @@ try {
             model.addAttribute("brandCreateGymPlanFlexDTO", new BrandCreateGymPlanFlexDTO());
             Thread.sleep(1500);
             return "brand-owner/gym-brand-plan-flexible-add";
-        }catch (DataAccessException ex) {
+        } catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
@@ -923,8 +921,7 @@ try {
             gymPlanService.createGymPlanFlex(brandCreateGymPlanFlexDTO);
             Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/flexible/list";
-        }
-        catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -958,7 +955,7 @@ try {
             // Send to front
             model.addAttribute("listFixedGymPlan", listFixedGymPlan);
             return "brand-owner/gym-brand-plan-fixed-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -983,7 +980,7 @@ try {
             BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO = gymPlanService.getGymPlanFixedDetail(gymPlanId);
             model.addAttribute("b", brandUpdateGymPlanFixedDTO);
             return "brand-owner/gym-brand-plan-fixed-detail";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -1017,7 +1014,7 @@ try {
             gymPlanService.updateGymPlanFixed(brandDetails);
             Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/fixed/list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -1043,7 +1040,7 @@ try {
         try {
             model.addAttribute("brandCreateGymPlanFixedDTO", new BrandCreateGymPlanFixedDTO());
             return "brand-owner/gym-brand-plan-fixed-add";
-        }catch (DataAccessException ex) {
+        } catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
@@ -1066,7 +1063,7 @@ try {
             gymPlanService.createGymPlanFixed(brandCreateGymPlanFixedDTO);
             Thread.sleep(1500);
             return "redirect:/brand-owner/gym-plans/fixed/list";
-        }catch (DataAccessException ex) {
+        } catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
@@ -1076,7 +1073,7 @@ try {
     }
 
     @GetMapping("/withdrawal/list")
-    public String getWithdrawal(Model model, HttpSession session){
+    public String getWithdrawal(Model model, HttpSession session) {
         try {
             User user = (User) session.getAttribute("userInfo");
             List<RequestWithdrawHistory> requestWithdrawHistoryListPending = requestWithdrawHistoryService.getAllByUserIdAndStatus(user.getUserId(), "Đang xử lý");
@@ -1095,7 +1092,7 @@ try {
             model.addAttribute("requestHistoryStats", requestHistoryStats);
             model.addAttribute("creditCardList", creditCardList);
             return "brand-owner/gym-brand-withdrawal-list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -1116,26 +1113,25 @@ try {
 
     @PostMapping("/withdrawal/add")
     public String addWithdrawal(@RequestParam int cardId, @RequestParam double creditAmount,
-                                @RequestParam  double moneyAmount, HttpSession session, Model model) {
+                                @RequestParam double moneyAmount, HttpSession session, Model model) {
         try {
             User user = (User) session.getAttribute("userInfo");
             double userBalance = walletService.getBalanceByUserId(user.getUserId());
 
             if (creditAmount > userBalance) {
-                model.addAttribute("errorCreadit", "Số Credit muốn rút không được lớn hơn số dư hiện tại (Credit)");
-                return "redirect:/brand-owner/withdrawal/list";
+                model.addAttribute("errorCredit", "Số Credit muốn rút không được lớn hơn số dư hiện tại (Credit)");
+            }else {
+                RequestWithdrawHistory requestWithdrawHistory = new RequestWithdrawHistory();
+                requestWithdrawHistory.setCreditCardId(cardId);
+                requestWithdrawHistory.setAmountCredit((long) creditAmount);
+                requestWithdrawHistory.setActualMoney((long) moneyAmount);
+                requestWithdrawHistory.setWithdrawalTime(new Timestamp(System.currentTimeMillis()));
+                requestWithdrawHistory.setWithdrawalCode(WebUtil.generateUniqueTransactionCode());
+                requestWithdrawHistory.setStatus("Đang xử lý");
+                requestWithdrawHistoryService.create(requestWithdrawHistory);
             }
-
-            RequestWithdrawHistory requestWithdrawHistory = new RequestWithdrawHistory();
-            requestWithdrawHistory.setCreditCardId(cardId);
-            requestWithdrawHistory.setAmountCredit((long) creditAmount);
-            requestWithdrawHistory.setActualMoney((long) moneyAmount);
-            requestWithdrawHistory.setWithdrawalTime(new Timestamp(System.currentTimeMillis()));
-            requestWithdrawHistory.setWithdrawalCode(WebUtil.generateUniqueTransactionCode());
-            requestWithdrawHistory.setStatus("Đang xử lý");
-            requestWithdrawHistoryService.create(requestWithdrawHistory);
             return "redirect:/brand-owner/withdrawal/list";
-        }catch (DuplicateKeyException ex) {
+        } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
@@ -1155,7 +1151,7 @@ try {
     }
 
     @GetMapping("/withdrawal/card/add")
-    public String getWithdrawalCard(Model model, HttpSession session){
+    public String getWithdrawalCard(Model model, HttpSession session) {
         try {
             User user = (User) session.getAttribute("userInfo");
             // Get all credit card by user id
@@ -1195,12 +1191,12 @@ try {
             User user = (User) session.getAttribute("userInfo");
             creditCard.setUserId(user.getUserId());
             creditCard.setStatus("Đang hoạt động");
-            if(creditCardService.checkCreditCardExist(creditCard, user.getUserId())) {
+            if (creditCardService.checkCreditCardExist(creditCard, user.getUserId())) {
                 return ResponseEntity.ok(-1);
             }
 
             int rowAffect = creditCardService.createCreditCard(creditCard);
-            if(rowAffect > 0) {
+            if (rowAffect > 0) {
                 int lastCreditCardId = creditCardService.getLastCreditCardId();
                 return ResponseEntity.ok(lastCreditCardId);
             }
@@ -1230,7 +1226,7 @@ try {
         }
         int rowAffect;
         try {
-            if(creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())) {
+            if (creditCardService.checkCreditCardExist(creditCard, creditCard.getUserId())) {
                 return ResponseEntity.ok(-1);
             }
 

@@ -101,7 +101,7 @@
                                             <input name="creditAmount" type="number" class="form-control" id="amount"
                                                    placeholder="Nhập số credit" required
                                                    oninput="updateConversionRate()">
-                                            <span th:text="${errorCreadit}" class="text-danger"></span>
+                                            <span th:if="${errorCredit}" class="text-danger" th:text="${errorCredit}"></span>
                                         </div>
                                         <label data-toggle="tooltip" data-placement="top" title="xnxx" class="fw-bold">
                                             Phí giao dịch (<span id="withdrawal-fee" th:text="${moneyPercent}">10</span>%)
