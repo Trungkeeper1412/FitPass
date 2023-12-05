@@ -30,10 +30,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -76,9 +78,15 @@ public class EmployeeController {
     }
 
     public boolean checkValidDepartmentParameter(HttpSession session, int departmentId){
-        User user = (User) session.getAttribute("userInfo");
-        int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
-        return departmentId == userDepartmentId;
+       try {
+           User user = (User) session.getAttribute("userInfo");
+           int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+           return departmentId == userDepartmentId;
+       } catch (Exception e) {
+           // Handle other exceptions if necessary
+           e.printStackTrace(); // Log or print the stack trace for debugging
+           return false; // Or throw a custom exception, depending on your requirements
+       }
     }
 
     @GetMapping("/changePassword")
@@ -90,27 +98,33 @@ public class EmployeeController {
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
                                  Model model,HttpSession session) {
+try {
+    User user = (User) session.getAttribute("userInfo");
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        User user = (User) session.getAttribute("userInfo");
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    // Kiểm tra mật khẩu hiện tại
+    if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
+        model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+        return "employee/change-password";
+    }
+    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+    if (!newPassword.equals(confirmPassword)) {
+        model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+        return "employee/change-password";
+    }
+    String hashedPassword = passwordEncoder.encode(newPassword);
+    // Cập nhật mật khẩu mới
+    userService.updatePassword(hashedPassword, user.getUserId());
 
-        // Kiểm tra mật khẩu hiện tại
-        if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-            model.addAttribute("error", "Mật khẩu hiện tại không đúng");
-            return "employee/change-password";
-        }
-        // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-        if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
-            return "employee/change-password";
-        }
-        String hashedPassword = passwordEncoder.encode(newPassword);
-        // Cập nhật mật khẩu mới
-        userService.updatePassword(hashedPassword, user.getUserId());
-
-        // Redirect hoặc hiển thị thông báo thành công
-        model.addAttribute("success", true);
-        return "redirect:/employee/changePassword";
+    // Redirect hoặc hiển thị thông báo thành công
+    model.addAttribute("success", true);
+    return "redirect:/employee/changePassword";
+} catch (Exception e) {
+    // Handle other exceptions if necessary
+    model.addAttribute("error", "An unexpected error occurred");
+    e.printStackTrace(); // Log or print the stack trace for debugging
+    return "employee/change-password";
+}
     }
 
     @GetMapping("/check-in/fixed")
@@ -170,20 +184,30 @@ public class EmployeeController {
             @RequestParam("searchOption") String searchOption,
             @RequestParam("departmentId") int departmentId
     ) {
-        List<CheckInFlexibleDTO> searchResults;
+        try {
+            List<CheckInFlexibleDTO> searchResults;
 
-        if ("username".equals(searchOption)) {
-            // Tìm kiếm theo tên (username)
-            searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
-        } else if ("phone-number".equals(searchOption)) {
-            // Tìm kiếm theo số điện thoại (phone number)
-            searchResults = employeeService.searchListCheckInByPhoneNumber(searchText, departmentId);
-        } else {
-            // Mặc định tìm kiếm theo tên (username)
-            searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
+            if ("username".equals(searchOption)) {
+                // Tìm kiếm theo tên (username)
+                searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
+            } else if ("phone-number".equals(searchOption)) {
+                // Tìm kiếm theo số điện thoại (phone number)
+                searchResults = employeeService.searchListCheckInByPhoneNumber(searchText, departmentId);
+            } else {
+                // Mặc định tìm kiếm theo tên (username)
+                searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
+            }
+
+            return ResponseEntity.ok(searchResults);
+        }catch (DataAccessException e) {
+            // Handle DataAccessException
+            logger.error("Error during database access in searchListCheckIn", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (Exception e) {
+            // Handle other exceptions if necessary
+            logger.error("An unexpected error occurred in searchListCheckIn", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        return ResponseEntity.ok(searchResults);
     }
 
     @GetMapping("/searchListCheckOut")
@@ -193,20 +217,31 @@ public class EmployeeController {
             @RequestParam("searchOption") String searchOption,
             @RequestParam("departmentId") int departmentId
     ) {
-        List<CheckInFlexibleDTO> searchResults;
+        try {
+            List<CheckInFlexibleDTO> searchResults;
 
-        if ("username".equals(searchOption)) {
-            // Tìm kiếm theo tên (username)
-            searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
-        } else if ("phone-number".equals(searchOption)) {
-            // Tìm kiếm theo số điện thoại (phone number)
-            searchResults = employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId);
-        } else {
-            // Mặc định tìm kiếm theo tên (username)
-            searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
+            if ("username".equals(searchOption)) {
+                // Tìm kiếm theo tên (username)
+                searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
+            } else if ("phone-number".equals(searchOption)) {
+                // Tìm kiếm theo số điện thoại (phone number)
+                searchResults = employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId);
+            } else {
+                // Mặc định tìm kiếm theo tên (username)
+                searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
+            }
+
+            return ResponseEntity.ok(searchResults);
+        }catch (DataAccessException e) {
+            // Handle DataAccessException
+            logger.error("Error during database access in searchListCheckIn", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (Exception e) {
+            // Handle other exceptions if necessary
+            logger.error("An unexpected error occurred in searchListCheckIn", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
-        return ResponseEntity.ok(searchResults);
     }
 
     @GetMapping("/flexible/sendCheckinRequest")
