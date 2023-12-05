@@ -123,7 +123,7 @@ public class PaymentController {
         }
     }
 
-    @PostMapping("/cancel")
+    @GetMapping("/cancel")
     public String processCancelPayment(HttpSession session, Model model) {
         try {
             Long amount = (Long) session.getAttribute("amount");
@@ -137,8 +137,10 @@ public class PaymentController {
             transactionService.insertTransaction(transactionDTO);
 
             session.removeAttribute("amount");
+            model.addAttribute("redirectCountdown", 5);
             return "user/paymentCancel";
-        }catch (DuplicateKeyException ex) {
+        }
+        catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
             return "error/duplicate-key-error";
