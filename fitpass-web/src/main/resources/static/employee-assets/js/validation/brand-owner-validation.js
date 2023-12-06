@@ -52,7 +52,7 @@ $.validator.addMethod("validateIdCard", function(value, element) {
 $.validator.addMethod("correctNumber", function(value, element) {
     var correctNumber;
     if (value.startsWith("1900") || value.startsWith("1800")) {
-        correctNumber = /^(1800|1900)\d{4}$/;
+        correctNumber = /^(1800|1900)\d{6}$/;
     } else {
         correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
     }
@@ -81,17 +81,20 @@ $(document).ready(function () {
             pricePerHours: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 0,
+                max: 10000,
             },
             planBeforeActive: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 1,
+                max: 36500,
             },
             planAfterActive: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 1,
+                max: 36500,
             },
             description: {
                 required: true,
@@ -102,11 +105,13 @@ $(document).ready(function () {
                 required: true,
                 number: true,
                 min: 1,
+                max: 36500,
             },
             price: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 0,
+                max: 10000,
             },
             statusActive: {
                 required: true,
@@ -151,7 +156,7 @@ $(document).ready(function () {
             },
             phone: {
                 required: true,
-                minlength: 8,
+                minlength: 10,
                 maxlength: 11,
                 correctNumber: true
             },
@@ -189,17 +194,20 @@ $(document).ready(function () {
             pricePerHours: {
                 required: "Vui lòng nhập số credits !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số credits/giờ phải lớn hơn 0 !",
+                min: "Số credits/giờ phải lớn hơn hoặc bằng 0 !",
+                max: "Số credits/giờ không vượt quá 10000 !",
             },
             planBeforeActive: {
                 required: "Vui lòng nhập nhập số ngày trước khi kích hoạt !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày phải lớn hơn 0 !"
+                min: "Số ngày ít nhất phải bằng 1 !",
+                max: "Số ngày không vượt quá 36500 ngày !",
             },
             planAfterActive: {
                 required: "Vui lòng nhập nhập số ngày sau khi kích hoạt !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày phải lớn hơn 0 !"
+                min: "Số ngày ít nhất phải bằng 1 !",
+                max: "Số ngày không vượt quá 36500 ngày !",
             },
             description: {
                 required: "Vui lòng nhập nhập mô tả gói tập !",
@@ -209,12 +217,14 @@ $(document).ready(function () {
             duration: {
                 required: "Vui lòng nhập nhập số ngày sử dụng gói tập !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày ít nhất phải bằng 1 !"
+                min: "Số ngày ít nhất phải bằng 1 !",
+                max: "Số ngày không vượt quá 36500 ngày !",
             },
             price: {
                 required: "Vui lòng nhập số credits !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số credits phải lớn hơn 0 !",
+                min: "Số credits phải lớn hơn hoặc bằng 0 !",
+                max: "Số credits không vượt quá 10000 !",
             },
             statusActive: {
                 required: "Vui lòng chọn trạng thái !"

@@ -383,7 +383,7 @@ function previewImage(input) {
 $.validator.addMethod("correctNumber", function(value, element) {
     var correctNumber;
     if (value.startsWith("1900") || value.startsWith("1800")) {
-        correctNumber = /^(1800|1900)\d{4}$/;
+        correctNumber = /^(1800|1900)\d{6}$/;
     } else {
         correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
     }
@@ -401,7 +401,7 @@ $(document).ready(function () {
             },
             phone: {
                 required: true,
-                minlength: 8,
+                minlength: 10,
                 maxlength: 11,
                 correctNumber: true
             },
@@ -424,11 +424,13 @@ $(document).ready(function () {
                 required: true,
                 number: true,
                 min: 0.01,
+                max: 10000,
             },
             area: {
                 required: true,
                 number: true,
                 min: 0.01,
+                max: 10000,
             },
             province: {
                 required: true,
@@ -475,11 +477,13 @@ $(document).ready(function () {
                 required: "Vui lòng nhập sức chứa !",
                 number: "Vui lòng nhập số !",
                 min: "Sức chứa phải lớn hơn 0",
+                max: "Sức chứa không vượt quá 10000 !",
             },
             area: {
                 required: "Vui lòng nhập diện tích !",
                 number: "Vui lòng nhập số !",
                 min: "Diện tích phải lớn hơn 0",
+                max: "Diện tích không vượt quá 10000 !",
             },
             province: {
                 required: "Vui lòng chọn tỉnh/thành phố !",
