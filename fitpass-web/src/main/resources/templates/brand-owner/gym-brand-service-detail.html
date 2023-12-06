@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="mb-4">
-                                            <label for="serviceDescription" class="form-label fw-bold">Mô tả gói tập:</label>
+                                            <label for="serviceDescription" class="form-label fw-bold">Mô tả dịch vụ:</label>
                                             <textarea th:field="*{description}" name="description" class="form-control" id="serviceDescription" rows="4" placeholder="Nhập mô tả dịch vụ" th:text="${brandAmenitie.getDescription()}"></textarea>
                                             <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">photoUrl Error</span>
                                         </div>
