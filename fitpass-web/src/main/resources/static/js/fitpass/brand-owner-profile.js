@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const newImageContainer = document.createElement("div");
         newImageContainer.classList.add("col-md-4");
         let num = rowElement.querySelectorAll(".col-md-4").length + 1;
-        if(type === "album") {
+        if (type === "album") {
             newImageContainer.innerHTML = `
               <div class="image-container">
                 <img src="${imageSrc}" alt="Image">
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 let num = idImageAlbumEdit;
                                 // Gửi yêu cầu delete ảnh cũ
                                 let oldImageSrc = $(`#album-${num}`).val();
-                                if(oldImageSrc != "") {
+                                if (oldImageSrc != "") {
                                     deleteImage(oldImageSrc);
                                 }
                                 $(`#album-${num}`).val(response);
@@ -306,13 +306,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
 function deleteImage(imagePath) {
+    console.log(imagePath)
     $.ajax({
         type: "POST",
         url: `/upload/deleteImage`,
         contentType: "application/json",
-        data:JSON.stringify( {
-            "imagePath" : imagePath
+        data: JSON.stringify({
+            "imagePath": imagePath
         }),
         success: function (response) {
             console.log(response)
@@ -380,7 +382,7 @@ function previewImage(input) {
 }
 
 //Code Js submit update Profile
-$.validator.addMethod("correctNumber", function(value, element) {
+$.validator.addMethod("correctNumber", function (value, element) {
     var correctNumber;
     if (value.startsWith("1900") || value.startsWith("1800")) {
         correctNumber = /^(1800|1900)\d{6}$/;
@@ -534,8 +536,9 @@ $(document).ready(function () {
         }
     });
 
-    // Handle "Submit" button click
-    $("#submitButton").click(function () {
+    $("#submitButton").click(function (e) {
+        e.preventDefault(); // Prevent the default form submit action
+
         // Validate the form
         if ($("#msform").valid()) {
             var profileData = {
@@ -553,44 +556,31 @@ $(document).ready(function () {
                 }
             };
 
-            $.ajax({
-                type: "POST",
-                url: "/brand-owner/updateProfile",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(profileData),
-                success: function (response) {
-                    console.log("shit")
-                    Swal.fire({
-                        title: 'Bạn có muốn cập nhật thông tin ?',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonText: 'Có',
-                        cancelButtonText: 'Không',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Vui lòng đợi...',
+                icon: 'info',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    $.ajax({
+                        type: "POST",
+                        url: "/brand-owner/updateProfile",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(profileData),
+                        success: function (response) {
                             Swal.fire({
-                                title: 'Vui lòng đợi...',
-                                icon: 'info',
+                                title: 'Thành công!',
+                                text: 'Cập nhật thông tin thành công.',
+                                icon: 'success',
                                 showConfirmButton: false,
-                                timerProgressBar: true,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                    setTimeout(() => {
-                                        $("#formSubmit").submit();
-                                        Swal.close();
-                                    }, 2000);
-                                },
-                                didClose: () => {
-                                    Swal.fire({
-                                        title: 'Thành công!',
-                                        text: 'Cập nhật thông tin thành công.',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    });
-                                }
+                                timer: 3000
+                            }).then(() => {
+                                location.reload();
                             });
-                        } else {
+                        },
+                        error: function (error) {
+                            console.error("Error:", error);
                             Swal.fire({
                                 title: 'Thất bại!',
                                 text: 'Cập nhật thông tin thất bại.',
@@ -600,20 +590,10 @@ $(document).ready(function () {
                             });
                         }
                     });
-                },
-                error: function (error) {
-                    console.error("Error:", error);
-                    Swal.fire({
-                        title: 'Thất bại!',
-                        text: 'Cập nhật thông tin thất bại.',
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
                 }
             });
         } else {
-            return false;
+            return false; // If the form is not valid, do nothing
         }
     });
 });
