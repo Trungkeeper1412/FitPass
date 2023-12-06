@@ -1,10 +1,7 @@
 package com.ks.fitpass.department.repository.impl;
 
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
+import com.ks.fitpass.department.dto.*;
 
-import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -16,12 +13,15 @@ import com.ks.fitpass.department.repository.DepartmentRepository;
 import com.ks.fitpass.department.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -359,4 +359,40 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         );
     }
 
+    @Override
+    public int countAllDepartment() {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_ALL_DEPARTMENT, Integer.class);
+    }
+
+    @Override
+    public List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId) {
+        try {
+            return jdbcTemplate.query(IRepositoryQuery.GET_DEPARTMENT_STAT_BRAND_OWNER, (rs, rowNum) -> {
+                DepartmentStatBrandOwner departmentStatBrandOwner = new DepartmentStatBrandOwner();
+                departmentStatBrandOwner.setDepartmentName(rs.getString("departmentName"));
+                departmentStatBrandOwner.setNumberOfGymPlanSold(rs.getInt("numberOfGymPlanSold"));
+                departmentStatBrandOwner.setTotalAmount(rs.getDouble("totalAmount") * 1000);
+                return departmentStatBrandOwner;
+            }, brandId);
+        } catch (EmptyResultDataAccessException e) {
+            return Collections.emptyList();
+        }
+
+    }
+
+    @Override
+    public List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_DEPARTMENT_RATING_STAT_BRAND_OWNER, (rs, rowNum) -> {
+            DepartmentRatingStatBrandOwner departmentRatingStatBrandOwner = new DepartmentRatingStatBrandOwner();
+            departmentRatingStatBrandOwner.setDepartmentName(rs.getString("departmentName"));
+            departmentRatingStatBrandOwner.setNumberOfRating(rs.getInt("numberOfRating"));
+            departmentRatingStatBrandOwner.setRatingStar(rs.getDouble("rating"));
+            return departmentRatingStatBrandOwner;
+        }, brandId);
+    }
+
+    @Override
+    public int getTotalNumberRatingByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_NUMBER_RATING_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
 }

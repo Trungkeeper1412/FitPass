@@ -6,12 +6,16 @@
 
         <nav class="navbar order-last order-lg-0" id="navbar">
             <ul>
+                <form action="/homepage/search" method="get">
                 <div class="search-bar">
-                    <input placeholder="Nhập tên thương hiệu..." type="text">
-                    <button class="search-button">
-                        <i class="fas fa-search"></i>
-                    </button>
+
+                        <input placeholder="Nhập tên thương hiệu..." type="text" name="search" th:value="${search}">
+                        <button type="submit" class="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
                 </div>
+                </form>
+
                 <li><a class="nav-link scrollto" th:href="@{/homepage}">Trang chủ</a></li>
                 <li><a class="nav-link scrollto" th:href="@{/landing-page}">Giới thiệu</a></li>
                 <th:block th:if="${session.userInfo != null}">

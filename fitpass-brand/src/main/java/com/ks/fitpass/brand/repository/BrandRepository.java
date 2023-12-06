@@ -1,10 +1,9 @@
 package com.ks.fitpass.brand.repository;
 
-import com.ks.fitpass.brand.dto.BrandAdminList;
-import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
+import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
+import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
-import com.ks.fitpass.brand.dto.BrandDetailFeedback;
-import com.ks.fitpass.brand.dto.BrandDetailFeedbackStat;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -38,4 +37,16 @@ public interface BrandRepository {
     int getBrandOwnerIdByDepartmentId(int departmentId);
 
     int createBrandWithBrandName(int userId, String brandName);
+
+    int countAllBrand();
+
+    List<BrandStatAdmin> getAdminStat();
+
+    List<BrandRatingStatAdmin> getAdminRatingStat();
+
+    int getTotalRating(int brandId);
+
+    List<DepartmentBrandHomepageSearch> searchBrandWithPagnition(String search, int page, int size);
+
+    int countSearchBrand(String search);
 }

@@ -2,6 +2,7 @@ package com.ks.fitpass.order.repository.impl;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.dto.OrderDetailDTO;
+import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.mapper.OrderDetailMapper;
 import com.ks.fitpass.order.mapper.OrderDetailWithDeparmentNameMapper;
@@ -119,5 +120,25 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
     @Override
     public int getLatestOrderDetailId() {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_LATEST_ORDER_DETAIL_ID, Integer.class);
+    }
+
+    @Override
+    public OrderDetailStatAdmin getAdminStat() {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_ADMIN_STAT, (rs, rowNum) -> {
+            OrderDetailStatAdmin o = new OrderDetailStatAdmin();
+            o.setTotalFixed(rs.getInt("total_fixed"));
+            o.setTotalFlex(rs.getInt("total_flex"));
+            return o;
+        });
+    }
+
+    @Override
+    public int getTotalBuyByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_BUY_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public double getTotalRevenueByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_REVENUE_BY_DEPARTMENT_ID, Double.class, departmentId);
     }
 }

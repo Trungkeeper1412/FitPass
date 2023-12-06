@@ -23,4 +23,14 @@ public class OrderServiceImpl implements OrderService {
     public int getLastOrderInsertId() {
         return orderRepository.getLastOrderInsertId();
     }
+
+    @Override
+    public int getNumberOfOrder(int brandId) {
+        return orderRepository.getNumberOfOrder(brandId);
+    }
+
+    @Override
+    public int getTotalRevenue(int brandId) {
+        return orderRepository.getTotalRevenue(brandId);
+    }
 }

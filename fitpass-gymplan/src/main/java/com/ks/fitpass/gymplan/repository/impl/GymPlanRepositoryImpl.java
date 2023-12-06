@@ -215,4 +215,14 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
     public int checkGymPlanInDepartmentUse(int gymPlanId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.CHECK_GYM_PLAN_IN_DEPARTMENT_USE, Integer.class, gymPlanId);
     }
+
+    @Override
+    public int getNumberOfGymPlan(int brandId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_NUMBER_OF_GYM_PLAN, Integer.class, brandId);
+    }
+
+    @Override
+    public int getTotalGymPlanDepartment(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_GYM_PLAN_DEPARTMENT, Integer.class, departmentId);
+    }
 }

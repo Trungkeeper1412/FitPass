@@ -41,4 +41,15 @@ public interface IRepositoryQuery {
             GROUP BY
                 w.user_id, w.wallet_id;
             """;
+
+    String COUNT_ALL_CREDIT = """
+            SELECT
+                SUM(t.amount) AS total_amount
+            FROM
+                wallet w
+                    JOIN
+                `transaction` t ON w.wallet_id = t.wallet_id
+            GROUP BY
+                w.user_id, w.wallet_id;
+            """;
 }

@@ -58,4 +58,5 @@ public interface UserRepository {
 
     int createEmployee(User user);
 
+    int countAllUsersAccount();
 }

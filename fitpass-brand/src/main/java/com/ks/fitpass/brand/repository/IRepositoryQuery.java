@@ -246,4 +246,106 @@ public interface IRepositoryQuery {
                 INSERT INTO brand (user_id, name, brand_status_key,first_time)
                 VALUES (?, ?, ?,?);
             """;
+
+    String COUNT_ALL_BRAND = """
+                SELECT
+                    COUNT(*)
+                FROM
+                    brand;
+            """;
+
+    String GET_ADMIN_STAT = """
+                SELECT
+                    b.name AS brand_name,
+                    COUNT(opd.order_detail_id) AS numberOfPlanSold,
+                    SUM(opd.price) AS totalAmount
+                FROM
+                    order_plan_detail opd
+                RIGHT JOIN
+                    gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                RIGHT JOIN
+                    brand b ON gd.brand_id = b.brand_id
+                GROUP BY
+                    b.name;
+            """;
+
+    String GET_ADMIN_RATING_STAT = """
+                SELECT
+                    b.name AS brand_name,
+                    b.rating AS ratingStar,
+                    COUNT(*) AS numberOfRating
+                FROM
+                    brand b
+                LEFT JOIN
+                    gym_department gd ON b.brand_id = gd.brand_id
+                LEFT JOIN
+                    order_plan_detail opd ON gd.gym_department_id = opd.gym_department_id
+                GROUP BY
+                    b.brand_id;
+            """;
+
+    String GET_TOTAL_RATING = """
+                SELECT
+                    COUNT(uf.feedback_id) AS totalFeedbacks
+                FROM
+                    user_feedback uf
+                JOIN
+                    gym_department g ON uf.department_id = g.gym_department_id
+                JOIN
+                    brand b ON g.brand_id = b.brand_id
+                WHERE
+                    b.brand_id = ?
+            """;
+
+    String SEARCH_BRAND_WITH_PAGNITION = """
+               SELECT
+                   'Thương hiệu' AS type,
+                   brand_id AS id,
+                   name,
+                   wallpaper_url,
+                   description,
+                   rating
+               FROM
+                   brand
+               WHERE
+                   name LIKE :search
+               
+               UNION
+               
+               SELECT
+                   'Cơ sở' AS type,
+                   gym_department_id AS id,
+                   name,
+                   wallpaper_url,
+                   description,
+                       rating
+               FROM
+                   gym_department
+               WHERE
+                   name LIKE :search
+                LIMIT :size OFFSET :offset;
+            """;
+
+    String COUNT_SEARCH_BRAND = """
+                SELECT COUNT(*) AS total_count
+                FROM (
+                    SELECT
+                        'brand' AS type,
+                        name
+                    FROM
+                        brand
+                    WHERE
+                        name LIKE :search
+                
+                    UNION
+                
+                    SELECT
+                        'gym_department' AS type,
+                        name
+                    FROM
+                        gym_department
+                    WHERE
+                        name LIKE :search
+                ) AS subquery;
+            """;
 }

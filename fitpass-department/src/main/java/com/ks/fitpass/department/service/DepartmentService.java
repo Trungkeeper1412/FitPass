@@ -67,4 +67,12 @@ public interface DepartmentService {
     int countAllFeedback(int departmentId, String sortRating);
 
     DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
+
+    int countAllDepartment();
+
+    List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId);
+
+    List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId);
+
+    int getTotalNumberRatingByDepartmentId(int departmentId);
 }

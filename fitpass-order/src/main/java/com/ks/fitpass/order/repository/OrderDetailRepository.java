@@ -2,6 +2,7 @@ package com.ks.fitpass.order.repository;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.dto.OrderDetailDTO;
+import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
 
 import java.sql.Timestamp;
@@ -37,4 +38,10 @@ public interface OrderDetailRepository {
     int[] updateOrderDetailExpiredStatus(List<Integer> listId);
 
     int getLatestOrderDetailId();
+
+    OrderDetailStatAdmin getAdminStat();
+
+    int getTotalBuyByDepartmentId(int departmentId);
+
+    double getTotalRevenueByDepartmentId(int departmentId);
 }

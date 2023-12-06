@@ -148,4 +148,14 @@ public class GymPlanServiceImpl implements GymPlanService {
     public int checkGymPlanInDepartmentUse(int gymPlanId) {
         return gymPlanRepository.checkGymPlanInDepartmentUse(gymPlanId);
     }
+
+    @Override
+    public int getNumberOfGymPlan(int brandId) {
+        return gymPlanRepository.getNumberOfGymPlan(brandId);
+    }
+
+    @Override
+    public int getTotalGymPlanDepartment(int departmentId) {
+        return gymPlanRepository.getTotalGymPlanDepartment(departmentId);
+    }
 }

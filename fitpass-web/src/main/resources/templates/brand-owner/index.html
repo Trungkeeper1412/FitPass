@@ -33,7 +33,7 @@
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                             Số lượng gói tập
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${numberOfGymplan}">5</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dumbbell fa-2x text-gray-300"></i>
@@ -50,7 +50,7 @@
                                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                             Số lượt mua
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">3728</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${numberOfOrder}">3728</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-cart-shopping fa-2x text-gray-300"></i>
@@ -67,7 +67,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Thu nhập
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">128.000.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalRevenue}">128.000.000</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-dong-sign fa-2x text-gray-300"></i>
@@ -85,8 +85,8 @@
                                             Số lượt đánh giá
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <div style="margin-right: 10px" data-star="4"></div>
-                                            5612
+                                            <div style="margin-right: 10px" th:attr="data-star=${brandDetails.rating}"></div>
+                                            <span th:text="${totalRating}">123</span>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -153,7 +153,7 @@
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h4 class="m-0 font-weight-bold text-primary">Xếp hạng cơ sở theo doanh thu</h4>
+                                <h4 class="m-0 font-weight-bold text-primary">Xếp hạng thương hiệu theo doanh thu</h4>
                             </div>
                             <div class="card-body table-responsive" style="max-height: 400px;">
                                 <table class="table table-bordered" id="table-department" width="100%"
@@ -167,30 +167,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="fw-bold">City Gym Thái Thành</td>
-                                        <td>185 gói</td>
-                                        <td>45.000.000 VNĐ</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td class="fw-bold">City Gym Phổ Quang</td>
-                                        <td>62 gói</td>
-                                        <td>37.000.000 VNĐ</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td class="fw-bold">City Gym Bến Vân Đồn</td>
-                                        <td>53 gói</td>
-                                        <td>28.000.000 VNĐ</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td class="fw-bold">City Gym Vạn Hạnh Mall</td>
-                                        <td>23 gói</td>
-                                        <td>14.000.000 VNĐ</td>
-                                    </tr>
+                                        <th:block th:each="d, iterStat : ${departmentStatBrandOwnerList}">
+                                            <tr>
+                                                <td th:text="${iterStat.index + 1}">1</td>
+                                                <td th:text="${d.departmentName}">City Gym Thái Thành</td>
+                                                <td th:text="${d.numberOfGymPlanSold + ' gói'}">185 gói</td>
+                                                <td th:text="${d.totalAmount + ' VNĐ'}">45.000.000 VNĐ</td>
+                                            </tr>
+                                        </th:block>
                                     </tbody>
                                 </table>
                             </div>
@@ -203,45 +187,17 @@
                                 <h4 class="m-0 font-weight-bold text-primary">Xếp hạng cơ sở theo sao</h4>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-items-center mb-3">
-                                        <h4 class="small font-weight-bold text-uppercase">City Gym Thái Thành</h4>
+                                <th:block th:each=" d : ${departmentRatingStatBrandOwnerList}">
+                                    <div class="row">
+                                        <div class="col-md-6 d-flex align-items-center mb-3">
+                                            <h4 class="small font-weight-bold text-uppercase" th:text="${d.departmentName}">City Gym Thái Thành</h4>
+                                        </div>
+                                        <div class="col-md-6 d-flex align-items-center justify-content-end mb-3">
+                                            <div style="margin-right: 10px" th:attr="data-star=${d.ratingStar}" data-star="4.4"></div>
+                                            <i class="num-of-rating" th:text="${d.numberOfRating + ' đánh giá'}">1370 đánh giá</i>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 d-flex align-items-center justify-content-end mb-3">
-                                        <div style="margin-right: 10px" data-star="4.4"></div>
-                                        <i class="num-of-rating">1370 đánh giá</i>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-items-center mb-3">
-                                        <h4 class="small font-weight-bold text-uppercase">City Gym Phổ Quang</h4>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-center justify-content-end mb-3">
-                                        <div style="margin-right: 10px" data-star="3.8"></div>
-                                        <i class="num-of-rating">940 đánh giá</i>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-items-center mb-3">
-                                        <h4 class="small font-weight-bold text-uppercase">City Gym Vạn Hạnh Mall</h4>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-center justify-content-end mb-3">
-                                        <div style="margin-right: 10px" data-star="4.2"></div>
-                                        <i class="num-of-rating">754 đánh giá</i>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-items-center mb-3">
-                                        <h4 class="small font-weight-bold text-uppercase">City Gym Phổ Quang</h4>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-center justify-content-end mb-3">
-                                        <div style="margin-right: 10px" data-star="4.3"></div>
-                                        <i class="num-of-rating">612 đánh giá</i>
-                                    </div>
-                                </div>
+                                </th:block>
                             </div>
                         </div>
                     </div>

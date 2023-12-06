@@ -1,6 +1,7 @@
 package com.ks.fitpass.order.service.impl;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
+import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.repository.OrderDetailRepository;
 import com.ks.fitpass.order.service.OrderDetailService;
@@ -88,5 +89,20 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public int getLatestOrderDetailId() {
         return orderDetailRepository.getLatestOrderDetailId();
+    }
+
+    @Override
+    public OrderDetailStatAdmin getAdminStat() {
+        return orderDetailRepository.getAdminStat();
+    }
+
+    @Override
+    public int getTotalBuyByDepartmentId(int departmentId) {
+        return orderDetailRepository.getTotalBuyByDepartmentId(departmentId);
+    }
+
+    @Override
+    public double getTotalRevenueByDepartmentId(int departmentId) {
+        return orderDetailRepository.getTotalRevenueByDepartmentId(departmentId);
     }
 }

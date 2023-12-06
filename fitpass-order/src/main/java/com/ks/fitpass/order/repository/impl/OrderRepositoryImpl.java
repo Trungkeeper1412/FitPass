@@ -29,4 +29,14 @@ public class OrderRepositoryImpl implements OrderRepository {
     public int getLastOrderInsertId() {
         return jdbcTemplate.queryForObject(IRepositoryQuery.SELECT_LAST_INSERT_ID, Integer.class);
     }
+
+    @Override
+    public int getNumberOfOrder(int brandId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.SELECT_NUMBER_OF_ORDER, Integer.class, brandId);
+    }
+
+    @Override
+    public int getTotalRevenue(int brandId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.SELECT_TOTAL_REVENUE, Integer.class, brandId);
+    }
 }

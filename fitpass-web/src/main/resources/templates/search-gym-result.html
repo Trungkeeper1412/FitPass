@@ -1,234 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kết quả tìm kiếm</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Kết quả tìm kiếm</title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
 
-  <th:block th:insert="common/vendor-head"></th:block>
-  <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet">
-  <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
-</head>
+        <th:block th:insert="common/vendor-head"></th:block>
+        <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet">
+        <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    </head>
 
-<body class="body-list-brand">
-<!-- ======= Header ======= -->
-<header th:replace="common/navbar :: navbar"></header>
+    <body class="body-list-brand">
+        <!-- ======= Header ======= -->
+        <header th:replace="common/navbar :: navbar"></header>
 
-<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="margin-top: 77px;">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
-    <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
-    <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
-  </ol>
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="margin-top: 77px;">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+            </ol>
 
-  <!-- Slides -->
-  <div class="carousel-inner">
-    <div class="carousel-item active bg-black">
-      <a href="#">
-        <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
-             alt="Banner 1">
-      </a>
-    </div>
-    <div class="carousel-item bg-black">
-      <a href="#">
-        <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
-             alt="Banner 2">
-      </a>
-    </div>
-    <div class="carousel-item bg-black">
-      <a href="#">
-        <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
-             alt="Banner 3">
-      </a>
-    </div>
-  </div>
-
-  <!-- Controls -->
-  <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
-</div>
-
-<!-- Content -->
-<div style="margin-top: 50px;" class="list-brand-content container">
-  <!-- List brands -->
-  <div id="list-brand" class="list-of-brand mt-4">
-    <h3 class="fw-bold list-brand-title mt-4">Kết quả tìm kiếm</h3>
-    <div class="row justify-content-center mt-4">
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://cali.vn/storage/app/media/2021/Club/Binh%20Duong/California-4365.jpg">
-          <div class="fw-bold is-brand">Thương hiệu</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">California fitness & yoga</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-              California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://cali.vn/storage/app/media/Editors/628df59761bf4phong-tap-gym-o-tp-hcm-11.jpg">
-          <div class="fw-bold is-brand">Thương hiệu</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">25 FIT</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-black">
+                    <a href="#">
+                        <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                             alt="Banner 1">
+                    </a>
+                </div>
+                <div class="carousel-item bg-black">
+                    <a href="#">
+                        <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                             alt="Banner 2">
+                    </a>
+                </div>
+                <div class="carousel-item bg-black">
+                    <a href="#">
+                        <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                             alt="Banner 3">
+                    </a>
+                </div>
             </div>
 
-          </div>
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
         </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://images.foody.vn/res/g76/752691/prof/s/sheis-c4f530d5-a22f-46fe-9808-d3b46e791c3e-20180621102758590.jpg">
-          <div class="fw-bold is-dept" >Cơ sở</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">Star Fitness Saigon</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
 
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://lh5.googleusercontent.com/6hP4p8CFRl-UvzlhKY-0Qu0Xd4XwihZ_pJU3rOCG463yul3qPqWS2p4JQkmSauswLUSKeu3WhsgRYBmnPjGtLG86mErLCR2ressjgozSFwZxy3rYmE5oxV9qp_rg4WrTBj37M-5pr6Am4e17lA">
-          <div class="fw-bold is-dept">Cơ sở</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">Getfit gym & yoga</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://images.foody.vn/res/g70/692634/prof/s/sheis-c655fd5b-6c57-4bdc-bc63-5343e2e69e16-20171004171236841.jpg">
-          <div class="fw-bold is-brand">Thương hiệu</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">Golden Wellness fitness & spa </h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://cdn.noron.vn/2022/05/05/top-30-phong-tap-xin-nhat-quanh-ha-noi-king-fitness-1651746122.jpg">
-          <div class="fw-bold is-brand">Thương hiệu</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">King fitness</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img  class="brand-image"
-                src="https://cdn.noron.vn/2022/05/05/top-30-phong-tap-xin-nhat-quanh-ha-noi-home-fitness-yoga-center-1651746589.jpg">
-          <div class="fw-bold is-dept">Cơ sở</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">HOME Fitness & Yoga Center</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
-        <div style="position: relative;" class="brand">
-          <img class="brand-image"
-               src="https://cdn.alongwalk.info/wp-content/uploads/2022/09/21053416/image-top-8-trung-tam-day-group-x-giam-can-hieu-qua-tot-nhat-tai-ha-noi-166368805628231.jpg">
-          <div class="fw-bold is-brand">Thương hiệu</div>
-          <div class="brand-info">
-            <h5 class="fw-bold">Level fitness</h5>
-            <div style="height: 25px; margin-top: -3px;" data-star="3"></div>
-            <div class="description1">California Fitness & Yoga Centers là hệ thống
-              trung tâm về thể dục và Yoga rộng lớn tại
-              Việt Nam, với tổng diện tích phòng tập hơn
-              16.000 mét vuông và không khí sôi động mang
-              đậm phong cách riêng.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- pagination -->
-    <div class="pagination mt-3 mb-4">
-      <a href="#">&laquo;</a>
-      <a href="#">1</a>
-      <a href="#" class="active">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">&raquo;</a>
-    </div>
-  </div>
-</div>
+        <!-- Content -->
+        <div style="margin-top: 50px;" class="list-brand-content container">
+            <!-- List brands -->
+            <div id="list-brand" class="list-of-brand mt-4">
+                <h3 class="fw-bold list-brand-title mt-4">Kết quả tìm kiếm</h3>
+                <div class="row justify-content-center mt-4">
+                    <th:block th:each="d : ${list}">
+                        <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
+                            <div style="position: relative;" class="brand">
+                                <img class="brand-image"
+                                     th:src="${d.wallpaperUrl}">
+                                <div class="fw-bold is-brand" th:text="${d.type.toUpperCase()}">Thương hiệu</div>
+                                <div class="brand-info">
+                                    <h5 class="fw-bold" th:text="${d.name}">California fitness & yoga</h5>
+                                    <div style="height: 25px; margin-top: -3px;" th:attr="data-star=${d.rating}"></div>
+                                    <div class="description1" th:text="${d.description}">California Fitness & Yoga
+                                        Centers là hệ thống
+                                        trung tâm về thể dục và Yoga rộng lớn tại
+                                        Việt Nam, với tổng diện tích phòng tập hơn
+                                        16.000 mét vuông và không khí sôi động mang
+                                        đậm phong cách riêng.
+                                        California Fitness & Yoga Centers là hệ thống
+                                        trung tâm về thể dục và Yoga rộng lớn tại
+                                        Việt Nam, với tổng diện tích phòng tập hơn
+                                        16.000 mét vuông và không khí sôi động mang
+                                        đậm phong cách riêng.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+                <!-- pagination -->
+                <div class="pagination mt-3 mb-4">
+                    <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${currentPage - 1}}"
+                       th:if="${currentPage > 1}">&laquo;</a>
 
-<div th:replace="common/footer :: footer"></div>
-<th:block th:insert="common/vendor-script"></th:block>
+                    <span th:each="pageNumber : ${#numbers.sequence(1, totalPage)}">
+                        <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${pageNumber}}"
+                           th:class="${pageNumber == currentPage} ? 'active' : ''" th:text="${pageNumber}"></a>
+                    </span>
 
-<!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
-<script>
-</script>
-</body>
+                    <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${currentPage + 1}}"
+                       th:if="${currentPage < totalPage}">&raquo;</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="common/footer :: footer"></div>
+        <th:block th:insert="common/vendor-script"></th:block>
+
+        <!-- Template Main JS File -->
+        <script src="assets/js/main.js"></script>
+        <script>
+        </script>
+    </body>
 
 </html>

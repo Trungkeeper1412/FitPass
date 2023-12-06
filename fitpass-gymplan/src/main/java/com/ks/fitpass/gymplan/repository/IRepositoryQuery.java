@@ -196,4 +196,14 @@ public interface IRepositoryQuery {
 				SELECT COUNT(*) FROM gym_department_plans
 				WHERE plan_id = ?;
 			""";
+
+	String GET_NUMBER_OF_GYM_PLAN = """
+				SELECT COUNT(*) FROM gym_plan
+				WHERE brand_id = ?;
+			""";
+
+	String GET_TOTAL_GYM_PLAN_DEPARTMENT = """
+				SELECT COUNT(*) FROM gym_department_plans
+				WHERE gym_department_id = ?;
+			""";
 }

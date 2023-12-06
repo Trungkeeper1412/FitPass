@@ -273,6 +273,26 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.getDepartmentNotificationDtoById(departmentId);
     }
 
+
+    @Override
+    public int countAllDepartment() {
+        return departmentRepository.countAllDepartment();
+    }
+
+    @Override
+    public List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId) {
+        return departmentRepository.getDepartmentStatBrandOwner(brandId);
+    }
+
+    @Override
+    public List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId) {
+        return departmentRepository.getDepartmentRatingStatBrandOwner(brandId);
+    }
+
+    @Override
+    public int getTotalNumberRatingByDepartmentId(int departmentId) {
+        return departmentRepository.getTotalNumberRatingByDepartmentId(departmentId);
+    }
 }
 
 

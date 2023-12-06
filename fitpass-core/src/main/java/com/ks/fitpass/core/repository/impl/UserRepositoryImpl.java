@@ -251,4 +251,9 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
                 user.getCreatedBy(), user.getInDepartmentId());
     }
 
+
+    @Override
+    public int countAllUsersAccount() {
+        return jdbcTemplate.queryForObject(COUNT_ALL_USERS_ACCOUNT, Integer.class);
+    }
 }

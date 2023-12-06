@@ -180,4 +180,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.updatePassword(newPassword, userId);
     }
 
+    @Override
+    public int countAllUsersAccount() {
+        return userRepository.countAllUsersAccount();
+    }
 }
