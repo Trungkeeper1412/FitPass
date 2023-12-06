@@ -3,10 +3,9 @@ import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
-import com.ks.fitpass.department.dto.EmployeUpdateDTO;
-import com.ks.fitpass.department.dto.EmployeeCreateDTO;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
+import com.ks.fitpass.department.entity.DepartmentFeature;
 import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFixedDTO;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
@@ -32,15 +31,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class GymOwnerControllerTest {
 
+    @Mock
+    private BindingResult bindingResult;
     @Mock
     private User user;
     @Mock
@@ -76,7 +79,19 @@ public class GymOwnerControllerTest {
     // Add this method to initialize mocks
     @BeforeEach
     public void setUp() {
+
         MockitoAnnotations.initMocks(this);
+        // Mock the behavior for successful retrieval of department details
+        when(departmentService.getByUserId(anyInt())).thenReturn(Department.builder()
+                .departmentId(1) // Set appropriate values for your test
+                .build());
+        // Mock the behavior for successful retrieval of the user from the session
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        // Mock the getUserId method of the User object
+        when(user.getUserId()).thenReturn(123); // Set an appropriate user ID
+
+
     }
 
     // Test case for a successful employee list page load
@@ -671,6 +686,316 @@ public class GymOwnerControllerTest {
 
 
 
+    @Test
+    void testGetDepartmentInfo() {
+        // Arrange
+
+        User user = new User();
+        user.setUserId(1); // Set the user ID as needed
+
+        Department departmentDetails = new Department();
+        departmentDetails.setDepartmentId(1); // Set the department ID as needed
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(departmentService.getByUserId(user.getUserId())).thenReturn(departmentDetails);
+        when(departmentScheduleService.getAllByDepartmentID(departmentDetails.getDepartmentId())).thenReturn(Mockito.anyList());
+
+        // Act
+        String result = gymOwnerController.getDepartmentInfo(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-update-info", result);
+
+        }
+
+    @Test
+    void testUpdateDepartmentInfo_Success() {
+        // Arrange
+        UpdateGymOwnerDepartmentInfo updateInfo = new UpdateGymOwnerDepartmentInfo();
+        BindingResult bindingResult = mock(BindingResult.class);
+        updateInfo.setCapacity(50); // Set a default value for capacity
+
+        Department department = new Department();
+        department.setDepartmentId(1);
+
+        when(session.getAttribute("userInfo")).thenReturn(new User()); // Set the user as needed
+        when(departmentService.getByUserId(anyInt())).thenReturn(department);
+        when(departmentScheduleService.deleteAllDepartmentSchedule(anyInt())).thenReturn(1);
+        when(departmentScheduleService.addDepartmentSchedule(anyMap(), anyInt())).thenReturn(new int[]{1, 1, 1, 1, 1, 1, 1});
+
+        // Act
+        String result = gymOwnerController.updateDepartmentInfo(updateInfo, bindingResult, session, model);
+
+        // Assert
+        assertEquals("redirect:/gym-owner/department/info", result);
+
+          }
+
+    @Test
+    void testGetDepartmentAmenities_Success() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        Department department = new Department();
+
+        department.setBrandId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(departmentService.getByUserId(1)).thenReturn(department);
+
+        List<BrandAmenitie> brandAmenities = Arrays.asList(new BrandAmenitie(), new BrandAmenitie());
+        List<DepartmentAmenitie> departmentAmenities = Arrays.asList(new DepartmentAmenitie(), new DepartmentAmenitie());
+
+        when(brandAmenitieService.getAllByBrandIDActivate(1)).thenReturn(brandAmenities);
+        when(departmentAmenitieService.getAllAmenitieOfDepartment(1)).thenReturn(departmentAmenities);
+
+        // Act
+        String result = gymOwnerController.getDepartmentAmenities(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-update-amenities", result);
+
+         }
 
 
+    @Test
+    void testUpdateDepartmentAmenities_Success() {
+        // Arrange
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+
+        List<Integer> selectedAmenitieId = Arrays.asList(1, 2, 3);
+
+        // Mocking successful deletion and insertion
+        when(departmentAmenitieService.deleteAllDepartmentAmenitie(anyInt())).thenReturn(1);
+        when(departmentAmenitieService.insertDepartmentAmenitie(anyInt(), anyList())).thenReturn(new int[]{1, 1, 1});
+
+        // Act
+        String result = gymOwnerController.updateDepartmentAmenities(session, model, selectedAmenitieId, 1);
+
+        // Assert
+        assertEquals("redirect:/gym-owner/department/amenities", result);
+
+        // Verify that necessary methods were called
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(departmentAmenitieService, times(1)).deleteAllDepartmentAmenitie(1);
+        verify(departmentAmenitieService, times(1)).insertDepartmentAmenitie(1, selectedAmenitieId);
+    }
+
+    @Test
+    void testGetDepartmentFeatures() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1); // Set appropriate values
+
+        Department department = new Department();
+        department.setDepartmentId(1); // Set appropriate values
+
+        List<Feature> allFeatures = new ArrayList<>();
+        // Add some features to the list
+
+        List<DepartmentFeature> departmentFeatures = new ArrayList<>();
+        // Add some department features to the list
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(departmentService.getByUserId(user.getUserId())).thenReturn(department);
+        when(departmentFeatureService.getAllFeatures()).thenReturn(allFeatures);
+        when(departmentFeatureService.getDepartmentFeatures(department.getDepartmentId())).thenReturn(departmentFeatures);
+
+        // Act
+        String result = gymOwnerController.getDepartmentFeatures(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-update-features", result); // Set the expected view name
+
+    }
+
+    @Test
+    void testUpdateDepartmentFeatures() {
+        // Arrange
+        List<Integer> selectedId = Arrays.asList(1, 2, 3);
+        int departmentId = 1;
+        when(departmentFeatureService.deleteAllDepartmentFeatures(departmentId)).thenReturn(1);
+        when(departmentFeatureService.insertDepartmentFeature(departmentId, selectedId)).thenReturn(new int[]{1, 1, 1});
+
+        // Act
+        String result = gymOwnerController.updateDepartmentFeatures(session, model, selectedId, departmentId);
+
+        // Assert
+        assertEquals("redirect:/gym-owner/department/features", result);
+
+    }
+    @Test
+    void testGetDepartmentImages() {
+        // Arrange
+
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(departmentAlbumsService.getAllByDepartmentID(anyInt())).thenReturn(new ArrayList<>());
+
+        // Act
+        String result = gymOwnerController.getDepartmentImages(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-update-image", result); // Set the expected view name
+
+    }
+
+    @Test
+    void testUpdateDepartmentImages() {
+        // Arrange
+
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(model.addAttribute(anyString(), any())).thenReturn(model);
+
+        // Act
+        String result = gymOwnerController.updateDepartmentImages(session, model, "logo.jpg", "thumbnail.jpg", "wallpaper.jpg", "album1.jpg,album2.jpg");
+
+        // Assert
+        assertEquals("redirect:/gym-owner/department/image", result);
+
+    }
+
+    @Test
+    void testGetDepartmentLocation() {
+        // Arrange
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(model.addAttribute(anyString(), any())).thenReturn(model);
+
+        // Act
+        String result = gymOwnerController.getDepartmentLocation(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-update-location", result);
+
+
+    }
+
+
+
+    @Test
+    void testUpdateDepartmentLocationSuccess() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        Model model = mock(Model.class);
+        UpdateGymOwnerDepartmentLocation locationUpdate = new UpdateGymOwnerDepartmentLocation();
+        locationUpdate.setLongitude("10.12345");
+        locationUpdate.setLatitude("20.54321");
+        User user = new User();
+        user.setUserId(100);
+        Department department = new Department();
+        department.setDepartmentId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(departmentService.getByUserId(anyInt())).thenReturn(department);
+
+        // Act
+        String result = gymOwnerController.updateDepartmentLocation(session, model, locationUpdate, mock(BindingResult.class));
+
+        // Assert
+        assertEquals("redirect:/gym-owner/department/location", result);
+        // Verify that departmentService.updateLongitudeLatitude is called with the correct parameters
+        verify(departmentService, times(1)).updateLongitudeLatitude(eq(1), eq(10.12345), eq(20.54321));
+    }
+
+    @Test
+    void testGetDepartmentGymPlansSuccess() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        Model model = mock(Model.class);
+        User user = new User();
+        user.setUserId(100);
+        Department department = new Department();
+        department.setDepartmentId(1);
+        department.setBrandId(2);
+
+        // Gym plans data
+        List<BrandGymPlanFixedDTO> listFixedGymPlan = Arrays.asList(new BrandGymPlanFixedDTO(), new BrandGymPlanFixedDTO());
+        List<BrandGymPlanFlexDTO> listFlexGymPlan = Arrays.asList(new BrandGymPlanFlexDTO(), new BrandGymPlanFlexDTO());
+
+        // Selected gym plans data
+        List<GymPlanDepartmentNameDto> listFixedGymPlanSelected = Arrays.asList(new GymPlanDepartmentNameDto(), new GymPlanDepartmentNameDto());
+        List<GymPlanDepartmentNameDto> listFlexGymPlanSelected = Arrays.asList(new GymPlanDepartmentNameDto(), new GymPlanDepartmentNameDto());
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        when(gymPlanService.getAllGymPlanFixedByBrandIdActive(anyInt())).thenReturn(listFixedGymPlan);
+        when(gymPlanService.getAllGymPlanFlexByBrandIdActive(anyInt())).thenReturn(listFlexGymPlan);
+        when(gymPlanService.getGymPlanDepartmentFixedByDepartmentId(anyInt())).thenReturn(listFixedGymPlanSelected);
+        when(gymPlanService.getGymPlanDepartmentFlexByDepartmentId(anyInt())).thenReturn(listFlexGymPlanSelected);
+
+        // Act
+        String result = gymOwnerController.getDepartmentGymPlans(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-update-plan", result);
+
+    }
+
+    @Test
+    void testUpdateDepartmentGymPlansSuccess() {
+        // Arrange
+
+        List<Integer> selectedFixedGymPlanId = Arrays.asList(1, 2, 3);
+        List<Integer> selectedFlexGymPlanId = Arrays.asList(4, 5, 6);
+        int departmentId = 1;
+
+        when(gymPlanService.deleteAllGymPlanByDepartmentId(anyInt())).thenReturn(2);
+        when(gymPlanService.insertGymPlanDepartment(anyInt(), anyList())).thenReturn(new int[]{1, 2, 3});
+
+        // Act
+        String result = gymOwnerController.updateDepartmentGymPlans(session, model, selectedFixedGymPlanId, selectedFlexGymPlanId, departmentId);
+
+        // Assert
+        assertEquals("redirect:/gym-owner/department/gym-plans", result);
+         }
+
+    @Test
+    void testCheckAndSetIsFirstTimeFromDB() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        Model model = mock(Model.class);
+        User user = new User();
+        user.setUserId(1);
+        Department departmentDetails = new Department();
+        departmentDetails.setDepartmentId(1);
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(departmentService.getByUserId(user.getUserId())).thenReturn(departmentDetails);
+        when(session.getAttribute("isFirstTime")).thenReturn(true); // Simulate different value in session
+        when(departmentService.checkFirstTimeDepartmentCreated(departmentDetails.getDepartmentId())).thenReturn(true);
+
+        // Act
+        boolean result = gymOwnerController.checkAndSetIsFirstTime(session, model);
+
+        // Assert
+        assertTrue(result);
+
+    }
+
+    @Test
+    void testCheckAndSetIsFirstTimeFromSession() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        Model model = mock(Model.class);
+        User user = new User();
+        user.setUserId(1);
+        Department departmentDetails = new Department();
+        departmentDetails.setDepartmentId(1);
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(departmentService.getByUserId(user.getUserId())).thenReturn(departmentDetails);
+        when(session.getAttribute("isFirstTime")).thenReturn(true); // Simulate the same value in session
+        when(departmentService.checkFirstTimeDepartmentCreated(departmentDetails.getDepartmentId())).thenReturn(true);
+
+        // Act
+        boolean result = gymOwnerController.checkAndSetIsFirstTime(session, model);
+
+        // Assert
+        assertTrue(result);
+
+    }
 }

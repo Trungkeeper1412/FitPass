@@ -29,6 +29,7 @@ public class GymOwnerUpdateDTO {
 
     @NotEmpty(message = "Vui lòng nhập email !")
     @Email (message = "Vui lòng nhập địa chỉ email hợp lệ !")
+    @Size(max = 100, message = "Email không vượt quá 100 kí tự !")
     private String email;
 
     @NotEmpty(message = "Vui lòng nhập số điện thoại !")
