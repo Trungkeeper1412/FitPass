@@ -15,18 +15,22 @@ public class BrandUpdateGymPlanFixedDTO {
 
     @NotNull(message = "Vui lòng nhập số credits !")
     @Positive(message = "Số credits phải lớn hơn 0 !")
+    @Max(value = 10000, message = "Số credits không vượt quá 10000 !")
     private Double price;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
     @Min(value = 1, message = "Số ngày phải lớn hơn 0 !")
+    @Max(value = 36500, message = "Số ngày không vượt quá 36500 ngày")
     private Integer planBeforeActive;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sau khi kích hoạt !")
     @Min(value = 1, message = "Số ngày phải lớn hơn 0 !")
+    @Max(value = 36500, message = "Số ngày không vượt quá 36500 ngày")
     private Integer planAfterActive;
 
     @NotNull(message = "Vui lòng nhập nhập số ngày sử dụng gói tập !")
     @Min(value = 1, message = "Số ngày ít nhất phải bằng 1 !")
+    @Max(value = 36500, message = "Số ngày không vượt quá 36500 ngày")
     private Integer duration;
 
     @NotNull
