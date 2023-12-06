@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class AdditionalResourceWebConfiguration implements WebMvcConfigurer {
@@ -20,4 +21,13 @@ public class AdditionalResourceWebConfiguration implements WebMvcConfigurer {
                 addResourceLocations("file:/" + upload + "/").
                 setCacheControl(CacheControl.noCache());
     }
+
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        // Specify full path to images on Ubuntu file system
+//        String imagesPath = "/home/upload/img/";
+//        registry.addResourceHandler("/img/**")
+//                .addResourceLocations("file:" + imagesPath)
+//                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS));
+//    }
 }
