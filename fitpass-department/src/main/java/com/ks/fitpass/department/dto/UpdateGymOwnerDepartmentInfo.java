@@ -32,15 +32,17 @@ public class UpdateGymOwnerDepartmentInfo {
     private String departmentContactNumber;
 
     @NotEmpty(message = "Vui lòng nhập mô tả thông tin cơ sở !")
-    @Size(min = 2, max = 750, message = "Mô tả thông tin cơ sở phải nằm trong khoảng 2 đến 750 kí tự !")
+    @Size(min = 2, max = 700, message = "Mô tả thông tin cơ sở phải nằm trong khoảng 2 đến 700 kí tự !")
     private String departmentDescription;
 
     @NotNull(message = "Vui lòng nhập sức chứa của cơ sở !")
     @Min(value = 1, message = "Sức chứa phải lớn hơn 0")
+    @Max(value = 10000, message = "Sức chứa không vượt quá 10000")
     private Integer capacity;
 
     @NotNull(message = "Vui lòng nhập diện tích của cơ sở !")
     @Min(value = 1, message = "Diện tích phải lớn hơn 0")
+    @Min(value = 10000, message = "Diện tích không vượt quá 10000")
     private Double area;
 
     @NotEmpty(message = "Vui lòng chọn thành phố !")

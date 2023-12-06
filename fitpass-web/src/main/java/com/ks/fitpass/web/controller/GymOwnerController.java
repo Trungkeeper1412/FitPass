@@ -60,28 +60,12 @@ public class GymOwnerController {
     @GetMapping("/index")
     public String getGOIndex(HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-        try {
+
             if (isFirstTime) {
                 return "redirect:/gym-owner/department/update-details";
             }
             return "gym-owner/index";
-        } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
-            // Handle empty result set
-            logger.error("EmptyResultDataAccessException occurred", ex);
-            return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
-        } catch (DataAccessException ex) {
-            // Handle other data access issues
-            logger.error("DataAccessException occurred", ex);
-            return "error/data-access-error";
-        }
+
     }
 
     //Gym Owner Profile (a person) & Change Password
@@ -411,6 +395,7 @@ public class GymOwnerController {
     //Feedback Management
     @GetMapping("/feedback/list")
     public String getListOfFeedback(HttpSession session, Model model) {
+        try{
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         if (isFirstTime) {
             return "redirect:/gym-owner/department/update-details";
@@ -422,6 +407,11 @@ public class GymOwnerController {
         model.addAttribute("userFeedbackList", userFeedbackList);
         model.addAttribute("departmentDetails", departmentDetails);
         return "gym-owner/gym-department-feedback";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     //Department Management

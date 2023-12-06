@@ -83,6 +83,11 @@ public class BrandOwnerControllerTest {
 
     @InjectMocks
     private BrandOwnerController brandOwnerController;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
     public static GymOwnerUpdateDTO createMockGymOwnerUpdateDTO() {
         GymOwnerUpdateDTO gymOwnerUpdateDTO = mock(GymOwnerUpdateDTO.class);
 
@@ -105,10 +110,7 @@ public class BrandOwnerControllerTest {
 
         return gymOwnerUpdateDTO;
     }
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+
 
     @Test
     public void testGetBrandProfileSuccess() {
