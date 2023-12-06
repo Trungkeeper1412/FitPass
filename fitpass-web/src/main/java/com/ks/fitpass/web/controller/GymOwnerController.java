@@ -34,6 +34,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -940,6 +941,52 @@ public class GymOwnerController {
             return "error/data-access-error";
         }
     }
+//    @PostMapping("/department/image")
+//    public ResponseEntity<?> updateDepartmentImages(@RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
+//                                                    @RequestParam String imageWallpaperUrl,
+//                                                @RequestParam String listAlbumUrl, HttpSession session, Model model) {
+//        logger.error("The method was running");
+//    boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+//    try {
+//        if (isFirstTime) {
+//            return ResponseEntity.status(HttpStatus.FOUND)
+//                    .location(URI.create("/gym-owner/department/update-details"))
+//                    .build();
+//        }
+//
+//        User user = (User) session.getAttribute("userInfo");
+//        Department departmentDetails = departmentService.getByUserId(user.getUserId());
+//
+//        departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
+//        departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
+//
+//        String[] listAlbum = listAlbumUrl.split(",");
+//        List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
+//        Arrays.stream(listAlbum).forEach(albumUrl -> {
+//            DepartmentAlbums departmentAlbums = new DepartmentAlbums();
+//            departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
+//            departmentAlbums.setPhotoUrl(albumUrl);
+//            departmentAlbumsList.add(departmentAlbums);
+//        });
+//        departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
+//
+//        // Return a successful response entity
+//        return ResponseEntity.ok("Image update successful");
+//
+//    } catch (DuplicateKeyException ex) {
+//        logger.error("DuplicateKeyException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate key error");
+//    } catch (EmptyResultDataAccessException ex) {
+//        logger.error("EmptyResultDataAccessException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No data found");
+//    } catch (IncorrectResultSizeDataAccessException ex) {
+//        logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Incorrect result size error");
+//    } catch (DataAccessException ex) {
+//        logger.error("DataAccessException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Data access error");
+//    }
+//    }
 
     @GetMapping("/department/location")
     public String getDepartmentLocation(HttpSession session, Model model) {
