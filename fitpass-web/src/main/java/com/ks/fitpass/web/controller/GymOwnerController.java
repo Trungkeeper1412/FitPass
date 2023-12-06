@@ -44,6 +44,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class GymOwnerController {
 
+    private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
     private final DepartmentScheduleService departmentScheduleService;
     private final DepartmentService departmentService;
     private final DepartmentAlbumsService departmentAlbumsService;
@@ -55,17 +56,15 @@ public class GymOwnerController {
     private final WalletService walletService;
     private final Email emailService;
 
-    private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
-
     //Index (Statistic Dashboard)
     @GetMapping("/index")
     public String getGOIndex(HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
 
-            if (isFirstTime) {
-                return "redirect:/gym-owner/department/update-details";
-            }
-            return "gym-owner/index";
+        if (isFirstTime) {
+            return "redirect:/gym-owner/department/update-details";
+        }
+        return "gym-owner/index";
 
     }
 
@@ -97,11 +96,12 @@ public class GymOwnerController {
             return "error/data-access-error";
         }
     }
+
     @PostMapping("/profile")
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model,HttpSession session) {
+                                 Model model, HttpSession session) {
 
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
@@ -396,18 +396,18 @@ public class GymOwnerController {
     //Feedback Management
     @GetMapping("/feedback/list")
     public String getListOfFeedback(HttpSession session, Model model) {
-        try{
-        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-        if (isFirstTime) {
-            return "redirect:/gym-owner/department/update-details";
-        }
-        User user = (User) session.getAttribute("userInfo");
-        Department departmentDetails = departmentService.getByUserId(user.getUserId());
+        try {
+            boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+            if (isFirstTime) {
+                return "redirect:/gym-owner/department/update-details";
+            }
+            User user = (User) session.getAttribute("userInfo");
+            Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-        List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentDetails.getDepartmentId());
-        model.addAttribute("userFeedbackList", userFeedbackList);
-        model.addAttribute("departmentDetails", departmentDetails);
-        return "gym-owner/gym-department-feedback";
+            List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentDetails.getDepartmentId());
+            model.addAttribute("userFeedbackList", userFeedbackList);
+            model.addAttribute("departmentDetails", departmentDetails);
+            return "gym-owner/gym-department-feedback";
         } catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
@@ -897,14 +897,60 @@ public class GymOwnerController {
         }
     }
 
+    //    @PostMapping("/department/image")
+//    public String updateDepartmentImages(HttpSession session, Model model,
+//                                         @RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
+//                                         @RequestParam String imageWallpaperUrl, @RequestParam String listAlbumUrl) {
+//        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+//        try {
+//            if (isFirstTime) {
+//                return "redirect:/gym-owner/department/update-details";
+//            }
+//
+//            User user = (User) session.getAttribute("userInfo");
+//            Department departmentDetails = departmentService.getByUserId(user.getUserId());
+//
+//            departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
+//            departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
+//            String[] listAlbum = listAlbumUrl.split(",");
+//            List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
+//            Arrays.stream(listAlbum).forEach(albumUrl -> {
+//                DepartmentAlbums departmentAlbums = new DepartmentAlbums();
+//                departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
+//                departmentAlbums.setPhotoUrl(albumUrl);
+//                departmentAlbumsList.add(departmentAlbums);
+//            });
+//            departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
+//
+//            return "redirect:/gym-owner/department/image";
+//        } catch (DuplicateKeyException ex) {
+//            // Handle duplicate key violation
+//            logger.error("DuplicateKeyException occurred", ex);
+//            return "error/duplicate-key-error";
+//        } catch (EmptyResultDataAccessException ex) {
+//            // Handle empty result set
+//            logger.error("EmptyResultDataAccessException occurred", ex);
+//            return "error/no-data";
+//        } catch (IncorrectResultSizeDataAccessException ex) {
+//            // Handle incorrect result size
+//            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+//            return "error/incorrect-result-size-error";
+//        } catch (DataAccessException ex) {
+//            // Handle other data access issues
+//            logger.error("DataAccessException occurred", ex);
+//            return "error/data-access-error";
+//        }
+//    }
     @PostMapping("/department/image")
-    public String updateDepartmentImages(HttpSession session, Model model,
-                                         @RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
-                                         @RequestParam String imageWallpaperUrl, @RequestParam String listAlbumUrl) {
+    public ResponseEntity<?> updateDepartmentImages(@RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
+                                                    @RequestParam String imageWallpaperUrl,
+                                                    @RequestParam String listAlbumUrl, HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
             if (isFirstTime) {
-                return "redirect:/gym-owner/department/update-details";
+                return ResponseEntity.status(HttpStatus.FOUND)
+                        .location(URI.create("/gym-owner/department/update-details"))
+                        .build();
             }
 
             User user = (User) session.getAttribute("userInfo");
@@ -912,6 +958,7 @@ public class GymOwnerController {
 
             departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
             departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
+
             String[] listAlbum = listAlbumUrl.split(",");
             List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
             Arrays.stream(listAlbum).forEach(albumUrl -> {
@@ -922,71 +969,23 @@ public class GymOwnerController {
             });
             departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
 
-            return "redirect:/gym-owner/department/image";
+            // Return a successful response entity
+            return ResponseEntity.ok("Cập nhật hình ảnh thành công");
+
         } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Lỗi trùng khóa - hình ảnh có thể đã tồn tại.");
         } catch (EmptyResultDataAccessException ex) {
-            // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
-            return "error/no-data";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy dữ liệu.");
         } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
             logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Kích thước ảnh không chính xác.");
         } catch (DataAccessException ex) {
-            // Handle other data access issues
             logger.error("DataAccessException occurred", ex);
-            return "error/data-access-error";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi truy cập dữ liệu.");
         }
     }
-//    @PostMapping("/department/image")
-//    public ResponseEntity<?> updateDepartmentImages(@RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
-//                                                    @RequestParam String imageWallpaperUrl,
-//                                                @RequestParam String listAlbumUrl, HttpSession session, Model model) {
-//        logger.error("The method was running");
-//    boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-//    try {
-//        if (isFirstTime) {
-//            return ResponseEntity.status(HttpStatus.FOUND)
-//                    .location(URI.create("/gym-owner/department/update-details"))
-//                    .build();
-//        }
-//
-//        User user = (User) session.getAttribute("userInfo");
-//        Department departmentDetails = departmentService.getByUserId(user.getUserId());
-//
-//        departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
-//        departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
-//
-//        String[] listAlbum = listAlbumUrl.split(",");
-//        List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
-//        Arrays.stream(listAlbum).forEach(albumUrl -> {
-//            DepartmentAlbums departmentAlbums = new DepartmentAlbums();
-//            departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
-//            departmentAlbums.setPhotoUrl(albumUrl);
-//            departmentAlbumsList.add(departmentAlbums);
-//        });
-//        departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
-//
-//        // Return a successful response entity
-//        return ResponseEntity.ok("Image update successful");
-//
-//    } catch (DuplicateKeyException ex) {
-//        logger.error("DuplicateKeyException occurred", ex);
-//        return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate key error");
-//    } catch (EmptyResultDataAccessException ex) {
-//        logger.error("EmptyResultDataAccessException occurred", ex);
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No data found");
-//    } catch (IncorrectResultSizeDataAccessException ex) {
-//        logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Incorrect result size error");
-//    } catch (DataAccessException ex) {
-//        logger.error("DataAccessException occurred", ex);
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Data access error");
-//    }
-//    }
 
     @GetMapping("/department/location")
     public String getDepartmentLocation(HttpSession session, Model model) {

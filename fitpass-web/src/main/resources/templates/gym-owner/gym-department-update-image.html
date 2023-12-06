@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="row text-start">
                                     <div class="col-md-4">
-                                        <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
+                                        <label for="imageLogo" class="form-label fw-bold fs-4">Logo :</label>
                                         <div class="image-container">
                                             <img th:if="${departmentDetails.getDepartmentLogoUrl() ne null}" th:src="${departmentDetails.getDepartmentLogoUrl()}" alt="Image">
                                             <img th:unless="${departmentDetails.getDepartmentLogoUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
+                                        <label for="imageThumbnail" class="form-label fw-bold fs-4">Thumbnail
                                             :</label>
                                         <div class="image-container">
                                             <img th:if="${departmentDetails.getDepartmentThumbnailUrl() ne null}" th:src="${departmentDetails.getDepartmentThumbnailUrl()}" alt="Image">
@@ -61,7 +61,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
+                                        <label for="imageWallpaper" class="form-label fw-bold fs-4">Ảnh bìa
                                             :</label>
                                         <div class="image-container">
                                             <img th:if="${departmentDetails.getDepartmentWallpaperUrl() ne null}" th:src="${departmentDetails.getDepartmentWallpaperUrl()}" alt="Image">
@@ -80,7 +80,7 @@
                                 <div class="row text-start">
                                     <div class="col">
                                         <div class="d-flex justify-content-between pt-3">
-                                            <label for="album" class="form-label fw-bold fs-4">Album
+                                            <label for="listAlbumUrl" class="form-label fw-bold fs-4">Album
                                                 ảnh:</label>
                                             <input type="file" id="imageInput" style="display: none;" accept="image/*">
                                             <input type="hidden" name="listAlbumUrl" id="listAlbumUrl">
@@ -164,48 +164,102 @@
 
 <script>
 
+    // $("#saveChangeBtn").click(function (e) {
+    //     e.preventDefault();
+    //     if ($("#updateImageForm").valid()) {
+    //         Swal.fire({
+    //             title: 'Bạn có muốn cập nhật thông tin',
+    //             icon: 'question',
+    //             showCancelButton: true,
+    //             confirmButtonText: 'Có',
+    //             cancelButtonText: 'Không'
+    //         }).then((result) => {
+    //             if (result.isConfirmed) {
+    //                 var values = [];
+    //                 $(".hidden-img-album-src").each(function () {
+    //                     values.push($(this).val());
+    //                 });
+    //                 var concatenatedValues = values.join(',');
+    //                 $("#listAlbumUrl").val(concatenatedValues);
+    //
+    //                 $("#updateImageForm").submit();
+    //
+    //                 Swal.fire({
+    //                     title: 'Thành công!',
+    //                     text: 'Thông tin đã được cập nhật thành công.',
+    //                     icon: 'success',
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             } else {
+    //                 Swal.fire({
+    //                     title: 'Thất bại!',
+    //                     text: 'Thông tin chưa được cập nhật.',
+    //                     icon: 'error',
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
+
     $("#saveChangeBtn").click(function (e) {
         e.preventDefault();
 
-        // Thực hiện validation trước khi xử lý form
         if ($("#updateImageForm").valid()) {
-            Swal.fire({
-                title: 'Bạn có muốn cập nhật thông tin',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Có',
-                cancelButtonText: 'Không'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var values = [];
-                    $(".hidden-img-album-src").each(function () {
-                        values.push($(this).val());
-                    });
-                    var concatenatedValues = values.join(',');
-                    $("#listAlbumUrl").val(concatenatedValues);
+            // Collect the values from the form inputs
+            var imageLogoUrl = $("#imageLogo").val();
+            var imageThumbnailUrl = $("#imageThumbnail").val();
+            var imageWallpaperUrl = $("#imageWallpaper").val();
 
-                    $("#updateImageForm").submit();
+            var values = [];
+            $(".hidden-img-album-src").each(function () {
+                values.push($(this).val());
+            });
+            var listAlbumUrl = values.join(',');
 
+            // Use AJAX to submit the form data
+            $.ajax({
+                type: "POST",
+                url: "/gym-owner/department/image",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    imageLogoUrl: imageLogoUrl,
+                    imageThumbnailUrl: imageThumbnailUrl,
+                    imageWallpaperUrl: imageWallpaperUrl,
+                    listAlbumUrl: listAlbumUrl
+                },
+                success: function (response) {
                     Swal.fire({
                         title: 'Thành công!',
-                        text: 'Thông tin đã được cập nhật thành công.',
+                        text: response,
                         icon: 'success',
                         showConfirmButton: false,
                         timer: 1500
                     });
-                } else {
+                },
+                error: function (xhr) {
+                    var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText || 'Đã có lỗi trong việc cập nhật ảnh';
                     Swal.fire({
                         title: 'Thất bại!',
-                        text: 'Thông tin chưa được cập nhật.',
+                        text: errorMessage,
                         icon: 'error',
                         showConfirmButton: false,
                         timer: 1500
                     });
                 }
             });
+        } else {
+            Swal.fire({
+                title: 'Thất bại!',
+                text: 'Thông tin chưa được cập nhật do lỗi xác thực.',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     });
-
 </script>
 </body>
 

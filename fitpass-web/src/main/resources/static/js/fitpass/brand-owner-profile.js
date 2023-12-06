@@ -68,13 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     contentType: false,
                     success: function (response) {
                         console.log(response)
-                        if (type == "logo") {
+                        if (type === "logo") {
                             $("#imageLogo").val(response);
-                        } else if (type == "thumbnail") {
+                        } else if (type === "thumbnail") {
                             $("#imageThumbnail").val(response)
-                        } else if (type == "wallpaper") {
+                        } else if (type === "wallpaper") {
                             $("#imageWallpaper").val(response)
-                        } else if (type == "album") {
+                        } else if (type === "album") {
                             $(`#album-${num}`).val(response);
                         }
                     },
@@ -91,11 +91,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     contentType: false,
                     success: function (response) {
                         console.log(response)
-                        if (type == "logo") {
+                        if (type === "logo") {
                             $("#imageLogo").val(response);
-                        } else if (type == "thumbnail") {
+                        } else if (type === "thumbnail") {
                             $("#imageThumbnail").val(response)
-                        } else if (type == "wallpaper") {
+                        } else if (type === "wallpaper") {
                             $("#imageWallpaper").val(response)
                         }
                     },
@@ -245,17 +245,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         contentType: false,
                         success: function (response) {
                             console.log(response)
-                            if (type == "logo") {
+                            if (type === "logo") {
                                 $("#imageLogo").val(response);
-                            } else if (type == "thumbnail") {
+                            } else if (type === "thumbnail") {
                                 $("#imageThumbnail").val(response)
-                            } else if (type == "wallpaper") {
+                            } else if (type === "wallpaper") {
                                 $("#imageWallpaper").val(response)
-                            } else if (type == "album") {
+                            } else if (type === "album") {
                                 let num = idImageAlbumEdit;
                                 // Gửi yêu cầu delete ảnh cũ
                                 let oldImageSrc = $(`#album-${num}`).val();
-                                if (oldImageSrc != "") {
+                                if (oldImageSrc !== "") {
                                     deleteImage(oldImageSrc);
                                 }
                                 $(`#album-${num}`).val(response);
@@ -274,11 +274,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         contentType: false,
                         success: function (response) {
                             console.log(response)
-                            if (type == "logo") {
+                            if (type === "logo") {
                                 $("#imageLogo").val(response);
-                            } else if (type == "thumbnail") {
+                            } else if (type === "thumbnail") {
                                 $("#imageThumbnail").val(response)
-                            } else if (type == "wallpaper") {
+                            } else if (type === "wallpaper") {
                                 $("#imageWallpaper").val(response)
                             }
                         },
@@ -555,40 +555,30 @@ $(document).ready(function () {
                     brandStatusCd: $("#inlineradio1").prop("checked") ? 1 : 2, brandStatusName: "",
                 }
             };
-
-            Swal.fire({
-                title: 'Vui lòng đợi...',
-                icon: 'info',
-                showConfirmButton: false,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading();
-                    $.ajax({
-                        type: "POST",
-                        url: "/brand-owner/updateProfile",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(profileData),
-                        success: function (response) {
-                            Swal.fire({
-                                title: 'Thành công!',
-                                text: 'Cập nhật thông tin thành công.',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000
-                            }).then(() => {
-                                location.reload();
-                            });
-                        },
-                        error: function (error) {
-                            console.error("Error:", error);
-                            Swal.fire({
-                                title: 'Thất bại!',
-                                text: 'Cập nhật thông tin thất bại.',
-                                icon: 'error',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
+            $.ajax({
+                type: "POST",
+                url: "/brand-owner/updateProfile",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(profileData),
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Cập nhật thông tin thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => {
+                        location.reload();
+                    });
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Cập nhật thông tin thất bại.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
                     });
                 }
             });
