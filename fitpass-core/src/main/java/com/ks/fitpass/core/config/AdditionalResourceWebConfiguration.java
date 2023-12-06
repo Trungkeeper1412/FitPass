@@ -1,4 +1,4 @@
-package com.ks.fitpass.web.util;
+package com.ks.fitpass.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
