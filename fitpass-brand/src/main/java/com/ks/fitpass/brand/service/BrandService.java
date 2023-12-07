@@ -1,9 +1,9 @@
 package com.ks.fitpass.brand.service;
 
-import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
-import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
 import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
+import com.ks.fitpass.partner.register.dto.BrandStatAdmin;
+import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

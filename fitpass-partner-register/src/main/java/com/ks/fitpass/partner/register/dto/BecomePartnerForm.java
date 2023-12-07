@@ -1,4 +1,4 @@
-package com.ks.fitpass.become_a_partner.dto;
+package com.ks.fitpass.partner.register.dto;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import jakarta.validation.constraints.*;

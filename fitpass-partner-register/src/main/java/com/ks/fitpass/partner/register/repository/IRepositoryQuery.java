@@ -1,4 +1,4 @@
-package com.ks.fitpass.become_a_partner.repository;
+package com.ks.fitpass.partner.register.repository;
 
 public interface IRepositoryQuery {
     String CREATE_BECOME_PARTNER_REQUEST = """
