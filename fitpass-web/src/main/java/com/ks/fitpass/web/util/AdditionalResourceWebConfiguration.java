@@ -1,4 +1,4 @@
-package com.ks.fitpass.core.config;
+package com.ks.fitpass.web.util;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
@@ -24,6 +24,6 @@ public class AdditionalResourceWebConfiguration implements WebMvcConfigurer {
         String imagesPath = "/home/upload/img/";
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("file:" + imagesPath)
-                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS));
+                .setCacheControl(CacheControl.noCache());
     }
 }
