@@ -107,10 +107,5 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public AdditionalResourceWebConfiguration additionalResourceWebConfiguration(){
-        return new AdditionalResourceWebConfiguration();
-    }
 }
 
