@@ -62,7 +62,7 @@
     <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 50px;"></div>
     <div class="list-service-wrapper  mt-4">
         <button th:if="${brandAmenitie.size() > 4}" class="left" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-scroll.png}">
         </button>
         <div class="scroll-services row mt-4">
             <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3"  th:each="amenitie : ${brandAmenitie}">
@@ -74,7 +74,7 @@
             </div>
         </div>
         <button th:if="${brandAmenitie.size() > 4}" class="right" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-scroll.png}">
         </button>
     </div>
 
