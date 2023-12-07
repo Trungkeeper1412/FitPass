@@ -61,6 +61,11 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public Double countAllCredit() {
-        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_ALL_CREDIT, Double.class);
+        try{
+            return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_ALL_CREDIT, Double.class);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return 0.0;
+        }
     }
 }
