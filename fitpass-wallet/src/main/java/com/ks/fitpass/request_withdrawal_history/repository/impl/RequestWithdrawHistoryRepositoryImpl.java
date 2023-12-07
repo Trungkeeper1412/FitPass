@@ -166,7 +166,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
     }
 
     @Override
-    public int getUserIdByRequestHistoryId(int requestHistoryId) {
+    public Integer getUserIdByRequestHistoryId(int requestHistoryId) {
         return jdbcTemplate.queryForObject(GET_USER_ID_BY_REQUEST_HISTORY_ID, Integer.class, requestHistoryId);
     }
 

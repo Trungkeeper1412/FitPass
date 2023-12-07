@@ -13,8 +13,6 @@ public interface DepartmentService {
 
     Department getByUserId(int userId) throws DataAccessException;
 
-    List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException;
-
     List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
 
     Department getOne(int id) throws DataAccessException;
@@ -26,8 +24,6 @@ public interface DepartmentService {
     List<Department> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
                                                                 double userLatitude, double userLongitude,
                                                                 String city, String sortPrice, String sortRating, String belowDistance);
-    List<Department> findByRatingBetween(double from, double to);
-
 
     List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size, String sortRating);
 

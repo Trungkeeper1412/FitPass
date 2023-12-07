@@ -29,7 +29,7 @@ public interface RequestWithdrawHistoryRepository {
 
     Integer getNumberPercentage(int requestHistoryId);
 
-    int getUserIdByRequestHistoryId(int requestHistoryId);
+    Integer getUserIdByRequestHistoryId(int requestHistoryId);
 
     Double countAllBrandCredit();
 
