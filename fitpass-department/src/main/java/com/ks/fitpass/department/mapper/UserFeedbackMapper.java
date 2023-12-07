@@ -22,6 +22,7 @@ public class UserFeedbackMapper implements RowMapper<UserFeedback> {
                 .comments(resultSet.getString("comments"))
                 .feedbackTime(resultSet.getTimestamp("feedback_time").toLocalDateTime())
                 .feedbackStatus(resultSet.getInt("feedback_status"))
+                .imageUrl(resultSet.getString("image_url"))
                 .build();
     }
 }

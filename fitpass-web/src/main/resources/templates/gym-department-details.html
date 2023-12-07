@@ -201,7 +201,7 @@
         <div class="rating-option row">
             <div class="rating-avg col-md-3 col-lg-2">
                 <div style="display: flex; position: relative">
-                    <div class="rating-point" th:text="${departmentFeedbacks.avgRating}"></div>
+                    <div class="rating-point" th:text="${department.getRating()}"></div>
                     <div class="rating-max">trên 5</div>
                 </div>
                 <div class="rating" th:attr="data-star=${departmentFeedbacks.avgRating}"></div>
@@ -608,7 +608,7 @@
                     feedbackListHtml += `
                             <div class="user-rating">
                 <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
+                    <img style="width: 60px; margin: auto;" src="${feedback.imageUrl}">
                 </div>
                 <div class="user-rating-description">
                     <div>${feedback.userName}</div>
