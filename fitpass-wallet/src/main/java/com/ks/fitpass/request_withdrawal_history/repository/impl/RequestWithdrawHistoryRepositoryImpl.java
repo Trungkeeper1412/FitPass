@@ -119,6 +119,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
             requestWithdrawHistoryWithBrandName.setAmountCredit(resultSet.getLong("amount_credit"));
             requestWithdrawHistoryWithBrandName.setActualMoney(resultSet.getLong("actual_money"));
             requestWithdrawHistoryWithBrandName.setStatus(resultSet.getString("status"));
+            requestWithdrawHistoryWithBrandName.setMoneyPercent(resultSet.getInt("money_percent"));
             requestWithdrawHistoryWithBrandName.setBrandName(resultSet.getString("name"));
             return requestWithdrawHistoryWithBrandName;
         }, status);
@@ -135,6 +136,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
             requestWithdrawHistoryWithBrandName.setAmountCredit(resultSet.getLong("amount_credit"));
             requestWithdrawHistoryWithBrandName.setActualMoney(resultSet.getLong("actual_money"));
             requestWithdrawHistoryWithBrandName.setStatus(resultSet.getString("status"));
+            requestWithdrawHistoryWithBrandName.setMoneyPercent(resultSet.getInt("money_percent"));
             requestWithdrawHistoryWithBrandName.setBrandName(resultSet.getString("name"));
             return requestWithdrawHistoryWithBrandName;
         });

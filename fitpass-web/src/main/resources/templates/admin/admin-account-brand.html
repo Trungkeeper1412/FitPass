@@ -41,7 +41,6 @@
                                     <th>Số liên hệ cơ sở</th>
                                     <th>Email</th>
                                     <th class="status-active">Trạng thái</th>
-                                    <th class="table-action-lock">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,7 +51,6 @@
                                         <td th:text="${b.getBrandContactNumber()}">0987654321</td>
                                         <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>
                                         <td th:text="${b.getBrandStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
-                                        <td><a class="btn btn-danger">Khóa tài khoản</a></td>
                                     </tr>
                                 </th:block>
                                 </tbody>
