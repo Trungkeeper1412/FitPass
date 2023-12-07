@@ -77,6 +77,7 @@ public interface IRepositoryQuery {
                        rwh.amount_credit,
                        rwh.actual_money,
                        rwh.status,
+                       b.money_percent,
                        b.name
                 FROM request_withdrawal_history rwh
                 JOIN credit_card cc ON rwh.credit_card_id = cc.credit_card_id
@@ -92,6 +93,7 @@ public interface IRepositoryQuery {
                        rwh.amount_credit,
                        rwh.actual_money,
                        rwh.status,
+                       b.money_percent,
                        b.name
                 FROM request_withdrawal_history rwh
                 JOIN credit_card cc ON rwh.credit_card_id = cc.credit_card_id
