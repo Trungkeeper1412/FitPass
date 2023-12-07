@@ -100,7 +100,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListCheckedInFixedByDepartmentId(anyInt())).thenReturn(checkedInDTOList);
 
         // Call the method
-        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
+        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model,session);
 
         // Verify the interactions and assertions
         verify(employeeService, times(1)).getListNeedCheckInFixedByDepartmentId(departmentId);
@@ -121,7 +121,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenThrow(DuplicateKeyException.class);
 
         // Call the method
-        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
+        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model,session);
 
         // Verify the interactions and assertions
         assertEquals("error/duplicate-key-error", result);
@@ -135,7 +135,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Call the method
-        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
+        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model,session);
 
         // Verify the interactions and assertions
         assertEquals("error/no-data", result);
@@ -149,7 +149,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
 
         // Call the method
-        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model);
+        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model,session);
 
         // Verify the interactions and assertions
         assertEquals("error/incorrect-result-size-error", result);
@@ -360,7 +360,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckOutFlexibleByDepartmentId(anyInt())).thenReturn(checkOutList);
 
         // Act
-        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model);
+        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model, session);
 
         // Assert
         verify(model).addAttribute(eq("checkInList"), eq(checkInList));
@@ -375,7 +375,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt())).thenThrow(DuplicateKeyException.class);
 
         // Act
-        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model);
+        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model,session);
 
         // Assert
         assertEquals("error/duplicate-key-error", result);
@@ -387,7 +387,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
-        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model);
+        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model,session);
 
         // Assert
         assertEquals("error/no-data", result);
@@ -399,7 +399,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
 
         // Act
-        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model);
+        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model,session);
 
         // Assert
         assertEquals("error/incorrect-result-size-error", result);
@@ -411,7 +411,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
 
         // Act
-        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model);
+        String result = employeeController.getCheckInListOfFlexibleCustomer(1, model,session);
 
         // Assert
         assertEquals("error/data-access-error", result);
@@ -424,7 +424,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckInByUsername(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn("searchText", "username", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn(session,"searchText", "username", 1);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -438,7 +438,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckInByPhoneNumber(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn("searchText", "phone-number", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn(session,"searchText", "phone-number", 1);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -452,7 +452,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckInByUsername(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn("searchText", "invalid-option", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn(session,"searchText", "invalid-option", 1);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -465,7 +465,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckInByUsername(anyString(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn("searchText", "username", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn(session,"searchText", "username", 1);
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
@@ -477,7 +477,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckInByUsername(anyString(), anyInt())).thenThrow(RuntimeException.class);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn("searchText", "username", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckIn(session,"searchText", "username", 1);
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
@@ -490,7 +490,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckOutByUsername(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut("searchText", "username", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut(session,"searchText", "username", 1);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -504,7 +504,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckOutByPhoneNumber(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut("searchText", "phone-number", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut(session,"searchText", "phone-number", 1);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -518,7 +518,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckOutByUsername(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut("searchText", "invalid-option", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut(session,"searchText", "invalid-option", 1);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -531,7 +531,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckOutByUsername(anyString(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut("searchText", "username", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut(session,"searchText", "username", 1);
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
@@ -543,7 +543,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckOutByUsername(anyString(), anyInt())).thenThrow(RuntimeException.class);
 
         // Act
-        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut("searchText", "username", 1);
+        ResponseEntity<List<CheckInFlexibleDTO>> responseEntity = employeeController.searchListCheckOut(session,"searchText", "username", 1);
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
@@ -729,7 +729,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckInFixedByUsername(searchText, departmentId)).thenReturn(getMockedCheckInFixedDTOList());
 
         // Act
-        ResponseEntity<List<CheckInFixedDTO>> responseEntity = employeeController.searchListFixedCheckIn(searchText, searchOption, departmentId);
+        ResponseEntity<List<CheckInFixedDTO>> responseEntity = employeeController.searchListFixedCheckIn(session, searchText, searchOption, departmentId);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -744,7 +744,7 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         when(employeeService.searchListCheckInFixedByUsername(searchText, departmentId)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
         // Act
-        ResponseEntity<List<CheckInFixedDTO>> responseEntity = employeeController.searchListFixedCheckIn(searchText, searchOption, departmentId);
+        ResponseEntity<List<CheckInFixedDTO>> responseEntity = employeeController.searchListFixedCheckIn(session,searchText, searchOption, departmentId);
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
@@ -766,7 +766,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckedInFixedByUsername(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act
-        ResponseEntity<List<CheckedInFixedDTO>> responseEntity = employeeController.searchListFixedCheckOut(searchText, searchOption, departmentId);
+        ResponseEntity<List<CheckedInFixedDTO>> responseEntity = employeeController.searchListFixedCheckOut(session, searchText, searchOption, departmentId);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -783,7 +783,7 @@ public class EmployeeControllerTest {
         when(employeeService.searchListCheckedInFixedByUsername(anyString(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
 
         // Act
-        ResponseEntity<List<CheckedInFixedDTO>> responseEntity = employeeController.searchListFixedCheckOut(searchText, searchOption, departmentId);
+        ResponseEntity<List<CheckedInFixedDTO>> responseEntity = employeeController.searchListFixedCheckOut(session, searchText, searchOption, departmentId);
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
