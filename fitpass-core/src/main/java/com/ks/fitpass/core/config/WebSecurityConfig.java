@@ -21,9 +21,11 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    public WebSecurityConfig (CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler){
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
@@ -104,6 +106,11 @@ public class WebSecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AdditionalResourceWebConfiguration additionalResourceWebConfiguration(){
+        return new AdditionalResourceWebConfiguration();
     }
 }
 
