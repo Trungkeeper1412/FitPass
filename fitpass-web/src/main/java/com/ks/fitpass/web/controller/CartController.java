@@ -9,7 +9,13 @@ import com.ks.fitpass.order.dto.CartUpdateRequestDto;
 import com.ks.fitpass.order.entity.cart.Cart;
 import com.ks.fitpass.order.entity.cart.CartItem;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +30,7 @@ public class CartController {
 
     private final GymPlanService gymPlanService;
 
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     public CartController(GymPlanService gymPlanService) {
         this.gymPlanService = gymPlanService;
@@ -50,16 +57,12 @@ public class CartController {
 /*                    item.setQuantity(item.getQuantity() + quantity);*/
                     productExistsInCart = true;
                     break;
-
                 }
             }
 
             if(productExistsInCart) {
-                return ResponseEntity.badRequest().body("Sản phẩm này đã add vào giỏ hàng");
-            }
-
-            // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm nó vào
-            if (!productExistsInCart) {
+                return ResponseEntity.badRequest().body("Sản phẩm này đã có sẵn vào giỏ hàng");
+            } else{
                 cart.addItem(product, quantity);
             }
 
@@ -76,42 +79,53 @@ public class CartController {
     @GetMapping("/quantityInCart")
     @ResponseBody
     public ResponseEntity<Integer> getQuantityInCart(HttpSession session) {
-
-            Cart cart = (Cart) session.getAttribute("cart");
-            int quantity = 0;
-            if(cart != null) {
-                quantity = cart.getItems().size();
-            }
-        return ResponseEntity.ok(quantity);
+try {
+    Cart cart = (Cart) session.getAttribute("cart");
+    int quantity = 0;
+    if (cart != null) {
+        quantity = cart.getItems().size();
+    }
+    return ResponseEntity.ok(quantity);
+} catch (RuntimeException ex) {
+    // Handle other data access issues
+    logger.error("RunTimeException occurred", ex);
+    return ResponseEntity.badRequest().build();
+}
     }
 
     @GetMapping("/view")
     public String viewCart(Model model,  HttpSession session) {
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
-        List<CartItem> cartItems;
-        cartItems = cart.getItems();
-
-        List<Department> departmentList = new ArrayList<>();
-
-        for (CartItem item:
-             cartItems) {
-            GymPlanDepartmentNameDto gymPlanDepartmentNameDto = item.getGymPlan();
-
-            if(departmentList.stream().noneMatch(e ->  e.getDepartmentId() == gymPlanDepartmentNameDto.getGymDepartmentId())) {
-                Department department = new Department();
-                department.setDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
-                department.setDepartmentName(gymPlanDepartmentNameDto.getGymDepartmentName());
-                departmentList.add(department);
+        try {
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new Cart();
+                session.setAttribute("cart", cart);
             }
-        }
+            List<CartItem> cartItems;
+            cartItems = cart.getItems();
 
-        model.addAttribute("departmentList", departmentList);
-        model.addAttribute("cartItems", cartItems);
-        return "shopping-cart";
+            List<Department> departmentList = new ArrayList<>();
+
+            for (CartItem item :
+                    cartItems) {
+                GymPlanDepartmentNameDto gymPlanDepartmentNameDto = item.getGymPlan();
+
+                if (departmentList.stream().noneMatch(e -> e.getDepartmentId() == gymPlanDepartmentNameDto.getGymDepartmentId())) {
+                    Department department = new Department();
+                    department.setDepartmentId(gymPlanDepartmentNameDto.getGymDepartmentId());
+                    department.setDepartmentName(gymPlanDepartmentNameDto.getGymDepartmentName());
+                    departmentList.add(department);
+                }
+            }
+
+            model.addAttribute("departmentList", departmentList);
+            model.addAttribute("cartItems", cartItems);
+            return "shopping-cart";
+        } catch (Exception ex) {
+            // Handle any unexpected exceptions
+            logger.error("An unexpected exception occurred", ex);
+            return "error/error";
+        }
     }
 
 @GetMapping("/remove")
@@ -143,11 +157,5 @@ public String removeItem(@RequestParam int gymPlanId, @RequestParam int departme
             return ResponseEntity.ok("Cart updated successfully");
         }
         return ResponseEntity.badRequest().body("Cart not found");
-    }
-
-    //Test method
-    @GetMapping("/checkout")
-    public String showCheckout() {
-        return "check-out";
     }
 }

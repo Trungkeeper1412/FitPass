@@ -40,9 +40,9 @@ public interface IRepositoryQuery {
 
     String INSERT_ORDER_PLAN_DETAIL= """
                 INSERT INTO order_plan_detail (order_id, name, gym_department_id, quantity, price_per_hours, price, duration,
-                                               plan_before_active_validity, plan_after_active_validity, item_status_key, description)
+                                               plan_before_active_validity, plan_after_active_validity, item_status_key, description, plan_expired_time)
                 VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             """;
 
     String GET_ALL_ORDER_ITEM_BY_USER_ID = """
@@ -147,5 +147,79 @@ public interface IRepositoryQuery {
 
     String DECREASE_DURATION = """
                 UPDATE order_plan_detail SET duration = duration - 1 WHERE order_detail_id = ?
+            """;
+
+    String GET_LIST_ORDER_DETAIL_EXPIRED = """
+                SELECT order_detail_id
+                FROM order_plan_detail
+                WHERE plan_expired_time IS NOT NULL AND DATE(plan_expired_time) < CURDATE();
+            """;
+
+    String UPDATE_ORDER_DETAIL_EXPIRED_STATUS= """
+                UPDATE order_plan_detail
+                SET item_status_key = ?
+                WHERE order_detail_id = your_order_detail_id;
+            """;
+
+    String GET_LATEST_ORDER_DETAIL_ID = """
+                SELECT order_detail_id
+                FROM order_plan_detail
+                ORDER BY order_detail_id DESC
+                LIMIT 1;
+            """;
+
+    String GET_ADMIN_STAT = """
+                SELECT
+                    COUNT(CASE WHEN price > 0 THEN 1 END) AS total_fixed,
+                    COUNT(CASE WHEN price_per_hours > 0 THEN 1 END) AS total_flex
+                FROM
+                    order_plan_detail;
+            """;
+
+    // Select number of order by brand id
+
+    String SELECT_NUMBER_OF_ORDER = """
+            SELECT
+                COUNT(o.order_id) AS totalOrders
+            FROM
+                `order` o
+            JOIN
+                order_plan_detail opd ON o.order_id = opd.order_id
+            JOIN
+                gym_department g ON opd.gym_department_id = g.gym_department_id
+            JOIN
+                brand b ON g.brand_id = b.brand_id
+            WHERE
+                b.brand_id = ?
+            """;
+
+    // Select total revenue by brand id
+    String SELECT_TOTAL_REVENUE = """
+                        SELECT
+                            SUM(opd.price) AS totalRevenue
+                        FROM
+                            `order` o
+                        JOIN
+                            order_plan_detail opd ON o.order_id = opd.order_id
+                        JOIN
+                            gym_department g ON opd.gym_department_id = g.gym_department_id
+                        JOIN
+                            brand b ON g.brand_id = b.brand_id
+                        WHERE
+                            b.brand_id = ?
+            """;
+
+    String GET_TOTAL_BUY_BY_DEPARTMENT_ID = """
+                SELECT COUNT(*) AS total_buy
+                FROM order_plan_detail opd
+                JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                WHERE gd.gym_department_id = ?;
+            """;
+
+    String GET_TOTAL_REVENUE_BY_DEPARTMENT_ID = """
+                SELECT COALESCE(SUM(opd.price), 0) AS total_revenue
+                FROM order_plan_detail opd
+                JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                WHERE gd.gym_department_id = ?;           
             """;
 }

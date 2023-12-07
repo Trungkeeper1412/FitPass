@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Đăng ký</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+
+    <th:block th:include="common/vendor-head"></th:block>
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+
+<body class="login-register-body">
+<div style="height: 100%; width: 100%;">
+    <div class="row mx" style="height: 100%; width: 100%;">
+        <div class="col-md-6 banner-wrapper">
+            <div class="banner">
+                <a th:href="@{/login}" onclick="changeTab" id="changeTab" class="ghost_btn move_register">Đăng nhập</a>
+            </div>
+        </div>
+
+        <div id="register-tab" class="col-md-6 register-tab">
+            <h1 class="fw-bold">ĐĂNG KÝ</h1>
+            <div class="line"></div>
+            <form id="formSubmit" method="post" action="/register" th:object="${userUpdateDTO}">
+
+                <div class="input-fields">
+                    <div class="name" style="display: flex;">
+                        <div class="input-field fname">
+                            <div class="input-title">Họ và tên đệm</div>
+                            <input th:field="*{firstName}" type="text" name="fist-name" value="">
+                            <span th:if="${#fields.hasErrors('firstName')}" class="error" th:errors="*{firstName}">firstName Error</span>
+                        </div>
+                        <div class="input-field lname">
+                            <div class="input-title">Tên</div>
+                            <input th:field="*{lastName}" type="text" name="last-name" value="">
+                            <span th:if="${#fields.hasErrors('lastName')}" class="error" th:errors="*{lastName}">lastName Error</span>
+                        </div>
+                    </div>
+                    <div class="name" style="display: flex;">
+                        <div class="input-field fname">
+                            <div class="input-title">Gmail</div>
+                            <input th:field="*{email}" type="text" name="email" value="">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</span>
+                        </div>
+                        <div class="input-field lname">
+                            <div class="input-title">Số điện thoại</div>
+                            <input th:field="*{phoneNumber}" type="number" name="phoneNumber" value="">
+                            <span th:if="${#fields.hasErrors('phoneNumber')}"
+                                  th:errors="*{phoneNumber}">phone Error</span>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-title">Tên đăng nhâp</div>
+                        <input th:field="*{userAccount}" type="text" name="username" value="">
+                        <span th:if="${#fields.hasErrors('userAccount')}" th:errors="*{userAccount}">phone Error</span>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-title">Mật khẩu</div>
+                        <input th:field="*{userPassword}" type="password" name="password" value="">
+                        <span th:if="${#fields.hasErrors('userPassword')}"
+                              th:errors="*{userPassword}">phone Error</span>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-title">Xác nhận mật khẩu</div>
+                        <input th:field="*{reUserPassword}" type="password" name="reUserPassword" value="">
+                        <span th:if="${#fields.hasErrors('reUserPassword')}"
+                              th:errors="*{reUserPassword}">phone Error</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px;">
+                        <div class="input-field dob">
+                            <div class="input-title">Ngày sinh</div>
+                            <input th:field="*{dateOfBirth}" type="date" value="">
+                            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth Error</span>
+                        </div>
+                        <div class="input-field gender">
+                            <div class="input-title">Giới tính</div>
+                            <select th:field="*{gender}" class="form-select" id="gender" name="gender">
+                                <option value="">Chọn giới tính</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('gender')}" class="error" th:errors="*{gender}">gender Error</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="login">Đăng ký</button>
+            </form>
+            <div th:if="${param.success}" id="toast-info" class="alert alert-success"> Đăng ký thành công </div>
+        </div>
+    </div>
+</div>
+<script th:if="${param.success}">
+    const toastError = document.getElementById("toast-info");
+    toastError.classList.add("show");
+    setTimeout(function () {
+        toastError.classList.remove("show");
+    }, 2800);
+</script>
+<script>
+</script>
+</body>
+
+</html>

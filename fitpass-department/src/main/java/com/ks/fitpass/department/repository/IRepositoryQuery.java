@@ -47,17 +47,6 @@ public interface IRepositoryQuery {
                 AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
             WHERE d.gym_department_status_key = ?
                         """;
-//    String GET_ALL_DEPARTMENT_BY_STATUS ="""
-//            SELECT * FROM (SELECT d.gym_department_id, d.brand_id, d.name, d.address, d.contact_number, d.logo_url, d.wallpaper_url, d.thumbnail_url, d.description, d.latitude, d.longitude, d.rating, d.capacity, d.area, d.city, d.gym_department_status_key, kbn_department_status.mst_kbn_value AS gym_department_status_name,
-//            COALESCE((SELECT MAX(gp.price) FROM gym_plan gp WHERE gp.brand_id = d.brand_id), 0) AS max_price,
-//            COALESCE((SELECT MIN(gp.price) FROM gym_plan gp WHERE gp.brand_id = d.brand_id), 0) AS min_price,
-//            (6371 * acos(cos(radians(:userLatitude)) * cos(radians(d.latitude)) * cos(radians(d.longitude) - radians(:userLongitude)) + sin(radians(:userLatitude)) * sin(radians(d.latitude)))) AS distance
-//            FROM gym_department d
-//            LEFT JOIN mst_kbn kbn_department_status ON d.gym_department_status_key = kbn_department_status.mst_kbn_key
-//            AND kbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'
-//            WHERE d.gym_department_status_key = :status
-//            """;
-
     String GET_ALL_DEPARTMENT_ORDER_BY_RATING ="""
                  SELECT
                      d.gym_department_id,
@@ -260,8 +249,7 @@ public interface IRepositoryQuery {
             SELECT
                      da.id,
                      da.gym_department_id,
-                     da.photo_url,
-                     da.description
+                     da.photo_url
                 FROM gym_department_albums da
                     WHERE da.gym_department_id =?
                 """;
@@ -359,6 +347,7 @@ public interface IRepositoryQuery {
                     uf.department_id,
                     uf.rating,
                     uf.comments,
+                    ud.image_url,
                     uf.feedback_time,
                     uf.feedback_status
                 FROM
@@ -392,7 +381,7 @@ public interface IRepositoryQuery {
                                 uf.department_id = ?
             """;
 
-    String GET_DEPARTMENT_FEEDBACK_PAGNITION = """
+    String GET_DEPARTMENT_FEEDBACK_PAGINATION = """
                 SELECT
                     uf.feedback_id,
                     uf.user_id,
@@ -402,14 +391,14 @@ public interface IRepositoryQuery {
                     uf.rating,
                     uf.comments,
                     uf.feedback_time,
+                    ud.image_url,
                     uf.feedback_status
                 FROM
                     user_feedback uf
                     INNER JOIN `user` u ON uf.user_id = u.user_id
                     INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
                 WHERE
-                    uf.department_id = ?
-                LIMIT ? OFFSET ?
+                    uf.department_id = :departmentId
             """;
 
     String GET_DEPARTMENT_FEATURES = """
@@ -449,20 +438,6 @@ public interface IRepositoryQuery {
                         INNER JOIN gym_department_amenities gda ON ba.amenitie_id = gda.amenitie_id \s
                         WHERE gda.gym_department_id = ? AND ba.amenitie_status = 1
             """;
-
-//    String GET_DEPARTMENT_AMENITIES_BRAND_ID = """
-//                                    SELECT\s
-//                                        gda.gym_department_id,
-//                        				ba.amenitie_id,
-//                                        ba.brand_id,
-//                                        ba.photo_url,
-//                                        ba.amenitie_name,
-//                                        ba.description,
-//                                        ba.amenitie_status
-//                        		FROM brand_amenities ba
-//                        INNER JOIN gym_department_amenities gda ON ba.amenitie_id = gda.amenitie_id \s
-//                        WHERE ba.brand_id = ? AND ba.amenitie_status = 1
-//            """;
 
 String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
         SELECT\s
@@ -538,8 +513,8 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
             """;
 
     String CREATE_DEPARTMENT_WITH_BRAND_ID = """
-                INSERT INTO gym_department (name, brand_id, gym_department_status_key)
-                VALUES (?, ?, ?);
+                INSERT INTO gym_department (name, brand_id, gym_department_status_key,first_time)
+                VALUES (?, ?, ?,?);
             """;
 
     String UPDATE_DEPARTMENT_GYM_OWNER = """
@@ -568,10 +543,197 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 ORDER BY d.rating DESC;
             """;
 
-    String GET_ALL_AMENITIE_OF_DEPARTMENT = """
+    String GET_ALL_AMENITIES_OF_DEPARTMENT = """
                 SELECT ba.amenitie_id, ba.brand_id, ba.photo_url, ba.amenitie_name, ba.description
                 FROM gym_department_amenities gda
                 INNER JOIN brand_amenities ba ON gda.amenitie_id = ba.amenitie_id
                 WHERE gda.gym_department_id = ?;
+            """;
+
+    String GET_ALL_FEATURES_ACTIVE = """
+                SELECT feature_id, feature_icon, feature_name, feature_status
+                FROM features WHERE feature_status = 1;
+            """;
+
+    String GET_ALL_FEATURES = """
+                SELECT feature_id, feature_icon, feature_name, feature_status
+                FROM features;
+            """;
+
+    String UPDATE_GYM_OWNER_DEPARTMENT_INFO = """
+                UPDATE gym_department
+                SET
+                    address = ?,
+                    contact_number = ?,
+                    description = ?,
+                    capacity = ?,
+                    area = ?,
+                    city = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_GYM_OWNER_DEPARTMENT_INFO_DETAIL = """
+                UPDATE gym_department
+                SET
+                    address = ?,
+                    contact_number = ?,
+                    description = ?,
+                    capacity = ?,
+                    area = ?,
+                    city = ?,
+                    latitude = ?,
+                    longitude = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String ADD_DEPARTMENT_SCHEDULE = """
+                INSERT INTO gym_department_schedule (gym_department_id, `day`, open_time, close_time)
+                VALUES (?, ?, ?, ?);
+            """;
+
+    String INSERT_DEPARTMENT_AMENITY = """
+                INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
+                VALUES (?, ?);
+            """;
+
+    String INSERT_DEPARTMENT_FEATURE = """
+                INSERT INTO gym_department_features
+                (feature_id, gym_department_id, feature_status)
+                VALUES(?, ?, 1);
+            """;
+
+    String DELETE_ALL_DEPARTMENT_AMENITY = """
+                DELETE FROM gym_department_amenities
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_ALL_DEPARTMENT_FEATURES = """
+                DELETE FROM gym_department_features
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_ALL_DEPARTMENT_SCHEDULE = """
+                DELETE FROM gym_department_schedule
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_DEPARTMENT_IMAGE = """
+                UPDATE gym_department
+                SET logo_url = ?, thumbnail_url = ?, wallpaper_url = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String UPDATE_DEPARTMENT_LONGITUDE_LATITUDE = """
+                UPDATE gym_department
+                SET longitude = ?, latitude = ?
+                WHERE gym_department_id = ?;
+            """;
+
+    String DELETE_DEPARTMENT_ALBUMS_BY_ID_DEPARTMENT = """
+                DELETE FROM gym_department_albums
+                WHERE gym_department_id = ?;
+            """;
+
+    String INSERT_DEPARTMENT_ALBUM = """
+                INSERT INTO gym_department_albums
+                (gym_department_id, photo_url)
+                VALUES(?, ?);
+            """;
+
+    String CHECK_FIRST_TIME_DEPARTMENT_CREATED = """
+                SELECT COUNT(*)
+                FROM gym_department
+                WHERE gym_department_id = ?
+                AND first_time = 1;
+            """;
+
+    String UPDATE_FIRST_TIME_DEPARTMENT_CREATED = """
+                UPDATE gym_department
+                SET first_time = 0
+                WHERE gym_department_id = ?;
+            """;
+
+             String  GET_FEATURE_BY_FEATURE_ID = """
+                SELECT feature_id, feature_icon, feature_name, feature_status
+                FROM features WHERE feature_id = ?;
+            """;
+
+    String INSERT_FEATURE = """
+                INSERT INTO features
+                (feature_name, feature_icon, feature_status)
+                VALUES(?, ?, ?);
+            """;
+
+    String UPDATE_FEATURE = """
+                UPDATE features
+                SET feature_name = ?, feature_icon = ?
+                WHERE feature_id = ?;
+            """;
+
+    String UPDATE_FEATURE_STATUS = """
+                UPDATE features
+                SET feature_status = ?
+                WHERE feature_id = ?;
+            """;
+
+
+    String COUNT_ALL_FEEDBACK = """
+                SELECT COUNT(*)
+                FROM user_feedback
+                WHERE department_id = :departmentId
+            """;
+    String GET_ALL_DEPARTMENT_NAME_AND_LOGO_BY_ID = """
+                SELECT
+                    d.name,
+                    d.logo_url
+                FROM
+                    gym_department d
+                WHERE
+                    d.gym_department_id = ?;
+            """;
+
+    String COUNT_ALL_DEPARTMENT = """
+                SELECT COUNT(*)
+                FROM gym_department
+            """;
+
+    String GET_DEPARTMENT_STAT_BRAND_OWNER = """
+                SELECT
+                    gd.name AS departmentName,
+                    COUNT(od.order_detail_id) AS numberOfGymPlanSold,
+                    SUM(od.price) AS totalAmount
+                FROM
+                    gym_department gd
+                LEFT JOIN
+                    order_plan_detail od ON gd.gym_department_id = od.gym_department_id
+                LEFT JOIN
+                    brand b ON gd.brand_id = b.brand_id
+                WHERE
+                    b.brand_id = ?
+                GROUP BY
+                    gd.name;
+            """;
+
+    String GET_DEPARTMENT_RATING_STAT_BRAND_OWNER = """
+                SELECT
+                    gd.name AS departmentName,
+                    COUNT(uf.feedback_id) AS numberOfRating,
+                    AVG(gd.rating) AS rating
+                FROM
+                    user_feedback uf
+                JOIN
+                    gym_department gd ON uf.department_id = gd.gym_department_id
+                JOIN
+                    brand b ON gd.brand_id = b.brand_id
+                WHERE
+                    b.brand_id = ?
+                GROUP BY
+                    gd.name;
+            """;
+
+    String GET_TOTAL_NUMBER_RATING_BY_DEPARTMENT_ID = """
+                SELECT COUNT(uf.feedback_id) AS numberOfRating
+                FROM user_feedback uf
+                WHERE uf.department_id = ?;
             """;
 }

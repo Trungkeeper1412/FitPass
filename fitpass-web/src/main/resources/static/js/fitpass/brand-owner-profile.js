@@ -5,12 +5,14 @@ $(function () {
 // --------------------------------------------------------------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
     var type = "";
+    var idImageAlbumEdit = "";
     const MAX_IMAGES = 9;
     const rowElement = document.querySelector(".row-add");
     const imageInput = document.getElementById("imageInput");
     const addButton = document.getElementById("addImageButton");
     const editImageInput = createEditImageInput();
     let editingImageContainer = null;
+    const currentUrl = window.location.pathname;
 
     // Gán sự kiện 'change' cho imageInput khi tài liệu được tải
     imageInput.addEventListener("change", handleImageChange);
@@ -55,26 +57,54 @@ document.addEventListener("DOMContentLoaded", function () {
         var formData = new FormData();
         formData.append("file", file);
 
-        $.ajax({
-            type: "POST",
-            url: `/upload/${type}/${$("#brandId").val()}`,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                console.log(response)
-                if (type == "logo") {
-                    $("#imageLogo").val(response);
-                } else if (type == "thumbnail") {
-                    $("#imageThumbnail").val(response)
-                } else if (type == "wallpaper") {
-                    $("imageWallpaper").val(response)
-                }
-            },
-            error: function () {
-                $("#message").text("Failed to upload file");
+        if (!currentUrl.includes("gym-owner/department/update-details")) {
+            if (currentUrl.includes("gym-owner/department/image")) {
+                let num = rowElement.querySelectorAll(".col-md-4").length + 1;
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/department/${type}/${$("#brandId").val()}`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        if (type === "logo") {
+                            $("#imageLogo").val(response);
+                        } else if (type === "thumbnail") {
+                            $("#imageThumbnail").val(response)
+                        } else if (type === "wallpaper") {
+                            $("#imageWallpaper").val(response)
+                        } else if (type === "album") {
+                            $(`#album-${num}`).val(response);
+                        }
+                    },
+                    error: function () {
+                        $("#message").text("Failed to upload file");
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: `/upload/${type}/${$("#brandId").val()}`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response)
+                        if (type === "logo") {
+                            $("#imageLogo").val(response);
+                        } else if (type === "thumbnail") {
+                            $("#imageThumbnail").val(response)
+                        } else if (type === "wallpaper") {
+                            $("#imageWallpaper").val(response)
+                        }
+                    },
+                    error: function () {
+                        $("#message").text("Failed to upload file");
+                    }
+                });
             }
-        });
+        }
 
         if (file) {
             const reader = new FileReader();
@@ -92,7 +122,27 @@ document.addEventListener("DOMContentLoaded", function () {
     function createImageContainer(imageSrc) {
         const newImageContainer = document.createElement("div");
         newImageContainer.classList.add("col-md-4");
-        newImageContainer.innerHTML = `
+        let num = rowElement.querySelectorAll(".col-md-4").length + 1;
+        if(type === "album") {
+            newImageContainer.innerHTML = `
+              <div class="image-container">
+                <img src="${imageSrc}" alt="Image">
+                <div class="image-actions">
+                  <button class="img-edit-button" type="button"
+                    data-toggle="tooltip" data-placement="top" data-image-type="${type}"
+                    data-album-id="${num}"
+                    title="Chỉnh sửa hình ảnh"><i
+                    class="fas fa-edit"></i></button>
+                  <button class="img-delete-button" type="button"
+                    data-toggle="tooltip" data-placement="top"
+                    title="Xóa hình ảnh"><i
+                    class="fas fa-trash"></i></button>
+                </div>
+                <input type="hidden" class="hidden-img-album-src" id="album-${rowElement.querySelectorAll(".col-md-4").length + 1}">
+              </div>
+            `;
+        } else {
+            newImageContainer.innerHTML = `
       <div class="image-container">
         <img src="${imageSrc}" alt="Image">
         <div class="image-actions">
@@ -107,6 +157,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     `;
+        }
+
         // Kích hoạt tooltips
         $(newImageContainer).find('[data-toggle="tooltip"]').tooltip();
 
@@ -123,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Hàm thêm hình ảnh
     function addImage() {
+        type = "album";
         if (rowElement.querySelectorAll(".col-md-4").length >= MAX_IMAGES) {
             Swal.fire({
                 icon: 'warning', title: 'Chỉ có thể thêm 9 ảnh vào album',
@@ -143,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             return;
         }
-
+        console.log(imageContainer);
         Swal.fire({
             title: 'Xác nhận xóa',
             text: 'Bạn có chắc muốn xóa hình ảnh này?',
@@ -153,6 +206,10 @@ document.addEventListener("DOMContentLoaded", function () {
             cancelButtonText: 'Hủy',
         }).then((result) => {
             if (result.isConfirmed) {
+                let num = rowElement.querySelectorAll(".col-md-4").length;
+                // Gửi yêu cầu delete ảnh cũ
+                let oldImageSrc = $(`#album-${num}`).val();
+                deleteImage(oldImageSrc);
                 removeTooltip(imageContainer);
                 imageContainer.remove();
             }
@@ -164,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
         editingImageContainer = event.target.closest(".col-md-4");
         let button = editingImageContainer.querySelector(".img-edit-button");
         type = button.getAttribute("data-image-type");
+        idImageAlbumEdit = button.getAttribute("data-album-id");
         editImageInput.value = null;
         editImageInput.click();
     }
@@ -176,26 +234,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
             var formData = new FormData();
             formData.append("file", file);
-            $.ajax({
-                type: "POST",
-                url: `/upload/${type}/${$("#brandId").val()}`,
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log(response)
-                    if (type == "logo") {
-                        $("#imageLogo").val(response);
-                    } else if (type == "thumbnail") {
-                        $("#imageThumbnail").val(response)
-                    } else if (type == "wallpaper") {
-                        $("#imageWallpaper").val(response)
-                    }
-                },
-                error: function () {
-                    $("#message").text("Failed to upload file");
+
+            if (!currentUrl.includes("gym-owner/department/update-details")) {
+                if (currentUrl.includes("gym-owner/department/image")) {
+                    $.ajax({
+                        type: "POST",
+                        url: `/upload/department/${type}/${$("#brandId").val()}`,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            console.log(response)
+                            if (type === "logo") {
+                                $("#imageLogo").val(response);
+                            } else if (type === "thumbnail") {
+                                $("#imageThumbnail").val(response)
+                            } else if (type === "wallpaper") {
+                                $("#imageWallpaper").val(response)
+                            } else if (type === "album") {
+                                let num = idImageAlbumEdit;
+                                // Gửi yêu cầu delete ảnh cũ
+                                let oldImageSrc = $(`#album-${num}`).val();
+                                if (oldImageSrc !== "") {
+                                    deleteImage(oldImageSrc);
+                                }
+                                $(`#album-${num}`).val(response);
+                            }
+                        },
+                        error: function () {
+                            $("#message").text("Failed to upload file");
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: `/upload/${type}/${$("#brandId").val()}`,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            console.log(response)
+                            if (type === "logo") {
+                                $("#imageLogo").val(response);
+                            } else if (type === "thumbnail") {
+                                $("#imageThumbnail").val(response)
+                            } else if (type === "wallpaper") {
+                                $("#imageWallpaper").val(response)
+                            }
+                        },
+                        error: function () {
+                            $("#message").text("Failed to upload file");
+                        }
+                    });
                 }
-            });
+            }
 
             if (file) {
                 const reader = new FileReader();
@@ -212,46 +304,31 @@ document.addEventListener("DOMContentLoaded", function () {
         const tooltips = $(element).find('[data-toggle="tooltip"]');
         tooltips.tooltip('dispose');
     }
+
 });
+function deleteImage(imagePath) {
+    $.ajax({
+        type: "POST",
+        url: `/upload/deleteImage`,
+        contentType: "application/json",
+        data:JSON.stringify( {
+            "imagePath" : imagePath
+        }),
+        success: function (response) {
+            console.log(response)
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+
+
+}
 
 // jQuery time
 var current_fs, next_fs, previous_fs; // fieldsets
 var left, opacity, scale; // fieldset properties which we will animate
 var animating; // flag to prevent quick multi-click glitches
-
-$(".next").click(function () {
-    if (animating) return false;
-    animating = true;
-
-    current_fs = $(this).parent();
-    next_fs = $(this).parent().next();
-
-    // activate next step on progress bar using the index of next_fs
-    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-    // show the next fieldset
-    next_fs.show();
-    // hide the current fieldset with style
-    current_fs.animate({opacity: 0}, {
-        step: function (now, mx) {
-            // as the opacity of current_fs reduces to 0 - stored in "now"
-            // 1. scale current_fs down to 80%
-            scale = 1 - (1 - now) * 0.2;
-            // 2. bring next_fs from the right (50%)
-            left = (now * 50) + "%";
-            // 3. increase opacity of next_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({
-                transform: "scale(" + scale + ")", position: "absolute",
-            });
-            next_fs.css({left: left, opacity: opacity});
-        }, duration: 800, complete: function () {
-            current_fs.hide();
-            animating = false;
-        }, // this comes from the custom easing plugin
-        easing: "easeInOutBack",
-    });
-});
 
 $(".previous").click(function () {
     if (animating) return false;
@@ -285,34 +362,9 @@ $(".previous").click(function () {
     });
 });
 
-$(".submit").click(function () {
-    return false;
-})
-
-$(document).ready(function () {
-    function configureDataTable(tableId) {
-        $(tableId).DataTable({
-            "paging": true, "lengthMenu": [10, 25, 50, 100], "searching": true,
-            "bDestroy": true
-        });
-    }
-
-    // Bảng "Gói linh hoạt"
-    configureDataTable('#dataTableFlexible');
-
-    // Bảng "Gói cố định"
-    configureDataTable('#dataTableFixed');
-
-    // Bảng "Checked Gói linh hoạt"
-    configureDataTable('#dataTableCheckedFlexible');
-
-    // Bảng "Checked Gói cố định"
-    configureDataTable('#dataTableCheckedFixed');
-
-    configureDataTable('#dataTableAmenities');
-
-    configureDataTable('#dataTableFeatures');
-});
+// $(".submit").click(function () {
+//     return false;
+// })
 
 function previewImage(input) {
     if (input.files && input.files[0]) {
@@ -327,53 +379,209 @@ function previewImage(input) {
     }
 }
 
-$("#submitButton").click(function () {
-    var profileData = {
-        brandId: $("#brandId").val(),
-        userId: 1,
-        brandName: $("#name-brand").val(),
-        brandLogoUrl: $("#imageLogo").val(),
-        brandWallpaperUrl: $("#imageWallpaper").val(),
-        brandThumbnailUrl: $("#imageThumbnail").val(),
-        brandDescription: $("#description").text(),
-        brandContactNumber: $("#phone").val(),
-        brandEmail: $("#email").val(),
-        brandStatus: {
-            brandStatusCd: $("#inlineradio1").prop("checked") ? 1 : 2, brandStatusName: "",
-        }
-    };
+//Code Js submit update Profile
+$.validator.addMethod("correctNumber", function(value, element) {
+    var correctNumber;
+    if (value.startsWith("1900") || value.startsWith("1800")) {
+        correctNumber = /^(1800|1900)\d{6}$/;
+    } else {
+        correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
+    }
+    return this.optional(element) || correctNumber.test(value);
+}, "Đầu số không đúng định dạng !");
 
-    console.log(JSON.stringify(profileData));
-
-    $.ajax({
-        type: "POST",
-        url: "/brand-owner/updateProfile",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(profileData),
-        success: function (response) {
-            console.log("Success:", response);
-
-            Swal.fire({
-                title: 'Đang cập nhật...', timer: 5000,
-                timerProgressBar: true, allowOutsideClick: false,
-                onBeforeOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-
-            setTimeout(function () {
-                Swal.fire({
-                    icon: 'success', title: 'Cập nhật thành công', showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    window.location.href = "/brand-owner/department/list"
-                });
-            }, 5000);
+$(document).ready(function () {
+    $("#msform").validate({
+        rules: {
+            brandName: {
+                required: true,
+                minlength: 3,
+                maxlength: 32,
+                pattern: /^(?!\s+$).+/,
+            },
+            phone: {
+                required: true,
+                minlength: 10,
+                maxlength: 11,
+                correctNumber: true
+            },
+            address: {
+                required: true,
+                maxlength: 150,
+                pattern: /^(?!\s+$).+/,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            comment: {
+                required: true,
+                minlength: 2,
+                maxlength: 700,
+                pattern: /^(?!\s+$).+/,
+            },
+            capacity: {
+                required: true,
+                number: true,
+                min: 0.01,
+                max: 10000,
+            },
+            area: {
+                required: true,
+                number: true,
+                min: 0.01,
+                max: 10000,
+            },
+            province: {
+                required: true,
+            },
+            latitude: {
+                required: true,
+                pattern: /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/,
+            },
+            longitude: {
+                required: true,
+                pattern: /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/,
+            },
         },
-        error: function (error) {
-            console.error("Error:", error);
-            // Xử lý lỗi (nếu có)
+        messages: {
+            brandName: {
+                required: "Vui lòng nhập tên cơ sở !",
+                minlength: "Tên thương hiệu phải có ít nhất 3 kí tự !",
+                maxlength: "Tên thương hiệu không được vượt quá 32 kí tự !",
+                pattern: "Tên thương hiệu đang bị trống !",
+            },
+            phone: {
+                required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập số điện thoại !",
+                minlength: 'Đầu số phải có ít nhất 8 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                correctNumber: "Đầu số không đúng định dạng !",
+            },
+            address: {
+                required: "Vui lòng nhập địa chỉ !",
+                maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
+                pattern: "Địa chỉ đang bị trống !",
+            },
+            email: {
+                required: "Vui lòng nhập email !",
+                email: "Vui lòng nhập địa chỉ email hợp lệ !"
+            },
+            comment: {
+                required: "Vui lòng nhập nhập mô tả gói tập !",
+                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
+                maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+                pattern: "Mô tả gói tập đang bị trống !",
+            },
+            capacity: {
+                required: "Vui lòng nhập sức chứa !",
+                number: "Vui lòng nhập số !",
+                min: "Sức chứa phải lớn hơn 0",
+                max: "Sức chứa không vượt quá 10000 !",
+            },
+            area: {
+                required: "Vui lòng nhập diện tích !",
+                number: "Vui lòng nhập số !",
+                min: "Diện tích phải lớn hơn 0",
+                max: "Diện tích không vượt quá 10000 !",
+            },
+            province: {
+                required: "Vui lòng chọn tỉnh/thành phố !",
+            },
+            latitude: {
+                required: "Vui lòng nhập kinh độ!",
+                pattern: "Kinh độ của bạn không hợp lệ!",
+            },
+            longitude: {
+                required: "Vui lòng nhập vĩ độ!",
+                pattern: "Vĩ độ của bạn không hợp lệ!",
+            },
+        },
+    });
+
+    $(".next").click(function () {
+        if (!$("#msform").valid()) {
+            return false;
+        } else {
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            // activate next step on progress bar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            // show the next fieldset
+            next_fs.show();
+            // hide the current fieldset with style
+            current_fs.animate({opacity: 0}, {
+                step: function (now, mx) {
+                    // as the opacity of current_fs reduces to 0 - stored in "now"
+                    // 1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    // 2. bring next_fs from the right (50%)
+                    left = (now * 50) + "%";
+                    // 3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        transform: "scale(" + scale + ")", position: "absolute",
+                    });
+                    next_fs.css({left: left, opacity: opacity});
+                }, duration: 800, complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                }, // this comes from the custom easing plugin
+                easing: "easeInOutBack",
+            });
         }
     });
-})
+
+    $("#submitButton").click(function (e) {
+        e.preventDefault(); // Prevent the default form submit action
+
+        // Validate the form
+        if ($("#msform").valid()) {
+            var profileData = {
+                brandId: $("#brandId").val(),
+                userId: 1,
+                brandName: $("#name-brand").val(),
+                brandLogoUrl: $("#imageLogo").val(),
+                brandWallpaperUrl: $("#imageWallpaper").val(),
+                brandThumbnailUrl: $("#imageThumbnail").val(),
+                brandDescription: $("#description").val(),
+                brandContactNumber: $("#phone").val(),
+                brandEmail: $("#email").val(),
+                brandStatus: {
+                    brandStatusCd: $("#inlineradio1").prop("checked") ? 1 : 2, brandStatusName: "",
+                }
+            };
+            $.ajax({
+                type: "POST",
+                url: "/brand-owner/updateProfile",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(profileData),
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Cập nhật thông tin thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => {
+                        location.reload();
+                    });
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Cập nhật thông tin thất bại.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        } else {
+            return false; // If the form is not valid, do nothing
+        }
+    });
+});

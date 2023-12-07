@@ -16,4 +16,5 @@ public class BrandGymPlanFlexDTO {
     private int planBeforeActive;
     private int planAfterActive;
     private int status;
+    private String description;
 }

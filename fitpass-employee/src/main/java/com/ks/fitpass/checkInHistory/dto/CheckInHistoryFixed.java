@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @Setter
 public class CheckInHistoryFixed {
     private String username;
+    private String userImageUrl;
     private String phoneNumber;
     private String empName;
     private Timestamp checkInTime;

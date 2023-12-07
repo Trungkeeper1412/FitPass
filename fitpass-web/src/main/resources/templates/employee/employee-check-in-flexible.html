@@ -206,7 +206,6 @@
                 url: `/employee/searchListCheckIn?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}` ,
                 success: function (data) {
                     // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                    console.log(data);
                     displaySearchResultsCheckIn(data);
                 },
                 error: function () {
@@ -222,7 +221,6 @@
                 url: `/employee/searchListCheckOut?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}` ,
                 success: function (data) {
                     // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                    console.log(data);
                     displaySearchResultsCheckOut(data);
                 },
                 error: function () {
@@ -234,8 +232,6 @@
         function displaySearchResultsCheckIn(results) {
             // Xóa các kết quả hiện tại
             $("#CheckInList").empty();
-
-            console.log(results)
             // Hiển thị kết quả tìm kiếm
             if (results.length > 0) {
                 var resultHtml = "";
@@ -264,7 +260,6 @@
                                             </div>
                                         </div>`;
                 }
-                console.log(resultHtml);
                 $("#CheckInList").append(resultHtml);
             } else {
                 $("#CheckInList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
@@ -275,7 +270,6 @@
             // Xóa các kết quả hiện tại
             $("#CheckOutList").empty();
 
-            console.log(results)
             // Hiển thị kết quả tìm kiếm
             if (results.length > 0) {
                 var resultHtml = "";
@@ -304,7 +298,6 @@
                                             </div>
                                         </div>`;
                 }
-                console.log(resultHtml);
                 $("#CheckOutList").append(resultHtml);
             } else {
                 $("#CheckOutList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);

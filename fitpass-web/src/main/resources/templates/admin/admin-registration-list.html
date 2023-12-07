@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="admin/common/head"></th:block>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <th:block th:replace="admin/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <th:block th:replace="admin/common/navbar"></th:block>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Đơn đang chờ xử lý</h2>
+                    </div>
+
+                    <!-- Modal chưa xử lý -->
+                    <div class="modal fade" id="pendingModal" role="dialog" aria-labelledby="pendingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="pendingModalLabel">Đơn đang chờ xử lý</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <input type="hidden" id="becomeAPartnerRequestIdPending" value="1">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandNamePending" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwnerPending" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="emailPending" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTimePending" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumberPending" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="addressPending" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="websitePending" value="http://www.example.com" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation('pending')">
+                                        <i class="fas fa-times-circle mr-2"></i>
+                                        Hủy đơn
+                                    </button>
+                                    <button type="button" class="btn btn-warning ml-2" onclick="showProcessingConfirmation('pending')">
+                                        Xác nhận xử lý
+                                        <i class="fas fa-check-circle ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal đang xử lý  -->
+                    <div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="processingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="processingModalLabel">Đơn đang xử lý</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="hidden" id="becomeAPartnerRequestIdProcessing" value="">
+                                                    <input type="text" class="form-control" id="brandNameProcessing" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwnerProcessing" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="emailProcessing" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTimeProcessing" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumberProcessing" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="addressProcessing" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="websiteProcessing" value="http://www.example.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeStartProcessing" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" onclick="showCancelConfirmation('processing')">
+                                        <i class="fas fa-times-circle mr-2"></i>
+                                        Hủy đơn
+                                    </button>
+                                    <button type="button" class="btn btn-success ml-2" onclick="showProcessingConfirmation('processing')">
+                                        Xác nhận thành công
+                                        <i class="fas fa-check-circle ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal thành công  -->
+                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="successModalLabel">Đơn xử lý thành công</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandName" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="hidden" id="becomeAPartnerRequestIdSuccess">
+                                                    <input type="text" class="form-control" id="brandNameSuccess" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwner" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwnerSuccess" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="emailSuccess" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTime" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTimeSuccess" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeSuccess" class="form-label">Thời gian xác nhận thành công:</label>
+                                                    <input type="text" class="form-control" id="requestTimeSuccessSuccess" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumberSuccess" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="addressSuccess" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="website" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="websiteSuccess" value="http://www.example.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeStart" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeProcessSuccess" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal hủy  -->
+                    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="text-center" style="width: 95%; margin-left: 20px">
+                                        <h5 class="modal-title" id="cancelModalLabel">Đơn xử lý đã hủy</h5>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="brandNameCancel" class="form-label">Tên thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandNameCancel" value="Tên thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="brandOwnerCancel" class="form-label">Chủ thương hiệu:</label>
+                                                    <input type="text" class="form-control" id="brandOwnerCancel" value="Chủ thương hiệu" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="emailCancel" class="form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="emailCancel" value="example@email.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeCancel" class="form-label">Thời gian gửi yêu cầu:</label>
+                                                    <input type="text" class="form-control" id="requestTimeCancel" value="15:45:PM-12/11/2024" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeCancel" class="form-label">Thời gian xác nhận hủy:</label>
+                                                    <input type="text" class="form-control" id="cancelHandleRequest" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phoneNumberCancel" class="form-label">Số điện thoại:</label>
+                                                    <input type="tel" class="form-control" id="phoneNumberCancel" value="0987654321" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="addressCancel" class="form-label">Địa chỉ:</label>
+                                                    <input type="text" class="form-control" id="addressCancel" value="Địa chỉ" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="websiteCancel" class="form-label">Địa chỉ trang web:</label>
+                                                    <input type="text" class="form-control" id="websiteCancel" value="http://www.example.com" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="requestTimeStartCancel" class="form-label">Thời gian bắt đầu xử lý:</label>
+                                                    <input type="text" class="form-control" id="requestTimeStartCancel" value="10:22:PM-15/11/2024" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="cancelReason" class="form-label">Lý do hủy:</label>
+                                                    <input type="text" class="form-control" id="cancelReason" value="Thương hiệu không đủ tiêu chuẩn" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table-registration-waiting" width="100%"
+                                   cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Thứ tự</th>
+                                    <th>Tên thương hiệu</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ trang web</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="b : ${becomePartnerRequestListUp}">
+                                        <tr>
+                                            <td th:text="${bStat.index + 1}">1</td>
+                                            <td th:text="${b.getBrandName()}">Gym hòa lạc</td>
+                                            <td th:text="${b.getBrandOwnerName()}">Nguyễn Văn Bảo Linh</td>
+                                            <td th:text="${b.getContactEmail()}">cc@gmail.com</td>
+                                            <td th:text="${b.getContactNumber()}">0917359115</td>
+                                            <td > <a th:href="${b.getWebUrl()}" th:text="${b.getBrandName()}">Gym hòa lạc</a> </td>
+                                            <td th:if="${b.getStatus().equals('Đang chờ xử lý')}" class="text-info fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td th:if="${b.getStatus().equals('Đang xử lý')}" class="text-warning fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${b.getStatus().equals('Đang chờ xử lý')}"
+                                                     data-target="#pendingModal"
+                                                     th:attr="onclick='showDetailPending('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${!b.getStatus().equals('Đang chờ xử lý')}"
+                                                     data-target="#processingModal"
+                                                     th:attr="onclick='showDetailProcessing('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pb-5 bg-gradient-withdrawal"></div>
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Lịch sử duyệt đơn</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table-registration-successful" width="100%"
+                                   cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Thứ tự</th>
+                                    <th>Tên thương hiệu</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ trang web</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="b : ${becomePartnerRequestListDown}">
+                                        <tr>
+                                            <td th:text="${bStat.index + 1}">1</td>
+                                            <td th:text="${b.getBrandName()}">Gym hòa lạc</td>
+                                            <td th:text="${b.getBrandOwnerName()}">Nguyễn Văn Bảo Linh</td>
+                                            <td th:text="${b.getContactEmail()}">cc@gmail.com</td>
+                                            <td th:text="${b.getContactNumber()}">0917359115</td>
+                                            <td > <a th:href="${b.getWebUrl()}" th:text="${b.getBrandName()}">Gym hòa lạc</a> </td>
+                                            <td th:if="${b.getStatus().equals('Thành công')}" class="text-success    fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td th:if="${b.getStatus().equals('Từ chối đơn')}" class="text-danger fw-bold" th:text="${b.getStatus()}">Chưa xử lý</td>
+                                            <td>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${b.getStatus().equals('Thành công')}"
+                                                     data-target="#successModal"
+                                                     th:attr="onclick='showDetailSuccess('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                                <div class="btn btn-primary" data-toggle="modal"
+                                                     th:if="${!b.getStatus().equals('Thành công')}"
+                                                     data-target="#cancelModal"
+                                                     th:attr="onclick='showDetailCancel('+${b.getBecomeAPartnerRequestId()}+')'">Xem chi tiết</div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="admin/common/footer"></th:block>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<th:block th:replace="admin/common/logout-modal"></th:block>
+
+<th:block th:replace="admin/common/script"></th:block>
+</body>
+
+</html>
+

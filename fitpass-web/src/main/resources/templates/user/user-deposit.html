@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Trang Cá Nhân</title>
+    <meta content="Profile Page" name="description">
+    <meta content="My" name="keywords">
+
+    <th:block th:insert="~{common/vendor-head}"></th:block>
+
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
+</head>
+<body style="background-color: rgb(238, 238, 238);">
+<!-- ======= Header ======= -->
+<header th:replace="~{common/navbar :: navbar}"></header>
+
+<!-- Content -->
+<div class="user-profile-content container-fluid">
+    <div class="row justify-content-center">
+        <th:block th:insert="~{user/fragments/sidebar :: sidebar}"></th:block>
+
+        <div class="col-md-8 col-lg-8 col-xl-9 content-by-option">
+            <!-- Common components in tab -->
+            <div class="add-money-tab">
+                <th:block th:insert="~{user/fragments/money-tab :: money-tab}"></th:block>
+
+                <!-- User deposit tab -->
+                <div id="add-money-tab">
+                    <div class="mt-4" style="font-weight: 500;">Chọn phương thức thanh toán</div>
+                    <div class="row banking-card-list mt-2 justify-content-center">
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                                <input checked class="card-input-element" id="choose-visa" name="product" type="radio"/>
+                                <div class="panel panel-default card-input">
+                                    <div class="panel-body">
+                                        <span><img th:src="@{/user-homepage-assets/assets/img/visa.png}"></span>
+                                        <span class="ab-title">Thanh toán bằng VISA</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                                <input class="card-input-element" id="choose-vnpay" name="product" type="radio"/>
+                                <div class="panel panel-default card-input">
+                                    <div class="panel-body">
+                                        <div>
+                                            <span><img
+                                                    src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Icon-VNPAY-QR.png"></span>
+                                            <span class="ab-title">Thanh toán bằng VNPAY</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                                <input class="card-input-element" id="choose-momo" name="product" type="radio"/>
+                                <div class="panel panel-default card-input">
+                                    <div class="panel-body">
+                                        <div>
+                        <span><img th:src="@{/user-homepage-assets/assets/img/momo.png}"></span>
+                                            <span class="ab-title">Thanh toán bằng ví điện tử</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="visa-payment">
+                        <div class="mt-4" style="font-weight: 500;">Thanh toán bằng thẻ visa</div>
+                        <div class="row mt-2 justify-content-center add-money">
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('50000', '50 credits tương ứng')" type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">50.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">50 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('100000', '100 credits tương ứng')" type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">100.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">100 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('200000', '200 credits tương ứng')" type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">200.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">200 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('300000', '300 credits tương ứng')" type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">300.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">300 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('500000', '500 credits tương ứng')" type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">500.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">500 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('1000000', '1000 credits tương ứng')"
+                                           type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">1.000.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">1000 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('2000000', '2000 credits tương ứng')"
+                                           type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                        <span>
+                          <h3 class="fw-bold">2.000.000</h3>
+                        </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">2000 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                                <label>
+                                    <input class="card-input-element" name="money"
+                                           onclick="updateInputValue('3000000', '3000 credits tương ứng')"
+                                           type="radio"/>
+                                    <div class="panel panel-default card-input">
+                                        <div class="panel-body">
+                                            <span>
+                                                <h3 class="fw-bold">3.000.000</h3>
+                                             </span>
+                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                        </div>
+                                        <div class="credit-trans">3000 credits tương ứng</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <form id="moneyForm">
+                            <div class="row justify-content-center">
+                                <div class="col-6 mb-4 input-money">
+                                    <input id="paymentAmount" name="moneyAmount" placeholder="Nhập số tiền cần nạp..."
+                                           type="number">
+                                </div>
+                                <div class="col-6 mb-4" id="add-money">
+                                    <button class="add-money-btn trigger" id="add-money-btn">
+                                        Nạp tiền
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mb-4" id="vnpay-payment">
+                        <div class="mt-4" style="font-weight: 500;">Thanh toán bằng vnpay</div>
+                        <div class="row mt-2 justify-content-center add-money">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">50.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">50 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">100.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">100 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">200.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">200 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">300.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">300 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">500.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">500 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">1.000.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">1000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">2.000.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">2000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">3.000.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">3000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 vnpay-img">
+                                <img th:src="@{/user-homepage-assets/assets/img/vnpay-qr.jpg}"
+                                     style="width: 95%; height: 95%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab thanh toán bằng ví momo -->
+                    <div class="mb-4" id="momo-payment">
+                        <div class="mt-4" style="font-weight: 500;">Thanh toán bằng momo</div>
+                        <div class="row mt-2 justify-content-center add-money">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">50.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+                                                </div>
+                                                <div class="credit-trans">50 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">100.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">100 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">200.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">200 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">300.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">300 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">500.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">500 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">1.000.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">1000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">2.000.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">2000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6 mb-4">
+                                        <label>
+                                            <input class="card-input-element" name="money" type="radio"/>
+                                            <div class="panel panel-default card-input">
+                                                <div class="panel-body">
+                            <span>
+                              <h3 class="fw-bold">3.000.000</h3>
+                            </span>
+                                                    <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
+
+                                                </div>
+                                                <div class="credit-trans">3000 credits tương ứng</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 vnpay-img">
+                                <img th:src="@{/user-homepage-assets/assets/img/momo-qr.jpg}"
+                                     style="width: 95%; height: 95%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="add-money-modal">
+        <div class="modal-content">
+            <div>
+                <span class="close-button" style="float: right;"><i class="bi bi-x-circle-fill"></i></span>
+                <h3 class="fw-bold">Xác nhận nạp tiền</h3>
+            </div>
+            <div class="mt-4">
+                <span>Tổng tiền nạp</span>
+                <span>:</span>
+                <span class="money fw-bold">số tiền nạp</span>
+                <span class="currency"> đồng</span>
+            </div>
+            <div class="mt-2">
+                <span class="creditConfirm fw-bold">500</span>
+                <span>Credits</span>
+                <span>sẽ được cộng vào ví của bạn!</span>
+            </div>
+            <div class="btn-option">
+                <button class="confirm" id="paymentSubmit">Xác nhận và thanh toán</button>
+                <button class="cancel">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======= Footer ======= -->
+
+<div id="preloader"></div>
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<th:block th:include="common/vendor-script"></th:block>
+
+<script>
+    function updateInputValue(value, creditTrans) {
+        document.getElementById('paymentAmount').value = value;
+        document.querySelector('.money').textContent = value; // Update the money element with the input value
+        document.querySelector('.creditConfirm').textContent = creditTrans; // Update the creditConfirm element with the selected credit-trans text
+    }
+
+    $(document).ready(function () {
+        // JS add money
+        let choose_vnpay = document.getElementById("choose-vnpay");
+        let choose_visa = document.getElementById("choose-visa");
+        let choose_momo = document.getElementById("choose-momo");
+
+        let visa_payment = document.getElementById("visa-payment")
+        let vnpay_payment = document.getElementById("vnpay-payment");
+        let momo_payment = document.getElementById("momo-payment");
+
+        vnpay_payment.style.display = "none";
+        momo_payment.style.display = "none";
+
+        choose_vnpay.addEventListener("click", function () {
+            visa_payment.style.display = "none";
+            momo_payment.style.display = "none";
+            vnpay_payment.style.display = "block";
+        });
+        choose_visa.addEventListener("click", function () {
+            vnpay_payment.style.display = "none";
+            momo_payment.style.display = "none";
+            visa_payment.style.display = "block";
+        });
+        choose_momo.addEventListener("click", function () {
+            vnpay_payment.style.display = "none";
+            visa_payment.style.display = "none";
+            momo_payment.style.display = "block";
+        });
+
+
+        const modal = document.querySelector(".add-money-modal");
+        function toggleModal() {
+            modal.classList.toggle("show-modal");
+        }
+
+        function windowOnClick(event) {
+            if (event.target === modal) {
+                toggleModal();
+            }
+        }
+
+        $("#add-money-btn").on("click", function (e) {
+            const moneyForm = $("#moneyForm");
+            moneyForm.validate({
+                rules: {
+                    moneyAmount: {
+                        required: true,
+                        number: true,
+                        min: 20000,
+                        max: 10000000,
+                        step: 1000
+                    }
+                },
+                messages: {
+                    moneyAmount: {
+                        required: "Vui lòng nhập số tiền",
+                        number: "Vui lòng nhập số và không nhập kí tự khác",
+                        min: "Số tiền nạp ít nhất bằng 20,000",
+                        max: "Số tiền nạp không được vượt quá 10,000,000",
+                        step: "Số tiền nạp phải là bội số của 1,000"
+                    }
+                },
+            });
+            if (moneyForm.valid()) {
+                e.preventDefault();
+                let inputValue = $("#paymentAmount").val();
+                inputValue = parseInt(inputValue);
+                inputValue = inputValue.toLocaleString();
+
+                // Update the text content of the money element with the input value
+                $(".money").text(inputValue);
+
+                // Update the text content of the creditConfirm element with the selected credit-trans text
+                $(".creditConfirm").text($("#paymentAmount").val() / 1000);
+
+                toggleModal();
+                const closeButton = document.querySelector(".close-button");
+                const cancel = document.querySelector(".cancel");
+
+                closeButton.addEventListener("click", toggleModal);
+                cancel.addEventListener("click", toggleModal);
+                window.addEventListener("click", windowOnClick);
+
+                $("#paymentSubmit").click(function () {
+                    var selectedAmount = $("#paymentAmount").val();
+
+                    // Create a data object with 'amount' property
+                    var requestData = {
+                        amount: selectedAmount
+                    };
+
+                    // Gửi giá trị lên server thông qua một POST request
+                    $.ajax({
+                        type: "POST",
+                        url: "/payment/create-session",
+                        contentType: "application/json", // Set content type to JSON
+                        data: JSON.stringify(requestData), // Convert data object to JSON string
+                        success: function (response) {
+                            // Xử lý kết quả trả về từ server (nếu cần)
+                            window.location.href = response;
+                        },
+                        error: function (error) {
+                            console.error("Error:", error);
+                        }
+                    });
+                });
+            }
+        })
+    });
+</script>
+</body>
+</html>

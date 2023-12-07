@@ -19,53 +19,72 @@
 
 <!-- Content -->
 <div id="my-card" class="my-card-container container">
-    <h2 class="row">Giỏ hàng của bạn</h2>
+    <h2 class="row shopping-cart-title">Giỏ hàng của bạn</h2>
     <div class="line row"></div>
     <th:block th:if="${cartItems.size() == 0}">
         <div class="row cart-empty">
-            <img src="https://assets.materialup.com/uploads/16e7d0ed-140b-4f86-9b7e-d9d1c04edb2b/preview.png">
+            <img th:src="@{/user-homepage-assets/assets/img/empty-cart.png}">
             <div class="mt-2 mb-4 mx-auto">Giỏ hàng của bạn đang còn trống</div>
-            <a th:href="@{/user/homepage}">
+            <a th:href="@{/homepage}">
                 <button class="buy-now-btn mb-4">Mua ngay</button>
             </a>
         </div>
     </th:block>
     <th:block th:if="${cartItems.size() > 0}">
-    <div class="my-card-title row">
-        <div class="form-check">
-            <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
-            <label class="" for="flexCheckChecked"> </label>
-        </div>
-        <div class="my-plan-title">Gói tập</div>
-        <div class="price-title">Đơn giá (credits)</div>
-        <div class="num-of-plan-title">Số lượng</div>
-        <div class="action-title">Thao tác</div>
-    </div>
-    <!-- Để foreach ở đây -->
-    <div th:each="department : ${departmentList}">
-        <div class="plan-in-my-card">
-            <div class="all-plan-of-gym row">
+    <div class="container-fluid">
+        <div class="row my-card-title">
+            <div class="col-1">
                 <div class="form-check">
-                    <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
+                    <input class="auto" onchange="checkAll(this)"  id="check-all" type="checkbox" value="" />
                     <label class="" for="flexCheckChecked"> </label>
                 </div>
-                <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
+            </div>
+            <div class="col-5">
+                <div class="my-plan-title">Gói tập</div>
+            </div>
+            <div class="col-2">
+                <div class="price-title">Đơn giá (credits)</div>
+            </div>
+            <div class="col-2">
+                <div class="num-of-plan-title">Số lượng</div>
+            </div>
+            <div class="col-2">
+                <div class="action-title">Thao tác</div>
+            </div>
+        </div>
+    </div>
+    <!-- Để foreach ở đây -->
+    <div class="plan-in-cart-wrapper container-fluid">
+    <div  th:each="department : ${departmentList}">
+        <div class="plan-in-my-card">
+            <div class="row all-plan-of-gym">
+                <div class="col-md-1 col-lg-1 col-xs-3">
+                    <div class="form-check">
+                        <input onchange='checkAllGym(this)' name="gym" class="dept-checkbox" type="checkbox" value="" id="flexCheckChecked" />
+                        <label class="" for="flexCheckChecked"> </label>
+                    </div>
+                </div>
+                <div class="col-md-11 col-lg-11 col-xs-9">
+                    <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym hòa lạc</div>
+                </div>
             </div>
             <th:block th:each="cartItem: ${cartItems}">
                 <th:block th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
                     <!-- Từng gym plan -->
                     <div class="row" style="height: 15px; background-color: white;"></div>
                     <div class="gym-department-plan row">
-                        <div class="form-check">
+                        <div class="col-sm-1 col-xs-3">
+                            <div class="form-check">
                             <input onclick='updateCartTotal(this)' name="plan" class="plan-checkbox" type="checkbox" value=""
                                    th:attr="data-product-id=${cartItem.getGymPlan().getGymPlanId()},
                                    data-dept-id=${cartItem.getGymPlan().getGymDepartmentId()},
                                    data-plan-price=${cartItem.getGymPlan().getPrice()}"/>
                             <label class="" for="flexCheckChecked"> </label>
+                            </div>
                         </div>
+                        <div class="col-sm-5 col-xs-5">
                         <div class="plan-card-mc">
-<!--                            <img th:src="${department.getDepartmentLogoUrl()}"/>-->
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ZzXyHZsB8zbJbdSjPVnhudXgXWnDbJIdOQ&usqp=CAU" />
+                            <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}" alt="Logo phòng tập"/>
                             <div class="plan-info-mc">
                                 <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
                                 <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
@@ -74,26 +93,34 @@
                                 Kích hoạt trong vòng 10 ngày
                             </div>
                         </div>
-                        <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
                             200
+                            </div>
                         </div>
-                        <div class="num-of-plan-mc" >
-                            <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
+                        <div class="col-sm-2">
+                            <div class="num-of-plan-mc" >
+                                <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
+                            </div>
                         </div>
-
-                        <button type="button" class="btn btn-warning" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-warning delete-btn" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
                                 />
-                            </svg>
-                        </button>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </th:block>
             </th:block>
         </div>
     </div>
+    </div>
 
+    <div class="container-fluid">
     <div class="row" style="height: 15px; background-color: white;"></div>
     <div class="total-container-mc row justify-content-center">
         <h3 class="total-plan-mc col-md-4 col-sm-3 col-3">
@@ -108,10 +135,11 @@
             <button disabled type="button" onclick="checkout()" class="btn btn-warning" style="font-weight: 700;">Mua hàng</button>
         </div>
     </div>
+    </div>
     </th:block>
 </div>
 
-
+<div th:replace="common/footer :: footer"></div>
 <th:block th:insert="common/vendor-script"></th:block>
 <script>
 
@@ -220,7 +248,7 @@
 
     // check all in each gym department
     for(var i=0; i<dept_checkboxes.length; i++){
-        let cbActual1 = dept_checkboxes[i].parentElement.parentElement.parentElement.querySelectorAll('input:not([class=dept-checkbox])');
+        let cbActual1 = dept_checkboxes[i].parentElement.parentElement.parentElement.parentElement.querySelectorAll('input:not([class=dept-checkbox])');
         console.log(cbActual1);
         cbActual1.forEach(cb1 => {
             cb1.addEventListener('change', (event) =>{
@@ -241,8 +269,8 @@
                         addToUniqueArray(selectedDept, p.deptId);
                         addToUniqueArray(selectedPrice, p.price);
                     }
-                    let test = cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
-                    cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
+                    let test = cb1.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox");
+                    cb1.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = false;
                 } else{
                     let plan = {planId: cb1.getAttribute("data-product-id"),
                         deptId: cb1.getAttribute("data-dept-id"),
@@ -259,7 +287,7 @@
                         addToUniqueArray(selectedPrice, p.price);
                     }
                     if([...cbActual1].every(cb1=>cb1.checked == true)){
-                        cb1.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
+                        cb1.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dept-checkbox")[0].checked = true;
                     }
                 }
 
@@ -279,7 +307,7 @@
     }
 
     function checkAllGym(myCheckAll){
-        let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
+        let own_checkboxs = myCheckAll.parentElement.parentElement.parentElement.parentElement.querySelectorAll("input[type='checkbox']");
         total_price = 0;
         if(myCheckAll.checked === true){
             document.querySelector('.buy-button-mc button').disabled = false;
@@ -388,7 +416,7 @@
 
     function removeFromCart(gymPlanId, departmentId) {
         Swal.fire({
-            title: 'Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?',
+            title: 'Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng không?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Xóa',

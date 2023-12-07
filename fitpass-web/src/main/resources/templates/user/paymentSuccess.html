@@ -34,7 +34,7 @@
         redirectCountdown--;
         if (redirectCountdown === 0) {
             clearInterval(redirectInterval);
-            window.location.href = "/user/profile/my-profile";
+            window.location.href = "/profile/my-profile";
         }
         document.querySelector('span').textContent = redirectCountdown;
     }, 1000);

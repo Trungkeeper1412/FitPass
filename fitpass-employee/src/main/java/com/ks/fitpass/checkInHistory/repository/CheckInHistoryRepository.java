@@ -15,9 +15,13 @@ public interface CheckInHistoryRepository {
 
     List<Integer> getListCheckInHistoryIdNeedCheckOut();
 
-    List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId);
-    List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId);
+    List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int offset, int size);
+    List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId, int offset, int size);
 
     List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter);
     List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter);
+
+    int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId);
+
+    int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId);
 }

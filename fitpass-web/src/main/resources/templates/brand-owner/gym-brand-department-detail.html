@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="brand-owner/common/head"></th:block>
 <body id="page-top">
 
@@ -25,8 +25,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h1 class="fw-bold text-primary">Thông tin chi tiết cơ sở</h1>
-                        <div class="show-wallpaper-brand col-lg-12" th:style="'background-image: url(' + ${department.getDepartmentWallpaperUrl()} + ');'">
-                            <img class="show-logo-brand" th:src="${department.getDepartmentLogoUrl()}" alt="Hình ảnh">
+                        <div class="show-wallpaper-brand col-lg-12" th:style="'background-image: url(' + ${department.getDepartmentWallpaperUrl() != null ? department.getDepartmentWallpaperUrl() : '/images/system/background-empty.jpg'} + ');'">
+                            <img class="show-logo-brand" th:src="${department.getDepartmentLogoUrl() != null ? department.getDepartmentLogoUrl() : '/images/system/no_image.png'}" alt="Hình ảnh">
                         </div>
                     </div>
                     <div class="card-body">
@@ -60,13 +60,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="capacity" class="form-label fw-bold">Sức chứa
+                                        <label for="capacity" class="form-label fw-bold">Sức chứa (Người)
                                             :</label>
                                         <input type="text" class="form-control" id="capacity" name="capacity"
                                                th:value="${department.getCapacity() + ' người'}" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="area" class="form-label fw-bold">Diện tích :</label>
+                                        <label for="area" class="form-label fw-bold">Diện tích (m2) :</label>
                                         <input type="text" class="form-control" id="area" name="area"
                                                th:value="${department.getArea()} + 'm²'" readonly>
                                     </div>
@@ -108,7 +108,8 @@
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-center">
                                                     <button type="button" class="btn btn-secondary text-center"
-                                                            data-dismiss="modal">Đóng</button>
+                                                            data-dismiss="modal">Đóng
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,23 +161,23 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <th:block th:each="gymPlan : ${gymPlans}">
-                                                            <th:block th:if="${gymPlan.getPricePerHours() > 0}">
-                                                                <tr>
-                                                                    <td th:text="${gymPlanStat.index + 1}">1</td>
-                                                                    <td th:text="${gymPlan.getGymPlanName()}">Gói linh hoạt tiết kiệm</td>
-                                                                    <td th:text="${gymPlan.getPricePerHours()}">5</td>
-                                                                    <td th:text="${gymPlan.getPlanBeforeActiveValidity()}">20 ngày</td>
-                                                                    <td th:text="${gymPlan.getPlanAfterActiveValidity()}">50 ngày</td>
-                                                                    <td th:text="${gymPlan.getGymPlanDescription()}">Đây là một trong các hạng thẻ siêu tiết kiệm tại
-                                                                        phòng gym của chúng tôi. Nếu bạn là người không có
-                                                                        nhu cầu di chuyển nhiều và mong muốn được tập luyện
-                                                                        ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
-                                                                        chọn thích hợp
-                                                                    </td>
-                                                                </tr>
-                                                            </th:block>
+                                                    <th:block th:each="gymPlan : ${gymPlans}">
+                                                        <th:block th:if="${gymPlan.getPricePerHours() > 0}">
+                                                            <tr>
+                                                                <td th:text="${gymPlanStat.index + 1}">1</td>
+                                                                <td th:text="${gymPlan.getGymPlanName()}">Gói linh hoạt tiết kiệm</td>
+                                                                <td th:text="${gymPlan.getPricePerHours()}">5</td>
+                                                                <td th:text="${gymPlan.getPlanBeforeActiveValidity()}">20 ngày</td>
+                                                                <td th:text="${gymPlan.getPlanAfterActiveValidity()}">50 ngày</td>
+                                                                <td th:text="${gymPlan.getGymPlanDescription()}">Đây là một trong các hạng thẻ siêu tiết kiệm tại
+                                                                    phòng gym của chúng tôi. Nếu bạn là người không có
+                                                                    nhu cầu di chuyển nhiều và mong muốn được tập luyện
+                                                                    ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa
+                                                                    chọn thích hợp
+                                                                </td>
+                                                            </tr>
                                                         </th:block>
+                                                    </th:block>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -206,19 +207,19 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <th:block th:each="gymPlan : ${gymPlans}">
-                                                            <th:block th:if="${gymPlan.getPrice() > 0}">
-                                                                <tr>
-                                                                    <td th:text="${gymPlanStat.index + 1}">1</td>
-                                                                    <td th:text="${gymPlan.getGymPlanName()}">Gói linh hoạt tiết kiệm</td>
-                                                                    <td th:text="${gymPlan.getPrice()}">5</td>
-                                                                    <td th:text="${gymPlan.getDuration() + ' ngày'}">20 ngày</td>
-                                                                    <td th:text="${gymPlan.getPlanBeforeActiveValidity() + ' ngày'}">50 ngày</td>
-                                                                    <td th:text="${gymPlan.getPlanAfterActiveValidity() + ' ngày'}"></td>
-                                                                    <td th:text="${gymPlan.getGymPlanDescription()}"></td>
-                                                                </tr>
-                                                            </th:block>
+                                                    <th:block th:each="gymPlan : ${gymPlans}">
+                                                        <th:block th:if="${gymPlan.getPrice() > 0}">
+                                                            <tr>
+                                                                <td th:text="${gymPlanStat.index + 1}">1</td>
+                                                                <td th:text="${gymPlan.getGymPlanName()}">Gói linh hoạt tiết kiệm</td>
+                                                                <td th:text="${gymPlan.getPrice()}">5</td>
+                                                                <td th:text="${gymPlan.getDuration() + ' ngày'}">20 ngày</td>
+                                                                <td th:text="${gymPlan.getPlanBeforeActiveValidity() + ' ngày'}">50 ngày</td>
+                                                                <td th:text="${gymPlan.getPlanAfterActiveValidity() + ' ngày'}"></td>
+                                                                <td th:text="${gymPlan.getGymPlanDescription()}"></td>
+                                                            </tr>
                                                         </th:block>
+                                                    </th:block>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -263,7 +264,7 @@
                                     <div class="col-md-1">
                                         <div class="service-type mb-3">
                                             <div th:utext="${feature.getFeature().getFeatureIcon()}"
-                                                    class="gym-service-logo d-flex align-items-center justify-content-center">
+                                                 class="gym-service-logo d-flex align-items-center justify-content-center">
                                             </div>
                                         </div>
                                     </div>
@@ -307,6 +308,9 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
+<!-- Logout Modal-->
+<th:block th:replace="brand-owner/common/logout-modal"></th:block>
 
 <th:block th:replace="brand-owner/common/script"></th:block>
 </body>

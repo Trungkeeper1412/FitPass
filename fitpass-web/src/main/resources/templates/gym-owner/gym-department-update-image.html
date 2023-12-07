@@ -3,64 +3,75 @@
 <th:block th:replace="gym-owner/common/head"></th:block>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <th:block th:replace="gym-owner/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
+    <th:block th:replace="gym-owner/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <th:block th:replace="gym-owner/common/navbar"></th:block>
-                <!-- End of Topbar -->
+            <!-- Topbar -->
+            <th:block th:replace="gym-owner/common/navbar"></th:block>
+            <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="card">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card">
+                    <form id="updateImageForm" method="post" action="/gym-owner/department/image">
                         <div class="card-header">
                             <h2 class="fw-bold text-primary">Quản lý hình ảnh</h2>
+                            <input type="hidden" id="brandId" th:value="${departmentDetails.getDepartmentId()}" name=""/>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="row text-start">
                                     <div class="col-md-4">
-                                        <label for="logo" class="form-label fw-bold fs-4">Logo :</label>
+                                        <label for="imageLogo" class="form-label fw-bold fs-4">Logo :</label>
                                         <div class="image-container">
-                                            <img th:src="${departmentDetails.getDepartmentLogoUrl()}" alt="Image">
+                                            <img th:if="${departmentDetails.getDepartmentLogoUrl() ne null}" th:src="${departmentDetails.getDepartmentLogoUrl()}" alt="Image">
+                                            <img th:unless="${departmentDetails.getDepartmentLogoUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
+
                                             <div class="image-actions">
-                                                <button class="img-edit-button" type="button" data-toggle="tooltip"
-                                                    data-placement="top" title="Chỉnh sửa hình ảnh"><i
-                                                        class="fas fa-edit"></i></button>
+                                                <button class="img-edit-button" type="button" data-toggle="tooltip" data-image-type="logo"
+                                                        data-placement="top" title="Chỉnh sửa hình ảnh">
+                                                    <i class="fas fa-edit"></i></button>
+                                                <input name="imageLogoUrl" type="hidden" id="imageLogo" th:value="${departmentDetails.getDepartmentLogoUrl()}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
+                                        <label for="imageThumbnail" class="form-label fw-bold fs-4">Thumbnail
                                             :</label>
                                         <div class="image-container">
-                                            <img th:src="${departmentDetails.getDepartmentThumbnailUrl()}" alt="Image">
+                                            <img th:if="${departmentDetails.getDepartmentThumbnailUrl() ne null}" th:src="${departmentDetails.getDepartmentThumbnailUrl()}" alt="Image">
+                                            <img th:unless="${departmentDetails.getDepartmentThumbnailUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
+
                                             <div class="image-actions">
-                                                <button class="img-edit-button" type="button" data-toggle="tooltip"
-                                                    data-placement="top" title="Chỉnh sửa hình ảnh"><i
+                                                <button class="img-edit-button" type="button" data-toggle="tooltip" data-image-type="thumbnail"
+                                                        data-placement="top" title="Chỉnh sửa hình ảnh"><i
                                                         class="fas fa-edit"></i></button>
+                                                <input name="imageThumbnailUrl" type="hidden" id="imageThumbnail" th:value="${departmentDetails.getDepartmentThumbnailUrl()}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="banner" class="form-label fw-bold fs-4">Ảnh bìa
+                                        <label for="imageWallpaper" class="form-label fw-bold fs-4">Ảnh bìa
                                             :</label>
                                         <div class="image-container">
-                                            <img th:src="${departmentDetails.getDepartmentWallpaperUrl()}" alt="Image">
+                                            <img th:if="${departmentDetails.getDepartmentWallpaperUrl() ne null}" th:src="${departmentDetails.getDepartmentWallpaperUrl()}" alt="Image">
+                                            <img th:unless="${departmentDetails.getDepartmentWallpaperUrl() ne null}" th:src="@{/images/system/no_image.png}" alt="Image">
+
                                             <div class="image-actions">
-                                                <button class="img-edit-button" type="button" data-toggle="tooltip"
-                                                    data-placement="top" title="Chỉnh sửa hình ảnh"><i
+                                                <button class="img-edit-button" type="button" data-toggle="tooltip" data-image-type="wallpaper"
+                                                        data-placement="top" title="Chỉnh sửa hình ảnh"><i
                                                         class="fas fa-edit"></i></button>
+                                                <input name="imageWallpaperUrl" type="hidden" id="imageWallpaper" th:value="${departmentDetails.getDepartmentWallpaperUrl()}">
                                             </div>
                                         </div>
                                     </div>
@@ -69,57 +80,187 @@
                                 <div class="row text-start">
                                     <div class="col">
                                         <div class="d-flex justify-content-between pt-3">
-                                            <label for="album" class="form-label fw-bold fs-4">Album
+                                            <label for="listAlbumUrl" class="form-label fw-bold fs-4">Album
                                                 ảnh:</label>
                                             <input type="file" id="imageInput" style="display: none;" accept="image/*">
+                                            <input type="hidden" name="listAlbumUrl" id="listAlbumUrl">
                                             <a class="fw-bold fs-5 text-black" id="addImageButton">Thêm
                                                 ảnh</a>
                                         </div>
                                         <div class="row-add">
-                                            <div class="col-md-4">
-                                                <div class="image-container" th:each="album : ${departmentAlbums}">
-                                                    <img th:src="${album.photoUrl}" alt="image">
-                                                    <div class="image-actions">
-                                                        <button class="img-edit-button" type="button"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Chỉnh sửa hình ảnh"><i
-                                                                class="fas fa-edit"></i></button>
-                                                        <button class="img-delete-button" type="button"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Xóa hình ảnh"><i class="fas fa-trash"></i></button>
+                                            <th:block th:each="album : ${departmentAlbums}">
+                                                <div class="col-md-4">
+                                                    <div class="image-container">
+                                                        <img th:src="${album.photoUrl}" alt="image">
+                                                        <div class="image-actions">
+                                                            <button class="img-edit-button" type="button"
+                                                                    data-toggle="tooltip" data-placement="top" data-image-type="album"
+                                                                    title="Chỉnh sửa hình ảnh" th:attr="data-album-id=${albumStat.index + 1}">
+                                                                <i
+                                                                        class="fas fa-edit"></i></button>
+                                                            <button class="img-delete-button" type="button"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Xóa hình ảnh"><i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <input type="hidden" class="hidden-img-album-src" th:id="'album-'+${albumStat.index + 1}" th:value="${album.getPhotoUrl()}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </th:block>
+                                            <th:block th:if="${departmentAlbums.size() == 0}">
+                                                <div class="col-md-4">
+                                                    <div class="image-container">
+                                                        <img th:src="@{/images/system/list-empty.jpg}" alt="Image">
+                                                        <div class="image-actions">
+                                                            <button class="img-edit-button" type="button"
+                                                                    data-toggle="tooltip" data-placement="top" data-image-type="album"
+                                                                    data-album-id="1"
+                                                                    title="Chỉnh sửa hình ảnh"><i
+                                                                    class="fas fa-edit"></i></button>
+                                                            <button class="img-delete-button" type="button"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Xóa hình ảnh"><i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <input type="hidden" class="hidden-img-album-src" id="album-1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </th:block>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                <button id="saveChangeBtn" type="button" class="btn btn-primary">Lưu thay đổi</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <th:block th:replace="gym-owner/common/footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="gym-owner/common/footer"></th:block>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <th:block th:replace="gym-owner/common/script"></th:block>
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<th:block th:replace="gym-owner/common/logout-modal"></th:block>
+
+<th:block th:replace="gym-owner/common/script"></th:block>
+
+<script>
+
+    // $("#saveChangeBtn").click(function (e) {
+    //     e.preventDefault();
+    //     if ($("#updateImageForm").valid()) {
+    //         Swal.fire({
+    //             title: 'Bạn có muốn cập nhật thông tin',
+    //             icon: 'question',
+    //             showCancelButton: true,
+    //             confirmButtonText: 'Có',
+    //             cancelButtonText: 'Không'
+    //         }).then((result) => {
+    //             if (result.isConfirmed) {
+    //                 var values = [];
+    //                 $(".hidden-img-album-src").each(function () {
+    //                     values.push($(this).val());
+    //                 });
+    //                 var concatenatedValues = values.join(',');
+    //                 $("#listAlbumUrl").val(concatenatedValues);
+    //
+    //                 $("#updateImageForm").submit();
+    //
+    //                 Swal.fire({
+    //                     title: 'Thành công!',
+    //                     text: 'Thông tin đã được cập nhật thành công.',
+    //                     icon: 'success',
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             } else {
+    //                 Swal.fire({
+    //                     title: 'Thất bại!',
+    //                     text: 'Thông tin chưa được cập nhật.',
+    //                     icon: 'error',
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
+
+    $("#saveChangeBtn").click(function (e) {
+        e.preventDefault();
+
+        if ($("#updateImageForm").valid()) {
+            // Collect the values from the form inputs
+            var imageLogoUrl = $("#imageLogo").val();
+            var imageThumbnailUrl = $("#imageThumbnail").val();
+            var imageWallpaperUrl = $("#imageWallpaper").val();
+
+            var values = [];
+            $(".hidden-img-album-src").each(function () {
+                values.push($(this).val());
+            });
+            var listAlbumUrl = values.join(',');
+
+            // Use AJAX to submit the form data
+            $.ajax({
+                type: "POST",
+                url: "/gym-owner/department/image",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    imageLogoUrl: imageLogoUrl,
+                    imageThumbnailUrl: imageThumbnailUrl,
+                    imageWallpaperUrl: imageWallpaperUrl,
+                    listAlbumUrl: listAlbumUrl
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: response,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function (xhr) {
+                    var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : xhr.responseText || 'Đã có lỗi trong việc cập nhật ảnh';
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: errorMessage,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        } else {
+            Swal.fire({
+                title: 'Thất bại!',
+                text: 'Thông tin chưa được cập nhật do lỗi xác thực.',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+</script>
 </body>
 
 </html>

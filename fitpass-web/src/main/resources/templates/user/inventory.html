@@ -28,10 +28,6 @@
         <section class="breadcrumbs bg-whitesmoke">
             <div class="container">
                 <div class="text-start fs-2 fw-bold ">Túi Đồ</div>
-                <ol>
-                    <a href="../index.html">Fitpass &nbsp;</a>
-                    <li class="text-black">/ Túi Đồ</li>
-                </ol>
                 <hr>
             </div>
         </section><!-- End Breadcrumbs -->
@@ -64,10 +60,16 @@
                         <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                             <div class="row">
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                <div class="col-md-8">
+                                <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
                                     <div class="item-grid" id="grid-container" >
+                                        <div th:if="${#lists.isEmpty(itemList)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemList}">
-
                                             <div class="text-light item-card-all mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
@@ -82,9 +84,9 @@
                                                 <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                 </h4>
                                                 <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
-                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
 
                                                 <th:block th:if="${item.getItemStatusKey() == 0}">
                                                     <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
@@ -114,7 +116,7 @@
                                 </div>
 
                                 <!-- Phần bên phải: Chi tiết vật phẩm -->
-                                <div class="col-md-4">
+                                <div class="col-sm-12 col-md-12 col-lg-4">
                                     <div class="detail-inventory">
                                         <div class="item-details">
                                             <h4>Chi tiết vật phẩm</h4>
@@ -153,8 +155,15 @@
                         <div class="tab-pane fade" id="unactivated" role="tabpanel" aria-labelledby="unactivated-tab">
                             <div class="row">
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                <div class="col-md-8">
+                                <div class="col-md-8 mb-3">
                                     <div class="item-grid" id="grid-container">
+                                        <div th:if="${#lists.isEmpty(itemListNotActive)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemListNotActive}">
                                             <div class="text-light item-card-unactivated mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
@@ -169,9 +178,9 @@
                                                 <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                 </h4>
                                                 <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
-                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
 
                                                 <th:block th:if="${item.getItemStatusKey() == 0}">
                                                     <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
@@ -235,8 +244,15 @@
                         <div class="tab-pane fade" id="active" role="tabpanel" aria-labelledby="active-tab">
                             <div class="row">
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                <div class="col-md-8">
+                                <div class="col-md-8 mb-3">
                                     <div class="item-grid" id="grid-container">
+                                        <div th:if="${#lists.isEmpty(itemListActive)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemListActive}">
                                             <div class="text-light item-card-active mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
@@ -251,9 +267,9 @@
                                                 <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                 </h4>
                                                 <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
-                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
                                                 <th:block th:if="${item.getItemStatusKey() == 1}">
                                                     <th:block th:if="${item.getPrice()} > 0">
                                                         <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
@@ -313,8 +329,15 @@
                         <div class="tab-pane fade" id="activated" role="tabpanel" aria-labelledby="activated-tab">
                             <div class="row">
                                 <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                <div class="col-md-8">
+                                <div class="col-md-8 mb-3">
                                     <div class="item-grid" id="grid-container">
+                                        <div th:if="${#lists.isEmpty(itemListExpired)}">
+                                            <div class="no-items">
+                                                <h2 class="no-items-title">No Items Available</h2>
+                                                <p class="no-items-description">There are currently no items available. Please check back later.</p>
+                                                <i class="no-items-icon fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
                                         <th:block th:each="item : ${itemListExpired}">
                                             <div class="text-light item-card-activated mb-2"
                                                  th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
@@ -329,9 +352,9 @@
                                                 <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                 </h4>
                                                 <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
-                                                <p th:if="${item.getItemStatusKey() == 0}">Trạng thái: Chưa kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 1}">Trạng thái: Đã kích hoạt</p>
-                                                <p th:if="${item.getItemStatusKey() == 2}">Trạng thái: Đã hết hạn</p>
+                                                <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
+                                                <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
 
                                                 <th:block th:if="${item.getItemStatusKey() == 0}">
                                                     <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
@@ -366,7 +389,7 @@
                                                     <p class="item-type" id="itemType">Loại thẻ:</p>
                                                     <p class="item-description" id="itemDescription">Mô tả:</p>
                                                     <p class="item-price" id="itemPrice">Giá thẻ:</p>
-                                                    <p class="item-status" id="itemStatus">Trạng thái:</p>
+                                                    <p  id="itemStatus">Trạng thái:</p>
                                                     <p class="purchase-date">Ngày mua thẻ: <span
                                                             class="purchase-date"></span></p>
                                                     <p class="activation-period">Số lượng ngày tập còn lại: <span

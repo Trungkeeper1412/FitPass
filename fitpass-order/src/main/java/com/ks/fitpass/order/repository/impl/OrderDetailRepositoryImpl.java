@@ -1,15 +1,17 @@
 package com.ks.fitpass.order.repository.impl;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
-import com.ks.fitpass.order.dto.OrderDetailDTO;
+import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
-import com.ks.fitpass.order.mapper.OrderDetailMapper;
 import com.ks.fitpass.order.mapper.OrderDetailWithDeparmentNameMapper;
 import com.ks.fitpass.order.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
                 orderDetail.getGymPlanDepartmentId(), orderDetail.getQuantity(),
                 orderDetail.getPricePerHours(), orderDetail.getPrice(),
                 orderDetail.getDuration(), orderDetail.getPlanBeforeActiveValidity(),
-                orderDetail.getPlanAfterActiveValidity(), orderDetail.getItemStatusKey(), orderDetail.getDescription());
+                orderDetail.getPlanAfterActiveValidity(), orderDetail.getItemStatusKey(), orderDetail.getDescription(), orderDetail.getPlanExpiredTime());
     }
 
     @Override
@@ -91,5 +93,50 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
     @Override
     public int decreaseDuration(int orderDetailId) {
         return jdbcTemplate.update(IRepositoryQuery.DECREASE_DURATION, orderDetailId);
+    }
+
+    @Override
+    public List<Integer> getListOrderDetailExpired() {
+        return jdbcTemplate.queryForList(IRepositoryQuery.GET_LIST_ORDER_DETAIL_EXPIRED, Integer.class);
+    }
+
+    @Override
+    public int[] updateOrderDetailExpiredStatus(List<Integer> listId) {
+        return jdbcTemplate.batchUpdate(IRepositoryQuery.UPDATE_ORDER_DETAIL_EXPIRED_STATUS, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setInt(1, listId.get(i));
+            }
+
+            @Override
+            public int getBatchSize() {
+                return listId.size();
+            }
+        });
+    }
+
+    @Override
+    public int getLatestOrderDetailId() {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_LATEST_ORDER_DETAIL_ID, Integer.class);
+    }
+
+    @Override
+    public OrderDetailStatAdmin getAdminStat() {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_ADMIN_STAT, (rs, rowNum) -> {
+            OrderDetailStatAdmin o = new OrderDetailStatAdmin();
+            o.setTotalFixed(rs.getInt("total_fixed"));
+            o.setTotalFlex(rs.getInt("total_flex"));
+            return o;
+        });
+    }
+
+    @Override
+    public Integer getTotalBuyByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_BUY_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public Double getTotalRevenueByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_REVENUE_BY_DEPARTMENT_ID, Double.class, departmentId);
     }
 }

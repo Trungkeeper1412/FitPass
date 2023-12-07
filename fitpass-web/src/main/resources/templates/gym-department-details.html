@@ -20,17 +20,21 @@
 <header th:replace="common/navbar :: navbar"></header>
 
 <div class="gym-first-info container">
+    <div class="gym-dept-img">
+        <input type="hidden" id="departmentId" th:value="${department.getDepartmentId()}">
+        <img th:src="${department.getDepartmentWallpaperUrl()}">
+    </div>
     <div class="gym-picture">
-        <img style="width: 150px; border-radius: 50%;" th:src="${department.departmentLogoUrl}">
+        <img style="" th:src="${department.departmentLogoUrl}">
         <div class="gym-name-cover">
             <h3 th:text="${department.departmentName}"></h3>
         </div>
     </div>
 </div>
 <div class="gym-container container">
-    <div class="about-our-gym row justify-content-center">
+    <div class="about-our-gym row justify-content-center mt-4">
         <div class="about-our-gym-1 col-md-6">
-            <h3 style="color: black;  font-weight: 600;">Về phòng gym của chúng tôi</h3>
+            <h3 class="info-title">Về phòng gym của chúng tôi</h3>
             <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
             <div class="gym-intro"  th:text="${department.departmentDescription}"></div>
             <hr style="margin-top: 20px; color: black">
@@ -43,11 +47,11 @@
                 <div style="margin-left: 10px;" th:text="${department.departmentContactNumber}"></div>
             </div>
             <div class="gym-address">
-                <img style="width: 20px" src="https://cdn-icons-png.flaticon.com/128/10405/10405743.png">
+                <img style="width: 20px" th:src="@{/user-homepage-assets/assets/img/dept-area.png}">
                 <div style="margin-left: 10px;">Diện tích: <span th:text="${department.area}"></span> m²</div>
             </div>
             <div class="gym-address">
-                <img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Leadership_-_The_Noun_Project.svg/1200px-Leadership_-_The_Noun_Project.svg.png">
+                <img style="width: 20px" th:src="@{/user-homepage-assets/assets/img/dept-capacity.png}">
                 <div style="margin-left: 10px;">Sức chứa: <span th:text="${department.capacity}"></span> người</div>
             </div>
             <div class="gym-address">
@@ -77,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="blank col-md-6 mt-4" style="background-color: white; border-radius: 10px;">
+        <div class="blank col-md-6 mt-4" style="border-radius: 10px;">
             <iframe
                     width="100%"
                     height="100%"
@@ -91,12 +95,12 @@
     </div>
 
 <!--    Tiện ích-->
-    <h3 style="color: black; margin-top: 80px; font-weight: 600">Tiện ích hàng đầu</h3>
+    <h3 class="info-title" style="color: black; margin-top: 80px; font-weight: 600">Tiện ích hàng đầu</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 110px;"></div>
     <!-- Gym service -->
-    <div class="container">
-        <div class="row justify-content-center gym-service">
-            <div class="col-lg-1 col-md-1 service-type mb-3" th:each="feature: ${departmentFeatures}">
+    <div class="container-fluid">
+        <div class="gym-service">
+            <div class="service-type mb-3" th:each="feature: ${departmentFeatures}">
                 <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
                      class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
                 </div>
@@ -104,68 +108,73 @@
         </div>
     </div>
 <!--    Dịch vụ-->
-    <h3 style="color: black; margin-top: 80px; font-weight: 600">Dịch vụ</h3>
+    <h3 class="info-title" style="color: black; margin-top: 30px; font-weight: 600">Dịch vụ</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
     <div class="list-service-wrapper container mt-2">
-        <button class="left" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2985/2985162.png">
+        <button th:if="${departmentAmenities.size() > 4}" class="left" onclick="leftScroll()">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-scroll.png}">
         </button>
-        <div class="scroll-services mt-4">
-            <div class="child col-lg-3 col-md-4 col-xl-3 col-sm-6 col-xs-12"  th:each="amenitie: ${departmentAmenities}">
+        <div class="scroll-services row mt-4">
+            <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3"  th:each="amenitie: ${departmentAmenities}">
+                <div class="child">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.brandAmenitieId.getPhotoUrl()} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.brandAmenitieId.getAmenitieName()}"></div>
                 <div class="service-descript" th:text="${amenitie.brandAmenitieId.getDescription()}"></div>
+                </div>
             </div>
         </div>
-        <button class="right" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/1549/1549454.png">
+        <button th:if="${departmentAmenities.size() > 4}" class="right" onclick="rightScroll()">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-scroll.png}">
         </button>
     </div>
 
-    <h3 style="color: black; margin-top: 80px; font-weight: 600">Danh sách gói tập</h3>
+    <h3 class="info-title" style="color: black; margin-top: 40px; font-weight: 600">Danh sách gói tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="list-plan-wrapper container">
-        <button class="left l1" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
+        <button th:if="${gymPlans.size() > 3}" class="left l1" onclick="leftScroll()">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-plan.png}"></img>
         </button>
-        <div class="scroll-plans">
-            <div th:each="gymPlan : ${gymPlans}" class="child col-lg-3 col-md-3" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
+        <div class="scroll-plans row">
+            <div class="col-xl-4 col-lg-6 col-md-8" th:each="gymPlan : ${gymPlans}">
+            <div class="child" th:classappend="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ') ? 'special-plan': child}">
                 <div class="plan-description">
                     <div style="" class="gym-plan-name" th:text="${gymPlan.getGymPlanName()}"></div>
                     <div style="" class="gym-plan-price">
-                        <div style="font-size: xxx-large; font-weight: 700">
-                            <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
-                            <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}"></span>
+                        <div style="display: flex; align-items: center">
+                            <span class="plan-price" th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
+                            <span class="plan-price" th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}"></span>
+                            <span style="margin-left: 5px">credits</span>
                         </div>
-                        <div style="padding-left: 10px; padding-top: 22px;">credits</div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
 
-                    <div style="" class="gym-duration fw-bold " th:if="${gymPlan.duration > 0}">
+                    <div class="gym-duration fw-bold" th:if="${gymPlan.duration > 0}">
                         <span>Thời lượng gói tập :</span>
                         <span class="day-duration" th:text="${gymPlan.duration}"></span>
                         <span class="day-duration">ngày</span>
                     </div>
                     <div class="fw-bold mt-1" th:text="'Thời hạn trước khi kích hoạt : ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
-                    <div class="fw-bold mt-1" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
+                    <div style="padding-bottom: 15px"  class="fw-bold mt-1" th:text="'Thời hạn sau khi kích hoạt : ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                 </div>
                 <button type="button"  th:attr="data-gym-plan-id=${gymPlan.getGymPlanId()}, data-department-id=${department.getDepartmentId()}" data-quantity="1" onclick="addToCart()">
                         Thêm vào giỏ hàng
                 </button>
             </div>
+            </div>
 
         </div>
-        <button class="right r1" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
+        <button th:if="${gymPlans.size() > 3}" class="right r1" onclick="rightScroll()">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-plan.png}"></img>
         </button>
     </div>
 
-    <div style="margin: auto;" class="container">
-        <h3 style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
-        <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
+    <h3 class="info-title" style="color: black; margin-top: 50px; font-weight: 600">Album ảnh</h3>
+    <div style="background-color: rgb(255, 187, 0); height: 3px; width: 100px;"></div>
+
+    <div style="margin: auto;">
         <div class="list-image">
             <button class="leftImage" onclick="leftScroll()">
-                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+                <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-scroll.png}">
             </button>
             <div class="image-scroll-wrapper squares row">
             <div th:each="album : ${departmentAlbums}">
@@ -173,7 +182,7 @@
             </div>
             </div>
             <button class="rightImage" onclick="rightScroll()">
-                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+                <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-scroll.png}">
             </button>
         </div>
         <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
@@ -186,75 +195,52 @@
         </div>
     </div>
 
-    <h3 style="color: black; font-weight: 600; margin-top: 60px">Đánh giá từ người tập</h3>
+    <h3 class="info-title" style="color: black; font-weight: 600; margin-top: 50px">Đánh giá từ người tập</h3>
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="rating-feedback container mx-auto" id="ratingfeedback">
         <div class="rating-option row">
-            <div class="rating-avg">
+            <div class="rating-avg col-md-3 col-lg-2">
                 <div style="display: flex; position: relative">
-                    <div class="rating-point" th:text="${departmentFeedbacks.avgRating}"></div>
+                    <div class="rating-point" th:text="${department.getRating()}"></div>
                     <div class="rating-max">trên 5</div>
                 </div>
                 <div class="rating" th:attr="data-star=${departmentFeedbacks.avgRating}"></div>
             </div>
-            <div class="button-list">
+            <div class="button-list col-md-9 col-lg-10">
             <div class="row">
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSortAllRating" type="button" class="btn btn-warning">
                 Tất cả (<span th:text="${departmentFeedbacks.total}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort5Rating" type="button" class="btn btn-warning">
                 5 sao (<span th:text="${departmentFeedbacks.total5}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort4Rating" type="button" class="btn btn-warning">
                 4 sao (<span th:text="${departmentFeedbacks.total4}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort3Rating" type="button" class="btn btn-warning">
                 3 sao (<span th:text="${departmentFeedbacks.total3}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2 col-xs-4">
+            <button id="btnSort2Rating" type="button" class="btn btn-warning">
                 2 sao (<span th:text="${departmentFeedbacks.total2}"></span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
+            <button id="btnSort1Rating" type="button" class="btn btn-warning">
                 1 sao (<span th:text="${departmentFeedbacks.total1}"></span>)
             </button>
                 </div>
             </div>
         </div>
-        <div th:each="feedback : ${userFeedbacks}" class="user-rating">
-            <div class="user-rating-avatar">
-                <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-            </div>
-            <div class="user-rating-description">
-                <div th:text="${feedback.userName}"></div>
-                <i style="height: 25px;" th:attr="data-star=${feedback.rating}"></i>
-                <div th:text="${feedback.feedbackTime}"></div>
-                <div  th:text="${feedback.comments}"></div>
-            </div>
+        <div id="feedback-list">
+
         </div>
-        <div class="pagination-wrapper container" th:if="${departmentFeedbacks.getTotal() > 7}">
-            <div class="pagination col justify-content-center">
-                <a class="prev page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage - 1} + '#ratingfeedback'}"
-                   th:classappend="${currentPage == 1}? 'disabled' : ''">prev</a>
-                <span th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
-                    <a class="page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${pageNumber} + '#ratingfeedback'}"
-                       th:classappend="${pageNumber == currentPage}? 'current' : ''"
-                       th:text="${pageNumber}"></a>
-                </span>
-                <a class="next page-numbers" th:href="@{'' + ${departmentId} + '?page=' + ${currentPage + 1} + '#ratingfeedback'}"
-                   th:classappend="${currentPage == totalPages}? 'disabled' : ''">next</a>
+        <div class="pagination-wrapper">
+            <div class="pagination justify-content-center" id="paginationFeedback">
             </div>
         </div>
     </div>
 </div>
 
-
-
-
 <!-- ======= Footer ======= -->
-<th:block th:include="common/footer :: footer"></th:block>
-<div id="preloader"></div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<div th:replace="common/footer :: footer"></div>
 
 <th:block th:include="common/vendor-script"></th:block>
 <script>
@@ -495,7 +481,143 @@
     }
 
 </script>
+<script>
+    $(document).ready(function () {
+        loadDepartmentFeedback(1);
+    });
+    var sortRating = "";
 
+    $("#btnSortAllRating").click(function () {
+        sortRating = "";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort5Rating").click(function () {
+        sortRating = "5";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort4Rating").click(function () {
+        sortRating = "4";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort3Rating").click(function () {
+        sortRating = "3";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort2Rating").click(function () {
+        sortRating = "2";
+        loadDepartmentFeedback(1);
+    });
+
+    $("#btnSort1Rating").click(function () {
+        sortRating = "1";
+        loadDepartmentFeedback(1);
+    });
+
+    function loadDepartmentFeedback(page) {
+        $.ajax({
+            url: '/department/department-feedback',
+            type: 'GET',
+            data: {
+                departmentId: $("#departmentId").val(),
+                page: page,
+                size: 2,
+                sortRating: sortRating
+            },
+            success: function (data) {
+                // Hiển thị danh sách người dùng
+                var feedbackListHtml = '';
+                if (data.userFeedbacks.length === 0) {
+                    feedbackListHtml = '' +
+                        '<div class="no-rating d-flex flex-column align-items-center justify-content-center">' +
+                        ' <span class="icon"></span>  ' +
+                        '<h2>Không có feedback nào</h2>' +
+                        '</div>';
+                } else {
+                $.each(data.userFeedbacks, function (index, feedback) {
+                    feedbackListHtml += `
+                            <div class="user-rating">
+                <div class="user-rating-avatar">
+                    <img style="margin: auto;" src="${feedback.imageUrl}">
+                </div>
+                <div class="user-rating-description">
+                    <div>${feedback.userName}</div>
+                    <i style="height: 25px;" data-star="${feedback.rating}"></i>
+                    <div>${formatDateTime(feedback.feedbackTime)}</div>
+                    <div class="feedback-comment">${feedback.comments}</div>
+                </div>
+            </div>
+`;
+                });
+                }
+                $('#feedback-list').html(feedbackListHtml);
+
+                var paginationHtml = '';
+
+                var prevPage = data.currentPage - 1;
+                if (data.currentPage > 1) {
+                    paginationHtml += '<a class="page-numbers prev" href="javascript:void(0);" onclick="paginationFeedback(' + prevPage + ')">Trước</a> ';
+                }
+
+                const maxVisiblePages = 5;
+
+                for (var i = 1; i <= data.totalPage; i++) {
+                    if (i <= data.currentPage - maxVisiblePages / 2 && i !== 1) {
+                        if (i === 2) {
+                            paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
+                        }
+                        continue;
+                    }
+
+                    if (i >= data.currentPage + maxVisiblePages / 2 && i !== data.totalPage) {
+                        if (i === data.totalPage - 1) {
+                            paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
+                        }
+                        continue;
+                    }
+
+                    if (i === data.currentPage) {
+                        paginationHtml += '<span aria-current="page" class="page-numbers current">' + i + '</span> ';
+                    } else {
+                        paginationHtml += '<a class="page-numbers" href="javascript:void(0);" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
+                    }
+                }
+
+                var nextPage = data.currentPage + 1;
+                if (data.currentPage < data.totalPage) {
+                    paginationHtml += '<a class="page-numbers next" href="javascript:void(0);" onclick="paginationFeedback(' + nextPage + ')">Sau</a> ';
+                }
+
+                $('#paginationFeedback').empty().html(paginationHtml);
+                }
+
+        });
+    }
+
+    function paginationFeedback(page) {
+        event.preventDefault();
+        loadDepartmentFeedback(page);
+    }
+
+    function formatDateTime(inputDate) {
+        const dateObject = new Date(inputDate);
+
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObject.getDate().toString().padStart(2, '0');
+        const hours = dateObject.getHours().toString().padStart(2, '0');
+        const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+        const seconds = dateObject.getSeconds().toString().padStart(2, '0');
+
+        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        const formattedDate = `${day}-${month}-${year}`;
+
+        return `${formattedTime} ${formattedDate}`;
+    }
+</script>
 </body>
 
 </html>

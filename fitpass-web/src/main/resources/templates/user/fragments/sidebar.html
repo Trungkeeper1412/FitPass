@@ -1,65 +1,65 @@
-<div class="col-md-3 menu-option mb-4" th:fragment="sidebar">
-  <div class="user-basic-info">
-    <div class="user-img">
-      <img th:src="@{/images/system/v2.png}">
+<div class="col-md-4 col-lg-4 col-xl-3 menu-option mb-4" th:fragment="sidebar">
+    <div class="user-basic-info">
+        <div class="user-img" th:if="${session.userAvatar != null}">
+            <img onclick="onClickImage(this)" class="w3-hover-opacity" th:src="@{${session.userAvatar}}" alt="Ảnh đại diện"/>
+        </div>
+        <div class="user-img" th:unless="${session.userAvatar != null}">
+            <img th:src="@{/images/system/v2.png}" alt="Ảnh đại diện"/>
+        </div>
+        <div class="user">
+            <div class="name fw-bold mt-3" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
+            <div class="gmail" th:if="${session.userEmail != null}">
+                <span th:text="${session.userEmail}"></span>
+            </div>
+        </div>
     </div>
-    <div class="user">
-      <div class="name" th:text="${session.userInfo.getUserAccount()}">Nguyễn Văn A</div>
-      <div class="gmail">nguyenvana@gmail.com</div>
-    </div>
-  </div>
 
-  <ul class="account-info list-group">
-    <li class="list-group-item p-3 option-tab at" onclick="openUserProfileTab()">
+    <ul class="account-info list-group">
+        <a th:href="@{/profile/my-profile}">
+            <li class="list-group-item p-3 option-tab" onclick="openUserProfileTab()">
             <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/8748/8748620.png">
+              <img th:src="@{/user-homepage-assets/assets/img/profile-icon.png}" alt="Hồ sơ">
             </span>
-      <span>Hồ sơ của tôi</span>
-    </li>
-    <li class="list-group-item p-3 option-tab" onclick="openChangePwTab()">
+                <span>Hồ sơ của tôi</span>
+            </li>
+        </a>
+
+        <a th:href="@{/profile/change-password}">
+            <li class="list-group-item p-3 option-tab" onclick="openChangePwTab()">
             <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/807/807241.png">
+              <img th:src="@{/user-homepage-assets/assets/img/pw-icon.png}" alt="Mật khẩu">
             </span>
-      <span>Đổi mật khẩu</span>
-    </li>
-    <li class="list-group-item p-3 option-tab">
-            <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/1860/1860195.png">
-            </span>
-      <span>Lịch tập</span>
-    </li>
-    <li class="list-group-item p-3 option-tab">
-            <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/11520/11520032.png">
-            </span>
-      <span>Đánh giá của tôi</span>
-    </li>
+                <span>Đổi mật khẩu</span>
+            </li>
+        </a>
+
+      <a th:href="@{/profile/my-notifications}">
       <li class="list-group-item p-3 option-tab" onclick="openNotiTab()">
               <span>
-                <img src="https://cdn-icons-png.flaticon.com/128/891/891012.png">
+                <img th:src="@{/user-homepage-assets/assets/img/notification-icon.png}" alt="Thông báo">
               </span>
-          <span>Thông báo</span>
-      </li>
-  </ul>
+                <span>Thông báo</span>
+            </li>
+        </a>
+    </ul>
 
-  <ul class="wallet-info list-group">
-    <li class="list-group-item p-3 option-tab" onclick="openAddMoneyTab()">
+    <ul class="wallet-info list-group">
+        <a th:href="@{/profile/deposit}">
+            <li class="list-group-item p-3 option-tab" onclick="openAddMoneyTab()">
             <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/7887/7887095.png">
+              <img th:src="@{/user-homepage-assets/assets/img/add-money.png}" alt="Nạp tiền">
             </span>
-      <span>Nạp tiền</span>
-    </li>
-    <li class="list-group-item p-3 option-tab">
+                <span>Nạp tiền</span>
+            </li>
+        </a>
+
+        <a th:href="@{/profile/transaction-history}">
+            <li class="list-group-item p-3 option-tab" onclick="openTransactionHistory()">
             <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/9334/9334627.png">
+              <img th:src="@{/user-homepage-assets/assets/img/history.png}" alt="Lịch sử">
             </span>
-      <span>Thêm tài khoản ngân hàng</span>
-    </li>
-    <li class="list-group-item p-3 option-tab" onclick="openTransactionHistory()">
-            <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/847/847566.png">
-            </span>
-      <span>Lịch sử giao dịch</span>
-    </li>
-  </ul>
+                <span>Lịch sử giao dịch</span>
+            </li>
+        </a>
+    </ul>
 </div>

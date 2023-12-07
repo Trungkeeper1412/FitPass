@@ -1,6 +1,7 @@
 package com.ks.fitpass.order.service.impl;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
+import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
 import com.ks.fitpass.order.repository.OrderDetailRepository;
 import com.ks.fitpass.order.service.OrderDetailService;
@@ -75,5 +76,36 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailRepository.decreaseDuration(orderDetailId);
     }
 
+    @Override
+    public List<Integer> getListOrderDetailExpired() {
+        return orderDetailRepository.getListOrderDetailExpired();
+    }
 
+    @Override
+    public int[] updateOrderDetailExpiredStatus(List<Integer> listId) {
+        return orderDetailRepository.updateOrderDetailExpiredStatus(listId);
+    }
+
+    @Override
+    public int getLatestOrderDetailId() {
+        return orderDetailRepository.getLatestOrderDetailId();
+    }
+
+    @Override
+    public OrderDetailStatAdmin getAdminStat() {
+        OrderDetailStatAdmin orderDetailStatAdmin = orderDetailRepository.getAdminStat();
+        return (orderDetailStatAdmin != null) ? orderDetailStatAdmin : new OrderDetailStatAdmin();
+    }
+
+    @Override
+    public int getTotalBuyByDepartmentId(int departmentId) {
+        Integer count = orderDetailRepository.getTotalBuyByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public double getTotalRevenueByDepartmentId(int departmentId) {
+        Double count = orderDetailRepository.getTotalRevenueByDepartmentId(departmentId);
+        return (count != null) ? count : 0.0;
+    }
 }

@@ -1,0 +1,26 @@
+<div class="row justify-content-center credit-info-common" th:fragment="money-tab">
+    <div class="col-sm-6 col-md-6">
+        <div class="account-balance">
+            <div>
+                <span><img th:src="@{/user-homepage-assets/assets/img/wallet.png}"></span>
+                <span class="wallet-money">
+                                    <span id="user-balance" th:text="${session.userCredit}"></span>
+                                        <span>Credits</span>
+                                    </span>
+            </div>
+            <div class="ab-title">Số dư trong ví</div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="account-balance">
+            <div>
+                <span><img th:src="@{/user-homepage-assets/assets/img/wallet1.png}"></span>
+                <span class="wallet-money">
+                                    <span  th:text="${session.userTotalDeposit div 1000}"></span>
+                                    <span>Credits</span>
+                                </span>
+            </div>
+            <div class="ab-title">Tổng credits đã nạp</div>
+        </div>
+    </div>
+</div>

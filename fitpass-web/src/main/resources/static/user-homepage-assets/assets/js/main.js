@@ -5,9 +5,15 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
+let notificationCountElement = document.querySelector(".notification-badge");
+let notificationCount;
 document.addEventListener('DOMContentLoaded', function () {
-    // Đây là nơi bạn có thể gọi hàm của bạn
-    updateQuantityCart();
+    updateQuantityCart()
+    getTotalUnseenNotificationNumber()
+        .then(num => {
+            notificationCount = num;
+            notificationCountElement.textContent = num;
+        });
 });
 
 function updateQuantityCart() {
@@ -26,13 +32,13 @@ function updateQuantityCart() {
         })
         .then((data) => {
             let number = parseInt(data);
-            console.log(number);
             cartNum.textContent = number;
         })
         .catch((error) => {
             console.error("Error:", error);
         });
 }
+
 
 (function () {
     "use strict";
@@ -453,9 +459,15 @@ function updateQuantityCart() {
 })()
 $(function () {
     $("#include-navbar").load("navbar.html");
-    $("#include-footer").load("footer.html");
 });
 
+//change avatar
+let user_img = document.getElementById('user-ava');
+let input_img = document.getElementById('exampleFormControlFile1');
+input_img.onchange = (e) => {
+    if (input_img.files[0])
+        user_img.src = URL.createObjectURL(input_img.files[0]);
+};
 
 
 

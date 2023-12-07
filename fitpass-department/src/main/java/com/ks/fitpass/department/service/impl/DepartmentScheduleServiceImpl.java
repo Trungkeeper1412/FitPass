@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DepartmentScheduleServiceImpl implements DepartmentScheduleService {
@@ -22,5 +23,15 @@ public class DepartmentScheduleServiceImpl implements DepartmentScheduleService 
     @Override
     public List<DepartmentSchedule> getAllByDepartmentID(int departmentID) throws DataAccessException {
         return departmentScheduleRepository.getAllByDepartmentID(departmentID);
+    }
+
+    @Override
+    public int[] addDepartmentSchedule(Map<String, String> dayToTimeMap, int departmentID) {
+        return departmentScheduleRepository.addDepartmentSchedule(dayToTimeMap, departmentID);
+    }
+
+    @Override
+    public int deleteAllDepartmentSchedule(int departmentId) {
+        return departmentScheduleRepository.deleteAllDepartmentSchedule(departmentId);
     }
 }

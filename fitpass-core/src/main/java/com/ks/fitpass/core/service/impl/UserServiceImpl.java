@@ -63,13 +63,28 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public List<UserDTO> getAllAccountUser() {
+        return userRepository.getAllAccountUser();
+    }
+
+    @Override
     public int insertIntoUserDetail(UserDetail userDetail) {
         return userRepository.insertIntoUserDetail(userDetail);
     }
 
     @Override
+    public int insertIntoUserDetailRegister(UserDetail userDetail) {
+        return userRepository.insertIntoUserDetailRegister(userDetail);
+    }
+
+    @Override
     public int getLastInsertUserDetailId(UserDetail userDetail) {
         return userRepository.getLastInsertUserDetailId(userDetail);
+    }
+
+    @Override
+    public int getLastInsertUserDetailIdRegister(UserDetail userDetail) {
+        return userRepository.getLastInsertUserDetailIdRegister(userDetail);
     }
 
     @Override
@@ -113,6 +128,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public UserDetail getUserDetailByUserId(int userId) {
+        return userRepository.getUserDetailByUserId(userId);
+    }
+
+    @Override
     public boolean checkEmailExist(String email) {
         return userRepository.checkEmailExist(email);
     }
@@ -120,5 +140,48 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public boolean checkUsernameExist(String username) {
         return userRepository.checkUsernameExist(username);
+    }
+
+    @Override
+    public boolean checkAccountFirstTimeLogin(int userId) {
+        return userRepository.checkAccountFirstTimeLogin(userId);
+    }
+
+    @Override
+    public int updateFirstTimeLoginStatus(int userId, int status) {
+        return userRepository.updateFirstTimeLoginStatus(userId, status);
+    }
+
+    @Override
+    public List<GymOwnerListDTO> getAllAccountByDepartmentId(int departmentId) {
+        return userRepository.getAllAccountByDepartmentId(departmentId);
+    }
+
+    @Override
+    public int getNumberOfAccountCreatedByDepartmentId(int departmentId) {
+        return userRepository.getNumberOfAccountCreatedByDepartmentId(departmentId);
+    }
+
+    @Override
+    public User getUserByAccount(String username) {
+        return userRepository.findByAccount(username);
+    }
+
+
+    @Override
+    public int createEmployee(User user) {
+        return userRepository.createEmployee(user);
+    }
+
+
+    @Override
+    public boolean updatePassword(String newPassword, int userId){
+        return userRepository.updatePassword(newPassword, userId);
+    }
+
+    @Override
+    public int countAllUsersAccount() {
+        Integer count = userRepository.countAllUsersAccount();
+        return (count != null) ? count : 0;
     }
 }

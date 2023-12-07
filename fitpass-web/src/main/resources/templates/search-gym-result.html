@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Kết quả tìm kiếm</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+
+    <th:block th:insert="common/vendor-head"></th:block>
+    <link th:href="@{https://www.w3schools.com/w3css/4/w3.css}" rel="stylesheet">
+    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+</head>
+
+<body class="body-list-brand">
+<!-- ======= Header ======= -->
+<header th:replace="common/navbar :: navbar"></header>
+
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="margin-top: 77px;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+    </ol>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+        <div class="carousel-item active bg-black">
+            <a href="#">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 1">
+            </a>
+        </div>
+        <div class="carousel-item bg-black">
+            <a href="#">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 2">
+            </a>
+        </div>
+        <div class="carousel-item bg-black">
+            <a href="#">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 3">
+            </a>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+<!-- Content -->
+<div style="margin-top: 50px;" class="list-brand-content container">
+    <!-- List brands -->
+    <div id="list-brand" class="list-of-brand mt-4">
+        <h3 class="fw-bold list-brand-title mt-4">Kết quả tìm kiếm</h3>
+        <div class="row justify-content-center mt-4">
+            <th:block th:each="d : ${list}">
+                <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
+                    <a th:if="${d.type == 'Cơ sở'}" th:href="@{'/department/department-detail/' + ${d.id}}">
+                        <div style="position: relative;" class="brand">
+                            <img class="brand-image" th:src="${d.wallpaperUrl}">
+                            <div class="fw-bold is-brand" th:text="${d.type.toUpperCase()}"></div>
+                            <div class="brand-info">
+                                <h5 class="fw-bold" th:text="${d.name}"></h5>
+                                <div style="height: 25px; margin-top: -3px;" th:attr="data-star=${d.rating}"></div>
+                                <div class="description1" th:text="${d.description}"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <a th:if="${d.type == 'Thương hiệu'}" th:href="@{'/brand/brand-detail/' + ${d.id}}">
+                        <div style="position: relative;" class="brand">
+                            <img class="brand-image" th:src="${d.wallpaperUrl}">
+                            <div class="fw-bold is-brand" th:text="${d.type.toUpperCase()}"></div>
+                            <div class="brand-info">
+                                <h5 class="fw-bold" th:text="${d.name}"></h5>
+                                <div style="height: 25px; margin-top: -3px;" th:attr="data-star=${d.rating}"></div>
+                                <div class="description1" th:text="${d.description}"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </th:block>
+        </div>
+        <div class="pagination mt-3 mb-4">
+            <!-- Previous Page Link -->
+            <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${currentPage - 1}}"
+               th:if="${currentPage > 1}">&laquo;</a>
+
+            <!-- First Page Link -->
+            <a th:href="@{'/homepage/search?search=' + ${search} + '&page=1'}"
+               th:if="${startPage > 1}">1</a>
+
+            <!-- Dots Before Current Page -->
+            <span th:if="${startPage > 2}">...</span>
+
+            <!-- Page Number Links -->
+            <span th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+                <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${pageNumber}}"
+                    th:class="${pageNumber == currentPage} ? 'active' : ''" th:text="${pageNumber}">
+                </a>
+            </span>
+
+            <!-- Dots After Current Page -->
+            <span th:if="${endPage < totalPage - 1}">...</span>
+
+            <!-- Last Page Link -->
+            <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${totalPage}}"
+               th:if="${endPage < totalPage}" th:text="${totalPage}"></a>
+
+            <!-- Next Page Link -->
+            <a th:href="@{'/homepage/search?search=' + ${search} + '&page=' + ${currentPage + 1}}"
+               th:if="${currentPage < totalPage}">&raquo;</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/footer :: footer"></div>
+<th:block th:insert="common/vendor-script"></th:block>
+<script>
+</script>
+</body>
+
+</html>

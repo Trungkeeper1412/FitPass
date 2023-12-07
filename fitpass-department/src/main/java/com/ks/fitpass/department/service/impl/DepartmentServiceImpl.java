@@ -1,9 +1,6 @@
 package com.ks.fitpass.department.service.impl;
 
-import com.ks.fitpass.department.dto.DepartmentDTO;
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -13,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -40,6 +37,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .departmentPhone(department.getDepartmentContactNumber())
 
                 .departmentWallpaperUrl(department.getDepartmentWallpaperUrl())
+                .departmentThumbnailUrl(department.getDepartmentThumbnailUrl())
                 .rating(department.getRating())
                 .capacity(department.getCapacity())
                 .area(department.getArea())
@@ -47,22 +45,6 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .minPrice(department.getMinPrice())
                 .feedbackCount(department.getFeedbackCount())
                 .build();
-    }
-
-    @Override
-    public List<DepartmentDTO> getAllDepartmentForHome(int pageIndex, int pageSize) throws DataAccessException {
-        // to do : implement paging
-        //List<Department> departments = departmentRepository.getAllByStatus(1);
-        List<Department> departments = Collections.emptyList();
-        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
-
-    }
-
-    @Override
-    public List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException {
-        // to do : implement paging
-        List<Department> departments = departmentRepository.getAllByTopRating(1);
-        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
     }
 
     @Override
@@ -78,32 +60,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentRepository.getAllByStatus(1, page, size, city, sortPrice, sortRating, userLatitude, userLongitude, belowDistance);
     }
-
-    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        // Convert latitude and longitude from degrees to radians
-        double radLat1 = Math.toRadians(lat1);
-        double radLon1 = Math.toRadians(lon1);
-        double radLat2 = Math.toRadians(lat2);
-        double radLon2 = Math.toRadians(lon2);
-
-        // Haversine formula
-        double dLat = radLat2 - radLat1;
-        double dLon = radLon2 - radLon1;
-
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(radLat1) * Math.cos(radLat2) *
-                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        // Calculate the distance in kilometers
-        return 6371 * c;
-    }
-
-//    @Override
-//    public List<Department> getAllByStatus(int status) throws DataAccessException {
-//        return departmentRepository.getAllByStatus(status);
-//    }
 
     @Override
     public Department getOne(int id) throws DataAccessException {
@@ -134,15 +90,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.update(department);
     }
 
-
     @Override
-    public List<Department> findByRatingBetween(double from, double to) {
-        return departmentRepository.findByRatingBetween(from, to);
-    }
-
-    @Override
-    public List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size) {
-        return departmentRepository.getDepartmentFeedbackPagnition(departmentId, page, size);
+    public List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size, String sortRating) {
+        return departmentRepository.getDepartmentFeedbackPagnition(departmentId, page, size, sortRating);
     }
 
     @Override
@@ -233,6 +183,72 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId) {
         return departmentRepository.getDepartmentFeedbackOfBrandOwner(brandId);
+    }
+
+    @Override
+    public int updateGymOwnerDepartmentInfo(Department department) {
+        return departmentRepository.updateGymOwnerDepartmentInfo(department);
+    }
+
+    @Override
+    public int updateGymOwnerDepartmentInfoDetails(Department department) {
+        return departmentRepository.updateGymOwnerDepartmentInfoDetails(department);
+    }
+
+    @Override
+    public int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl) {
+        return departmentRepository.updateDepartmentImage(departmentId, imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
+    }
+
+    @Override
+    public int updateLongitudeLatitude(int departmentId, double longitude, double latitude) {
+        return departmentRepository.updateLongitudeLatitude(departmentId, longitude, latitude);
+    }
+
+    @Override
+    public boolean checkFirstTimeDepartmentCreated(int departmentId) {
+        return departmentRepository.checkFirstTimeDepartmentCreated(departmentId);
+    }
+
+    @Override
+    public int updateFirstTimeDepartmentCreated(int departmentId) {
+        return departmentRepository.updateFirstTimeDepartmentCreated(departmentId);
+    }
+
+    @Override
+    public int countAllFeedback(int departmentId, String sortRating) {
+        Integer count = departmentRepository.countAllFeedback(departmentId, sortRating);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId) {
+        return departmentRepository.getDepartmentNotificationDtoById(departmentId);
+    }
+
+
+    @Override
+    public int countAllDepartment() {
+        Integer count = departmentRepository.countAllDepartment();
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId) {
+        List<DepartmentStatBrandOwner> list = departmentRepository.getDepartmentStatBrandOwner(brandId);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    @Override
+    public List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId) {
+        List<DepartmentRatingStatBrandOwner> list = departmentRepository.getDepartmentRatingStatBrandOwner(brandId);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    @Override
+    public int getTotalNumberRatingByDepartmentId(int departmentId) {
+        Integer count = departmentRepository.getTotalNumberRatingByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 }
 

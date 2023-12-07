@@ -1,85 +1,105 @@
 package com.ks.fitpass.core.config;
 
-import com.ks.fitpass.core.service.impl.UserServiceImpl;
+import com.ks.fitpass.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    private final UserServiceImpl userDetailsService;
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    @Autowired
-    public WebSecurityConfig(UserServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public WebSecurityConfig (CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler){
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/css/**", "/images/**", "/js/**", "/webfonts/**").permitAll()
-                .requestMatchers("/user-homepage-assets/**").permitAll()
-                .requestMatchers("/employee-assets/**").permitAll()
-                .requestMatchers("/login", "/logout").permitAll()
-                .requestMatchers("/user/**").permitAll()
-                .requestMatchers("/cart/**").permitAll()
-                            .requestMatchers("/upload/**").permitAll()
-                            .requestMatchers("/user/**").permitAll()
-//                .requestMatchers("/gym-owner/**").hasRole("MANAGER")
-//                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .requestMatchers("/employee").hasRole("EMPLOYEE")
-                .requestMatchers("/employee").permitAll()
-                .requestMatchers("/send-message").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(formLogin -> formLogin
-                //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
-                .loginPage("/login")
-                .usernameParameter("account")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/user/homepage", true)
-                .failureUrl("/login?error=true")
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")                               // default url
-                .logoutSuccessUrl("/login?logout")                  // default url
-                .invalidateHttpSession(true)                        // default: true
-                .deleteCookies("JSESSIONID")
-            )
-            .rememberMe((remember) -> remember
-                    .rememberMeServices(rememberMeServices)
-            );
+                .addFilterAfter(new AuditInterceptor(), AnonymousAuthenticationFilter.class)
+                .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
+                        .requestMatchers("/websocket/**").hasAnyAuthority("USER", "EMPLOYEE")
+                        .requestMatchers("/login", "/logout").permitAll()
+                        .requestMatchers("/forgot-password/**").hasAnyAuthority("USER","EMPLOYEE","GYM_OWNER","BRAND_OWNER")
+                        .requestMatchers("/register").anonymous()
+                        .requestMatchers("/").permitAll()
+
+                        .requestMatchers("/landing-page").permitAll()
+                        .requestMatchers("/homepage/**").hasAnyAuthority("ROLE_ANONYMOUS","USER")
+                        .requestMatchers("/brand/**").permitAll()
+                        .requestMatchers("/department/**").permitAll()
+                        .requestMatchers("/cart/**").permitAll()
+                        .requestMatchers("/become-a-partner/**").permitAll()
+
+                        .requestMatchers("/checkout/**").hasAuthority("USER")
+                        .requestMatchers("/profile/**").hasAuthority("USER")
+                        .requestMatchers("/user/**").hasAuthority("USER")
+                        .requestMatchers("/item/**").hasAuthority("USER")
+                        .requestMatchers("/inventory/**").hasAuthority("USER")
+                        .requestMatchers("/payment/**").hasAuthority("USER")
+                        .requestMatchers("/confirm/**").hasAuthority("USER")
+
+                        .requestMatchers("/employee/**").hasAuthority("EMPLOYEE")
+                        .requestMatchers("/gym-owner/**").hasAuthority("GYM_OWNER")
+                        .requestMatchers("/brand-owner/**").hasAuthority("BRAND_OWNER")
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+
+                        .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                        //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
+                        .loginPage("/login")
+                        .usernameParameter("account")
+                        .passwordParameter("password")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .failureUrl("/login?error=true")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")                               // default url
+                        .logoutSuccessUrl("/login?logout")                  // default url
+                        .invalidateHttpSession(true)                        // default: true
+                        .deleteCookies("JSESSIONID")
+                )
+                .rememberMe((remember) -> remember
+                        .rememberMeServices(rememberMeServices)
+                        .rememberMeParameter("remember-me")
+                );
         return http.build();
     }
 
+
     @Bean
-    RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
+    public WebSecurityCustomizer ignoringCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/img/**", "/assets/**", "/ws/**", "/error/**", "/notification/**");
+    }
+
+    @Bean
+    RememberMeServices rememberMeServices(UserService userService) {
         TokenBasedRememberMeServices.RememberMeTokenAlgorithm encodingAlgorithm = TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256;
-        TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("FitPass", userDetailsService, encodingAlgorithm);
+        TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("FitPass", userService, encodingAlgorithm);
         rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256);
+        rememberMe.setTokenValiditySeconds(3000);
         return rememberMe;
     }
 
-//    @Bean
-//    public PersistentTokenRepository persistentTokenRepository() {
-//        // Save remember me in memory (RAM)
-//        return new InMemoryTokenRepositoryImpl();
-//    }
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -87,6 +107,5 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }
+

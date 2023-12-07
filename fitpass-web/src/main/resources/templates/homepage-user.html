@@ -16,7 +16,7 @@
 <!-- ======= Header ======= -->
 <header th:replace="common/navbar :: navbar"></header>
 
-<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="margin-top: 77px;">
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="margin-top: 75px;">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
@@ -27,27 +27,33 @@
     <!-- Slides -->
     <div class="carousel-inner">
         <div class="carousel-item active bg-black">
-            <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
-                 alt="Banner 1">
+            <a href="#">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 1">
+            </a>
         </div>
         <div class="carousel-item bg-black">
-            <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
-                 alt="Banner 2">
+            <a href="#">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 2">
+            </a>
         </div>
         <div class="carousel-item bg-black">
-            <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
-                 alt="Banner 3">
+            <a href="#">
+                <img th:src="@{/user-homepage-assets/assets/img/banner/banner_2.gif}" class="d-block w-100"
+                     alt="Banner 3">
+            </a>
         </div>
     </div>
 
     <!-- Controls -->
     <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Trước</span>
     </a>
     <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Sau</span>
     </a>
 </div>
 
@@ -55,11 +61,11 @@
 <div class="list-brand-content container">
     <div class="row home-option">
         <div id="brand-list" onclick="openBrand()" class="col-md-6 mx-auto active-list">
-            <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/5632/5632749.png"></span>
+            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/brand-logo.png}"></span>
             <span class="tab-title fw-bold">Thương hiệu</span>
         </div>
         <div id="gym-list" onclick="openGym()" class="col-md-6 mx-auto">
-            <span class="tab-img"><img src="https://cdn-icons-png.flaticon.com/128/6129/6129133.png"></span>
+            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/dept-logo.png}"></span>
             <span class="tab-title fw-bold">Cơ sở gần bạn</span>
         </div>
     </div>
@@ -112,53 +118,52 @@
                             <option value="Bạc Liêu">Bạc Liêu</option>
                             <option value="Bắc Ninh">Bắc Ninh</option>
                             <option value="Bến Tre">Bến Tre</option>
-
-<!--                            <option value="BĐ">Bình Định</option>-->
-<!--                            <option value="BP">Bình Phước</option>-->
-<!--                            <option value="BTH">Bình Thuận</option>-->
-<!--                            <option value="CM">Cà Mau</option>-->
-<!--                            <option value="CB">Cao Bằng</option>-->
-<!--                            <option value="DN">Đà Nẵng</option>-->
-<!--                            <option value="ĐN">Đắk Nông</option>-->
-<!--                            <option value="ĐL">Đắk Lắk</option>-->
-<!--                            <option value="ĐT">Đồng Tháp</option>-->
-<!--                            <option value="GL">Gia Lai</option>-->
-<!--                            <option value="HG">Hà Giang</option>-->
-<!--                            <option value="HD">Hải Dương</option>-->
-<!--                            <option value="HP">Hải Phòng</option>-->
-<!--                            <option value="HU">Hậu Giang</option>-->
-<!--                            <option value="HY">Hòa Bình</option>-->
-<!--                            <option value="KH">Khánh Hòa</option>-->
-<!--                            <option value="KG">Kiên Giang</option>-->
-<!--                            <option value="KT">Kon Tum</option>-->
-<!--                            <option value="LC">Lai Châu</option>-->
-<!--                            <option value="LD">Lâm Đồng</option>-->
-<!--                            <option value="LS">Lạng Sơn</option>-->
-<!--                            <option value="LA">Lào Cai</option>-->
-<!--                            <option value="LC">Long An</option>-->
-<!--                            <option value="ND">Nam Định</option>-->
-<!--                            <option value="NB">Nghệ An</option>-->
-<!--                            <option value="NT">Ninh Bình</option>-->
-<!--                            <option value="NA">Ninh Thuận</option>-->
-<!--                            <option value="PT">Phú Thọ</option>-->
-<!--                            <option value="PYN">Phú Yên</option>-->
-<!--                            <option value="QB">Quảng Bình</option>-->
-<!--                            <option value="QG">Quảng Ngãi</option>-->
-<!--                            <option value="QN">Quảng Ninh</option>-->
-<!--                            <option value="QT">Quảng Trị</option>-->
-<!--                            <option value="ST">Sóc Trăng</option>-->
-<!--                            <option value="SL">Sơn La</option>-->
-<!--                            <option value="TN">Tây Ninh</option>-->
-<!--                            <option value="TB">Thái Bình</option>-->
-<!--                            <option value="TNH">Thái Nguyên</option>-->
-<!--                            <option value="TH">Thanh Hóa</option>-->
-<!--                            <option value="TG">Thừa Thiên Huế</option>-->
-<!--                            <option value="TI">Tiền Giang</option>-->
-<!--                            <option value="TR">Trà Vinh</option>-->
-<!--                            <option value="TQ">Tuyên Quang</option>-->
-<!--                            <option value="VL">Vĩnh Long</option>-->
-<!--                            <option value="VT">Vĩnh Phúc</option>-->
-<!--                            <option value="YN">Yên Bái</option>-->
+                            <option value="Bình Định">Bình Định</option>
+                            <option value="Bình Phước">Bình Phước</option>
+                            <option value="Bình Thuận">Bình Thuận</option>
+                            <option value="Cà Mau">Cà Mau</option>
+                            <option value="Cao Bằng">Cao Bằng</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Đắk Nông">Đắk Nông</option>
+                            <option value="Đắk Lắk">Đắk Lắk</option>
+                            <option value="Đồng Tháp">Đồng Tháp</option>
+                            <option value="Gia Lai">Gia Lai</option>
+                            <option value="Hà Giang">Hà Giang</option>
+                            <option value="Hải Dương">Hải Dương</option>
+                            <option value="Hải Phòng">Hải Phòng</option>
+                            <option value="Hậu Giang">Hậu Giang</option>
+                            <option value="Hòa Bình">Hòa Bình</option>
+                            <option value="Khánh Hòa">Khánh Hòa</option>
+                            <option value="Kiên Giang">Kiên Giang</option>
+                            <option value="Kon Tum">Kon Tum</option>
+                            <option value="Lai Châu">Lai Châu</option>
+                            <option value="Lâm Đồng">Lâm Đồng</option>
+                            <option value="Lạng Sơn">Lạng Sơn</option>
+                            <option value="Lào Cai">Lào Cai</option>
+                            <option value="Long An">Long An</option>
+                            <option value="Nam Định">Nam Định</option>
+                            <option value="Nghệ An">Nghệ An</option>
+                            <option value="Ninh Bình">Ninh Bình</option>
+                            <option value="Ninh Thuận">Ninh Thuận</option>
+                            <option value="Phú Thọ">Phú Thọ</option>
+                            <option value="Phú Yên">Phú Yên</option>
+                            <option value="Quảng Bình">Quảng Bình</option>
+                            <option value="Quảng Ngãi">Quảng Ngãi</option>
+                            <option value="Quảng Ninh">Quảng Ninh</option>
+                            <option value="Quảng Trị">Quảng Trị</option>
+                            <option value="Sóc Trăng">Sóc Trăng</option>
+                            <option value="Sơn La">Sơn La</option>
+                            <option value="Tây Ninh">Tây Ninh</option>
+                            <option value="Thái Bình">Thái Bình</option>
+                            <option value="Thái Nguyên">Thái Nguyên</option>
+                            <option value="Thanh Hóa">Thanh Hóa</option>
+                            <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                            <option value="Tiền Giang">Tiền Giang</option>
+                            <option value="Trà Vinh">Trà Vinh</option>
+                            <option value="Tuyên Quang">Tuyên Quang</option>
+                            <option value="Vĩnh Long">Vĩnh Long</option>
+                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                            <option value="Yên Bái">Yên Bái</option>
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
@@ -194,8 +199,6 @@
         <!-- pagination -->
         <div class="pagination mt-5" id="pagnitionDepartment"></div>
     </div>
-</div>
-</div>
 </div>
 <!-- ======= Footer ======= -->
 <div th:replace="common/footer :: footer"></div>
@@ -244,7 +247,7 @@
 
     function loadBrand(page) {
         $.ajax({
-            url: '/user/homepage/brand',
+            url: '/homepage/brand',
             type: 'GET',
             data: {
                 page: page,
@@ -261,7 +264,7 @@
 <a href="/brand/brand-detail/${brand.brandId}">
             <div class="brand">
                 <img class="brand-image"
-                     src="${brand.brandThumbnailUrl}" alt="Ảnh bìa">
+                     src="${brand.brandLogoUrl}" alt="Ảnh bìa">
                 <div class="brand-info">
                     <h5 class="fw-bold">${brand.brandName}</h5>
                     <div style="height: 25px; margin-top: -3px;" data-star="${brand.rating}"></div>
@@ -367,7 +370,7 @@
     function loadDepartmentData(userLatitude, userLongitude, belowDistance, city, sortPrice, sortRating, page, size) {
         $.ajax({
             type: "POST",
-            url: "/user/homepage",
+            url: "/homepage",
             data: {
                 userLatitude: userLatitude,
                 userLongitude: userLongitude,
@@ -390,7 +393,7 @@
     function loadDepartmentDataWithNoGeolocation(userLatitude, userLongitude, belowDistance, city, sortPrice, sortRating, page, size) {
         $.ajax({
             type: "POST",
-            url: "/user/homepage",
+            url: "/homepage",
             data: {
                 userLatitude: userLatitude,
                 userLongitude: userLongitude,
@@ -428,18 +431,20 @@
                     <a href="/department/department-detail/${department.departmentId}">
                     <div class="card">
                             <div class="distance-flag">
-                                <span><img src="https://cdn-icons-png.flaticon.com/128/5774/5774388.png"></span>
+                                <i class="bi bi-geo-alt-fill"></i>
                                 <span>Cách bạn ${roundToTwoDecimalPlaces(+department.distance)} km</span>
                             </div>
-                            <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            <div class="list-img">
+                                <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            </div>
                             <div class="card-body">
-                                   <h3 class="card-title">${department.departmentName}</h3>
-                                    <p class="card-text">
+                                   <h4 class="card-title fw-bold">${department.departmentName}</h4>
+                                    <div class="card-text">
                                        <i class="bi bi-geo-alt"></i> ${department.departmentAddress}
-                                    </p>
-                                    <p class="phone-number">
+                                    </div>
+                                    <div class="phone-number">
                                            <i class="bi bi-telephone"></i> ${department.departmentContactNumber}
-                                    </p>
+                                    </div>
                 <div class="review-section mb-3">
                     Đánh giá:
                     <div class="rating" data-star="${department.rating}"></div>
@@ -489,15 +494,17 @@
                 <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
                     <a href="/department/department-detail/${department.departmentId}">
                     <div class="card">
-                            <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            <div class="list-img">
+                                <img class="card-img-top" alt="Ảnh phòng tập" src="${department.departmentThumbnailUrl}">
+                            </div>
                             <div class="card-body">
-                                   <h3 class="card-title">${department.departmentName}</h3>
-                                    <p class="card-text">
+                                   <h4 class="card-title fw-bold">${department.departmentName}</h4>
+                                    <div class="card-text">
                                        <i class="bi bi-geo-alt"></i> ${department.departmentAddress}
-                                    </p>
-                                    <p class="phone-number">
+                                    </div>
+                                    <div class="phone-number">
                                            <i class="bi bi-telephone"></i> ${department.departmentContactNumber}
-                                    </p>
+                                    </div>
                 <div class="review-section mb-3">
                     Đánh giá:
                     <div class="rating" data-star="${department.rating}"></div>

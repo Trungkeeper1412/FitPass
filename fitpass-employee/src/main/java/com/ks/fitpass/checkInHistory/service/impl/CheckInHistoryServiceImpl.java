@@ -38,13 +38,15 @@ public class CheckInHistoryServiceImpl implements CheckInHistoryService {
     }
 
     @Override
-    public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
-        return checkInHistoryRepository.getListCheckInHistoryFlexibleByDepartmentId(departmentId);
+    public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return checkInHistoryRepository.getListCheckInHistoryFlexibleByDepartmentId(departmentId, offset, size);
     }
 
     @Override
-    public List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId) {
-        return checkInHistoryRepository.getListCheckInHistoryFixedByDepartmentId(departmentId);
+    public List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return checkInHistoryRepository.getListCheckInHistoryFixedByDepartmentId(departmentId, offset, size);
     }
 
     @Override
@@ -55,5 +57,15 @@ public class CheckInHistoryServiceImpl implements CheckInHistoryService {
     @Override
     public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
         return checkInHistoryRepository.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
+    }
+
+    @Override
+    public int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
+        return checkInHistoryRepository.getTotalListCheckInHistoryFlexibleByDepartmentId(departmentId);
+    }
+
+    @Override
+    public int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId) {
+        return checkInHistoryRepository.getTotalListCheckInHistoryFixedByDepartmentId(departmentId);
     }
 }

@@ -13,5 +13,7 @@ public interface OrderService {
 
     int getLastOrderInsertId();
 
+    int getNumberOfOrder(int brandId);
 
+    int getTotalRevenue(int brandId);
 }

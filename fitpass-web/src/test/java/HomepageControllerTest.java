@@ -1,10 +1,12 @@
 import com.ks.fitpass.brand.dto.BrandPagnition;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
+import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.department.dto.DepartmentDTO;
 import com.ks.fitpass.department.dto.DepartmentHomePagePagnition;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
+import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.HomepageController;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,11 +19,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpSession;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,6 +32,9 @@ public class HomepageControllerTest {
 
     @Mock
     private BrandService brandService;
+
+    @Mock
+    private WalletService walletService;
 
     @Mock
     private DepartmentService departmentService;
@@ -257,6 +262,40 @@ public class HomepageControllerTest {
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
+
+    @Test
+    void testGetHomepageWithUserSession() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("userInfo", user);
+
+        when(walletService.getBalanceByUserId(user.getUserId())).thenReturn(100.0);
+
+        // Act
+        String result = homepageController.getHomepage(session);
+
+        // Assert
+        assertEquals("homepage-user", result);
+        assertEquals(100.0, session.getAttribute("userCredit"));
+
+    }
+
+    @Test
+    void testGetHomepageWithoutUserSession() {
+        // Arrange
+        MockHttpSession session = new MockHttpSession();
+
+        // Act
+        String result = homepageController.getHomepage(session);
+
+        // Assert
+        assertEquals("homepage-user", result);
+        assertNull(session.getAttribute("userCredit"));
+    }
+
 
 
 }

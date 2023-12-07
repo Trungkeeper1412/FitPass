@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Chi tiết chi nhánh </title>
+    <title> Chi tiết thương hiệu </title>
     <meta name="description" content="Gym Brand Details Page">
     <meta name="keywords" content="My">
 
@@ -26,9 +26,10 @@
 <!-- Content -->
 <div class="container gym-brand-content" style="margin-top: 50px">
     <div class="row justify-content-center md-3 gym-brand-name mt-5">
+        <input type="hidden" id="brandId" th:value="${brand.getBrandId()}">
         <h2 class="text-center fw-bold" th:text="${brand.getBrandName()}"></h2>
     </div>
-    <div class="row brand-info justify-content-center">
+    <div class="row brand-info">
         <div class="col-md-7 col-lg-7 col-sm-6 brand-first-info">
             <div class="brand-descript" th:text="${brand.brandDescription}">
                 Hệ thống phòng tập gym và yoga của CITIGYM có mặt khắp các quận TPHCM.Lựa chọn phòng tập gần bạn nhất để có
@@ -37,18 +38,18 @@
             <div class="brand-contact">
                 <h6 class="fw-bold">LIÊN HỆ</h6>
                 <div class="phone mt-3">
-                    <span><img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/128/455/455705.png"></span>
+                    <span><img style="width: 20px;" th:src="@{/user-homepage-assets/assets/img/phone.png}"></span>
                     <span th:text="${brand.brandContactNumber}"></span>
                 </div>
                 <div class="email mt-2">
-                    <span><img style="width: 20px;" src="https://cdn-icons-png.flaticon.com/128/6244/6244710.png"></span>
+                    <span><img style="width: 20px;" th:src="@{/user-homepage-assets/assets/img/email.png}"></span>
                     <span th:text="${brand.brandEmail}"></span>
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-lg-5 col-sm-6 club-view">
+        <div class="col-md-5 col-lg-5 col-sm-6">
             <div class="club-view-bg">
-<!--                <img th:src="${brand.getBrandThumbnailUrl()}">-->
+                <img th:src="${brand.getBrandWallpaperUrl()}">
                 <a href="#club">
                     <button class="btn btn-warning">Xem các cơ sở</button>
                 </a>
@@ -59,19 +60,21 @@
     <!-- DỊCH VỤ -->
     <h4 class="row fw-bold mt-5">Dịch vụ</h4>
     <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 50px;"></div>
-    <div class="list-service-wrapper mt-4">
-        <button class="left" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+    <div class="list-service-wrapper  mt-4">
+        <button th:if="${brandAmenitie.size() > 4}" class="left" onclick="leftScroll()">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-scroll.png}">
         </button>
-        <div class="scroll-services row">
-            <div class="child col-lg-4 col-md-4 col-xl-3 col-xs-5" th:each="amenitie : ${brandAmenitie}">
+        <div class="scroll-services row mt-4">
+            <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3"  th:each="amenitie : ${brandAmenitie}">
+                <div class="child">
                 <div class="brand-service-img" th:style="'background-image: url(\'' + ${amenitie.photoUrl} + '\'); background-size: cover; object-fit: cover;'"></div>
                 <div class="service-name" th:text="${amenitie.amenitieName}"></div>
                 <div class="service-descript" th:text="${amenitie.description}"></div>
+                </div>
             </div>
         </div>
-        <button class="right" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+        <button th:if="${brandAmenitie.size() > 4}" class="right" onclick="rightScroll()">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-scroll.png}">
         </button>
     </div>
 
@@ -81,8 +84,8 @@
     <div class="list-gym-department container">
         <div th:each="dept : ${departments}">
             <a class="department" th:href="@{/department/department-detail/{department_id}(department_id=${dept.getDepartmentId()})}">
-            <div class="dept-img"
-                 th:style="'background-image: url(\'' + ${dept.getDepartmentWallpaperUrl()} + '\'); background-size: cover;'">
+            <div class="dept-img">
+                <img th:src="${dept.getDepartmentThumbnailUrl()}">
             </div>
             <div class="dept-info">
                 <h4 class="fw-bold" th:text="${dept.getDepartmentName()}">City Gym</h4>
@@ -113,95 +116,43 @@
     <!--ĐÁNH GIÁ-->
     <h4 class="row fw-bold mt-5">ĐÁNH GIÁ TỪ NGƯỜI TẬP</h4>
     <div class="row" style="background-color: rgb(255, 187, 0); height: 3px; width: 140px;"></div>
-    <div class="rating-feedback container mx-auto">
+    <div class="rating-feedback mx-auto">
         <div class="rating-option row">
-            <div class="rating-avg">
+            <div class="rating-avg col-md-3 col-lg-2">
                 <div style="display: flex; position: relative">
                     <div class="rating-point" th:text="${brand.getRating()}"></div>
                     <div class="rating-max">trên 5</div>
                 </div>
                 <div class="rating" th:attr="data-star=${brand.getRating()}"></div>
             </div>
-            <div class="button-list">
+            <div class="button-list col-md-9 col-lg-10">
             <div class="row">
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
-                Tất cả (<span>24</span>)
+            <button id="btnSortAllRating" type="button" class="btn btn-warning">
+                Tất cả (<span th:text="${feedbackStat.getTotalFeedback()}">24</span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
-                5 sao (<span>5</span>)
+            <button id="btnSort5Rating" type="button" class="btn btn-warning">
+                5 sao (<span th:text="${feedbackStat.getFiveStar()}">5</span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
-                4 sao (<span>5</span>)
+            <button id="btnSort4Rating" type="button" class="btn btn-warning">
+                4 sao (<span th:text="${feedbackStat.getFourStar()}">5</span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
-                3 sao (<span>4</span>)
+            <button id="btnSort3Rating" type="button" class="btn btn-warning">
+                3 sao (<span th:text="${feedbackStat.getThreeStar()}">4</span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
-                2 sao (<span>10</span>)
+            <button id="btnSort2Rating" type="button" class="btn btn-warning">
+                2 sao (<span th:text="${feedbackStat.getTwoStar()}">10</span>)
             </button>
-            <button type="button" class="btn btn-warning col-lg-1 col-md-2">
-                1 sao (<span>1</span>)
+            <button id="btnSort1Rating" type="button" class="btn btn-warning">
+                1 sao (<span th:text="${feedbackStat.getOneStar()}">1</span>)
             </button>
             </div>
             </div>
         </div>
-        <div class="user-rating">
-            <div class="user-rating-avatar">
-                <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-            </div>
-            <div class="user-rating-description">
-                <div>User458</div>
-                <i style="height: 20px;" data-star="3"></i>
-                <div>2023-07-15 12:05</div>
-                <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và
-                    nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo
-                    hức</div>
-            </div>
-        </div>
-        <div class="user-rating">
-            <div class="user-rating-avatar">
-                <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-            </div>
-            <div class="user-rating-description">
-                <div>User458</div>
-                <i style="height: 25px;" data-star="3"></i>
-                <div>2023-07-15 12:05</div>
-                <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và
-                    nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo
-                    hức</div>
-            </div>
-        </div>
-        <div class="user-rating">
-            <div class="user-rating-avatar">
-                <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-            </div>
-            <div class="user-rating-description">
-                <div>User458</div>
-                <i style="height: 20px;" data-star="3"></i>
-                <div>2023-07-15 12:05</div>
-                <div>Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên hướng dẫn tỉ mỉ và
-                    nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo
-                    hức</div>
-            </div>
-        </div>
-        <div class="user-rating">
-            <div class="user-rating-avatar">
-                <img style="width: 60px; margin: auto;" src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png">
-            </div>
-            <div class="user-rating-description">
-                <div>User458</div>
-                <i style="height: 20px;" data-star="3"></i>
-                <div>2023-07-15 12:05</div>
-                <div class="comment">Anh đến với Yoga bay là thử sức và thích môn mới. Ở lớp Yoga bay, anh được giáo viên
-                    hướng dẫn tỉ mỉ và
-                    nhiệt tình từng chút một, các học viên trong lớp vui vẻ, hòa đồng nên mỗi khi đến lớp anh đều thấy rất háo
-                    hức
-                </div>
-            </div>
+        <div id="feedback-list">
         </div>
         <div class="pagination-wrapper container">
-            <div class="pagination col justify-content-center">
-                <a class="page-numbers" href="javascript:;">prev</a>
+            <div class="pagination col justify-content-center" id="paginationFeedback">
+                <a class="page-numbers" href="javascript:;">Trước</a>
                 <span aria-current="page" class="page-numbers current">1</span>
                 <a class="page-numbers" href="javascript:;">2</a>
                 <a class="page-numbers" href="javascript:;">3</a>
@@ -209,7 +160,7 @@
                 <a class="page-numbers" href="javascript:;">5</a>
                 <a class="page-numbers" href="javascript:;">6</a>
                 <a class="page-numbers" href="javascript:;">7</a>
-                <a class="page-numbers" href="javascript:;">next</a>
+                <a class="page-numbers" href="javascript:;">Sau</a>
             </div>
         </div>
     </div>
@@ -269,5 +220,143 @@
     });
 
 </script>
+    <script>
+        $(document).ready(function () {
+            loadBrandFeedback(1);
+        });
+        var sortRating = "";
+
+        $("#btnSortAllRating").click(function () {
+            sortRating = "";
+            loadBrandFeedback(1);
+        });
+
+        $("#btnSort5Rating").click(function () {
+            sortRating = "5";
+            loadBrandFeedback(1);
+        });
+
+        $("#btnSort4Rating").click(function () {
+            sortRating = "4";
+            loadBrandFeedback(1);
+        });
+
+        $("#btnSort3Rating").click(function () {
+            sortRating = "3";
+            loadBrandFeedback(1);
+        });
+
+        $("#btnSort2Rating").click(function () {
+            sortRating = "2";
+            loadBrandFeedback(1);
+        });
+
+        $("#btnSort1Rating").click(function () {
+            sortRating = "1";
+            loadBrandFeedback(1);
+        });
+
+        function loadBrandFeedback(page) {
+            $.ajax({
+                url: '/brand/feedback',
+                type: 'GET',
+                data: {
+                    brandId: $("#brandId").val(),
+                    page: page,
+                    size: 2,
+                    sortRating: sortRating
+                },
+                success: function (data) {
+                    var feedbackListHtml = '';
+                    if (data.feedbackList.length === 0) {
+                        feedbackListHtml = '' +
+                            '<div class="no-rating d-flex flex-column align-items-center justify-content-center">' +
+                            ' <span class="icon"></span>  ' +
+                            '<h2>Không có feedback nào</h2>' +
+                            '</div>';
+                    } else {
+                        $.each(data.feedbackList, function (index, feedback) {
+                            feedbackListHtml += `
+                    <div class="user-rating">
+                        <div class="user-rating-avatar">
+                            <img style="width: 60px; margin: auto;" src="${feedback.imageUrl}">
+                        </div>
+                        <div class="user-rating-description">
+                            <div>${feedback.firstName + ' ' + feedback.lastName}</div>
+                            <i style="height: 25px;" data-star="${feedback.rating}"></i>
+                            <div>${formatDateTime(feedback.feedbackTime)}</div>
+                            <div>${feedback.comment}</div>
+                        </div>
+                    </div>
+                `;
+                        });
+                    }
+
+                    $('#feedback-list').html(feedbackListHtml);
+
+                    // Tạo liên kết phân trang
+                    var paginationHtml = '';
+
+                    var prevPage = data.currentPage - 1;
+                    if (data.currentPage > 1) {
+                        paginationHtml += '<a class="page-numbers prev" href="javascript:void(0);" onclick="paginationFeedback(' + prevPage + ')">Trước</a> ';
+                    }
+
+                    const maxVisiblePages = 5;
+
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        if (i <= data.currentPage - maxVisiblePages / 2 && i !== 1) {
+                            if (i === 2) {
+                                paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
+                            }
+                            continue;
+                        }
+
+                        if (i >= data.currentPage + maxVisiblePages / 2 && i !== data.totalPage) {
+                            if (i === data.totalPage - 1) {
+                                paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
+                            }
+                            continue;
+                        }
+
+                        if (i === data.currentPage) {
+                            paginationHtml += '<span aria-current="page" class="page-numbers current">' + i + '</span> ';
+                        } else {
+                            paginationHtml += '<a class="page-numbers" href="javascript:void(0);" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
+                        }
+                    }
+
+                    var nextPage = data.currentPage + 1;
+                    if (data.currentPage < data.totalPage) {
+                        paginationHtml += '<a class="page-numbers next" href="javascript:void(0);" onclick="paginationFeedback(' + nextPage + ')">Sau</a> ';
+                    }
+
+                    $('#paginationFeedback').empty().html(paginationHtml);
+                }
+
+            });
+        }
+
+        function paginationFeedback(page) {
+            event.preventDefault();
+            loadBrandFeedback(page);
+        }
+
+        function formatDateTime(inputDate) {
+            const dateObject = new Date(inputDate);
+
+            const year = dateObject.getFullYear();
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const day = dateObject.getDate().toString().padStart(2, '0');
+            const hours = dateObject.getHours().toString().padStart(2, '0');
+            const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+            const seconds = dateObject.getSeconds().toString().padStart(2, '0');
+
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+            const formattedDate = `${day}-${month}-${year}`;
+
+            return `${formattedTime} ${formattedDate}`;
+        }
+    </script>
 </body>
 </html>

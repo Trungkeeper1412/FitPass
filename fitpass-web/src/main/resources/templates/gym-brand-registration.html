@@ -26,8 +26,8 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <ol>
-                    <li><a href="index.html">Fitpass</a></li>
-                    <li>Trang chủ</li>
+                    <li><a href="/static">Fitpass</a></li>
+                    <li>Trở thành đối tác</li>
                 </ol>
             </div>
         </div>
@@ -57,53 +57,46 @@
                 <div class="container2 text-white" data-aos="zoom-in">
                     <h3 class="fw-bold mb-5">Sẵn sàng để bắt đầu kiếm thêm thu nhập?</h3>
                     <h4 class="mb-5">Đăng kí phòng tập của bạn trên FitPass, và kiếm thêm thu nhập.</h4>
-                    <form>
+                    <form method="post" action="/become-a-partner/submitForm" th:object="${becomePartnerForm}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="venueName" class="form-label">Tên phòng tập :</label>
-                                <input type="text" class="form-control" id="venueName" required>
+                                <label for="venueName" class="form-label">Tên thương hiệu :</label>
+                                <input th:field="*{brandName}" type="text" class="form-control" id="venueName">
+                                <span th:if="${#fields.hasErrors('brandName')}" class="error" th:errors="*{brandName}">photoUrl Error</span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="location" class="form-label">Vị trí :</label>
-                                <input type="text" class="form-control" id="location" required>
+                                <label for="location" class="form-label">Địa chỉ :</label>
+                                <input th:field="*{address}" type="text" class="form-control" id="location">
+                                <span th:if="${#fields.hasErrors('address')}" class="error" th:errors="*{address}">photoUrl Error</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName" class="form-label">Tên :</label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName" class="form-label">Họ :</label>
-                                <input type="text" class="form-control" id="lastName" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email :</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <label for="fullName" class="form-label">Họ và Tên :</label>
+                                <input th:field="*{brandOwnerName}" type="text" class="form-control" id="fullName">
+                                <span th:if="${#fields.hasErrors('brandOwnerName')}" class="error" th:errors="*{brandOwnerName}">photoUrl Error</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="phoneNumber" class="form-label">Số điện thoại :</label>
-                                <input type="tel" class="form-control" id="phoneNumber" required>
+                                <input th:field="*{contactNumber}" type="tel" class="form-control" id="phoneNumber">
+                                <span th:if="${#fields.hasErrors('contactNumber')}" class="error" th:errors="*{contactNumber}">photoUrl Error</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="websiteURL" class="form-label">Địa chỉ trang web ( nếu có )*</label>
-                                <input type="url" class="form-control" id="websiteURL" required>
+                                <input th:field="*{webUrl}" type="url" class="form-control" id="websiteURL">
+                                <span th:if="${#fields.hasErrors('webUrl')}" class="error" th:errors="*{webUrl}">photoUrl Error</span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="businessType" class="form-label">Loại hình kinh doanh :</label>
-                                <select class="form-select" id="businessType" required>
-                                    <option value="" disabled selected>Chọn...</option>
-                                    <option value="Phòng tập thể dục">Phòng tập thể dục</option>
-                                    <option value="Phòng tập thể hình">Phòng tập thể hình</option>
-                                    <option value="Phòng tập yoga">Phòng tập yoga</option>
-                                </select>
+                                <label for="email" class="form-label">Email liên hệ :</label>
+                                <input th:field="*{contactEmail}" type="email" class="form-control" id="email">
+                                <span th:if="${#fields.hasErrors('contactEmail')}" class="error" th:errors="*{contactEmail}">photoUrl Error</span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Bắt đầu ngay</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary mt-3">Đăng ký</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -118,7 +111,7 @@
 
                 <div class="row">
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                        <img src="assets/img/brand/about-brand.jpg" class="img-fluid rounded" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/about-brand.jpg}" class="img-fluid rounded" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right"
                         data-aos-delay="100">
@@ -141,10 +134,10 @@
             <p class="container text-center">Các chuỗi phòng Gym với đủ mọi đối tác với ClassPass. Cho dù bạn là một thương hiệu lớn hay mới bắt đầu, bạn sẽ có một môi trường công bằng như nhau.</p>
             <div class="row p-3">
                 <div class="col text-center">
-                    <img src="assets/img/brand/icon/all-icon.jpg" alt="ClassPass Partner Logo" class="container center-image">
+                    <img th:src="@{/user-homepage-assets/assets/img/brand/icon/all-icon.jpg}" alt="ClassPass Partner Logo" class="container center-image">
                 </div>
             </div>
-        </section>        
+        </section>
 
         <section id="service" class="about">
             <h3 class="text-center mt-4 fw-bold">Bạn có các dịch vụ nổi bật? Hãy cho chúng tôi biết</h3>
@@ -155,7 +148,7 @@
             <div class="row p-3">
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                     <div class="card-3 mb-4">
-                        <img src="assets/img/brand/service/boxing.jpg" class="card-img-top" alt="Dịch vụ 1">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/service/boxing.jpg}" class="card-img-top" alt="Dịch vụ 1">
                         <div class="card-body">
                             <label>Boxing</label>
                         </div>
@@ -163,7 +156,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                     <div class="card-3 mb-4">
-                        <img src="assets/img/brand/service/yoga.jpg" class="card-img-top" alt="Dịch vụ 2">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/service/yoga.jpg}" class="card-img-top" alt="Dịch vụ 2">
                         <div class="card-body">
                             <label>Yoga</label>
                         </div>
@@ -171,7 +164,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                     <div class="card-3 mb-4">
-                        <img src="assets/img/brand/service/outdoor.jpg" class="card-img-top" alt="Dịch vụ 3">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/service/outdoor.jpg}" class="card-img-top" alt="Dịch vụ 3">
                         <div class="card-body">
                             <label>Tập ngoài trời</label>
                         </div>
@@ -179,7 +172,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                     <div class="card-3 mb-4">
-                        <img src="assets/img/brand/service/running.jpg" class="card-img-top" alt="Dịch vụ 4">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/service/running.jpg}" class="card-img-top" alt="Dịch vụ 4">
                         <div class="card-body">
                             <label>Chạy bộ</label>
                         </div>
@@ -187,7 +180,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                     <div class="card-3 mb-4">
-                        <img src="assets/img/brand/service/spa.jpg" class="card-img-top" alt="Dịch vụ 5">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/service/spa.jpg}" class="card-img-top" alt="Dịch vụ 5">
                         <div class="card-body">
                             <label>Spa</label>
                         </div>
@@ -195,7 +188,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                     <div class="card-3 mb-4">
-                        <img src="assets/img/brand/service/thien.jpg" class="card-img-top" alt="Dịch vụ 6">
+                        <img th:src="@{/user-homepage-assets/assets/img/brand/service/thien.jpg}" class="card-img-top" alt="Dịch vụ 6">
                         <div class="card-body">
                             <label>Thiền</label>
                         </div>
@@ -207,13 +200,15 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <th:block th:include="common/footer :: footer"></th:block>
+    <footer th:replace="common/footer :: footer"></footer>
 
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <th:block th:include="common/vendor-script"></th:block>
+    <!-- Vendor JS Files -->
+    <th:block th:insert="common/vendor-script"></th:block>
 
 </body>
 </html>
+

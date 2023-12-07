@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class GymPlanDepartmentNameDto implements Serializable {
     private int gymPlanId;
     private int gymDepartmentId;
-    private int gymPlanKey;
+    private int gymPlanTypeKey;
     private String gymPlanName;
     private String gymPlanDescription;
     private double price;
@@ -20,4 +20,5 @@ public class GymPlanDepartmentNameDto implements Serializable {
     private int planBeforeActiveValidity;
     private int planAfterActiveValidity;
     private String gymDepartmentName;
+    private String gymDepartmentLogoUrl;
 }

@@ -2,6 +2,7 @@ package com.ks.fitpass.employee.entity;
 
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.order.repository.OrderDetailRepository;
+import com.ks.fitpass.order.service.OrderDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,6 +19,9 @@ public class UpdateNewDayConfig {
     private static final Logger logger = LoggerFactory.getLogger(UpdateNewDayConfig.class);
     @Autowired
     private OrderDetailRepository orderDetailRepository;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @Autowired
     private CheckInHistoryService checkInHistoryService;
@@ -32,5 +37,16 @@ public class UpdateNewDayConfig {
             checkInHistoryService.updateCheckOutTimeAndCredit(id, now, 0);
         }
 //        checkInHistoryService.updateCheckOutTimeAndCredit()
+    }
+
+    @Scheduled(cron = "0 0 0 * * ?") // Mỗi ngày vào lúc 00:00:00
+    public void updateExpiredGymPlanStatus() {
+        logger.info("Update row: " );
+
+        // Lấy ra tất cả những id check in history cần được check out
+        List<Integer> listId = orderDetailService.getListOrderDetailExpired();
+        int[] status = orderDetailService.updateOrderDetailExpiredStatus(listId);
+//        checkInHistoryService.updateCheckOutTimeAndCredit()
+        logger.info("Update row: " + Arrays.stream(status).sum());
     }
 }

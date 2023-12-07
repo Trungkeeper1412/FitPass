@@ -26,7 +26,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
-                        <h2 class="m-0 font-weight-bold text-primary">Danh sách các thương hiệu</h2>
+                        <h2 class="m-0 font-weight-bold text-primary">Lịch sử giao dịch của các thương hiệu</h2>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -38,42 +38,18 @@
                                     <th>Tổng số giao dịch</th>
                                     <th>Tổng số credit đã rút</th>
                                     <th>Tổng số tiền quy đổi</th>
-                                    <th>Chi tiết</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>California Fitness & Yoga</td>
-                                    <td>12</td>
-                                    <td>12,450</td>
-                                    <td>12,450,000 VNĐ</td>
-                                    <td><a th:href="@{/admin/withdrawal}" class="btn btn-primary">Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Kickfit Sport</td>
-                                    <td>23</td>
-                                    <td>21,450</td>
-                                    <td>21,450,000 VNĐ</td>
-                                    <td><a th:href="@{/admin/withdrawal}" class="btn btn-primary">Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Elite Fitness</td>
-                                    <td>33</td>
-                                    <td>36,150</td>
-                                    <td>36,150,000 VNĐ</td>
-                                    <td><a th:href="@{/admin/withdrawal}" class="btn btn-primary">Xem chi tiết</a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>The New Gym</td>
-                                    <td>47</td>
-                                    <td>58,125</td>
-                                    <td>58,125,000 VNĐ</td>
-                                    <td><a th:href="@{/admin/withdrawal}" class="btn btn-primary">Xem chi tiết</a></td>
-                                </tr>
+                                    <th:block th:each="h : ${listHisBrand}">
+                                        <tr>
+                                            <td th:text="${hStat.index + 1}">1</td>
+                                            <td th:text="${h.brandName}">California Fitness & Yoga</td>
+                                            <td th:text="${h.totalRequest}">12</td>
+                                            <td th:text="${h.amountCredit}">12,450</td>
+                                            <td th:text="${h.actualMoney + ' VNĐ'}">12,450,000 VNĐ</td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -101,7 +77,11 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- Logout Modal-->
+<th:block th:replace="admin/common/logout-modal"></th:block>
+
 <th:block th:replace="admin/common/script"></th:block>
+
 </body>
 
 </html>

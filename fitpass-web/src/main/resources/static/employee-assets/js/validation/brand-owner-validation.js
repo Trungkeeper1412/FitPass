@@ -49,6 +49,17 @@ $.validator.addMethod("validateIdCard", function(value, element) {
     return true; // Các mã tỉnh và số tiếp theo đều hợp lệ
 }, "Số căn cước công dân không đúng định dạng !");
 
+$.validator.addMethod("correctNumber", function(value, element) {
+    var correctNumber;
+    if (value.startsWith("1900") || value.startsWith("1800")) {
+        correctNumber = /^(1800|1900)\d{6}$/;
+    } else {
+        correctNumber = /^(0|84)(9|3|7|8|5)\d{8,10}$/;
+    }
+    return this.optional(element) || correctNumber.test(value);
+}, "Đầu số không đúng định dạng !");
+
+
 $(document).ready(function () {
     $("#formSubmit").validate({
         rules: {
@@ -57,7 +68,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 3,
                 maxlength: 32,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?!\s+$).+/,
             },
 
             // Validate Plan
@@ -65,22 +76,25 @@ $(document).ready(function () {
                 required: true,
                 minlength: 2,
                 maxlength: 26,
-                pattern: /^[a-zA-Z0-9\u00C0-\u1EF9 ]*$/,
+                pattern: /^(?!\s+$).+/,
             },
             pricePerHours: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 0,
+                max: 10000,
             },
             planBeforeActive: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 1,
+                max: 36500,
             },
             planAfterActive: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 1,
+                max: 36500,
             },
             description: {
                 required: true,
@@ -91,11 +105,13 @@ $(document).ready(function () {
                 required: true,
                 number: true,
                 min: 1,
+                max: 36500,
             },
             price: {
                 required: true,
                 number: true,
-                min: 0.01,
+                min: 0,
+                max: 10000,
             },
             statusActive: {
                 required: true,
@@ -142,7 +158,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 10,
                 maxlength: 11,
-                pattern: /^(0|84)(9|3|7|8|5)\d{8}$/
+                correctNumber: true
             },
             idCard: {
                 required: true,
@@ -158,36 +174,40 @@ $(document).ready(function () {
                 required: true,
                 minlength: 2,
                 maxlength: 50,
+                pattern: /^(?!\s+$).+/,
             }
         },
         messages: {
             // Validate Plan
             brandName: {
                 required: "Vui lòng nhập tên cơ sở !",
-                minlength: "Tên cơ sở phải có ít nhất 3 kí tự !",
-                maxlength: "Tên cơ sở không được vượt quá 32 kí tự !",
-                pattern: "Tên cơ sở không được chứa kí tự đặc biệt !",
+                minlength: "Tên thương hiệu phải có ít nhất 3 kí tự !",
+                maxlength: "Tên thương hiệu không được vượt quá 32 kí tự !",
+                pattern: "Tên thương hiệu đang bị trống !",
             },
             gymPlanName: {
                 required: "Vui lòng nhập tên gói tập !",
                 minlength: "Tên gói tập phải có ít nhất 2 kí tự !",
                 maxlength: "Tên gói tập không được vượt quá 32 kí tự !",
-                pattern: "Tên gói tập không được chứa kí tự đặc biệt !",
+                pattern: "Tên gói tập đang bị trống !",
             },
             pricePerHours: {
                 required: "Vui lòng nhập số credits !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số credits/giờ phải lớn hơn 0 !",
+                min: "Số credits/giờ phải lớn hơn hoặc bằng 0 !",
+                max: "Số credits/giờ không vượt quá 10000 !",
             },
             planBeforeActive: {
                 required: "Vui lòng nhập nhập số ngày trước khi kích hoạt !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày phải lớn hơn 0 !"
+                min: "Số ngày ít nhất phải bằng 1 !",
+                max: "Số ngày không vượt quá 36500 ngày !",
             },
             planAfterActive: {
                 required: "Vui lòng nhập nhập số ngày sau khi kích hoạt !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày phải lớn hơn 0 !"
+                min: "Số ngày ít nhất phải bằng 1 !",
+                max: "Số ngày không vượt quá 36500 ngày !",
             },
             description: {
                 required: "Vui lòng nhập nhập mô tả gói tập !",
@@ -197,12 +217,14 @@ $(document).ready(function () {
             duration: {
                 required: "Vui lòng nhập nhập số ngày sử dụng gói tập !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày ít nhất phải bằng 1 !"
+                min: "Số ngày ít nhất phải bằng 1 !",
+                max: "Số ngày không vượt quá 36500 ngày !",
             },
             price: {
                 required: "Vui lòng nhập số credits !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số credits phải lớn hơn 0 !",
+                min: "Số credits phải lớn hơn hoặc bằng 0 !",
+                max: "Số credits không vượt quá 10000 !",
             },
             statusActive: {
                 required: "Vui lòng chọn trạng thái !"
@@ -246,9 +268,9 @@ $(document).ready(function () {
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
                 number: "Vui lòng nhập số điện thoại !",
-                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                minlength: 'Đầu số phải có ít nhất 8 số !',
                 maxlength: 'Số điện thoại có tối đa 11 số !',
-                pattern: 'Số điện thoại không đúng định dạng !'
+                correctNumber: "Đầu số không đúng định dạng !",
             },
             idCard: {
                 required: "Vui lòng nhập số căn cước công dân !",
@@ -263,6 +285,7 @@ $(document).ready(function () {
                 required: "Vui lòng nhập tên dịch vụ !",
                 minlength: "Tên dịch vụ phải có ít nhất 2 kí tự !",
                 maxlength: "Tên dịch vụ không được vượt quá 50 kí tự !",
+                pattern: "Tên dịch vụ đang bị trống !",
             }
         },
         errorPlacement: function (error, element) {

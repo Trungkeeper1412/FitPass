@@ -1,29 +1,19 @@
 package com.ks.fitpass.department.service;
 
-import com.ks.fitpass.department.dto.DepartmentDTO;
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
-import java.util.Map;
 
 
 public interface DepartmentService {
 
     Department getByUserId(int userId) throws DataAccessException;
 
-    List<DepartmentDTO> getAllDepartmentForHome(int pageIndex, int pageSize) throws DataAccessException;
-
-    List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException;
-
     List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
-
-//    List<Department> getAllByStatus(int status) throws DataAccessException;
 
     Department getOne(int id) throws DataAccessException;
 
@@ -34,10 +24,8 @@ public interface DepartmentService {
     List<Department> getAllDepartmentByNearbyLocation(int pageIndex, int pageSize,
                                                                 double userLatitude, double userLongitude,
                                                                 String city, String sortPrice, String sortRating, String belowDistance);
-    List<Department> findByRatingBetween(double from, double to);
 
-
-    List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size);
+    List<UserFeedback> getDepartmentFeedback(int departmentId, int page, int size, String sortRating);
 
 
     DepartmentDTO filterDepartmentFeedbacks(int departmentId);
@@ -57,4 +45,28 @@ public interface DepartmentService {
     List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
 
     List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId);
+
+    int updateGymOwnerDepartmentInfo(Department department);
+
+    int updateGymOwnerDepartmentInfoDetails(Department department);
+
+    int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl);
+
+    int updateLongitudeLatitude(int departmentId, double longitude, double latitude);
+
+    boolean checkFirstTimeDepartmentCreated(int departmentId);
+
+    int updateFirstTimeDepartmentCreated(int departmentId);
+
+    int countAllFeedback(int departmentId, String sortRating);
+
+    DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
+
+    int countAllDepartment();
+
+    List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId);
+
+    List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId);
+
+    int getTotalNumberRatingByDepartmentId(int departmentId);
 }

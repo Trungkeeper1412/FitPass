@@ -27,4 +27,5 @@ public class UserFeedback {
 
     private int feedbackStatus;
 
+    private String imageUrl;
 }

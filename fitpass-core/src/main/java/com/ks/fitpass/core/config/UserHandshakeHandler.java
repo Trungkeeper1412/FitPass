@@ -1,31 +1,41 @@
 package com.ks.fitpass.core.config;
-import com.ks.fitpass.core.entity.CustomUser;
-import com.sun.security.auth.UserPrincipal;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.ks.fitpass.core.entity.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.security.Principal;
 import java.util.Map;
 
+@Component
 public class UserHandshakeHandler extends DefaultHandshakeHandler {
-    private final Logger LOG = LoggerFactory.getLogger(UserHandshakeHandler.class);
 
     @Override
-    protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof CustomUser customUserDetails) {
-            String id = String.valueOf(customUserDetails.getId());
-            // ... other attributes
-            LOG.info("User with ID " + id + " opened the page");
-
-            return new UserPrincipal(id);
+    protected Principal determineUser(@NonNull ServerHttpRequest request, @NonNull WebSocketHandler wsHandler, @NonNull Map<String, Object> attributes) {
+        try {
+            if (request instanceof ServletServerHttpRequest servletRequest) {
+                HttpSession session = servletRequest.getServletRequest().getSession(false);
+                if (session != null) {
+                    User user = (User) session.getAttribute("userInfo");
+                    if (user != null) {
+                        return () -> String.valueOf(user.getUserId());
+                    } else {
+                        return () -> "default-user"; // Default Principal when there's no user in the session
+                    }
+                } else {
+                    return () -> "default-user"; // Default Principal when there's no active session
+                }
+            } else {
+                throw new Exception("Request is not an instance of ServletServerHttpRequest.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error during determineUser", e);
         }
-        return null;
     }
 }
 

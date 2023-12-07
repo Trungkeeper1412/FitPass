@@ -1,6 +1,7 @@
 package com.ks.fitpass.transaction.service.Impl;
 
 import com.ks.fitpass.transaction.dto.TransactionDTO;
+import com.ks.fitpass.transaction.dto.TransferCreditHistory;
 import com.ks.fitpass.transaction.repository.TransactionRepository;
 import com.ks.fitpass.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,20 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<TransactionDTO> getListTransactionByUserId(int userId) {
         return transactionRepository.getListTransactionByUserId(userId);
+    }
+
+    @Override
+    public int insertTransferCreditHistory(TransferCreditHistory transferCreditHistory) {
+        return transactionRepository.insertTransferCreditHistory(transferCreditHistory);
+    }
+
+    @Override
+    public Double getTotalAmountOfTransactionByUserId(int userId) {
+        return transactionRepository.getTotalAmountOfTransactionByUserId(userId);
+    }
+
+    @Override
+    public double countAllCredit() {
+        return transactionRepository.countAllCredit();
     }
 }

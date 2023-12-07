@@ -2865,6 +2865,16 @@ fieldset:disabled a.btn {
     pointer-events: none
 }
 
+.btn-upload-img {
+    border: 1px solid #d1d3e2;
+    background-color: #e9ecef;
+}
+
+.btn-upload-img:hover {
+    border: 1px solid #d1d3e2;
+    background-color: #dde0e3;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #404040;
@@ -5937,6 +5947,25 @@ a.badge-dark:focus {
     padding-left: 0;
     margin-bottom: 0;
     border-radius: .35rem
+}
+
+.list-bank-card {
+    background: linear-gradient(to right, #333, #666);
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px !important;
+    padding: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bank-card {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.list-bank-card:hover {
+    background: linear-gradient(to right, #666, #333);
 }
 
 .list-group-item-action {
@@ -13325,7 +13354,7 @@ td img {
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     width: 100%;
     box-sizing: border-box;
     font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -13404,7 +13433,7 @@ td img {
     list-style-type: none;
     color: black;
     font-size: 20px;
-    width: calc(100% / 6);
+    width: 20%;
     float: left;
     position: relative;
     letter-spacing: 1px;
@@ -13426,11 +13455,11 @@ td img {
 /*progressbar connectors*/
 #progressbar li:after {
     content: '';
-    width: 89%;
+    width: 90%;
     height: 2px;
     background: #dddddd;
     position: absolute;
-    left: -44%;
+    left: -44.5%;
     top: 15px;
     z-index: 1; /*put it behind the numbers*/
 }
@@ -13535,6 +13564,7 @@ tr td i {
     object-fit: cover;
     margin-top: 180px;
     margin-left: 80px;
+    border: 1px solid darkgray;
 }
 
 #progressbar li.w-50::after {
@@ -13765,6 +13795,14 @@ td, th {
     flex: 1; /* Take remaining space */
 }
 
+span.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+    display: block;
+    position: absolute;
+}
+
 label.error {
     color: red;
     font-size: 14px;
@@ -13773,38 +13811,47 @@ label.error {
     position: absolute;
 }
 @media (max-width: 1600px) {
-.user-status{
-    text-align: center;
-    margin:auto;
-    width: 110px;
-    margin-left: 15px;
-    background-color: #e5e5e5;
-    color: grey;
-    font-size: 12px;
-    font-weight: 450;
-    padding: 6px 12px;
-    border-radius: 20px;
+    .user-status {
+        text-align: center;
+        margin: auto;
+        width: 110px;
+        margin-left: 15px;
+        background-color: #e5e5e5;
+        color: grey;
+        font-size: 12px;
+        font-weight: 450;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
 }
 .working{
     color: darkblue;
     background-color: #cae8fd;
 }
 
-.list-group-item {
-    background: linear-gradient(to right, #333, #666);
-    color: white;
-    border: 2px solid #ccc;
-    border-radius: 10px !important;
-    padding: 10px;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.w3-modal{
+    width: 100%;
 }
 
-.bank-card {
-    max-height: 400px;
-    overflow-x: auto;
+.w3-animate-zoom {
+    position: relative;
+    margin: auto;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.list-group-item:hover {
-    background: linear-gradient(to right, #666, #333);
+.w3-animate-zoom img {
+    width: 80%;
+    height: 30%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.w3-button{
+    position: absolute;
+    top: 3%;
+    right: 14%;
 }

@@ -1,9 +1,7 @@
 package com.ks.fitpass.department.repository;
 
 
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
@@ -30,7 +28,7 @@ public interface DepartmentRepository {
 
     List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException;
 
-    List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size);
+    List<UserFeedback> getDepartmentFeedbackPagnition(int departmentId, int page, int size, String sortRating);
 
     List<DepartmentListByBrandDTO> getAllDepartmentListOfBrand(int brandId);
 
@@ -45,4 +43,28 @@ public interface DepartmentRepository {
     List<UserFeedbackOfBrandOwner> getAllDepartmentFeedbackOfBrandOwner(int departmentId);
 
     List<ListBrandDepartmentFeedback> getDepartmentFeedbackOfBrandOwner(int brandId);
+
+    int updateGymOwnerDepartmentInfo(Department department);
+
+    int updateGymOwnerDepartmentInfoDetails(Department department);
+
+    int updateDepartmentImage(int departmentId, String imageLogoUrl, String imageThumbnailUrl, String imageWallpaperUrl);
+
+    int updateLongitudeLatitude(int departmentId, double longitude, double latitude);
+
+    boolean checkFirstTimeDepartmentCreated(int departmentId);
+
+    int updateFirstTimeDepartmentCreated(int departmentId);
+
+    Integer countAllFeedback(int departmentId, String sortRating);
+
+    DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
+
+    Integer countAllDepartment();
+
+    List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId);
+
+    List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId);
+
+    Integer getTotalNumberRatingByDepartmentId(int departmentId);
 }

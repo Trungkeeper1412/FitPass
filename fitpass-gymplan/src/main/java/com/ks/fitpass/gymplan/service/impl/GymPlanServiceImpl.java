@@ -33,7 +33,7 @@ public class GymPlanServiceImpl implements GymPlanService {
             dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
             dto.setDuration(gymPlan.getDuration());
 
-            String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanKey(gymPlan.getGymPlanKey());
+            String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanTypeKey(gymPlan.getGymPlanTypeKey());
             dto.setGymPlanType(gymPlanType);
 
             if (gymPlanType.equalsIgnoreCase("Gói không theo giờ")) {
@@ -53,11 +53,11 @@ public class GymPlanServiceImpl implements GymPlanService {
         GymPlanDepartmentNameDto dto = new GymPlanDepartmentNameDto();
         dto.setGymPlanId(gymPlan.getPlanId());
         dto.setGymPlanName(gymPlan.getGymPlanName());
-        dto.setGymPlanKey(gymPlan.getGymPlanKey());
+        dto.setGymPlanTypeKey(gymPlan.getGymPlanTypeKey());
         dto.setGymDepartmentId(gymPlan.getGymDepartmentId());
         dto.setGymPlanDescription(gymPlan.getGymPlanDescription());
 
-        String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanKey(gymPlan.getGymPlanKey());
+        String gymPlanType = mstKbnRepository.getGymPlanTypeByPlanTypeKey(gymPlan.getGymPlanTypeKey());
         if (gymPlanType.equalsIgnoreCase("Gói không theo giờ")) {
             dto.setPrice(gymPlan.getPrice());
         } else if (gymPlanType.equalsIgnoreCase("Gói theo giờ")) {
@@ -67,13 +67,22 @@ public class GymPlanServiceImpl implements GymPlanService {
         dto.setPlanAfterActiveValidity(gymPlan.getPlanAfterActiveValidity());
         dto.setDuration(gymPlan.getDuration());
         dto.setGymDepartmentName(gymPlan.getGymDepartmentName());
+        dto.setGymDepartmentLogoUrl(gymPlan.getGymDepartmentLogoUrl());
+
         return dto;
+    }
+
+    @Override
+    public List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandIdActive(int brandId) {
+        return gymPlanRepository.getAllGymPlanFlexByBrandIdActive(brandId);
     }
 
     @Override
     public List<BrandGymPlanFlexDTO> getAllGymPlanFlexByBrandId(int brandId) {
         return gymPlanRepository.getAllGymPlanFlexByBrandId(brandId);
     }
+
+
 
     @Override
     public int createGymPlanFlex(BrandCreateGymPlanFlexDTO brandCreateGymPlanFlexDTO) {
@@ -88,6 +97,11 @@ public class GymPlanServiceImpl implements GymPlanService {
     @Override
     public int updateGymPlanFlex(BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO) {
         return gymPlanRepository.updateGymPlanFlex(brandUpdateGymPlanFlexDTO);
+    }
+
+    @Override
+    public List<BrandGymPlanFixedDTO> getAllGymPlanFixedByBrandIdActive(int brandId) {
+        return gymPlanRepository.getAllGymPlanFixedByBrandIdActive(brandId);
     }
 
     @Override
@@ -108,5 +122,43 @@ public class GymPlanServiceImpl implements GymPlanService {
     @Override
     public int updateGymPlanFixed(BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO) {
         return gymPlanRepository.updateGymPlanFixed(brandUpdateGymPlanFixedDTO);
+    }
+
+    @Override
+    public int[] insertGymPlanDepartment(int departmentId, List<Integer> gymPlanId) {
+        return gymPlanRepository.insertGymPlanDepartment(departmentId, gymPlanId);
+    }
+
+    @Override
+    public List<GymPlanDepartmentNameDto> getGymPlanDepartmentFlexByDepartmentId(int departmentId) {
+        return gymPlanRepository.getGymPlanDepartmentFlexByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<GymPlanDepartmentNameDto> getGymPlanDepartmentFixedByDepartmentId(int departmentId) {
+        return gymPlanRepository.getGymPlanDepartmentFixedByDepartmentId(departmentId);
+    }
+
+    @Override
+    public int deleteAllGymPlanByDepartmentId(int departmentId) {
+        return gymPlanRepository.deleteAllGymPlanByDepartmentId(departmentId);
+    }
+
+    @Override
+    public int checkGymPlanInDepartmentUse(int gymPlanId) {
+        Integer count = gymPlanRepository.checkGymPlanInDepartmentUse(gymPlanId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int getNumberOfGymPlan(int brandId) {
+        Integer count = gymPlanRepository.getNumberOfGymPlan(brandId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int getTotalGymPlanDepartment(int departmentId) {
+        Integer count = gymPlanRepository.getTotalGymPlanDepartment(departmentId);
+        return (count != null) ? count : 0;
     }
 }

@@ -9,9 +9,13 @@ public interface NotificationService {
 
     int updateStatusNotificationById(int notificationId, int status);
 
-    List<Notification> getAllNotificationForUser(int userIdReceive);
+    int getNumberOfUnseenNotification(int userIdReceive);
+
+    List<Notification> getAllNotificationForUser(int userIdReceive, int page, int size);
 
     List<Notification> get3NewestUnseenNotificationForUser(int userIdReceive);
 
     List<Notification> getAllNotificationForEmployee(int empIdReceive);
+
+    int getTotalNotificationsForUser(int userId);
 }
