@@ -373,7 +373,7 @@ CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
                                                                 brand_owner_name      VARCHAR(100) NOT NULL,
                                                                 contact_number   VARCHAR(20) NOT NULL,
                                                                 address      VARCHAR(150) NOT NULL,
-                                                                web_url      VARCHAR(250) ,
+                                                                web_url      VARCHAR(100) ,
                                                                 contact_email      VARCHAR(100) NOT NULL,
                                                                 send_request_time   timestamp, -- thời gian gửi đơn
                                                                 start_handle_request_time   timestamp, -- thời gian bắt đầu xử lý
@@ -387,6 +387,8 @@ CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
 
 
 
+
+
 DELIMITER $$
 CREATE TRIGGER update_gym_rating_avg
     AFTER INSERT ON user_feedback
@@ -395,19 +397,29 @@ BEGIN
 
     DECLARE dept_id INT;
     DECLARE total DECIMAL(10,2);
-    DECLARE count INT;
+    DECLARE count DECIMAL(10,2);
 
     SET dept_id = NEW.department_id;
 
-    SELECT IFNULL(SUM(rating),0), COUNT(*) INTO total, count
+    SELECT
+        IFNULL(SUM(CAST(rating AS DECIMAL(10,2))), 0),
+        COUNT(*)
+    INTO
+        total, count
     FROM user_feedback
     WHERE department_id = dept_id;
 
+    SET count = CAST(count AS DECIMAL(10,2));
+
+    SET total = CAST(total AS DECIMAL(10,2));
+
     UPDATE gym_department
-    SET rating = total/count
+    SET
+        rating = total / count
     WHERE gym_department_id = dept_id;
 
 END$$
+
 DELIMITER ;
 
 
