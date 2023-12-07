@@ -8,6 +8,7 @@ import com.ks.fitpass.brand.repository.BrandRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,8 +32,7 @@ public class BrandServiceImpl implements BrandService{
 
     @Override
     public Brand getOne(int id) throws DataAccessException {
-        Brand brand =  brandRepository.getOne(id);
-        return brand;
+        return brandRepository.getOne(id);
     }
 
     @Override
@@ -92,22 +92,26 @@ public class BrandServiceImpl implements BrandService{
 
     @Override
     public int countAllBrand() {
-        return brandRepository.countAllBrand();
+        Integer count = brandRepository.countAllBrand();
+        return (count != null) ? count : 0;
     }
 
     @Override
     public List<BrandStatAdmin> getAdminStat() {
-        return brandRepository.getAdminStat();
+        List<BrandStatAdmin> stats = brandRepository.getAdminStat();
+        return (stats != null) ? stats : new ArrayList<>();
     }
 
     @Override
     public List<BrandRatingStatAdmin> getAdminRatingStat() {
-        return brandRepository.getAdminRatingStat();
+        List<BrandRatingStatAdmin> list = brandRepository.getAdminRatingStat();
+        return (list != null) ? list : new ArrayList<>();
     }
 
     @Override
     public int getTotalRating(int brandId) {
-        return brandRepository.getTotalRating(brandId);
+        Integer count = brandRepository.getTotalRating(brandId);
+        return (count != null) ? count : 0;
     }
 
     @Override

@@ -171,7 +171,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
     }
 
     @Override
-    public double countAllBrandCredit() {
+    public Double countAllBrandCredit() {
         return jdbcTemplate.queryForObject(COUNT_ALL_BRAND_CREDIT, Double.class);
     }
 

@@ -180,12 +180,12 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getBrandMoneyPercent(int brandId) {
+    public Integer getBrandMoneyPercent(int brandId) {
         return jdbcTemplate.queryForObject(GET_BRAND_MONEY_PERCENT, Integer.class, brandId);
     }
 
     @Override
-    public int countAllBrand() {
+    public Integer countAllBrand() {
         return jdbcTemplate.queryForObject(COUNT_ALL_BRAND, Integer.class);
     }
 
@@ -212,7 +212,7 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getTotalRating(int brandId) {
+    public Integer getTotalRating(int brandId) {
         return jdbcTemplate.queryForObject(GET_TOTAL_RATING, Integer.class, brandId);
     }
 

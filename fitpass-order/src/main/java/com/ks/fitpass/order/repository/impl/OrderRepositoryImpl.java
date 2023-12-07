@@ -6,7 +6,6 @@ import com.ks.fitpass.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
@@ -31,12 +30,12 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public int getNumberOfOrder(int brandId) {
+    public Integer getNumberOfOrder(int brandId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.SELECT_NUMBER_OF_ORDER, Integer.class, brandId);
     }
 
     @Override
-    public int getTotalRevenue(int brandId) {
+    public Integer getTotalRevenue(int brandId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.SELECT_TOTAL_REVENUE, Integer.class, brandId);
     }
 }

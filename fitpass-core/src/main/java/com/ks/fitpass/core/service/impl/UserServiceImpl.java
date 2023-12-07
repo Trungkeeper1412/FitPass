@@ -182,6 +182,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public int countAllUsersAccount() {
-        return userRepository.countAllUsersAccount();
+        Integer count = userRepository.countAllUsersAccount();
+        return (count != null) ? count : 0;
     }
 }

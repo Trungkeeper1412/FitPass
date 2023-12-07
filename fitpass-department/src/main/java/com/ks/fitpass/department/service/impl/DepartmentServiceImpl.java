@@ -265,7 +265,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public int countAllFeedback(int departmentId, String sortRating) {
-        return departmentRepository.countAllFeedback(departmentId, sortRating);
+        Integer count = departmentRepository.countAllFeedback(departmentId, sortRating);
+        return (count != null) ? count : 0;
     }
 
     @Override
@@ -276,22 +277,26 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public int countAllDepartment() {
-        return departmentRepository.countAllDepartment();
+        Integer count = departmentRepository.countAllDepartment();
+        return (count != null) ? count : 0;
     }
 
     @Override
     public List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId) {
-        return departmentRepository.getDepartmentStatBrandOwner(brandId);
+        List<DepartmentStatBrandOwner> list = departmentRepository.getDepartmentStatBrandOwner(brandId);
+        return (list != null) ? list : new ArrayList<>();
     }
 
     @Override
     public List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId) {
-        return departmentRepository.getDepartmentRatingStatBrandOwner(brandId);
+        List<DepartmentRatingStatBrandOwner> list = departmentRepository.getDepartmentRatingStatBrandOwner(brandId);
+        return (list != null) ? list : new ArrayList<>();
     }
 
     @Override
     public int getTotalNumberRatingByDepartmentId(int departmentId) {
-        return departmentRepository.getTotalNumberRatingByDepartmentId(departmentId);
+        Integer count = departmentRepository.getTotalNumberRatingByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 }
 

@@ -13,5 +13,5 @@ public interface TransactionRepository {
 
     Double getTotalAmountOfTransactionByUserId(int userId);
 
-    double countAllCredit();
+    Double countAllCredit();
 }

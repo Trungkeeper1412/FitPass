@@ -26,11 +26,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int getNumberOfOrder(int brandId) {
-        return orderRepository.getNumberOfOrder(brandId);
+        Integer count = orderRepository.getNumberOfOrder(brandId);
+        return (count != null) ? count : 0;
     }
 
     @Override
     public int getTotalRevenue(int brandId) {
-        return orderRepository.getTotalRevenue(brandId);
+        Integer count = orderRepository.getTotalRevenue(brandId);
+        return (count != null) ? count : 0;
     }
 }

@@ -37,6 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public double countAllCredit() {
-        return transactionRepository.countAllCredit();
+        Double count = transactionRepository.countAllCredit();
+        return (count != null) ? count : 0;
     }
 }

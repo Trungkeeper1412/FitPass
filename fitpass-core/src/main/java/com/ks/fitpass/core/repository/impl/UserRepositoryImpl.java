@@ -253,7 +253,7 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
 
 
     @Override
-    public int countAllUsersAccount() {
+    public Integer countAllUsersAccount() {
         return jdbcTemplate.queryForObject(COUNT_ALL_USERS_ACCOUNT, Integer.class);
     }
 }

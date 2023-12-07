@@ -56,15 +56,15 @@ public interface DepartmentRepository {
 
     int updateFirstTimeDepartmentCreated(int departmentId);
 
-    int countAllFeedback(int departmentId, String sortRating);
+    Integer countAllFeedback(int departmentId, String sortRating);
 
     DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
 
-    int countAllDepartment();
+    Integer countAllDepartment();
 
     List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId);
 
     List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId);
 
-    int getTotalNumberRatingByDepartmentId(int departmentId);
+    Integer getTotalNumberRatingByDepartmentId(int departmentId);
 }

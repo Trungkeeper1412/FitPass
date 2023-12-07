@@ -93,16 +93,19 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public OrderDetailStatAdmin getAdminStat() {
-        return orderDetailRepository.getAdminStat();
+        OrderDetailStatAdmin orderDetailStatAdmin = orderDetailRepository.getAdminStat();
+        return (orderDetailStatAdmin != null) ? orderDetailStatAdmin : new OrderDetailStatAdmin();
     }
 
     @Override
     public int getTotalBuyByDepartmentId(int departmentId) {
-        return orderDetailRepository.getTotalBuyByDepartmentId(departmentId);
+        Integer count = orderDetailRepository.getTotalBuyByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override
     public double getTotalRevenueByDepartmentId(int departmentId) {
-        return orderDetailRepository.getTotalRevenueByDepartmentId(departmentId);
+        Double count = orderDetailRepository.getTotalRevenueByDepartmentId(departmentId);
+        return (count != null) ? count : 0.0;
     }
 }

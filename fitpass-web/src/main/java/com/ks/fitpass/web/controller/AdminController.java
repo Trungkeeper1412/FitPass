@@ -65,13 +65,21 @@ public class AdminController {
     @GetMapping("/index")
     public String getAdminIndex(Model model) {
         int totalAccount = userService.countAllUsersAccount();
+
         int totalBrand = brandService.countAllBrand();
+
         int totalDepartment = departmentService.countAllDepartment();
+
         double totalCredit =  transactionService.countAllCredit();
+
         double totalBrandCredit = requestWithdrawHistoryService.countAllBrandCredit();
+
         OrderDetailStatAdmin orderDetailStatAdmin = orderDetailService.getAdminStat();
+
         List<BrandStatAdmin> brandStatAdmin = brandService.getAdminStat();
+
         brandStatAdmin.forEach(brandStat -> brandStat.setTotalAmount(brandStat.getTotalAmount() * 1000));
+
         List<BrandRatingStatAdmin> brandRatingStatAdmin = brandService.getAdminRatingStat();
 
         model.addAttribute("totalAccount", totalAccount);
@@ -82,7 +90,6 @@ public class AdminController {
         model.addAttribute("orderDetailStatAdmin", orderDetailStatAdmin);
         model.addAttribute("brandStatAdmin", brandStatAdmin);
         model.addAttribute("brandRatingStatAdmin", brandRatingStatAdmin);
-
         return "admin/index";
     }
 

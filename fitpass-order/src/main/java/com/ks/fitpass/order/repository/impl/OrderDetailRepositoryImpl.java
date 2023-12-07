@@ -1,10 +1,8 @@
 package com.ks.fitpass.order.repository.impl;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
-import com.ks.fitpass.order.dto.OrderDetailDTO;
 import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
-import com.ks.fitpass.order.mapper.OrderDetailMapper;
 import com.ks.fitpass.order.mapper.OrderDetailWithDeparmentNameMapper;
 import com.ks.fitpass.order.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,12 +131,12 @@ public class OrderDetailRepositoryImpl implements com.ks.fitpass.order.repositor
     }
 
     @Override
-    public int getTotalBuyByDepartmentId(int departmentId) {
+    public Integer getTotalBuyByDepartmentId(int departmentId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_BUY_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 
     @Override
-    public double getTotalRevenueByDepartmentId(int departmentId) {
+    public Double getTotalRevenueByDepartmentId(int departmentId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_REVENUE_BY_DEPARTMENT_ID, Double.class, departmentId);
     }
 }

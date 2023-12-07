@@ -70,9 +70,13 @@ public class GymOwnerController {
 
             User user = (User) session.getAttribute("userInfo");
             Department departmentDetails = departmentService.getByUserId(user.getUserId());
+
             int totalGymPlan = gymPlanService.getTotalGymPlanDepartment(departmentDetails.getDepartmentId());
+
             int totalBuy = orderDetailService.getTotalBuyByDepartmentId(departmentDetails.getDepartmentId());
+
             double totalRevenue = orderDetailService.getTotalRevenueByDepartmentId(departmentDetails.getDepartmentId());
+
             int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
 
             model.addAttribute("totalGymPlan", totalGymPlan);

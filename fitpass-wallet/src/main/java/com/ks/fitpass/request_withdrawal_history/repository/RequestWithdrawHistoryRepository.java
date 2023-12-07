@@ -31,7 +31,7 @@ public interface RequestWithdrawHistoryRepository {
 
     int getUserIdByRequestHistoryId(int requestHistoryId);
 
-    double countAllBrandCredit();
+    Double countAllBrandCredit();
 
     List<RequestHistoryBrandAdmin> getAllRequestHistoryBrandAdmin();
 }

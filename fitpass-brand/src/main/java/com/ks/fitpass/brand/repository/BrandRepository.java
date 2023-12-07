@@ -26,7 +26,7 @@ public interface BrandRepository {
 
     int updateBrandMoneyPercent(int brandId, int moneyPercent);
 
-    int getBrandMoneyPercent(int brandId);
+    Integer getBrandMoneyPercent(int brandId);
 
     BrandDetailFeedbackStat getFeedbackOfBrandDetailStat(int brandId);
 
@@ -38,13 +38,13 @@ public interface BrandRepository {
 
     int createBrandWithBrandName(int userId, String brandName);
 
-    int countAllBrand();
+    Integer countAllBrand();
 
     List<BrandStatAdmin> getAdminStat();
 
     List<BrandRatingStatAdmin> getAdminRatingStat();
 
-    int getTotalRating(int brandId);
+    Integer getTotalRating(int brandId);
 
     List<DepartmentBrandHomepageSearch> searchBrandWithPagnition(String search, int page, int size);
 

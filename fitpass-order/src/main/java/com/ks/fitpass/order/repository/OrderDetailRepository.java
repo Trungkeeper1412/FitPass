@@ -1,7 +1,6 @@
 package com.ks.fitpass.order.repository;
 
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
-import com.ks.fitpass.order.dto.OrderDetailDTO;
 import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.entity.OrderDetails;
 
@@ -41,7 +40,7 @@ public interface OrderDetailRepository {
 
     OrderDetailStatAdmin getAdminStat();
 
-    int getTotalBuyByDepartmentId(int departmentId);
+    Integer getTotalBuyByDepartmentId(int departmentId);
 
-    double getTotalRevenueByDepartmentId(int departmentId);
+    Double getTotalRevenueByDepartmentId(int departmentId);
 }

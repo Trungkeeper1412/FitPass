@@ -80,7 +80,8 @@ public class RequestWithdrawHistoryServiceImpl implements RequestWithdrawHistory
 
     @Override
     public double countAllBrandCredit() {
-        return requestWithdrawHistoryRepository.countAllBrandCredit();
+        Double count = requestWithdrawHistoryRepository.countAllBrandCredit();
+        return (count != null) ? count : 0;
     }
 
     @Override

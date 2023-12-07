@@ -72,17 +72,20 @@ public class BrandOwnerController {
     @GetMapping("/index")
     public String getBOIndex(HttpSession session, Model model) {
         try {
-
             User user = (User) session.getAttribute("userInfo");
             Brand brandDetails = brandService.getBrandDetail(user.getUserId());
+
             int numberOfGymplan = gymPlanService.getNumberOfGymPlan(brandDetails.getBrandId());
+
             int numberOfOrder = orderService.getNumberOfOrder(brandDetails.getBrandId());
+
             int totalRevenue = orderService.getTotalRevenue(brandDetails.getBrandId());
+
             int totalRating = brandService.getTotalRating(brandDetails.getBrandId());
-            List<DepartmentStatBrandOwner> departmentStatBrandOwnerList = departmentService.
-                    getDepartmentStatBrandOwner(brandDetails.getBrandId());
-            List<DepartmentRatingStatBrandOwner> departmentRatingStatBrandOwnerList =
-                    departmentService.getDepartmentRatingStatBrandOwner(brandDetails.getBrandId());
+
+            List<DepartmentStatBrandOwner> departmentStatBrandOwnerList = departmentService.getDepartmentStatBrandOwner(brandDetails.getBrandId());
+
+            List<DepartmentRatingStatBrandOwner> departmentRatingStatBrandOwnerList = departmentService.getDepartmentRatingStatBrandOwner(brandDetails.getBrandId());
 
             model.addAttribute("numberOfGymplan", numberOfGymplan);
             model.addAttribute("numberOfOrder", numberOfOrder);

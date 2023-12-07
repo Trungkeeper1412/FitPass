@@ -20,7 +20,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public int insertTransaction(TransactionDTO transactionDTO) {
-        return jdbcTemplate.update(IRepositoryQuery.INSERT_INTO_TRANSACTION,  transactionDTO.getWalletId(), transactionDTO.getAmount(),
+        return jdbcTemplate.update(IRepositoryQuery.INSERT_INTO_TRANSACTION, transactionDTO.getWalletId(), transactionDTO.getAmount(),
                 transactionDTO.getTransactionDate(), transactionDTO.getStatus());
     }
 
@@ -46,27 +46,21 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     @Override
     public Double getTotalAmountOfTransactionByUserId(int userId) {
-            try {
-                return jdbcTemplate.queryForObject(
-                        IRepositoryQuery.GET_TOTAL_AMOUNT_TRANSACTION_BY_USER_ID,
-                        new Object[]{userId},
-                        new int[]{Types.INTEGER},
-                        Double.class
-                );
-            } catch (EmptyResultDataAccessException e) {
-                // No transactions found, return 0
-                return 0.0;
-            }
-    }
-
-    @Override
-    public double countAllCredit() {
         try {
-            return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_ALL_CREDIT, Double.class);
-
+            return jdbcTemplate.queryForObject(
+                    IRepositoryQuery.GET_TOTAL_AMOUNT_TRANSACTION_BY_USER_ID,
+                    new Object[]{userId},
+                    new int[]{Types.INTEGER},
+                    Double.class
+            );
         } catch (EmptyResultDataAccessException e) {
             // No transactions found, return 0
             return 0.0;
         }
+    }
+
+    @Override
+    public Double countAllCredit() {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_ALL_CREDIT, Double.class);
     }
 }
