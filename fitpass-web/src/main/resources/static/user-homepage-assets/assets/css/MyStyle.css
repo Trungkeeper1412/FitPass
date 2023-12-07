@@ -5799,12 +5799,6 @@ section {
 }
 
 /* CSS FOR LOGIN + REGISTER */
-html,
-body {
-    margin: 0px;
-    /*height: 100%;*/
-}
-
 .login-register-body {
     font-family: 'Times New Roman', Times, serif;
 }
