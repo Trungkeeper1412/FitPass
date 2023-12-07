@@ -1164,6 +1164,8 @@ try {
             User user = (User) session.getAttribute("userInfo");
             double userBalance = walletService.getBalanceByUserId(user.getUserId());
 
+            Brand b = brandService.getBrandDetail(user.getUserId());
+            int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
             if (creditAmount > userBalance) {
                 model.addAttribute("errorCredit", "Số Credit muốn rút không được lớn hơn số dư hiện tại (Credit)");
             }else {
@@ -1173,6 +1175,7 @@ try {
                 requestWithdrawHistory.setActualMoney((long) moneyAmount);
                 requestWithdrawHistory.setWithdrawalTime(new Timestamp(System.currentTimeMillis()));
                 requestWithdrawHistory.setWithdrawalCode(WebUtil.generateUniqueTransactionCode());
+                requestWithdrawHistory.setMoneyPercent(moneyPercent);
                 requestWithdrawHistory.setStatus("Đang xử lý");
                 requestWithdrawHistoryService.create(requestWithdrawHistory);
             }

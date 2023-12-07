@@ -99,50 +99,98 @@
                 </div>
                 <!-- Content Row -->
                 <div class="row">
-                    <!-- Area Chart -->
-                    <div class="col-xl-8 col-lg-7">
+                    <div class="col-xl-12">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h4 class="m-0 font-weight-bold text-primary">Biểu đồ doanh số trong năm</h4>
+                                <h4 class="m-0 font-weight-bold text-primary">Xếp hạng xu hướng mua </h4>
                             </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="gymOwnerAreaChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Pie Chart -->
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h4 class="m-0 font-weight-bold text-primary">Biểu đồ xu hướng mua </h4>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <div class="mt-4 text-center small">
-                                    <span class="mr-2" style="color: #0AC429;">
-                                        <i class="fas fa-circle"></i> Gói linh hoạt
-                                    </span>
-                                    <span class="mr-2" style="color: #36A2EB;">
-                                        <i class="fas fa-circle"></i> Gói 7 ngày
-                                    </span>
-                                    <span class="mr-2" style="color: #4BC0C0;">
-                                        <i class="fas fa-circle"></i> Gói 3 tháng
-                                    </span>
-                                    <span class="mr-2" style="color: #FF6384;">
-                                        <i class="fas fa-circle"></i> Gói 6 tháng
-                                    </span>
-                                    <span class="mr-2" style="color: #FF9F40;">
-                                        <i class="fas fa-circle"></i> Gói 12 tháng
-                                    </span>
-                                </div>
+                            <div class="card-body table-responsive" style="max-height: 700px;">
+                                <table class="table table-bordered" id="table-department-plan" width="100%"
+                                       cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên gói tập</th>
+                                        <th>Giá gói</th>
+                                        <th>Lượt bán</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

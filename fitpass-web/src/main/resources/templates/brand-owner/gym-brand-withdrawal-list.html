@@ -43,6 +43,7 @@
                                     <th>Thời gian</th>
                                     <th>Số credit</th>
                                     <th>Số tiền quy đổi</th>
+                                    <th>Hoa Hồng(%)</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 </thead>
@@ -54,6 +55,7 @@
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
                                         <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
                                     </tr>
                                 </th:block>
@@ -193,6 +195,7 @@
                                     <th>Thời gian</th>
                                     <th>Số credit</th>
                                     <th>Số tiền quy đổi</th>
+                                    <th>Hoa Hồng(%)</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 </thead>
@@ -204,6 +207,7 @@
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
                                         <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
                                         <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
                                         <td th:if="${h.getStatus() == 'Giao dịch bị hủy'}" class="text-danger fw-bold">Giao dịch bị hủy</td>
@@ -246,17 +250,17 @@
 
         $('#filterButtonPending').on('click', function () {
             // Filter by status 'Đang xử lý'
-            table.columns(5).search('Đang xử lý').draw();
+            table.columns(6).search('Đang xử lý').draw();
         });
 
         $('#filterButtonAll').on('click', function () {
             // Remove filter
-            table.columns(5).search('').draw();
+            table.columns(6).search('').draw();
         });
 
         $('#filterButtonSuccess').on('click', function () {
             // Filter by status 'Thành công'
-            table.columns(5).search('Thành công').draw();
+            table.columns(6).search('Thành công').draw();
         });
     });
 </script>

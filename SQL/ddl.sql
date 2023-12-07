@@ -362,6 +362,7 @@ CREATE TABLE IF NOT EXISTS request_withdrawal_history (
                                                           withdrawal_time   timestamp,
                                                           amount_credit    INT NOT NULL,
                                                           actual_money     INT NOT NULL,
+                                                          money_percent    INT DEFAULT 0 ,
                                                           status           VARCHAR(30) NOT NULL,
                                                           FOREIGN KEY (credit_card_id) REFERENCES credit_card(credit_card_id)
 );

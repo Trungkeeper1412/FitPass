@@ -1,7 +1,7 @@
 package com.ks.fitpass.brand.repository.impl;
 
-import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
-import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
+import com.ks.fitpass.partner.register.dto.BrandStatAdmin;
+import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
 import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;

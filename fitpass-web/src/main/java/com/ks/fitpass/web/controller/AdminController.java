@@ -1,11 +1,11 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerUpdateStatus;
-import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
-import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
-import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
 import com.ks.fitpass.brand.dto.BrandAdminList;
+import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
+import com.ks.fitpass.partner.register.dto.BecomePartnerUpdateStatus;
+import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
+import com.ks.fitpass.partner.register.dto.BrandStatAdmin;
+import com.ks.fitpass.partner.register.service.BecomePartnerService;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryBrandAdmin;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
@@ -19,7 +19,6 @@ import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
 import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
 import com.ks.fitpass.transaction.service.TransactionService;

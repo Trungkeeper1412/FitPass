@@ -100,7 +100,7 @@ public class BrandController {
     public ResponseEntity<BrandDetailFeedbackPaginition> getBrandFeedback(@RequestParam int brandId,
                                                                           @RequestParam(defaultValue = "1") int page,
                                                                           @RequestParam(defaultValue = "7") int size,
-                                                                          @RequestParam(required = false) String sortRating) {
+                                                                          @RequestParam("sortRating") String sortRating) {
         try {
             List<BrandDetailFeedback> brandDetailFeedbacks = brandService.getFeedbackOfBrandDetail(brandId,
                     page, size, sortRating);
