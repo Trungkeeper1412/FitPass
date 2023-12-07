@@ -223,4 +223,8 @@ public interface IRepositoryQuery {
                 JOIN gym_department gd ON u.in_department_id = gd.gym_department_id
                 WHERE u.user_id = ?;
             """;
+
+    String COUNT_ALL_USERS_ACCOUNT = """
+                SELECT COUNT(*) FROM user;
+            """;
 }

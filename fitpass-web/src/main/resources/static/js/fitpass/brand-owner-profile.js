@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const newImageContainer = document.createElement("div");
         newImageContainer.classList.add("col-md-4");
         let num = rowElement.querySelectorAll(".col-md-4").length + 1;
-        if (type === "album") {
+        if(type === "album") {
             newImageContainer.innerHTML = `
               <div class="image-container">
                 <img src="${imageSrc}" alt="Image">
@@ -306,15 +306,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
-
 function deleteImage(imagePath) {
-    console.log(imagePath)
     $.ajax({
         type: "POST",
         url: `/upload/deleteImage`,
         contentType: "application/json",
-        data: JSON.stringify({
-            "imagePath": imagePath
+        data:JSON.stringify( {
+            "imagePath" : imagePath
         }),
         success: function (response) {
             console.log(response)
@@ -382,7 +380,7 @@ function previewImage(input) {
 }
 
 //Code Js submit update Profile
-$.validator.addMethod("correctNumber", function (value, element) {
+$.validator.addMethod("correctNumber", function(value, element) {
     var correctNumber;
     if (value.startsWith("1900") || value.startsWith("1800")) {
         correctNumber = /^(1800|1900)\d{6}$/;

@@ -2,8 +2,11 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
 import com.ks.fitpass.become_a_partner.dto.BecomePartnerUpdateStatus;
+import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
+import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
 import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
 import com.ks.fitpass.brand.dto.BrandAdminList;
+import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryBrandAdmin;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDTO;
@@ -11,11 +14,15 @@ import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.credit_card.service.CreditCardService;
 import com.ks.fitpass.department.entity.Feature;
 import com.ks.fitpass.department.service.DepartmentFeatureService;
+import com.ks.fitpass.department.service.DepartmentService;
+import com.ks.fitpass.order.dto.OrderDetailStatAdmin;
+import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
 import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
+import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.WebUtil;
@@ -49,11 +56,40 @@ public class AdminController {
     private final UserService userService;
     private final Email emailService;
     private final WalletService walletService;
+    private final DepartmentService departmentService;
+    private final TransactionService transactionService;
+    private final OrderDetailService orderDetailService;
 
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     //Index (Statistic Dashboard)
     @GetMapping("/index")
-    public String getAdminIndex() {
+    public String getAdminIndex(Model model) {
+        int totalAccount = userService.countAllUsersAccount();
+
+        int totalBrand = brandService.countAllBrand();
+
+        int totalDepartment = departmentService.countAllDepartment();
+
+        double totalCredit =  transactionService.countAllCredit();
+
+        double totalBrandCredit = requestWithdrawHistoryService.countAllBrandCredit();
+
+        OrderDetailStatAdmin orderDetailStatAdmin = orderDetailService.getAdminStat();
+
+        List<BrandStatAdmin> brandStatAdmin = brandService.getAdminStat();
+
+        brandStatAdmin.forEach(brandStat -> brandStat.setTotalAmount(brandStat.getTotalAmount() * 1000));
+
+        List<BrandRatingStatAdmin> brandRatingStatAdmin = brandService.getAdminRatingStat();
+
+        model.addAttribute("totalAccount", totalAccount);
+        model.addAttribute("totalBrand", totalBrand);
+        model.addAttribute("totalDepartment", totalDepartment);
+        model.addAttribute("totalCredit", totalCredit);
+        model.addAttribute("totalBrandCredit", totalBrandCredit);
+        model.addAttribute("orderDetailStatAdmin", orderDetailStatAdmin);
+        model.addAttribute("brandStatAdmin", brandStatAdmin);
+        model.addAttribute("brandRatingStatAdmin", brandRatingStatAdmin);
         return "admin/index";
     }
 
@@ -300,6 +336,14 @@ public class AdminController {
     public ResponseEntity<RequestHistoryAdmin> getWithdrawalDetail(@PathVariable int requestHistoryId) {
         try{
             RequestHistoryAdmin requestWithdrawHistory = requestWithdrawHistoryService.getById(requestHistoryId);
+            int userId = requestWithdrawHistoryService.getUserIdByRequestHistoryId(requestHistoryId);
+            double userBalance = walletService.getBalanceByUserId(userId);
+            requestWithdrawHistory.setBrandBalance(userBalance);
+
+            if(userBalance < requestWithdrawHistory.getAmountCredit()) {
+                int updateRow = requestWithdrawHistoryService.updateStatus(requestHistoryId, "Giao dịch bị hủy");
+            }
+
             return ResponseEntity.ok(requestWithdrawHistory);
         } catch (DataAccessException e) {
             return ResponseEntity.badRequest().build();
@@ -344,7 +388,9 @@ public class AdminController {
     }
 
     @GetMapping("/withdrawal/history")
-    public String getWithdrawalHistory() {
+    public String getWithdrawalHistory(Model model) {
+        List<RequestHistoryBrandAdmin> listHisBrand = requestWithdrawHistoryService.getAllRequestHistoryBrandAdmin();
+        model.addAttribute("listHisBrand", listHisBrand);
         return "admin/admin-withdrawal-history";
     }
 

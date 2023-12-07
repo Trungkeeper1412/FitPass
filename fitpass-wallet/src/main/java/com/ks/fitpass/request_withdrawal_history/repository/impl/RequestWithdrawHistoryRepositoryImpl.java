@@ -1,9 +1,6 @@
 package com.ks.fitpass.request_withdrawal_history.repository.impl;
 
-import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
+import com.ks.fitpass.request_withdrawal_history.dto.*;
 import com.ks.fitpass.request_withdrawal_history.repository.IRepositoryQuery;
 import com.ks.fitpass.request_withdrawal_history.repository.RequestWithdrawHistoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -169,7 +166,24 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
     }
 
     @Override
-    public int getUserIdByRequestHistoryId(int requestHistoryId) {
+    public Integer getUserIdByRequestHistoryId(int requestHistoryId) {
         return jdbcTemplate.queryForObject(GET_USER_ID_BY_REQUEST_HISTORY_ID, Integer.class, requestHistoryId);
+    }
+
+    @Override
+    public Double countAllBrandCredit() {
+        return jdbcTemplate.queryForObject(COUNT_ALL_BRAND_CREDIT, Double.class);
+    }
+
+    @Override
+    public List<RequestHistoryBrandAdmin> getAllRequestHistoryBrandAdmin() {
+        return jdbcTemplate.query(GET_ALL_REQUEST_HISTORY_BRAND_ADMIN, (rs, i) -> {
+            RequestHistoryBrandAdmin re = new RequestHistoryBrandAdmin();
+            re.setBrandName(rs.getString("name"));
+            re.setTotalRequest(rs.getInt("total_request"));
+            re.setAmountCredit(rs.getLong("amount_credit"));
+            re.setActualMoney(rs.getLong("actual_money"));
+            return re;
+        });
     }
 }

@@ -1,10 +1,7 @@
 package com.ks.fitpass.department.repository;
 
 
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.UserFeedback;
 import org.springframework.dao.DataAccessException;
@@ -59,7 +56,15 @@ public interface DepartmentRepository {
 
     int updateFirstTimeDepartmentCreated(int departmentId);
 
-    int countAllFeedback(int departmentId, String sortRating);
+    Integer countAllFeedback(int departmentId, String sortRating);
 
     DepartmentNotificationDTO getDepartmentNotificationDtoById(int departmentId);
+
+    Integer countAllDepartment();
+
+    List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId);
+
+    List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId);
+
+    Integer getTotalNumberRatingByDepartmentId(int departmentId);
 }

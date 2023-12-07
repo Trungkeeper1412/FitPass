@@ -40,5 +40,9 @@ public interface GymPlanRepository {
 
     int deleteAllGymPlanByDepartmentId(int departmentId);
 
-    int checkGymPlanInDepartmentUse(int gymPlanId);
+    Integer checkGymPlanInDepartmentUse(int gymPlanId);
+
+    Integer getNumberOfGymPlan(int brandId);
+
+    Integer getTotalGymPlanDepartment(int departmentId);
 }

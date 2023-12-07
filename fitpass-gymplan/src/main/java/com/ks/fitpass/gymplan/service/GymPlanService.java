@@ -36,4 +36,8 @@ public interface GymPlanService {
 
     int deleteAllGymPlanByDepartmentId(int departmentId);
     int checkGymPlanInDepartmentUse(int gymPlanId);
+
+    int getNumberOfGymPlan(int brandId);
+
+    int getTotalGymPlanDepartment(int departmentId);
 }

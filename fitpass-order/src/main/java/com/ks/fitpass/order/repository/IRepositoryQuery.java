@@ -167,4 +167,59 @@ public interface IRepositoryQuery {
                 ORDER BY order_detail_id DESC
                 LIMIT 1;
             """;
+
+    String GET_ADMIN_STAT = """
+                SELECT
+                    COUNT(CASE WHEN price > 0 THEN 1 END) AS total_fixed,
+                    COUNT(CASE WHEN price_per_hours > 0 THEN 1 END) AS total_flex
+                FROM
+                    order_plan_detail;
+            """;
+
+    // Select number of order by brand id
+
+    String SELECT_NUMBER_OF_ORDER = """
+            SELECT
+                COUNT(o.order_id) AS totalOrders
+            FROM
+                `order` o
+            JOIN
+                order_plan_detail opd ON o.order_id = opd.order_id
+            JOIN
+                gym_department g ON opd.gym_department_id = g.gym_department_id
+            JOIN
+                brand b ON g.brand_id = b.brand_id
+            WHERE
+                b.brand_id = ?
+            """;
+
+    // Select total revenue by brand id
+    String SELECT_TOTAL_REVENUE = """
+                        SELECT
+                            SUM(opd.price) AS totalRevenue
+                        FROM
+                            `order` o
+                        JOIN
+                            order_plan_detail opd ON o.order_id = opd.order_id
+                        JOIN
+                            gym_department g ON opd.gym_department_id = g.gym_department_id
+                        JOIN
+                            brand b ON g.brand_id = b.brand_id
+                        WHERE
+                            b.brand_id = ?
+            """;
+
+    String GET_TOTAL_BUY_BY_DEPARTMENT_ID = """
+                SELECT COUNT(*) AS total_buy
+                FROM order_plan_detail opd
+                JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                WHERE gd.gym_department_id = ?;
+            """;
+
+    String GET_TOTAL_REVENUE_BY_DEPARTMENT_ID = """
+                SELECT COALESCE(SUM(opd.price), 0) AS total_revenue
+                FROM order_plan_detail opd
+                JOIN gym_department gd ON opd.gym_department_id = gd.gym_department_id
+                WHERE gd.gym_department_id = ?;           
+            """;
 }

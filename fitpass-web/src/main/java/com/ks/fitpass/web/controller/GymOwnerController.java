@@ -12,6 +12,7 @@ import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFixedDTO;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
 import com.ks.fitpass.gymplan.service.GymPlanService;
+import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.TimeConversionUtil;
@@ -44,7 +45,6 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class GymOwnerController {
 
-    private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
     private final DepartmentScheduleService departmentScheduleService;
     private final DepartmentService departmentService;
     private final DepartmentAlbumsService departmentAlbumsService;
@@ -55,17 +55,54 @@ public class GymOwnerController {
     private final DepartmentFeatureService departmentFeatureService;
     private final WalletService walletService;
     private final Email emailService;
+    private final OrderDetailService orderDetailService;
+
+    private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
     public String getGOIndex(HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+        try {
+            if (isFirstTime) {
+                return "redirect:/gym-owner/department/update-details";
+            }
 
-        if (isFirstTime) {
-            return "redirect:/gym-owner/department/update-details";
+            User user = (User) session.getAttribute("userInfo");
+            Department departmentDetails = departmentService.getByUserId(user.getUserId());
+
+            int totalGymPlan = gymPlanService.getTotalGymPlanDepartment(departmentDetails.getDepartmentId());
+
+            int totalBuy = orderDetailService.getTotalBuyByDepartmentId(departmentDetails.getDepartmentId());
+
+            double totalRevenue = orderDetailService.getTotalRevenueByDepartmentId(departmentDetails.getDepartmentId());
+
+            int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
+
+            model.addAttribute("totalGymPlan", totalGymPlan);
+            model.addAttribute("totalBuy", totalBuy);
+            model.addAttribute("totalRevenue", totalRevenue);
+            model.addAttribute("totalNumberRating", totalNumberRating);
+            model.addAttribute("departmentDetails", departmentDetails);
+            return "gym-owner/index";
+
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
         }
-        return "gym-owner/index";
-
     }
 
     //Gym Owner Profile (a person) & Change Password
@@ -96,7 +133,6 @@ public class GymOwnerController {
             return "error/data-access-error";
         }
     }
-
     @PostMapping("/profile")
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
@@ -396,18 +432,18 @@ public class GymOwnerController {
     //Feedback Management
     @GetMapping("/feedback/list")
     public String getListOfFeedback(HttpSession session, Model model) {
-        try {
-            boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-            if (isFirstTime) {
-                return "redirect:/gym-owner/department/update-details";
-            }
-            User user = (User) session.getAttribute("userInfo");
-            Department departmentDetails = departmentService.getByUserId(user.getUserId());
+        try{
+        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+        if (isFirstTime) {
+            return "redirect:/gym-owner/department/update-details";
+        }
+        User user = (User) session.getAttribute("userInfo");
+        Department departmentDetails = departmentService.getByUserId(user.getUserId());
 
-            List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentDetails.getDepartmentId());
-            model.addAttribute("userFeedbackList", userFeedbackList);
-            model.addAttribute("departmentDetails", departmentDetails);
-            return "gym-owner/gym-department-feedback";
+        List<UserFeedbackOfBrandOwner> userFeedbackList = departmentService.getAllDepartmentFeedbackOfBrandOwner(departmentDetails.getDepartmentId());
+        model.addAttribute("userFeedbackList", userFeedbackList);
+        model.addAttribute("departmentDetails", departmentDetails);
+        return "gym-owner/gym-department-feedback";
         } catch (DataAccessException ex) {
             // Handle other data access issues
             logger.error("DataAccessException occurred", ex);

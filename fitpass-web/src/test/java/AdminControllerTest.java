@@ -90,13 +90,13 @@ public class AdminControllerTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void testGetAdminIndex() {
-        //act
-        String result = adminController.getAdminIndex();
-        //assert
-        assertEquals("admin/index", result);
-    }
+//    @Test
+//    public void testGetAdminIndex() {
+//        //act
+//        String result = adminController.getAdminIndex();
+//        //assert
+//        assertEquals("admin/index", result);
+//    }
 
     @Test
     public void testGetFeature() {

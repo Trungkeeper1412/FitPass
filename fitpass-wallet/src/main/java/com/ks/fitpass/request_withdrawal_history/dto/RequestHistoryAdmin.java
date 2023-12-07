@@ -15,4 +15,5 @@ public class RequestHistoryAdmin {
     private String cardBank;
     private String cardNumber;
     private String cardHolder;
+    private double brandBalance;
 }

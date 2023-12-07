@@ -33,7 +33,7 @@
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                             Số lượng gói tập
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalGymPlan}">5</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dumbbell fa-2x text-gray-300"></i>
@@ -50,7 +50,7 @@
                                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                             Số lượt mua
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">3728</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalBuy}">3728</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-cart-shopping fa-2x text-gray-300"></i>
@@ -67,7 +67,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Thu nhập
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">44.000.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalRevenue}">44.000.000</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-dong-sign fa-2x text-gray-300"></i>
@@ -85,8 +85,8 @@
                                             Số lượt đánh giá
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <div style="margin-right: 10px" data-star="4"></div>
-                                            5612
+                                            <div style="margin-right: 10px" th:attr="data-star=${departmentDetails.rating}"></div>
+                                            <span th:text="${totalNumberRating}">5612</span>
                                         </div>
                                     </div>
                                     <div class="col-auto">
