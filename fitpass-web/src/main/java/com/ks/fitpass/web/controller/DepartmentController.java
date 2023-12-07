@@ -109,7 +109,7 @@ public class DepartmentController {
     public ResponseEntity<DepartmentDetailsFeedback> getDepartmentFeedback(@RequestParam int departmentId,
                                                                            @RequestParam(defaultValue = "1") int page,
                                                                            @RequestParam(defaultValue = "7") int size,
-                                                                           @RequestParam(required = false) String sortRating) {
+                                                                           @RequestParam("sortRating") String sortRating) {
         try {
             // Get list of user feedback for the department
             List<UserFeedback> userFeedbacks = departmentService.getDepartmentFeedback(departmentId, page, size, sortRating);

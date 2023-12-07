@@ -36,7 +36,7 @@ public class HomepageController {
     @GetMapping("")
     public String getHomepage(HttpSession session) {
         User userSession = (User) session.getAttribute("userInfo");
-        if(userSession != null){
+        if (userSession != null) {
             double credit = walletService.getBalanceByUserId(userSession.getUserId());
             session.setAttribute("userCredit", credit);
         }
@@ -143,24 +143,31 @@ public class HomepageController {
         }
     }
 
-//    @GetMapping("/search")
-//    public String viewSearchResult(HttpSession session) {
-//        return "search-gym-result";
-//    }
-
     @GetMapping("/search")
     public String getSearchResult(Model model, @RequestParam("search") String search,
-                                  @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "2") int size) {
-        List<DepartmentBrandHomepageSearch> list =  brandService.searchBrandWithPagnition(search, page, size);
+                                  @RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "4") int size) {
+        List<DepartmentBrandHomepageSearch> list = brandService.searchBrandWithPagnition(search, page, size);
 
         int totalResult = brandService.countSearchBrand(search);
 
         int totalPage = (int) Math.ceil((double) totalResult / size);
 
+        int startPage = Math.max(1, page - 2);
+        int endPage = Math.min(totalPage, page + 2);
+        if (page <= 3) {
+            endPage = Math.min(totalPage, 5);
+        }
+        if (page >= totalPage - 2) {
+            startPage = Math.max(1, totalPage - 4);
+        }
+
         model.addAttribute("search", search);
         model.addAttribute("list", list);
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("currentPage", page);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
         return "search-gym-result";
     }
 }
