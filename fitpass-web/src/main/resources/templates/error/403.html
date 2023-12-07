@@ -24,8 +24,11 @@
           <p class="status-code">403</p>
         </div>
         <h4>Bạn không thể truy cập trang này.</h4>
-        <a th:href="@{/}" class="btn btn-back">
-          <i class="fas fa-home fa-fw me-2"></i>Trang chủ
+        <a onclick="goBack()" class="btn btn-back">
+          <i class="fas fa-arrow-left fa-fw me-2"></i>Quay lại
+        </a>
+        <a th:href="@{/logout}" class="btn btn-back">
+          <i class="fas fa-sign-out-alt fa-fw me-2"></i>Đăng nhập bằng tài khoản khác
         </a>
       </div>
     </div>
@@ -46,6 +49,11 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
 </body>
 
 </html>

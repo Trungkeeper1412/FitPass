@@ -35,6 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             case "BRAND_OWNER":
                 userSession = userRepository.findByAccount(customUser.getUsername());
                 session.setAttribute("userInfo", userSession);
+                session.setAttribute("userRole", userRole);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + userRole);
