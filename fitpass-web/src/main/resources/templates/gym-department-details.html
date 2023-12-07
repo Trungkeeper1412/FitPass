@@ -47,11 +47,11 @@
                 <div style="margin-left: 10px;" th:text="${department.departmentContactNumber}"></div>
             </div>
             <div class="gym-address">
-                <img style="width: 20px" src="https://cdn-icons-png.flaticon.com/128/10405/10405743.png">
+                <img style="width: 20px" th:src="@{/user-homepage-assets/assets/img/dept-area.png}">
                 <div style="margin-left: 10px;">Diện tích: <span th:text="${department.area}"></span> m²</div>
             </div>
             <div class="gym-address">
-                <img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Leadership_-_The_Noun_Project.svg/1200px-Leadership_-_The_Noun_Project.svg.png">
+                <img style="width: 20px" th:src="@{/user-homepage-assets/assets/img/dept-capacity.png}">
                 <div style="margin-left: 10px;">Sức chứa: <span th:text="${department.capacity}"></span> người</div>
             </div>
             <div class="gym-address">
@@ -112,7 +112,7 @@
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 60px;"></div>
     <div class="list-service-wrapper container mt-2">
         <button th:if="${departmentAmenities.size() > 4}" class="left" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-scroll.png}">
         </button>
         <div class="scroll-services row mt-4">
             <div class="col-lg-4 col-md-5 col-xl-3 col-xxl-3"  th:each="amenitie: ${departmentAmenities}">
@@ -124,7 +124,7 @@
             </div>
         </div>
         <button th:if="${departmentAmenities.size() > 4}" class="right" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-scroll.png}">
         </button>
     </div>
 
@@ -132,7 +132,7 @@
     <div style="background-color: rgb(255, 187, 0); height: 3px; width: 150px;"></div>
     <div class="list-plan-wrapper container">
         <button th:if="${gymPlans.size() > 3}" class="left l1" onclick="leftScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892646.png"></img>
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-plan.png}"></img>
         </button>
         <div class="scroll-plans row">
             <div class="col-xl-4 col-lg-6 col-md-8" th:each="gymPlan : ${gymPlans}">
@@ -164,7 +164,7 @@
 
         </div>
         <button th:if="${gymPlans.size() > 3}" class="right r1" onclick="rightScroll()">
-            <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/892/892662.png"></img>
+            <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-plan.png}"></img>
         </button>
     </div>
 
@@ -174,7 +174,7 @@
     <div style="margin: auto;">
         <div class="list-image">
             <button class="leftImage" onclick="leftScroll()">
-                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2723/2723003.png">
+                <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/left-scroll.png}">
             </button>
             <div class="image-scroll-wrapper squares row">
             <div th:each="album : ${departmentAlbums}">
@@ -182,7 +182,7 @@
             </div>
             </div>
             <button class="rightImage" onclick="rightScroll()">
-                <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/2722/2722998.png">
+                <img style="width: 30px;" th:src="@{/user-homepage-assets/assets/img/right-scroll.png}">
             </button>
         </div>
         <div id="modal01" class="w3-modal" onclick="this.style.display='none'">

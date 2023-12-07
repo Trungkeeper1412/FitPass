@@ -4924,7 +4924,6 @@ section {
     width: 90%;
     margin: auto;
     display: flex;
-    justify-content: center;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
