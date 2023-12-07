@@ -1,4 +1,4 @@
-package com.ks.fitpass.become_a_partner.dto;
+package com.ks.fitpass.partner.register.dto;
 import com.ks.fitpass.department.dto.UpdateGymOwnerDepartmentInfo;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

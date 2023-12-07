@@ -1,6 +1,6 @@
-package com.ks.fitpass.become_a_partner.repository;
+package com.ks.fitpass.partner.register.repository;
 
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
+import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 
 import java.sql.Timestamp;
 import java.util.List;

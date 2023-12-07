@@ -1,8 +1,8 @@
-package com.ks.fitpass.become_a_partner.service.impl;
+package com.ks.fitpass.partner.register.service.impl;
 
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
-import com.ks.fitpass.become_a_partner.repository.BecomePartnerRepository;
-import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
+import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
+import com.ks.fitpass.partner.register.repository.BecomePartnerRepository;
+import com.ks.fitpass.partner.register.service.BecomePartnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
