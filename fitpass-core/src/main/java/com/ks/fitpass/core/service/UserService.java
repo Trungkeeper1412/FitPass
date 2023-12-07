@@ -48,4 +48,6 @@ public interface UserService extends UserDetailsService {
     int createEmployee(User user);
 
     boolean updatePassword(String newPassword, int userId) throws DataAccessException;
+
+    int countAllUsersAccount();
 }

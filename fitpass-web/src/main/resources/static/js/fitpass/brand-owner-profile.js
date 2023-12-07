@@ -534,8 +534,9 @@ $(document).ready(function () {
         }
     });
 
-    // Handle "Submit" button click
-    $("#submitButton").click(function () {
+    $("#submitButton").click(function (e) {
+        e.preventDefault(); // Prevent the default form submit action
+
         // Validate the form
         if ($("#msform").valid()) {
             var profileData = {
@@ -553,44 +554,31 @@ $(document).ready(function () {
                 }
             };
 
-            $.ajax({
-                type: "POST",
-                url: "/brand-owner/updateProfile",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(profileData),
-                success: function (response) {
-                    console.log("shit")
-                    Swal.fire({
-                        title: 'Bạn có muốn cập nhật thông tin ?',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonText: 'Có',
-                        cancelButtonText: 'Không',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Vui lòng đợi...',
+                icon: 'info',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    $.ajax({
+                        type: "POST",
+                        url: "/brand-owner/updateProfile",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(profileData),
+                        success: function (response) {
                             Swal.fire({
-                                title: 'Vui lòng đợi...',
-                                icon: 'info',
+                                title: 'Thành công!',
+                                text: 'Cập nhật thông tin thành công.',
+                                icon: 'success',
                                 showConfirmButton: false,
-                                timerProgressBar: true,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                    setTimeout(() => {
-                                        $("#formSubmit").submit();
-                                        Swal.close();
-                                    }, 2000);
-                                },
-                                didClose: () => {
-                                    Swal.fire({
-                                        title: 'Thành công!',
-                                        text: 'Cập nhật thông tin thành công.',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    });
-                                }
+                                timer: 3000
+                            }).then(() => {
+                                location.reload();
                             });
-                        } else {
+                        },
+                        error: function (error) {
+                            console.error("Error:", error);
                             Swal.fire({
                                 title: 'Thất bại!',
                                 text: 'Cập nhật thông tin thất bại.',
@@ -600,20 +588,10 @@ $(document).ready(function () {
                             });
                         }
                     });
-                },
-                error: function (error) {
-                    console.error("Error:", error);
-                    Swal.fire({
-                        title: 'Thất bại!',
-                        text: 'Cập nhật thông tin thất bại.',
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
                 }
             });
         } else {
-            return false;
+            return false; // If the form is not valid, do nothing
         }
     });
 });

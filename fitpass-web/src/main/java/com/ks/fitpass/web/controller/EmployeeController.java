@@ -35,7 +35,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -77,59 +76,63 @@ public class EmployeeController {
         this.userRepository = userRepository;
     }
 
-    public boolean checkValidDepartmentParameter(HttpSession session, int departmentId){
-       try {
-           User user = (User) session.getAttribute("userInfo");
-           int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
-           return departmentId == userDepartmentId;
-       } catch (Exception e) {
-           // Handle other exceptions if necessary
-           e.printStackTrace(); // Log or print the stack trace for debugging
-           return false; // Or throw a custom exception, depending on your requirements
-       }
+    public boolean checkValidDepartmentParameter(HttpSession session, int departmentId) {
+        try {
+            User user = (User) session.getAttribute("userInfo");
+            int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+            return departmentId == userDepartmentId;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @GetMapping("/changePassword")
     public String getRegistrationList() {
         return "employee/change-password";
     }
+
     @PostMapping("/changePassword")
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model,HttpSession session) {
-try {
-    User user = (User) session.getAttribute("userInfo");
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                                 Model model, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("userInfo");
+            int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // Kiểm tra mật khẩu hiện tại
-    if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-        model.addAttribute("error", "Mật khẩu hiện tại không đúng");
-        return "employee/change-password";
-    }
-    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-    if (!newPassword.equals(confirmPassword)) {
-        model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
-        return "employee/change-password";
-    }
-    String hashedPassword = passwordEncoder.encode(newPassword);
-    // Cập nhật mật khẩu mới
-    userService.updatePassword(hashedPassword, user.getUserId());
+            // Kiểm tra mật khẩu hiện tại
+            if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
+                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                return "employee/change-password";
+            }
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+            if (!newPassword.equals(confirmPassword)) {
+                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                return "employee/change-password";
+            }
+            String hashedPassword = passwordEncoder.encode(newPassword);
+            // Cập nhật mật khẩu mới
+            userService.updatePassword(hashedPassword, user.getUserId());
 
-    // Redirect hoặc hiển thị thông báo thành công
-    model.addAttribute("success", true);
-    return "redirect:/employee/changePassword";
-} catch (Exception e) {
-    // Handle other exceptions if necessary
-    model.addAttribute("error", "An unexpected error occurred");
-    e.printStackTrace(); // Log or print the stack trace for debugging
-    return "employee/change-password";
-}
+            // Redirect hoặc hiển thị thông báo thành công
+            model.addAttribute("success", true);
+            model.addAttribute("departmentId", userDepartmentId);
+            return "redirect:/employee/changePassword";
+        } catch (Exception e) {
+            // Handle other exceptions if necessary
+            model.addAttribute("error", "An unexpected error occurred");
+            e.printStackTrace(); // Log or print the stack trace for debugging
+            return "employee/change-password";
+        }
     }
 
     @GetMapping("/check-in/fixed")
-    public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+    public String getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId, Model model, HttpSession session) {
         try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return "error/403";
+            }
             List<CheckInFixedDTO> checkInFixedDTOList = employeeService.getListNeedCheckInFixedByDepartmentId(departmentId);
             List<CheckedInFixedDTO> checkedInDTOList = employeeService.getListCheckedInFixedByDepartmentId(departmentId);
             model.addAttribute("checkInList", checkInFixedDTOList);
@@ -153,8 +156,11 @@ try {
 
 
     @GetMapping("/check-in/flexible")
-    public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model) {
+    public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model, HttpSession session) {
         try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return "error/403";
+            }
             List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId);
             List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
             model.addAttribute("checkInList", checkInFlexibleDTOList);
@@ -179,12 +185,15 @@ try {
 
     @GetMapping("/searchListCheckIn")
     @ResponseBody
-    public ResponseEntity<List<CheckInFlexibleDTO>> searchListCheckIn(
-            @RequestParam("searchText") String searchText,
-            @RequestParam("searchOption") String searchOption,
-            @RequestParam("departmentId") int departmentId
+    public ResponseEntity<List<CheckInFlexibleDTO>> searchListCheckIn(HttpSession session,
+                                                                      @RequestParam("searchText") String searchText,
+                                                                      @RequestParam("searchOption") String searchOption,
+                                                                      @RequestParam("departmentId") int departmentId
     ) {
         try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
             List<CheckInFlexibleDTO> searchResults;
 
             if ("username".equals(searchOption)) {
@@ -199,7 +208,7 @@ try {
             }
 
             return ResponseEntity.ok(searchResults);
-        }catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             // Handle DataAccessException
             logger.error("Error during database access in searchListCheckIn", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -212,12 +221,15 @@ try {
 
     @GetMapping("/searchListCheckOut")
     @ResponseBody
-    public ResponseEntity<List<CheckInFlexibleDTO>> searchListCheckOut(
-            @RequestParam("searchText") String searchText,
-            @RequestParam("searchOption") String searchOption,
-            @RequestParam("departmentId") int departmentId
+    public ResponseEntity<List<CheckInFlexibleDTO>> searchListCheckOut(HttpSession session,
+                                                                       @RequestParam("searchText") String searchText,
+                                                                       @RequestParam("searchOption") String searchOption,
+                                                                       @RequestParam("departmentId") int departmentId
     ) {
         try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
             List<CheckInFlexibleDTO> searchResults;
 
             if ("username".equals(searchOption)) {
@@ -232,7 +244,7 @@ try {
             }
 
             return ResponseEntity.ok(searchResults);
-        }catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             // Handle DataAccessException
             logger.error("Error during database access in searchListCheckIn", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -392,8 +404,7 @@ try {
             detailCheckOutDTO.setCheckInTime(checkInTime);
             detailCheckOutDTO.setPricePerHours(pricePerHours);
             return ResponseEntity.ok(detailCheckOutDTO);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             // Handle DataAccessException
             logger.error("Error during database access in showDetail", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -459,12 +470,15 @@ try {
 
     @GetMapping("/fixed/searchListCheckIn")
     @ResponseBody
-    public ResponseEntity<List<CheckInFixedDTO>> searchListFixedCheckIn(
-            @RequestParam("searchText") String searchText,
-            @RequestParam("searchOption") String searchOption,
-            @RequestParam("departmentId") int departmentId
+    public ResponseEntity<List<CheckInFixedDTO>> searchListFixedCheckIn(HttpSession session,
+                                                                        @RequestParam("searchText") String searchText,
+                                                                        @RequestParam("searchOption") String searchOption,
+                                                                        @RequestParam("departmentId") int departmentId
     ) {
         try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
             List<CheckInFixedDTO> searchResults;
 
             if ("username".equals(searchOption)) {
@@ -487,12 +501,15 @@ try {
 
     @GetMapping("/fixed/searchListCheckOut")
     @ResponseBody
-    public ResponseEntity<List<CheckedInFixedDTO>> searchListFixedCheckOut(
-            @RequestParam("searchText") String searchText,
-            @RequestParam("searchOption") String searchOption,
-            @RequestParam("departmentId") int departmentId
+    public ResponseEntity<List<CheckedInFixedDTO>> searchListFixedCheckOut(HttpSession session,
+                                                                           @RequestParam("searchText") String searchText,
+                                                                           @RequestParam("searchOption") String searchOption,
+                                                                           @RequestParam("departmentId") int departmentId
     ) {
         try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
             List<CheckedInFixedDTO> searchResults;
 
             if ("username".equals(searchOption)) {
@@ -506,7 +523,7 @@ try {
                 searchResults = employeeService.searchListCheckedInFixedByUsername(searchText, departmentId);
             }
             return ResponseEntity.ok(searchResults);
-        }catch (Exception e) {
+        } catch (Exception e) {
             // Handle other exceptions if necessary
             logger.error("An unexpected error occurred in showDetail", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -521,7 +538,7 @@ try {
             }
             model.addAttribute("departmentId", departmentId);
             return "employee/employee-check-in-history";
-        }catch (EmptyResultDataAccessException ex) {
+        } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return "error/no-data";
@@ -565,7 +582,7 @@ try {
                         .build();
             }
             return ResponseEntity.ok(checkInHistoryPage);
-        }catch (EmptyResultDataAccessException ex) {
+        } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -585,7 +602,7 @@ try {
         try {
             List<CheckInHistoryFlexible> listFlexible = checkInHistoryService.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
             return ResponseEntity.ok(listFlexible);
-        }catch (EmptyResultDataAccessException ex) {
+        } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -605,11 +622,11 @@ try {
         try {
             List<CheckInHistoryFixed> listFlexible = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
             return ResponseEntity.ok(listFlexible);
-        }catch (EmptyResultDataAccessException ex) {
+        } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             // Handle other exceptions if necessary
             logger.error("An unexpected error occurred in showDetail", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

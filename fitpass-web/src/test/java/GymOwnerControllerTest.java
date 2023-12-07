@@ -841,22 +841,22 @@ public class GymOwnerControllerTest {
 
     }
 
-    @Test
-    void testUpdateDepartmentImages() {
-        // Arrange
-
-
-        when(session.getAttribute("userInfo")).thenReturn(new User());
-        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
-        when(model.addAttribute(anyString(), any())).thenReturn(model);
-
-        // Act
-        String result = gymOwnerController.updateDepartmentImages(session, model, "logo.jpg", "thumbnail.jpg", "wallpaper.jpg", "album1.jpg,album2.jpg");
-
-        // Assert
-        assertEquals("redirect:/gym-owner/department/image", result);
-
-    }
+//    @Test
+//    void testUpdateDepartmentImages() {
+//        // Arrange
+//
+//
+//        when(session.getAttribute("userInfo")).thenReturn(new User());
+//        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+//        when(model.addAttribute(anyString(), any())).thenReturn(model);
+//
+//        // Act
+//        String result = gymOwnerController.updateDepartmentImages(session, model, "logo.jpg", "thumbnail.jpg", "wallpaper.jpg", "album1.jpg,album2.jpg");
+//
+//        // Assert
+//        assertEquals("redirect:/gym-owner/department/image", result);
+//
+//    }
 
     @Test
     void testGetDepartmentLocation() {

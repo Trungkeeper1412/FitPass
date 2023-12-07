@@ -1,9 +1,6 @@
 package com.ks.fitpass.request_withdrawal_history.repository;
 
-import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
+import com.ks.fitpass.request_withdrawal_history.dto.*;
 
 import java.util.List;
 
@@ -32,5 +29,9 @@ public interface RequestWithdrawHistoryRepository {
 
     Integer getNumberPercentage(int requestHistoryId);
 
-    int getUserIdByRequestHistoryId(int requestHistoryId);
+    Integer getUserIdByRequestHistoryId(int requestHistoryId);
+
+    Double countAllBrandCredit();
+
+    List<RequestHistoryBrandAdmin> getAllRequestHistoryBrandAdmin();
 }

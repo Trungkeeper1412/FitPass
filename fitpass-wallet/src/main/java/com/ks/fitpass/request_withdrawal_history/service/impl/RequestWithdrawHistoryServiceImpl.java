@@ -1,9 +1,6 @@
 package com.ks.fitpass.request_withdrawal_history.service.impl;
 
-import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryAdmin;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestHistoryStats;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistory;
-import com.ks.fitpass.request_withdrawal_history.dto.RequestWithdrawHistoryWithBrandName;
+import com.ks.fitpass.request_withdrawal_history.dto.*;
 import com.ks.fitpass.request_withdrawal_history.repository.RequestWithdrawHistoryRepository;
 import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -79,5 +76,16 @@ public class RequestWithdrawHistoryServiceImpl implements RequestWithdrawHistory
     @Override
     public int getUserIdByRequestHistoryId(int requestHistoryId) {
         return requestWithdrawHistoryRepository.getUserIdByRequestHistoryId(requestHistoryId);
+    }
+
+    @Override
+    public double countAllBrandCredit() {
+        Double count = requestWithdrawHistoryRepository.countAllBrandCredit();
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public List<RequestHistoryBrandAdmin> getAllRequestHistoryBrandAdmin() {
+        return requestWithdrawHistoryRepository.getAllRequestHistoryBrandAdmin();
     }
 }

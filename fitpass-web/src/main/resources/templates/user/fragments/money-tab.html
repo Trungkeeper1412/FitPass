@@ -2,7 +2,7 @@
     <div class="col-sm-6 col-md-6">
         <div class="account-balance">
             <div>
-                <span><img src="https://cdn-icons-png.flaticon.com/128/10317/10317738.png"></span>
+                <span><img th:src="@{/user-homepage-assets/assets/img/wallet.png}"></span>
                 <span class="wallet-money">
                                     <span id="user-balance" th:text="${session.userCredit}"></span>
                                         <span>Credits</span>
@@ -14,7 +14,7 @@
     <div class="col-sm-6 col-md-6">
         <div class="account-balance">
             <div>
-                <span><img src="https://cdn-icons-png.flaticon.com/128/10318/10318269.png"></span>
+                <span><img th:src="@{/user-homepage-assets/assets/img/wallet1.png}"></span>
                 <span class="wallet-money">
                                     <span  th:text="${session.userTotalDeposit div 1000}"></span>
                                     <span>Credits</span>

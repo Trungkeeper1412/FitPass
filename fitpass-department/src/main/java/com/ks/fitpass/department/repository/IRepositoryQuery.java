@@ -347,6 +347,7 @@ public interface IRepositoryQuery {
                     uf.department_id,
                     uf.rating,
                     uf.comments,
+                    ud.image_url,
                     uf.feedback_time,
                     uf.feedback_status
                 FROM
@@ -390,6 +391,7 @@ public interface IRepositoryQuery {
                     uf.rating,
                     uf.comments,
                     uf.feedback_time,
+                    ud.image_url,
                     uf.feedback_status
                 FROM
                     user_feedback uf
@@ -650,7 +652,7 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 SET first_time = 0
                 WHERE gym_department_id = ?;
             """;
-            
+
              String  GET_FEATURE_BY_FEATURE_ID = """
                 SELECT feature_id, feature_icon, feature_name, feature_status
                 FROM features WHERE feature_id = ?;
@@ -673,7 +675,7 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 SET feature_status = ?
                 WHERE feature_id = ?;
             """;
-            
+
 
     String COUNT_ALL_FEEDBACK = """
                 SELECT COUNT(*)
@@ -688,5 +690,50 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                     gym_department d
                 WHERE
                     d.gym_department_id = ?;
+            """;
+
+    String COUNT_ALL_DEPARTMENT = """
+                SELECT COUNT(*)
+                FROM gym_department
+            """;
+
+    String GET_DEPARTMENT_STAT_BRAND_OWNER = """
+                SELECT
+                    gd.name AS departmentName,
+                    COUNT(od.order_detail_id) AS numberOfGymPlanSold,
+                    SUM(od.price) AS totalAmount
+                FROM
+                    gym_department gd
+                LEFT JOIN
+                    order_plan_detail od ON gd.gym_department_id = od.gym_department_id
+                LEFT JOIN
+                    brand b ON gd.brand_id = b.brand_id
+                WHERE
+                    b.brand_id = ?
+                GROUP BY
+                    gd.name;
+            """;
+
+    String GET_DEPARTMENT_RATING_STAT_BRAND_OWNER = """
+                SELECT
+                    gd.name AS departmentName,
+                    COUNT(uf.feedback_id) AS numberOfRating,
+                    AVG(gd.rating) AS rating
+                FROM
+                    user_feedback uf
+                JOIN
+                    gym_department gd ON uf.department_id = gd.gym_department_id
+                JOIN
+                    brand b ON gd.brand_id = b.brand_id
+                WHERE
+                    b.brand_id = ?
+                GROUP BY
+                    gd.name;
+            """;
+
+    String GET_TOTAL_NUMBER_RATING_BY_DEPARTMENT_ID = """
+                SELECT COUNT(uf.feedback_id) AS numberOfRating
+                FROM user_feedback uf
+                WHERE uf.department_id = ?;
             """;
 }

@@ -12,4 +12,6 @@ public interface TransactionService {
     int insertTransferCreditHistory(TransferCreditHistory transferCreditHistory);
 
     Double getTotalAmountOfTransactionByUserId(int userId);
+
+    double countAllCredit();
 }

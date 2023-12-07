@@ -34,4 +34,9 @@ public class TransactionServiceImpl implements TransactionService {
     public Double getTotalAmountOfTransactionByUserId(int userId) {
         return transactionRepository.getTotalAmountOfTransactionByUserId(userId);
     }
+
+    @Override
+    public double countAllCredit() {
+        return transactionRepository.countAllCredit();
+    }
 }

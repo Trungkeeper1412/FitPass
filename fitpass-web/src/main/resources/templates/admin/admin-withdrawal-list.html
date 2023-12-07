@@ -153,8 +153,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
-                                        <button type="submit" class="btn btn-success">Xác nhận</button>
+                                        <button id="btn-close" type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                                        <button id="btn-submit" type="submit" class="btn btn-success">Xác nhận</button>
                                     </div>
                                 </form>
 
@@ -186,7 +186,7 @@
                                         <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
                                         <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
                                         <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
-                                        <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">Không thành công</td>
+                                        <td th:if="${h.getStatus() == 'Giao dịch bị hủy'}" class="text-danger fw-bold">Giao dịch bị hủy</td>
                                     </tr>
                                 </th:block>
 
@@ -254,6 +254,23 @@
                 $("#bankSelect").val(response.cardBank);
                 $("#receiverAccount").val(response.cardNumber);
                 $("#cardHolderName").val(response.cardHolder);
+
+                let amountCredit = response.amountCredit;
+                let brandBalance = response.brandBalance;
+
+                if (amountCredit > brandBalance) {
+                    $("#btn-submit").prop("disabled", true);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Số credit rút lớn hơn số credit hiện có',
+                        text: 'Số credit của thương hiệu hiện tại là ' + brandBalance + ' Credit',
+                    })
+                    $("#btn-close").click(() => location.reload());
+                } else {
+                    $("#btn-submit").prop("disabled", false);
+                }
+
+
             },
             error: function (response) {
                 console.log(response);

@@ -204,15 +204,9 @@
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
                                         <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
-                                        <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành
-                                            công
-                                        </td>
-                                        <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang
-                                            xử lý
-                                        </td>
-                                        <td th:if="${h.getStatus() == 'Không thành công'}" class="text-danger fw-bold">
-                                            Không thành công
-                                        </td>
+                                        <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
+                                        <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
+                                        <td th:if="${h.getStatus() == 'Giao dịch bị hủy'}" class="text-danger fw-bold">Giao dịch bị hủy</td>
                                     </tr>
                                 </th:block>
                                 </tbody>
@@ -247,7 +241,7 @@
 <th:block th:replace="brand-owner/common/script"></th:block>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var table = $('#table-withdrawal-success').DataTable();
 
         $('#filterButtonPending').on('click', function () {

@@ -133,4 +133,26 @@ public interface IRepositoryQuery {
                 JOIN user u ON cc.user_id = u.user_id
                 WHERE rwh.request_withdrawal_history_id = ?;
             """;
+
+    String COUNT_ALL_BRAND_CREDIT = """
+                SELECT SUM(rwh.amount_credit)
+                FROM request_withdrawal_history rwh
+                WHERE rwh.status = 'Thành công';
+            """;
+
+    String GET_ALL_REQUEST_HISTORY_BRAND_ADMIN = """
+                SELECT
+                    b.name AS name,
+                    COUNT(rwh.request_withdrawal_history_id) AS total_request,
+                    COALESCE(SUM(rwh.amount_credit), 0) AS amount_credit,
+                    COALESCE(SUM(rwh.actual_money), 0) AS actual_money
+                FROM
+                    brand b
+                LEFT JOIN
+                    credit_card cc ON b.user_id = cc.user_id
+                LEFT JOIN
+                    request_withdrawal_history rwh ON cc.credit_card_id = rwh.credit_card_id AND rwh.status = 'Thành công'
+                GROUP BY
+                    b.brand_id;
+            """;
 }

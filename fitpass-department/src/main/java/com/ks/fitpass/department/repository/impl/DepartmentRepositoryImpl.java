@@ -1,10 +1,6 @@
 package com.ks.fitpass.department.repository.impl;
 
-import com.ks.fitpass.department.dto.DepartmentListByBrandDTO;
-
-import com.ks.fitpass.department.dto.DepartmentNotificationDTO;
-import com.ks.fitpass.department.dto.ListBrandDepartmentFeedback;
-import com.ks.fitpass.department.dto.UserFeedbackOfBrandOwner;
+import com.ks.fitpass.department.dto.*;
 import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.entity.DepartmentStatus;
 import com.ks.fitpass.department.entity.UserFeedback;
@@ -16,12 +12,14 @@ import com.ks.fitpass.department.repository.DepartmentRepository;
 import com.ks.fitpass.department.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -53,25 +51,25 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         parameters.add(userLatitude);
         parameters.add(status);
 
-        if(userLatitude != 0 && userLongitude != 0) {
+        if (userLatitude != 0 && userLongitude != 0) {
             sql += " HAVING distance <= ? \n";
             parameters.add(belowDistance);
         }
 
-        if(sortRating != null && !sortRating.isEmpty()) {
-            sql +=  " AND d.rating >=  ? \n";
+        if (sortRating != null && !sortRating.isEmpty()) {
+            sql += " AND d.rating >=  ? \n";
             parameters.add(sortRating);
         }
 
-        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
-            sql +=  " AND d.city =  ? \n";
+        if (city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
+            sql += " AND d.city =  ? \n";
             parameters.add(city);
         }
 
-        if(userLatitude != 0 && userLongitude != 0) {
+        if (userLatitude != 0 && userLongitude != 0) {
             sql += " ORDER BY distance ASC ";
-            if(sortPrice != null && !sortPrice.isEmpty()) {
-                if(sortPrice.equals("lowToHigh")) {
+            if (sortPrice != null && !sortPrice.isEmpty()) {
+                if (sortPrice.equals("lowToHigh")) {
                     sql += " , max_price asc, \n" +
                             " min_price asc \n";
                 } else {
@@ -80,8 +78,8 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
                 }
             }
         } else {
-            if(sortPrice != null && !sortPrice.isEmpty()) {
-                if(sortPrice.equals("lowToHigh")) {
+            if (sortPrice != null && !sortPrice.isEmpty()) {
+                if (sortPrice.equals("lowToHigh")) {
                     sql += " ORDER BY max_price asc, \n" +
                             " min_price asc \n";
                 } else {
@@ -92,14 +90,13 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         }
 
 
-        if(userLatitude == 0 && userLongitude == 0) {
-            if(sortPrice == null || sortPrice.isEmpty()) {
+        if (userLatitude == 0 && userLongitude == 0) {
+            if (sortPrice == null || sortPrice.isEmpty()) {
                 sql += "ORDER BY d.rating DESC";
             } else {
                 sql += ", d.rating DESC";
             }
         }
-
 
 
         sql += " LIMIT ? OFFSET ?";
@@ -116,6 +113,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
             return "max_price DESC, min_price DESC";
         }
     }
+
     @Override
     public List<Department> getAllByTopRating(int status) throws DataAccessException {
         return jdbcTemplate.query(GET_ALL_DEPARTMENT_ORDER_BY_RATING, new DepartmentMapper(), status);
@@ -128,8 +126,9 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public Department getOne(int id) throws DataAccessException {
-    return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapperWithUserName(), id);
+        return jdbcTemplate.queryForObject(GET_DEPARTMENT_BY_ID, new DepartmentMapperWithUserName(), id);
     }
+
     @Override
     public boolean update(Department department) throws DataAccessException {
         return jdbcTemplate.update(
@@ -180,7 +179,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public List<Department> getDepartmentByBrandID(int status, int brandID) throws DataAccessException {
-        return jdbcTemplate.query(GET_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), status,brandID);
+        return jdbcTemplate.query(GET_DEPARTMENT_BY_BRAND_ID, new DepartmentMapper(), status, brandID);
     }
 
     @Override
@@ -206,44 +205,44 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
 
     @Override
     public int createDepartmentWithBrandId(int brandId, String name) {
-        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2,1);
+        return jdbcTemplate.update(CREATE_DEPARTMENT_WITH_BRAND_ID, name, brandId, 2, 1);
     }
 
     @Override
-    public int countAllDepartment(int status , String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance) {
+    public int countAllDepartment(int status, String city, String sortPrice, String sortRating, double userLatitude, double userLongitude, String belowDistance) {
         String sql = "SELECT COUNT(*) -- Đếm số dòng\n" +
                 "        FROM gym_department subd\n" +
                 "        LEFT JOIN mst_kbn subkbn_department_status\n" +
                 "            ON subd.gym_department_status_key = subkbn_department_status.mst_kbn_key\n" +
                 "            AND subkbn_department_status.mst_kbn_name = 'DEPARTMENT_STATUS'\n" +
                 "        WHERE subd.gym_department_status_key = ?\n";
-        if(userLatitude != 0 && userLongitude != 0) {
+        if (userLatitude != 0 && userLongitude != 0) {
             sql += "        AND (\n" +
                     "            6371 * acos(\n" +
                     "                cos(radians(?)) * cos(radians(subd.latitude)) *\n" +
                     "                cos(radians(subd.longitude) - radians(?)) +\n" +
                     "                sin(radians(?)) * sin(radians(subd.latitude))\n" +
                     "            )\n" +
-                    "        ) <= "+belowDistance+" \n";
+                    "        ) <= " + belowDistance + " \n";
         }
 
-        if(sortRating != null && !sortRating.isEmpty()) {
-            sql +=  " AND subd.rating >=  " + sortRating + " \n";
+        if (sortRating != null && !sortRating.isEmpty()) {
+            sql += " AND subd.rating >=  " + sortRating + " \n";
         }
 
-        if(city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
-            sql +=  " AND subd.city =  '"+city+"'\n";
+        if (city != null && !city.isEmpty() && !city.equalsIgnoreCase("all")) {
+            sql += " AND subd.city =  '" + city + "'\n";
         }
 
-        if(userLatitude != 0 && userLongitude != 0) {
-            return jdbcTemplate.queryForObject(sql, Integer.class,  status, userLatitude, userLongitude, userLatitude);
+        if (userLatitude != 0 && userLongitude != 0) {
+            return jdbcTemplate.queryForObject(sql, Integer.class, status, userLatitude, userLongitude, userLatitude);
         }
-        return jdbcTemplate.queryForObject(sql, Integer.class,  status);
+        return jdbcTemplate.queryForObject(sql, Integer.class, status);
     }
 
     @Override
     public int updateDepartmentGymOwner(int departmentId, int userId) {
-        if(userId == 0) {
+        if (userId == 0) {
             return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_GYM_OWNER, null, departmentId);
         }
         return jdbcTemplate.update(IRepositoryQuery.UPDATE_DEPARTMENT_GYM_OWNER, userId, departmentId);
@@ -265,7 +264,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
             dto.setPhoneNumber(rs.getString("phone_number"));
             dto.setGymPlanName(rs.getString("name"));
             return dto;
-        },departmentId);
+        }, departmentId);
     }
 
     @Override
@@ -329,7 +328,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
     }
 
     @Override
-    public int countAllFeedback(int departmentId, String sortRating) {
+    public Integer countAllFeedback(int departmentId, String sortRating) {
         String sql = IRepositoryQuery.COUNT_ALL_FEEDBACK;
 
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -359,4 +358,44 @@ public class DepartmentRepositoryImpl implements DepartmentRepository, IReposito
         );
     }
 
+    @Override
+    public Integer countAllDepartment() {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_ALL_DEPARTMENT, Integer.class);
+    }
+
+    @Override
+    public List<DepartmentStatBrandOwner> getDepartmentStatBrandOwner(int brandId) {
+        try {
+            return jdbcTemplate.query(IRepositoryQuery.GET_DEPARTMENT_STAT_BRAND_OWNER, (rs, rowNum) -> {
+                DepartmentStatBrandOwner departmentStatBrandOwner = new DepartmentStatBrandOwner();
+                departmentStatBrandOwner.setDepartmentName(rs.getString("departmentName"));
+                departmentStatBrandOwner.setNumberOfGymPlanSold(rs.getInt("numberOfGymPlanSold"));
+                departmentStatBrandOwner.setTotalAmount(rs.getDouble("totalAmount") * 1000);
+                return departmentStatBrandOwner;
+            }, brandId);
+        } catch (EmptyResultDataAccessException e) {
+            return Collections.emptyList();
+        }
+
+    }
+
+    @Override
+    public List<DepartmentRatingStatBrandOwner> getDepartmentRatingStatBrandOwner(int brandId) {
+        try {
+            return jdbcTemplate.query(IRepositoryQuery.GET_DEPARTMENT_RATING_STAT_BRAND_OWNER, (rs, rowNum) -> {
+                DepartmentRatingStatBrandOwner departmentRatingStatBrandOwner = new DepartmentRatingStatBrandOwner();
+                departmentRatingStatBrandOwner.setDepartmentName(rs.getString("departmentName"));
+                departmentRatingStatBrandOwner.setNumberOfRating(rs.getInt("numberOfRating"));
+                departmentRatingStatBrandOwner.setRatingStar(rs.getDouble("rating"));
+                return departmentRatingStatBrandOwner;
+            }, brandId);
+        } catch (EmptyResultDataAccessException e) {
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Integer getTotalNumberRatingByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_NUMBER_RATING_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
 }

@@ -21,9 +21,11 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    public WebSecurityConfig (CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler){
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
@@ -34,12 +36,12 @@ public class WebSecurityConfig {
                         .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
                         .requestMatchers("/websocket/**").hasAnyAuthority("USER", "EMPLOYEE")
                         .requestMatchers("/login", "/logout").permitAll()
-                        .requestMatchers("/forgot-password/**").permitAll()
-                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/forgot-password/**").hasAnyAuthority("USER","EMPLOYEE","GYM_OWNER","BRAND_OWNER")
+                        .requestMatchers("/register").anonymous()
                         .requestMatchers("/").permitAll()
 
                         .requestMatchers("/landing-page").permitAll()
-                        .requestMatchers("/homepage/**").permitAll()
+                        .requestMatchers("/homepage/**").hasAnyAuthority("ROLE_ANONYMOUS","USER")
                         .requestMatchers("/brand/**").permitAll()
                         .requestMatchers("/department/**").permitAll()
                         .requestMatchers("/cart/**").permitAll()

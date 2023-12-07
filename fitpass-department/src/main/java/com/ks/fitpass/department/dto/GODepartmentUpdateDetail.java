@@ -81,7 +81,13 @@ public class GODepartmentUpdateDetail {
     private String listSelectedFixedGymPlanId;
     private String listSelectedAmenitiesId;
     private String listSelectedFeaturesId;
+
+    @NotEmpty(message = "Vui lòng nhập kinh độ !")
+    @Pattern(regexp = "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)$", message = "Kinh độ của bạn đang sai!")
     private double longitude;
+
+    @NotEmpty(message = "Vui lòng nhập vĩ độ !")
+    @Pattern(regexp = "^[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$", message = "Vĩ độ của bạn đang sai !")
     private double latitude;
 
     @AssertTrue(message = "Open time must be before close time")

@@ -1,10 +1,9 @@
 package com.ks.fitpass.brand.service;
 
-import com.ks.fitpass.brand.dto.BrandAdminList;
-import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
+import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
+import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
-import com.ks.fitpass.brand.dto.BrandDetailFeedback;
-import com.ks.fitpass.brand.dto.BrandDetailFeedbackStat;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -22,11 +21,11 @@ public interface BrandService {
     Brand getBrandDetail(int userId);
 
     int updateBrandDetail(BrandOwnerProfile brandOwnerProfile);
-    
+
     List<BrandAdminList> getAllBrand();
-    
+
     int updateBrandMoneyPercent(int brandId, int moneyPercent);
-    
+
     int getBrandMoneyPercent(int brandId);
 
     List<BrandDetailFeedback> getFeedbackOfBrandDetail(int brandId, int page, int size, String sortRating);
@@ -36,4 +35,16 @@ public interface BrandService {
     int getBrandOwnerIdByDepartmentId(int departmentId);
 
     int createBrandWithBrandName(int userId, String brandName);
+
+    int countAllBrand();
+
+    List<BrandStatAdmin> getAdminStat();
+
+    List<BrandRatingStatAdmin> getAdminRatingStat();
+
+    int getTotalRating(int brandId);
+
+    List<DepartmentBrandHomepageSearch> searchBrandWithPagnition(String search, int page, int size);
+
+    int countSearchBrand(String search);
 }

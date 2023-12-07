@@ -1,14 +1,13 @@
 package com.ks.fitpass.brand.repository.impl;
 
-import com.ks.fitpass.brand.dto.BrandAdminList;
-import com.ks.fitpass.brand.dto.BrandOwnerProfile;
+import com.ks.fitpass.become_a_partner.dto.BrandRatingStatAdmin;
+import com.ks.fitpass.become_a_partner.dto.BrandStatAdmin;
+import com.ks.fitpass.brand.dto.*;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.mapper.BrandWithTotalOrderMapper;
 import com.ks.fitpass.brand.repository.IRepositoryQuery;
 import com.ks.fitpass.brand.repository.BrandRepository;
 import com.ks.fitpass.brand.mapper.BrandMapper;
-import com.ks.fitpass.brand.dto.BrandDetailFeedback;
-import com.ks.fitpass.brand.dto.BrandDetailFeedbackStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -181,8 +180,65 @@ public class BrandRepositoryImpl implements BrandRepository, IRepositoryQuery {
     }
 
     @Override
-    public int getBrandMoneyPercent(int brandId) {
+    public Integer getBrandMoneyPercent(int brandId) {
         return jdbcTemplate.queryForObject(GET_BRAND_MONEY_PERCENT, Integer.class, brandId);
     }
 
+    @Override
+    public Integer countAllBrand() {
+        return jdbcTemplate.queryForObject(COUNT_ALL_BRAND, Integer.class);
+    }
+
+    @Override
+    public List<BrandStatAdmin> getAdminStat() {
+        return jdbcTemplate.query(GET_ADMIN_STAT, (rs, rowNum) -> {
+            BrandStatAdmin dto = new BrandStatAdmin();
+            dto.setBrandName(rs.getString("brand_name"));
+            dto.setNumberOfGymPlanSold(rs.getInt("numberOfPlanSold"));
+            dto.setTotalAmount(rs.getInt("totalAmount"));
+            return dto;
+        });
+    }
+
+    @Override
+    public List<BrandRatingStatAdmin> getAdminRatingStat() {
+        return jdbcTemplate.query(GET_ADMIN_RATING_STAT, (rs, rowNum) -> {
+            BrandRatingStatAdmin dto = new BrandRatingStatAdmin();
+            dto.setBrandName(rs.getString("brand_name"));
+            dto.setRatingStar(rs.getInt("ratingStar"));
+            dto.setNumberOfRating(rs.getInt("numberOfRating"));
+            return dto;
+        });
+    }
+
+    @Override
+    public Integer getTotalRating(int brandId) {
+        return jdbcTemplate.queryForObject(GET_TOTAL_RATING, Integer.class, brandId);
+    }
+
+    @Override
+    public List<DepartmentBrandHomepageSearch> searchBrandWithPagnition(String search, int page, int size) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("search", "%" + search + "%");
+        int offset = (page - 1) * size;
+        params.addValue("size", size);
+        params.addValue("offset", offset);
+        return namedParameterJdbcTemplate.query(SEARCH_BRAND_WITH_PAGNITION, params,(rs, rowNum) -> {
+            DepartmentBrandHomepageSearch dto = new DepartmentBrandHomepageSearch();
+            dto.setType(rs.getString("type"));
+            dto.setId(rs.getInt("id"));
+            dto.setName(rs.getString("name"));
+            dto.setWallpaperUrl(rs.getString("wallpaper_url"));
+            dto.setDescription(rs.getString("description"));
+            dto.setRating(rs.getDouble("rating"));
+            return dto;
+            });
+    }
+
+    @Override
+    public int countSearchBrand(String search) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("search", "%" + search + "%");
+        return namedParameterJdbcTemplate.queryForObject(COUNT_SEARCH_BRAND, params, Integer.class);
+    }
 }

@@ -12,6 +12,7 @@ import com.ks.fitpass.department.service.*;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFixedDTO;
 import com.ks.fitpass.gymplan.dto.BrandGymPlanFlexDTO;
 import com.ks.fitpass.gymplan.service.GymPlanService;
+import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.TimeConversionUtil;
@@ -34,6 +35,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -53,6 +55,7 @@ public class GymOwnerController {
     private final DepartmentFeatureService departmentFeatureService;
     private final WalletService walletService;
     private final Email emailService;
+    private final OrderDetailService orderDetailService;
 
     private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
 
@@ -60,12 +63,46 @@ public class GymOwnerController {
     @GetMapping("/index")
     public String getGOIndex(HttpSession session, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-
+        try {
             if (isFirstTime) {
                 return "redirect:/gym-owner/department/update-details";
             }
+
+            User user = (User) session.getAttribute("userInfo");
+            Department departmentDetails = departmentService.getByUserId(user.getUserId());
+
+            int totalGymPlan = gymPlanService.getTotalGymPlanDepartment(departmentDetails.getDepartmentId());
+
+            int totalBuy = orderDetailService.getTotalBuyByDepartmentId(departmentDetails.getDepartmentId());
+
+            double totalRevenue = orderDetailService.getTotalRevenueByDepartmentId(departmentDetails.getDepartmentId());
+
+            int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
+
+            model.addAttribute("totalGymPlan", totalGymPlan);
+            model.addAttribute("totalBuy", totalBuy);
+            model.addAttribute("totalRevenue", totalRevenue);
+            model.addAttribute("totalNumberRating", totalNumberRating);
+            model.addAttribute("departmentDetails", departmentDetails);
             return "gym-owner/index";
 
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
     }
 
     //Gym Owner Profile (a person) & Change Password
@@ -345,8 +382,8 @@ public class GymOwnerController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(randomPassword);
             // Create user create time
-            Long userCreateTimeLong = System.currentTimeMillis();
-            String createTime = userCreateTimeLong.toString();
+            long userCreateTimeLong = System.currentTimeMillis();
+            String createTime = Long.toString(userCreateTimeLong);
             // Create user_deleted = 0;
             boolean userDelete = false;
             // Create new User
@@ -477,12 +514,12 @@ public class GymOwnerController {
                     errors.put(fieldError.getField(), fieldError.getDefaultMessage());
                 }
 
-                String errorMsg = "";
+                StringBuilder errorMsg = new StringBuilder();
 
                 for (String key : errors.keySet()) {
-                    errorMsg += "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+                    errorMsg.append("Lỗi ở: ").append(key).append(", lí do: ").append(errors.get(key)).append("\n");
                 }
-                return ResponseEntity.badRequest().body(errorMsg);
+                return ResponseEntity.badRequest().body(errorMsg.toString());
             }
 
             // Update department information
@@ -717,10 +754,10 @@ public class GymOwnerController {
             List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(brandId);
             List<DepartmentAmenitie> departmentAmenities = departmentAmenitieService.getAllAmenitieOfDepartment(departmentDetails.getDepartmentId());
             List<Integer> selectedId = departmentAmenities.stream()
-                    .filter(departmentAmenitie -> brandAmenitie.stream()
-                            .anyMatch(brand -> brand.getAmenitieId() == departmentAmenitie.getAmenitieId()))
                     .map(DepartmentAmenitie::getAmenitieId)
-                    .collect(Collectors.toList());
+                    .filter(amenitieId -> brandAmenitie.stream()
+                            .anyMatch(brand -> brand.getAmenitieId() == amenitieId))
+                    .toList();
             String result = selectedId.stream()
                     .map(Object::toString)
                     .collect(Collectors.joining(","));
@@ -800,7 +837,7 @@ public class GymOwnerController {
                     .filter(departmentFeature -> allFeatures.stream()
                             .anyMatch(feature -> feature.getFeatureID() == departmentFeature.getFeature().getFeatureID()))
                     .map(e -> e.getFeature().getFeatureID())
-                    .collect(Collectors.toList());
+                    .toList();
 
             String result = selectedId.stream()
                     .map(Object::toString)
@@ -940,6 +977,52 @@ public class GymOwnerController {
             return "error/data-access-error";
         }
     }
+//    @PostMapping("/department/image")
+//    public ResponseEntity<?> updateDepartmentImages(@RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
+//                                                    @RequestParam String imageWallpaperUrl,
+//                                                @RequestParam String listAlbumUrl, HttpSession session, Model model) {
+//        logger.error("The method was running");
+//    boolean isFirstTime = checkAndSetIsFirstTime(session, model);
+//    try {
+//        if (isFirstTime) {
+//            return ResponseEntity.status(HttpStatus.FOUND)
+//                    .location(URI.create("/gym-owner/department/update-details"))
+//                    .build();
+//        }
+//
+//        User user = (User) session.getAttribute("userInfo");
+//        Department departmentDetails = departmentService.getByUserId(user.getUserId());
+//
+//        departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
+//        departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
+//
+//        String[] listAlbum = listAlbumUrl.split(",");
+//        List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
+//        Arrays.stream(listAlbum).forEach(albumUrl -> {
+//            DepartmentAlbums departmentAlbums = new DepartmentAlbums();
+//            departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
+//            departmentAlbums.setPhotoUrl(albumUrl);
+//            departmentAlbumsList.add(departmentAlbums);
+//        });
+//        departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
+//
+//        // Return a successful response entity
+//        return ResponseEntity.ok("Image update successful");
+//
+//    } catch (DuplicateKeyException ex) {
+//        logger.error("DuplicateKeyException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate key error");
+//    } catch (EmptyResultDataAccessException ex) {
+//        logger.error("EmptyResultDataAccessException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No data found");
+//    } catch (IncorrectResultSizeDataAccessException ex) {
+//        logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Incorrect result size error");
+//    } catch (DataAccessException ex) {
+//        logger.error("DataAccessException occurred", ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Data access error");
+//    }
+//    }
 
     @GetMapping("/department/location")
     public String getDepartmentLocation(HttpSession session, Model model) {
@@ -1038,16 +1121,16 @@ public class GymOwnerController {
             List<GymPlanDepartmentNameDto> listFlexGymPlanSelected = gymPlanService.getGymPlanDepartmentFlexByDepartmentId(departmentId);
 
             List<Integer> selectedFixedId = listFixedGymPlanSelected.stream()
-                    .filter(gymPlanDepartmentNameDto -> listFixedGymPlan.stream()
-                            .anyMatch(brandGymPlanFixedDTO -> brandGymPlanFixedDTO.getGymPlanId() == gymPlanDepartmentNameDto.getGymPlanId()))
                     .map(GymPlanDepartmentNameDto::getGymPlanId)
-                    .collect(Collectors.toList());
+                    .filter(gymPlanId -> listFixedGymPlan.stream()
+                            .anyMatch(brandGymPlanFixedDTO -> brandGymPlanFixedDTO.getGymPlanId() == gymPlanId))
+                    .toList();
 
             List<Integer> selectedFlexId = listFlexGymPlanSelected.stream()
-                    .filter(gymPlanDepartmentNameDto -> listFlexGymPlan.stream()
-                            .anyMatch(brandGymPlanFlexDTO -> brandGymPlanFlexDTO.getGymPlanId() == gymPlanDepartmentNameDto.getGymPlanId()))
                     .map(GymPlanDepartmentNameDto::getGymPlanId)
-                    .collect(Collectors.toList());
+                    .filter(gymPlanId -> listFlexGymPlan.stream()
+                            .anyMatch(brandGymPlanFlexDTO -> brandGymPlanFlexDTO.getGymPlanId() == gymPlanId))
+                    .toList();
 
             // Parse to string ['1', '2', '3']
             String selectedFixedIdString = selectedFixedId.stream()

@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandPagnition;
+import com.ks.fitpass.brand.dto.DepartmentBrandHomepageSearch;
 import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -141,8 +143,24 @@ public class HomepageController {
         }
     }
 
-    @GetMapping("/homepage/search")
-    public String getSearchResult(HttpSession session) {
+//    @GetMapping("/search")
+//    public String viewSearchResult(HttpSession session) {
+//        return "search-gym-result";
+//    }
+
+    @GetMapping("/search")
+    public String getSearchResult(Model model, @RequestParam("search") String search,
+                                  @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "2") int size) {
+        List<DepartmentBrandHomepageSearch> list =  brandService.searchBrandWithPagnition(search, page, size);
+
+        int totalResult = brandService.countSearchBrand(search);
+
+        int totalPage = (int) Math.ceil((double) totalResult / size);
+
+        model.addAttribute("search", search);
+        model.addAttribute("list", list);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", page);
         return "search-gym-result";
     }
 }
