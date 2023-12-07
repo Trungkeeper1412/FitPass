@@ -3,11 +3,13 @@ package com.ks.fitpass.web.controller;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.entity.UserUpdateDTO;
+import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +25,36 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MainController {
     private final UserService userService;
     private final WalletService walletService;
+    private final UserRepository userRepository;
 
     @GetMapping("/")
     public String checkFirstTimeLogin(HttpSession session){
         User user = (User) session.getAttribute("userInfo");
         if (user != null) {
-            return "redirect:/homepage";
+            String userRole = (String) session.getAttribute("userRole");
+            if (userRole != null){
+                switch (userRole){
+                    case "ADMIN":
+                        return "redirect:/admin/index";
+                    case "GYM_OWNER":
+                        return "redirect:/gym-owner/index";
+                    case "EMPLOYEE":
+                        try {
+                            Integer departmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+                            if (departmentId == null || departmentId == 0) {
+                                return "error/403";
+                            } else {
+                                return "redirect:/employee/history?id=" + departmentId;
+                            }
+                        } catch (EmptyResultDataAccessException e) {
+                            return "error/403";
+                        }
+                    case "USER":
+                        return "redirect:/homepage";
+                    case "BRAND_OWNER":
+                        return "redirect:/brand-owner/index";
+                }
+            }
         }
         return "landing";
     }
