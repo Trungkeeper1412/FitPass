@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -717,11 +718,11 @@ try {
     }
 
     // Update user department
-    if (gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+    if (!Objects.equals(gymOwnerUpdateDTO.getOldDepartmentId(), gymOwnerUpdateDTO.getDepartmentId())) {
         departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getDepartmentId(), gymOwnerUpdateDTO.getUserId());
     }
 
-    if (gymOwnerUpdateDTO.getOldDepartmentId() != 0 && gymOwnerUpdateDTO.getOldDepartmentId() != gymOwnerUpdateDTO.getDepartmentId()) {
+    if (gymOwnerUpdateDTO.getOldDepartmentId() != 0 && !gymOwnerUpdateDTO.getOldDepartmentId().equals(gymOwnerUpdateDTO.getDepartmentId())) {
         departmentService.updateDepartmentGymOwner(gymOwnerUpdateDTO.getOldDepartmentId(), 0);
     }
     Thread.sleep(1300);
@@ -792,8 +793,8 @@ try {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(randomPassword);
             // Create user create time
-            Long userCreateTimeLong = System.currentTimeMillis();
-            String createTime = userCreateTimeLong.toString();
+            long userCreateTimeLong = System.currentTimeMillis();
+            String createTime = Long.toString(userCreateTimeLong);
             // Create user_deleted = 0;
             boolean userDelete = false;
             // Create new User

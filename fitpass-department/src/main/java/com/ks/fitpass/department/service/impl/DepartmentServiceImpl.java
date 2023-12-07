@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -48,17 +49,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentDTO> getAllDepartmentForHome(int pageIndex, int pageSize) throws DataAccessException {
-        // to do : implement paging
-        //List<Department> departments = departmentRepository.getAllByStatus(1);
-        List<Department> departments = Collections.emptyList();
-        return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
-
-    }
-
-    @Override
     public List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException {
-        // to do : implement paging
         List<Department> departments = departmentRepository.getAllByTopRating(1);
         return departments.stream().map(this::departmentDTOMapper).collect(Collectors.toList());
     }

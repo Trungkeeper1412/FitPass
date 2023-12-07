@@ -13,8 +13,6 @@ public interface DepartmentService {
 
     Department getByUserId(int userId) throws DataAccessException;
 
-    List<DepartmentDTO> getAllDepartmentForHome(int pageIndex, int pageSize) throws DataAccessException;
-
     List<DepartmentDTO> getAllDepartmentTopRatingForHome(int pageIndex, int pageSize) throws DataAccessException;
 
     List<DepartmentDTO> getAllDepartmentByBrandId(int brandId, int pageIndex,int pageSize) throws DataAccessException;
