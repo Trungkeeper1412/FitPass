@@ -104,15 +104,103 @@
                     <!-- Area Chart -->
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h4 class="m-0 font-weight-bold text-primary">Biểu đồ mua Credit</h4>
+                            <div class="card-header py-3">
+                                <h4 class="m-0 font-weight-bold text-primary">Xếp hạng thương hiệu theo doanh thu</h4>
                             </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="adminBarChart"></canvas>
-                                </div>
+                            <div class="card-body table-responsive" style="max-height: 700px;">
+                                <table class="table table-bordered" id="table-brand" width="100%"
+                                       cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Thương hiệu</th>
+                                        <th>Gói tập đã bán</th>
+                                        <th>Tổng thu nhập (VNĐ)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="brand : ${brandStatAdmin}">
+                                        <tr>
+                                            <td th:text="${brandStat.index + 1 }">1</td>
+                                            <td th:text="${brand.brandName}" class="fw-bold">California Fitness & Yoga</td>
+                                            <td th:text="${brand.numberOfGymPlanSold}">235</td>
+                                            <td th:text="${brand.totalAmount + ' VNĐ'}">45.000.000 VNĐ</td>
+                                        </tr>
+                                    </th:block>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >1</td>
+                                        <td >Gói linh hoạt</td>
+                                        <td >120/Giờ</td>
+                                        <td >185 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >2</td>
+                                        <td >Gói 7 ngày</td>
+                                        <td >350</td>
+                                        <td >65 gói</td>
+                                    </tr>
+                                    <tr>
+                                        <td >3</td>
+                                        <td >Gói 30 ngày</td>
+                                        <td >680</td>
+                                        <td >37 gói</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -140,44 +228,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Content Row -->
-                <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h4 class="m-0 font-weight-bold text-primary">Xếp hạng thương hiệu theo doanh thu</h4>
-                            </div>
-                            <div class="card-body table-responsive" style="max-height: 400px;">
-                                <table class="table table-bordered" id="table-brand" width="100%"
-                                       cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Thương hiệu</th>
-                                        <th>Gói tập đã bán</th>
-                                        <th>Tổng thu nhập (VNĐ)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <th:block th:each="brand : ${brandStatAdmin}">
-                                            <tr>
-                                                <td th:text="${brandStat.index + 1 }">1</td>
-                                                <td th:text="${brand.brandName}" class="fw-bold">California Fitness & Yoga</td>
-                                                <td th:text="${brand.numberOfGymPlanSold}">235</td>
-                                                <td th:text="${brand.totalAmount + ' VNĐ'}">45.000.000 VNĐ</td>
-                                            </tr>
-                                        </th:block>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <!-- Project Card Example -->
-                        <div class="card shadow">
+                        <div class="card shadow" style="height: 300px; overflow: auto">
                             <div class="card-header py-3">
                                 <h4 class="m-0 font-weight-bold text-primary">Xếp hạng thương hiệu theo sao</h4>
                             </div>
