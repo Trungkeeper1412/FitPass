@@ -23,7 +23,7 @@
     <div class="line row"></div>
     <th:block th:if="${cartItems.size() == 0}">
         <div class="row cart-empty">
-            <img src="https://assets.materialup.com/uploads/16e7d0ed-140b-4f86-9b7e-d9d1c04edb2b/preview.png">
+            <img th:src="@{/user-homepage-assets/assets/img/empty-cart.png}">
             <div class="mt-2 mb-4 mx-auto">Giỏ hàng của bạn đang còn trống</div>
             <a th:href="@{/homepage}">
                 <button class="buy-now-btn mb-4">Mua ngay</button>

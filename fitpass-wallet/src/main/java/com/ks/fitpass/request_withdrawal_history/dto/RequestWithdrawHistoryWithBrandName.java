@@ -16,4 +16,6 @@ public class RequestWithdrawHistoryWithBrandName {
     private Long actualMoney;
     private String status;
     private String brandName;
+    private int moneyPercent;
+
 }

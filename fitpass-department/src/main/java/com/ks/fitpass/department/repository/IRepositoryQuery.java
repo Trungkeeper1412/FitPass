@@ -347,6 +347,7 @@ public interface IRepositoryQuery {
                     uf.department_id,
                     uf.rating,
                     uf.comments,
+                    ud.image_url,
                     uf.feedback_time,
                     uf.feedback_status
                 FROM
@@ -390,6 +391,7 @@ public interface IRepositoryQuery {
                     uf.rating,
                     uf.comments,
                     uf.feedback_time,
+                    ud.image_url,
                     uf.feedback_status
                 FROM
                     user_feedback uf

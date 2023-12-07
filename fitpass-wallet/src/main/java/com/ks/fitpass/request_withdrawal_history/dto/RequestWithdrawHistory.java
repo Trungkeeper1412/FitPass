@@ -15,5 +15,6 @@ public class RequestWithdrawHistory {
     private Timestamp withdrawalTime;
     private Long amountCredit;
     private Long actualMoney;
+
     private String status;
 }

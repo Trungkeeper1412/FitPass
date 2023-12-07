@@ -387,6 +387,8 @@ CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
 
 
 
+
+
 DELIMITER $$
 CREATE TRIGGER update_gym_rating_avg
     AFTER INSERT ON user_feedback
@@ -395,19 +397,29 @@ BEGIN
 
     DECLARE dept_id INT;
     DECLARE total DECIMAL(10,2);
-    DECLARE count INT;
+    DECLARE count DECIMAL(10,2);
 
     SET dept_id = NEW.department_id;
 
-    SELECT IFNULL(SUM(rating),0), COUNT(*) INTO total, count
+    SELECT
+        IFNULL(SUM(CAST(rating AS DECIMAL(10,2))), 0),
+        COUNT(*)
+    INTO
+        total, count
     FROM user_feedback
     WHERE department_id = dept_id;
 
+    SET count = CAST(count AS DECIMAL(10,2));
+
+    SET total = CAST(total AS DECIMAL(10,2));
+
     UPDATE gym_department
-    SET rating = total/count
+    SET
+        rating = total / count
     WHERE gym_department_id = dept_id;
 
 END$$
+
 DELIMITER ;
 
 

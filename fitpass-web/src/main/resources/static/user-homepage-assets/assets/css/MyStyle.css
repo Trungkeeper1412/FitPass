@@ -4130,9 +4130,15 @@ section {
 }
 
 .user-rating-avatar {
-    padding: 15px;
+    margin: auto;
+    width: 60px;
+    height: 60px;
 }
-
+.user-rating-avatar img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
 .user-rating-description {
     color: rgb(0, 0, 0);
     padding: 15px;
@@ -4924,7 +4930,6 @@ section {
     width: 90%;
     margin: auto;
     display: flex;
-    justify-content: center;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -5794,12 +5799,6 @@ section {
 }
 
 /* CSS FOR LOGIN + REGISTER */
-html,
-body {
-    margin: 0px;
-    height: 100%;
-}
-
 .login-register-body {
     font-family: 'Times New Roman', Times, serif;
 }

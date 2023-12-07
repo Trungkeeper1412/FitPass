@@ -382,8 +382,8 @@ public class GymOwnerController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(randomPassword);
             // Create user create time
-            Long userCreateTimeLong = System.currentTimeMillis();
-            String createTime = userCreateTimeLong.toString();
+            long userCreateTimeLong = System.currentTimeMillis();
+            String createTime = Long.toString(userCreateTimeLong);
             // Create user_deleted = 0;
             boolean userDelete = false;
             // Create new User
@@ -514,12 +514,12 @@ public class GymOwnerController {
                     errors.put(fieldError.getField(), fieldError.getDefaultMessage());
                 }
 
-                String errorMsg = "";
+                StringBuilder errorMsg = new StringBuilder();
 
                 for (String key : errors.keySet()) {
-                    errorMsg += "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+                    errorMsg.append("Lỗi ở: ").append(key).append(", lí do: ").append(errors.get(key)).append("\n");
                 }
-                return ResponseEntity.badRequest().body(errorMsg);
+                return ResponseEntity.badRequest().body(errorMsg.toString());
             }
 
             // Update department information
@@ -754,10 +754,10 @@ public class GymOwnerController {
             List<BrandAmenitie> brandAmenitie = brandAmenitieService.getAllByBrandIDActivate(brandId);
             List<DepartmentAmenitie> departmentAmenities = departmentAmenitieService.getAllAmenitieOfDepartment(departmentDetails.getDepartmentId());
             List<Integer> selectedId = departmentAmenities.stream()
-                    .filter(departmentAmenitie -> brandAmenitie.stream()
-                            .anyMatch(brand -> brand.getAmenitieId() == departmentAmenitie.getAmenitieId()))
                     .map(DepartmentAmenitie::getAmenitieId)
-                    .collect(Collectors.toList());
+                    .filter(amenitieId -> brandAmenitie.stream()
+                            .anyMatch(brand -> brand.getAmenitieId() == amenitieId))
+                    .toList();
             String result = selectedId.stream()
                     .map(Object::toString)
                     .collect(Collectors.joining(","));
@@ -837,7 +837,7 @@ public class GymOwnerController {
                     .filter(departmentFeature -> allFeatures.stream()
                             .anyMatch(feature -> feature.getFeatureID() == departmentFeature.getFeature().getFeatureID()))
                     .map(e -> e.getFeature().getFeatureID())
-                    .collect(Collectors.toList());
+                    .toList();
 
             String result = selectedId.stream()
                     .map(Object::toString)
@@ -1120,16 +1120,16 @@ public class GymOwnerController {
             List<GymPlanDepartmentNameDto> listFlexGymPlanSelected = gymPlanService.getGymPlanDepartmentFlexByDepartmentId(departmentId);
 
             List<Integer> selectedFixedId = listFixedGymPlanSelected.stream()
-                    .filter(gymPlanDepartmentNameDto -> listFixedGymPlan.stream()
-                            .anyMatch(brandGymPlanFixedDTO -> brandGymPlanFixedDTO.getGymPlanId() == gymPlanDepartmentNameDto.getGymPlanId()))
                     .map(GymPlanDepartmentNameDto::getGymPlanId)
-                    .collect(Collectors.toList());
+                    .filter(gymPlanId -> listFixedGymPlan.stream()
+                            .anyMatch(brandGymPlanFixedDTO -> brandGymPlanFixedDTO.getGymPlanId() == gymPlanId))
+                    .toList();
 
             List<Integer> selectedFlexId = listFlexGymPlanSelected.stream()
-                    .filter(gymPlanDepartmentNameDto -> listFlexGymPlan.stream()
-                            .anyMatch(brandGymPlanFlexDTO -> brandGymPlanFlexDTO.getGymPlanId() == gymPlanDepartmentNameDto.getGymPlanId()))
                     .map(GymPlanDepartmentNameDto::getGymPlanId)
-                    .collect(Collectors.toList());
+                    .filter(gymPlanId -> listFlexGymPlan.stream()
+                            .anyMatch(brandGymPlanFlexDTO -> brandGymPlanFlexDTO.getGymPlanId() == gymPlanId))
+                    .toList();
 
             // Parse to string ['1', '2', '3']
             String selectedFixedIdString = selectedFixedId.stream()
