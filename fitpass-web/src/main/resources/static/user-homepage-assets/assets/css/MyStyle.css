@@ -4941,14 +4941,15 @@ section {
     overflow: auto;
     background-color: rgba(0,0,0,0.9);
     padding: 50px; /* Add this line, adjust as needed */
+    justify-content: center; /* For centering */
+    align-items: center; /* For centering */
 }
 
 #brandWallpaperModal.show {
-    display: block;
+    display: flex;
 }
 
 .brandWallpaperModal-content {
-
     margin: auto;
     display: block;
     width: 80%;

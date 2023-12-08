@@ -191,11 +191,11 @@
     $("#brandWallpaper").click(function () {
         var imgSrc = $(this).attr("src");
         $("#imgWallpaper").attr("src", imgSrc);
-        $("#brandWallpaperModal").show();
+        $("#brandWallpaperModal").addClass('show');
     });
 
     $(".close-button").click(function () {
-        $("#brandWallpaperModal").hide();
+        $("#brandWallpaperModal").removeClass('show');
     });
 
     document.addEventListener("DOMContentLoaded", function () {
