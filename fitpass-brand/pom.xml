@@ -25,5 +25,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<scope>compile</scope>
 	</dependency>
+	<dependency>
+		<groupId>com.ks</groupId>
+		<artifactId>fitpass-partner-register</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<scope>compile</scope>
+	</dependency>
 </dependencies>
 </project>

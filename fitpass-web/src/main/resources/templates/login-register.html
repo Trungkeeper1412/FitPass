@@ -57,6 +57,14 @@
     </div>
 </div>
 
+<style>
+    html,
+    body {
+        margin: 0px;
+        height: 100%;
+    }
+</style>
+
 <script th:if="${param.logout}">
     const toastInfo = document.getElementById("toast-info");
     toastInfo.classList.add("show", "alert", "alert-success");

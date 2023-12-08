@@ -12,6 +12,7 @@ public interface IRepositoryQuery {
                        rwh.withdrawal_time,
                        rwh.amount_credit,
                        rwh.actual_money,
+                       rwh.money_percent,
                        rwh.status,
                        cc.credit_card_id
                 FROM request_withdrawal_history rwh
@@ -26,6 +27,7 @@ public interface IRepositoryQuery {
                        rwh.withdrawal_time,
                        rwh.amount_credit,
                        rwh.actual_money,
+                       rwh.money_percent,
                        rwh.status,
                        cc.credit_card_id
                 FROM request_withdrawal_history rwh
@@ -59,8 +61,8 @@ public interface IRepositoryQuery {
 
     String CREATE = """
                 INSERT INTO request_withdrawal_history
-                (credit_card_id, withdrawal_code, withdrawal_time, amount_credit, actual_money, status)
-                VALUES(?, ?, ?, ?, ?, ?);
+                (credit_card_id, withdrawal_code, withdrawal_time, amount_credit, actual_money, money_percent, status)
+                VALUES(?, ?, ?, ?, ?, ?,?);
             """;
 
     String GET_ALL_BY_STATUS = """
@@ -77,7 +79,7 @@ public interface IRepositoryQuery {
                        rwh.amount_credit,
                        rwh.actual_money,
                        rwh.status,
-                       b.money_percent,
+                       rwh.money_percent,
                        b.name
                 FROM request_withdrawal_history rwh
                 JOIN credit_card cc ON rwh.credit_card_id = cc.credit_card_id
@@ -93,7 +95,7 @@ public interface IRepositoryQuery {
                        rwh.amount_credit,
                        rwh.actual_money,
                        rwh.status,
-                       b.money_percent,
+                       rwh.money_percent,
                        b.name
                 FROM request_withdrawal_history rwh
                 JOIN credit_card cc ON rwh.credit_card_id = cc.credit_card_id

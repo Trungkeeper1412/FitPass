@@ -1,8 +1,8 @@
-package com.ks.fitpass.become_a_partner.repository.impl;
+package com.ks.fitpass.partner.register.repository.impl;
 
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
-import com.ks.fitpass.become_a_partner.repository.BecomePartnerRepository;
-import com.ks.fitpass.become_a_partner.repository.IRepositoryQuery;
+import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
+import com.ks.fitpass.partner.register.repository.BecomePartnerRepository;
+import com.ks.fitpass.partner.register.repository.IRepositoryQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

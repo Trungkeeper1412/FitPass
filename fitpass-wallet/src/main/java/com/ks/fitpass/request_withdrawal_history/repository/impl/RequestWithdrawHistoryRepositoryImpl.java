@@ -39,6 +39,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
             requestWithdrawHistory.setWithdrawalTime(resultSet.getTimestamp("withdrawal_time"));
             requestWithdrawHistory.setAmountCredit(resultSet.getLong("amount_credit"));
             requestWithdrawHistory.setActualMoney(resultSet.getLong("actual_money"));
+            requestWithdrawHistory.setMoneyPercent(resultSet.getInt("money_percent"));
             requestWithdrawHistory.setStatus(resultSet.getString("status"));
             return requestWithdrawHistory;
         }, userId);
@@ -54,6 +55,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
             requestWithdrawHistory.setWithdrawalTime(resultSet.getTimestamp("withdrawal_time"));
             requestWithdrawHistory.setAmountCredit(resultSet.getLong("amount_credit"));
             requestWithdrawHistory.setActualMoney(resultSet.getLong("actual_money"));
+            requestWithdrawHistory.setMoneyPercent(resultSet.getInt("money_percent"));
             requestWithdrawHistory.setStatus(resultSet.getString("status"));
             return requestWithdrawHistory;
         }, userId, status);
@@ -89,7 +91,7 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
     public int create(RequestWithdrawHistory requestWithdrawHistory) {
         return jdbcTemplate.update(CREATE, requestWithdrawHistory.getCreditCardId(), requestWithdrawHistory.getWithdrawalCode(),
                 requestWithdrawHistory.getWithdrawalTime(), requestWithdrawHistory.getAmountCredit(), requestWithdrawHistory.getActualMoney(),
-                requestWithdrawHistory.getStatus()
+                requestWithdrawHistory.getMoneyPercent(),requestWithdrawHistory.getStatus()
                 );
     }
 

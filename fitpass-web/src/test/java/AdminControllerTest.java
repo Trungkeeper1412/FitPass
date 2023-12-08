@@ -1,7 +1,7 @@
 
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerUpdateStatus;
-import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
+import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
+import com.ks.fitpass.partner.register.dto.BecomePartnerUpdateStatus;
+import com.ks.fitpass.partner.register.service.BecomePartnerService;
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
@@ -16,12 +16,10 @@ import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryS
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.AdminController;
 import jakarta.servlet.http.HttpSession;
-import lombok.Value;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;

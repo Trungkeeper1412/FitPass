@@ -6,6 +6,7 @@ import com.ks.fitpass.request_withdrawal_history.service.RequestWithdrawHistoryS
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,17 +46,20 @@ public class RequestWithdrawHistoryServiceImpl implements RequestWithdrawHistory
 
     @Override
     public List<RequestWithdrawHistory> getAllByStatus(String status) {
-        return requestWithdrawHistoryRepository.getAllByStatus(status);
+        List<RequestWithdrawHistory> list = requestWithdrawHistoryRepository.getAllByStatus(status);
+        return (list != null) ? list : new ArrayList<>();
     }
 
     @Override
     public List<RequestWithdrawHistoryWithBrandName> getAllByStatusWithBrandName(String status) {
-        return requestWithdrawHistoryRepository.getAllByStatusWithBrandName(status);
+        List<RequestWithdrawHistoryWithBrandName> list = requestWithdrawHistoryRepository.getAllByStatusWithBrandName(status);
+        return (list != null) ? list : new ArrayList<>();
     }
 
     @Override
     public List<RequestWithdrawHistoryWithBrandName> getAllWithBrandName() {
-        return requestWithdrawHistoryRepository.getAllWithBrandName();
+        List<RequestWithdrawHistoryWithBrandName> list = requestWithdrawHistoryRepository.getAllWithBrandName();
+        return (list != null) ? list : new ArrayList<>();
     }
 
     @Override

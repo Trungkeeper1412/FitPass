@@ -149,7 +149,6 @@
             </div>
         </div>
         <div id="feedback-list">
-
         </div>
         <div class="pagination-wrapper container">
             <div class="pagination col justify-content-center" id="paginationFeedback">
@@ -268,46 +267,77 @@
                     sortRating: sortRating
                 },
                 success: function (data) {
-                    console.log(data);
-                    // Hiển thị danh sách người dùng
                     var feedbackListHtml = '';
-                    $.each(data.feedbackList, function (index, feedback) {
-                        feedbackListHtml += `
-                            <div class="user-rating">
-                <div class="user-rating-avatar">
-                    <img style="width: 60px; margin: auto;" src="${feedback.imageUrl}">
-                </div>
-                <div class="user-rating-description">
-                    <div>${feedback.firstName + ' ' + feedback.lastName}</div>
-                    <i style="height: 25px;" data-star="${feedback.rating}"></i>
-                    <div>${formatDateTime(feedback.feedbackTime)}</div>
-                    <div>${feedback.comment}</div>
-                </div>
-            </div>
-`;
-                    });
+                    if (data.feedbackList.length === 0) {
+                        feedbackListHtml = '' +
+                            '<div class="no-rating d-flex flex-column align-items-center justify-content-center">' +
+                            ' <span class="icon"></span>  ' +
+                            '<h2>Không có feedback nào</h2>' +
+                            '</div>';
+                    } else {
+                        $.each(data.feedbackList, function (index, feedback) {
+                            feedbackListHtml += `
+                    <div class="user-rating">
+                        <div class="user-rating-avatar">
+                            <img style="width: 60px; margin: auto;" src="${feedback.imageUrl}">
+                        </div>
+                        <div class="user-rating-description">
+                            <div>${feedback.firstName + ' ' + feedback.lastName}</div>
+                            <i style="height: 25px;" data-star="${feedback.rating}"></i>
+                            <div>${formatDateTime(feedback.feedbackTime)}</div>
+                            <div>${feedback.comment}</div>
+                        </div>
+                    </div>
+                `;
+                        });
+                    }
 
                     $('#feedback-list').html(feedbackListHtml);
 
                     // Tạo liên kết phân trang
                     var paginationHtml = '';
 
-
                     var prevPage = data.currentPage - 1;
-                    paginationHtml += '<a class="prev page-numbers' + (data.currentPage === 1 ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + prevPage + ')">Trước</a> ';
+                    if (data.currentPage > 1) {
+                        paginationHtml += '<a class="page-numbers prev" href="javascript:void(0);" onclick="paginationFeedback(' + prevPage + ')">Trước</a> ';
+                    }
+
+                    const maxVisiblePages = 5;
 
                     for (var i = 1; i <= data.totalPage; i++) {
+<<<<<<< HEAD
                         var currentPage = data.currentPage;
                         if (i === currentPage) {
                             paginationHtml += '<a class="page-numbers number current" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
                         } else {
                             paginationHtml += '<a class="page-numbers number" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
+=======
+                        if (i <= data.currentPage - maxVisiblePages / 2 && i !== 1) {
+                            if (i === 2) {
+                                paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
+                            }
+                            continue;
+                        }
+
+                        if (i >= data.currentPage + maxVisiblePages / 2 && i !== data.totalPage) {
+                            if (i === data.totalPage - 1) {
+                                paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
+                            }
+                            continue;
+                        }
+
+                        if (i === data.currentPage) {
+                            paginationHtml += '<span aria-current="page" class="page-numbers current">' + i + '</span> ';
+                        } else {
+                            paginationHtml += '<a class="page-numbers" href="javascript:void(0);" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
+>>>>>>> 453909b80b6f94de04dd97b96ce409fa56f14f3a
                         }
                     }
 
-
                     var nextPage = data.currentPage + 1;
-                    paginationHtml += '<a class="next page-numbers' + (data.currentPage === data.totalPage ? ' disabled' : '') + '" href="#" onclick="paginationFeedback(' + nextPage + ')">Sau</a> ';
+                    if (data.currentPage < data.totalPage) {
+                        paginationHtml += '<a class="page-numbers next" href="javascript:void(0);" onclick="paginationFeedback(' + nextPage + ')">Sau</a> ';
+                    }
 
                     $('#paginationFeedback').empty().html(paginationHtml);
                 }

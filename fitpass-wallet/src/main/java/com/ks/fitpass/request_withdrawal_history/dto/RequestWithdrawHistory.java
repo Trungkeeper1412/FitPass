@@ -16,5 +16,7 @@ public class RequestWithdrawHistory {
     private Long amountCredit;
     private Long actualMoney;
 
+    private int moneyPercent;
+
     private String status;
 }

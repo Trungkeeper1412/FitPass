@@ -1,8 +1,8 @@
 package com.ks.fitpass.web.controller;
 
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerForm;
-import com.ks.fitpass.become_a_partner.dto.BecomePartnerRequest;
-import com.ks.fitpass.become_a_partner.service.BecomePartnerService;
+import com.ks.fitpass.partner.register.dto.BecomePartnerForm;
+import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
+import com.ks.fitpass.partner.register.service.BecomePartnerService;
 import com.ks.fitpass.core.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
