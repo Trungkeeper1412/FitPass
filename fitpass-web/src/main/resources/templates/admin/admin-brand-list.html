@@ -32,7 +32,7 @@
                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="/admin/brand/number-percentage" method="post">
+                                <form id="formPercentage" action="/admin/brand/number-percentage" method="post">
                                     <div class="modal-header">
                                         <div class="text-center" style="width: 95%; margin-left: 20px">
                                             <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí giao dịch áp dụng</h5>
@@ -44,16 +44,15 @@
                                     <div class="modal-body">
                                         <label for="editPercentage">Phần trăm phí rút tiền:</label>
                                         <input type="hidden" id="brandId" name="brandId">
-                                        <input type="text" class="form-control" id="editPercentage" name="numberPercentage" value="10">
-                                        <small id="percentageNote" class="form-text text-danger">
+                                        <input type="number" class="form-control" id="editPercentage" name="numberPercentage">
+                                        <small id="percentageNote" class="form-text text-danger font-italic mt-4">
                                             Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí rút tiền được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
                                         </small>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                        <button type="submit" class="btn btn-primary" id="submit">Lưu thay đổi</button>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
