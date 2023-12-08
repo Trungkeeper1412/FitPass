@@ -2420,19 +2420,6 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* Fading animation */
-.banner {
-    /* margin-left: 10px; */
-}
-
-.banner img {
-    /* height: 175px;
-  width: 85%;
-  padding: 10px 0 0 10px;
-  border: 1px solid white;
-  border-radius: 15px; */
-}
-
 .fade {
     animation-name: fade;
     animation-duration: 3.5s;
@@ -5828,9 +5815,38 @@ section {
 }
 
 /* CSS FOR LOGIN + REGISTER */
+.for-md-size{
+    display: none;
+}
+@media (max-width: 767.98px) {
+    .banner-wrapper{
+        display: none;
+    }
+    .for-md-size{
+        display: block;
+    }
+    .login-tab, .register-tab{
+        margin-top: 20px;
+    }
+    .register-login-content{
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+@media (min-width: 768px) {
+    .register-login-content{
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
 .login-register-body {
     height: 100%;
+    position: relative;
     font-family: 'Times New Roman', Times, serif;
 }
 .login-register-body form{
@@ -5854,18 +5870,19 @@ section {
 
 .banner-wrapper {
     /*height: 100%;*/
+    width: 100%;
     padding-right: 0;
 }
 
 .login-tab {
     /* padding-left: 0; */
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 .login-register-body .container.right-panel-active .register-container {
     transform: translateX(100%);
     opacity: 1;
@@ -6016,6 +6033,7 @@ section {
 }
 
 .register-tab {
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;

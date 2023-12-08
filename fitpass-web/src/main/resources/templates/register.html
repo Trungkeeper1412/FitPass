@@ -20,8 +20,8 @@
 </head>
 
 <body class="login-register-body">
-<div style="height: 100%; width: 100%;">
-    <div class="row mx" style="height: 100%; width: 100%;">
+<!--<div style="height: 100%; width: 100%;">-->
+    <div class="register-login-content">
         <div class="col-md-6 banner-wrapper">
             <div class="banner">
                 <a th:href="@{/login}" class="ghost_btn move_register">Đăng nhập</a>
@@ -97,8 +97,14 @@
             </form>
             <div th:if="${param.success}" id="toast-info" class="alert alert-success"> Đăng ký thành công </div>
         </div>
+
+        <div class="col-md-6 banner-wrapper for-md-size">
+            <div class="banner">
+                <a th:href="@{/login}" class="ghost_btn move_register">Đăng nhập</a>
+            </div>
+        </div>
     </div>
-</div>
+<!--</div>-->
 <script th:if="${param.success}">
     const toastError = document.getElementById("toast-info");
     toastError.classList.add("show");
