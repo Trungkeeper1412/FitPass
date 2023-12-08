@@ -31,30 +31,28 @@
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
                             <div class="row text-start">
                                 <form id="formSubmit" action="/admin/account/brand/create" method="POST">
-                                    <div class="d-flex justify-content-center pb-3">
+                                    <div class="d-flex justify-content-center mb-4">
                                         <div class="col-md-4">
                                             <label for="name-brand" class="form-label fw-bold">Chọn thương hiệu trong danh sách chờ
                                                 :</label>
                                             <select id="name-brand" name="requestId">
-                                                <option selected>Select brand</option>
+                                                <option value="" disabled selected th:text="'Chọn thương hiệu'"></option>
                                                 <th:block th:each="brand : ${becomePartnerRequestList}">
                                                     <option th:value="${brand.getBecomeAPartnerRequestId()}" th:text="${brand.getBrandName()}"></option>
                                                 </th:block>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center pb-3">
+                                    <div class="d-flex justify-content-center mb-4">
                                         <div class="col-md-4">
                                             <label for="email-brand" class="form-label fw-bold">Email
                                                 :</label>
-                                            <input type="text" class="form-control" id="email-brand"
-                                                   name="brandEmail" value="Classpass@gmail.com">
+                                            <input type="email" class="form-control" id="email-brand"
+                                                   name="brandEmail" value="Fitpass@gmail.com">
                                         </div>
                                     </div>
-
-
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Gửi xác nhận">
+                                        <input class="btn btn-submit" type="submit" value="Gửi xác nhận" id="submit">
                                     </div>
                                 </form>
                             </div>

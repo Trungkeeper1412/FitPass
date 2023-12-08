@@ -14,8 +14,8 @@
 </head>
 
 <body class="login-register-body">
-<div style="height: 100%; width: 100%;">
-    <div class="row mx" style="height: 100%; width: 100%;">
+<!--<div style="height: 100%; width: 100%;">-->
+    <div class="register-login-content">
         <div class="col-md-6 banner-wrapper">
             <div class="banner">
                 <a th:href="@{/register}"  class="ghost_btn move_register">Đăng ký ngay</a>
@@ -52,9 +52,14 @@
             <div th:if="${param.error}" id="toast-error" class="alert alert-danger" role="alert">
                 Tên đăng nhập hoặc mật khẩu không chính xác, vui lòng thử lại
             </div>
+            <div th:if="${successRegister}" id="toast-info-register" class="alert alert-success"> Đăng ký thành công </div>
         </div>
 
-    </div>
+        <div class="col-md-6 banner-wrapper for-md-size">
+            <div class="banner">
+                <a th:href="@{/register}"  class="ghost_btn move_register">Đăng ký ngay</a>
+            </div>
+        </div>
 </div>
 
 <style>
@@ -80,7 +85,13 @@
         toastError.classList.remove("show");
     }, 2800);
 </script>
-
+<script th:if="${successRegister}">
+    const toastError = document.getElementById("toast-info-register");
+    toastError.classList.add("show");
+    setTimeout(function () {
+        toastError.classList.remove("show");
+    }, 2800);
+</script>
 <script>
 </script>
 </body>

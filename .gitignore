@@ -33,4 +33,5 @@ build/
 ### VS Code ###
 .vscode/
 /upload/
-/fitpass-web/src/main/resources/application.properties
+fitpass-web/src/main/resources/application.properties
+fitpass-web/src/main/resources/keystore.jks

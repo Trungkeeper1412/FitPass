@@ -103,7 +103,7 @@
                                                 <label for="thumbnail" class="form-label fw-bold fs-4">Thumbnail
                                                     :</label>
                                                 <div class="image-container">
-                                                    <img th:src="${brandDetails.getBrandThumbnailUrl() + '?v=' + time}" alt="Image">
+                                                    <img th:src="${brandDetails.getBrandThumbnailUrl()}" alt="Image">
                                                     <div class="image-actions">
                                                         <button class="img-edit-button" type="button"
                                                                 data-toggle="tooltip" data-placement="top" data-image-type="thumbnail"
