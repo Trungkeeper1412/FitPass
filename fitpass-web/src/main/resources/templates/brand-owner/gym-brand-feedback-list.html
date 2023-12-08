@@ -50,7 +50,10 @@
                                         <td><i data-star="3" th:attr="data-star=${d.getRating()}"></i></td>
                                         <td th:text="${d.getFeedbackCount()}">5643</td>
                                         <td>
-                                            <a th:href="@{/brand-owner/feedback/details(id=${d.getDepartmentId()})}" class="btn btn-primary">Chi tiết đánh giá</a>
+                                            <form action="/brand-owner/feedback/details" method="post">
+                                                <input type="hidden" name="id" th:value="${d.getDepartmentId()}">
+                                                <button type="submit" class="btn btn-primary">Chi tiết đánh giá</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </th:block>

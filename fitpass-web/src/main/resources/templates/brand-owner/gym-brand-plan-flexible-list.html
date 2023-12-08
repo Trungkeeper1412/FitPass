@@ -64,8 +64,11 @@
                                             <td th:text="${gymPlan.getPlanAfterActive()} + ' ngày'">30 ngày</td>
                                             <td th:text="${gymPlan.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                             <td>
-                                                <a th:href="@{/brand-owner/gym-plans/flexible/details(id=${gymPlan.getGymPlanId()})}"
-                                                   class="btn btn-primary">Cập nhật</a></td>
+                                                <form action="/brand-owner/gym-plans/flexible/details" method="post">
+                                                    <input type="hidden" name="id" th:value="${gymPlan.getGymPlanId()}">
+                                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     </th:block>
                                     </tbody>

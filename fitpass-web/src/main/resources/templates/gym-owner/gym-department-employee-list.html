@@ -58,8 +58,11 @@
                                         <td th:text="${e.getEmail()}">ldt2001@gmail.com</td>
                                         <td th:text="${e.isUserDeleted() ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
                                         <td>
-                                            <a th:href="@{/gym-owner/employee/details(id1=${e.getUserId()},id2=${e.getUserDetailId()})}"
-                                               class="btn btn-primary">Cập nhật</a></td>
+                                            <form action="/gym-owner/employee/details" method="post">
+                                                <input type="hidden" name="id1" th:value="${e.getUserId()}">
+                                                <input type="hidden" name="id2" th:value="${e.getUserDetailId()}">
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </form>
                                     </tr>
                                 </th:block>
                                 </tbody>

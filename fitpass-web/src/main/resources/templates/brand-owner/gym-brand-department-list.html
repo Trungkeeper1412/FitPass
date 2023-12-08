@@ -62,7 +62,10 @@
                                                 <option value="deactive" th:selected="${d.getDepartmentStatus().getDepartmentStatusCd() != 1}">Không hoạt động</option>
                                             </select></td>
                                         <td>
-                                            <a th:href="@{/brand-owner/department/details(id=${d.getDepartmentId()})}" class="btn btn-primary">Xem chi tiết</a>
+                                            <form action="/brand-owner/department/details" method="post">
+                                                <input type="hidden" name="id" th:value="${d.getDepartmentId()}">
+                                                <button type="submit" class="btn btn-primary">Xem chi tiết</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </th:block>

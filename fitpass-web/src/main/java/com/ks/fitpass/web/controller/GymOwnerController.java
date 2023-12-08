@@ -216,7 +216,7 @@ public class GymOwnerController {
         }
     }
 
-    @GetMapping("/employee/details")
+    @PostMapping("/employee/details")
     public String getEmployeeDetails(HttpSession session, Model model, @RequestParam("id1") int userId, @RequestParam("id2") int userDetailId) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {

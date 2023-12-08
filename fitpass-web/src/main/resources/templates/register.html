@@ -95,9 +95,7 @@
                 </div>
                 <button type="submit" class="login">Đăng ký</button>
             </form>
-            <div th:if="${param.success}" id="toast-info" class="alert alert-success"> Đăng ký thành công </div>
         </div>
-
         <div class="col-md-6 banner-wrapper for-md-size">
             <div class="banner">
                 <a th:href="@{/login}" class="mb-4 ghost_btn move_register">Đăng nhập</a>
@@ -105,13 +103,6 @@
         </div>
     </div>
 <!--</div>-->
-<script th:if="${param.success}">
-    const toastError = document.getElementById("toast-info");
-    toastError.classList.add("show");
-    setTimeout(function () {
-        toastError.classList.remove("show");
-    }, 2800);
-</script>
 <script>
 </script>
 </body>
