@@ -12,6 +12,8 @@ function showCancelConfirmation(type) {
             return new Promise((resolve) => {
                 if (value.trim() === '') {
                     resolve('Lý do hủy không được để trống');
+                } else if (value.length > 270) {
+                    resolve('Lý do hủy không được quá 200 kí tự');
                 } else {
                     resolve();
                 }

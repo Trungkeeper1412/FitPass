@@ -11,7 +11,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div class="d-flex flex-column" id="content-wrapper">
 
         <!-- Main Content -->
         <div id="content">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Thứ tự</th>
@@ -38,19 +38,18 @@
                                     <th>Số điện thoại</th>
                                     <th>Email đăng ký</th>
                                     <th class="status-active">Trạng thái</th>
-                                    <th class="table-action-lock">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="userDTOList : ${userDTOList}">
-                                    <tr>
-                                        <td th:text="${userDTOListStat.index + 1}">1</td>
-                                        <td th:text="${userDTOList.getFirstName()} + ' ' +  ${userDTOList.getLastName()} ">Lê Đình Tuấn</td>
-                                        <td th:text="${userDTOList.getPhoneNumber()}">0987654321</td>
-                                        <td th:text="${userDTOList.getEmail()}">tuanld@fpt.com</td>
-                                        <td th:text="${userDTOList.isUserDeleted() == 1 ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
-                                        <td><a class="btn btn-danger">Khóa tài khoản</a></td>
-                                    </tr>
+                                    <th:block th:each="userDTOList : ${userDTOList}">
+                                        <tr>
+                                            <td th:text="${userDTOListStat.index + 1}">1</td>
+                                            <td th:text="${userDTOList.getFirstName()} + ' ' +  ${userDTOList.getLastName()} ">Lê Đình Tuấn</td>
+                                            <td th:text="${userDTOList.getPhoneNumber()}">0987654321</td>
+                                            <td th:text="${userDTOList.getEmail()}">tuanld@fpt.com</td>
+                                            <td th:text="${userDTOList.isUserDeleted() == 1 ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </div>
