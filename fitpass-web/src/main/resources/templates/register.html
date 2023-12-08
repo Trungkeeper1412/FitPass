@@ -11,11 +11,17 @@
     <th:block th:include="common/vendor-head"></th:block>
     <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body class="login-register-body">
-<div class="container-fluid">
-    <div class="row mx">
+<div style="height: 100%; width: 100%;">
+    <div class="row mx" style="height: 100%; width: 100%;">
         <div class="col-md-6 banner-wrapper">
             <div class="banner">
                 <a th:href="@{/login}" class="ghost_btn move_register">Đăng nhập</a>

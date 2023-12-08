@@ -5828,7 +5828,9 @@ section {
 }
 
 /* CSS FOR LOGIN + REGISTER */
+
 .login-register-body {
+    height: 100%;
     font-family: 'Times New Roman', Times, serif;
 }
 .login-register-body form{
