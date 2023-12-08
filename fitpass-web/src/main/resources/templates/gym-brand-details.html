@@ -305,11 +305,6 @@
                     const maxVisiblePages = 5;
 
                     for (var i = 1; i <= data.totalPage; i++) {
-                        var currentPage = data.currentPage;
-                        if (i === currentPage) {
-                            paginationHtml += '<a class="page-numbers number current" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
-                        } else {
-                            paginationHtml += '<a class="page-numbers number" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
                         if (i <= data.currentPage - maxVisiblePages / 2 && i !== 1) {
                             if (i === 2) {
                                 paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
