@@ -305,13 +305,11 @@
                     const maxVisiblePages = 5;
 
                     for (var i = 1; i <= data.totalPage; i++) {
-<<<<<<< HEAD
                         var currentPage = data.currentPage;
                         if (i === currentPage) {
                             paginationHtml += '<a class="page-numbers number current" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
                         } else {
                             paginationHtml += '<a class="page-numbers number" href="#" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
-=======
                         if (i <= data.currentPage - maxVisiblePages / 2 && i !== 1) {
                             if (i === 2) {
                                 paginationHtml += '<span class="page-numbers ellipsis">...</span> ';
@@ -330,7 +328,6 @@
                             paginationHtml += '<span aria-current="page" class="page-numbers current">' + i + '</span> ';
                         } else {
                             paginationHtml += '<a class="page-numbers" href="javascript:void(0);" onclick="paginationFeedback(' + i + ')">' + i + '</a> ';
->>>>>>> 453909b80b6f94de04dd97b96ce409fa56f14f3a
                         }
                     }
 
