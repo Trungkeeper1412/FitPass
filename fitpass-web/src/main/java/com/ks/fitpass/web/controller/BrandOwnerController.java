@@ -124,8 +124,6 @@ public class BrandOwnerController {
 
             User user = (User) session.getAttribute("userInfo");
             Brand brandDetails = brandService.getBrandDetail(user.getUserId());
-
-            model.addAttribute("time", System.currentTimeMillis());
             model.addAttribute("brandDetails", brandDetails);
             return "brand-owner/gym-brand-update-profile";
         }catch (DuplicateKeyException ex) {
@@ -243,7 +241,7 @@ public class BrandOwnerController {
         }
     }
 
-    @GetMapping("/department/details")
+    @PostMapping("/department/details")
     public String getDepartmentDetails(@RequestParam("id") int departmentId, Model model) {
         try {
             Department department = departmentService.getOne(departmentId);
@@ -416,7 +414,7 @@ public class BrandOwnerController {
         }
     }
 
-    @GetMapping("/feedback/details")
+    @PostMapping("/feedback/details")
     public String getDepartmentFeedbackDetails(@RequestParam("id") int departmentId, Model model) {
         try {
             Department department = departmentService.getOne(departmentId);
@@ -475,7 +473,7 @@ public class BrandOwnerController {
         }
     }
 
-    @GetMapping("/service/details")
+    @PostMapping("/service/details")
     public String getServiceDetails(@RequestParam("id") int id, Model model) {
         try {
             BrandAmenitie brandAmenitie = brandAmenitieService.getAmenitieDetail(id);
@@ -620,7 +618,7 @@ public class BrandOwnerController {
         }
     }
 
-    @GetMapping("/gym-owner/details")
+    @PostMapping("/gym-owner/details")
     public String getGymOwnerDetails(@RequestParam("id1") int userId, @RequestParam("id2") int userDetailId,
                                      Model model, HttpSession session) {
         try {
@@ -871,7 +869,7 @@ try {
         }
     }
 
-    @GetMapping("/gym-plans/flexible/details")
+    @PostMapping("/gym-plans/flexible/details")
     public String getFlexibleGymPlanDetails(@RequestParam("id") int gymPlanId, Model model) {
         try {
             BrandUpdateGymPlanFlexDTO brandUpdateGymPlanFlexDTO = gymPlanService.getGymPlanFlexDetail(gymPlanId);
@@ -1020,7 +1018,7 @@ try {
         }
     }
 
-    @GetMapping("/gym-plans/fixed/details")
+    @PostMapping("/gym-plans/fixed/details")
     public String getFixedGymPlanDetails(@RequestParam("id") int gymPlanId, Model model) {
         try {
             BrandUpdateGymPlanFixedDTO brandUpdateGymPlanFixedDTO = gymPlanService.getGymPlanFixedDetail(gymPlanId);
