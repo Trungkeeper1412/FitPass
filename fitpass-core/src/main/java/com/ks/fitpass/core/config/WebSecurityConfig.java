@@ -1,7 +1,6 @@
 package com.ks.fitpass.core.config;
 
 import com.ks.fitpass.core.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +30,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .addFilterAfter(new AuditInterceptor(), AnonymousAuthenticationFilter.class)
+                .requiresChannel(channel ->
+                        channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
