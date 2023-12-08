@@ -9,12 +9,16 @@ import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +30,13 @@ public class MainController {
     private final UserService userService;
     private final WalletService walletService;
     private final UserRepository userRepository;
+    private final Logger logger = LoggerFactory.getLogger(MainController.class);
+
+    @InitBinder("userUpdateDTO")
+    public void initUserUpdateDTOBinder(WebDataBinder binder) {
+        logger.info("Customizing data binding for userUpdateDTO");
+        binder.setDisallowedFields("imageUrl", "address");
+    }
 
     @GetMapping("/")
     public String checkFirstTimeLogin(HttpSession session){
@@ -94,61 +105,68 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String registered(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
+    public String registered(@ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
                              BindingResult bindingResult,Model model, RedirectAttributes redirectAttributes) {
+        logger.warn("The register has been initiated");
 
         if (userService.checkEmailExist(userUpdateDTO.getEmail())) {
             bindingResult.rejectValue("email", "error.email", "Email đã tồn tại !");
+            logger.error("Email already exists: {}", userUpdateDTO.getEmail());
         }
 
-        if(!userUpdateDTO.getUserPassword().equals(userUpdateDTO.getReUserPassword())){
+        if (!userUpdateDTO.getUserPassword().equals(userUpdateDTO.getReUserPassword())) {
             bindingResult.rejectValue("reUserPassword", "error.reUserPassword", "Mật khẩu và xác nhận mật khẩu không khớp !");
+            logger.error("Password and Confirm Password do not match");
         }
 
         if (bindingResult.hasErrors()) {
+            logger.error("Errors in form submission: {}", bindingResult.getAllErrors());
             model.addAttribute("userUpdateDTO", userUpdateDTO);
             return "register";
         }
 
-        UserDetail userDetail = new UserDetail();
-        userDetail.setFirstName(userUpdateDTO.getFirstName());
-        userDetail.setLastName(userUpdateDTO.getLastName());
-        userDetail.setEmail(userUpdateDTO.getEmail());
-        userDetail.setPhoneNumber(userUpdateDTO.getPhoneNumber());
-        userDetail.setDateOfBirth(userUpdateDTO.getDateOfBirth());
-        userDetail.setGender(userUpdateDTO.getGender());
-        // Insert into User Detail
-        userService.insertIntoUserDetailRegister(userDetail);
+        if(!bindingResult.hasErrors()){
+            UserDetail userDetail = new UserDetail();
+            userDetail.setFirstName(userUpdateDTO.getFirstName());
+            userDetail.setLastName(userUpdateDTO.getLastName());
+            userDetail.setEmail(userUpdateDTO.getEmail());
+            userDetail.setPhoneNumber(userUpdateDTO.getPhoneNumber());
+            userDetail.setDateOfBirth(userUpdateDTO.getDateOfBirth());
+            userDetail.setGender(userUpdateDTO.getGender());
+            // Insert into User Detail
+            userService.insertIntoUserDetailRegister(userDetail);
 
-        int userDetailId = userService.getLastInsertUserDetailIdRegister(userDetail);
+            int userDetailId = userService.getLastInsertUserDetailIdRegister(userDetail);
 
-        String password = userUpdateDTO.getUserPassword();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
+            String password = userUpdateDTO.getUserPassword();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(password);
 
-        Long userCreateTimeLong = System.currentTimeMillis();
-        String createTime = userCreateTimeLong.toString();
-        // Create user_deleted = 0;
-        boolean userDelete = false;
+            Long userCreateTimeLong = System.currentTimeMillis();
+            String createTime = userCreateTimeLong.toString();
+            // Create user_deleted = 0;
+            boolean userDelete = false;
 
-        // Create new User
-        User newUser = new User();
-        newUser.setUserAccount(userUpdateDTO.getUserAccount());
-        newUser.setUserCreateTime(userCreateTimeLong);
-        newUser.setUserPassword(hashedPassword);
-        newUser.setUserDeleted(userDelete);
-        newUser.setUserDetailId(userDetailId);
-        newUser.setCreatedBy(1);
-        // Insert into User
-        userService.insertIntoUser(newUser);
+            // Create new User
+            User newUser = new User();
+            newUser.setUserAccount(userUpdateDTO.getUserAccount());
+            newUser.setUserCreateTime(userCreateTimeLong);
+            newUser.setUserPassword(hashedPassword);
+            newUser.setUserDeleted(userDelete);
+            newUser.setUserDetailId(userDetailId);
+            newUser.setCreatedBy(1);
+            // Insert into User
+            userService.insertIntoUser(newUser);
 
-        // Get last user insert id
-        int userInsertId = userService.getLastUserInsertId(newUser);
-        // Insert into user_role
-        userService.insertIntoUserRole(userInsertId, 4);
-        // Insert into wallet
-        walletService.insertWallet(userInsertId, 0);
-        redirectAttributes.addFlashAttribute("success", true);
-        return "redirect:/register";
+            // Get last user insert id
+            int userInsertId = userService.getLastUserInsertId(newUser);
+            // Insert into user_role
+            userService.insertIntoUserRole(userInsertId, 4);
+            // Insert into wallet
+            walletService.insertWallet(userInsertId, 0);
+            redirectAttributes.addFlashAttribute("successRegister", true);
+            return "redirect:/login";
+        }
+        return "register";
     }
 }

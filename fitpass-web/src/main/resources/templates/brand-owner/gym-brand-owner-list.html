@@ -56,7 +56,11 @@
                                         <td th:text="${gymOwner.getGymDepartmentName()}">Cơ sở Đống Đa</td>
                                         <td th:text="${gymOwner.isUserDeleted() ? 'Không hoạt động' : 'Hoạt động'}">Hoạt động</td>
                                         <td>
-                                            <a th:href="@{/brand-owner/gym-owner/details(id1=${gymOwner.getUserId()}, id2=${gymOwner.getUserDetailId()})}" class="btn btn-primary">Cập nhật</a>
+                                            <form action="/brand-owner/gym-owner/details" method="post">
+                                                <input type="hidden" name="id1" th:value="${gymOwner.getUserId()}">
+                                                <input type="hidden" name="id2" th:value="${gymOwner.getUserDetailId()}">
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </th:block>

@@ -11,14 +11,20 @@
     <th:block th:include="common/vendor-head"></th:block>
     <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
     <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body class="login-register-body">
-<div style="height: 100%; width: 100%;">
-    <div class="row mx" style="height: 100%; width: 100%;">
+<!--<div style="height: 100%; width: 100%;">-->
+    <div class="register-login-content">
         <div class="col-md-6 banner-wrapper">
             <div class="banner">
-                <a th:href="@{/login}" onclick="changeTab" id="changeTab" class="ghost_btn move_register">Đăng nhập</a>
+                <a th:href="@{/login}" class="ghost_btn move_register">Đăng nhập</a>
             </div>
         </div>
 
@@ -89,17 +95,14 @@
                 </div>
                 <button type="submit" class="login">Đăng ký</button>
             </form>
-            <div th:if="${param.success}" id="toast-info" class="alert alert-success"> Đăng ký thành công </div>
+        </div>
+        <div class="col-md-6 banner-wrapper for-md-size">
+            <div class="banner">
+                <a th:href="@{/login}" class="mb-4 ghost_btn move_register">Đăng nhập</a>
+            </div>
         </div>
     </div>
-</div>
-<script th:if="${param.success}">
-    const toastError = document.getElementById("toast-info");
-    toastError.classList.add("show");
-    setTimeout(function () {
-        toastError.classList.remove("show");
-    }, 2800);
-</script>
+<!--</div>-->
 <script>
 </script>
 </body>

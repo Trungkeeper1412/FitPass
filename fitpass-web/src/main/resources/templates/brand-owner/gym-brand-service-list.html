@@ -53,7 +53,10 @@
                                         <td><img th:src="${s.getPhotoUrl()}" alt=""></td>
                                         <td th:text="${s.getStatus() == 1 ? 'Hoạt động' : 'Ngừng hoạt động'}">Hoạt động</td>
                                         <td>
-                                            <a th:href="@{/brand-owner/service/details(id=${s.getAmenitieId()})}" class="btn btn-primary">Cập nhật</a>
+                                            <form action="/brand-owner/service/details" method="post">
+                                                <input type="hidden" name="id" th:value="${s.getAmenitieId()}">
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </th:block>
