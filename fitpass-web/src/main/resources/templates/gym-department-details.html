@@ -22,8 +22,16 @@
 <div class="gym-first-info container">
     <div class="gym-dept-img">
         <input type="hidden" id="departmentId" th:value="${department.getDepartmentId()}">
-        <img th:src="${department.getDepartmentWallpaperUrl()}">
+        <img th:src="${department.getDepartmentWallpaperUrl()}" id="deptWallpaper" style="cursor:pointer">
     </div>
+    <div id="deptWallpaperModal" class="deptWallpaperModal">
+        <span class="close-button">&times;</span>
+        <div style="height: auto">
+            <img class="deptWallpaperModal-content" id="imgWallpaper">
+        </div>
+        <div id="deptWallpaperCaption"></div>
+    </div>
+
     <div class="gym-picture">
         <img style="" th:src="${department.departmentLogoUrl}">
         <div class="gym-name-cover">
@@ -248,6 +256,15 @@
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
+    $("#deptWallpaper").click(function () {
+        var imgSrc = $(this).attr("src");
+        $("#imgWallpaper").attr("src", imgSrc);
+        $("#deptWallpaperModal").addClass('show');  /* Use .addClass here */
+    });
+
+    $(".close-button").click(function () {
+        $("#deptWallpaperModal").removeClass('show'); /* Use .removeClass here */
+    });
 
     function onClickImage(element) {
         document.getElementById("img01").src = element.src;
