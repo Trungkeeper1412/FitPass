@@ -108,7 +108,7 @@ $(document).ready(function () {
             },
             phoneDepartment: {
                 required: true,
-                minlength: 8,
+                minlength: 10,
                 maxlength: 11,
                 correctNumber: true
             },
@@ -237,6 +237,77 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $("#formUpdate").validate({
+        rules: {
+            address: {
+                required: true,
+                maxlength: 150,
+                pattern: /^(?!\s+$).+/,
+            },
+            phoneDepartment: {
+                required: true,
+                minlength: 10,
+                maxlength: 11,
+                correctNumber: true
+            },
+            capacity: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 10000,
+            },
+            area: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 10000,
+            },
+            description: {
+                required: true,
+                minlength: 2,
+                maxlength: 700,
+            },
+        },
+        messages: {
+            address: {
+                required: "Vui lòng nhập địa chỉ !",
+                maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
+                pattern: "Địa chỉ đang bị trống !",
+            },
+            phoneDepartment: {
+                required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập số điện thoại !",
+                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                correctNumber: "Đầu số không đúng định dạng !"
+            },
+            capacity: {
+                required: "Vui lòng nhập sức chứa !",
+                number: "Vui lòng nhập số !",
+                min: "Sức chứa phải lớn hơn 0",
+                max: "Sức chứa không vượt quá 10000 !",
+            },
+            area: {
+                required: "Vui lòng nhập diện tích !",
+                number: "Vui lòng nhập số !",
+                min: "Diện tích phải lớn hơn 0",
+                max: "Diện tích không vượt quá 10000 !",
+            },
+            description: {
+                required: "Vui lòng nhập nhập mô tả gói tập !",
+                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
+                maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+            },
+        },
+    });
+    $("#updateInfo").click(function () {
+        if (!$("#formUpdate").valid()) {
+            return false;
+        }
+    });
+});
+
+$(document).ready(function () {
     $.validator.addMethod("strongPassword", function (value) {
         return /^(?=.*[a-zA-Z])(?=.*\d).*$/.test(value);
     }, "Mật khẩu phải chứa cả chữ và số");
@@ -284,7 +355,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#submit").click(function () {
+    $("#submitPassword").click(function () {
         if (!$("#change-pw-form").valid()) {
             return false;
         }

@@ -42,6 +42,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -179,7 +180,7 @@ public class BrandOwnerController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model, HttpSession session) {
+                                 Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             User user = (User) session.getAttribute("userInfo");
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -198,8 +199,7 @@ public class BrandOwnerController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
 
-            // Redirect hoặc hiển thị thông báo thành công
-            model.addAttribute("success", true);
+            redirectAttributes.addFlashAttribute("success", true);
             return "redirect:/brand-owner/password";
         } catch (Exception ex) {
             // Handle other exceptions

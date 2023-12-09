@@ -34,6 +34,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
 import java.util.*;
@@ -137,7 +138,7 @@ public class GymOwnerController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model,HttpSession session) {
+                                 Model model,HttpSession session, RedirectAttributes redirectAttributes) {
 
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
@@ -161,7 +162,7 @@ public class GymOwnerController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
             // Redirect hoặc hiển thị thông báo thành công
-            model.addAttribute("success", true);
+            redirectAttributes.addFlashAttribute("success", true);
             return "redirect:/gym-owner/profile";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation

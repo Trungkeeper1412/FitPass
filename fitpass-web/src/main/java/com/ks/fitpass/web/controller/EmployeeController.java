@@ -36,6 +36,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -95,7 +96,7 @@ public class EmployeeController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model, HttpSession session) {
+                                 Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             User user = (User) session.getAttribute("userInfo");
             int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
@@ -116,7 +117,7 @@ public class EmployeeController {
             userService.updatePassword(hashedPassword, user.getUserId());
 
             // Redirect hoặc hiển thị thông báo thành công
-            model.addAttribute("success", true);
+            redirectAttributes.addFlashAttribute("success", true);
             model.addAttribute("departmentId", userDepartmentId);
             return "redirect:/employee/changePassword";
         } catch (Exception e) {

@@ -352,7 +352,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#submit").click(function () {
+    $("#submitPassword").click(function () {
         if (!$("#change-pw-form").valid()) {
             return false;
         }
