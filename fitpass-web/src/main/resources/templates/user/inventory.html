@@ -136,10 +136,10 @@
                                                             class="expiration-date"></span></p>
                                                     <p class="activate-time">Bạn còn: <span
                                                             class="activate-time"></span> ngày để kích hoạt</p>
-                                                    <form method="post" action="/inventory/activeItem" class="formActive">
+                                                    <form id="tabAll" method="post" action="/inventory/activeItem" class="formActive">
                                                         <input class="orderDetailId" type="hidden" name="orderDetailId" value="" />
                                                         <input class="duration" type="hidden" name="duration" value="" />
-                                                        <button type="submit" class="btn btn-primary text-black w-100">Kích hoạt</button>
+                                                        <button type="button" class="btn btn-primary text-black w-100" onclick="confirmActivation()">Kích hoạt</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -225,10 +225,10 @@
                                                             class="expiration-date"></span></p>
                                                     <p class="activate-time">Bạn còn: <span
                                                             class="activate-time"></span> ngày để kích hoạt</p>
-                                                    <form method="post" action="/inventory/activeItem" class="formActive">
+                                                    <form id="tabUnactive" method="post" action="/inventory/activeItem" class="formActive">
                                                         <input class="orderDetailId" type="hidden" name="orderDetailId" value="" />
                                                         <input class="duration" type="hidden" name="duration" value="" />
-                                                        <button type="submit" class="btn btn-primary text-black w-100">Kích hoạt</button>
+                                                        <button type="button" class="btn btn-primary text-black w-100" onclick="confirmActivation()">Kích hoạt</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -428,20 +428,45 @@
     </th:block>
 
     <th:block th:include="common/vendor-script"></th:block>
+
     <script>
-        <!-- Show notification -->
-        if(document.querySelector("#activeItemMSG") != null) {
-            let value = document.querySelector("#activeItemMSG").value;
-            console.log(value)
+        function confirmActivation() {
             Swal.fire({
-                icon:  value == 'Kích hoạt thành công' ? 'success' : 'error',
-                title: value == 'Kích hoạt thành công' ? 'Kích hoạt thành công!' : 'Kích hoạt không thành công',
-                text:  value == 'Kích hoạt thành công' ? 'Bạn đã kích hoạt thẻ tập thành công' : 'Bạn đã kích hoạt thẻ tập không thành công',
-                showConfirmButton: true,
-                timer: 1500
+                title: 'Xác nhận kích hoạt thẻ ?',
+                text: 'Thẻ sẽ được kích hoạt và không thể hoàn tác !',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Kích hoạt',
+                cancelButtonText: 'Hủy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công !',
+                        text: 'Bạn đã kích hoạt thẻ tập thành công.',
+                        showConfirmButton: true,
+                        timer: 3000
+                    });
+
+                    // Determine the active tab and set the form action accordingly
+                    var activeTabId = $('.tab-content .tab-pane.active').attr('id');
+                    var formId = activeTabId === 'all' ? 'tabAll' : 'tabUnactive';
+
+                    // Set the form action and submit the form
+                    document.getElementById(formId).submit();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Kích hoạt thất bại !',
+                        showConfirmButton: true,
+                        timer: 1500
+                    });
+                }
             });
         }
+
     </script>
+
 </body>
 
 </html>
