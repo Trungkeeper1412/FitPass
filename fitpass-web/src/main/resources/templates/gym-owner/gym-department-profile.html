@@ -141,28 +141,44 @@
     $(document).ready(function () {
         $('#change-pw-form').submit(function (event) {
             event.preventDefault();
+
             Swal.fire({
-                icon: 'question',
                 title: 'Bạn muốn thay đổi mật khẩu?',
-                showConfirmButton: true,
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Xác nhận',
                 cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.submit();
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Thành công!',
-                        text: 'Mật khẩu của bạn đã được thay đổi!',
-                        confirmButtonText: 'Đóng',
+                        title: 'Vui lòng đợi...',
+                        icon: 'info',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            setTimeout(() => {
+                                $('#change-pw-form').submit();
+                                Swal.close();
+                            }, 2000);
+                        },
+                        didClose: () => {
+                            Swal.fire({
+                                title: 'Thành công!',
+                                text: 'Mật khẩu của bạn đã được thay đổi!',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
                     });
                 } else if (result.isDismissed || result.isDenied) {
                     Swal.fire({
-                        icon: 'error',
                         title: 'Thất bại!',
                         text: 'Mật khẩu của bạn chưa được thay đổi!',
-                        confirmButtonText: 'Đóng',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
                     });
                 }
             });
