@@ -38,6 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -675,6 +676,7 @@ public class GymOwnerController {
                 int departmentId = departmentDetails.getDepartmentId();
                 List<DepartmentSchedule> departmentSchedules = departmentScheduleService.getAllByDepartmentID(departmentId);
                 model.addAttribute("departmentSchedules", departmentSchedules);
+                TimeUnit.SECONDS.sleep(2);
                 return "/gym-owner/gym-department-update-info";
             }
 
@@ -721,7 +723,12 @@ public class GymOwnerController {
             int[] numRowInsertScheduleResult = departmentScheduleService.addDepartmentSchedule(dayToTimeMap, updateGymOwnerDepartmentInfo.getDepartmentId());
             int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
 
+            TimeUnit.SECONDS.sleep(3);
             return "redirect:/gym-owner/department/info";
+        } catch (InterruptedException ex) {
+            // Handle InterruptedException
+            logger.error("InterruptedException occurred", ex);
+            return "error/sleep-error";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);

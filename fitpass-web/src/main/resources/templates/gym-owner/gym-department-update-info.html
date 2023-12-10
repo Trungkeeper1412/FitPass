@@ -260,7 +260,6 @@
     $("#updateInfo").click(function (e) {
         e.preventDefault();
 
-        // Thực hiện validation trước khi xử lý form
         if ($("#formUpdate").valid()) {
             Swal.fire({
                 title: 'Bạn có muốn cập nhật thông tin cơ sở',
@@ -270,34 +269,20 @@
                 cancelButtonText: 'Không',
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $("#formUpdate").submit();
                     Swal.fire({
-                        title: 'Vui lòng đợi...',
-                        icon: 'info',
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading();
-                            setTimeout(() => {
-                                $("#formUpdate").submit();
-                                Swal.close();
-                            }, 2000);
-                        },
-                        didClose: () => {
-                            Swal.fire({
-                                title: 'Thành công!',
-                                text: 'Cập nhật thông tin thành công.',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                        }
+                        title: 'Thành công!',
+                        text: 'Cập nhật thông tin thành công.',
+                        icon: 'success',
+                        showConfirmButton: true,
+                        timer: 3000
                     });
                 } else {
                     Swal.fire({
                         title: 'Thất bại!',
                         text: 'Cập nhật thông tin thất bại.',
                         icon: 'error',
-                        showConfirmButton: false,
+                        showConfirmButton: true,
                         timer: 1500
                     });
                 }
