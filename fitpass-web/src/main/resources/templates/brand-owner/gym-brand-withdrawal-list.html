@@ -80,7 +80,7 @@
                                     <!-- Form Rút Tiền -->
                                     <form id="withdrawForm" method="post" action="/brand-owner/withdrawal/add"
                                           onsubmit="return validateForm()">
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="cardSelect" class="form-label">Chọn thẻ ngân hàng :</label>
                                             <select class="form-select" id="cardSelect" name="cardId">
                                                 <th:block th:each="c : ${creditCardList}">
@@ -93,22 +93,22 @@
                                             </select>
                                             <span id="errorCard" class="text-danger"></span>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="currentBalance">Số dư hiện tại (Credit) :</label>
                                             <input th:value="${userBalance}" type="number" class="form-control"
                                                    id="currentBalance" placeholder="Số dư hiện tại" readonly>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="amount">Số Credit muốn rút :</label>
                                             <input name="creditAmount" type="number" class="form-control" id="amount"
                                                    placeholder="Nhập số credit" required
                                                    oninput="updateConversionRate()">
                                             <span th:if="${errorCredit}" class="text-danger" th:text="${errorCredit}"></span>
                                         </div>
-                                        <label data-toggle="tooltip" data-placement="top" title="xnxx" class="fw-bold">
+                                        <label data-toggle="tooltip" data-placement="top" title="Đức viết cài này đi" class="fw-bold">
                                             Phí giao dịch (<span id="withdrawal-fee" th:text="${moneyPercent}">10</span>%)
                                         </label>
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label for="conversionRate">Số tiền quy đổi (VND) :</label>
                                             <input name="moneyAmount" type="text" class="form-control"
                                                    id="conversionRate" value="0" readonly>

@@ -358,3 +358,34 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $("#withdrawForm").validate({
+        rules: {
+            cardId: {
+                required: true,
+            },
+            creditAmount: {
+                required: true,
+                min: 10000,
+                max: 1000000,
+            },
+        },
+        messages: {
+            cardId: {
+                required: "Vui lòng chọn thẻ ngân hàng !",
+            },
+            creditAmount: {
+                required: "Vui lòng nhập số credit muốn rút !",
+                min: "Số credit rút phải ít nhất 10,000 !",
+                max: "Số credit rút tối đa nhất 1,000,000 !",
+            },
+        },
+    });
+
+    $("#submitPassword").click(function () {
+        if (!$("#change-pw-form").valid()) {
+            return false;
+        }
+    });
+});
