@@ -1167,7 +1167,7 @@ try {
             int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
             if (creditAmount > userBalance) {
                 model.addAttribute("errorCredit", "Số Credit muốn rút không được lớn hơn số dư hiện tại (Credit)");
-            }else {
+            } else {
                 RequestWithdrawHistory requestWithdrawHistory = new RequestWithdrawHistory();
                 requestWithdrawHistory.setCreditCardId(cardId);
                 requestWithdrawHistory.setAmountCredit((long) creditAmount);

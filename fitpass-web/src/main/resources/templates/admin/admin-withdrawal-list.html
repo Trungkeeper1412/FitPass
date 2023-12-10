@@ -112,8 +112,7 @@
                     <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="/admin/withdrawal/update-status" method="post">
-
+                                <form id="acceptWithdrawal" action="/admin/withdrawal/update-status" method="post">
                                     <div class="modal-header">
                                         <div class="text-center" style="width: 95%; margin-left: 20px">
                                             <h5 class="modal-title" id="transactionModalLabel">Xử lý giao dịch</h5>
@@ -159,7 +158,6 @@
                                         <button id="btn-submit" type="submit" class="btn btn-success">Xác nhận</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -274,7 +272,6 @@
                     $("#btn-submit").prop("disabled", false);
                 }
 
-
             },
             error: function (response) {
                 console.log(response);
@@ -293,6 +290,47 @@
             }
         });
     }
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+
+        if (successParam === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Giao dịch của bạn đã đc xử lý thành công!',
+                time: 2000
+            });
+        }
+
+        $('#acceptWithdrawal').submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'question',
+                title: 'Bạn muốn xác nhận giao dịch?',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                } else if (result.isDismissed || result.isDenied) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại!',
+                        text: 'Giao dịch của bạn chưa đc xử lý!',
+                        confirmButtonText: 'Đóng',
+                    });
+                }
+            });
+        });
+    });
+
 </script>
 
 </body>

@@ -383,7 +383,7 @@ public class AdminController {
         } catch (DataAccessException e) {
             return "error/data-access-error";
         }
-        return "redirect:/admin/withdrawal";
+        return "redirect:/admin/withdrawal?success=true";
     }
 
     @GetMapping("/withdrawal/history")
