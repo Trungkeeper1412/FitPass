@@ -723,7 +723,7 @@ public class GymOwnerController {
             int[] numRowInsertScheduleResult = departmentScheduleService.addDepartmentSchedule(dayToTimeMap, updateGymOwnerDepartmentInfo.getDepartmentId());
             int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
 
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
             return "redirect:/gym-owner/department/info";
         } catch (InterruptedException ex) {
             // Handle InterruptedException

@@ -116,7 +116,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
                                             </button>
-                                            <button type="submit" class="btn btn-primary">Gửi Xác Nhận</button>
+                                            <button type="submit" class="btn btn-primary" id="addWithDrawal" >Gửi Xác Nhận</button>
                                         </div>
                                     </form>
                                     <script>
@@ -264,6 +264,43 @@
         });
     });
 </script>
+
+<script>
+    $("#addWithDrawal").click(function (e) {
+        e.preventDefault()
+        // Thực hiện validation trước khi xử lý form
+        if ($("#withdrawForm").valid()) {
+            Swal.fire({
+                title: 'Bạn muốn gửi yêu cầu rút tiền ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Chỉ submit form nếu người dùng chấp nhận
+                    $("#withdrawForm").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Yêu cầu rút tiền của bạn đã đc gửi.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Yêu cầu rút tiền của bạn chưa đc gửi.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 
 </html>

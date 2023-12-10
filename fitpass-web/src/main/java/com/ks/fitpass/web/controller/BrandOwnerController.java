@@ -47,6 +47,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Controller
@@ -1177,7 +1178,12 @@ try {
                 requestWithdrawHistory.setStatus("Đang xử lý");
                 requestWithdrawHistoryService.create(requestWithdrawHistory);
             }
+            TimeUnit.SECONDS.sleep(2);
             return "redirect:/brand-owner/withdrawal/list";
+        } catch (InterruptedException ex) {
+            // Handle InterruptedException
+            logger.error("InterruptedException occurred", ex);
+            return "error/sleep-error";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
