@@ -1,38 +1,42 @@
 var selectedCardItem = null;
 
 $(document).ready(function () {
-    // Define validation rules
+    $.validator.addMethod("noSpaceOnly", function (value, element) {
+        return /^(?!\s+$).+/.test(value);
+    }, "Họ và tên không được chỉ chứa dấu cách !");
+
     $("#bankCardForm").validate({
         rules: {
-            cardHolderName: {
+            cardHolder: {
                 required: true,
                 maxlength: 50,
                 pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
+                noSpaceOnly: true,
             },
-            bankTypeUpdate: {
+            bankType: {
                 required: true,
             },
-            receiverAccount: {
+            accountNumber: {
                 required: true,
-                number: true,
+                digits: true,
                 minlength: 8,
                 maxlength: 15,
             },
         },
         messages: {
-            cardHolderName: {
-                required: "Vui lòng nhập tên chủ thẻ",
+            cardHolder: {
+                required: "Vui lòng nhập họ và tên chủ thẻ",
                 maxlength: "Họ và tên không được vượt quá 50 kí tự !",
                 pattern: "Họ và tên không được chứa số và kí tự đặc biệt !",
             },
-            bankTypeUpdate: {
-                required: "Vui lòng chọn loại ngân hàng",
+            bankType: {
+                required: "Vui lòng chọn Loại Ngân Hàng",
             },
-            receiverAccount: {
+            accountNumber: {
                 required: "Vui lòng nhập số tài khoản",
-                number: "Số tài khoản chỉ có thể chứa các chữ số",
-                minlength: "Số tài khoản phải có ít nhất 8 số",
-                maxlength: "Số tài khoản không được vượt quá 15 số",
+                digits: "Số tài khoản chỉ có thể chứa các chữ số",
+                minlength: "Số Tài Khoản phải có ít nhất 8 số",
+                maxlength: "Số Tài Khoản không được vượt quá 15 số",
             },
         },
         errorPlacement: function (error, element) {
@@ -116,8 +120,8 @@ function addBankCard() {
         },
         error: function (e) {
             Swal.fire({
-                title: 'Thêm thẻ thất bại !',
-                text: 'Kiểm tra lại Họ tên chủ thẻ và số tài khoản !',
+                title: 'Thất bại !',
+                text: 'Kiểm tra lại họ tên chủ thẻ và số tài khoản !',
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });
@@ -171,10 +175,6 @@ function showCardInfo(item) {
 
 function updateCard() {
 
-    if (!$("#cardInfoForm").valid()) {
-        return;
-    }
-
     let creditCardId = document.getElementById("creditCardId").value;
     let cardHolder = document.getElementById("cardHolderName").value;
     let bankType = document.getElementById("bankTypeUpdate").value;
@@ -218,8 +218,8 @@ function updateCard() {
         },
         error: function (e) {
             Swal.fire({
-                title: 'Cập nhật thẻ thất bại !',
-                text: 'Kiểm tra lại họ tên chủ thẻ và số tài khoản !',
+                title: 'Thất bại !',
+                text: 'Cập nhật thẻ thất bại vui lòng kiểm tra tên chủ thẻ và số tài khoản !',
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });

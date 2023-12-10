@@ -266,6 +266,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 2,
                 maxlength: 700,
+                pattern: /^(?!\s+$).+/,
             },
         },
         messages: {
@@ -297,6 +298,7 @@ $(document).ready(function () {
                 required: "Vui lòng nhập nhập mô tả gói tập !",
                 minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
                 maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+                pattern: "Mô tả gói tập đang bị trống !",
             },
         },
     });
@@ -308,22 +310,24 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $.validator.addMethod("strongPassword", function (value) {
-        return /^(?=.*[a-zA-Z])(?=.*\d).*$/.test(value);
-    }, "Mật khẩu phải chứa cả chữ và số");
 
-    $("#change-pw-form").validate({
+    $.validator.addMethod("noSpace", function (value) {
+        return /^\S*$/.test(value);
+    }, "Mật khẩu không được chứa khoảng trắng");
+
+    $('#change-pw-form').validate({
         rules: {
             currentPassword: {
                 required: true,
                 minlength: 6,
                 maxlength: 50,
+                noSpace: true,
             },
             newPassword: {
                 required: true,
                 minlength: 6,
                 maxlength: 50,
-                strongPassword: true,
+                noSpace: true,
             },
             confirmPassword: {
                 required: true,

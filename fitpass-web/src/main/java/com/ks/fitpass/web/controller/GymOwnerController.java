@@ -151,12 +151,12 @@ public class GymOwnerController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "gym-owner/gym-department-profile";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "gym-owner/gym-department-profile";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
@@ -164,7 +164,7 @@ public class GymOwnerController {
             userService.updatePassword(hashedPassword, user.getUserId());
             // Redirect hoặc hiển thị thông báo thành công
             redirectAttributes.addFlashAttribute("success", true);
-            return "redirect:/gym-owner/profile";
+            return "redirect:/gym-owner/profile?success=true";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);

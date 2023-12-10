@@ -83,7 +83,7 @@
                                         <div class="card-body bank-card">
                                             <h5 class="card-title fw-bold">Danh Sách Thẻ Ngân Hàng</h5>
                                             <ul id="cardList" class="list-group">
-                                                <!-- Hiển thị danh sách thẻ ngân hàng ở đây -->
+                                                <!-- Hiển thị danh sách thẻ ngân hàng -->
                                                 <th:block th:each="c : ${creditCardList}">
                                                     <li th:attr="data-creditCardId=${c.getCreditCardId()}, data-cardHolder=${c.getCardOwnerName()},
                                                     data-bankType=${c.getBankName()}, data-accountNumber=${c.getCardNumber()}"
@@ -116,15 +116,13 @@
                                             <button type="button" class="btn btn-close" data-dismiss="modal"></button>
                                         </div>
                                     </div>
-                                    <form id="cardInfoForm">
-                                        <div class="modal-body">
-                                            <div id="modalCardInfo"></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteCardBtn">Xóa thẻ</button>
-                                            <button type="button" class="btn btn-primary" onclick="updateCard()">Cập nhật thẻ</button>
-                                        </div>
-                                    </form>
+                                    <div class="modal-body">
+                                        <div id="modalCardInfo"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteCardBtn">Xóa thẻ</button>
+                                        <button type="button" class="btn btn-primary" onclick="updateCard()">Cập nhật thẻ</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -185,12 +185,12 @@ public class ProfileController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "user/user-change-password";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "user/user-change-password";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
@@ -199,7 +199,7 @@ public class ProfileController {
 
             // Redirect hoặc hiển thị thông báo thành công
             model.addAttribute("success", true);
-            return "redirect:/profile/change-password";
+            return "redirect:/profile/change-password?success=true";
         }
         catch (Exception e) {
             // Handle the exception, you can log it or return an error response

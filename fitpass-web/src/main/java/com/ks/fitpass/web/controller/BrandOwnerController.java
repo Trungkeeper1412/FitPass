@@ -188,12 +188,12 @@ public class BrandOwnerController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "brand-owner/gym-brand-update-password";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "brand-owner/gym-brand-update-password";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
@@ -201,7 +201,7 @@ public class BrandOwnerController {
             userService.updatePassword(hashedPassword, user.getUserId());
 
             redirectAttributes.addFlashAttribute("success", true);
-            return "redirect:/brand-owner/password";
+            return "redirect:/brand-owner/password?success=true";
         } catch (Exception ex) {
             // Handle other exceptions
             logger.error("Exception occurred in changePassword", ex);

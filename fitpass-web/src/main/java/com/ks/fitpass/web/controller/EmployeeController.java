@@ -104,12 +104,13 @@ public class EmployeeController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "employee/change-password";
             }
+
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "employee/change-password";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
@@ -119,11 +120,11 @@ public class EmployeeController {
             // Redirect hoặc hiển thị thông báo thành công
             redirectAttributes.addFlashAttribute("success", true);
             model.addAttribute("departmentId", userDepartmentId);
-            return "redirect:/employee/changePassword";
+            return "redirect:/employee/changePassword?success=true";
         } catch (Exception e) {
             // Handle other exceptions if necessary
-            model.addAttribute("error", "An unexpected error occurred");
-            e.printStackTrace(); // Log or print the stack trace for debugging
+            model.addAttribute("unexpectedError", "Lỗi không xác định");
+            e.printStackTrace();
             return "employee/change-password";
         }
     }

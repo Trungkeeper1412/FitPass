@@ -41,6 +41,7 @@
                                                     <i class="bi bi-eye-slash field-icon" id="togglePassword"></i>
                                                 </span>
                                             </div>
+                                            <span th:if="${currentPasswordError}" class="error" th:text="${currentPasswordError}"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -67,13 +68,13 @@
                                                     <i class="bi bi-eye-slash field-icon" id="toggleRePassword"></i>
                                                 </span>
                                             </div>
+                                            <span th:if="${passwordMismatchError}" class="error" th:text="${passwordMismatchError}"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center">
                                     <input class="btn btn-submit" id="submitPassword" type="submit" value="Lưu mật khẩu">
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -139,46 +140,36 @@
 
 <script>
     $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+
+        if (successParam === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Mật khẩu của bạn đã được thay đổi!',
+                confirmButtonText: 'Đóng',
+            });
+        }
+
         $('#change-pw-form').submit(function (event) {
             event.preventDefault();
-
             Swal.fire({
-                title: 'Bạn muốn thay đổi mật khẩu?',
                 icon: 'question',
+                title: 'Bạn muốn thay đổi mật khẩu?',
+                showConfirmButton: true,
                 showCancelButton: true,
                 confirmButtonText: 'Xác nhận',
                 cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Vui lòng đợi...',
-                        icon: 'info',
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading();
-                            setTimeout(() => {
-                                $('#change-pw-form').submit();
-                                Swal.close();
-                            }, 2000);
-                        },
-                        didClose: () => {
-                            Swal.fire({
-                                title: 'Thành công!',
-                                text: 'Mật khẩu của bạn đã được thay đổi!',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                        }
-                    });
+                    this.submit();
                 } else if (result.isDismissed || result.isDenied) {
                     Swal.fire({
+                        icon: 'error',
                         title: 'Thất bại!',
                         text: 'Mật khẩu của bạn chưa được thay đổi!',
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
+                        confirmButtonText: 'Đóng',
                     });
                 }
             });
