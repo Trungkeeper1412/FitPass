@@ -239,12 +239,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#formUpdate").validate({
         rules: {
-            address: {
+            departmentAddress: {
                 required: true,
                 maxlength: 150,
                 pattern: /^(?!\s+$).+/,
             },
-            phoneDepartment: {
+            departmentContactNumber: {
                 required: true,
                 minlength: 10,
                 maxlength: 11,
@@ -262,19 +262,19 @@ $(document).ready(function () {
                 min: 1,
                 max: 10000,
             },
-            description: {
+            departmentDescription: {
                 required: true,
                 minlength: 2,
                 maxlength: 700,
             },
         },
         messages: {
-            address: {
+            departmentAddress: {
                 required: "Vui lòng nhập địa chỉ !",
                 maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
                 pattern: "Địa chỉ đang bị trống !",
             },
-            phoneDepartment: {
+            departmentContactNumber: {
                 required: "Vui lòng nhập số điện thoại !",
                 number: "Vui lòng nhập số điện thoại !",
                 minlength: 'Số điện thoại phải có ít nhất 10 số !',
@@ -293,7 +293,7 @@ $(document).ready(function () {
                 min: "Diện tích phải lớn hơn 0",
                 max: "Diện tích không vượt quá 10000 !",
             },
-            description: {
+            departmentDescription: {
                 required: "Vui lòng nhập nhập mô tả gói tập !",
                 minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
                 maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
