@@ -15,7 +15,7 @@
     <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
     <style>
         html, body {
-            height: 130%;
+            height: 100%;
             margin: 0;
         }
     </style>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-md-6 register-tab" id="register-tab">
-        <form action="/register" id="formSubmit" method="post" th:object="${userRegisterDTO}">
+        <form class="mb-4" action="/register" id="formSubmit" method="post" th:object="${userRegisterDTO}">
         <h1 class="fw-bold">ĐĂNG KÝ</h1>
         <div class="line"></div>
             <div class="input-fields">

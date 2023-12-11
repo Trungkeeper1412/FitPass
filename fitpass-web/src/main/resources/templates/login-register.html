@@ -26,7 +26,7 @@
         <div id="login-tab" class="col-md-6 login-tab">
             <h1 class="fw-bold">ĐĂNG NHẬP</h1>
             <div class="line"></div>
-            <form th:action="@{/login}" method='POST'>
+            <form class="mb-4" th:action="@{/login}" method='POST'>
             <div class="input-fields">
                 <div class="input-field">
                     <div class="input-title">Tên đăng nhập</div>
@@ -53,7 +53,7 @@
                 Tên đăng nhập hoặc mật khẩu không chính xác, vui lòng thử lại
             </div>
             <div th:if="${successRegister}" id="toast-info-register" class="alert alert-success"> Đăng ký thành công </div>
-            <a th:href="@{/register}" class="mx-auto text-dark login-register-link">Chưa có tài khoản? Đăng ký ngay!</a>
+            <a th:href="@{/register}" class="mt-4 mx-auto text-dark login-register-link">Chưa có tài khoản? Đăng ký ngay!</a>
         </div>
 
         <div class="col-md-6 banner-wrapper for-md-size">
