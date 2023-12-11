@@ -227,4 +227,10 @@ public interface IRepositoryQuery {
     String COUNT_ALL_USERS_ACCOUNT = """
                 SELECT COUNT(*) FROM user;
             """;
+
+    String RESET_PASSWORD = """
+                UPDATE user
+                SET user_password = ?
+                WHERE user.user_detail_id IN (SELECT user_detail_id FROM user_detail WHERE email = ?);
+            """;
 }
