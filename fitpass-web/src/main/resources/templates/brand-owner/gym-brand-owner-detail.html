@@ -106,7 +106,6 @@
                                                 <option value="">Chọn giới tính</option>
                                                 <option value="Male" th:selected="${gymOwner.getGender().equals('Male')}">Nam</option>
                                                 <option value="Female" th:selected="${gymOwner.getGender().equals('Female')}">Nữ</option>
-                                                <option value="Khác">Khác</option>
                                             </select>
                                             <span th:if="${#fields.hasErrors('gender')}" class="error" th:errors="*{gender}">gender Error</span>
                                         </div>

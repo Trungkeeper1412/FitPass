@@ -105,9 +105,8 @@
                                             <label for="gender" class="form-label fw-bold">Giới Tính :</label>
                                             <select th:field="*{gender}" th:value="${employeeInfo.gender}" class="form-select" id="gender" name="gender">
                                                 <option value="">Chọn giới tính</option>
-                                                <option value="Nam">Nam</option>
-                                                <option value="Nữ">Nữ</option>
-                                                <option value="Khác">Khác</option>
+                                                <option value="Male" th:selected="${employeeInfo.getGender().equals('Male')}">Nam</option>
+                                                <option value="Female" th:selected="${employeeInfo.getGender().equals('Female')}">Nữ</option>
                                             </select>
                                             <span th:if="${#fields.hasErrors('gender')}" class="error" th:errors="*{gender}">gender Error</span>
                                         </div>
