@@ -37,12 +37,6 @@ public class ProfileController {
         this.userService = userService;
     }
 
-    @InitBinder("userUpdateDTO")
-    public void initUserUpdateDTOBinder(WebDataBinder binder) {
-        logger.info("set disallowed field");
-        binder.setDisallowedFields("userPassword", "reUserPassword", "userAccount");
-    }
-
     @ModelAttribute
     public void populateModel(HttpSession session) {
         Object userInfo = session.getAttribute("userInfo");
@@ -93,7 +87,7 @@ public class ProfileController {
     }
 
     @PostMapping("/my-profile/update")
-    public String updateGymOwnerDetails(@ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
+    public String updateGymOwnerDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
                                         BindingResult bindingResult) {
         try {
             if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
