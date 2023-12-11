@@ -5961,8 +5961,16 @@ section {
         /*display: grid;*/
         /*grid-template-rows: 1.5fr 1fr;*/
     }
+    .fp-logo{
+        display: block;
+        width: 100px;
+        height: 100px;
+    }
 }
 @media (min-width: 768px) {
+    .fp-logo{
+        display: none;
+    }
     .register-login-content{
         height: 100%;
         width: 100%;
