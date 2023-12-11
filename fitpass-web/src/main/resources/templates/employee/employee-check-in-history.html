@@ -47,8 +47,7 @@
                             <div class="search-flexible container pb-4">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                                        <form
-                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
                                             <div class="input-group">
                                                 <input type="hidden" id="departmentId" th:value="${departmentId}">
                                                 <input type="text" class="form-control bg-light border-1 small"
@@ -269,7 +268,7 @@
         paginationContainer.empty();
 
         // Generate the previous button
-        const previousLink = $('<a>').addClass('page-link').attr('href', '#').text('Previous');
+        const previousLink = $('<a>').addClass('page-link').attr('href', '#').text('Trước');
         const previousLi = $('<li>').addClass('page-item').append(previousLink);
         paginationContainer.append(previousLi);
 
@@ -291,7 +290,7 @@
         }
 
         // Generate the next button
-        const nextLink = $('<a>').addClass('page-link').attr('href', '#').text('Next');
+        const nextLink = $('<a>').addClass('page-link').attr('href', '#').text('Sau');
         const nextLi = $('<li>').addClass('page-item').append(nextLink);
         paginationContainer.append(nextLi);
 

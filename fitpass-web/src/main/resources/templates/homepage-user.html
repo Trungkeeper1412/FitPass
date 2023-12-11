@@ -356,7 +356,7 @@
                 loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
                 break;
             case error.POSITION_UNAVAILABLE:
-                // Không thể xác định được vị trí
+                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
                 break;
             case error.TIMEOUT:
                 // Quá thời gian để lấy vị trí

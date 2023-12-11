@@ -877,26 +877,32 @@ public class EmployeeControllerTest {
         String username = "john_doe";
         String phoneNumber = "123456789";
         String dateFilter = "2023-01-01";
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any())).thenReturn(Collections.emptyList());
+        int page = 1;
+        int size = 7;
+        int offset = 0;
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size)).thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<List<CheckInHistoryFlexible>> responseEntity = employeeController.searchFlex(departmentId, username, phoneNumber, dateFilter);
+        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, username, phoneNumber, dateFilter,page,size);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(Collections.emptyList(), responseEntity.getBody());
         // Verify that the CheckInHistoryService method is called
-        verify(checkInHistoryService, times(1)).searchListHistoryFlexible(anyInt(), any(), any(), any());
+        verify(checkInHistoryService, times(1)).searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size);
     }
 
     @Test
     public void testSearchFlexEmptyResultDataAccessException() {
         // Arrange
         int departmentId = 1;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any())).thenThrow(EmptyResultDataAccessException.class);
+        int page =1;
+        int size = 7;
+        int offset = 0;
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size)).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
-        ResponseEntity<List<CheckInHistoryFlexible>> responseEntity = employeeController.searchFlex(departmentId, null, null, null);
+        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null,page, size);
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
@@ -906,10 +912,12 @@ public class EmployeeControllerTest {
     public void testSearchFlexDataAccessException() {
         // Arrange
         int departmentId = 1;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-
+        int page = 1;
+        int size = 7;
+        int offset = 0;
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
         // Act
-        ResponseEntity<List<CheckInHistoryFlexible>> responseEntity = employeeController.searchFlex(departmentId, null, null, null);
+        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null, page, size);
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());

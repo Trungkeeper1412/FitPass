@@ -594,15 +594,27 @@ public class EmployeeController {
     }
 
     @GetMapping("/history/searchFlex")
-    public ResponseEntity<List<CheckInHistoryFlexible>> searchFlex(
+    public ResponseEntity<CheckInHistoryPage> searchFlex(
             @RequestParam("id") int departmentId,
             @RequestParam(name = "username", required = false) String username,
             @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
-            @RequestParam(name = "dateFilter", required = false) String dateFilter) {
+            @RequestParam(name = "dateFilter", required = false) String dateFilter,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         try {
-            List<CheckInHistoryFlexible> listFlexible = checkInHistoryService.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
-            return ResponseEntity.ok(listFlexible);
-        } catch (EmptyResultDataAccessException ex) {
+            List<CheckInHistoryFlexible> results = checkInHistoryService.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter, page, size);
+            int totalRecords = checkInHistoryService.countSearchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
+            int totalPages = (int) Math.ceil((double) totalRecords / size);
+
+            CheckInHistoryPage checkInHistoryPage = CheckInHistoryPage.builder()
+                    .listFlexible(results)
+                    .totalPages(totalPages)
+                    .currentPage(page)
+                    .departmentId(departmentId)
+                    .build();
+            return ResponseEntity.ok(checkInHistoryPage);
+        }
+        catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
