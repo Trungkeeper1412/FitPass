@@ -71,8 +71,8 @@
                         <div class="input-title">Giới tính</div>
                         <select class="form-select" id="gender" name="gender" style="padding: 8px; border: 2px solid #e1e1e1;" th:field="*{gender}">
                             <option value="">Chọn giới tính</option>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
+                            <option value="Male">Nam</option>
+                            <option value="Female">Nữ</option>
                         </select>
                         <span class="error" th:errors="*{gender}" th:if="${#fields.hasErrors('gender')}">gender Error</span>
                     </div>
