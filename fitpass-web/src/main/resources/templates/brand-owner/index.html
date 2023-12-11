@@ -121,7 +121,7 @@
                                             <td th:text="${iterStat.index + 1}">1</td>
                                             <td th:text="${d.departmentName}">City Gym Thái Thành</td>
                                             <td th:text="${d.numberOfGymPlanSold + ' gói'}">185 gói</td>
-                                            <td th:text="${d.totalAmount + ' VNĐ'}">45.000.000 VNĐ</td>
+                                            <td class="money-value" th:text="${d.totalAmount}">45.000.000 VNĐ</td>
                                         </tr>
                                     </th:block>
                                     </tbody>
@@ -284,6 +284,12 @@
 
 <th:block th:replace="brand-owner/common/script"></th:block>
 
+<script>
+    const money_elements = document.querySelectorAll('.money-value');
+    money_elements.forEach((element) => {
+        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+    });
+</script>
 </body>
 
 </html>
