@@ -69,10 +69,13 @@ public interface IRepositoryQuery {
                      b.rating,
                      b.contact_number,
                      b.contact_email,
-                 
-                     b.brand_status_key
+                     b.brand_status_key,
+                     kbn_brand_status.mst_kbn_value AS brand_status_name                    
                  FROM brand b
-                 WHERE b.brand_id = ?
+                                  LEFT JOIN mst_kbn kbn_brand_status
+                                      ON b.brand_status_key = kbn_brand_status.mst_kbn_key
+                                      AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS' 
+                                      WHERE b.brand_id = ?
             """;
 
     String GET_BRAND_AMENITIES_BRAND_ID = """

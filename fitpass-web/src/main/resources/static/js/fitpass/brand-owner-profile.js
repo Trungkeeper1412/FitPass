@@ -454,7 +454,7 @@ $(document).ready(function () {
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
                 number: "Vui lòng nhập số điện thoại !",
-                minlength: 'Đầu số phải có ít nhất 8 số !',
+                minlength: 'Đầu số phải có ít nhất 10 số !',
                 maxlength: 'Số điện thoại có tối đa 11 số !',
                 correctNumber: "Đầu số không đúng định dạng !",
             },
