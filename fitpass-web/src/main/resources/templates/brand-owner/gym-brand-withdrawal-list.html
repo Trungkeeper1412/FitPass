@@ -84,7 +84,7 @@
                                     <form id="withdrawForm" method="post" action="/brand-owner/withdrawal/add"
                                           onsubmit="return validateForm()">
                                         <div class="mb-4">
-                                            <label for="cardSelect" class="form-label">Chọn thẻ ngân hàng :</label>
+                                            <label for="cardSelect" class="form-label">Chọn tài khoản ngân hàng :</label>
                                             <select class="form-select" id="cardSelect" name="cardId">
                                                 <th:block th:each="c : ${creditCardList}">
                                                     <option th:value="${c.getCreditCardId()}">
