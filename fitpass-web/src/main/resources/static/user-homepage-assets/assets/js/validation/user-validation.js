@@ -149,6 +149,18 @@ $(document).ready(function () {
                 equalTo: "Xác nhận mật khẩu phải giống với mật khẩu",
             }
         },
+        submitHandler: function (form) {
+            // Lấy giá trị reCAPTCHA response
+            const recaptchaResponse = grecaptcha.getResponse();
+
+            // Kiểm tra xem reCAPTCHA response có giá trị hay không
+            if (recaptchaResponse.length === 0) {
+                alert('Vui lòng hoàn thành reCAPTCHA trước khi submit form.');
+            } else {
+                // Nếu reCAPTCHA đã được hoàn thành, tiếp tục submit form
+                form.submit();
+            }
+        },
     });
 
     $("#updateInfo").click(function () {
