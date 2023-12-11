@@ -97,7 +97,7 @@ $(document).ready(function () {
             username: {
                 required: true,
                 minlength: 6,
-                maxlength: 50,
+                maxlength: 20,
                 pattern: /^[a-zA-Z0-9]+$/,
             },
             phone: {
@@ -175,7 +175,7 @@ $(document).ready(function () {
             username: {
                 required: "Vui lòng nhập tên đăng nhập !",
                 minlength: "Tên đăng nhập phải có ít nhất 6 kí tự !",
-                maxlength: "Tên đăng nhập không được vượt quá 50 kí tự !",
+                maxlength: "Tên đăng nhập không được vượt quá 20 kí tự !",
                 pattern: "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt !",
             },
             phone: {

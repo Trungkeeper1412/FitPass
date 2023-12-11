@@ -6019,7 +6019,6 @@ section {
     width: 100%;
     border: 2px solid #e1e1e1;
     border-radius: 8px;
-    margin: 2px 0;
     outline: none;
     padding: 8px;
     box-sizing: border-box;
@@ -6144,7 +6143,7 @@ section {
 
 .login-register-body .lname {
     float: right;
-    margin-left: 10px;
+    margin-left: 20px;
     width: 100%;
 }
 
@@ -6174,7 +6173,7 @@ section {
     float: right;
     height: fit-content;
     margin-left: 20px;
-    width: 50%;
+    width: 100%;
 }
 
 @keyframes show {
