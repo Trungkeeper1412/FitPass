@@ -206,8 +206,8 @@ public class BrandOwnerController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
 
-            redirectAttributes.addFlashAttribute("success", true);
-            return "redirect:/brand-owner/password?success=true";
+            redirectAttributes.addAttribute("success", "true");
+            return "redirect:/brand-owner/password";
         } catch (Exception ex) {
             // Handle other exceptions
             logger.error("Exception occurred in changePassword", ex);

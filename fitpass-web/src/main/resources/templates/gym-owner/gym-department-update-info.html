@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label class="fw-bold" for="openHours">Giờ hoạt động:</label><br>
-                                        <div class="mb-4 d-flex align-items-center align-content-center" id="openHours">
+                                        <div class="mb-2 d-flex align-items-center align-content-center" id="openHours">
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectOpenHoursModal">
                                                 Chọn giờ
                                             </button>
@@ -257,37 +257,41 @@
 
 <script>
 
-    $("#updateInfo").click(function (e) {
-        e.preventDefault();
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
 
-        if ($("#formUpdate").valid()) {
+        if (successParam === 'true') {
             Swal.fire({
-                title: 'Bạn có muốn cập nhật thông tin cơ sở',
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Cập nhật thông tin thành công.',
+                confirmButtonText: 'Đóng',
+            });
+        }
+
+        $('#formUpdate').submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
                 icon: 'question',
+                title: 'Bạn có muốn cập nhật thông tin cơ sở ?',
+                showConfirmButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'Có',
-                cancelButtonText: 'Không',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $("#formUpdate").submit();
+                    this.submit();
+                } else if (result.isDismissed || result.isDenied) {
                     Swal.fire({
-                        title: 'Thành công!',
-                        text: 'Cập nhật thông tin thành công.',
-                        icon: 'success',
-                        showConfirmButton: true,
-                        timer: 3000
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Thất bại!',
-                        text: 'Cập nhật thông tin thất bại.',
                         icon: 'error',
-                        showConfirmButton: true,
-                        timer: 1500
+                        title: 'Thất bại!',
+                        text: 'Cập nhật thông tin thất bại !',
+                        confirmButtonText: 'Đóng',
                     });
                 }
             });
-        }
+        });
     });
 
     function convertTimeStringToTimeValue(timeString) {

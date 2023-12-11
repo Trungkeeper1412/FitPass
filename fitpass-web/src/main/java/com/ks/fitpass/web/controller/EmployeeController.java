@@ -127,10 +127,9 @@ public class EmployeeController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
 
-            // Redirect hoặc hiển thị thông báo thành công
-            redirectAttributes.addFlashAttribute("success", true);
             model.addAttribute("departmentId", userDepartmentId);
-            return "redirect:/employee/changePassword?success=true";
+            redirectAttributes.addAttribute("success", "true");
+            return "redirect:/employee/changePassword";
         } catch (Exception e) {
             // Handle other exceptions if necessary
             model.addAttribute("unexpectedError", "Lỗi không xác định");

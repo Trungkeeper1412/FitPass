@@ -173,8 +173,8 @@ public class GymOwnerController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
             // Redirect hoặc hiển thị thông báo thành công
-            redirectAttributes.addFlashAttribute("success", true);
-            return "redirect:/gym-owner/profile?success=true";
+            redirectAttributes.addAttribute("success", "true");
+            return "redirect:/gym-owner/profile";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
@@ -674,7 +674,7 @@ public class GymOwnerController {
 
     @PostMapping("/department/info")
     public String updateDepartmentInfo(@Valid @ModelAttribute UpdateGymOwnerDepartmentInfo updateGymOwnerDepartmentInfo,
-                                       BindingResult bindingResult, HttpSession session, Model model) {
+                                       BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
             if (bindingResult.hasErrors()) {
@@ -734,6 +734,7 @@ public class GymOwnerController {
             int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
 
             TimeUnit.SECONDS.sleep(2);
+            redirectAttributes.addAttribute("success", "true");
             return "redirect:/gym-owner/department/info";
         } catch (InterruptedException ex) {
             // Handle InterruptedException

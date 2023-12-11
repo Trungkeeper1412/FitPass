@@ -38,6 +38,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -359,7 +360,7 @@ public class AdminController {
     }
 
     @PostMapping("/withdrawal/update-status")
-    public String updateWithdrawalStatus(@RequestParam int requestHistoryId, HttpSession session) {
+    public String updateWithdrawalStatus(@RequestParam int requestHistoryId, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             User admin = (User) session.getAttribute("userInfo");
             String status = "Thành công";
@@ -383,7 +384,8 @@ public class AdminController {
         } catch (DataAccessException e) {
             return "error/data-access-error";
         }
-        return "redirect:/admin/withdrawal?success=true";
+        redirectAttributes.addAttribute("success", "true");
+        return "redirect:/admin/withdrawal";
     }
 
     @GetMapping("/withdrawal/history")
