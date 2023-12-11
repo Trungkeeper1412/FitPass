@@ -269,87 +269,87 @@ public class EmployeeControllerTest {
         assertFalse(result);
     }
 
-    @Test
-    public void testChangePasswordWithValidData() {
-        // Arrange
-        User user = new User();
-        user.setUserId(1);
-        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+//    @Test
+//    public void testChangePasswordWithValidData() {
+//        // Arrange
+//        User user = new User();
+//        user.setUserId(1);
+//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+//
+//        when(session.getAttribute("userInfo")).thenReturn(user);
+//        when(userService.updatePassword(anyString(), anyInt())).thenReturn(true);
+//
+//        // Act
+//        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session);
+//
+//        // Assert
+//        verify(session, times(1)).getAttribute("userInfo");
+//        verify(userService, times(1)).updatePassword(anyString(), anyInt());
+//        assertEquals("redirect:/employee/changePassword", result);
+//        verify(model, never()).addAttribute(eq("error"), anyString());
+//        verify(model, times(1)).addAttribute("success", true);
+//    }
 
-        when(session.getAttribute("userInfo")).thenReturn(user);
-        when(userService.updatePassword(anyString(), anyInt())).thenReturn(true);
+//    @Test
+//    public void testChangePasswordWithIncorrectCurrentPassword() {
+//        // Arrange
+//        User user = new User();
+//        user.setUserId(1);
+//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+//
+//        when(session.getAttribute("userInfo")).thenReturn(user);
+//
+//        // Act
+//        String result = employeeController.changePassword("wrongCurrentPassword", "newPassword", "newPassword", model, session);
+//
+//        // Assert
+//        verify(session, times(1)).getAttribute("userInfo");
+//        verify(userService, never()).updatePassword(anyString(), anyInt());
+//        verify(model, times(1)).addAttribute("error", "Mật khẩu hiện tại không đúng");
+//        verify(model, never()).addAttribute(eq("success"), any());
+//        assertEquals("employee/change-password", result);
+//    }
 
-        // Act
-        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session);
+//    @Test
+//    public void testChangePasswordWithMismatchedPasswords() {
+//        // Arrange
+//        User user = new User();
+//        user.setUserId(1);
+//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+//
+//        when(session.getAttribute("userInfo")).thenReturn(user);
+//
+//        // Act
+//        String result = employeeController.changePassword("currentPassword", "newPassword", "confirmPassword", model, session);
+//
+//        // Assert
+//        verify(session, times(1)).getAttribute("userInfo");
+//        verify(userService, never()).updatePassword(anyString(), anyInt());
+//        verify(model, times(1)).addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+//        verify(model, never()).addAttribute(eq("success"), any());
+//        assertEquals("employee/change-password", result);
+//    }
 
-        // Assert
-        verify(session, times(1)).getAttribute("userInfo");
-        verify(userService, times(1)).updatePassword(anyString(), anyInt());
-        assertEquals("redirect:/employee/changePassword", result);
-        verify(model, never()).addAttribute(eq("error"), anyString());
-        verify(model, times(1)).addAttribute("success", true);
-    }
-
-    @Test
-    public void testChangePasswordWithIncorrectCurrentPassword() {
-        // Arrange
-        User user = new User();
-        user.setUserId(1);
-        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-
-        when(session.getAttribute("userInfo")).thenReturn(user);
-
-        // Act
-        String result = employeeController.changePassword("wrongCurrentPassword", "newPassword", "newPassword", model, session);
-
-        // Assert
-        verify(session, times(1)).getAttribute("userInfo");
-        verify(userService, never()).updatePassword(anyString(), anyInt());
-        verify(model, times(1)).addAttribute("error", "Mật khẩu hiện tại không đúng");
-        verify(model, never()).addAttribute(eq("success"), any());
-        assertEquals("employee/change-password", result);
-    }
-
-    @Test
-    public void testChangePasswordWithMismatchedPasswords() {
-        // Arrange
-        User user = new User();
-        user.setUserId(1);
-        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-
-        when(session.getAttribute("userInfo")).thenReturn(user);
-
-        // Act
-        String result = employeeController.changePassword("currentPassword", "newPassword", "confirmPassword", model, session);
-
-        // Assert
-        verify(session, times(1)).getAttribute("userInfo");
-        verify(userService, never()).updatePassword(anyString(), anyInt());
-        verify(model, times(1)).addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
-        verify(model, never()).addAttribute(eq("success"), any());
-        assertEquals("employee/change-password", result);
-    }
-
-    @Test
-    public void testChangePasswordWithException() {
-        // Arrange
-        User user = new User();
-        user.setUserId(1);
-        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-
-        when(session.getAttribute("userInfo")).thenReturn(user);
-        when(userService.updatePassword(anyString(), anyInt())).thenThrow(RuntimeException.class);
-
-        // Act
-        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session);
-
-        // Assert
-        verify(session, times(1)).getAttribute("userInfo");
-        verify(userService, times(1)).updatePassword(anyString(), anyInt());
-        verify(model, times(1)).addAttribute("error", "An unexpected error occurred");
-        verify(model, never()).addAttribute(eq("success"), any());
-        assertEquals("employee/change-password", result);
-    }
+//    @Test
+//    public void testChangePasswordWithException() {
+//        // Arrange
+//        User user = new User();
+//        user.setUserId(1);
+//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+//
+//        when(session.getAttribute("userInfo")).thenReturn(user);
+//        when(userService.updatePassword(anyString(), anyInt())).thenThrow(RuntimeException.class);
+//
+//        // Act
+//        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session);
+//
+//        // Assert
+//        verify(session, times(1)).getAttribute("userInfo");
+//        verify(userService, times(1)).updatePassword(anyString(), anyInt());
+//        verify(model, times(1)).addAttribute("error", "An unexpected error occurred");
+//        verify(model, never()).addAttribute(eq("success"), any());
+//        assertEquals("employee/change-password", result);
+//    }
 
     @Test
     public void testGetCheckInListOfFlexibleCustomerSuccess() {

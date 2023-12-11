@@ -42,10 +42,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Controller
@@ -69,24 +71,34 @@ public class BrandOwnerController {
 
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 
-    //Index (Statistic Dashboard)
+    @ModelAttribute
+    public void populateBrandOwnerInfo(HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        Brand brandDetails = brandService.getBrandDetail(user.getUserId());
+        double credit = walletService.getBalanceByUserId(user.getUserId());
+
+        session.setAttribute("brandDetails",brandDetails);
+        session.setAttribute("userCredit", credit);
+    }
+
     @GetMapping("/index")
     public String getBOIndex(HttpSession session, Model model) {
         try {
-            User user = (User) session.getAttribute("userInfo");
-            Brand brandDetails = brandService.getBrandDetail(user.getUserId());
+            Brand brandDetails = (Brand) session.getAttribute("brandDetails");
 
-            int numberOfGymplan = gymPlanService.getNumberOfGymPlan(brandDetails.getBrandId());
+            int brandId = brandDetails.getBrandId();
 
-            int numberOfOrder = orderService.getNumberOfOrder(brandDetails.getBrandId());
+            int numberOfGymplan = gymPlanService.getNumberOfGymPlan(brandId);
 
-            int totalRevenue = orderService.getTotalRevenue(brandDetails.getBrandId());
+            int numberOfOrder = orderService.getNumberOfOrder(brandId);
 
-            int totalRating = brandService.getTotalRating(brandDetails.getBrandId());
+            int totalRevenue = orderService.getTotalRevenue(brandId);
 
-            List<DepartmentStatBrandOwner> departmentStatBrandOwnerList = departmentService.getDepartmentStatBrandOwner(brandDetails.getBrandId());
+            int totalRating = brandService.getTotalRating(brandId);
 
-            List<DepartmentRatingStatBrandOwner> departmentRatingStatBrandOwnerList = departmentService.getDepartmentRatingStatBrandOwner(brandDetails.getBrandId());
+            List<DepartmentStatBrandOwner> departmentStatBrandOwnerList = departmentService.getDepartmentStatBrandOwner(brandId);
+
+            List<DepartmentRatingStatBrandOwner> departmentRatingStatBrandOwnerList = departmentService.getDepartmentRatingStatBrandOwner(brandId);
 
             model.addAttribute("numberOfGymplan", numberOfGymplan);
             model.addAttribute("numberOfOrder", numberOfOrder);
@@ -94,8 +106,6 @@ public class BrandOwnerController {
             model.addAttribute("totalRating", totalRating);
             model.addAttribute("departmentStatBrandOwnerList", departmentStatBrandOwnerList);
             model.addAttribute("departmentRatingStatBrandOwnerList", departmentRatingStatBrandOwnerList);
-            model.addAttribute("brandDetails", brandDetails);
-
             return "brand-owner/index";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -120,8 +130,6 @@ public class BrandOwnerController {
     @GetMapping("/profile")
     public String getBrandProfile(HttpSession session, Model model) {
         try {
-
-
             User user = (User) session.getAttribute("userInfo");
             Brand brandDetails = brandService.getBrandDetail(user.getUserId());
             model.addAttribute("brandDetails", brandDetails);
@@ -179,28 +187,27 @@ public class BrandOwnerController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model, HttpSession session) {
+                                 Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             User user = (User) session.getAttribute("userInfo");
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "brand-owner/gym-brand-update-password";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "brand-owner/gym-brand-update-password";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
 
-            // Redirect hoặc hiển thị thông báo thành công
-            model.addAttribute("success", true);
-            return "redirect:/brand-owner/password";
+            redirectAttributes.addFlashAttribute("success", true);
+            return "redirect:/brand-owner/password?success=true";
         } catch (Exception ex) {
             // Handle other exceptions
             logger.error("Exception occurred in changePassword", ex);
@@ -1157,7 +1164,7 @@ try {
 
     @PostMapping("/withdrawal/add")
     public String addWithdrawal(@RequestParam int cardId, @RequestParam double creditAmount,
-                                @RequestParam  double moneyAmount, HttpSession session, Model model) {
+                                @RequestParam  double moneyAmount, HttpSession session, RedirectAttributes attributes) {
         try {
             User user = (User) session.getAttribute("userInfo");
             double userBalance = walletService.getBalanceByUserId(user.getUserId());
@@ -1165,8 +1172,8 @@ try {
             Brand b = brandService.getBrandDetail(user.getUserId());
             int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
             if (creditAmount > userBalance) {
-                model.addAttribute("errorCredit", "Số Credit muốn rút không được lớn hơn số dư hiện tại (Credit)");
-            }else {
+                attributes.addFlashAttribute("errorCredit", "Số credit muốn rút phải nhỏ hơn hoặc bằng số dư hiện tại.");
+            } else {
                 RequestWithdrawHistory requestWithdrawHistory = new RequestWithdrawHistory();
                 requestWithdrawHistory.setCreditCardId(cardId);
                 requestWithdrawHistory.setAmountCredit((long) creditAmount);
@@ -1177,7 +1184,12 @@ try {
                 requestWithdrawHistory.setStatus("Đang xử lý");
                 requestWithdrawHistoryService.create(requestWithdrawHistory);
             }
+            TimeUnit.SECONDS.sleep(2);
             return "redirect:/brand-owner/withdrawal/list";
+        } catch (InterruptedException ex) {
+            // Handle InterruptedException
+            logger.error("InterruptedException occurred", ex);
+            return "error/error";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);

@@ -176,7 +176,7 @@ public interface IRepositoryQuery {
             """;
 
     String CHECK_USERNAME_EXIST = """
-                SELECT COUNT(*) FROM user WHERE user_account LIKE '%?%';
+                SELECT COUNT(*) FROM user WHERE user_account = ?;
             """;
 
     String CHECK_ACCOUNT_FIRST_TIME_LOGIN = """

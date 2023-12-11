@@ -316,6 +316,7 @@ a:hover {
     background: #fff;
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
+    border-radius: 30px;
 }
 
 .view-all-notification-link {
@@ -3352,29 +3353,10 @@ input[type="radio"]:checked {
 
 .change-pw .field-icon {
     float: right;
-    margin-left: -25px;
-    margin-top: -32px;
-    margin-right: 8px;
+    margin-top: -34px;
+    margin-right: 10px;
     position: relative;
     z-index: 2;
-}
-
-.pw-format {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: fit-content;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 0 0 25px 0 rgb(193, 193, 193);
-    font-size: 14px;
-}
-
-.pw-format img {
-    width: 18px;
-}
-
-.pw-details {
-    padding: 10px 15px;
 }
 
 .change-pw button {
@@ -6037,7 +6019,6 @@ section {
     width: 100%;
     border: 2px solid #e1e1e1;
     border-radius: 8px;
-    margin: 2px 0;
     outline: none;
     padding: 8px;
     box-sizing: border-box;
@@ -6162,7 +6143,7 @@ section {
 
 .login-register-body .lname {
     float: right;
-    margin-left: 10px;
+    margin-left: 20px;
     width: 100%;
 }
 
@@ -6192,7 +6173,7 @@ section {
     float: right;
     height: fit-content;
     margin-left: 20px;
-    width: 50%;
+    width: 100%;
 }
 
 @keyframes show {
@@ -6237,7 +6218,6 @@ section {
 }
 .forgot-pw-body .forgot-pw-title{
     color: white;
-    background-color: none;
 }
 .forgot-pw-body .box{
     margin: auto;

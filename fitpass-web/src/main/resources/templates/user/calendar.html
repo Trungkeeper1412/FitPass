@@ -317,6 +317,44 @@
 <script th:src="@{/user-homepage-assets/assets/js/packages/daygrid/index.global.js}"></script>
 <script th:src="@{/user-homepage-assets/assets/js/packages/interaction/index.global.js}"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var successParam = urlParams.get('success');
+
+        if (successParam === 'true') {
+            // Hiển thị SweetAlert khi đánh giá được gửi thành công
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Cảm ơn bạn đã chia sẻ ý kiến với chúng tôi.',
+                showConfirmButton: true,
+                confirmButtonText: 'Đóng',
+                timer: 5000
+            });
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var updateSuccessParam = urlParams.get('updateSuccess');
+
+        if (updateSuccessParam === 'true') {
+            // Hiển thị SweetAlert khi cập nhật đánh giá thành công
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Đánh giá của bạn đã được cập nhật.',
+                showConfirmButton: true,
+                confirmButtonText: 'Đóng',
+                timer: 5000
+            });
+        }
+    });
+</script>
+
 </body>
 
 </html>

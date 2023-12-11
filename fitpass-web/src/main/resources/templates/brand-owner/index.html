@@ -85,7 +85,7 @@
                                             Số lượt đánh giá
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <div style="margin-right: 10px" th:attr="data-star=${brandDetails.rating}"></div>
+                                            <div style="margin-right: 10px" th:attr="data-star=${session.brandDetails.getRating()}"></div>
                                             <span th:text="${totalRating}">123</span>
                                         </div>
                                     </div>

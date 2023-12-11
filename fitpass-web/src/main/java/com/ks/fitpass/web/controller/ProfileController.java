@@ -37,12 +37,6 @@ public class ProfileController {
         this.userService = userService;
     }
 
-    @InitBinder("userUpdateDTO")
-    public void initUserUpdateDTOBinder(WebDataBinder binder) {
-        logger.info("set disallowed field");
-        binder.setDisallowedFields("userPassword", "reUserPassword", "userAccount");
-    }
-
     @ModelAttribute
     public void populateModel(HttpSession session) {
         Object userInfo = session.getAttribute("userInfo");
@@ -93,7 +87,7 @@ public class ProfileController {
     }
 
     @PostMapping("/my-profile/update")
-    public String updateGymOwnerDetails(@ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
+    public String updateGymOwnerDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
                                         BindingResult bindingResult) {
         try {
             if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
@@ -185,12 +179,12 @@ public class ProfileController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "user/user-change-password";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "user/user-change-password";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
@@ -199,7 +193,7 @@ public class ProfileController {
 
             // Redirect hoặc hiển thị thông báo thành công
             model.addAttribute("success", true);
-            return "redirect:/profile/change-password";
+            return "redirect:/profile/change-password?success=true";
         }
         catch (Exception e) {
             // Handle the exception, you can log it or return an error response

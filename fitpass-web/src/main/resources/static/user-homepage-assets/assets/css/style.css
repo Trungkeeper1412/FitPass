@@ -239,6 +239,7 @@ h6 {
   background: #fff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
+  border-radius: 30px;
 }
 
 .view-all-noti{
@@ -3102,4 +3103,35 @@ label.error {
   margin-top: 3px;
   display: block;
   position: absolute;
+}
+
+.custom-form {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-form p {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-form img {
+  width: 100%;
+}
+
+.custom-form-btn {
+  font-weight: bold;
+  color: black;
+  background-color: rgb(255, 196, 0);
+  padding: 10px;
+  width: 120px;
+  border-radius: 30px;
+}
+
+.custom-form-btn:hover {
+  background-color: rgb(255, 176, 0);
+  color: black;
 }

@@ -38,11 +38,11 @@
                                         <div class="card-body">
                                             <h5 class="card-title fw-bold">Thêm Thẻ Ngân Hàng</h5>
                                             <form id="bankCardForm">
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="cardHolder" class="form-label">Họ Tên Chủ Thẻ</label>
                                                     <input type="text" class="form-control" id="cardHolder" name="cardHolder" required>
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="bankType" class="form-label">Loại Ngân Hàng</label>
                                                     <select class="form-select" id="bankType" name="bankType" required>
                                                         <option value="acb">ACB</option>
@@ -65,12 +65,12 @@
                                                         <option value="vpbank">VPBank</option>
                                                     </select>
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-4">
                                                     <label for="accountNumber" class="form-label">Số Tài Khoản</label>
                                                     <input type="number" class="form-control" id="accountNumber" name="accountNumber" required>
                                                 </div>
                                                 <div class="d-flex justify-content-center">
-                                                    <button type="button" class="btn btn-primary" onclick="addBankCard()">Thêm Thẻ</button>
+                                                    <button type="button" class="btn btn-primary" onclick="addBankCard()" id="addCard">Thêm Thẻ</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -83,12 +83,12 @@
                                         <div class="card-body bank-card">
                                             <h5 class="card-title fw-bold">Danh Sách Thẻ Ngân Hàng</h5>
                                             <ul id="cardList" class="list-group">
-                                                <!-- Hiển thị danh sách thẻ ngân hàng ở đây -->
+                                                <!-- Hiển thị danh sách thẻ ngân hàng -->
                                                 <th:block th:each="c : ${creditCardList}">
                                                     <li th:attr="data-creditCardId=${c.getCreditCardId()}, data-cardHolder=${c.getCardOwnerName()},
                                                     data-bankType=${c.getBankName()}, data-accountNumber=${c.getCardNumber()}"
                                                         th:onclick="showCardInfo(this)"
-                                                        class="list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-3">
+                                                        class="list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-4">
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-credit-card-2-front fs-1 pr-3"></i>
                                                             <span class="fs-4 text-uppercase" th:text="${c.getBankName()}">agribank</span>

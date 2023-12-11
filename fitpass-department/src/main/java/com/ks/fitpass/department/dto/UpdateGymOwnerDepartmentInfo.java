@@ -42,7 +42,7 @@ public class UpdateGymOwnerDepartmentInfo {
 
     @NotNull(message = "Vui lòng nhập diện tích của cơ sở !")
     @Min(value = 1, message = "Diện tích phải lớn hơn 0")
-    @Min(value = 10000, message = "Diện tích không vượt quá 10000")
+    @Max(value = 10000, message = "Diện tích không vượt quá 10000")
     private Double area;
 
     @NotEmpty(message = "Vui lòng chọn thành phố !")

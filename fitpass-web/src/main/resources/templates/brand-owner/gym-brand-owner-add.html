@@ -75,7 +75,6 @@
                                                 <option value="">Chọn giới tính</option>
                                                 <option value="Male">Nam</option>
                                                 <option value="Female">Nữ</option>
-                                                <option value="Khác">Khác</option>
                                             </select>
                                             <span th:if="${#fields.hasErrors('gender')}" class="error" th:errors="*{gender}"></span>
                                         </div>
@@ -174,9 +173,11 @@
         }
     }
 
-    $("#addGymOwner").click(function (e) {
-        e.preventDefault();
+</script>
 
+<script>
+    $("#addGymOwner").click(function (e) {
+        e.preventDefault()
         // Thực hiện validation trước khi xử lý form
         if ($("#formSubmit").valid()) {
             Swal.fire({
@@ -184,30 +185,17 @@
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Có',
-                cancelButtonText: 'Không',
+                cancelButtonText: 'Không'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    // Chỉ submit form nếu người dùng chấp nhận
+                    $("#formSubmit").submit();
                     Swal.fire({
-                        title: 'Vui lòng đợi...',
-                        icon: 'info',
+                        title: 'Thành công!',
+                        text: 'Chủ cơ sở mới đã được thêm thành công.',
+                        icon: 'success',
                         showConfirmButton: false,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading();
-                            setTimeout(() => {
-                                $("#formSubmit").submit();
-                                Swal.close();
-                            }, 2000);
-                        },
-                        didClose: () => {
-                            Swal.fire({
-                                title: 'Thành công!',
-                                text: 'Chủ cơ sở mới đã được thêm thành công.',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                        }
+                        timer: 3000
                     });
                 } else {
                     Swal.fire({
@@ -221,7 +209,6 @@
             });
         }
     });
-
 </script>
 
 </body>

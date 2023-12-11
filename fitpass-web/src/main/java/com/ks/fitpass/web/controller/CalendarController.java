@@ -118,7 +118,9 @@ public class CalendarController {
 
             // nhét nó lại vào bảng check_in_history
             calendarService.insertCheckInHistoryFeedback(feedbackId, checkInHistoryId);
-            return "redirect:/calendar/view";
+
+            // Hiển thị SweetAlert khi đánh giá được gửi thành công
+            return "redirect:/calendar/view?success=true";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
@@ -151,7 +153,9 @@ public class CalendarController {
             userFeedback.setComments(comments);
             userFeedback.setFeedbackTime(LocalDateTime.now());
             calendarService.updateCalendarFeedbackRating(feedbackId, userFeedback);
-            return "redirect:/calendar/view";
+
+            // Hiển thị SweetAlert khi cập nhật đánh giá thành công
+            return "redirect:/calendar/view?updateSuccess=true";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
