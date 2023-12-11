@@ -108,6 +108,11 @@ public class MainController {
             logger.error("Email already exists: {}", userRegisterDTO.getEmail());
         }
 
+        if (userService.checkUsernameExist(userRegisterDTO.getUserAccount())) {
+            bindingResult.rejectValue("userAccount", "error.userAccount", "Tên đăng nhập đã tồn tại !");
+            logger.error("User Name already exists: {}", userRegisterDTO.getUserAccount());
+        }
+
         if (!userRegisterDTO.getUserPassword().equals(userRegisterDTO.getReUserPassword())) {
             bindingResult.rejectValue("reUserPassword", "error.reUserPassword", "Mật khẩu và xác nhận mật khẩu không khớp !");
             logger.error("Password and Confirm Password do not match");
