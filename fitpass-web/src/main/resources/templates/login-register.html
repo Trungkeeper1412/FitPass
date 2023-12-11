@@ -23,6 +23,9 @@
         </div>
 
         <div id="login-tab" class="col-md-6 login-tab">
+            <a th:href="@{/landing-page}">
+                <img class="fp-logo" th:src="@{/user-homepage-assets/assets/img/3.png}">
+            </a>
             <h1 class="fw-bold">ĐĂNG NHẬP</h1>
             <div class="line"></div>
             <form class="mb-4" th:action="@{/login}" method='POST'>
