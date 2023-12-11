@@ -3,13 +3,16 @@ package com.ks.fitpass.brand.entity;
 import com.ks.fitpass.brand.entity.BrandStatus;
 import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Brand {
+public class Brand implements Serializable {
 
     private int brandId;
 

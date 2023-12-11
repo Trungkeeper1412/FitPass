@@ -35,6 +35,7 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class BrandOwnerControllerTest {
     private HttpSession session;
     @Mock
     private Model model;
+    @Mock
+    private RedirectAttributes attributes;
 
 
     @Mock
@@ -1842,7 +1845,7 @@ public class BrandOwnerControllerTest {
         when(walletService.getBalanceByUserId(user.getUserId())).thenReturn(userBalance);
 
         // Act
-        String result = brandOwnerController.addWithdrawal(cardId, creditAmount, moneyAmount, session, model);
+        String result = brandOwnerController.addWithdrawal(cardId, creditAmount, moneyAmount, session, attributes);
 
         // Assert
         verify(walletService, times(1)).getBalanceByUserId(user.getUserId());
@@ -1864,7 +1867,7 @@ public class BrandOwnerControllerTest {
         when(walletService.getBalanceByUserId(user.getUserId())).thenReturn(userBalance);
 
         // Act
-        String result = brandOwnerController.addWithdrawal(cardId, creditAmount, moneyAmount, session, model);
+        String result = brandOwnerController.addWithdrawal(cardId, creditAmount, moneyAmount, session, attributes);
 
         // Assert
         verify(walletService, times(1)).getBalanceByUserId(user.getUserId());
@@ -1882,7 +1885,7 @@ public class BrandOwnerControllerTest {
         when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(DuplicateKeyException.class);
 
         // Act
-        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, attributes);
 
         // Assert
         assertEquals("error/duplicate-key-error", result);
@@ -1898,7 +1901,7 @@ public class BrandOwnerControllerTest {
         when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
-        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, attributes);
 
         // Assert
         assertEquals("error/no-data", result);
@@ -1914,7 +1917,7 @@ public class BrandOwnerControllerTest {
         when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(IncorrectResultSizeDataAccessException.class);
         when(brandService.getBrandDetail(user.getUserId())).thenReturn(new Brand());
         // Act
-        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, attributes);
 
         // Assert
         assertEquals("error/incorrect-result-size-error", result);
@@ -1930,7 +1933,7 @@ public class BrandOwnerControllerTest {
         when(requestWithdrawHistoryService.create(any(RequestWithdrawHistory.class))).thenThrow(new DataAccessException("Simulated DataAccessException") {});
 
         // Act
-        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, model);
+        String result = brandOwnerController.addWithdrawal(1, 50L, 50L, session, attributes);
 
         // Assert
         assertEquals("error/data-access-error", result);

@@ -362,6 +362,12 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $.validator.addMethod("lessThanOrEqualCurrentBalance", function(value, element) {
+        var currentBalance = parseFloat($('#currentBalance').val());
+        var creditAmount = parseFloat(value);
+        return this.optional(element) || creditAmount <= currentBalance;
+    }, "Số credit muốn rút phải nhỏ hơn hoặc bằng số dư hiện tại.");
+
     $("#withdrawForm").validate({
         rules: {
             cardId: {
@@ -371,6 +377,7 @@ $(document).ready(function () {
                 required: true,
                 min: 10000,
                 max: 1000000,
+                lessThanOrEqualCurrentBalance: true
             },
         },
         messages: {
