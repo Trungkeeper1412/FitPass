@@ -23,6 +23,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.ks.fitpass.core.service.UserService;
+import com.ks.fitpass.web.util.Email;
+import com.ks.fitpass.web.util.WebUtil;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +37,7 @@ public class MainController {
     private final UserService userService;
     private final WalletService walletService;
     private final UserRepository userRepository;
+    private final Email emailService;
     private final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @GetMapping("/")
@@ -87,8 +95,26 @@ public class MainController {
         return "show-info";
     }
 
+    @GetMapping("/forgot-password/reset")
+    public ResponseEntity<?> forgotPwPost(@RequestParam("email") String email) {
+
+        String randomPassword = WebUtil.generateRandomPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(randomPassword);
+
+        boolean emailExists = userService.checkEmailExist(email);
+        if(!emailExists){
+            return ResponseEntity.badRequest().build();
+        }
+
+        int userResetPass = userService.resetPassword(email, hashedPassword);
+
+        emailService.send( "FitPass - Reset Password", "Your new password is: " +  randomPassword, email);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/forgot-password")
-    public String forgotPw() {
+    public String getPasswordPage(){
         return "forgot-password";
     }
 

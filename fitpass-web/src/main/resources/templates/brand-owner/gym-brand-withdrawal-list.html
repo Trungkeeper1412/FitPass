@@ -28,9 +28,12 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
                         <h2 class="m-0 font-weight-bold text-primary">Danh sách yêu cầu rút tiền :</h2>
-                        <button type="button" class="btn btn-primary" onclick="openWithdrawModal()" title="Rút tiền">
-                            Gửi yêu cầu rút tiền<i class="fas fa-plus pl-2"></i>
-                        </button>
+                        <div>
+                            <div class="text-danger" th:if="${error}" th:text="${error}"></div>
+                            <button type="button" class="btn btn-primary" onclick="openWithdrawModal()" title="Rút tiền">
+                                Gửi yêu cầu rút tiền<i class="fas fa-plus pl-2"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

@@ -453,6 +453,10 @@ public class AdminController {
                 becomePartnerService.updateStartRequestTime(b.getBecomeAPartnerRequestId(), new Timestamp(System.currentTimeMillis()));
             } else if(b.getStatus().equals("Từ chối đơn")) {
                 becomePartnerService.updateCancelRequestTime(b.getBecomeAPartnerRequestId(), new Timestamp(System.currentTimeMillis()), b.getCancelReason());
+                BecomePartnerRequest becomePartnerRequest = becomePartnerService.getById(b.getBecomeAPartnerRequestId());
+                String email = becomePartnerRequest.getContactEmail();
+                emailService.send("Từ chối làm thương hiệu Fitpass", "Đơn của bạn đã bị từ chối vì: " + b.getCancelReason(),
+                        email);
             } else if(b.getStatus().equals("Thành công")) {
                 becomePartnerService.updateApproveRequestTime(b.getBecomeAPartnerRequestId(), new Timestamp(System.currentTimeMillis()));
             }

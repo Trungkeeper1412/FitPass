@@ -272,13 +272,13 @@ public interface IRepositoryQuery {
                 SELECT
                     b.name AS brand_name,
                     b.rating AS ratingStar,
-                    COUNT(*) AS numberOfRating
+                    COUNT(uf.feedback_id) AS numberOfRating
                 FROM
                     brand b
                 LEFT JOIN
                     gym_department gd ON b.brand_id = gd.brand_id
                 LEFT JOIN
-                    order_plan_detail opd ON gd.gym_department_id = opd.gym_department_id
+                    user_feedback uf ON gd.gym_department_id = uf.department_id
                 GROUP BY
                     b.brand_id;
             """;

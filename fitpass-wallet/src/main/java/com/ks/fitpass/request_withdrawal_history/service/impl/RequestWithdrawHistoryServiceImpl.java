@@ -92,4 +92,9 @@ public class RequestWithdrawHistoryServiceImpl implements RequestWithdrawHistory
     public List<RequestHistoryBrandAdmin> getAllRequestHistoryBrandAdmin() {
         return requestWithdrawHistoryRepository.getAllRequestHistoryBrandAdmin();
     }
+
+    @Override
+    public int countRequestIsPending(int cardId) {
+        return requestWithdrawHistoryRepository.countRequestIsPending(cardId);
+    }
 }

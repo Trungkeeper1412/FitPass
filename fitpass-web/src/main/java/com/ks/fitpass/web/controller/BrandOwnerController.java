@@ -1136,6 +1136,11 @@ try {
             Brand b = brandService.getBrandDetail(user.getUserId());
             int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
 
+            if(session.getAttribute("error") != null) {
+                model.addAttribute("error", session.getAttribute("error"));
+                session.removeAttribute("error");
+            }
+
             model.addAttribute("moneyPercent", moneyPercent);
             model.addAttribute("userBalance", userBalance);
             model.addAttribute("requestWithdrawHistoryListPending", requestWithdrawHistoryListPending);
@@ -1171,6 +1176,11 @@ try {
 
             Brand b = brandService.getBrandDetail(user.getUserId());
             int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
+            int count = requestWithdrawHistoryService.countRequestIsPending(cardId);
+            if(count > 0) {
+                session.setAttribute("error", "Bạn đã có 1 yêu cầu rút tiền đang chờ xử lý");
+                return "redirect:/brand-owner/withdrawal/list";
+            }
             if (creditAmount > userBalance) {
                 attributes.addFlashAttribute("errorCredit", "Số credit muốn rút phải nhỏ hơn hoặc bằng số dư hiện tại.");
             } else {

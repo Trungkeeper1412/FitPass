@@ -13,7 +13,7 @@
 
     <!-- Template Main CSS File -->
     <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -57,7 +57,7 @@
                 <div class="container2 text-white" data-aos="zoom-in">
                     <h3 class="fw-bold mb-5">Sẵn sàng để bắt đầu kiếm thêm thu nhập?</h3>
                     <h4 class="mb-5">Đăng kí phòng tập của bạn trên FitPass, và kiếm thêm thu nhập.</h4>
-                    <form method="post" action="/become-a-partner/submitForm" th:object="${becomePartnerForm}">
+                    <form id="BoRegisterForm" method="post"  action="/become-a-partner/submitForm" th:object="${becomePartnerForm}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="venueName" class="form-label">Tên thương hiệu :</label>
@@ -95,7 +95,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary mt-3">Đăng ký</button>
+                            <div class="g-recaptcha" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
+                            <button type="submit" class="btn btn-primary mt-3" onclick="submitForm()" >Đăng ký</button>
                         </div>
                     </form>
                 </div>
@@ -209,6 +210,25 @@
     <!-- Vendor JS Files -->
     <th:block th:insert="common/vendor-script"></th:block>
 
+
+    <script type="text/javascript">
+        function submitForm() {
+            // Lấy giá trị reCAPTCHA response
+            const recaptchaResponse = grecaptcha.getResponse();
+
+            // Kiểm tra xem reCAPTCHA response có giá trị hay không
+            if (recaptchaResponse.length === 0) {
+                alert('Vui lòng hoàn thành reCAPTCHA trước khi submit form.');
+                return;
+            }
+
+            // Nếu reCAPTCHA đã được hoàn thành, tiếp tục submit form
+            document.getElementById('BoRegisterForm').submit();
+        }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+    </script>
 </body>
 </html>
 
