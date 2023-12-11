@@ -15,7 +15,7 @@
     <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
     <style>
         html, body {
-            height: 100%;
+            height: 110%;
             margin: 0;
         }
     </style>
@@ -26,7 +26,7 @@
 <div class="register-login-content">
     <div class="col-md-6 banner-wrapper">
         <div class="banner">
-            <a class="ghost_btn move_register" th:href="@{/login}">Đăng nhập</a>
+            <a th:href="@{/landing-page}"  class="ghost_btn move_register">Landing page</a>
         </div>
     </div>
 
@@ -97,10 +97,11 @@
             </div>
             <button class="login" id="updateInfo" type="submit">Đăng ký</button>
         </form>
+        <a th:href="@{/login}" class="mt-4 mx-auto text-dark login-register-link">Đã có tài khoản? Đăng nhâp ngay!</a>
     </div>
     <div class="col-md-6 banner-wrapper for-md-size">
         <div class="banner">
-            <a class="mb-4 ghost_btn move_register" th:href="@{/login}">Đăng nhập</a>
+            <a class="mb-4 ghost_btn move_register" th:href="@{/landing-page}">Landing page</a>
         </div>
     </div>
 </div>

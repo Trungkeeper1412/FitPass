@@ -5934,6 +5934,12 @@ section {
 .for-md-size{
     display: none;
 }
+.login-register-link{
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    font-weight: 600;
+}
 @media (max-width: 767.98px) {
     .banner-wrapper{
         display: none;
