@@ -1,9 +1,7 @@
 package com.ks.fitpass.brand.entity;
 
-import com.ks.fitpass.brand.entity.BrandStatus;
 import lombok.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 
