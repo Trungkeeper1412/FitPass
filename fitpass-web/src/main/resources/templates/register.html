@@ -19,6 +19,7 @@
             margin: 0;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body class="login-register-body">
@@ -31,10 +32,9 @@
     </div>
 
     <div class="col-md-6 register-tab" id="register-tab">
+        <form action="/register" id="formSubmit" method="post" th:object="${userRegisterDTO}">
         <h1 class="fw-bold">ĐĂNG KÝ</h1>
         <div class="line"></div>
-        <form action="/register" id="formSubmit" method="post" th:object="${userRegisterDTO}">
-
             <div class="input-fields">
                 <div style="display: flex;">
                     <div class="input-field fname">
@@ -95,7 +95,8 @@
                           th:if="${#fields.hasErrors('reUserPassword')}"></span>
                 </div>
             </div>
-            <button class="login" id="updateInfo" type="submit">Đăng ký</button>
+            <div class="g-recaptcha" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
+            <button class="login" id="updateInfo" type="submit" onclick="submitForm()" >Đăng ký</button>
         </form>
         <a th:href="@{/login}" class="mt-4 mx-auto text-dark login-register-link">Đã có tài khoản? Đăng nhâp ngay!</a>
     </div>
@@ -107,6 +108,25 @@
 </div>
 
 <th:block th:include="common/vendor-script"></th:block>
+
+<script type="text/javascript">
+    function submitForm() {
+        // Lấy giá trị reCAPTCHA response
+        const recaptchaResponse = grecaptcha.getResponse();
+
+        // Kiểm tra xem reCAPTCHA response có giá trị hay không
+        if (recaptchaResponse.length === 0) {
+            alert('Vui lòng hoàn thành reCAPTCHA trước khi submit form.');
+            return;
+        }
+        // Nếu reCAPTCHA đã được hoàn thành, tiếp tục submit form
+        document.getElementById('formSubmit').submit();
+    }
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
 
 </body>
 
