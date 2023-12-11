@@ -302,9 +302,12 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công!',
-                text: 'Giao dịch của bạn đã đc xử lý thành công!',
+                text: 'Giao dịch của bạn đã được xử lý thành công!',
                 time: 2000
             });
+
+            const urlWithoutSuccess = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, urlWithoutSuccess);
         }
 
         $('#acceptWithdrawal').submit(function (event) {
@@ -323,7 +326,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Thất bại!',
-                        text: 'Giao dịch của bạn chưa đc xử lý!',
+                        text: 'Giao dịch của bạn chưa được xử lý!',
                         confirmButtonText: 'Đóng',
                     });
                 }
