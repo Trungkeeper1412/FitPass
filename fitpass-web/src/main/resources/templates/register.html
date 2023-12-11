@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
 
 <head>
     <meta charset="utf-8"/>
@@ -13,12 +13,7 @@
     <th:block th:include="common/vendor-head"></th:block>
     <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
     <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-    </style>
+
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
@@ -27,7 +22,7 @@
 <div class="register-login-content">
     <div class="col-md-6 banner-wrapper">
         <div class="banner">
-            <a th:href="@{/landing-page}"  class="ghost_btn move_register">Landing page</a>
+            <a th:href="@{/landing-page}" class="ghost_btn move_register">Trang giới thiệu</a>
         </div>
     </div>
 
@@ -52,12 +47,12 @@
                     <div class="input-field fname">
                         <div class="input-title">Gmail</div>
                         <input name="email" th:field="*{email}" type="text">
-                        <span th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
+                        <span class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
                     </div>
                     <div class="input-field lname">
                         <div class="input-title">Số điện thoại</div>
                         <input name="phoneNumber" th:field="*{phoneNumber}" type="number">
-                        <span th:errors="*{phoneNumber}"
+                        <span class="error" th:errors="*{phoneNumber}"
                               th:if="${#fields.hasErrors('phoneNumber')}"></span>
                     </div>
                 </div>
@@ -65,7 +60,7 @@
                     <div class="input-field dob">
                         <div class="input-title">Ngày sinh</div>
                         <input th:field="*{dateOfBirth}" type="date">
-                        <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
+                        <span class="error" th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
                     </div>
                     <div class="input-field gender">
                         <div class="input-title">Giới tính</div>
@@ -80,53 +75,31 @@
                 <div class="input-field mt-4">
                     <div class="input-title">Tên đăng nhâp</div>
                     <input name="userAccount" th:field="*{userAccount}" type="text">
-                    <span th:errors="*{userAccount}" th:if="${#fields.hasErrors('userAccount')}"></span>
+                    <span class="error" th:errors="*{userAccount}" th:if="${#fields.hasErrors('userAccount')}"></span>
                 </div>
                 <div class="input-field mt-4">
                     <div class="input-title">Mật khẩu</div>
                     <input name="userPassword" th:field="*{userPassword}" type="password">
-                    <span th:errors="*{userPassword}"
+                    <span class="error" th:errors="*{userPassword}"
                           th:if="${#fields.hasErrors('userPassword')}"></span>
                 </div>
                 <div class="input-field mt-4 mb-4">
                     <div class="input-title">Xác nhận mật khẩu</div>
                     <input name="reUserPassword" th:field="*{reUserPassword}" type="password">
-                    <span th:errors="*{reUserPassword}"
+                    <span class="error" th:errors="*{reUserPassword}"
                           th:if="${#fields.hasErrors('reUserPassword')}"></span>
                 </div>
             </div>
             <div class="g-recaptcha mt-4" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
-            <button class="login" id="updateInfo" type="submit" onclick="submitForm()" >Đăng ký</button>
+            <button class="login" id="updateInfo" type="submit" >Đăng ký</button>
         </form>
-        <a th:href="@{/login}" class="mt-4 mx-auto text-dark login-register-link">Đã có tài khoản? Đăng nhâp ngay!</a>
-    </div>
-    <div class="col-md-6 banner-wrapper for-md-size">
-        <div class="banner">
-            <a class="mb-4 ghost_btn move_register" th:href="@{/landing-page}">Landing page</a>
-        </div>
+        <p class="mt-4 mx-auto text-dark login-register-link">Đã có tài khoản?<a th:href="@{/login}" class="link-style" style="margin-left: 10px">Đăng nhập ngay</a></p>
     </div>
 </div>
 
 <th:block th:include="common/vendor-script"></th:block>
 
-<script type="text/javascript">
-    function submitForm() {
-        // Lấy giá trị reCAPTCHA response
-        const recaptchaResponse = grecaptcha.getResponse();
-
-        // Kiểm tra xem reCAPTCHA response có giá trị hay không
-        if (recaptchaResponse.length === 0) {
-            alert('Vui lòng hoàn thành reCAPTCHA trước khi submit form.');
-            return;
-        }
-        // Nếu reCAPTCHA đã được hoàn thành, tiếp tục submit form
-        document.getElementById('formSubmit').submit();
-    }
-</script>
-
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-</script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 
 </body>
 
