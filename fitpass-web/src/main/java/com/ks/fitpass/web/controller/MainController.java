@@ -96,7 +96,7 @@ public class MainController {
     }
 
     @GetMapping("/forgot-password/reset")
-    public ResponseEntity forgotPwPost(@RequestParam("email") String email) {
+    public ResponseEntity<?> forgotPwPost(@RequestParam("email") String email) {
 
         String randomPassword = WebUtil.generateRandomPassword();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -111,6 +111,11 @@ public class MainController {
 
         emailService.send( "FitPass - Reset Password", "Your new password is: " +  randomPassword, email);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/forgot-password")
+    public String getPasswordPage(){
+        return "forgot-password";
     }
 
     @GetMapping("/register")
