@@ -15,7 +15,7 @@
     <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
     <style>
         html, body {
-            height: 110%;
+            height: 130%;
             margin: 0;
         }
     </style>
@@ -88,14 +88,14 @@
                     <span th:errors="*{userPassword}"
                           th:if="${#fields.hasErrors('userPassword')}"></span>
                 </div>
-                <div class="input-field mt-4">
+                <div class="input-field mt-4 mb-4">
                     <div class="input-title">Xác nhận mật khẩu</div>
                     <input name="reUserPassword" th:field="*{reUserPassword}" type="password">
                     <span th:errors="*{reUserPassword}"
                           th:if="${#fields.hasErrors('reUserPassword')}"></span>
                 </div>
             </div>
-            <div class="g-recaptcha" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
+            <div class="g-recaptcha mt-4" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
             <button class="login" id="updateInfo" type="submit" onclick="submitForm()" >Đăng ký</button>
         </form>
         <a th:href="@{/login}" class="mt-4 mx-auto text-dark login-register-link">Đã có tài khoản? Đăng nhâp ngay!</a>
