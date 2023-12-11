@@ -33,15 +33,23 @@
                 </form>
             </div>
         </li>
-        
-        <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-black small">Gym Owner</span>
-                <img class="img-profile rounded-circle" th:src="@{/employee-assets/img/undraw_profile.svg}">
+                <th:block th:if="${session.userFullNameGO} != null">
+                    <span class="mr-2 d-none d-lg-inline text-black small" th:text="${session.userFullNameGO}"></span>
+                </th:block>
+                <th:block th:unless="${session.userFullNameGO} != null">
+                    <span class="mr-2 d-none d-lg-inline text-black small">Brand Owner</span>
+                </th:block>
+                <th:block th:unless="${session.userAvatarGO != null}">
+                    <img class="img-profile rounded-circle" th:src="@{/employee-assets/img/undraw_profile.svg}">
+                </th:block>
+                <th:block th:if="${session.userAvatarGO != null}">
+                    <img class="img-profile rounded-circle" th:src="@{${session.userAvatarGO}}">
+                </th:block>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

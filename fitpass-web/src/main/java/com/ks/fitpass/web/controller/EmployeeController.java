@@ -60,6 +60,7 @@ public class EmployeeController {
 
     private final UserRepository userRepository;
 
+
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
                               NotificationService notificationService, CheckInHistoryService checkInHistoryService,
                               WalletService walletService, WebSocketService webSocketService, BrandService brandService,
@@ -85,6 +86,15 @@ public class EmployeeController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @ModelAttribute
+    public void populateEmployeeInfo(HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
+
+        session.setAttribute("userFullNameEmp", userDetail.getFirstName().concat(" ").concat(userDetail.getLastName()));
+        session.setAttribute("userAvatarEmp", userDetail.getImageUrl());
     }
 
     @GetMapping("/changePassword")

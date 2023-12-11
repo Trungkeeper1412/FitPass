@@ -1,5 +1,6 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
@@ -60,6 +61,15 @@ public class GymOwnerController {
     private final OrderDetailService orderDetailService;
 
     private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
+
+    @ModelAttribute
+    public void populateGymOwnerInfo(HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
+
+        session.setAttribute("userFullNameGO", userDetail.getFirstName().concat(" ").concat(userDetail.getLastName()));
+        session.setAttribute("userAvatarGO", userDetail.getImageUrl());
+    }
 
     //Index (Statistic Dashboard)
     @GetMapping("/index")
