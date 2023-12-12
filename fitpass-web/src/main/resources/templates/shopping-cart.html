@@ -96,18 +96,18 @@
                         </div>
                         <div class="col-sm-6" style="">
                             <div class="row">
-                        <div class="col-sm-4 col-xs-4 col-md-4">
-                            <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                        <div class="col-sm-4 col-xs-4 col-md-4 mb-2">
+                            <div data-bs-toggle="tooltip" class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}" th:attr="title='Giá gói tập'">
                             200
                             </div>
                         </div>
-                        <div class="col-sm-4 col-xs-4 col-md-4">
-                            <div class="num-of-plan-mc" >
-                                <div class="product-quantity" th:text="${cartItem.getQuantity()}">1</div>
+                        <div class="col-sm-4 col-xs-4 col-md-4 mb-2">
+                            <div class="num-of-plan-mc">
+                                <div class="product-quantity" data-bs-toggle="tooltip" th:attr="title='Số lượng'" th:text="${cartItem.getQuantity()}">1</div>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-xs-4 col-md-4">
-                            <button type="button" class="btn btn-warning delete-btn" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
+                        <div class="col-sm-4 col-xs-4 col-md-4 mb-2">
+                            <button data-bs-toggle="tooltip" th:attr="title='Xóa'" type="button" class="btn btn-warning delete-btn" th:onclick="'removeFromCart(' + ${cartItem.getGymPlan().getGymPlanId()} + ','+${cartItem.getGymPlan().getGymDepartmentId()}+')'">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path
                                         d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
@@ -146,6 +146,10 @@
 <div th:replace="common/footer :: footer"></div>
 <th:block th:insert="common/vendor-script"></th:block>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 
     var count = 0;
     let selectedItems = [];
