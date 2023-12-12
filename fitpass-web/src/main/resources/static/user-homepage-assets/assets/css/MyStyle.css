@@ -4581,7 +4581,6 @@ section {
         display: flex;
         align-items: center;
         color: white;
-        padding: 10px;
         font-weight: 500;
     }
 
@@ -4594,7 +4593,7 @@ section {
 .plan-card-mc img {
     border-radius: 50%;
     width: 100px;
-    height: 80px;
+    height: 100px;
     margin: auto;
 }
 .gym-department-plan .delete-btn{

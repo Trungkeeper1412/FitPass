@@ -85,8 +85,8 @@
                         <div class="ms-2 col-sm-5 col-xs-5">
                         <div class="plan-card-mc">
                             <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}" alt="Logo phòng tập"/>
-                            <div class="mx-auto plan-info-mc">
-                                <h4 class="mx-auto" th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
+                            <div class="plan-info-mc">
+                                <h4 class="" th:text="${cartItem.getGymPlan().getGymPlanName()}"></h4>
                                 <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">Thời lượng 365 ngày</div>
                             </div>
                             <div class="active-time-mc" th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
