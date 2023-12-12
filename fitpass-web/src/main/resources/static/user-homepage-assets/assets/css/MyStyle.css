@@ -4428,6 +4428,7 @@ section {
 }
 
 .all-plan-of-gym .gym-name-mc {
+    width: fit-content;
     display: flex;
     align-items: center;
     color: rgb(0, 0, 0);
@@ -4446,8 +4447,17 @@ section {
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 280px) and (max-width: 375px) {
-
+@media only screen and (min-width: 280px) and (max-width: 400px) {
+    .plan-card-mc {
+        background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+        background-size: cover;
+        height: 90%;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+    }
     .shopping-cart-title{
         font-size: 19px;
     }
@@ -4468,8 +4478,31 @@ section {
         width: 10px;
         height: 10px;
     }
+    .plan-info-mc h4 {
+        font-size: 13px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .plan-duration-mc {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 3px;
+    }
+    .plan-info-mc div {
+        font-size: 12px;
+    }
+    .active-time-mc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 12px;
+    }
 }
-@media only screen and (min-width: 280px) {
+@media only screen and (min-width: 399.8px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
@@ -5423,6 +5456,9 @@ section {
 }
 
 @media screen and (max-width: 770px) {
+    .form-check{
+        padding-left: 0px;
+    }
     .gym-brand-content .department {
         display: flex;
         flex-wrap: wrap;
