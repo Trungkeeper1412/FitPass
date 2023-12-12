@@ -41,6 +41,7 @@
                                                     <i class="bi bi-eye-slash field-icon" id="togglePassword"></i>
                                                 </span>
                                             </div>
+                                            <span th:if="${currentPasswordError}" class="error" th:text="${currentPasswordError}"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -67,13 +68,13 @@
                                                     <i class="bi bi-eye-slash field-icon" id="toggleRePassword"></i>
                                                 </span>
                                             </div>
+                                            <span th:if="${passwordMismatchError}" class="error" th:text="${passwordMismatchError}"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center">
-                                    <input class="btn btn-submit" id="submit" type="submit" value="Lưu mật khẩu">
+                                    <input class="btn btn-submit" id="submitPassword" type="submit" value="Lưu mật khẩu">
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -136,6 +137,46 @@
         this.classList.toggle("bi-eye");
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+
+        if (successParam === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Mật khẩu của bạn đã được thay đổi!',
+                confirmButtonText: 'Đóng',
+            });
+        }
+
+        $('#change-pw-form').submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'question',
+                title: 'Bạn muốn thay đổi mật khẩu?',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                } else if (result.isDismissed || result.isDenied) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại!',
+                        text: 'Mật khẩu của bạn chưa được thay đổi!',
+                        confirmButtonText: 'Đóng',
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

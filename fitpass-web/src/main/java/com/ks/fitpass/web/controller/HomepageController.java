@@ -26,7 +26,6 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-//@RequestMapping("/user")
 @RequestMapping("/homepage")
 public class HomepageController {
     private final DepartmentService departmentService;

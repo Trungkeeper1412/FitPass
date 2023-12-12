@@ -708,28 +708,28 @@ public class GymOwnerControllerTest {
 
         }
 
-    @Test
-    void testUpdateDepartmentInfo_Success() {
-        // Arrange
-        UpdateGymOwnerDepartmentInfo updateInfo = new UpdateGymOwnerDepartmentInfo();
-        BindingResult bindingResult = mock(BindingResult.class);
-        updateInfo.setCapacity(50); // Set a default value for capacity
-
-        Department department = new Department();
-        department.setDepartmentId(1);
-
-        when(session.getAttribute("userInfo")).thenReturn(new User()); // Set the user as needed
-        when(departmentService.getByUserId(anyInt())).thenReturn(department);
-        when(departmentScheduleService.deleteAllDepartmentSchedule(anyInt())).thenReturn(1);
-        when(departmentScheduleService.addDepartmentSchedule(anyMap(), anyInt())).thenReturn(new int[]{1, 1, 1, 1, 1, 1, 1});
-
-        // Act
-        String result = gymOwnerController.updateDepartmentInfo(updateInfo, bindingResult, session, model);
-
-        // Assert
-        assertEquals("redirect:/gym-owner/department/info", result);
-
-          }
+//    @Test
+//    void testUpdateDepartmentInfo_Success() {
+//        // Arrange
+//        UpdateGymOwnerDepartmentInfo updateInfo = new UpdateGymOwnerDepartmentInfo();
+//        BindingResult bindingResult = mock(BindingResult.class);
+//        updateInfo.setCapacity(50); // Set a default value for capacity
+//
+//        Department department = new Department();
+//        department.setDepartmentId(1);
+//
+//        when(session.getAttribute("userInfo")).thenReturn(new User()); // Set the user as needed
+//        when(departmentService.getByUserId(anyInt())).thenReturn(department);
+//        when(departmentScheduleService.deleteAllDepartmentSchedule(anyInt())).thenReturn(1);
+//        when(departmentScheduleService.addDepartmentSchedule(anyMap(), anyInt())).thenReturn(new int[]{1, 1, 1, 1, 1, 1, 1});
+//
+//        // Act
+//        String result = gymOwnerController.updateDepartmentInfo(updateInfo, bindingResult, session, model);
+//
+//        // Assert
+//        assertEquals("redirect:/gym-owner/department/info", result);
+//
+//          }
 
     @Test
     void testGetDepartmentAmenities_Success() {

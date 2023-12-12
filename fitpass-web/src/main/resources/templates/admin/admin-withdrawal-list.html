@@ -40,7 +40,7 @@
                                     <th>Thời gian</th>
                                     <th>Số credit</th>
                                     <th>Số tiền quy đổi</th>
-                                    <th>Hoa Hồng(%)</th>
+                                    <th>Phí hoa hồng (%)</th>
                                     <th>Trạng thái</th>
                                     <th class="table-action-lock">Hành động</th>
                                 </tr>
@@ -53,7 +53,7 @@
                                         <td th:text="${h.getBrandName()}">California Fitness & Yoga</td>
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
-                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="money-value" th:text="${h.getActualMoney()}">10000000 VNĐ</td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
                                         <td>
@@ -112,8 +112,7 @@
                     <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="/admin/withdrawal/update-status" method="post">
-
+                                <form id="acceptWithdrawal" action="/admin/withdrawal/update-status" method="post">
                                     <div class="modal-header">
                                         <div class="text-center" style="width: 95%; margin-left: 20px">
                                             <h5 class="modal-title" id="transactionModalLabel">Xử lý giao dịch</h5>
@@ -137,7 +136,8 @@
                                         </label>
                                         <div class="mb-3">
                                             <label for="amount" class="form-label">Số tiền quy đổi (VND) :</label>
-                                            <input type="text" class="form-control" id="amount" value="10000000" readonly>
+                                            <input type="text" class="form-control"  id="amountConversation" value="10000000" readonly>
+                                            <input type="hidden" class="form-control"  id="amount" value="10000000" readonly>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-5 mb-3">
@@ -159,7 +159,6 @@
                                         <button id="btn-submit" type="submit" class="btn btn-success">Xác nhận</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -174,7 +173,7 @@
                                     <th>Thời gian</th>
                                     <th>Số credit</th>
                                     <th>Số tiền quy đổi</th>
-                                    <th>Hoa Hồng(%)</th>
+                                    <th>Phí hoa hồng (%)</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 </thead>
@@ -186,7 +185,7 @@
                                         <td th:text="${h.getBrandName()}">California Fitness & Yoga</td>
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
-                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="money-value" th:text="${h.getActualMoney()}">10000000 VNĐ</td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
                                         <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
@@ -226,8 +225,22 @@
 <th:block th:replace="admin/common/script"></th:block>
 
 <script>
+    const money_elements = document.querySelectorAll('.money-value');
+    money_elements.forEach((element) => {
+        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+    });
+
+    const amount = document.querySelector('#amountConversation')
+    amount.value = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(amount.value);
+    document.querySelector('#amountConversation').value = amount.value;
+
+
     $(document).ready(function() {
-        var table = $('#table-withdrawal-success').DataTable();
+        var table = $('#table-withdrawal-success').DataTable({
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json"
+            }
+        });
 
         $('#filterButtonPending').on('click', function () {
             // Lọc theo trạng thái 'Active'
@@ -274,7 +287,6 @@
                     $("#btn-submit").prop("disabled", false);
                 }
 
-
             },
             error: function (response) {
                 console.log(response);
@@ -293,6 +305,50 @@
             }
         });
     }
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+
+        if (successParam === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Giao dịch của bạn đã được xử lý thành công!',
+                time: 2000
+            });
+
+            const urlWithoutSuccess = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, urlWithoutSuccess);
+        }
+
+        $('#acceptWithdrawal').submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'question',
+                title: 'Bạn muốn xác nhận giao dịch?',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                } else if (result.isDismissed || result.isDenied) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại!',
+                        text: 'Giao dịch của bạn chưa được xử lý!',
+                        confirmButtonText: 'Đóng',
+                    });
+                }
+            });
+        });
+    });
+
 </script>
 
 </body>

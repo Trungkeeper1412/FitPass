@@ -201,7 +201,7 @@ function loadCalendar(data){
 
     calendar.render();
 
-    const form = document.querySelector('form');
+    const form = document.querySelector('#myForm');
 
     // Tạo kế hoạch tập
     form.addEventListener('submit', function (event) {

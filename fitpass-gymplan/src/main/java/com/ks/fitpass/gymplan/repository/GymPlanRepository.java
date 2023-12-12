@@ -45,4 +45,8 @@ public interface GymPlanRepository {
     Integer getNumberOfGymPlan(int brandId);
 
     Integer getTotalGymPlanDepartment(int departmentId);
+
+    List<GymPlanBuyStat> getGymPlanBuyStat(int brandId);
+
+    List<GymPlanBuyStat> getGymPlanBuyStatByDepartmentId(int departmentId);
 }

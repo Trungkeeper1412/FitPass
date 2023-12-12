@@ -69,7 +69,7 @@
                     <a th:if="${d.type == 'Cơ sở'}" th:href="@{'/department/department-detail/' + ${d.id}}">
                         <div style="position: relative;" class="brand">
                             <img class="brand-image" th:src="${d.wallpaperUrl}">
-                            <div class="fw-bold is-brand" th:text="${d.type.toUpperCase()}"></div>
+                            <div class="fw-bold is-dept" th:text="${d.type.toUpperCase()}"></div>
                             <div class="brand-info">
                                 <h5 class="fw-bold" th:text="${d.name}"></h5>
                                 <div style="height: 25px; margin-top: -3px;" th:attr="data-star=${d.rating}"></div>

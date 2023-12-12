@@ -69,14 +69,13 @@ public interface IRepositoryQuery {
                      b.rating,
                      b.contact_number,
                      b.contact_email,
-
                      b.brand_status_key,
-                     kbn_brand_status.mst_kbn_value AS brand_status_name                     
+                     kbn_brand_status.mst_kbn_value AS brand_status_name                    
                  FROM brand b
-                 LEFT JOIN mst_kbn kbn_brand_status
-                     ON b.brand_status_key = kbn_brand_status.mst_kbn_key
-                     AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'  
-                     WHERE b.brand_id = ?
+                                  LEFT JOIN mst_kbn kbn_brand_status
+                                      ON b.brand_status_key = kbn_brand_status.mst_kbn_key
+                                      AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS' 
+                                      WHERE b.brand_id = ?
             """;
 
     String GET_BRAND_AMENITIES_BRAND_ID = """
@@ -273,13 +272,13 @@ public interface IRepositoryQuery {
                 SELECT
                     b.name AS brand_name,
                     b.rating AS ratingStar,
-                    COUNT(*) AS numberOfRating
+                    COUNT(uf.feedback_id) AS numberOfRating
                 FROM
                     brand b
                 LEFT JOIN
                     gym_department gd ON b.brand_id = gd.brand_id
                 LEFT JOIN
-                    order_plan_detail opd ON gd.gym_department_id = opd.gym_department_id
+                    user_feedback uf ON gd.gym_department_id = uf.department_id
                 GROUP BY
                     b.brand_id;
             """;

@@ -34,7 +34,7 @@
             <!-- Notification Bell -->
             <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button">
                 <i class="fas fa-bell fa-fw"></i>
-                <span class="badge badge-danger badge-counter" id="notificationCounter">0</span>
+                <span class="badge badge-danger badge-counter" id="notificationCounter">1</span>
             </a>
 
             <!-- Dropdown - Notifications -->
@@ -157,9 +157,18 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-black text-capitalize small"
-                      th:text="${session.userInfo.getUserAccount()}"></span>
-                <img class="img-profile rounded-circle" th:src="@{/employee-assets/img/undraw_profile.svg}">
+                <th:block th:if="${session.userFullNameEmp} != null">
+                    <span class="mr-2 d-none d-lg-inline text-black fs-5 fw-bold" th:text="${session.userFullNameEmp}"></span>
+                </th:block>
+                <th:block th:unless="${session.userFullNameEmp} != null">
+                    <span class="mr-2 d-none d-lg-inline text-black fs-5 fw-bold">Employee</span>
+                </th:block>
+                <th:block th:unless="${session.userAvatarEmp != null}">
+                    <img class="img-profile rounded-circle" th:src="@{/employee-assets/img/undraw_profile.svg}">
+                </th:block>
+                <th:block th:if="${session.userAvatarEmp != null}">
+                    <img class="img-profile rounded-circle" th:src="@{${session.userAvatarEmp}}">
+                </th:block>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

@@ -19,7 +19,7 @@ public class CreditCard {
     private String cardOwnerName;
 
     @NotEmpty(message = "Vui lòng nhập số tài khoản !")
-    @Size(min = 9, max = 16, message = "Số tài khoản phải là 9-16 số !")
+    @Size(min = 8, max = 15, message = "Số tài khoản phải là 8-15 số !")
     private String cardNumber;
 
     private String status;

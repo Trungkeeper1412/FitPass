@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <meta charset="utf-8" />
@@ -14,19 +14,21 @@
 </head>
 
 <body class="login-register-body">
-<!--<div style="height: 100%; width: 100%;">-->
+
     <div class="register-login-content">
         <div class="col-md-6 banner-wrapper">
             <div class="banner">
-                <a th:href="@{/register}"  class="ghost_btn move_register">Đăng ký ngay</a>
+                <a th:href="@{/landing-page}"  class="ghost_btn move_register">Trang giới thiệu</a>
             </div>
         </div>
 
-        <!-- <div class="col-md-6 tab"> -->
         <div id="login-tab" class="col-md-6 login-tab">
+            <a th:href="@{/landing-page}">
+                <img class="fp-logo" th:src="@{/user-homepage-assets/assets/img/3.png}">
+            </a>
             <h1 class="fw-bold">ĐĂNG NHẬP</h1>
             <div class="line"></div>
-            <form th:action="@{/login}" method='POST'>
+            <form class="mb-4" th:action="@{/login}" method='POST'>
             <div class="input-fields">
                 <div class="input-field">
                     <div class="input-title">Tên đăng nhập</div>
@@ -53,22 +55,9 @@
                 Tên đăng nhập hoặc mật khẩu không chính xác, vui lòng thử lại
             </div>
             <div th:if="${successRegister}" id="toast-info-register" class="alert alert-success"> Đăng ký thành công </div>
+            <p class="mt-4 mx-auto text-dark login-register-link">Chưa có tài khoản?<a th:href="@{/register}" class="link-style" style="margin-left: 10px">Đăng ký ngay</a></p>
         </div>
-
-        <div class="col-md-6 banner-wrapper for-md-size">
-            <div class="banner">
-                <a th:href="@{/register}"  class="ghost_btn move_register">Đăng ký ngay</a>
-            </div>
-        </div>
-</div>
-
-<style>
-    html,
-    body {
-        margin: 0px;
-        height: 100%;
-    }
-</style>
+    </div>
 
 <script th:if="${param.logout}">
     const toastInfo = document.getElementById("toast-info");

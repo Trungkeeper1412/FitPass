@@ -7,10 +7,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-public class UserUpdateDTO {
-    private int userId;
+public class UserRegisterDTO {
 
-    private int userDetailId;
+    @NotEmpty(message = "Vui lòng nhập tên đăng nhập!")
+    private String userAccount;
+
+    @NotEmpty(message = "Vui lòng nhập mật khẩu !")
+    private String userPassword;
+
+    @NotEmpty(message = "Vui lòng xác nhận mật khẩu !")
+    private String reUserPassword;
 
     @Size(max = 25, message = "Họ của bạn không được vượt quá 25 kí tự !")
     @NotEmpty(message = "Vui lòng nhập họ của bạn !")
@@ -30,10 +36,6 @@ public class UserUpdateDTO {
     @Pattern(regexp = "^(0|84)(9|3|7|8|5)\\d{8,9}$", message = "Số điện thoại không đúng định dạng !")
     private String phoneNumber;
 
-    @NotEmpty(message = "Vui lòng nhập địa chỉ !")
-    @Size(max = 150, message = "Địa chỉ không được vượt quá 150 kí tự !")
-    private String address;
-
     @NotNull(message = "Vui lòng nhập ngày sinh !")
     @Past(message = "Vui lòng nhập ngày sinh hợp lệ !")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -41,12 +43,4 @@ public class UserUpdateDTO {
 
     @NotEmpty(message = "Vui lòng chọn giới tính !")
     private String gender;
-
-    @NotEmpty(message = "Vui lòng chọn ảnh !")
-    private String imageUrl;
-
-    private boolean userDeleted;
-
-    private String oldEmail;
-
 }

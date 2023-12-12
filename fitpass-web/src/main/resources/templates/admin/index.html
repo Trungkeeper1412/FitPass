@@ -124,7 +124,7 @@
                                             <td th:text="${brandStat.index + 1 }">1</td>
                                             <td th:text="${brand.brandName}" class="fw-bold">California Fitness & Yoga</td>
                                             <td th:text="${brand.numberOfGymPlanSold}">235</td>
-                                            <td th:text="${brand.totalAmount + ' VNĐ'}">45.000.000 VNĐ</td>
+                                            <td class="money-value" th:text="${brand.totalAmount}">45.000.000 VNĐ</td>
                                         </tr>
                                     </th:block>
                                     </tbody>
@@ -196,8 +196,14 @@
 
 <!-- Logout Modal-->
 <th:block th:replace="admin/common/logout-modal"></th:block>
-
 <th:block th:replace="admin/common/script"></th:block>
+
+<script>
+    const money_elements = document.querySelectorAll('.money-value');
+    money_elements.forEach((element) => {
+        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+    });
+</script>
 
 </body>
 

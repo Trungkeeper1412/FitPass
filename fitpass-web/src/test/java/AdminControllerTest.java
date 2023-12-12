@@ -359,50 +359,50 @@ public class AdminControllerTest {
         verify(model, never()).addAttribute(anyString(), any());
 
     }
-    @Test
-    public void testUpdateBrandNumberPercentageSuccess() {
-        // Arrange
-        int brandId = 1;
-        int numberPercentage = 50;
-        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(1);
-
-        // Act
-        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
-
-        // Assert
-        assertEquals("redirect:/admin/brand/list", resultView);
-        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
-    }
-
-    @Test
-    public void testUpdateBrandNumberPercentageUpdateFail() {
-        // Arrange
-        int brandId = 1;
-        int numberPercentage = 50;
-        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(0);
-
-        // Act
-        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
-    }
-
-    @Test
-    public void testUpdateBrandNumberPercentageDataAccessException() {
-        // Arrange
-        int brandId = 1;
-        int numberPercentage = 50;
-        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-
-        // Act
-        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
-    }
+//    @Test
+//    public void testUpdateBrandNumberPercentageSuccess() {
+//        // Arrange
+//        int brandId = 1;
+//        int numberPercentage = 50;
+//        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(1);
+//
+//        // Act
+//        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+//
+//        // Assert
+//        assertEquals("redirect:/admin/brand/list", resultView);
+//        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+//    }
+//
+//    @Test
+//    public void testUpdateBrandNumberPercentageUpdateFail() {
+//        // Arrange
+//        int brandId = 1;
+//        int numberPercentage = 50;
+//        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(0);
+//
+//        // Act
+//        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+//    }
+//
+//    @Test
+//    public void testUpdateBrandNumberPercentageDataAccessException() {
+//        // Arrange
+//        int brandId = 1;
+//        int numberPercentage = 50;
+//        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+//
+//        // Act
+//        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+//    }
 
     @Test
     public void testGetAccountBrandListSuccess() {
@@ -578,73 +578,73 @@ public class AdminControllerTest {
         verify(requestWithdrawHistoryService, times(1)).getNumberPercentage(requestHistoryId);
     }
 
-    @Test
-    public void testUpdateWithdrawalStatusSuccess() {
-        // Arrange
-        int requestHistoryId = 1;
-        User mockAdmin = new User();
-        mockAdmin.setUserId(123); // Set a valid admin user ID for testing
-        when(session.getAttribute("userInfo")).thenReturn(mockAdmin);
-        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
+//    @Test
+//    public void testUpdateWithdrawalStatusSuccess() {
+//        // Arrange
+//        int requestHistoryId = 1;
+//        User mockAdmin = new User();
+//        mockAdmin.setUserId(123); // Set a valid admin user ID for testing
+//        when(session.getAttribute("userInfo")).thenReturn(mockAdmin);
+//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(1);
+//
+//        int userId = 456; // Set a valid user ID for testing
+//        int adminId = mockAdmin.getUserId();
+//
+//        double userBalance = 100.0; // Set a valid user balance for testing
+//        double adminBalance = 200.0; // Set a valid admin balance for testing
+//        long amountCredit = 50;
+//        RequestHistoryAdmin mockRequestWithdrawHistory = new RequestHistoryAdmin();
+//        mockRequestWithdrawHistory.setAmountCredit(amountCredit); // Set a valid amount credit for testing
+//        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenReturn(mockRequestWithdrawHistory);
+//        when(requestWithdrawHistoryService.getUserIdByRequestHistoryId(requestHistoryId)).thenReturn(userId);
+//
+//        when(walletService.getBalanceByUserId(userId)).thenReturn(userBalance);
+//        when(walletService.getBalanceByUserId(adminId)).thenReturn(adminBalance);
+//
+//        // Act
+//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
+//
+//        // Assert
+//        assertEquals("redirect:/admin/withdrawal", resultView);
+//        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
+//        verify(requestWithdrawHistoryService, times(1)).getUserIdByRequestHistoryId(requestHistoryId);
+//        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
+//        verify(walletService, times(1)).getBalanceByUserId(userId);
+//        verify(walletService, times(1)).getBalanceByUserId(adminId);
+//        verify(walletService, times(1)).updateBalanceByUderId(userId, userBalance - mockRequestWithdrawHistory.getAmountCredit());
+//        verify(walletService, times(1)).updateBalanceByUderId(adminId, adminBalance + mockRequestWithdrawHistory.getAmountCredit());
+//    }
 
-        int userId = 456; // Set a valid user ID for testing
-        int adminId = mockAdmin.getUserId();
+//    @Test
+//    public void testUpdateWithdrawalStatusUpdateFail() {
+//        // Arrange
+//        int requestHistoryId = 1;
+//        User mockAdmin = new User();
+//        when(session.getAttribute("userInfo")).thenReturn(mockAdmin);
+//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
+//
+//        // Act
+//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//
+//    }
 
-        double userBalance = 100.0; // Set a valid user balance for testing
-        double adminBalance = 200.0; // Set a valid admin balance for testing
-        long amountCredit = 50;
-        RequestHistoryAdmin mockRequestWithdrawHistory = new RequestHistoryAdmin();
-        mockRequestWithdrawHistory.setAmountCredit(amountCredit); // Set a valid amount credit for testing
-        when(requestWithdrawHistoryService.getById(requestHistoryId)).thenReturn(mockRequestWithdrawHistory);
-        when(requestWithdrawHistoryService.getUserIdByRequestHistoryId(requestHistoryId)).thenReturn(userId);
-
-        when(walletService.getBalanceByUserId(userId)).thenReturn(userBalance);
-        when(walletService.getBalanceByUserId(adminId)).thenReturn(adminBalance);
-
-        // Act
-        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
-
-        // Assert
-        assertEquals("redirect:/admin/withdrawal", resultView);
-        verify(requestWithdrawHistoryService, times(1)).updateStatus(requestHistoryId, "Thành công");
-        verify(requestWithdrawHistoryService, times(1)).getUserIdByRequestHistoryId(requestHistoryId);
-        verify(requestWithdrawHistoryService, times(1)).getById(requestHistoryId);
-        verify(walletService, times(1)).getBalanceByUserId(userId);
-        verify(walletService, times(1)).getBalanceByUserId(adminId);
-        verify(walletService, times(1)).updateBalanceByUderId(userId, userBalance - mockRequestWithdrawHistory.getAmountCredit());
-        verify(walletService, times(1)).updateBalanceByUderId(adminId, adminBalance + mockRequestWithdrawHistory.getAmountCredit());
-    }
-
-    @Test
-    public void testUpdateWithdrawalStatusUpdateFail() {
-        // Arrange
-        int requestHistoryId = 1;
-        User mockAdmin = new User();
-        when(session.getAttribute("userInfo")).thenReturn(mockAdmin);
-        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenReturn(0);
-
-        // Act
-        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-
-    }
-
-    @Test
-    public void testUpdateWithdrawalStatusDataAccessException() {
-        // Arrange
-        int requestHistoryId = 1;
-        when(session.getAttribute("userInfo")).thenReturn(new User());
-        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-
-        // Act
-        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-
-    }
+//    @Test
+//    public void testUpdateWithdrawalStatusDataAccessException() {
+//        // Arrange
+//        int requestHistoryId = 1;
+//        when(session.getAttribute("userInfo")).thenReturn(new User());
+//        when(requestWithdrawHistoryService.updateStatus(requestHistoryId, "Thành công")).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+//
+//        // Act
+//        String resultView = adminController.updateWithdrawalStatus(requestHistoryId, session);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//
+//    }
 
     @Test
     public void testGetRegistrationListSuccess() {

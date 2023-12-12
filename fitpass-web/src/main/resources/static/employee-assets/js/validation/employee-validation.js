@@ -1,20 +1,22 @@
 $(document).ready(function () {
-    $.validator.addMethod("strongPassword", function (value) {
-        return /^(?=.*[a-zA-Z])(?=.*\d).*$/.test(value);
-    }, "Mật khẩu phải chứa cả chữ và số");
 
-    $("#change-pw-form").validate({
+    $.validator.addMethod("noSpace", function (value) {
+        return /^\S*$/.test(value);
+    }, "Mật khẩu không được chứa khoảng trắng");
+
+    $('#change-pw-form').validate({
         rules: {
             currentPassword: {
                 required: true,
                 minlength: 6,
                 maxlength: 50,
+                noSpace: true,
             },
             newPassword: {
                 required: true,
                 minlength: 6,
                 maxlength: 50,
-                strongPassword: true,
+                noSpace: true,
             },
             confirmPassword: {
                 required: true,
@@ -46,7 +48,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#submit").click(function () {
+    $("#submitPassword").click(function () {
         if (!$("#change-pw-form").valid()) {
             return false;
         }

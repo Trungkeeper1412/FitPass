@@ -38,6 +38,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -359,7 +360,7 @@ public class AdminController {
     }
 
     @PostMapping("/withdrawal/update-status")
-    public String updateWithdrawalStatus(@RequestParam int requestHistoryId, HttpSession session) {
+    public String updateWithdrawalStatus(@RequestParam int requestHistoryId, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             User admin = (User) session.getAttribute("userInfo");
             String status = "Thành công";
@@ -383,6 +384,7 @@ public class AdminController {
         } catch (DataAccessException e) {
             return "error/data-access-error";
         }
+        redirectAttributes.addAttribute("success", "true");
         return "redirect:/admin/withdrawal";
     }
 
@@ -451,6 +453,10 @@ public class AdminController {
                 becomePartnerService.updateStartRequestTime(b.getBecomeAPartnerRequestId(), new Timestamp(System.currentTimeMillis()));
             } else if(b.getStatus().equals("Từ chối đơn")) {
                 becomePartnerService.updateCancelRequestTime(b.getBecomeAPartnerRequestId(), new Timestamp(System.currentTimeMillis()), b.getCancelReason());
+                BecomePartnerRequest becomePartnerRequest = becomePartnerService.getById(b.getBecomeAPartnerRequestId());
+                String email = becomePartnerRequest.getContactEmail();
+                emailService.send("Từ chối làm thương hiệu Fitpass", "Đơn của bạn đã bị từ chối vì: " + b.getCancelReason(),
+                        email);
             } else if(b.getStatus().equals("Thành công")) {
                 becomePartnerService.updateApproveRequestTime(b.getBecomeAPartnerRequestId(), new Timestamp(System.currentTimeMillis()));
             }
