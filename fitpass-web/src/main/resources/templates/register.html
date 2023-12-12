@@ -34,38 +34,38 @@
         <h1 class="fw-bold">ĐĂNG KÝ</h1>
         <div class="line"></div>
             <div class="input-fields">
-                <div style="display: flex;">
-                    <div class="input-field fname">
+                <div class="row">
+                    <div class="input-field col-md-12 col-lg-12 col-xl-6">
                         <div class="input-title">Họ và tên đệm</div>
                         <input name="fist-name" th:field="*{firstName}" type="text">
                         <span class="error" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}"></span>
                     </div>
-                    <div class="input-field lname">
+                    <div class="input-field col-md-12 col-lg-12 col-xl-6">
                         <div class="input-title">Tên</div>
                         <input name="last-name" th:field="*{lastName}" type="text">
                         <span class="error" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></span>
                     </div>
                 </div>
-                <div class="mt-2" style="display: flex;">
-                    <div class="input-field fname">
+                <div class="mt-2 row">
+                    <div class="input-field col-md-12 col-lg-12 col-xl-6">
                         <div class="input-title">Gmail</div>
                         <input name="email" th:field="*{email}" type="text">
                         <span class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
                     </div>
-                    <div class="input-field lname">
+                    <div class="input-field col-md-12 col-lg-12 col-xl-6">
                         <div class="input-title">Số điện thoại</div>
                         <input name="phoneNumber" th:field="*{phoneNumber}" type="number">
                         <span class="error" th:errors="*{phoneNumber}"
                               th:if="${#fields.hasErrors('phoneNumber')}"></span>
                     </div>
                 </div>
-                <div class="mt-2" style="display: flex;">
-                    <div class="input-field dob">
+                <div class="row mt-2">
+                    <div class="input-field col-md-12 col-lg-12 col-xl-6">
                         <div class="input-title">Ngày sinh</div>
                         <input th:field="*{dateOfBirth}" type="date">
                         <span class="error" th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
                     </div>
-                    <div class="input-field gender">
+                    <div class="input-field col-md-12 col-lg-12 col-xl-6">
                         <div class="input-title">Giới tính</div>
                         <select class="form-select" id="gender" name="gender" style="padding: 8px; border: 2px solid #e1e1e1;" th:field="*{gender}">
                             <option value="">Chọn giới tính</option>
