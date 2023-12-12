@@ -35,18 +35,18 @@
                                 <form id="formPercentage" action="/admin/brand/number-percentage" method="post">
                                     <div class="modal-header">
                                         <div class="text-center" style="width: 95%; margin-left: 20px">
-                                            <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí giao dịch áp dụng</h5>
+                                            <h5 class="modal-title" id="transactionModalLabel">Chỉnh sửa phí hoa hồng áp dụng</h5>
                                         </div>
                                         <div class="text-center">
                                             <button type="button" class="btn btn-close" data-dismiss="modal"></button>
                                         </div>
                                     </div>
                                     <div class="modal-body">
-                                        <label for="editPercentage">Phần trăm phí rút tiền:</label>
+                                        <label for="editPercentage">Phần trăm phí:</label>
                                         <input type="hidden" id="brandId" name="brandId">
                                         <input type="number" class="form-control" id="editPercentage" name="numberPercentage">
                                         <small id="percentageNote" class="form-text text-danger font-italic mt-4">
-                                            Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí rút tiền được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
+                                            Lưu ý: Thay đổi này có thể ảnh hưởng đến quá trình rút tiền từ các đối tác liên kết. Phần trăm phí hoa hồng được áp dụng khi các brand liên kết yêu cầu thanh toán. Hãy cân nhắc kỹ trước khi điều chỉnh giá trị này để đảm bảo mối quan hệ với đối tác không bị ảnh hưởng đáng kể.
                                         </small>
                                     </div>
                                     <div class="modal-footer">
@@ -67,7 +67,7 @@
                                     <th>Số liên hệ cơ sở</th>
                                     <th>Email cơ sở</th>
                                     <th class="status-active">Trạng thái</th>
-                                    <th class="table-action">Phí giao dịch</th>
+                                    <th class="table-action">Phí hoa hồng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -133,6 +133,9 @@
         $("#editPercentage").val(numberPercentage);
     }
 </script>
+
+
+
 </body>
 
 </html>

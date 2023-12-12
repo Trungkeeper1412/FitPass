@@ -7,7 +7,7 @@ var ctx2 = document.getElementById("adminPieChart");
 let totalFlex = document.getElementById("totalFlex").value;
 let totalFixed = document.getElementById("totalFixed").value;
 var adminPieChart = new Chart(ctx2, {
-    type: 'doughnut',
+    type: 'pie', // Change type to 'pie'
     data: {
         labels: ["Gói linh hoạt", "Gói cố định"],
         datasets: [{
@@ -32,6 +32,5 @@ var adminPieChart = new Chart(ctx2, {
         legend: {
             display: false
         },
-        cutoutPercentage: 80,
     },
 });
