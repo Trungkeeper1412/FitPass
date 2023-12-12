@@ -4548,7 +4548,9 @@ section {
         width: 90%;
         padding: 15px;
         display: grid;
-        grid-template-columns: 1fr 2fr 1.5fr;
+        grid-template-areas:
+            'image content1 content1 content1 content1 content1'
+            'image content2 content2 content2 content2 content2';
         margin: auto 0;
         border-radius: 10px;
     }
@@ -4563,16 +4565,16 @@ section {
     /*    border: 1px solid black;*/
     /*    border-radius: 10px;*/
     /*}*/
-    /*.plan-info-mc{*/
-    /*    grid-column-start: 2;*/
-    /*    grid-column-end: 4;*/
-    /*}*/
-
-    /*.plan-card-mc img{*/
-    /*    border: 1px solid black;*/
-    /*    grid-column-start: 1;*/
-    /*    grid-column-end: 2;*/
-    /*}*/
+    .plan-info-mc{
+        grid-area: content1;
+    }
+    .active-time-mc {
+        grid-area: content2;
+    }
+    .plan-card-mc img{
+        border: 1px solid black;
+        grid-area: image;
+    }
 
 
     .active-time-mc {
@@ -4591,7 +4593,7 @@ section {
 
 .plan-card-mc img {
     border-radius: 50%;
-    width: 80px;
+    width: 100px;
     height: 80px;
     margin: auto;
 }
