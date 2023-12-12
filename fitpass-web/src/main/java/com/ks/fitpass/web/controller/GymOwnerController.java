@@ -36,6 +36,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.ks.fitpass.gymplan.dto.GymPlanBuyStat;
 
 import java.net.URI;
 import java.util.*;
@@ -91,11 +92,15 @@ public class GymOwnerController {
 
             int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
 
+            List<GymPlanBuyStat> gymPlanBuyStats = gymPlanService.getGymPlanBuyStatByDepartmentId(departmentDetails.getDepartmentId());
+
             model.addAttribute("totalGymPlan", totalGymPlan);
             model.addAttribute("totalBuy", totalBuy);
             model.addAttribute("totalRevenue", totalRevenue);
             model.addAttribute("totalNumberRating", totalNumberRating);
             model.addAttribute("departmentDetails", departmentDetails);
+            model.addAttribute("gymPlanBuyStats", gymPlanBuyStats);
+
             return "gym-owner/index";
 
         } catch (DuplicateKeyException ex) {
@@ -173,8 +178,8 @@ public class GymOwnerController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
             // Redirect hoặc hiển thị thông báo thành công
-            redirectAttributes.addFlashAttribute("success", true);
-            return "redirect:/gym-owner/profile?success=true";
+            redirectAttributes.addAttribute("success", "true");
+            return "redirect:/gym-owner/profile";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
@@ -674,7 +679,7 @@ public class GymOwnerController {
 
     @PostMapping("/department/info")
     public String updateDepartmentInfo(@Valid @ModelAttribute UpdateGymOwnerDepartmentInfo updateGymOwnerDepartmentInfo,
-                                       BindingResult bindingResult, HttpSession session, Model model) {
+                                       BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
             if (bindingResult.hasErrors()) {
@@ -734,6 +739,7 @@ public class GymOwnerController {
             int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
 
             TimeUnit.SECONDS.sleep(2);
+            redirectAttributes.addAttribute("success", "true");
             return "redirect:/gym-owner/department/info";
         } catch (InterruptedException ex) {
             // Handle InterruptedException

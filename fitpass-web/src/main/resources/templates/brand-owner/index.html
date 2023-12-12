@@ -67,7 +67,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Thu nhập
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalRevenue}">128.000.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800 money-value" th:text="${totalRevenue}">128.000.000</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-dong-sign fa-2x text-gray-300"></i>
@@ -121,7 +121,7 @@
                                             <td th:text="${iterStat.index + 1}">1</td>
                                             <td th:text="${d.departmentName}">City Gym Thái Thành</td>
                                             <td th:text="${d.numberOfGymPlanSold + ' gói'}">185 gói</td>
-                                            <td th:text="${d.totalAmount + ' VNĐ'}">45.000.000 VNĐ</td>
+                                            <td class="money-value" th:text="${d.totalAmount}">45.000.000 VNĐ</td>
                                         </tr>
                                     </th:block>
                                     </tbody>
@@ -151,90 +151,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td >1</td>
-                                            <td >Gói linh hoạt</td>
-                                            <td >120/Giờ</td>
-                                            <td >185 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >2</td>
-                                            <td >Gói 7 ngày</td>
-                                            <td >350</td>
-                                            <td >65 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >3</td>
-                                            <td >Gói 30 ngày</td>
-                                            <td >680</td>
-                                            <td >37 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >2</td>
-                                            <td >Gói 7 ngày</td>
-                                            <td >350</td>
-                                            <td >65 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >3</td>
-                                            <td >Gói 30 ngày</td>
-                                            <td >680</td>
-                                            <td >37 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >1</td>
-                                            <td >Gói linh hoạt</td>
-                                            <td >120/Giờ</td>
-                                            <td >185 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >2</td>
-                                            <td >Gói 7 ngày</td>
-                                            <td >350</td>
-                                            <td >65 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >3</td>
-                                            <td >Gói 30 ngày</td>
-                                            <td >680</td>
-                                            <td >37 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >1</td>
-                                            <td >Gói linh hoạt</td>
-                                            <td >120/Giờ</td>
-                                            <td >185 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >2</td>
-                                            <td >Gói 7 ngày</td>
-                                            <td >350</td>
-                                            <td >65 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >3</td>
-                                            <td >Gói 30 ngày</td>
-                                            <td >680</td>
-                                            <td >37 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >1</td>
-                                            <td >Gói linh hoạt</td>
-                                            <td >120/Giờ</td>
-                                            <td >185 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >2</td>
-                                            <td >Gói 7 ngày</td>
-                                            <td >350</td>
-                                            <td >65 gói</td>
-                                        </tr>
-                                        <tr>
-                                            <td >3</td>
-                                            <td >Gói 30 ngày</td>
-                                            <td >680</td>
-                                            <td >37 gói</td>
-                                        </tr>
+                                    <th:block th:each="gp, iterStat : ${gymPlanBuyStatList}">
+                                    <tr>
+                                        <td th:text="${iterStat.index + 1}">1</td>
+                                        <td th:text="${gp.getName()}"></td>
+                                        <td >
+                                            <span th:if="${gp.getPrice() > 0}" th:text="${gp.getPrice()}"></span>
+                                            <span th:if="${gp.getPrice() == 0}" th:text="${gp.getPricePerHours()} + ' Creits/ giờ'"></span>
+                                        </td>
+                                        <td th:text="${gp.getTotalBuy()}"></td>
+                                    </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>
@@ -284,6 +211,12 @@
 
 <th:block th:replace="brand-owner/common/script"></th:block>
 
+<script>
+    const money_elements = document.querySelectorAll('.money-value');
+    money_elements.forEach((element) => {
+        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+    });
+</script>
 </body>
 
 </html>

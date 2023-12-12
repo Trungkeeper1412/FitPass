@@ -93,7 +93,7 @@ $(document).ready(function () {
     });
 
     $("#submit").click(function () {
-        if (!$("#formUpdate").valid()) {
+        if (!$("#formPercentage").valid()) {
             return false;
         }
     });

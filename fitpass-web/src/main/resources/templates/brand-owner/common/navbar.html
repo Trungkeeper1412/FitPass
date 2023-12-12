@@ -54,10 +54,10 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <th:block th:if="${session.brandDetails.getBrandName()} != null">
-                    <span class="mr-2 d-none d-lg-inline text-black small" th:text="${session.brandDetails.getBrandName()}"></span>
+                    <span class="mr-2 d-none d-lg-inline text-black fs-5 fw-bold" th:text="${session.brandDetails.getBrandName()}"></span>
                 </th:block>
                 <th:block th:unless="${session.brandDetails.getBrandName()} != null">
-                    <span class="mr-2 d-none d-lg-inline text-black small">Brand Owner</span>
+                    <span class="mr-2 d-none d-lg-inline text-black fs-5 fw-bold">Brand Owner</span>
                 </th:block>
                 <th:block th:unless="${session.brandDetails.getBrandLogoUrl() != null}">
                     <img class="img-profile rounded-circle" th:src="@{/employee-assets/img/undraw_profile.svg}">

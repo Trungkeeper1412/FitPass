@@ -59,4 +59,6 @@ public interface UserRepository {
     int createEmployee(User user);
 
     Integer countAllUsersAccount();
+
+    int resetPassword(String email, String hashedPassword);
 }

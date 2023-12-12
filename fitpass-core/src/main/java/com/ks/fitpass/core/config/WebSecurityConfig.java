@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
                         .requestMatchers("/websocket/**").hasAnyAuthority("USER", "EMPLOYEE")
                         .requestMatchers("/login", "/logout").permitAll()
-                        .requestMatchers("/forgot-password/**").permitAll()
+                        .requestMatchers("/forgot-password/**").anonymous()
                         .requestMatchers("/register").anonymous()
                         .requestMatchers("/").permitAll()
 

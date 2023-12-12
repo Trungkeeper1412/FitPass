@@ -184,4 +184,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         Integer count = userRepository.countAllUsersAccount();
         return (count != null) ? count : 0;
     }
+
+    @Override
+    public int resetPassword(String email, String hashedPassword) {
+        return userRepository.resetPassword(email, hashedPassword);
+    }
 }

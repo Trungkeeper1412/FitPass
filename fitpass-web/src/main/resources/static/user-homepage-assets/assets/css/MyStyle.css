@@ -4428,6 +4428,7 @@ section {
 }
 
 .all-plan-of-gym .gym-name-mc {
+    width: fit-content;
     display: flex;
     align-items: center;
     color: rgb(0, 0, 0);
@@ -4446,8 +4447,18 @@ section {
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 280px) and (max-width: 375px) {
-
+@media only screen and (min-width: 280px) and (max-width: 400px) {
+    .plan-card-mc {
+        background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+        background-size: cover;
+        height: 90%;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-radius: 10px;
+    }
     .shopping-cart-title{
         font-size: 19px;
     }
@@ -4468,17 +4479,40 @@ section {
         width: 10px;
         height: 10px;
     }
+    .plan-info-mc h4 {
+        font-size: 13px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .plan-duration-mc {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 3px;
+    }
+    .plan-info-mc div {
+        font-size: 12px;
+    }
+    .active-time-mc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 12px;
+    }
 }
-@media only screen and (min-width: 280px) {
+@media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 90%;
-        width: 100%;
+        height: 100%;
         padding: 10px;
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr 2fr 1.5fr;
-        margin: auto 0;
+        /*margin: auto 0;*/
         border-radius: 10px;
     }
 
@@ -4512,16 +4546,38 @@ section {
         background-size: cover;
         height: 75%;
         width: 90%;
+        padding: 15px;
         display: grid;
         grid-template-columns: 1fr 2fr 1.5fr;
         margin: auto 0;
         border-radius: 10px;
     }
+    /*.plan-card-mc {*/
+    /*    background-size: cover;*/
+    /*    height: 100%;*/
+    /*    width: 90%;*/
+    /*    padding: 20px 10px 20px 10px;*/
+    /*    display: grid;*/
+    /*    grid-template-columns: 1fr 2fr 1.5fr;*/
+    /*    margin: auto 0;*/
+    /*    border: 1px solid black;*/
+    /*    border-radius: 10px;*/
+    /*}*/
+    /*.plan-info-mc{*/
+    /*    grid-column-start: 2;*/
+    /*    grid-column-end: 4;*/
+    /*}*/
+
+    /*.plan-card-mc img{*/
+    /*    border: 1px solid black;*/
+    /*    grid-column-start: 1;*/
+    /*    grid-column-end: 2;*/
+    /*}*/
+
 
     .active-time-mc {
         display: flex;
         align-items: center;
-        /* justify-content: center; */
         color: white;
         padding: 10px;
         font-weight: 500;
@@ -4529,7 +4585,6 @@ section {
 
     .plan-info-mc h4 {
         font-size: 18px;
-        /*margin: auto;*/
         margin-top: 10px;
     }
 }
@@ -5423,6 +5478,9 @@ section {
 }
 
 @media screen and (max-width: 770px) {
+    .form-check{
+        padding-left: 0px;
+    }
     .gym-brand-content .department {
         display: flex;
         flex-wrap: wrap;
@@ -5934,6 +5992,13 @@ section {
 .for-md-size{
     display: none;
 }
+.login-register-link{
+    cursor: pointer;
+    /*position: absolute;*/
+    margin-top: 20px;
+    bottom: 20px;
+    font-weight: 600;
+}
 @media (max-width: 767.98px) {
     .banner-wrapper{
         display: none;
@@ -5943,15 +6008,27 @@ section {
     }
     .login-tab, .register-tab{
         margin-top: 20px;
+        position: relative;
+        height: fit-content;
     }
     .register-login-content{
-        height: 100%;
+        /*height: 100%;*/
         width: 100%;
-        display: grid;
-        grid-template-rows: 1fr 1fr;
+        display: flex;
+        align-items: center;
+        /*display: grid;*/
+        /*grid-template-rows: 1.5fr 1fr;*/
+    }
+    .fp-logo{
+        display: block;
+        width: 100px;
+        height: 100px;
     }
 }
 @media (min-width: 768px) {
+    .fp-logo{
+        display: none;
+    }
     .register-login-content{
         height: 100%;
         width: 100%;
@@ -5991,7 +6068,7 @@ section {
 }
 
 .login-tab {
-    /* padding-left: 0; */
+    position: relative;
     width: 100%;
     text-align: center;
     display: flex;
@@ -6148,6 +6225,7 @@ section {
 }
 
 .register-tab {
+    position: relative;
     width: 100%;
     text-align: center;
     display: flex;

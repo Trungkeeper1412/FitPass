@@ -34,4 +34,6 @@ public interface RequestWithdrawHistoryRepository {
     Double countAllBrandCredit();
 
     List<RequestHistoryBrandAdmin> getAllRequestHistoryBrandAdmin();
+
+    int countRequestIsPending(int cardId);
 }

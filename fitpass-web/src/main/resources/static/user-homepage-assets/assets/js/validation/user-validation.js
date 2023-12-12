@@ -94,8 +94,8 @@ $(document).ready(function () {
             },
             firstName: {
                 required: "Vui lòng nhập họ của bạn !",
-                maxlength: "Họ của bạn không được vượt quá 25 kí tự !",
-                pattern: "Họ của bạn không được chứa số và kí tự đặc biệt !",
+                maxlength: "Họ tên không vượt quá 25 kí tự !",
+                pattern: "Họ tên không chứa số và kí tự đặc biệt !",
             },
             email: {
                 required: "Vui lòng nhập email !",
@@ -115,8 +115,8 @@ $(document).ready(function () {
             },
             lastName: {
                 required: "Vui lòng nhập tên của bạn !",
-                maxlength: "Tên của bạn không được vượt quá 25 kí tự !",
-                pattern: "Tên của bạn không được chứa số và kí tự đặc biệt !",
+                maxlength: "Tên không vượt quá 25 kí tự !",
+                pattern: "Tên không chứa số và kí tự đặc biệt !",
             },
             phone: {
                 required: "Vui lòng nhập số điện thoại !",
@@ -147,6 +147,18 @@ $(document).ready(function () {
             reUserPassword: {
                 required: "Vui lòng xác nhận mật khẩu !",
                 equalTo: "Xác nhận mật khẩu phải giống với mật khẩu",
+            }
+        },
+        submitHandler: function (form) {
+            // Lấy giá trị reCAPTCHA response
+            const recaptchaResponse = grecaptcha.getResponse();
+
+            // Kiểm tra xem reCAPTCHA response có giá trị hay không
+            if (recaptchaResponse.length === 0) {
+                alert('Vui lòng hoàn thành reCAPTCHA trước khi submit form.');
+            } else {
+                // Nếu reCAPTCHA đã được hoàn thành, tiếp tục submit form
+                form.submit();
             }
         },
     });

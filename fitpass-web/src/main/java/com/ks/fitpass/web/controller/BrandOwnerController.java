@@ -100,12 +100,16 @@ public class BrandOwnerController {
 
             List<DepartmentRatingStatBrandOwner> departmentRatingStatBrandOwnerList = departmentService.getDepartmentRatingStatBrandOwner(brandId);
 
+            List<GymPlanBuyStat> gymPlanBuyStatList = gymPlanService.getGymPlanBuyStat(brandId);
+
             model.addAttribute("numberOfGymplan", numberOfGymplan);
             model.addAttribute("numberOfOrder", numberOfOrder);
             model.addAttribute("totalRevenue", totalRevenue);
             model.addAttribute("totalRating", totalRating);
             model.addAttribute("departmentStatBrandOwnerList", departmentStatBrandOwnerList);
             model.addAttribute("departmentRatingStatBrandOwnerList", departmentRatingStatBrandOwnerList);
+            model.addAttribute("gymPlanBuyStatList", gymPlanBuyStatList);
+
             return "brand-owner/index";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -206,8 +210,8 @@ public class BrandOwnerController {
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
 
-            redirectAttributes.addFlashAttribute("success", true);
-            return "redirect:/brand-owner/password?success=true";
+            redirectAttributes.addAttribute("success", "true");
+            return "redirect:/brand-owner/password";
         } catch (Exception ex) {
             // Handle other exceptions
             logger.error("Exception occurred in changePassword", ex);
@@ -1171,6 +1175,7 @@ try {
 
             Brand b = brandService.getBrandDetail(user.getUserId());
             int moneyPercent = brandService.getBrandMoneyPercent(b.getBrandId());
+
             if (creditAmount > userBalance) {
                 attributes.addFlashAttribute("errorCredit", "Số credit muốn rút phải nhỏ hơn hoặc bằng số dư hiện tại.");
             } else {
