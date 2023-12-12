@@ -362,11 +362,15 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $.validator.addMethod("lessThanOrEqualCurrentBalance", function(value, element) {
+    $.validator.addMethod("maxCredit", function(value, element) {
         var currentBalance = parseFloat($('#currentBalance').val());
         var creditAmount = parseFloat(value);
         return this.optional(element) || creditAmount <= currentBalance;
     }, "Số credit muốn rút phải nhỏ hơn hoặc bằng số dư hiện tại.");
+
+    $.validator.addMethod("integerCredit", function(value, element) {
+        return this.optional(element) || Number.isInteger(parseFloat(value));
+    }, "Số credit muốn rút phải là số nguyên.");
 
     $("#withdrawForm").validate({
         rules: {
@@ -377,7 +381,8 @@ $(document).ready(function () {
                 required: true,
                 min: 10000,
                 max: 1000000,
-                lessThanOrEqualCurrentBalance: true
+                maxCredit: true,
+                integerCredit: true
             },
         },
         messages: {

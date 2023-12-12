@@ -332,6 +332,8 @@
                 confirmButtonText: 'Đóng',
                 timer: 5000
             });
+            const urlWithoutSuccess = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, urlWithoutSuccess);
         }
     });
 </script>
@@ -351,6 +353,8 @@
                 confirmButtonText: 'Đóng',
                 timer: 5000
             });
+            const urlWithoutSuccess = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, urlWithoutSuccess);
         }
     });
 </script>

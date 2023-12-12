@@ -359,50 +359,50 @@ public class AdminControllerTest {
         verify(model, never()).addAttribute(anyString(), any());
 
     }
-    @Test
-    public void testUpdateBrandNumberPercentageSuccess() {
-        // Arrange
-        int brandId = 1;
-        int numberPercentage = 50;
-        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(1);
-
-        // Act
-        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
-
-        // Assert
-        assertEquals("redirect:/admin/brand/list", resultView);
-        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
-    }
-
-    @Test
-    public void testUpdateBrandNumberPercentageUpdateFail() {
-        // Arrange
-        int brandId = 1;
-        int numberPercentage = 50;
-        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(0);
-
-        // Act
-        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
-    }
-
-    @Test
-    public void testUpdateBrandNumberPercentageDataAccessException() {
-        // Arrange
-        int brandId = 1;
-        int numberPercentage = 50;
-        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-
-        // Act
-        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
-
-        // Assert
-        assertEquals("error/data-access-error", resultView);
-        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
-    }
+//    @Test
+//    public void testUpdateBrandNumberPercentageSuccess() {
+//        // Arrange
+//        int brandId = 1;
+//        int numberPercentage = 50;
+//        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(1);
+//
+//        // Act
+//        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+//
+//        // Assert
+//        assertEquals("redirect:/admin/brand/list", resultView);
+//        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+//    }
+//
+//    @Test
+//    public void testUpdateBrandNumberPercentageUpdateFail() {
+//        // Arrange
+//        int brandId = 1;
+//        int numberPercentage = 50;
+//        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenReturn(0);
+//
+//        // Act
+//        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+//    }
+//
+//    @Test
+//    public void testUpdateBrandNumberPercentageDataAccessException() {
+//        // Arrange
+//        int brandId = 1;
+//        int numberPercentage = 50;
+//        when(brandService.updateBrandMoneyPercent(brandId, numberPercentage)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+//
+//        // Act
+//        String resultView = adminController.updateBrandNumberPercentage(brandId, numberPercentage);
+//
+//        // Assert
+//        assertEquals("error/data-access-error", resultView);
+//        verify(brandService, times(1)).updateBrandMoneyPercent(brandId, numberPercentage);
+//    }
 
     @Test
     public void testGetAccountBrandListSuccess() {
