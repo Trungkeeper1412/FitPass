@@ -30,8 +30,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .addFilterAfter(new AuditInterceptor(), AnonymousAuthenticationFilter.class)
-                .requiresChannel(channel ->
-                        channel.anyRequest().requiresSecure())
+                .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
