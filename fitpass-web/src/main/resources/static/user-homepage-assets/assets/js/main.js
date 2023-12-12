@@ -457,10 +457,6 @@ function updateQuantityCart() {
         });
     });
 })()
-$(function () {
-    $("#include-navbar").load("navbar.html");
-});
-
 //change avatar
 let user_img = document.getElementById('user-ava');
 let input_img = document.getElementById('exampleFormControlFile1');

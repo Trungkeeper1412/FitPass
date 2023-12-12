@@ -40,4 +40,7 @@ public interface GymPlanService {
     int getNumberOfGymPlan(int brandId);
 
     int getTotalGymPlanDepartment(int departmentId);
+
+    List<GymPlanBuyStat> getGymPlanBuyStat(int brandId);
+    List<GymPlanBuyStat> getGymPlanBuyStatByDepartmentId(int departmentId);
 }

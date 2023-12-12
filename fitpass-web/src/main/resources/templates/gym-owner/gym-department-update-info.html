@@ -28,7 +28,7 @@
                         <h2 class="fw-bold text-primary">Cập nhật thông tin</h2>
                     </div>
                     <div class="card-body">
-                        <form id="formSubmit" action="/gym-owner/department/info" method="post"
+                        <form id="formUpdate" action="/gym-owner/department/info" method="post"
                               th:object="${updateGymOwnerDepartmentInfo}">
                             <div class="row">
                                 <div class="row">
@@ -49,17 +49,17 @@
                                             <label for="phone" class="form-label fw-bold">Số điện thoại
                                                 :</label>
                                             <input th:field="*{departmentContactNumber}" type="number"
-                                                   class="form-control" id="phone" name="phoneDepartment"
+                                                   class="form-control" id="phone" name="departmentContactNumber"
                                                    placeholder="Nhập số điện thoại"
                                                    th:value="${updateGymOwnerDepartmentInfo.getDepartmentContactNumber()}">
                                             <span th:if="${#fields.hasErrors('departmentContactNumber')}"
                                                   class="error" th:errors="*{departmentContactNumber}">Error</span>
                                         </div>
                                         <div class="mb-4">
-                                            <label for="address" class="form-label fw-bold">Địa chỉ
+                                            <label for="departmentAddress" class="form-label fw-bold">Địa chỉ
                                                 :</label>
                                             <input th:field="*{departmentAddress}" type="text" class="form-control"
-                                                   placeholder="Địa chỉ" name="address"
+                                                   placeholder="Địa chỉ" name="departmentAddress" id="departmentAddress"
                                                    th:value="${updateGymOwnerDepartmentInfo.getDepartmentAddress()}">
                                             <span th:if="${#fields.hasErrors('departmentAddress')}"
                                                   class="error" th:errors="*{departmentAddress}">Error</span>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label class="fw-bold" for="openHours">Giờ hoạt động:</label><br>
-                                        <div class="mb-4 d-flex align-items-center align-content-center">
+                                        <div class="mb-2 d-flex align-items-center align-content-center" id="openHours">
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectOpenHoursModal">
                                                 Chọn giờ
                                             </button>
@@ -215,9 +215,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 pt-2">
-                                    <label for="description" class="form-label fw-bold">Mô tả :</label>
+                                    <label for="departmentDescription" class="form-label fw-bold">Mô tả :</label>
                                     <textarea th:field="*{departmentDescription}" style="width: 100%; padding: 10px;"
-                                              rows="4" cols="50" name="comment"
+                                              rows="4" cols="50" name="departmentDescription" id="departmentDescription"
                                               th:text="${updateGymOwnerDepartmentInfo.getDepartmentDescription()}">
                                     </textarea>
                                     <span th:if="${#fields.hasErrors('departmentDescription')}"
@@ -257,52 +257,41 @@
 
 <script>
 
-    $("#updateInfo").click(function (e) {
-        e.preventDefault();
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
 
-        // Thực hiện validation trước khi xử lý form
-        if ($("#formSubmit").valid()) {
+        if (successParam === 'true') {
             Swal.fire({
-                title: 'Bạn có muốn cập nhật thông tin cơ sở',
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Cập nhật thông tin thành công.',
+                confirmButtonText: 'Đóng',
+            });
+        }
+
+        $('#formUpdate').submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
                 icon: 'question',
+                title: 'Bạn có muốn cập nhật thông tin cơ sở ?',
+                showConfirmButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'Có',
-                cancelButtonText: 'Không',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
+                    this.submit();
+                } else if (result.isDismissed || result.isDenied) {
                     Swal.fire({
-                        title: 'Vui lòng đợi...',
-                        icon: 'info',
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading();
-                            setTimeout(() => {
-                                $("#formSubmit").submit();
-                                Swal.close();
-                            }, 2000);
-                        },
-                        didClose: () => {
-                            Swal.fire({
-                                title: 'Thành công!',
-                                text: 'Cập nhật thông tin thành công.',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Thất bại!',
-                        text: 'Cập nhật thông tin thất bại.',
                         icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
+                        title: 'Thất bại!',
+                        text: 'Cập nhật thông tin thất bại !',
+                        confirmButtonText: 'Đóng',
                     });
                 }
             });
-        }
+        });
     });
 
     function convertTimeStringToTimeValue(timeString) {

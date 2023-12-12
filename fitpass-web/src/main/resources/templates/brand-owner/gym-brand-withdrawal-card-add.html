@@ -36,14 +36,14 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title fw-bold">Thêm Thẻ Ngân Hàng</h5>
+                                            <h5 class="card-title fw-bold">Thêm tài khoản ngân hàng</h5>
                                             <form id="bankCardForm">
-                                                <div class="mb-3">
-                                                    <label for="cardHolder" class="form-label">Họ Tên Chủ Thẻ</label>
+                                                <div class="mb-4">
+                                                    <label for="cardHolder" class="form-label">Họ tên chủ thẻ</label>
                                                     <input type="text" class="form-control" id="cardHolder" name="cardHolder" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="bankType" class="form-label">Loại Ngân Hàng</label>
+                                                <div class="mb-4">
+                                                    <label for="bankType" class="form-label">Loại ngân hàng</label>
                                                     <select class="form-select" id="bankType" name="bankType" required>
                                                         <option value="acb">ACB</option>
                                                         <option value="agribank">Agribank</option>
@@ -65,12 +65,12 @@
                                                         <option value="vpbank">VPBank</option>
                                                     </select>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="accountNumber" class="form-label">Số Tài Khoản</label>
+                                                <div class="mb-4">
+                                                    <label for="accountNumber" class="form-label">Số tài khoản</label>
                                                     <input type="number" class="form-control" id="accountNumber" name="accountNumber" required>
                                                 </div>
                                                 <div class="d-flex justify-content-center">
-                                                    <button type="button" class="btn btn-primary" onclick="addBankCard()">Thêm Thẻ</button>
+                                                    <button type="button" class="btn btn-primary" onclick="addBankCard()" id="addCard">Thêm tài khoản</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -81,14 +81,14 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="card">
                                         <div class="card-body bank-card">
-                                            <h5 class="card-title fw-bold">Danh Sách Thẻ Ngân Hàng</h5>
+                                            <h5 class="card-title fw-bold">Danh sách tài khoản ngân hàng</h5>
                                             <ul id="cardList" class="list-group">
-                                                <!-- Hiển thị danh sách thẻ ngân hàng ở đây -->
+                                                <!-- Hiển thị danh sách thẻ ngân hàng -->
                                                 <th:block th:each="c : ${creditCardList}">
                                                     <li th:attr="data-creditCardId=${c.getCreditCardId()}, data-cardHolder=${c.getCardOwnerName()},
                                                     data-bankType=${c.getBankName()}, data-accountNumber=${c.getCardNumber()}"
                                                         th:onclick="showCardInfo(this)"
-                                                        class="list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-3">
+                                                        class="list-bank-card list-group-item d-flex flex-column justify-content-between align-items-start mb-4">
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-credit-card-2-front fs-1 pr-3"></i>
                                                             <span class="fs-4 text-uppercase" th:text="${c.getBankName()}">agribank</span>
@@ -110,7 +110,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <div class="text-center" style="width: 95%; margin-left: 20px">
-                                            <h5 class="modal-title" id="cardInfoModalLabel">Thông tin thẻ</h5>
+                                            <h5 class="modal-title" id="cardInfoModalLabel">Thông tin tài khoản</h5>
                                         </div>
                                         <div class="text-center">
                                             <button type="button" class="btn btn-close" data-dismiss="modal"></button>
@@ -120,8 +120,8 @@
                                         <div id="modalCardInfo"></div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteCardBtn">Xóa thẻ</button>
-                                        <button type="button" class="btn btn-primary" onclick="updateCard()">Cập nhật thẻ</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteCardBtn">Xóa tài khoản</button>
+                                        <button type="button" class="btn btn-primary" onclick="updateCard()">Cập nhật</button>
                                     </div>
                                 </div>
                             </div>

@@ -256,4 +256,9 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     public Integer countAllUsersAccount() {
         return jdbcTemplate.queryForObject(COUNT_ALL_USERS_ACCOUNT, Integer.class);
     }
+
+    @Override
+    public int resetPassword(String email, String hashedPassword) {
+        return jdbcTemplate.update(RESET_PASSWORD, hashedPassword, email);
+    }
 }

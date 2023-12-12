@@ -2,7 +2,6 @@ package com.ks.fitpass.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryPage;
@@ -21,8 +20,6 @@ import com.ks.fitpass.notification.service.NotificationService;
 import com.ks.fitpass.notification.service.WebSocketService;
 import com.ks.fitpass.order.dto.OrderDetailConfirmCheckOut;
 import com.ks.fitpass.order.service.OrderDetailService;
-import com.ks.fitpass.transaction.service.TransactionService;
-import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +33,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -43,35 +41,26 @@ import java.util.List;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
-
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
-
     private final EmployeeService employeeService;
     private final OrderDetailService orderDetailService;
     private final NotificationService notificationService;
     private final CheckInHistoryService checkInHistoryService;
-    private final WalletService walletService;
     private final WebSocketService webSocketService;
-    private final BrandService brandService;
     private final DepartmentService departmentService;
-    private final TransactionService transactionService;
     private final UserService userService;
-
     private final UserRepository userRepository;
 
+
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,
-                              NotificationService notificationService, CheckInHistoryService checkInHistoryService,
-                              WalletService walletService, WebSocketService webSocketService, BrandService brandService,
-                              DepartmentService departmentService, TransactionService transactionService, UserService userService, UserRepository userRepository) {
+                              NotificationService notificationService, CheckInHistoryService checkInHistoryService, WebSocketService webSocketService,
+                              DepartmentService departmentService, UserService userService, UserRepository userRepository) {
         this.employeeService = employeeService;
         this.orderDetailService = orderDetailService;
         this.notificationService = notificationService;
         this.checkInHistoryService = checkInHistoryService;
-        this.walletService = walletService;
         this.webSocketService = webSocketService;
-        this.brandService = brandService;
         this.departmentService = departmentService;
-        this.transactionService = transactionService;
         this.userService = userService;
         this.userRepository = userRepository;
     }
@@ -86,6 +75,17 @@ public class EmployeeController {
         }
     }
 
+    @ModelAttribute
+    public void populateEmployeeInfo(HttpSession session, Model model){
+        User user = (User) session.getAttribute("userInfo");
+        UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
+        int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+
+        session.setAttribute("userFullNameEmp", userDetail.getFirstName().concat(" ").concat(userDetail.getLastName()));
+        session.setAttribute("userAvatarEmp", userDetail.getImageUrl());
+        model.addAttribute("departmentId", userDepartmentId);
+    }
+
     @GetMapping("/changePassword")
     public String getRegistrationList() {
         return "employee/change-password";
@@ -95,34 +95,33 @@ public class EmployeeController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model, HttpSession session) {
+                                 Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
             User user = (User) session.getAttribute("userInfo");
-            int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "employee/change-password";
             }
+
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "employee/change-password";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
 
-            // Redirect hoặc hiển thị thông báo thành công
-            model.addAttribute("success", true);
-            model.addAttribute("departmentId", userDepartmentId);
+            redirectAttributes.addAttribute("success", "true");
             return "redirect:/employee/changePassword";
+            
         } catch (Exception e) {
             // Handle other exceptions if necessary
-            model.addAttribute("error", "An unexpected error occurred");
-            e.printStackTrace(); // Log or print the stack trace for debugging
+            model.addAttribute("unexpectedError", "Lỗi không xác định");
             return "employee/change-password";
         }
     }
@@ -137,7 +136,6 @@ public class EmployeeController {
             List<CheckedInFixedDTO> checkedInDTOList = employeeService.getListCheckedInFixedByDepartmentId(departmentId);
             model.addAttribute("checkInList", checkInFixedDTOList);
             model.addAttribute("checkedInList", checkedInDTOList);
-            model.addAttribute("departmentId", departmentId);
             return "employee/employee-check-in-fixed";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -165,7 +163,6 @@ public class EmployeeController {
             List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
             model.addAttribute("checkInList", checkInFlexibleDTOList);
             model.addAttribute("checkOutList", checkOutFlexibleDTOList);
-            model.addAttribute("departmentId", departmentId);
             return "employee/employee-check-in-flexible";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -346,12 +343,9 @@ public class EmployeeController {
         double totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
 
         OrderDetailConfirmCheckOut orderCheckOut = orderDetailService.getByOrderDetailId(orderDetailId);
-        double userBalance = walletService.getBalanceByUserId(userIdReceived);
         int checkInHistoryId = checkInHistoryService.getCheckInHistoryIdByOrderDetailIdAndCheckInTime(orderDetailId, checkInTime);
 
-//        orderCheckOut.setCreditInWallet(userBalance);
         orderCheckOut.setCreditNeedToPay(totalCredit);
-//        orderCheckOut.setCreditAfterPay(userBalance - totalCredit);
         orderCheckOut.setDurationHavePractice(duration);
         orderCheckOut.setHistoryCheckInId(checkInHistoryId);
         orderCheckOut.setCheckOutTime(new Timestamp(checkOutTimeLong));
@@ -531,12 +525,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/history")
-    public String getCheckInHistory(@RequestParam("id") int departmentId, Model model, HttpSession session) {
+    public String getCheckInHistory(@RequestParam("id") int departmentId, HttpSession session) {
         try {
             if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
                 return "error/403";
             }
-            model.addAttribute("departmentId", departmentId);
             return "employee/employee-check-in-history";
         } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
@@ -560,24 +553,22 @@ public class EmployeeController {
                 List<CheckInHistoryFlexible> listFlexible = checkInHistoryService.getListCheckInHistoryFlexibleByDepartmentId(departmentId, page, size);
                 int totalListCheckInHistoryFlexible = checkInHistoryService.getTotalListCheckInHistoryFlexibleByDepartmentId(departmentId);
                 int totalPages = (int) Math.ceil((double) totalListCheckInHistoryFlexible / size);
-                int currentPage = page;
 
                 checkInHistoryPage = CheckInHistoryPage.builder()
                         .listFlexible(listFlexible)
                         .totalPages(totalPages)
-                        .currentPage(currentPage)
+                        .currentPage(page)
                         .departmentId(departmentId)
                         .build();
             } else if (plan.equals("fixed")) {
                 List<CheckInHistoryFixed> listFixed = checkInHistoryService.getListCheckInHistoryFixedByDepartmentId(departmentId, page, size);
                 int totalListCheckInHistoryFixed = checkInHistoryService.getTotalListCheckInHistoryFixedByDepartmentId(departmentId);
                 int totalPages = (int) Math.ceil((double) totalListCheckInHistoryFixed / size);
-                int currentPage = page;
 
                 checkInHistoryPage = CheckInHistoryPage.builder()
                         .listFixed(listFixed)
                         .totalPages(totalPages)
-                        .currentPage(currentPage)
+                        .currentPage(page)
                         .departmentId(departmentId)
                         .build();
             }

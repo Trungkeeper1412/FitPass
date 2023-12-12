@@ -1,5 +1,6 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.brand.entity.Brand;
 import com.ks.fitpass.brand.entity.BrandAmenitie;
 import com.ks.fitpass.brand.service.BrandAmenitieService;
 import com.ks.fitpass.core.entity.GymOwnerListDTO;
@@ -34,9 +35,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.ks.fitpass.gymplan.dto.GymPlanBuyStat;
 
 import java.net.URI;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -59,6 +63,15 @@ public class GymOwnerController {
 
     private static final Logger logger = LoggerFactory.getLogger(GymOwnerController.class);
 
+    @ModelAttribute
+    public void populateGymOwnerInfo(HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
+
+        session.setAttribute("userFullNameGO", userDetail.getFirstName().concat(" ").concat(userDetail.getLastName()));
+        session.setAttribute("userAvatarGO", userDetail.getImageUrl());
+    }
+
     //Index (Statistic Dashboard)
     @GetMapping("/index")
     public String getGOIndex(HttpSession session, Model model) {
@@ -79,11 +92,15 @@ public class GymOwnerController {
 
             int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
 
+            List<GymPlanBuyStat> gymPlanBuyStats = gymPlanService.getGymPlanBuyStatByDepartmentId(departmentDetails.getDepartmentId());
+
             model.addAttribute("totalGymPlan", totalGymPlan);
             model.addAttribute("totalBuy", totalBuy);
             model.addAttribute("totalRevenue", totalRevenue);
             model.addAttribute("totalNumberRating", totalNumberRating);
             model.addAttribute("departmentDetails", departmentDetails);
+            model.addAttribute("gymPlanBuyStats", gymPlanBuyStats);
+
             return "gym-owner/index";
 
         } catch (DuplicateKeyException ex) {
@@ -137,7 +154,7 @@ public class GymOwnerController {
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
-                                 Model model, HttpSession session) {
+                                 Model model,HttpSession session, RedirectAttributes redirectAttributes) {
 
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
@@ -149,19 +166,19 @@ public class GymOwnerController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("error", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
                 return "gym-owner/gym-department-profile";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if (!newPassword.equals(confirmPassword)) {
-                model.addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                model.addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
                 return "gym-owner/gym-department-profile";
             }
             String hashedPassword = passwordEncoder.encode(newPassword);
             // Cập nhật mật khẩu mới
             userService.updatePassword(hashedPassword, user.getUserId());
             // Redirect hoặc hiển thị thông báo thành công
-            model.addAttribute("success", true);
+            redirectAttributes.addAttribute("success", "true");
             return "redirect:/gym-owner/profile";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
@@ -662,7 +679,7 @@ public class GymOwnerController {
 
     @PostMapping("/department/info")
     public String updateDepartmentInfo(@Valid @ModelAttribute UpdateGymOwnerDepartmentInfo updateGymOwnerDepartmentInfo,
-                                       BindingResult bindingResult, HttpSession session, Model model) {
+                                       BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         boolean isFirstTime = checkAndSetIsFirstTime(session, model);
         try {
             if (bindingResult.hasErrors()) {
@@ -674,6 +691,7 @@ public class GymOwnerController {
                 int departmentId = departmentDetails.getDepartmentId();
                 List<DepartmentSchedule> departmentSchedules = departmentScheduleService.getAllByDepartmentID(departmentId);
                 model.addAttribute("departmentSchedules", departmentSchedules);
+                TimeUnit.SECONDS.sleep(2);
                 return "/gym-owner/gym-department-update-info";
             }
 
@@ -720,7 +738,13 @@ public class GymOwnerController {
             int[] numRowInsertScheduleResult = departmentScheduleService.addDepartmentSchedule(dayToTimeMap, updateGymOwnerDepartmentInfo.getDepartmentId());
             int numRowInsertSchedule = Arrays.stream(numRowInsertScheduleResult).sum();
 
+            TimeUnit.SECONDS.sleep(2);
+            redirectAttributes.addAttribute("success", "true");
             return "redirect:/gym-owner/department/info";
+        } catch (InterruptedException ex) {
+            // Handle InterruptedException
+            logger.error("InterruptedException occurred", ex);
+            return "error/error";
         } catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
@@ -933,50 +957,6 @@ public class GymOwnerController {
         }
     }
 
-    //    @PostMapping("/department/image")
-//    public String updateDepartmentImages(HttpSession session, Model model,
-//                                         @RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
-//                                         @RequestParam String imageWallpaperUrl, @RequestParam String listAlbumUrl) {
-//        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-//        try {
-//            if (isFirstTime) {
-//                return "redirect:/gym-owner/department/update-details";
-//            }
-//
-//            User user = (User) session.getAttribute("userInfo");
-//            Department departmentDetails = departmentService.getByUserId(user.getUserId());
-//
-//            departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
-//            departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
-//            String[] listAlbum = listAlbumUrl.split(",");
-//            List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
-//            Arrays.stream(listAlbum).forEach(albumUrl -> {
-//                DepartmentAlbums departmentAlbums = new DepartmentAlbums();
-//                departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
-//                departmentAlbums.setPhotoUrl(albumUrl);
-//                departmentAlbumsList.add(departmentAlbums);
-//            });
-//            departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
-//
-//            return "redirect:/gym-owner/department/image";
-//        } catch (DuplicateKeyException ex) {
-//            // Handle duplicate key violation
-//            logger.error("DuplicateKeyException occurred", ex);
-//            return "error/duplicate-key-error";
-//        } catch (EmptyResultDataAccessException ex) {
-//            // Handle empty result set
-//            logger.error("EmptyResultDataAccessException occurred", ex);
-//            return "error/no-data";
-//        } catch (IncorrectResultSizeDataAccessException ex) {
-//            // Handle incorrect result size
-//            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-//            return "error/incorrect-result-size-error";
-//        } catch (DataAccessException ex) {
-//            // Handle other data access issues
-//            logger.error("DataAccessException occurred", ex);
-//            return "error/data-access-error";
-//        }
-//    }
     @PostMapping("/department/image")
     public ResponseEntity<?> updateDepartmentImages(@RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
                                                     @RequestParam String imageWallpaperUrl,

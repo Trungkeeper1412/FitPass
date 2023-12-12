@@ -22,7 +22,6 @@ function showCancelConfirmation(type) {
         preConfirm: (reason) => {
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    resolve();
                     let becomeAPartnerRequestId;
                     if(type === 'pending') {
                         becomeAPartnerRequestId = $("#becomeAPartnerRequestIdPending").val();
@@ -42,6 +41,7 @@ function showCancelConfirmation(type) {
                         success: function (result) {
                             Swal.fire('Xử lý hủy đơn thành công', '', 'success').then(
                                 function () {
+                                    resolve();
                                     location.reload();
                                 }
                             );
@@ -51,6 +51,7 @@ function showCancelConfirmation(type) {
                         error: function (e) {
                             Swal.fire('Xử lý hủy đơn thất bại', '', 'error');
                             console.log(e);
+                            resolve();
                         }
                     });
                     if(type === 'pending'){

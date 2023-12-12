@@ -35,3 +35,4 @@ build/
 /upload/
 fitpass-web/src/main/resources/application.properties
 fitpass-web/src/main/resources/keystore.jks
+fitpass-web/pom.xml

@@ -11,7 +11,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div class="d-flex flex-column" id="content-wrapper">
 
         <!-- Main Content -->
         <div id="content">
@@ -28,40 +28,52 @@
                         <h2 class="m-0 font-weight-bold text-primary">Đổi mật khẩu</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/gym-owner/profile" id="change-pw-form">
+                        <form action="/gym-owner/profile" id="change-pw-form" method="POST">
                             <div class="card-box">
                                 <h2 class="fs-title text-center">Đổi mật khẩu</h2>
                                 <div class="row">
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3 mx-auto">
-                                            <div class="mb-3">
-                                                <label for="old-password" class="form-label fw-bold">Mật khẩu cũ:</label>
-                                                <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Nhập mật khẩu cũ">
-                                                <i class="bi bi-eye-slash field-icon" id="togglePassword"></i>
+                                    <div class="col-md-5 mb-3 mx-auto">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold" for="currentPassword">Mật khẩu cũ:</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="currentPassword" name="currentPassword" placeholder="Nhập mật khẩu cũ" type="password">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-eye-slash field-icon" id="togglePassword"></i>
+                                                </span>
+                                            </div>
+                                            <span th:if="${currentPasswordError}" class="error" th:text="${currentPasswordError}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3 mx-auto">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold" for="newPassword">Mật khẩu mới:</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới" type="password">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-eye-slash field-icon" id="toggleNewPassword"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3 mx-auto">
-                                            <div class="mb-3">
-                                                <label for="new-password" class="form-label fw-bold">Mật khẩu mới:</label>
-                                                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới">
-                                                <i class="bi bi-eye-slash field-icon" id="toggleNewPassword"></i>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3 mx-auto">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold" for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu mới" type="password">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-eye-slash field-icon" id="toggleRePassword"></i>
+                                                </span>
                                             </div>
+                                            <span th:if="${passwordMismatchError}" class="error" th:text="${passwordMismatchError}"></span>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3 mx-auto">
-                                            <div class="mb-3">
-                                                <label for="confirm-password" class="form-label fw-bold">Xác nhận mật khẩu mới:</label>
-                                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu mới">
-                                                <i class="bi bi-eye-slash field-icon" id="toggleRePassword"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" id="submit" type="submit" value="Lưu mật khẩu">
-                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <input class="btn btn-submit" id="submitPassword" type="submit" value="Lưu mật khẩu">
                                 </div>
                             </div>
                         </form>
@@ -125,6 +137,46 @@
         this.classList.toggle("bi-eye");
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+
+        if (successParam === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Mật khẩu của bạn đã được thay đổi!',
+                confirmButtonText: 'Đóng',
+            });
+        }
+
+        $('#change-pw-form').submit(function (event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'question',
+                title: 'Bạn muốn thay đổi mật khẩu?',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                } else if (result.isDismissed || result.isDenied) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại!',
+                        text: 'Mật khẩu của bạn chưa được thay đổi!',
+                        confirmButtonText: 'Đóng',
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

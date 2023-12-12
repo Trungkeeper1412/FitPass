@@ -159,4 +159,13 @@ public interface IRepositoryQuery {
                 GROUP BY
                     b.brand_id;
             """;
+
+    String COUNT_REQUEST_IS_PENDING = """
+                SELECT COUNT(rwh.request_withdrawal_history_id)
+                FROM request_withdrawal_history rwh
+                JOIN credit_card cc ON rwh.credit_card_id = cc.credit_card_id
+                JOIN `user` u ON u.user_id = cc.user_id
+                WHERE u.user_id IN (SELECT u1.user_id FROM `user` u1 JOIN credit_card cc1 ON u1.user_id = cc1.user_id WHERE cc1.credit_card_id = ?)
+                  AND rwh.status = 'Đang xử lý';
+            """;
 }

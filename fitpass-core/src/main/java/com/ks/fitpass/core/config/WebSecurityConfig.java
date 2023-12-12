@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableWebSecurity
@@ -30,14 +31,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .addFilterAfter(new AuditInterceptor(), AnonymousAuthenticationFilter.class)
-                .requiresChannel(channel ->
-                        channel.anyRequest().requiresSecure())
+                .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/user-homepage-assets/**", "/employee-assets/**", "/webfonts/**").permitAll()
                         .requestMatchers("/websocket/**").hasAnyAuthority("USER", "EMPLOYEE")
                         .requestMatchers("/login", "/logout").permitAll()
-                        .requestMatchers("/forgot-password/**").permitAll()
+                        .requestMatchers("/forgot-password/**").anonymous()
                         .requestMatchers("/register").anonymous()
                         .requestMatchers("/").permitAll()
 
@@ -107,6 +107,11 @@ public class WebSecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
 

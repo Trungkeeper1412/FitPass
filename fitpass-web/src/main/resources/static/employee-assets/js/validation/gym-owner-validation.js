@@ -97,7 +97,7 @@ $(document).ready(function () {
             username: {
                 required: true,
                 minlength: 6,
-                maxlength: 50,
+                maxlength: 20,
                 pattern: /^[a-zA-Z0-9]+$/,
             },
             phone: {
@@ -108,7 +108,7 @@ $(document).ready(function () {
             },
             phoneDepartment: {
                 required: true,
-                minlength: 8,
+                minlength: 10,
                 maxlength: 11,
                 correctNumber: true
             },
@@ -175,7 +175,7 @@ $(document).ready(function () {
             username: {
                 required: "Vui lòng nhập tên đăng nhập !",
                 minlength: "Tên đăng nhập phải có ít nhất 6 kí tự !",
-                maxlength: "Tên đăng nhập không được vượt quá 50 kí tự !",
+                maxlength: "Tên đăng nhập không được vượt quá 20 kí tự !",
                 pattern: "Tên đăng nhập không bao gồm khoảng trắng và ký tự đặc biệt !",
             },
             phone: {
@@ -231,6 +231,136 @@ $(document).ready(function () {
 
     $("#updateInfo").click(function () {
         if (!$("#formSubmit").valid()) {
+            return false;
+        }
+    });
+});
+
+$(document).ready(function () {
+    $("#formUpdate").validate({
+        rules: {
+            departmentAddress: {
+                required: true,
+                maxlength: 150,
+                pattern: /^(?!\s+$).+/,
+            },
+            departmentContactNumber: {
+                required: true,
+                minlength: 10,
+                maxlength: 11,
+                correctNumber: true
+            },
+            capacity: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 10000,
+            },
+            area: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 10000,
+            },
+            departmentDescription: {
+                required: true,
+                minlength: 2,
+                maxlength: 700,
+                pattern: /^(?!\s+$).+/,
+            },
+        },
+        messages: {
+            departmentAddress: {
+                required: "Vui lòng nhập địa chỉ !",
+                maxlength: "Địa chỉ không được vượt quá 150 kí tự !",
+                pattern: "Địa chỉ đang bị trống !",
+            },
+            departmentContactNumber: {
+                required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập số điện thoại !",
+                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                correctNumber: "Đầu số không đúng định dạng !"
+            },
+            capacity: {
+                required: "Vui lòng nhập sức chứa !",
+                number: "Vui lòng nhập số !",
+                min: "Sức chứa phải lớn hơn 0",
+                max: "Sức chứa không vượt quá 10000 !",
+            },
+            area: {
+                required: "Vui lòng nhập diện tích !",
+                number: "Vui lòng nhập số !",
+                min: "Diện tích phải lớn hơn 0",
+                max: "Diện tích không vượt quá 10000 !",
+            },
+            departmentDescription: {
+                required: "Vui lòng nhập nhập mô tả gói tập !",
+                minlength: "Mô tả gói tập phải có ít nhất 2 kí tự !",
+                maxlength: "Mô tả gói tập không được vượt quá 700 kí tự !",
+                pattern: "Mô tả gói tập đang bị trống !",
+            },
+        },
+    });
+    $("#updateInfo").click(function () {
+        if (!$("#formUpdate").valid()) {
+            return false;
+        }
+    });
+});
+
+$(document).ready(function () {
+
+    $.validator.addMethod("noSpace", function (value) {
+        return /^\S*$/.test(value);
+    }, "Mật khẩu không được chứa khoảng trắng");
+
+    $('#change-pw-form').validate({
+        rules: {
+            currentPassword: {
+                required: true,
+                minlength: 6,
+                maxlength: 50,
+                noSpace: true,
+            },
+            newPassword: {
+                required: true,
+                minlength: 6,
+                maxlength: 50,
+                noSpace: true,
+            },
+            confirmPassword: {
+                required: true,
+                equalTo: "#newPassword",
+            }
+        },
+        messages: {
+            currentPassword: {
+                required: "Vui lòng nhập mật khẩu hiện tại!",
+                minlength: "Mật khẩu hiện tại phải có ít nhất 6 ký tự",
+                maxlength: "Mật khẩu hiện tại không được quá 50 ký tự",
+            },
+            newPassword: {
+                required: "Vui lòng nhập mật khẩu mới!",
+                minlength: "Mật khẩu mới phải có ít nhất 6 ký tự",
+                maxlength: "Mật khẩu mới không được quá 50 ký tự",
+            },
+            confirmPassword: {
+                required: "Vui lòng xác nhận mật khẩu mới!",
+                equalTo: "Xác nhận mật khẩu phải giống với mật khẩu mới",
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("form-control")) {
+                error.insertAfter(element.closest('.input-group'));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+    $("#submitPassword").click(function () {
+        if (!$("#change-pw-form").valid()) {
             return false;
         }
     });

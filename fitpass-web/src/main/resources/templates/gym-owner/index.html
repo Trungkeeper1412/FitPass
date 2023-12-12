@@ -117,78 +117,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td >1</td>
-                                        <td >Gói linh hoạt</td>
-                                        <td >120/Giờ</td>
-                                        <td >185 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >2</td>
-                                        <td >Gói 7 ngày</td>
-                                        <td >350</td>
-                                        <td >65 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >3</td>
-                                        <td >Gói 30 ngày</td>
-                                        <td >680</td>
-                                        <td >37 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >1</td>
-                                        <td >Gói linh hoạt</td>
-                                        <td >120/Giờ</td>
-                                        <td >185 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >2</td>
-                                        <td >Gói 7 ngày</td>
-                                        <td >350</td>
-                                        <td >65 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >3</td>
-                                        <td >Gói 30 ngày</td>
-                                        <td >680</td>
-                                        <td >37 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >1</td>
-                                        <td >Gói linh hoạt</td>
-                                        <td >120/Giờ</td>
-                                        <td >185 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >2</td>
-                                        <td >Gói 7 ngày</td>
-                                        <td >350</td>
-                                        <td >65 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >3</td>
-                                        <td >Gói 30 ngày</td>
-                                        <td >680</td>
-                                        <td >37 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >1</td>
-                                        <td >Gói linh hoạt</td>
-                                        <td >120/Giờ</td>
-                                        <td >185 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >2</td>
-                                        <td >Gói 7 ngày</td>
-                                        <td >350</td>
-                                        <td >65 gói</td>
-                                    </tr>
-                                    <tr>
-                                        <td >3</td>
-                                        <td >Gói 30 ngày</td>
-                                        <td >680</td>
-                                        <td >37 gói</td>
-                                    </tr>
+                                    <th:block th:each="gp, iterStat : ${gymPlanBuyStats}">
+                                        <tr>
+                                            <td th:text="${iterStat.index + 1}">1</td>
+                                            <td th:text="${gp.getName()}"></td>
+                                            <td >
+                                                <span th:if="${gp.getPrice() > 0}" th:text="${gp.getPrice()}"></span>
+                                                <span th:if="${gp.getPrice() == 0}" th:text="${gp.getPricePerHours()} + ' Creits/ giờ'"></span>
+                                            </td>
+                                            <td th:text="${gp.getTotalBuy()}"></td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>

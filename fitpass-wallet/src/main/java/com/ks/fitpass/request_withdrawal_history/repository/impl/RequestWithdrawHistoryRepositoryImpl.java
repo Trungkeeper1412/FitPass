@@ -190,4 +190,9 @@ public class RequestWithdrawHistoryRepositoryImpl implements RequestWithdrawHist
             return re;
         });
     }
+
+    @Override
+    public int countRequestIsPending(int cardId) {
+        return jdbcTemplate.queryForObject(COUNT_REQUEST_IS_PENDING, Integer.class, cardId);
+    }
 }

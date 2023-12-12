@@ -50,4 +50,6 @@ public interface UserService extends UserDetailsService {
     boolean updatePassword(String newPassword, int userId) throws DataAccessException;
 
     int countAllUsersAccount();
+
+    int resetPassword(String email, String hashedPassword);
 }
