@@ -236,7 +236,11 @@
 
 
     $(document).ready(function() {
-        var table = $('#table-withdrawal-success').DataTable();
+        var table = $('#table-withdrawal-success').DataTable({
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json"
+            }
+        });
 
         $('#filterButtonPending').on('click', function () {
             // Lọc theo trạng thái 'Active'
