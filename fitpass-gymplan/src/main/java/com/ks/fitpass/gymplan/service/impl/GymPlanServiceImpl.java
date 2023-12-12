@@ -161,4 +161,14 @@ public class GymPlanServiceImpl implements GymPlanService {
         Integer count = gymPlanRepository.getTotalGymPlanDepartment(departmentId);
         return (count != null) ? count : 0;
     }
+
+    @Override
+    public List<GymPlanBuyStat> getGymPlanBuyStat(int brandId) {
+        return gymPlanRepository.getGymPlanBuyStat(brandId);
+    }
+
+    @Override
+    public List<GymPlanBuyStat> getGymPlanBuyStatByDepartmentId(int departmentId) {
+        return gymPlanRepository.getGymPlanBuyStatByDepartmentId(departmentId);
+    }
 }

@@ -225,4 +225,27 @@ public class GymPlanRepositoryImpl implements GymPlanRepository {
     public Integer getTotalGymPlanDepartment(int departmentId) {
         return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_GYM_PLAN_DEPARTMENT, Integer.class, departmentId);
     }
+
+    @Override
+    public List<GymPlanBuyStat> getGymPlanBuyStat(int brandId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_GYM_PLAN_BUY_STAT, (rs, rowNum) -> {
+            GymPlanBuyStat gymPlanBuyStat = new GymPlanBuyStat();
+            gymPlanBuyStat.setName(rs.getString("name"));
+            gymPlanBuyStat.setPrice(rs.getDouble("price"));
+            gymPlanBuyStat.setPricePerHours(rs.getDouble("price_per_hours"));
+            gymPlanBuyStat.setTotalBuy(rs.getInt("total_buy"));
+            return gymPlanBuyStat;
+        }, brandId);
+    }
+    @Override
+    public List<GymPlanBuyStat> getGymPlanBuyStatByDepartmentId(int departmentId) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_GYM_PLAN_BUY_STAT_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+            GymPlanBuyStat gymPlanBuyStat = new GymPlanBuyStat();
+            gymPlanBuyStat.setName(rs.getString("name"));
+            gymPlanBuyStat.setPrice(rs.getDouble("price"));
+            gymPlanBuyStat.setPricePerHours(rs.getDouble("price_per_hours"));
+            gymPlanBuyStat.setTotalBuy(rs.getInt("total_buy"));
+            return gymPlanBuyStat;
+        }, departmentId);
+    }
 }

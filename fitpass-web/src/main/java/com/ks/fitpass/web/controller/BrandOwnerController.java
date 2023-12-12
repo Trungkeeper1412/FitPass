@@ -100,12 +100,16 @@ public class BrandOwnerController {
 
             List<DepartmentRatingStatBrandOwner> departmentRatingStatBrandOwnerList = departmentService.getDepartmentRatingStatBrandOwner(brandId);
 
+            List<GymPlanBuyStat> gymPlanBuyStatList = gymPlanService.getGymPlanBuyStat(brandId);
+
             model.addAttribute("numberOfGymplan", numberOfGymplan);
             model.addAttribute("numberOfOrder", numberOfOrder);
             model.addAttribute("totalRevenue", totalRevenue);
             model.addAttribute("totalRating", totalRating);
             model.addAttribute("departmentStatBrandOwnerList", departmentStatBrandOwnerList);
             model.addAttribute("departmentRatingStatBrandOwnerList", departmentRatingStatBrandOwnerList);
+            model.addAttribute("gymPlanBuyStatList", gymPlanBuyStatList);
+
             return "brand-owner/index";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation

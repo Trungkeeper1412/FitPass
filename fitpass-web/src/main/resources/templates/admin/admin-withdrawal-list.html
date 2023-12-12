@@ -53,7 +53,7 @@
                                         <td th:text="${h.getBrandName()}">California Fitness & Yoga</td>
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
-                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="money-value" th:text="${h.getActualMoney()}">10000000 VNĐ</td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
                                         <td>
@@ -136,7 +136,8 @@
                                         </label>
                                         <div class="mb-3">
                                             <label for="amount" class="form-label">Số tiền quy đổi (VND) :</label>
-                                            <input type="text" class="form-control" id="amount" value="10000000" readonly>
+                                            <input type="text" class="form-control"  id="amountConversation" value="10000000" readonly>
+                                            <input type="hidden" class="form-control"  id="amount" value="10000000" readonly>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-5 mb-3">
@@ -184,7 +185,7 @@
                                         <td th:text="${h.getBrandName()}">California Fitness & Yoga</td>
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
-                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="money-value" th:text="${h.getActualMoney()}">10000000 VNĐ</td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
                                         <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
@@ -224,6 +225,16 @@
 <th:block th:replace="admin/common/script"></th:block>
 
 <script>
+    const money_elements = document.querySelectorAll('.money-value');
+    money_elements.forEach((element) => {
+        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+    });
+
+    const amount = document.querySelector('#amountConversation')
+    amount.value = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(amount.value);
+    document.querySelector('#amountConversation').value = amount.value;
+
+
     $(document).ready(function() {
         var table = $('#table-withdrawal-success').DataTable();
 

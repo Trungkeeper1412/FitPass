@@ -36,6 +36,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.ks.fitpass.gymplan.dto.GymPlanBuyStat;
 
 import java.net.URI;
 import java.util.*;
@@ -91,11 +92,15 @@ public class GymOwnerController {
 
             int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
 
+            List<GymPlanBuyStat> gymPlanBuyStats = gymPlanService.getGymPlanBuyStat(departmentDetails.getDepartmentId());
+
             model.addAttribute("totalGymPlan", totalGymPlan);
             model.addAttribute("totalBuy", totalBuy);
             model.addAttribute("totalRevenue", totalRevenue);
             model.addAttribute("totalNumberRating", totalNumberRating);
             model.addAttribute("departmentDetails", departmentDetails);
+            model.addAttribute("gymPlanBuyStats", gymPlanBuyStats);
+
             return "gym-owner/index";
 
         } catch (DuplicateKeyException ex) {

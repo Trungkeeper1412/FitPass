@@ -206,4 +206,40 @@ public interface IRepositoryQuery {
 				SELECT COUNT(*) FROM gym_department_plans
 				WHERE gym_department_id = ?;
 			""";
+
+	String GET_GYM_PLAN_BUY_STAT = """
+			 SELECT
+			     opd.name,
+			     opd.price,
+			     opd.price_per_hours,
+			     COUNT(*) AS total_buy
+			 FROM
+			     order_plan_detail opd
+			 JOIN
+			     gym_department_plans gdp ON opd.gym_department_id = gdp.gym_department_id
+			 JOIN
+			     gym_plan gp ON gdp.plan_id = gp.plan_id
+			 WHERE
+			     opd.gym_department_id IN (SELECT gym_department_id FROM gym_department WHERE brand_id = ?)
+			 GROUP BY
+			     opd.name, opd.price, opd.price_per_hours;
+			""";
+
+	String GET_GYM_PLAN_BUY_STAT_BY_DEPARTMENT_ID = """
+			 SELECT
+			     opd.name,
+			     opd.price,
+			     opd.price_per_hours,
+			     COUNT(*) AS total_buy
+			 FROM
+			     order_plan_detail opd
+			 JOIN
+			     gym_department_plans gdp ON opd.gym_department_id = gdp.gym_department_id
+			 JOIN
+			     gym_plan gp ON gdp.plan_id = gp.plan_id
+			 WHERE
+			     opd.gym_department_id = ?
+			 GROUP BY
+			     opd.name, opd.price, opd.price_per_hours;
+			""";
 }

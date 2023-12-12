@@ -57,7 +57,7 @@
                                         <td th:text="${h.getWithdrawalCode()}">10001321</td>
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Creadit</td>
-                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="money-value" th:text="${h.getActualMoney()}"></td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
                                     </tr>
@@ -113,7 +113,9 @@
                                         </label>
                                         <div class="mb-4">
                                             <label for="conversionRate">Số tiền quy đổi (VND) :</label>
-                                            <input name="moneyAmount" type="text" class="form-control"
+                                            <input type="text" class="form-control"
+                                                   id="conversionRateToVND" value="0" readonly>
+                                            <input name="moneyAmount" type="hidden" class="form-control"
                                                    id="conversionRate" value="0" readonly>
                                         </div>
                                         <div class="modal-footer">
@@ -139,6 +141,7 @@
                                             var amount = document.getElementById('amount').value;
                                             var withdrawalFee = document.getElementById('withdrawal-fee').innerText;
                                             var conversionRate = amount * 1000 - amount * 1000 * withdrawalFee / 100;
+                                            document.getElementById('conversionRateToVND').value = conversionRate.toLocaleString();
                                             document.getElementById('conversionRate').value = conversionRate;
                                         }
                                     </script>
@@ -181,8 +184,8 @@
                             <div class="transactions-money">
                                 <i class="bi bi-wallet2 fs-3"></i>
                                 <label>Tổng số tiền đã nhận:
-                                    <span class="text-money"
-                                          th:text="${requestHistoryStats.getTotalMoney() + ' ' + 'đ'}"></span>
+                                    <span id="money-value" class="text-money money-value"
+                                          th:text="${requestHistoryStats.getTotalMoney()}"></span>
                                 </label>
                             </div>
                         </div>
@@ -209,7 +212,7 @@
                                         <td th:text="${h.getWithdrawalCode()}">10001321</td>
                                         <td th:text="${h.getWithdrawalTime()}">12:32:12 PM</td>
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
-                                        <td th:text="${h.getActualMoney() + ' VNĐ'}">10000000 VNĐ</td>
+                                        <td class="money-value" th:text="${h.getActualMoney()}">10000000</td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
                                         <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
@@ -248,6 +251,11 @@
 <th:block th:replace="brand-owner/common/script"></th:block>
 
 <script>
+    const money_elements = document.querySelectorAll('.money-value');
+    money_elements.forEach((element) => {
+        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+    });
+
     $(document).ready(function() {
         var table = $('#table-withdrawal-success').DataTable();
 

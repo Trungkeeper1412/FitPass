@@ -27,6 +27,9 @@
     </div>
 
     <div class="col-md-6 register-tab" id="register-tab">
+        <a th:href="@{/landing-page}">
+            <img class="fp-logo" th:src="@{/user-homepage-assets/assets/img/3.png}">
+        </a>
         <form class="mb-4" action="/register" id="formSubmit" method="post" th:object="${userRegisterDTO}">
         <h1 class="fw-bold">ĐĂNG KÝ</h1>
         <div class="line"></div>
@@ -93,7 +96,7 @@
             <div class="g-recaptcha mt-4" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
             <button class="login" id="updateInfo" type="submit" >Đăng ký</button>
         </form>
-        <p class="mt-4 mx-auto text-dark login-register-link">Đã có tài khoản?<a th:href="@{/login}" class="link-style" style="margin-left: 10px">Đăng nhập ngay</a></p>
+        <p class="mx-auto mt-4 text-dark login-register-link">Đã có tài khoản?<a th:href="@{/login}" class="link-style" style="margin-left: 10px">Đăng nhập ngay</a></p>
     </div>
 </div>
 
