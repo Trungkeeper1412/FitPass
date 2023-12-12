@@ -958,51 +958,6 @@ public class GymOwnerController {
     }
 
     @PostMapping("/department/image")
-    public String updateDepartmentImages(HttpSession session, Model model,
-                                         @RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
-                                         @RequestParam String imageWallpaperUrl, @RequestParam String listAlbumUrl) {
-        boolean isFirstTime = checkAndSetIsFirstTime(session, model);
-        try {
-            if (isFirstTime) {
-                return "redirect:/gym-owner/department/update-details";
-            }
-
-            User user = (User) session.getAttribute("userInfo");
-            Department departmentDetails = departmentService.getByUserId(user.getUserId());
-
-            departmentService.updateDepartmentImage(departmentDetails.getDepartmentId(), imageLogoUrl, imageThumbnailUrl, imageWallpaperUrl);
-            departmentAlbumsService.deleteAllAlbumsByDepartmentID(departmentDetails.getDepartmentId());
-            String[] listAlbum = listAlbumUrl.split(",");
-            List<DepartmentAlbums> departmentAlbumsList = new ArrayList<>();
-            Arrays.stream(listAlbum).forEach(albumUrl -> {
-                DepartmentAlbums departmentAlbums = new DepartmentAlbums();
-                departmentAlbums.setDepartmentId(departmentDetails.getDepartmentId());
-                departmentAlbums.setPhotoUrl(albumUrl);
-                departmentAlbumsList.add(departmentAlbums);
-            });
-            departmentAlbumsService.addDepartmentAlbums(departmentAlbumsList);
-
-            return "redirect:/gym-owner/department/image";
-        } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
-            // Handle empty result set
-            logger.error("EmptyResultDataAccessException occurred", ex);
-            return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
-        } catch (DataAccessException ex) {
-            // Handle other data access issues
-            logger.error("DataAccessException occurred", ex);
-            return "error/data-access-error";
-        }
-    }
-
-    @PostMapping("/department/image")
     public ResponseEntity<?> updateDepartmentImages(@RequestParam String imageLogoUrl, @RequestParam String imageThumbnailUrl,
                                                     @RequestParam String imageWallpaperUrl,
                                                     @RequestParam String listAlbumUrl, HttpSession session, Model model) {
