@@ -1,35 +1,39 @@
 package com.ks.fitpass.web.controller;
 
+import com.ks.fitpass.core.entity.ReCaptchaResponse;
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.entity.UserRegisterDTO;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.wallet.service.WalletService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.WebUtil;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,6 +42,12 @@ public class MainController {
     private final WalletService walletService;
     private final UserRepository userRepository;
     private final Email emailService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${google.recaptcha.secret}")
+    private String recaptchaSecret;
     private final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @GetMapping("/")
@@ -126,8 +136,24 @@ public class MainController {
 
     @PostMapping("/register")
     public String registered(@Valid @ModelAttribute("userRegisterDTO") UserRegisterDTO userRegisterDTO,
-                             BindingResult bindingResult,Model model, RedirectAttributes redirectAttributes) {
-        logger.warn("The register has been initiated");
+                             @RequestParam(name = "g-recaptcha-response") String recaptchaResponse,
+                             BindingResult bindingResult,Model model,
+                             RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+        String recaptchaVerifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+        MultiValueMap<String, String> recaptchaRequestMap = new LinkedMultiValueMap<>();
+        recaptchaRequestMap.add("secret", recaptchaSecret);
+        recaptchaRequestMap.add("response", recaptchaResponse);
+        recaptchaRequestMap.add("remoteip", request.getRemoteAddr());
+
+        ResponseEntity<ReCaptchaResponse> recaptchaResponseEntity =
+                restTemplate.postForEntity(recaptchaVerifyUrl, recaptchaRequestMap, ReCaptchaResponse.class);
+
+        if (!Objects.requireNonNull(recaptchaResponseEntity.getBody()).isSuccess()) {
+            bindingResult.reject("recaptchaError", "Captcha validation failed.");
+            logger.error("Captcha validation failed");
+
+        }
 
         if (userService.checkEmailExist(userRegisterDTO.getEmail())) {
             bindingResult.rejectValue("email", "error.email", "Email đã tồn tại !");

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -36,10 +37,13 @@ public class PaymentController {
 
     private final WalletService walletService;
     private final TransactionService transactionService;
+
+    @Value("${stripe.api.key}")
+    private String apiKey;
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     @PostMapping("/create-session")
     public ResponseEntity<String> createCheckoutSession(@RequestBody CreateSessionRequest request, HttpSession session) {
-        Stripe.apiKey = Constants.STRIPE_API_KEY;
+        Stripe.apiKey = apiKey;
         Long amount = request.getAmount();
 
         try {

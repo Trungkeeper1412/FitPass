@@ -14,6 +14,7 @@
     <!-- Template Main CSS File -->
     <link th:href="@{/user-homepage-assets/assets/css/style.css}" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 </head>
 
 <body>
@@ -95,7 +96,10 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="g-recaptcha" data-type="image" data-sitekey="6Ld0IC0pAAAAAAt_BrlfqYrB1IPKQ93fmucqQPbg"></div>
+                            <div class="g-recaptcha" data-type="image" data-sitekey="6LcFay8pAAAAAC8kNqKdxhr0s0DuLtdUhYO_Gq4U"></div>
+                            <div th:if="${#fields.hasGlobalErrors()}">
+                                <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+                            </div>
                             <button type="submit" class="btn btn-primary mt-3" onclick="submitForm()" >Đăng ký</button>
                         </div>
                     </form>
@@ -209,26 +213,6 @@
 
     <!-- Vendor JS Files -->
     <th:block th:insert="common/vendor-script"></th:block>
-
-
-    <script type="text/javascript">
-        function submitForm() {
-            // Lấy giá trị reCAPTCHA response
-            const recaptchaResponse = grecaptcha.getResponse();
-
-            // Kiểm tra xem reCAPTCHA response có giá trị hay không
-            if (recaptchaResponse.length === 0) {
-                alert('Vui lòng hoàn thành reCAPTCHA trước khi submit form.');
-                return;
-            }
-
-            // Nếu reCAPTCHA đã được hoàn thành, tiếp tục submit form
-            document.getElementById('BoRegisterForm').submit();
-        }
-    </script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-            async defer>
-    </script>
 </body>
 </html>
 

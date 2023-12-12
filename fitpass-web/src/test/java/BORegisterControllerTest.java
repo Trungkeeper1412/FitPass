@@ -2,6 +2,7 @@ import com.ks.fitpass.partner.register.dto.BecomePartnerForm;
 import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 import com.ks.fitpass.partner.register.service.BecomePartnerService;
 import com.ks.fitpass.web.controller.BORegisterController;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -18,6 +19,8 @@ public class BORegisterControllerTest {
     private BecomePartnerService becomePartnerService;
     @Mock
     private Model model;
+    @Mock
+    private HttpServletRequest request;
 
     @InjectMocks
     private BORegisterController boRegisterController;
@@ -94,6 +97,7 @@ public class BORegisterControllerTest {
 
     @Test
     public void testPostBrandOwnerRegisterSuccess() {
+        String recaptchaResponse = "true";
         // Arrange
         BecomePartnerForm form = new BecomePartnerForm();
         form.setBrandName("TestBrand");
@@ -104,7 +108,7 @@ public class BORegisterControllerTest {
         when(becomePartnerService.create(any(BecomePartnerRequest.class))).thenReturn(1);
 
         // Act
-        String result = boRegisterController.postBrandOwnerRegister(form, mock(BindingResult.class));
+        String result = boRegisterController.postBrandOwnerRegister(form, mock(BindingResult.class),request,recaptchaResponse);
 
         // Assert
         assertEquals("redirect:/become-a-partner/successful", result);
@@ -113,6 +117,7 @@ public class BORegisterControllerTest {
 
     @Test
     public void testPostBrandOwnerRegisterWithValidationError() {
+        String recaptchaResponse = "true";
         // Arrange
         BecomePartnerForm form = new BecomePartnerForm();
         // Set form properties with validation errors
@@ -121,7 +126,7 @@ public class BORegisterControllerTest {
         when(bindingResult.hasErrors()).thenReturn(true);
 
         // Act
-        String result = boRegisterController.postBrandOwnerRegister(form, bindingResult);
+        String result = boRegisterController.postBrandOwnerRegister(form, bindingResult,request,recaptchaResponse);
 
         // Assert
         assertEquals("gym-brand-registration", result);
@@ -130,6 +135,7 @@ public class BORegisterControllerTest {
 
     @Test
     public void testPostBrandOwnerRegisterWithDuplicateKeyException() {
+        String recaptchaResponse = "true";
         // Arrange
         BecomePartnerForm form = new BecomePartnerForm();
         // Set form properties
@@ -137,7 +143,7 @@ public class BORegisterControllerTest {
         when(becomePartnerService.create(any(BecomePartnerRequest.class))).thenThrow(DuplicateKeyException.class);
 
         // Act
-        String result = boRegisterController.postBrandOwnerRegister(form, mock(BindingResult.class));
+        String result = boRegisterController.postBrandOwnerRegister(form, mock(BindingResult.class),request,recaptchaResponse);
 
         // Assert
         assertEquals("error/duplicate-key-error", result);
