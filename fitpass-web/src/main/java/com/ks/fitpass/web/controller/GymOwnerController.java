@@ -92,7 +92,7 @@ public class GymOwnerController {
 
             int totalNumberRating = departmentService.getTotalNumberRatingByDepartmentId(departmentDetails.getDepartmentId());
 
-            List<GymPlanBuyStat> gymPlanBuyStats = gymPlanService.getGymPlanBuyStat(departmentDetails.getDepartmentId());
+            List<GymPlanBuyStat> gymPlanBuyStats = gymPlanService.getGymPlanBuyStatByDepartmentId(departmentDetails.getDepartmentId());
 
             model.addAttribute("totalGymPlan", totalGymPlan);
             model.addAttribute("totalBuy", totalBuy);
