@@ -4481,7 +4481,7 @@ section {
     }
     .plan-info-mc h4 {
         font-size: 13px;
-        text-align: center;
+        margin: auto;
         margin-top: 10px;
     }
 
@@ -4502,18 +4502,38 @@ section {
         font-weight: 500;
         font-size: 12px;
     }
+    .plan-card-mc img{
+        width: 80px;
+        height: 80px;
+        border: 1px solid black;
+    }
 }
 @media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 100%;
-        padding: 10px;
+        height: 75%;
         width: 100%;
+        padding: 15px;
         display: grid;
-        grid-template-columns: 1fr 2fr 1.5fr;
-        /*margin: auto 0;*/
+        grid-template-areas:
+            'image content1 content1 content1 content1 content1'
+            'image content2 content2 content2 content2 content2';
+        margin: auto 0;
         border-radius: 10px;
+    }
+    .plan-info-mc{
+        grid-area: content1;
+    }
+    .active-time-mc {
+        grid-area: content2;
+    }
+    .plan-card-mc img{
+        width: 70px;
+        height: 70px;
+        border: 1px solid black;
+        margin-right: 10px;
+        grid-area: image;
     }
 
     .plan-info-mc h4 {
@@ -4537,6 +4557,7 @@ section {
         font-weight: 500;
         font-size: 14px;
     }
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -4553,6 +4574,19 @@ section {
             'image content2 content2 content2 content2 content2';
         margin: auto 0;
         border-radius: 10px;
+    }
+    .plan-info-mc{
+        grid-area: content1;
+    }
+    .active-time-mc {
+        grid-area: content2;
+    }
+    .plan-card-mc img{
+        width: 70px;
+        height: 70px;
+        border: 1px solid black;
+        margin-right: 10px;
+        grid-area: image;
     }
     /*.plan-card-mc {*/
     /*    background-size: cover;*/
@@ -4573,7 +4607,10 @@ section {
     }
     .plan-card-mc img{
         border: 1px solid black;
+        margin-right: 10px;
         grid-area: image;
+        width: 100px;
+        height: 100px;
     }
 
 
@@ -4592,8 +4629,8 @@ section {
 
 .plan-card-mc img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    /*width: 100px;*/
+    /*height: 100px;*/
     margin: auto;
 }
 .gym-department-plan .delete-btn{
