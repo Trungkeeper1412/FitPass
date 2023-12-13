@@ -11,7 +11,6 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,11 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/profile")
@@ -87,8 +85,8 @@ public class ProfileController {
     }
 
     @PostMapping("/my-profile/update")
-    public String updateGymOwnerDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
-                                        BindingResult bindingResult) {
+    public String updateProfileDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
+                                       BindingResult bindingResult, RedirectAttributes attributes) {
         try {
             if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
                 if (userService.checkEmailExist(userUpdateDTO.getEmail())) {
@@ -116,8 +114,7 @@ public class ProfileController {
 
             // Update user detail
             userService.updateUserDetail(userDetail);
-
-
+            attributes.addFlashAttribute("successUpdate", true);
             return "redirect:/profile/my-profile";
         }catch (EmptyResultDataAccessException ex) {
             // Handle empty result set

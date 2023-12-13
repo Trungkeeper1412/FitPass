@@ -95,12 +95,24 @@
     new DataTable('#transaction-history-tb', {
         language: {
             processing: "Đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: "Xem _MENU_ mục ",
-            info: "Bản ghi từ _START_ đến _END_ , tổng cộng _TOTAL_ bản ghi",
-            loadingRecords: "",
-            zeroRecords: "Không có dữ liệu",
-            emptyTable: "Không có dữ liệu",
+            search: "Tìm kiếm:",
+            lengthMenu: "Xem _MENU_ mục",
+            info: "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ bản ghi",
+            infoEmpty: "Đang xem 0 đến 0 trong tổng số 0 bản ghi",
+            infoFiltered: "(được lọc từ _MAX_ mục)",
+            loadingRecords: "Đang tải...",
+            zeroRecords: "Không có dữ liệu giao dịch nào",
+            emptyTable: "Không có dữ liệu giao dịch nào",
+            paginate: {
+                first: "Đầu",
+                previous: "Trước",
+                next: "Tiếp",
+                last: "Cuối"
+            },
+            aria: {
+                sortAscending: ": Sắp xếp cột tăng dần",
+                sortDescending: ": Sắp xếp cột giảm dần"
+            }
         }
     });
 </script>
