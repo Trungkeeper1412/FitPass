@@ -6494,3 +6494,13 @@ label.error {
 .input-title {
     padding-bottom: 3px;
 }
+
+.not-found .icon{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 5px;
+    background-image: url('../img/not_found.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

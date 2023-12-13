@@ -82,8 +82,9 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
-                        <label class="pt-2 pb-2 fw-bold" for="rating">Rating:</label>
+                        <label class="pt-2 pb-2 fw-bold" for="rating">Đánh giá:</label>
                         <select class="gym-dropdown" id="sort-rating">
+                            <option value="0" selected>Tất cả đánh giá</option>
                             <option value="5">5 sao</option>
                             <option value="4">Trên 4 sao</option>
                             <option value="3">Trên 3 sao</option>
@@ -174,9 +175,9 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
-                        <label class="pt-2 pb-2 fw-bold" for="rating">Rating:</label>
+                        <label class="pt-2 pb-2 fw-bold" for="rating">Đánh giá:</label>
                         <select class="gym-dropdown" id="rating">
-                            <option value="0" selected>Select Rating</option>
+                            <option value="0" selected>Tất cả đánh giá</option>
                             <option value="5">5 sao</option>
                             <option value="4">Trên 4 sao</option>
                             <option value="3">Trên 3 sao</option>
@@ -257,9 +258,17 @@
             },
             success: function (data) {
                 // Hiển thị danh sách người dùng
-                var brandListHtml = '';
-                $.each(data.listBrand, function (index, brand) {
-                    brandListHtml += `
+                if (data.listBrand.length === 0) {
+
+                    $('#brand-list-container').html('' +
+                        '<div class="not-found d-flex flex-column align-items-center justify-content-center">' +
+                        '<div class="fw-bold fs-4">Không tìm thấy thương hiệu nào!</div>' +
+                        '<span class="icon"></span>  ' +
+                        '</div>');
+                } else {
+                    var brandListHtml = '';
+                    $.each(data.listBrand, function (index, brand) {
+                        brandListHtml += `
 <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
 <a href="/brand/brand-detail/${brand.brandId}">
             <div class="brand">
@@ -283,20 +292,21 @@
             </div>
             </a>
             </div>`;
-                });
+                    });
 
-                $('#brand-list-container').html(brandListHtml);
-                // Tạo liên kết phân trang
-                var paginationHtml = '';
-                for (var i = 1; i <= data.totalPage; i++) {
-                    var currentPage = data.currentPage;
-                    if (i === currentPage) {
-                        paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
-                    } else {
-                        paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                    $('#brand-list-container').html(brandListHtml);
+                    // Tạo liên kết phân trang
+                    var paginationHtml = '';
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        var currentPage = data.currentPage;
+                        if (i === currentPage) {
+                            paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                        } else {
+                            paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                        }
                     }
+                    $('#paginationBrand').empty().html(paginationHtml);
                 }
-                $('#paginationBrand').empty().html(paginationHtml);
             }
         });
     }
@@ -421,8 +431,13 @@
         departmentListContainer.empty();
 
         if (departmentSize === 0) {
-            departmentListContainer.html('<p>No gyms found nearby.</p>');
-        } else {
+            departmentListContainer.html('' +
+                '<div class="not-found d-flex flex-column align-items-center justify-content-center">' +
+                '<div class="fw-bold fs-4">Không tìm thấy phòng gym nào!</div>' +
+                '<span class="icon"></span>  ' +
+                '</div>');
+        }
+        else {
             var departmentListHtml = '';
 
             $.each(response.departmentList, function (index, department) {
@@ -485,7 +500,11 @@
         departmentListContainer.empty();
 
         if (departmentSize === 0) {
-            departmentListContainer.html('<p>No gyms found</p>');
+            departmentListContainer.html('' +
+                '<div class="not-found d-flex flex-column align-items-center justify-content-center">' +
+                '<div class="fw-bold fs-4">Không tìm thấy phòng gym nào!</div>' +
+                '<span class="icon"></span>  ' +
+                '</div>');
         } else {
             var departmentListHtml = '';
 
