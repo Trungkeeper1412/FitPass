@@ -176,7 +176,7 @@ public class ProfileController {
 
             // Kiểm tra mật khẩu hiện tại
             if (!passwordEncoder.matches(currentPassword, user.getUserPassword())) {
-                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng, vui lòng thử lại");
                 return "user/user-change-password";
             }
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
