@@ -34,398 +34,376 @@ VALUES (6, 'brandOwner1', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9J
        (15, 'brandOwner10', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1),
        (16, 'brandOwner11', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1),
        (17, 'brandOwner12', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1),
-       (18, 'brandOwner13', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
+       (18, 'brandOwner13', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1),
+       (76, 'brandOwner14', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
 -- Gym Owner creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
-                         date_of_birth,
-                         gender, image_url,securityId)
-VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '1234567890', '123 Main St',
-        '1990-01-01', 'Female', '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (2, 'Jane', 'Doe', 'janedoe@example.com', '0987654321', '123 Main St','1990-01-01', 'Female', '087084000999', '/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (2, 'gymowner', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 2, 15);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (19, 'Nguyễn', 'Văn A', 'gymowner1@example.com', '1234567890', '123 Main St', '1990-01-01', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (19, 'Nguyễn', 'Văn A', 'gymowner1@example.com', '0987654321', '123 Main St', '1990-01-01', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (19, 'gymowner1', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 19, 6);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (20, 'Trần', 'Thị B', 'gymowner2@example.com', '2345678901', '456 Oak St', '1985-07-15', 'Female',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (20, 'Trần', 'Thị B', 'gymowner2@example.com', '0987654321', '456 Oak St', '1985-07-15', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (20, 'gymowner2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 20, 6);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (21, 'Lê', 'Văn C', 'gymowner3@example.com', '3456789012', '789 Elm St', '1992-03-25', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (21, 'Lê', 'Văn C', 'gymowner3@example.com', '0987654321', '789 Elm St', '1992-03-25', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (21, 'gymowner3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 21, 6);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (22, 'Ngô', 'Thị D', 'gymowner4@example.com', '4567890123', '789 Elm St', '1995-09-12', 'Female',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (22, 'Ngô', 'Thị D', 'gymowner4@example.com', '0987654321', '789 Elm St', '1995-09-12', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (22, 'gymowner4', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 22, 6);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (23, 'Hoàng', 'Văn E', 'gymowner5@example.com', '5678901234', '567 Pine St', '1988-11-30', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (23, 'Hoàng', 'Văn E', 'gymowner5@example.com', '0987654321', '567 Pine St', '1988-11-30', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (23, 'gymowner5', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 23, 7);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (24, 'Đặng', 'Thị F', 'gymowner6@example.com', '6789012345', '890 Maple St', '1993-06-20', 'Female',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (24, 'Đặng', 'Thị F', 'gymowner6@example.com', '0987654321', '890 Maple St', '1993-06-20', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (24, 'gymowner6', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 24, 7);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (25, 'Phạm', 'Văn G', 'gymowner7@example.com', '7890123456', '123 Cherry St', '1991-04-18', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (25, 'Phạm', 'Văn G', 'gymowner7@example.com', '0987654321', '123 Cherry St', '1991-04-18', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (25, 'gymowner7', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 25, 7);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (26, 'Vũ', 'Thị H', 'gymowner8@example.com', '8901234567', '456 Walnut St', '1987-02-09', 'Female',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (26, 'Vũ', 'Thị H', 'gymowner8@example.com', '0987654321', '456 Walnut St', '1987-02-09', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (26, 'gymowner8', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 26, 7);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (27, 'Nguyễn', 'Văn I', 'gymowner9@example.com', '9012345678', '789 Walnut St', '1994-12-05', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (27, 'Nguyễn', 'Văn I', 'gymowner9@example.com', '0987654321', '789 Walnut St', '1994-12-05', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (27, 'gymowner9', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 27, 8);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (28, 'Hồ', 'Thị J', 'gymowner10@example.com', '0123456789', '123 Oak St', '1996-08-22', 'Female',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (28, 'Hồ', 'Thị J', 'gymowner10@example.com', '0987654321', '123 Oak St', '1996-08-22', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (28, 'gymowner10', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 28, 8);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (29, 'Trương', 'Văn K', 'gymowner11@example.com', '1234567890', '456 Maple St', '1997-11-13', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (29, 'Trương', 'Văn K', 'gymowner11@example.com', '0987654321', '456 Maple St', '1997-11-13', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (29, 'gymowner11', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 29, 8);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (30, 'Lý', 'Thị L', 'gymowner12@example.com', '2345678901', '789 Pine St', '1998-05-26', 'Female',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (30, 'Lý', 'Thị L', 'gymowner12@example.com', '0987654321', '789 Pine St', '1998-05-26', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (30, 'gymowner12', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 30, 9);
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url,securityId)
-VALUES (31, 'Trần', 'Văn M', 'gymowner13@example.com', '3456789012', '123 Elm St', '1999-02-28', 'Male',
-        '/images/system/v.png',568743029172);
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (31, 'Trần', 'Văn M', 'gymowner13@example.com', '0987654321', '123 Elm St', '1999-02-28', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (31, 'gymowner13', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 31, 9);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (32, 'Nguyễn', 'Thị N', 'gymowner14@example.com', '4567890123', '456 Cherry St', '2000-09-15', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (32, 'Nguyễn', 'Thị N', 'gymowner14@example.com', '0987654321', '456 Cherry St', '2000-09-15', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (32, 'gymowner14', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 32, 9);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (33, 'Đỗ', 'Văn P', 'gymowner15@example.com', '5678901234', '789 Oak St', '2001-04-10', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (33, 'Đỗ', 'Văn P', 'gymowner15@example.com', '0987654321', '789 Oak St', '2001-04-10', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (33, 'gymowner15', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 33, 10);
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (34, 'Lê', 'Thị Q', 'gymowner16@example.com', '6789012345', '123 Pine St', '2002-11-25', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (34, 'Lê', 'Thị Q', 'gymowner16@example.com', '0987654321', '123 Pine St', '2002-11-25', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (34, 'gymowner16', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 34, 10);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (35, 'Hoàng', 'Văn R', 'gymowner17@example.com', '7890123456', '456 Elm St', '2003-08-15', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (35, 'Hoàng', 'Văn R', 'gymowner17@example.com', '0987654321', '456 Elm St', '2003-08-15', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (35, 'gymowner17', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 35, 10);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (36, 'Nguyễn', 'Thị S', 'gymowner18@example.com', '8901234567', '789 Cherry St', '2004-05-10', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (36, 'Nguyễn', 'Thị S', 'gymowner18@example.com', '0987654321', '789 Cherry St', '2004-05-10', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (36, 'gymowner18', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 36, 11);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (37, 'Trần', 'Văn T', 'gymowner19@example.com', '9012345678', '123 Walnut St', '2005-02-28', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (37, 'Trần', 'Văn T', 'gymowner19@example.com', '0987654321', '123 Walnut St', '2005-02-28', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (37, 'gymowner19', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 37, 12);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (38, 'Phạm', 'Thị U', 'gymowner20@example.com', '0123456789', '456 Pine St', '2006-09-15', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (38, 'Phạm', 'Thị U', 'gymowner20@example.com', '0987654321', '456 Pine St', '2006-09-15', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (38, 'gymowner20', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 38, 12);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (39, 'Nguyễn', 'Văn V', 'gymowner21@example.com', '1234567890', '789 Oak St', '2007-04-10', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (39, 'Nguyễn', 'Văn V', 'gymowner21@example.com', '0987654321', '789 Oak St', '2007-04-10', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (39, 'gymowner21', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 39, 12);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (40, 'Ngô', 'Thị X', 'gymowner22@example.com', '2345678901', '123 Maple St', '2008-11-25', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (40, 'Ngô', 'Thị X', 'gymowner22@example.com', '0987654321', '123 Maple St', '2008-11-25', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (40, 'gymowner22', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 40, 13);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (41, 'Vũ', 'Văn Y', 'gymowner23@example.com', '3456789012', '456 Walnut St', '2009-08-15', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (41, 'Vũ', 'Văn Y', 'gymowner23@example.com', '0987654321', '456 Walnut St', '2009-08-15', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (41, 'gymowner23', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 41, 13);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (42, 'Hoàng', 'Thị Z', 'gymowner24@example.com', '4567890123', '789 Elm St', '2010-05-10', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (42, 'Hoàng', 'Thị Z', 'gymowner24@example.com', '0987654321', '789 Elm St', '2010-05-10', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (42, 'gymowner24', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 42, 13);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (43, 'Trần', 'Thị A', 'gymowner25@example.com', '5678901234', '123 Oak St', '2011-02-28', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (43, 'Trần', 'Thị A', 'gymowner25@example.com', '0987654321', '123 Oak St', '2011-02-28', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (43, 'gymowner25', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 43, 13);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (44, 'Nguyễn', 'Văn B', 'gymowner26@example.com', '6789012345', '456 Cherry St', '2012-09-15', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (44, 'Nguyễn', 'Văn B', 'gymowner26@example.com', '0987654321', '456 Cherry St', '2012-09-15', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (44, 'gymowner26', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 44, 14);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (45, 'Phạm', 'Thị C', 'gymowner27@example.com', '7890123456', '789 Walnut St', '2013-04-10', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (45, 'Phạm', 'Thị C', 'gymowner27@example.com', '0987654321', '789 Walnut St', '2013-04-10', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (45, 'gymowner27', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 45, 14);
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (46, 'Lê', 'Văn F', 'gymowner30@example.com', '9012345678', '123 Maple St', '1995-08-20', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (46, 'Lê', 'Văn F', 'gymowner30@example.com', '0987654321', '123 Maple St', '1995-08-20', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (46, 'gymowner28', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 46, 15);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (47, 'Hoàng', 'Thị G', 'gymowner31@example.com', '0123456789', '456 Cherry St', '1998-04-15', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (47, 'Hoàng', 'Thị G', 'gymowner31@example.com', '0987654321', '456 Cherry St', '1998-04-15', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (47, 'gymowner29', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 47, 15);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (48, 'Nguyễn', 'Văn H', 'gymowner32@example.com', '1234567890', '789 Elm St', '2000-01-10', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (48, 'Nguyễn', 'Văn H', 'gymowner32@example.com', '0987654321', '789 Elm St', '2000-01-10', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (48, 'gymowner30', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 48, 15);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (49, 'Nguyen', 'Thị I', 'gymowner33@example.com', '2345678901', '789 Oak St', '1992-03-25', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (49, 'Nguyen', 'Thị I', 'gymowner33@example.com', '0987654321', '789 Oak St', '1992-03-25', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (49, 'gymowner31', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 49, 16);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (50, 'Tran', 'Văn J', 'gymowner34@example.com', '3456789012', '456 Walnut St', '1994-11-12', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (50, 'Tran', 'Văn J', 'gymowner34@example.com', '0987654321', '456 Walnut St', '1994-11-12', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (50, 'gymowner32', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 50, 16);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (51, 'Pham', 'Thị K', 'gymowner35@example.com', '4567890123', '789 Maple St', '1997-07-05', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (51, 'Pham', 'Thị K', 'gymowner35@example.com', '0987654321', '789 Maple St', '1997-07-05', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (51, 'gymowner33', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 51, 16);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (52, 'Nguyen', 'Van L', 'gymowner36@example.com', '5678901234', '123 Oak St', '1988-09-18', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (52, 'Nguyen', 'Van L', 'gymowner36@example.com', '0987654321', '123 Oak St', '1988-09-18', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (52, 'gymowner34', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 52, 16);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (53, 'Tran', 'Thi M', 'gymowner37@example.com', '6789012345', '456 Cherry St', '1991-05-31', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (53, 'Tran', 'Thi M', 'gymowner37@example.com', '0987654321', '456 Cherry St', '1991-05-31', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (53, 'gymowner35', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 53, 17);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (54, 'Pham', 'Van N', 'gymowner38@example.com', '7890123456', '789 Walnut St', '1986-12-10', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (54, 'Pham', 'Van N', 'gymowner38@example.com', '0987654321', '789 Walnut St', '1986-12-10', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (54, 'gymowner36', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 54, 17);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (55, 'Trần', 'Thị O', 'gymowner39@example.com', '8901234567', '123 Elm St', '1993-06-28', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (55, 'Trần', 'Thị O', 'gymowner39@example.com', '0987654321', '123 Elm St', '1993-06-28', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (55, 'gymowner37', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 55, 17);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (56, 'Lê', 'Văn P', 'gymowner40@example.com', '9012345678', '456 Oak St', '1990-02-15', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (56, 'Lê', 'Văn P', 'gymowner40@example.com', '0987654321', '456 Oak St', '1990-02-15', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (56, 'gymowner38', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 56, 17);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (57, 'Nguyễn', 'Thị Q', 'gymowner41@example.com', '0123456789', '789 Cherry St', '1996-09-10', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (57, 'Nguyễn', 'Thị Q', 'gymowner41@example.com', '0987654321', '789 Cherry St', '1996-09-10', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (57, 'gymowner39', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 57, 18);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (58, 'Nguyen', 'Van R', 'gymowner42@example.com', '2345678901', '123 Walnut St', '1994-07-22', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (58, 'Nguyen', 'Van R', 'gymowner42@example.com', '0987654321', '123 Walnut St', '1994-07-22', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (58, 'gymowner40', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 58, 18);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (59, 'Tran', 'Thi S', 'gymowner43@example.com', '3456789012', '456 Maple St', '1997-03-12', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (59, 'Tran', 'Thi S', 'gymowner43@example.com', '0987654321', '456 Maple St', '1997-03-12', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (59, 'gymowner41', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 59, 18);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (60, 'Pham', 'Van T', 'gymowner44@example.com', '4567890123', '789 Oak St', '1999-10-05', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (60, 'Pham', 'Van T', 'gymowner44@example.com', '0987654321', '789 Oak St', '1999-10-05', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (60, 'gymowner42', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 60, 18);
 
 -- Gym Owner Creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (61, 'Nguyen', 'Thị U', 'gymowner45@example.com', '5678901234', '123 Cherry St', '1992-08-15', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (61, 'Nguyen', 'Thị U', 'gymowner45@example.com', '0987654321', '123 Cherry St', '1992-08-15', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (61, 'gymowner43', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 61, 18);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (62, 'Tran', 'Văn V', 'gymowner46@example.com', '6789012345', '456 Elm St', '1995-11-28', 'Male',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (62, 'Tran', 'Văn V', 'gymowner46@example.com', '0987654321', '456 Elm St', '1995-11-28', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (62, 'gymowner44', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 62, 18);
 
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender,
-                         image_url)
-VALUES (63, 'Pham', 'Thị X', 'gymowner47@example.com', '7890123456', '789 Walnut St', '1998-04-10', 'Female',
-        '/images/system/v.png');
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (63, 'Pham', 'Thị X', 'gymowner47@example.com', '0987654321', '789 Walnut St', '1998-04-10', 'Female', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
 VALUES (63, 'gymowner45', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 63, 18);
 
+-- Gym Owner Hòa Lạc Creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (77, 'Nguyen', 'Trà My', 'gymowner77@example.com', '0987654321', '789 Walnut St', '1998-04-10', 'Female', '087084000999','/images/system/v2.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
+VALUES (77, 'gymowner46', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 77, 76);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (78, 'Tran', 'Van Anh', 'gymowner78@example.com', '0987654321', '123 Main St', '1990-08-15', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
+VALUES (78, 'gymowner47', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989808', 0, 78, 76);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (79, 'Pham', 'Minh Duc', 'gymowner79@example.com', '0987654321', '456 Oak St', '1985-03-22', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
+VALUES (79, 'gymowner48', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989809', 0, 79, 76);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (80, 'Nguyen', 'Van Tuan', 'gymowner80@example.com', '0987654321', '789 Maple St', '1995-12-05', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
+VALUES (80, 'gymowner49', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989810', 0, 80, 76);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (81, 'Tran', 'Thi Mai', 'gymowner81@example.com', '0987654321', '101 Pine St', '1988-07-18', 'Female', '087084000999','/images/system/v2.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
+VALUES (81, 'gymowner50', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989811', 0, 81, 76);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (82, 'Le', 'Van Hung', 'gymowner82@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by)
+VALUES (82, 'gymowner51', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 82, 76);
+
 -- Employee creation
-INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
-                         date_of_birth,
-                         gender, securityId ,image_url)
-VALUES (3, 'Nguyen Van Bao', 'Linh', 'linhnvb2@fpt.com', '0987654321', '123 Main St',
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId ,image_url)
+VALUES (3, 'Nguyen Van', 'Trung', 'trungnv@fpt.com', '0987654321', '123 Main St',
         '2001-01-01', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
 VALUES (3, 'employee', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 3, 19, 1);
 
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (83, 'Nguyễn', 'Văn Hùng', 'employee2@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
+VALUES (83, 'employee2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 83, 77, 77);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (84, 'Mai', 'Quang Trường', 'employee3@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
+VALUES (84, 'employee3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 84, 78, 78);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (85, 'Hoàng', 'Phương Chi', 'employee4@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v2.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
+VALUES (85, 'employee4', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 85, 79, 79);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (86, 'Trần Thị', 'Lan Anh', 'employee5@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v2.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
+VALUES (86, 'employee5', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 86, 80, 80);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (87, 'Hoàng', 'Lan Chi', 'employee6@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v2.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
+VALUES (87, 'employee6', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 87, 81, 81);
+
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
+VALUES (88, 'Nguyễn Kim', 'Nam', 'employee7@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
+VALUES (88, 'employee7', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 88, 82, 82);
 -- User creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
@@ -517,6 +495,15 @@ VALUES (75, 'Phan', 'Ngô', 'phango@example.com', '0987654321', '123 Đường N
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (75, 'phanngo', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 75);
 
+-- Assign role for employee
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES 	(83, 83, 3),
+          (84, 84, 3),
+          (85, 85, 3),
+          (86, 86, 3),
+          (87, 87, 3),
+          (88, 88, 3);
+
 -- Assign role for users
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (1, 1, 1);
@@ -570,6 +557,8 @@ INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (17, 17, 5);
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (18, 18, 5);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (76, 76, 5);
 
 -- Assign role for gym owner
 INSERT INTO user_role (user_role_id, user_id, role_id)
@@ -663,6 +652,20 @@ VALUES (62, 62, 2);
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES (63, 63, 2);
 
+-- Assign role for gym owner Hòa lạc
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (77, 77, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (78, 78, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (79, 79, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (80, 80, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (81, 81, 2);
+INSERT INTO user_role (user_role_id, user_id, role_id)
+VALUES (82, 82, 2);
+
 -- User Wallet insert
 INSERT INTO wallet (user_id, balance)
 VALUES (1, 20000);
@@ -691,17 +694,17 @@ VALUES
 
 -- Brand Owner Wallet insert
 INSERT INTO wallet (user_id, balance)
-VALUES (6, 20000);
+VALUES (6, 89000);
 INSERT INTO wallet (user_id, balance)
-VALUES (7, 2000);
+VALUES (7, 50000);
 INSERT INTO wallet (user_id, balance)
 VALUES (8, 10000);
 INSERT INTO wallet (user_id, balance)
-VALUES (9, 1000);
+VALUES (9, 40000);
 INSERT INTO wallet (user_id, balance)
-VALUES (10, 20000);
+VALUES (10, 30000);
 INSERT INTO wallet (user_id, balance)
-VALUES (11, 20000);
+VALUES (11, 70000);
 INSERT INTO wallet (user_id, balance)
 VALUES (12, 20000);
 INSERT INTO wallet (user_id, balance)
@@ -716,12 +719,12 @@ INSERT INTO wallet (user_id, balance)
 VALUES (17, 20000);
 INSERT INTO wallet (user_id, balance)
 VALUES (18, 20000);
-
 INSERT INTO wallet (user_id, balance)
-VALUES (19, 20000);
+VALUES (76, 20000);
 
 INSERT INTO wallet (user_id, balance)
 VALUES
+    (19, 0),
     (20, 0),
     (21, 0),
     (22, 0),
@@ -765,7 +768,22 @@ VALUES
     (60, 0),
     (61, 0),
     (62, 0),
-    (63, 0);
+    (63, 0),
+-- Create gym owner wallet
+    (77, 0),
+    (78, 0),
+    (79, 0),
+    (80, 0),
+    (81, 0),
+    (82, 0);
+-- Eployee Wallet insert
+INSERT INTO wallet (user_id, balance)
+VALUES 	(83, 0),
+          (84, 0),
+          (85, 0),
+          (86, 0),
+          (87, 0),
+          (88, 0);
 /********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,
@@ -798,8 +816,19 @@ VALUES (5, 6, 'Citi Gym',
         'Bạn sẽ được trải nghiệm đa dạng các lớp từ Dance cho đến Yoga, được hướng dẫn bài bản để học viên đạt được mục tiêu trong thời gian ngắn nhất.
 
   Trong đó, Yoga sẽ được hướng dẫn bởi master Ấn Độ và Việt Nam giàu kinh nghiệm, tận tâm, gym cùng các chuyên gia hàng đầu. FIT24 tổ chức cả lớp nhảy dành cho các bạn nhỏ.',
-        4.2, '1900262442', 'fit24@gmail.com', 1);
+        4.2, '1900262442', 'fit24@gmail.com', 1),
 
+       (14, 76, 'Gym Hòa Lạc',
+        '/img/brands/logos/14_logo.jpg',
+        '/img/brands/wallpapers/14_wallpaper.jpg',
+        '/img/brands/thumbnails/14_thumbnail.jpg',
+        '“Hãy bắt đầu tập gym vì sức khỏe của bản thân và vì một thân hình đẹp”
+TẬP CÙNG HUẤN LUYỆN VIÊN HÒA LẠC GYM… BẠN ĐƯỢC GÌ?
+- Phân tích và thiết kế giáo trình tập luyện rõ ràng
+- Tư vấn chế độ dinh dưỡng phù hợp với thể trạng và mục tiêu luyện tập
+- Theo dõi sát sao, đảm bảo luyện tập đúng bài, đúng tiến độ
+- HLV sẽ truyền cảm hứng khi bạn cảm thấy mệt mỏi, mất năng lượng.',
+        4.5, '1900262442', 'gymhoalac@gmail.com', 1);
 
 INSERT INTO brand_amenities (amenitie_id, brand_id, photo_url, amenitie_name, description, amenitie_status)
 VALUES (1, 5, '/img/brandAmenities/1701103600069_brandAmenities.jpg', 'MÁY TẬP NHẬP KHẨU',
@@ -865,8 +894,27 @@ VALUES (1, 5, '/img/brandAmenities/1701103600069_brandAmenities.jpg', 'MÁY TẬ
         1),
        (17, 7, '/img/brandAmenities/1701105382902_brandAmenities.jpg', 'CĂNG CƠ – TRỊ LIỆU',
         'FIT24 với các Master chuyên môn cao không những giúp bạn phục hồi cơ thể sau những giờ tập luyện mà còn hỗ trợ trị liệu về các vấn đề xương khớp mà bạn mắc phải.',
-        1);
+        1),
 
+
+
+
+-- Create Gym Brand Amenities
+       (18, 14, '/img/brandAmenities/1702422521039_brandAmenities.jpg', 'HIIT (HIGH-INTENSITY INTERVAL TRAINING)',
+        'Tham gia các buổi tập HIIT để đốt cháy mỡ thừa, tăng cường sức mạnh và cải thiện thể lực tổng thể.',
+        1),
+       (19, 14, '/img/brandAmenities/1702422539068_brandAmenities.jpg', 'Đạp xe',
+        'Trải nghiệm các buổi tập đạp xe indoor chất lượng cao với nhạc nền sôi động, giúp tăng cường sức mạnh và sức bền.',
+        1),
+       (20, 14, '/img/brandAmenities/1701105371125_brandAmenities.jpg', 'Huấn luyện viên cá nhân',
+        'Tập luyện với Huấn luyện viên cá nhân theo hình thức 1 kèm 1, được thiết kế đặc biệt phù hợp với thể trạng và mục tiêu thể hình mà bạn mong muốn.',
+        1),
+       (21, 14, '/img/brandAmenities/1701105377379_brandAmenities.jpg', 'Tư vẫn dinh dưỡng',
+        'Được tư vấn dinh dưỡng chuyên sâu từ các chuyên gia, giúp bạn xây dựng chế độ ăn uống phù hợp với mục tiêu tập luyện và sức khỏe cá nhân.',
+        1),
+       (22, 14, '/img/brandAmenities/1702422550825_brandAmenities.jpg', 'Yoga',
+        'Tham gia các lớp Yoga và thiền để giảm căng thẳng, cải thiện linh hoạt và tăng cường tinh thần thoải mái',
+        1);
 
 /********** Gym Department Creation ***********/
 -- Create Gym Department Status
@@ -973,7 +1021,74 @@ VALUES (1, 5, 19, 1, 'CITIGYM THÀNH THÁI', ' 52 Thành Thái, Phường 12, Qu
         '/img/departments/wallpapers/11_wallpaper.jpg',
         '/img/departments/thumbnails/11_thumbnail.jpg',
         'Là phòng tập Gym và Yoga LỚN NHẤT – ĐẸP NHẤT với quy mô 3 tầng và diện tích trên 2,000m2, Fit24 Ba Tháng Hai được thiết kế sang trọng và ấn tượng theo phong cách Châu Âu hiện đại và là chi nhánh mới nhất của Hệ thống Fit24.',
-        10.777031921131604, 106.68105969760164, 70, 2000,'Hồ Chí Minh');
+        10.777031921131604, 106.68105969760164, 70, 2000,'Hồ Chí Minh'),
+
+-- Create Gym Department Hòa Lạc
+       (37, 14, 77, 1, 'Gym Hòa Lạc - Super Gym', 'Số nhà 156, thôn 2 Thạch Hoà, Thạch Thất, Hoà Lạc, Hà Nội',
+        '0948096456',
+        '/img/departments/logos/37_logo.jpg',
+        '/img/departments/wallpapers/37_wallpaper.png',
+        '/img/departments/thumbnails/37_thumbnail.jpg',
+        'Diện tích 700m2 (450m2 phòng+250m2 sân) , phòng sạch sẽ, thoáng mát. Cơ sở vật chất hiện đại, thiết bị máy móc được nhập nguyên đai, nguyên kiện. Nói KHÔNG với máy cũ. 100% PT có kinh nghiệm sư phạm tốt, PT có chứng chỉ và thi đấu chuyên nghiệp.',
+        20.993832563714847, 105.52318645431545, 150, 700,'Hà Nội'),
+
+       (38, 14, 78, 1, 'Gym Hòa Lạc - Fit Way', 'Phòng Tập GYM Tại Thôn 3, Thạch Hoà , Thạch Thất , Hà Nội',
+        '0941024953',
+        '/img/departments/logos/38_logo.png',
+        '/img/departments/wallpapers/38_wallpaper.jpg',
+        '/img/departments/thumbnails/38_thumbnail.jpg',
+        'Bạn đang tìm phòng tập #HLV với chi phí tốt?. Thiết kệ lộ trình tập luyện bài bản. Đặt hiệu quả khách hàng lên hàng đầu. Đảm bảo chất lượng trong từng giờ tập.
+- Đạt hiệu quả tập luyện nhanh chóng
+- Có thể tự tập sau 1 khóa tập
+- KHỎE hơn, ĐẸP hơn, TỰ TIN hơn',
+        21.011987370266482, 105.51894157781494, 300, 1300,'Hà Nội'),
+
+       (39, 14, 79, 1, 'Gym Hòa Lạc - Tân Xã', 'Thôn 2 , xã Thạch Hòa , Thạch Thất, Hà Nội',
+        '0903210507',
+        '/img/departments/logos/39_logo.jpg',
+        '/img/departments/wallpapers/39_wallpaper.jpg',
+        '/img/departments/thumbnails/39_thumbnail.jpg',
+        'Đến với Hòa Lạc - Tân Xã gym bạn sẽ được tập luyện tại phòng tập có trang thiết bị đầy đủ và hiện đại nhất Hòa Lạc.
+- Với diện tích phòng tập rộng 500m2 đầy đủ tiện nghi
+- Nước uống, wifi miễn phí
+- Đầy đủ dịch vụ tủ đồ, tắm nóng lạnh và camera giám sát 24/24',
+        20.983846109762734, 105.52544428129941, 160, 780,'Hà Nội'),
+
+       (40, 14, 80, 1, 'Gym Hòa Lạc - T&T Fit', 'Số 366 thôn 4, Thạch Hoà, Thạch Thất, Hoà Lạc, Hà Nội',
+        '0879.379.686 ',
+        '/img/departments/logos/40_logo.png',
+        '/img/departments/wallpapers/40_wallpaper.jpg',
+        '/img/departments/thumbnails/40_thumbnail.jpg',
+        'Tập thả ga không lo về giá.
+- Tặng ngay vocher giảm giá tất cả các gói tập
+- T&T FIT tặng 100 bữa ăn phụ mỗi thứ 5 hàng tuần.
+- T&T FIT mở lớp HLV tập chuyên mông, cardio, bụng từ t2 - T6 hoàn toàn free dành cho hội viên Nữ.
+- T&T FIT tuyển sinh các lớp yoga aerobic zumba',
+        21.017876101281686, 105.51972689577266, 250, 900,'Hà Nội'),
+
+       (41, 14, 81, 1, 'Gym Hòa Lạc - KA Fitness', 'Cần Kiệm, Thạch Thất, Hà Nội, Việt Nam',
+        '0971545504',
+        '/img/departments/logos/41_logo.png',
+        '/img/departments/wallpapers/41_wallpaper.jpg',
+        '/img/departments/thumbnails/41_thumbnail.jpg',
+        'GYM KA Fitness Center Thạch Thất.
+Hãy đến để trải nghiệm Gym , Boxing , Kickfit
+- Chuyên Giảm Béo ,
+- Tăng Cân Tăng Cơ
+- Độ Bodyfit
+KA FITNESS CENTER • GYM FOR LIFE',
+        21.016034238364934, 105.58167245431571, 320, 1100,'Hà Nội'),
+
+       (42, 14, 82, 1, 'Gym Hòa Lạc - Tài Phát', 'Bắc, Khu Tái Định Cư, Thạch Thất, Hà Nội, Việt Nam',
+        '0948096456',
+        '/img/departments/logos/42_logo.png',
+        '/img/departments/wallpapers/42_wallpaper.jpg',
+        '/img/departments/thumbnails/42_thumbnail.jpg',
+        'Cơ sở vật chất hiện đại, thiết bị máy móc được nhập nguyên đai, nguyên kiện. Gym bạn sẽ được tập luyện tại phòng tập có trang thiết bị đầy đủ và hiện đại nhất Hòa Lạc.
+- Với diện tích phòng tập rộng đầy đủ tiện nghi
+- Nước uống, wifi miễn phí
+- Đầy đủ dịch vụ tủ đồ, tắm nóng lạnh và camera giám sát 24/24',
+        20.989100209720757, 105.52995052360504, 190, 670,'Hà Nội');
 
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)
 VALUES (1, 1),
@@ -1096,7 +1211,24 @@ VALUES (1, 5, 1, 1, 1, 'Gói giờ',
 
        (9, 7, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30);
+        150.00, 0, 0, 30, 10, 30),
+
+-- Create Gym plan infos Hòa Lạc
+       (10, 14, 1, 1, 1, 'Gói giờ',
+        'Gói tập ưu đãi hấp dẫn, và tiết kiệm và linh hoạt nhất cho người dùng. Với gói này bạn sẽ được thỏa sức tập luyện và tính theo giờ tập',
+        0, 25.00, 0, 0, 10, 15),
+
+       (11, 14, 2, 1, 2, 'Gói 1 tháng',
+        'Gói tập ưu đãi hấp dẫn cho người dùng trong vòng một tháng. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích của các cơ sở của chúng tôi ở Hòa Lạc',
+        300, 0, 0, 30, 10, 40),
+
+       (12, 14, 2, 1, 2, 'Gói 3 tháng',
+        'Gói tập ưu đãi toàn diện cho người dùng trong vòng ba tháng với những ưu đãi tốt nhất. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích của các cơ sở của chúng tôi ở Hòa Lạc',
+        800.00, 0, 0, 60, 20, 80),
+
+       (13, 14, 2, 1, 2, 'Gói 6 tháng',
+        'Gói tập ưu đãi hấp dẫn nhất và tiết kiệm cho người dùng trong vòng 6 tháng với những ưu đãi toàn diện. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích, tập luyện cùng huấn luyện cá nhân trên tất cả các cơ sở của chúng tôi ở Hòa Lạc',
+        1500.00, 0, 0, 120, 30, 150);
 
 INSERT INTO gym_department_plans(gym_department_id, plan_id)
 VALUES (1, 1),
@@ -1141,7 +1273,38 @@ VALUES (1, 1),
 
        (11, 7),
        (11, 8),
-       (11, 9);
+       (11, 9),
+
+-- Create Gym plan infos Hòa Lạc
+       (37, 10),
+       (37, 11),
+       (37, 12),
+       (37, 13),
+
+       (38, 10),
+       (38, 11),
+       (38, 12),
+       (38, 13),
+
+       (39, 10),
+       (39, 11),
+       (39, 12),
+       (39, 13),
+
+       (40, 10),
+       (40, 11),
+       (40, 12),
+       (40, 13),
+
+       (41, 10),
+       (41, 11),
+       (41, 12),
+       (41, 13),
+
+       (42, 10),
+       (42, 11),
+       (42, 12),
+       (42, 13);
 
 INSERT INTO features (feature_icon, feature_name, feature_status)
 VALUES ('<i class="bi-p-circle"></i>', 'Bãi Đỗ Xe', 1),
@@ -1218,7 +1381,50 @@ VALUES (1, 1, 1),
        (3, 11, 1),
        (4, 11, 1),
        (5, 11, 1),
-       (7, 11, 1);
+       (7, 11, 1),
+
+-- Create Gym Department Hòa Lạc Features
+       (1, 37, 1),
+       (2, 37, 1),
+       (3, 37, 1),
+       (4, 37, 1),
+       (5, 37, 1),
+       (6, 37, 1),
+
+       (1, 38, 1),
+       (2, 38, 1),
+       (3, 38, 1),
+       (4, 38, 1),
+       (5, 38, 1),
+       (6, 38, 1),
+
+       (1, 39, 1),
+       (2, 39, 1),
+       (3, 39, 1),
+       (4, 39, 1),
+       (5, 39, 1),
+       (6, 39, 1),
+
+       (1, 40, 1),
+       (2, 40, 1),
+       (3, 40, 1),
+       (4, 40, 1),
+       (5, 40, 1),
+       (6, 40, 1),
+
+       (1, 41, 1),
+       (2, 41, 1),
+       (3, 41, 1),
+       (4, 41, 1),
+       (5, 41, 1),
+       (6, 41, 1),
+
+       (1, 42, 1),
+       (2, 42, 1),
+       (3, 42, 1),
+       (4, 42, 1),
+       (5, 42, 1),
+       (6, 42, 1);
 
 -- Create Gym Department Gallery
 INSERT INTO gym_department_albums (gym_department_id, photo_url)
@@ -1304,7 +1510,48 @@ VALUES (1, '/img/departments/albums/1_albums_1701104437519.jpg'),
        (11, '/img/departments/albums/11_albums_1701144949475.jpg'),
        (11, '/img/departments/albums/11_albums_1701144953905.jpg'),
        (11, '/img/departments/albums/11_albums_1701144969646.jpg'),
-       (11, '/img/departments/albums/11_albums_1701144991980.jpg');
+       (11, '/img/departments/albums/11_albums_1701144991980.jpg'),
+
+-- Create Gym Department Hòa Lạc Gallery
+       (37, '/img/departments/albums/37_albums_1702465348511.jpg'),
+       (37, '/img/departments/albums/37_albums_1702465369596.jpg'),
+       (37, '/img/departments/albums/37_albums_1702465326369.jpg'),
+       (37, '/img/departments/albums/37_albums_1702465318800.jpg'),
+       (37, '/img/departments/albums/37_albums_1702465312041.jpg'),
+       (37, '/img/departments/albums/37_albums_1702465306548.jpg'),
+
+       (38, '/img/departments/albums/38_albums_1702466189332.jpg'),
+       (38, '/img/departments/albums/38_albums_1702466202345.jpg'),
+       (38, '/img/departments/albums/38_albums_1702466210849.jpg'),
+       (38, '/img/departments/albums/38_albums_1702466215831.jpg'),
+       (38, '/img/departments/albums/38_albums_1702466174486.jpg'),
+
+       (39, '/img/departments/albums/39_albums_1702466648568.jpeg'),
+       (39, '/img/departments/albums/39_albums_1702466642297.jpg'),
+       (39, '/img/departments/albums/39_albums_1702466636898.jpg'),
+       (39, '/img/departments/albums/39_albums_1702466632484.jpg'),
+       (39, '/img/departments/albums/39_albums_1702466628300.jpg'),
+       (39, '/img/departments/albums/39_albums_1702466624897.jpg'),
+
+       (40, '/img/departments/albums/40_albums_1702468187432.jpg'),
+       (40, '/img/departments/albums/40_albums_1702468205910.jpg'),
+       (40, '/img/departments/albums/40_albums_1702468209890.jpg'),
+       (40, '/img/departments/albums/40_albums_1702468214114.jpg'),
+       (40, '/img/departments/albums/40_albums_1702468221408.jpg'),
+       (40, '/img/departments/albums/40_albums_1702468247392.jpg'),
+
+       (41, '/img/departments/albums/41_albums_1702468814583.jpg'),
+       (41, '/img/departments/albums/41_albums_1702468819716.jpg'),
+       (41, '/img/departments/albums/41_albums_1702468824282.jpg'),
+       (41, '/img/departments/albums/41_albums_1702468830521.jpg'),
+       (41, '/img/departments/albums/41_albums_1702468838302.jpg'),
+
+       (42, '/img/departments/albums/42_albums_1702469223884.jpg'),
+       (42, '/img/departments/albums/42_albums_1702469227931.jpg'),
+       (42, '/img/departments/albums/42_albums_1702469232049.jpg'),
+       (42, '/img/departments/albums/42_albums_1702469237233.jpg'),
+       (42, '/img/departments/albums/42_albums_1702469241074.jpg'),
+       (42, '/img/departments/albums/42_albums_1702469260509.jpg');
 
 
 -- Create Gym Department Schedule
@@ -1395,7 +1642,57 @@ VALUES (1, 'Thứ 2', '6:00 AM', '10:00 PM'),
        (11, 'Thứ 5', '9:00 AM', '11:00 PM'),
        (11, 'Thứ 6', '9:00 AM', '11:00 PM'),
        (11, 'Thứ 7', '9:00 AM', '11:00 PM'),
-       (11, 'Chủ Nhật', '9:00 AM', '11:00 PM');
+       (11, 'Chủ Nhật', '9:00 AM', '11:00 PM'),
+
+
+-- Create Gym Department Hòa Lạc Schedule
+       (37, 'Thứ 2', '6:00 AM', '10:00 PM'),
+       (37, 'Thứ 3', '9:00 AM', '11:00 PM'),
+       (37, 'Thứ 4', '9:00 AM', '11:00 PM'),
+       (37, 'Thứ 5', '9:00 AM', '11:00 PM'),
+       (37, 'Thứ 6', '9:00 AM', '11:00 PM'),
+       (37, 'Thứ 7', '9:00 AM', '11:00 PM'),
+       (37, 'Chủ Nhật', '9:00 AM', '11:00 PM'),
+
+       (38, 'Thứ 2', '6:00 AM', '10:00 PM'),
+       (38, 'Thứ 3', '9:00 AM', '11:00 PM'),
+       (38, 'Thứ 4', '9:00 AM', '11:00 PM'),
+       (38, 'Thứ 5', '9:00 AM', '11:00 PM'),
+       (38, 'Thứ 6', '9:00 AM', '11:00 PM'),
+       (38, 'Thứ 7', '9:00 AM', '11:00 PM'),
+       (38, 'Chủ Nhật', '9:00 AM', '11:00 PM'),
+
+       (39, 'Thứ 2', '6:00 AM', '10:00 PM'),
+       (39, 'Thứ 3', '9:00 AM', '11:00 PM'),
+       (39, 'Thứ 4', '9:00 AM', '11:00 PM'),
+       (39, 'Thứ 5', '9:00 AM', '11:00 PM'),
+       (39, 'Thứ 6', '9:00 AM', '11:00 PM'),
+       (39, 'Thứ 7', '9:00 AM', '11:00 PM'),
+       (39, 'Chủ Nhật', '9:00 AM', '11:00 PM'),
+
+       (40, 'Thứ 2', '6:00 AM', '10:00 PM'),
+       (40, 'Thứ 3', '9:00 AM', '11:00 PM'),
+       (40, 'Thứ 4', '9:00 AM', '11:00 PM'),
+       (40, 'Thứ 5', '9:00 AM', '11:00 PM'),
+       (40, 'Thứ 6', '9:00 AM', '11:00 PM'),
+       (40, 'Thứ 7', '9:00 AM', '11:00 PM'),
+       (40, 'Chủ Nhật', '9:00 AM', '11:00 PM'),
+
+       (41, 'Thứ 2', '6:00 AM', '10:00 PM'),
+       (41, 'Thứ 3', '9:00 AM', '11:00 PM'),
+       (41, 'Thứ 4', '9:00 AM', '11:00 PM'),
+       (41, 'Thứ 5', '9:00 AM', '11:00 PM'),
+       (41, 'Thứ 6', '9:00 AM', '11:00 PM'),
+       (41, 'Thứ 7', '9:00 AM', '11:00 PM'),
+       (41, 'Chủ Nhật', '9:00 AM', '11:00 PM'),
+
+       (42, 'Thứ 2', '6:00 AM', '10:00 PM'),
+       (42, 'Thứ 3', '9:00 AM', '11:00 PM'),
+       (42, 'Thứ 4', '9:00 AM', '11:00 PM'),
+       (42, 'Thứ 5', '9:00 AM', '11:00 PM'),
+       (42, 'Thứ 6', '9:00 AM', '11:00 PM'),
+       (42, 'Thứ 7', '9:00 AM', '11:00 PM'),
+       (42, 'Chủ Nhật', '9:00 AM', '11:00 PM');
 
 /********** Department Feedback Creation ***********/
 INSERT INTO user_feedback
@@ -1469,7 +1766,58 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
 
        (1, 1, 9, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
        (4, 2, 10, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
-       (5, 3, 11, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1);
+       (5, 3, 11, 2, 'Cần cải thiện về thiết bị tại phòng tập cardio.', NOW(), 1),
+
+
+-- Create Gym Department Hòa Lạc feedback
+       (2, 10, 37, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (4, 11, 38, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (5, 12, 39, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (3, 13, 40, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (4, 12, 41, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (2, 11, 42, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+
+       (2, 10, 37, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (4, 11, 38, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (5, 12, 39, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (3, 13, 40, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (4, 12, 41, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (2, 11, 42, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+
+       (2, 10, 37, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+       (4, 11, 38, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+       (5, 12, 39, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+       (3, 13, 40, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+       (4, 12, 41, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+       (2, 11, 42, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+
+       (2, 10, 37, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+       (4, 11, 38, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+       (5, 12, 39, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+       (3, 13, 40, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+       (4, 12, 41, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+       (2, 11, 42, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+
+       (2, 10, 37, 2, 'Cần cải thiện về thiết bị tại phòng tập.', NOW(), 1),
+       (4, 11, 38, 2, 'Cần cải thiện về thiết bị tại phòng tập.', NOW(), 1),
+       (5, 12, 39, 2, 'Cần cải thiện về thiết bị tại phòng tập.', NOW(), 1),
+       (3, 13, 40, 2, 'Cần cải thiện về thiết bị tại phòng tập.', NOW(), 1),
+       (4, 12, 41, 2, 'Cần cải thiện về thiết bị tại phòng tập.', NOW(), 1),
+       (2, 11, 42, 2, 'Cần cải thiện về thiết bị tại phòng tập.', NOW(), 1),
+
+       (2, 10, 37, 3, 'Phòng tập siêu đẹp nhưng không có chỗ để xe :(.', NOW(), 1),
+       (4, 11, 38, 3, 'Phòng tập siêu đẹp nhưng không có chỗ để xe :(', NOW(), 1),
+       (5, 12, 39, 3, 'Phòng tập siêu đẹp nhưng không có chỗ để xe :(', NOW(), 1),
+       (3, 13, 40, 3, 'Phòng tập siêu đẹp nhưng không có chỗ để xe :(', NOW(), 1),
+       (4, 12, 41, 3, 'Phòng tập siêu đẹp nhưng không có chỗ để xe :(', NOW(), 1),
+       (2, 11, 42, 3, 'Phòng tập siêu đẹp nhưng không có chỗ để xe :(', NOW(), 1),
+
+       (2, 10, 37, 4, 'Phòng tập siêu xịn sò, mua ngay trải nghiệm đi ae.', NOW(), 1),
+       (4, 11, 38, 4, 'Phòng tập siêu xịn sò, mua ngay trải nghiệm đi ae.', NOW(), 1),
+       (5, 12, 39, 4, 'Phòng tập siêu xịn sò, mua ngay trải nghiệm đi ae.', NOW(), 1),
+       (3, 13, 40, 4, 'Phòng tập siêu xịn sò, mua ngay trải nghiệm đi ae.', NOW(), 1),
+       (4, 12, 41, 4, 'Phòng tập siêu xịn sò, mua ngay trải nghiệm đi ae.', NOW(), 1),
+       (2, 11, 42, 4, 'Phòng tập siêu xịn sò, mua ngay trải nghiệm đi ae.', NOW(), 1);
 
 /**************************************************************************************** Brand Creation - DUC **********************************************************************/
 -- Create brand infos
