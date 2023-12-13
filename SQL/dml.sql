@@ -373,37 +373,37 @@ INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_num
 VALUES (83, 'Nguyễn', 'Văn Hùng', 'employee2@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
-VALUES (83, 'employee2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 83, 77, 77);
+VALUES (83, 'employee2', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 83, 77, 37);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
 VALUES (84, 'Mai', 'Quang Trường', 'employee3@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
-VALUES (84, 'employee3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 84, 78, 78);
+VALUES (84, 'employee3', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 84, 78, 38);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
 VALUES (85, 'Hoàng', 'Phương Chi', 'employee4@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v2.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
-VALUES (85, 'employee4', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 85, 79, 79);
+VALUES (85, 'employee4', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 85, 79, 39);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
 VALUES (86, 'Trần Thị', 'Lan Anh', 'employee5@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v2.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
-VALUES (86, 'employee5', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 86, 80, 80);
+VALUES (86, 'employee5', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 86, 80, 40);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
 VALUES (87, 'Hoàng', 'Lan Chi', 'employee6@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v2.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
-VALUES (87, 'employee6', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 87, 81, 81);
+VALUES (87, 'employee6', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 87, 81, 41);
 
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address, date_of_birth, gender, securityId, image_url)
 VALUES (88, 'Nguyễn Kim', 'Nam', 'employee7@example.com', '0987654321', '202 Elm St', '1993-02-25', 'Male', '087084000999','/images/system/v.png');
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id, created_by, in_department_id)
-VALUES (88, 'employee7', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 88, 82, 82);
+VALUES (88, 'employee7', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989812', 0, 88, 82, 42);
 -- User creation
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
@@ -769,6 +769,7 @@ VALUES
     (61, 0),
     (62, 0),
     (63, 0),
+
 -- Create gym owner wallet
     (77, 0),
     (78, 0),
@@ -778,12 +779,12 @@ VALUES
     (82, 0);
 -- Eployee Wallet insert
 INSERT INTO wallet (user_id, balance)
-VALUES 	(83, 0),
-          (84, 0),
-          (85, 0),
-          (86, 0),
-          (87, 0),
-          (88, 0);
+VALUES 	  (83, 0),
+            (84, 0),
+            (85, 0),
+            (86, 0),
+            (87, 0),
+            (88, 0);
 /********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,
