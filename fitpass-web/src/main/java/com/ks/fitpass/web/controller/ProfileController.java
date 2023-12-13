@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -85,7 +86,7 @@ public class ProfileController {
 
     @PostMapping("/my-profile/update")
     public String updateProfileDetails(@Valid @ModelAttribute("userUpdateDTO") UserUpdateDTO userUpdateDTO,
-                                       BindingResult bindingResult) {
+                                       BindingResult bindingResult, RedirectAttributes attributes) {
         try {
             if (!userUpdateDTO.getEmail().equals(userUpdateDTO.getOldEmail())) {
                 if (userService.checkEmailExist(userUpdateDTO.getEmail())) {
@@ -113,8 +114,7 @@ public class ProfileController {
 
             // Update user detail
             userService.updateUserDetail(userDetail);
-
-
+            attributes.addFlashAttribute("successUpdate", true);
             return "redirect:/profile/my-profile";
         }catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
