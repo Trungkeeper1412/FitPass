@@ -119,8 +119,6 @@ public class ProfileControllerTest {
 
         // Assert
         assertEquals("redirect:/profile/my-profile", result);
-
-
     }
 
     @Test

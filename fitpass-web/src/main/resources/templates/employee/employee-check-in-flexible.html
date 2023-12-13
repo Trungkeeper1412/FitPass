@@ -369,7 +369,7 @@
                             <p  class="fw-bold">Credit tạm tính: <span class="fw-normal">${credit} credit</span></p>
                         `,
                         showCancelButton: true,
-                        confirmButtonText: 'Check out',
+                        confirmButtonText: 'Check Out',
                         cancelButtonText: 'Back',
                         reverseButtons: true,
                     }).then((result) => {
@@ -464,9 +464,8 @@
             const timeDifference = currentTime - startDate;
 
             // Chuyển thời gian cách nhau thành phút (hoặc đơn vị khác tùy chọn)
-            const durationInMinutes = Math.floor(timeDifference / (1000 * 60)); // 1 phút = 60,000 mili giây
-
-            return durationInMinutes;
+             // 1 phút = 60,000 mili giây
+            return Math.floor(timeDifference / (1000 * 60));
         }
 
         function calculateTotalPrice(durationInMinutes, pricePerHour) {

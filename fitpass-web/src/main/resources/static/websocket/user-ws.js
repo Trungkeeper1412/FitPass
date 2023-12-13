@@ -519,14 +519,16 @@ function insertCheckInNotificationDiv(notification, order) {
 function handleCheckInNotificationClick(notification) {
     // Check if the notification is already seen
     const isSeen = $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`).hasClass("seen-notification");
-
     if (!isSeen) {
         Swal.fire({
             title: `Xác nhận check in`,
             icon: 'question',
+            html: `
+                <p class="fw-bold">Phòng tập: <span class="fw-normal">${notification.departmentName}</span></p>
+                `,
             showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Không',
             reverseButtons: true,
             allowEscapeKey: false,
             allowOutsideClick: false
@@ -744,7 +746,7 @@ function handleCheckOutNotificationClick(notification) {
                 `,
                     showCancelButton: true,
                     confirmButtonText: '<a href="deposit">Nạp thêm credit</a>',
-                    cancelButtonText: 'No',
+                    cancelButtonText: 'Không',
                     reverseButtons: true,
                     allowEscapeKey: false,
                     allowOutsideClick: false
@@ -763,8 +765,8 @@ function handleCheckOutNotificationClick(notification) {
                 <p  class="fw-bold">Số dư credit còn lại: <span class="fw-normal">${userBalance - orderDetailConfirmCheckOut.creditNeedToPay} credit</span></p>
                 `,
                     showCancelButton: true,
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'No',
+                    confirmButtonText: 'Xác nhận',
+                    cancelButtonText: 'Không',
                     reverseButtons: true,
                     allowEscapeKey: false,
                     allowOutsideClick: false
