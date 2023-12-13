@@ -61,11 +61,11 @@
 <div class="list-brand-content container">
     <div class="row home-option">
         <div id="brand-list" onclick="openBrand()" class="col-md-6 mx-auto active-list">
-            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/brand-logo.png}"></span>
+            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/brand-logo.png}" alt="icon"></span>
             <span class="tab-title fw-bold">Thương hiệu</span>
         </div>
         <div id="gym-list" onclick="openGym()" class="col-md-6 mx-auto">
-            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/dept-logo.png}"></span>
+            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/dept-logo.png}" alt="icon"></span>
             <span class="tab-title fw-bold">Cơ sở gần bạn</span>
         </div>
     </div>
@@ -271,11 +271,11 @@
                     <div class="description">${brand.brandDescription}</div>
                     <div style="display: flex; margin-top: 20px">
                         <div class="basic-info">
-                            <span><img src="https://cdn-icons-png.flaticon.com/128/11569/11569967.png"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/11569/11569967.png" alt="logo"></span>
                             <span>${data.brandDepartmentsMap[brand.brandId].length} Cơ Sở</span>
                         </div>
                         <div class="basic-info" style="margin-left: 15px;">
-                            <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png" alt="logo"></span>
                             <span>${brand.numberOfOrderDetailSale} gói tập đã bán</span>
                         </div>
                     </div>
@@ -337,11 +337,11 @@
     }
 
     function sendLocationToServer(position, page) {
-        // latitude = position.coords.latitude;
-        // longtitue = position.coords.longitude;
-        //Hoan Kiem Geo
-        latitude = 21.0287875844513
-        longtitue = 105.85144018976352
+        latitude = position.coords.latitude;
+        longtitue = position.coords.longitude;
+        // //Hoan Kiem Geo
+        // latitude = 21.0287875844513
+        // longtitue = 105.85144018976352
         console.log(latitude);
         console.log(longtitue);
         loadDepartmentData(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
