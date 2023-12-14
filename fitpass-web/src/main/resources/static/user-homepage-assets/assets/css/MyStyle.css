@@ -4507,6 +4507,10 @@ section {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 280px) and (max-width: 400px) {
+    .gym-department-plan {
+        display: grid;
+        grid-template-columns: 1fr 6fr 3fr;
+    }
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
@@ -4619,7 +4623,6 @@ section {
         display: flex;
         text-align: start;
         color: white;
-        padding-bottom: 25px;
         font-weight: 500;
         font-size: 14px;
     }
