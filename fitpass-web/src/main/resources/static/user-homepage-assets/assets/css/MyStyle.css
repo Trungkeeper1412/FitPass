@@ -4579,7 +4579,19 @@ section {
         display: grid;
         gap: 10px;
     }
-
+    .total-plan-mc{
+        font-size: 16px;
+    }
+    .total-credits-mc .total-title{
+        font-size: 13px;
+    }
+    .total-credits-mc{
+        display: flex;
+        gap: 5px;
+    }
+    .buy-button-mc {
+        text-align: start;
+    }
 }
 @media only screen and (min-width: 449.8px) and (max-width: 767.8px) {
     .gym-department-plan {
@@ -4640,6 +4652,21 @@ section {
         display: grid;
         gap: 5px;
     }
+    .total-container-mc {
+        display: grid;
+        grid-template-columns: 5fr 5fr 2fr;
+    }
+    .total-plan-mc{
+        font-size: 17px;
+    }
+    .total-credits-mc{
+        display: flex;
+        flex-direction: column;
+    }
+    .buy-button-mc{
+        font-size: 14px;
+        text-align: end;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -4696,8 +4723,6 @@ section {
         width: 100px;
         height: 100px;
     }
-
-
     .active-time-mc {
         display: flex;
         align-items: center;
@@ -4708,6 +4733,13 @@ section {
     .plan-info-mc h4 {
         font-size: 18px;
         margin-top: 10px;
+    }
+    .total-container-mc {
+        display: grid;
+        grid-template-columns: 5fr 5fr 2fr;
+    }
+    .buy-button-mc{
+        text-align: end;
     }
 }
 
@@ -4764,26 +4796,20 @@ section {
 }
 
 .total-container-mc {
-    /* position: fixed;
-    width: 87%; */
-    /* display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  margin: auto;*/
     bottom: 0;
     background-color: rgb(0, 0, 0);
     color: white;
-    /* text-align: center; */
-    height: 90px;
+    padding: 15px;
 }
 
 .total-plan-mc {
     font-weight: 700;
     margin: auto;
-    padding-left: 30px;
+
+
 }
 
 .total-credits-mc {
-    display: flex;
     margin: auto;
     font-size: 16px;
 }
@@ -4802,8 +4828,6 @@ section {
     margin: auto;
     padding-right: 10px;
     font-weight: 700;
-    text-align: end;
-    padding-right: 40px;
 }
 
 
@@ -4834,7 +4858,7 @@ section {
     }
 }
 
-@media only screen and (min-width: 250px) and (max-width: 991px) {
+@media only screen and (min-width: 250px) and (max-width: 991.8px) {
     .checkout-container {
         position: relative;
         width: 100%;
@@ -4891,6 +4915,10 @@ section {
     .body-checkout .plan-card-mc .duration {
         font-size: 13px;
         padding: 3px 0;
+    }
+    .total-container-mc {
+        display: grid;
+        grid-template-columns: 5fr 5fr 2fr;
     }
 }
 
