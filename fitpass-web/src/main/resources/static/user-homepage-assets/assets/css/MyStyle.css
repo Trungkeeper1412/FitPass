@@ -3794,9 +3794,6 @@ input:checked + .toggle-slider:before {
     object-fit: cover;
 }
 
-@media only screen and (min-width: 501px) {
-
-}
 
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .about-our-gym-1 div {
@@ -4391,7 +4388,9 @@ section {
     margin-top: 50px;
     padding-top: 15px;
     padding-bottom: 15px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 5fr 2fr 2fr 2fr;
+    padding-left: 5px;
     align-items: center;
     background-color: white;
 }
@@ -4426,7 +4425,7 @@ section {
 .my-plan-title {
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     color: rgb(0, 0, 0)
 }
 
@@ -4480,7 +4479,8 @@ section {
 
 .all-plan-of-gym {
     height: 60px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 11fr;
     background-color: white;
     align-items: center;
     border-bottom: 1px solid rgb(203, 203, 203);
@@ -4509,12 +4509,12 @@ section {
 @media only screen and (min-width: 280px) and (max-width: 400px) {
     .gym-department-plan {
         display: grid;
-        grid-template-columns: 1fr 6fr 3fr;
+        grid-template-columns: 1fr 5fr 6fr;
     }
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 90%;
+        height: 100%;
         width: 100%;
         padding: 10px;
         display: flex;
@@ -4559,10 +4559,7 @@ section {
     .active-time-mc {
         display: flex;
         text-align: start;
-        /*justify-content: center;*/
-        /*align-items: center;*/
         color: white;
-        padding-bottom: 15px;
         font-weight: 500;
         font-size: 12px;
     }
@@ -4577,6 +4574,10 @@ section {
 
 }
 @media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
+    .gym-department-plan {
+        display: grid;
+        grid-template-columns: 1fr 8fr 5fr;
+    }
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
@@ -4631,11 +4632,18 @@ section {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    .gym-department-plan {
+        display: grid;
+        grid-template-columns: 1fr 5fr 6fr;
+    }
+    .plan-other-info{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 75%;
-        width: 90%;
+        width: 100%;
         padding: 15px;
         display: grid;
         grid-template-areas:
