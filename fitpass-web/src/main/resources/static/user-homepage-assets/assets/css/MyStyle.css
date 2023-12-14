@@ -4515,7 +4515,7 @@ section {
         padding: 10px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        /*gap: 10px;*/
         border-radius: 10px;
     }
     .shopping-cart-title{
@@ -4554,10 +4554,11 @@ section {
     }
     .active-time-mc {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: start;
+        /*justify-content: center;*/
+        /*align-items: center;*/
         color: white;
-        padding-bottom: 5px;
+        padding-bottom: 15px;
         font-weight: 500;
         font-size: 12px;
     }
@@ -4566,6 +4567,10 @@ section {
         height: 80px;
         border: 1px solid black;
     }
+    .checkout-container .price-title, .num-of-plan-title{
+        display: none;
+    }
+
 }
 @media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
     .plan-card-mc {
@@ -4609,8 +4614,8 @@ section {
 
     .active-time-mc {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        /*justify-content: center;*/
+        /*align-items: center;*/
         color: white;
         padding-bottom: 25px;
         font-weight: 500;
