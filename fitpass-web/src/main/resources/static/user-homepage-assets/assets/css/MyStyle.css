@@ -4481,6 +4481,7 @@ section {
     height: 60px;
     display: grid;
     grid-template-columns: 1fr 11fr;
+    column-gap: 6px;
     background-color: white;
     align-items: center;
     border-bottom: 1px solid rgb(203, 203, 203);
@@ -4505,11 +4506,17 @@ section {
 }
 
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 280px) and (max-width: 400px) {
+@media only screen and (min-width: 280px) and (max-width: 767.8px) {
+    .my-card-title .price-title, .num-of-plan-title, .action-title{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 450px) {
     .gym-department-plan {
         display: grid;
-        grid-template-columns: 1fr 5fr 6fr;
+        grid-template-columns: 1fr 7fr 4fr;
+        column-gap: 6px;
     }
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
@@ -4530,9 +4537,6 @@ section {
     }
     .my-card-title{
         font-size: 12px;
-    }
-    .my-card-title .price-title, .num-of-plan-title, .action-title{
-        display: none;
     }
     .plan-in-my-card .gym-name-mc{
         font-size: 12px;
@@ -4571,20 +4575,24 @@ section {
     .checkout-container .price-title, .num-of-plan-title{
         display: none;
     }
+    .plan-other-info{
+        display: grid;
+        gap: 10px;
+    }
 
 }
-@media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
+@media only screen and (min-width: 449.8px) and (max-width: 767.8px) {
     .gym-department-plan {
         display: grid;
-        grid-template-columns: 1fr 8fr 5fr;
+        grid-template-columns: 1fr 8fr 3fr;
     }
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 75%;
         width: 100%;
         padding: 15px;
         display: grid;
+        column-gap: 10px;
         grid-template-areas:
             'image content1 content1 content1 content1 content1'
             'image content2 content2 content2 content2 content2';
@@ -4596,6 +4604,7 @@ section {
     }
     .plan-info-mc{
         grid-area: content1;
+        font-size: 13px;
     }
     .active-time-mc {
         grid-area: content2;
@@ -4609,13 +4618,13 @@ section {
     }
 
     .plan-info-mc h4 {
-        font-size: 16px;
-        /*margin: auto;*/
+        font-size: 14px;
+        padding: 6px 13px;
         margin-top: 10px;
     }
 
     .plan-duration-mc {
-        font-size: 14px;
+        font-size: 13px;
         text-align: center;
         margin-top: 3px;
     }
@@ -4625,13 +4634,16 @@ section {
         text-align: start;
         color: white;
         font-weight: 500;
-        font-size: 14px;
+        font-size: 13px;
     }
-
+    .plan-other-info{
+        display: grid;
+        gap: 5px;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
     .gym-department-plan {
         display: grid;
         grid-template-columns: 1fr 5fr 6fr;
@@ -4714,7 +4726,6 @@ section {
 }
 
 .plan-info-mc {
-    /*margin: auto 0;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -4726,10 +4737,10 @@ section {
 }
 
 .plan-info-mc h4 {
+    padding: 6px 13px;
     font-weight: 600;
     border-radius: 10px;
     background-color: black;
-    padding: 10px;
     width: fit-content;
 }
 
