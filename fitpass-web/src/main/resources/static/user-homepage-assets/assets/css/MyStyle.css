@@ -4496,7 +4496,7 @@ section {
 .gym-department-plan {
     /*display: grid;*/
     background-color: white;
-    /*grid-template-columns: 1fr 8fr 4fr 2fr 2fr;*/
+    padding-bottom: 15px;
     height: fit-content;
     display: flex;
     align-items: center;
@@ -4515,7 +4515,7 @@ section {
         padding: 10px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        /*gap: 10px;*/
         border-radius: 10px;
     }
     .shopping-cart-title{
@@ -4554,10 +4554,11 @@ section {
     }
     .active-time-mc {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: start;
+        /*justify-content: center;*/
+        /*align-items: center;*/
         color: white;
-        padding-bottom: 5px;
+        padding-bottom: 15px;
         font-weight: 500;
         font-size: 12px;
     }
@@ -4566,6 +4567,10 @@ section {
         height: 80px;
         border: 1px solid black;
     }
+    .checkout-container .price-title, .num-of-plan-title{
+        display: none;
+    }
+
 }
 @media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
     .plan-card-mc {
@@ -4580,6 +4585,9 @@ section {
             'image content2 content2 content2 content2 content2';
         margin: auto 0;
         border-radius: 10px;
+    }
+    .checkout-container .plan-card-mc{
+        height: fit-content;
     }
     .plan-info-mc{
         grid-area: content1;
@@ -4609,8 +4617,7 @@ section {
 
     .active-time-mc {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: start;
         color: white;
         padding-bottom: 25px;
         font-weight: 500;
@@ -4641,23 +4648,18 @@ section {
         grid-area: content2;
     }
     .plan-card-mc img{
+        display: flex;
         width: 70px;
         height: 70px;
+        justify-content: center;
+        align-items: center;
         border: 1px solid black;
         margin-right: 10px;
         grid-area: image;
     }
-    /*.plan-card-mc {*/
-    /*    background-size: cover;*/
-    /*    height: 100%;*/
-    /*    width: 90%;*/
-    /*    padding: 20px 10px 20px 10px;*/
-    /*    display: grid;*/
-    /*    grid-template-columns: 1fr 2fr 1.5fr;*/
-    /*    margin: auto 0;*/
-    /*    border: 1px solid black;*/
-    /*    border-radius: 10px;*/
-    /*}*/
+    .body-checkout .plan-card-mc {
+        height: fit-content;
+    }
     .plan-info-mc{
         grid-area: content1;
     }
@@ -5718,7 +5720,7 @@ section {
 
 /*================ CSS FOR LIST BRAND PAGE ================  */
 .body-list-brand {
-    background-color: rgb(238, 238, 238);;
+    background-color: rgb(238, 238, 238);
 }
 
 .body-list-brand footer {
@@ -6149,7 +6151,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../img/banner_login_2.png");
+    background-image: url("../img/banner_login_3.jpg");
     height: 100%;
     width: 100%;
     background-position: center;

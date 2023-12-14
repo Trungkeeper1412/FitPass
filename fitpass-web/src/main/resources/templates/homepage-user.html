@@ -106,7 +106,7 @@
         <div class="container ">
             <form id="filter-form">
                 <div class="row justify-content-center">
-                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="location-select">
                         <label class="pt-2 pb-2 fw-bold" for="location">Vị trí:</label>
                         <select class="gym-dropdown" id="location">
                             <option value="all">Tất cả</option>
@@ -185,7 +185,8 @@
                             <option value="1">Trên 1 sao</option>
                         </select>
                     </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="distance-select" style="display: none;">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="distance-select"
+                         style="display: none;">
                         <label class="pt-2 pb-2 fw-bold" for="distance">Cách bạn:</label>
                         <select class="gym-dropdown" id="distance">
                             <option value="2">Dưới 2 km</option>
@@ -233,7 +234,7 @@
         document.getElementById("gym-list").classList.remove("active-list");
         loadBrand(1);
     }
-    
+
     // Sự kiện thay đổi giá trị trong dropdown "Rating"
     $('#sort-rating').change(function () {
         selectedRating = $(this).val();
@@ -265,6 +266,7 @@
                         '<div class="fw-bold fs-4">Không tìm thấy thương hiệu nào!</div>' +
                         '<span class="icon"></span>  ' +
                         '</div>');
+                    $('#paginationBrand').empty().css('background-color', 'rgb(238, 238, 238)');
                 } else {
                     var brandListHtml = '';
                     $.each(data.listBrand, function (index, brand) {
@@ -292,20 +294,19 @@
             </div>
             </a>
             </div>`;
-                    });
-
-                    $('#brand-list-container').html(brandListHtml);
-                    // Tạo liên kết phân trang
-                    var paginationHtml = '';
-                    for (var i = 1; i <= data.totalPage; i++) {
-                        var currentPage = data.currentPage;
-                        if (i === currentPage) {
-                            paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
-                        } else {
-                            paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                        $('#brand-list-container').html(brandListHtml);
+                        // Tạo liên kết phân trang
+                        var paginationHtml = '';
+                        for (var i = 1; i <= data.totalPage; i++) {
+                            var currentPage = data.currentPage;
+                            if (i === currentPage) {
+                                paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                            } else {
+                                paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                            }
                         }
-                    }
-                    $('#paginationBrand').empty().html(paginationHtml);
+                        $('#paginationBrand').empty().css('background-color','white').html(paginationHtml);
+                    });
                 }
             }
         });
@@ -337,6 +338,7 @@
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     document.getElementById("distance-select").style.display = "block";
+                    document.getElementById("location-select").style.display = "none";
                     sendLocationToServer(position, page);
                 },
                 function (error) {
@@ -360,16 +362,12 @@
     function handleGeolocationError(error, page) {
         switch (error.code) {
             case error.PERMISSION_DENIED:
+            case error.POSITION_UNAVAILABLE:
+            case error.TIMEOUT:
                 latitude = 0;
                 longtitue = 0;
                 // Người dùng từ chối cung cấp vị trí
                 loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
-                break;
-            case error.POSITION_UNAVAILABLE:
-                // Không thể xác định được vị trí
-                break;
-            case error.TIMEOUT:
-                // Quá thời gian để lấy vị trí
                 break;
             case error.UNKNOWN_ERROR:
                 // Lỗi không xác định
@@ -436,8 +434,8 @@
                 '<div class="fw-bold fs-4">Không tìm thấy phòng gym nào!</div>' +
                 '<span class="icon"></span>  ' +
                 '</div>');
-        }
-        else {
+            $('#pagnitionDepartment').empty().css('background-color', 'rgb(238, 238, 238)');
+        } else {
             var departmentListHtml = '';
 
             $.each(response.departmentList, function (index, department) {
@@ -475,20 +473,19 @@
        </div>
        </a>
    </div>`;
-            });
-            departmentListContainer.html(departmentListHtml);
-
-            // Tạo liên kết phân trang
-            var paginationHtml = '';
-            for (var i = 1; i <= response.totalPage; i++) {
-                var currentPage = response.currentPage; // Trang hiện tại (0-based)
-                if (i === currentPage) {
-                    paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
-                } else {
-                    paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                departmentListContainer.html(departmentListHtml);
+                // Tạo liên kết phân trang
+                var paginationHtml = '';
+                for (var i = 1; i <= response.totalPage; i++) {
+                    var currentPage = response.currentPage; // Trang hiện tại (0-based)
+                    if (i === currentPage) {
+                        paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    } else {
+                        paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    }
                 }
-            }
-            $('#pagnitionDepartment').empty().html(paginationHtml);
+                $('#pagnitionDepartment').empty().css('background-color','white').html(paginationHtml);
+            });
         }
     }
 
@@ -505,6 +502,7 @@
                 '<div class="fw-bold fs-4">Không tìm thấy phòng gym nào!</div>' +
                 '<span class="icon"></span>  ' +
                 '</div>');
+            $('#pagnitionDepartment').empty().css('background-color', 'rgb(238, 238, 238)');
         } else {
             var departmentListHtml = '';
 
@@ -539,21 +537,19 @@
        </div>
        </a>
    </div>`;
-            });
-            departmentListContainer.html(departmentListHtml);
-
-            // Tạo liên kết phân trang
-            var paginationHtml = '';
-            for (var i = 1; i <= response.totalPage; i++) {
-                var currentPage = response.currentPage;
-                if (i === currentPage) {
-                    paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
-                } else {
-                    paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                departmentListContainer.html(departmentListHtml);
+                // Tạo liên kết phân trang
+                var paginationHtml = '';
+                for (var i = 1; i <= response.totalPage; i++) {
+                    var currentPage = response.currentPage;
+                    if (i === currentPage) {
+                        paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    } else {
+                        paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    }
                 }
-            }
-            $('#pagnitionDepartment').empty();
-            $('#pagnitionDepartment').html(paginationHtml);
+                $('#pagnitionDepartment').empty().css('background-color','white').html(paginationHtml);
+            });
         }
     }
 
