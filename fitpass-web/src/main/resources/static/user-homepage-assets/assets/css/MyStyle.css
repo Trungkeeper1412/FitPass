@@ -4496,7 +4496,7 @@ section {
 .gym-department-plan {
     /*display: grid;*/
     background-color: white;
-    /*grid-template-columns: 1fr 8fr 4fr 2fr 2fr;*/
+    padding-bottom: 15px;
     height: fit-content;
     display: flex;
     align-items: center;
@@ -4586,6 +4586,9 @@ section {
         margin: auto 0;
         border-radius: 10px;
     }
+    .checkout-container .plan-card-mc{
+        height: fit-content;
+    }
     .plan-info-mc{
         grid-area: content1;
     }
@@ -4614,8 +4617,7 @@ section {
 
     .active-time-mc {
         display: flex;
-        /*justify-content: center;*/
-        /*align-items: center;*/
+        text-align: start;
         color: white;
         padding-bottom: 25px;
         font-weight: 500;
@@ -4646,23 +4648,18 @@ section {
         grid-area: content2;
     }
     .plan-card-mc img{
+        display: flex;
         width: 70px;
         height: 70px;
+        justify-content: center;
+        align-items: center;
         border: 1px solid black;
         margin-right: 10px;
         grid-area: image;
     }
-    /*.plan-card-mc {*/
-    /*    background-size: cover;*/
-    /*    height: 100%;*/
-    /*    width: 90%;*/
-    /*    padding: 20px 10px 20px 10px;*/
-    /*    display: grid;*/
-    /*    grid-template-columns: 1fr 2fr 1.5fr;*/
-    /*    margin: auto 0;*/
-    /*    border: 1px solid black;*/
-    /*    border-radius: 10px;*/
-    /*}*/
+    .body-checkout .plan-card-mc {
+        height: fit-content;
+    }
     .plan-info-mc{
         grid-area: content1;
     }
