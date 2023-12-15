@@ -1,0 +1,32 @@
+@startuml
+actor User as user
+participant "Browser" as browser
+participant "WebSecurityConfig" as webSecConfig
+participant "HttpSecurity" as httpSec
+participant "SecurityContextLogoutHandler" as secContextLogoutHandler
+participant "CookieClearingLogoutHandler" as cookieClearingLogoutHandler
+participant "SimpleUrlLogoutSuccessHandler" as simpleUrlLogoutSuccessHandler
+
+user -> browser : Click logout
+browser -> webSecConfig : Logout request
+webSecConfig -> httpSec : configure()
+activate httpSec
+
+httpSec -> secContextLogoutHandler : clearAuthentication()
+activate secContextLogoutHandler
+secContextLogoutHandler -> httpSec : Authentication cleared
+deactivate secContextLogoutHandler
+
+httpSec -> cookieClearingLogoutHandler : deleteCookies("JSESSIONID")
+activate cookieClearingLogoutHandler
+cookieClearingLogoutHandler -> httpSec : Cookies cleared
+deactivate cookieClearingLogoutHandler
+
+httpSec -> simpleUrlLogoutSuccessHandler : onLogoutSuccess()
+activate simpleUrlLogoutSuccessHandler
+simpleUrlLogoutSuccessHandler -> browser : Redirect to /login?logout
+deactivate simpleUrlLogoutSuccessHandler
+
+deactivate httpSec
+browser -> user : Show login page (logged out)
+@enduml

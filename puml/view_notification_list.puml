@@ -1,0 +1,66 @@
+@startuml
+
+class NotificationController {
+    + getAllNotificationsForUser(HttpSession, int, int) : ResponseEntity<NotificationPage>
+}
+interface HttpSession {
+}
+
+interface RequestParam{
+}
+
+class ResponseEntity<T> {
+}
+
+class User {
+    - userId : Integer
+    + getUserId() : Integer
+}
+interface NotificationService {
+    + getAllNotificationForUser(Integer, int, int) : List<Notification>
+    + getTotalNotificationsForUser(Integer) : int
+}
+class NotificationServiceImpl {
+    + getAllNotificationForUser(Integer, int, int) : List<Notification>
+    + getTotalNotificationsForUser(Integer) : int
+}
+interface NotificationRepository {
+    + getAllNotificationForUser(Integer, int, int) : List<Notification>
+    + getTotalNotificationsForUser(Integer) : int
+}
+
+
+
+class Notification {
+    - notificationId : int
+    - userIdSend : int
+    - userIdReceive : int
+    - message : String
+    - timeSend : Timestamp
+    - messageType : String
+    - status : int
+}
+
+class NotificationPage {
+    - notifications : List<Notification>
+    - totalPages : int
+    - currentPage : int
+    + NotificationPage(List<Notification>, int, int)
+}
+
+NotificationController ..>  HttpSession : <<uses>>
+NotificationController ..>  RequestParam : <<uses>>
+NotificationController ..>  ResponseEntity : <<uses>>
+NotificationController ..>  User : <<uses>>
+NotificationController ..>  Notification : <<uses>>
+NotificationController ..>  NotificationPage : <<uses>>
+NotificationController ..>  NotificationService : <<uses>>
+
+NotificationService <|.. NotificationServiceImpl
+NotificationServiceImpl ..> NotificationRepository : <<uses>>
+
+NotificationServiceImpl ..>  Notification : <<uses>>
+NotificationRepository ..>  Notification : <<uses>>
+NotificationPage ..>  Notification : <<uses>>
+NotificationService ..>  Notification : <<uses>>
+@enduml

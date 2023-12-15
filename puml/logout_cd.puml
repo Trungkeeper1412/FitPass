@@ -1,0 +1,60 @@
+@startuml
+class WebSecurityConfig {
+    + filterChain(HttpSecurity, RememberMeServices) : SecurityFilterChain
+}
+
+interface SecurityFilterChain {
+}
+
+class HttpSecurity {
+    + logout(Consumer<LogoutConfigurer<HttpSecurity>>) : HttpSecurity
+    + build() : SecurityFilterChain
+}
+
+class LogoutConfigurer<T> {
+    - logoutHandlers : List<LogoutHandler>
+    - logoutSuccessHandler : LogoutSuccessHandler
+    - contextLogoutHandler : SecurityContextLogoutHandler
+    - logoutUrl : String
+    - logoutRequestMatcher : RequestMatcher
+    - defaultLogoutSuccessHandlerMappings : LinkedHashMap<RequestMatcher, LogoutSuccessHandler>
+
+    + logoutUrl(String) : LogoutConfigurer
+    + logoutSuccessUrl(String) : LogoutConfigurer
+    + addLogoutHandler(LogoutHandler) : LogoutConfigurer
+    + logoutSuccessHandler(LogoutSuccessHandler) : LogoutConfigurer
+    + clearAuthentication(boolean) : LogoutConfigurer
+    + invalidateHttpSession(boolean) : LogoutConfigurer
+    + deleteCookies(String...) : LogoutConfigurer
+}
+
+interface LogoutHandler {
+}
+
+class SecurityContextLogoutHandler implements LogoutHandler {
+    + clearAuthentication() : void
+    + invalidateHttpSession() : void
+}
+
+class CookieClearingLogoutHandler implements LogoutHandler {
+    + deleteCookies(String...) : void
+}
+
+interface LogoutSuccessHandler {
+}
+
+class SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
+    + onLogoutSuccess() : void
+}
+
+interface Filter {
+}
+SecurityFilterChain ..|> Filter
+WebSecurityConfig ..> HttpSecurity : <<configures>>
+WebSecurityConfig ..> SecurityFilterChain : <<creates>>
+
+HttpSecurity ..> LogoutConfigurer : <<configures>>
+HttpSecurity ..> SecurityFilterChain : <<builds>>
+LogoutConfigurer ..> LogoutHandler : <<uses>>
+LogoutConfigurer ..> LogoutSuccessHandler : <<uses>>
+@enduml
