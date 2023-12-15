@@ -1,7 +1,6 @@
 package com.ks.fitpass.core.config;
 
 import com.ks.fitpass.core.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,7 +62,6 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        //.loginProcessingUrl("/j_spring_security_check")   // submit URL login
                         .loginPage("/login")
                         .usernameParameter("account")
                         .passwordParameter("password")
@@ -71,10 +69,11 @@ public class WebSecurityConfig {
                         .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")                               // default url
-                        .logoutSuccessUrl("/login?logout")                  // default url
-                        .invalidateHttpSession(true)                        // default: true
+                        .logoutUrl("/logout")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
+                        .logoutSuccessUrl("/login?logout")
                 )
                 .rememberMe((remember) -> remember
                         .rememberMeServices(rememberMeServices)
