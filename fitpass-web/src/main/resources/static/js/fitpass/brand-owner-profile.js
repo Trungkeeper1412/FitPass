@@ -58,11 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const fileSize = fileInput.files[0].size;
 
             if (fileSize > maxSizeInBytes) {
-                // Kích thước file lớn hơn 10MB, hiển thị thông báo
                 Swal.fire({
                     icon: 'error',
-                    title: 'Lỗi',
-                    text: 'Kích thước file vượt quá 10MB. Vui lòng chọn file nhỏ hơn.',
+                    title: 'Vui lòng thử lại!',
+                    text: 'Kích thước của tập tin hình ảnh vượt quá giới hạn cho phép. Hãy chọn ảnh có kích thước nhỏ hơn 2MB.',
                 });
 
                 fileInput.value = '';
@@ -72,6 +71,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Hàm xử lý sự kiện thay đổi hình ảnh
     function handleImageChange(event) {
+
+        checkFileSize(event.target);
+
         const file = event.target.files[0];
 
         var formData = new FormData();
@@ -250,6 +252,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleEditImage(event) {
         console.log(event)
         if (editingImageContainer) {
+
+            checkFileSize(event.target);
+
             const file = event.target.files[0];
 
             var formData = new FormData();
