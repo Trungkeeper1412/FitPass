@@ -118,31 +118,6 @@
             </form>
         </div>
     </div>
-
-    <div class="add-money-modal">
-        <div class="modal-content">
-            <div>
-                <span class="close-button" style="float: right;"><i class="bi bi-x-circle-fill"></i></span>
-                <h3 class="fw-bold">Xác nhận nạp tiền</h3>
-            </div>
-            <div class="mt-4">
-                <span>Tổng tiền nạp</span>
-                <span>:</span>
-                <span class="money fw-bold">số tiền nạp</span>
-                <span class="currency"> đồng</span>
-            </div>
-            <div class="mt-2">
-                <span class="creditConfirm fw-bold">500</span>
-                <span>Credits</span>
-                <span>sẽ được cộng vào ví của bạn!</span>
-            </div>
-            <div class="btn-option">
-                <button id="paymentSubmit" class="confirm">Xác nhận và thanh toán</button>
-                <button class="cancel">Hủy</button>
-            </div>
-        </div>
-    </div>
-
     <div id="modal01" class="w3-modal" style="display: none">
         <div style="text-align: center; position: relative">
             <div class="ava-zoom" >
@@ -161,8 +136,21 @@
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
-
 <th:block th:include="common/vendor-script"></th:block>
+<script th:if="${successUpdate}">
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Thông tin đã được cập nhật thành công',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+</script>
 <script>
     let close_image_bnt = document.getElementById("close-img");
     close_image_bnt.addEventListener('click', function() {
@@ -179,7 +167,28 @@
         document.getElementById("modal01").style.right = "0";
     }
     function uploadImage(input) {
+        function checkFileSize(fileInput) {
+            const maxSizeInBytes = 2 * 1024 * 1024;
+
+            if (fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size;
+
+                if (fileSize > maxSizeInBytes) {
+                    // Kích thước file lớn hơn 10MB, hiển thị thông báo
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng thử lại!',
+                        text: 'Kích thước của tập tin hình ảnh vượt quá giới hạn cho phép. Hãy chọn ảnh có kích thước nhỏ hơn 2MB.',
+                    });
+
+                    fileInput.value = '';
+                }
+            }
+        }
         if (input.files && input.files[0]) {
+
+            checkFileSize(input);
+
             const file = input.files[0];
 
             var formData = new FormData();
@@ -209,40 +218,6 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-
-    // $("#updateProfile").click(function (e) {
-    //     e.preventDefault();
-    //     // Thực hiện validation trước khi xử lý form
-    //     if ($("#formSubmit").valid()) {
-    //         Swal.fire({
-    //             title: 'Bạn có muốn cập nhật thông tin cá nhân ?',
-    //             icon: 'question',
-    //             showCancelButton: true,
-    //             confirmButtonText: 'Có',
-    //             cancelButtonText: 'Không'
-    //         }).then((result) => {
-    //             if (result.isConfirmed) {
-    //                 $("#formSubmit").submit();
-    //                 Swal.fire({
-    //                     title: 'Thành công!',
-    //                     text: 'Thông tin đã được cập nhật thành công.',
-    //                     icon: 'success',
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 });
-    //             } else {
-    //                 Swal.fire({
-    //                     title: 'Thất bại!',
-    //                     text: 'Thông tin chưa được cập nhật.',
-    //                     icon: 'error',
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 });
-    //             }
-    //         });
-    //     }
-    // });
-
 </script>
 </body>
 </html>

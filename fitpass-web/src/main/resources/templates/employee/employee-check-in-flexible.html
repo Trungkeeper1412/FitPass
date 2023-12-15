@@ -305,48 +305,59 @@
         }
 
         function performCheckIn(orderDetailId) {
-            $.ajax({
-                type: "GET",
-                url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}` ,
-                success: function (data) {
-                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                    console.log(data)
-                    if(data > 0) {
-                        Swal.fire({
-                            toast: true,
-                            icon: 'success',
-                            title: `Gửi yêu cầu check in thành công`,
-                            animation: true,
-                            position: 'top-right',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            Swal.fire({
+                title: 'Gửi yêu cầu check in',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true})
+                .then((result) => {
+                    if(result.isConfirmed){
+                        $.ajax({
+                            type: "GET",
+                            url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}` ,
+                            success: function (data) {
+                                // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                                console.log(data)
+                                if(data > 0) {
+                                    Swal.fire({
+                                        toast: true,
+                                        icon: 'success',
+                                        title: `Gửi yêu cầu check in thành công`,
+                                        animation: true,
+                                        position: 'top-right',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                        }
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        toast: true,
+                                        icon: 'error',
+                                        title: `Gửi yêu cầu check in không thành công`,
+                                        animation: true,
+                                        position: 'top-right',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                        }
+                                    })
+                                }
+                            },
+                            error: function () {
+                                alert("Đã xảy ra lỗi trong quá trình check in.");
                             }
-                        })
-                    } else {
-                        Swal.fire({
-                            toast: true,
-                            icon: 'error',
-                            title: `Gửi yêu cầu check in không thành công`,
-                            animation: true,
-                            position: 'top-right',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
+                        });
                     }
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình check in.");
-                }
-            });
+                })
         }
 
         function showDetail(orderDetailId) {
@@ -369,8 +380,8 @@
                             <p  class="fw-bold">Credit tạm tính: <span class="fw-normal">${credit} credit</span></p>
                         `,
                         showCancelButton: true,
-                        confirmButtonText: 'Check out',
-                        cancelButtonText: 'Back',
+                        confirmButtonText: 'Check Out',
+                        cancelButtonText: 'Quay lại',
                         reverseButtons: true,
                     }).then((result) => {
                         // Nếu employee nhấn xác nhận check out thì gửi thông tin lên sever
@@ -464,9 +475,8 @@
             const timeDifference = currentTime - startDate;
 
             // Chuyển thời gian cách nhau thành phút (hoặc đơn vị khác tùy chọn)
-            const durationInMinutes = Math.floor(timeDifference / (1000 * 60)); // 1 phút = 60,000 mili giây
-
-            return durationInMinutes;
+             // 1 phút = 60,000 mili giây
+            return Math.floor(timeDifference / (1000 * 60));
         }
 
         function calculateTotalPrice(durationInMinutes, pricePerHour) {
@@ -479,8 +489,12 @@
             const durationInHours = durationInMinutes / 60;
 
             // Tính tổng giá dựa trên duration và giá cho mỗi giờ
-            const totalPrice = durationInHours * pricePerHour;
-
+            let totalPrice;
+            if (durationInHours > 0 && durationInHours <= 1){
+                totalPrice = pricePerHour;
+            } else {
+                totalPrice = durationInHours * pricePerHour;
+            }
             return totalPrice.toFixed(2); // Làm tròn tổng giá đến 2 chữ số thập phân
         }
     </script>

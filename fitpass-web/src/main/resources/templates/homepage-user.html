@@ -61,11 +61,11 @@
 <div class="list-brand-content container">
     <div class="row home-option">
         <div id="brand-list" onclick="openBrand()" class="col-md-6 mx-auto active-list">
-            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/brand-logo.png}"></span>
+            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/brand-logo.png}" alt="icon"></span>
             <span class="tab-title fw-bold">Thương hiệu</span>
         </div>
         <div id="gym-list" onclick="openGym()" class="col-md-6 mx-auto">
-            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/dept-logo.png}"></span>
+            <span class="tab-img"><img th:src="@{/user-homepage-assets/assets/img/dept-logo.png}" alt="icon"></span>
             <span class="tab-title fw-bold">Cơ sở gần bạn</span>
         </div>
     </div>
@@ -82,8 +82,9 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
-                        <label class="pt-2 pb-2 fw-bold" for="rating">Rating:</label>
+                        <label class="pt-2 pb-2 fw-bold" for="rating">Đánh giá:</label>
                         <select class="gym-dropdown" id="sort-rating">
+                            <option value="0" selected>Tất cả đánh giá</option>
                             <option value="5">5 sao</option>
                             <option value="4">Trên 4 sao</option>
                             <option value="3">Trên 3 sao</option>
@@ -105,7 +106,7 @@
         <div class="container ">
             <form id="filter-form">
                 <div class="row justify-content-center">
-                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="location-select">
                         <label class="pt-2 pb-2 fw-bold" for="location">Vị trí:</label>
                         <select class="gym-dropdown" id="location">
                             <option value="all">Tất cả</option>
@@ -174,9 +175,9 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
-                        <label class="pt-2 pb-2 fw-bold" for="rating">Rating:</label>
+                        <label class="pt-2 pb-2 fw-bold" for="rating">Đánh giá:</label>
                         <select class="gym-dropdown" id="rating">
-                            <option value="0" selected>Select Rating</option>
+                            <option value="0" selected>Tất cả đánh giá</option>
                             <option value="5">5 sao</option>
                             <option value="4">Trên 4 sao</option>
                             <option value="3">Trên 3 sao</option>
@@ -184,7 +185,8 @@
                             <option value="1">Trên 1 sao</option>
                         </select>
                     </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="distance-select" style="display: none;">
+                    <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center" id="distance-select"
+                         style="display: none;">
                         <label class="pt-2 pb-2 fw-bold" for="distance">Cách bạn:</label>
                         <select class="gym-dropdown" id="distance">
                             <option value="2">Dưới 2 km</option>
@@ -232,7 +234,7 @@
         document.getElementById("gym-list").classList.remove("active-list");
         loadBrand(1);
     }
-    
+
     // Sự kiện thay đổi giá trị trong dropdown "Rating"
     $('#sort-rating').change(function () {
         selectedRating = $(this).val();
@@ -257,9 +259,18 @@
             },
             success: function (data) {
                 // Hiển thị danh sách người dùng
-                var brandListHtml = '';
-                $.each(data.listBrand, function (index, brand) {
-                    brandListHtml += `
+                if (data.listBrand.length === 0) {
+
+                    $('#brand-list-container').html('' +
+                        '<div class="not-found d-flex flex-column align-items-center justify-content-center">' +
+                        '<div class="fw-bold fs-4">Không tìm thấy thương hiệu nào!</div>' +
+                        '<span class="icon"></span>  ' +
+                        '</div>');
+                    $('#paginationBrand').empty().css('background-color', 'rgb(238, 238, 238)');
+                } else {
+                    var brandListHtml = '';
+                    $.each(data.listBrand, function (index, brand) {
+                        brandListHtml += `
 <div class="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
 <a href="/brand/brand-detail/${brand.brandId}">
             <div class="brand">
@@ -271,11 +282,11 @@
                     <div class="description">${brand.brandDescription}</div>
                     <div style="display: flex; margin-top: 20px">
                         <div class="basic-info">
-                            <span><img src="https://cdn-icons-png.flaticon.com/128/11569/11569967.png"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/11569/11569967.png" alt="logo"></span>
                             <span>${data.brandDepartmentsMap[brand.brandId].length} Cơ Sở</span>
                         </div>
                         <div class="basic-info" style="margin-left: 15px;">
-                            <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png"></span>
+                            <span><img src="https://cdn-icons-png.flaticon.com/128/2804/2804294.png" alt="logo"></span>
                             <span>${brand.numberOfOrderDetailSale} gói tập đã bán</span>
                         </div>
                     </div>
@@ -283,20 +294,20 @@
             </div>
             </a>
             </div>`;
-                });
-
-                $('#brand-list-container').html(brandListHtml);
-                // Tạo liên kết phân trang
-                var paginationHtml = '';
-                for (var i = 1; i <= data.totalPage; i++) {
-                    var currentPage = data.currentPage;
-                    if (i === currentPage) {
-                        paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
-                    } else {
-                        paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
-                    }
+                        $('#brand-list-container').html(brandListHtml);
+                        // Tạo liên kết phân trang
+                        var paginationHtml = '';
+                        for (var i = 1; i <= data.totalPage; i++) {
+                            var currentPage = data.currentPage;
+                            if (i === currentPage) {
+                                paginationHtml += '<a href="#" class="active" onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                            } else {
+                                paginationHtml += '<a href="#"  onclick="paginationBrand(' + i + ')">' + i + '</a> ';
+                            }
+                        }
+                        $('#paginationBrand').empty().css('background-color','white').html(paginationHtml);
+                    });
                 }
-                $('#paginationBrand').empty().html(paginationHtml);
             }
         });
     }
@@ -327,6 +338,7 @@
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     document.getElementById("distance-select").style.display = "block";
+                    document.getElementById("location-select").style.display = "none";
                     sendLocationToServer(position, page);
                 },
                 function (error) {
@@ -337,11 +349,11 @@
     }
 
     function sendLocationToServer(position, page) {
-        // latitude = position.coords.latitude;
-        // longtitue = position.coords.longitude;
-        //Hoan Kiem Geo
-        latitude = 21.0287875844513
-        longtitue = 105.85144018976352
+        latitude = position.coords.latitude;
+        longtitue = position.coords.longitude;
+        // //Hoan Kiem Geo
+        // latitude = 21.0287875844513
+        // longtitue = 105.85144018976352
         console.log(latitude);
         console.log(longtitue);
         loadDepartmentData(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
@@ -350,16 +362,12 @@
     function handleGeolocationError(error, page) {
         switch (error.code) {
             case error.PERMISSION_DENIED:
+            case error.POSITION_UNAVAILABLE:
+            case error.TIMEOUT:
                 latitude = 0;
                 longtitue = 0;
                 // Người dùng từ chối cung cấp vị trí
                 loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
-                break;
-            case error.POSITION_UNAVAILABLE:
-                // Không thể xác định được vị trí
-                break;
-            case error.TIMEOUT:
-                // Quá thời gian để lấy vị trí
                 break;
             case error.UNKNOWN_ERROR:
                 // Lỗi không xác định
@@ -421,7 +429,12 @@
         departmentListContainer.empty();
 
         if (departmentSize === 0) {
-            departmentListContainer.html('<p>No gyms found nearby.</p>');
+            departmentListContainer.html('' +
+                '<div class="not-found d-flex flex-column align-items-center justify-content-center">' +
+                '<div class="fw-bold fs-4">Không tìm thấy phòng gym nào!</div>' +
+                '<span class="icon"></span>  ' +
+                '</div>');
+            $('#pagnitionDepartment').empty().css('background-color', 'rgb(238, 238, 238)');
         } else {
             var departmentListHtml = '';
 
@@ -460,20 +473,19 @@
        </div>
        </a>
    </div>`;
-            });
-            departmentListContainer.html(departmentListHtml);
-
-            // Tạo liên kết phân trang
-            var paginationHtml = '';
-            for (var i = 1; i <= response.totalPage; i++) {
-                var currentPage = response.currentPage; // Trang hiện tại (0-based)
-                if (i === currentPage) {
-                    paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
-                } else {
-                    paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                departmentListContainer.html(departmentListHtml);
+                // Tạo liên kết phân trang
+                var paginationHtml = '';
+                for (var i = 1; i <= response.totalPage; i++) {
+                    var currentPage = response.currentPage; // Trang hiện tại (0-based)
+                    if (i === currentPage) {
+                        paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    } else {
+                        paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    }
                 }
-            }
-            $('#pagnitionDepartment').empty().html(paginationHtml);
+                $('#pagnitionDepartment').empty().css('background-color','white').html(paginationHtml);
+            });
         }
     }
 
@@ -485,7 +497,12 @@
         departmentListContainer.empty();
 
         if (departmentSize === 0) {
-            departmentListContainer.html('<p>No gyms found</p>');
+            departmentListContainer.html('' +
+                '<div class="not-found d-flex flex-column align-items-center justify-content-center">' +
+                '<div class="fw-bold fs-4">Không tìm thấy phòng gym nào!</div>' +
+                '<span class="icon"></span>  ' +
+                '</div>');
+            $('#pagnitionDepartment').empty().css('background-color', 'rgb(238, 238, 238)');
         } else {
             var departmentListHtml = '';
 
@@ -520,21 +537,19 @@
        </div>
        </a>
    </div>`;
-            });
-            departmentListContainer.html(departmentListHtml);
-
-            // Tạo liên kết phân trang
-            var paginationHtml = '';
-            for (var i = 1; i <= response.totalPage; i++) {
-                var currentPage = response.currentPage;
-                if (i === currentPage) {
-                    paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
-                } else {
-                    paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                departmentListContainer.html(departmentListHtml);
+                // Tạo liên kết phân trang
+                var paginationHtml = '';
+                for (var i = 1; i <= response.totalPage; i++) {
+                    var currentPage = response.currentPage;
+                    if (i === currentPage) {
+                        paginationHtml += '<a href="#" class="active" onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    } else {
+                        paginationHtml += '<a href="#"  onclick="pagnitionDepartment(' + i + ')">' + i + '</a> ';
+                    }
                 }
-            }
-            $('#pagnitionDepartment').empty();
-            $('#pagnitionDepartment').html(paginationHtml);
+                $('#pagnitionDepartment').empty().css('background-color','white').html(paginationHtml);
+            });
         }
     }
 

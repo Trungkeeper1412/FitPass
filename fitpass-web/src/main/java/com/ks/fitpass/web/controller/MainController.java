@@ -8,6 +8,8 @@ import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpServletRequest;
+import com.ks.fitpass.web.util.Email;
+import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -31,7 +35,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.WebUtil;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Objects;
 
@@ -117,10 +123,10 @@ public class MainController {
             return ResponseEntity.badRequest().build();
         }
 
-        int userResetPass = userService.resetPassword(email, hashedPassword);
+        userService.resetPassword(email, hashedPassword);
 
         emailService.send( "FitPass - Reset Password", "Your new password is: " +  randomPassword, email);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(email);
     }
 
     @GetMapping("/forgot-password")

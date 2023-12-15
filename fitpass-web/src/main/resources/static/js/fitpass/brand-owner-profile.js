@@ -50,6 +50,26 @@ document.addEventListener("DOMContentLoaded", function () {
         return editInput;
     }
 
+    // Hàm check giới hạn dung lượng hình ảnh
+    function checkFileSize(fileInput) {
+        const maxSizeInBytes = 2 * 1024 * 1024;
+
+        if (fileInput.files.length > 0) {
+            const fileSize = fileInput.files[0].size;
+
+            if (fileSize > maxSizeInBytes) {
+                // Kích thước file lớn hơn 10MB, hiển thị thông báo
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Kích thước file vượt quá 10MB. Vui lòng chọn file nhỏ hơn.',
+                });
+
+                fileInput.value = '';
+            }
+        }
+    }
+
     // Hàm xử lý sự kiện thay đổi hình ảnh
     function handleImageChange(event) {
         const file = event.target.files[0];

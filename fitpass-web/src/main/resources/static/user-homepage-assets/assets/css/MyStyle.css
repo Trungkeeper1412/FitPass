@@ -2408,6 +2408,7 @@ input[type="range"]::-moz-range-thumb {
         }
     }
 }
+
 /* Slider */
 /* The dots/bullets/indicators */
 .dot {
@@ -2579,10 +2580,12 @@ a:link {
     background-color: white;
     padding: 20px;
 }
-.change-ava-btn{
+
+.change-ava-btn {
     display: flex;
     align-items: center;
 }
+
 .user-profile-content {
     margin-top: 130px;
     width: 90%;
@@ -2722,21 +2725,24 @@ a:link {
     margin-top: 15px;
 
 }
-.w3-button{
+
+.w3-button {
     position: absolute;
     top: 3%;
     right: 37%;
 }
-.w3-button img{
+
+.w3-button img {
     width: 25px;
 }
+
 .user-basic-info .user {
-  position: relative;
-  margin-left: 10px;
-  font-size: 14px;
-  text-align: center;
-  margin-left: 10px;
-  font-size: 14px;
+    position: relative;
+    margin-left: 10px;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 14px;
 }
 
 .user-basic-info .name {
@@ -2983,6 +2989,7 @@ a:link {
     padding: 20px 20px 0 20px;
     border-radius: 10px;
 }
+
 .empty-notification {
     margin-bottom: 20px;
     text-align: center;
@@ -3189,6 +3196,7 @@ a:link {
     box-sizing: border-box;
     transition: .3s;
 }
+
 .user-edit-profile select {
     width: 100%;
     border: 2px solid #e1e1e1;
@@ -3199,6 +3207,7 @@ a:link {
     box-sizing: border-box;
     transition: .3s;
 }
+
 .user-edit-profile .input-title {
     font-weight: 600;
     font-size: 16px;
@@ -3378,7 +3387,7 @@ input[type="radio"]:checked {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 50px; /* Add this line, adjust as needed */
     justify-content: center; /* Add for centering */
     align-items: center; /* Add for centering */
@@ -3396,6 +3405,7 @@ input[type="radio"]:checked {
     height: auto; /* Add this line */
     max-height: 100%; /* Add this line */
 }
+
 .deptWallpaperModal-content img {
     width: 100%; /* Make the image full width */
     height: auto; /* Adjust the height automatically */
@@ -3416,6 +3426,7 @@ input[type="radio"]:checked {
     cursor: pointer;
     padding: 10px 20px;
 }
+
 .deptWallpaperModal .close-button:hover,
 .deptWallpaperModal .close-button:focus {
     color: #bbb;
@@ -3431,13 +3442,21 @@ input[type="radio"]:checked {
 }
 
 @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)}
-    to {-webkit-transform:scale(1)}
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
 }
 
 @keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
 }
 
 .w3-animate-zoom {
@@ -3466,6 +3485,7 @@ input[type="radio"]:checked {
     justify-content: center;
     align-items: center;
 }
+
 .ava-zoom img {
     width: 90%;
     height: 90%;
@@ -3665,8 +3685,8 @@ input:checked + .toggle-slider:before {
     width: fit-content;
     padding: 10px;
     position: absolute;
-    top: 95px;
-    left: 180px;
+    top: 210px;
+    left: 10px;
     color: rgb(255, 255, 255);
     font-weight: 600;
     overflow-wrap: break-word;
@@ -3681,13 +3701,55 @@ input:checked + .toggle-slider:before {
     z-index: 1;
 }
 
+@media only screen and (min-width: 199px) {
+    .gym-first-info .gym-picture img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50px;
+    }
+
+    .gym-name-cover h3 {
+        text-align: left;
+        width: fit-content;
+        position: absolute;
+    }
+
+    .gym-service-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+
+    .gym-service-logo i {
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gym-service {
+        padding: 30px;
+        width: 100%;
+        height: fit-content;
+        margin-top: 50px;
+        color: #000;
+    }
+
+}
+
 @media only screen and (min-width: 799px) {
     .gym-first-info .gym-picture img {
         width: 150px;
         height: 150px;
         border-radius: 50%;
         position: absolute;
-        top: 15%;
+        top: 60px;
     }
 
     .gym-name-cover h3 {
@@ -3731,7 +3793,7 @@ input:checked + .toggle-slider:before {
     top: 50px;
     position: relative;
     width: 90%;
-    height: 200px;
+    height: 300px;
     margin: auto;
     border-radius: 10px;
     object-fit: cover;
@@ -3746,15 +3808,12 @@ input:checked + .toggle-slider:before {
     /*display: grid;*/
     /*grid-template-columns: 1fr 1fr;*/
     width: 100%;
-    height: 200px;
+    height: 300px;
     margin: auto;
     border-radius: 10px;
     object-fit: cover;
 }
 
-@media only screen and (min-width: 501px) {
-
-}
 
 @media only screen and (min-width: 280px) and (max-width: 500px) {
     .about-our-gym-1 div {
@@ -3799,20 +3858,38 @@ input:checked + .toggle-slider:before {
     color: black;
     font-weight: 600;
 }
+
 @media only screen and (min-width: 280px) and (max-width: 799px) {
+    .gym-first-info {
+        top: 50px;
+        position: relative;
+        width: 90%;
+        height: 200px;
+        margin: auto;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .gym-first-info img {
+        width: 100%;
+        height: 200px;
+        margin: auto;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
     .gym-name-cover h3 {
         text-align: left;
         font-size: 14px;
-        width: 70%;
         padding: 5px;
-        top: 90px;
-        left: 20px;
+        top: 130px;
+        left: 10px;
         right: 20px;
     }
 
     .gym-picture img {
-        width: 80px;
-        height: 80px;
+        width: 80px !important;
+        height: 80px !important;
         border-radius: 50%;
     }
 
@@ -4162,14 +4239,14 @@ section {
     height: 35px;
 }
 
-.no-rating{
+.no-rating {
     border-bottom: 1px solid rgb(255, 162, 0);
     width: 100%;
     height: fit-content;
     padding: 20px 0;
 }
 
-.no-rating .icon{
+.no-rating .icon {
     width: 50px;
     height: 50px;
     margin-bottom: 5px;
@@ -4179,7 +4256,7 @@ section {
     background-size: cover;
 }
 
-.no-rating h2{
+.no-rating h2 {
     font-size: 1.5em;
     text-align: center;
     color: #333;
@@ -4203,11 +4280,13 @@ section {
     width: 60px;
     height: 60px;
 }
-.user-rating-avatar img{
+
+.user-rating-avatar img {
     width: 60px;
     height: 60px;
     object-fit: cover;
 }
+
 .user-rating-description {
     color: rgb(0, 0, 0);
     padding: 15px;
@@ -4332,7 +4411,9 @@ section {
     margin-top: 50px;
     padding-top: 15px;
     padding-bottom: 15px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 5fr 2fr 2fr 2fr;
+    padding-left: 5px;
     align-items: center;
     background-color: white;
 }
@@ -4342,9 +4423,11 @@ section {
     width: 20px;
     height: 20px;
 }
+
 .my-card-title .form-check {
     /*margin-left: -25px;*/
 }
+
 .my-card-container .form-check {
     width: fit-content;
     display: flex;
@@ -4367,7 +4450,7 @@ section {
 .my-plan-title {
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     color: rgb(0, 0, 0)
 }
 
@@ -4421,7 +4504,9 @@ section {
 
 .all-plan-of-gym {
     height: 60px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 11fr;
+    column-gap: 6px;
     background-color: white;
     align-items: center;
     border-bottom: 1px solid rgb(203, 203, 203);
@@ -4437,7 +4522,7 @@ section {
 .gym-department-plan {
     /*display: grid;*/
     background-color: white;
-    /*grid-template-columns: 1fr 8fr 4fr 2fr 2fr;*/
+    padding-bottom: 15px;
     height: fit-content;
     display: flex;
     align-items: center;
@@ -4446,42 +4531,56 @@ section {
 }
 
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 280px) and (max-width: 400px) {
+@media only screen and (min-width: 280px) and (max-width: 767.8px) {
+    .my-card-title .price-title, .my-card-container .num-of-plan-title, .action-title {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 450px) {
+    .gym-department-plan {
+        display: grid;
+        grid-template-columns: 1fr 7fr 4fr;
+        column-gap: 6px;
+    }
+
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 90%;
+        height: 100%;
         width: 100%;
         padding: 10px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        /*gap: 10px;*/
         border-radius: 10px;
     }
-    .shopping-cart-title{
+
+    .shopping-cart-title {
         font-size: 19px;
     }
-    .my-card-container .line{
+
+    .my-card-container .line {
         width: 50%;
     }
-    .my-card-title{
+
+    .my-card-title {
         font-size: 12px;
     }
-    .my-card-title .price-title, .num-of-plan-title, .action-title{
-        display: none;
-    }
-    .plan-in-my-card .gym-name-mc{
+
+    .plan-in-my-card .gym-name-mc {
         font-size: 12px;
     }
+
     .my-card-title input {
         border: 1px solid orange;
         width: 10px;
         height: 10px;
     }
+
     .plan-info-mc h4 {
         font-size: 13px;
-        text-align: center;
+        margin: auto;
         margin-top: 10px;
     }
 
@@ -4490,96 +4589,210 @@ section {
         text-align: center;
         margin-top: 3px;
     }
+
     .plan-info-mc div {
         font-size: 12px;
     }
+
     .active-time-mc {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: start;
         color: white;
-        padding-bottom: 5px;
         font-weight: 500;
         font-size: 12px;
     }
+
+    .plan-card-mc img {
+        width: 80px;
+        height: 80px;
+        border: 1px solid black;
+    }
+
+    .checkout-container .price-title, .num-of-plan-title {
+        /*display: none;*/
+    }
+
+    .plan-other-info {
+        display: grid;
+        gap: 10px;
+    }
+
+    .total-plan-mc {
+        font-size: 16px;
+    }
+
+    .total-credits-mc .total-title {
+        font-size: 13px;
+    }
+
+    .total-credits-mc {
+        display: flex;
+        gap: 5px;
+    }
+
+    .buy-button-mc {
+        text-align: start;
+    }
+
+    .back-to-cart h3, .total-credits h3 {
+        font-size: 18px;
+    }
 }
-@media only screen and (min-width: 399.8px) and (max-width: 991.8px) {
+
+@media only screen and (min-width: 449.8px) and (max-width: 767.8px) {
+    .gym-department-plan {
+        display: grid;
+        grid-template-columns: 1fr 8fr 3fr;
+    }
+
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 100%;
-        padding: 10px;
         width: 100%;
+        padding: 15px;
         display: grid;
-        grid-template-columns: 1fr 2fr 1.5fr;
-        /*margin: auto 0;*/
+        column-gap: 10px;
+        grid-template-areas:
+            'image content1 content1 content1 content1 content1'
+            'image content2 content2 content2 content2 content2';
+        margin: auto 0;
         border-radius: 10px;
     }
 
+    .checkout-container .plan-card-mc {
+        height: fit-content;
+    }
+
+    .plan-info-mc {
+        grid-area: content1;
+        font-size: 13px;
+    }
+
+    .active-time-mc {
+        grid-area: content2;
+    }
+
+    .plan-card-mc img {
+        width: 70px;
+        height: 70px;
+        border: 1px solid black;
+        margin-right: 10px;
+        grid-area: image;
+    }
+
     .plan-info-mc h4 {
-        font-size: 16px;
-        /*margin: auto;*/
+        font-size: 14px;
+        padding: 6px 13px;
         margin-top: 10px;
     }
 
     .plan-duration-mc {
-        font-size: 14px;
+        font-size: 13px;
         text-align: center;
         margin-top: 3px;
     }
 
     .active-time-mc {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: start;
         color: white;
-        padding-bottom: 25px;
         font-weight: 500;
+        font-size: 13px;
+    }
+
+    .plan-other-info {
+        display: grid;
+        gap: 5px;
+    }
+
+    .total-container-mc {
+        display: grid;
+        grid-template-columns: 5fr 5fr 2fr;
+    }
+
+    .total-plan-mc {
+        font-size: 17px;
+    }
+
+    .total-credits-mc {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buy-button-mc {
         font-size: 14px;
+        text-align: end;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+    .gym-department-plan {
+        display: grid;
+        grid-template-columns: 1fr 5fr 6fr;
+    }
+
+    .plan-other-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
     .plan-card-mc {
         background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
         background-size: cover;
-        height: 75%;
-        width: 90%;
+        width: 100%;
         padding: 15px;
         display: grid;
-        grid-template-columns: 1fr 2fr 1.5fr;
+        grid-template-areas:
+            'image content1 content1 content1 content1 content1'
+            'image content2 content2 content2 content2 content2';
         margin: auto 0;
         border-radius: 10px;
     }
-    /*.plan-card-mc {*/
-    /*    background-size: cover;*/
-    /*    height: 100%;*/
-    /*    width: 90%;*/
-    /*    padding: 20px 10px 20px 10px;*/
-    /*    display: grid;*/
-    /*    grid-template-columns: 1fr 2fr 1.5fr;*/
-    /*    margin: auto 0;*/
-    /*    border: 1px solid black;*/
-    /*    border-radius: 10px;*/
-    /*}*/
-    /*.plan-info-mc{*/
-    /*    grid-column-start: 2;*/
-    /*    grid-column-end: 4;*/
-    /*}*/
 
-    /*.plan-card-mc img{*/
-    /*    border: 1px solid black;*/
-    /*    grid-column-start: 1;*/
-    /*    grid-column-end: 2;*/
-    /*}*/
+    .plan-info-mc {
+        grid-area: content1;
+    }
 
+    .active-time-mc {
+        grid-area: content2;
+    }
+
+    .plan-card-mc img {
+        display: flex;
+        width: 70px;
+        height: 70px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        margin-right: 10px;
+        grid-area: image;
+    }
+
+    .body-checkout .plan-card-mc {
+        height: fit-content;
+    }
+
+    .plan-info-mc {
+        grid-area: content1;
+    }
+
+    .active-time-mc {
+        grid-area: content2;
+    }
+
+    .plan-card-mc img {
+        border: 1px solid black;
+        margin-right: 10px;
+        grid-area: image;
+        width: 100px;
+        height: 100px;
+    }
 
     .active-time-mc {
         display: flex;
         align-items: center;
         color: white;
-        padding: 10px;
         font-weight: 500;
     }
 
@@ -4587,15 +4800,25 @@ section {
         font-size: 18px;
         margin-top: 10px;
     }
+
+    .total-container-mc {
+        display: grid;
+        grid-template-columns: 5fr 5fr 2fr;
+    }
+
+    .buy-button-mc {
+        text-align: end;
+    }
 }
 
 .plan-card-mc img {
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    /*width: 100px;*/
+    /*height: 100px;*/
     margin: auto;
 }
-.gym-department-plan .delete-btn{
+
+.gym-department-plan .delete-btn {
     display: flex;
     align-items: center;
     margin: auto;
@@ -4604,7 +4827,6 @@ section {
 }
 
 .plan-info-mc {
-    /*margin: auto 0;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -4616,10 +4838,10 @@ section {
 }
 
 .plan-info-mc h4 {
+    padding: 6px 13px;
     font-weight: 600;
     border-radius: 10px;
     background-color: black;
-    padding: 10px;
     width: fit-content;
 }
 
@@ -4643,26 +4865,20 @@ section {
 }
 
 .total-container-mc {
-    /* position: fixed;
-    width: 87%; */
-    /* display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  margin: auto;*/
     bottom: 0;
     background-color: rgb(0, 0, 0);
     color: white;
-    /* text-align: center; */
-    height: 90px;
+    padding: 15px;
 }
 
 .total-plan-mc {
     font-weight: 700;
     margin: auto;
-    padding-left: 30px;
+
+
 }
 
 .total-credits-mc {
-    display: flex;
     margin: auto;
     font-size: 16px;
 }
@@ -4681,8 +4897,6 @@ section {
     margin: auto;
     padding-right: 10px;
     font-weight: 700;
-    text-align: end;
-    padding-right: 40px;
 }
 
 
@@ -4713,7 +4927,7 @@ section {
     }
 }
 
-@media only screen and (min-width: 250px) and (max-width: 991px) {
+@media only screen and (min-width: 250px) and (max-width: 991.8px) {
     .checkout-container {
         position: relative;
         width: 100%;
@@ -4726,7 +4940,6 @@ section {
     }
 
     .body-checkout .bill-info {
-        margin-top: 30px;
         margin-left: 0px;
         width: 100%;
         margin-bottom: 60px;
@@ -4738,9 +4951,6 @@ section {
 }
 
 @media only screen and (min-width: 992px) {
-    .body-checkout {
-    }
-
     .checkout-container {
         position: relative;
         width: 100%;
@@ -4750,6 +4960,10 @@ section {
         grid-template-columns: 2fr 1fr;
         background-color: white;
         margin-top: 50px;
+    }
+
+    .checkout-container .wallet-title, .wallet-value{
+       font-size: 13px;
     }
 
     .body-checkout .plan-card-mc {
@@ -4771,14 +4985,20 @@ section {
         font-size: 13px;
         padding: 3px 0;
     }
+
+    .total-container-mc {
+        display: grid;
+        grid-template-columns: 5fr 5fr 2fr;
+    }
 }
 
 @media only screen and (min-width: 1400px) {
-    .body-checkout {
-    }
     .plan-card-mc {
         height: 90%;
         width: 80%;
+    }
+    .checkout-container .wallet-title, .wallet-value{
+        font-size: 16px;
     }
     .body-checkout .plan-card-mc .duration {
         font-size: 14px;
@@ -4840,7 +5060,12 @@ section {
 .plan-checkout {
     background-color: rgb(248, 248, 248);
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
+}
+
+.plan-price-and-num {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .checkout-container .gym-name-mc {
@@ -4976,7 +5201,7 @@ section {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 50px; /* Add this line, adjust as needed */
     justify-content: center; /* For centering */
     align-items: center; /* For centering */
@@ -5006,6 +5231,7 @@ section {
     cursor: pointer;
     padding: 10px 20px;
 }
+
 .brandWallpaperModal .close-button:hover,
 .brandWallpaperModal .close-button:focus {
     color: #bbb;
@@ -5021,13 +5247,21 @@ section {
 }
 
 @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)}
-    to {-webkit-transform:scale(1)}
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
 }
 
 @keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
 }
 
 .body-gym-brand-details {
@@ -5048,7 +5282,7 @@ section {
 
 .body-gym-brand-details .brand-bg-image img {
     width: 100%;
-    height: 350px;
+    max-height: 500px;
     margin-top: 60px;
     object-fit: cover;
 }
@@ -5079,19 +5313,21 @@ section {
     /*margin-left: 10px;*/
     position: relative;
 }
-.club-view-bg img{
+
+.club-view-bg img {
     border-radius: 10px;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .club-view-bg button {
     width: fit-content;
     height: fit-content;
     position: absolute;
     left: 0;
     right: 0;
-    top : 0;
+    top: 0;
     bottom: 0;
     margin-top: auto;
     margin-bottom: auto;
@@ -5261,12 +5497,14 @@ section {
     border-radius: 10px;
     height: 250px;
 }
+
 .gym-brand-content .department .dept-img img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
 }
+
 .gym-brand-content .list-gym-department .dept-description {
     padding-left: 20px;
     border-left: 2px solid rgb(227, 227, 227);
@@ -5407,6 +5645,7 @@ section {
     .page-numbers {
         line-height: 20px;
     }
+
     .squares > div {
         width: 200px;
         height: 200px;
@@ -5478,9 +5717,10 @@ section {
 }
 
 @media screen and (max-width: 770px) {
-    .form-check{
+    .form-check {
         padding-left: 0px;
     }
+
     .gym-brand-content .department {
         display: flex;
         flex-wrap: wrap;
@@ -5621,7 +5861,7 @@ section {
 
 /*================ CSS FOR LIST BRAND PAGE ================  */
 .body-list-brand {
-    background-color: rgb(238, 238, 238);;
+    background-color: rgb(238, 238, 238);
 }
 
 .body-list-brand footer {
@@ -5698,6 +5938,7 @@ section {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+
 .list-of-brand .brand .description1 {
     margin-top: 5px;
     color: black;
@@ -5710,26 +5951,29 @@ section {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
-.list-of-brand .brand .is-brand{
+
+.list-of-brand .brand .is-brand {
     font-size: 17px;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     color: white;
     background-color: rgb(44, 44, 44);
     padding: 5px 18px;
     border-radius: 15px 0;
 }
-.list-of-brand .brand .is-dept{
+
+.list-of-brand .brand .is-dept {
     font-size: 17px;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     color: white;
     background-color: rgb(255, 179, 0);
     padding: 5px 18px;
     border-radius: 15px 0;
 }
+
 .list-of-brand .basic-info {
     color: black;
     font-size: 12px;
@@ -5989,29 +6233,34 @@ section {
 }
 
 /* CSS FOR LOGIN + REGISTER */
-.for-md-size{
+.for-md-size {
     display: none;
 }
-.login-register-link{
+
+.login-register-link {
     cursor: pointer;
     /*position: absolute;*/
     margin-top: 20px;
     bottom: 20px;
     font-weight: 600;
 }
+
 @media (max-width: 767.98px) {
-    .banner-wrapper{
+    .banner-wrapper {
         display: none;
     }
-    .for-md-size{
+
+    .for-md-size {
         display: block;
     }
-    .login-tab, .register-tab{
+
+    .login-tab, .register-tab {
         margin-top: 20px;
         position: relative;
         height: fit-content;
     }
-    .register-login-content{
+
+    .register-login-content {
         /*height: 100%;*/
         width: 100%;
         display: flex;
@@ -6019,17 +6268,20 @@ section {
         /*display: grid;*/
         /*grid-template-rows: 1.5fr 1fr;*/
     }
-    .fp-logo{
+
+    .fp-logo {
         display: block;
         width: 100px;
         height: 100px;
     }
 }
+
 @media (min-width: 768px) {
-    .fp-logo{
+    .fp-logo {
         display: none;
     }
-    .register-login-content{
+
+    .register-login-content {
         height: 100%;
         width: 100%;
         display: grid;
@@ -6042,17 +6294,19 @@ section {
     position: relative;
     font-family: 'Times New Roman', Times, serif;
 }
-.login-register-body form{
+
+.login-register-body form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .login-register-body .banner {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../img/banner_login_2.png");
+    background-image: url("../img/banner_login_3.jpg");
     height: 100%;
     width: 100%;
     background-position: center;
@@ -6076,6 +6330,7 @@ section {
     justify-content: center;
     align-items: center;
 }
+
 .login-register-body .container.right-panel-active .register-container {
     transform: translateX(100%);
     opacity: 1;
@@ -6288,62 +6543,72 @@ section {
 }
 
 /* CSS FOR FORGOT PW PAGE */
-.forgot-pw-body{
+.forgot-pw-body {
     background-color: rgb(238, 238, 238);
 }
-.forgot-pw-body header{
+
+.forgot-pw-body header {
     position: relative;
 }
-.forgot-pw-body .forgot-pw-title{
+
+.forgot-pw-body .forgot-pw-title {
     color: white;
 }
-.forgot-pw-body .box{
+
+.forgot-pw-body .box {
     margin: auto;
     /* width:  50%; */
     height: fit-content;
     padding-bottom: 60px;
     background-color: white;
-    box-shadow:0 0 8px 0 rgb(193, 193, 193);
+    box-shadow: 0 0 8px 0 rgb(193, 193, 193);
 }
-.forgot-pw-content{
+
+.forgot-pw-content {
     padding: 130px 0;
 }
-.forgot-pw-content .head{
+
+.forgot-pw-content .head {
     width: 100%;
     height: 60px;
     /* background-color: rgb(237, 237, 237); */
 }
-.forgot-pw-content .head .head-title{
+
+.forgot-pw-content .head .head-title {
     font-weight: 500;
     font-size: 20px;
     margin: auto;
 }
 
-.forgot-pw-content .head{
+.forgot-pw-content .head {
     width: 90%;
     margin: auto;
     margin-top: 10px;
     display: flex;
 }
-.forgot-pw-content .head .back-icon{
+
+.forgot-pw-content .head .back-icon {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.forgot-pw-content input{
+
+.forgot-pw-content input {
     width: 65%;
-    border:2px solid #e1e1e1;
-    outline:none;
-    padding:6px;
+    border: 2px solid #e1e1e1;
+    outline: none;
+    padding: 6px;
     margin-top: 30px;
-    box-sizing:border-box;
-    transition:.3s;
+    box-sizing: border-box;
+    transition: .3s;
 }
-.forgot-pw-content input:focus{
-    border-color:rgb(223, 223, 223);
-    box-shadow:0 0 8px 0 rgb(193, 193, 193);
+
+.forgot-pw-content input:focus {
+    border-color: rgb(223, 223, 223);
+    box-shadow: 0 0 8px 0 rgb(193, 193, 193);
 }
-.forgot-pw-content .next-btn{
+
+.forgot-pw-content .next-btn {
     width: 65%;
     margin-top: 25px;
     border: none;
@@ -6353,16 +6618,18 @@ section {
     text-align: center;
     background-color: rgb(255, 196, 0);
 }
-.noti-text{
+
+.noti-text {
     margin-top: 15px;
     font-size: 14px;
     text-align: center;
 }
-.forgot-pw-content .gmail-icon img{
+
+.forgot-pw-content .gmail-icon img {
     width: 120px;
 }
 
-.forgot-pw-content .field-icon{
+.forgot-pw-content .field-icon {
     float: right;
     margin-left: 250px;
     margin-top: -32px;
@@ -6370,7 +6637,8 @@ section {
     position: absolute;
     z-index: 2;
 }
-.forgot-pw-content .new-pw-form{
+
+.forgot-pw-content .new-pw-form {
     color: rgb(192, 192, 192);
     padding-left: 0;
     font-size: 15px;
@@ -6396,4 +6664,14 @@ label.error {
 
 .input-title {
     padding-bottom: 3px;
+}
+
+.not-found .icon {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 5px;
+    background-image: url('../img/not_found.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
