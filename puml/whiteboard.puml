@@ -1,0 +1,33 @@
+@startuml
+actor Client
+participant EmployeeController
+participant HttpSession
+participant EmployeeService
+
+Client -> EmployeeController : getCheckInListOfFlexibleCustomer(departmentId)
+activate EmployeeController
+
+EmployeeController -> HttpSession: get user session
+alt session is null or invalid departmentId
+    EmployeeController -> Client: return "error/403"
+else session is valid and departmentId is valid
+    HttpSession --> EmployeeController : return user session
+    EmployeeController -> EmployeeService: getListNeedCheckInFlexibleByDepartmentId(departmentId)
+    activate EmployeeService
+    EmployeeService --> EmployeeController: checkInFlexibleDTOList
+    deactivate EmployeeService
+
+    EmployeeController -> EmployeeService: getListNeedCheckOutFlexibleByDepartmentId(departmentId)
+    activate EmployeeService
+    EmployeeService --> EmployeeController: checkOutFlexibleDTOList
+    deactivate EmployeeService
+
+    EmployeeController -> Client: return "employee/employee-check-in-flexible"
+end
+
+alt exception occurs
+    EmployeeController -> Client: return appropriate error page
+end
+
+deactivate EmployeeController
+@enduml

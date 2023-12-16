@@ -1,0 +1,54 @@
+@startuml
+class EmployeeController {
+    + getCheckInListOfFlexibleCustomer(int, Model, HttpSession) : String
+}
+
+interface Model {
+    + addAttribute(String, Object) : Model
+}
+
+interface HttpSession {
+}
+
+interface EmployeeService {
+    + getListNeedCheckInFlexibleByDepartmentId(int) : List<CheckInFlexibleDTO>
+    + getListNeedCheckOutFlexibleByDepartmentId(int) : List<CheckOutFlexibleDTO>
+}
+class EmployeeServiceImpl {
+    + getListNeedCheckInFlexibleByDepartmentId(int) : List<CheckInFlexibleDTO>
+    + getListNeedCheckOutFlexibleByDepartmentId(int) : List<CheckOutFlexibleDTO>
+}
+interface EmployeeRepository {
+    + getListNeedCheckInFlexibleByDepartmentId(int) : List<CheckInFlexibleDTO>
+    + getListNeedCheckOutFlexibleByDepartmentId(int) : List<CheckOutFlexibleDTO>
+}
+
+class CheckInFlexibleDTO {
+    - orderDetailId : int
+    - username : String
+    - productName : String
+    - phoneNumber : String
+    - pricePerHours : double
+    - price : double
+    - imageUrl : String
+}
+
+class CheckOutFlexibleDTO {
+    - orderDetailId : int
+    - username : String
+    - productName : String
+    - phoneNumber : String
+    - pricePerHours : double
+    - price : double
+    - imageUrl : String
+}
+
+EmployeeController ..> EmployeeService : <<uses>>
+EmployeeController ..> Model : <<uses>>
+EmployeeController ..> HttpSession : <<uses>>
+EmployeeController ..> CheckInFlexibleDTO : <<uses>>
+EmployeeController ..> CheckOutFlexibleDTO : <<uses>>
+
+EmployeeServiceImpl ..|> EmployeeService
+EmployeeServiceImpl ..> EmployeeRepository : <<uses>>
+@enduml

@@ -1,0 +1,92 @@
+@startuml
+class ConfirmRequestController {
+    + performCheckIn(int, int, int, int, String) : ResponseEntity<Integer>
+}
+class ResponseEntity<T> {
+}
+
+interface NotificationService {
+    + insertNotification(Notification) : void
+}
+class NotificationServiceImpl {
+    + insertNotification(Notification) : void
+}
+interface NotificationRepository {
+    + insertNotification(Notification) : void
+}
+class OrderDetailServiceImpl {
+    + getUserNameByOrderDetailId(int) : String
+    + updateOrderDetailsUseStatus(int, String) : void
+    + isFixedGymPlan(int) : boolean
+    + decreaseDuration(int) : void
+}
+interface OrderDetailService {
+    + getUserNameByOrderDetailId(int) : String
+    + updateOrderDetailsUseStatus(int, String) : void
+    + isFixedGymPlan(int) : boolean
+    + decreaseDuration(int) : void
+}
+interface OrderDetailRepository {
+    + getUserNameByOrderDetailId(int) : String
+    + updateOrderDetailsUseStatus(int, String) : void
+    + isFixedGymPlan(int) : boolean
+    + decreaseDuration(int) : void
+}
+
+interface EmployeeService {
+    + insertToCheckInHistory(int, int, Timestamp, ?, int, int) : void
+}
+class EmployeeServiceImpl {
+    + insertToCheckInHistory(int, int, Timestamp, ?, int, int) : void
+}
+interface EmployeeRepository {
+    + insertToCheckInHistory(int, int, Timestamp, ?, int, int) : void
+}
+
+interface WebSocketService {
+    + notifyEmployee(int, Notification) : void
+}
+class WebSocketServiceImpl {
+    - SimpMessagingTemplate simpMessagingTemplate
+    + notifyEmployee(int, Notification) : void
+    + convertAndSendToUser(String user, String destination, Notification) : void
+}
+
+class SimpMessagingTemplate {
+    + convertAndSendToUser(String user, String destination, Object payload) : void
+}
+
+class Notification {
+    - userIdSend : int
+    - userIdReceive : int
+    - departmentId : int
+    - orderDetailId : int
+    - message : String
+    - timeSend : Timestamp
+    - messageType : String
+    --builder() : NotificationBuilder
+}
+
+ConfirmRequestController ..> ResponseEntity  : <<builds>>
+ConfirmRequestController ..> Notification : <<builds>>
+
+ConfirmRequestController ..> NotificationService  : <<uses>>
+NotificationServiceImpl ..|> NotificationService
+NotificationServiceImpl ..> NotificationRepository : <<uses>>
+
+ConfirmRequestController ..> OrderDetailService : <<uses>>
+OrderDetailServiceImpl ..|> OrderDetailService
+OrderDetailServiceImpl ..> OrderDetailRepository : <<uses>>
+
+ConfirmRequestController ..> EmployeeService : <<uses>>
+EmployeeServiceImpl ..|> EmployeeService
+EmployeeServiceImpl ..> EmployeeRepository : <<uses>>
+
+ConfirmRequestController ..> WebSocketService : <<uses>>
+WebSocketServiceImpl ..|> WebSocketService
+WebSocketServiceImpl ..> SimpMessagingTemplate : <<uses>>
+
+ConfirmRequestController ..> Notification : <<builds>>
+NotificationService ..> Notification : <<builds>>
+WebSocketService ..> Notification : <<builds>>
+@enduml
