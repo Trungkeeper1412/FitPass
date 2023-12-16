@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.WebSocket;
 import java.sql.Timestamp;
 @Controller
 @RequestMapping("/confirm")
@@ -34,9 +33,9 @@ public class ConfirmRequestController {
     private final TransactionService transactionService;
     private final CheckInHistoryService checkInHistoryService;
     @GetMapping("/checkin")
-    public ResponseEntity<Integer> performFlexibleCheckIn(@RequestParam("id") int orderDetailId,
-                                                          @RequestParam("uis") int userIdSend, @RequestParam("uir") int userIdReceive,
-                                                          @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
+    public ResponseEntity<Integer> performCheckIn(@RequestParam("id") int orderDetailId,
+                                                  @RequestParam("uis") int userIdSend, @RequestParam("uir") int userIdReceive,
+                                                  @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
         // Nếu người dùng không nhấn cancel thì check in
         String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
         if (cancel.equals("no")) {

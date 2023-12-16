@@ -1,12 +1,9 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
-import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.employee.dto.UpdateCheckInHistory;
-import com.ks.fitpass.notification.entity.Notification;
 import com.ks.fitpass.notification.service.NotificationService;
 import com.ks.fitpass.notification.service.WebSocketService;
 import com.ks.fitpass.order.service.OrderDetailService;
-import com.ks.fitpass.transaction.dto.TransferCreditHistory;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.ConfirmRequestController;
@@ -17,10 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
-import java.sql.Timestamp;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 class ConfirmRequestControllerTest {
@@ -57,7 +51,7 @@ class ConfirmRequestControllerTest {
         when(orderDetailService.getUserNameByOrderDetailId(orderDetailId)).thenReturn("John Doe");
 
         // Act
-        ResponseEntity<Integer> responseEntity = confirmRequestController.performFlexibleCheckIn(
+        ResponseEntity<Integer> responseEntity = confirmRequestController.performCheckIn(
                 orderDetailId, userIdSend, userIdReceive, departmentId, cancel);
 
         // Assert
