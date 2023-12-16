@@ -112,16 +112,14 @@
                                        cellspacing="0">
                                     <thead>
                                     <tr>
-                                        <th>STT</th>
                                         <th>Thương hiệu</th>
                                         <th>Gói tập đã bán</th>
                                         <th>Tổng thu nhập (VNĐ)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <th:block th:each="brand : ${brandStatAdmin}">
+                                    <th:block th:each="brand ,brandStat: ${brandStatAdmin}">
                                         <tr>
-                                            <td th:text="${brandStat.index + 1 }">1</td>
                                             <td th:text="${brand.brandName}" class="fw-bold">California Fitness & Yoga</td>
                                             <td th:text="${brand.numberOfGymPlanSold}">235</td>
                                             <td class="money-value" th:text="${brand.totalAmount}">45.000.000 VNĐ</td>
