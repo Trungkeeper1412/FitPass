@@ -33,6 +33,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             case "EMPLOYEE":
             case "USER":
             case "BRAND_OWNER":
+            case "ACCOUNTANT":
                 userSession = userRepository.findByAccount(customUser.getUsername());
                 session.setAttribute("userInfo", userSession);
                 session.setAttribute("userRole", userRole);
@@ -45,6 +46,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         switch (userRole) {
             case "ADMIN":
                 response.sendRedirect("/admin/index");
+                break;
+            case "ACCOUNTANT":
+                response.sendRedirect("/admin/withdrawal");
                 break;
             case "GYM_OWNER":
                 response.sendRedirect("/gym-owner/index");
