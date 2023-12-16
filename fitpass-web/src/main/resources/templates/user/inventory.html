@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemList)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container" >
                                             <th:block th:each="item : ${itemList}">
                                                 <div class="text-light item-card-all mb-2"
@@ -178,7 +178,7 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemListNotActive)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container">
                                             <th:block th:each="item : ${itemListNotActive}">
                                                 <div class="text-light item-card-unactivated mb-2"
@@ -272,7 +272,7 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemListActive)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container">
                                             <th:block th:each="item : ${itemListActive}">
                                                 <div class="text-light item-card-active mb-2"
@@ -362,7 +362,7 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemListExpired)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container">
                                             <th:block th:each="item : ${itemListExpired}">
                                                 <div class="text-light item-card-activated mb-2"
