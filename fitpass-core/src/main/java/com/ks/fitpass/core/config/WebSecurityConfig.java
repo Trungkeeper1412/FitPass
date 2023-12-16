@@ -57,7 +57,14 @@ public class WebSecurityConfig {
                         .requestMatchers("/employee/**").hasAuthority("EMPLOYEE")
                         .requestMatchers("/gym-owner/**").hasAuthority("GYM_OWNER")
                         .requestMatchers("/brand-owner/**").hasAuthority("BRAND_OWNER")
-                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+
+                        .requestMatchers("/admin/index").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/feature/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/brand/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/account/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/registration/**").hasAuthority("ADMIN")
+
+                        .requestMatchers("/admin/withdrawal/**").hasAnyAuthority("ADMIN","ACCOUNTANT")
 
                         .anyRequest().authenticated()
                 )

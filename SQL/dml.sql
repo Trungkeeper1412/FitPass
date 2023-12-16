@@ -9,6 +9,9 @@ INSERT INTO role (role_id, role_name)
 VALUES (4, 'USER');
 INSERT INTO role (role_id, role_name)
 VALUES (5, 'BRAND_OWNER');
+INSERT INTO role (role_id, role_name)
+VALUES (6, 'ACCOUNTANT');
+
 
 /********** User Creation ***********/
 -- Admin creation
@@ -495,6 +498,16 @@ VALUES (75, 'Phan', 'Ngô', 'phango@example.com', '0987654321', '123 Đường N
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
 VALUES (75, 'phanngo', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 75);
 
+-- Admin accountant creation
+INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
+                         date_of_birth,
+                         gender, image_url,securityId)
+VALUES (89, 'Accountant', 'A', 'adminaccountant@example.com', '0981586960', 'Thach Hoa, Thach That, Ha Noi',
+        '2001-01-01', 'Female', '/images/system/v.png',568743029172);
+
+INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)
+VALUES (89, 'accountant', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv6/c2', '1655989807', 0, 1);
+
 -- Assign role for employee
 INSERT INTO user_role (user_role_id, user_id, role_id)
 VALUES 	(83, 83, 3),
@@ -502,7 +515,8 @@ VALUES 	(83, 83, 3),
           (85, 85, 3),
           (86, 86, 3),
           (87, 87, 3),
-          (88, 88, 3);
+          (88, 88, 3),
+          (89, 89, 6);
 
 -- Assign role for users
 INSERT INTO user_role (user_role_id, user_id, role_id)
@@ -784,7 +798,8 @@ VALUES 	  (83, 0),
             (85, 0),
             (86, 0),
             (87, 0),
-            (88, 0);
+            (88, 0),
+            (89, 0);
 /********** Brand Creation ***********/
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,

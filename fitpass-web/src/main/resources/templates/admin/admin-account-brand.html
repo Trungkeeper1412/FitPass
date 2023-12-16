@@ -36,7 +36,6 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Thứ tự</th>
                                     <th>Tên brand</th>
                                     <th>Số liên hệ cơ sở</th>
                                     <th>Email</th>
@@ -44,9 +43,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="b : ${brandList}">
+                                <th:block th:each="b: ${brandList}">
                                     <tr>
-                                        <td th:text="${bStat.index + 1}">1</td>
                                         <td th:text="${b.getBrandName()}">California Fitness & Yoga</td>
                                         <td th:text="${b.getBrandContactNumber()}">0987654321</td>
                                         <td th:text="${b.getBrandEmail()}">ldt2001@gmail.com</td>

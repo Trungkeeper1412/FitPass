@@ -33,7 +33,6 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>STT</th>
                                     <th>Thương hiệu</th>
                                     <th>Tổng số giao dịch</th>
                                     <th>Tổng số credit đã rút</th>
@@ -41,9 +40,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <th:block th:each="h : ${listHisBrand}">
+                                    <th:block th:each="h: ${listHisBrand}">
                                         <tr>
-                                            <td th:text="${hStat.index + 1}">1</td>
                                             <td th:text="${h.brandName}">California Fitness & Yoga</td>
                                             <td th:text="${h.totalRequest}">12</td>
                                             <td th:text="${h.amountCredit}">12,450</td>
