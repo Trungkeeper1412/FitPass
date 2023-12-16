@@ -1,17 +1,26 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center"
-       th:if="${session.userRole == 'ADMIN'}"
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" th:if="${session.userRole == 'ADMIN'}"
        th:href="@{/admin/index/}">
         <div class="sidebar-brand-icon">
             <img th:src="@{/employee-assets/img/icon.png}" alt="Logo Fitpass">
         </div>
         <div class="sidebar-brand-text mx-3">fitpass admin</div>
+    </a>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" th:if="${session.userRole == 'ACCOUNTANT'}"
+       th:href="@{/admin/withdrawal}">
+        <div class="sidebar-brand-icon">
+            <img th:src="@{/employee-assets/img/icon.png}" alt="Logo Fitpass">
+        </div>
+        <div class="sidebar-brand-text mx-3">kế toán</div>
+    </a>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <th:block th:if="${session.userRole == 'ADMIN'}">
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" th:href="@{/admin/index}">
@@ -94,16 +103,9 @@
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-    </a>
+    </th:block>
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center"
-       th:if="${session.userRole == 'ACCOUNTANT'}"
-       th:href="@{/admin/withdrawal}">
-        <div class="sidebar-brand-icon">
-            <img th:src="@{/employee-assets/img/icon.png}" alt="Logo Fitpass">
-        </div>
-        <div class="sidebar-brand-text mx-3">fitpass accountant</div>
-
+    <th:block th:if="${session.userRole == 'ACCOUNTANT'}">
         <!-- Heading -->
         <div class="sidebar-heading">
             Giao dịch
@@ -131,5 +133,6 @@
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-    </a>
+    </th:block>
+
 </ul>
