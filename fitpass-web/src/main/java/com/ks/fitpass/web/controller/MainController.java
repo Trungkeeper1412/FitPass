@@ -7,9 +7,9 @@ import com.ks.fitpass.core.entity.UserRegisterDTO;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.wallet.service.WalletService;
-import jakarta.servlet.http.HttpServletRequest;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.WebUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +29,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.ks.fitpass.web.util.Email;
-import com.ks.fitpass.web.util.WebUtil;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Objects;
@@ -65,6 +59,8 @@ public class MainController {
                 switch (userRole){
                     case "ADMIN":
                         return "redirect:/admin/index";
+                    case "ACCOUNTANT    ":
+                        return "redirect:/admin/withdrawal";
                     case "GYM_OWNER":
                         return "redirect:/gym-owner/index";
                     case "EMPLOYEE":
@@ -98,7 +94,32 @@ public class MainController {
     public String login(HttpSession session) {
         User user = (User) session.getAttribute("userInfo");
         if (user != null) {
-            return "redirect:/homepage";
+            String userRole = (String) session.getAttribute("userRole");
+            if (userRole != null){
+                switch (userRole){
+                    case "ADMIN":
+                        return "redirect:/admin/index";
+                    case "ACCOUNTANT    ":
+                        return "redirect:/admin/withdrawal";
+                    case "GYM_OWNER":
+                        return "redirect:/gym-owner/index";
+                    case "EMPLOYEE":
+                        try {
+                            Integer departmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
+                            if (departmentId == null || departmentId == 0) {
+                                return "error/403";
+                            } else {
+                                return "redirect:/employee/history?id=" + departmentId;
+                            }
+                        } catch (EmptyResultDataAccessException e) {
+                            return "error/403";
+                        }
+                    case "USER":
+                        return "redirect:/homepage";
+                    case "BRAND_OWNER":
+                        return "redirect:/brand-owner/index";
+                }
+            }
         }
         return "login-register";
     }
