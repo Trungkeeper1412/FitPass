@@ -502,7 +502,7 @@ VALUES (75, 'phanngo', '$2a$12$RtKhDBN9Ba8UlVcAulEenOsxqHK5ZNQ1Lj62508aqPwg9Jbbv
 INSERT INTO user_detail (user_detail_id, first_name, last_name, email, phone_number, address,
                          date_of_birth,
                          gender, image_url,securityId)
-VALUES (89, 'Accountant', 'Accountant', 'adminaccountant@example.com', '0981586960', 'Thach Hoa, Thach That, Ha Noi',
+VALUES (89, 'Accountant', 'A', 'adminaccountant@example.com', '0981586960', 'Thach Hoa, Thach That, Ha Noi',
         '2001-01-01', 'Female', '/images/system/v.png',568743029172);
 
 INSERT INTO user (user_id, user_account, user_password, user_create_time, user_deleted, user_detail_id)

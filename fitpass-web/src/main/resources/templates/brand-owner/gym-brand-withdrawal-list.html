@@ -54,7 +54,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <th:block th:each="h : ${requestWithdrawHistoryListPending}">
+                                <th:block th:each="h ,hStat: ${requestWithdrawHistoryListPending}">
                                     <tr>
                                         <td th:text="${hStat.index + 1}">1</td>
                                         <td th:text="${h.getWithdrawalCode()}">10001321</td>
