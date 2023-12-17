@@ -799,6 +799,7 @@ h6 {
 
 .features .image {
   background-position: center center;
+  background: url(../img/features.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 400px;
@@ -2285,28 +2286,6 @@ select {
   position: relative;
 }
 
-.icon:hover::before {
-  content: attr(data-title);
-  width: 10vh;
-  position: absolute;
-  background-color: #808080;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.icon:hover::before {
-  opacity: 1;
-  visibility: visible;
-}
-
 /* -----------------------------------------------------*/
 
 .review-section {
@@ -2937,7 +2916,7 @@ td div div div a:hover {
     font-size: 14px;
   }
 
-  .col-lg-8 {
+  .detail-card {
     overflow-y: auto;
     max-height: 300px;
   }
@@ -3008,7 +2987,7 @@ td div div div a:hover {
     height: auto;
   }
 
-  .col-lg-8 {
+  .detail-card {
     overflow-y: auto;
     max-height: 300px;
   }
@@ -3134,4 +3113,10 @@ label.error {
 .custom-form-btn:hover {
   background-color: rgb(255, 176, 0);
   color: black;
+}
+
+.member-img img {
+  width: 300px;
+  height: 375px;
+  object-fit: cover;
 }

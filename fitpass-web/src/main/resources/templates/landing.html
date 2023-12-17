@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<header class="fixed-top" id="header" th:fragment="navbar">
+<header id="header" th:fragment="navbar">
 
     <div class="container d-flex align-items-center justify-content-lg-between">
 
@@ -114,12 +114,12 @@
     }
 </script>
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center justify-content-center">
+<section id="hero" class="d-flex align-items-center justify-content-center pb-5">
     <div class="container" data-aos="fade-up">
 
         <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
             <div class="col-xl-6 col-lg-8">
-                <img th:src="@{/user-homepage-assets/assets/img/icon.png}" alt="Mô tả hình ảnh">
+                <img class="w-100" style="max-width: 500px" th:src="@{/user-homepage-assets/assets/img/icon.png}" alt="Mô tả hình ảnh">
                 <h1>TẬP LUYỆN TỐI ƯU</h1>
                 <h2>Với mạng lưới phòng gym đa dạng, bạn có thể tập luyện ở bất kỳ đâu và khi nào bạn muốn</h2>
             </div>
@@ -164,7 +164,6 @@
     <!-- ======= About Section ======= -->
     <section id="about" class="about pt-5">
         <div class="container" data-aos="fade-up">
-
             <div class="row">
                 <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
                     <img th:src="@{/user-homepage-assets/assets/img/about.jpg}" class="img-fluid" alt="">
@@ -202,29 +201,35 @@
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients">
         <div class="container" data-aos="zoom-in">
-
             <div class="clients-slider swiper">
                 <div class="swiper-wrapper align-items-center">
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-1.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_adv.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-2.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_cali.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-3.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_citygym.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-4.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_diamond.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-5.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_elite.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-6.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_fit24.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-7.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_fit25.png}"
                                                    class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/client-8.png}"
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_fit365.png}"
+                                                   class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_kickfit.png}"
+                                                   class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_newgym.png}"
+                                                   class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_slife.png}"
+                                                   class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img th:src="@{/user-homepage-assets/assets/img/clients/logo_vshape.png}"
                                                    class="img-fluid" alt=""></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-
         </div>
     </section><!-- End Clients Section -->
 
@@ -233,7 +238,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="row">
-                <div class="image col-lg-6" style='background-image: url("assets/img/features.jpg");'
+                <div class="image col-lg-6"
                      data-aos="fade-right"></div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
                     <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
@@ -267,56 +272,50 @@
     </section><!-- End Features Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    <section id="services" class="services mt-5 mb-5">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Dịch vụ</h2>
-                <p>Check our Services</p>
+                <h2>Về hệ thống</h2>
+                <p>Các tính năng nổi bật</p>
             </div>
 
             <div class="row">
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="listOfGym.html">Tìm Kiếm Phòng Gym</a></h4>
-                        <p>Người dùng có thể dễ dàng tìm kiếm các phòng gym trong mạng lưới của bạn dựa trên vị trí,
-                            tiện nghi, hoặc dịch vụ</p>
+                        <div class="icon"><i class="bx bx-search"></i></div>
+                        <h4>Tìm Kiếm Phòng Gym</h4>
+                        <p>Người dùng có thể dễ dàng tìm kiếm các phòng gym trong mạng lưới của bạn dựa trên vị trí, tiện nghi, hoặc dịch vụ</p>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
-                     data-aos-delay="200">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Đặt Lịch Tập</a></h4>
-                        <p>Cho phép người dùng đặt lịch tập luyện tại các phòng gym trong hệ thống, bao gồm cả các lịch
-                            trình định thời và linh hoạt.</p>
+                        <div class="icon"><i class="bx bx-calendar"></i></div>
+                        <h4>Đặt Lịch Tập</h4>
+                        <p>Cho phép người dùng đặt lịch tập luyện tại các phòng gym trong hệ thống, bao gồm cả các lịch trình định thời và linh hoạt.</p>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in"
-                     data-aos-delay="300">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
+                        <div class="icon"><i class="bx bx-smile"></i></div>
                         <h4><a href="">Giao diện Thân thiện</a></h4>
-                        <p>Giao diện dễ sử dụng và thân thiện với người dùng giúp họ tìm và đặt lịch một cách nhanh
-                            chóng</p>
+                        <p>Giao diện dễ sử dụng và thân thiện với người dùng giúp họ tìm và đặt lịch một cách nhanh chóng</p>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
+                        <div class="icon"><i class="bx bx-user"></i></div>
                         <h4><a href="">Quản Lý Tài Khoản</a></h4>
-                        <p>Cho phép người dùng quản lý tài khoản cá nhân, cập nhật thông tin cá nhân và tùy chỉnh cài
-                            đặt</p>
+                        <p>Cho phép người dùng quản lý tài khoản cá nhân, cập nhật thông tin cá nhân và tùy chỉnh cài đặt</p>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-slideshow"></i></div>
+                        <div class="icon"><i class="bx bx-badge-check"></i></div>
                         <h4><a href="">Đăng Ký Và Quản Lý Gói Dịch Vụ</a></h4>
                         <p>Người dùng có thể đăng ký và quản lý các gói dịch vụ hoặc hủy gói dịch vụ hiện tại của họ</p>
                     </div>
@@ -324,13 +323,11 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-arch"></i></div>
+                        <div class="icon"><i class="bx bx-calendar-alt"></i></div>
                         <h4><a href="">Quản Lý Lịch Trình</a></h4>
-                        <p>Cho phép người dùng theo dõi lịch trình tập luyện cá nhân, đặt lịch trình cho các buổi tập,
-                            và nhận thông báo</p>
+                        <p>Cho phép người dùng theo dõi lịch trình tập luyện cá nhân, đặt lịch trình cho các buổi tập, và nhận thông báo</p>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -341,31 +338,30 @@
         <div class="container" data-aos="zoom-in">
 
             <div class="text-center">
-                <h3>Đánh Giá và Phản Hồi</h3>
-                <p> Đọc đánh giá về các phòng gym, lớp học, và dịch vụ. Bạn cũng có thể để lại phản hồi của mình để giúp
-                    cộng đồng cải thiện và tối ưu hóa trải nghiệm tập luyện.</p>
-                <a class="cta-btn" href="#">Ấn để đánh giá ngay</a>
+                <h3>Khám Phá Và Trải Nghiệm Mạng Lưới Tập Gym Đa Dạng Của Chúng Tôi!</h3>
+                <p>Bạn đang tìm kiếm không gian tập luyện lý tưởng cho mình? Hãy khám phá ngay hệ thống web của chúng tôi, nơi kết nối giữa những thương hiệu gym hàng đầu!</p>
+                <a class="cta-btn" href="#">Khám phá ngay</a>
             </div>
 
         </div>
     </section><!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio mt-5 mb-5">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Danh sách các phòng gym</h2>
-                <p>Check our Gym</p>
+                <h2>Top gym</h2>
+                <p>Thương hiệu nổi tiếng</p>
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="portfolio-flters">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-card">Card</li>
-                        <li data-filter=".filter-web">Web</li>
+                        <li data-filter="*" class="filter-active">Tất cả</li>
+                        <li data-filter=".filter-app">Hà Nội</li>
+                        <li data-filter=".filter-card">TP.HCM</li>
+                        <li data-filter=".filter-web">Hải Phòng</li>
                     </ul>
                 </div>
             </div>
@@ -374,29 +370,14 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/Hanoi_Cali.jpg}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>App 1</h4>
                             <p>App</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/Hanoi_Cali.jpg}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Web 3</h4>
-                            <p>Web</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-                                   class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/5}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
@@ -404,14 +385,29 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/Hanoi_Elite.jpg}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Web 3</h4>
+                            <p>Web</p>
+                            <div class="portfolio-links">
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/Hanoi_Elite.jpg}" data-gallery="portfolioGallery"
+                                   class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                                <a th:href="@{/department/department-detail/87}" title="More Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/Hanoi_Kickfit.png}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>App 2</h4>
                             <p>App</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/Hanoi_Kickfit.png}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/22}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
@@ -419,44 +415,44 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/HCM_adv.jpg}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>Card 2</h4>
                             <p>Card</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/HCM_adv.jpg}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/12}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/HCM_gefit.jpg}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>Web 2</h4>
                             <p>Web</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/HCM_gefit.jpg}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/83}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/HCM_fit24.jpg}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>App 3</h4>
                             <p>App</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/HCM_fit24.jpg}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/9}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
@@ -464,29 +460,14 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/HCM_Diamond.png}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>Card 1</h4>
                             <p>Card</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/HCM_Diamond.png}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Card 3</h4>
-                            <p>Card</p>
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery"
-                                   class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/33}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
@@ -494,14 +475,29 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <div class="portfolio-wrap">
-                        <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/HaiPhong_Diamond.jpg}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Card 3</h4>
+                            <p>Card</p>
+                            <div class="portfolio-links">
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/HaiPhong_Diamond.jpg}" data-gallery="portfolioGallery"
+                                   class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
+                                <a th:href="@{/department/department-detail/36}" title="More Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img th:src="@{/user-homepage-assets/assets/img/portfolio/Haiphong_Diamond2.jpg}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>Web 3</h4>
                             <p>Web</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery"
+                                <a th:href="@{/user-homepage-assets/assets/img/portfolio/Haiphong_Diamond2.jpg}" data-gallery="portfolioGallery"
                                    class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a th:href="@{/department/department-detail/35}" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
@@ -576,7 +572,7 @@
     </section><!-- End Counts Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials mt-5">
         <div class="container" data-aos="zoom-in">
 
             <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -584,14 +580,12 @@
 
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                            <h3>Saul Goodman</h3>
-                            <h4>Ceo &amp; Founder</h4>
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach-kickfit.jpg}" class="testimonial-img" alt="">
+                            <h3>Walter White</h3>
+                            <h4>Coach PT</h4>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit
-                                rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                                risus at semper.
+                                “Tôi là một người luôn suy nghĩ thận trọng trong mọi quyết định. Tuy nhiên, khi đã có một quyết định rõ ràng, tôi sẽ theo đuổi đến cùng”.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
                         </div>
@@ -599,9 +593,9 @@
 
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                            <h3>Sara Wilsson</h3>
-                            <h4>Designer</h4>
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach_diamond.jpg}" class="testimonial-img" alt="">
+                            <h3>Amanda Jepson</h3>
+                            <h4>Coach PT</h4>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid
@@ -614,43 +608,13 @@
 
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                            <h3>Jena Karlis</h3>
-                            <h4>Store Owner</h4>
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach-elite.jpg}" class="testimonial-img" alt="">
+                            <h3>Sam Jhonson</h3>
+                            <h4>Coach PT</h4>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam
                                 duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                            </p>
-                        </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                            <h3>Matt Brandon</h3>
-                            <h4>Freelancer</h4>
-                            <p>
-                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat
-                                minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore
-                                labore illum veniam.
-                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                            </p>
-                        </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                            <h3>John Larson</h3>
-                            <h4>Entrepreneur</h4>
-                            <p>
-                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster
-                                veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam
-                                culpa fore nisi cillum quid.
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
                         </div>
@@ -667,16 +631,16 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Team</h2>
-                <p>Check our Team</p>
+                <h2>PT (Personal trainer)</h2>
+                <p>Trainer nổi tiếng</p>
             </div>
 
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch justify-content-center">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach-kickfit.jpg}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>
                                 <a href=""><i class="bi bi-facebook"></i></a>
@@ -686,15 +650,15 @@
                         </div>
                         <div class="member-info">
                             <h4>Walter White</h4>
-                            <span>Chief Executive Officer</span>
+                            <span>Coach PT</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch justify-content-center">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach-elite.jpg}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>
                                 <a href=""><i class="bi bi-facebook"></i></a>
@@ -703,16 +667,16 @@
                             </div>
                         </div>
                         <div class="member-info">
-                            <h4>Sarah Jhonson</h4>
-                            <span>Product Manager</span>
+                            <h4>Sam Jhonson</h4>
+                            <span>Coach PT</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch justify-content-center">
                     <div class="member" data-aos="fade-up" data-aos-delay="300">
                         <div class="member-img">
-                            <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach_adv.png}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>
                                 <a href=""><i class="bi bi-facebook"></i></a>
@@ -722,15 +686,15 @@
                         </div>
                         <div class="member-info">
                             <h4>William Anderson</h4>
-                            <span>CTO</span>
+                            <span>Coach PT</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch justify-content-center">
                     <div class="member" data-aos="fade-up" data-aos-delay="400">
                         <div class="member-img">
-                            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                            <img th:src="@{/user-homepage-assets/assets/img/team/coach_diamond.jpg}" class="img-fluid" alt="">
                             <div class="social">
                                 <a href=""><i class="bi bi-twitter"></i></a>
                                 <a href=""><i class="bi bi-facebook"></i></a>
@@ -740,7 +704,7 @@
                         </div>
                         <div class="member-info">
                             <h4>Amanda Jepson</h4>
-                            <span>Accountant</span>
+                            <span>Coach PT</span>
                         </div>
                     </div>
                 </div>
@@ -751,79 +715,18 @@
     </section><!-- End Team Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
+    <section id="contact" class="contact mb-5">
+        <div class="container" data-aos="fade-left">
 
             <div class="section-title">
                 <h2>Liên Hệ</h2>
-                <p>Contact Us</p>
+                <p>Thông Tin</p>
             </div>
 
             <div>
                 <iframe style="border:0; width: 100%; height: 270px;"
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24587.275457509837!2d105.53405684506927!3d20.999226535241753!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abc60e7d3f19%3A0x2be9d7d0b5abcbf4!2zVHLGsOG7nW5nIMSR4bqhaSBo4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1702752982796!5m2!1svi!2s"
                         frameborder="0" allowfullscreen></iframe>
-            </div>
-
-            <div class="row mt-5">
-
-                <div class="col-lg-4">
-                    <div class="info">
-                        <div class="address">
-                            <i class="bi bi-geo-alt"></i>
-                            <h4>Location:</h4>
-                            <p>A108 Adam Street, New York, NY 535022</p>
-                        </div>
-
-                        <div class="email">
-                            <i class="bi bi-envelope"></i>
-                            <h4>Email:</h4>
-                            <p>info@example.com</p>
-                        </div>
-
-                        <div class="phone">
-                            <i class="bi bi-phone"></i>
-                            <h4>Call:</h4>
-                            <p>+1 5589 55488 55s</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-8 mt-5 mt-lg-0">
-
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                       required>
-                            </div>
-                            <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="Your Email" required>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                                   required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Message"
-                                      required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit">Send Message</button>
-                        </div>
-                    </form>
-
-                </div>
-
             </div>
 
         </div>
