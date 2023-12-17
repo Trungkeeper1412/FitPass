@@ -90,6 +90,7 @@ public class InventoryController {
           int status = orderDetailService.updateOrderDetailItemStatus(planActiveTime, 1, planExpiredTime, orderDetailId);
           String message = status > 0 ? "Kích hoạt thành công" : "Kích hoạt không thành công";
           session.setAttribute("activeItemMSG", message);
+          Thread.sleep(1500);
           return "redirect:/inventory/view";
       }catch (DuplicateKeyException ex) {
           // Handle duplicate key violation
@@ -107,6 +108,8 @@ public class InventoryController {
           // Handle other data access issues
           logger.error("DataAccessException occurred", ex);
           return "error/data-access-error";
+      } catch (InterruptedException e) {
+          throw new RuntimeException(e);
       }
     }
 }
