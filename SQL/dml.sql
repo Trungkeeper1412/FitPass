@@ -3217,14 +3217,14 @@ Khám phá và trải nghiệm một lối sống khỏe mạnh và tích cực 
      '/img/departments/wallpapers/35_wallpaper.jpg',
      '/img/departments/thumbnails/35_thumbnail.jpg',
      'Viên kim cương khổng lồ Diamond Fitness Paragon tại TD Plaza, Lê Hồng Phong, TP Hải Phòng là dự án lớn nhất TP Hải Phòng với dòng thiết bị cao cấp nhất Hàn Quốc – DRAX cùng 2 phân khu đẳng cấp nhất.',
-     20.846699998604187, 106.70741856252596, 400, 3000,'Hồ Chí Minh'),
+     20.846699998604187, 106.70741856252596, 400, 3000,'Hải Phòng'),
     (36, 4, 60, 1, 'Diamond Fitness Paragon Bạch Đằng',
      '97 Bạch Đằng, Hạ Lý, Hồng Bàng, Hải Phòng', '0899164562',
      '/img/departments/logos/36_logo.jpg',
      '/img/departments/wallpapers/36_wallpaper.jpg',
      '/img/departments/thumbnails/36_thumbnail.jpg',
      'Diamond Fitness Paragon Bạch Đằng Hải Phòng tọa lạc ngay vị trí trung tâm của thành phố hoa phượng đỏ, được đầu tư lên đến 40 tỷ đồng với quy mô diện tích hơn 5.000m2, thiết kế hiện đại, sang trọng chuẩn "hoàng gia" cùng trang bị máy móc hiện đại. Với không gian tập luyện chuyên biệt vừa sang trọng vừa riêng tư đi kèm là những đặc quyền V.I.P độc nhất, Diamond Fitness Paragon Bạch Đằng không chỉ là nơi tập luyện, giải trí và chăm sóc sức khỏe vóc dáng đơn thuần mà còn mang đến những trải nghiệm tuyệt vời dành cho các Hội viên Diamond Fitness Paragon.',
-     20.86149391226383, 106.67305678210231, 480, 5000,'Hồ Chí Minh');
+     20.86149391226383, 106.67305678210231, 480, 5000,'Hải Phòng');
 
 -- Create Gym Department Gallery
 INSERT INTO gym_department_albums (gym_department_id, photo_url)
