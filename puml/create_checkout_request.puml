@@ -1,0 +1,109 @@
+@startuml
+' Define classes
+class EmployeeController {
+    -employeeService : EmployeeService
+    -departmentService : DepartmentService
+    -userService : UserService
+    -orderDetailService : OrderDetailService
+    -checkInHistoryService : CheckInHistoryService
+    -notificationService : NotificationService
+    -webSocketService : WebSocketService
+    +sendCheckoutRequest(DataSendCheckOutFlexibleDTO, HttpSession) : ResponseEntity<Integer>
+}
+
+interface EmployeeService {
+    +getUserReceiveMessage(int) : UserReceiveMessageDTO
+}
+
+interface DepartmentService {
+    +getDepartmentNotificationDtoById(int) : DepartmentNotificationDTO
+}
+
+interface UserService {
+    +getUserDetailByUserDetailId(int) : UserDetail
+}
+
+interface OrderDetailService {
+    +getByOrderDetailId(int) : OrderDetailConfirmCheckOut
+}
+
+interface CheckInHistoryService {
+    +getCheckInHistoryIdByOrderDetailIdAndCheckInTime(int, Timestamp) : int
+}
+
+interface NotificationService {
+    +insertNotification(Notification) : int
+}
+
+interface WebSocketService {
+    +notifyUser(int, Notification) : void
+}
+
+class DataSendCheckOutFlexibleDTO {
+    -orderDetailId : int
+    -duration : int
+    -checkInTime : Timestamp
+    -checkOutTime : long
+    -totalCredit : double
+    -employeeMessage : String
+}
+
+class UserReceiveMessageDTO {
+    -gymDepartmentId : int
+    -userId : int
+}
+
+class DepartmentNotificationDTO {
+    -departmentName : String
+    -departmentLogoUrl : String
+}
+
+class UserDetail {
+    -firstName : String
+    -lastName : String
+    -userId : int
+}
+
+class OrderDetailConfirmCheckOut {
+    -pricePerHours : double
+    -creditNeedToPay : double
+    -durationHavePractice : int
+    -historyCheckInId : int
+    -checkOutTime : Timestamp
+    -orderDetailId : int
+}
+
+class Notification {
+    -orderDetailId : int
+    -userIdSend : int
+    -userIdReceive : int
+    -messageType : String
+    -message : String
+    -departmentId : int
+    -departmentName : String
+    -departmentLogoUrl : String
+    -timeSend : Timestamp
+    +builder() : NotificationBuilder
+}
+
+' Define relationships
+EmployeeController ..> EmployeeService : <<uses>>
+EmployeeController ..> DepartmentService : <<uses>>
+EmployeeController ..> UserService : <<uses>>
+EmployeeController ..> OrderDetailService : <<uses>>
+EmployeeController ..> CheckInHistoryService : <<uses>>
+EmployeeController ..> NotificationService : <<uses>>
+EmployeeController ..> WebSocketService : <<uses>>
+EmployeeController ..> DataSendCheckOutFlexibleDTO : <<receives>>
+EmployeeController ..> Notification : <<uses>>
+EmployeeController ..> UserDetail : <<uses>>
+EmployeeController ..> OrderDetailConfirmCheckOut : <<uses>>
+EmployeeController ..> UserReceiveMessageDTO : <<uses>>
+EmployeeController ..> DepartmentNotificationDTO : <<uses>>
+
+NotificationService ..> Notification : <<creates>>
+UserService ..> UserDetail : <<creates>>
+OrderDetailService ..> OrderDetailConfirmCheckOut : <<creates>>
+EmployeeService ..> UserReceiveMessageDTO : <<creates>>
+DepartmentService ..> DepartmentNotificationDTO : <<creates>>
+@enduml

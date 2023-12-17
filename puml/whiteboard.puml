@@ -1,32 +1,71 @@
 @startuml
 actor Client
 participant EmployeeController
-participant HttpSession
+participant HttpSession as Session
 participant EmployeeService
+participant DepartmentService
+participant UserService
+participant NotificationService
+participant WebSocketService
+database DB
 
-Client -> EmployeeController : getCheckInListOfFlexibleCustomer(departmentId)
+Client -> EmployeeController : sendCheckInRequest(orderDetailId, session)
 activate EmployeeController
 
-EmployeeController -> HttpSession: get user session
-alt session is null or invalid departmentId
-    EmployeeController -> Client: return "error/403"
-else session is valid and departmentId is valid
-    HttpSession --> EmployeeController : return user session
-    EmployeeController -> EmployeeService: getListNeedCheckInFlexibleByDepartmentId(departmentId)
-    activate EmployeeService
-    EmployeeService --> EmployeeController: checkInFlexibleDTOList
-    deactivate EmployeeService
+EmployeeController -> Session : getAttribute("userInfo")
+activate Session
+Session -> EmployeeController : return user
+deactivate Session
 
-    EmployeeController -> EmployeeService: getListNeedCheckOutFlexibleByDepartmentId(departmentId)
-    activate EmployeeService
-    EmployeeService --> EmployeeController: checkOutFlexibleDTOList
-    deactivate EmployeeService
+EmployeeController -> EmployeeService : getUserReceiveMessage(orderDetailId)
+activate EmployeeService
+EmployeeService -> DB : query userReceiveMessageDTO
+activate DB
+DB -> EmployeeService : return userReceiveMessageDTO
+deactivate DB
+EmployeeService -> EmployeeController : return userReceiveMessageDTO
+deactivate EmployeeService
 
-    EmployeeController -> Client: return "employee/employee-check-in-flexible"
-end
+EmployeeController -> DepartmentService : getDepartmentNotificationDtoById(gymDepartmentId)
+activate DepartmentService
+DepartmentService -> DB : query departmentNotificationDTO
+activate DB
+DB -> DepartmentService : return departmentNotificationDTO
+deactivate DB
+DepartmentService -> EmployeeController : return departmentNotificationDTO
+deactivate DepartmentService
 
-alt exception occurs
-    EmployeeController -> Client: return appropriate error page
+EmployeeController -> UserService : getUserDetailByUserDetailId(userId)
+activate UserService
+UserService -> DB : query userDetail
+activate DB
+DB -> UserService : return userDetail
+deactivate DB
+UserService -> EmployeeController : return employeeDetail
+deactivate UserService
+
+EmployeeController -> Notification : builder()
+activate Notification
+Notification -> EmployeeController : build(notification)
+deactivate Notification
+
+EmployeeController -> NotificationService : insertNotification(notification)
+activate NotificationService
+NotificationService -> DB : insert notification
+activate DB
+DB -> NotificationService : return insertStatus
+deactivate DB
+NotificationService -> EmployeeController : return insertStatus
+deactivate NotificationService
+
+alt if insertStatus > 0
+    EmployeeController -> WebSocketService : notifyUser(userIdReceived, notification)
+    activate WebSocketService
+    WebSocketService -> EmployeeController : notification sent
+    deactivate WebSocketService
+    EmployeeController -> Client : ResponseEntity.ok(insertStatus)
+else
+    EmployeeController -> Client : ResponseEntity.ok(insertStatus)
 end
 
 deactivate EmployeeController
