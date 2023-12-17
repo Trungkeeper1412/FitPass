@@ -376,7 +376,7 @@ function updateQuantityCart() {
             detailCard.querySelector("#gymName").textContent = element.getAttribute("data-gym-name");
             detailCard.querySelector("#itemType").textContent = "Loại thẻ: " + element.getAttribute("data-item-type");
             detailCard.querySelector("#itemDescription").textContent = "Mô tả: " + element.getAttribute("data-item-description");
-            detailCard.querySelector("#itemPrice").textContent = "Giá thẻ: " + element.getAttribute("data-item-price");
+            detailCard.querySelector("#itemPrice").textContent = "Giá thẻ: " + element.getAttribute("data-item-price") + " " + element.getAttribute("data-item-unit");
             detailCard.querySelector("#itemStatus").textContent = "Trạng thái: " + element.getAttribute("data-item-status");
 
             var activationDate = element.getAttribute("data-activation-date") == "null" ? "null" : new Date(element.getAttribute("data-activation-date"));
