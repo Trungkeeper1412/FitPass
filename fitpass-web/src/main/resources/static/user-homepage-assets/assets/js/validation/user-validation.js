@@ -85,6 +85,28 @@ $(document).ready(function () {
             reUserPassword: {
                 required: true,
                 equalTo: "#userPassword",
+            },
+            brandName: {
+                required: true,
+                minlength: 3,
+                maxlength: 32,
+                pattern: /^(?!\s+$).+/,
+            },
+            brandOwnerName: {
+                required: true,
+                maxlength: 50,
+                pattern: /^[a-zA-Z\u00C0-\u1EF9 ]*$/,
+            },
+            contactNumber: {
+                required: true,
+                number:true,
+                minlength: 10,
+                maxlength: 11,
+                pattern: /^(0|84)(9|3|7|8|5)\d{8}$/,
+            },
+            contactEmail: {
+                required: true,
+                email: true,
             }
         },
         messages: {
@@ -147,6 +169,28 @@ $(document).ready(function () {
             reUserPassword: {
                 required: "Vui lòng xác nhận mật khẩu !",
                 equalTo: "Xác nhận mật khẩu phải giống với mật khẩu",
+            },
+            brandName: {
+                required: "Vui lòng nhập tên cơ sở !",
+                minlength: "Tên thương hiệu phải có ít nhất 3 kí tự !",
+                maxlength: "Tên thương hiệu không được vượt quá 32 kí tự !",
+                pattern: "Tên thương hiệu đang bị trống !",
+            },
+            brandOwnerName: {
+                required: "Vui lòng nhập tên chủ thương hiệu !",
+                maxlength: "Tên chủ thương hiệu không vượt quá 50 kí tự !",
+                pattern: "Tên chủ thương hiệu không chứa số và kí tự đặc biệt !",
+            },
+            contactNumber: {
+                required: "Vui lòng nhập số điện thoại !",
+                number: "Vui lòng nhập đúng định dạng số !",
+                minlength: 'Số điện thoại phải có ít nhất 10 số !',
+                maxlength: 'Số điện thoại có tối đa 11 số !',
+                pattern: 'Số điện thoại không đúng định dạng !'
+            },
+            contactEmail: {
+                required: "Vui lòng nhập email !",
+                email: "Vui lòng nhập địa chỉ email hợp lệ !"
             }
         },
         submitHandler: function (form) {
