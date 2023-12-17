@@ -1,0 +1,50 @@
+@startuml
+class EmployeeController {
+    - CheckInHistoryService checkInHistoryService
+    + ResponseEntity<CheckInHistoryPage> getCheckInHistory(int departmentId, String plan, int page, int size)
+}
+
+interface CheckInHistoryService {
+    + List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int page, int size)
+    + int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId)
+    + List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId, int page, int size)
+    + int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId)
+}
+class CheckInHistoryServiceImpl {
+    + List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int page, int size)
+    + int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId)
+    + List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId, int page, int size)
+    + int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId)
+}
+interface CheckInHistoryRepository {
+    + List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int page, int size)
+    + int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId)
+    + List<CheckInHistoryFixed> getListCheckInHistoryFixedByDepartmentId(int departmentId, int page, int size)
+    + int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId)
+}
+
+class CheckInHistoryPage {
+    - List<CheckInHistoryFlexible> listFlexible
+    - List<CheckInHistoryFixed> listFixed
+    - int totalPages
+    - int currentPage
+    - int departmentId
+    + builder()
+}
+
+class CheckInHistoryFlexible {
+}
+
+class CheckInHistoryFixed {
+}
+
+EmployeeController ..> CheckInHistoryService : <<uses>>
+CheckInHistoryPage ..> CheckInHistoryFlexible : <<uses>>
+CheckInHistoryPage ..> CheckInHistoryFixed : <<uses>>
+EmployeeController ..> CheckInHistoryPage : <<builds>>
+CheckInHistoryService ..> CheckInHistoryFlexible :<<uses>>
+CheckInHistoryService ..> CheckInHistoryFixed :<<uses>>
+
+CheckInHistoryServiceImpl ..|> CheckInHistoryService
+CheckInHistoryServiceImpl ..> CheckInHistoryRepository : <<uses>>
+@enduml

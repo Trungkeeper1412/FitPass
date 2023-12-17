@@ -1,4 +1,4 @@
-@startuml
+    @startuml
 participant Actor
 Actor -> ConfirmRequestController : performCheckIn
 activate ConfirmRequestController
