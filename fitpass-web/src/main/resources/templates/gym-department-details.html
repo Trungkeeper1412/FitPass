@@ -152,6 +152,7 @@
                             <span class="plan-price" th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói không theo giờ')}" th:text="${gymPlan.price}"></span>
                             <span class="plan-price" th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}" th:text="${gymPlan.pricePerHours}" ></span>
                             <span style="margin-left: 5px">credits</span>
+                            <span th:if="${gymPlan.gymPlanType.equalsIgnoreCase('Gói theo giờ')}">/giờ</span>
                         </div>
                     </div>
                     <div class="gym-plan-description" th:text="${gymPlan.getGymPlanDescription()}"></div>
