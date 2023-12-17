@@ -47,12 +47,12 @@
                                         <div class="plan-info-mc">
                                             <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim
                                                 cương</h4>
-                                            <div th:text=" 'Thời lượng ' +  ${cartItem.getGymPlan().getDuration()} + ' ngày'">
+                                            <div th:text="'Thời gian cần kích hoạt: ' + ${cartItem.getGymPlan().getPlanBeforeActiveValidity()} +' ngày'">
                                                 Thời lượng 365 ngày
                                             </div>
                                         </div>
                                         <div class="active-time-mc"
-                                             th:text=" 'Kích hoạt trong vòng ' +  ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                                             th:text="'Thời gian sử dụng: ' + ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
                                             Kích hoạt trong vòng 10 ngày
                                         </div>
                                     </div>
