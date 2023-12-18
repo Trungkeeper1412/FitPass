@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <th:block th:if="${session.userInfo != null}">
-                    <li>
+                    <li class="notification-block">
                         <div class="dropdown w-100">
                             <a class="nav-link" th:href="@{/profile/my-notifications}" id="notification-btn">
                                 <span class="notification-badge" id="notification-badge">0</span>
@@ -51,6 +51,7 @@
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
+
         <th:block th:if="${session.userInfo != null}">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
