@@ -436,9 +436,15 @@ a:hover {
     .mobile-nav-toggle {
         display: block;
     }
-
-    .navbar ul {
+    .navbar ul form {
         display: none;
+    }
+    .navbar ul li {
+        display: none;
+    }
+    .navbar .notification-block {
+        display: block;
+        margin-right: 50px;
     }
 }
 
@@ -459,7 +465,15 @@ a:hover {
     top: 15px;
     right: 15px;
 }
-
+.navbar-mobile ul form {
+    display: block;
+}
+.navbar-mobile ul li {
+    display: block;
+}
+.navbar-mobile ul .notification-block {
+    display: none;
+}
 .navbar-mobile ul {
     display: block;
     position: absolute;
