@@ -93,7 +93,9 @@ $(document).ready(function () {
             planAfterActive: {
                 required: true,
                 number: true,
-                min: 1,
+                min: function () {
+                    return $("#packageDuration").val() || 1;
+                },
                 max: 36500,
             },
             description: {
@@ -206,7 +208,7 @@ $(document).ready(function () {
             planAfterActive: {
                 required: "Vui lòng nhập nhập số ngày sau khi kích hoạt !",
                 number: "Vui lòng nhập số hợp lệ !",
-                min: "Số ngày ít nhất phải bằng 1 !",
+                min: "Thời gian sử dụng phải lớn hơn hoặc bằng thời lượng !",
                 max: "Số ngày không vượt quá 36500 ngày !",
             },
             description: {

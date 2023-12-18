@@ -43,22 +43,21 @@
                                         <span th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}">Price Error</span>
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="activationBefore" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
-                                               title="Đây là mô tả của thời gian trước khi kích hoạt">Thời hạn trước khi kích hoạt:</label>
-                                        <input name="planBeforeActive" th:field="*{planBeforeActive}" type="number" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
-                                        <span th:if="${#fields.hasErrors('planBeforeActive')}" class="error" th:errors="*{planBeforeActive}">Plan Before Active Error</span>
+                                        <label for="packageDuration" class="form-label fw-bold">Thời lượng gói tập:</label>
+                                        <input name="duration" th:field="*{duration}" type="number" class="form-control" id="packageDuration" placeholder="Nhập thời lượng gói tập">
+                                        <span th:if="${#fields.hasErrors('duration')}" class="error" th:errors="*{duration}">Duration Error</span>
                                     </div>
-
                                     <div class="col-md-6 mb-4">
                                         <label for="activationAfter" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
-                                               title="Đây là mô tả của thời gian sau khi kích hoạt">Thời hạn sau khi kích hoạt:</label>
+                                               title="Thẻ của người dùng sẽ tự động hết hạn khi bạn hết thời gian sử dụng">Thời gian sử dụng:</label>
                                         <input name="planAfterActive" th:field="*{planAfterActive}" type="number" class="form-control" id="activationAfter" placeholder="Nhập thời hạn sau khi kích hoạt">
                                         <span th:if="${#fields.hasErrors('planAfterActive')}" class="error" th:errors="*{planAfterActive}">Plan After Active Error</span>
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="packageDuration" class="form-label fw-bold">Thời lượng gói tập:</label>
-                                        <input name="duration" th:field="*{duration}" type="number" class="form-control" id="packageDuration" placeholder="Nhập thời lượng gói tập">
-                                        <span th:if="${#fields.hasErrors('duration')}" class="error" th:errors="*{duration}">Duration Error</span>
+                                        <label for="activationBefore" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
+                                               title="Thẻ của của người dùng sẽ tự động hết hạn nếu người dùng không kích hoạt thẻ trong thời gian quy định">Thời gian hết hạn kích hoạt:</label>
+                                        <input name="planBeforeActive" th:field="*{planBeforeActive}" type="number" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
+                                        <span th:if="${#fields.hasErrors('planBeforeActive')}" class="error" th:errors="*{planBeforeActive}">Plan Before Active Error</span>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="packageDescription" class="form-label fw-bold">Mô tả gói tập:</label>
