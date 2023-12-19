@@ -24,6 +24,7 @@ public interface IRepositoryQuery {
                      ON b.brand_status_key = kbn_brand_status.mst_kbn_key
                      AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'
                  WHERE b.brand_status_key = ?
+                 ORDER BY b.rating DESC
             """;
 
     String COUNT_ALL_BRAND_BY_STATUS = """
@@ -55,7 +56,7 @@ public interface IRepositoryQuery {
                      ON b.brand_status_key = kbn_brand_status.mst_kbn_key
                      AND kbn_brand_status.mst_kbn_name = 'BRAND_STATUS'  
                      WHERE b.brand_status_key = ?
-                     ORDER BY d.rating DESC
+                     ORDER BY b.rating DESC
             """;
     String GET_BRAND_BY_ID = """
                  SELECT
