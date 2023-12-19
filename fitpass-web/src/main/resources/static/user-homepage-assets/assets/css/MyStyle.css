@@ -409,7 +409,9 @@ a:hover {
     left: 100%;
     visibility: visible;
 }
-
+.icon-logo-navbar{
+    display: none;
+}
 @media (max-width: 1366px) {
     .navbar .dropdown .dropdown ul {
         left: -90%;
@@ -439,12 +441,26 @@ a:hover {
     .navbar ul form {
         display: none;
     }
+    .navbar{
+        position: absolute;
+        right: 20px;
+    }
     .navbar ul li {
         display: none;
     }
     .navbar .notification-block {
         display: block;
-        margin-right: 50px;
+        margin-right: 40px;
+    }
+    .navbar .cart-block {
+        display: block;
+        margin-right: 10px;
+    }
+    .text-logo-navbar{
+        display: none;
+    }
+    .icon-logo-navbar{
+        display: block;
     }
 }
 
@@ -472,6 +488,9 @@ a:hover {
     display: block;
 }
 .navbar-mobile ul .notification-block {
+    display: none;
+}
+.navbar-mobile ul .cart-block {
     display: none;
 }
 .navbar-mobile ul {
@@ -4530,6 +4549,9 @@ section {
     .my-card-title .price-title, .my-card-container .num-of-plan-title, .action-title {
         display: none;
     }
+    .cart-empty {
+        width: 90%;
+    }
 }
 
 @media only screen and (min-width: 280px) and (max-width: 450px) {
@@ -4722,6 +4744,9 @@ section {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 768px) {
+    .cart-empty {
+        width: 40%;
+    }
     .gym-department-plan {
         display: grid;
         grid-template-columns: 1fr 5fr 6fr;
@@ -5158,7 +5183,6 @@ section {
 }
 
 .cart-empty {
-    width: 40%;
     padding-top: 30px;
     padding-bottom: 30px;
     height: 50%;
