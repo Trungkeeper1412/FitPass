@@ -2,8 +2,8 @@
 
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a th:href="@{/homepage}">Fitpass<span>.</span></a></h1>
-
+        <h1 class="text-logo-navbar logo me-auto me-lg-0"><a th:href="@{/homepage}">Fitpass<span>.</span></a></h1>
+        <img class="icon-logo-navbar" style="width: 60px;" th:src="@{/user-homepage-assets/assets/img/logo.png}">
         <nav class="navbar order-last order-lg-0" id="navbar">
             <ul>
                 <form action="/homepage/search" method="get">
@@ -26,7 +26,7 @@
                         </a>
                     </li>
                 </th:block>
-                <li>
+                <li class="cart-block">
                     <a class="nav-link scrollto" th:href="@{/cart/view}">
                         <span class="cart-badge" id="card-badge">0</span>
                         <i class="bi bi-cart3 fs-4"></i>
@@ -53,7 +53,7 @@
         </nav>
 
         <th:block th:if="${session.userInfo != null}">
-            <div class="dropdown">
+            <div class="dropdown user-dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                     <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
