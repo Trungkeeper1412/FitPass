@@ -320,12 +320,13 @@ public class EmployeeController {
         // Lấy ra thông tin người cần gửi đến (người dùng cần checkout)
         UserReceiveMessageDTO userReceiveMessageDTO = employeeService.getUserReceiveMessage(orderDetailId);
 
+        // Get department informations
         int departmentId = userReceiveMessageDTO.getGymDepartmentId();
         DepartmentNotificationDTO departmentNotificationDTO = departmentService.getDepartmentNotificationDtoById(departmentId);
-
         String departmentName = departmentNotificationDTO.getDepartmentName();
         String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
 
+        //Get employee name
         UserDetail employeeDetail = userService.getUserDetailByUserDetailId(user.getUserId());
         String usernameSend = employeeDetail.getFirstName().concat(" ").concat(employeeDetail.getLastName());
 
@@ -340,10 +341,17 @@ public class EmployeeController {
         int duration = dataSendCheckOutFlexibleDTO.getDuration();
         Timestamp checkInTime = dataSendCheckOutFlexibleDTO.getCheckInTime();
         long checkOutTimeLong = dataSendCheckOutFlexibleDTO.getCheckOutTime();
-        double totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
 
         OrderDetailConfirmCheckOut orderCheckOut = orderDetailService.getByOrderDetailId(orderDetailId);
         int checkInHistoryId = checkInHistoryService.getCheckInHistoryIdByOrderDetailIdAndCheckInTime(orderDetailId, checkInTime);
+
+        // Set trg hợp khách hàng chưa tập đủ 1 tiếng
+        double totalCredit;
+        if (duration <= 60) {
+            totalCredit = orderCheckOut.getPricePerHours();
+        } else {
+            totalCredit = dataSendCheckOutFlexibleDTO.getTotalCredit();
+        }
 
         orderCheckOut.setCreditNeedToPay(totalCredit);
         orderCheckOut.setDurationHavePractice(duration);

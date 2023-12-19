@@ -6,30 +6,25 @@ import com.ks.fitpass.core.entity.UserRegisterDTO;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.wallet.service.WalletService;
+import com.ks.fitpass.web.util.Email;
+import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.ks.fitpass.core.service.UserService;
-import com.ks.fitpass.web.util.Email;
-import com.ks.fitpass.web.util.WebUtil;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -107,10 +102,10 @@ public class MainController {
             return ResponseEntity.badRequest().build();
         }
 
-        int userResetPass = userService.resetPassword(email, hashedPassword);
+        userService.resetPassword(email, hashedPassword);
 
         emailService.send( "FitPass - Reset Password", "Your new password is: " +  randomPassword, email);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(email);
     }
 
     @GetMapping("/forgot-password")

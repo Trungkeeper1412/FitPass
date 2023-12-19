@@ -75,11 +75,12 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemList)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container" >
                                             <th:block th:each="item : ${itemList}">
                                                 <div class="text-light item-card-all mb-2"
                                                      th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-unit=${item.getPrice() > 0 ? 'Credit' : 'Credit/Giờ'},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
@@ -97,7 +98,7 @@
                                                     <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
 
                                                     <th:block th:if="${item.getItemStatusKey() == 0}">
-                                                        <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
+                                                        <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt '"></p>
                                                     </th:block>
                                                     <th:block th:if="${item.getItemStatusKey() == 1}">
                                                         <th:block th:if="${item.getPrice()} > 0">
@@ -178,16 +179,18 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemListNotActive)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container">
                                             <th:block th:each="item : ${itemListNotActive}">
                                                 <div class="text-light item-card-unactivated mb-2"
                                                      th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-unit=${item.getPrice() > 0 ? 'Credit' : 'Credit/Giờ'},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getPrice() > 0 ? item.getDuration() : item.getPlanAfterActiveValidity()} + ' ngày',
                                                  data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-before-active=${item.getPlanBeforeActiveValidity()},
                                                  data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
                                                  data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
                                                      onclick="showItemDetail(this)">
@@ -199,7 +202,7 @@
                                                     <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
 
                                                     <th:block th:if="${item.getItemStatusKey() == 0}">
-                                                        <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
+                                                        <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt '"></p>
                                                     </th:block>
                                                     <th:block th:if="${item.getItemStatusKey() == 1}">
                                                         <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>
@@ -272,11 +275,12 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemListActive)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container">
                                             <th:block th:each="item : ${itemListActive}">
                                                 <div class="text-light item-card-active mb-2"
                                                      th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-unit=${item.getPrice() > 0 ? 'Credit' : 'Credit/Giờ'},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
@@ -362,11 +366,12 @@
                                 </div>
                                 <div class="row" th:if="${not #lists.isEmpty(itemListExpired)}">
                                     <!-- Phần bên trái: Ô chứa vật phẩm -->
-                                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                                    <div class="detail-card col-sm-12 col-md-12 col-lg-8 mb-3">
                                         <div class="item-grid" id="grid-container">
                                             <th:block th:each="item : ${itemListExpired}">
                                                 <div class="text-light item-card-activated mb-2"
                                                      th:attr="data-item-id=${item.getOrderDetailId()} ,data-gym-name=${item.getGymDepartmentName()}, data-item-type=${item.getName()},
+                                                 data-item-unit=${item.getPrice() > 0 ? 'Credit' : 'Credit/Giờ'},
                                                  data-item-price=${item.getPrice == 0 ? item.getPricePerHours() : item.getPrice()},
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
@@ -383,7 +388,7 @@
                                                     <p th:if="${item.getItemStatusKey() == 2}" class="text-activated-card">Trạng thái: Đã hết hạn</p>
 
                                                     <th:block th:if="${item.getItemStatusKey() == 0}">
-                                                        <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt thẻ '"></p>
+                                                        <p th:text="'Bạn còn: ' + ${item.getPlanBeforeActiveValidity()} + ' ngày để kích hoạt '"></p>
                                                     </th:block>
                                                     <th:block th:if="${item.getItemStatusKey() == 1}">
                                                         <p th:text="'Bạn còn: ' + ${item.getDuration()} + ' ngày tập'"></p>

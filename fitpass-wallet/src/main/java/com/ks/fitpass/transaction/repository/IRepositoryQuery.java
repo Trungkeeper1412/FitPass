@@ -38,6 +38,8 @@ public interface IRepositoryQuery {
                 `transaction` t ON w.wallet_id = t.wallet_id
             WHERE
                     w.user_id = ?
+            AND
+                t.status = 'Thành công'
             GROUP BY
                 w.user_id, w.wallet_id;
             """;

@@ -9,15 +9,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +33,9 @@ public class ProfileControllerTest {
 
     @InjectMocks
     private ProfileController profileController;
+
+    @Mock
+    private RedirectAttributes attributes;
 
     @BeforeEach
     void setUp() {
@@ -92,7 +94,7 @@ public class ProfileControllerTest {
         when(userService.checkEmailExist(userUpdateDTO.getEmail())).thenReturn(false);
 
         // Act
-        String result = profileController.updateGymOwnerDetails(userUpdateDTO, bindingResult);
+        String result = profileController.updateProfileDetails(userUpdateDTO, bindingResult, attributes);
 
         // Assert
         assertEquals("redirect:/profile/my-profile", result);
@@ -113,12 +115,10 @@ public class ProfileControllerTest {
         when(userService.checkEmailExist(userUpdateDTO.getEmail())).thenReturn(true);
 
         // Act
-        String result = profileController.updateGymOwnerDetails(userUpdateDTO, bindingResult);
+        String result = profileController.updateProfileDetails(userUpdateDTO, bindingResult, attributes);
 
         // Assert
         assertEquals("redirect:/profile/my-profile", result);
-
-
     }
 
     @Test
@@ -133,7 +133,7 @@ public class ProfileControllerTest {
         when(userService.checkEmailExist(userUpdateDTO.getEmail())).thenReturn(false);
 
         // Act
-        String result = profileController.updateGymOwnerDetails(userUpdateDTO, bindingResult);
+        String result = profileController.updateProfileDetails(userUpdateDTO, bindingResult,attributes);
 
         // Assert
         assertEquals("redirect:/profile/my-profile", result);
@@ -157,7 +157,7 @@ public class ProfileControllerTest {
         when(bindingResult.hasErrors()).thenReturn(true);
 
         // Act
-        String result = profileController.updateGymOwnerDetails(userUpdateDTO, bindingResult);
+        String result = profileController.updateProfileDetails(userUpdateDTO, bindingResult,attributes);
 
         // Assert
         assertEquals("user/user-profile", result);
@@ -179,7 +179,7 @@ public class ProfileControllerTest {
         doThrow(EmptyResultDataAccessException.class).when(userService).updateUserDetail(any());
 
         // Act
-        String result = profileController.updateGymOwnerDetails(userUpdateDTO, bindingResult);
+        String result = profileController.updateProfileDetails(userUpdateDTO, bindingResult,attributes);
 
         // Assert
         assertEquals("error/no-data", result);
@@ -198,7 +198,7 @@ public class ProfileControllerTest {
         doThrow(new CustomDataAccessException("Custom Data Access Exception")).when(userService).updateUserDetail(any());
 
         // Act
-        String result = profileController.updateGymOwnerDetails(userUpdateDTO, bindingResult);
+        String result = profileController.updateProfileDetails(userUpdateDTO, bindingResult,attributes);
 
         // Assert
         assertEquals("error/data-access-error", result);

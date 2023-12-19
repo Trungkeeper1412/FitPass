@@ -1,6 +1,7 @@
 package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
+import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 import com.ks.fitpass.partner.register.dto.BecomePartnerUpdateStatus;
 import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
@@ -91,6 +92,15 @@ public class AdminController {
         model.addAttribute("brandStatAdmin", brandStatAdmin);
         model.addAttribute("brandRatingStatAdmin", brandRatingStatAdmin);
         return "admin/index";
+    }
+
+    @ModelAttribute
+    public void populateGymOwnerInfo(HttpSession session){
+        User user = (User) session.getAttribute("userInfo");
+        UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
+
+        session.setAttribute("userFullNameA", userDetail.getFirstName().concat(" ").concat(userDetail.getLastName()));
+        session.setAttribute("userAvatarA", userDetail.getImageUrl());
     }
 
     @GetMapping("/feature")
