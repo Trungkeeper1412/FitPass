@@ -32,6 +32,7 @@
                 <div class="num-of-plan-title mx-auto">Số lượng</div>
             </div>
             <div class="check-out-scroll">
+                <th:block th:if="${departmentList!=null}">
                 <th:block th:each="department :${departmentList}">
                     <div class="plan-in-a-gymdept row">
                         <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
@@ -69,6 +70,7 @@
                         </th:block>
                     </div>
                 </th:block>
+                </th:block>
             </div>
 
             <div class="total-checkout mb-4">
@@ -82,10 +84,12 @@
                     </a>
                     <h3>Giỏ hàng</h3>
                 </div>
+                <th:block th:if="${departmentList!=null}">
                 <div class="total-credits">
                     <div th:text="'Tạm tính: ' + ${totalPrice} + ' Credits'">Tạm tính: 800 Credits</div>
                     <h3 th:text="'Tổng thanh toán: ' + ${totalPrice} + ' Credits'">Tổng thanh toán: 800 Credits</h3>
                 </div>
+                </th:block>
             </div>
         </div>
         <div class="bill-info">
