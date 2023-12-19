@@ -98,7 +98,6 @@ public class ConfirmRequestController {
 
             // Trừ credit của người dùng
             walletService.updateBalanceByUderId(user.getUserId(), updateCheckInHistory.getCreditAfterPay());
-            double credit = walletService.getBalanceByUserId(user.getUserId());
 
             // Cộng credit cho brand owner
             int brandOwnerId = brandService.getBrandOwnerIdByDepartmentId(successNotification.getDepartmentId());
@@ -116,6 +115,7 @@ public class ConfirmRequestController {
 
             transactionService.insertTransferCreditHistory(transferCreditHistory);
 
+            double credit = walletService.getBalanceByUserId(user.getUserId());
             session.setAttribute("userCredit", credit);
             // Update status use của order detail id thành chưa tập
             orderDetailService.updateOrderDetailsUseStatus(updateCheckInHistory.getOrderDetailId(), "Chưa tập");
