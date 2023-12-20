@@ -92,6 +92,7 @@
                                                      onclick="showItemDetail(this)">
                                                     <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                     </h4>
+                                                    <p th:text="${'FITPASS_CARD_' + item.getOrderDetailId()}">FITPASS_CARD</p>
                                                     <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
                                                     <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
                                                     <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
@@ -196,6 +197,7 @@
                                                      onclick="showItemDetail(this)">
                                                     <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                     </h4>
+                                                    <p th:text="${'FITPASS_CARD_' + item.getOrderDetailId()}">FITPASS_CARD</p>
                                                     <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
                                                     <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
                                                     <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
@@ -291,6 +293,7 @@
                                                      onclick="showItemDetail(this)">
                                                     <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                     </h4>
+                                                    <p th:text="${'FITPASS_CARD_' + item.getOrderDetailId()}">FITPASS_CARD</p>
                                                     <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
                                                     <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
                                                     <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
@@ -382,6 +385,7 @@
                                                      onclick="showItemDetail(this)">
                                                     <h4 class="show-title fw-bold text-uppercase" th:text="${item.getGymDepartmentName()}">California Fitness & Yoga
                                                     </h4>
+                                                    <p th:text="${'FITPASS_CARD_' + item.getOrderDetailId()}">FITPASS_CARD</p>
                                                     <p th:text="${item.getPrice() != 0 ? 'Gói cố định' : 'Gói linh hoạt'}">Gói cố định</p>
                                                     <p th:if="${item.getItemStatusKey() == 0}" class="text-inactive-card">Trạng thái: Chưa kích hoạt</p>
                                                     <p th:if="${item.getItemStatusKey() == 1}" class="text-active-card">Trạng thái: Đã kích hoạt</p>
