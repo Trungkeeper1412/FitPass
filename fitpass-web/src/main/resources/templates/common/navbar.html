@@ -48,26 +48,45 @@
                         </div>
                     </li>
                 </th:block>
+                <th:block th:if="${session.userInfo != null}">
+                    <li class="user-dropdown">
+                    <div>
+<!--                        <button class="" type="button" id="dropdownMenuButton1">-->
+                            <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
+<!--                        </button>-->
+                    </div>
+                    </li>
+                    <div id="user-dropdown" class="list-group" style="position: absolute; top: 50px; right: 20px; width: 180px; background-color: black">
+<!--                        <div class="list-group">-->
+                            <a style="padding-left: 10px" class="list-group-item" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ
+                                sơ người dùng</a>
+                            <a style="padding-left: 10px" class="list-group-item" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi
+                                đồ</a>
+                            <a  style="padding-left: 10px" class="list-group-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng
+                                xuất</a>
+<!--                        </div>-->
+                    </div>
+                </th:block>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
 
-        <th:block th:if="${session.userInfo != null}">
-            <div class="dropdown user-dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ
-                        sơ người dùng</a></li>
-                    <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi
-                        đồ</a></li>
-                    <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng
-                        xuất</a></li>
-                </ul>
-            </div>
-        </th:block>
+<!--        <th:block th:if="${session.userInfo != null}">-->
+<!--            <div class="user-dropdown">-->
+<!--                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"-->
+<!--                        data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                    <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>-->
+<!--                </button>-->
+<!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--                    <li><a class="dropdown-item small" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ-->
+<!--                        sơ người dùng</a></li>-->
+<!--                    <li><a class="dropdown-item small" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi-->
+<!--                        đồ</a></li>-->
+<!--                    <li><a class="dropdown-item small" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng-->
+<!--                        xuất</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </th:block>-->
         <div th:unless="${session.userInfo != null}">
             <a th:href="@{/login}" class="get-started-btn scrollto">Đăng nhập ngay</a>
         </div>
