@@ -73,10 +73,10 @@
                                     <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
                                         <select id="filter-date-flexible">
                                             <option value="" disabled selected>Sắp xếp theo:</option>
-                                            <option value="inDay">Trong ngày</option>
-                                            <option value="inWeek">Trong tuần</option>
-                                            <option value="inMonth">Trong tháng</option>
-                                            <option value="inYear">Trong năm</option>
+                                            <option value="day">Trong ngày</option>
+                                            <option value="week">Trong tuần</option>
+                                            <option value="month">Trong tháng</option>
+                                            <option value="year">Trong năm</option>
                                         </select>
                                     </div>
                                 </div>
@@ -148,10 +148,10 @@
                                     <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
                                         <select id="filter-date-fixed">
                                             <option value="" disabled selected>Sắp xếp theo:</option>
-                                            <option value="inDay">Trong ngày</option>
-                                            <option value="inWeek">Trong tuần</option>
-                                            <option value="inMonth">Trong tháng</option>
-                                            <option value="inYear">Trong năm</option>
+                                            <option value="day">Trong ngày</option>
+                                            <option value="week">Trong tuần</option>
+                                            <option value="month">Trong tháng</option>
+                                            <option value="year">Trong năm</option>
                                         </select>
                                     </div>
                                 </div>
@@ -381,13 +381,12 @@
                 }
             })
             .catch(error => {
-                console.error('Error fetching notifications:', error);
+                console.error('Error fetching data:', error);
             });
     }
 
     $("#searchButton").click(function () {
         event.preventDefault();
-        console.log("click");
         // Lấy giá trị từ ô nhập liệu
         let searchText = $("#searchInput").val();
         // Lấy giá trị từ dropdown chọn
@@ -405,9 +404,26 @@
         }
     });
 
+    $("#searchButtonFlexible").click(function (){
+        event.preventDefault();
+        let searchText = $("#searchInputFlexible").val();
+        let searchOption = $("#search-by-flexible").val();
+        let filterDate = $("#filter-date-flexible").val();
+        let departmentId = $("#departmentId").val();
+        searchListFlex(searchText, searchOption, filterDate, departmentId)
+    })
+
+    $("#searchButtonFixed").click(function (){
+        event.preventDefault();
+        let searchText = $("#searchInputFixed").val();
+        let searchOption = $("#search-by-fixed").val();
+        let filterDate = $("#filter-date-fixed").val();
+        let departmentId = $("#departmentId").val();
+        searchListFixed(searchText, searchOption, filterDate, departmentId);
+    })
+
     function searchListFlex(searchText, searchOption, filterDate, departmentId) {
         let url;
-
         if (searchOption === 'username') {
             url = `/employee/history/searchFlex?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
         } else if (searchOption === 'phone-number') {
