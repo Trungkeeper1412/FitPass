@@ -152,7 +152,7 @@ public interface IRepositoryQuery {
     String GET_LIST_ORDER_DETAIL_EXPIRED = """
                 SELECT order_detail_id
                 FROM order_plan_detail
-                WHERE plan_expired_time IS NOT NULL AND DATE(plan_expired_time) < CURDATE();
+            WHERE (plan_expired_time IS NOT NULL AND DATE(plan_expired_time) < CURDATE()) OR duration = 0;
             """;
 
     String UPDATE_ORDER_DETAIL_EXPIRED_STATUS= """
