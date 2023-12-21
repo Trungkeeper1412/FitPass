@@ -598,8 +598,8 @@ public class EmployeeController {
             @RequestParam(name = "username", required = false) String username,
             @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
             @RequestParam(name = "dateFilter", required = false) String dateFilter,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "size", defaultValue = "7") int size) {
         try {
             List<CheckInHistoryFlexible> results = checkInHistoryService.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter, page, size);
             int totalRecords = checkInHistoryService.countSearchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
@@ -625,14 +625,26 @@ public class EmployeeController {
     }
 
     @GetMapping("/history/searchFixed")
-    public ResponseEntity<List<CheckInHistoryFixed>> searchFixed(
+    public ResponseEntity<CheckInHistoryPage> searchFixed(
             @RequestParam("id") int departmentId,
             @RequestParam(name = "username", required = false) String username,
             @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
-            @RequestParam(name = "dateFilter", required = false) String dateFilter) {
+            @RequestParam(name = "dateFilter", required = false) String dateFilter,
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "size", defaultValue = "7") int size){
         try {
-            List<CheckInHistoryFixed> listFlexible = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
-            return ResponseEntity.ok(listFlexible);
+            List<CheckInHistoryFixed> results = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter, page, size);
+            int totalRecords = checkInHistoryService.countSearchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
+            int totalPages = (int) Math.ceil((double) totalRecords / size);
+
+            CheckInHistoryPage checkInHistoryPage = CheckInHistoryPage.builder()
+                    .listFixed(results)
+                    .totalPages(totalPages)
+                    .currentPage(page)
+                    .departmentId(departmentId)
+                    .build();
+
+            return ResponseEntity.ok(checkInHistoryPage);
         } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);

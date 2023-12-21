@@ -21,11 +21,13 @@ public interface CheckInHistoryService {
 
     List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter, int page, int size);
 
-    List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter);
+    List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter,int page, int size);
 
     int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId);
 
     int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId);
 
     int countSearchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter);
+
+    int countSearchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter);
 }

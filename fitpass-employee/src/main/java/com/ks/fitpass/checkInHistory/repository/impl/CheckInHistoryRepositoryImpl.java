@@ -4,6 +4,8 @@ import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.repository.CheckInHistoryRepository;
 import com.ks.fitpass.checkInHistory.repository.IRepositoryQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,8 @@ import static com.ks.fitpass.checkInHistory.repository.IRepositoryQuery.GET_TOTA
 public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
 
     private final JdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(CheckInHistoryRepositoryImpl.class);
 
     @Autowired
     public CheckInHistoryRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -133,6 +137,10 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
         parameters.add(size);
         parameters.add(offset);
 
+        logger.error("Final SQL: " + sql);
+        logger.error("Parameters: " + parameters);
+
+
         List<CheckInHistoryFlexible> list = jdbcTemplate.query(sql, parameters.toArray(), (rs, rowNum) -> {
                     CheckInHistoryFlexible checkInHistoryFlexible = new CheckInHistoryFlexible();
                     checkInHistoryFlexible.setUsername(rs.getString("username"));
@@ -152,30 +160,54 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
                 });
         return (!list.isEmpty()) ? list : new ArrayList<>();
     }
-    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
+    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber,
+                                                            String dateFilter,
+                                                            int offset,
+                                                            int size) {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(departmentId);
         String sql = IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FIXED_BY_DEPARTMENT_ID;
 
+        // Conditional query parts for filters
         if (username != null && !username.isEmpty()) {
-            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE '%" + username + "%'";
+            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE ?";
+            parameters.add("%" + username + "%");
         }
 
         if (phoneNumber != null && !phoneNumber.isEmpty()) {
-            sql += " AND ud.phone_number LIKE '%" + phoneNumber + "%'";
+            sql += " AND ud.phone_number LIKE ?";
+            parameters.add("%" + phoneNumber + "%");
         }
 
         if (dateFilter != null && !dateFilter.isEmpty()) {
-            if (dateFilter.equals("day")) {
-                sql += " AND DATE(ci.check_in_time) = CURDATE()";
-            } else if (dateFilter.equals("week")) {
-                sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
-            } else if (dateFilter.equals("month")) {
-                sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
-            } else if (dateFilter.equals("year")) {
-                sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+            switch (dateFilter) {
+                case "day":
+                    sql += " AND DATE(ci.check_in_time) = CURDATE()";
+                    break;
+                case "week":
+                    sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
+                    break;
+                case "month":
+                    sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
+                    break;
+                case "year":
+                    sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+                    break;
             }
         }
 
-        List<CheckInHistoryFixed> list = jdbcTemplate.query(sql, (rs, rowNum) -> {
+        // Add ORDER BY clause for consistent ordering
+        sql += " ORDER BY ci.check_in_time DESC";
+
+        // Add pagination using LIMIT and OFFSET
+        sql += " LIMIT ? OFFSET ?";
+        parameters.add(size);
+        parameters.add(offset);
+
+        logger.error("Final SQL: " + sql);
+        logger.error("Parameters: " + parameters);
+
+        List<CheckInHistoryFixed> list = jdbcTemplate.query(sql, parameters.toArray(), (rs, rowNum) -> {
             CheckInHistoryFixed checkInHistoryFixed = new CheckInHistoryFixed();
             checkInHistoryFixed.setUsername(rs.getString("username"));
             checkInHistoryFixed.setPhoneNumber(rs.getString("phone_number"));
@@ -184,12 +216,8 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             checkInHistoryFixed.setGymPlanName(rs.getString("name"));
             checkInHistoryFixed.setCredit(rs.getDouble("price"));
             return checkInHistoryFixed;
-        }, departmentId);
-
-        if(list.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return list;
+        });
+        return (!list.isEmpty()) ? list : new ArrayList<>();
     }
 
     @Override

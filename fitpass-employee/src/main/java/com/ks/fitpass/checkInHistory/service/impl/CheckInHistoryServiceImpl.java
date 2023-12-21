@@ -56,8 +56,9 @@ public class CheckInHistoryServiceImpl implements CheckInHistoryService {
     }
 
     @Override
-    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
-        return checkInHistoryRepository.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
+    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter, int page, int size) {
+        int offset = (page - 1) * size;
+        return checkInHistoryRepository.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter, offset, size);
     }
 
     @Override
@@ -75,6 +76,12 @@ public class CheckInHistoryServiceImpl implements CheckInHistoryService {
     @Override
     public int countSearchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter) {
         Integer count = checkInHistoryRepository.countSearchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
+        Integer count = checkInHistoryRepository.countSearchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
         return (count != null) ? count : 0;
     }
 }
