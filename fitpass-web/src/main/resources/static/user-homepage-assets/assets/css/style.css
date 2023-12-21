@@ -430,7 +430,9 @@ h6 {
 .navbar-mobile .dropdown>.dropdown-active {
   display: block;
 }
+.user-profile-option a{
 
+}
 /*--------------------------------------------------------------
   # Hero Section
   --------------------------------------------------------------*/

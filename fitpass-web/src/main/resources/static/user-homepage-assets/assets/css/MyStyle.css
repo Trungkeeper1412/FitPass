@@ -20,7 +20,16 @@ h6 {
 }
 
 /*NAVBAR*/
-
+.user-profile-option{
+    position: absolute;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+    top: 50px;
+    right: 10px;
+    width: 180px;
+    box-shadow: 0px 0px 30px rgb(217, 217, 217);
+    background-color: white;
+}
 .cart-badge {
     position: absolute;
     top: 0;
@@ -498,6 +507,9 @@ a:hover {
     display: block;
 }
 .navbar-mobile ul .notification-block {
+    display: none;
+}
+.navbar-mobile ul .user-dropdown {
     display: none;
 }
 .navbar-mobile ul .cart-block {
@@ -2597,8 +2609,14 @@ a:link {
 .dot-slider .active {
     background-color: #000000;
 }
-
-
+.user-profile-option a{
+    padding-left: 10px;
+    color: black
+}
+.user-profile-option a:hover{
+    color: orange;
+    background-color: #f3f3f3;
+}
 /* ===================== User profile ===================== */
 .transaction-history {
     background-color: white;

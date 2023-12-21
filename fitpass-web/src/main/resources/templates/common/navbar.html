@@ -1,7 +1,5 @@
 <header class="fixed-top" id="header" th:fragment="navbar">
-
     <div class="container d-flex align-items-center justify-content-lg-between">
-
         <h1 class="text-logo-navbar logo me-auto me-lg-0"><a th:href="@{/homepage}">Fitpass<span>.</span></a></h1>
         <img class="icon-logo-navbar" style="width: 60px;" th:src="@{/user-homepage-assets/assets/img/logo.png}">
         <nav class="navbar order-last order-lg-0" id="navbar">
@@ -50,22 +48,19 @@
                 </th:block>
                 <th:block th:if="${session.userInfo != null}">
                     <li class="user-dropdown">
-                    <div>
-<!--                        <button class="" type="button" id="dropdownMenuButton1">-->
-                            <a href="#"><img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png"></a>
-<!--                        </button>-->
+                    <div id="user-ava-icon">
+                         <img style="width: 30px;" src="https://cdn-icons-png.flaticon.com/128/3870/3870822.png">
+                    </div>
+
+                    <div class="user-profile-option" id="user-dropdown-content">
+                            <a class="list-group-item" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ
+                                sơ người dùng</a>
+                            <a class="list-group-item" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi
+                                đồ</a>
+                            <a class="list-group-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng
+                                xuất</a>
                     </div>
                     </li>
-                    <div id="user-dropdown" class="list-group" style="position: absolute; top: 50px; right: 20px; width: 180px; background-color: black">
-<!--                        <div class="list-group">-->
-                            <a style="padding-left: 10px" class="list-group-item" th:href="@{/profile/my-profile}"><i class="fas fa-user"></i> Hồ
-                                sơ người dùng</a>
-                            <a style="padding-left: 10px" class="list-group-item" th:href="@{/inventory/view}"><i class="fas fa-briefcase"></i> Túi
-                                đồ</a>
-                            <a  style="padding-left: 10px" class="list-group-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng
-                                xuất</a>
-<!--                        </div>-->
-                    </div>
                 </th:block>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -91,16 +86,28 @@
             <a th:href="@{/login}" class="get-started-btn scrollto">Đăng nhập ngay</a>
         </div>
     </div>
-
+    <script>
+        let count = 0;
+        console.log(document.getElementById("user-dropdown-content"));
+        document.getElementById("user-dropdown-content").style.display = "none";
+        document.getElementById("user-ava-icon").addEventListener('click', function(){
+            document.getElementById("user-dropdown-content").style.display = "block";
+            count ++;
+            console.log(count);
+            if(count % 2 == 0){
+                document.getElementById("user-dropdown-content").style.display = "none";
+            }
+        });
+    </script>
 </header>
 <script>
+
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
     function openNotifications() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
-    // Close the dropdown if the user clicks outside of it
     window.onclick = function (event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -113,4 +120,16 @@
             }
         }
     }
+
+    let count = 0;
+    console.log(document.getElementById("user-dropdown-content"));
+    document.getElementById("user-dropdown-content").style.display = "none";
+    document.getElementById("user-ava-icon").addEventListener('click', function(){
+        document.getElementById("user-dropdown-content").style.display = "block";
+        count ++;
+        console.log(count);
+        if(count % 2 === 0){
+            document.getElementById("user-dropdown").style.display = "none";
+        }
+    });
 </script>
