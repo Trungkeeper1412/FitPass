@@ -59,8 +59,7 @@
                                     <div class="col-md-6 mb-4">
                                         <label for="activationBefore" class="form-label fw-bold"
                                                data-toggle="tooltip" data-placement="top"
-                                               title="Đây là mô tả của thời gian trước khi kích hoạt">Thời hạn
-                                            trước khi kích hoạt:</label>
+                                               title="Thẻ của của người dùng sẽ tự động hết hạn nếu người dùng không kích hoạt thẻ trong thời gian quy định">Thời gian cần kích hoạt:</label>
                                         <input name="planBeforeActive" th:value="${b.getPlanBeforeActive()}"
                                                th:field="*{planBeforeActive}"
                                                type="number" class="form-control" id="activationBefore"
@@ -71,12 +70,11 @@
                                     <div class="col-md-6 mb-4">
                                         <label for="activationAfter" class="form-label fw-bold"
                                                data-toggle="tooltip" data-placement="top"
-                                               title="Đây là mô tả của thời gian sau khi kích hoạt">Thời hạn sau
-                                            khi kích hoạt:</label>
+                                               title="Thẻ của người dùng sẽ tự động hết hạn khi bạn hết thời gian sử dụng">Thời gian sử dụng:</label>
                                         <input name="planAfterActive" th:value="${b.getPlanAfterActive()}"
                                                th:field="*{planAfterActive}"
                                                type="number" class="form-control" id="activationAfter"
-                                               placeholder="Nhập thời hạn sau khi kích hoạt">
+                                               placeholder="Nhập thời gian sử dụng">
                                         <span th:if="${#fields.hasErrors('planAfterActive')}" class="error" th:errors="*{planAfterActive}">planAfterActive Error</span>
                                     </div>
                                     <div class="col-md-6">

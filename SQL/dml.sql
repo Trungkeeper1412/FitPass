@@ -1236,11 +1236,11 @@ VALUES (1, 5, 1, 1, 1, 'Gói giờ',
 
        (2, 5, 2, 1, 2, 'Gói 3 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
-        400, 0, 0, 90, 10, 90),
+        400, 0, 0, 90, 10, 120),
 
        (3, 5, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30),
+        150.00, 0, 0, 30, 10, 40),
 
        (4, 6, 1, 1, 1, 'Gói giờ',
         'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp.',
@@ -1248,11 +1248,11 @@ VALUES (1, 5, 1, 1, 1, 'Gói giờ',
 
        (5, 6, 2, 1, 2, 'Gói 3 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
-        400, 0, 0, 90, 10, 90),
+        400, 0, 0, 90, 10, 120),
 
        (6, 6, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30),
+        150.00, 0, 0, 30, 10, 40),
 
        (7, 7, 1, 1, 1, 'Gói giờ',
         'Đây là một trong các hạng thẻ siêu tiết kiệm tại phòng gym của chúng tôi. Nếu bạn là người không có nhu cầu di chuyển nhiều và mong muốn được tập luyện ở bất kỳ khung giờ nào thì gói tập này sẽ là một lựa chọn thích hợp.',
@@ -1260,11 +1260,11 @@ VALUES (1, 5, 1, 1, 1, 'Gói giờ',
 
        (8, 7, 2, 1, 2, 'Gói 3 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam',
-        400, 0, 0, 90, 10, 90),
+        400, 0, 0, 90, 10, 120),
 
        (9, 7, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30),
+        150.00, 0, 0, 30, 10, 40),
 
 -- Create Gym plan infos Hòa Lạc
        (10, 14, 1, 1, 1, 'Gói giờ',
@@ -2110,10 +2110,10 @@ VALUES (51, 8, 1, 1, 1, 'Gói Linh Hoạt',
         50.00, 0, 0, 10, 30),
        (52, 8, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30),
+        150.00, 0, 0, 30, 10, 40),
        (53, 8, 2, 1, 2, 'Gói 3 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        450.00, 0, 0, 90, 10, 90);
+        450.00, 0, 0, 90, 10, 120);
 
 -- Create Gym plan infos for Elite
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price,
@@ -2123,10 +2123,10 @@ VALUES (54, 9, 1, 1, 1, 'Gói Linh Hoạt',
         50.00, 0, 0, 10, 30),
        (55, 9, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30),
+        150.00, 0, 0, 30, 10, 40),
        (56, 9, 2, 1, 2, 'Gói 3 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        450.00, 0, 0, 90, 10, 90);
+        450.00, 0, 0, 90, 10, 120);
 
 -- Create Gym plan infos for Fit365
 INSERT INTO gym_plan (plan_id, brand_id, gym_plan_key, gym_plan_status_key, gym_plan_type_key, name, description, price,
@@ -2136,10 +2136,10 @@ VALUES (57, 10, 1, 1, 1, 'Gói Linh Hoạt',
         50.00, 0, 0, 10, 30),
        (58, 10, 2, 1, 2, 'Gói 1 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        150.00, 0, 0, 30, 10, 30),
+        150.00, 0, 0, 30, 10, 40),
        (59, 10, 2, 1, 2, 'Gói 3 tháng',
         'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập ở tất cả CLB cũng như phòng tập trên toàn bộ hệ thống theo từng khu vực Bắc, Trung hoặc Nam ',
-        450.00, 0, 0, 90, 10, 90);
+        450.00, 0, 0, 90, 10, 110);
 
 -- For Getfit Chi nhánh Oriental Tân Phú (department ID 57)
 INSERT INTO gym_department_plans(gym_department_id, plan_id)
@@ -2865,23 +2865,23 @@ VALUES (151, 11, 1, 1, 1, 'Gói giờ',
 
        (152, 11, 2, 1, 2, 'Gói 8 tuần',
         'Advance Fitness & Gym cam kết sẽ hoàn tiền 100% nếu học viên tập luyện nhưng không hiệu quả: giảm 5 kg/1 tháng cho người tập giảm cân và tăng cân, tăng cơ cho người gầy trong 8 tuần.',
-        6000.00, 0, 0, 90, 10, 90),
+        6000.00, 0, 0, 56, 10, 90),
 
        (153, 11, 2, 1, 2, 'Gói 20 buổi tập luyện với PT',
         'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
-        10300.00, 0, 0, 30, 10, 30),
+        10300.00, 0, 0, 20, 10, 30),
 
        (154, 11, 2, 1, 2, 'Gói 30 buổi tập luyện với PT',
         'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
-        13400.00, 0, 0, 30, 10, 30),
+        13400.00, 0, 0, 30, 10, 40),
 
        (155, 11, 2, 1, 2, 'Gói 50 buổi tập luyện với PT',
         'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
-        20000.00, 0, 0, 30, 10, 30),
+        20000.00, 0, 0, 50, 10, 75),
 
        (156, 11, 2, 1, 2, 'Gói 100 buổi tập luyện với PT',
         'Có huấn luyện viên 1:1. Phòng tập rộng rãi, thoáng mát. Trang thiết bị hiện đại. Được kiểm tra sức khỏe đều đặn. Miễn phí các chương trình tập khác như Yoga, Spinning, Zumba….',
-        35800.00, 0, 0, 30, 10, 30),
+        35800.00, 0, 0, 100, 10, 135),
 
        (157, 12, 1, 1, 1, 'Gói giờ',
         'Gói linh hoạt tính theo giờ tại phòng tập gym của chúng tôi mang đến cho bạn sự thoải mái và linh hoạt tối đa trong việc rèn luyện sức khỏe. ',
@@ -2889,15 +2889,15 @@ VALUES (151, 11, 1, 1, 1, 'Gói giờ',
 
        (158, 12, 2, 1, 2, 'Gói 1 tháng',
         'Thanh toán một lần. Tập luyện không giới hạn thời gian. Gửi xe miễn phí. Lớp học miễn phí. Nước uống miễn phí. Đo chỉ số Inbody. Buổi tập PT miễn phí.',
-        2000.00, 0, 0, 90, 10, 90),
+        2000.00, 0, 0, 30, 10, 45),
 
        (159, 12, 2, 1, 2, 'Gói 6 tháng',
         'Miễn phí Hội viên. Thanh toán một lần. Tập luyện không giới hạn thời gian. Gửi xe miễn phí. Lớp học miễn phí. Nước uống miễn phí. Đo chỉ số Inbody. Buổi tập PT miễn phí.',
-        5000.00, 0, 0, 30, 10, 30),
+        5000.00, 0, 0, 180, 10, 215),
 
        (160, 12, 2, 1, 2, 'Gói 12 tháng',
         'Miễn phí Hội viên. Thanh toán một lần. Tập luyện không giới hạn thời gian. Gửi xe miễn phí. Lớp học miễn phí. Nước uống miễn phí. Đo chỉ số Inbody. Buổi tập PT miễn phí.',
-        9000.00, 0, 0, 30, 10, 30),
+        9000.00, 0, 0, 365, 10, 420),
 
        (161, 13, 1, 1, 1, 'Gói giờ',
         'Gói linh hoạt tính theo giờ của phòng tập gym là sự lựa chọn hoàn hảo cho những người có lịch trình bận rộn hoặc muốn tận hưởng sự thoải mái và linh hoạt trong việc tập luyện.',
@@ -2905,15 +2905,15 @@ VALUES (151, 11, 1, 1, 1, 'Gói giờ',
 
        (162, 13, 2, 1, 2, 'Gói 1 tháng',
         'VShape Fitness cung cấp cho hội viên các dịch vụ: fitness, gym, yoga, xông hơi khô, khu vực trang điểm, bãi giữ xe rộng rãi miễn phí….',
-        2000.00, 0, 0, 90, 10, 90),
+        2000.00, 0, 0, 30, 10, 45),
 
        (163, 13, 2, 1, 2, 'Gói 6 tháng',
         'VShape Fitness cung cấp cho hội viên các dịch vụ: fitness, gym, yoga, xông hơi khô, khu vực trang điểm, bãi giữ xe rộng rãi miễn phí….',
-        5000.00, 0, 0, 30, 10, 30),
+        5000.00, 0, 0, 180, 10, 220),
 
        (164, 13, 2, 1, 2, 'Gói 12 tháng',
         'VShape Fitness cung cấp cho hội viên các dịch vụ: fitness, gym, yoga, xông hơi khô, khu vực trang điểm, bãi giữ xe rộng rãi miễn phí….',
-        9000.00, 0, 0, 30, 10, 30);
+        9000.00, 0, 0, 365, 10, 430);
 
 
 INSERT INTO gym_department_plans(gym_department_id, plan_id)
@@ -3421,24 +3421,24 @@ VALUES
     /******************************************** Kickfit Sport Plans ***************************************************/
     (101, 1, 2, 1, 2, 'Gói Bạc',
      'Đây là một trong những loại thẻ tập chính. Khi tham gia gói tập này bạn sẽ có rất nhiều đặc quyền như được tập các loại hình như Gym – Yoga – Group X. Miễn phí tủ đồ và phòng xông hơi',
-     599.00, 0, 0, 30, 10, 30),
+     599.00, 0, 0, 30, 10, 40),
     (102, 1, 2, 1, 2, 'Gói Kim cương',
      'Gói tập Gym – Kickfit – Bơi – Yoga – Group X, miễn phí tủ đồ, Xông hơi, Khăn Tập, Khăn Tắm và Nước. (Đặc biệt được dẫn theo một người đi cùng)',
-     2199.00, 0, 0, 30, 10, 30),
+     2199.00, 0, 0, 60, 10, 80),
     (103, 1, 2, 1, 2, 'Gói PT',
      'Gói Tập Gym với PT chuyên nghiệp, miễn phí tủ đồ, Xông hơi Khăn Tập, Khăn Tắm, Nước',
-     399.00, 0, 0, 30, 10, 30),
+     399.00, 0, 0, 40, 10, 50),
 
     /******************************************** 25 FIT Plans ***************************************************/
     (104, 2, 2, 1, 2, 'Gói Platinum',
      'Khi mua gói tập này, bạn sẽ nhận được các quyền lợi như: Miễn phí reworkout, nước uống và khăn tập. Ngoài ra voucher tập 1 tuần và HLV cá nhân cũng sẽ được cung cấp',
-     53760.00, 0, 0, 365, 10, 365),
+     53760.00, 0, 0, 365, 10, 425),
     (105, 2, 2, 1, 2, 'Gói Platinum 2 Năm',
      'Khi mua gói tập này, bạn sẽ nhận được các quyền lợi như: Miễn phí reworkout, nước uống và khăn tập tặng kèm với voucher tập 1 tháng và HLV cá nhân',
-     79999.00, 0, 0, 730, 10, 730),
+     79999.00, 0, 0, 730, 10, 900),
     (106, 2, 2, 1, 2, 'Gói trải nghiệm',
      'Khi mua gói tập này, bạn sẽ nhận được các quyền lợi của 25 FIT trong vòng 1 tháng với mức giá phải chăng',
-     6099.00, 0, 0, 30, 10, 30),
+     6099.00, 0, 0, 30, 10, 40),
 
     /******************************************** S'Life Gym  ***************************************************/
     (107, 3, 1, 1, 1, 'Gói Linh Hoạt',
@@ -3446,13 +3446,13 @@ VALUES
      0, 50.00, 0, 0, 10, 30),
     (108, 3, 2, 1, 2, 'Gói Silver',
      'Quý khách sẽ có quyền lợi được tham gia tất cả các lớp tập 1 một chi nhánh bạn lựa chọn.Tham gia các lớp dance, Group X, Yoga, Gym, Kickfit,….Có Locker (tủ) đựng đồ, được xông hơi, sử dụng phòng tắm,…',
-     9000.00, 0, 0, 720, 10, 720),
+     9000.00, 0, 0, 720, 10, 920),
     (109, 3, 2, 1, 2, 'Gói Gold ',
      'Quý Khách sẽ có quyền lợi như gói Silver.Có thêm khăn mỗi buổi tập nên không cần mang theo. Được tập tại tất cả các chi nhánh của S’life Gym',
-     12500.00, 0, 0, 1080, 10, 1080),
+     12500.00, 0, 0, 1080, 10, 1380),
     (110, 3, 2, 1, 2, 'Gói Titaninum ',
      'Quý Khách sẽ được hưởng tất cả các quyền lợi như của thẻ Silver và Gold thì còn được uống detox sau mỗi buổi tập.Được tham gia tất cả các lớp tập tại tất cả các chi nhánh',
-     13000.00, 0, 0, 900, 10, 900),
+     13000.00, 0, 0, 900, 10, 1100),
 
     /******************************************** Diamond Fitness  ***************************************************/
     (111, 4, 1, 1, 1, 'Gói Linh Hoạt',
@@ -3460,10 +3460,10 @@ VALUES
      0, 50.00, 0, 0, 10, 30),
     (112, 4, 2, 1, 2, 'Gói Siêu Quyền Lợi',
      'Hơn 45 bộ môn : Gym, Kick Boxing, GroupX, Cycling. Hơn 100+ lớp học thú vị: Dance, Zumba, Múa cổ trang, Aerobics, TikTok Dance,. Đội ngũ HLV giàu kinh nghiệm chuyên môn ',
-     3400.00, 0, 0, 365, 10, 365),
+     3400.00, 0, 0, 365, 10, 450),
     (113, 4, 2, 1, 2, 'Gói Full Dịch Vụ',
      'Quý khách sẽ được hưởng quyền lợi như Gói Siêu Quyền Lợi cộng thêm tự do tập toàn khung giờ từ 5:30 - 22:00.Dịch vụ tiện ích thư giãn cao cấp: xông hơi, bơi lội,...',
-     4000.00, 0, 0, 365, 10, 365);
+     4000.00, 0, 0, 365, 10, 450);
 
 
 INSERT INTO gym_department_amenities (gym_department_id, amenitie_id)

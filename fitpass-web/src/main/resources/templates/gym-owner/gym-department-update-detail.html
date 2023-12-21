@@ -306,13 +306,13 @@
                                                                     <th>Số credits/giờ</th>
                                                                     <th data-toggle="tooltip"
                                                                         data-placement="top"
-                                                                        title="Đây là mô tả của thời gian trước khi kích hoạt">
-                                                                        Thời hạn trước khi kích hoạt
+                                                                        title="Thẻ của của người dùng sẽ tự động hết hạn nếu người dùng không kích hoạt thẻ trong thời gian quy định">
+                                                                        Thời gian cần kích hoạt
                                                                     </th>
                                                                     <th data-toggle="tooltip"
                                                                         data-placement="top"
-                                                                        title="Đây là mô tả của thời gian sau khi kích hoạt">
-                                                                        Thời hạn sau khi kích hoạt
+                                                                        title="Thẻ của người dùng sẽ tự động hết hạn khi bạn hết thời gian sử dụng">
+                                                                        Thời gian sử dụng
                                                                     </th>
                                                                     <th class="plan-description">Mô tả</th>
                                                                     <th><input type="checkbox"
@@ -362,13 +362,13 @@
                                                                     <th>Thời lượng tập</th>
                                                                     <th data-toggle="tooltip"
                                                                         data-placement="top"
-                                                                        title="Đây là mô tả của thời gian trước khi kích hoạt">
-                                                                        Thời hạn trước khi kích hoạt
+                                                                        title="Thẻ của của người dùng sẽ tự động hết hạn nếu người dùng không kích hoạt thẻ trong thời gian quy định">
+                                                                        Thời gian cần kích hoạt
                                                                     </th>
                                                                     <th data-toggle="tooltip"
                                                                         data-placement="top"
-                                                                        title="Đây là mô tả của thời gian sau khi kích hoạt">
-                                                                        Thời hạn sau khi kích hoạt
+                                                                        title="Thẻ của người dùng sẽ tự động hết hạn khi bạn hết thời gian sử dụng">
+                                                                        Thời gian sử dụng
                                                                     </th>
                                                                     <th class="fixed-description">Mô tả</th>
                                                                     <th><input type="checkbox"
@@ -499,26 +499,38 @@
                                     <fieldset>
                                         <h2 class="fs-title">Thông tin cơ bản</h2>
                                         <div class="row text-start">
-                                            <div class="col-md-6 pb-4">
-                                                <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
-                                            </div>
-                                            <div class="col-md-6 pb-4">
-                                                <img class="guide-img" src="https://bom.so/r1ld1E" alt="guide">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="mb-4">
-                                                    <label for="latitude" class="form-label fw-bold">Vĩ độ
-                                                        :</label>
-                                                    <input type="number" class="form-control" id="latitude"
-                                                           name="latitude" placeholder="Nhập vĩ độ">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-4">
+                                                        <label for="latitude" class="form-label fw-bold">Vĩ độ
+                                                            :</label>
+                                                        <input type="number" class="form-control" id="latitude"
+                                                               name="latitude" placeholder="Nhập vĩ độ">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-4">
+                                                        <label for="longitude" class="form-label fw-bold">Kinh độ
+                                                            :</label>
+                                                        <input type="number" class="form-control" id="longitude"
+                                                               name="longitude" placeholder="Nhập kinh độ">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="mb-4">
-                                                    <label for="longitude" class="form-label fw-bold">Kinh độ
-                                                        :</label>
-                                                    <input type="number" class="form-control" id="longitude"
-                                                           name="longitude" placeholder="Nhập kinh độ">
+                                            <div class="row">
+                                                <div class="col-md-12 col-lg-12 col-xl-6">
+                                                    <p class="fw-bold">&#9888; Để cung cấp thông tin vị trí chính xác nhất cho phòng tập của bạn, hãy thực hiện các bước sau:</p>
+                                                    <div class="alert alert-info text-black">
+                                                        <div>&#10149; Mở ứng dụng bản đồ trực tuyến như <a href="https://www.google.com/maps" target="_blank">Google Maps</a>.</div>
+                                                        <div>&#10149; Tìm kiếm và chọn vị trí chính xác của phòng tập của bạn.</div>
+                                                        <div>&#10149; Ấn chuột phải và vị trí phòng tập của bạn vừa tìm sẽ thấy một chuỗi (ví dụ: 10.770336486220907, 106.66632963884305).</div>
+                                                        <div>&#10149; Chuỗi số đầu tiên là vĩ độ, chuỗi số sau là kinh độ (ví dụ: 10.770336486220907 = vĩ độ, 106.66632963884305 = kinh độ).</div>
+                                                        <div>&#10149; Sao chép và dán giá trị vĩ độ (Latitude) và kinh độ (Longitude) từ thanh địa chỉ vào các ô tương ứng ở trên.</div>
+                                                    </div>
+                                                    <p class="fw-bold">&#10004; Bằng cách này, bạn sẽ đảm bảo rằng thông tin vị trí được nhập chính xác, giúp khách hàng dễ dàng tìm đến phòng tập của bạn.</p>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12 col-xl-6">
+                                                    <img class="map-image" th:src="@{/images/system/guide.jpg}" alt="">
                                                 </div>
                                             </div>
                                         </div>

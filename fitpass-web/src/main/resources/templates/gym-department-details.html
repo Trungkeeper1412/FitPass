@@ -164,12 +164,12 @@
                     </div>
                     <div class="d-flex">
                         <i class="bi bi-info-circle pt-1" data-toggle="tooltip" data-placement="top"
-                           title="Thẻ của bạn sẽ tự động hết hạn nếu bạn không kích hoạt nó trước thời gian này khi mua."></i>&#160;
-                        <div class="fw-bold mt-1 text-danger" th:text="'Thời gian hết hạn kích hoạt: ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
+                           title="Thẻ của bạn sẽ tự động hết hạn nếu bạn không kích hoạt nó trước thời gian này sau khi mua."></i>&#160;
+                        <div class="fw-bold mt-1 text-danger" th:text="'Thời hạn cần kích hoạt: ' + ${gymPlan.planBeforeActiveValidity} +' ngày'"></div>
                     </div>
                     <div class="d-flex">
                         <i class="bi bi-info-circle pt-1" data-toggle="tooltip" data-placement="top"
-                           title="Thẻ của bạn sẽ hết hạn sau khoảng thời gian này, ngay sau khi bạn kích hoạt nó."></i>&#160;
+                           title="Thẻ của bạn sẽ hết hạn sau khoảng thời gian sử dụng khi bạn kích hoạt nó."></i>&#160;
                         <div class="fw-bold mt-1" style="padding-bottom: 15px" th:text="'Thời gian sử dụng: ' + ${gymPlan.planAfterActiveValidity} + ' ngày'"></div>
                     </div>
                 </div>

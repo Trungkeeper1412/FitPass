@@ -91,6 +91,7 @@
                                                     <span class="not-check-in">Chưa check-in</span>
                                                 </div>
                                                 <div class="plan-info">
+                                                    <div class="fw-bold" th:text="${'Fitpass_Card_' + item.getOrderDetailId()}"></div>
                                                     <div class="fw-bold plan-type" th:text="${item.getProductName()}">Gói linh hoạt VIP </div>
                                                     <div>
                                                         <span  class="text-money" th:text="${item.getPrice()}"></span>
@@ -121,6 +122,7 @@
                                                     <span class="checked-in">Đã check-in</span>
                                                 </div>
                                                 <div class="plan-info">
+                                                    <div class="fw-bold" th:text="${'Fitpass_Card_' + item.getOrderDetailId()}"></div>
                                                     <div class="plan-type" th:text="${item.getProductName()}">Gói linh hoạt VIP </div>
                                                     <div>
                                                         <span  class="text-money" th:text="${item.getPrice()}"></span>
