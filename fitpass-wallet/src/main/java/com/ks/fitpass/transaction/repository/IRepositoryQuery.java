@@ -51,6 +51,8 @@ public interface IRepositoryQuery {
                 wallet w
                     JOIN
                 `transaction` t ON w.wallet_id = t.wallet_id
+            WHERE
+                t.status = 'Thành công'
             GROUP BY
                 w.user_id, w.wallet_id;
             """;
