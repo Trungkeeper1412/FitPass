@@ -5039,6 +5039,13 @@ section {
         display: grid;
         grid-template-columns: 5fr 5fr 2fr;
     }
+    /*.body-checkout .bill-info{*/
+    /*    position: fixed;*/
+    /*    top: 240px;*/
+    /*    bottom: 500px;*/
+    /*    right: 60px;*/
+    /*    width: 25%;*/
+    /*}*/
 }
 
 @media only screen and (min-width: 1400px) {
