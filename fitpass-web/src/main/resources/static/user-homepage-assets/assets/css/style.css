@@ -1593,7 +1593,6 @@ h6 {
   padding: 15px 0;
   background: whitesmoke;
   min-height: 40px;
-  margin-top: 74px;
 }
 
 .breadcrumbs h2 {
@@ -1622,10 +1621,6 @@ h6 {
 }
 
 @media (max-width: 992px) {
-  .breadcrumbs {
-    margin-top: 94px;
-  }
-
   .breadcrumbs .d-flex {
     display: block !important;
   }
@@ -1640,10 +1635,6 @@ h6 {
 }
 
 @media (min-width: 767px) and (max-width: 1200px) {
-  .breadcrumbs {
-    margin-top: 68px;
-  }
-
   .breadcrumbs .d-flex {
     display: block !important;
   }
