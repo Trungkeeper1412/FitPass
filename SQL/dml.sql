@@ -1755,6 +1755,43 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (5, 3, 3, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
        (5, 1, 4, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
 
+       (64, 1, 1, 5, 'Phòng tập thể dục rất chuyên nghiệp và sạch sẽ.', NOW(), 1),
+       (65, 1, 1, 4, 'Dịch vụ tốt, phòng tập thoải mái.', NOW(), 1),
+       (66, 1, 1, 3, 'Không gian tập luyện tốt, nhưng có thể cải thiện thêm về thiết bị.', NOW(), 1),
+       (67, 1, 2, 5, 'Rất hài lòng với trang thiết bị và không gian tập luyện.', NOW(), 1),
+       (68, 1, 2, 4, 'Nhân viên thân thiện, phòng tập sạch sẽ.', NOW(), 1),
+
+-- Đánh giá cho user_id 69 - 73, gym_plan_id 2, department_id 20 - 24
+       (69, 2, 3, 4, 'Phòng tập đẹp và hiện đại, nhân viên nhiệt tình.', NOW(), 1),
+       (70, 2, 3, 5, 'Dịch vụ chất lượng, phòng tập rộng rãi và thoải mái.', NOW(), 1),
+       (71, 2, 3, 4, 'Thiết bị tốt, không gian tập luyện sạch sẽ.', NOW(), 1),
+       (72, 2, 3, 3, 'Phòng tập đông, cần nâng cấp thêm thiết bị.', NOW(), 1),
+       (73, 2, 4, 5, 'Đánh giá cao về chất lượng dịch vụ và trang thiết bị.', NOW(), 1),
+
+-- Đánh giá cho user_id 74 - 75, gym_plan_id 3, department_id 25
+       (74, 3, 4, 5, 'Phòng tập rất đẹp và thoải mái, nhân viên thân thiện.', NOW(), 1),
+       (75, 3, 4, 4, 'Dịch vụ tốt, không gian tập luyện phù hợp với mọi người.', NOW(), 1),
+
+
+       (73, 2, 3, 5, 'Đánh giá cao về chất lượng dịch vụ và trang thiết bị.', NOW(), 1),
+
+-- Đánh giá cho user_id 74 - 75, gym_plan_id 3, department_id 25
+       (74, 3, 3, 5, 'Phòng tập rất đẹp và thoải mái, nhân viên thân thiện.', NOW(), 1),
+       (75, 3, 3, 4, 'Dịch vụ tốt, không gian tập luyện phù hợp với mọi người.', NOW(), 1),
+
+       (69, 2, 2, 4, 'Phòng tập đẹp và hiện đại, nhân viên nhiệt tình.', NOW(), 1),
+       (70, 2, 2, 5, 'Dịch vụ chất lượng, phòng tập rộng rãi và thoải mái.', NOW(), 1),
+       (71, 2, 2, 4, 'Thiết bị tốt, không gian tập luyện sạch sẽ.', NOW(), 1),
+       (72, 2, 2, 3, 'Phòng tập đông, cần nâng cấp thêm thiết bị.', NOW(), 1),
+
+       (74, 1, 3, 5, 'Phòng tập rất đẹp và thoải mái, nhân viên thân thiện.', NOW(), 1),
+       (75, 1, 3, 4, 'Dịch vụ tốt, không gian tập luyện phù hợp với mọi người.', NOW(), 1),
+
+       (69, 1, 1, 4, 'Phòng tập đẹp và hiện đại, nhân viên nhiệt tình.', NOW(), 1),
+       (70, 1, 1, 5, 'Dịch vụ chất lượng, phòng tập rộng rãi và thoải mái.', NOW(), 1),
+       (71, 1, 1, 4, 'Thiết bị tốt, không gian tập luyện sạch sẽ.', NOW(), 1),
+       (72, 1, 1, 3, 'Phòng tập đông, cần nâng cấp thêm thiết bị.', NOW(), 1),
+
        (1, 1, 1, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
        (4, 2, 2, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
        (5, 3, 3, 3, 'Nhân viên phục vụ tận tình.', NOW(), 1),
@@ -1829,6 +1866,15 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (3, 13, 40, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
        (4, 12, 41, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
        (2, 11, 42, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái.', NOW(), 1),
+       (69, 11, 42, 4, 'Nhân viên thân thiện, không gian thoải mái.', NOW(), 1),
+       (71, 11, 38, 3, 'Phòng tập sạch sẽ nhưng không có wifi.', NOW(), 1),
+       (72, 12, 39, 4, 'Gym plan phù hợp với mọi đối tượng.', NOW(), 1),
+       (73, 13, 40, 2, 'Nhân viên nhiệt tình, không gian thoải mái.', NOW(), 1),
+       (74, 12, 41, 3, 'Gym plan giá trị cao, phù hợp cho người mới tập.', NOW(), 1),
+       (75, 11, 42, 4, 'Phòng tập rộng rãi, có nhiều lớp học.', NOW(), 1),
+       (73, 13, 40, 2, 'Nhân viên nhiệt tình, không gian thoải mái.', NOW(), 1),
+       (74, 12, 41, 3, 'Gym plan giá trị cao, phù hợp cho người mới tập.', NOW(), 1),
+       (75, 11, 42, 4, 'Phòng tập rộng rãi, có nhiều lớp học.', NOW(), 1),
 
        (4, 10, 37, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
        (2, 11, 38, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
@@ -1836,6 +1882,15 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (5, 13, 40, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
        (2, 12, 41, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
        (4, 11, 42, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (74, 12, 41, 3, 'Gym plan giá trị cao, phù hợp cho người mới tập.', NOW(), 1),
+       (75, 11, 42, 4, 'Phòng tập rộng rãi, có nhiều lớp học.', NOW(), 1),
+       (73, 13, 40, 2, 'Nhân viên nhiệt tình, không gian thoải mái.', NOW(), 1),
+       (74, 12, 41, 3, 'Gym plan giá trị cao, phù hợp cho người mới tập.', NOW(), 1),
+       (75, 11, 42, 4, 'Phòng tập rộng rãi, có nhiều lớp học.', NOW(), 1),
+       (69, 11, 42, 4, 'Nhân viên thân thiện, không gian thoải mái.', NOW(), 1),
+       (71, 11, 38, 3, 'Phòng tập sạch sẽ nhưng không có wifi.', NOW(), 1),
+       (72, 12, 39, 4, 'Gym plan phù hợp với mọi đối tượng.', NOW(), 1),
+
 
        (3, 10, 37, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
        (3, 11, 38, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
@@ -1843,6 +1898,16 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (4, 13, 40, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
        (3, 12, 41, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
        (3, 11, 42, 3, 'Phòng tập đông và điều hòa chưa thật sự đáp ứng đc nhu cầu.', NOW(), 1),
+       (2, 12, 41, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (4, 11, 42, 5, 'Phòng tập siêu chất lượng, nhân viên nhiệt tình.', NOW(), 1),
+       (74, 12, 41, 3, 'Gym plan giá trị cao, phù hợp cho người mới tập.', NOW(), 1),
+       (75, 11, 42, 4, 'Phòng tập rộng rãi, có nhiều lớp học.', NOW(), 1),
+       (73, 13, 40, 2, 'Nhân viên nhiệt tình, không gian thoải mái.', NOW(), 1),
+       (74, 12, 41, 3, 'Gym plan giá trị cao, phù hợp cho người mới tập.', NOW(), 1),
+       (75, 11, 42, 4, 'Phòng tập rộng rãi, có nhiều lớp học.', NOW(), 1),
+       (69, 11, 42, 4, 'Nhân viên thân thiện, không gian thoải mái.', NOW(), 1),
+       (71, 11, 38, 3, 'Phòng tập sạch sẽ nhưng không có wifi.', NOW(), 1),
+       (72, 12, 39, 4, 'Gym plan phù hợp với mọi đối tượng.', NOW(), 1),
 
        (5, 10, 37, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
        (5, 11, 38, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
@@ -1850,6 +1915,9 @@ VALUES (1, 1, 1, 4, 'Phòng tập thể dục rất sạch sẽ và thoải mái
        (2, 13, 40, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
        (5, 12, 41, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
        (5, 11, 42, 3, 'Phòng tập ổn nhưng hơi thiếu nhân viên phục vụ.', NOW(), 1),
+
+
+
 
        (64, 10, 37, 2, 'Phòng tập ok nhưng cần thêm máy cardio.', NOW(), 1),
        (65, 11, 38, 3, 'Gym plan tốt, nhưng nhân viên phục vụ hơi lâu.', NOW(), 1),
