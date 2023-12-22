@@ -356,6 +356,8 @@ public interface IRepositoryQuery {
                     INNER JOIN user_detail ud ON u.user_detail_id = ud.user_detail_id
                 WHERE
                     uf.department_id = ?
+                ORDER BY
+                    uf.rating DESC, uf.feedback_time DESC;
             """;
 
     String GET_DEPARTMENT_FEEDBACK_OF_BRAND_OWNER = """
@@ -379,6 +381,8 @@ public interface IRepositoryQuery {
                                 INNER JOIN gym_plan gp ON gp.plan_id = uf.gym_plan_id
                             WHERE
                                 uf.department_id = ?
+                            ORDER BY
+                            uf.rating DESC, uf.feedback_time DESC;        
             """;
 
     String GET_DEPARTMENT_FEEDBACK_PAGINATION = """

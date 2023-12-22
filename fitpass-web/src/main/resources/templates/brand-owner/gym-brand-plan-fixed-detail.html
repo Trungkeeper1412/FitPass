@@ -33,36 +33,35 @@
                             <h2 class="fs-title text-center">Gói cố định</h2>
                             <form id="formSubmit" method="post" action="/brand-owner/gym-plans/fixed/update" th:object="${b}">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-4">
                                         <input type="hidden" th:field="${b.gymPlanId}" th:value="${b.gymPlanId}">
                                         <label for="packageName" class="form-label fw-bold">Tên gói tập :</label>
                                         <input name="gymPlanName" th:value="${b.gymPlanName}" th:field="${b.gymPlanName}" type="text" class="form-control" id="packageName" placeholder="Nhập tên gói tập">
                                         <span th:if="${#fields.hasErrors('gymPlanName')}" class="error" th:errors="*{gymPlanName}">Gym Plan Name Error</span>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-4">
                                         <label for="credits" class="form-label fw-bold">Số credits :</label>
                                         <input name="price" th:value="${b.price}" th:field="${b.price}" type="text" class="form-control" id="credits" placeholder="Nhập số credits">
                                         <span th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}">Price Error</span>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="activationBefore" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
-                                               title="Đây là mô tả của thời gian trước khi kích hoạt">Thời hạn trước khi kích hoạt:</label>
-                                        <input name="planBeforeActive" th:value="${b.planBeforeActive}" th:field="${b.planBeforeActive}" type="text" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
-                                        <span th:if="${#fields.hasErrors('planBeforeActive')}" class="error" th:errors="*{planBeforeActive}">PlanBeforeActive Error</span>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="activationAfter" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
-                                               title="Đây là mô tả của thời gian sau khi kích hoạt">Thời hạn sau khi kích hoạt:</label>
-                                        <input name="planAfterActive" th:value="${b.planAfterActive}" th:field="${b.planAfterActive}" type="text" class="form-control" id="activationAfter" placeholder="Nhập thời hạn sau khi kích hoạt">
-                                        <span th:if="${#fields.hasErrors('planAfterActive')}" class="error" th:errors="*{planAfterActive}">PlanAfterActive Error</span>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-4">
                                         <label for="packageDuration" class="form-label fw-bold">Thời lượng gói tập:</label>
                                         <input name="duration" th:value="${b.duration}" th:field="${b.duration}" type="text" class="form-control" id="packageDuration" placeholder="Nhập thời lượng gói tập">
                                         <span th:if="${#fields.hasErrors('duration')}" class="error" th:errors="*{duration}">Duration Error</span>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="activationAfter" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
+                                               title="Thẻ của người dùng sẽ tự động hết hạn khi bạn hết thời gian sử dụng">Thời gian sử dụng:</label>
+                                        <input name="planAfterActive" th:value="${b.planAfterActive}" th:field="${b.planAfterActive}" type="text" class="form-control" id="activationAfter" placeholder="Nhập thời hạn sau khi kích hoạt">
+                                        <span th:if="${#fields.hasErrors('planAfterActive')}" class="error" th:errors="*{planAfterActive}">PlanAfterActive Error</span>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="activationBefore" class="form-label fw-bold" data-toggle="tooltip" data-placement="top"
+                                               title="Thẻ của của người dùng sẽ tự động hết hạn nếu người dùng không kích hoạt thẻ trong thời gian quy định">Thời gian hết hạn kích hoạt:</label>
+                                        <input name="planBeforeActive" th:value="${b.planBeforeActive}" th:field="${b.planBeforeActive}" type="text" class="form-control" id="activationBefore" placeholder="Nhập thời hạn trước khi kích hoạt">
+                                        <span th:if="${#fields.hasErrors('planBeforeActive')}" class="error" th:errors="*{planBeforeActive}">PlanBeforeActive Error</span>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
                                         <div class="display-status">
                                             <label class="d-block fw-bold">Trạng thái :</label>
                                             <div class="form-check form-check-inline">
@@ -76,7 +75,7 @@
                                             <span th:if="${#fields.hasErrors('status')}" class="error" th:errors="*{status}" style="color: red; font-size: 12px;">Status Error</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-4">
                                         <label for="packageDescription" class="form-label fw-bold">Mô tả gói tập:</label>
                                         <textarea name="description" th:text="${b.description}" th:field="${b.description}" class="form-control" id="packageDescription" rows="4" placeholder="Nhập mô tả gói tập"></textarea>
                                         <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">Description Error</span>

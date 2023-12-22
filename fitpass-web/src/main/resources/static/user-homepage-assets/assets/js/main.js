@@ -374,7 +374,7 @@ function updateQuantityCart() {
 
             // Cập nhật thông tin chi tiết vật phẩm từ data-attributes của element
             detailCard.querySelector("#gymName").textContent = element.getAttribute("data-gym-name");
-            detailCard.querySelector("#itemType").textContent = "Loại thẻ: " + element.getAttribute("data-item-type");
+            detailCard.querySelector("#itemType").textContent = "Loại thẻ: " + element.getAttribute("data-item-type") + " - " + 'Fitpass_Card_'+ element.getAttribute("data-item-id");
             detailCard.querySelector("#itemDescription").textContent = "Mô tả: " + element.getAttribute("data-item-description");
             detailCard.querySelector("#itemPrice").textContent = "Giá thẻ: " + element.getAttribute("data-item-price") + " " + element.getAttribute("data-item-unit");
             detailCard.querySelector("#itemStatus").textContent = "Trạng thái: " + element.getAttribute("data-item-status");
