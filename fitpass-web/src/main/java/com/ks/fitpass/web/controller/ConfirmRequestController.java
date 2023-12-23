@@ -40,7 +40,7 @@ public class ConfirmRequestController {
                                                   @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
         // Nếu người dùng không nhấn cancel thì check in
         String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
-        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Bangkok")).toInstant());
+        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toInstant());
         if (cancel.equals("no")) {
             // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
             Notification successNotification = Notification.builder()
@@ -84,7 +84,7 @@ public class ConfirmRequestController {
 
     @PostMapping("/checkout")
     public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) {
-        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Bangkok")).toInstant());
+        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toInstant());
         if (updateCheckInHistory.getCancel().equals("No")) {
             User user = (User) session.getAttribute("userInfo");
 
