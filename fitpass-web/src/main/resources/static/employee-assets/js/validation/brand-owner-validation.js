@@ -94,7 +94,7 @@ $(document).ready(function () {
                 required: true,
                 number: true,
                 min: function () {
-                    return $("#packageDuration").val() || 1;
+                    return $("#packageDuration").val();
                 },
                 max: 36500,
             },
