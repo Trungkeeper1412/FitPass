@@ -1,6 +1,5 @@
 package com.ks.fitpass.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
 import com.ks.fitpass.core.entity.User;
@@ -20,6 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZoneId;
+
 @Controller
 @RequestMapping("/confirm")
 @RequiredArgsConstructor
@@ -38,6 +40,7 @@ public class ConfirmRequestController {
                                                   @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
         // Nếu người dùng không nhấn cancel thì check in
         String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
+        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Bangkok")).toInstant());
         if (cancel.equals("no")) {
             // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
             Notification successNotification = Notification.builder()
@@ -47,14 +50,13 @@ public class ConfirmRequestController {
                     .message(username + " đã xác nhận check in thành công")
                     .departmentId(departmentId)
                     .orderDetailId(orderDetailId)
-                    .timeSend(new Timestamp(System.currentTimeMillis()))
+                    .timeSend(timestamp)
                     .build();
             notificationService.insertNotification(successNotification);
             webSocketService.notifyEmployee(userIdReceive, successNotification);
 
             // Update bảng check in history
-            employeeService.insertToCheckInHistory(orderDetailId, 0, new Timestamp(System.currentTimeMillis()),
-                    null, 0, userIdReceive);
+            employeeService.insertToCheckInHistory(orderDetailId, 0, timestamp, null, 0, userIdReceive);
             // Thay đổi status thành đang tập để chuyển sang tab check in
             orderDetailService.updateOrderDetailsUseStatus(orderDetailId, "Đang tập");
 
@@ -71,7 +73,7 @@ public class ConfirmRequestController {
                     .message(username + " đã hủy check in")
                     .departmentId(departmentId)
                     .orderDetailId(orderDetailId)
-                    .timeSend(new Timestamp(System.currentTimeMillis()))
+                    .timeSend(timestamp)
                     .build();
             notificationService.insertNotification(cancelNotification);
             webSocketService.notifyEmployee(userIdReceive, cancelNotification);
@@ -81,7 +83,8 @@ public class ConfirmRequestController {
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) throws JsonProcessingException {
+    public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) {
+        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Bangkok")).toInstant());
         if (updateCheckInHistory.getCancel().equals("No")) {
             User user = (User) session.getAttribute("userInfo");
 
@@ -90,7 +93,7 @@ public class ConfirmRequestController {
             String username = orderDetailService.getUserNameByOrderDetailId(successNotification.getOrderDetailId());
             successNotification.setMessageType("Thông báo checkout thành công tới employee");
             successNotification.setMessage(username + " đã thanh toán thành công");
-            successNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+            successNotification.setTimeSend(timestamp);
 
             // Gửi lại thông báo cho employee là đã thanh toán thành công + insert vào db
             notificationService.insertNotification(successNotification);
@@ -111,7 +114,7 @@ public class ConfirmRequestController {
             transferCreditHistory.setReceiverUserId(brandOwnerId);
             transferCreditHistory.setAmount(updateCheckInHistory.getTotalCredit());
             transferCreditHistory.setOrderDetailId(successNotification.getOrderDetailId());
-            transferCreditHistory.setTransferDate(new Timestamp(System.currentTimeMillis()));
+            transferCreditHistory.setTransferDate(timestamp);
 
             transactionService.insertTransferCreditHistory(transferCreditHistory);
 
@@ -128,7 +131,7 @@ public class ConfirmRequestController {
             String username = orderDetailService.getUserNameByOrderDetailId(cancelNotification.getOrderDetailId());
             cancelNotification.setMessageType("Thông báo hủy checkout tới employee");
             cancelNotification.setMessage(username + " đã hủy checkout");
-            cancelNotification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+            cancelNotification.setTimeSend(timestamp);
 
             // Gửi lại thông báo cho employee là đã check in thất bại + insert vào db
             notificationService.insertNotification(cancelNotification);
