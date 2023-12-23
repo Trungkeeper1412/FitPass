@@ -24,13 +24,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId) {
-        return employeeRepository.getListNeedCheckInFlexibleByDepartmentId(departmentId);
+    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return employeeRepository.getListNeedCheckInFlexibleByDepartmentId(departmentId, offset, size);
     }
 
     @Override
-    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
-        return employeeRepository.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
+    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return employeeRepository.getListNeedCheckOutFlexibleByDepartmentId(departmentId, offset, size);
+    }
+
+    @Override
+    public int getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId) {
+        Integer count = employeeRepository.getTotalListNeedCheckInFlexibleByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
+        Integer count = employeeRepository.getTotalListNeedCheckOutFlexibleByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override

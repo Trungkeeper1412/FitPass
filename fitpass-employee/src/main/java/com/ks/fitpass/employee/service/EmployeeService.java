@@ -10,9 +10,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface EmployeeService {
-    List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId);
-    List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId);
+    //////////////////////////////////////////////// Flexible Plan //////////////////////////
+    List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int page, int size);
+    List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int page, int size);
+    int getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
+    int getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
 
+    ////////////////////////////////////////////////// Fixed Plan //////////////////////////
     List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId);
 
     List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId);

@@ -5,16 +5,16 @@ import com.ks.fitpass.employee.dto.CheckInFlexibleDTO;
 import com.ks.fitpass.employee.dto.CheckOutFlexibleDTO;
 import com.ks.fitpass.employee.dto.CheckedInFixedDTO;
 import com.ks.fitpass.notification.dto.UserReceiveMessageDTO;
-import com.ks.fitpass.order.entity.OrderDetails;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 public interface EmployeeRepository {
 
-    List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId);
-
-    List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId);
+    List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int offset, int size);
+    List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int offset, int size);
+    Integer getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
+    Integer getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
 
     List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId);
 

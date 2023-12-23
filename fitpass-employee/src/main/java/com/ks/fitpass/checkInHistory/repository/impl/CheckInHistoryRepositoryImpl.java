@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.ks.fitpass.checkInHistory.repository.IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID;
@@ -52,7 +51,7 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
 
     @Override
     public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int offset, int size) {
-        List<CheckInHistoryFlexible> list = jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID + " LIMIT ?, ?", (rs, rowNum) -> {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID + " LIMIT ?, ?", (rs, rowNum) -> {
             CheckInHistoryFlexible checkInHistoryFlexible = new CheckInHistoryFlexible();
             checkInHistoryFlexible.setUsername(rs.getString("username"));
             checkInHistoryFlexible.setUserImageUrl(rs.getString("image_url"));
@@ -70,7 +69,6 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             checkInHistoryFlexible.setDuration(duration);
             return checkInHistoryFlexible;
         }, departmentId, offset, size);
-        return list;
     }
 
     @Override
@@ -307,9 +305,8 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
         long minutes = (durationInMillis % (60 * 60 * 1000)) / (60 * 1000);
 
         // Định dạng chuỗi "HH h mm p"
-        String formattedDuration = String.format("%02d giờ %02d phút", hours, minutes);
 
-        return formattedDuration;
+        return String.format("%02d giờ %02d phút", hours, minutes);
     }
 
 }

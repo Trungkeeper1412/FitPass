@@ -25,8 +25,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -36,12 +36,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
     }
 
     @Override
-    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckOutFlexibleDTO dto = new CheckOutFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -51,7 +51,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
+    }
+
+    @Override
+    public Integer getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public Integer getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 
     @Override

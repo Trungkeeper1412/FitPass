@@ -152,30 +152,68 @@ public class EmployeeController {
         }
     }
 
-
     @GetMapping("/check-in/flexible")
-    public String getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId, Model model, HttpSession session) {
+    public String getCheckInListOfFlexibleCustomerPage(@RequestParam("departmentId") int departmentId, HttpSession session) {
         try {
             if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
                 return "error/403";
             }
-            List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId);
-            List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
-            model.addAttribute("checkInList", checkInFlexibleDTOList);
-            model.addAttribute("checkOutList", checkOutFlexibleDTOList);
             return "employee/employee-check-in-flexible";
-        } catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            return "error/duplicate-key-error";
         } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
             return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            return "error/incorrect-result-size-error";
         } catch (DataAccessException ex) {
             // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
             return "error/data-access-error";
+        }
+    }
+
+    @GetMapping("/check-in/flexible/list")
+    public ResponseEntity<?> getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId,
+                                                   @RequestParam("status") String status,
+                                                   @RequestParam(defaultValue = "1") int page,
+                                                   @RequestParam(defaultValue = "6") int size,
+                                                   HttpSession session) {
+        try {
+            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+            FlexiblePlanPage flexiblePlanPage = null;
+            if (status.equals("check-in")){
+                List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId,page,size);
+                int totalListCheckInFlexibleDTOList = employeeService.getTotalListNeedCheckInFlexibleByDepartmentId(departmentId);
+                int totalPages = (int) Math.ceil((double) totalListCheckInFlexibleDTOList / size);
+                flexiblePlanPage = FlexiblePlanPage.builder()
+                        .listCheckInFlexible(checkInFlexibleDTOList)
+                        .currentPage(page)
+                        .totalPages(totalPages)
+                        .departmentId(departmentId)
+                        .build();
+            } else if (status.equals("checked-in")) {
+                List<CheckOutFlexibleDTO> checkOutFlexibleDTOList = employeeService.getListNeedCheckOutFlexibleByDepartmentId(departmentId, page, size);
+                int totalListCheckOutFlexibleDTOList = employeeService.getTotalListNeedCheckOutFlexibleByDepartmentId(departmentId);
+                int totalPages = (int) Math.ceil((double) totalListCheckOutFlexibleDTOList / size);
+                flexiblePlanPage = FlexiblePlanPage.builder()
+                        .listCheckOutFlexible(checkOutFlexibleDTOList)
+                        .currentPage(page)
+                        .totalPages(totalPages)
+                        .departmentId(departmentId)
+                        .build();
+            }
+            return ResponseEntity.ok(flexiblePlanPage);
+        } catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Duplicate key violation.");
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: No data found.");
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: Incorrect result size.");
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Error: Data access issue.");
         }
     }
 
@@ -532,6 +570,7 @@ public class EmployeeController {
         }
     }
 
+    ///////////////////////////////////////////// Check In History ///////////////////////////////////////////////////////////////////////
     @GetMapping("/history")
     public String getCheckInHistory(@RequestParam("id") int departmentId, HttpSession session) {
         try {

@@ -5,240 +5,376 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <th:block th:replace="employee/common/sidebar"></th:block>
-        <!-- End of Sidebar -->
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <th:block th:replace="employee/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Navbar -->
-                <th:block th:replace="employee/common/navbar"></th:block>
-                <!-- End of Navbar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Navbar -->
+            <th:block th:replace="employee/common/navbar"></th:block>
+            <!-- End of Navbar -->
 
-                <!-- Begin Page Content -->
-                <!-- ======= Breadcrumbs ======= -->
-                <section class="breadcrumbs">
-                    <div class="d-flex align-items-center justify-content-lg-between">
-                        <ol>
-                            <li><a href="#">Fitpass</a></li>
-                            <li>Check-in gói linh hoạt</li>
-                        </ol>
-                    </div>
-                </section><!-- End Breadcrumbs -->
-                <div class="row">
-                    <div class="col">
-                        <div class="text-center fs-1 fw-bold">Danh sách người dùng:</div>
-                    </div>
+            <!-- Begin Page Content -->
+            <!-- ======= Breadcrumbs ======= -->
+            <section class="breadcrumbs">
+                <div class="d-flex align-items-center justify-content-lg-between">
+                    <ol>
+                        <li><a href="#">Fitpass</a></li>
+                        <li>Check-in gói linh hoạt</li>
+                    </ol>
                 </div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                            <div
-                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="hidden" id="departmentId" th:value="${departmentId}">
-                                    <input type="text" class="form-control bg-light border-1 small" id="searchInput"
-                                        placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" id="searchButton">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
+            </section><!-- End Breadcrumbs -->
+            <div class="row">
+                <div class="col">
+                    <div class="text-center fs-1 fw-bold">Danh sách người dùng:</div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="container separator-box">
+                    <ul class="nav nav-tabs" id="myTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">
+                                <span>Chưa tập</span>
+                                <span id="num-of-checkin"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">
+                                <span>Đang tập</span>
+                                <span id="num-of-active">(0)</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Tab Content -->
+                    <div class="tab-content mt-4">
+                        <div class="tab-pane fade show active" id="unactivated">
+                            <div class="search-check-in container">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
+                                        <div
+                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="hidden" id="departmentId" th:value="${departmentId}">
+                                                <input type="text" class="form-control bg-light border-1 small"
+                                                       id="searchInputCheckIn"
+                                                       placeholder="Tìm kiếm..." aria-label="Search"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button"
+                                                            id="searchButtonCheckIn">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                        <select id="search-by-check-in">
+                                            <option value="" disabled selected>Tìm kiếm theo:</option>
+                                            <option value="username">Tên</option>
+                                            <option value="phone-number">Số điện thoại</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="search-by">
-                                <option value="" disabled selected>Tìm kiếm theo:</option>
-                                <option value="username">Tên</option>
-                                <option value="phonenumber">Số điện thoại</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="container separator-box">
-                        <ul class="nav nav-tabs" id="myTabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">
-                                    <span>Chưa tập</span>
-                                    <span id="num-of-checkin"></span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">
-                                    <span>Đang tập</span>
-                                    <span id="num-of-active">(0)</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- Tab Content -->
-                        <div class="tab-content mt-4">
-                            <div class="tab-pane fade show active" id="unactivated">
-                                <div class="row justify-content-center" id="CheckInList">
-                                    <th:block th:each="item : ${checkInList}">
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                        <div class="user-card">
-                                            <div class="user-info">
-                                                <div class="img-col">
-                                                    <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
-                                                </div>
-                                                <div class="basic-info">
-                                                    <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
-                                                    <div class="phone" th:text="${item.getPhoneNumber()}">0987654321</div>
-                                                </div>
-                                                <span class="user-status">Chưa tập</span>
-                                            </div>
-                                            <div class="plan-info">
-                                                <div class="fw-bold" th:text="${'Fitpass_Card_' + item.getOrderDetailId()}"></div>
-                                                <div class="plan-type" style="overflow-wrap: break-word" th:text="${item.getProductName()}">
-                                                    Gói linh hoạt Gói linh hoạt Gói linh hoạt
-                                                </div>
-                                                <div>
-                                                    <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
-                                                    <span class="credit fw-bold">Credit/Giờ</span>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-primary checkin-btn mt-3 mx-auto" th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'">Check-in</button>
-                                        </div>
-                                        </div>
-                                    </th:block>
-
+                            <div class="row justify-content-center mt-3" id="CheckInList">
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center" id="paginationCheckIn">
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="tab-pane fade" id="active">
-                                <div class="row justify-content-center" id="CheckOutList">
-                                    <th:block th:each="item : ${checkOutList}">
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                        <div class="user-card">
-                                            <div class="user-info">
-                                                <div class="img-col">
-                                                    <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
+                        <div class="tab-pane fade" id="active">
+                            <div class="search-check-in container">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
+                                        <div
+                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-1 small"
+                                                       id="searchInputCheckedIn"
+                                                       placeholder="Tìm kiếm..." aria-label="Search"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button"
+                                                            id="searchButtonCheckedIn">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
                                                 </div>
-                                                <div class="basic-info">
-                                                    <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
-                                                    <div class="phone" th:text="${item.getPhoneNumber()}">0987654321</div>
-                                                </div>
-                                                <span class="user-status working">Đang tập</span>
-                                            </div>
-                                            <div style="display: flex" class="plan-wrapper">
-                                            <div class="plan-info">
-                                                <div class="fw-bold" th:text="${'Fitpass_Card_' + item.getOrderDetailId()}"></div>
-                                                <div class="plan-type" style="overflow-wrap: break-word" th:text="${item.getProductName()}">
-                                                    Gói linh hoạt Gói linh hoạt Gói linh hoạt
-                                                </div>
-                                                <div>
-                                                    <span  class="text-money" th:text="${item.getPricePerHours()}"></span>
-                                                    <span class="credit fw-bold">Credit/Giờ</span>
-                                                </div>
-                                            </div>
-                                                <button class="btn checkin-btn mx-auto mt-2" th:onclick="'showDetail(' + ${item.getOrderDetailId()} + ')'">Chi tiết</button>
-                                            </div>
                                             </div>
                                         </div>
-                                    </th:block>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                        <select id="search-by-checked-in">
+                                            <option value="" disabled selected>Tìm kiếm theo:</option>
+                                            <option value="username">Tên</option>
+                                            <option value="phone-number">Số điện thoại</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-3" id="CheckOutList">
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center" id="paginationCheckedIn">
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
-
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <th:block th:replace="employee/common/footer :: footer"></th:block>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
         </div>
-        <!-- End of Content Wrapper -->
 
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <th:block th:replace="employee/common/footer :: footer"></th:block>
+        <!-- End of Footer -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <!-- Logout Modal-->
-    <th:block th:replace="employee/common/logout-modal"></th:block>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <!-- Script -->
-    <th:block th:replace="employee/common/script :: script"></th:block>
+<!-- Logout Modal-->
+<th:block th:replace="employee/common/logout-modal"></th:block>
 
-
-    <!-- Search AJAX Jquery-->
-    <script>
-        // number of checkout person
-        let numOfActive = document.getElementById("CheckOutList").getElementsByClassName("user-card").length;
-        document.getElementById("num-of-active").innerHTML = '('+numOfActive+')';
-        console.log(numOfActive);
-
-        // number of checkin person
-        let numOfCheckin = document.getElementById("CheckInList").getElementsByClassName("user-card").length;
-        document.getElementById("num-of-checkin").innerHTML = '('+numOfCheckin+')';
+<!-- Script -->
+<th:block th:replace="employee/common/script :: script"></th:block>
 
 
-        // Bắt sự kiện khi nút tìm kiếm được nhấn
-        $("#searchButton").click(function () {
-            event.preventDefault();
-            // Lấy giá trị từ ô nhập liệu
-            let searchText = $("#searchInput").val();
-            // Lấy giá trị từ dropdown chọn
-            let searchOption = $("#search-by").val();
+<!-- Search AJAX Jquery-->
+<script>
+    // // number of checkout person
+    // let numOfActive = document.getElementById("CheckOutList").getElementsByClassName("user-card").length;
+    // document.getElementById("num-of-active").innerHTML = '(' + numOfActive + ')';
+    // console.log(numOfActive);
+    //
+    // // number of checkin person
+    // let numOfCheckin = document.getElementById("CheckInList").getElementsByClassName("user-card").length;
+    // document.getElementById("num-of-checkin").innerHTML = '(' + numOfCheckin + ')';
 
-            let departmentId = $("#departmentId").val();
-            // Gửi yêu cầu tìm kiếm bằng Ajax
-            if ($("#active").hasClass("show")) {
-                searchListCheckOut(searchText, searchOption, departmentId)
-            } else {
-                searchListCheckIn(searchText, searchOption, departmentId);
+    let globalCurrentPage = 1;
+    let defaultPageSize = 6;
+    let status = "check-in"; // default status
+    const departmentId = $('#departmentId').val();
+
+    $(document).ready(function () {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            let targetId = $(e.target).attr("href");
+            status = targetId === "#unactivated" ? "check-in" : "checked-in";
+
+            console.log("shown.bs.tab event triggered - targetId: " + targetId + ", status: " + status);
+
+            // Add 'show' and 'active' classes to the shown tab content
+            $(targetId + '-tab').addClass('show active');
+
+            // If the other tab was previously active, remove 'show' and 'active' from it
+            let otherTabId = status === "check-in" ? "#active-tab" : "#unactivated-tab";
+            $(otherTabId).removeClass('show active');
+
+            handleTabChange(departmentId, status)
+        });
+        // Manually show the #unactivated-tab
+        $('a[href="#unactivated"]').trigger('shown.bs.tab');
+    });
+
+    // Function to handle tab change
+    function handleTabChange(departmentId, status) {
+        console.log("Tab changed, the status is " + status)
+        fetchData(departmentId, status, globalCurrentPage, defaultPageSize).then(data => {
+            console.log(data)
+            updateUI(data, status);
+            attachPaginationEventListeners(departmentId, status, defaultPageSize);
+        });
+    }
+
+    // Function to make an AJAX call to the backend
+    function fetchData(departmentId, status, page, size) {
+        return fetch(`/employee/check-in/flexible/list?departmentId=${departmentId}&status=${status}&page=${page}&size=${size}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server responded with an error: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Fetching error:', error);
+            });
+    }
+
+    function updateUI(data, status) {
+        renderPage(data, status);
+        renderPagination(data.currentPage, data.totalPages, status);
+    }
+
+    function renderPage(data, status) {
+        // Determine which list to use based on the status
+        let list = status === 'check-in' ? data.listCheckInFlexible : data.listCheckOutFlexible;
+        // Determine the container to update based on the status
+        let container = status === 'check-in' ? $('#CheckInList') : $('#CheckOutList');
+
+        // Clear the container before adding new content
+        container.empty();
+
+        // Iterate over the list items and create the HTML content
+        list.forEach(item => {
+            let userCardHtml = `
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="user-card">
+                    <div class="user-info">
+                        <div class="img-col">
+                            <img src="${item.imageUrl}" alt="User Profile Image">
+                        </div>
+                        <div class="basic-info">
+                            <div class="fw-bold username">${item.username}</div>
+                            <div class="phone">${item.phoneNumber}</div>
+                        </div>
+                        <span class="user-status${status === 'check-in' ? '' : ' working'}">${status === 'check-in' ? 'Chưa tập' : 'Đang tập'}</span>
+                    </div>
+                    <div class="${status === 'check-in' ? 'plan-info' : 'plan-wrapper'}">
+                        <div class="fw-bold">Fitpass_Card_${item.orderDetailId}</div>
+                        <div class="plan-type" style="overflow-wrap: break-word">${item.productName}</div>
+                        <div>
+                            <span class="text-money">${item.pricePerHours}</span>
+                            <span class="credit fw-bold">Credit/Giờ</span>
+                        </div>
+                        ${status === 'check-in' ?
+                '<button class="btn btn-primary checkin-btn mt-3 mx-auto" onclick="performCheckIn('+ item.orderDetailId+')">Check-in</button>' :
+                '<button class="btn checkin-btn mx-auto mt-2" onclick="showDetail('+ item.orderDetailId +')">Chi tiết</button>'}
+                    </div>
+                </div>
+            </div>
+        `;
+            // Append the userCardHtml to the container
+            container.append(userCardHtml);
+        });
+    }
+
+    function renderPagination(currentPage, totalPages, status) {
+        let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
+
+        // Clear the pagination container
+        paginationContainer.empty();
+
+        // Append 'Previous' button
+        let previousDisabled = currentPage === 1 ? ' disabled' : '';
+        paginationContainer.append(`<li class="page-item${previousDisabled}">
+        <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+    </li>`);
+
+        // Append page number buttons
+        for (let i = 1; i <= totalPages; i++) {
+            let activeClass = i === currentPage ? ' active' : '';
+            paginationContainer.append(`<li class="page-item${activeClass}">
+            <a class="page-link" href="#" data-page="${i}">${i}</a>
+        </li>`);
+        }
+
+        // Append 'Next' button
+        let nextDisabled = currentPage === totalPages ? ' disabled' : '';
+        paginationContainer.append(`<li class="page-item${nextDisabled}">
+        <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+    </li>`);
+
+        attachPaginationEventListeners(departmentId, status, defaultPageSize);
+    }
+
+    function attachPaginationEventListeners(departmentId, status, size) {
+        let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
+        let paginationControls = paginationContainer.find('.page-link');
+
+        paginationControls.off('click').on('click', function (e) {
+            e.preventDefault();
+            const page = parseInt($(this).data('page'));
+            if (page > 0) {
+                handlePageChange(departmentId, status, page, size);
             }
         });
+    }
 
-        function searchListCheckIn(searchText, searchOption, departmentId) {
-            // Gửi yêu cầu tìm kiếm đến server
-            $.ajax({
-                type: "GET",
-                url: `/employee/searchListCheckIn?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}` ,
-                success: function (data) {
-                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                    displaySearchResultsCheckIn(data);
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-                }
-            });
+    // Function to handle page change
+    function handlePageChange(departmentId, status, page, size) {
+        fetchData(departmentId, status, page, size).then(data => {
+            updateUI(data, status);
+            attachPaginationEventListeners(departmentId, status, size);
+        });
+    }
+
+    // Bắt sự kiện khi nút tìm kiếm được nhấn
+    $("#searchButton").click(function () {
+        event.preventDefault();
+        // Lấy giá trị từ ô nhập liệu
+        let searchText = $("#searchInput").val();
+        // Lấy giá trị từ dropdown chọn
+        let searchOption = $("#search-by").val();
+
+        let departmentId = $("#departmentId").val();
+        // Gửi yêu cầu tìm kiếm bằng Ajax
+        if ($("#active").hasClass("show")) {
+            searchListCheckOut(searchText, searchOption, departmentId)
+        } else {
+            searchListCheckIn(searchText, searchOption, departmentId);
         }
+    });
 
-        function searchListCheckOut(searchText, searchOption, departmentId) {
-            // Gửi yêu cầu tìm kiếm đến server
-            $.ajax({
-                type: "GET",
-                url: `/employee/searchListCheckOut?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}` ,
-                success: function (data) {
-                    // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                    displaySearchResultsCheckOut(data);
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-                }
-            });
-        }
+    function searchListCheckIn(searchText, searchOption, departmentId) {
+        // Gửi yêu cầu tìm kiếm đến server
+        $.ajax({
+            type: "GET",
+            url: `/employee/searchListCheckIn?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}`,
+            success: function (data) {
+                // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                displaySearchResultsCheckIn(data);
+            },
+            error: function () {
+                alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+            }
+        });
+    }
 
-        function displaySearchResultsCheckIn(results) {
-            // Xóa các kết quả hiện tại
-            $("#CheckInList").empty();
-            // Hiển thị kết quả tìm kiếm
-            if (results.length > 0) {
-                var resultHtml = "";
-                for (var i = 0; i < results.length; i++) {
-                    resultHtml += `<div class="user-card">
+    function searchListCheckOut(searchText, searchOption, departmentId) {
+        // Gửi yêu cầu tìm kiếm đến server
+        $.ajax({
+            type: "GET",
+            url: `/employee/searchListCheckOut?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}`,
+            success: function (data) {
+                // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                displaySearchResultsCheckOut(data);
+            },
+            error: function () {
+                alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
+            }
+        });
+    }
+
+    function displaySearchResultsCheckIn(results) {
+        // Xóa các kết quả hiện tại
+        $("#CheckInList").empty();
+        // Hiển thị kết quả tìm kiếm
+        if (results.length > 0) {
+            var resultHtml = "";
+            for (var i = 0; i < results.length; i++) {
+                resultHtml += `<div class="user-card">
                                             <div class="row">
                                                 <div class="col-2">
                                                     <img src="${results[i].imageUrl}" alt="User 1 Profile Image">
@@ -261,22 +397,22 @@
                                                 </div>
                                             </div>
                                         </div>`;
-                }
-                $("#CheckInList").append(resultHtml);
-            } else {
-                $("#CheckInList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
             }
+            $("#CheckInList").append(resultHtml);
+        } else {
+            $("#CheckInList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
         }
+    }
 
-        function displaySearchResultsCheckOut(results) {
-            // Xóa các kết quả hiện tại
-            $("#CheckOutList").empty();
+    function displaySearchResultsCheckOut(results) {
+        // Xóa các kết quả hiện tại
+        $("#CheckOutList").empty();
 
-            // Hiển thị kết quả tìm kiếm
-            if (results.length > 0) {
-                var resultHtml = "";
-                for (var i = 0; i < results.length; i++) {
-                    resultHtml += `<div class="user-card">
+        // Hiển thị kết quả tìm kiếm
+        if (results.length > 0) {
+            var resultHtml = "";
+            for (var i = 0; i < results.length; i++) {
+                resultHtml += `<div class="user-card">
                                             <div class="row">
                                                 <div class="col-2">
                                                     <img src="${results[i].imageUrl}" alt="User 1 Profile Image">
@@ -299,34 +435,118 @@
                                                 </div>
                                             </div>
                                         </div>`;
-                }
-                $("#CheckOutList").append(resultHtml);
-            } else {
-                $("#CheckOutList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
             }
+            $("#CheckOutList").append(resultHtml);
+        } else {
+            $("#CheckOutList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
         }
+    }
 
-        function performCheckIn(orderDetailId) {
-            Swal.fire({
-                title: 'Gửi yêu cầu check in',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Có',
-                cancelButtonText: 'Không',
-                reverseButtons: true})
-                .then((result) => {
-                    if(result.isConfirmed){
+    ////////////////////////////////// Create Check In Request + Create Check Out Request ///////////////////////////////////////
+    function performCheckIn(orderDetailId) {
+        Swal.fire({
+            title: 'Gửi yêu cầu check in',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không',
+            reverseButtons: true
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "GET",
+                        url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}`,
+                        success: function (data) {
+                            // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
+                            console.log(data)
+                            if (data > 0) {
+                                Swal.fire({
+                                    toast: true,
+                                    icon: 'success',
+                                    title: `Gửi yêu cầu check in thành công`,
+                                    animation: true,
+                                    position: 'top-right',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+                            } else {
+                                Swal.fire({
+                                    toast: true,
+                                    icon: 'error',
+                                    title: `Gửi yêu cầu check in không thành công`,
+                                    animation: true,
+                                    position: 'top-right',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+                            }
+                        },
+                        error: function () {
+                            alert("Đã xảy ra lỗi trong quá trình check in.");
+                        }
+                    });
+                }
+            })
+    }
+
+    function showDetail(orderDetailId) {
+        $.ajax({
+            type: "GET",
+            url: `/employee/flexible/getCheckInTime?id=${orderDetailId}`,
+            success: function (data) {
+                console.log(data)
+                var dataCheckOut = data;
+                // Xử lí thông tin check out
+                var checkInTime = formatDateTime(data.checkInTime);
+                var duration = calculateDuration(data.checkInTime);
+                var credit = calculateTotalPrice(duration, data.pricePerHours);
+                // Hiện thông tin check out bằng thông báo
+                Swal.fire({
+                    title: 'Thông tin',
+                    html: `
+                            <p class="fw-bold">Thời gian check in: <span class="fw-normal">${checkInTime}</span></p>
+                            <p  class="fw-bold">Thời gian đã tập: <span class="fw-normal">${duration} phút</span></p>
+                            <p  class="fw-bold">Credit tạm tính: <span class="fw-normal">${credit} credit</span></p>
+                        `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Check Out',
+                    cancelButtonText: 'Quay lại',
+                    reverseButtons: true,
+                }).then((result) => {
+                    // Nếu employee nhấn xác nhận check out thì gửi thông tin lên sever
+                    const dataToSend = {
+                        orderDetailId: orderDetailId,
+                        duration: duration,
+                        checkInTime: dataCheckOut.checkInTime,
+                        checkOutTime: Date.now(),
+                        totalCredit: credit
+                    };
+                    console.log(JSON.stringify(dataToSend));
+                    if (result.isConfirmed) {
                         $.ajax({
-                            type: "GET",
-                            url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}` ,
+                            type: "POST",
+                            url: `/employee/flexible/sendCheckoutRequest`,
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            data: JSON.stringify(dataToSend),
                             success: function (data) {
-                                // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                                console.log(data)
-                                if(data > 0) {
+                                if (data > 0) {
                                     Swal.fire({
                                         toast: true,
                                         icon: 'success',
-                                        title: `Gửi yêu cầu check in thành công`,
+                                        title: `Gửi yêu cầu check out thành công`,
                                         animation: true,
                                         position: 'top-right',
                                         showConfirmButton: false,
@@ -341,7 +561,7 @@
                                     Swal.fire({
                                         toast: true,
                                         icon: 'error',
-                                        title: `Gửi yêu cầu check in không thành công`,
+                                        title: `Gửi yêu cầu check out không thành công`,
                                         animation: true,
                                         position: 'top-right',
                                         showConfirmButton: false,
@@ -353,153 +573,71 @@
                                         }
                                     })
                                 }
+
                             },
                             error: function () {
-                                alert("Đã xảy ra lỗi trong quá trình check in.");
+                                alert("Đã xảy ra lỗi trong quá trình gửi thông tin check out");
                             }
                         });
                     }
-                })
-        }
-
-        function showDetail(orderDetailId) {
-            $.ajax({
-                type: "GET",
-                url: `/employee/flexible/getCheckInTime?id=${orderDetailId}` ,
-                success: function (data) {
-                    console.log(data)
-                    var dataCheckOut = data;
-                    // Xử lí thông tin check out
-                    var checkInTime = formatDateTime(data.checkInTime);
-                    var duration = calculateDuration(data.checkInTime);
-                    var credit = calculateTotalPrice(duration, data.pricePerHours);
-                    // Hiện thông tin check out bằng thông báo
-                    Swal.fire({
-                        title: 'Thông tin',
-                        html: `
-                            <p class="fw-bold">Thời gian check in: <span class="fw-normal">${checkInTime}</span></p>
-                            <p  class="fw-bold">Thời gian đã tập: <span class="fw-normal">${duration} phút</span></p>
-                            <p  class="fw-bold">Credit tạm tính: <span class="fw-normal">${credit} credit</span></p>
-                        `,
-                        showCancelButton: true,
-                        confirmButtonText: 'Check Out',
-                        cancelButtonText: 'Quay lại',
-                        reverseButtons: true,
-                    }).then((result) => {
-                        // Nếu employee nhấn xác nhận check out thì gửi thông tin lên sever
-                        const dataToSend = {
-                            orderDetailId: orderDetailId,
-                            duration: duration,
-                            checkInTime: dataCheckOut.checkInTime,
-                            checkOutTime: Date.now(),
-                            totalCredit: credit
-                        };
-                        console.log(JSON.stringify(dataToSend));
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                type: "POST",
-                                url: `/employee/flexible/sendCheckoutRequest` ,
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                data: JSON.stringify(dataToSend),
-                                success: function (data) {
-                                    if(data > 0){
-                                        Swal.fire({
-                                            toast: true,
-                                            icon: 'success',
-                                            title: `Gửi yêu cầu check out thành công`,
-                                            animation: true,
-                                            position: 'top-right',
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        })
-                                    } else {
-                                        Swal.fire({
-                                            toast: true,
-                                            icon: 'error',
-                                            title: `Gửi yêu cầu check out không thành công`,
-                                            animation: true,
-                                            position: 'top-right',
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        })
-                                    }
-
-                                },
-                                error: function () {
-                                    alert("Đã xảy ra lỗi trong quá trình gửi thông tin check out");
-                                }
-                            });
-                        }
-                    });
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình lấy check in time.");
-                }
-            });
-        }
-
-        function formatDateTime(inputDate) {
-            const dateObject = new Date(inputDate);
-
-            const year = dateObject.getFullYear();
-            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-            const day = dateObject.getDate().toString().padStart(2, '0');
-            const hours = dateObject.getHours().toString().padStart(2, '0');
-            const minutes = dateObject.getMinutes().toString().padStart(2, '0');
-            const seconds = dateObject.getSeconds().toString().padStart(2, '0');
-
-            const formattedTime = `${hours}:${minutes}:${seconds}`;
-            const formattedDate = `${day}-${month}-${year}`;
-
-            return `${formattedTime} ${formattedDate}`;
-        }
-
-        function calculateDuration(startTime) {
-            // Lấy thời gian hiện tại
-            const currentTime = new Date();
-
-            // Chuyển thời gian bắt đầu (startTime) thành đối tượng Date
-            const startDate = new Date(startTime);
-
-            // Tính toán thời gian cách nhau (đơn vị: mili giây)
-            const timeDifference = currentTime - startDate;
-
-            // Chuyển thời gian cách nhau thành phút (hoặc đơn vị khác tùy chọn)
-             // 1 phút = 60,000 mili giây
-            return Math.floor(timeDifference / (1000 * 60));
-        }
-
-        function calculateTotalPrice(durationInMinutes, pricePerHour) {
-            // Kiểm tra nếu durationInMinutes hoặc pricePerHour không hợp lệ
-            if (isNaN(durationInMinutes) || isNaN(pricePerHour) || durationInMinutes < 0 || pricePerHour < 0) {
-                return "Dữ liệu không hợp lệ";
+                });
+            },
+            error: function () {
+                alert("Đã xảy ra lỗi trong quá trình lấy check in time.");
             }
+        });
+    }
 
-            // Chuyển đổi duration từ phút sang giờ (1 giờ = 60 phút)
-            const durationInHours = durationInMinutes / 60;
+    function formatDateTime(inputDate) {
+        const dateObject = new Date(inputDate);
 
-            // Tính tổng giá dựa trên duration và giá cho mỗi giờ
-            let totalPrice;
-            if (durationInHours > 0 && durationInHours <= 1){
-                totalPrice = pricePerHour;
-            } else {
-                totalPrice = durationInHours * pricePerHour;
-            }
-            return totalPrice.toFixed(2); // Làm tròn tổng giá đến 2 chữ số thập phân
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObject.getDate().toString().padStart(2, '0');
+        const hours = dateObject.getHours().toString().padStart(2, '0');
+        const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+        const seconds = dateObject.getSeconds().toString().padStart(2, '0');
+
+        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        const formattedDate = `${day}-${month}-${year}`;
+
+        return `${formattedTime} ${formattedDate}`;
+    }
+
+    function calculateDuration(startTime) {
+        // Lấy thời gian hiện tại
+        const currentTime = new Date();
+
+        // Chuyển thời gian bắt đầu (startTime) thành đối tượng Date
+        const startDate = new Date(startTime);
+
+        // Tính toán thời gian cách nhau (đơn vị: mili giây)
+        const timeDifference = currentTime - startDate;
+
+        // Chuyển thời gian cách nhau thành phút (hoặc đơn vị khác tùy chọn)
+        // 1 phút = 60,000 mili giây
+        return Math.floor(timeDifference / (1000 * 60));
+    }
+
+    function calculateTotalPrice(durationInMinutes, pricePerHour) {
+        // Kiểm tra nếu durationInMinutes hoặc pricePerHour không hợp lệ
+        if (isNaN(durationInMinutes) || isNaN(pricePerHour) || durationInMinutes < 0 || pricePerHour < 0) {
+            return "Dữ liệu không hợp lệ";
         }
-    </script>
+
+        // Chuyển đổi duration từ phút sang giờ (1 giờ = 60 phút)
+        const durationInHours = durationInMinutes / 60;
+
+        // Tính tổng giá dựa trên duration và giá cho mỗi giờ
+        let totalPrice;
+        if (durationInHours > 0 && durationInHours <= 1) {
+            totalPrice = pricePerHour;
+        } else {
+            totalPrice = durationInHours * pricePerHour;
+        }
+        return totalPrice.toFixed(2); // Làm tròn tổng giá đến 2 chữ số thập phân
+    }
+</script>
 </body>
 
 </html>
