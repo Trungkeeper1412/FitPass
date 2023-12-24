@@ -103,7 +103,7 @@ class CalendarControllerTest {
         );
 
         // Assert
-        assertEquals("redirect:/calendar/view", result);
+        assertEquals("redirect:/calendar/view?updateSuccess=true", result);
 
     }
 

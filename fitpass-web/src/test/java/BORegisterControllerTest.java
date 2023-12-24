@@ -1,3 +1,4 @@
+import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.partner.register.dto.BecomePartnerForm;
 import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 import com.ks.fitpass.partner.register.service.BecomePartnerService;
@@ -16,6 +17,8 @@ public class BORegisterControllerTest {
 
     @Mock
     private BecomePartnerService becomePartnerService;
+    @Mock
+    private UserService userService;
     @Mock
     private Model model;
 
@@ -98,7 +101,8 @@ public class BORegisterControllerTest {
         BecomePartnerForm form = new BecomePartnerForm();
         form.setBrandName("TestBrand");
         form.setBrandOwnerName("TestOwner");
-        // Set other form properties as needed
+        form.setContactEmail("sample email");
+
 
         // Mock successful form submission
         when(becomePartnerService.create(any(BecomePartnerRequest.class))).thenReturn(1);

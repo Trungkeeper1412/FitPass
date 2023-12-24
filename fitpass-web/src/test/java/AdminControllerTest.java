@@ -521,6 +521,8 @@ public class AdminControllerTest {
         // Arrange
         int requestHistoryId = 1;
         RequestHistoryAdmin mockRequestWithdrawHistory = new RequestHistoryAdmin();
+        long amountCredit = 10;
+        mockRequestWithdrawHistory.setAmountCredit(amountCredit);
         when(requestWithdrawHistoryService.getById(requestHistoryId)).thenReturn(mockRequestWithdrawHistory);
 
         // Act
