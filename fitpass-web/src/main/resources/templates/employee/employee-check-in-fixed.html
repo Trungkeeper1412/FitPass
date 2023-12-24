@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" id="CheckInList">
+                                <div class="row justify-content-center mt-3" id="CheckInList">
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row justify-content-center" id="CheckOutList">
+                                <div class="row justify-content-center mt-3" id="CheckOutList">
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -256,7 +256,7 @@
                     <p class="fw-bold">Thời lượng còn: <span>${item.duration}</span> ngày</p>
                     ${
                         status === 'check-in' ?
-                            `<button onclick="performCheckIn(${item.orderDetailId})" class="btn checkin-btn mx-auto">Check-in</button>` :
+                            `<button onclick="performCheckIn(${item.orderDetailId})" class="btn checkin-btn">Check-in</button>` :
                             `<div class="checkin-time">Thời gian: <span>${
                                 new Date(item.checkInTime).toLocaleString('vi-VN', {
                                     year: 'numeric',
