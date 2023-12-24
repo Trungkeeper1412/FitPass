@@ -324,7 +324,7 @@ h6 {
   top: 40px;
   right: 0px;
   width: 180px;
-  box-shadow: 0px 0px 10px rgb(217, 217, 217);
+  box-shadow: 0px 0px 5px rgb(217, 217, 217);
   background-color: white;
 }
 .user-profile-option a{

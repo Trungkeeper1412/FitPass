@@ -27,7 +27,7 @@ h6 {
     top: 40px;
     right: 0px;
     width: 180px;
-    box-shadow: 0px 0px 10px rgb(217, 217, 217);
+    box-shadow: 0px 0px 5px rgb(217, 217, 217);
     background-color: white;
 }
 .cart-badge {
@@ -4137,9 +4137,8 @@ section {
 }
 
 .special-plan {
-    background-image: url("https://i.pinimg.com/236x/1e/85/2c/1e852cb84f256d39406a0afd4aa7d8ed.jpg");
+    background-image: url('../img/flexible_card.jpg');
     background-size: cover;
-    /* padding-top:50px */
 }
 
 #special-plan {
@@ -4157,9 +4156,6 @@ section {
 }
 
 #special-plan button {
-    /* color: white;
-  background-image: url("https://i.pinimg.com/236x/8a/3c/a1/8a3ca1089e86d2c55e24790632291867.jpg");
-  background-size: cover; */
     margin-top: 20px;
 }
 
@@ -4178,7 +4174,7 @@ section {
     font-size: medium;
     padding: 10px;
     /* background-image: linear-gradient(to right, rgb(255, 81, 0) , rgb(255, 111, 0),  rgb(255, 153, 0)); */
-    background-image: url("https://i.pinimg.com/236x/55/07/53/5507538396c7a86c7791bed6b1eab0e7.jpg");
+    background-image: url('../img/flexible_card_button.jpg');
     background-size: cover;
 }
 
@@ -4591,7 +4587,7 @@ section {
     }
 
     .plan-card-mc {
-        background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+        background-image: url('../img/card_checkout.jpg');
         background-size: cover;
         height: 100%;
         width: 100%;
@@ -4692,7 +4688,7 @@ section {
     }
 
     .plan-card-mc {
-        background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+        background-image: url('../img/card_checkout.jpg');
         background-size: cover;
         width: 100%;
         padding: 15px;
@@ -4787,7 +4783,7 @@ section {
     }
 
     .plan-card-mc {
-        background-image: url("https://i.pinimg.com/236x/34/b9/ad/34b9adb2eb5fdb418f360faf83105749.jpg");
+        background-image: url('../img/card_checkout.jpg');
         background-size: cover;
         width: 100%;
         padding: 15px;
