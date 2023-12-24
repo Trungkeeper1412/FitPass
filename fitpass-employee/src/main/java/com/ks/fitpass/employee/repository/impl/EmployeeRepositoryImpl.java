@@ -140,8 +140,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFixedDTO dto = new CheckInFixedDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -151,12 +151,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
     }
 
     @Override
-    public List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckedInFixedDTO dto = new CheckedInFixedDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -167,7 +167,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setCheckInTime(rs.getTimestamp("check_in_time"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
+    }
+
+    @Override
+    public Integer getTotalListNeedCheckInFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public Integer getTotalListCheckedInFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 
     @Override

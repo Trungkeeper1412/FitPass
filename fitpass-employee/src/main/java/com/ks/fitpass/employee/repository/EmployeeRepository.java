@@ -10,15 +10,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface EmployeeRepository {
-
+    //////////////////////////////////////////////// Flexible Plan //////////////////////////
     List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int offset, int size);
     List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int offset, int size);
     Integer getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
     Integer getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
-
-    List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId);
-
-    List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId);
 
     List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId);
 
@@ -28,6 +24,15 @@ public interface EmployeeRepository {
 
     List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId);
 
+    ////////////////////////////////////////////////// Fixed Plan //////////////////////////
+    List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int offset, int size);
+
+    List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int offset, int size);
+
+    Integer getTotalListCheckedInFixedByDepartmentId(int departmentId);
+
+    Integer getTotalListNeedCheckInFixedByDepartmentId(int departmentId);
+
     List<CheckInFixedDTO> searchListCheckInFixedByUsername(String username, int departmentId);
 
     List<CheckInFixedDTO> searchListCheckInFixedByPhoneNumber(String phoneNumber, int departmentId);
@@ -35,6 +40,8 @@ public interface EmployeeRepository {
     List<CheckedInFixedDTO> searchListCheckedInFixedByUsername(String username, int departmentId);
 
     List<CheckedInFixedDTO> searchListCheckedInFixedByPhoneNumber(String phoneNumber, int departmentId);
+
+    ///////////////////////////////////////// Other method ///////////////////////////////////////////
 
     int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId);
 

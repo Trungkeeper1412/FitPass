@@ -40,13 +40,11 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="unactivated-tab" data-toggle="tab" href="#unactivated">
                                 <span>Chưa tập</span>
-                                <span id="num-of-checkin"></span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="active-tab" data-toggle="tab" href="#active">
                                 <span>Đang tập</span>
-                                <span id="num-of-active">(0)</span>
                             </a>
                         </li>
                     </ul>
@@ -95,7 +93,7 @@
                         </div>
 
                         <div class="tab-pane fade" id="active">
-                            <div class="search-check-in container">
+                            <div class="search-check-out container">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
                                         <div
@@ -164,15 +162,6 @@
 
 <!-- Search AJAX Jquery-->
 <script>
-    // // number of checkout person
-    // let numOfActive = document.getElementById("CheckOutList").getElementsByClassName("user-card").length;
-    // document.getElementById("num-of-active").innerHTML = '(' + numOfActive + ')';
-    // console.log(numOfActive);
-    //
-    // // number of checkin person
-    // let numOfCheckin = document.getElementById("CheckInList").getElementsByClassName("user-card").length;
-    // document.getElementById("num-of-checkin").innerHTML = '(' + numOfCheckin + ')';
-
     let globalCurrentPage = 1;
     let defaultPageSize = 6;
     let status = "check-in"; // default status
@@ -228,16 +217,28 @@
     }
 
     function renderPage(data, status) {
-        // Determine which list to use based on the status
         let list = status === 'check-in' ? data.listCheckInFlexible : data.listCheckOutFlexible;
-        // Determine the container to update based on the status
         let container = status === 'check-in' ? $('#CheckInList') : $('#CheckOutList');
-
-        // Clear the container before adding new content
+        let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
         container.empty();
 
-        // Iterate over the list items and create the HTML content
-        list.forEach(item => {
+        if (list.length === 0) {
+            let noCustomerMessage = status === 'check-in'
+                ? "Bạn không có khách hàng nào đang cần check in"
+                : "Bạn không có khách hàng nào đã check in";
+
+            // Add a placeholder for the image
+            let alertDiv = `
+                <div class="alert alert-warning bg-white text-center fs-4 d-flex flex-column align-items-center justify-content-center" role="alert">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-info-circle me-2"></i><span>${noCustomerMessage}</span>
+                    </div>
+                    <img src="/images/system/empty-list.png" alt="Empty List" style="max-width: 100px;">
+                 </div>
+                 `;
+            container.append(alertDiv); // Append the alert div to the container
+            paginationContainer.hide();
+        } else {list.forEach(item => {
             let userCardHtml = `
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="user-card">
@@ -265,9 +266,11 @@
                 </div>
             </div>
         `;
-            // Append the userCardHtml to the container
             container.append(userCardHtml);
-        });
+        })}
+        if (list.length > 0 && paginationContainer.is(':hidden')) {
+            paginationContainer.show();
+        }
     }
 
     function renderPagination(currentPage, totalPages, status) {

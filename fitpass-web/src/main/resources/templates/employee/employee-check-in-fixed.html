@@ -35,33 +35,6 @@
                         <div class="text-center fs-1 fw-bold">Danh sách người dùng:</div>
                     </div>
                 </div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                            <form
-                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="hidden" id="departmentId" th:value="${departmentId}">
-                                    <input type="text" class="form-control bg-light border-1 small" id="searchInput"
-                                        placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" id="searchButton">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                            <select id="search-by">
-                                <option value="" disabled selected>Tìm kiếm theo:</option>
-                                <option value="username">Tên</option>
-                                <option value="phonenumber">Số điện thoại</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="container-fluid">
                     <div class="container separator-box">
                         <ul class="nav nav-tabs" id="myTabs">
@@ -76,84 +49,32 @@
                         <!-- Tab Content -->
                         <div class="tab-content mt-4">
                             <div class="tab-pane fade show active" id="unactivated">
+
                                 <div class="row" id="CheckInList">
-                                    <th:block th:each="item:${checkInList}">
-                                        <div class="col-md-6 col-lg-4 mb-2">
-                                            <div class="user-card">
-                                                <div class="user-info">
-                                                    <div class="img-col">
-                                                        <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
-                                                    </div>
-                                                    <div class="basic-info">
-                                                        <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
-                                                        <p class="phone" th:text="${item.getPhoneNumber()}">0987654321</p>
-                                                    </div>
-                                                    <span class="not-check-in">Chưa check-in</span>
-                                                </div>
-                                                <div class="plan-info">
-                                                    <div class="fw-bold" th:text="${'Fitpass_Card_' + item.getOrderDetailId()}"></div>
-                                                    <div class="fw-bold plan-type" th:text="${item.getProductName()}">Gói linh hoạt VIP </div>
-                                                    <div>
-                                                        <span  class="text-money" th:text="${item.getPrice()}"></span>
-                                                        <span class="credit fw-bold">Credit/Giờ</span>
-                                                    </div>
-                                                    <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
-                                                </div>
-                                                <button  th:onclick="'performCheckIn(' + ${item.getOrderDetailId()} + ')'" class="btn checkin-btn mx-auto">Check-in</button>
-                                            </div>
-                                        </div>
-                                    </th:block>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination justify-content-center" id="paginationCheckIn">
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="active">
                                 <div class="row justify-content-center" id="CheckOutList">
-                                    <th:block th:each="item:${checkedInList}">
-                                        <div class="col-md-6 col-lg-4 mb-2">
-                                            <div class="user-card">
-                                                <div class="user-info">
-                                                    <div class="img-col">
-                                                        <img th:src="${item.getImageUrl()}" alt="User 1 Profile Image">
-                                                    </div>
-                                                    <div class="basic-info">
-                                                        <div class="fw-bold username" th:text="${item.getUsername()}">Nguyễn Văn Bảo Linh</div>
-                                                        <p class="phone" th:text="${item.getPhoneNumber()}">0987654321</p>
-                                                    </div>
-                                                    <span class="checked-in">Đã check-in</span>
-                                                </div>
-                                                <div class="plan-info">
-                                                    <div class="fw-bold" th:text="${'Fitpass_Card_' + item.getOrderDetailId()}"></div>
-                                                    <div class="plan-type" th:text="${item.getProductName()}">Gói linh hoạt VIP </div>
-                                                    <div>
-                                                        <span  class="text-money" th:text="${item.getPrice()}"></span>
-                                                        <span class="credit fw-bold">Credit/Giờ</span>
-                                                    </div>
-                                                    <div class="checkin-time">Thời gian: <span th:text="${#temporals.format(item.getCheckInTime().toLocalDateTime(), 'HH:mm:ss dd/MM/yyyy')}">12:12:32 PM</span><span id="usageTime"></span></div>
-                                                    <p class="fw-bold">Thời lượng còn: <span th:text="${item.getDuration()}">2</span> ngày</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th:block>
-
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination justify-content-center" id="paginationCheckedIn">
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="container">-->
-<!--                            <ul class="pagination justify-content-center">-->
-<!--                                <li class="page-item disabled">-->
-<!--                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>-->
-<!--                                </li>-->
-<!--                                <li class="page-item active" aria-current="page">-->
-<!--                                    <a class="page-link" href="#page1">1</a>-->
-<!--                                </li>-->
-<!--                                <li class="page-item">-->
-<!--                                    <a class="page-link" href="#page2">2</a>-->
-<!--                                </li>-->
-<!--                                <li class="page-item">-->
-<!--                                    <a class="page-link" href="#" tabindex="+1">Next</a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -180,6 +101,181 @@
 
 
     <script>
+        let globalCurrentPage = 1;
+        let defaultPageSize = 6;
+        let status = "check-in"; // default status
+        const departmentId = $('#departmentId').val();
+
+        $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                let targetId = $(e.target).attr("href");
+                status = targetId === "#unactivated" ? "check-in" : "checked-in";
+
+                console.log("shown.bs.tab event triggered - targetId: " + targetId + ", status: " + status);
+
+                // Add 'show' and 'active' classes to the shown tab content
+                $(targetId + '-tab').addClass('show active');
+
+                // If the other tab was previously active, remove 'show' and 'active' from it
+                let otherTabId = status === "check-in" ? "#active-tab" : "#unactivated-tab";
+                $(otherTabId).removeClass('show active');
+
+                handleTabChange(departmentId, status)
+            });
+            // Manually show the #unactivated-tab
+            $('a[href="#unactivated"]').trigger('shown.bs.tab');
+        });
+
+        // Function to handle tab change
+        function handleTabChange(departmentId, status) {
+            console.log("Tab changed, the status is " + status)
+            fetchData(departmentId, status, globalCurrentPage, defaultPageSize).then(data => {
+                console.log(data)
+                updateUI(data, status);
+                attachPaginationEventListeners(departmentId, status, defaultPageSize);
+            });
+        }
+
+        // Function to make an AJAX call to the backend
+        function fetchData(departmentId, status, page, size) {
+            return fetch(`/employee/check-in/fixed/list?departmentId=${departmentId}&status=${status}&page=${page}&size=${size}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Server responded with an error: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error('Fetching error:', error);
+                });
+        }
+
+        function updateUI(data, status) {
+            renderPage(data, status);
+            renderPagination(data.currentPage, data.totalPages, status);
+        }
+
+        function renderPage(data, status) {
+            let list = status === 'check-in' ? data.listCheckInFixed : data.listCheckedInFixed;
+            let container = status === 'check-in' ? $('#CheckInList') : $('#CheckOutList');
+            let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
+            container.empty();
+            if (list.length === 0) {
+                let noCustomerMessage = status === 'check-in'
+                    ? "Bạn không có khách hàng nào đang cần check in"
+                    : "Bạn không có khách hàng nào đã check in";
+
+                // Add a placeholder for the image
+                let alertDiv = `
+                <div class="alert alert-warning bg-white text-center fs-4 d-flex flex-column align-items-center justify-content-center" role="alert">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-info-circle me-2"></i><span>${noCustomerMessage}</span>
+                    </div>
+                    <img src="/images/system/empty-list.png" alt="Empty List" style="max-width: 100px;">
+                 </div>
+                 `;
+                container.append(alertDiv); // Append the alert div to the container
+                paginationContainer.hide();
+            } else {
+                list.forEach(item => {
+                    let userCardHtml = `
+        <div class="col-md-6 col-lg-4 mb-2">
+            <div class="user-card">
+                <div class="user-info">
+                    <div class="img-col">
+                        <img src="${item.imageUrl}" alt="User Profile Image">
+                    </div>
+                    <div class="basic-info">
+                        <div class="fw-bold username">${item.username}</div>
+                        <p class="phone">${item.phoneNumber}</p>
+                    </div>
+                    <span class="${status === 'check-in' ? 'not-check-in' : 'checked-in'}">${status === 'check-in' ? 'Chưa check-in' : 'Đã check-in'}</span>
+                </div>
+                <div class="plan-info">
+                    <div class="fw-bold">Fitpass_Card_${item.orderDetailId}</div>
+                    <div class="fw-bold plan-type">${item.productName}</div>
+                    <div>
+                        <span class="text-money">${item.price}</span>
+                        <span class="credit fw-bold">Credit</span>
+                    </div>
+                    <p class="fw-bold">Thời lượng còn: <span>${item.duration}</span> ngày</p>
+                    ${
+                        status === 'check-in' ?
+                            `<button onclick="performCheckIn(${item.orderDetailId})" class="btn checkin-btn mx-auto">Check-in</button>` :
+                            `<div class="checkin-time">Thời gian: <span>${
+                                new Date(item.checkInTime).toLocaleString('vi-VN', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit',
+                                    hour12: false
+                                })
+                            }</span></div>`
+                    }
+                </div>
+            </div>
+        </div>
+        `;
+                    container.append(userCardHtml);
+                });
+            }
+            if (list.length > 0 && paginationContainer.is(':hidden')) {
+                paginationContainer.show();
+            }
+        }
+
+        function renderPagination(currentPage, totalPages, status) {
+            let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
+
+            // Clear the pagination container
+            paginationContainer.empty();
+            // Append 'Previous' button
+            let previousDisabled = currentPage === 1 ? ' disabled' : '';
+            paginationContainer.append(`<li class="page-item${previousDisabled}">
+        <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+    </li>`);
+
+            // Append page number buttons
+            for (let i = 1; i <= totalPages; i++) {
+                let activeClass = i === currentPage ? ' active' : '';
+                paginationContainer.append(`<li class="page-item${activeClass}">
+            <a class="page-link" href="#" data-page="${i}">${i}</a>
+        </li>`);
+            }
+
+            // Append 'Next' button
+            let nextDisabled = currentPage === totalPages ? ' disabled' : '';
+            paginationContainer.append(`<li class="page-item${nextDisabled}">
+        <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+    </li>`);
+
+            attachPaginationEventListeners(departmentId, status, defaultPageSize);
+        }
+
+        function attachPaginationEventListeners(departmentId, status, size) {
+            let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
+            let paginationControls = paginationContainer.find('.page-link');
+
+            paginationControls.off('click').on('click', function (e) {
+                e.preventDefault();
+                const page = parseInt($(this).data('page'));
+                if (page > 0) {
+                    handlePageChange(departmentId, status, page, size);
+                }
+            });
+        }
+
+        // Function to handle page change
+        function handlePageChange(departmentId, status, page, size) {
+            fetchData(departmentId, status, page, size).then(data => {
+                updateUI(data, status);
+                attachPaginationEventListeners(departmentId, status, size);
+            });
+        }
+
+
         function performCheckIn(orderDetailId) {
             $.ajax({
                 type: "GET",

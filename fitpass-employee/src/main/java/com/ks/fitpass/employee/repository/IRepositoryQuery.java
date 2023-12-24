@@ -88,7 +88,7 @@ public interface IRepositoryQuery {
                 NOW() < order_plan_detail.plan_expired_time
                 AND order_plan_detail.gym_department_id = ?
                 AND price > 0
-                AND use_status = "Chưa tập";
+                AND use_status = 'Chưa tập'
                 """;
 
     String GET_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID = """
@@ -117,8 +117,30 @@ public interface IRepositoryQuery {
                 AND order_plan_detail.gym_department_id = ?
                 AND price > 0
                 AND use_status = "Đang tập"
-                AND check_in_history.check_out_time IS NULL;
+                AND check_in_history.check_out_time IS NULL
                 """;
+
+    String GET_TOTAL_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID = """
+            SELECT COUNT(*)
+            FROM order_plan_detail
+            INNER JOIN
+                 check_in_history ON check_in_history.order_detail_id = order_plan_detail.order_detail_id
+            WHERE
+                NOW() < order_plan_detail.plan_expired_time
+              AND order_plan_detail.gym_department_id = ?
+              AND price > 0
+              AND use_status = 'Đang tập'
+              AND check_in_history.check_out_time IS NULL
+            """;
+    String GET_TOTAL_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID = """
+             SELECT COUNT(*)
+            FROM order_plan_detail
+            WHERE
+                NOW() < order_plan_detail.plan_expired_time
+                AND order_plan_detail.gym_department_id = ?
+                AND price > 0
+                AND use_status = 'Chưa tập'
+            """;
 
     String SEARCH_LIST_CHECK_IN_BY_USERNAME = """
             SELECT
@@ -341,5 +363,4 @@ public interface IRepositoryQuery {
                             	user_detail ud on u.user_detail_id = ud.user_detail_id
                             WHERE order_detail_id = ?;
             """;
-
 }

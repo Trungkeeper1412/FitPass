@@ -16,11 +16,6 @@ public interface EmployeeService {
     int getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
     int getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
 
-    ////////////////////////////////////////////////// Fixed Plan //////////////////////////
-    List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId);
-
-    List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId);
-
     List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId);
 
     List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId);
@@ -29,9 +24,14 @@ public interface EmployeeService {
 
     List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId);
 
-    int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId);
+    ////////////////////////////////////////////////// Fixed Plan //////////////////////////
+    List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int page, int size);
 
-    UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId);
+    List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int page, int size);
+
+    int getTotalListNeedCheckInFixedByDepartmentId(int departmentId);
+
+    int getTotalListCheckedInFixedByDepartmentId(int departmentId);
 
     List<CheckInFixedDTO> searchListCheckInFixedByUsername(String username, int departmentId);
 
@@ -40,4 +40,10 @@ public interface EmployeeService {
     List<CheckedInFixedDTO> searchListCheckedInFixedByUsername(String username, int departmentId);
 
     List<CheckedInFixedDTO> searchListCheckedInFixedByPhoneNumber(String phoneNumber, int departmentId);
+
+    ///////////////////////////////////////// Other method ///////////////////////////////////////////
+
+    int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId);
+
+    UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId);
 }
