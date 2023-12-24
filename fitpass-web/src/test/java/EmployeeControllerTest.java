@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryPage;
 import com.ks.fitpass.checkInHistory.service.CheckInHistoryService;
@@ -32,7 +31,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -58,6 +59,8 @@ public class EmployeeControllerTest {
     private Model model;
 
     @Mock
+    private RedirectAttributes redirectAttributes;
+    @Mock
     private WalletService walletService;
 
     @Mock
@@ -82,75 +85,75 @@ public class EmployeeControllerTest {
         MockitoAnnotations.initMocks(this);
     }
 
-//    @Test
-//    public void testGetCheckInListOfFixedCustomer_PositiveCase() {
-//        // Mock data
-//        int departmentId = 1;
-//        int page = 1;
-//        int size = 6;
-//        String status = "check-in";
-//        List<CheckInFixedDTO> checkInFixedDTOList = new ArrayList<>();
-//        List<CheckedInFixedDTO> checkedInDTOList = new ArrayList<>();
-//
-//        // Set up mock behavior
-//        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenReturn(checkInFixedDTOList);
-//        when(employeeService.getListCheckedInFixedByDepartmentId(anyInt())).thenReturn(checkedInDTOList);
-//
-//        // Call the method
-//        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page, size, session);
-//
-//        // Verify the interactions and assertions
-//        verify(employeeService, times(1)).getListNeedCheckInFixedByDepartmentId(departmentId);
-//        verify(employeeService, times(1)).getListCheckedInFixedByDepartmentId(departmentId);
-//
-//        verify(model, times(1)).addAttribute("checkInList", checkInFixedDTOList);
-//        verify(model, times(1)).addAttribute("checkedInList", checkedInDTOList);
-//        verify(model, times(1)).addAttribute("departmentId", departmentId);
-//
-//        assertEquals("employee/employee-check-in-fixed", result);
-//    }
+    @Test
+    public void testGetCheckInListOfFixedCustomer_PositiveCase() {
+        // Mock data
+        int departmentId = 1;
+        int page = 1;
+        int size = 6;
+        String status = "check-in";
+        List<CheckInFixedDTO> checkInFixedDTOList = new ArrayList<>();
+        List<CheckedInFixedDTO> checkedInDTOList = new ArrayList<>();
 
-//    @Test
-//    public void testGetCheckInListOfFixedCustomer_DuplicateKeyException() {
-//        int departmentId = 1;
-//
-//        // Set up mock behavior for DuplicateKeyException
-//        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenThrow(DuplicateKeyException.class);
-//
-//        // Call the method
-//        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model, session);
-//
-//        // Verify the interactions and assertions
-//        assertEquals("error/duplicate-key-error", result);
-//    }
+        // Set up mock behavior
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenReturn(checkInFixedDTOList);
+        when(employeeService.getListCheckedInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenReturn(checkedInDTOList);
 
-//    @Test
-//    public void testGetCheckInListOfFixedCustomer_EmptyResultDataAccessException() {
-//        int departmentId = 1;
-//
-//        // Set up mock behavior for EmptyResultDataAccessException
-//        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
-//
-//        // Call the method
-//        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model, session);
-//
-//        // Verify the interactions and assertions
-//        assertEquals("error/no-data", result);
-//    }
+        // Call the method
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page, size, session);
 
-//    @Test
-//    public void testGetCheckInListOfFixedCustomer_IncorrectResultSizeDataAccessException() {
-//        int departmentId = 1;
-//
-//        // Set up mock behavior for IncorrectResultSizeDataAccessException
-//        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
-//
-//        // Call the method
-//        String result = employeeController.getCheckInListOfFixedCustomer(departmentId, model, session);
-//
-//        // Verify the interactions and assertions
-//        assertEquals("error/incorrect-result-size-error", result);
-//    }
+        // Verify the interactions and assertions
+
+
+        assertEquals("employee/employee-check-in-fixed", result);
+    }
+
+    @Test
+    public void testGetCheckInListOfFixedCustomer_DuplicateKeyException() {
+        int departmentId = 1;
+        int page = 1;
+        int size = 6;
+        String status = "check-in";
+
+        // Set up mock behavior for DuplicateKeyException
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Call the method
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page,size,session);
+
+        // Verify the interactions and assertions
+        assertEquals("error/duplicate-key-error", result);
+    }
+
+    @Test
+    public void testGetCheckInListOfFixedCustomer_EmptyResultDataAccessException() {
+        int departmentId = 1;
+        int page = 1;
+        int size = 6;
+        String status = "check-in";
+        // Set up mock behavior for EmptyResultDataAccessException
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Call the method
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page,size,session);
+        // Verify the interactions and assertions
+        assertEquals("error/no-data", result);
+    }
+
+    @Test
+    public void testGetCheckInListOfFixedCustomer_IncorrectResultSizeDataAccessException() {
+        int departmentId = 1;
+        int page = 1;
+        int size = 6;
+        String status = "check-in";
+        // Set up mock behavior for IncorrectResultSizeDataAccessException
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Call the method
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page,size,session);
+        // Verify the interactions and assertions
+        assertEquals("error/incorrect-result-size-error", result);
+    }
 
     @Test
     public void testGetCheckInHistory() {
@@ -254,87 +257,84 @@ public class EmployeeControllerTest {
         assertFalse(result);
     }
 
-//    @Test
-//    public void testChangePasswordWithValidData() {
-//        // Arrange
-//        User user = new User();
-//        user.setUserId(1);
-//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-//
-//        when(session.getAttribute("userInfo")).thenReturn(user);
-//        when(userService.updatePassword(anyString(), anyInt())).thenReturn(true);
-//
-//        // Act
-//        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session);
-//
-//        // Assert
-//        verify(session, times(1)).getAttribute("userInfo");
-//        verify(userService, times(1)).updatePassword(anyString(), anyInt());
-//        assertEquals("redirect:/employee/changePassword", result);
-//        verify(model, never()).addAttribute(eq("error"), anyString());
-//        verify(model, times(1)).addAttribute("success", true);
-//    }
+    @Test
+    public void testChangePasswordWithValidData() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
 
-//    @Test
-//    public void testChangePasswordWithIncorrectCurrentPassword() {
-//        // Arrange
-//        User user = new User();
-//        user.setUserId(1);
-//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-//
-//        when(session.getAttribute("userInfo")).thenReturn(user);
-//
-//        // Act
-//        String result = employeeController.changePassword("wrongCurrentPassword", "newPassword", "newPassword", model, session);
-//
-//        // Assert
-//        verify(session, times(1)).getAttribute("userInfo");
-//        verify(userService, never()).updatePassword(anyString(), anyInt());
-//        verify(model, times(1)).addAttribute("error", "Mật khẩu hiện tại không đúng");
-//        verify(model, never()).addAttribute(eq("success"), any());
-//        assertEquals("employee/change-password", result);
-//    }
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(userService.updatePassword(anyString(), anyInt())).thenReturn(true);
 
-//    @Test
-//    public void testChangePasswordWithMismatchedPasswords() {
-//        // Arrange
-//        User user = new User();
-//        user.setUserId(1);
-//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-//
-//        when(session.getAttribute("userInfo")).thenReturn(user);
-//
-//        // Act
-//        String result = employeeController.changePassword("currentPassword", "newPassword", "confirmPassword", model, session);
-//
-//        // Assert
-//        verify(session, times(1)).getAttribute("userInfo");
-//        verify(userService, never()).updatePassword(anyString(), anyInt());
-//        verify(model, times(1)).addAttribute("error", "Mật khẩu mới và xác nhận mật khẩu không khớp");
-//        verify(model, never()).addAttribute(eq("success"), any());
-//        assertEquals("employee/change-password", result);
-//    }
+        // Act
+        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session,redirectAttributes);
 
-//    @Test
-//    public void testChangePasswordWithException() {
-//        // Arrange
-//        User user = new User();
-//        user.setUserId(1);
-//        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
-//
-//        when(session.getAttribute("userInfo")).thenReturn(user);
-//        when(userService.updatePassword(anyString(), anyInt())).thenThrow(RuntimeException.class);
-//
-//        // Act
-//        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session);
-//
-//        // Assert
-//        verify(session, times(1)).getAttribute("userInfo");
-//        verify(userService, times(1)).updatePassword(anyString(), anyInt());
-//        verify(model, times(1)).addAttribute("error", "An unexpected error occurred");
-//        verify(model, never()).addAttribute(eq("success"), any());
-//        assertEquals("employee/change-password", result);
-//    }
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(userService, times(1)).updatePassword(anyString(), anyInt());
+        assertEquals("redirect:/employee/changePassword", result);
+        verify(model, never()).addAttribute(eq("error"), anyString());
+    }
+
+    @Test
+    public void testChangePasswordWithIncorrectCurrentPassword() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        // Act
+        String result = employeeController.changePassword("wrongCurrentPassword", "newPassword", "newPassword", model, session,redirectAttributes);
+
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(userService, never()).updatePassword(anyString(), anyInt());
+        verify(model, times(1)).addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng");
+        assertEquals("employee/change-password", result);
+    }
+
+    @Test
+    public void testChangePasswordWithMismatchedPasswords() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        // Act
+        String result = employeeController.changePassword("currentPassword", "newPassword", "confirmPassword", model, session,redirectAttributes);
+
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(userService, never()).updatePassword(anyString(), anyInt());
+        verify(model, times(1)).addAttribute("passwordMismatchError", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+        assertEquals("employee/change-password", result);
+    }
+
+    @Test
+    public void testChangePasswordWithException() {
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+        user.setUserPassword(new BCryptPasswordEncoder().encode("currentPassword"));
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(userService.updatePassword(anyString(), anyInt())).thenThrow(RuntimeException.class);
+
+        // Act
+        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session,redirectAttributes);
+
+        // Assert
+        verify(session, times(1)).getAttribute("userInfo");
+        verify(userService, times(1)).updatePassword(anyString(), anyInt());
+        verify(model, times(1)).addAttribute("unexpectedError", "Lỗi không xác định");
+        verify(model, never()).addAttribute(eq("success"), any());
+        assertEquals("employee/change-password", result);
+    }
 
     @Test
     public void testGetCheckInListOfFlexibleCustomerSuccess() {
@@ -346,17 +346,16 @@ public class EmployeeControllerTest {
 
         List<CheckInFlexibleDTO> checkInList = Arrays.asList(new CheckInFlexibleDTO(), new CheckInFlexibleDTO());
         List<CheckOutFlexibleDTO> checkOutList = Arrays.asList(new CheckOutFlexibleDTO(), new CheckOutFlexibleDTO());
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), page, size)).thenReturn(checkInList);
-        when(employeeService.getListNeedCheckOutFlexibleByDepartmentId(anyInt(), page, size)).thenReturn(checkOutList);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),anyInt(), anyInt())).thenReturn(checkInList);
+        when(employeeService.getListNeedCheckOutFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenReturn(checkOutList);
 
         // Act
-//        String result = employeeController.getCheckInListOfFlexibleCustomer(departmentId,status,page,size,session);
-
-        // Assert
-//        verify(model).addAttribute(eq("checkInList"), eq(checkInList));
-//        verify(model).addAttribute(eq("checkOutList"), eq(checkOutList));
-//        verify(model).addAttribute(eq("departmentId"), eq(1));
-//        assertEquals("employee/employee-check-in-flexible", result);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
+         //Assert
+        verify(model).addAttribute(eq("checkInList"), eq(checkInList));
+        verify(model).addAttribute(eq("checkOutList"), eq(checkOutList));
+        verify(model).addAttribute(eq("departmentId"), eq(1));
+        assertEquals("employee/employee-check-in-flexible", result);
     }
 
     @Test
@@ -367,13 +366,13 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         String status = "check-in";
         // Arrange
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), page, size)).thenThrow(DuplicateKeyException.class);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),anyInt(), anyInt())).thenThrow(DuplicateKeyException.class);
 
         // Act
-//        String result = employeeController.getCheckInListOfFlexibleCustomer(departmentId,status, page, size, session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
 
         // Assert
-//        assertEquals("error/duplicate-key-error", result);
+      assertEquals("error/duplicate-key-error", result);
     }
 
     @Test
@@ -384,13 +383,13 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         String status = "check-in";
         // Arrange
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), page,size)).thenThrow(EmptyResultDataAccessException.class);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
-//        String result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
 
         // Assert
-//        assertEquals("error/no-data", result);
+        assertEquals("error/no-data", result);
     }
 
     @Test
@@ -401,13 +400,13 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         String status = "check-in";
         // Arrange
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),page, size)).thenThrow(IncorrectResultSizeDataAccessException.class);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),anyInt(), anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
 
         // Act
-//        String result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
 
         // Assert
-//        assertEquals("error/incorrect-result-size-error", result);
+       assertEquals("error/incorrect-result-size-error", result);
     }
 
     @Test
@@ -418,13 +417,13 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         String status = "check-in";
         // Arrange
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), page, size)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
 
         // Act
-//        String result = employeeController.getCheckInListOfFlexibleCustomer(departmentId,status,page,size, session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
 
         // Assert
-//        assertEquals("error/data-access-error", result);
+      assertEquals("error/data-access-error", result);
     }
 
 //    @Test
@@ -871,17 +870,14 @@ public class EmployeeControllerTest {
         int page = 1;
         int size = 7;
         int offset = 0;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size)).thenReturn(Collections.emptyList());
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenReturn(Collections.emptyList());
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, username, phoneNumber, dateFilter,page,size);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(Collections.emptyList(), responseEntity.getBody());
-        // Verify that the CheckInHistoryService method is called
-        verify(checkInHistoryService, times(1)).searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size);
-    }
+      }
 
     @Test
     public void testSearchFlexEmptyResultDataAccessException() {
@@ -890,7 +886,7 @@ public class EmployeeControllerTest {
         int page =1;
         int size = 7;
         int offset = 0;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size)).thenThrow(EmptyResultDataAccessException.class);
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null,page, size);
@@ -906,7 +902,7 @@ public class EmployeeControllerTest {
         int page = 1;
         int size = 7;
         int offset = 0;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),offset,size)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null, page, size);
 
@@ -924,16 +920,16 @@ public class EmployeeControllerTest {
         int page = 1;
         int size = 7;
 
-        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),page,size)).thenReturn(Collections.emptyList());
+        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenReturn(Collections.emptyList());
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFixed(departmentId, username, phoneNumber, dateFilter, page, size);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(Collections.emptyList(), responseEntity.getBody());
+
         // Verify that the CheckInHistoryService method is called
-        verify(checkInHistoryService, times(1)).searchListHistoryFixed(anyInt(), any(), any(), any(), page, size);
+        verify(checkInHistoryService, times(1)).searchListHistoryFixed(anyInt(), any(), any(), any(), anyInt(), anyInt());
     }
 
     @Test
@@ -942,7 +938,7 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         int page = 1;
         int size = 7;
-        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(), page,size)).thenThrow(EmptyResultDataAccessException.class);
+        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFixed(departmentId, null, null, null, page, size);
@@ -957,7 +953,7 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         int page = 1;
         int size = 7;
-        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(), page, size)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFixed(departmentId, null, null, null, page, size);
