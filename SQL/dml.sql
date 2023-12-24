@@ -688,7 +688,7 @@ VALUES (2, 20000);
 INSERT INTO wallet (user_id, balance)
 VALUES (3, 0);
 INSERT INTO wallet (user_id, balance)
-VALUES (4, 1000);
+VALUES (4, 0);
 INSERT INTO wallet (user_id, balance)
 VALUES (5, 1000);
 INSERT INTO wallet (user_id, balance)
@@ -1273,15 +1273,15 @@ VALUES (1, 5, 1, 1, 1, 'Gói giờ',
 
        (11, 14, 2, 1, 2, 'Gói 1 tháng',
         'Gói tập ưu đãi hấp dẫn cho người dùng trong vòng một tháng. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích của các cơ sở của chúng tôi ở Hòa Lạc',
-        300, 0, 0, 30, 10, 40),
+        300, 0, 0, 30, 10, 45),
 
        (12, 14, 2, 1, 2, 'Gói 3 tháng',
         'Gói tập ưu đãi toàn diện cho người dùng trong vòng ba tháng với những ưu đãi tốt nhất. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích của các cơ sở của chúng tôi ở Hòa Lạc',
-        800.00, 0, 0, 60, 20, 80),
+        800.00, 0, 0, 90, 20, 120),
 
        (13, 14, 2, 1, 2, 'Gói 6 tháng',
         'Gói tập ưu đãi hấp dẫn nhất và tiết kiệm cho người dùng trong vòng 6 tháng với những ưu đãi toàn diện. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích, tập luyện cùng huấn luyện cá nhân trên tất cả các cơ sở của chúng tôi ở Hòa Lạc',
-        1500.00, 0, 0, 120, 30, 150);
+        1500.00, 0, 0, 120, 30, 160);
 
 INSERT INTO gym_department_plans(gym_department_id, plan_id)
 VALUES (1, 1),
