@@ -47,9 +47,8 @@
                             <div class="search-flexible container pb-4">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                                        <form
-                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                            <div class="input-group">
+                                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search-flexible">
+                                            <div class="input-group flexible-search-input">
                                                 <input type="hidden" id="departmentId" th:value="${departmentId}">
                                                 <input type="text" class="form-control bg-light border-1 small"
                                                        id="searchInputFlexible"
@@ -74,10 +73,10 @@
                                     <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
                                         <select id="filter-date-flexible">
                                             <option value="" disabled selected>Sắp xếp theo:</option>
-                                            <option value="inDay">Trong ngày</option>
-                                            <option value="inWeek">Trong tuần</option>
-                                            <option value="inMonth">Trong tháng</option>
-                                            <option value="inYear">Trong năm</option>
+                                            <option value="day">Trong ngày</option>
+                                            <option value="week">Trong tuần</option>
+                                            <option value="month">Trong tháng</option>
+                                            <option value="year">Trong năm</option>
                                         </select>
                                     </div>
                                 </div>
@@ -124,8 +123,8 @@
                             <div class="search-fixed container pb-4">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                            <div class="input-group">
+                                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search-fixed">
+                                            <div class="input-group fixed-search-input">
                                                 <input type="text" class="form-control bg-light border-1 small"
                                                        id="searchInputFixed"
                                                        placeholder="Tìm kiếm..." aria-label="Search"
@@ -149,10 +148,10 @@
                                     <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
                                         <select id="filter-date-fixed">
                                             <option value="" disabled selected>Sắp xếp theo:</option>
-                                            <option value="inDay">Trong ngày</option>
-                                            <option value="inWeek">Trong tuần</option>
-                                            <option value="inMonth">Trong tháng</option>
-                                            <option value="inYear">Trong năm</option>
+                                            <option value="day">Trong ngày</option>
+                                            <option value="week">Trong tuần</option>
+                                            <option value="month">Trong tháng</option>
+                                            <option value="year">Trong năm</option>
                                         </select>
                                     </div>
                                 </div>
@@ -266,10 +265,9 @@
     function renderPagination(currentPage, totalPages, gymPlanType) {
         const paginationContainer = $(`.${gymPlanType}-pagination-container ul`);
         paginationContainer.empty();
-        paginationContainer.empty();
 
         // Generate the previous button
-        const previousLink = $('<a>').addClass('page-link').attr('href', '#').text('Previous');
+        const previousLink = $('<a>').addClass('page-link').attr('href', '#').text('Trước');
         const previousLi = $('<li>').addClass('page-item').append(previousLink);
         paginationContainer.append(previousLi);
 
@@ -291,7 +289,7 @@
         }
 
         // Generate the next button
-        const nextLink = $('<a>').addClass('page-link').attr('href', '#').text('Next');
+        const nextLink = $('<a>').addClass('page-link').attr('href', '#').text('Sau');
         const nextLi = $('<li>').addClass('page-item').append(nextLink);
         paginationContainer.append(nextLi);
 
@@ -382,153 +380,289 @@
                 }
             })
             .catch(error => {
-                console.error('Error fetching notifications:', error);
+                console.error('Error fetching data:', error);
             });
     }
 
-    $("#searchButton").click(function () {
+    ///////////////////////////////////////////////Search Function//////////////////////////////////////////////////
+    $(".navbar-search-flexible").submit(function(event) {
         event.preventDefault();
-        console.log("click");
-        // Lấy giá trị từ ô nhập liệu
-        let searchText = $("#searchInput").val();
-        // Lấy giá trị từ dropdown chọn
-        let searchOption = $("#search-by").val();
+        $("#searchButtonFlexible").click();
+    });
 
-        let filterDate = $("#filter-date").val();
+    $(".navbar-search-fixed").submit(function(event) {
+        event.preventDefault();
+        $("#searchButtonFixed").click();
+    });
 
+    $("#searchButtonFlexible").click(function (event) {
+        event.preventDefault();
+        let searchText = $("#searchInputFlexible").val().trim(); // Use trim() to remove whitespace
+        let searchOption = $("#search-by-flexible").val();
+        let filterDate = $("#filter-date-flexible").val();
         let departmentId = $("#departmentId").val();
-        // Gửi yêu cầu tìm kiếm bằng Ajax
-        if ($("#flexible-tab").hasClass("show")) {
-            searchListFlex(searchText, searchOption, filterDate, departmentId)
-        } else if ($("#fixed-tab").hasClass("show")) {
-            console.log("hello");
+
+        // Remove any existing error messages
+        $('.error-message').remove();
+
+        // Initialize a flag to check if the input is valid
+        let isValidInput = true;
+
+        // Check if a search option has been chosen
+        if (!searchOption) {
+            // Display an error message for search option
+            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm</div>").insertAfter("#search-by-flexible");
+            // Optionally add a red outline to the select dropdown
+            $("#search-by-flexible").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If a search option is selected, remove the red outline
+            $("#search-by-flexible").css('border', '');
+        }
+
+        if (!searchText) {
+            // Display an error message for search text
+            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>").insertAfter(".input-group flexible-search-input");
+            // Optionally add a red outline to the input field
+            $("#searchInputFlexible").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If search text is not empty, remove the red outline
+            $("#searchInputFlexible").css('border', '');
+        }
+
+        // Proceed with the search if the input is valid
+        if (isValidInput) {
+            $('#listFlexible').empty();
+            searchListFlex(searchText, searchOption, filterDate, departmentId);
+        }
+    });
+
+    $("#searchButtonFixed").click(function (event){
+        event.preventDefault();
+
+        let searchText = $("#searchInputFixed").val().trim();
+        let searchOption = $("#search-by-fixed").val();
+        let filterDate = $("#filter-date-fixed").val();
+        let departmentId = $("#departmentId").val();
+        // Remove any existing error messages
+        $('.error-message').remove();
+
+        // Initialize a flag to check if the input is valid
+        let isValidInput = true;
+
+        // Check if a search option has been chosen
+        if (!searchOption) {
+            // Display an error message for search option
+            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm </div>").insertAfter("#search-by-fixed");
+            // Optionally add a red outline to the select dropdown
+            $("#search-by-fixed").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If a search option is selected, remove the red outline
+            $("#search-by-fixed").css('border', '');
+        }
+
+        if (!searchText) {
+            // Display an error message for search text
+            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>").insertAfter(".input-group fixed-search-input");
+            // Optionally add a red outline to the input field
+            $("#searchInputFixed").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If search text is not empty, remove the red outline
+            $("#searchInputFixed").css('border', '');
+        }
+
+        // Proceed with the search if the input is valid
+        if (isValidInput) {
+            $('#listFixed').empty();
             searchListFixed(searchText, searchOption, filterDate, departmentId);
         }
     });
 
     function searchListFlex(searchText, searchOption, filterDate, departmentId) {
-        let url;
-
-        if (searchOption === 'username') {
-            url = `/employee/history/searchFlex?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-        } else if (searchOption === 'phone-number') {
-            url = `/employee/history/searchFlex?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+        console.log("enable search")
+        let data = {
+            id: departmentId === "" ? null : departmentId
+        };
+        if (searchOption === "username") {
+            data.username = searchText;
+        } else if (searchOption === "phone-number") {
+            data.id = departmentId;
+            data.phoneNumber = searchText;
+        }
+        if (filterDate) {
+            data.dateFilter = filterDate;
         }
 
-        if (url) {
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function (data) {
-                    console.log(data);
-                    displaySearchListFlex(data);
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-                }
-            });
-        }
+        console.log(data)
+        // Perform the AJAX request
+        $.ajax({
+            url: "/employee/history/searchFlex",
+            data: data,
+            type: "GET",
+            success: function(response) {
+                updateTableAndPaginationFlexible(response, searchText, searchOption, filterDate, departmentId);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error occurred during AJAX request:", status, error);
+            }
+        });
     }
 
-    function displaySearchListFlex(results) {
-        // Xóa các kết quả hiện tại
-        $("#listFlexible").empty();
+    function updateTableAndPaginationFlexible(response, searchText, searchOption, filterDate, departmentId) {
+        let tableContent = $('#listFlexible');
+        tableContent.empty(); // Clear the existing table content
 
-        // Hiển thị kết quả tìm kiếm
-        if (results.length > 0) {
-            var resultHtml = "";
-            for (var i = 0; i < results.length; i++) {
-                resultHtml += `<tr>
-                                                <td><button class="view-image-btn view-detail"
-                                                            data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-                                                <td>${results[i].username}</td>
-                                                <td>${results[i].phoneNumber}</td>
-                                                <td>${results[i].empName}</td>
-                                                <td>${formatDateTime(results[i].checkInTime)}</td>
-                                                <td>${results[i].checkOutTime ? formatDateTime(results[i].checkOutTime) : 'Chưa check out'}</td>
-                                                <td>${results[i].duration ? results[i].duration : ''}</td>
-                                                <td>
-                                                    <h5 class="text-money"><span>${results[i].pricePerHours}</span> <span class="credit">Credit/Giờ</span></h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="text-money"><span>${results[i].totalCredit}</span> <span class="credit">Credit</span></h5>
-                                                </td>
-                                            </tr>`;
-            }
-            $("#listFlexible").append(resultHtml);
+        // Populate the table content with the response data
+        if (response.listFlexible.length === 0) {
+            tableContent.append(`<tr><td colspan="10" class="text-center">Không có dữ liệu</td></tr>`);
         } else {
-            $("#listFlexible").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+            $.each(response.listFlexible, function (index, rowData) {
+                let rowHtml = `
+                <tr>
+                    <td><button class="view-image-btn view-detail" data-image-src="${rowData.userImageUrl}">Xem ảnh</button></td>
+                    <td>${rowData.username}</td>
+                    <td>${rowData.phoneNumber}</td>
+                    <td>${rowData.empName}</td>
+                    <td>${rowData.gymPlanName}</td>
+                    <td>${new Date(rowData.checkInTime).toLocaleString()}</td>
+                    <td>${rowData.checkOutTime !== null ? new Date(rowData.checkOutTime).toLocaleString() : 'Chưa check out'}</td>
+                    <td>${rowData.duration}</td>
+                    <td><h5 class="text-money"><span>${rowData.pricePerHours}</span> <span class="credit">Credit/Giờ</span></h5></td>
+                    <td><h5 class="text-money"><span>${rowData.totalCredit !== null ? rowData.totalCredit : '0'}</span> <span class="credit">Credit</span></h5></td>
+                </tr>
+            `;
+                tableContent.append(rowHtml);
+            });
         }
+
+        // Update the pagination controls
+        let paginationContent = $('.pagination');
+        paginationContent.empty(); // Clear existing pagination controls
+
+        // 'Previous' button
+        let prevClass = response.currentPage === 1 ? 'page-item disabled' : 'page-item';
+        paginationContent.append(`
+        <li class="${prevClass}">
+            <a class="page-link" href="#" onclick="searchListFlex('${searchText}', '${searchOption}', '${filterDate}', '${departmentId}', ${response.currentPage - 1}); return false;">Previous</a>
+        </li>
+    `);
+
+        // Page numbers
+        for (let i = 1; i <= response.totalPages; i++) {
+            let pageClass = response.currentPage === i ? 'page-item active' : 'page-item';
+            paginationContent.append(`
+            <li class="${pageClass}">
+                <a class="page-link" href="#" onclick="searchListFlex('${searchText}', '${searchOption}', '${filterDate}', '${departmentId}', ${i}); return false;">${i}</a>
+            </li>
+        `);
+        }
+
+        // 'Next' button
+        let nextClass = response.currentPage >= response.totalPages ? 'page-item disabled' : 'page-item';
+        paginationContent.append(`
+        <li class="${nextClass}">
+            <a class="page-link" href="#" onclick="searchListFlex('${searchText}', '${searchOption}', '${filterDate}', '${departmentId}', ${response.currentPage + 1}); return false;">Next</a>
+        </li>
+    `);
     }
 
     function searchListFixed(searchText, searchOption, filterDate, departmentId) {
-        let url;
-
-        if (searchOption === 'username') {
-            url = `/employee/history/searchFixed?username=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
-        } else if (searchOption === 'phone-number') {
-            url = `/employee/history/searchFixed?phoneNumber=${searchText}&dateFilter=${filterDate}&id=${departmentId}`;
+        let data = {
+            id: departmentId
+        };
+        if (searchOption === "username") {
+            data.username = searchText;
+        } else if (searchOption === "phone-number") {
+            data.phoneNumber = searchText;
+        }
+        if (filterDate) {
+            data.dateFilter = filterDate;
         }
 
-        if (url) {
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function (data) {
-                    console.log(data);
-                    displaySearchListFixed(data);
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-                }
+        // Perform the AJAX request
+        $.ajax({
+            url: "/employee/history/searchFixed",
+            data: data,
+            type: "GET",
+            success: function (response) {
+                // Pass the response data to update both table and pagination
+                updateTableAndPaginationFixed(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error occurred during AJAX request:", status, error);
+            }
+        });
+    }
+
+    function updateTableAndPaginationFixed(response) {
+        let tableContent = $('#listFixed');
+        tableContent.empty(); // Clear the existing table content
+
+        // Update table with new data
+        if (response.listFixed.length === 0) {
+            tableContent.append(`<tr><td colspan="7" class="text-center">Không có dữ liệu</td></tr>`);
+        } else {
+            $.each(response.listFixed, function (index, rowData) {
+                let rowHtml = `
+                <tr>
+                    <td><button class="view-image-btn view-detail" data-image-src="${rowData.userImageUrl}">Xem ảnh</button></td>
+                    <td>${rowData.username}</td>
+                    <td>${rowData.phoneNumber}</td>
+                    <td>${rowData.empName}</td>
+                    <td>${rowData.gymPlanName}</td>
+                    <td>${new Date(rowData.checkInTime).toLocaleString()}</td>
+                    <td><h5 class="text-money"><span>${rowData.credit}</span> <span class="credit">Credit</span></h5></td>
+                </tr>
+            `;
+                tableContent.append(rowHtml);
             });
         }
-    }
 
-    function displaySearchListFixed(results) {
-        // Xóa các kết quả hiện tại
-        $("#listFixed").empty();
+        // Update pagination
+        let paginationContainer = $('.fixed-pagination-container ul.pagination');
+        paginationContainer.empty(); // Clear the existing pagination content
 
-        // Hiển thị kết quả tìm kiếm
-        if (results.length > 0) {
-            var resultHtml = "";
-            for (var i = 0; i < results.length; i++) {
-                resultHtml += `<tr>
-                                                    <td><button class="view-image-btn view-detail"
-                                                            data-image-src="https://bom.so/fvEON4">Xem ảnh</button></td>
-                                                    <td>${results[i].username}</td>
-                                                    <td>${results[i].phoneNumber}</td>
-                                                    <td>${results[i].empName}</td>
-                                                    <td>${results[i].checkInTime}</td>
-                                                    <td>${results[i].gymPlanName}</td>
-                                                    <td>
-                                                        <h5 class="text-money"><span>${results[i].credit}</span> <span class="credit">Credit</span></h5>
-                                                    </td>
-                                                </tr>`;
-            }
-            $("#listFixed").append(resultHtml);
-        } else {
-            $("#listFixed").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
+        // Add 'Previous' button
+        let prevClass = response.currentPage === 1 ? 'page-item disabled' : 'page-item';
+        let prevPage = response.currentPage > 1 ? response.currentPage - 1 : 1;
+        paginationContainer.append(`
+        <li class="${prevClass}">
+            <a class="page-link" href="#" data-page="${prevPage}">Previous</a>
+        </li>
+    `);
+
+        // Add page numbers
+        for (let i = 1; i <= response.totalPages; i++) {
+            let pageClass = i === response.currentPage ? 'page-item active' : 'page-item';
+            paginationContainer.append(`
+            <li class="${pageClass}" aria-current="page">
+                <a class="page-link" href="#" data-page="${i}">${i}</a>
+            </li>
+        `);
         }
-    }
 
-    function formatDateTime(dateTimeString) {
-        const date = new Date(dateTimeString);
-        const day = date.getDate();
-        const month = date.getMonth() + 1; // Tháng bắt đầu từ 0
-        const year = date.getFullYear();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
+        // Add 'Next' button
+        let nextClass = response.currentPage === response.totalPages ? 'page-item disabled' : 'page-item';
+        let nextPage = response.currentPage < response.totalPages ? response.currentPage + 1 : response.totalPages;
+        paginationContainer.append(`
+        <li class="${nextClass}">
+            <a class="page-link" href="#" data-page="${nextPage}">Next</a>
+        </li>
+    `);
 
-        // Đảm bảo rằng tháng và ngày có hai chữ số
-        const formattedMonth = month < 10 ? `0${month}` : month;
-        const formattedDay = day < 10 ? `0${day}` : day;
-        const formattedHours = hours < 10 ? `0${hours}` : hours;
-        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-        return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        // Attach click event to pagination links
+        paginationContainer.find('a.page-link').on('click', function (event) {
+            event.preventDefault();
+            let page = $(this).data('page');
+            if (page && !$(this).parent().hasClass('disabled')) {
+                // Call the search function with the new page number
+                // You may need to adjust this to pass the correct parameters
+                searchListFixed($('#searchInputFixed').val(), $('#search-by-fixed').val(), $('#filter-date-fixed').val(), $('#departmentId').val(), page);
+            }
+        });
     }
 </script>
 </body>

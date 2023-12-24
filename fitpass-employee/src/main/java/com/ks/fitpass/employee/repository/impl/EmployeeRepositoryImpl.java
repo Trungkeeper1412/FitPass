@@ -25,8 +25,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -36,12 +36,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
     }
 
     @Override
-    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckOutFlexibleDTO dto = new CheckOutFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -51,12 +51,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_IN_BY_USERNAME, (rs, rowNum) -> {
+    public Integer getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_NEED_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public Integer getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_NEED_CHECK_OUT_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_IN_BY_USERNAME + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -66,12 +76,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId, "%" + username + "%");
+        }, departmentId, "%" + username + "%", offset, size);
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_IN_BY_PHONE, (rs, rowNum) -> {
+    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_IN_BY_PHONE + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -81,28 +91,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId, "%" + phoneNumber + "%");
+        }, departmentId, "%" + phoneNumber + "%", offset, size);
     }
 
     @Override
-    public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
-        return jdbcTemplate.update(IRepositoryQuery.INSERT_CHECK_IN_HISTORY, orderDetailId, statusKey, checkInTime, checkOutTime, totalCredit, empCheckinId);
-    }
-
-    @Override
-    public UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId) {
-        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_USER_RECEIVE, (rs, rowNum) -> {
-            UserReceiveMessageDTO userReceiveMessageDTO = new UserReceiveMessageDTO();
-            userReceiveMessageDTO.setUserId(rs.getInt("user_id"));
-            userReceiveMessageDTO.setGymDepartmentId(rs.getInt("gym_department_id"));
-            return userReceiveMessageDTO;
-        }, orderDetailId);
-    }
-
-    @Override
-    public List<CheckInFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_OUT_BY_USERNAME, (rs, rowNum) -> {
-            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+    public List<CheckOutFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_OUT_BY_USERNAME + "LIMIT ?, ?", (rs, rowNum) -> {
+            CheckOutFlexibleDTO dto = new CheckOutFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
             dto.setProductName(rs.getString("product_name"));
@@ -111,13 +106,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId, "%" + username + "%");
+        }, departmentId, "%" + username + "%", offset, size);
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_OUT_BY_PHONE, (rs, rowNum) -> {
-            CheckInFlexibleDTO dto = new CheckInFlexibleDTO();
+    public List<CheckOutFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.SEARCH_LIST_CHECK_OUT_BY_PHONE + "LIMIT ?, ?" , (rs, rowNum) -> {
+            CheckOutFlexibleDTO dto = new CheckOutFlexibleDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
             dto.setProductName(rs.getString("product_name"));
@@ -126,12 +121,32 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId, "%" + phoneNumber + "%");
+        }, departmentId, "%" + phoneNumber + "%", offset, size);
     }
 
     @Override
-    public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public Integer countSearchListCheckInByUsername(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_IN_BY_USERNAME, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public Integer countSearchListCheckInByPhoneNumber(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_IN_BY_PHONE, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public Integer countSearchListCheckOutByUsername(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_OUT_BY_USERNAME, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public Integer countSearchListCheckOutByPhoneNumber(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_OUT_BY_PHONE, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFixedDTO dto = new CheckInFixedDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -141,12 +156,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setPrice(rs.getDouble("price"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
     }
 
     @Override
-    public List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId) {
-        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID, (rs, rowNum) -> {
+    public List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int offset, int size) {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckedInFixedDTO dto = new CheckedInFixedDTO();
             dto.setOrderDetailId(rs.getInt("order_detail_id"));
             dto.setUsername(rs.getString("user_name"));
@@ -157,7 +172,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setCheckInTime(rs.getTimestamp("check_in_time"));
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
-        }, departmentId);
+        }, departmentId, offset, size);
+    }
+
+    @Override
+    public Integer getTotalListNeedCheckInFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID, Integer.class, departmentId);
+    }
+
+    @Override
+    public Integer getTotalListCheckedInFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_CHECKED_IN_FIXED_BY_DEPARTMENT_ID, Integer.class, departmentId);
     }
 
     @Override
@@ -218,5 +243,20 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             dto.setImageUrl(rs.getString("image_url"));
             return dto;
         }, departmentId, "%" + phoneNumber + "%");
+    }
+
+    @Override
+    public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
+        return jdbcTemplate.update(IRepositoryQuery.INSERT_CHECK_IN_HISTORY, orderDetailId, statusKey, checkInTime, checkOutTime, totalCredit, empCheckinId);
+    }
+
+    @Override
+    public UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_USER_RECEIVE, (rs, rowNum) -> {
+            UserReceiveMessageDTO userReceiveMessageDTO = new UserReceiveMessageDTO();
+            userReceiveMessageDTO.setUserId(rs.getInt("user_id"));
+            userReceiveMessageDTO.setGymDepartmentId(rs.getInt("gym_department_id"));
+            return userReceiveMessageDTO;
+        }, orderDetailId);
     }
 }

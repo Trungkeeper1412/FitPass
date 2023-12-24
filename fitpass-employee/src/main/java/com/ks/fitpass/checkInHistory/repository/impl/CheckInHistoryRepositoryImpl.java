@@ -4,20 +4,25 @@ import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;
 import com.ks.fitpass.checkInHistory.repository.CheckInHistoryRepository;
 import com.ks.fitpass.checkInHistory.repository.IRepositoryQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.ks.fitpass.checkInHistory.repository.IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID;
+import static com.ks.fitpass.checkInHistory.repository.IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID;
 
 @Repository
 public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
 
     private final JdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(CheckInHistoryRepositoryImpl.class);
 
     @Autowired
     public CheckInHistoryRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -46,7 +51,7 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
 
     @Override
     public List<CheckInHistoryFlexible> getListCheckInHistoryFlexibleByDepartmentId(int departmentId, int offset, int size) {
-        List<CheckInHistoryFlexible> list = jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID + " LIMIT ?, ?", (rs, rowNum) -> {
+        return jdbcTemplate.query(IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID + " LIMIT ?, ?", (rs, rowNum) -> {
             CheckInHistoryFlexible checkInHistoryFlexible = new CheckInHistoryFlexible();
             checkInHistoryFlexible.setUsername(rs.getString("username"));
             checkInHistoryFlexible.setUserImageUrl(rs.getString("image_url"));
@@ -64,7 +69,6 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             checkInHistoryFlexible.setDuration(duration);
             return checkInHistoryFlexible;
         }, departmentId, offset, size);
-        return list;
     }
 
     @Override
@@ -83,77 +87,125 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
     }
 
     @Override
-    public List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter) {
+    public List<CheckInHistoryFlexible> searchListHistoryFlexible(
+            int departmentId,
+            String username,
+            String phoneNumber,
+            String dateFilter,
+            int offset,
+            int size) {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(departmentId);
+
         String sql = IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FLEXIBLE_BY_DEPARTMENT_ID;
 
+        // Conditional query parts for filters
         if (username != null && !username.isEmpty()) {
-            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE '%" + username + "%'";
+            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE ?";
+            parameters.add("%" + username + "%");
         }
 
         if (phoneNumber != null && !phoneNumber.isEmpty()) {
-            sql += " AND ud.phone_number LIKE '%" + phoneNumber + "%'";
+            sql += " AND ud.phone_number LIKE ?";
+            parameters.add("%" + phoneNumber + "%");
         }
 
         if (dateFilter != null && !dateFilter.isEmpty()) {
-            if (dateFilter.equals("day")) {
-                sql += " AND DATE(ci.check_in_time) = CURDATE()";
-            } else if (dateFilter.equals("week")) {
-                sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
-            } else if (dateFilter.equals("month")) {
-                sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
-            } else if (dateFilter.equals("year")) {
-                sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+            switch (dateFilter) {
+                case "day":
+                    sql += " AND DATE(ci.check_in_time) = CURDATE()";
+                    break;
+                case "week":
+                    sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
+                    break;
+                case "month":
+                    sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
+                    break;
+                case "year":
+                    sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+                    break;
             }
         }
 
-        List<CheckInHistoryFlexible> list = jdbcTemplate.query(sql, (rs, rowNum) -> {
-            CheckInHistoryFlexible checkInHistoryFlexible = new CheckInHistoryFlexible();
-            checkInHistoryFlexible.setUsername(rs.getString("username"));
-            checkInHistoryFlexible.setPhoneNumber(rs.getString("phone_number"));
-            checkInHistoryFlexible.setEmpName(rs.getString("emp_name"));
-            checkInHistoryFlexible.setCheckInTime(rs.getTimestamp("checkInTime"));
-            checkInHistoryFlexible.setCheckOutTime(rs.getTimestamp("checkOutTime"));
-            checkInHistoryFlexible.setPricePerHours(rs.getDouble("pricePerHours"));
-            checkInHistoryFlexible.setTotalCredit(rs.getDouble("totalCredit"));
-            String duration = "";
-            if(rs.getTimestamp("checkOutTime") != null) {
-                duration = calculateDuration(rs.getTimestamp("checkInTime"), rs.getTimestamp("checkOutTime"));
-            }
-            checkInHistoryFlexible.setDuration(duration);
-            return checkInHistoryFlexible;
-        }, departmentId);
+        // Add ORDER BY clause for consistent ordering
+        sql += " ORDER BY ci.check_in_time DESC";
 
-        if(list.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return list;
+        // Add pagination using LIMIT and OFFSET
+        sql += " LIMIT ? OFFSET ?";
+        parameters.add(size);
+        parameters.add(offset);
+
+        logger.error("Final SQL: " + sql);
+        logger.error("Parameters: " + parameters);
+
+
+        List<CheckInHistoryFlexible> list = jdbcTemplate.query(sql, parameters.toArray(), (rs, rowNum) -> {
+                    CheckInHistoryFlexible checkInHistoryFlexible = new CheckInHistoryFlexible();
+                    checkInHistoryFlexible.setUsername(rs.getString("username"));
+                    checkInHistoryFlexible.setPhoneNumber(rs.getString("phone_number"));
+                    checkInHistoryFlexible.setEmpName(rs.getString("emp_name"));
+                    checkInHistoryFlexible.setCheckInTime(rs.getTimestamp("checkInTime"));
+                    checkInHistoryFlexible.setCheckOutTime(rs.getTimestamp("checkOutTime"));
+                    checkInHistoryFlexible.setGymPlanName(rs.getString("name"));
+                    checkInHistoryFlexible.setPricePerHours(rs.getDouble("pricePerHours"));
+                    checkInHistoryFlexible.setTotalCredit(rs.getDouble("totalCredit"));
+                    String duration = "";
+                    if (rs.getTimestamp("checkOutTime") != null) {
+                        duration = calculateDuration(rs.getTimestamp("checkInTime"), rs.getTimestamp("checkOutTime"));
+                    }
+                    checkInHistoryFlexible.setDuration(duration);
+                    return checkInHistoryFlexible;
+                });
+        return (!list.isEmpty()) ? list : new ArrayList<>();
     }
-
-    @Override
-    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
+    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber,
+                                                            String dateFilter,
+                                                            int offset,
+                                                            int size) {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(departmentId);
         String sql = IRepositoryQuery.GET_LIST_CHECK_IN_HISTORY_FIXED_BY_DEPARTMENT_ID;
 
+        // Conditional query parts for filters
         if (username != null && !username.isEmpty()) {
-            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE '%" + username + "%'";
+            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE ?";
+            parameters.add("%" + username + "%");
         }
 
         if (phoneNumber != null && !phoneNumber.isEmpty()) {
-            sql += " AND ud.phone_number LIKE '%" + phoneNumber + "%'";
+            sql += " AND ud.phone_number LIKE ?";
+            parameters.add("%" + phoneNumber + "%");
         }
 
         if (dateFilter != null && !dateFilter.isEmpty()) {
-            if (dateFilter.equals("day")) {
-                sql += " AND DATE(ci.check_in_time) = CURDATE()";
-            } else if (dateFilter.equals("week")) {
-                sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
-            } else if (dateFilter.equals("month")) {
-                sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
-            } else if (dateFilter.equals("year")) {
-                sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+            switch (dateFilter) {
+                case "day":
+                    sql += " AND DATE(ci.check_in_time) = CURDATE()";
+                    break;
+                case "week":
+                    sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
+                    break;
+                case "month":
+                    sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
+                    break;
+                case "year":
+                    sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+                    break;
             }
         }
 
-        List<CheckInHistoryFixed> list = jdbcTemplate.query(sql, (rs, rowNum) -> {
+        // Add ORDER BY clause for consistent ordering
+        sql += " ORDER BY ci.check_in_time DESC";
+
+        // Add pagination using LIMIT and OFFSET
+        sql += " LIMIT ? OFFSET ?";
+        parameters.add(size);
+        parameters.add(offset);
+
+        logger.error("Final SQL: " + sql);
+        logger.error("Parameters: " + parameters);
+
+        List<CheckInHistoryFixed> list = jdbcTemplate.query(sql, parameters.toArray(), (rs, rowNum) -> {
             CheckInHistoryFixed checkInHistoryFixed = new CheckInHistoryFixed();
             checkInHistoryFixed.setUsername(rs.getString("username"));
             checkInHistoryFixed.setPhoneNumber(rs.getString("phone_number"));
@@ -162,22 +214,88 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
             checkInHistoryFixed.setGymPlanName(rs.getString("name"));
             checkInHistoryFixed.setCredit(rs.getDouble("price"));
             return checkInHistoryFixed;
-        }, departmentId);
+        });
+        return (!list.isEmpty()) ? list : new ArrayList<>();
+    }
 
-        if(list.isEmpty()) {
-            return Collections.emptyList();
+    @Override
+    public Integer getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(GET_TOTAL_LIST_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class,departmentId);
+    }
+
+    @Override
+    public Integer getTotalListCheckInHistoryFixedByDepartmentId(int departmentId) {
+        return jdbcTemplate.queryForObject(GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID, Integer.class,departmentId);
+    }
+
+    @Override
+    public Integer countSearchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter) {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(departmentId);
+
+        // Start with the base query from the constant
+        String sql = IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID;
+
+        // Modify the existing query to add additional conditions
+        if (username != null && !username.isEmpty()) {
+            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE ?";
+            parameters.add("%" + username + "%");
         }
-        return list;
+
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            sql += " AND ud.phone_number LIKE ?";
+            parameters.add("%" + phoneNumber + "%");
+        }
+
+        if (dateFilter != null && !dateFilter.isEmpty()) {
+            if (dateFilter.equals("day")) {
+                sql += " AND DATE(ci.check_in_time) = CURDATE()";
+            } else if (dateFilter.equals("week")) {
+                sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
+            } else if (dateFilter.equals("month")) {
+                sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
+            } else if (dateFilter.equals("year")) {
+                sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+            }
+        }
+
+        // Execute the query to get the count
+        return jdbcTemplate.queryForObject(sql, Integer.class, parameters.toArray());
     }
 
     @Override
-    public int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
-        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FLEXIBLE_BY_DEPARTMENT_ID, Integer.class,departmentId);
-    }
+    public Integer countSearchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(departmentId);
 
-    @Override
-    public int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId) {
-        return jdbcTemplate.queryForObject(IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID, Integer.class,departmentId);
+        // Start with the base query from the constant
+        String sql = IRepositoryQuery.GET_TOTAL_LIST_CHECK_IN_FIXED_BY_DEPARTMENT_ID;
+
+        // Modify the existing query to add additional conditions
+        if (username != null && !username.isEmpty()) {
+            sql += " AND CONCAT(ud.first_name, ' ', ud.last_name) LIKE ?";
+            parameters.add("%" + username + "%");
+        }
+
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            sql += " AND ud.phone_number LIKE ?";
+            parameters.add("%" + phoneNumber + "%");
+        }
+
+        if (dateFilter != null && !dateFilter.isEmpty()) {
+            if (dateFilter.equals("day")) {
+                sql += " AND DATE(ci.check_in_time) = CURDATE()";
+            } else if (dateFilter.equals("week")) {
+                sql += " AND WEEK(ci.check_in_time) = WEEK(NOW())";
+            } else if (dateFilter.equals("month")) {
+                sql += " AND MONTH(ci.check_in_time) = MONTH(NOW())";
+            } else if (dateFilter.equals("year")) {
+                sql += " AND YEAR(ci.check_in_time) = YEAR(NOW())";
+            }
+        }
+
+        // Execute the query to get the count
+        return jdbcTemplate.queryForObject(sql, Integer.class, parameters.toArray());
     }
 
     private String calculateDuration(Timestamp checkInTime, Timestamp checkOutTime) {
@@ -187,9 +305,8 @@ public class CheckInHistoryRepositoryImpl implements CheckInHistoryRepository {
         long minutes = (durationInMillis % (60 * 60 * 1000)) / (60 * 1000);
 
         // Định dạng chuỗi "HH h mm p"
-        String formattedDuration = String.format("%02d giờ %02d phút", hours, minutes);
 
-        return formattedDuration;
+        return String.format("%02d giờ %02d phút", hours, minutes);
     }
 
 }

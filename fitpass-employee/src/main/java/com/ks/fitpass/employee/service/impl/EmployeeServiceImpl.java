@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,33 +25,79 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId) {
-        return employeeRepository.getListNeedCheckInFlexibleByDepartmentId(departmentId);
+    public List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return employeeRepository.getListNeedCheckInFlexibleByDepartmentId(departmentId, offset, size);
     }
 
     @Override
-    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
-        return employeeRepository.getListNeedCheckOutFlexibleByDepartmentId(departmentId);
+    public List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return employeeRepository.getListNeedCheckOutFlexibleByDepartmentId(departmentId, offset, size);
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId) {
-        return employeeRepository.searchListCheckInByUsername(username, departmentId);
+    public int getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId) {
+        Integer count = employeeRepository.getTotalListNeedCheckInFlexibleByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId) {
-        return employeeRepository.searchListCheckInByPhoneNumber(phoneNumber, departmentId);
+    public int getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId) {
+        Integer count = employeeRepository.getTotalListNeedCheckOutFlexibleByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override
-    public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
-        return employeeRepository.insertToCheckInHistory(orderDetailId, statusKey, checkInTime, checkOutTime, totalCredit, empCheckinId);
+    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckInFlexibleDTO> results = employeeRepository.searchListCheckInByUsername(username, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
     }
 
     @Override
-    public UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId) {
-        return employeeRepository.getUserReceiveMessage(orderDetailId);
+    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckInFlexibleDTO> results = employeeRepository.searchListCheckInByPhoneNumber(phoneNumber, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
+    }
+
+    @Override
+    public List<CheckOutFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckOutFlexibleDTO> results = employeeRepository.searchListCheckOutByUsername(username, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
+    }
+
+    @Override
+    public List<CheckOutFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckOutFlexibleDTO> results = employeeRepository.searchListCheckOutByPhoneNumber(phoneNumber, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
+    }
+
+    @Override
+    public int countSearchListCheckInByUsername(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckInByUsername(searchText,departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListCheckInByPhoneNumber(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckInByPhoneNumber(searchText, departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListCheckOutByUsername(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckOutByUsername(searchText, departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListCheckOutByPhoneNumber(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckOutByPhoneNumber(searchText, departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override
@@ -74,22 +121,36 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId) {
-        return employeeRepository.searchListCheckOutByUsername(username, departmentId);
+    public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return employeeRepository.getListNeedCheckInFixedByDepartmentId(departmentId, offset, size);
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId) {
-        return employeeRepository.searchListCheckOutByPhoneNumber(phoneNumber, departmentId);
+    public List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        return employeeRepository.getListCheckedInFixedByDepartmentId(departmentId, offset, size);
     }
 
     @Override
-    public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId) {
-        return employeeRepository.getListNeedCheckInFixedByDepartmentId(departmentId);
+    public int getTotalListNeedCheckInFixedByDepartmentId(int departmentId) {
+        Integer count = employeeRepository.getTotalListNeedCheckInFixedByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override
-    public List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId) {
-        return employeeRepository.getListCheckedInFixedByDepartmentId(departmentId);
+    public int getTotalListCheckedInFixedByDepartmentId(int departmentId) {
+        Integer count = employeeRepository.getTotalListCheckedInFixedByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
+        return employeeRepository.insertToCheckInHistory(orderDetailId, statusKey, checkInTime, checkOutTime, totalCredit, empCheckinId);
+    }
+
+    @Override
+    public UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId) {
+        return employeeRepository.getUserReceiveMessage(orderDetailId);
     }
 }

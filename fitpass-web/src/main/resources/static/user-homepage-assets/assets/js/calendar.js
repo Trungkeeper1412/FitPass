@@ -275,11 +275,15 @@ function loadCalendar(data){
                     membershipPackage: data.gymPlanName
                 };
 
+                const originalCheckInTime = workoutData.checkInTime;
+                const newCheckInTime = new Date(`2000-01-01 ${originalCheckInTime}`);
+                newCheckInTime.setHours(newCheckInTime.getHours() + 7);
+
                 if(data.feedBackId === 0) {
                     document.getElementById('gym-location').value = workoutData.gymLocation;
                     document.getElementById('gym-address').value = workoutData.gymAddress;
                     document.getElementById('workout-date').value = workoutData.date;
-                    document.getElementById('check-in-time').value = workoutData.checkInTime;
+                    document.getElementById('check-in-time').value = newCheckInTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
                     document.getElementById('membership-package').value = workoutData.membershipPackage;
 
                     document.getElementById("checkInHistoryIdReview").value = data.checkInHistoryId;
@@ -296,7 +300,7 @@ function loadCalendar(data){
                             document.getElementById('gym-location-review').value = workoutData.gymLocation;
                             document.getElementById('gym-address-review').value = workoutData.gymAddress;
                             document.getElementById('workout-date-review').value = workoutData.date;
-                            document.getElementById('check-in-time-review').value = workoutData.checkInTime;
+                            document.getElementById('check-in-time-review').value = newCheckInTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
                             document.getElementById('membership-package-review').value = workoutData.membershipPackage;
 
                             document.getElementById("checkInHistoryIdReviewed").value = data.checkInHistoryId;

@@ -50,22 +50,38 @@ public class CheckInHistoryServiceImpl implements CheckInHistoryService {
     }
 
     @Override
-    public List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter) {
-        return checkInHistoryRepository.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
+    public List<CheckInHistoryFlexible> searchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter,int page, int size) {
+        int offset = (page - 1) * size;
+        return checkInHistoryRepository.searchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter,offset,size);
     }
 
     @Override
-    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
-        return checkInHistoryRepository.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
+    public List<CheckInHistoryFixed> searchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter, int page, int size) {
+        int offset = (page - 1) * size;
+        return checkInHistoryRepository.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter, offset, size);
     }
 
     @Override
     public int getTotalListCheckInHistoryFlexibleByDepartmentId(int departmentId) {
-        return checkInHistoryRepository.getTotalListCheckInHistoryFlexibleByDepartmentId(departmentId);
+        Integer count = checkInHistoryRepository.getTotalListCheckInHistoryFlexibleByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
     }
 
     @Override
     public int getTotalListCheckInHistoryFixedByDepartmentId(int departmentId) {
-        return checkInHistoryRepository.getTotalListCheckInHistoryFixedByDepartmentId(departmentId);
+        Integer count = checkInHistoryRepository.getTotalListCheckInHistoryFixedByDepartmentId(departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListHistoryFlexible(int departmentId, String username, String phoneNumber, String dateFilter) {
+        Integer count = checkInHistoryRepository.countSearchListHistoryFlexible(departmentId, username, phoneNumber, dateFilter);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListHistoryFixed(int departmentId, String username, String phoneNumber, String dateFilter) {
+        Integer count = checkInHistoryRepository.countSearchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);
+        return (count != null) ? count : 0;
     }
 }

@@ -13832,7 +13832,18 @@ label.error {
 .w3-modal{
     width: 100%;
 }
-
+.user-status {
+    text-align: center;
+    margin: auto;
+    width: 110px;
+    margin-left: 15px;
+    /*background-color: #e5e5e5;*/
+    /*color: grey;*/
+    font-size: 12px;
+    font-weight: 450;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
 .w3-animate-zoom {
     position: relative;
     margin: auto;

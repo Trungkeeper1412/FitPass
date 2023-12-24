@@ -10,24 +10,39 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface EmployeeService {
-    List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId);
-    List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId);
+    //////////////////////////////////////////////// Flexible Plan //////////////////////////
+    List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int page, int size);
 
-    List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId);
+    List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int page, int size);
 
-    List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId);
+    int getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
 
-    List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId);
+    int getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
 
-    List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId);
+    List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId, int page, int size);
 
-    List<CheckInFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId);
+    List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId, int page, int size);
 
-    List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId);
+    List<CheckOutFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId, int page, int size);
 
-    int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId);
+    List<CheckOutFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId, int page, int size);
 
-    UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId);
+    int countSearchListCheckInByUsername(String searchText, int departmentId);
+
+    int countSearchListCheckInByPhoneNumber(String searchText, int departmentId);
+
+    int countSearchListCheckOutByUsername(String searchText, int departmentId);
+
+    int countSearchListCheckOutByPhoneNumber(String searchText, int departmentId);
+
+    ////////////////////////////////////////////////// Fixed Plan //////////////////////////
+    List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int page, int size);
+
+    List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int page, int size);
+
+    int getTotalListNeedCheckInFixedByDepartmentId(int departmentId);
+
+    int getTotalListCheckedInFixedByDepartmentId(int departmentId);
 
     List<CheckInFixedDTO> searchListCheckInFixedByUsername(String username, int departmentId);
 
@@ -36,4 +51,10 @@ public interface EmployeeService {
     List<CheckedInFixedDTO> searchListCheckedInFixedByUsername(String username, int departmentId);
 
     List<CheckedInFixedDTO> searchListCheckedInFixedByPhoneNumber(String phoneNumber, int departmentId);
+
+    ///////////////////////////////////////// Other method ///////////////////////////////////////////
+
+    int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId);
+
+    UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId);
 }

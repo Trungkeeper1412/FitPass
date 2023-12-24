@@ -804,7 +804,7 @@ VALUES 	  (83, 0),
 -- Create brand infos
 INSERT INTO brand (brand_id, user_id, name, logo_url, wallpaper_url, thumbnail_url, description, rating, contact_number,
                    contact_email, brand_status_key)
-VALUES (5, 6, 'Citi Gym',
+VALUES (5, 6, 'Citigym',
         '/img/brands/logos/5_logo.jpg',
         '/img/brands/wallpapers/5_wallpaper.jpg',
         '/img/brands/thumbnails/5_thumbnail.jpg',
