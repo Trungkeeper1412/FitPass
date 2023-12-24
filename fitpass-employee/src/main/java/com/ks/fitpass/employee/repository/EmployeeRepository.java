@@ -12,8 +12,11 @@ import java.util.List;
 public interface EmployeeRepository {
     //////////////////////////////////////////////// Flexible Plan //////////////////////////
     List<CheckInFlexibleDTO> getListNeedCheckInFlexibleByDepartmentId(int departmentId, int offset, int size);
+
     List<CheckOutFlexibleDTO> getListNeedCheckOutFlexibleByDepartmentId(int departmentId, int offset, int size);
+
     Integer getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
+
     Integer getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
 
     List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId, int offset, int size);
@@ -24,7 +27,15 @@ public interface EmployeeRepository {
 
     List<CheckOutFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId, int offset, int size);
 
-    ////////////////////////////////////////////////// Fixed Plan //////////////////////////
+    Integer countSearchListCheckInByUsername(String searchText, int departmentId);
+
+    Integer countSearchListCheckInByPhoneNumber(String searchText, int departmentId);
+
+    Integer countSearchListCheckOutByUsername(String searchText, int departmentId);
+
+    Integer countSearchListCheckOutByPhoneNumber(String searchText, int departmentId);
+
+    ////////////////////////////////////////////////// Fixed Plan ///////////////////////////////////////////////////////////////////////////
     List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int offset, int size);
 
     List<CheckedInFixedDTO> getListCheckedInFixedByDepartmentId(int departmentId, int offset, int size);

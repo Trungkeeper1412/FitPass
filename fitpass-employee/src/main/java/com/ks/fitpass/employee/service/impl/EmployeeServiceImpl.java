@@ -77,6 +77,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public int countSearchListCheckInByUsername(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckInByUsername(searchText,departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListCheckInByPhoneNumber(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckInByPhoneNumber(searchText, departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListCheckOutByUsername(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckOutByUsername(searchText, departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int countSearchListCheckOutByPhoneNumber(String searchText, int departmentId) {
+        Integer count = employeeRepository.countSearchListCheckOutByPhoneNumber(searchText, departmentId);
+        return (count != null) ? count : 0;
+    }
+
+    @Override
     public List<CheckInFixedDTO> searchListCheckInFixedByUsername(String username, int departmentId) {
         return employeeRepository.searchListCheckInFixedByUsername(username, departmentId);
     }

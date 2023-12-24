@@ -125,6 +125,26 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    public Integer countSearchListCheckInByUsername(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_IN_BY_USERNAME, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public Integer countSearchListCheckInByPhoneNumber(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_IN_BY_PHONE, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public Integer countSearchListCheckOutByUsername(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_OUT_BY_USERNAME, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
+    public Integer countSearchListCheckOutByPhoneNumber(String searchText, int departmentId) {
+        return jdbcTemplate.queryForObject(IRepositoryQuery.COUNT_SEARCH_LIST_CHECK_OUT_BY_PHONE, Integer.class, departmentId, "%" + searchText + "%");
+    }
+
+    @Override
     public List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int offset, int size) {
         return jdbcTemplate.query(IRepositoryQuery.GET_LIST_NEED_CHECK_IN_FIXED_BY_DEPARTMENT_ID + "LIMIT ?, ?", (rs, rowNum) -> {
             CheckInFixedDTO dto = new CheckInFixedDTO();

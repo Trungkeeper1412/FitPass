@@ -392,61 +392,99 @@ public class EmployeeController {
 
     @GetMapping("/flexible/search")
     @ResponseBody
-    public ResponseEntity<?> searchListByStatus(HttpSession session,
-                                                @RequestParam("searchText") String searchText,
+    public ResponseEntity<?> searchListByStatus(@RequestParam("searchText") String searchText,
                                                 @RequestParam("searchOption") String searchOption,
                                                 @RequestParam("departmentId") int departmentId,
                                                 @RequestParam("status") String status,
                                                 @RequestParam(name = "page", defaultValue = "1") int page,
-                                                @RequestParam(name = "size", defaultValue = "6") int size) {
-
+                                                @RequestParam(name = "size", defaultValue = "6") int size,
+                                                HttpSession session) {
         try {
             if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body("Access denied: Invalid department or session.");
             }
-
-            List<?> searchResults;
 
             if ("check-in".equals(status)) {
-                searchResults = performSearchCheckIn(searchOption, searchText, departmentId, page, size);
+                return handleCheckInSearch(searchOption, searchText, departmentId, page, size);
             } else if ("checked-in".equals(status)) {
-                searchResults = performSearchCheckOut(searchOption, searchText, departmentId, page, size);
+                return handleCheckOutSearch(searchOption, searchText, departmentId, page, size);
             } else {
-                logger.error("Invalid status value: " + status);
-                return ResponseEntity.badRequest().build();
+                return ResponseEntity.badRequest()
+                        .body("Invalid search status: " + status);
             }
-
-            // Check if the search results are null or empty
-            if (searchResults == null || searchResults.isEmpty()) {
-                logger.info("Search returned no content for status " + status);
-                return ResponseEntity.noContent().build(); // Or return an appropriate status code
-            }
-            return ResponseEntity.ok(searchResults);
         } catch (DataAccessException e) {
-            logger.error("Error during database access in searchListByStatus", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Database access error occurred.");
         } catch (Exception e) {
             logger.error("An unexpected error occurred in searchListByStatus", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An unexpected error occurred.");
         }
     }
 
-    private List<CheckInFlexibleDTO> performSearchCheckIn(String searchOption, String searchText, int departmentId, int page, int size) {
+    private ResponseEntity<?> handleCheckInSearch(String searchOption, String searchText, int departmentId, int page, int size) {
+        List<CheckInFlexibleDTO> results;
+        int totalRecords;
+
         if ("username".equals(searchOption)) {
-            return employeeService.searchListCheckInByUsername(searchText, departmentId, page, size);
+            totalRecords = employeeService.countSearchListCheckInByUsername(searchText, departmentId);
+            results = employeeService.searchListCheckInByUsername(searchText, departmentId, page, size);
         } else if ("phone-number".equals(searchOption)) {
-            return employeeService.searchListCheckInByPhoneNumber(searchText, departmentId, page, size);
+            totalRecords = employeeService.countSearchListCheckInByPhoneNumber(searchText, departmentId);
+            results = employeeService.searchListCheckInByPhoneNumber(searchText, departmentId, page, size);
+        } else {
+            return ResponseEntity.badRequest()
+                    .body("Invalid search option: " + searchOption);
         }
-        return null;
+        if (results == null || results.isEmpty()) {
+            return ResponseEntity.noContent()
+                    .header("X-Message", "No content found for the provided search criteria.")
+                    .build();
+        }
+
+        int totalPages = (int) Math.ceil((double) totalRecords / size);
+        FlexiblePlanPage flexiblePlanPage = FlexiblePlanPage.builder()
+                .listCheckInFlexible(results)
+                .currentPage(page)
+                .totalPages(totalPages)
+                .totalRecords(totalRecords)
+                .departmentId(departmentId)
+                .build();
+
+        return ResponseEntity.ok(flexiblePlanPage);
     }
 
-    private List<CheckOutFlexibleDTO> performSearchCheckOut(String searchOption, String searchText, int departmentId, int page, int size) {
+    private ResponseEntity<?> handleCheckOutSearch(String searchOption, String searchText, int departmentId, int page, int size) {
+        List<CheckOutFlexibleDTO> results;
+        int totalRecords;
         if ("username".equals(searchOption)) {
-            return employeeService.searchListCheckOutByUsername(searchText, departmentId, page, size);
+            totalRecords = employeeService.countSearchListCheckOutByUsername(searchText, departmentId);
+            results = employeeService.searchListCheckOutByUsername(searchText, departmentId, page, size);
         } else if ("phone-number".equals(searchOption)) {
-            return employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId, page, size);
+            totalRecords = employeeService.countSearchListCheckOutByPhoneNumber(searchText, departmentId);
+            results = employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId, page, size);
+        } else {
+            return ResponseEntity.badRequest()
+                    .body("Invalid search option: " + searchOption);
         }
-        return null;
+
+        if (results == null || results.isEmpty()) {
+            return ResponseEntity.noContent()
+                    .header("X-Message", "No check-out records found for the provided search criteria.")
+                    .build();
+        }
+
+        int totalPages = (int) Math.ceil((double) totalRecords / size);
+        FlexiblePlanPage flexiblePlanPage = FlexiblePlanPage.builder()
+                .listCheckOutFlexible(results)
+                .currentPage(page)
+                .totalPages(totalPages)
+                .totalRecords(totalRecords)
+                .departmentId(departmentId)
+                .build();
+
+        return ResponseEntity.ok(flexiblePlanPage);
     }
 
     @GetMapping("/flexible/getCheckInTime")

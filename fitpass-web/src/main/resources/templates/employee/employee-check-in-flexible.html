@@ -54,9 +54,8 @@
                             <div class="search-check-in container">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                                        <div
-                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                            <div class="input-group">
+                                        <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                            <div class="input-group check-in-search-input">
                                                 <input type="hidden" id="departmentId" th:value="${departmentId}">
                                                 <input type="text" class="form-control bg-light border-1 small"
                                                        id="searchInputCheckIn"
@@ -96,9 +95,8 @@
                             <div class="search-check-out container">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
-                                        <div
-                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
-                                            <div class="input-group">
+                                        <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                            <div class="input-group check-out-search-input">
                                                 <input type="text" class="form-control bg-light border-1 small"
                                                        id="searchInputCheckedIn"
                                                        placeholder="Tìm kiếm..." aria-label="Search"
@@ -211,13 +209,18 @@
             });
     }
 
-    function updateUI(data, status) {
-        renderPage(data, status);
-        renderPagination(data.currentPage, data.totalPages, status);
+    function updateUI(data, status, isSearch) {
+        renderPage(data, status, isSearch);
+        renderPagination(data.currentPage, data.totalPages, status, isSearch);
     }
 
-    function renderPage(data, status) {
-        let list = status === 'check-in' ? data.listCheckInFlexible : data.listCheckOutFlexible;
+    function renderPage(data, status, isSearch) {
+        let list;
+        if (Object.keys(data).length === 0) {
+            list = [];
+        } else {
+            list = status === 'check-in' ? data.listCheckInFlexible : data.listCheckOutFlexible;
+        }
         let container = status === 'check-in' ? $('#CheckInList') : $('#CheckOutList');
         let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
         container.empty();
@@ -227,53 +230,66 @@
                 ? "Bạn không có khách hàng nào đang cần check in"
                 : "Bạn không có khách hàng nào đã check in";
 
-            // Add a placeholder for the image
             let alertDiv = `
-                <div class="alert alert-warning bg-white text-center fs-4 d-flex flex-column align-items-center justify-content-center" role="alert">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-info-circle me-2"></i><span>${noCustomerMessage}</span>
-                    </div>
-                    <img src="/images/system/empty-list.png" alt="Empty List" style="max-width: 100px;">
-                 </div>
-                 `;
-            container.append(alertDiv); // Append the alert div to the container
-            paginationContainer.hide();
-        } else {list.forEach(item => {
-            let userCardHtml = `
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="user-card">
-                    <div class="user-info">
-                        <div class="img-col">
-                            <img src="${item.imageUrl}" alt="User Profile Image">
-                        </div>
-                        <div class="basic-info">
-                            <div class="fw-bold username">${item.username}</div>
-                            <div class="phone">${item.phoneNumber}</div>
-                        </div>
-                        <span class="user-status${status === 'check-in' ? '' : ' working'}">${status === 'check-in' ? 'Chưa tập' : 'Đang tập'}</span>
-                    </div>
-                    <div class="${status === 'check-in' ? 'plan-info' : 'plan-wrapper'}">
-                        <div class="fw-bold">Fitpass_Card_${item.orderDetailId}</div>
-                        <div class="plan-type" style="overflow-wrap: break-word">${item.productName}</div>
-                        <div>
-                            <span class="text-money">${item.pricePerHours}</span>
-                            <span class="credit fw-bold">Credit/Giờ</span>
-                        </div>
-                        ${status === 'check-in' ?
-                '<button class="btn btn-primary checkin-btn mt-3 mx-auto" onclick="performCheckIn('+ item.orderDetailId+')">Check-in</button>' :
-                '<button class="btn checkin-btn mx-auto mt-2" onclick="showDetail('+ item.orderDetailId +')">Chi tiết</button>'}
-                    </div>
+            <div class="alert alert-warning bg-white text-center fs-4 d-flex flex-column align-items-center justify-content-center" role="alert">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-info-circle me-2"></i><span>${noCustomerMessage}</span>
                 </div>
+                <img src="/images/system/empty-list.png" alt="Empty List" style="max-width: 100px;">
             </div>
         `;
-            container.append(userCardHtml);
-        })}
-        if (list.length > 0 && paginationContainer.is(':hidden')) {
-            paginationContainer.show();
+            container.append(alertDiv);
+            paginationContainer.hide();
+        } else {
+            if (isSearch) {
+                let searchResultsHtml = `
+                <div class="search-results-info d-flex justify-content-between align-items-center mb-3">
+                    <span>Tìm thấy ${data.totalRecords} kết quả</span>
+                    <button class="btn btn-secondary" onclick="location.reload()">Quay lại</button>
+                </div>
+            `;
+                container.prepend(searchResultsHtml);
+            }
+
+            list.forEach(item => {
+                let userCardHtml = `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="user-card">
+                        <div class="user-info">
+                            <div class="img-col">
+                                <img src="${item.imageUrl}" alt="User Profile Image">
+                            </div>
+                            <div class="basic-info">
+                                <div class="fw-bold username">${item.username}</div>
+                                <div class="phone">${item.phoneNumber}</div>
+                            </div>
+                            <span class="user-status${status === 'check-in' ? '' : ' working'}">${status === 'check-in' ? 'Chưa tập' : 'Đang tập'}</span>
+                        </div>
+                        <div class="${status === 'check-in' ? 'plan-info' : 'plan-wrapper'}">
+                            <div class="fw-bold">Fitpass_Card_${item.orderDetailId}</div>
+                            <div class="plan-type" style="overflow-wrap: break-word">${item.productName}</div>
+                            <div>
+                                <span class="text-money">${item.pricePerHours}</span>
+                                <span class="credit fw-bold">Credit/Giờ</span>
+                            </div>
+                            ${status === 'check-in' ?
+                    `<button class="btn btn-primary checkin-btn mt-3 mx-auto" onclick="performCheckIn(${item.orderDetailId})">Check-in</button>` :
+                    `<button class="btn checkin-btn mx-auto mt-2" onclick="showDetail(${item.orderDetailId})">Chi tiết</button>`}
+                        </div>
+                    </div>
+                </div>
+            `;
+                container.append(userCardHtml);
+            });
+            if (list.length > 0 && paginationContainer.is(':hidden')) {
+                paginationContainer.show();
+            }
         }
     }
 
-    function renderPagination(currentPage, totalPages, status) {
+    // You need to replace `yourFullData` and `yourStatus` with the actual variables or ways to retrieve the full list and status
+
+    function renderPagination(currentPage, totalPages, status, isSearch) {
         let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
 
         // Clear the pagination container
@@ -299,10 +315,10 @@
         <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
     </li>`);
 
-        attachPaginationEventListeners(departmentId, status, defaultPageSize);
+        attachPaginationEventListeners(departmentId, status, defaultPageSize, isSearch);
     }
 
-    function attachPaginationEventListeners(departmentId, status, size) {
+    function attachPaginationEventListeners(departmentId, status, size, isSearch) {
         let paginationContainer = status === 'check-in' ? $('#paginationCheckIn') : $('#paginationCheckedIn');
         let paginationControls = paginationContainer.find('.page-link');
 
@@ -310,36 +326,35 @@
             e.preventDefault();
             const page = parseInt($(this).data('page'));
             if (page > 0) {
-                handlePageChange(departmentId, status, page, size);
+                handlePageChange(departmentId, status, page, size, isSearch);
             }
         });
     }
 
     // Function to handle page change
-    function handlePageChange(departmentId, status, page, size) {
-        fetchData(departmentId, status, page, size).then(data => {
-            updateUI(data, status);
-            attachPaginationEventListeners(departmentId, status, size);
-        });
+    // Function to handle page change
+    function handlePageChange(departmentId, status, page, size, isSearch) {
+        if (isSearch) {
+            let searchText = $("#searchInputCheckIn").val().trim();
+            let searchOption = $("#search-by-check-in").val();
+            fetchSearchData(departmentId, status, page, size, searchText, searchOption).then(data => {
+                updateUI(data, status, true);
+                attachPaginationEventListeners(departmentId, status, size, true);
+            });
+        } else {
+            // Fetch normal data and update the UI without maintaining the search state
+            fetchData(departmentId, status, page, size).then(data => {
+                updateUI(data, status, false);
+                attachPaginationEventListeners(departmentId, status, size, false);
+            });
+        }
     }
 
     ////////////////////////////////////////////////////// Search Function ////////////////////////////////////////////////
-
-    $(".navbar-search-flexible").submit(function(event) {
+    $("#searchButtonCheckIn").click(function (event) {
         event.preventDefault();
-        $("#searchButtonFlexible").click();
-    });
-
-    $(".navbar-search-fixed").submit(function(event) {
-        event.preventDefault();
-        $("#searchButtonFixed").click();
-    });
-
-    $("#searchButtonFlexible").click(function (event) {
-        event.preventDefault();
-        let searchText = $("#searchInputFlexible").val().trim(); // Use trim() to remove whitespace
-        let searchOption = $("#search-by-flexible").val();
-        let filterDate = $("#filter-date-flexible").val();
+        let searchText = $("#searchInputCheckIn").val().trim(); // Use trim() to remove whitespace
+        let searchOption = $("#search-by-check-in").val();
         let departmentId = $("#departmentId").val();
 
         // Remove any existing error messages
@@ -351,39 +366,43 @@
         // Check if a search option has been chosen
         if (!searchOption) {
             // Display an error message for search option
-            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm</div>").insertAfter("#search-by-flexible");
+            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm</div>")
+                .insertAfter("#search-by-check-in");
             // Optionally add a red outline to the select dropdown
-            $("#search-by-flexible").css('border', '1px solid red');
+            $("#search-by-check-in").css('border', '1px solid red');
             isValidInput = false;
         } else {
             // If a search option is selected, remove the red outline
-            $("#search-by-flexible").css('border', '');
+            $("#search-by-check-in").css('border', '');
         }
 
         if (!searchText) {
             // Display an error message for search text
-            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>").insertAfter(".input-group flexible-search-input");
+            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>")
+                .insertAfter(".check-in-search-input");
             // Optionally add a red outline to the input field
-            $("#searchInputFlexible").css('border', '1px solid red');
+            $("#searchInputCheckIn").css('border', '1px solid red');
             isValidInput = false;
         } else {
             // If search text is not empty, remove the red outline
-            $("#searchInputFlexible").css('border', '');
+            $("#searchInputCheckIn").css('border', '');
         }
 
         // Proceed with the search if the input is valid
         if (isValidInput) {
-            $('#listFlexible').empty();
-            searchListFlex(searchText, searchOption, filterDate, departmentId);
+            $('#CheckInList').empty();
+            fetchSearchData(departmentId, status, globalCurrentPage, defaultPageSize, searchText, searchOption).then(data => {
+                updateUI(data, status, true);
+                attachPaginationEventListeners(departmentId, status, defaultPageSize, true);
+            });
         }
     });
 
-    $("#searchButtonFixed").click(function (event){
+    $("#searchButtonCheckedIn").click(function (event){
         event.preventDefault();
 
-        let searchText = $("#searchInputFixed").val().trim();
-        let searchOption = $("#search-by-fixed").val();
-        let filterDate = $("#filter-date-fixed").val();
+        let searchText = $("#searchInputCheckedIn").val().trim();
+        let searchOption = $("#search-by-checked-in").val();
         let departmentId = $("#departmentId").val();
         // Remove any existing error messages
         $('.error-message').remove();
@@ -394,153 +413,68 @@
         // Check if a search option has been chosen
         if (!searchOption) {
             // Display an error message for search option
-            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm </div>").insertAfter("#search-by-fixed");
+            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm </div>")
+                .insertAfter("#search-by-checked-in");
             // Optionally add a red outline to the select dropdown
-            $("#search-by-fixed").css('border', '1px solid red');
+            $("#search-by-checked-in").css('border', '1px solid red');
             isValidInput = false;
         } else {
             // If a search option is selected, remove the red outline
-            $("#search-by-fixed").css('border', '');
+            $("#search-by-checked-in").css('border', '');
         }
 
         if (!searchText) {
             // Display an error message for search text
-            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>").insertAfter(".input-group fixed-search-input");
+            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>")
+                .insertAfter(".check-out-search-input");
             // Optionally add a red outline to the input field
-            $("#searchInputFixed").css('border', '1px solid red');
+            $("#searchInputCheckedIn").css('border', '1px solid red');
             isValidInput = false;
         } else {
             // If search text is not empty, remove the red outline
-            $("#searchInputFixed").css('border', '');
+            $("#searchInputCheckedIn").css('border', '');
         }
 
         // Proceed with the search if the input is valid
         if (isValidInput) {
-            $('#listFixed').empty();
-            searchListFixed(searchText, searchOption, filterDate, departmentId);
+            $('#CheckOutList').empty();
+            fetchSearchData(departmentId, status, globalCurrentPage, defaultPageSize, searchText, searchOption).then(data => {
+                updateUI(data, status, true);
+                attachPaginationEventListeners(departmentId, status, defaultPageSize, true);
+            });
         }
     });
 
-    // Bắt sự kiện khi nút tìm kiếm được nhấn
-    $("#searchButton").click(function () {
-        event.preventDefault();
-        // Lấy giá trị từ ô nhập liệu
-        let searchText = $("#searchInput").val();
-        // Lấy giá trị từ dropdown chọn
-        let searchOption = $("#search-by").val();
+    function fetchSearchData(departmentId, status, page, size, searchText, searchOption) {
+        console.log(searchOption)
+        console.log(searchText)
+        const baseUrl = `/employee/flexible/search`;
+        const queryParams = new URLSearchParams({
+            searchText,
+            searchOption,
+            departmentId,
+            status,
+            page,
+            size
+        }).toString();
 
-        let departmentId = $("#departmentId").val();
-        // Gửi yêu cầu tìm kiếm bằng Ajax
-        if ($("#active").hasClass("show")) {
-            searchListCheckOut(searchText, searchOption, departmentId)
-        } else {
-            searchListCheckIn(searchText, searchOption, departmentId);
-        }
-    });
+        return fetch(`${baseUrl}?${queryParams}`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error('Server responded with an error: ' + text);
+                    });
+                }
+                if (response.status === 204) {
+                    return {}; // or return null, or an appropriate default value to indicate no content
+                }
 
-    function searchListCheckIn(searchText, searchOption, departmentId) {
-        // Gửi yêu cầu tìm kiếm đến server
-        $.ajax({
-            type: "GET",
-            url: `/employee/searchListCheckIn?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}`,
-            success: function (data) {
-                // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                displaySearchResultsCheckIn(data);
-            },
-            error: function () {
-                alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-            }
-        });
-    }
-
-    function searchListCheckOut(searchText, searchOption, departmentId) {
-        // Gửi yêu cầu tìm kiếm đến server
-        $.ajax({
-            type: "GET",
-            url: `/employee/searchListCheckOut?searchText=${searchText}&searchOption=${searchOption}&departmentId=${departmentId}`,
-            success: function (data) {
-                // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                displaySearchResultsCheckOut(data);
-            },
-            error: function () {
-                alert("Đã xảy ra lỗi trong quá trình tìm kiếm.");
-            }
-        });
-    }
-
-    function displaySearchResultsCheckIn(results) {
-        // Xóa các kết quả hiện tại
-        $("#CheckInList").empty();
-        // Hiển thị kết quả tìm kiếm
-        if (results.length > 0) {
-            var resultHtml = "";
-            for (var i = 0; i < results.length; i++) {
-                resultHtml += `<div class="user-card">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <img src="${results[i].imageUrl}" alt="User 1 Profile Image">
-                                                </div>
-                                                <div class="col-4">
-                                                    <h3 class="fw-bold">${results[i].username}</h3>
-                                                    <p class="text-uppercase fw-bold" >${results[i].productName}</p>
-                                                    <p >Số điện thoại: ${results[i].phoneNumber}</p>
-                                                </div>
-                                                <div class="col-2">
-                                                    <h5 class="text-money"><span>${results[i].pricePerHours}</span>  <span class="credit">Credit/Giờ</span></h5>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="status-box">
-                                                        <span class="user-status">Chưa tập</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-primary" onclick="performCheckIn(${results[i].orderDetailId})">Check-in</button>
-                                                </div>
-                                            </div>
-                                        </div>`;
-            }
-            $("#CheckInList").append(resultHtml);
-        } else {
-            $("#CheckInList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
-        }
-    }
-
-    function displaySearchResultsCheckOut(results) {
-        // Xóa các kết quả hiện tại
-        $("#CheckOutList").empty();
-
-        // Hiển thị kết quả tìm kiếm
-        if (results.length > 0) {
-            var resultHtml = "";
-            for (var i = 0; i < results.length; i++) {
-                resultHtml += `<div class="user-card">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <img src="${results[i].imageUrl}" alt="User 1 Profile Image">
-                                                </div>
-                                                <div class="col-4">
-                                                    <h3 class="fw-bold">${results[i].username}</h3>
-                                                    <p class="text-uppercase fw-bold" >${results[i].productName}</p>
-                                                    <p >Số điện thoại: ${results[i].phoneNumber}</p>
-                                                </div>
-                                                <div class="col-2">
-                                                    <h5 class="text-money"><span>${results[i].pricePerHours}</span>  <span class="credit">Credit/Giờ</span></h5>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="status-box">
-                                                        <span class="user-status">Đang tập</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-primary" onclick=showDetail(${results[i].orderDetailId})>Chi tiết</button>
-                                                </div>
-                                            </div>
-                                        </div>`;
-            }
-            $("#CheckOutList").append(resultHtml);
-        } else {
-            $("#CheckOutList").append(`<h6>Không tìm thấy kết quả nào.</h6>`);
-        }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Fetching error:', error);
+                return {};
+            });
     }
 
     ////////////////////////////////// Create Check In Request + Create Check Out Request ///////////////////////////////////////
