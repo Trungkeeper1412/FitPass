@@ -49,7 +49,35 @@
                         <!-- Tab Content -->
                         <div class="tab-content mt-4">
                             <div class="tab-pane fade show active" id="unactivated">
-
+                                <div class="search-check-in container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
+                                            <div
+                                                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                                <div class="input-group">
+                                                    <input type="hidden" id="departmentId" th:value="${departmentId}">
+                                                    <input type="text" class="form-control bg-light border-1 small"
+                                                           id="searchInputCheckIn"
+                                                           placeholder="Tìm kiếm..." aria-label="Search"
+                                                           aria-describedby="basic-addon2">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="button"
+                                                                id="searchButtonCheckIn">
+                                                            <i class="fas fa-search fa-sm"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                            <select id="search-by-check-in">
+                                                <option value="" disabled selected>Tìm kiếm theo:</option>
+                                                <option value="username">Tên</option>
+                                                <option value="phone-number">Số điện thoại</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row" id="CheckInList">
                                 </div>
                                 <div class="row">
@@ -61,8 +89,35 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade" id="active">
+                                <div class="search-check-out container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-sm-4 col-md-8 col-lg-6 col-xl-4 mr-3">
+                                            <div
+                                                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 w-100 navbar-search">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control bg-light border-1 small"
+                                                           id="searchInputCheckedIn"
+                                                           placeholder="Tìm kiếm..." aria-label="Search"
+                                                           aria-describedby="basic-addon2">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="button"
+                                                                id="searchButtonCheckedIn">
+                                                            <i class="fas fa-search fa-sm"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                            <select id="search-by-checked-in">
+                                                <option value="" disabled selected>Tìm kiếm theo:</option>
+                                                <option value="username">Tên</option>
+                                                <option value="phone-number">Số điện thoại</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row justify-content-center" id="CheckOutList">
                                 </div>
                                 <div class="row">

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -48,23 +49,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId) {
-        return employeeRepository.searchListCheckInByUsername(username, departmentId);
+    public List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckInFlexibleDTO> results = employeeRepository.searchListCheckInByUsername(username, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
     }
 
     @Override
-    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId) {
-        return employeeRepository.searchListCheckInByPhoneNumber(phoneNumber, departmentId);
+    public List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckInFlexibleDTO> results = employeeRepository.searchListCheckInByPhoneNumber(phoneNumber, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
     }
 
     @Override
-    public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
-        return employeeRepository.insertToCheckInHistory(orderDetailId, statusKey, checkInTime, checkOutTime, totalCredit, empCheckinId);
+    public List<CheckOutFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckOutFlexibleDTO> results = employeeRepository.searchListCheckOutByUsername(username, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
     }
 
     @Override
-    public UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId) {
-        return employeeRepository.getUserReceiveMessage(orderDetailId);
+    public List<CheckOutFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId, int page, int size) {
+        int offset = (page - 1) * size;
+        List<CheckOutFlexibleDTO> results = employeeRepository.searchListCheckOutByPhoneNumber(phoneNumber, departmentId, offset, size);
+        return results != null ? results : Collections.emptyList();
     }
 
     @Override
@@ -85,16 +94,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<CheckedInFixedDTO> searchListCheckedInFixedByPhoneNumber(String phoneNumber, int departmentId) {
         return employeeRepository.searchListCheckedInFixedByPhoneNumber(phoneNumber, departmentId);
-    }
-
-    @Override
-    public List<CheckInFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId) {
-        return employeeRepository.searchListCheckOutByUsername(username, departmentId);
-    }
-
-    @Override
-    public List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId) {
-        return employeeRepository.searchListCheckOutByPhoneNumber(phoneNumber, departmentId);
     }
 
     @Override
@@ -119,5 +118,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     public int getTotalListCheckedInFixedByDepartmentId(int departmentId) {
         Integer count = employeeRepository.getTotalListCheckedInFixedByDepartmentId(departmentId);
         return (count != null) ? count : 0;
+    }
+
+    @Override
+    public int insertToCheckInHistory(int orderDetailId, int statusKey, Timestamp checkInTime, Timestamp checkOutTime, double totalCredit, int empCheckinId) {
+        return employeeRepository.insertToCheckInHistory(orderDetailId, statusKey, checkInTime, checkOutTime, totalCredit, empCheckinId);
+    }
+
+    @Override
+    public UserReceiveMessageDTO getUserReceiveMessage(int orderDetailId) {
+        return employeeRepository.getUserReceiveMessage(orderDetailId);
     }
 }

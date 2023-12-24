@@ -76,7 +76,7 @@ public class EmployeeController {
     }
 
     @ModelAttribute
-    public void populateEmployeeInfo(HttpSession session, Model model){
+    public void populateEmployeeInfo(HttpSession session, Model model) {
         User user = (User) session.getAttribute("userInfo");
         UserDetail userDetail = userService.getUserDetailByUserId(user.getUserId());
         int userDepartmentId = userRepository.getDepartmentIdByEmployeeId(user.getUserId());
@@ -345,17 +345,17 @@ public class EmployeeController {
 
     @GetMapping("/check-in/flexible/list")
     public ResponseEntity<?> getCheckInListOfFlexibleCustomer(@RequestParam("departmentId") int departmentId,
-                                                   @RequestParam("status") String status,
-                                                   @RequestParam(defaultValue = "1") int page,
-                                                   @RequestParam(defaultValue = "6") int size,
-                                                   HttpSession session) {
+                                                              @RequestParam("status") String status,
+                                                              @RequestParam(defaultValue = "1") int page,
+                                                              @RequestParam(defaultValue = "6") int size,
+                                                              HttpSession session) {
         try {
             if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             FlexiblePlanPage flexiblePlanPage = null;
-            if (status.equals("check-in")){
-                List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId,page,size);
+            if (status.equals("check-in")) {
+                List<CheckInFlexibleDTO> checkInFlexibleDTOList = employeeService.getListNeedCheckInFlexibleByDepartmentId(departmentId, page, size);
                 int totalListCheckInFlexibleDTOList = employeeService.getTotalListNeedCheckInFlexibleByDepartmentId(departmentId);
                 int totalPages = (int) Math.ceil((double) totalListCheckInFlexibleDTOList / size);
                 flexiblePlanPage = FlexiblePlanPage.builder()
@@ -390,77 +390,63 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/searchListCheckIn")
+    @GetMapping("/flexible/search")
     @ResponseBody
-    public ResponseEntity<List<CheckInFlexibleDTO>> searchListCheckIn(HttpSession session,
-                                                                      @RequestParam("searchText") String searchText,
-                                                                      @RequestParam("searchOption") String searchOption,
-                                                                      @RequestParam("departmentId") int departmentId
-    ) {
+    public ResponseEntity<?> searchListByStatus(HttpSession session,
+                                                @RequestParam("searchText") String searchText,
+                                                @RequestParam("searchOption") String searchOption,
+                                                @RequestParam("departmentId") int departmentId,
+                                                @RequestParam("status") String status,
+                                                @RequestParam(name = "page", defaultValue = "1") int page,
+                                                @RequestParam(name = "size", defaultValue = "6") int size) {
+
         try {
             if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
-            List<CheckInFlexibleDTO> searchResults;
 
-            if ("username".equals(searchOption)) {
-                // Tìm kiếm theo tên (username)
-                searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
-            } else if ("phone-number".equals(searchOption)) {
-                // Tìm kiếm theo số điện thoại (phone number)
-                searchResults = employeeService.searchListCheckInByPhoneNumber(searchText, departmentId);
+            List<?> searchResults;
+
+            if ("check-in".equals(status)) {
+                searchResults = performSearchCheckIn(searchOption, searchText, departmentId, page, size);
+            } else if ("checked-in".equals(status)) {
+                searchResults = performSearchCheckOut(searchOption, searchText, departmentId, page, size);
             } else {
-                // Mặc định tìm kiếm theo tên (username)
-                searchResults = employeeService.searchListCheckInByUsername(searchText, departmentId);
+                logger.error("Invalid status value: " + status);
+                return ResponseEntity.badRequest().build();
             }
 
+            // Check if the search results are null or empty
+            if (searchResults == null || searchResults.isEmpty()) {
+                logger.info("Search returned no content for status " + status);
+                return ResponseEntity.noContent().build(); // Or return an appropriate status code
+            }
             return ResponseEntity.ok(searchResults);
         } catch (DataAccessException e) {
-            // Handle DataAccessException
-            logger.error("Error during database access in searchListCheckIn", e);
+            logger.error("Error during database access in searchListByStatus", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         } catch (Exception e) {
-            // Handle other exceptions if necessary
-            logger.error("An unexpected error occurred in searchListCheckIn", e);
+            logger.error("An unexpected error occurred in searchListByStatus", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping("/searchListCheckOut")
-    @ResponseBody
-    public ResponseEntity<List<CheckInFlexibleDTO>> searchListCheckOut(HttpSession session,
-                                                                       @RequestParam("searchText") String searchText,
-                                                                       @RequestParam("searchOption") String searchOption,
-                                                                       @RequestParam("departmentId") int departmentId
-    ) {
-        try {
-            if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            }
-            List<CheckInFlexibleDTO> searchResults;
-
-            if ("username".equals(searchOption)) {
-                // Tìm kiếm theo tên (username)
-                searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
-            } else if ("phone-number".equals(searchOption)) {
-                // Tìm kiếm theo số điện thoại (phone number)
-                searchResults = employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId);
-            } else {
-                // Mặc định tìm kiếm theo tên (username)
-                searchResults = employeeService.searchListCheckOutByUsername(searchText, departmentId);
-            }
-
-            return ResponseEntity.ok(searchResults);
-        } catch (DataAccessException e) {
-            // Handle DataAccessException
-            logger.error("Error during database access in searchListCheckIn", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        } catch (Exception e) {
-            // Handle other exceptions if necessary
-            logger.error("An unexpected error occurred in searchListCheckIn", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    private List<CheckInFlexibleDTO> performSearchCheckIn(String searchOption, String searchText, int departmentId, int page, int size) {
+        if ("username".equals(searchOption)) {
+            return employeeService.searchListCheckInByUsername(searchText, departmentId, page, size);
+        } else if ("phone-number".equals(searchOption)) {
+            return employeeService.searchListCheckInByPhoneNumber(searchText, departmentId, page, size);
         }
+        return null;
+    }
 
+    private List<CheckOutFlexibleDTO> performSearchCheckOut(String searchOption, String searchText, int departmentId, int page, int size) {
+        if ("username".equals(searchOption)) {
+            return employeeService.searchListCheckOutByUsername(searchText, departmentId, page, size);
+        } else if ("phone-number".equals(searchOption)) {
+            return employeeService.searchListCheckOutByPhoneNumber(searchText, departmentId, page, size);
+        }
+        return null;
     }
 
     @GetMapping("/flexible/getCheckInTime")
@@ -501,18 +487,19 @@ public class EmployeeController {
             return "error/data-access-error";
         }
     }
+
     @GetMapping("/check-in/fixed/list")
     public ResponseEntity<?> getCheckInListOfFixedCustomer(@RequestParam("departmentId") int departmentId,
-                                                @RequestParam("status") String status,
-                                                @RequestParam(defaultValue = "1") int page,
-                                                @RequestParam(defaultValue = "6") int size,
-                                               HttpSession session) {
+                                                           @RequestParam("status") String status,
+                                                           @RequestParam(defaultValue = "1") int page,
+                                                           @RequestParam(defaultValue = "6") int size,
+                                                           HttpSession session) {
         try {
             if (session == null || !checkValidDepartmentParameter(session, departmentId)) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
             FixedPlanPage fixedPlanPage = null;
-            if (status.equals("check-in")){
+            if (status.equals("check-in")) {
                 List<CheckInFixedDTO> checkInFixedDTOList = employeeService.getListNeedCheckInFixedByDepartmentId(departmentId, page, size);
                 int totalListCheckInFixed = employeeService.getTotalListNeedCheckInFixedByDepartmentId(departmentId);
                 int totalPages = (int) Math.ceil((double) totalListCheckInFixed / size);
@@ -564,7 +551,7 @@ public class EmployeeController {
             if ("username".equals(searchOption)) {
                 // Tìm kiếm theo tên (username)
                 searchResults = employeeService.searchListCheckInFixedByUsername(searchText, departmentId);
-            } else if ("phonenumber".equals(searchOption)) {
+            } else if ("phone-number".equals(searchOption)) {
                 // Tìm kiếm theo số điện thoại (phone number)
                 searchResults = employeeService.searchListCheckInFixedByPhoneNumber(searchText, departmentId);
             } else {
@@ -595,7 +582,7 @@ public class EmployeeController {
             if ("username".equals(searchOption)) {
                 // Tìm kiếm theo tên (username)
                 searchResults = employeeService.searchListCheckedInFixedByUsername(searchText, departmentId);
-            } else if ("phonenumber".equals(searchOption)) {
+            } else if ("phone-number".equals(searchOption)) {
                 // Tìm kiếm theo số điện thoại (phone number)
                 searchResults = employeeService.searchListCheckedInFixedByPhoneNumber(searchText, departmentId);
             } else {
@@ -691,8 +678,7 @@ public class EmployeeController {
                     .departmentId(departmentId)
                     .build();
             return ResponseEntity.ok(checkInHistoryPage);
-        }
-        catch (EmptyResultDataAccessException ex) {
+        } catch (EmptyResultDataAccessException ex) {
             // Handle empty result set
             logger.error("EmptyResultDataAccessException occurred", ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -710,7 +696,7 @@ public class EmployeeController {
             @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
             @RequestParam(name = "dateFilter", required = false) String dateFilter,
             @RequestParam(name = "page", defaultValue = "1") int page,
-            @RequestParam(name = "size", defaultValue = "7") int size){
+            @RequestParam(name = "size", defaultValue = "7") int size) {
         try {
             List<CheckInHistoryFixed> results = checkInHistoryService.searchListHistoryFixed(departmentId, username, phoneNumber, dateFilter, page, size);
             int totalRecords = checkInHistoryService.countSearchListHistoryFixed(departmentId, username, phoneNumber, dateFilter);

@@ -164,7 +164,7 @@ public interface IRepositoryQuery {
                 AND order_plan_detail.gym_department_id = ?
                 AND price_per_hours > 0
                 AND CONCAT(user_detail.first_name, ' ', user_detail.last_name) like ?
-                AND use_status = "Chưa tập";
+                AND use_status = 'Chưa tập'
                 """;
 
     String SEARCH_LIST_FIXED_CHECK_IN_BY_USERNAME = """
@@ -294,7 +294,7 @@ public interface IRepositoryQuery {
                 AND order_plan_detail.gym_department_id = ?
                 AND price_per_hours > 0
                 AND CONCAT(user_detail.first_name, ' ', user_detail.last_name) like ?
-                AND use_status = "Đang tập";
+                AND use_status = 'Đang tập'
                 """;
 
     String SEARCH_LIST_CHECK_IN_BY_PHONE = """
@@ -319,7 +319,7 @@ public interface IRepositoryQuery {
                 AND order_plan_detail.gym_department_id = ?
                 AND price_per_hours > 0
                 AND phone_number like ?
-                AND use_status = "Chưa tập";
+                AND use_status = 'Chưa tập'
                 """;
 
     String SEARCH_LIST_CHECK_OUT_BY_PHONE = """
@@ -344,7 +344,7 @@ public interface IRepositoryQuery {
                 AND order_plan_detail.gym_department_id = ?
                 AND price_per_hours > 0
                 AND phone_number like ?
-                AND use_status = "Đang tập";
+                AND use_status = 'Đang tập'
                 """;
 
     String INSERT_CHECK_IN_HISTORY = """

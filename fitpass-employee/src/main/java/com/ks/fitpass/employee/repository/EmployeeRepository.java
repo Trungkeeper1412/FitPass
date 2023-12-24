@@ -16,13 +16,13 @@ public interface EmployeeRepository {
     Integer getTotalListNeedCheckInFlexibleByDepartmentId(int departmentId);
     Integer getTotalListNeedCheckOutFlexibleByDepartmentId(int departmentId);
 
-    List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId);
+    List<CheckInFlexibleDTO> searchListCheckInByUsername(String username, int departmentId, int offset, int size);
 
-    List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId);
+    List<CheckInFlexibleDTO> searchListCheckInByPhoneNumber(String phoneNumber, int departmentId, int offset, int size);
 
-    List<CheckInFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId);
+    List<CheckOutFlexibleDTO> searchListCheckOutByUsername(String username, int departmentId, int offset, int size);
 
-    List<CheckInFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId);
+    List<CheckOutFlexibleDTO> searchListCheckOutByPhoneNumber(String phoneNumber, int departmentId, int offset, int size);
 
     ////////////////////////////////////////////////// Fixed Plan //////////////////////////
     List<CheckInFixedDTO> getListNeedCheckInFixedByDepartmentId(int departmentId, int offset, int size);

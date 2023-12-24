@@ -323,6 +323,104 @@
         });
     }
 
+    ////////////////////////////////////////////////////// Search Function ////////////////////////////////////////////////
+
+    $(".navbar-search-flexible").submit(function(event) {
+        event.preventDefault();
+        $("#searchButtonFlexible").click();
+    });
+
+    $(".navbar-search-fixed").submit(function(event) {
+        event.preventDefault();
+        $("#searchButtonFixed").click();
+    });
+
+    $("#searchButtonFlexible").click(function (event) {
+        event.preventDefault();
+        let searchText = $("#searchInputFlexible").val().trim(); // Use trim() to remove whitespace
+        let searchOption = $("#search-by-flexible").val();
+        let filterDate = $("#filter-date-flexible").val();
+        let departmentId = $("#departmentId").val();
+
+        // Remove any existing error messages
+        $('.error-message').remove();
+
+        // Initialize a flag to check if the input is valid
+        let isValidInput = true;
+
+        // Check if a search option has been chosen
+        if (!searchOption) {
+            // Display an error message for search option
+            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm</div>").insertAfter("#search-by-flexible");
+            // Optionally add a red outline to the select dropdown
+            $("#search-by-flexible").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If a search option is selected, remove the red outline
+            $("#search-by-flexible").css('border', '');
+        }
+
+        if (!searchText) {
+            // Display an error message for search text
+            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>").insertAfter(".input-group flexible-search-input");
+            // Optionally add a red outline to the input field
+            $("#searchInputFlexible").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If search text is not empty, remove the red outline
+            $("#searchInputFlexible").css('border', '');
+        }
+
+        // Proceed with the search if the input is valid
+        if (isValidInput) {
+            $('#listFlexible').empty();
+            searchListFlex(searchText, searchOption, filterDate, departmentId);
+        }
+    });
+
+    $("#searchButtonFixed").click(function (event){
+        event.preventDefault();
+
+        let searchText = $("#searchInputFixed").val().trim();
+        let searchOption = $("#search-by-fixed").val();
+        let filterDate = $("#filter-date-fixed").val();
+        let departmentId = $("#departmentId").val();
+        // Remove any existing error messages
+        $('.error-message').remove();
+
+        // Initialize a flag to check if the input is valid
+        let isValidInput = true;
+
+        // Check if a search option has been chosen
+        if (!searchOption) {
+            // Display an error message for search option
+            $("<div class='error-message' style='color: red;'>Hãy chọn 1 cách tìm kiếm </div>").insertAfter("#search-by-fixed");
+            // Optionally add a red outline to the select dropdown
+            $("#search-by-fixed").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If a search option is selected, remove the red outline
+            $("#search-by-fixed").css('border', '');
+        }
+
+        if (!searchText) {
+            // Display an error message for search text
+            $("<div class='error-message' style='color: red; display: block; width: 100%; margin-top: 0.25rem;'>Hãy nhập nội dung tìm kiếm</div>").insertAfter(".input-group fixed-search-input");
+            // Optionally add a red outline to the input field
+            $("#searchInputFixed").css('border', '1px solid red');
+            isValidInput = false;
+        } else {
+            // If search text is not empty, remove the red outline
+            $("#searchInputFixed").css('border', '');
+        }
+
+        // Proceed with the search if the input is valid
+        if (isValidInput) {
+            $('#listFixed').empty();
+            searchListFixed(searchText, searchOption, filterDate, departmentId);
+        }
+    });
+
     // Bắt sự kiện khi nút tìm kiếm được nhấn
     $("#searchButton").click(function () {
         event.preventDefault();
