@@ -14,12 +14,15 @@ import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.wallet.service.WalletService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Controller
@@ -34,13 +37,16 @@ public class ConfirmRequestController {
     private final BrandService brandService;
     private final TransactionService transactionService;
     private final CheckInHistoryService checkInHistoryService;
+
+    private final Logger logger = LoggerFactory.getLogger(ConfirmRequestController.class);
     @GetMapping("/checkin")
     public ResponseEntity<Integer> performCheckIn(@RequestParam("id") int orderDetailId,
                                                   @RequestParam("uis") int userIdSend, @RequestParam("uir") int userIdReceive,
                                                   @RequestParam("di") int departmentId, @RequestParam("cancel") String cancel) {
         // Nếu người dùng không nhấn cancel thì check in
         String username = orderDetailService.getUserNameByOrderDetailId(orderDetailId);
-        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toInstant());
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
+        logger.warn("Timestamp right now is {}", timestamp);
         if (cancel.equals("no")) {
             // Gửi lại thông báo cho employee là người dùng đã xác nhận check in thành công
             Notification successNotification = Notification.builder()
@@ -84,7 +90,7 @@ public class ConfirmRequestController {
 
     @PostMapping("/checkout")
     public ResponseEntity<Integer> performFlexibleCheckOut(@RequestBody UpdateCheckInHistory updateCheckInHistory, HttpSession session) {
-        Timestamp timestamp = Timestamp.from(Instant.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toInstant());
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
         if (updateCheckInHistory.getCancel().equals("No")) {
             User user = (User) session.getAttribute("userInfo");
 
