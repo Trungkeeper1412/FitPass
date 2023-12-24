@@ -1281,7 +1281,7 @@ VALUES (1, 5, 1, 1, 1, 'Gói giờ',
 
        (13, 14, 2, 1, 2, 'Gói 6 tháng',
         'Gói tập ưu đãi hấp dẫn nhất và tiết kiệm cho người dùng trong vòng 6 tháng với những ưu đãi toàn diện. Với gói này bạn có thể trải nghiệm đầy đủ dịch vụ, tiện ích, tập luyện cùng huấn luyện cá nhân trên tất cả các cơ sở của chúng tôi ở Hòa Lạc',
-        1500.00, 0, 0, 120, 30, 160);
+        1500.00, 0, 0, 180, 30, 230);
 
 INSERT INTO gym_department_plans(gym_department_id, plan_id)
 VALUES (1, 1),
