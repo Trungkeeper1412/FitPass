@@ -36,7 +36,6 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Thứ tự</th>
                                     <th>Tên người đánh giá</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
@@ -49,7 +48,6 @@
                                 <tbody>
                                 <th:block th:each="u : ${userFeedbackList}">
                                     <tr>
-                                        <td th:text="${uStat.index + 1}">1</td>
                                         <td th:text="${u.getUserName()}">Lê Đình Tuấn</td>
                                         <td th:text="${u.getPhoneNumber()}">0987654321</td>
                                         <td th:text="${u.getEmail()}">tuanld2001@gmail.com</td>
