@@ -331,16 +331,30 @@
         });
     }
 
-    // Function to handle page change
-    // Function to handle page change
     function handlePageChange(departmentId, status, page, size, isSearch) {
+        let searchText, searchOption;
+
+        // Check the status and use values accordingly
+        if (status === 'check-in') {
+            searchText = $("#searchInputCheckIn").val().trim();
+            searchOption = $("#search-by-check-in").val();
+        } else if (status === 'checked-in') {
+            searchText = $("#searchInputCheckedIn").val().trim();
+            searchOption = $("#search-by-checked-in").val();
+        }
+
         if (isSearch) {
-            let searchText = $("#searchInputCheckIn").val().trim();
-            let searchOption = $("#search-by-check-in").val();
-            fetchSearchData(departmentId, status, page, size, searchText, searchOption).then(data => {
-                updateUI(data, status, true);
-                attachPaginationEventListeners(departmentId, status, size, true);
-            });
+            // Ensure searchText and searchOption are defined
+            if (searchText !== undefined && searchOption !== undefined) {
+                fetchSearchData(departmentId, status, page, size, searchText, searchOption).then(data => {
+                    updateUI(data, status, true);
+                    attachPaginationEventListeners(departmentId, status, size, true);
+                });
+            } else {
+                console.error("Search text or option is undefined.");
+                // Handle error case where search text or option is undefined
+                // Perhaps revert to normal data fetching or show an error message
+            }
         } else {
             // Fetch normal data and update the UI without maintaining the search state
             fetchData(departmentId, status, page, size).then(data => {
