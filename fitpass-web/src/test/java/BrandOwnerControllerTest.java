@@ -271,6 +271,19 @@ public class BrandOwnerControllerTest {
     }
 
     @Test
+    public void testUpdateBrandProfileException() {
+        // Arrange
+        BrandOwnerProfile brandOwnerProfile = new BrandOwnerProfile();
+        when(brandService.updateBrandDetail(brandOwnerProfile)).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        ResponseEntity<Integer> result = brandOwnerController.updateBrandProfile(brandOwnerProfile);
+
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+
+    }
+    @Test
     public void testGetListOfDepartmentSuccess() {
         // Arrange
         User user = new User();
@@ -342,6 +355,24 @@ public class BrandOwnerControllerTest {
 
         // Assert
         assertEquals("error/incorrect-result-size-error", result);
+
+    }
+
+    @Test
+    public void testGetListOfDepartmentWithException() {
+
+        // Arrange
+        User user = new User();
+        user.setUserId(1);
+
+        when(session.getAttribute("userInfo")).thenReturn(user);
+        when(brandService.getBrandDetail(user.getUserId())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = brandOwnerController.getListOfDepartment(model, session);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
 
     }
 

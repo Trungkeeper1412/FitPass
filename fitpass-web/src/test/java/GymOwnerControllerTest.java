@@ -998,4 +998,158 @@ public class GymOwnerControllerTest {
         assertTrue(result);
 
     }
+
+    @Test
+    public void testGetListOfEmployeeisSuccess() {
+        // Arrange
+        when(session.getAttribute("isFirstTime")).thenReturn(false);
+
+        User user = new User();
+        user.setUserId(1);
+        when(session.getAttribute("userInfo")).thenReturn(user);
+
+        Department departmentDetails = new Department();
+        departmentDetails.setDepartmentId(1);
+        when(departmentService.getByUserId(user.getUserId())).thenReturn(departmentDetails);
+
+        List<GymOwnerListDTO> listOfEmployee = new ArrayList<>();
+        when(userService.getAllAccountByDepartmentId(departmentDetails.getDepartmentId())).thenReturn(listOfEmployee);
+
+        // Act
+        String result = gymOwnerController.getListOfEmployee(session, model);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-employee-list", result);
+    }
+
+    @Test
+    void testGetListOfEmployeeDuplicateException() {
+        // Arrange
+
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(userService.getAllAccountByDepartmentId(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = gymOwnerController.getListOfEmployee(session, model);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+
+    }
+
+    @Test
+    void testGetListOfEmployeeEmptyResultException() {
+        // Arrange
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(userService.getAllAccountByDepartmentId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = gymOwnerController.getListOfEmployee(session, model);
+
+        // Assert
+        assertEquals("error/no-data", result);
+
+    }
+
+    @Test
+    void testGetListOfEmployeeIncorrectException() {
+        // Arrange
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(userService.getAllAccountByDepartmentId(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = gymOwnerController.getListOfEmployee(session, model);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+
+    }
+
+    @Test
+    void testGetListOfEmployeeDataException() {
+        // Arrange
+
+
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(userService.getAllAccountByDepartmentId(anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+
+        // Act
+        String result = gymOwnerController.getListOfEmployee(session, model);
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+
+    }
+
+    @Test
+    void testGetEmployeeDetails() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(userService.getUserDetailByUserDetailId(anyInt())).thenReturn(new UserDetail());
+
+        // Act
+        String result = gymOwnerController.getEmployeeDetails(session, model, 1, 1);
+
+        // Assert
+        assertEquals("gym-owner/gym-department-employee-detail", result);
+        verify(model, times(1)).addAttribute(eq("employeeInfo"), any(EmployeUpdateDTO.class));
+    }
+
+    // Add more tests for exception handling scenarios
+
+    @Test
+    void testGetEmployeeDetailException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+
+        when(userService.getUserDetailByUserDetailId(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        String result = gymOwnerController.getEmployeeDetails(session, model, 1, 1);
+
+        // Assert
+        assertEquals("error/duplicate-key-error", result);
+
+    }
+
+    @Test
+    void testGetEmployeeDetailswithException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+
+        when(userService.getUserDetailByUserDetailId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
+
+        // Act
+        String result = gymOwnerController.getEmployeeDetails(session, model, 1, 1);
+
+        // Assert
+        assertEquals("error/no-data", result);
+
+    }
+
+    @Test
+    void testGetEmployeeDetailsException() {
+        // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(new User());
+        when(departmentService.getByUserId(anyInt())).thenReturn(new Department());
+        when(userService.getUserDetailByUserDetailId(anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+
+        // Act
+        String result = gymOwnerController.getEmployeeDetails(session, model, 1, 1);
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+
+    }
+
 }

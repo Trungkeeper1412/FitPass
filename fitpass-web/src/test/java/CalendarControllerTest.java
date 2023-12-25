@@ -103,7 +103,7 @@ class CalendarControllerTest {
         );
 
         // Assert
-        assertEquals("redirect:/calendar/view", result);
+        assertEquals("redirect:/calendar/view?updateSuccess=true", result);
 
     }
 
@@ -219,6 +219,74 @@ class CalendarControllerTest {
         // Arrange
         MockitoAnnotations.initMocks(this);
         when(calendarService.getFeedbackByCheckInHistoryId(anyInt())).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+
+        // Act
+        ResponseEntity<CalendarFeedbackDTO> result = calendarController.getFeedback(1);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+    @Test
+    void testUpdateReviewWithException() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        doThrow(IncorrectResultSizeDataAccessException.class).when(calendarService).updateCalendarFeedbackRating(anyInt(), any(UserFeedback.class));
+
+        // Act
+        String result = calendarController.updateReview(1, 2, 3, 4, "Test comments");
+
+        // Assert
+        assertEquals("error/incorrect-result-size-error", result);
+    }
+
+    @Test
+    void testUpdateReviewException() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        doThrow(new CustomDataAccessException("Simulated DataAccessException")).when(calendarService).updateCalendarFeedbackRating(anyInt(), any(UserFeedback.class));
+
+        // Act
+        String result = calendarController.updateReview(1, 2, 3, 4, "Test comments");
+
+        // Assert
+        assertEquals("error/data-access-error", result);
+    }
+
+    @Test
+    void testGetFeedbackSuccess() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(calendarService.getFeedbackByCheckInHistoryId(anyInt())).thenReturn(new CalendarFeedbackDTO());
+
+        // Act
+        ResponseEntity<CalendarFeedbackDTO> responseEntity = calendarController.getFeedback(1);
+
+        // Assert
+
+        assertEquals(200, responseEntity.getStatusCodeValue());
+
+
+    }
+
+    @Test
+    void testGetFeedbackException() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(calendarService.getFeedbackByCheckInHistoryId(anyInt())).thenThrow(DuplicateKeyException.class);
+
+        // Act
+        ResponseEntity<CalendarFeedbackDTO> result = calendarController.getFeedback(1);
+
+        // Assert
+        assertEquals(ResponseEntity.badRequest().build(), result);
+    }
+
+    @Test
+    void testGetFeedbackEception() {
+        // Arrange
+        MockitoAnnotations.initMocks(this);
+        when(calendarService.getFeedbackByCheckInHistoryId(anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
         ResponseEntity<CalendarFeedbackDTO> result = calendarController.getFeedback(1);

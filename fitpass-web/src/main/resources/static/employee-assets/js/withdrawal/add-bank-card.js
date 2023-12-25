@@ -25,7 +25,7 @@ $(document).ready(function () {
         },
         messages: {
             cardHolder: {
-                required: "Vui lòng nhập họ và tên chủ thẻ",
+                required: "Vui lòng nhập họ và tên chủ tài khoản",
                 maxlength: "Họ và tên không được vượt quá 50 kí tự !",
                 pattern: "Họ và tên không được chứa số và kí tự đặc biệt !",
             },
@@ -121,7 +121,7 @@ function addBankCard() {
         error: function (e) {
             Swal.fire({
                 title: 'Thất bại !',
-                text: 'Kiểm tra lại họ tên chủ thẻ và số tài khoản !',
+                text: 'Kiểm tra lại họ tên chủ tài khoản và số tài khoản !',
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });
@@ -137,7 +137,7 @@ function showCardInfo(item) {
 
     document.getElementById("modalCardInfo").innerHTML =
         `<div class="mb-4">
-            <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
+            <label for="cardHolderName" class="form-label">Tên chủ tài khoản :</label>
             <input type="hidden" class="form-control" id="creditCardId" value="${creditCardId}">
             <input type="text" class="form-control" id="cardHolderName" value="${cardHolder}">
          </div>
@@ -219,7 +219,7 @@ function updateCard() {
         error: function (e) {
             Swal.fire({
                 title: 'Thất bại !',
-                text: 'Cập nhật thẻ thất bại vui lòng kiểm tra tên chủ thẻ và số tài khoản !',
+                text: 'Cập nhật thẻ thất bại vui lòng kiểm tra tên chủ tài khoản và số tài khoản !',
                 icon: 'error',
                 confirmButtonText: 'Đóng'
             });

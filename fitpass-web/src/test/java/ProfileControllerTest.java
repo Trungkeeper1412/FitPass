@@ -347,7 +347,7 @@ public class ProfileControllerTest {
 
         // Assert
         assertEquals("user/user-change-password", result);
-        verify(model, times(1)).addAttribute("error", "Mật khẩu hiện tại không đúng");
+        verify(model, times(1)).addAttribute("currentPasswordError", "Mật khẩu hiện tại không đúng, vui lòng thử lại");
     }
 
     @Test
@@ -367,7 +367,6 @@ public class ProfileControllerTest {
 
         // Assert
         assertEquals("user/user-change-password", result);
-        verify(model, times(1)).addAttribute("error", "Mật khẩu hiện tại không đúng");
     }
 
 

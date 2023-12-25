@@ -80,7 +80,7 @@ public class CartControllerTest {
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Sản phẩm này đã add vào giỏ hàng", response.getBody());
+        assertEquals("Sản phẩm này đã có sẵn vào giỏ hàng", response.getBody());
 
         // Verify that the cart was not modified
         assertEquals(1, mockCart.getItems().size());
