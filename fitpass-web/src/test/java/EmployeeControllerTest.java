@@ -755,9 +755,14 @@ public class EmployeeControllerTest {
         String searchText = "John";
         String searchOption = "username";
         int departmentId = 1;
+        int employeeId = 3; // The employeeId corresponding to the valid departmentId
 
+        User stubUser = new User();
+        stubUser.setUserId(employeeId);
         List<CheckedInFixedDTO> searchResults = Collections.singletonList(new CheckedInFixedDTO());
 
+        when(session.getAttribute("userInfo")).thenReturn(stubUser);
+        when(userRepository.getDepartmentIdByEmployeeId(employeeId)).thenReturn(departmentId);
         when(employeeService.searchListCheckedInFixedByUsername(anyString(), anyInt())).thenReturn(searchResults);
 
         // Act

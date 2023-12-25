@@ -41,7 +41,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     private final EmployeeService employeeService;
     private final OrderDetailService orderDetailService;
     private final NotificationService notificationService;
@@ -50,6 +50,8 @@ public class EmployeeController {
     private final DepartmentService departmentService;
     private final UserService userService;
     private final UserRepository userRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 
     public EmployeeController(EmployeeService employeeService, OrderDetailService orderDetailService,

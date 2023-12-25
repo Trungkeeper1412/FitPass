@@ -13018,6 +13018,7 @@ label {
 .checkin-time{
     font-size: 13px;
     margin-top: 10px;
+    font-weight: bold;
 }
 .user-info{
     /*display: grid;*/
