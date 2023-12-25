@@ -5,6 +5,7 @@ import com.ks.fitpass.core.entity.UserUpdateDTO;
 import com.ks.fitpass.core.service.UserService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.MainController;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,9 @@ class MainControllerTest {
     @Mock
     private WalletService walletService;
 
+    @Mock
+    private HttpServletRequest request;
+
     @InjectMocks
     private MainController mainController;
 
@@ -75,9 +79,9 @@ class MainControllerTest {
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         when(bindingResult.hasErrors()).thenReturn(false);
         userRegisterDTO.setUserPassword("password");  // Set a non-null password
-
+        String recaptchaResponse = "recaptchaResponse";
         // Act
-        String result = mainController.registered(userRegisterDTO, bindingResult, model, redirectAttributes);
+        String result = mainController.registered(userRegisterDTO, recaptchaResponse, bindingResult, model, redirectAttributes, request);
 
         // Assert
         assertEquals("redirect:/login", result);
@@ -90,11 +94,12 @@ class MainControllerTest {
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         when(bindingResult.hasErrors()).thenReturn(true);
         userRegisterDTO.setUserPassword("password");  // Set a non-null password
+        String recaptchaResponse = "recaptchaResponse";
 
         when(bindingResult.getAllErrors()).thenReturn(Collections.singletonList(new ObjectError("email", "Email đã tồn tại !")));
 
         // Act
-        String result = mainController.registered(userRegisterDTO, bindingResult, model, redirectAttributes);
+        String result = mainController.registered(userRegisterDTO, recaptchaResponse, bindingResult, model, redirectAttributes, request);
 
         // Assert
         assertEquals("register", result);
@@ -105,12 +110,13 @@ class MainControllerTest {
         // Arrange
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setUserPassword("password");  // Set a non-null password
+        String recaptchaResponse = "recaptchaResponse";
 
         when(bindingResult.hasErrors()).thenReturn(true);
         when(bindingResult.getAllErrors()).thenReturn(Collections.singletonList(new ObjectError("userAccount", "Tên đăng nhập đã tồn tại !")));
 
         // Act
-        String result = mainController.registered(userRegisterDTO, bindingResult, model, redirectAttributes);
+        String result = mainController.registered(userRegisterDTO, recaptchaResponse, bindingResult, model, redirectAttributes, request);
 
         // Assert
         assertEquals("register", result);
@@ -122,12 +128,13 @@ class MainControllerTest {
 
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setUserPassword("password");  // Set a non-null password
+        String recaptchaResponse = "recaptchaResponse";
 
         when(bindingResult.hasErrors()).thenReturn(true);
         when(bindingResult.getAllErrors()).thenReturn(Collections.singletonList(new ObjectError("reUserPassword", "Mật khẩu và xác nhận mật khẩu không khớp !")));
 
         // Act
-        String result = mainController.registered(userRegisterDTO, bindingResult, model, redirectAttributes);
+        String result = mainController.registered(userRegisterDTO, recaptchaResponse, bindingResult, model, redirectAttributes, request);
 
         // Assert
         assertEquals("register", result);
