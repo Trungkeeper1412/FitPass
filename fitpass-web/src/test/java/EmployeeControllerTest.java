@@ -41,38 +41,31 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 public class EmployeeControllerTest {
-
     @Mock
     private EmployeeService employeeService;
-
     @Mock
     private UserService userService;
     @Mock
     private UserRepository userRepository;
     @Mock
     private Model model;
-
     @Mock
     private RedirectAttributes redirectAttributes;
     @Mock
     private WalletService walletService;
-
     @Mock
     private CheckInHistoryService checkInHistoryService;
     @Mock
     private DepartmentService departmentService;
     @Mock
     private WebSocketService webSocketService;
-
     @Mock
     private OrderDetailService orderDetailService;
-
     @Mock
     private NotificationService notificationService;
     @InjectMocks
@@ -87,25 +80,50 @@ public class EmployeeControllerTest {
 
     @Test
     public void testGetCheckInListOfFixedCustomer_PositiveCase() {
-        // Mock data
-        int departmentId = 1;
+        // Arrange
         int page = 1;
         int size = 6;
         String status = "check-in";
+        int departmentId = 1;
+        int employeeId = 3; // The employeeId corresponding to the valid departmentId
+
+        User stubUser = new User();
+        stubUser.setUserId(employeeId);
+
         List<CheckInFixedDTO> checkInFixedDTOList = new ArrayList<>();
-        List<CheckedInFixedDTO> checkedInDTOList = new ArrayList<>();
+        int totalListCheckInFixed = 10; // Mock the total number of entries
+        int totalPages = (int) Math.ceil((double) totalListCheckInFixed / size);
 
-        // Set up mock behavior
-        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenReturn(checkInFixedDTOList);
-        when(employeeService.getListCheckedInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenReturn(checkedInDTOList);
+        FixedPlanPage fixedPlanPage = FixedPlanPage.builder()
+                .listCheckInFixed(checkInFixedDTOList)
+                .currentPage(page)
+                .totalPages(totalPages)
+                .departmentId(departmentId)
+                .build();
 
-        // Call the method
+        when(session.getAttribute("userInfo")).thenReturn(stubUser);
+        when(userRepository.getDepartmentIdByEmployeeId(employeeId)).thenReturn(departmentId);
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(departmentId, page, size)).thenReturn(checkInFixedDTOList);
+        when(employeeService.getTotalListNeedCheckInFixedByDepartmentId(departmentId)).thenReturn(totalListCheckInFixed);
+
+        // Act
         ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page, size, session);
 
-        // Verify the interactions and assertions
+        // Assert
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertTrue(result.getBody() instanceof FixedPlanPage);
+        FixedPlanPage resultFixedPlanPage = (FixedPlanPage) result.getBody();
+        assertNotNull(resultFixedPlanPage);
+        assertEquals(fixedPlanPage.getListCheckInFixed(), resultFixedPlanPage.getListCheckInFixed());
+        assertEquals(fixedPlanPage.getCurrentPage(), resultFixedPlanPage.getCurrentPage());
+        assertEquals(fixedPlanPage.getTotalPages(), resultFixedPlanPage.getTotalPages());
+        assertEquals(fixedPlanPage.getDepartmentId(), resultFixedPlanPage.getDepartmentId());
 
-
-        assertEquals("employee/employee-check-in-fixed", result);
+        // Verify
+        verify(session).getAttribute("userInfo");
+        verify(userRepository).getDepartmentIdByEmployeeId(employeeId);
+        verify(employeeService).getListNeedCheckInFixedByDepartmentId(departmentId, page, size);
+        verify(employeeService).getTotalListNeedCheckInFixedByDepartmentId(departmentId);
     }
 
     @Test
@@ -116,10 +134,10 @@ public class EmployeeControllerTest {
         String status = "check-in";
 
         // Set up mock behavior for DuplicateKeyException
-        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenThrow(DuplicateKeyException.class);
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(DuplicateKeyException.class);
 
         // Call the method
-        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page, size, session);
 
         // Verify the interactions and assertions
         assertEquals("error/duplicate-key-error", result);
@@ -132,27 +150,38 @@ public class EmployeeControllerTest {
         int size = 6;
         String status = "check-in";
         // Set up mock behavior for EmptyResultDataAccessException
-        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenThrow(EmptyResultDataAccessException.class);
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Call the method
-        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page, size, session);
         // Verify the interactions and assertions
         assertEquals("error/no-data", result);
     }
 
     @Test
     public void testGetCheckInListOfFixedCustomer_IncorrectResultSizeDataAccessException() {
-        int departmentId = 1;
         int page = 1;
         int size = 6;
         String status = "check-in";
+        int departmentId = 1;
+        int employeeId = 3; // The employeeId corresponding to the valid departmentId
+
+        User stubUser = new User();
+        stubUser.setUserId(employeeId);
+        List<CheckedInFixedDTO> searchResults = Collections.singletonList(new CheckedInFixedDTO());
+
+        when(session.getAttribute("userInfo")).thenReturn(stubUser);
+        when(userRepository.getDepartmentIdByEmployeeId(employeeId)).thenReturn(departmentId);
+
         // Set up mock behavior for IncorrectResultSizeDataAccessException
-        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(),anyInt(),anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+        when(employeeService.getListNeedCheckInFixedByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
 
         // Call the method
-        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFixedCustomer(departmentId, status, page, size, session);
+
         // Verify the interactions and assertions
-        assertEquals("error/incorrect-result-size-error", result);
+        ResponseEntity<?> expectedResult = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: Incorrect result size.");
+        assertEquals(expectedResult, result);
     }
 
     @Test
@@ -190,13 +219,13 @@ public class EmployeeControllerTest {
             // Assertions
             Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
             CheckInHistoryPage checkInHistoryPage = response.getBody();
-            Assert.assertNotNull(checkInHistoryPage);
+            assertNotNull(checkInHistoryPage);
             Assert.assertEquals(departmentId, checkInHistoryPage.getDepartmentId());
             Assert.assertEquals(page, checkInHistoryPage.getCurrentPage());
             // Assert other properties of the CheckInHistoryPage object
 
             // Assert the specific properties based on the plan type
-            Assert.assertNotNull(checkInHistoryPage.getListFlexible());
+            assertNotNull(checkInHistoryPage.getListFlexible());
             Assert.assertEquals(mockListFlexible, checkInHistoryPage.getListFlexible());
             // Assert other properties specific to the flexible plan
 
@@ -268,7 +297,7 @@ public class EmployeeControllerTest {
         when(userService.updatePassword(anyString(), anyInt())).thenReturn(true);
 
         // Act
-        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session,redirectAttributes);
+        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session, redirectAttributes);
 
         // Assert
         verify(session, times(1)).getAttribute("userInfo");
@@ -287,7 +316,7 @@ public class EmployeeControllerTest {
         when(session.getAttribute("userInfo")).thenReturn(user);
 
         // Act
-        String result = employeeController.changePassword("wrongCurrentPassword", "newPassword", "newPassword", model, session,redirectAttributes);
+        String result = employeeController.changePassword("wrongCurrentPassword", "newPassword", "newPassword", model, session, redirectAttributes);
 
         // Assert
         verify(session, times(1)).getAttribute("userInfo");
@@ -306,7 +335,7 @@ public class EmployeeControllerTest {
         when(session.getAttribute("userInfo")).thenReturn(user);
 
         // Act
-        String result = employeeController.changePassword("currentPassword", "newPassword", "confirmPassword", model, session,redirectAttributes);
+        String result = employeeController.changePassword("currentPassword", "newPassword", "confirmPassword", model, session, redirectAttributes);
 
         // Assert
         verify(session, times(1)).getAttribute("userInfo");
@@ -326,7 +355,7 @@ public class EmployeeControllerTest {
         when(userService.updatePassword(anyString(), anyInt())).thenThrow(RuntimeException.class);
 
         // Act
-        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session,redirectAttributes);
+        String result = employeeController.changePassword("currentPassword", "newPassword", "newPassword", model, session, redirectAttributes);
 
         // Assert
         verify(session, times(1)).getAttribute("userInfo");
@@ -346,12 +375,12 @@ public class EmployeeControllerTest {
 
         List<CheckInFlexibleDTO> checkInList = Arrays.asList(new CheckInFlexibleDTO(), new CheckInFlexibleDTO());
         List<CheckOutFlexibleDTO> checkOutList = Arrays.asList(new CheckOutFlexibleDTO(), new CheckOutFlexibleDTO());
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),anyInt(), anyInt())).thenReturn(checkInList);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenReturn(checkInList);
         when(employeeService.getListNeedCheckOutFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenReturn(checkOutList);
 
         // Act
-        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
-         //Assert
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
+        //Assert
         verify(model).addAttribute(eq("checkInList"), eq(checkInList));
         verify(model).addAttribute(eq("checkOutList"), eq(checkOutList));
         verify(model).addAttribute(eq("departmentId"), eq(1));
@@ -366,13 +395,13 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         String status = "check-in";
         // Arrange
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),anyInt(), anyInt())).thenThrow(DuplicateKeyException.class);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(DuplicateKeyException.class);
 
         // Act
-        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
 
         // Assert
-      assertEquals("error/duplicate-key-error", result);
+        assertEquals("error/duplicate-key-error", result);
     }
 
     @Test
@@ -386,7 +415,7 @@ public class EmployeeControllerTest {
         when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
-        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
 
         // Assert
         assertEquals("error/no-data", result);
@@ -397,16 +426,25 @@ public class EmployeeControllerTest {
         // Arrange
         int page = 1;
         int size = 7;
-        int departmentId = 1;
         String status = "check-in";
+        int departmentId = 1;
+        int employeeId = 3; // The employeeId corresponding to the valid departmentId
+
+        User stubUser = new User();
+        stubUser.setUserId(employeeId);
+
+        when(session.getAttribute("userInfo")).thenReturn(stubUser);
+        when(userRepository.getDepartmentIdByEmployeeId(employeeId)).thenReturn(departmentId);
         // Arrange
-        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(),anyInt(), anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
+        when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(IncorrectResultSizeDataAccessException.class);
 
         // Act
-        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
 
         // Assert
-       assertEquals("error/incorrect-result-size-error", result);
+        ResponseEntity<?> expected = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: Incorrect result size.");
+
+        assertEquals(expected, result);
     }
 
     @Test
@@ -414,16 +452,24 @@ public class EmployeeControllerTest {
         // Arrange
         int page = 1;
         int size = 7;
-        int departmentId = 1;
         String status = "check-in";
+        int departmentId = 1;
+        int employeeId = 3; // The employeeId corresponding to the valid departmentId
+
+        User stubUser = new User();
+        stubUser.setUserId(employeeId);
+
         // Arrange
+        when(session.getAttribute("userInfo")).thenReturn(stubUser);
+        when(userRepository.getDepartmentIdByEmployeeId(employeeId)).thenReturn(departmentId);
         when(employeeService.getListNeedCheckInFlexibleByDepartmentId(anyInt(), anyInt(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
 
         // Act
-        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page,size,session);
+        ResponseEntity<?> result = employeeController.getCheckInListOfFlexibleCustomer(departmentId, status, page, size, session);
 
         // Assert
-      assertEquals("error/data-access-error", result);
+        ResponseEntity<?> expectedResult = ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Error: Data access issue.");
+        assertEquals(expectedResult, result);
     }
 
 //    @Test
@@ -875,26 +921,26 @@ public class EmployeeControllerTest {
         int page = 1;
         int size = 7;
         int offset = 0;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenReturn(Collections.emptyList());
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(), anyInt(), anyInt())).thenReturn(Collections.emptyList());
 
         // Act
-        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, username, phoneNumber, dateFilter,page,size);
+        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, username, phoneNumber, dateFilter, page, size);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-      }
+    }
 
     @Test
     public void testSearchFlexEmptyResultDataAccessException() {
         // Arrange
         int departmentId = 1;
-        int page =1;
+        int page = 1;
         int size = 7;
         int offset = 0;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(), anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
-        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null,page, size);
+        ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null, page, size);
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
@@ -907,7 +953,7 @@ public class EmployeeControllerTest {
         int page = 1;
         int size = 7;
         int offset = 0;
-        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
+        when(checkInHistoryService.searchListHistoryFlexible(anyInt(), any(), any(), any(), anyInt(), anyInt())).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFlex(departmentId, null, null, null, page, size);
 
@@ -925,7 +971,7 @@ public class EmployeeControllerTest {
         int page = 1;
         int size = 7;
 
-        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenReturn(Collections.emptyList());
+        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(), anyInt(), anyInt())).thenReturn(Collections.emptyList());
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFixed(departmentId, username, phoneNumber, dateFilter, page, size);
@@ -943,7 +989,7 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         int page = 1;
         int size = 7;
-        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
+        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(), anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFixed(departmentId, null, null, null, page, size);
@@ -958,7 +1004,7 @@ public class EmployeeControllerTest {
         int departmentId = 1;
         int page = 1;
         int size = 7;
-        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(),anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
+        when(checkInHistoryService.searchListHistoryFixed(anyInt(), any(), any(), any(), anyInt(), anyInt())).thenThrow(EmptyResultDataAccessException.class);
 
         // Act
         ResponseEntity<CheckInHistoryPage> responseEntity = employeeController.searchFixed(departmentId, null, null, null, page, size);
