@@ -2,6 +2,8 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.core.entity.UserDetail;
+import com.ks.fitpass.department.dto.FeatureCreateDTO;
+import com.ks.fitpass.department.dto.FeatureUpdateDTO;
 import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 import com.ks.fitpass.partner.register.dto.BecomePartnerUpdateStatus;
 import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
@@ -27,6 +29,7 @@ import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.util.Email;
 import com.ks.fitpass.web.util.WebUtil;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +41,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 @Controller
@@ -129,15 +134,46 @@ public class AdminController {
     }
 
     @GetMapping("/feature/add")
-    public String addFeature() {
+    public String addFeature(@ModelAttribute("createFeature") FeatureCreateDTO featureCreateDTO) {
         return "admin/admin-feature-add";
     }
 
-    @GetMapping("/feature/detail")
-    public String getFeatureDetails() {
+    @PostMapping("/feature/add")
+    public String createFeature(@Valid @ModelAttribute("createFeature") FeatureCreateDTO featureCreateDTO,
+                                BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            return "admin/admin-feature-add"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+
+        Feature feature  = new Feature();
+        feature.setFeatureIcon(featureCreateDTO.getFeatureIcon());
+        feature.setFeatureName(featureCreateDTO.getFeatureName());
+        feature.setFeatureStatus(1);
+        departmentFeatureService.insertFeature(feature);
+        return "redirect:/admin/feature/list";
+    }
+    @PostMapping("/feature/detail")
+    public String getFeatureDetails(@RequestParam("id") int id, Model model) {
+        Feature feature = departmentFeatureService.getByFeatureId(id);
+        model.addAttribute("feature", feature);
         return "admin/admin-feature-detail";
     }
 
+    @PostMapping("/feature/update")
+    public String updateFeature(@Valid @ModelAttribute("feature") FeatureUpdateDTO featureUpdateDTO,
+                                BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "admin/admin-feature-detail"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+        Feature feature  = new Feature();
+        feature.setFeatureIcon(featureUpdateDTO.getFeatureIcon());
+        feature.setFeatureName(featureUpdateDTO.getFeatureName());
+        feature.setFeatureID(featureUpdateDTO.getFeatureId());
+
+        departmentFeatureService.updateFeature(feature);
+        return "redirect:/admin/feature/list";
+    }
     @PostMapping("/feature/updateStatus")
     public ResponseEntity<String> updateFeatureStatus(@RequestBody Feature feature) {
         try {
@@ -151,8 +187,6 @@ public class AdminController {
     @GetMapping("/brand/list")
     public String getBrandList(Model model) {
         try {
-
-
             List<BrandAdminList> brandList = brandService.getAllBrand();
             model.addAttribute("brandList", brandList);
             return "admin/admin-brand-list";

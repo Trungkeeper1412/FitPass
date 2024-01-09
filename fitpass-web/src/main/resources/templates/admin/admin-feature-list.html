@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="admin/common/head"></th:block>
 <body id="page-top">
 
@@ -49,7 +49,7 @@
                                         <tr>
                                             <td th:text="${fStat.index + 1}">1</td>
                                             <td th:text="${f.getFeatureName()}">Bãi đỗ xe</td>
-                                            <td th:utext="${f.getFeatureIcon()}"><i class="bi bi-p-circle"></i></td>
+                                            <td><img th:src="${f.getFeatureIcon()}" alt=""></td>
                                             <td>
                                                 <select class="form-select" id="set-active"
                                                         name="set-active" th:attr="onchange='updateFeatureStatus('+${f.getFeatureID()}+',this)'">
@@ -58,10 +58,10 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <a th:href="@{/admin/feature/detail}" class="btn btn-primary" data-toggle="tooltip"
-                                                   data-placement="left" title="Thêm dịch vụ">
-                                                   <span class="ml-1">Cập nhật</span>
-                                                </a>
+                                                <form action="/admin/feature/detail" method="post">
+                                                    <input type="hidden" name="id" th:value="${f.getFeatureID}">
+                                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </th:block>

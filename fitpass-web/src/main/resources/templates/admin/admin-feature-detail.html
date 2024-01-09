@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="admin/common/head"></th:block>
 <body id="page-top">
 
@@ -30,20 +30,29 @@
                     <div class="card-body">
                         <div class="card-box">
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                            <form>
+                            <form id="formUpdate" action="/admin/feature/update" method="post" th:object="${feature}">
                                 <div class="row">
                                     <div class="col-md-1 mb-4">
                                     </div>
                                     <div class="col-md-3 mb-4">
                                         <label for="feature-img" class="form-label fw-bold w-100">Ảnh biểu tượng :</label>
-                                        <img class="show-feature-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
+                                        <img class="show-feature-img" th:src="${feature.getFeatureIcon()}" alt="Hình ảnh">
+                                        <input th:field="*{featureIcon}" id="featureIcon" type="hidden" name="featureIcon" th:value="${feature.getFeatureIcon()}}">
+                                        <input th:field="*{featureId}" id="featureId" type="hidden" name="featureId" th:value="${feature.getFeatureId()}">
+                                        <span th:if="${#fields.hasErrors('featureIcon')}" class="error" th:errors="*{featureIcon}">photoUrl Error</span>
                                         <input type="file" class="form-control mt-2" style="width: 230px;" id="feature-img" accept="image/*" onchange="uploadImage(this);">
+                                        <div class="d-flex justify-content-center mt-3" style="width: 230px">
+                                            <button type="button" class="btn btn-upload-img" onclick="document.getElementById('feature-img').click();">
+                                                Chọn ảnh
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-md-7 mb-4">
                                         <div class="mb-4">
                                             <label for="name-feature" class="form-label fw-bold">Tên tiện ích:</label>
-                                            <input name="featureName" type="text" class="form-control" id="name-feature"
-                                                   placeholder="Nhập tên tiện ích">
+                                            <input th:field="*{featureName}" name="featureName" th:value="${feature.getFeatureName()}" type="text" class="form-control" id="name-service"
+                                                   placeholder="Hệ thống tủ khóa">
+                                            <span th:if="${#fields.hasErrors('featureName')}" class="error" th:errors="*{featureName}">photoUrl Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
@@ -82,85 +91,58 @@
 <th:block th:replace="admin/common/script"></th:block>
 
 <script>
-    function updateFeatureStatus(featureId, selectObject) {
-        let selectedValue = selectObject.value;
-        let feature = {
-            featureID: featureId,
-            featureName: "",
-            featureIcon: "",
-            featureStatus: selectedValue === "active" ? 1 : 0
-        }
-        Swal.fire({
-            title: 'Bạn có chắc chắn muốn thay đổi trạng thái?',
-            showDenyButton: true,
-            showCancelButton: false,
-            confirmButtonText: `Đồng ý`,
-            denyButtonText: `Không đồng ý`,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "/admin/feature/updateStatus",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(feature),
-                    success: function (data) {
-                        console.log(data);
-                        Swal.fire("Thay đổi trạng thái thành công", "", "success");
-                        window.location.reload();
-                    }
-                });
-            } else {
-                window.location.reload();
-            }
-        })
+    function uploadImage(input) {
+        function checkFileSize(fileInput) {
+            const maxSizeInBytes = 2 * 1024 * 1024;
 
+            if (fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size;
 
-    }
+                if (fileSize > maxSizeInBytes) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng thử lại!',
+                        text: 'Kích thước của tập tin hình ảnh vượt quá giới hạn cho phép. Hãy chọn ảnh có kích thước nhỏ hơn 2MB.',
+                    });
 
-    function getDetail(featureId) {
-        $.ajax({
-            url: "/admin/feature/detail/" + featureId,
-            type: "GET",
-            success: function (data) {
-                console.log(data);
-                let iconString = data.featureIcon;
-                let icon = $(iconString);
-                let className = icon.attr('class');
-                $("#updateFeatureId").val(data.featureID);
-                $("#updateName").val(data.featureName);
-                $("#selectUpdate").val(className);
-                $("#selectUpdate").trigger('change');
-            }
-        });
-    }
-
-    function updateFeature() {
-        let featureId = $("#updateFeatureId").val();
-        let featureName = $("#updateName").val();
-        let featureIcon = $("#selectUpdate").val();
-        let feature = {
-            featureID: featureId,
-            featureName: featureName,
-            featureIcon: featureIcon,
-            featureStatus: 0
-        }
-        $.ajax({
-            url: "/admin/feature/update",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(feature),
-            success: function (data) {
-                if ($("#formUpdate").valid()) {
-                    console.log(data);
-                    Swal.fire("Cập nhật thành công", "", "success");
-                    window.location.reload();
-                }
-                else {
-                    return false;
+                    fileInput.value = '';
                 }
             }
-        });
+        }
+
+        if (input.files && input.files[0]) {
+
+            checkFileSize(input);
+
+            const file = input.files[0];
+
+            var formData = new FormData();
+            formData.append("file", file);
+            $.ajax({
+                type: "POST",
+                url: `/upload/uploadImageFeatures/${$("#featureId").val()}`,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response)
+                    $("#featureIcon").val(response);
+                },
+                error: function () {
+                    console.log("Failed to upload file");
+                }
+            });
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.querySelector('.show-feature-img');
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
     }
+
 </script>
 </body>
 
