@@ -22,165 +22,39 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header py-3 d-flex justify-content-between">
-                        <h2 class="m-0 font-weight-bold text-primary">Danh sách tiện ích</h2>
-                        <div class="btn btn-primary" data-target="#addModalFeature" data-toggle="modal">
-                            <i class="fas fa-plus"></i> <span class="ml-1">Thêm mới</span>
-                        </div>
-                    </div>
-                    <!-- Modal Add Feature-->
-                    <div aria-hidden="true" aria-labelledby="addFeature" class="modal fade" id="addModalFeature" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <form action="/admin/feature/add" id="formSubmit" method="post">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="addFeature">Thêm tiện ích mới</h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Form thêm mới tiện ích -->
-                                        <div class="form-group">
-                                            <label for="name">Tên tiện ích:</label>
-                                            <input class="form-control" id="name" name="featureName" placeholder="Nhập tên tiện ích" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="mt-2" for="icon">Chọn biểu tượng:</label>
-                                            <div class="row">
-                                                <div class="select2-wrapper" id="icon">
-                                                    <select class="input icons_select2" name="featureIcon">
-                                                        <option data-icon="bi-p-circle" value="bi-p-circle">Bãi đỗ xe</option>
-                                                        <option data-icon="fa-solid fa-scroll" value="fa-solid fa-scroll">Khăn miễn phí</option>
-                                                        <option data-icon="fa-solid fa-medkit" value="fa-solid fa-medkit">Phòng y tế</option>
-                                                        <option data-icon="fa-solid fa-cocktail" value="fa-solid fa-cocktail">Quầy nước</option>
-                                                        <option data-icon="bi-cloud-haze2" value="bi-cloud-haze2">Phòng xông hơi</option>
-                                                        <option data-icon="fa-solid fa-shower" value="fa-solid fa-shower">Phòng tắm</option>
-                                                        <option data-icon="a-solid fa-bed" value="fa-solid fa-bed">Phòng thay đồ</option>
-                                                        <option data-icon="fa-solid fa-coffee" value="fa-solid fa-coffee">Khu vực cafe</option>
-                                                        <option data-icon="fa-solid fa-couch" value="fa-solid fa-couch">Khu vực nghỉ ngơi</option>
-                                                        <option data-icon="fa-solid fa-utensils" value="fa-solid fa-utensils">Khu vực ăn uống</option>
-                                                        <option data-icon="bi-bicycle" value="bi-bicycle">Khu vực đạp xe</option>
-                                                        <option data-icon="bi-calendar" value="bi-calendar">Lịch hẹn</option>
-                                                        <option data-icon="fa-solid fa-wifi" value="fa-solid fa-wifi">Wi-Fi</option>
-                                                        <option data-icon="fa-solid fa-fire-extinguisher" value="fa-solid fa-fire-extinguisher">Hệ thống an toàn</option>
-                                                        <option data-icon="fa-solid fa-thermometer" value="fa-solid fa-thermometer">Đo nhiệt độ</option>
-                                                        <option data-icon="fa-solid fa-music" value="fa-solid fa-music">Âm nhạc</option>
-                                                        <option data-icon="bi-person" value="bi-person">Hướng dẫn viên</option>
-                                                        <option data-icon="fa-solid fa-spa" value="fa-solid fa-spa">Khu vực Spa</option>
-                                                        <option data-icon="fa-solid fa-smoking" value="fa-solid fa-smoking">Khu vực hút thuốc</option>
-                                                        <option data-icon="fa-solid fa-child" value="fa-solid fa-child">Khu vực trẻ em</option>
-                                                        <option data-icon="fa-solid fa-tree" value="fa-solid fa-tree">Khu vực tập luyện ngoại ô</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Hủy</button>
-                                        <button class="btn btn-primary" id="submit" type="submit">Thêm mới</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal Update Feature -->
-                    <div aria-hidden="true" aria-labelledby="updateFeature" class="modal fade" id="updateModalFeature" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="updateFeature">Cập nhật tiện ích</h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Form cập nhật tiện ích -->
-                                    <form id="formUpdate">
-                                        <div class="form-group">
-                                            <label for="updateName">Tên tiện ích:</label>
-                                            <input id="updateFeatureId" required type="hidden" value="1">
-                                            <input class="form-control" id="updateName" name="featureName" type="text" value="Bãi đỗ xe">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="mt-2" for="icon-update">Chọn biểu tượng:</label>
-                                            <div class="row">
-                                                <div class="select2-wrapper" id="icon-update">
-                                                    <select class="input icons_select2" id="selectUpdate" name="featureIcon">
-                                                        <option data-icon="bi-p-circle" value="bi-p-circle">Bãi đỗ xe</option>
-                                                        <option data-icon="fa-solid fa-scroll" value="fa-solid fa-scroll">Khăn miễn phí</option>
-                                                        <option data-icon="fa-solid fa-medkit" value="fa-solid fa-medkit">Phòng y tế</option>
-                                                        <option data-icon="fa-solid fa-cocktail" value="fa-solid fa-cocktail">Quầy nước</option>
-                                                        <option data-icon="bi-cloud-haze2" value="bi-cloud-haze2">Phòng xông hơi</option>
-                                                        <option data-icon="fa-solid fa-shower" value="fa-solid fa-shower">Phòng tắm</option>
-                                                        <option data-icon="a-solid fa-bed" value="fa-solid fa-bed">Phòng thay đồ</option>
-                                                        <option data-icon="fa-solid fa-coffee" value="fa-solid fa-coffee">Khu vực cafe</option>
-                                                        <option data-icon="fa-solid fa-couch" value="fa-solid fa-couch">Khu vực nghỉ ngơi</option>
-                                                        <option data-icon="fa-solid fa-utensils" value="fa-solid fa-utensils">Khu vực ăn uống</option>
-                                                        <option data-icon="bi-bicycle" value="bi-bicycle">Khu vực đạp xe</option>
-                                                        <option data-icon="bi-calendar" value="bi-calendar">Lịch hẹn</option>
-                                                        <option data-icon="fa-solid fa-wifi" value="fa-solid fa-wifi">Wi-Fi</option>
-                                                        <option data-icon="fa-solid fa-fire-extinguisher" value="fa-solid fa-fire-extinguisher">Hệ thống an toàn</option>
-                                                        <option data-icon="fa-solid fa-thermometer" value="fa-solid fa-thermometer">Đo nhiệt độ</option>
-                                                        <option data-icon="fa-solid fa-music" value="fa-solid fa-music">Âm nhạc</option>
-                                                        <option data-icon="bi-person" value="bi-person">Hướng dẫn viên</option>
-                                                        <option data-icon="fa-solid fa-spa" value="fa-solid fa-spa">Khu vực Spa</option>
-                                                        <option data-icon="fa-solid fa-smoking" value="fa-solid fa-smoking">Khu vực hút thuốc</option>
-                                                        <option data-icon="fa-solid fa-child" value="fa-solid fa-child">Khu vực trẻ em</option>
-                                                        <option data-icon="fa-solid fa-tree" value="fa-solid fa-tree">Khu vực tập luyện ngoại ô</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Hủy</button>
-                                            <button class="btn btn-primary" data-dismiss="modal" id="update" onclick="updateFeature()" type="button">Cập nhật</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Chi tiết tiện ích</h2>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="text-start">
-                                <table cellspacing="0" class="table table-bordered" id="dataTable"
-                                       width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Thứ tự</th>
-                                        <th>Tên tiện ích</th>
-                                        <th>Biểu tượng</th>
-                                        <th class="status-active">Trạng thái</th>
-                                        <th class="table-action">Hành động</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <th:block th:each="f ,fStat: ${featureList}">
-                                        <tr>
-                                            <td th:text="${fStat.index + 1}">1</td>
-                                            <td th:text="${f.getFeatureName()}">Bãi đỗ xe</td>
-                                            <td th:utext="${f.getFeatureIcon()}"><i class="bi bi-p-circle"></i></td>
-                                            <td>
-                                                <select class="form-select" id="set-active"
-                                                        name="set-active" th:attr="onchange='updateFeatureStatus('+${f.getFeatureID()}+',this)'">
-                                                    <option th:selected="${f.getFeatureStatus() == 1}" value="active">Hoạt động</option>
-                                                    <option th:selected="${f.getFeatureStatus() != 1}" value="deactive">Không hoạt động</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="btn btn-primary" data-target="#updateModalFeature" data-toggle="modal" th:attr="onclick='getDetail('+${f.getFeatureID()}+')'">Cập nhật</div>
-                                            </td>
-                                        </tr>
-                                    </th:block>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="card-box">
+                            <h2 class="fs-title text-center">Thông tin cơ bản</h2>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-1 mb-4">
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                        <label for="feature-img" class="form-label fw-bold w-100">Ảnh biểu tượng :</label>
+                                        <img class="show-feature-img" th:src="@{/images/system/no_image.png}" alt="Chưa chọn hình ảnh">
+                                        <input type="file" class="form-control mt-2" style="width: 230px;" id="feature-img" accept="image/*" onchange="uploadImage(this);">
+                                    </div>
+                                    <div class="col-md-7 mb-4">
+                                        <div class="mb-4">
+                                            <label for="name-feature" class="form-label fw-bold">Tên tiện ích:</label>
+                                            <input name="featureName" type="text" class="form-control" id="name-feature"
+                                                   placeholder="Nhập tên tiện ích">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi" id="addFeature">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+
             </div>
             <!-- /.container-fluid -->
 

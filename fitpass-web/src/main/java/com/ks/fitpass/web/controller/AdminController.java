@@ -103,12 +103,12 @@ public class AdminController {
         session.setAttribute("userAvatarA", userDetail.getImageUrl());
     }
 
-    @GetMapping("/feature")
+    @GetMapping("/feature/list")
     public String getFeature(Model model) {
         try {
             List<Feature> featureList = departmentFeatureService.getAllFeatureNoStatus();
             model.addAttribute("featureList", featureList);
-            return "admin/admin-feature";
+            return "admin/admin-feature-list";
         }catch (DuplicateKeyException ex) {
             // Handle duplicate key violation
             logger.error("DuplicateKeyException occurred", ex);
@@ -128,70 +128,14 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/feature/add")
-    public String addFeature(@RequestParam String featureName, @RequestParam String featureIcon) {
-        try {
-            String featureIconValue = "<i class=\""+featureIcon+"\"></i>";
-            Feature feature = Feature.builder()
-                    .featureName(featureName)
-                    .featureIcon(featureIconValue)
-                    .featureStatus(1)
-                    .build();
-            departmentFeatureService.insertFeature(feature);
-            return "redirect:/admin/feature";
-        }catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return "error/duplicate-key-error";
-        } catch (EmptyResultDataAccessException ex) {
-            // Handle empty result set
-            logger.error("EmptyResultDataAccessException occurred", ex);
-            return "error/no-data";
-        } catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return "error/incorrect-result-size-error";
-        } catch (DataAccessException ex) {
-            // Handle other data access issues
-            logger.error("DataAccessException occurred", ex);
-            return "error/data-access-error";
-        }
+    @GetMapping("/feature/add")
+    public String addFeature() {
+        return "admin/admin-feature-add";
     }
 
-    @GetMapping("/feature/detail/{featureId}")
-    public ResponseEntity<Feature> getFeatureDetail(@PathVariable int featureId) {
-        try {
-            Feature feature = departmentFeatureService.getByFeatureId(featureId);
-            return ResponseEntity.ok(feature);
-        }catch (EmptyResultDataAccessException e) {
-            return ResponseEntity.notFound().build();
-        }catch (DuplicateKeyException ex) {
-            // Handle duplicate key violation
-            logger.error("DuplicateKeyException occurred", ex);
-            return ResponseEntity.badRequest().build();
-        }  catch (IncorrectResultSizeDataAccessException ex) {
-            // Handle incorrect result size
-            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
-            return ResponseEntity.badRequest().build();
-        } catch (DataAccessException ex) {
-            // Handle other data access issues
-            logger.error("DataAccessException occurred", ex);
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PostMapping("/feature/update")
-    public ResponseEntity<String> updateFeature(@RequestBody Feature feature) {
-        try {
-            String featureIconValue = feature.getFeatureIcon();
-            String featureIcon = "<i class=\""+featureIconValue+"\"></i>";
-            feature.setFeatureIcon(featureIcon);
-            departmentFeatureService.updateFeature(feature);
-            return ResponseEntity.ok("Update feature success");
-        } catch (DataAccessException e) {
-            return ResponseEntity.badRequest().build();
-        }
-
+    @GetMapping("/feature/detail")
+    public String getFeatureDetails() {
+        return "admin/admin-feature-detail";
     }
 
     @PostMapping("/feature/updateStatus")

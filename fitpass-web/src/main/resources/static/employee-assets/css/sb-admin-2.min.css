@@ -13892,3 +13892,10 @@ label.error {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+.show-feature-img {
+    width: 230px;
+    height: 230px;
+    border-radius: 10px;
+    object-fit: cover;
+}
