@@ -134,50 +134,6 @@
 
     }
 
-    function getDetail(featureId) {
-        $.ajax({
-            url: "/admin/feature/detail/" + featureId,
-            type: "GET",
-            success: function (data) {
-                console.log(data);
-                let iconString = data.featureIcon;
-                let icon = $(iconString);
-                let className = icon.attr('class');
-                $("#updateFeatureId").val(data.featureID);
-                $("#updateName").val(data.featureName);
-                $("#selectUpdate").val(className);
-                $("#selectUpdate").trigger('change');
-            }
-        });
-    }
-
-    function updateFeature() {
-        let featureId = $("#updateFeatureId").val();
-        let featureName = $("#updateName").val();
-        let featureIcon = $("#selectUpdate").val();
-        let feature = {
-            featureID: featureId,
-            featureName: featureName,
-            featureIcon: featureIcon,
-            featureStatus: 0
-        }
-        $.ajax({
-            url: "/admin/feature/update",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(feature),
-            success: function (data) {
-                if ($("#formUpdate").valid()) {
-                    console.log(data);
-                    Swal.fire("Cập nhật thành công", "", "success");
-                    window.location.reload();
-                }
-                else {
-                    return false;
-                }
-            }
-        });
-    }
 </script>
 </body>
 
