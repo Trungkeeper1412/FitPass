@@ -38,7 +38,7 @@
                                         <label for="feature-img" class="form-label fw-bold w-100">Ảnh biểu tượng :</label>
                                         <img class="show-feature-img" th:src="${feature.getFeatureIcon()}" alt="Hình ảnh">
                                         <input th:field="*{featureIcon}" id="featureIcon" type="hidden" name="featureIcon" th:value="${feature.getFeatureIcon()}">
-                                        <input th:field="*{featureId}" id="featureId" type="hidden" name="featureId" th:value="${feature.getFeatureId()}">
+                                        <input th:field="*{featureID}" id="featureID" type="hidden" name="featureID" th:value="${feature.getFeatureID()}">
                                         <span th:if="${#fields.hasErrors('featureIcon')}" class="error" th:errors="*{featureIcon}">photoUrl Error</span>
                                         <input type="file" class="form-control mt-2" style="width: 230px;" id="feature-img" accept="image/*" onchange="uploadImage(this);">
                                         <div class="d-flex justify-content-center mt-3" style="width: 230px">
@@ -50,7 +50,7 @@
                                     <div class="col-md-7 mb-4">
                                         <div class="mb-4">
                                             <label for="name-feature" class="form-label fw-bold">Tên tiện ích:</label>
-                                            <input th:field="*{featureName}" name="featureName" th:value="${feature.getFeatureName()}" type="text" class="form-control" id="name-service"
+                                            <input th:field="*{featureName}" name="featureName" th:value="${feature.getFeatureName()}" type="text" class="form-control" id="name-feature"
                                                    placeholder="Hệ thống tủ khóa">
                                             <span th:if="${#fields.hasErrors('featureName')}" class="error" th:errors="*{featureName}">photoUrl Error</span>
                                         </div>
