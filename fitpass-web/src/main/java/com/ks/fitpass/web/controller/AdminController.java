@@ -301,6 +301,11 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/deposit")
+    public String getDeposit() {
+        return "admin/admin-deposit";
+    }
+
     @GetMapping("/withdrawal")
     public String getWithdrawalList(Model model) {
         try {
