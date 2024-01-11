@@ -61,9 +61,9 @@
                                             <td th:text="${gymPlanStat.index + 1}">1</td>
                                             <td th:text="${gymPlan.getGymPlanName()}">Gói 3 ngày</td>
                                             <td th:text="${gymPlan.getPrice() + ' Credit'}">100 Credit</td>
+                                            <td th:text="${gymPlan.getDuration() + ' ngày'}">30 ngày</td>
                                             <td th:text="${gymPlan.getPlanBeforeActive()  + ' ngày'}">3 ngày</td>
                                             <td th:text="${gymPlan.getPlanAfterActive() + ' ngày'}">10 ngày</td>
-                                            <td th:text="${gymPlan.getDuration() + ' ngày'}">30 ngày</td>
                                             <td th:text="${gymPlan.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                             <td>
                                                 <form action="/brand-owner/gym-plans/fixed/details" method="post">
