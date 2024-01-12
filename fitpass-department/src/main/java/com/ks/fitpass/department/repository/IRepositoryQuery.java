@@ -740,4 +740,9 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
                 FROM user_feedback uf
                 WHERE uf.department_id = ?;
             """;
+
+    String GET_ALL_DEPOSIT_DENOMINATION = """
+            SELECT deposit_denomination_id,credit,money,deposit_denomination_status 
+            FROM deposit_denomination
+            """;
 }
