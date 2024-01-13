@@ -4,6 +4,8 @@ import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.department.dto.FeatureCreateDTO;
 import com.ks.fitpass.department.dto.FeatureUpdateDTO;
+import com.ks.fitpass.department.entity.DepositDenomination;
+import com.ks.fitpass.department.service.DepositDenominationService;
 import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 import com.ks.fitpass.partner.register.dto.BecomePartnerUpdateStatus;
 import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
@@ -65,6 +67,7 @@ public class AdminController {
     private final DepartmentService departmentService;
     private final TransactionService transactionService;
     private final OrderDetailService orderDetailService;
+    private final DepositDenominationService depositDenominationService;
 
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     //Index (Statistic Dashboard)
@@ -301,11 +304,6 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/deposit")
-    public String getDeposit() {
-        return "admin/admin-deposit";
-    }
-
     @GetMapping("/withdrawal")
     public String getWithdrawalList(Model model) {
         try {
@@ -462,4 +460,30 @@ public class AdminController {
         }
         return ResponseEntity.ok("Cập nhật thành công");
     }
+
+    @GetMapping("/deposit")
+    public String getDeposit(Model model) {
+        try {
+            List<DepositDenomination> depositDenominationList = depositDenominationService.getAllDepositDenomination() ;
+            model.addAttribute("depositDenominationList", depositDenominationList);
+            return "admin/admin-deposit";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
+    }
+
 }

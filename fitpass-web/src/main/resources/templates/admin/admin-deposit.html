@@ -106,118 +106,120 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <th:block th:each="d ,dStat: ${depositDenominationList}">
                                     <tr>
-                                        <td>1</td>
-                                        <td>50 Credit</td>
-                                        <td>50000 VNĐ</td>
+                                        <td th:text="${dStat.index + 1}" >1</td>
+                                        <td th:text="${d.getCredit()}">50 Credit</td>
+                                        <td th:text="${d.getMoney()}">50000 VNĐ</td>
                                         <td>
                                             <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
+                                                <option th:selected="${d.getDepositDenominationStatus() == 1}" value="active">Hoạt động</option>
+                                                <option th:selected="${d.getDepositDenominationStatus() != 1}" value="deactive">Không hoạt động</option>
                                             </select>
                                         </td>
                                         <td>
                                             <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>100 Credit</td>
-                                        <td>100000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>200 Credit</td>
-                                        <td>200000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>300 Credit</td>
-                                        <td>300000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>500 Credit</td>
-                                        <td>500000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>1000 Credit</td>
-                                        <td>1000000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>2000 Credit</td>
-                                        <td>2000000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>3000 Credit</td>
-                                        <td>3000000 VNĐ</td>
-                                        <td>
-                                            <select class="form-select" id="set-active" name="set-active">
-                                                <option value="active">Hoạt động</option>
-                                                <option value="deactive">Không hoạt động</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
-                                        </td>
-                                    </tr>
+                                </th:block>
+<!--                                    <tr>-->
+<!--                                        <td>2</td>-->
+<!--                                        <td>100 Credit</td>-->
+<!--                                        <td>100000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>3</td>-->
+<!--                                        <td>200 Credit</td>-->
+<!--                                        <td>200000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>4</td>-->
+<!--                                        <td>300 Credit</td>-->
+<!--                                        <td>300000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>5</td>-->
+<!--                                        <td>500 Credit</td>-->
+<!--                                        <td>500000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>6</td>-->
+<!--                                        <td>1000 Credit</td>-->
+<!--                                        <td>1000000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>7</td>-->
+<!--                                        <td>2000 Credit</td>-->
+<!--                                        <td>2000000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>8</td>-->
+<!--                                        <td>3000 Credit</td>-->
+<!--                                        <td>3000000 VNĐ</td>-->
+<!--                                        <td>-->
+<!--                                            <select class="form-select" id="set-active" name="set-active">-->
+<!--                                                <option value="active">Hoạt động</option>-->
+<!--                                                <option value="deactive">Không hoạt động</option>-->
+<!--                                            </select>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
                                 </tbody>
                             </table>
                         </div>

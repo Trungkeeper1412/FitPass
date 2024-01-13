@@ -1,16 +1,19 @@
 package com.ks.fitpass.department.service.impl;
 
 import com.ks.fitpass.department.entity.DepositDenomination;
+import com.ks.fitpass.department.repository.DepositDenominationRepository;
 import com.ks.fitpass.department.service.DepositDenominationService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class DepositDenominationServiceImpl implements DepositDenominationService {
-
+private final DepositDenominationRepository depositDenominationRepository;
     @Override
     public List<DepositDenomination> getAllDepositDenomination() {
-        return null;
+      return  depositDenominationRepository.getAllDepositDenomination();
     }
 }
