@@ -172,7 +172,7 @@ public class AdminController {
         Feature feature  = new Feature();
         feature.setFeatureIcon(featureUpdateDTO.getFeatureIcon());
         feature.setFeatureName(featureUpdateDTO.getFeatureName());
-        feature.setFeatureID(featureUpdateDTO.getFeatureId());
+        feature.setFeatureID(featureUpdateDTO.getFeatureID());
 
         departmentFeatureService.updateFeature(feature);
         return "redirect:/admin/feature/list";

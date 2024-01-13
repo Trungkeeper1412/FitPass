@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 public class FeatureUpdateDTO {
-    @NotNull(message = "AmenitieId cannot be empty")
-    private Integer featureId;
+    @NotNull(message = "Tên tiện ích không được để trống !")
+    private Integer featureID;
 
     @NotEmpty(message = "Vui lòng chọn ảnh !")
     private String featureIcon;
