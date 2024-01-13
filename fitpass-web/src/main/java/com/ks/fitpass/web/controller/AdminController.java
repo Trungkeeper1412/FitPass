@@ -494,11 +494,11 @@ public class AdminController {
 
     @PostMapping("/deposit/updateStatus")
     public ResponseEntity<String> updateDepositStatus(@RequestBody DepositDenomination depositDenomination) {
-//        try {
+        try {
             depositDenominationService.updateDepositDenominationStatus(depositDenomination.getDepositDenominationStatus(), depositDenomination.getDepositDenominationId());
             return ResponseEntity.ok("Update deposit status success");
-//        } catch (DataAccessException e) {
-//            return ResponseEntity.badRequest().build();
-//        }
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
