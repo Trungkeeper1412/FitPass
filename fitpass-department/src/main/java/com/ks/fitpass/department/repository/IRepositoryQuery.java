@@ -745,4 +745,29 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
             SELECT deposit_denomination_id,credit,money,deposit_denomination_status 
             FROM deposit_denomination
             """;
+
+    String GET_DEPOSIT_DENOMINATION_BY_ID = """
+        SELECT deposit_denomination_id, credit, money, deposit_denomination_status 
+        FROM deposit_denomination
+        WHERE deposit_denomination_id = ?
+        """;
+
+    String UPDATE_DEPOSIT_DENOMINATION = """
+        UPDATE deposit_denomination
+        SET credit = ?, money = ?
+        WHERE deposit_denomination_id = ?
+        """;
+
+    String UPDATE_DEPOSIT_DENOMINATION_STATUS = """
+        UPDATE deposit_denomination
+        SET deposit_denomination_status = ?
+        WHERE deposit_denomination_id = ?
+        """;
+
+    String INSERT_DEPOSIT_DENOMINATION = """
+        INSERT INTO deposit_denomination (credit, money, deposit_denomination_status)
+        VALUES (?, ?, 1)
+        """;
+
+
 }

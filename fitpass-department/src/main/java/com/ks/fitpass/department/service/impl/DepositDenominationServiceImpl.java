@@ -16,4 +16,24 @@ private final DepositDenominationRepository depositDenominationRepository;
     public List<DepositDenomination> getAllDepositDenomination() {
       return  depositDenominationRepository.getAllDepositDenomination();
     }
+
+    @Override
+    public DepositDenomination getDepositDenominationById(int depositId) {
+        return depositDenominationRepository.getDepositDenominationById(depositId);
+    }
+
+    @Override
+    public int insertDepositDenomination(DepositDenomination depositDenomination) {
+        return depositDenominationRepository.insertDepositDenomination(depositDenomination);
+    }
+
+    @Override
+    public int updateDepositDenomination(DepositDenomination depositDenomination) {
+        return depositDenominationRepository.updateDepositDenomination(depositDenomination);
+    }
+
+    @Override
+    public int updateDepositDenominationStatus(int status, int id) {
+        return depositDenominationRepository.updateDepositDenominationStatus(status,id);
+    }
 }

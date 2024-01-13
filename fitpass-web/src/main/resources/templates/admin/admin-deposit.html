@@ -112,7 +112,8 @@
                                         <td th:text="${d.getCredit()}">50 Credit</td>
                                         <td th:text="${d.getMoney()}">50000 VNĐ</td>
                                         <td>
-                                            <select class="form-select" id="set-active" name="set-active">
+                                            <select class="form-select" id="set-active" name="set-active"
+                                                    th:attr="onchange='updateDepositStatus('+${d.getDepositDenominationId()}+',this)'">
                                                 <option th:selected="${d.getDepositDenominationStatus() == 1}" value="active">Hoạt động</option>
                                                 <option th:selected="${d.getDepositDenominationStatus() != 1}" value="deactive">Không hoạt động</option>
                                             </select>
@@ -153,7 +154,43 @@
 <th:block th:replace="admin/common/logout-modal"></th:block>
 
 <th:block th:replace="admin/common/script"></th:block>
+<script>
+    function updateDepositStatus(depositId, selectObject) {
+        let selectedValue = selectObject.value;
+        let deposit = {
+            depositDenominationId: depositId,
+            credit: "",
+            money: "",
+            depositDenominationStatus: selectedValue === "active" ? 1 : 0
+        }
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn thay đổi trạng thái?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: `Đồng ý`,
+            denyButtonText: `Không đồng ý`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/admin/deposit/updateStatus",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(deposit),
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire("Thay đổi trạng thái thành công", "", "success");
+                        window.location.reload();
+                    }
+                });
+            } else {
+                window.location.reload();
+            }
+        })
 
+
+    }
+
+</script>
 </body>
 
 </html>

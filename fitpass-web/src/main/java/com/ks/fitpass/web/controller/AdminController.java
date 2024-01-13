@@ -485,5 +485,20 @@ public class AdminController {
             return "error/data-access-error";
         }
     }
+//    @PostMapping("/deposit/detail")
+//    public String getDepositDetail(@RequestParam("id") int id, Model model) {
+//        DepositDenomination depositDenomination = depositDenominationService.getDepositDenominationById(id);
+//        model.addAttribute("depositDenomination", depositDenomination);
+//        return "admin/admin-feature-detail";
+//    }
 
+    @PostMapping("/deposit/updateStatus")
+    public ResponseEntity<String> updateDepositStatus(@RequestBody DepositDenomination depositDenomination) {
+//        try {
+            depositDenominationService.updateDepositDenominationStatus(depositDenomination.getDepositDenominationStatus(), depositDenomination.getDepositDenominationId());
+            return ResponseEntity.ok("Update deposit status success");
+//        } catch (DataAccessException e) {
+//            return ResponseEntity.badRequest().build();
+//        }
+    }
 }
