@@ -27,41 +27,12 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
                         <h2 class="m-0 font-weight-bold text-primary">Danh sách các mốc nạp tiền</h2>
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+                        <a th:href="@{/admin/deposit/add}" class="btn btn-primary" data-toggle="tooltip"
+                           data-placement="left" title="Thêm dịch vụ">
                             <i class="fas fa-plus"></i><span class="ml-1">Thêm mới</span>
                         </a>
                     </div>
-                    <!-- Modal chỉnh sửa -->
-                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form>
-                                    <div class="modal-header">
-                                        <div class="text-center" style="width: 95%; margin-left: 20px">
-                                            <h5 class="modal-title">Chỉnh sửa mốc nạp</h5>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-close" data-dismiss="modal"></button>
-                                        </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label class="form-label">Credit:</label>
-                                            <input class="form-control" id="depositCredit" type="number">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Mức giá:</label>
-                                            <input class="form-control" id="depositMoney" type="number">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="submit" class="btn btn-primary" id="updateDeposit">Lưu thay đổi</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Modal thêm mới -->
                     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -119,7 +90,10 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Cập nhật</button>
+                                            <form action="/admin/deposit/detail" method="post">
+                                                <input type="hidden" name="id" th:value="${d.getDepositDenominationId()}">
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </th:block>

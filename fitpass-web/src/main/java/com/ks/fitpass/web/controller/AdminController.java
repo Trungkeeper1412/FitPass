@@ -2,6 +2,8 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.core.entity.UserDetail;
+import com.ks.fitpass.department.dto.DepositCreateDTO;
+import com.ks.fitpass.department.dto.DepositUpdateDTO;
 import com.ks.fitpass.department.dto.FeatureCreateDTO;
 import com.ks.fitpass.department.dto.FeatureUpdateDTO;
 import com.ks.fitpass.department.entity.DepositDenomination;
@@ -485,12 +487,15 @@ public class AdminController {
             return "error/data-access-error";
         }
     }
-//    @PostMapping("/deposit/detail")
-//    public String getDepositDetail(@RequestParam("id") int id, Model model) {
-//        DepositDenomination depositDenomination = depositDenominationService.getDepositDenominationById(id);
-//        model.addAttribute("depositDenomination", depositDenomination);
-//        return "admin/admin-feature-detail";
-//    }
+    @PostMapping("/deposit/detail")
+    public String getDepositDetail(@RequestParam("id") int id, Model model) {
+        DepositDenomination depositDenominationDetail = depositDenominationService.getDepositDenominationById(id);
+        model.addAttribute("depositDenominationDetail", depositDenominationDetail);
+        return "admin/admin-deposit-detail";
+    }
+
+
+
 
     @PostMapping("/deposit/updateStatus")
     public ResponseEntity<String> updateDepositStatus(@RequestBody DepositDenomination depositDenomination) {
@@ -501,4 +506,40 @@ public class AdminController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PostMapping("/deposit/update")
+    public String updateDeposit(@Valid @ModelAttribute("deposit") DepositUpdateDTO depositUpdateDTO,
+                                BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "admin/admin-deposit-detail"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+        DepositDenomination depositDenomination = new DepositDenomination();
+        depositDenomination.setCredit(depositUpdateDTO.getCredit());
+        depositDenomination.setMoney(depositUpdateDTO.getMoney());
+        depositDenomination.setDepositDenominationId(depositUpdateDTO.getDepositDenominationId());
+
+        depositDenominationService.updateDepositDenomination(depositDenomination);
+        return "redirect:/admin/deposit";
+    }
+
+    @GetMapping("/deposit/add")
+    public String addDeposit(@ModelAttribute("createDeposit") DepositCreateDTO depositCreateDTO) {
+        return "admin/admin-deposit-add";
+    }
+    @PostMapping("/deposit/add")
+    public String createDeposit(@Valid @ModelAttribute("createDeposit") DepositCreateDTO depositCreateDTO,
+                                BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            return "admin/admin-deposit-add";
+        }
+        DepositDenomination depositDenomination  = new DepositDenomination();
+        depositDenomination.setCredit(depositCreateDTO.getCredit());
+        depositDenomination.setMoney(depositCreateDTO.getCredit());
+        depositDenomination.setDepositDenominationStatus(1);
+
+        depositDenominationService.insertDepositDenomination(depositDenomination);
+        return "redirect:/admin/deposit";
+    }
+
 }
