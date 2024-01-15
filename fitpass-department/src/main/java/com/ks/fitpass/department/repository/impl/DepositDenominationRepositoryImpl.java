@@ -58,4 +58,16 @@ public class DepositDenominationRepositoryImpl implements DepositDenominationRep
     public int updateDepositDenominationStatus(int status, int id) {
         return jdbcTemplate.update(UPDATE_DEPOSIT_DENOMINATION_STATUS, status, id);
     }
+
+    @Override
+    public List<DepositDenomination> getAllDepositDenominationActive() {
+        return jdbcTemplate.query(GET_ALL_DEPOSIT_DENOMINATION_ACTIVE, (rs, rowNum) -> {
+            DepositDenomination depositDenomination = new DepositDenomination();
+            depositDenomination.setDepositDenominationId(rs.getInt("deposit_denomination_id"));
+            depositDenomination.setCredit(rs.getInt("credit"));
+            depositDenomination.setMoney(rs.getInt("money"));
+            depositDenomination.setDepositDenominationStatus(rs.getInt("deposit_denomination_status"));
+            return depositDenomination;
+        });
+    }
 }

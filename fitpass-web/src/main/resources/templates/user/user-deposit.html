@@ -73,135 +73,28 @@
                     <div id="visa-payment">
                         <div class="mt-4" style="font-weight: 500;">Thanh toán bằng thẻ visa</div>
                         <div class="row mt-2 justify-content-center add-money">
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
+                            <div th:each="denomination : ${depositDenominations}" class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('50000', '50 credits tương ứng')" type="radio"/>
+                                    <input class="card-input-element" name="money" th:attr="data-money=${denomination.money}, data-credit=${denomination.credit}" onclick="updateInputValue(this)" type="radio"/>
                                     <div class="panel panel-default card-input">
                                         <div class="panel-body">
                         <span>
-                          <h3 class="fw-bold">50.000</h3>
+                          <h3 class="fw-bold" th:text="${denomination.money}"></h3>
                         </span>
                                             <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
                                         </div>
-                                        <div class="credit-trans">50 credits tương ứng</div>
+                                        <div class="credit-trans" th:text="${denomination.credit + ' credits tương ứng'}"></div>
                                     </div>
                                 </label>
                             </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('100000', '100 credits tương ứng')" type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">100.000</h3>
-                        </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">100 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('200000', '200 credits tương ứng')" type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">200.000</h3>
-                        </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">200 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('300000', '300 credits tương ứng')" type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">300.000</h3>
-                        </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">300 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('500000', '500 credits tương ứng')" type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">500.000</h3>
-                        </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">500 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('1000000', '1000 credits tương ứng')"
-                                           type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">1.000.000</h3>
-                        </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">1000 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('2000000', '2000 credits tương ứng')"
-                                           type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                        <span>
-                          <h3 class="fw-bold">2.000.000</h3>
-                        </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">2000 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-4 col-lg-3 col-sm-6 mb-4">
-                                <label>
-                                    <input class="card-input-element" name="money"
-                                           onclick="updateInputValue('3000000', '3000 credits tương ứng')"
-                                           type="radio"/>
-                                    <div class="panel panel-default card-input">
-                                        <div class="panel-body">
-                                            <span>
-                                                <h3 class="fw-bold">3.000.000</h3>
-                                             </span>
-                                            <span><img th:src="@{/user-homepage-assets/assets/img/vnd.png}"></span>
-                                        </div>
-                                        <div class="credit-trans">3000 credits tương ứng</div>
-                                    </div>
-                                </label>
-                            </div>
+
                         </div>
                         <form class="mb-4" id="moneyForm">
                             <div class="mb-4 row justify-content-center">
                                 <div class="col-6 mb-4 input-money">
                                     <input id="paymentAmount" name="moneyAmount" placeholder="Nhập số tiền cần nạp..."
                                            type="number">
+                                    <input id="creditAmount" name="credit" type="hidden">
                                 </div>
                                 <div class="col-6 mb-4" id="add-money">
                                     <button class="add-money-btn trigger" id="add-money-btn">
@@ -521,10 +414,19 @@
 <th:block th:include="common/vendor-script"></th:block>
 
 <script>
-    function updateInputValue(value, creditTrans) {
-        document.getElementById('paymentAmount').value = value;
-        document.querySelector('.money').textContent = value; // Update the money element with the input value
-        document.querySelector('.creditConfirm').textContent = creditTrans; // Update the creditConfirm element with the selected credit-trans text
+    function updateInputValue(element) {
+        // Get the values from data attributes
+        var moneyValue = parseInt(element.getAttribute('data-money'));
+        var creditTrans = element.getAttribute('data-credit') ;
+
+        // Check if the parsed value is a valid integer
+        if (!isNaN(moneyValue)) {
+            document.getElementById('paymentAmount').value = moneyValue;
+            document.getElementById('creditAmount').value = creditTrans;
+            document.querySelector('.creditConfirm').textContent = creditTrans;
+        } else {
+            console.error('Invalid money value:', moneyValue);
+        }
     }
 
     $(document).ready(function () {
@@ -592,15 +494,16 @@
             });
             if (moneyForm.valid()) {
                 e.preventDefault();
-                let inputValue = $("#paymentAmount").val();
+                let moneyValue = $("#paymentAmount").val();
+                let inputValue = $("#creditAmount").val();
                 inputValue = parseInt(inputValue);
                 inputValue = inputValue.toLocaleString();
 
                 // Update the text content of the money element with the input value
-                $(".money").text(inputValue);
+                $(".money").text(moneyValue);
 
                 // Update the text content of the creditConfirm element with the selected credit-trans text
-                $(".creditConfirm").text($("#paymentAmount").val() / 1000);
+                // $(".creditConfirm").text($("#paymentAmount").val() / 1000);
 
                 toggleModal();
                 const closeButton = document.querySelector(".close-button");

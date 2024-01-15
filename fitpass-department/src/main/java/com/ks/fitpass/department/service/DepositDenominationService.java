@@ -15,4 +15,7 @@ public interface DepositDenominationService {
     int updateDepositDenomination (DepositDenomination depositDenomination);
 
     int updateDepositDenominationStatus (int status, int id);
+
+    List<DepositDenomination> getAllDepositDenominationActive();
+
 }

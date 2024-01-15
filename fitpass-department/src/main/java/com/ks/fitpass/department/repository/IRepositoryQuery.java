@@ -769,5 +769,10 @@ String GET_GYM_PLAN_BY_GYM_PLAN_ID = """
         VALUES (?, ?, 1)
         """;
 
+    String GET_ALL_DEPOSIT_DENOMINATION_ACTIVE = """
+            SELECT deposit_denomination_id,credit,money,deposit_denomination_status
+            FROM deposit_denomination
+            where deposit_denomination_status = 1
+            """;
 
 }
