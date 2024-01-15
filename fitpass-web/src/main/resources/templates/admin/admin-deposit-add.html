@@ -25,34 +25,29 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h2 class="m-0 font-weight-bold text-primary">Chi tiết mệnh giá</h2>
+                        <h2 class="m-0 font-weight-bold text-primary">Thêm mệnh giá quy đổi</h2>
                     </div>
                     <div class="card-body">
                         <div class="card-box">
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
                             <form id="formSubmit" action="/admin/deposit/add" method="post" th:object="${createDeposit}">
-                                <div class="row">
-                                    <div class="col-md-1 mb-4">
-                                    </div>
-
-                                    <div class="col-md-7 mb-4">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-4">
                                         <div class="mb-4">
-
                                             <label for="credit" class="form-label fw-bold">Số credit quy đổi:</label>
-                                            <input th:field="*{credit}" name="credit" th:value="${createDeposit.getCredit()}" type="text" class="form-control" id="credit"
+                                            <input th:field="*{credit}" name="credit" th:value="${createDeposit.getCredit()}" type="number" class="form-control" id="credit"
                                                    placeholder="Nhập số credit">
                                             <span th:if="${#fields.hasErrors('credit')}" class="error" th:errors="*{credit}">photoUrl Error</span>
-
-                                            <label for="money" class="form-label fw-bold">Số tiền quy đổi:</label>
-                                            <input th:field="*{money}" name="money" th:value="${createDeposit.getMoney()}" type="text" class="form-control" id="money"
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="money" class="form-label fw-bold">Số tiền quy đổi (VNĐ):</label>
+                                            <input th:field="*{money}" name="money" th:value="${createDeposit.getMoney()}" type="number" class="form-control" id="money"
                                                    placeholder="Nhập số tiền">
                                             <span th:if="${#fields.hasErrors('money')}" class="error" th:errors="*{money}">photoUrl Error</span>
                                         </div>
-
                                     </div>
-
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="submit" value="Thêm mệnh giá quy đổi" id="updateDeposit">
+                                        <input class="btn btn-submit" type="submit" value="Thêm mới" id="addDeposit">
                                     </div>
                                 </div>
                             </form>
@@ -88,12 +83,12 @@
 
 <script>
 
-    $("#updateDeposit").click(function (e) {
+    $("#addDeposit").click(function (e) {
         e.preventDefault();
         // Thực hiện validation trước khi xử lý form
         if ($("#formSubmit").valid()) {
             Swal.fire({
-                title: 'Bạn có muốn cập nhật mệnh giá quy đổi ?',
+                title: 'Bạn có muốn thêm mệnh giá quy đổi mới ?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Có',
@@ -103,7 +98,7 @@
                     $("#formSubmit").submit();
                     Swal.fire({
                         title: 'Thành công!',
-                        text: 'Thông tin đã được cập nhật thành công.',
+                        text: 'Mệnh giá mới đã được thêm thành công.',
                         icon: 'success',
                         showConfirmButton: false,
                         timer: 1500
@@ -111,7 +106,7 @@
                 } else {
                     Swal.fire({
                         title: 'Thất bại!',
-                        text: 'Thông tin chưa được cập nhật.',
+                        text: 'Mệnh giá mới chưa được thêm.',
                         icon: 'error',
                         showConfirmButton: false,
                         timer: 1500
