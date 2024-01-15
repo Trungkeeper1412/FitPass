@@ -2,8 +2,12 @@ package com.ks.fitpass.web.controller;
 
 import com.ks.fitpass.brand.dto.BrandAdminList;
 import com.ks.fitpass.core.entity.UserDetail;
+import com.ks.fitpass.department.dto.DepositCreateDTO;
+import com.ks.fitpass.department.dto.DepositUpdateDTO;
 import com.ks.fitpass.department.dto.FeatureCreateDTO;
 import com.ks.fitpass.department.dto.FeatureUpdateDTO;
+import com.ks.fitpass.department.entity.DepositDenomination;
+import com.ks.fitpass.department.service.DepositDenominationService;
 import com.ks.fitpass.partner.register.dto.BecomePartnerRequest;
 import com.ks.fitpass.partner.register.dto.BecomePartnerUpdateStatus;
 import com.ks.fitpass.partner.register.dto.BrandRatingStatAdmin;
@@ -65,6 +69,7 @@ public class AdminController {
     private final DepartmentService departmentService;
     private final TransactionService transactionService;
     private final OrderDetailService orderDetailService;
+    private final DepositDenominationService depositDenominationService;
 
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
     //Index (Statistic Dashboard)
@@ -169,7 +174,7 @@ public class AdminController {
         Feature feature  = new Feature();
         feature.setFeatureIcon(featureUpdateDTO.getFeatureIcon());
         feature.setFeatureName(featureUpdateDTO.getFeatureName());
-        feature.setFeatureID(featureUpdateDTO.getFeatureId());
+        feature.setFeatureID(featureUpdateDTO.getFeatureID());
 
         departmentFeatureService.updateFeature(feature);
         return "redirect:/admin/feature/list";
@@ -457,4 +462,84 @@ public class AdminController {
         }
         return ResponseEntity.ok("Cập nhật thành công");
     }
+
+    @GetMapping("/deposit")
+    public String getDeposit(Model model) {
+        try {
+            List<DepositDenomination> depositDenominationList = depositDenominationService.getAllDepositDenomination() ;
+            model.addAttribute("depositDenominationList", depositDenominationList);
+            return "admin/admin-deposit";
+        }catch (DuplicateKeyException ex) {
+            // Handle duplicate key violation
+            logger.error("DuplicateKeyException occurred", ex);
+            return "error/duplicate-key-error";
+        } catch (EmptyResultDataAccessException ex) {
+            // Handle empty result set
+            logger.error("EmptyResultDataAccessException occurred", ex);
+            return "error/no-data";
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            // Handle incorrect result size
+            logger.error("IncorrectResultSizeDataAccessException occurred", ex);
+            return "error/incorrect-result-size-error";
+        } catch (DataAccessException ex) {
+            // Handle other data access issues
+            logger.error("DataAccessException occurred", ex);
+            return "error/data-access-error";
+        }
+    }
+    @PostMapping("/deposit/detail")
+    public String getDepositDetail(@RequestParam("id") int id, Model model) {
+        DepositDenomination depositDenominationDetail = depositDenominationService.getDepositDenominationById(id);
+        model.addAttribute("depositDenominationDetail", depositDenominationDetail);
+        return "admin/admin-deposit-detail";
+    }
+
+
+
+
+    @PostMapping("/deposit/updateStatus")
+    public ResponseEntity<String> updateDepositStatus(@RequestBody DepositDenomination depositDenomination) {
+        try {
+            depositDenominationService.updateDepositDenominationStatus(depositDenomination.getDepositDenominationStatus(), depositDenomination.getDepositDenominationId());
+            return ResponseEntity.ok("Update deposit status success");
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/deposit/update")
+    public String updateDeposit(@Valid @ModelAttribute("deposit") DepositUpdateDTO depositUpdateDTO,
+                                BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "admin/admin-deposit-detail"; // Trả về trang form và hiển thị thông báo lỗi
+        }
+        DepositDenomination depositDenomination = new DepositDenomination();
+        depositDenomination.setCredit(depositUpdateDTO.getCredit());
+        depositDenomination.setMoney(depositUpdateDTO.getMoney());
+        depositDenomination.setDepositDenominationId(depositUpdateDTO.getDepositDenominationId());
+
+        depositDenominationService.updateDepositDenomination(depositDenomination);
+        return "redirect:/admin/deposit";
+    }
+
+    @GetMapping("/deposit/add")
+    public String addDeposit(@ModelAttribute("createDeposit") DepositCreateDTO depositCreateDTO) {
+        return "admin/admin-deposit-add";
+    }
+    @PostMapping("/deposit/add")
+    public String createDeposit(@Valid @ModelAttribute("createDeposit") DepositCreateDTO depositCreateDTO,
+                                BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            return "admin/admin-deposit-add";
+        }
+        DepositDenomination depositDenomination  = new DepositDenomination();
+        depositDenomination.setCredit(depositCreateDTO.getCredit());
+        depositDenomination.setMoney(depositCreateDTO.getCredit());
+        depositDenomination.setDepositDenominationStatus(1);
+
+        depositDenominationService.insertDepositDenomination(depositDenomination);
+        return "redirect:/admin/deposit";
+    }
+
 }

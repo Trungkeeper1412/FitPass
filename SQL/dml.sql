@@ -4042,3 +4042,10 @@ VALUES (1, 21, 1),
        (4, 36, 1),
        (5, 36, 1),
        (7, 36, 1);
+
+insert into deposit_denomination (credit,money,deposit_denomination_status)
+values (50,50000,1),
+       (100,100000,1),
+       (200,200000,1),
+       (300,300000,1),
+       (1000,1000000,1);

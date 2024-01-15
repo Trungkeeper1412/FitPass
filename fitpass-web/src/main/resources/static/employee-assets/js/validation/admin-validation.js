@@ -16,6 +16,18 @@ $(document).ready(function () {
                 required: true,
                 email: true,
             },
+            credit: {
+                required: true,
+                number: true,
+                min: 1,
+                max: 100000,
+            },
+            money: {
+                required: true,
+                number: true,
+                min: 1000,
+                max: 1000000000,
+            }
         },
         messages: {
             featureName: {
@@ -33,6 +45,18 @@ $(document).ready(function () {
                 required: "Vui lòng nhập email thương hiệu",
                 email: "Vui lòng nhập đúng định dạng email",
             },
+            credit: {
+                required: "Vui lòng nhập mốc Credit",
+                number: "Vui lòng nhập số",
+                min: "Số Credit phải lớn hơn hoặc bằng 1",
+                max: "Số Credit không được vượt quá 100.000",
+            },
+            money: {
+                required: "Vui lòng nhập tiền của mốc Credit",
+                number: "Vui lòng nhập số",
+                min: "Số tiền phải lớn hơn hoặc bằng 1.000",
+                max: "Số tiền không được vượt quá 100.000.000",
+            }
         },
     });
 

@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS wallet;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user_detail;
 DROP TABLE IF EXISTS become_a_partner_request_history;
+DROP TABLE IF EXISTS deposit_denomination ;
 
 CREATE TABLE IF NOT EXISTS user_detail (
                                            user_detail_id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -383,7 +384,15 @@ CREATE TABLE IF NOT EXISTS become_a_partner_request_history (
                                                                 cancel_reason VARCHAR(350) ,
                                                                 status           VARCHAR(30) NOT NULL
 );
+-- Bảng deposit_denomination
+CREATE TABLE IF NOT EXISTS deposit_denomination (
+                                                    deposit_denomination_id   INT AUTO_INCREMENT PRIMARY KEY,
+                                                    credit  INT NOT NULL,
+                                                    money INT NOT NULL,
+                                                    deposit_denomination_status INT NOT NULL
 
+
+);
 
 
 

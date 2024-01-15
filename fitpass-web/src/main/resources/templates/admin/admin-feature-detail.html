@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="card-box">
                             <h2 class="fs-title text-center">Thông tin cơ bản</h2>
-                            <form id="formUpdate" action="/admin/feature/update" method="post" th:object="${feature}">
+                            <form id="formSubmit" action="/admin/feature/update" method="post" th:object="${feature}">
                                 <div class="row">
                                     <div class="col-md-1 mb-4">
                                     </div>
@@ -38,9 +38,9 @@
                                         <label for="feature-img" class="form-label fw-bold w-100">Ảnh biểu tượng :</label>
                                         <img class="show-feature-img" th:src="${feature.getFeatureIcon()}" alt="Hình ảnh">
                                         <input th:field="*{featureIcon}" id="featureIcon" type="hidden" name="featureIcon" th:value="${feature.getFeatureIcon()}">
-                                        <input th:field="*{featureId}" id="featureId" type="hidden" name="featureId" th:value="${feature.getFeatureId()}">
+                                        <input th:field="*{featureID}" id="featureID" type="hidden" name="featureID" th:value="${feature.getFeatureID()}">
                                         <span th:if="${#fields.hasErrors('featureIcon')}" class="error" th:errors="*{featureIcon}">photoUrl Error</span>
-                                        <input type="file" class="form-control mt-2" style="width: 230px;" id="feature-img" accept="image/*" onchange="uploadImage(this);">
+                                        <input type="file" class="form-control mt-2" style="display: none;" id="feature-img" accept="image/*" onchange="uploadImage(this);">
                                         <div class="d-flex justify-content-center mt-3" style="width: 230px">
                                             <button type="button" class="btn btn-upload-img" onclick="document.getElementById('feature-img').click();">
                                                 Chọn ảnh
@@ -50,13 +50,13 @@
                                     <div class="col-md-7 mb-4">
                                         <div class="mb-4">
                                             <label for="name-feature" class="form-label fw-bold">Tên tiện ích:</label>
-                                            <input th:field="*{featureName}" name="featureName" th:value="${feature.getFeatureName()}" type="text" class="form-control" id="name-service"
-                                                   placeholder="Hệ thống tủ khóa">
+                                            <input th:field="*{featureName}" name="featureName" th:value="${feature.getFeatureName()}" type="text" class="form-control" id="name-feature"
+                                                   placeholder="Nhập tên tiện ích">
                                             <span th:if="${#fields.hasErrors('featureName')}" class="error" th:errors="*{featureName}">photoUrl Error</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <input class="btn btn-submit" type="update" value="Lưu thay đổi" id="addFeature">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi" id="updateFeature">
                                     </div>
                                 </div>
                             </form>
@@ -120,7 +120,7 @@
             formData.append("file", file);
             $.ajax({
                 type: "POST",
-                url: `/upload/uploadImageFeatures/${$("#featureId").val()}`,
+                url: `/upload/uploadImageFeatures/${$("#featureID").val()}`,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -142,6 +142,39 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#updateFeature").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin tiện ích ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
 
 </script>
 </body>
