@@ -2856,6 +2856,17 @@ a:link {
     border: none;
 }
 
+.add-money{
+    padding-top: 5px;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: fit-content;
+    max-height: 400px;
+    -webkit-overflow-scrolling: touch;
+}
 .add-money label {
     width: 100%;
 }

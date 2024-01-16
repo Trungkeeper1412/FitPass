@@ -76,7 +76,7 @@
                             <div th:each="denomination : ${depositDenominations}" class="col-md-4 col-lg-3 col-sm-6 mb-4">
                                 <label>
                                     <input class="card-input-element" name="money" th:attr="data-money=${denomination.money}, data-credit=${denomination.credit}" onclick="updateInputValue(this)" type="radio"/>
-                                    <div class="panel panel-default card-input">
+                                    <div class="panel panel-default card-input money-card">
                                         <div class="panel-body">
                         <span>
                           <h3 class="fw-bold" th:text="${denomination.money}"></h3>
@@ -414,6 +414,15 @@
 <th:block th:include="common/vendor-script"></th:block>
 
 <script>
+    // unchecked when input new money value
+    $("#paymentAmount").on("click", function (e) {
+        let cards = $(".add-money .card-input-element");
+        console.log(cards);
+        for (var i = 0; i < cards.length; i++) {
+            let card = cards[i];
+            card.checked = false;
+        }
+    })
     function updateInputValue(element) {
         // Get the values from data attributes
         var moneyValue = parseInt(element.getAttribute('data-money'));
