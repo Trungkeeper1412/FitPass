@@ -36,4 +36,9 @@ private final DepositDenominationRepository depositDenominationRepository;
     public int updateDepositDenominationStatus(int status, int id) {
         return depositDenominationRepository.updateDepositDenominationStatus(status,id);
     }
+
+    @Override
+    public List<DepositDenomination> getAllDepositDenominationActive() {
+        return depositDenominationRepository.getAllDepositDenominationActive();
+    }
 }

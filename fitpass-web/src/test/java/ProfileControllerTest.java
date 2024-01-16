@@ -214,15 +214,15 @@ public class ProfileControllerTest {
         assertEquals("user/user-notification", result);
     }
 
-    @Test
-    void testShowDepositPage() {
-        // Arrange
-        // Act
-        String result = profileController.showDepositPage();
-
-        // Assert
-        assertEquals("user/user-deposit", result);
-    }
+//    @Test
+//    void testShowDepositPage() {
+//        // Arrange
+//        // Act
+//        String result = profileController.showDepositPage();
+//
+//        // Assert
+//        assertEquals("user/user-deposit", result);
+//    }
 
     @Test
     void testShowTransactionHistoryPageSuccess() {

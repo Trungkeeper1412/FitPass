@@ -4,6 +4,8 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.entity.UserUpdateDTO;
 import com.ks.fitpass.core.service.UserService;
+import com.ks.fitpass.department.entity.DepositDenomination;
+import com.ks.fitpass.department.service.DepositDenominationService;
 import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import jakarta.servlet.http.HttpSession;
@@ -30,9 +32,12 @@ public class ProfileController {
     private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 
-    public ProfileController(TransactionService transactionService, UserService userService) {
+    private final DepositDenominationService depositDenominationService;
+
+    public ProfileController(TransactionService transactionService, UserService userService, DepositDenominationService depositDenominationService) {
         this.transactionService = transactionService;
         this.userService = userService;
+        this.depositDenominationService = depositDenominationService;
     }
 
     @ModelAttribute
@@ -134,7 +139,9 @@ public class ProfileController {
     }
 
     @GetMapping("/deposit")
-    public String showDepositPage() {
+    public String showDepositPage(Model model) {
+        List<DepositDenomination> depositDenominations = depositDenominationService.getAllDepositDenominationActive();
+        model.addAttribute("depositDenominations", depositDenominations);
         return "user/user-deposit";
     }
 
@@ -199,5 +206,7 @@ public class ProfileController {
             return "user/user-change-password";
         }
     }
+
+
 
 }
