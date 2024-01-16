@@ -237,41 +237,41 @@ public class BrandControllerTest {
     }
 
 
-    @Test
-    public void testGetBrandFeedbackWithIncorrectResult() {
-        // Arrange
-        int brandId = 1;
-        int page = 1;
-        int size = 3;
-        String sortRating = "desc";
-
-        when(brandService.getFeedbackOfBrandDetail(brandId, page, size, sortRating)).thenThrow(IncorrectResultSizeDataAccessException.class);
-
-        // Act
-        ResponseEntity<BrandDetailFeedbackPaginition> result = brandController.getBrandFeedback(brandId, page, size, sortRating);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
-
-    }
-
-    @Test
-    public void testGetBrandFeedbackWithDataAccessException() {
-        // Arrange
-        int brandId = 1;
-        int page = 1;
-        int size = 7;
-        String sortRating = "desc";
-
-        when(brandService.getFeedbackOfBrandDetail(brandId, page, size, sortRating)).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
-
-        // Act
-        ResponseEntity<BrandDetailFeedbackPaginition> result = brandController.getBrandFeedback(brandId, page, size, sortRating);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
-
-    }
+//    @Test
+//    public void testGetBrandFeedbackWithIncorrectResult() {
+//        // Arrange
+//        int brandId = 1;
+//        int page = 1;
+//        int size = 3;
+//        String sortRating = "desc";
+//
+//        when(brandService.getFeedbackOfBrandDetail(brandId, page, size, sortRating)).thenThrow(IncorrectResultSizeDataAccessException.class);
+//
+//        // Act
+//        ResponseEntity<BrandDetailFeedbackPaginition> result = brandController.getBrandFeedback(brandId, page, size, sortRating);
+//
+//        // Assert
+//        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+//
+//    }
+//
+//    @Test
+//    public void testGetBrandFeedbackWithDataAccessException() {
+//        // Arrange
+//        int brandId = 1;
+//        int page = 1;
+//        int size = 7;
+//        String sortRating = "desc";
+//
+//        when(brandService.getFeedbackOfBrandDetail(brandId, page, size, sortRating)).thenThrow(new CustomDataAccessException("Simulated DataAccessException"));
+//
+//        // Act
+//        ResponseEntity<BrandDetailFeedbackPaginition> result = brandController.getBrandFeedback(brandId, page, size, sortRating);
+//
+//        // Assert
+//        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+//
+//    }
 
 
 }

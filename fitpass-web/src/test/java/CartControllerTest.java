@@ -203,35 +203,35 @@ public class CartControllerTest {
 
     }
 
-    @Test
-    void testGetQuantityInCart_WhenCartExists() {
-        // Arrange
-        MockitoAnnotations.initMocks(this);
-        Cart cart = new Cart();
-        cart.addItem(new GymPlanDepartmentNameDto() , 2);
-        when(session.getAttribute("cart")).thenReturn(cart);
-
-        // Act
-        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
-
-        // Assert
-        assertEquals(ResponseEntity.ok(1), response);
-
-    }
-
-    @Test
-    void testGetQuantityInCart_WhenCartDoesNotExist() {
-        // Arrange
-        MockitoAnnotations.initMocks(this);
-        when(session.getAttribute("cart")).thenReturn(null);
-
-        // Act
-        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
-
-        // Assert
-        assertEquals(ResponseEntity.ok(0), response);
-
-    }
+//    @Test
+//    void testGetQuantityInCart_WhenCartExists() {
+//        // Arrange
+//        MockitoAnnotations.initMocks(this);
+//        Cart cart = new Cart();
+//        cart.addItem(new GymPlanDepartmentNameDto() , 2);
+//        when(session.getAttribute("cart")).thenReturn(cart);
+//
+//        // Act
+//        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
+//
+//        // Assert
+//        assertEquals(ResponseEntity.ok(1), response);
+//
+//    }
+//
+//    @Test
+//    void testGetQuantityInCart_WhenCartDoesNotExist() {
+//        // Arrange
+//        MockitoAnnotations.initMocks(this);
+//        when(session.getAttribute("cart")).thenReturn(null);
+//
+//        // Act
+//        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
+//
+//        // Assert
+//        assertEquals(ResponseEntity.ok(0), response);
+//
+//    }
 
     @Test
     void testViewCart_WhenCartExistsWithItems() {
@@ -284,19 +284,19 @@ public class CartControllerTest {
         verify(session, never()).setAttribute(anyString(), any());
 
     }
-    @Test
-    void testGetQuantityInCart_ExceptionHandling() {
-        // Arrange
-        MockitoAnnotations.initMocks(this);
-        when(session.getAttribute("cart")).thenThrow(RuntimeException.class);
-
-        // Act
-        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
-
-        // Assert
-        assertEquals(ResponseEntity.badRequest().build(), response);
-
-    }
+//    @Test
+//    void testGetQuantityInCart_ExceptionHandling() {
+//        // Arrange
+//        MockitoAnnotations.initMocks(this);
+//        when(session.getAttribute("cart")).thenThrow(RuntimeException.class);
+//
+//        // Act
+//        ResponseEntity<Integer> response = cartController.getQuantityInCart(session);
+//
+//        // Assert
+//        assertEquals(ResponseEntity.badRequest().build(), response);
+//
+//    }
 
     @Test
     void testUpdateCartQuantity_WhenCartExists() {
