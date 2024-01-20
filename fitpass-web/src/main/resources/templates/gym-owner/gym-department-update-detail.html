@@ -481,8 +481,7 @@
                                                         <td th:text="${fStat.index + 1}">1</td>
                                                         <td th:text="${f.getFeatureID()}"></td>
                                                         <td th:text="${f.featureName}">Bãi đỗ xe</td>
-                                                        <td th:utext="${f.getFeatureIcon()}"><i
-                                                                class="bi bi-p-circle"></i></td>
+                                                        <td><img th:src="${f.getFeatureIcon()}" alt=""></td>
                                                         <td></td>
                                                     </tr>
                                                 </th:block>
