@@ -100,7 +100,7 @@ public class AdminControllerTest {
         String result = adminController.getFeature(model);
 
         //Assert
-        assertEquals("admin/admin-feature", result);
+        assertEquals("admin/admin-feature-list", result);
 
     }
     
