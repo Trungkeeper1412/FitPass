@@ -5809,6 +5809,13 @@ section {
         font-size: 15px;
     }
 
+    .developing{
+        text-align: center;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     /*.dept-description .service-name{*/
     /*  height: 30px;*/
     /*  font-size: 10px;*/
