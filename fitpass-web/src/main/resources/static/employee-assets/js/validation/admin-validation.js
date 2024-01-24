@@ -25,8 +25,8 @@ $(document).ready(function () {
             money: {
                 required: true,
                 number: true,
-                min: 1000,
-                max: 1000000000,
+                min: 20000,
+                max: 100000000,
             }
         },
         messages: {
@@ -54,7 +54,7 @@ $(document).ready(function () {
             money: {
                 required: "Vui lòng nhập tiền của mốc Credit",
                 number: "Vui lòng nhập số",
-                min: "Số tiền phải lớn hơn hoặc bằng 1.000",
+                min: "Số tiền phải lớn hơn hoặc bằng 20.000",
                 max: "Số tiền không được vượt quá 100.000.000",
             }
         },
