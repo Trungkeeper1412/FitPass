@@ -85,7 +85,7 @@
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getPrice() > 0 ? item.getDuration() : item.getPlanAfterActiveValidity()} + ' ngày',
-                                                 data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-description= ${item.getDescription()} ,
                                                  data-item-before-active=${item.getPlanBeforeActiveValidity()},
                                                  data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
                                                  data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
@@ -189,7 +189,7 @@
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getPrice() > 0 ? item.getDuration() : item.getPlanAfterActiveValidity()} + ' ngày',
-                                                 data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-description= ${item.getDescription()} ,
                                                  data-item-before-active=${item.getPlanBeforeActiveValidity()},
                                                  data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
                                                  data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
@@ -285,7 +285,7 @@
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getPrice() > 0 ? item.getDuration() : item.getPlanAfterActiveValidity()} + ' ngày',
-                                                 data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-description=${item.getDescription()} ,
                                                  data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
                                                  data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
                                                      onclick="showItemDetail(this)">
@@ -376,7 +376,7 @@
                                                  data-item-status=${item.getItemStatusKey() == 0 ? 'Chưa kích hoạt' : (item.getItemStatusKey() == 1 ? 'Đã kích hoạt' : 'Đã hết hạn') } ,
                                                  data-activation-date=${item.getPlanActiveTime() == null ? 'null' : item.getPlanActiveTime()},
                                                  data-activation-period=${item.getDuration()} + ' ngày',
-                                                 data-item-description='Mô tả ' + ${item.getDescription()} ,
+                                                 data-item-description= ${item.getDescription()} ,
                                                  data-item-buyDate= ${item.getBuyItemTime()}, data-item-duration=${item.getDuration()},
                                                  data-item-plan-after-active=${item.getPlanAfterActiveValidity()}"
                                                      onclick="showItemDetail(this)">
