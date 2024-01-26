@@ -2,29 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Thanh Toán</title>
-    <meta name="description" content="Check Out Page">
-    <meta name="keywords" content="My">
+    <meta content="Check Out Page" name="description">
+    <meta content="My" name="keywords">
 
     <th:block th:include="common/vendor-head"></th:block>
 
     <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
-    <link th:href="@{/user-homepage-assets/assets/css/MyStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/user-homepage-assets/assets/css/MyStyle.css}">
 
 </head>
 
 <body class="body-checkout">
 <!-- ======= Header ======= -->
 <header th:replace="common/navbar :: navbar"></header>
-<form method="post" action="/checkout/perform">
+<form action="/checkout/perform" method="post">
     <!-- Content -->
     <div class="container">
         <h2 class="row ms-1">Thanh toán</h2>
         <div class="line row ms-1"></div>
     </div>
 
-    <div id="my-card" class="checkout-container container">
+    <div class="checkout-container container" id="my-card">
         <div class="checkout-content">
             <div class="checkout-title">
                 <div class="my-plan-title">Gói tập</div>
@@ -33,62 +33,62 @@
             </div>
             <div class="check-out-scroll">
                 <th:block th:if="${departmentList!=null}">
-                <th:block th:each="department :${departmentList}">
-                    <div class="plan-in-a-gymdept row">
-                        <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
-                        <th:block th:each="cartItem: ${checkoutCartList}">
-                            <th:block
-                                    th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
-                                <div class="plan-checkout">
-                                    <div class="plan-card-mc">
-                                        <input name="planId" type="hidden"
-                                               th:value="${cartItem.getGymPlan().getGymPlanId()+';'+cartItem.getGymPlan().getGymDepartmentId()}"/>
-                                        <img th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}"
-                                             alt="Logo phòng tập"/>
-                                        <div class="plan-info-mc">
-                                            <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim
-                                                cương</h4>
-                                            <div th:text="'Thời hạn cần kích hoạt: ' + ${cartItem.getGymPlan().getPlanBeforeActiveValidity()} +' ngày'">
-                                                Thời lượng 365 ngày
+                    <th:block th:each="department :${departmentList}">
+                        <div class="plan-in-a-gymdept row">
+                            <div class="gym-name-mc" th:text="${department.getDepartmentName()}">Phòng gym Hòa Lạc</div>
+                            <th:block th:each="cartItem: ${checkoutCartList}">
+                                <th:block
+                                        th:if="${cartItem.getGymPlan().getGymDepartmentId() == department.getDepartmentId()}">
+                                    <div class="plan-checkout">
+                                        <div class="plan-card-mc">
+                                            <input name="planId" th:value="${cartItem.getGymPlan().getGymPlanId()+';'+cartItem.getGymPlan().getGymDepartmentId()}"
+                                                   type="hidden"/>
+                                            <img alt="Logo phòng tập"
+                                                 th:src="${cartItem.getGymPlan().getGymDepartmentLogoUrl()}"/>
+                                            <div class="plan-info-mc">
+                                                <h4 th:text="${cartItem.getGymPlan().getGymPlanName()}">Gói tập kim
+                                                    cương</h4>
+                                                <div th:text="'Thời hạn cần kích hoạt: ' + ${cartItem.getGymPlan().getPlanBeforeActiveValidity()} +' ngày'">
+                                                    Thời lượng 365 ngày
+                                                </div>
+                                            </div>
+                                            <div class="active-time-mc"
+                                                 th:text="'Thời gian sử dụng: ' + ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
+                                                Kích hoạt trong vòng 10 ngày
                                             </div>
                                         </div>
-                                        <div class="active-time-mc"
-                                             th:text="'Thời gian sử dụng: ' + ${cartItem.getGymPlan().getPlanAfterActiveValidity()} + ' ngày'">
-                                            Kích hoạt trong vòng 10 ngày
+                                        <div class="plan-price-and-num">
+                                            <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
+                                                200
+                                            </div>
+                                            <div class="num-of-plan-mc" th:text="${cartItem.getQuantity()}">
+                                                1
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="plan-price-and-num">
-                                        <div class="plan-price-mc" th:text="${cartItem.getGymPlan().getPrice()}">
-                                            200
-                                        </div>
-                                        <div class="num-of-plan-mc" th:text="${cartItem.getQuantity()}">
-                                            1
-                                        </div>
-                                    </div>
-                                </div>
+                                </th:block>
                             </th:block>
-                        </th:block>
-                    </div>
-                </th:block>
+                        </div>
+                    </th:block>
                 </th:block>
             </div>
 
             <div class="total-checkout mb-4">
                 <div class="back-to-cart">
                     <a href="/cart/view">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                             class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                        <svg class="bi bi-arrow-left-circle" fill="currentColor" height="32" viewBox="0 0 16 16"
+                             width="32" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
+                                  fill-rule="evenodd"/>
                         </svg>
                     </a>
                     <h3>Giỏ hàng</h3>
                 </div>
                 <th:block th:if="${departmentList!=null}">
-                <div class="total-credits">
-                    <div th:text="'Tạm tính: ' + ${totalPrice} + ' Credits'">Tạm tính: 800 Credits</div>
-                    <h3 th:text="'Tổng thanh toán: ' + ${totalPrice} + ' Credits'">Tổng thanh toán: 800 Credits</h3>
-                </div>
+                    <div class="total-credits">
+                        <div th:text="'Tạm tính: ' + ${totalPrice} + ' Credits'">Tạm tính: 800 Credits</div>
+                        <h3 th:text="'Tổng thanh toán: ' + ${totalPrice} + ' Credits'">Tổng thanh toán: 800 Credits</h3>
+                    </div>
                 </th:block>
             </div>
         </div>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="wallet-value">
                     <div th:text="${userBalance}">1000</div>
-                    <input type="hidden" name="totalPrice" th:value="${totalPrice}">
+                    <input name="totalPrice" th:value="${totalPrice}" type="hidden">
                     <div style="margin-top: 10px;" th:text="${totalPrice}">800</div>
                     <div style="margin-top: 10px;">0</div>
                 </div>
@@ -116,9 +116,9 @@
             </div>
             <th:block th:if="${userBalanceAfterBuying < 0}">
                 <a th:href="@{/profile/deposit}">
-                    <button type="button" class="btn btn-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <button class="btn btn-warning" type="button">
+                        <svg class="bi bi-plus-circle" fill="currentColor" height="16" viewBox="0 0 16 16"
+                             width="16" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
@@ -129,7 +129,7 @@
             </th:block>
 
             <th:block th:if="${userBalanceAfterBuying >= 0}">
-                <button type="submit" class="btn btn-dark" style="margin-bottom: 30px;">Thanh toán</button>
+                <button class="btn btn-dark" style="margin-bottom: 30px;" type="submit">Thanh toán</button>
             </th:block>
         </div>
 
@@ -137,27 +137,52 @@
 </form>
 
 <th:block th:if="${messageInsertOrder}">
-    <input type="hidden" id="messageInsertOrder" value="${messageInsertOrder}"/>
+    <input id="messageInsertOrder" type="hidden" value="${messageInsertOrder}"/>
 </th:block>
 
 <div style="margin-top: 40px" th:replace="common/footer :: footer"></div>
 <div id="preloader"></div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
         class="bi bi-arrow-up-short"></i></a>
 <!-- Vendor JS Files -->
 <th:block th:include="common/vendor-script"></th:block>
 <script>
-    if (document.querySelector("#messageInsertOrder") != null) {
+    document.querySelector(".btn-dark").addEventListener("click", function (event) {
+        event.preventDefault();
         Swal.fire({
-            icon: 'success',
-            title: 'Mua hàng thành công!',
-            text: 'Bạn đã mua hàng thành công.',
-            showConfirmButton: true,
-            timer: 1500
-        }).then(function () {
-            window.location.href = '/inventory/view';
+            title: 'Xác nhận thanh toán?',
+            text: "Bạn có chắc muốn thanh toán không?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Thanh toán',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (document.querySelector("#messageInsertOrder") != null) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Mua hàng thành công!',
+                    text: 'Bạn đã mua hàng thành công.',
+                    showConfirmButton: true,
+                    timer: 1500
+                }).then(function () {
+                    window.location.href = '/inventory/view';
+                });
+            }
         });
-    }
+    });
 </script>
+<!--<script>-->
+<!--    if (document.querySelector("#messageInsertOrder") != null) {-->
+<!--        Swal.fire({-->
+<!--            icon: 'success',-->
+<!--            title: 'Mua hàng thành công!',-->
+<!--            text: 'Bạn đã mua hàng thành công.',-->
+<!--            showConfirmButton: true,-->
+<!--            timer: 1500-->
+<!--        }).then(function () {-->
+<!--            window.location.href = '/inventory/view';-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
 </body>
 </html>
