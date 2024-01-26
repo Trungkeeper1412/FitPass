@@ -2861,11 +2861,18 @@ a:link {
     position: relative;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     scroll-behavior: smooth;
     height: fit-content;
-    max-height: 400px;
+    max-height: 228px;
     -webkit-overflow-scrolling: touch;
+}
+/*.add-money::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
+.add-money{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 .add-money label {
     width: 100%;
