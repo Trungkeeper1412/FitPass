@@ -837,7 +837,8 @@ function handleCheckOutNotificationClick(notification) {
                 $(".my-notifications").find(`[data-notification-id="${notification.notificationId}"]`)
                     .removeClass("unseen-notification").addClass("seen-notification");
                 deleteNavNotificationItem(notification.notificationId);
-
+                $(".text-money").text(parseFloat(dataToSend.creditAfterPay).toFixed(1));
+                $("#user-balance").text(parseFloat(dataToSend.creditAfterPay).toFixed(1));
             },
             error: function () {
                 toastr.options = {

@@ -289,14 +289,14 @@
             let previousDisabled = currentPage === 1 ? ' disabled' : '';
             paginationContainer.append(`<li class="page-item${previousDisabled}">
         <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
-    </li>`);
+            </li>`);
 
             // Append page number buttons
             for (let i = 1; i <= totalPages; i++) {
                 let activeClass = i === currentPage ? ' active' : '';
                 paginationContainer.append(`<li class="page-item${activeClass}">
             <a class="page-link" href="#" data-page="${i}">${i}</a>
-        </li>`);
+    </li>`);
             }
 
             // Append 'Next' button
