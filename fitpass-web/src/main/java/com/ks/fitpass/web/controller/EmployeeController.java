@@ -318,8 +318,6 @@ public class EmployeeController {
             if (insertStatus > 0) {
                 webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
                 return ResponseEntity.ok(insertStatus);
-            } else {
-                logger.error("Notification insertion failed for some reason.");
             }
         } catch (DataAccessException e) {
             logger.error("Error during notification insertion", e);
