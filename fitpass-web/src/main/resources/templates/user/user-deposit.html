@@ -28,8 +28,8 @@
 
                 <!-- User deposit tab -->
                 <div id="add-money-tab">
-                    <div class="mt-4" style="font-weight: 500;">Chọn phương thức thanh toán</div>
-                    <div class="row banking-card-list mt-2 justify-content-center">
+                    <div class="mt-4" style="font-weight: 500;">Phương thức thanh toán</div>
+                    <div class="row banking-card-list mt-2">
                         <div class="col-md-4 col-lg-4 col-sm-4">
                             <label>
                                 <input checked class="card-input-element" id="choose-visa" name="product" type="radio"/>
@@ -37,33 +37,6 @@
                                     <div class="panel-body">
                                         <span><img th:src="@{/user-homepage-assets/assets/img/visa.png}"></span>
                                         <span class="ab-title">Thanh toán bằng VISA</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                            <label>
-                                <input class="card-input-element" id="choose-vnpay" name="product" type="radio"/>
-                                <div class="panel panel-default card-input">
-                                    <div class="panel-body">
-                                        <div>
-                                            <span><img
-                                                    src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Icon-VNPAY-QR.png"></span>
-                                            <span class="ab-title">Thanh toán bằng VNPAY</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                            <label>
-                                <input class="card-input-element" id="choose-momo" name="product" type="radio"/>
-                                <div class="panel panel-default card-input">
-                                    <div class="panel-body">
-                                        <div>
-                        <span><img th:src="@{/user-homepage-assets/assets/img/momo.png}"></span>
-                                            <span class="ab-title">Thanh toán bằng ví điện tử</span>
-                                        </div>
                                     </div>
                                 </div>
                             </label>
@@ -105,20 +78,6 @@
                         </form>
                     </div>
 
-                    <div class="mb-4 vnpay-payment" id="vnpay-payment">
-                        <div class="row mt-4 justify-content-center">
-                            <img style="width: 200px" th:src="@{/user-homepage-assets/assets/img/develop.png}">
-                        </div>
-                        <h5 class="row mt-4 justify-content-center fw-bold">Chức năng đang được phát triển, vui lòng quay lại sau!</h5>
-                    </div>
-
-                    <!-- Tab thanh toán bằng ví momo -->
-                    <div class="mb-4" id="momo-payment">
-                            <div class="row mt-4 justify-content-center">
-                                <img style="width: 200px" th:src="@{/user-homepage-assets/assets/img/develop.png}">
-                            </div>
-                            <h5 class="row mt-4 justify-content-center fw-bold">Chức năng đang được phát triển, vui lòng quay lại sau!</h5>
-                    </div>
                 </div>
 
 
