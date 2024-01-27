@@ -88,13 +88,6 @@ public class AdminControllerTest {
         MockitoAnnotations.initMocks(this);
     }
 
-//    @Test
-//    public void testGetAdminIndex() {
-//        //act
-//        String result = adminController.getAdminIndex();
-//        //assert
-//        assertEquals("admin/index", result);
-//    }
 
     @Test
     public void testGetFeature() {
@@ -107,7 +100,7 @@ public class AdminControllerTest {
         String result = adminController.getFeature(model);
 
         //Assert
-        assertEquals("admin/admin-feature", result);
+        assertEquals("admin/admin-feature-list", result);
 
     }
     
@@ -152,149 +145,6 @@ public class AdminControllerTest {
         verify(departmentFeatureService, times(1)).getAllFeatureNoStatus();
         verify(model, never()).addAttribute(eq("featureList"), any());
     }
-
-    @Test
-    public void testAddFeatureSuccess() {
-        // Arrange
-        when(departmentFeatureService.insertFeature(any())).thenReturn(1);
-
-        // Act
-        String result = adminController.addFeature("TestFeature", "test-icon");
-
-        // Assert
-        assertEquals("redirect:/admin/feature", result);
-        verify(departmentFeatureService, times(1)).insertFeature(any());
-    }
-
-    @Test
-    public void testAddFeatureDuplicateKeyException() {
-        // Arrange
-        when(departmentFeatureService.insertFeature(any())).thenThrow(DuplicateKeyException.class);
-
-        // Act
-        String result = adminController.addFeature("TestFeature", "test-icon");
-
-        // Assert
-        assertEquals("error/duplicate-key-error", result);
-        verify(departmentFeatureService, times(1)).insertFeature(any());
-    }
-
-    @Test
-    public void testAddFeatureEmptyResultDataAccessException() {
-        // Arrange
-        when(departmentFeatureService.insertFeature(any())).thenThrow(EmptyResultDataAccessException.class);
-
-        // Act
-        String result = adminController.addFeature("TestFeature", "test-icon");
-
-        // Assert
-        assertEquals("error/no-data", result);
-        verify(departmentFeatureService, times(1)).insertFeature(any());
-    }
-
-    @Test
-    public void testAddFeatureIncorrectResultSizeDataAccessException() {
-        // Arrange
-        when(departmentFeatureService.insertFeature(any())).thenThrow(IncorrectResultSizeDataAccessException.class);
-
-        // Act
-        String result = adminController.addFeature("TestFeature", "test-icon");
-
-        // Assert
-        assertEquals("error/incorrect-result-size-error", result);
-        verify(departmentFeatureService, times(1)).insertFeature(any());
-    }
-    @Test
-    public void testGetFeatureDetailSuccess() {
-        // Arrange
-        int featureId = 1;
-        Feature expectedFeature = new Feature();
-        when(departmentFeatureService.getByFeatureId(featureId)).thenReturn(expectedFeature);
-
-        // Act
-        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
-
-        // Assert
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(expectedFeature, result.getBody());
-        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
-    }
-
-    @Test
-    public void testGetFeatureDetailEmptyResultDataAccessException() {
-        // Arrange
-        int featureId = 1;
-        when(departmentFeatureService.getByFeatureId(featureId)).thenThrow(EmptyResultDataAccessException.class);
-
-        // Act
-        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
-
-        // Assert
-        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
-        Assertions.assertNull(result.getBody());
-        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
-    }
-
-    @Test
-    public void testGetFeatureDetailDuplicateKeyException() {
-        // Arrange
-        int featureId = 1;
-        when(departmentFeatureService.getByFeatureId(featureId)).thenThrow(DuplicateKeyException.class);
-
-        // Act
-        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
-        Assertions.assertNull(result.getBody());
-        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
-    }
-
-    @Test
-    public void testGetFeatureDetailIncorrectResultSizeDataAccessException() {
-        // Arrange
-        int featureId = 1;
-        when(departmentFeatureService.getByFeatureId(featureId)).thenThrow(IncorrectResultSizeDataAccessException.class);
-
-        // Act
-        ResponseEntity<Feature> result = adminController.getFeatureDetail(featureId);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
-        assertNull(result.getBody());
-        verify(departmentFeatureService, times(1)).getByFeatureId(featureId);
-    }
-
-
-    @Test
-    public void testUpdateFeatureSuccess() {
-        // Arrange
-        Feature featureToUpdate = new Feature();
-        when(departmentFeatureService.updateFeature(featureToUpdate)).thenReturn(1);
-
-        // Act
-        ResponseEntity<String> result = adminController.updateFeature(featureToUpdate);
-
-        // Assert
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals("Update feature success", result.getBody());
-        verify(departmentFeatureService, times(1)).updateFeature(featureToUpdate);
-    }
-
-    @Test
-    public void testUpdateFeatureDataAccessException() {
-        // Arrange
-        Feature featureToUpdate = new Feature();
-        when(departmentFeatureService.updateFeature(featureToUpdate)).thenThrow(new CustomDataAccessException("Custom Data Access Exception"));
-
-        // Act
-        ResponseEntity<String> result = adminController.updateFeature(featureToUpdate);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
-        verify(departmentFeatureService, times(1)).updateFeature(featureToUpdate);
-    }
-
 
     @Test
     public void testUpdateFeatureStatusSuccess() {

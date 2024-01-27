@@ -47,7 +47,7 @@
                                             <label for="name-service" class="form-label fw-bold">Tên dịch vụ:</label>
                                             <input th:field="*{amenitieName}" name="amenitieName" type="text" class="form-control" id="name-service"
                                                    placeholder="Hệ thống tủ khóa">
-                                            <span th:if="${#fields.hasErrors('photoUrl')}" class="error" th:errors="*{photoUrl}">photoUrl Error</span>
+                                            <span th:if="${#fields.hasErrors('amenitieName')}" class="error" th:errors="*{amenitieName}">photoUrl Error</span>
                                         </div>
                                         <div class="mb-4">
                                             <label for="serviceDescription" class="form-label fw-bold">Mô tả dịch vụ:</label>
@@ -80,7 +80,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
+<!-- Scroll to Top Button-->    
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>

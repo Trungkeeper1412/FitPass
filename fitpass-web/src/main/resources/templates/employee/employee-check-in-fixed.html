@@ -256,7 +256,8 @@
                     <p class="fw-bold">Thời lượng còn: <span>${item.duration}</span> ngày</p>
                     ${
                         status === 'check-in' ?
-                            `<button onclick="performCheckIn(${item.orderDetailId})" class="btn checkin-btn">Check-in</button>` :
+                            `<button class="btn checkin-btn mt-3" order-detail-id="${item.orderDetailId}"
+                                onclick="performCheckIn(${item.orderDetailId})">Check-in</button>` :
                             `<div class="checkin-time">Thời gian check in: <span>${
                                 new Date(item.checkInTime).toLocaleString('vi-VN', {
                                     year: 'numeric',
@@ -289,14 +290,14 @@
             let previousDisabled = currentPage === 1 ? ' disabled' : '';
             paginationContainer.append(`<li class="page-item${previousDisabled}">
         <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
-    </li>`);
+            </li>`);
 
             // Append page number buttons
             for (let i = 1; i <= totalPages; i++) {
                 let activeClass = i === currentPage ? ' active' : '';
                 paginationContainer.append(`<li class="page-item${activeClass}">
             <a class="page-link" href="#" data-page="${i}">${i}</a>
-        </li>`);
+    </li>`);
             }
 
             // Append 'Next' button
@@ -335,8 +336,6 @@
                 type: "GET",
                 url: `/employee/fixed/sendCheckinRequest?id=${orderDetailId}`,
                 success: function (data) {
-                    console.log(data)
-                    // Nếu send request thành công thì hiện  thông báo gửi thành công
                     if(data > 0) {
                         Swal.fire({
                             toast: true,
@@ -353,6 +352,7 @@
                             }
                         })
                     }
+                    $('button.btn.checkin-btn.mt-3[order-detail-id="' + orderDetailId + '"]').prop('disabled', true).text("Đã gửi yêu cầu")
                 },
                 error: function () {
                     alert("Đã xảy ra lỗi trong quá trình check in.");

@@ -64,7 +64,8 @@
             </div>
             <div class="gym-address">
                 <i class="bi bi-alarm-fill"></i>
-                <div id="myBtn" style="margin-left: 10px;">Giờ hoạt động</div>
+                <div  id="myBtn" style="margin-left: 10px;">Giờ hoạt động</div>
+                <i class="bi bi-caret-right-fill ms-1"></i>
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
                     <!-- Modal content -->
@@ -109,9 +110,8 @@
     <div class="container-fluid">
         <div class="gym-service">
             <div class="service-type mb-3" th:each="feature: ${departmentFeatures}">
-                <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
-                     class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
-                </div>
+                <img data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
+                     class="gym-service-logo p-2" th:src="${feature.feature.getFeatureIcon()}">
             </div>
         </div>
     </div>

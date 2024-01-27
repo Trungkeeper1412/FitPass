@@ -51,13 +51,13 @@ function loadCalendar(data){
     var calendar = new FullCalendar.Calendar(calendarEl, {
         customButtons: {
             customButton: {
-                text: 'Đặt kế hoạch tập',
+                text: 'Tạo ghi chú',
                 click: function () {
                     myModal.show();
                     const modalTitle = document.getElementById('modal-title');
                     const submitButton = document.getElementById('submit-button');
-                    modalTitle.innerHTML = 'Kế hoạch tập'
-                    submitButton.innerHTML = 'Lưu kế hoạch'
+                    modalTitle.innerHTML = 'Thông tin ghi chú'
+                    submitButton.innerHTML = 'Lưu ghi chú'
                     submitButton.classList.remove('btn-primary');
                     submitButton.classList.add('btn-primary');
                     close.addEventListener('click', () => {
@@ -184,8 +184,8 @@ function loadCalendar(data){
             myModal.show();
             const modalTitle = document.getElementById('modal-title');
             const submitButton = document.getElementById('submit-button');
-            modalTitle.innerHTML = 'Kế hoạch tập'
-            submitButton.innerHTML = 'Lưu kế hoạch'
+            modalTitle.innerHTML = 'Thông tin ghi chú'
+            submitButton.innerHTML = 'Lưu ghi chú'
             submitButton.classList.remove('btn-primary');
             submitButton.classList.add('btn-primary');
 

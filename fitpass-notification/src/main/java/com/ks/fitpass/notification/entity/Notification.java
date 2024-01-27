@@ -22,4 +22,5 @@ public class Notification {
     private String employeeName;
     private String messageType;
     private int status;
+
 }

@@ -287,8 +287,10 @@ public class EmployeeController {
         String departmentName = departmentNotificationDTO.getDepartmentName();
         String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
 
+        UserDetail employeeDetail = userService.getUserDetailByUserDetailId(user.getUserId());
+        String usernameSend = employeeDetail.getFirstName().concat(" ").concat(employeeDetail.getLastName());
+
         int userIdSend = user.getUserId();
-        String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
         String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentName + ". Hãy xác nhận ngay!";
@@ -316,8 +318,6 @@ public class EmployeeController {
             if (insertStatus > 0) {
                 webSocketService.notifyUser(userReceiveMessageDTO.getUserId(), notification);
                 return ResponseEntity.ok(insertStatus);
-            } else {
-                logger.error("Notification insertion failed for some reason.");
             }
         } catch (DataAccessException e) {
             logger.error("Error during notification insertion", e);

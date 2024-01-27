@@ -2630,7 +2630,7 @@ a:link {
 }
 
 .user-profile-content {
-    margin-top: 130px;
+    margin-top: 50px;
     width: 90%;
 }
 
@@ -2856,6 +2856,24 @@ a:link {
     border: none;
 }
 
+.add-money{
+    padding-top: 5px;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    height: fit-content;
+    max-height: 228px;
+    -webkit-overflow-scrolling: touch;
+}
+/*.add-money::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
+.add-money{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 .add-money label {
     width: 100%;
 }
@@ -5080,7 +5098,6 @@ section {
 }
 
 .body-checkout h2 {
-    margin-top: 60px;
     font-weight: 900;
     color: black;
 }
@@ -5798,6 +5815,13 @@ section {
         font-size: 15px;
     }
 
+    .developing{
+        text-align: center;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     /*.dept-description .service-name{*/
     /*  height: 30px;*/
     /*  font-size: 10px;*/

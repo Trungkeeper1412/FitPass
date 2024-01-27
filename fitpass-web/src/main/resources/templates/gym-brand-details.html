@@ -115,9 +115,8 @@
                 <div class="dept-description">
                     <div class="service-type" th:each="feature: ${departmentFeatures}"
                          th:if="${feature.getGymDepartmentId() == dept.getDepartmentId()}">
-                        <div data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
-                             class="gym-service-logo" th:utext="${feature.feature.getFeatureIcon()}">
-                        </div>
+                        <img data-bs-toggle="tooltip" th:attr="title=${feature.feature.getFeatureName()}"
+                             class="gym-service-logo p-1" th:src="${feature.feature.getFeatureIcon()}" alt="">
                     </div>
                 </div>
             </a>

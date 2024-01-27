@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="admin/common/head"></th:block>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <th:block th:replace="admin/common/sidebar"></th:block>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div class="d-flex flex-column" id="content-wrapper">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <th:block th:replace="admin/common/navbar"></th:block>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-primary">Chi tiết tiện ích</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-box">
+                            <h2 class="fs-title text-center">Thông tin cơ bản</h2>
+                            <form id="formSubmit" action="/admin/feature/update" method="post" th:object="${feature}">
+                                <div class="row">
+                                    <div class="col-md-1 mb-4">
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                        <label for="feature-img" class="form-label fw-bold w-100">Ảnh biểu tượng :</label>
+                                        <img class="show-feature-img" th:src="${feature.getFeatureIcon()}" alt="Hình ảnh">
+                                        <input th:field="*{featureIcon}" id="featureIcon" type="hidden" name="featureIcon" th:value="${feature.getFeatureIcon()}">
+                                        <input th:field="*{featureID}" id="featureID" type="hidden" name="featureID" th:value="${feature.getFeatureID()}">
+                                        <span th:if="${#fields.hasErrors('featureIcon')}" class="error" th:errors="*{featureIcon}">photoUrl Error</span>
+                                        <input type="file" class="form-control mt-2" style="display: none;" id="feature-img" accept="image/*" onchange="uploadImage(this);">
+                                        <div class="d-flex justify-content-center mt-3" style="width: 230px">
+                                            <button type="button" class="btn btn-upload-img" onclick="document.getElementById('feature-img').click();">
+                                                Chọn ảnh
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 mb-4">
+                                        <div class="mb-4">
+                                            <label for="name-feature" class="form-label fw-bold">Tên tiện ích:</label>
+                                            <input th:field="*{featureName}" name="featureName" th:value="${feature.getFeatureName()}" type="text" class="form-control" id="name-feature"
+                                                   placeholder="Nhập tên tiện ích">
+                                            <span th:if="${#fields.hasErrors('featureName')}" class="error" th:errors="*{featureName}">photoUrl Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <input class="btn btn-submit" type="submit" value="Lưu thay đổi" id="updateFeature">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="admin/common/footer"></th:block>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<th:block th:replace="admin/common/logout-modal"></th:block>
+
+<th:block th:replace="admin/common/script"></th:block>
+
+<script>
+    function uploadImage(input) {
+        function checkFileSize(fileInput) {
+            const maxSizeInBytes = 2 * 1024 * 1024;
+
+            if (fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size;
+
+                if (fileSize > maxSizeInBytes) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Vui lòng thử lại!',
+                        text: 'Kích thước của tập tin hình ảnh vượt quá giới hạn cho phép. Hãy chọn ảnh có kích thước nhỏ hơn 2MB.',
+                    });
+
+                    fileInput.value = '';
+                }
+            }
+        }
+
+        if (input.files && input.files[0]) {
+
+            checkFileSize(input);
+
+            const file = input.files[0];
+
+            var formData = new FormData();
+            formData.append("file", file);
+            $.ajax({
+                type: "POST",
+                url: `/upload/uploadImageFeatures/${$("#featureID").val()}`,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response)
+                    $("#featureIcon").val(response);
+                },
+                error: function () {
+                    console.log("Failed to upload file");
+                }
+            });
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.querySelector('.show-feature-img');
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#updateFeature").click(function (e) {
+        e.preventDefault();
+        // Thực hiện validation trước khi xử lý form
+        if ($("#formSubmit").valid()) {
+            Swal.fire({
+                title: 'Bạn có muốn cập nhật thông tin tiện ích ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#formSubmit").submit();
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Thông tin đã được cập nhật thành công.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Thất bại!',
+                        text: 'Thông tin chưa được cập nhật.',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    });
+
+</script>
+</body>
+
+</html>

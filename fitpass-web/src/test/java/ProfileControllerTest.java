@@ -2,6 +2,8 @@ import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.core.entity.UserDetail;
 import com.ks.fitpass.core.entity.UserUpdateDTO;
 import com.ks.fitpass.core.service.UserService;
+import com.ks.fitpass.department.entity.DepositDenomination;
+import com.ks.fitpass.department.service.DepositDenominationService;
 import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
 import com.ks.fitpass.web.controller.ProfileController;
@@ -27,6 +29,9 @@ public class ProfileControllerTest {
 
     @Mock
     private TransactionService transactionService;
+
+    @Mock
+    private DepositDenominationService depositDenominationService;
 
     @Mock
     private UserService userService;
@@ -217,8 +222,12 @@ public class ProfileControllerTest {
     @Test
     void testShowDepositPage() {
         // Arrange
+        Model model = mock(Model.class);
+        List<DepositDenomination> depositDenominations = new ArrayList<>();
+        when(depositDenominationService.getAllDepositDenominationActive()).thenReturn(depositDenominations);
+
         // Act
-        String result = profileController.showDepositPage();
+        String result = profileController.showDepositPage(model);
 
         // Assert
         assertEquals("user/user-deposit", result);

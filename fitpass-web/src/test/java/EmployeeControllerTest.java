@@ -35,6 +35,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -767,6 +768,7 @@ public class EmployeeControllerTest {
         dataSendCheckOutFlexibleDTO.setCheckInTime(new Timestamp(System.currentTimeMillis()));
         dataSendCheckOutFlexibleDTO.setCheckOutTime(System.currentTimeMillis() + 1000);
         dataSendCheckOutFlexibleDTO.setTotalCredit(100.0);
+
         User user = new User();
         user.setUserId(456);
         UserReceiveMessageDTO userReceiveMessageDTO = new UserReceiveMessageDTO();
@@ -775,14 +777,15 @@ public class EmployeeControllerTest {
         DepartmentNotificationDTO departmentNotificationDTO = new DepartmentNotificationDTO();
         departmentNotificationDTO.setDepartmentName("Test Department");
         departmentNotificationDTO.setDepartmentLogoUrl("https://example.com/logo.png");
+
         UserDetail employeeDetail = new UserDetail();
         employeeDetail.setFirstName("John");
         employeeDetail.setLastName("Doe");
         user.setUserDetailId(1);
-        String usernameSend = "John Doe";
-        int userIdSend = 456;
+
+        String usernameSend = employeeDetail.getFirstName().concat("").concat(employeeDetail.getLastName());
+
         int userIdReceived = 123;
-        String messageType = "Xác nhận check out";
         String employeeMessage = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check out ở phòng tập " +
                 departmentNotificationDTO.getDepartmentName() + ". Hãy bấm vào để xem chi tiết.";
         dataSendCheckOutFlexibleDTO.setEmployeeMessage(employeeMessage);
@@ -794,6 +797,7 @@ public class EmployeeControllerTest {
         int checkInHistoryId = 456;
         orderCheckOut.setHistoryCheckInId(checkInHistoryId);
         double userBalance = 500.0;
+
         when(session.getAttribute("userInfo")).thenReturn(user);
         when(employeeService.getUserReceiveMessage(dataSendCheckOutFlexibleDTO.getOrderDetailId())).thenReturn(userReceiveMessageDTO);
         when(departmentService.getDepartmentNotificationDtoById(userReceiveMessageDTO.getGymDepartmentId())).thenReturn(departmentNotificationDTO);
@@ -848,17 +852,29 @@ public class EmployeeControllerTest {
         User user = new User();
         user.setUserId(456);
         user.setUserAccount("johndoe@example.com");
+
+        UserDetail employeeDetail = new UserDetail();
+        employeeDetail.setFirstName("John");
+        employeeDetail.setLastName("Doe");
+
         UserReceiveMessageDTO userReceiveMessageDTO = new UserReceiveMessageDTO();
         userReceiveMessageDTO.setGymDepartmentId(789);
         userReceiveMessageDTO.setUserId(123);
         DepartmentNotificationDTO departmentNotificationDTO = new DepartmentNotificationDTO();
         departmentNotificationDTO.setDepartmentName("Test Department");
         departmentNotificationDTO.setDepartmentLogoUrl("https://example.com/logo.png");
+
         int userIdSend = 456;
         int userIdReceived = 123;
+        String usernameSend = "John Doe";
+
         String messageType = "Xác nhận check in";
-        String message = "Nhân viên với tên " + user.getUserAccount() + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentNotificationDTO.getDepartmentName() + ". Hãy xác nhận ngay!";
+        String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentNotificationDTO.getDepartmentName() +
+                ". Hãy xác nhận ngay!";
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         Notification notification = new Notification();
+        notification.setNotificationId(0);
         notification.setOrderDetailId(orderDetailId);
         notification.setUserIdSend(userIdSend);
         notification.setUserIdReceive(userIdReceived);
@@ -867,19 +883,19 @@ public class EmployeeControllerTest {
         notification.setDepartmentId(userReceiveMessageDTO.getGymDepartmentId());
         notification.setDepartmentName(departmentNotificationDTO.getDepartmentName());
         notification.setDepartmentLogoUrl(departmentNotificationDTO.getDepartmentLogoUrl());
-        notification.setTimeSend(new Timestamp(System.currentTimeMillis()));
+        notification.setTimeSend(timestamp);
+
         when(session.getAttribute("userInfo")).thenReturn(user);
+        when(userService.getUserDetailByUserDetailId(user.getUserId())).thenReturn(employeeDetail);
         when(employeeService.getUserReceiveMessage(orderDetailId)).thenReturn(userReceiveMessageDTO);
         when(departmentService.getDepartmentNotificationDtoById(userReceiveMessageDTO.getGymDepartmentId())).thenReturn(departmentNotificationDTO);
-        when(notificationService.insertNotification(notification)).thenReturn(1);
-
+        when(notificationService.insertNotification((notification))).thenReturn(1);
 
         // Act
         ResponseEntity<Integer> response = employeeController.sendCheckInRequestFixed(orderDetailId, session);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-
     }
 
     @Test

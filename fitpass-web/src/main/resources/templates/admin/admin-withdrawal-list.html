@@ -12,7 +12,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div class="d-flex flex-column" id="content-wrapper">
 
         <!-- Main Content -->
         <div id="content">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-withdrawal-waiting" width="100%" cellspacing="0">
+                            <table cellspacing="0" class="table table-bordered" id="table-withdrawal-waiting" width="100%">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
@@ -57,7 +57,7 @@
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
                                         <td class="text-warning fw-bold" th:text="${h.getStatus()}">Đang xử lý</td>
                                         <td>
-                                            <div class="btn btn-primary" th:attr="onclick='getDetail(' + ${h.getRequestHistoryId()} + ')'" data-toggle="modal" data-target="#transactionModal">Xử lý giao dịch</div>
+                                            <div class="btn btn-primary" data-target="#transactionModal" data-toggle="modal" th:attr="onclick='getDetail(' + ${h.getRequestHistoryId()} + ')'">Xử lý giao dịch</div>
                                         </td>
                                     </tr>
                                 </th:block>
@@ -109,53 +109,53 @@
                         </div>
                     </div>
                     <!-- Modal Xử lý -->
-                    <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
+                    <div aria-hidden="true" aria-labelledby="transactionModalLabel" class="modal fade" id="transactionModal" role="dialog" tabindex="-1">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form id="acceptWithdrawal" action="/admin/withdrawal/update-status" method="post">
+                                <form action="/admin/withdrawal/update-status" id="acceptWithdrawal" method="post">
                                     <div class="modal-header">
                                         <div class="text-center" style="width: 95%; margin-left: 20px">
                                             <h5 class="modal-title" id="transactionModalLabel">Xử lý giao dịch</h5>
                                         </div>
                                         <div class="text-center">
-                                            <button type="button" class="btn btn-close" data-dismiss="modal"></button>
+                                            <button class="btn btn-close" data-dismiss="modal" type="button"></button>
                                         </div>
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="brandName" class="form-label">Tên chủ thương hiệu :</label>
-                                            <input type="hidden" name="requestHistoryId" id="requestHistoryId">
-                                            <input type="text" class="form-control" id="brandName" value="Lê Đình Tuấn" readonly>
+                                            <label class="form-label" for="brandName">Tên chủ thương hiệu :</label>
+                                            <input id="requestHistoryId" name="requestHistoryId" type="hidden">
+                                            <input class="form-control" id="brandName" readonly type="text" value="Lê Đình Tuấn">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="credit" class="form-label">Số credit :</label>
-                                            <input type="text" class="form-control" id="credit" value="10000" readonly>
+                                            <label class="form-label" for="credit">Số credit :</label>
+                                            <input class="form-control" id="credit" readonly type="text" value="10000">
                                         </div>
-                                        <label data-toggle="tooltip" data-placement="top" title="Phí hoa hồng cho hệ thống với mỗi yêu cầu rút tiền" class="fw-bold">
+                                        <label class="fw-bold" data-placement="top" data-toggle="tooltip" title="Phí hoa hồng cho hệ thống với mỗi yêu cầu rút tiền">
                                             Hoa Hồng (<span id="withdrawal-fee">10</span>%)
                                         </label>
                                         <div class="mb-3">
-                                            <label for="amount" class="form-label">Số tiền quy đổi (VND) :</label>
-                                            <input type="text" class="form-control"  id="amount" value="10000000" readonly>
+                                            <label class="form-label" for="amount">Số tiền quy đổi (VND) :</label>
+                                            <input class="form-control" id="amount" readonly type="text" value="10000000">
                                         </div>
                                         <div class="row">
                                             <div class="col-md-5 mb-3">
-                                                <label for="bankSelect" class="form-label">Loại ngân hàng :</label>
-                                                <input type="text" class="form-control" id="bankSelect" value="BDIV" readonly>
+                                                <label class="form-label" for="bankSelect">Loại ngân hàng :</label>
+                                                <input class="form-control" id="bankSelect" readonly type="text" value="BDIV">
                                             </div>
                                             <div class="col-md-7 mb-3">
-                                                <label for="receiverAccount" class="form-label">Số tài khoản :</label>
-                                                <input type="text" class="form-control" id="receiverAccount" value="0986547312" readonly>
+                                                <label class="form-label" for="receiverAccount">Số tài khoản :</label>
+                                                <input class="form-control" id="receiverAccount" readonly type="text" value="0986547312">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="cardHolderName" class="form-label">Tên chủ thẻ :</label>
-                                            <input type="text" class="form-control" id="cardHolderName" value="Nguyễn Trà My" readonly>
+                                            <label class="form-label" for="cardHolderName">Tên chủ thẻ :</label>
+                                            <input class="form-control" id="cardHolderName" readonly type="text" value="Nguyễn Trà My">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button id="btn-close" type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
-                                        <button id="btn-submit" type="submit" class="btn btn-success">Xác nhận</button>
+                                        <button class="btn btn-primary" data-dismiss="modal" id="btn-close" type="button">Đóng</button>
+                                        <button class="btn btn-success" id="btn-submit" type="submit">Xác nhận</button>
                                     </div>
                                 </form>
                             </div>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-withdrawal-success" width="100%" cellspacing="0">
+                            <table cellspacing="0" class="table table-bordered" id="table-withdrawal-success" width="100%">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
@@ -186,12 +186,11 @@
                                         <td th:text="${h.getAmountCredit() + ' Credit'}">10000 Credit</td>
                                         <td class="money-value" th:text="${h.getActualMoney()}">10000000 VNĐ</td>
                                         <td th:text="${h.getMoneyPercent() + ' %'}">10000000 VNĐ</td>
-                                        <td th:if="${h.getStatus() == 'Thành công'}" class="text-success fw-bold">Thành công</td>
-                                        <td th:if="${h.getStatus() == 'Đang xử lý'}" class="text-warning fw-bold">Đang xử lý</td>
-                                        <td th:if="${h.getStatus() == 'Giao dịch bị hủy'}" class="text-danger fw-bold">Giao dịch bị hủy</td>
+                                        <td class="text-success fw-bold" th:if="${h.getStatus() == 'Thành công'}">Thành công</td>
+                                        <td class="text-warning fw-bold" th:if="${h.getStatus() == 'Đang xử lý'}">Đang xử lý</td>
+                                        <td class="text-danger fw-bold" th:if="${h.getStatus() == 'Giao dịch bị hủy'}">Giao dịch bị hủy</td>
                                     </tr>
                                 </th:block>
-
                                 </tbody>
                             </table>
                         </div>
@@ -226,15 +225,13 @@
 <script>
     const money_elements = document.querySelectorAll('.money-value');
     money_elements.forEach((element) => {
-        element.innerHTML = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(element.innerHTML)
+        element.innerHTML = new Intl.NumberFormat('it-IT', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(element.innerHTML)
     });
 
-    const amount = document.querySelector('#amountConversation')
-    amount.value = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(amount.value);
-    document.querySelector('#amountConversation').value = amount.value;
-
-
-    $(document).ready(function() {
+    $(document).ready(function () {
         var table = $('#table-withdrawal-success').DataTable({
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json"
