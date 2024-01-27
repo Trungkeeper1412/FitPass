@@ -208,8 +208,6 @@
 <script>
     var latitude;
     var longtitue;
-    var selectedRating;
-    var selectedPrice = "lowToHigh";
 
     $(document).ready(function () {
         loadBrand(1);
@@ -238,13 +236,11 @@
 
     // Sự kiện thay đổi giá trị trong dropdown "Rating"
     $('#sort-rating').change(function () {
-        selectedRating = $(this).val();
         loadBrand(1)
     });
 
     // Sự kiện thay đổi giá trị trong dropdown "Price"
     $('#sort-price').change(function () {
-        selectedPrice = $(this).val();
         loadBrand(1)
     });
 
@@ -255,8 +251,8 @@
             data: {
                 page: page,
                 size: 6,
-                sortPrice: selectedPrice,
-                sortRating: selectedRating
+                sortPrice: $('#sort-price').val(),
+                sortRating: $('#sort-rating').val(),
             },
             success: function (data) {
                 // Hiển thị danh sách người dùng
