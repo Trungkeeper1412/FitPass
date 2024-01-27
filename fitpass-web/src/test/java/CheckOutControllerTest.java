@@ -171,7 +171,7 @@ public class CheckOutControllerTest {
         String viewName = checkOutController.payment(model, List.of("1;1"), 100.0, mockSession);
 
         // Assert
-        assertEquals("check-out", viewName);
+        assertEquals("redirect:/inventory/view", viewName);
      }
 
 
