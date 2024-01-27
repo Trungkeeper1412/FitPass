@@ -287,8 +287,10 @@ public class EmployeeController {
         String departmentName = departmentNotificationDTO.getDepartmentName();
         String departmentLogoUrl = departmentNotificationDTO.getDepartmentLogoUrl();
 
+        UserDetail employeeDetail = userService.getUserDetailByUserDetailId(user.getUserId());
+        String usernameSend = employeeDetail.getFirstName().concat(" ").concat(employeeDetail.getLastName());
+
         int userIdSend = user.getUserId();
-        String usernameSend = user.getUserAccount();
         int userIdReceived = userReceiveMessageDTO.getUserId();
         String messageType = "Xác nhận check in";
         String message = "Nhân viên với tên " + usernameSend + " đã gửi cho bạn yêu cầu check in ở phòng tập " + departmentName + ". Hãy xác nhận ngay!";
