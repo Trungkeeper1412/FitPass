@@ -535,7 +535,7 @@ public class AdminController {
         }
         DepositDenomination depositDenomination  = new DepositDenomination();
         depositDenomination.setCredit(depositCreateDTO.getCredit());
-        depositDenomination.setMoney(depositCreateDTO.getCredit());
+        depositDenomination.setMoney(depositCreateDTO.getMoney());
         depositDenomination.setDepositDenominationStatus(1);
 
         depositDenominationService.insertDepositDenomination(depositDenomination);
