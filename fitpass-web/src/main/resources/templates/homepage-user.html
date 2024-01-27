@@ -206,23 +206,24 @@
 <div th:replace="common/footer :: footer"></div>
 <th:block th:insert="common/vendor-script"></th:block>
 <script>
-    var latitude = 0;
-    var longtitue = 0;
-    var selectedRating = "";
-    var selectedPrice = "";
+    var latitude;
+    var longtitue;
+    var selectedRating;
+    var selectedPrice = "lowToHigh";
 
     $(document).ready(function () {
-        loadBrand(1); // Tải trang đầu tiên
+        loadBrand(1);
     });
 
     //Tab display code
     document.getElementById("list-gym").style.display = "none";
-
     function openGym() {
         document.getElementById("list-brand").style.display = "none";
         document.getElementById("list-gym").style.display = "block";
         document.getElementById("gym-list").classList.add("active-list");
         document.getElementById("brand-list").classList.remove("active-list");
+        latitude = 0;
+        longtitue = 0;
         loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), 1, 6);
         getNearbyGyms(1);
     }
@@ -339,9 +340,11 @@
                 function (position) {
                     document.getElementById("distance-select").style.display = "block";
                     document.getElementById("location-select").style.display = "none";
+                    console.log("Allow location")
                     sendLocationToServer(position, page);
                 },
                 function (error) {
+                    console.log("Not allow location")
                     handleGeolocationError(error, page);
                 }
             );
@@ -351,9 +354,6 @@
     function sendLocationToServer(position, page) {
         latitude = position.coords.latitude;
         longtitue = position.coords.longitude;
-        // //Hoan Kiem Geo
-        // latitude = 21.0287875844513
-        // longtitue = 105.85144018976352
         loadDepartmentData(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
     }
 
@@ -365,7 +365,7 @@
                 latitude = 0;
                 longtitue = 0;
                 // Người dùng từ chối cung cấp vị trí
-                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), " ", $("#rating").val(), page, 6);
+                loadDepartmentDataWithNoGeolocation(latitude, longtitue, $("#distance").val(), $("#location").val(), $("#price").val(), $("#rating").val(), page, 6);
                 break;
             case error.UNKNOWN_ERROR:
                 // Lỗi không xác định
@@ -420,7 +420,6 @@
     }
 
     function handleDepartmentDataResponse(response) {
-        console.log(response);
         let departmentSize = response.departmentList.length
 
         var departmentListContainer = $('#department-list-container');
@@ -488,7 +487,6 @@
     }
 
     function handleDepartmentDataResponseWithNoGeolocation(response) {
-        console.log(response);
         let departmentSize = response.departmentList.length
 
         var departmentListContainer = $('#department-list-container');
