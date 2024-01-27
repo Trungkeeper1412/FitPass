@@ -273,8 +273,8 @@
                                 <span class="credit fw-bold">Credit/Giờ</span>
                             </div>
                             ${status === 'check-in' ?
-                    `<button class="btn checkin-btn mt-3" onclick="performCheckIn(${item.orderDetailId})">Check-in</button>` :
-                    `<button class="btn checkin-btn mx-auto mt-2" onclick="showDetail(${item.orderDetailId})">Chi tiết</button>`}
+                    `<button class="btn checkin-btn mt-3" order-detail-id="${item.orderDetailId}" onclick="performCheckIn(${item.orderDetailId})">Check-in</button>`:
+                    `<button class="btn checkin-btn mx-auto mt-2" order-detail-id="${item.orderDetailId}" onclick="showDetail(${item.orderDetailId})">Chi tiết</button>`}
                         </div>
                     </div>
                 </div>
@@ -507,8 +507,6 @@
                         type: "GET",
                         url: `/employee/flexible/sendCheckinRequest?id=${orderDetailId}`,
                         success: function (data) {
-                            // Xử lý dữ liệu tìm kiếm và hiển thị kết quả
-                            console.log(data)
                             if (data > 0) {
                                 Swal.fire({
                                     toast: true,
@@ -524,6 +522,8 @@
                                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                                     }
                                 })
+                                $('button.btn.checkin-btn.mt-3[order-detail-id="' + orderDetailId + '"]').prop('disabled', true).text("Đã gửi yêu cầu")
+
                             } else {
                                 Swal.fire({
                                     toast: true,
@@ -572,6 +572,12 @@
                     confirmButtonText: 'Check Out',
                     cancelButtonText: 'Quay lại',
                     reverseButtons: true,
+                    didOpen: () => {
+                        if (duration === 0) {
+                            const confirmButton = Swal.getConfirmButton();
+                            confirmButton.disabled = true;
+                        }
+                    }
                 }).then((result) => {
                     // Nếu employee nhấn xác nhận check out thì gửi thông tin lên sever
                     const dataToSend = {
@@ -606,6 +612,7 @@
                                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                                         }
                                     })
+                                    $('button.btn.checkin-btn.mx-auto.mt-2[order-detail-id="' + orderDetailId + '"]').prop('disabled', true).text("Đã gửi yêu cầu")
                                 } else {
                                     Swal.fire({
                                         toast: true,
