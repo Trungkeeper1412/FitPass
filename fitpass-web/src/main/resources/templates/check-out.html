@@ -108,12 +108,13 @@
                 </div>
                 <div class="wallet-line"></div>
                 <div class="wallet-title">
-                    <div>Số dư còn lại</div>
+                    <div th:if="${userBalanceAfterBuying >= 0}">Số dư còn lại</div>
                 </div>
-                <div class="wallet-value">
+                <div th:if="${userBalanceAfterBuying >= 0}" class="wallet-value">
                     <div th:text="${userBalanceAfterBuying}">200</div>
                 </div>
             </div>
+            <div class="text-danger fw-bolder" th:if="${userBalanceAfterBuying < 0}">Số dư không đủ, vui lòng nạp thêm</div>
             <th:block th:if="${userBalanceAfterBuying < 0}">
                 <a th:href="@{/profile/deposit}">
                     <button type="button" class="btn btn-warning">
