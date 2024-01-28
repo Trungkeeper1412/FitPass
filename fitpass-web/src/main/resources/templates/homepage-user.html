@@ -245,14 +245,16 @@
     });
 
     function loadBrand(page) {
+        var sortPrice = $('#sort-price').val();
+        var sortRating = $('#sort-rating').val();
         $.ajax({
             url: '/homepage/brand',
             type: 'GET',
             data: {
                 page: page,
                 size: 6,
-                sortPrice: $('#sort-price').val(),
-                sortRating: $('#sort-rating').val(),
+                sortPrice: sortPrice,
+                sortRating: sortRating,
             },
             success: function (data) {
                 console.log(data);
