@@ -255,6 +255,7 @@
                 sortRating: $('#sort-rating').val(),
             },
             success: function (data) {
+                console.log(data);
                 // Hiển thị danh sách người dùng
                 if (data.listBrand.length === 0) {
 
@@ -310,6 +311,7 @@
     }
 
     function paginationBrand(page) {
+        console.log("Page Number is",page)
         event.preventDefault();
         loadBrand(page);
     }
