@@ -4,6 +4,7 @@ import com.ks.fitpass.core.entity.*;
 import com.ks.fitpass.core.repository.RoleRepository;
 import com.ks.fitpass.core.repository.UserRepository;
 import com.ks.fitpass.core.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
@@ -49,7 +51,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             }
         }
         System.out.println("Authorities: " + grantedAuthorities);
-
+        log.info("User's password {}", user.getUserPassword());
         // return object UserDetails of Spring
         return new CustomUser(
                 user.getUserAccount(),

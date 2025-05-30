@@ -8,8 +8,8 @@
         <artifactId>FitPass</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>fitpass-core</artifactId>
+    <artifactId>fitpass-auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>fitpass-core</name>
-    <description>fitpass-core</description>
+    <description>fitpass-auth</description>
 </project>

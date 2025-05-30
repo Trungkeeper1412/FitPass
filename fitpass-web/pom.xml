@@ -34,7 +34,7 @@
         <!-- Import module-->
         <dependency>
             <groupId>com.ks</groupId>
-            <artifactId>fitpass-core</artifactId>
+            <artifactId>fitpass-auth</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

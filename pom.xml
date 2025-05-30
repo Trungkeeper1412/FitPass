@@ -22,7 +22,7 @@
         <java.version>17</java.version>
     </properties>
     <modules>
-        <module>fitpass-core</module>
+        <module>fitpass-auth</module>
         <module>fitpass-wallet</module>
         <module>fitpass-brand</module>
         <module>fitpass-web</module>
@@ -62,10 +62,11 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.38</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
