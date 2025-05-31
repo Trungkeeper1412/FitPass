@@ -7,11 +7,12 @@ import com.ks.fitpass.web.controller.CalendarController;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
+
+
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;

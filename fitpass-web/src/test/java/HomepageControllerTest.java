@@ -8,7 +8,7 @@ import com.ks.fitpass.department.entity.Department;
 import com.ks.fitpass.department.service.DepartmentService;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.HomepageController;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,7 +25,6 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class HomepageControllerTest {

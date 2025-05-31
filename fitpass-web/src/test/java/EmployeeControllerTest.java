@@ -1,3 +1,4 @@
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFixed;
 import com.ks.fitpass.checkInHistory.dto.CheckInHistoryFlexible;

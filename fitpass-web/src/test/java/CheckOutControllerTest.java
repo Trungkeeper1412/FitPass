@@ -4,9 +4,10 @@ import static org.mockito.Mockito.*;
 
 import com.ks.fitpass.brand.service.BrandService;
 import com.ks.fitpass.core.entity.User;
+
 import com.ks.fitpass.department.dto.GymPlanDepartmentNameDto;
 import com.ks.fitpass.order.entity.Order;
-import com.ks.fitpass.order.entity.OrderDetails;
+
 import com.ks.fitpass.order.entity.cart.Cart;
 import com.ks.fitpass.order.service.OrderDetailService;
 import com.ks.fitpass.order.service.OrderService;
@@ -21,7 +22,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CheckOutControllerTest {

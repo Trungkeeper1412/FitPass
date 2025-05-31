@@ -2,15 +2,13 @@
 import com.ks.fitpass.core.entity.User;
 import com.ks.fitpass.transaction.dto.TransactionDTO;
 import com.ks.fitpass.transaction.service.TransactionService;
-import com.ks.fitpass.wallet.entity.CreateSessionRequest;
 import com.ks.fitpass.wallet.service.WalletService;
 import com.ks.fitpass.web.controller.PaymentController;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
