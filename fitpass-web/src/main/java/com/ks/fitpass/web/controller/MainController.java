@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ import com.ks.fitpass.web.util.WebUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @Controller
@@ -95,6 +98,14 @@ public class MainController {
             return "redirect:/homepage";
         }
         return "login-register";
+    }
+
+    @GetMapping("/home")
+    public String home(Principal principal) {
+        if (principal instanceof KeycloakAuthenticationToken) {
+            KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) principal;
+        }
+        return "redirect:/homepage";
     }
 
     @GetMapping("/show-info")

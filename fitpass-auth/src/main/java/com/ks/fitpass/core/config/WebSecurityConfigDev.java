@@ -21,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableWebSecurity
-@Profile("dev")
 public class WebSecurityConfigDev {
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
